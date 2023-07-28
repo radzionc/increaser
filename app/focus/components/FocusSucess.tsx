@@ -1,6 +1,5 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { assertDefined } from 'shared/utils/assertDefined'
 import { toPercents } from 'shared/utils/toPercents'
 import styled from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
@@ -11,6 +10,7 @@ import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
 import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
 import { AbsolutelyCentered } from 'ui/AbsolutelyCentered'
+import { useCurrentFocus } from './CurrentFocusProvider'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -30,9 +30,10 @@ const Container = styled.div<{ $color: HSLA }>`
 `
 
 export const FocusSuccess = () => {
-  const { initialFocusDuration, focusDuration, currentSet } = useFocus()
+  const { initialFocusDuration, focusDuration } = useFocus()
+  const { projectId } = useCurrentFocus()
   const { projectsRecord } = useProjects()
-  const project = projectsRecord[assertDefined(currentSet).projectId]
+  const project = projectsRecord[projectId]
 
   if (initialFocusDuration >= focusDuration) return null
 

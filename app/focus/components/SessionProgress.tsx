@@ -1,16 +1,16 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { assertDefined } from 'shared/utils/assertDefined'
 import { MS_IN_MIN } from 'utils/time'
 
 import { FillingBlock } from './FillingBlock'
+import { useCurrentFocus } from './CurrentFocusProvider'
 
 export const SessionProgress = () => {
   const now = useRhythmicRerender()
 
-  const { currentSet: optionalCurrentSet, focusDuration } = useFocus()
-  const { startedAt, projectId } = assertDefined(optionalCurrentSet)
+  const { focusDuration } = useFocus()
+  const { startedAt, projectId } = useCurrentFocus()
 
   const { projectsRecord } = useProjects()
   const color = projectsRecord[projectId].hslaColor

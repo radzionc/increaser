@@ -1,21 +1,36 @@
+import { CurrentSet } from 'focus/context/FocusContext'
+import { createContext, useEffect } from 'react'
+import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { pluralize } from '@increaser/ui/shared/utils/pluralize'
+import { range } from '@increaser/ui/shared/utils/range'
+import { MS_IN_MIN } from '@increaser/ui/shared/utils/time'
+import { useFocus } from 'focus/hooks/useFocus'
 import { useProject } from 'projects/hooks/useProject'
-import { useEffect } from 'react'
 import { showNotification } from 'shared/utils/notification'
-import { pluralize } from 'shared/utils/pluralize'
-import { range } from 'shared/utils/range'
 import { tryToPlaySound } from 'shared/utils/tryToPlaySound'
 import { tryToSay } from 'shared/utils/tryToSay'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MS_IN_MIN } from 'utils/time'
+import { createContextHook } from '@increaser/ui/shared/utils/createContextHook'
 
-import { useFocus } from './useFocus'
+interface CurrentFocusState extends CurrentSet {}
+
+export const CurrentFocusContext = createContext<CurrentFocusState | undefined>(
+  undefined,
+)
+
+interface CurrentFocusProviderProps extends ComponentWithChildrenProps {
+  value: CurrentSet
+}
 
 const remindersCount = 5
 const startRemindersAfter = 30
 const repeatRemindersEvery = 10
 const remindMinBeforeWorkDayEnds = 5
 
-export const useFocusTimer = () => {
+export const CurrentFocusProvider = ({
+  children,
+  value,
+}: CurrentFocusProviderProps) => {
   const {
     focusDuration,
     hasTimerSoundNotification,
@@ -128,4 +143,15 @@ export const useFocusTimer = () => {
     hasTimerBrowserNotification,
     hasTimerSoundNotification,
   ])
+
+  return (
+    <CurrentFocusContext.Provider value={value}>
+      {children}
+    </CurrentFocusContext.Provider>
+  )
 }
+
+export const useCurrentFocus = createContextHook(
+  CurrentFocusContext,
+  'CurrentFocusContext',
+)

@@ -1,13 +1,13 @@
 import { FocusGoal } from 'focus/components/FocusGoal'
 import { FocusSuccess } from 'focus/components/FocusSucess'
 import { SessionProgress } from 'focus/components/SessionProgress'
-import { useFocus } from 'focus/hooks/useFocus'
 import styled from 'styled-components'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { MS_IN_SEC } from 'utils/time'
 import { SlidingTime } from 'ui/SlidingTime'
+import { useCurrentFocus } from 'focus/components/CurrentFocusProvider'
 
 const BlockWrapper = styled.div`
   height: 520px;
@@ -22,11 +22,9 @@ const TimeWrapper = styled.div`
 `
 
 export const FocusPreview = () => {
-  const { currentSet } = useFocus()
+  const { startedAt } = useCurrentFocus()
 
-  const startTime = currentSet?.startedAt as number
-
-  const getSeconds = () => (Date.now() - startTime) / MS_IN_SEC
+  const getSeconds = () => (Date.now() - startedAt) / MS_IN_SEC
 
   return (
     <VStack alignItems="center" justifyContent="center" style={{ width: 320 }}>

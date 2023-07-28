@@ -1,9 +1,6 @@
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { useFocus } from 'focus/hooks/useFocus'
-import { useFocusTimer } from 'focus/hooks/useFocusTimer'
 import { useProjects } from 'projects/hooks/useProjects'
-import { useEffect } from 'react'
-import { Path } from 'router/Path'
 import { useOnWindowCloseAlert } from 'shared/hooks/useOnWindowCloseAlert'
 import { formatDuration } from 'shared/utils/formatDuration'
 import styled from 'styled-components'
@@ -25,7 +22,7 @@ import { SesssionStartedAt } from './SessionStartedAt'
 import Head from 'next/head'
 import { SlidingTime } from 'ui/SlidingTime'
 import { RhytmicRerender } from '@increaser/ui/ui/RhytmicRerender'
-import { useRouter } from 'next/router'
+import { useCurrentFocus } from './CurrentFocusProvider'
 
 const Container = styled.div`
   max-height: 100%;
@@ -62,27 +59,18 @@ const Content = styled(HStack)`
 `
 
 export const FocusPageContent = () => {
-  const router = useRouter()
+  const { cancel } = useFocus()
 
-  const { currentSet, cancel } = useFocus()
+  const { projectId, startedAt } = useCurrentFocus()
 
   const { projectsRecord } = useProjects()
 
-  useEffect(() => {
-    if (!currentSet || !project) {
-      router.push(Path.Home)
-    }
-  })
-
   useOnWindowCloseAlert('Please stop the timer first')
-  useFocusTimer()
 
-  if (!currentSet) return null
-  const project = projectsRecord[currentSet?.projectId]
+  const project = projectsRecord[projectId]
   if (!project) return null
 
-  const startTime = currentSet?.startedAt as number
-  const getSeconds = () => (Date.now() - startTime) / MS_IN_SEC
+  const getSeconds = () => (Date.now() - startedAt) / MS_IN_SEC
 
   return (
     <>

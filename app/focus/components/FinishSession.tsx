@@ -1,11 +1,11 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { assertDefined } from 'shared/utils/assertDefined'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { useCurrentFocus } from './CurrentFocusProvider'
 
 const Container = styled(UnstyledButton)<{ $color: HSLA }>`
   font-size: 18px;
@@ -29,9 +29,10 @@ interface FinishSessionProps {
 }
 
 export const FinishSession = ({ style }: FinishSessionProps) => {
-  const { currentSet, stop } = useFocus()
+  const { stop } = useFocus()
+  const { projectId } = useCurrentFocus()
   const { projectsRecord } = useProjects()
-  const project = projectsRecord[assertDefined(currentSet).projectId]
+  const project = projectsRecord[projectId]
 
   return (
     <Container $color={project.hslaColor} style={style} onClick={stop}>
