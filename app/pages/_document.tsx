@@ -8,6 +8,7 @@ import Document, {
 import { MetaTags } from 'product/components/MetaTags'
 import { ServerStyleSheet } from 'styled-components'
 
+// TODO: theme meta tag
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
