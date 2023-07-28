@@ -1,0 +1,35 @@
+{
+  "short_name": "Increaser",
+  "name": "Increaser",
+  "start_url": ".",
+  "display": "fullscreen",
+  "theme_color": "#1a1a1a",
+  "background_color": "#1a1a1a",
+  "description": "Get More Free Time Out of Remote Work",
+  "icons": [
+    {
+      "src": "images/logo/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/logo/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "increaser",
+  "packageManager": "yarn@3.6.1",
+  "private": true,
+  "workspaces": [
+    "./*"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^8.45.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
+  },
+  "scripts": {
+    "postinstall": "husky install",
+    "format": "eslint --fix && prettier --write"
+  }
+}
