@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from '@increaser/ui/ui/GlobalStyle'
+import { ThemeMetaTags } from '@increaser/ui/ui/theme/ThemeMetaTags'
 import { Path } from 'router/Path'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useState } from 'react'
@@ -30,6 +31,7 @@ import { PresentationProvider } from 'ui/PresentationProvider'
 
 import { Open_Sans } from 'next/font/google'
 import { Page } from 'components/Page'
+import Head from 'next/head'
 
 const pagesWithoutNavigation = [
   Path.Focus,
@@ -71,8 +73,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   return (
     <ThemeProvider>
+      <GlobalStyle fontFamily={openSans.style.fontFamily} />
+      <Head>
+        <ThemeMetaTags />
+      </Head>
       <QueryClientProvider client={queryClient}>
-        <GlobalStyle fontFamily={openSans.style.fontFamily} />
         <SnackbarProvider>
           <ErrorBoundary fallback={<FullSizeErrorFallback />}>
             <NetworkStateObserver />

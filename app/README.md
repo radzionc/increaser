@@ -1,11 +1,11 @@
 ### Update manifest
 
 ```sh
-npx pwa-asset-generator light-logo.svg ./public/images/logo --manifest ./public/manifest.json --opaque false --icon-only --favicon --type png --path-override ""
-npx pwa-asset-generator light-logo.svg ./public/images/logo --manifest ./public/manifest.json --background "#ffffff" --icon-only --path-overrideh ""
+npx pwa-asset-generator assets/light-logo.svg ./public/images/logo --manifest ./public/manifest.json --opaque false --icon-only --favicon --type png --path-override "images/logo"
+npx pwa-asset-generator assets/light-logo.svg ./public/images/logo --manifest ./public/manifest.json --background "#ffffff" --icon-only --path-override "images/logo"
 
-npx pwa-asset-generator light-logo.svg ./public/images/logo --manifest ./public/manifest.json --background "#ffffff" --splash-only --path-override ""
-npx pwa-asset-generator dark-logo.svg  ./public/images/logo --manifest ./public/manifest.json --background "#1a1a1a" --splash-only --path-override "" --dark-mode
+npx pwa-asset-generator assets/light-logo.svg ./public/images/logo --manifest ./public/manifest.json --background "#ffffff" --splash-only --path-override "images/logo"
+npx pwa-asset-generator assets/dark-logo.svg  ./public/images/logo --manifest ./public/manifest.json --background "#1a1a1a" --splash-only --path-override "images/logo" --dark-mode
 ```
 
 ### Generate screenshots for landing

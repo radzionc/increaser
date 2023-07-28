@@ -1,4 +1,4 @@
-export const IconsMeta = () => (
+export const LogoMetaTags = () => (
   <>
     <link
       rel="icon"
@@ -7,7 +7,6 @@ export const IconsMeta = () => (
       href="images/logo/favicon-196.png"
     />
     <link rel="apple-touch-icon" href="images/logo/apple-icon-180.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <link rel="apple-touch-icon" href="public/apple-icon-180.png" />
 

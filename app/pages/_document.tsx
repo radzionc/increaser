@@ -5,7 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document'
-import { IconsMeta } from 'product/components/IconsMeta'
+import { MetaTags } from 'product/components/MetaTags'
 import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {
@@ -37,44 +37,13 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="application-name" content="Increaser" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="default"
+          <MetaTags
+            title="Increaser"
+            description="Toolkit: Deep Work, Time Management, Habit Tracking"
+            image="images/increaser.png"
+            url={process.env.NEXT_PUBLIC_BASE_URL!}
+            twitterId="@radzionc"
           />
-          <meta name="apple-mobile-web-app-title" content="Increaser" />
-          <meta
-            name="description"
-            content="Stop overworking and get more done with right tools"
-          />
-          <meta name="msapplication-TileColor" content="#fff" />
-          <meta name="msapplication-tap-highlight" content="no" />
-          <meta name="theme-color" content="#1a1a1a" />
-
-          {/* <meta name="twitter:card" content="summary" />
-          <meta name="twitter:url" content="https://yourdomain.com" />
-          <meta name="twitter:title" content="PWA App" />
-          <meta
-          name="twitter:description"
-          content="Best PWA App in the world"
-          />
-          <meta
-          name="twitter:image"
-          content="https://yourdomain.com/icons/android-chrome-192x192.png"
-          />
-          <meta name="twitter:creator" content="@DavidWShadow" />
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content="PWA App" />
-          <meta property="og:description" content="Best PWA App in the world" />
-          <meta property="og:site_name" content="PWA App" />
-          <meta property="og:url" content="https://yourdomain.com" />
-          <meta
-          property="og:image"
-          content="https://yourdomain.com/icons/apple-touch-icon.png"
-        /> */}
-
-          <IconsMeta />
         </Head>
         <body>
           <Main />
