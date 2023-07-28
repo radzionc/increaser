@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_PUBLIC_VERSION=$npm_package_version next dev",
-    "build": "NEXT_PUBLIC_VERSION=$npm_package_version next build",
+    "build": "NEXT_PUBLIC_VERSION=$npm_package_version next build && next-sitemap",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"

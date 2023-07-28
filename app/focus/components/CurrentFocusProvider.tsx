@@ -11,6 +11,8 @@ import { tryToPlaySound } from 'shared/utils/tryToPlaySound'
 import { tryToSay } from 'shared/utils/tryToSay'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { createContextHook } from '@increaser/ui/shared/utils/createContextHook'
+import { useRouter } from 'next/router'
+import { Path } from 'router/Path'
 
 interface CurrentFocusState extends CurrentSet {}
 
@@ -148,6 +150,26 @@ export const CurrentFocusProvider = ({
     <CurrentFocusContext.Provider value={value}>
       {children}
     </CurrentFocusContext.Provider>
+  )
+}
+
+export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
+  const { currentSet } = useFocus()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!currentSet) {
+      router.replace(Path.Home)
+    }
+  }, [currentSet, router])
+
+  if (!currentSet) {
+    return null
+  }
+
+  return (
+    <CurrentFocusProvider value={currentSet}>{children}</CurrentFocusProvider>
   )
 }
 
