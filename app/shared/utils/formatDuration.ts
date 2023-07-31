@@ -1,4 +1,5 @@
-import { MIN_IN_HOUR, MS_IN_MIN, S_IN_MIN } from 'utils/time'
+import { MIN_IN_HOUR, MS_IN_MIN, S_IN_HOUR, S_IN_MIN } from 'utils/time'
+import { padWithZero } from './padWithZero'
 
 type DurationUnit = 'ms' | 'min' | 's' | 'h'
 
@@ -20,4 +21,22 @@ export const formatDuration = (duration: number, unit: DurationUnit) => {
     return `${hours}h`
   }
   return `${hours}h ${minutesPart}m`
+}
+
+export const formatDurationAsADigitalClock = (totalSeconds: number) => {
+  const hours = Math.floor(totalSeconds / S_IN_HOUR)
+  const minutes = Math.floor((totalSeconds - hours * S_IN_HOUR) / S_IN_MIN)
+  const seconds = Math.floor(
+    totalSeconds - hours * S_IN_HOUR - minutes * S_IN_MIN,
+  )
+
+  const parts: string[] = []
+  if (hours) {
+    parts.push(padWithZero(hours))
+  }
+
+  parts.push(padWithZero(minutes))
+  parts.push(padWithZero(seconds))
+
+  return parts.join(':')
 }

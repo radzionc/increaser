@@ -2,7 +2,7 @@ import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
 import { useOnWindowCloseAlert } from 'shared/hooks/useOnWindowCloseAlert'
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDurationAsADigitalClock } from 'shared/utils/formatDuration'
 import styled from 'styled-components'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
@@ -75,11 +75,13 @@ export const FocusPageContent = () => {
   return (
     <>
       <RhytmicRerender
-        render={() => (
-          <Head>
-            <title>{formatDuration(getSeconds(), 's')}</title>
-          </Head>
-        )}
+        render={() => {
+          return (
+            <Head>
+              <title>{formatDurationAsADigitalClock(getSeconds())}</title>
+            </Head>
+          )
+        }}
       />
       <ElementSizeAware
         render={({ setElement, size }) => (

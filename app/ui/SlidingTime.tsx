@@ -1,9 +1,8 @@
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { padWithZero } from 'shared/utils/padWithZero'
+import { formatDurationAsADigitalClock } from 'shared/utils/formatDuration'
 import styled, { css, keyframes } from 'styled-components'
-import { S_IN_HOUR, S_IN_MIN } from 'utils/time'
 
 interface Props {
   getSeconds: (now: number) => number
@@ -32,30 +31,14 @@ const Character = styled(Text)<{ animationId?: string }>`
     `}
 `
 
-const formatForSlidingTime = (totalSeconds: number) => {
-  const hours = Math.floor(totalSeconds / S_IN_HOUR)
-  const minutes = Math.floor((totalSeconds - hours * S_IN_HOUR) / S_IN_MIN)
-  const seconds = Math.floor(
-    totalSeconds - hours * S_IN_HOUR - minutes * S_IN_MIN,
-  )
-
-  const parts: string[] = []
-  if (hours) {
-    parts.push(padWithZero(hours))
-  }
-
-  parts.push(padWithZero(minutes))
-  parts.push(padWithZero(seconds))
-
-  return parts.join(':')
-}
-
 export const SlidingTime = ({ getSeconds }: Props) => {
   const now = useRhythmicRerender()
 
   const seconds = getSeconds(now)
-  const timeString = formatForSlidingTime(seconds)
-  const previousTimeString = formatForSlidingTime(Math.max(0, seconds - 1))
+  const timeString = formatDurationAsADigitalClock(seconds)
+  const previousTimeString = formatDurationAsADigitalClock(
+    Math.max(0, seconds - 1),
+  )
 
   return (
     <HStack>
