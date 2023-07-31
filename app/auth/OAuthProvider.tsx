@@ -2,8 +2,8 @@ import { FacebookIcon } from '@increaser/ui/ui/icons/FacebookIcon'
 import { GoogleIcon } from '@increaser/ui/ui/icons/GoogleIcon'
 
 export enum OAuthProvider {
-  Google = 'GOOGLE',
-  Facebook = 'FACEBOOK',
+  Google = 'google',
+  Facebook = 'facebook',
 }
 
 export const AUTH_PROVIDER_NAME = {

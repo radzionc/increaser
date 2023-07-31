@@ -37,6 +37,7 @@ const pagesWithoutNavigation = [
   Path.PrivacyPolicy,
   Path.Landing,
   Path.AppSumo,
+  Path.OAuth,
 ]
 
 const openSans = Open_Sans({

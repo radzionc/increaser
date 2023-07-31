@@ -1,9 +1,10 @@
-import { assertQueryParams } from 'auth/helpers/assertQueryParams'
-import { useHandleIdentificationFailure } from 'auth/hooks/useHandleIdentificationFailure'
 import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
-import { useEffect } from 'react'
-import { useMutation } from 'react-query'
+import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
+import { useCallback } from 'react'
 import { getTimeZone } from 'shared/utils/getTimeZone'
+import { AuthDestination } from './AuthFlow/AuthFlowContext'
+import { Center } from '@increaser/ui/ui/Center'
+import { Spinner } from '@increaser/ui/ui/Spinner'
 
 const identificationQueryResult = `
 email
@@ -22,30 +23,36 @@ query identifyWithEmail($input: IdentifyWithEmailInput!) {
 }
 `
 
+interface EmailAuthParams {
+  token: string
+  destination: AuthDestination
+}
+
 export const EmailAuthPage = () => {
-  const { mutateAsync: identify } = useIdentificationMutation()
+  const { mutate: identify } = useIdentificationMutation()
 
-  const { mutate: processEmailAuthParams, error } = useMutation(async () => {
-    const { token, destination } = assertQueryParams(['token', 'destination'])
+  useHandleQueryParams<EmailAuthParams>(
+    useCallback(
+      ({ token, destination }) => {
+        const variables = {
+          input: {
+            token,
+            timeZone: getTimeZone(),
+          },
+        }
 
-    const variables = {
-      input: {
-        token,
-        timeZone: getTimeZone(),
+        identify({
+          destination,
+          queryParams: { variables, query: identifyWithEmailQuery },
+        })
       },
-    }
+      [identify],
+    ),
+  )
 
-    await identify({
-      destination,
-      queryParams: { variables, query: identifyWithEmailQuery },
-    })
-  })
-
-  useHandleIdentificationFailure(error)
-
-  useEffect(() => {
-    processEmailAuthParams()
-  }, [processEmailAuthParams])
-
-  return null
+  return (
+    <Center>
+      <Spinner />
+    </Center>
+  )
 }

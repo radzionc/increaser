@@ -1,16 +1,12 @@
-import { assertQueryParams } from 'auth/helpers/assertQueryParams'
 import { getOAuthProviderRedirectUri } from 'auth/helpers/OAuthProviderUrl'
-import { useHandleIdentificationFailure } from 'auth/hooks/useHandleIdentificationFailure'
 import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
 import { OAuthProvider } from 'auth/OAuthProvider'
-import { useEffect } from 'react'
-import { useMutation } from 'react-query'
+import { useCallback } from 'react'
 import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Spinner } from '@increaser/ui/ui/Spinner'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-
 import { AuthDestination } from './AuthFlow/AuthFlowContext'
+import { Center } from '@increaser/ui/ui/Center'
+import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 
 const identificationQueryResult = `
 email
@@ -29,64 +25,36 @@ query identifyWithOAuth($input: IdentifyWithOAuthInput!) {
 }
 `
 
-interface SharedOAuthQueryParams {
+interface OAuthParams {
   code: string
-  provider: string
+  provider: OAuthProvider
   destination: AuthDestination
 }
 
 export const OAuthPage = () => {
-  const { mutateAsync: identify } = useIdentificationMutation()
+  const { mutate: identify } = useIdentificationMutation()
 
-  const { mutate: processOAuthParams, error } = useMutation(async () => {
-    const {
-      code,
-      provider: loverCaseProvider,
-      destination,
-    } = assertQueryParams([
-      'code',
-      'provider',
-      'destination',
-    ]) as SharedOAuthQueryParams
-
-    const provider = loverCaseProvider.toUpperCase() as OAuthProvider
-    if (!Object.values(OAuthProvider).includes(provider)) {
-      throw new Error('Unsupported OAuth provider')
-    }
-
-    const input = {
-      provider,
-      code,
-      redirectUri: getOAuthProviderRedirectUri(provider, destination),
-      timeZone: getTimeZone(),
-    }
-
-    await identify({
-      destination,
-      queryParams: { variables: { input }, query: identifyWithOAuthQuery },
-    })
-  })
-
-  useHandleIdentificationFailure(error)
-
-  useEffect(() => {
-    processOAuthParams()
-  }, [processOAuthParams])
+  useHandleQueryParams<OAuthParams>(
+    useCallback(
+      ({ provider, code, destination }) => {
+        const input = {
+          provider,
+          code,
+          redirectUri: getOAuthProviderRedirectUri(provider, destination),
+          timeZone: getTimeZone(),
+        }
+        identify({
+          destination: destination as AuthDestination,
+          queryParams: { variables: { input }, query: identifyWithOAuthQuery },
+        })
+      },
+      [identify],
+    ),
+  )
 
   return (
-    <VStack
-      gap={24}
-      alignItems="center"
-      justifyContent="center"
-      fullWidth
-      fullHeight
-    >
-      <HStack alignItems="center" gap={12}>
-        <Spinner />
-        <Text color="supporting" size={24}>
-          Please wait
-        </Text>
-      </HStack>
-    </VStack>
+    <Center>
+      <Spinner />
+    </Center>
   )
 }
