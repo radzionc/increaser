@@ -5,10 +5,10 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document'
-import { MetaTags } from 'product/components/MetaTags'
 import { ServerStyleSheet } from 'styled-components'
+import { MetaTags } from '@increaser/ui/metadata/MetaTags'
+import { AppIconMetaTags } from '@increaser/ui/metadata/AppIconMetaTags'
 
-// TODO: theme meta tag
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
@@ -45,6 +45,7 @@ class MyDocument extends Document {
             url={process.env.NEXT_PUBLIC_BASE_URL!}
             twitterId="@radzionc"
           />
+          <AppIconMetaTags />
         </Head>
         <body>
           <Main />
