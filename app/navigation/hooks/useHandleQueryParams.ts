@@ -9,6 +9,6 @@ export const useHandleQueryParams = <T>(handler: QueryParamsHandler<T>) => {
   useEffect(() => {
     if (!isReady) return
 
-    handler(query as T)
+    handler(query as never as T)
   }, [isReady, query, handler])
 }
