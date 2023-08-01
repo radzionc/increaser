@@ -14,6 +14,7 @@ import { hideScrollbarsCSS } from '@increaser/ui/ui/utils/hideScrollbarsCSS'
 import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOnboarding'
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
+import { useFocus } from 'focus/hooks/useFocus'
 
 const Container = styled.div`
   display: flex;
@@ -46,13 +47,18 @@ const MobileContent = styled(VStack)`
 
 export const HomePageContent = () => {
   const todaySets = useTodaySets()
+  const { currentSet } = useFocus()
 
   const content = (
     <VStack>
       {!todaySets.length && <NoSetsHomeTitle />}
       <VStack gap={40}>
-        <BreakTimeline />
-        <FocusSessionForm />
+        {currentSet ? null : (
+          <>
+            <BreakTimeline />
+            <FocusSessionForm />
+          </>
+        )}
         <Panel kind="secondary">
           <SeparatedByLine gap={20}>
             <TasksView />
@@ -63,7 +69,9 @@ export const HomePageContent = () => {
     </VStack>
   )
 
-  const timeline = <TodayTimeline footer={<CreateSet />} />
+  const timeline = (
+    <TodayTimeline footer={currentSet ? undefined : <CreateSet />} />
+  )
 
   return (
     <>

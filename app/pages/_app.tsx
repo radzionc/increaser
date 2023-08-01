@@ -30,6 +30,7 @@ import { PresentationProvider } from 'ui/PresentationProvider'
 
 import { Open_Sans } from 'next/font/google'
 import { Page } from 'components/Page'
+import { EnhancedFocusNavigation } from 'focus/components/EnhancedFocusNavigation'
 
 const pagesWithoutNavigation = [
   Path.Focus,
@@ -91,7 +92,15 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                                   <SetsManagerProvider>
                                     <FocusProvider>
                                       <Retro />
-                                      <BreakProvider>{content}</BreakProvider>
+                                      <BreakProvider>
+                                        {shouldHideNavigation ? (
+                                          component
+                                        ) : (
+                                          <EnhancedFocusNavigation>
+                                            {component}
+                                          </EnhancedFocusNavigation>
+                                        )}
+                                      </BreakProvider>
                                     </FocusProvider>
                                   </SetsManagerProvider>
                                 </HabitsProvider>
@@ -99,7 +108,13 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                             </UserManagerProvider>
                           </MembershipProvider>
                         )}
-                        missing={() => content}
+                        missing={() =>
+                          shouldHideNavigation ? (
+                            component
+                          ) : (
+                            <Navigation>{component}</Navigation>
+                          )
+                        }
                       />
                     </PWAProvider>
                   </PresentationProvider>

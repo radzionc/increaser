@@ -23,6 +23,7 @@ import Head from 'next/head'
 import { SlidingTime } from 'ui/SlidingTime'
 import { RhytmicRerender } from '@increaser/ui/ui/RhytmicRerender'
 import { useCurrentFocus } from './CurrentFocusProvider'
+import { ShrinkFocusView } from './ShrinkFocusView'
 
 const Container = styled.div`
   max-height: 100%;
@@ -129,6 +130,7 @@ export const FocusPageContent = () => {
                 {size.width > 750 && (
                   <Side>
                     <ErrorBoundary>
+                      <ShrinkFocusView />
                       <TodayTimeline />
                       <FocusAssistance />
                     </ErrorBoundary>

@@ -25,6 +25,7 @@ import { MS_IN_MIN } from 'utils/time'
 
 import { useFocusSoundsState } from './FocusSounds/useFocusSoundsState'
 import { useRouter } from 'next/router'
+import { CurrentFocusGuard } from './CurrentFocusProvider'
 
 interface Props {
   children: ReactNode
@@ -161,7 +162,11 @@ export const FocusProvider = ({ children }: Props) => {
         hasTimerSoundNotification,
       }}
     >
-      {children}
+      {currentSet ? (
+        <CurrentFocusGuard>{children}</CurrentFocusGuard>
+      ) : (
+        <>{children}</>
+      )}
     </FocusContext.Provider>
   )
 }

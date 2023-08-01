@@ -10,7 +10,7 @@ import { getLast } from 'shared/utils/getLast'
 import { MS_IN_MIN } from 'utils/time'
 
 import { MockProjectId } from '../LandingUserStateProvider'
-import { CurrentFocusGuard } from 'focus/components/CurrentFocusProvider'
+import { CurrentFocusContext } from 'focus/components/CurrentFocusProvider'
 
 export const LandingPageFocusProvider = ({
   children,
@@ -63,7 +63,9 @@ export const LandingPageFocusProvider = ({
         hasTimerSoundNotification: false,
       }}
     >
-      <CurrentFocusGuard>{children}</CurrentFocusGuard>
+      <CurrentFocusContext.Provider value={currentSet}>
+        {children}
+      </CurrentFocusContext.Provider>
     </FocusContext.Provider>
   )
 }
