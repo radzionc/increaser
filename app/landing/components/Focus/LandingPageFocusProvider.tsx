@@ -9,7 +9,7 @@ import { ComponentWithChildrenProps } from 'shared/props'
 import { getLast } from 'shared/utils/getLast'
 import { MS_IN_MIN } from 'utils/time'
 
-import { MockProjectId } from '../LandingUserStateProvider'
+import { PreviewUserProject } from '../LandingUserStateProvider'
 import { CurrentFocusContext } from 'focus/components/CurrentFocusProvider'
 
 export const LandingPageFocusProvider = ({
@@ -19,7 +19,7 @@ export const LandingPageFocusProvider = ({
 
   const currentSet: CurrentSet = useMemo(() => {
     return {
-      projectId: MockProjectId.Content,
+      projectId: PreviewUserProject.Content,
       startedAt: Date.now() - (defaultFocusDuration - 0.08) * MS_IN_MIN,
     }
   }, [])

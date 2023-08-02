@@ -5,7 +5,6 @@ color
 status
 emoji
 total
-lastSetEnd
 allocatedMinutesPerWeek
 weeks {
   year

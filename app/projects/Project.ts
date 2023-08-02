@@ -24,7 +24,6 @@ export interface ProjectResponse {
   emoji: string
   total: number
   status: ProjectStatus
-  lastSetEnd?: number
   allocatedMinutesPerWeek: number
   weeks: ProjectWeek[]
   months: ProjectMonth[]
