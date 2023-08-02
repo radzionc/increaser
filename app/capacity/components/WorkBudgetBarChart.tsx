@@ -23,7 +23,7 @@ export const WorkBudgetBarChart = ({
           label: getShortWeekday(index),
           segments: [
             {
-              color: index > 4 ? theme.colors.success : theme.colors.idle,
+              color: index > 4 ? theme.colors.idle : theme.colors.success,
               value,
             },
           ],
