@@ -5,10 +5,11 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { ScheduleEducationBanner } from './ScheduleEducationBanner'
 import { SessionsPageContent } from './SessionsPageContent'
 import { PageTitle } from 'ui/PageTitle'
+import { Page } from 'components/Page'
 
 const title = 'Work Schedule'
 
-export const SessionsPage = () => {
+export const SessionsPage: Page = () => {
   return (
     <FixedWidthContent>
       <PageTitle documentTitle={`☕️ ${title}`} title={title} />

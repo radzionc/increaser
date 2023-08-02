@@ -16,8 +16,9 @@ import {
   RenderHabitsView,
 } from './HabitsView'
 import { PageTitle } from 'ui/PageTitle'
+import { Page } from 'components/Page'
 
-export const HabitsPage = () => {
+export const HabitsPage: Page = () => {
   return (
     <FixedWidthContent>
       <HabitsViewProvider>

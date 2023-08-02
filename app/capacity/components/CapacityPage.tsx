@@ -6,10 +6,11 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { CapacityPageContent } from './CapacityPageContent'
 import { ManagePrimaryGoal } from './ManagePrimaryGoal'
 import { PageTitle } from 'ui/PageTitle'
+import { Page } from 'components/Page'
 
 const title = 'Manage Time'
 
-export const CapacityPage = () => {
+export const CapacityPage: Page = () => {
   return (
     <FixedWidthContent>
       <PageTitle

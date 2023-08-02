@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from '@increaser/ui/ui/GlobalStyle'
-import { Path } from 'router/Path'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useState } from 'react'
 import { trackEvent } from 'analytics'
@@ -23,23 +22,12 @@ import { ConditionalUserState } from 'user/components/ConditionalUserState'
 import { UserManagerProvider } from 'user/components/UserManagerProvider'
 import { UserStateProvider } from 'user/components/UserStateProvider'
 import { MembershipProvider } from 'membership/components/MembershipProvider'
-import { Navigation } from 'ui/Navigation'
 import { ThemeProvider } from 'ui/ThemeProvider'
 import { SnackbarProvider } from 'ui/Snackbar/SnackbarProvider'
 import { PresentationProvider } from 'ui/PresentationProvider'
 
 import { Open_Sans } from 'next/font/google'
 import { Page } from 'components/Page'
-import { EnhancedFocusNavigation } from 'focus/components/EnhancedFocusNavigation'
-
-const pagesWithoutNavigation = [
-  Path.Focus,
-  Path.TermsOfService,
-  Path.PrivacyPolicy,
-  Path.Landing,
-  Path.AppSumo,
-  Path.OAuth,
-]
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -64,13 +52,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
   const component = getLayout(<Component {...pageProps} />)
 
-  const shouldHideNavigation = pagesWithoutNavigation.includes(pathname as Path)
-  const content = shouldHideNavigation ? (
-    component
-  ) : (
-    <Navigation>{component}</Navigation>
-  )
-
   return (
     <ThemeProvider>
       <GlobalStyle fontFamily={openSans.style.fontFamily} />
@@ -92,15 +73,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                                   <SetsManagerProvider>
                                     <FocusProvider>
                                       <Retro />
-                                      <BreakProvider>
-                                        {shouldHideNavigation ? (
-                                          component
-                                        ) : (
-                                          <EnhancedFocusNavigation>
-                                            {component}
-                                          </EnhancedFocusNavigation>
-                                        )}
-                                      </BreakProvider>
+                                      <BreakProvider>{component}</BreakProvider>
                                     </FocusProvider>
                                   </SetsManagerProvider>
                                 </HabitsProvider>
@@ -108,13 +81,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                             </UserManagerProvider>
                           </MembershipProvider>
                         )}
-                        missing={() =>
-                          shouldHideNavigation ? (
-                            component
-                          ) : (
-                            <Navigation>{component}</Navigation>
-                          )
-                        }
+                        missing={() => <>{component}</>}
                       />
                     </PWAProvider>
                   </PresentationProvider>

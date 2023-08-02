@@ -2,8 +2,9 @@ import { APP_NAME, APP_SUPPORT_EMAIL } from 'shared/product'
 
 import { LegalPage } from './LegalPage'
 import { LegalSection } from './LegalSection'
+import { Page } from 'components/Page'
 
-export const TermsOfServicePage = () => {
+export const TermsOfServicePage: Page = () => {
   return (
     <LegalPage title="Terms of Service">
       <LegalSection title="Acceptance of terms">

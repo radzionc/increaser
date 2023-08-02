@@ -5,8 +5,9 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { HomePageContent } from './HomePageContent'
 import Head from 'next/head'
+import { Page } from 'components/Page'
 
-export const HomePage = () => {
+export const HomePage: Page = () => {
   return (
     <FixedWidthContent style={{ display: 'flex', flexDirection: 'column' }}>
       <Head>

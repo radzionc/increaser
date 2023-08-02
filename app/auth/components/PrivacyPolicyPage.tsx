@@ -5,8 +5,9 @@ import { APP_NAME, APP_SUPPORT_EMAIL } from 'shared/product'
 import { LegalPage } from './LegalPage'
 import { LegalSection } from './LegalSection'
 import Link from 'next/link'
+import { Page } from 'components/Page'
 
-export const PrivacyPolicyPage = () => {
+export const PrivacyPolicyPage: Page = () => {
   return (
     <LegalPage title="Privacy Policy">
       <LegalSection title="Privacy policy">

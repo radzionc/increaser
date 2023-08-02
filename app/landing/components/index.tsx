@@ -11,8 +11,6 @@ import { HeroSlice } from './HeroSlice'
 import { LandingUserStateProvider } from './LandingUserStateProvider'
 import { PrimaryTestimonialsSlice } from './testimonials/PrimaryTestimonialsSlice'
 import { TimeBoxingSlice } from './TimeBlocking/TimeBoxingSlice'
-import { Topbar } from './Topbar'
-import Head from 'next/head'
 
 const FullHeightContainer = styled(VStack)`
   background: ${({ theme }) => theme.colors.background.toCssValue()};
@@ -21,16 +19,8 @@ const FullHeightContainer = styled(VStack)`
 
 export const LandingPage = () => {
   return (
-    <div>
-      <Head>
-        <meta
-          name="description"
-          content="Powerful and easy-to-use online time tracking and time management app. For personal growth, not corporate cringe. Works on all devices."
-        />
-        <title>Achieve Your Goals Via Intelligent Effort</title>
-      </Head>
-      <FullHeightContainer gap={20}>
-        <Topbar />
+    <VStack>
+      <FullHeightContainer>
         <HeroSlice />
       </FullHeightContainer>
       <LandingUserStateProvider>
@@ -46,6 +36,6 @@ export const LandingPage = () => {
       {/* <SecondaryTestimonialSlice /> */}
       <FounderNote />
       <ClosingArgument />
-    </div>
+    </VStack>
   )
 }
