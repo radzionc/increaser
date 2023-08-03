@@ -59,6 +59,12 @@ const Content = styled(HStack)`
   flex: 1;
 `
 
+const PositionSettings = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+`
+
 export const FocusPageContent = () => {
   const { cancel } = useFocus()
 
@@ -107,6 +113,12 @@ export const FocusPageContent = () => {
                     <SesssionStartedAt />
                     <BlockWrapper>
                       <SessionProgress />
+                      <PositionSettings>
+                        <VStack gap={4}>
+                          <ShrinkFocusView />
+                          <FocusAssistance />
+                        </VStack>
+                      </PositionSettings>
                       <TimeWrapper>
                         <Text as="div" weight="bold" size={64} height="small">
                           <SlidingTime getSeconds={getSeconds} />
@@ -130,9 +142,7 @@ export const FocusPageContent = () => {
                 {size.width > 750 && (
                   <Side>
                     <ErrorBoundary>
-                      <ShrinkFocusView />
                       <TodayTimeline />
-                      <FocusAssistance />
                     </ErrorBoundary>
                   </Side>
                 )}
