@@ -127,7 +127,6 @@ export const UserStateProvider = ({ children }: Props) => {
       }}
     >
       {children}
-      {/* {data && !data.name && <AskForNameOverlay />} */}
     </UserStateContext.Provider>
   )
 }

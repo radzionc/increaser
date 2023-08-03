@@ -10,7 +10,6 @@ import { useCurrentFocus } from './CurrentFocusProvider'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { useProjects } from 'projects/hooks/useProjects'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { getFireplaceKeyframes } from './FillingBlock'
 import { toPercents } from '@increaser/ui/shared/utils/toPercents'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { useFocus } from 'focus/hooks/useFocus'
@@ -23,21 +22,16 @@ const Container = styled.div<{ $color: HSLA }>`
   position: relative;
   font-weight: 600;
   font-size: 20px;
-  border-bottom: 2px solid ${({ $color }) => $color.toCssValue()};
+  border: 1px solid ${getColor('background')};
 `
 // TODO: reuse with FillingBlock
 const Filler = styled.div<{ $color: HSLA }>`
-  height: 100%;
-
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
   ${defaultTransitionCSS};
-
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    ${({ $color }) => $color.getVariant({ a: () => 0.4 }).toCssValue()} 100%
-  );
-
-  animation: ${getFireplaceKeyframes()} 6s ease-in-out infinite;
+  background: ${({ $color }) => $color.toCssValue()};
 `
 
 export const FocusNavigationSlice = () => {
