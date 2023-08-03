@@ -30,7 +30,7 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
 
   if (doneMinutesThisWeek >= allocatedMinutesPerWeek) {
     return (
-      <Text color="success">
+      <Text as="span" color="success">
         <CheckDoubleIcon />
       </Text>
     )
@@ -38,14 +38,14 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
 
   if (doneMinutesThisWeek >= target) {
     return (
-      <Text color="success">
+      <Text as="span" color="success">
         <CheckIcon />
       </Text>
     )
   }
 
   return (
-    <Text color="alert">
+    <Text as="span" color="alert">
       <AlertTriangleIcon />
     </Text>
   )

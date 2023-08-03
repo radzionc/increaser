@@ -4,8 +4,6 @@ import { useWeekday } from 'shared/hooks/useWeekday'
 import { formatDuration } from 'shared/utils/formatDuration'
 import { sum } from 'shared/utils/sum'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
-import { Circle } from '@increaser/ui/ui/Circle'
-import { Spacer } from '@increaser/ui/ui/Spacer'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import {
   HStackSeparatedBy,
@@ -13,8 +11,11 @@ import {
 } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
-import { WeekdaysProgressBar } from 'capacity/components/WeekdaysProgressBar'
 import Link from 'next/link'
+import { ProjectGoalBadge } from './ProjectGoalBadge'
+import { AllocationLine } from 'ui/AllocationLine'
+import { useTheme } from 'styled-components'
+import { useMemo } from 'react'
 
 interface ProjectWeeklyGoalProps {
   projectId: string
@@ -23,20 +24,78 @@ interface ProjectWeeklyGoalProps {
 export const ProjectWeeklyGoal = ({ projectId }: ProjectWeeklyGoalProps) => {
   const { allocation, totalMinutes } = useWeekTimeAllocation()
 
+  const { colors } = useTheme()
+
   const { projectsRecord } = useProjects()
-  const { allocatedMinutesPerWeek, doneMinutesThisWeek, hslaColor } =
-    projectsRecord[projectId]
+  const project = projectsRecord[projectId]
+  const { allocatedMinutesPerWeek, doneMinutesThisWeek, name } = project
   const weekday = useWeekday()
 
   const target =
     allocatedMinutesPerWeek *
     (sum(allocation.filter((_, index) => index <= weekday)) / totalMinutes)
 
+  const segments = useMemo(() => {
+    if (doneMinutesThisWeek >= allocatedMinutesPerWeek) {
+      return [
+        {
+          color: colors.success,
+          proportion: 1,
+        },
+      ]
+    }
+
+    if (doneMinutesThisWeek < target) {
+      return [
+        {
+          color: colors.mistExtra,
+          proportion: doneMinutesThisWeek / allocatedMinutesPerWeek,
+        },
+        {
+          color: colors.alert,
+          proportion: (target - doneMinutesThisWeek) / allocatedMinutesPerWeek,
+        },
+      ]
+    }
+
+    if (doneMinutesThisWeek > target) {
+      return [
+        {
+          color: colors.mistExtra,
+          proportion: target / allocatedMinutesPerWeek,
+        },
+        {
+          color: colors.success,
+          proportion: (doneMinutesThisWeek - target) / allocatedMinutesPerWeek,
+        },
+      ]
+    }
+
+    return [
+      {
+        color: colors.mistExtra,
+        proportion: doneMinutesThisWeek / allocatedMinutesPerWeek,
+      },
+    ]
+  }, [
+    allocatedMinutesPerWeek,
+    colors.alert,
+    colors.mistExtra,
+    colors.success,
+    doneMinutesThisWeek,
+    target,
+  ])
+
   return (
     <VStack gap={4}>
       <HStack fullWidth alignItems="center" justifyContent="space-between">
-        <HStack alignItems="center" gap={8}>
-          <Circle size={8} background={hslaColor} />
+        <HStack alignItems="center" fullWidth justifyContent="space-between">
+          <Text size={14}>
+            <ProjectGoalBadge project={project} />
+            <Text as="span" style={{ marginLeft: 8 }}>
+              {name}
+            </Text>
+          </Text>
           <Text size={14} as="div" weight="bold">
             <HStackSeparatedBy
               separator={<Text color="shy">{slashSeparator}</Text>}
@@ -55,17 +114,7 @@ export const ProjectWeeklyGoal = ({ projectId }: ProjectWeeklyGoalProps) => {
           </Text>
         </HStack>
       </HStack>
-      {allocatedMinutesPerWeek > 0 ? (
-        <WeekdaysProgressBar
-          target={target}
-          value={doneMinutesThisWeek}
-          goal={'awareness'}
-          color={hslaColor}
-          total={allocatedMinutesPerWeek}
-        />
-      ) : (
-        <Spacer height={4} />
-      )}
+      <AllocationLine height={4} segments={segments} />
     </VStack>
   )
 }
