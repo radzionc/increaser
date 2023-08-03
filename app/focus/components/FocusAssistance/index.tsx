@@ -3,18 +3,13 @@ import styled from 'styled-components'
 import { HStack } from '@increaser/ui/ui/Stack'
 
 import { FocusBrowserNotification } from '../FocusSettings/FocusBrowserNotification'
-import { SoundToggle } from 'ui/SoundToggle'
 import { Menu } from '@increaser/ui/ui/Menu'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { SettingsIcon } from '@increaser/ui/ui/icons/SettingsIcon'
+import { ShySoundToggle } from '@increaser/ui/ui/ShySoundToggle'
 
 const Container = styled(HStack)`
   position: relative;
-`
-
-const SoundsNotifications = styled.div`
-  position: absolute;
-  right: -42px;
 `
 
 export const FocusAssistance = () => {
@@ -30,14 +25,11 @@ export const FocusAssistance = () => {
       renderContent={() => (
         <Container alignItems="center" gap={16}>
           <FocusBrowserNotification />
-          {hasTimerBrowserNotification && (
-            <SoundsNotifications>
-              <SoundToggle
-                value={hasTimerSoundNotification}
-                onChange={setHasTimerSoundNotification}
-              />
-            </SoundsNotifications>
-          )}
+          <ShySoundToggle
+            value={hasTimerSoundNotification}
+            style={{ opacity: Number(hasTimerBrowserNotification) }}
+            onChange={setHasTimerSoundNotification}
+          />
         </Container>
       )}
       renderOpener={(props) => (
