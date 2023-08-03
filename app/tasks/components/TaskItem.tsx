@@ -30,6 +30,7 @@ export const TaskItem = () => {
       }
       render={() => (
         <ChecklistItem
+          shouldCrossOut
           style={{ width: '100%' }}
           onChange={() => {
             mutate({

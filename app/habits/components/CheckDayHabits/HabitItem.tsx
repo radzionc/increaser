@@ -30,6 +30,7 @@ export const HabitItem = ({ habit, date, warning, showStreak }: Props) => {
 
   return (
     <ChecklistItem
+      hasCongratulation
       style={{ width: '100%' }}
       onChange={() => {
         const value = !isDone
@@ -40,25 +41,24 @@ export const HabitItem = ({ habit, date, warning, showStreak }: Props) => {
         <HStack alignItems="center" gap={8}>
           <Text>{habit.emoji}</Text>
           {habit.name}
-          {!isDone &&
-            (warning ? (
-              <StreakWrapper>
-                <Text color="alert" size={14}>
-                  {warning}
+          {warning ? (
+            <StreakWrapper>
+              <Text color="alert" size={14}>
+                {warning}
+              </Text>
+            </StreakWrapper>
+          ) : shouldShowStreak ? (
+            <StreakWrapper>
+              <HStack alignItems="center" gap={4}>
+                <Text color="supporting" size={14}>
+                  streak
                 </Text>
-              </StreakWrapper>
-            ) : shouldShowStreak ? (
-              <StreakWrapper>
-                <HStack alignItems="center" gap={4}>
-                  <Text color="supporting" size={14}>
-                    streak
-                  </Text>
-                  <Text weight="bold" size={14} color="success">
-                    {habit.streak}
-                  </Text>
-                </HStack>
-              </StreakWrapper>
-            ) : null)}
+                <Text weight="bold" size={14} color="success">
+                  {habit.streak}
+                </Text>
+              </HStack>
+            </StreakWrapper>
+          ) : null}
         </HStack>
       }
     />
