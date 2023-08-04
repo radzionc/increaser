@@ -1,5 +1,6 @@
 import { trackEvent } from 'analytics'
-import { FREE_TRIAL_DAYS, MembershipPeriod } from 'membership'
+import { FREE_TRIAL_DAYS } from 'membership'
+import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
 import { useCallback, useState } from 'react'
 import { Spacer } from '@increaser/ui/ui/Spacer'
@@ -12,26 +13,25 @@ import { SaleContent } from './SaleContent'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
 
 export const FreeTrialEnded = () => {
-  const [membershipPeriod, setMembershipPeriod] =
-    useState<MembershipPeriod | null>(null)
+  const [cadence, setCadence] = useState<SubscriptionCadence | null>(null)
 
   const { closeFreeTrialEndedModal } = useMembership()
 
   const handleClose = () => {
-    if (membershipPeriod) {
-      setMembershipPeriod(null)
+    if (cadence) {
+      setCadence(null)
     } else {
       closeFreeTrialEndedModal()
     }
   }
 
   const handleCloseCheckout = useCallback(() => {
-    setMembershipPeriod(null)
+    setCadence(null)
   }, [])
 
-  const handleMembershipPeriodSelect = (period: MembershipPeriod) => {
+  const handleSubscriptionCadenceSelect = (period: SubscriptionCadence) => {
     trackEvent(`Start ${period} membership checkout`)
-    setMembershipPeriod(period)
+    setCadence(period)
   }
 
   const { isSuccess: isPaddleLoaded } = usePaddleSdk()
@@ -40,7 +40,7 @@ export const FreeTrialEnded = () => {
     <PaddleModal
       onClose={handleClose}
       title={
-        membershipPeriod ? null : (
+        cadence ? null : (
           <Text>
             <EmojiTextPrefix emoji="✅" /> {FREE_TRIAL_DAYS} days free trial
             ended
@@ -49,25 +49,23 @@ export const FreeTrialEnded = () => {
       }
       renderContent={() => (
         <>
-          {!membershipPeriod && (
+          {!cadence && (
             <>
               <Spacer height={20} />
               <SaleContent
-                onMembershipPeriodSelect={handleMembershipPeriodSelect}
+                onSubscriptionCadenceSelect={handleSubscriptionCadenceSelect}
               />
             </>
           )}
           {isPaddleLoaded && (
             <div
               style={
-                membershipPeriod
-                  ? undefined
-                  : { position: 'absolute', bottom: 10000 }
+                cadence ? undefined : { position: 'absolute', bottom: 10000 }
               }
             >
               <CheckoutContent
                 onClose={handleCloseCheckout}
-                period={membershipPeriod || 'yearly'}
+                period={cadence || 'year'}
               />
             </div>
           )}

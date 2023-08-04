@@ -1,5 +1,5 @@
 import { MembersTelegram } from 'communication/MembersTelegram'
-import { MembershipPeriod } from 'membership'
+import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { CheckoutModal } from 'membership/components/CheckoutModal'
 import { MembershipSaleCard } from 'membership/components/MembershipSaleCard'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { ManageMembership } from './ManageMembership'
 
 export const Membership = () => {
-  const [period, setPeriod] = useState<MembershipPeriod | null>(null)
+  const [period, setPeriod] = useState<SubscriptionCadence | null>(null)
 
   const { membership, freeTrialEnd } = useAssertUserState()
 

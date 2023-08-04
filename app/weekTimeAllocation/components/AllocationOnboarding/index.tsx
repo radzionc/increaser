@@ -9,6 +9,8 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { WorkHoursOnboarding } from './WorkHoursOnboarding'
 import { WorkScheduleOnboarding } from './WorkScheduleOnboarding'
 import { Match } from '@increaser/ui/ui/Match'
+import { useIsPayingUser } from 'membership/hooks/useIsPayingUser'
+import { SaleOnboarding } from 'sale/component/SaleOnboarding'
 
 type AllocationOnboardingStage =
   | 'goal'
@@ -17,11 +19,14 @@ type AllocationOnboardingStage =
   | 'goals'
   | 'schedule'
   | 'habits'
+  | 'sale'
 
 export const AllocationOnboarding = () => {
-  const [stage, setStage] = useState<AllocationOnboardingStage | null>(null)
+  const [stage, setStage] = useState<AllocationOnboardingStage | null>('sale')
 
   const { name, projects } = useAssertUserState()
+
+  const isPayingUser = useIsPayingUser()
 
   useEffect(() => {
     if (projects.length === 0 && name && stage === null) {
@@ -81,6 +86,14 @@ export const AllocationOnboarding = () => {
         <HabitsOnboarding
           onNext={() => {
             trackEvent('Finish habits onboarding')
+            setStage(isPayingUser ? 'sale' : null)
+          }}
+        />
+      )}
+      sale={() => (
+        <SaleOnboarding
+          onNext={() => {
+            trackEvent('Finish sale onboarding')
             setStage(null)
           }}
         />

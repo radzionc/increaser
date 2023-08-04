@@ -1,5 +1,5 @@
 import { trackEvent } from 'analytics'
-import { MembershipPeriod, MembershipProvider } from 'membership'
+import { MembershipProvider } from 'membership'
 import { PaddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { useCallback } from 'react'
 import { Path } from 'router/Path'
@@ -8,9 +8,10 @@ import { useUserState } from 'user/state/UserStateContext'
 import { useMembership } from './MembershipContext'
 import { PaddleIFrame } from './PaddleIFrame'
 import { useRouter } from 'next/router'
+import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 
 interface Props {
-  period: MembershipPeriod
+  period: SubscriptionCadence
   onClose: () => void
 }
 

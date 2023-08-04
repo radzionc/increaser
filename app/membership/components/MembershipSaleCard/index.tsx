@@ -1,4 +1,4 @@
-import { MembershipPeriod } from 'membership'
+import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { useMembershipPricesQuery } from 'membership/hooks/useMembershipPricesQuery'
 import { useState } from 'react'
 import { capitalizeFirstLetter } from 'shared/utils/capitalizeFirstLetter'
@@ -9,7 +9,7 @@ import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenR
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 interface Props {
-  onPurchaseRequest: (period: MembershipPeriod) => void
+  onPurchaseRequest: (period: SubscriptionCadence) => void
 }
 
 const SaveBadge = styled(Text)`
@@ -20,23 +20,23 @@ const SaveBadge = styled(Text)`
     theme.colors.success.getVariant({ l: (l) => l * 0.2 }).toCssValue()};
 `
 
-const montsInPeriod = {
-  monthly: 1,
-  yearly: 12,
+const montsInPeriod: Record<SubscriptionCadence, number> = {
+  month: 1,
+  year: 12,
 }
 
 export const MembershipSaleCard = ({ onPurchaseRequest }: Props) => {
   const { data: prices } = useMembershipPricesQuery()
-  const [period, setPeriod] = useState<MembershipPeriod>('yearly')
+  const [period, setPeriod] = useState<SubscriptionCadence>('year')
 
   if (!prices) return null
 
-  const monthlyYearTotal = prices.monthly.amount * 12
+  const monthlyYearTotal = prices.month.amount * 12
   const yearlySave = Math.round(
-    ((monthlyYearTotal - prices.yearly.amount) / monthlyYearTotal) * 100,
+    ((monthlyYearTotal - prices.year.amount) / monthlyYearTotal) * 100,
   )
 
-  const price = period === 'yearly' ? prices.yearly : prices.monthly
+  const price = period === 'year' ? prices.year : prices.month
 
   return (
     <VStack style={{ minWidth: 320 }} alignItems="start" gap={20}>
@@ -48,7 +48,7 @@ export const MembershipSaleCard = ({ onPurchaseRequest }: Props) => {
             <SelectOption
               isSelected={option === period}
               value={option}
-              onSelect={() => setPeriod(option as MembershipPeriod)}
+              onSelect={() => setPeriod(option as SubscriptionCadence)}
               groupName="membership-plan"
               key={option}
             >
@@ -85,7 +85,7 @@ export const MembershipSaleCard = ({ onPurchaseRequest }: Props) => {
           color="supporting"
           style={{
             transition: 'none',
-            visibility: period === 'monthly' ? 'hidden' : 'initial',
+            visibility: period === 'month' ? 'hidden' : 'initial',
           }}
         >
           * {price.currency} {price.amount} per year

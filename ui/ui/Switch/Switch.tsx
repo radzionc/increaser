@@ -53,6 +53,7 @@ const Wrapper = styled(HStack)<{ kind: SwitchKind }>`
     `}
 
   color: ${getColor('textSupporting')};
+  ${defaultTransitionCSS};
 
   :hover {
     color: ${getColor('text')};
@@ -71,6 +72,7 @@ const Container = styled.div`
   align-items: center;
 
   ${roundedCSS};
+
   ${defaultTransitionCSS};
 `
 

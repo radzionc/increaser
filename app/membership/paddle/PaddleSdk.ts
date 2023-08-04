@@ -29,7 +29,7 @@ interface PaddleSdkOpenCheckoutParams {
   successCallback: (info: CheckoutSuccessInfo) => void
   closeCallback: () => void
   frameInitialHeight: number
-  loadCallback: () => void
+  loadCallback?: () => void
   email?: string | null
   passthrough: string
   override: any
