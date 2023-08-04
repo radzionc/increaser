@@ -8,12 +8,11 @@ import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { getVerticalMarginCSS } from '@increaser/ui/ui/utils/getVerticalMarginCSS'
+import { APP_DEMO_URL } from 'shared/externalResources'
 
 const Container = styled(VStack)`
   ${getVerticalMarginCSS(80)};
 `
-
-const DEMO_URL = 'https://youtu.be/0No3EHVddlk'
 
 const youTubeVideoRatio = 9 / 16
 
@@ -63,7 +62,7 @@ export const DemoSlice = () => {
                               isActive
                               width={size.width}
                               height={size.width * youTubeVideoRatio}
-                              url={DEMO_URL}
+                              url={APP_DEMO_URL}
                               playing={isPlaying}
                               onPause={pause}
                               onPlay={play}
