@@ -5,6 +5,7 @@ import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCade
 import { useState } from 'react'
 import { SubscriptionCadenceInput } from '@increaser/ui/subscription/components/SubscriptionCadenceInput'
 import { SubscriptionPrice } from '@increaser/ui/subscription/components/SubscriptionPrice'
+import { SubscriptionBenefit } from '@increaser/ui/subscription/components/SubscriptionBenefit'
 
 import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
 
@@ -33,6 +34,7 @@ export const SaleOnboarding = ({ onNext }: Props) => {
   return (
     <Modal
       title="Achieve your goals with Increaser"
+      titlePlacement="center"
       hasImplicitClose={false}
       placement="top"
       footer={
@@ -57,7 +59,7 @@ export const SaleOnboarding = ({ onNext }: Props) => {
             success={(prices) => {
               console.log('prices: ', prices)
               return (
-                <VStack gap={20}>
+                <VStack alignItems="center" gap={20}>
                   <SubscriptionCadenceInput
                     value={cadence}
                     onChange={setCadence}
@@ -66,16 +68,21 @@ export const SaleOnboarding = ({ onNext }: Props) => {
                       prices.month.amount,
                     )}
                   />
-                  <Center>
-                    <SubscriptionPrice
-                      currency={prices.year.currency}
-                      cadence={cadence}
-                      price={{
-                        month: prices.month.amount,
-                        year: prices.year.amount,
-                      }}
-                    />
-                  </Center>
+                  <SubscriptionPrice
+                    currency={prices.year.currency}
+                    cadence={cadence}
+                    price={{
+                      month: prices.month.amount,
+                      year: prices.year.amount,
+                    }}
+                  />
+                  <VStack gap={8}>
+                    <SubscriptionBenefit benefit="Enhance your focus" />
+                    <SubscriptionBenefit benefit="Finish work faster" />
+                    <SubscriptionBenefit benefit="Accelerate your career" />
+                    <SubscriptionBenefit benefit="Develop positive habits" />
+                    <SubscriptionBenefit benefit="Boundaries for work-life balance" />
+                  </VStack>
                 </VStack>
               )
             }}

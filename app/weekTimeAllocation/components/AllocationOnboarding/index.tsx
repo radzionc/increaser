@@ -22,7 +22,7 @@ type AllocationOnboardingStage =
   | 'sale'
 
 export const AllocationOnboarding = () => {
-  const [stage, setStage] = useState<AllocationOnboardingStage | null>('sale')
+  const [stage, setStage] = useState<AllocationOnboardingStage | null>(null)
 
   const { name, projects } = useAssertUserState()
 

@@ -1,8 +1,6 @@
-import { ComponentWithChildrenProps } from '../../shared/props'
+import { ComponentProps } from 'react'
 import { Text } from '../Text'
 
-export const ModalTitleText = ({ children }: ComponentWithChildrenProps) => (
-  <Text color="regular" as="div" weight="extraBold" size={22}>
-    {children}
-  </Text>
+export const ModalTitleText = (props: ComponentProps<typeof Text>) => (
+  <Text color="regular" as="div" weight="extraBold" size={20} {...props} />
 )

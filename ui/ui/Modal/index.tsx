@@ -156,12 +156,20 @@ export const Modal = ({
             >
               {(titlePlacement === 'center' || !title) &&
                 (hasCloseButton ? <Spacer width={32} /> : <div />)}
-              {title && <ModalTitleText>{title}</ModalTitleText>}
-              {hasCloseButton && (
-                <CloseButton size="l" onClick={() => onClose?.()} />
+              {title && (
+                <ModalTitleText centered={titlePlacement === 'center'}>
+                  {title}
+                </ModalTitleText>
               )}
+              {hasCloseButton ? (
+                <CloseButton size="l" onClick={() => onClose?.()} />
+              ) : titlePlacement === 'center' ? (
+                <div />
+              ) : null}
             </HStack>
-            {(title || hasCloseButton) && <Spacer height={20} />}
+            {(title || hasCloseButton) && (
+              <Spacer height={footer ? padding * 2 : padding} />
+            )}
             <Content style={{ padding: contentPadding }}>
               {renderContent({ isFullScreen })}
             </Content>
