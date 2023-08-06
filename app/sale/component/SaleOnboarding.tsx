@@ -57,7 +57,6 @@ export const SaleOnboarding = ({ onNext }: Props) => {
               </Center>
             )}
             success={(prices) => {
-              console.log('prices: ', prices)
               return (
                 <VStack alignItems="center" gap={20}>
                   <SubscriptionCadenceInput

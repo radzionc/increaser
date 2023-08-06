@@ -167,9 +167,7 @@ export const Modal = ({
                 <div />
               ) : null}
             </HStack>
-            {(title || hasCloseButton) && (
-              <Spacer height={footer ? padding * 2 : padding} />
-            )}
+            {(title || hasCloseButton) && <Spacer height={padding} />}
             <Content style={{ padding: contentPadding }}>
               {renderContent({ isFullScreen })}
             </Content>

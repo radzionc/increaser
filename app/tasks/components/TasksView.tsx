@@ -11,7 +11,6 @@ import { TaskItem } from './TaskItem'
 
 export const TasksView = () => {
   const { tasks } = useAssertUserState()
-  console.log(tasks)
 
   const [isCreatingTask, { set: startCreatingTask, unset: stopCreatingTask }] =
     useBoolean(false)
