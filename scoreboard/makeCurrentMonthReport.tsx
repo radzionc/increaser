@@ -9,6 +9,7 @@ import { inTimeZone } from '@increaser/utils/inTimeZone'
 import { MIN_IN_HOUR, MS_IN_DAY, S_IN_MIN } from '@increaser/utils/time'
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
 import { uploadJsonToPublic } from '@increaser/public/uploadJsonToPublic'
+import { PerformanceScoreboard } from '@increaser/entities/PerformanceScoreboard'
 
 interface UserRecord {
   dailyAvgInMinutes: number
@@ -75,7 +76,7 @@ export const makeCurrentMonthReport = async () => {
     .sort((a, b) => b.dailyAvgInMinutes - a.dailyAvgInMinutes)
     .filter(({ dailyAvgInMinutes }) => dailyAvgInMinutes > 2 * MIN_IN_HOUR)
 
-  const content = {
+  const content: PerformanceScoreboard = {
     createdAt: Date.now(),
     users: records,
   }

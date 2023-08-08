@@ -6,6 +6,7 @@ import { ListIcon } from '@increaser/ui/ui/icons/ListIcon'
 import { SettingsIcon } from '@increaser/ui/ui/icons/SettingsIcon'
 import { TableIcon } from '@increaser/ui/ui/icons/TableIcon'
 import { ZapIcon } from '@increaser/ui/ui/icons/ZapIcon'
+import { GlobeIcon } from '@increaser/ui/ui/icons/GlobeIcon'
 
 export const navigationPathInfo = {
   [Path.Home]: {
@@ -35,5 +36,9 @@ export const navigationPathInfo = {
   [Path.Habits]: {
     name: 'Habits',
     icon: <ZapIcon />,
+  },
+  [Path.Community]: {
+    name: 'Community',
+    icon: <GlobeIcon />,
   },
 } as const

@@ -16,6 +16,7 @@ export enum Path {
   Capacity = '/capacity',
   Work = '/work',
   CreateProject = '/projects/create',
+  Community = '/community',
 }
 
 export const getProjectPath = (projectId: string) => `/projects/${projectId}`

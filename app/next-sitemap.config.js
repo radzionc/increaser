@@ -21,5 +21,6 @@ module.exports = {
     '/habits',
     '/capacity',
     '/work',
+    '/community',
   ],
 }

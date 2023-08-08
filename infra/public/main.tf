@@ -3,6 +3,9 @@ provider "aws" {
 
 terraform {
   backend "s3" {
+    bucket = "infrastructure-remote-state"
+    key    = "pomodoro/public.tfstate"
+    region = "eu-central-1"
   }
 }
 
@@ -10,6 +13,17 @@ resource "aws_s3_bucket" "frontend" {
   bucket = var.bucket_name
 }
 
+resource "aws_s3_bucket_cors_configuration" "frontend" {
+  bucket = var.bucket_name
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET"]
+    allowed_origins = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
+}
 
 resource "aws_s3_bucket_policy" "frontend" {
   bucket = aws_s3_bucket.frontend.id
@@ -77,15 +91,8 @@ resource "aws_s3_bucket_website_configuration" "frontend" {
 
 resource "aws_cloudfront_distribution" "frontend" {
   origin {
-    domain_name = aws_s3_bucket_website_configuration.frontend.website_endpoint
+    domain_name = aws_s3_bucket.frontend.bucket_domain_name
     origin_id   = var.bucket_name
-
-    custom_origin_config {
-      http_port              = "80"
-      https_port             = "443"
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
-    }
   }
   enabled             = true
   is_ipv6_enabled     = true
@@ -94,12 +101,13 @@ resource "aws_cloudfront_distribution" "frontend" {
   aliases = [var.domain]
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = var.bucket_name
 
     forwarded_values {
       query_string = false
+      headers = ["Access-Control-Request-Headers", "Access-Control-Request-Method", "Origin"]
 
       cookies {
         forward = "none"
@@ -118,25 +126,6 @@ resource "aws_cloudfront_distribution" "frontend" {
     geo_restriction {
       restriction_type = "none"
     }
-  }
-
-  custom_error_response {
-    error_caching_min_ttl = "0"
-    error_code            = "403"
-    response_code         = "200"
-    response_page_path    = "/"
-  }
-  custom_error_response {
-    error_caching_min_ttl = "0"
-    error_code            = "404"
-    response_code         = "200"
-    response_page_path    = "/"
-  }
-  custom_error_response {
-    error_caching_min_ttl = "0"
-    error_code            = "400"
-    response_code         = "200"
-    response_page_path    = "/"
   }
 }
 
