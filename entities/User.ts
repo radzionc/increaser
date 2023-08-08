@@ -48,7 +48,7 @@ export type User = {
   primaryGoal: PrimaryGoal
   id: string
   email?: string
-  country: string | null
+  country: string
   name?: string
   sets: Set[]
   prevSets: Set[]
@@ -62,6 +62,8 @@ export type User = {
   goalToStartWorkAt: number
   goalToFinishWorkBy: number
   goalToGoToBedAt: number
+
+  isAnonymous: boolean
 
   appSumo?: AppSumo
 

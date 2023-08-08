@@ -6,18 +6,24 @@ import { tableName } from '@increaser/db/tableName'
 import { ScanCommand } from '@aws-sdk/lib-dynamodb'
 import { getMonthStartedAt } from '@increaser/utils/getMonthStartedAt'
 import { inTimeZone } from '@increaser/utils/inTimeZone'
-import { MS_IN_DAY, S_IN_HOUR } from '@increaser/utils/time'
+import { MIN_IN_HOUR, MS_IN_DAY, S_IN_MIN } from '@increaser/utils/time'
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
+import { uploadJsonToPublic } from '@increaser/public/uploadJsonToPublic'
 
-interface UserInfo {
-  dailyAvg: number
+interface UserRecord {
+  dailyAvgInMinutes: number
   id: string
   name: string | undefined
+  country: string | undefined
 }
 
-const activeUsers = async () => {
-  const users: Pick<User, 'id' | 'name' | 'sets' | 'prevSets' | 'timeZone'>[] =
-    []
+type UserInfo = Pick<
+  User,
+  'id' | 'name' | 'country' | 'sets' | 'prevSets' | 'timeZone' | 'isAnonymous'
+>
+
+export const makeCurrentMonthReport = async () => {
+  const users: UserInfo[] = []
 
   const recursiveProcess = async (lastEvaluatedKey?: any) => {
     const command = new ScanCommand({
@@ -30,20 +36,18 @@ const activeUsers = async () => {
         '#prevSets': 'prevSets',
         '#name': 'name',
         '#timeZone': 'timeZone',
+        '#country': 'country',
+        '#isAnonymous': 'isAnonymous',
       },
       ExpressionAttributeValues: {
         ':size': 0,
       },
-      ProjectionExpression: '#id, #sets, #prevSets, #name, #timeZone',
+      ProjectionExpression:
+        '#id,#sets,#prevSets,#name,#timeZone,#country,#isAnonymous',
     })
     const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
     if (Items) {
-      users.push(
-        ...(Items as Pick<
-          User,
-          'id' | 'name' | 'sets' | 'prevSets' | 'timeZone'
-        >[]),
-      )
+      users.push(...(Items as UserInfo[]))
     }
 
     if (LastEvaluatedKey) {
@@ -51,8 +55,8 @@ const activeUsers = async () => {
     }
   }
   await recursiveProcess()
-  const info: UserInfo[] = users
-    .map(({ id, name, sets, prevSets, timeZone }) => {
+  const records: UserRecord[] = users
+    .map(({ id, name, country, isAnonymous, sets, prevSets, timeZone }) => {
       const now = Date.now()
       const monthStartedAt = inTimeZone(getMonthStartedAt(now), timeZone)
       const allSets = [...sets, ...prevSets].filter(
@@ -63,14 +67,21 @@ const activeUsers = async () => {
 
       return {
         id,
-        name,
-        dailyAvg: total / days / S_IN_HOUR,
+        name: isAnonymous ? undefined : name,
+        country: isAnonymous ? undefined : country,
+        dailyAvgInMinutes: Math.round(total / days / S_IN_MIN),
       }
     })
-    .sort((a, b) => a.dailyAvg - b.dailyAvg)
-    .filter(({ dailyAvg }) => dailyAvg > 3)
+    .sort((a, b) => b.dailyAvgInMinutes - a.dailyAvgInMinutes)
+    .filter(({ dailyAvgInMinutes }) => dailyAvgInMinutes > 2 * MIN_IN_HOUR)
 
-  console.log(info)
+  const content = {
+    createdAt: Date.now(),
+    users: records,
+  }
+
+  await uploadJsonToPublic({
+    content,
+    path: 'month',
+  })
 }
-
-activeUsers()
