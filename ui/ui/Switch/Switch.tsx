@@ -107,7 +107,11 @@ export const Switch = ({
           {value ? <CheckIcon /> : <CloseIcon />}
         </Control>
       </Container>
-      {label && <Text>{label}</Text>}
+      {label && (
+        <Text size={16} weight="semibold">
+          {label}
+        </Text>
+      )}
     </Wrapper>
   )
 }

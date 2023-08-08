@@ -8,6 +8,7 @@ interface UpdateUserParams {
   primaryGoal?: PrimaryGoal
   focusSounds?: FocusSound[]
   tasks?: Task[]
+  isAnonymous?: boolean
 }
 
 const updateUserMutation = `

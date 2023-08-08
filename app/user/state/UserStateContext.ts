@@ -33,6 +33,7 @@ export interface UserStateView {
   primaryGoal: PrimaryGoal
   focusSounds: FocusSound[]
   tasks: Task[]
+  isAnonymous: boolean
 }
 
 interface UserState {
