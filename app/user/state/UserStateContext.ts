@@ -1,3 +1,4 @@
+import { CountryCode } from '@increaser/ui/ui/inputs/CountryInput/countryNameRecord'
 import { QueryMainApiParams } from 'api/hooks/useMainApi'
 import { PrimaryGoal } from 'capacity/PrimaryGoal'
 import { HabitResponse } from 'habits/Habit'
@@ -34,6 +35,7 @@ export interface UserStateView {
   focusSounds: FocusSound[]
   tasks: Task[]
   isAnonymous: boolean
+  country: CountryCode
 }
 
 interface UserState {

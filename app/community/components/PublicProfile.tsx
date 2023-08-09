@@ -8,9 +8,10 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useState } from 'react'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
+import { getCountryFlagEmoji } from '@increaser/ui/shared/utils/getCountryFlagEmoji'
 
 export const PublicProfile = () => {
-  const { isAnonymous, name } = useAssertUserState()
+  const { isAnonymous, name, country } = useAssertUserState()
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -37,8 +38,16 @@ export const PublicProfile = () => {
             fullWidth
             justifyContent="space-between"
           >
-            <LabeledValue name="Name">{name || '-'}</LabeledValue>
+            <LabeledValue name="Name">
+              {name || '-'}{' '}
+              {country && (
+                <Text as="span" color="contrast">
+                  {getCountryFlagEmoji(country)}
+                </Text>
+              )}
+            </LabeledValue>
             <IconButton
+              title="Edit profile"
               kind="secondary"
               icon={<EditIcon />}
               onClick={() => setIsEditing(true)}

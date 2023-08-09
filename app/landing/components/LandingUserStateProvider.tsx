@@ -54,8 +54,10 @@ export const LandingUserStateProvider = ({
       goalToStartWorkAt: defaultGoalToStartWorkAt,
       goalToFinishWorkBy: defaultGoalToFinishWorkBy,
       goalToGoToBedAt: defaultGoalToGoToBedAt,
+      isAnonymous: false,
       tasks: getDemoTasks(),
       habits: getDemoHabits(),
+      country: 'US',
     }
   })
 

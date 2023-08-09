@@ -31,6 +31,7 @@ query userState($input: UserStateInput!) {
     email
     id
     name
+    country
     isAnonymous
     membership {
       provider
