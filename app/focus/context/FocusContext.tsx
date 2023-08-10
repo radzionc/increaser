@@ -1,3 +1,4 @@
+import { Set } from '@increaser/entities/User'
 import { FocusDuration } from 'focus/FocusDuration'
 import { createContext } from 'react'
 
@@ -11,9 +12,13 @@ export interface CurrentSet {
   startedAt: number
 }
 
+export interface StopFocusParams {
+  setOverride?: Partial<Set>
+}
+
 export interface FocusState {
   start: (params: StartFocusParams) => void
-  stop: () => void
+  stop: (params?: StopFocusParams) => void
   cancel: () => void
 
   currentSet: CurrentSet | undefined

@@ -3,6 +3,7 @@ import {
   CurrentSet,
   FocusContext,
   StartFocusParams,
+  StopFocusParams,
 } from 'focus/context/FocusContext'
 import {
   FocusDuration,
@@ -115,34 +116,32 @@ export const FocusProvider = ({ children }: Props) => {
     router.push(Path.Home)
   }, [router])
 
-  const stop = useCallback(() => {
-    if (!currentSet) return
+  const stop = useCallback(
+    (params: StopFocusParams = {}) => {
+      if (!currentSet) return
 
-    router.push(Path.Home)
-    const set = {
-      start: currentSet.startedAt,
-      end: Date.now(),
-      projectId: currentSet.projectId,
-    }
-    const blocks = getBlocks([...todaySets, set])
+      router.push(Path.Home)
+      const set = {
+        start: currentSet.startedAt,
+        end: Date.now(),
+        projectId: currentSet.projectId,
+        ...params?.setOverride,
+      }
+      const blocks = getBlocks([...todaySets, set])
 
-    createSet(set)
+      createSet(set)
 
-    setCurrentSet(undefined)
+      setCurrentSet(undefined)
 
-    setFocusDuration(getNextFocusDuration(blocks))
+      setFocusDuration(getNextFocusDuration(blocks))
 
-    trackEvent('Finish focus session', {
-      duration: Math.round(getSetDuration(set) / MS_IN_MIN),
-      activeSoundUrl: focusSoundsState.activeSoundUrl,
-    })
-  }, [
-    createSet,
-    currentSet,
-    focusSoundsState.activeSoundUrl,
-    todaySets,
-    router,
-  ])
+      trackEvent('Finish focus session', {
+        duration: Math.round(getSetDuration(set) / MS_IN_MIN),
+        activeSoundUrl: focusSoundsState.activeSoundUrl,
+      })
+    },
+    [createSet, currentSet, focusSoundsState.activeSoundUrl, todaySets, router],
+  )
 
   return (
     <FocusContext.Provider
