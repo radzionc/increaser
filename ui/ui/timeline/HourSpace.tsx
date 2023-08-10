@@ -3,15 +3,15 @@ import { VStack } from '../Stack'
 import { Text } from '../Text'
 import { getColor } from '../theme/getters'
 import { range } from '../../shared/utils/range'
+import { MS_IN_HOUR } from '@increaser/utils/time'
+import { formatTime } from '../../../app/shared/utils/formatTime'
 
 interface Props {
   start: number
   end: number
   className?: string
-  hourLabelWidthInPx?: number
   children?: React.ReactNode
   underLinesContent?: React.ReactNode
-  formatHour?: (hour: number) => string | number
 }
 
 const Container = styled(VStack)`
@@ -55,12 +55,12 @@ export const HourSpace = ({
   start,
   end,
   className,
-  hourLabelWidthInPx = 20,
   children,
   underLinesContent,
-  formatHour = (v) => v,
 }: Props) => {
   const hours = range(end + 1 - start).map((index) => start + index)
+
+  const hourLabelWidthInPx = 40
 
   return (
     <Container
@@ -77,8 +77,8 @@ export const HourSpace = ({
           <HourWr key={hour}>
             <HourContainer>
               <HourContent labelWidth={hourLabelWidthInPx}>
-                <Text size={14} color="supporting">
-                  {formatHour(hour)}
+                <Text nowrap size={12} color="supporting">
+                  {formatTime(start + hour * MS_IN_HOUR)}
                 </Text>
                 <HourLine />
               </HourContent>

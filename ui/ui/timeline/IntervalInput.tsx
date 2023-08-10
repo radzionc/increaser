@@ -181,15 +181,7 @@ export const IntervalInput = ({
       style={{ height: height, cursor }}
       onMouseMove={handleMouseMove}
     >
-      <HourSpace
-        formatHour={(hour) => {
-          const date = new Date(startOfDay + hour * MS_IN_HOUR)
-          return date.toLocaleString(undefined, { hour: 'numeric' })
-        }}
-        start={startHour}
-        end={endHour}
-        hourLabelWidthInPx={20}
-      >
+      <HourSpace start={startHour} end={endHour}>
         {renderContent && renderContent({ pxInMs })}
         <CurrentIntervalRect
           $color={color}

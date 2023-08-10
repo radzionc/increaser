@@ -62,7 +62,11 @@ export const CreateSetOverlay = ({ onClose }: Props) => {
               onClick={handleSubmit(onSubmit)}
               text={`Add ${projectsRecord[projectId].name} Session`}
             />
-            <Button kind="secondary" onClick={() => setValue('projectId', '')}>
+            <Button
+              size="l"
+              kind="secondary"
+              onClick={() => setValue('projectId', '')}
+            >
               Back
             </Button>
           </VStack>

@@ -15,10 +15,7 @@ import { IntervalRect } from '@increaser/ui/ui/timeline/IntervalRect'
 import { MS_IN_HOUR } from 'utils/time'
 interface Props extends ClosableComponentProps {}
 
-const Session = styled(IntervalRect)`
-  width: 96%;
-  right: 4%;
-`
+const Session = styled(IntervalRect)``
 
 export const ChangeLastSetIntervalOverlay = ({ onClose }: Props) => {
   const startOfDay = useStartOfDay()
