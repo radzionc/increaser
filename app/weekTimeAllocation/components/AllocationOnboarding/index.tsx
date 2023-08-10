@@ -86,7 +86,7 @@ export const AllocationOnboarding = () => {
         <HabitsOnboarding
           onNext={() => {
             trackEvent('Finish habits onboarding')
-            setStage(isPayingUser ? 'sale' : null)
+            setStage(isPayingUser ? null : 'sale')
           }}
         />
       )}
