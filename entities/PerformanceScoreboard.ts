@@ -1,5 +1,6 @@
-interface UserPerformanceRecord {
+export interface UserPerformanceRecord {
   dailyAvgInMinutes: number
+  avgBlockInMinutes: number
   id: string
   name: string | undefined
   country: string | undefined

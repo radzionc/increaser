@@ -10,7 +10,7 @@ import { MS_IN_MIN } from 'utils/time'
 
 import { getSetsSum } from './helpers/getSetsSum'
 import { Set } from './Set'
-import { getDistanceBetweenSets } from './utils/getDistanceBetweenSets'
+import { getDistanceBetweenSets } from '@increaser/entities-utils/set/getDistanceBetweenSets'
 
 export interface Block {
   sets: Set[]

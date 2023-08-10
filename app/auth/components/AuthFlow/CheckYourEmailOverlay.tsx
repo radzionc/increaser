@@ -38,6 +38,7 @@ export const CheckYourEmailOverlay = ({ email, onEditEmail }: Props) => {
             <HStack alignItems="center" gap={12}>
               <Text weight="bold">{email}</Text>
               <IconButton
+                title="Edit email"
                 size="s"
                 kind="secondary"
                 icon={<EditIcon />}

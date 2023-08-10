@@ -6,17 +6,14 @@ import { tableName } from '@increaser/db/tableName'
 import { ScanCommand } from '@aws-sdk/lib-dynamodb'
 import { getMonthStartedAt } from '@increaser/utils/getMonthStartedAt'
 import { inTimeZone } from '@increaser/utils/inTimeZone'
-import { MIN_IN_HOUR, MS_IN_DAY, S_IN_MIN } from '@increaser/utils/time'
-import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
+import { MIN_IN_HOUR, MS_IN_DAY, MS_IN_MIN } from '@increaser/utils/time'
 import { uploadJsonToPublic } from '@increaser/public/uploadJsonToPublic'
-import { PerformanceScoreboard } from '@increaser/entities/PerformanceScoreboard'
-
-interface UserRecord {
-  dailyAvgInMinutes: number
-  id: string
-  name: string | undefined
-  country: string | undefined
-}
+import {
+  PerformanceScoreboard,
+  UserPerformanceRecord,
+} from '@increaser/entities/PerformanceScoreboard'
+import { getBlocks } from '@increaser/entities-utils/block'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 
 type UserInfo = Pick<
   User,
@@ -56,25 +53,36 @@ export const makeCurrentMonthReport = async () => {
     }
   }
   await recursiveProcess()
-  const records: UserRecord[] = users
-    .map(({ id, name, country, isAnonymous, sets, prevSets, timeZone }) => {
+
+  const records: UserPerformanceRecord[] = []
+
+  users.forEach(
+    ({ timeZone, sets, prevSets, id, isAnonymous, name, country }) => {
       const now = Date.now()
       const monthStartedAt = inTimeZone(getMonthStartedAt(now), timeZone)
       const allSets = [...sets, ...prevSets].filter(
         (set) => set.start > monthStartedAt,
       )
       const days = Math.ceil((now - monthStartedAt) / MS_IN_DAY)
-      const total = getSetsDurationInSeconds(allSets)
+      const total = getSetsDuration(allSets)
+      const totalInMinutes = Math.round(total / MS_IN_MIN)
 
-      return {
+      const dailyAvgInMinutes = Math.round(totalInMinutes / days)
+      if (dailyAvgInMinutes < 2 * MIN_IN_HOUR) return
+
+      const blocks = getBlocks(allSets)
+
+      const avgBlockInMinutes = totalInMinutes / blocks.length
+
+      records.push({
         id,
         name: isAnonymous ? undefined : name,
         country: isAnonymous ? undefined : country,
-        dailyAvgInMinutes: Math.round(total / days / S_IN_MIN),
-      }
-    })
-    .sort((a, b) => b.dailyAvgInMinutes - a.dailyAvgInMinutes)
-    .filter(({ dailyAvgInMinutes }) => dailyAvgInMinutes > 2 * MIN_IN_HOUR)
+        dailyAvgInMinutes,
+        avgBlockInMinutes,
+      })
+    },
+  )
 
   const content: PerformanceScoreboard = {
     createdAt: Date.now(),

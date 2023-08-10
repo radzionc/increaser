@@ -16,7 +16,12 @@ export const BreakSettings = () => {
         </>
       )}
       renderOpener={(props) => (
-        <IconButton kind="secondary" icon={<SettingsIcon />} {...props} />
+        <IconButton
+          title="Break settings"
+          kind="secondary"
+          icon={<SettingsIcon />}
+          {...props}
+        />
       )}
     />
   )

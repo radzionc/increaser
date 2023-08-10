@@ -5,11 +5,18 @@ import { CurrentMonthUsers } from './CurrentMonthUsers'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { PublicProfile } from './PublicProfile'
 import { UserStateOnly } from 'user/state/UserStateOnly'
+import { ClientOnly } from 'ui/ClientOnly'
+import { getMonthName } from '@increaser/utils/getMonthName'
 
 export const CommunityPage: Page = () => {
   return (
     <FixedWidthContent>
-      <PageTitle documentTitle={`👋 Community`} title={`Community`} />
+      <ClientOnly>
+        <PageTitle
+          documentTitle={`👋 Community`}
+          title={`${getMonthName(Date.now())} Top Performers`}
+        />
+      </ClientOnly>
       <UserStateOnly>
         <HStack alignItems="start" wrap="wrap" gap={40}>
           <CurrentMonthUsers />

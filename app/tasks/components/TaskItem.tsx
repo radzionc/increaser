@@ -19,6 +19,7 @@ export const TaskItem = () => {
       actionPlacerStyles={{ right: 0 }}
       action={
         <IconButton
+          title="Delete task"
           kind="secondary"
           icon={<TrashBinIcon />}
           onClick={() => {

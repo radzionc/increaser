@@ -10,6 +10,7 @@ interface SoundToggleProps {
 export const SoundToggle = ({ value, onChange }: SoundToggleProps) => {
   return (
     <IconButton
+      title="Toggle sound"
       kind={value ? 'regular' : 'secondary'}
       onClick={() => onChange(!value)}
       icon={value ? <VolumeIcon /> : <NoVolumeIcon />}

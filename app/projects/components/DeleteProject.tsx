@@ -21,7 +21,12 @@ export const DeleteProject = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <IconButton kind="alert" icon={<TrashBinIcon />} onClick={onOpen} />
+        <IconButton
+          title="Delete"
+          kind="alert"
+          icon={<TrashBinIcon />}
+          onClick={onOpen}
+        />
       )}
       renderContent={({ onClose }) => (
         <ConfirmationModal

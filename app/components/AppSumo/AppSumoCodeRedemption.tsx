@@ -78,7 +78,12 @@ export const AppSumoCodeRedemption = () => {
           </Text>{' '}
           {userState?.email || ''}
         </Text>
-        <IconButton size="s" icon={<EditIcon />} onClick={unauthorize} />
+        <IconButton
+          title="Edit"
+          size="s"
+          icon={<EditIcon />}
+          onClick={unauthorize}
+        />
       </HStack>
       <Form
         gap={4}

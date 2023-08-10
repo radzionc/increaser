@@ -50,12 +50,14 @@ export const ManageTimeBoundary = ({
           </Text>
           <HStack alignItems="center" gap={4}>
             <IconButton
+              title="Decrease time"
               onClick={() => handleChange(value - incrementInMinutes)}
               kind="secondary"
               size="m"
               icon={<MinusIcon />}
             />
             <IconButton
+              title="Increase time"
               onClick={() => handleChange(value + incrementInMinutes)}
               kind="secondary"
               size="m"

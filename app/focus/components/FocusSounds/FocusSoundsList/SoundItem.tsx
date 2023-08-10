@@ -94,6 +94,7 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
           <Opener
             renderOpener={({ onOpen }) => (
               <IconButton
+                title="Manage sound"
                 kind="secondary"
                 onClick={onOpen}
                 icon={<MoreHorizontalIcon />}
@@ -110,6 +111,7 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
             )}
           />
           <IconButton
+            title="Favourite"
             kind="secondary"
             icon={star}
             onClick={() => {

@@ -33,7 +33,12 @@ export const FocusAssistance = () => {
         </Container>
       )}
       renderOpener={(props) => (
-        <IconButton kind="secondary" icon={<SettingsIcon />} {...props} />
+        <IconButton
+          title="Focus settings"
+          kind="secondary"
+          icon={<SettingsIcon />}
+          {...props}
+        />
       )}
     />
   )

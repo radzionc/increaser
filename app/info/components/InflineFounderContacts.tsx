@@ -65,13 +65,25 @@ export const InlineFounderContacts = ({
         </HStack>
       </CopyEmail>
       <ExternalLink to={AUTHOR_TWITTER}>
-        <IconButton {...iconButtonSharedProps} icon={<TwitterIcon />} />
+        <IconButton
+          {...iconButtonSharedProps}
+          title="Twitter"
+          icon={<TwitterIcon />}
+        />
       </ExternalLink>
       <ExternalLink to={AUTHOR_LINKEDIN}>
-        <IconButton {...iconButtonSharedProps} icon={<LinkedinIcon />} />
+        <IconButton
+          {...iconButtonSharedProps}
+          title="LinkedIn"
+          icon={<LinkedinIcon />}
+        />
       </ExternalLink>
       <ExternalLink to={AUTHOR_TELEGRAM}>
-        <IconButton {...iconButtonSharedProps} icon={<TelegramIcon />} />
+        <IconButton
+          {...iconButtonSharedProps}
+          title="Telegram"
+          icon={<TelegramIcon />}
+        />
       </ExternalLink>
     </HStack>
   )

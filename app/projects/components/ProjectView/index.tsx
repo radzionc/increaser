@@ -28,6 +28,7 @@ export const ProjectView = () => {
             Edit project
           </Text>
           <IconButton
+            title="Close"
             onClick={() => setIsEditing(false)}
             size="l"
             icon={<CloseIcon />}
@@ -53,6 +54,7 @@ export const ProjectView = () => {
               {name}
             </Text>
             <IconButton
+              title="Edit project"
               onClick={() => setIsEditing(true)}
               kind="secondary"
               icon={<EditIcon />}
