@@ -3,7 +3,6 @@ import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
 import styled from 'styled-components'
 import { Spacer } from '@increaser/ui/ui/Spacer'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOnboarding'
 
 import { GroupedByDaySessions } from './DailyReport/GroupedByDaySessions'
 import { ManageWorkSchedule } from './ManageWorkSchedule'
@@ -17,7 +16,6 @@ const Container = styled(HStack)`
 export const SessionsPageContent = () => {
   return (
     <ErrorBoundary fallback={<ErrorFallbackCard />}>
-      <AllocationOnboarding />
       <Container fullWidth gap={60}>
         <ManageWorkSchedule />
         <VStack fullWidth>

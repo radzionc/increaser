@@ -23,7 +23,8 @@ export interface TimeInputProps {
   startOfDay: number
   startHour: number
   endHour: number
-  max?: number
+  max: number
+  min?: number
 
   intialValue: number
 
@@ -64,12 +65,11 @@ export const TimeInput = ({
   endHour,
   startHour,
   pxInHour = 60,
-  max: optionalMax,
+  max,
+  min,
   intialValue,
 }: TimeInputProps) => {
   const hoursCount = endHour - startHour
-
-  const max = optionalMax ?? startOfDay + MS_IN_HOUR * endHour
 
   const minTimeStart = startOfDay + MS_IN_HOUR * startHour
   const timelineStart = minTimeStart
@@ -99,7 +99,7 @@ export const TimeInput = ({
 
     const timestamp = timelineStart + y / pxInMs
 
-    onChange(enforceRange(timestamp, minTimeStart, max))
+    onChange(enforceRange(timestamp, min ?? minTimeStart, max))
   }
 
   const cursor = isActive ? 'row-resize' : undefined
@@ -115,20 +115,38 @@ export const TimeInput = ({
       onMouseMove={handleMouseMove}
     >
       <HourSpace start={startHour} end={endHour}>
-        {optionalMax && (
+        {min && (
           <>
             <MaxIntervalEndBoundary
-              timestamp={optionalMax}
-              y={pxInMs * (optionalMax - timelineStart)}
+              timestamp={min}
+              y={pxInMs * (min - timelineStart)}
               isActive={isActive}
             />
             <Session
               style={{
-                top: valueInPx,
-                height: pxInMs * (max - timelineStart) - valueInPx,
+                top: pxInMs * (min - timelineStart),
+                height: pxInMs * (value - min),
                 background: color.getVariant({ a: () => 0.2 }).toCssValue(),
               }}
             />
+          </>
+        )}
+        {max && (
+          <>
+            <MaxIntervalEndBoundary
+              timestamp={max}
+              y={pxInMs * (max - timelineStart)}
+              isActive={isActive}
+            />
+            {!min && (
+              <Session
+                style={{
+                  top: valueInPx,
+                  height: pxInMs * (max - timelineStart) - valueInPx,
+                  background: color.getVariant({ a: () => 0.2 }).toCssValue(),
+                }}
+              />
+            )}
           </>
         )}
 

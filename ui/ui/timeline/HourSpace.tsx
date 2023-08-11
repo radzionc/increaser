@@ -5,6 +5,7 @@ import { getColor } from '../theme/getters'
 import { range } from '../../shared/utils/range'
 import { MS_IN_HOUR } from '@increaser/utils/time'
 import { formatTime } from '../../../app/shared/utils/formatTime'
+import { useStartOfDay } from '../../shared/hooks/useStartOfDay'
 
 interface Props {
   start: number
@@ -59,6 +60,7 @@ export const HourSpace = ({
   underLinesContent,
 }: Props) => {
   const hours = range(end + 1 - start).map((index) => start + index)
+  const todayStartedAt = useStartOfDay()
 
   const hourLabelWidthInPx = 40
 
@@ -78,7 +80,7 @@ export const HourSpace = ({
             <HourContainer>
               <HourContent labelWidth={hourLabelWidthInPx}>
                 <Text nowrap size={12} color="supporting">
-                  {formatTime(start + hour * MS_IN_HOUR)}
+                  {formatTime(todayStartedAt + hour * MS_IN_HOUR)}
                 </Text>
                 <HourLine />
               </HourContent>

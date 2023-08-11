@@ -18,6 +18,7 @@ export const getQueryClient = () => {
 
   const localStoragePersistor = createWebStoragePersistor({
     storage: (hasWindow ? window.localStorage : undefined)!,
+    key: 'REACT_QUERY_OFFLINE_CACHE_V1',
   })
 
   const doNotPersistQueries: QueryKey[] = [paddleQueryKey]

@@ -10,6 +10,7 @@ import { usePersistentStorageValue } from 'state/persistentStorage'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
 import { SyncSet } from './SyncSet'
+import { useMount } from 'react-use'
 
 export const SetsManagerProvider = ({
   children,
@@ -18,6 +19,10 @@ export const SetsManagerProvider = ({
     PersistentStorageKey.UnsyncedSets,
     [],
   )
+
+  useMount(() => {
+    console.log('Mount SetsManagerProvider')
+  })
 
   const shouldSync = unsyncedSets.length > 0
   useOnWindowCloseAlert('You have unsynced sessions', shouldSync)
