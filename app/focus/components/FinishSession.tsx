@@ -46,7 +46,7 @@ export const FinishSession = ({ style }: FinishSessionProps) => {
     const duration = now - startedAt
 
     // TODO: consider last interaction with the app to understand if it was stale
-    if (startedAt < todayStartedAt || duration > 1 * MS_IN_HOUR) {
+    if (startedAt < todayStartedAt || duration > 2 * MS_IN_HOUR) {
       setIsEditing(true)
       return
     }

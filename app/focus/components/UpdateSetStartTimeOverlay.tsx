@@ -8,6 +8,8 @@ import { Modal } from '@increaser/ui/ui/Modal'
 import { TimeInput } from '@increaser/ui/ui/timeline/TimeInput'
 import { MS_IN_HOUR } from 'utils/time'
 import { useCurrentFocus } from './CurrentFocusProvider'
+import { startOfHour } from 'date-fns'
+
 interface Props extends ClosableComponentProps {
   onSubmit: (value: number) => void
 }
@@ -15,17 +17,17 @@ interface Props extends ClosableComponentProps {
 export const UpdateSetStartTimeOverlay = ({ onClose, onSubmit }: Props) => {
   const now = useRhythmicRerender(10000)
   const startOfDay = useStartOfDay()
-  const newLocal = now - startOfDay
-  const msToday = newLocal
-
-  const endHour = Math.ceil(msToday / MS_IN_HOUR)
-  const startHour = Math.max(endHour - 2, 0)
 
   const { projectsRecord } = useProjects()
 
   const { startedAt, projectId } = useCurrentFocus()
 
   const [value, setValue] = useState(startedAt)
+
+  const timelineStartsAt = Math.max(
+    startOfDay,
+    startOfHour(now).getTime() - 2 * MS_IN_HOUR,
+  )
 
   return (
     <Modal
@@ -47,14 +49,11 @@ export const UpdateSetStartTimeOverlay = ({ onClose, onSubmit }: Props) => {
       renderContent={() => (
         <TimeInput
           intialValue={startedAt}
-          pxInHour={180}
-          startOfDay={startOfDay}
-          startHour={startHour}
-          endHour={endHour}
+          timelineStartsAt={timelineStartsAt}
+          timelineEndsAt={now}
           color={projectsRecord[projectId].hslaColor}
           value={value}
           onChange={setValue}
-          max={now}
         />
       )}
     />

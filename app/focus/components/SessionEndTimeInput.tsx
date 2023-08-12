@@ -3,23 +3,16 @@ import { MS_IN_HOUR } from '@increaser/utils/time'
 import { endOfDay, startOfHour } from 'date-fns'
 import { TimeSpace } from '@increaser/ui/ui/TimeSpace'
 import { useCallback } from 'react'
-import styled from 'styled-components'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from 'utils/time'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { useProjects } from 'projects/hooks/useProjects'
 import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from 'shared/utils/formatDuration'
 import { PressTracker } from '@increaser/ui/ui/PressTracker'
-import { PositionAbsolutelyCenterHorizontally } from '@increaser/ui/ui/PositionAbsolutelyCenterHorizontally'
 import { enforceRange } from 'shared/utils/enforceRange'
 import { VStack } from '@increaser/ui/ui/Stack'
-import { ChevronDownIcon } from '@increaser/ui/ui/icons/ChevronDownIcon'
-import { ChevronUpIcon } from '@increaser/ui/ui/icons/ChevronUpIcon'
-import { getColor } from '@increaser/ui/ui/theme/getters'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { CenterAbsolutely } from '@increaser/ui/ui/CenterAbsolutely'
+import { EditorActiveSession } from './EditorActiveSession'
+import { BoundaryInteractiveArea } from './BoundaryInteractiveArea'
 
 interface SessionEndTimeInputProps extends InputProps<number> {
   projectId: string
@@ -27,38 +20,6 @@ interface SessionEndTimeInputProps extends InputProps<number> {
 }
 
 const pxInHour = 100
-
-const Session = styled.div<{ $color: HSLA }>`
-  position: absolute;
-  left: 0;
-  width: 100%;
-
-  ${centerContentCSS}
-
-  border-radius: 4px;
-
-  border: 2px solid ${({ $color }) => $color.toCssValue()};
-  border-bottom-color: ${getColor('contrast')};
-  background: ${({ $color }) =>
-    $color.getVariant({ a: () => 0.12 }).toCssValue()};
-`
-
-const InteractiveArea = styled.div`
-  width: 100%;
-  cursor: row-resize;
-  ${centerContentCSS};
-  height: 20px;
-  color: ${getColor('contrast')};
-  svg {
-    font-size: 18px;
-    ${defaultTransitionCSS};
-  }
-  :hover {
-    svg {
-      transform: scale(1.24);
-    }
-  }
-`
 
 export const SessionEndTimeInput = ({
   projectId,
@@ -104,7 +65,7 @@ export const SessionEndTimeInput = ({
         }}
         render={({ props: { ref, ...rest } }) => (
           <VStack ref={ref} fullWidth fullHeight>
-            <Session
+            <EditorActiveSession
               $color={color}
               style={{
                 top: msToPx(startedAt - timeSpaceStartsAt),
@@ -114,20 +75,11 @@ export const SessionEndTimeInput = ({
               <Text weight="bold">
                 {formatDuration(value - startedAt, 'ms')}
               </Text>
-            </Session>
-            <PositionAbsolutelyCenterHorizontally
-              fullWidth
+            </EditorActiveSession>
+            <BoundaryInteractiveArea
               top={msToPx(value - timeSpaceStartsAt)}
-            >
-              <InteractiveArea {...rest}>
-                <CenterAbsolutely>
-                  <VStack alignItems="center">
-                    <ChevronUpIcon />
-                    <ChevronDownIcon />
-                  </VStack>
-                </CenterAbsolutely>
-              </InteractiveArea>
-            </PositionAbsolutelyCenterHorizontally>
+              {...rest}
+            />
           </VStack>
         )}
       />

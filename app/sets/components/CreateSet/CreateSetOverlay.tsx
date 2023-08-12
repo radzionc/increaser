@@ -57,14 +57,14 @@ export const CreateSetOverlay = ({ onClose }: Props) => {
       onClose={onClose}
       footer={
         isProjectSelected ? (
-          <VStack fullWidth gap={8}>
+          <VStack fullWidth gap={4}>
             <SubmitFormButton
               onClick={handleSubmit(onSubmit)}
               text={`Add ${projectsRecord[projectId].name} Session`}
             />
             <Button
               size="l"
-              kind="secondary"
+              kind="ghostSecondary"
               onClick={() => setValue('projectId', '')}
             >
               Back
