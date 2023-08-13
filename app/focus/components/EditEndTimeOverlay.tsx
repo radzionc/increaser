@@ -4,7 +4,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useCurrentFocus } from './CurrentFocusProvider'
-import { endOfDay, startOfHour } from 'date-fns'
+import { endOfDay } from 'date-fns'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useState } from 'react'
 import { SessionEndTimeInput } from './SessionEndTimeInput'
@@ -18,9 +18,6 @@ export const EditEndTimeOverlay = () => {
   const [endedAt, setEndedAt] = useState(() =>
     Math.min(max, startedAt + 90 * MS_IN_MIN),
   )
-
-  const startHour = startOfHour(startedAt).getHours()
-  console.log(startHour)
 
   return (
     <Modal

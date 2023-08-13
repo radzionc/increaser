@@ -58,7 +58,6 @@ export const SessionEndTimeInput = ({
     >
       <PressTracker
         onChange={({ position }) => {
-          console.log(position)
           if (position) {
             handleMove(position.y)
           }
