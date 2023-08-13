@@ -1,0 +1,32 @@
+{
+  "name": "@increaser/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node dist/src/lambda.js",
+    "transpile": "esbuild src/lambda.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/src/lambda.js",
+    "build": "yarn clean & yarn transpile",
+    "clean": "rm -rf ./dist"
+  },
+  "dependencies": {
+    "@sentry/serverless": "^7.61.1",
+    "apollo-server": "^3.8.1",
+    "apollo-server-lambda": "^3.8.1",
+    "aws-sdk": "^2.924.0",
+    "date-fns": "^2.30.0",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "luxon": "^1.17.2",
+    "node-fetch": "^2.6.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.1",
+    "@types/luxon": "^2.3.2",
+    "@types/node": "^15.12.1",
+    "@types/node-fetch": "^2.5.10",
+    "@types/uuid": "^8.3.3",
+    "esbuild": "^0.18.20",
+    "typescript": "^4.3.2"
+  }
+}
