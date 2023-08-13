@@ -1,4 +1,3 @@
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
 import { VStack } from '@increaser/ui/ui/Stack'
@@ -9,6 +8,7 @@ import { useHabits } from '../HabitsProvider'
 import { CheckDayHabitsTitle } from './CheckDayHabitsTitle'
 import { HabitItem } from './HabitItem'
 import { TwoDayRuleEducation } from './TwoDayRuleEducation'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 const dayName = 'Today'
 

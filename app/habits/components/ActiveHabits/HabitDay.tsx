@@ -1,5 +1,4 @@
 import { useTrackHabitMutation } from 'habits/api/useTrackHabitMutation'
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useMemo } from 'react'
 import { isToday } from 'shared/utils/isToday'
 import styled from 'styled-components'
@@ -9,6 +8,7 @@ import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 
 import { useActiveHabits } from './ActiveHabitsContext'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 interface Props {
   id: string

@@ -2,7 +2,6 @@ import { CurrentSet } from 'focus/context/FocusContext'
 import { createContext, useEffect } from 'react'
 import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
 import { pluralize } from '@increaser/ui/shared/utils/pluralize'
-import { range } from '@increaser/ui/shared/utils/range'
 import { MS_IN_MIN } from '@increaser/ui/shared/utils/time'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProject } from 'projects/hooks/useProject'
@@ -13,6 +12,7 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { createContextHook } from '@increaser/ui/shared/utils/createContextHook'
 import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
+import { range } from '@increaser/utils/range'
 
 interface CurrentFocusState extends CurrentSet {}
 

@@ -1,7 +1,7 @@
 import { startOfWeek } from 'date-fns'
-import { MS_IN_DAY, MS_IN_HOUR, MS_IN_MIN } from '../shared/utils/time'
 import { DemoProject } from './projects'
-import { getWeekday } from '../shared/utils/getWeekday'
+import { getWeekday } from '@increaser/utils/getWeekday'
+import { MS_IN_DAY, MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 
 type SetBoundaryDescriptor = [number, number]
 

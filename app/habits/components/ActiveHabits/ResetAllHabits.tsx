@@ -1,5 +1,4 @@
 import { useResetAllHabitsMutation } from 'habits/api/useResetAllHabitsMutation'
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useMemo } from 'react'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { range } from 'shared/utils/range'
@@ -8,6 +7,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { MS_IN_DAY } from 'utils/time'
 
 import { useHabits } from '../HabitsProvider'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 const minInactiveDays = 3
 

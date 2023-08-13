@@ -22,7 +22,8 @@
     "**/*.ts",
     "**/*.tsx",
     "../entities-utils/block/index.ts",
-    "../entities-utils/set/getDistanceBetweenSets.ts"
+    "../entities-utils/set/getDistanceBetweenSets.ts",
+    "../entities-utils/habit/toHabitDate.ts"
   ],
   "exclude": ["node_modules"]
 }

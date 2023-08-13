@@ -6,7 +6,7 @@ import { LinkText } from '@increaser/ui/ui/Text/LinkText'
 
 export const SignUpAgreement = () => {
   return (
-    <Text size={14} color="shy">
+    <Text centered size={14} color="supporting">
       By continuing, you agree to {APP_NAME}’s
       <br />
       <LinkText as="span">

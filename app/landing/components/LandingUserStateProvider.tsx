@@ -1,7 +1,7 @@
-import { getDemoHabits } from 'demo/habits'
-import { getDemoProjects } from 'demo/projects'
-import { getDemoSets } from 'demo/sets'
-import { getDemoTasks } from 'demo/tasks'
+import { getDemoHabits } from '@increaser/demo/habits'
+import { getDemoProjects } from '@increaser/demo/projects'
+import { getDemoSets } from '@increaser/demo/sets'
+import { getDemoTasks } from '@increaser/demo/tasks'
 import { useCallback, useState } from 'react'
 import {
   defaultGoalToFinishWorkBy,

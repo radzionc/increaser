@@ -1,7 +1,7 @@
 import { Habit } from 'habits/Habit'
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 interface Props {
   date: Date

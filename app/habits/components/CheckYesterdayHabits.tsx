@@ -1,4 +1,3 @@
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { ExpandablePanel } from '@increaser/ui/ui/Panel/ExpandablePanel'
 import { VStack } from '@increaser/ui/ui/Stack'
@@ -8,6 +7,7 @@ import { MS_IN_DAY, MS_IN_SEC } from 'utils/time'
 import { CheckDayHabitsTitle } from './CheckDayHabits/CheckDayHabitsTitle'
 import { HabitItem } from './CheckDayHabits/HabitItem'
 import { useHabits } from './HabitsProvider'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 export const CheckYesterdayHabits = () => {
   const { habits: currentHabits } = useHabits()

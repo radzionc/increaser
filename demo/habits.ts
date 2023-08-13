@@ -1,8 +1,8 @@
 import { startOfDay } from 'date-fns'
-import { Habit } from '../habits/Habit'
-import { MS_IN_DAY, MS_IN_SEC } from '../shared/utils/time'
-import { range } from '../shared/utils/range'
-import { toHabitDate } from '../habits/utils/toHabitDate'
+import { Habit } from '@increaser/entities/Habit'
+import { range } from '@increaser/utils/range'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 enum DemoHabit {
   Sunlight = 'View sunlight after waking up',

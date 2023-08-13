@@ -1,8 +1,8 @@
 import { Project, ProjectResponse } from 'projects/Project'
 import { Set } from 'sets/Set'
-import { getSetsTotalInSeconds } from 'sets/utils/getSetsTotalInSeconds'
 import { DefaultTheme } from 'styled-components'
 import { S_IN_MIN } from 'utils/time'
+import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
 
 export const toProject = (
   project: ProjectResponse,
@@ -11,7 +11,7 @@ export const toProject = (
 ): Project => {
   const projectSets = sets.filter((set) => set.projectId === project.id)
 
-  const seconds = getSetsTotalInSeconds(projectSets)
+  const seconds = getSetsDurationInSeconds(projectSets)
 
   const projectDetails: Project = {
     ...project,

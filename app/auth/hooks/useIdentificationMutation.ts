@@ -1,12 +1,12 @@
 import { trackEvent } from 'analytics'
 import { useMainApi } from 'api/hooks/useMainApi'
-import { AuthDestination } from 'auth/components/AuthFlow/AuthFlowContext'
 import { IdentificationQueryResult } from 'auth/IdentificationQueryResult'
 import { useMutation } from 'react-query'
 import { Path } from 'router/Path'
 
 import { useAuth } from './useAuth'
 import { useRouter } from 'next/router'
+import { AuthDestination } from 'auth/AuthDestination'
 
 interface IdentificationQueryParams {
   query: string
@@ -29,6 +29,7 @@ export const useIdentificationMutation = () => {
         await query<IdentificationQueryResult>(queryParams)
 
       updateSession({ token, tokenExpirationTime })
+      trackEvent('Finish identification')
 
       if (destination === AuthDestination.AppSumo) {
         router.push(Path.AppSumo)

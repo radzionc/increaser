@@ -2,9 +2,11 @@ import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { useCallback } from 'react'
 import { getTimeZone } from 'shared/utils/getTimeZone'
-import { AuthDestination } from './AuthFlow/AuthFlowContext'
 import { Center } from '@increaser/ui/ui/Center'
 import { Spinner } from '@increaser/ui/ui/Spinner'
+import { AuthDestination } from 'auth/AuthDestination'
+import { AuthView } from './AuthView'
+import { Text } from '@increaser/ui/ui/Text'
 
 const identificationQueryResult = `
 email
@@ -28,7 +30,7 @@ interface EmailAuthParams {
   destination: AuthDestination
 }
 
-export const EmailAuthPage = () => {
+export const EmailAuthContent = () => {
   const { mutate: identify } = useIdentificationMutation()
 
   useHandleQueryParams<EmailAuthParams>(
@@ -51,8 +53,12 @@ export const EmailAuthPage = () => {
   )
 
   return (
-    <Center>
-      <Spinner />
-    </Center>
+    <AuthView title={`Continue with email`}>
+      <Center>
+        <Text size={80}>
+          <Spinner />
+        </Text>
+      </Center>
+    </AuthView>
   )
 }

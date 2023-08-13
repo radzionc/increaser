@@ -22,5 +22,6 @@ module.exports = {
     '/capacity',
     '/work',
     '/community',
+    '/email-confirm',
   ],
 }

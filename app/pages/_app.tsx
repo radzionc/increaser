@@ -7,7 +7,6 @@ import { useDev } from 'components/layout/useDev'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { NetworkStateObserver } from 'api/components/NetworkStateObserver'
 import { getQueryClient } from 'api/queryClient'
-import { AuthFlowOverlayProvider } from 'auth/components/AuthFlow/AuthFlowOverlayProvider'
 import { AuthProvider } from 'auth/components/AuthProvider'
 import { BreakProvider } from 'break/components/BreakProvider'
 import { FullSizeErrorFallback } from 'errors/components/FullSizeErrorFallback'
@@ -61,31 +60,29 @@ function MyApp({ Component, pageProps }: MyAppProps) {
             <NetworkStateObserver />
             <AuthProvider>
               <UserStateProvider>
-                <AuthFlowOverlayProvider>
-                  <PresentationProvider>
-                    <PWAProvider>
-                      <ConditionalUserState
-                        present={() => (
-                          <MembershipProvider>
-                            <UserManagerProvider>
-                              <ProjectsProvider>
-                                <HabitsProvider>
-                                  <SetsManagerProvider>
-                                    <FocusProvider>
-                                      <Retro />
-                                      <BreakProvider>{component}</BreakProvider>
-                                    </FocusProvider>
-                                  </SetsManagerProvider>
-                                </HabitsProvider>
-                              </ProjectsProvider>
-                            </UserManagerProvider>
-                          </MembershipProvider>
-                        )}
-                        missing={() => <>{component}</>}
-                      />
-                    </PWAProvider>
-                  </PresentationProvider>
-                </AuthFlowOverlayProvider>
+                <PresentationProvider>
+                  <PWAProvider>
+                    <ConditionalUserState
+                      present={() => (
+                        <MembershipProvider>
+                          <UserManagerProvider>
+                            <ProjectsProvider>
+                              <HabitsProvider>
+                                <SetsManagerProvider>
+                                  <FocusProvider>
+                                    <Retro />
+                                    <BreakProvider>{component}</BreakProvider>
+                                  </FocusProvider>
+                                </SetsManagerProvider>
+                              </HabitsProvider>
+                            </ProjectsProvider>
+                          </UserManagerProvider>
+                        </MembershipProvider>
+                      )}
+                      missing={() => <>{component}</>}
+                    />
+                  </PWAProvider>
+                </PresentationProvider>
               </UserStateProvider>
             </AuthProvider>
           </ErrorBoundary>

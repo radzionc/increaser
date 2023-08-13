@@ -1,7 +1,9 @@
-import { Project, ProjectStatus } from '../projects/Project'
-import { randomInRange } from '../shared/utils/randomInRange'
-import { MS_IN_WEEK, S_IN_HOUR, MIN_IN_HOUR } from '../shared/utils/time'
-import { toWeek } from '../shared/utils/toWeek'
+import { Project, ProjectStatus } from '@increaser/entities/Project'
+import { randomInRange } from '@increaser/ui/shared/utils/randomInRange'
+import { range } from '@increaser/utils/range'
+import { sum } from '@increaser/utils/sum'
+import { MIN_IN_HOUR, MS_IN_WEEK, S_IN_HOUR } from '@increaser/utils/time'
+import { toWeek } from '@increaser/utils/toWeek'
 
 export enum DemoProject {
   Job = 'Remote job',

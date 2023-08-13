@@ -12,7 +12,7 @@ import { ExpandableInputOpener } from './ExpandableInputOpener'
 import { ShySection } from '../ShySection'
 import { labelColorsCount } from '../colors/generateLabelColorGetter'
 import { InputProps, StyledComponentWithColorProps } from '../../shared/props'
-import { range } from '../../shared/utils/range'
+import { range } from '@increaser/utils/range'
 import { splitBy } from '../../shared/utils/splitBy'
 
 interface ColorLabelInputProps extends InputProps<number> {

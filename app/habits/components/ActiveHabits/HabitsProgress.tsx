@@ -1,4 +1,3 @@
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { range } from 'shared/utils/range'
 import styled, { useTheme } from 'styled-components'
@@ -9,6 +8,7 @@ import { MS_IN_DAY, MS_IN_SEC } from 'utils/time'
 
 import { useHabits } from '../HabitsProvider'
 import { habitDaysToShow } from './config'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 const HabitStatus = styled.div`
   width: 100%;

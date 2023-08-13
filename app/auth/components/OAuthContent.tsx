@@ -1,12 +1,14 @@
 import { getOAuthProviderRedirectUri } from 'auth/helpers/OAuthProviderUrl'
 import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
-import { OAuthProvider } from 'auth/OAuthProvider'
-import { useCallback } from 'react'
+import { AUTH_PROVIDER_NAME, OAuthProvider } from 'auth/OAuthProvider'
+import { useCallback, useState } from 'react'
 import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Spinner } from '@increaser/ui/ui/Spinner'
-import { AuthDestination } from './AuthFlow/AuthFlowContext'
 import { Center } from '@increaser/ui/ui/Center'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
+import { AuthDestination } from 'auth/AuthDestination'
+import { Text } from '@increaser/ui/ui/Text'
+import { AuthView } from './AuthView'
 
 const identificationQueryResult = `
 email
@@ -31,12 +33,14 @@ interface OAuthParams {
   destination: AuthDestination
 }
 
-export const OAuthPage = () => {
+export const OAuthContent = () => {
   const { mutate: identify } = useIdentificationMutation()
+  const [provider, setProvider] = useState<undefined | OAuthProvider>()
 
   useHandleQueryParams<OAuthParams>(
     useCallback(
       ({ provider, code, destination }) => {
+        setProvider(provider)
         const input = {
           provider,
           code,
@@ -44,7 +48,7 @@ export const OAuthPage = () => {
           timeZone: getTimeZone(),
         }
         identify({
-          destination: destination as AuthDestination,
+          destination,
           queryParams: { variables: { input }, query: identifyWithOAuthQuery },
         })
       },
@@ -52,9 +56,17 @@ export const OAuthPage = () => {
     ),
   )
 
+  if (!provider) {
+    return null
+  }
+
   return (
-    <Center>
-      <Spinner />
-    </Center>
+    <AuthView title={`Continue with ${AUTH_PROVIDER_NAME[provider]}`}>
+      <Center>
+        <Text size={80}>
+          <Spinner />
+        </Text>
+      </Center>
+    </AuthView>
   )
 }

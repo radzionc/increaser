@@ -1,20 +1,12 @@
-import {
-  ComponentWithChildrenProps,
-  ComponentWithClassNameProps,
-} from '../shared/props'
+import { ComponentProps } from 'react'
 import { VStack } from './Stack'
 
-export const Center = ({
-  children,
-  className,
-}: ComponentWithChildrenProps & ComponentWithClassNameProps) => (
+export const Center = (props: ComponentProps<typeof VStack>) => (
   <VStack
-    className={className}
     fullWidth
     fullHeight
     alignItems="center"
     justifyContent="center"
-  >
-    {children}
-  </VStack>
+    {...props}
+  />
 )

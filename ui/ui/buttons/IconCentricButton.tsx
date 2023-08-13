@@ -28,7 +28,7 @@ const Container = styled(Button)`
 `
 
 export const IconCentricButton = ({ icon, text, as, ...rest }: Props) => (
-  <Container kind="outlined" forwardedAs={as} size="l" {...rest}>
+  <Container kind="outlined" forwardedAs={as} size="xl" {...rest}>
     <Content>
       <IconWrapper>{icon}</IconWrapper>
       {text}

@@ -1,4 +1,4 @@
-import { toHabitDate } from './toHabitDate'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 export const getHabitStreak = (
   successesSet: Set<string>,

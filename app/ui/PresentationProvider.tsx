@@ -1,6 +1,7 @@
-import { useAuthFlow } from 'auth/components/AuthFlow/AuthFlowContext'
 import { useAuth } from 'auth/hooks/useAuth'
+import { useRouter } from 'next/router'
 import { createContext, useCallback } from 'react'
+import { Path } from 'router/Path'
 import { ComponentWithChildrenProps } from 'shared/props'
 import { createContextHook } from 'shared/utils/createContextHook'
 
@@ -16,17 +17,17 @@ interface Props extends ComponentWithChildrenProps {}
 
 export const PresentationProvider = ({ children }: Props) => {
   const { isUserLoggedIn } = useAuth()
-  const { setAuthFlowPurpose } = useAuthFlow()
+  const { push } = useRouter()
 
   const onInteraction = useCallback(
     (func: () => void) => {
       if (isUserLoggedIn) {
         func()
       } else {
-        setAuthFlowPurpose('signUp')
+        push(Path.SignUp)
       }
     },
-    [isUserLoggedIn, setAuthFlowPurpose],
+    [isUserLoggedIn, push],
   )
 
   return (

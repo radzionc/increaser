@@ -1,19 +1,16 @@
-import { useAuthFlow } from 'auth/components/AuthFlow/AuthFlowContext'
 import { Button } from '@increaser/ui/ui/buttons/Button'
+import Link from 'next/link'
+import { Path } from 'router/Path'
 interface Props {
   text?: string
 }
 
 export const CTA = ({ text = 'Start now' }: Props) => {
-  const { setAuthFlowPurpose } = useAuthFlow()
-
   return (
-    <Button
-      onClick={() => setAuthFlowPurpose('signUp')}
-      kind="reversed"
-      size="xl"
-    >
-      {text}
-    </Button>
+    <Link href={Path.SignUp}>
+      <Button as="div" kind="reversed" size="xl">
+        {text}
+      </Button>
+    </Link>
   )
 }

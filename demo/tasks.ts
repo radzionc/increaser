@@ -1,4 +1,4 @@
-import { Task } from '../users/User'
+import { Task } from '@increaser/entities/User'
 
 const tasks = [
   'Record a YouTube video',

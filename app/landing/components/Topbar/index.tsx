@@ -1,4 +1,3 @@
-import { useAuthFlow } from 'auth/components/AuthFlow/AuthFlowContext'
 import { ProductLogo } from 'product/components/ProductLogo'
 import { Path } from 'router/Path'
 import styled from 'styled-components'
@@ -37,7 +36,6 @@ export const SignInContainer = styled.div<{ rightSiblingWidth: number }>`
 
 export const Topbar = () => {
   const isSmallScreen = useIsScreenWidthLessThan(smallScreenBreakpointInPx)
-  const { setAuthFlowPurpose } = useAuthFlow()
   return (
     <ClientOnly>
       <ElementSizeAware
@@ -54,23 +52,21 @@ export const Topbar = () => {
                 </Link>
               )}
               <div ref={setElement}>
-                <Button
-                  kind="reversed"
-                  onClick={() => setAuthFlowPurpose('signUp')}
-                >
-                  Sign up
-                </Button>
+                <Link href={Path.SignUp}>
+                  <Button as="div" kind="reversed">
+                    Sign up
+                  </Button>
+                </Link>
               </div>
             </Container>
             <Placeholder>
               {size && (
                 <SignInContainer rightSiblingWidth={size.width}>
-                  <Button
-                    kind="ghost"
-                    onClick={() => setAuthFlowPurpose('signIn')}
-                  >
-                    Sign in
-                  </Button>
+                  <Link href={Path.SignIn}>
+                    <Button as="div" kind="ghost">
+                      Sign in
+                    </Button>
+                  </Link>
                 </SignInContainer>
               )}
             </Placeholder>

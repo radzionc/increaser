@@ -11,8 +11,7 @@ import {
 } from 'auth/OAuthProvider'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
-
-import { useAuthFlow } from './AuthFlowContext'
+import { useAuthDestination } from '../AuthDestinationProvider'
 
 interface Props {
   provider: OAuthProvider
@@ -24,7 +23,7 @@ const OAuthProviderUrlRecord = {
 }
 
 export const OAuthProviderButton = ({ provider }: Props) => {
-  const { authFlowPurpose, destination } = useAuthFlow()
+  const destination = useAuthDestination()
 
   const redirectUri = getOAuthProviderRedirectUri(provider, destination)
   const url = OAuthProviderUrlRecord[provider](redirectUri)
@@ -36,9 +35,7 @@ export const OAuthProviderButton = ({ provider }: Props) => {
       style={{ width: '100%' }}
       openInSameTab
       onClick={() => {
-        if (authFlowPurpose === 'signIn') return
-
-        trackEvent(`Start sign up with ${AUTH_PROVIDER_NAME[provider]}`)
+        trackEvent(`Start identification with ${AUTH_PROVIDER_NAME[provider]}`)
       }}
     >
       <IconCentricButton

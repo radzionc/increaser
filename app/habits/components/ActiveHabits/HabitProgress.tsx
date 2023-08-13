@@ -1,4 +1,3 @@
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { range } from 'shared/utils/range'
 import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
@@ -6,6 +5,7 @@ import { D_IN_WEEK, MS_IN_DAY, MS_IN_SEC } from 'utils/time'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'
 import { HabitDay } from './HabitDay'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 export const HabitProgress = () => {
   const startOfDay = useStartOfDay()

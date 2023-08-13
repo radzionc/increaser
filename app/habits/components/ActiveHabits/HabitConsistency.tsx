@@ -1,9 +1,9 @@
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { useMemo } from 'react'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'
 import { habitDaysToShow } from './config'
 import { HabitSuccessStatistic } from './HabitSuccessStatistic'
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 export const HabitConsistency = () => {
   const habit = useCurrentHabit()

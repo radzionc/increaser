@@ -2859,6 +2859,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/demo@workspace:demo":
+  version: 0.0.0-use.local
+  resolution: "@increaser/demo@workspace:demo"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/entities-utils@workspace:entities-utils":
   version: 0.0.0-use.local
   resolution: "@increaser/entities-utils@workspace:entities-utils"

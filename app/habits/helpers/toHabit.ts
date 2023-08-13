@@ -1,6 +1,6 @@
+import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { Habit, HabitResponse } from 'habits/Habit'
 import { getHabitStreak } from 'habits/utils/getHabitStreak'
-import { toHabitDate } from 'habits/utils/toHabitDate'
 import { range } from 'shared/utils/range'
 import { DefaultTheme } from 'styled-components'
 import { MS_IN_DAY, MS_IN_SEC } from 'utils/time'

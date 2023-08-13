@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { ExternalLink } from 'router/Link/ExternalLink'
-import { TextButton } from '@increaser/ui/ui/buttons/TextButton'
+import { Button } from '@increaser/ui/ui/buttons/Button'
 
 interface Props {
   email: string
@@ -26,8 +26,10 @@ export const CheckInboxLink = ({ email }: Props) => {
   }
 
   return (
-    <ExternalLink to={url}>
-      <TextButton as="div" text="Check your inbox" />
+    <ExternalLink style={{ width: '100%' }} to={url}>
+      <Button size="xl" as="div">
+        Check your inbox
+      </Button>
     </ExternalLink>
   )
 }
