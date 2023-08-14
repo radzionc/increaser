@@ -10,10 +10,10 @@ import { Form } from '@increaser/ui/ui/Form/Form'
 import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
 import { useUserState } from 'user/state/UserStateContext'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { useRouter } from 'next/router'
+import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 
 interface RedeemCodeFormState {
   code: string
@@ -72,12 +72,7 @@ export const AppSumoCodeRedemption = () => {
   return (
     <VStack gap={20} fullWidth>
       <HStack alignItems="center" gap={12}>
-        <Text>
-          <Text as="span" color="supporting">
-            Email:
-          </Text>{' '}
-          {userState?.email || ''}
-        </Text>
+        <LabeledValue name="Email">{userState?.email || ''}</LabeledValue>
         <IconButton
           title="Edit"
           size="s"
