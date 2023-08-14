@@ -31,13 +31,13 @@ export const useIdentificationMutation = () => {
       updateSession({ token, tokenExpirationTime })
       trackEvent('Finish identification')
 
+      if (firstIdentification) {
+        trackEvent('Finish Sign Up')
+      }
+
       if (destination === AuthDestination.AppSumo) {
         router.push(Path.AppSumo)
       } else {
-        if (firstIdentification) {
-          trackEvent('Finish Sign Up')
-        }
-
         router.push(Path.Home)
       }
     },

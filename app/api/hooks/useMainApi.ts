@@ -59,6 +59,7 @@ export const useMainApi = () => {
     if (errors?.length) {
       const { message, extensions } = errors[0]
       if (extensions?.code === 'UNAUTHENTICATED') {
+        console.log('Unauthorize because of API UNAUTHENTICATED error')
         unauthorize()
       }
 

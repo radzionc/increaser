@@ -15,9 +15,7 @@ export const getOAuthProviderRedirectUri = (
   provider: OAuthProvider,
   destination: AuthDestination,
 ) =>
-  `${process.env.NEXT_PUBLIC_BASE_URL}${
-    Path.OAuth
-  }?provider=${provider.toLowerCase()}&destination=${destination}`
+  `${process.env.NEXT_PUBLIC_BASE_URL}${Path.OAuth}/${provider}?destination=${destination}`
 
 export const getGoogleOAuthUrl = (redirectUri: string) =>
   getURLWithQueryParams(GOOGLE_AUTH_URL, {

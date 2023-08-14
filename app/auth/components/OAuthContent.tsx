@@ -1,7 +1,7 @@
 import { getOAuthProviderRedirectUri } from 'auth/helpers/OAuthProviderUrl'
 import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
 import { AUTH_PROVIDER_NAME, OAuthProvider } from 'auth/OAuthProvider'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { Center } from '@increaser/ui/ui/Center'
@@ -29,18 +29,19 @@ query identifyWithOAuth($input: IdentifyWithOAuthInput!) {
 
 interface OAuthParams {
   code: string
-  provider: OAuthProvider
   destination: AuthDestination
 }
 
-export const OAuthContent = () => {
+interface OAuthContentProps {
+  provider: OAuthProvider
+}
+
+export const OAuthContent = ({ provider }: OAuthContentProps) => {
   const { mutate: identify } = useIdentificationMutation()
-  const [provider, setProvider] = useState<undefined | OAuthProvider>()
 
   useHandleQueryParams<OAuthParams>(
     useCallback(
-      ({ provider, code, destination }) => {
-        setProvider(provider)
+      ({ code, destination }) => {
         const input = {
           provider,
           code,
@@ -52,13 +53,9 @@ export const OAuthContent = () => {
           queryParams: { variables: { input }, query: identifyWithOAuthQuery },
         })
       },
-      [identify],
+      [identify, provider],
     ),
   )
-
-  if (!provider) {
-    return null
-  }
 
   return (
     <AuthView title={`Continue with ${AUTH_PROVIDER_NAME[provider]}`}>

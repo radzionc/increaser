@@ -5,7 +5,7 @@ module.exports = {
   generateIndexSitemap: false,
   outDir: './out',
   exclude: [
-    '/oauth',
+    '/oauth/*',
     '/email-auth',
     '/home',
     '/budget',
