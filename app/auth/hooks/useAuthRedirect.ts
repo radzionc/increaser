@@ -10,7 +10,7 @@ export const useAuthRedirect = () => {
   const { push, pathname } = useRouter()
 
   const toAuthenticationPage = useCallback(() => {
-    persistentStorage.setItem(
+    persistentStorage.setItem<string | undefined>(
       PersistentStorageKey.PathAttemptedWhileUnauthenticated,
       pathname,
     )
@@ -19,7 +19,7 @@ export const useAuthRedirect = () => {
 
   const toAuthenticatedPage = useCallback(() => {
     const destination =
-      persistentStorage.getItem(
+      persistentStorage.getItem<string | undefined>(
         PersistentStorageKey.PathAttemptedWhileUnauthenticated,
       ) ?? Path.Home
     console.log('Redirect to authenticated page: ', destination)
