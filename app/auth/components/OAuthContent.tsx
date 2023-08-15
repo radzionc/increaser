@@ -40,6 +40,7 @@ export const OAuthContent = ({ provider }: OAuthContentProps) => {
   useHandleQueryParams<OAuthParams>(
     useCallback(
       ({ code }) => {
+        console.log('Handle oauth query params')
         const input = {
           provider,
           code,

@@ -5,7 +5,8 @@ const withPWA = require('next-pwa')({
 })
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // to test authorization
+  reactStrictMode: false,
   compiler: {
     styledComponents: true,
   },

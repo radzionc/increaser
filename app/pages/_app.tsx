@@ -45,8 +45,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter()
   const { pathname } = router
   useEffect(() => {
+    console.log('Visit page: ', pathname)
     trackEvent('Visit page', { pathname })
-  })
+  }, [pathname])
 
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
   const component = getLayout(<Component {...pageProps} />)

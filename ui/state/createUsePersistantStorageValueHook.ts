@@ -24,11 +24,11 @@ export function createUsePersistantStorageValueHook<T extends string>(
 
     const setPersistentStorageValue = useCallback(
       (newValue: V) => {
-        if (newValue !== value) {
+        if (newValue !== storage.getItem<V>(key)) {
           storage.setItem(key, newValue)
         }
       },
-      [key, value],
+      [key],
     )
 
     return [value, setPersistentStorageValue] as const
