@@ -2879,6 +2879,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/management@workspace:management":
+  version: 0.0.0-use.local
+  resolution: "@increaser/management@workspace:management"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/public@workspace:public":
   version: 0.0.0-use.local
   resolution: "@increaser/public@workspace:public"
