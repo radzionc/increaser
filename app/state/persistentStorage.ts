@@ -28,6 +28,7 @@ export enum PersistentStorageKey {
   FocusSoundsView = 'focusSoundsView',
   ScheduleEducationWasAt = 'scheduleEducationWasAt',
   HabitsEducationWasAt = 'habitsEducationWasAt',
+  PathAttemptedWhileUnauthenticated = 'pathAttemptedWhileUnauthenticated',
 }
 
 export const persistentStorage =

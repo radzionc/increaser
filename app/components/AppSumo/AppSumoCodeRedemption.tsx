@@ -1,19 +1,13 @@
 import { MainApiError, useMainApi } from 'api/hooks/useMainApi'
-import { useAuth } from 'auth/hooks/useAuth'
 import { MembershipProvider } from 'membership'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { Path } from 'router/Path'
 import { SubmitFormButton } from '@increaser/ui/ui/buttons/SubmitFormButton'
 import { Form } from '@increaser/ui/ui/Form/Form'
-import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/ui/Stack'
 import { useUserState } from 'user/state/UserStateContext'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
-import { useRouter } from 'next/router'
-import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 
 interface RedeemCodeFormState {
   code: string
@@ -27,7 +21,6 @@ mutation redeemAppSumoCode($input: RedeemAppSumoCodeInput!) {
 
 export const AppSumoCodeRedemption = () => {
   const [code, setCode] = useState('')
-  const router = useRouter()
 
   const { updateState: updateUserState } = useUserState()
 
@@ -57,8 +50,6 @@ export const AppSumoCodeRedemption = () => {
         updateUserState({
           membership: { provider: MembershipProvider.AppSumo },
         })
-
-        router.push(Path.Home)
       } catch (error) {
         const { message } = error as MainApiError
         setError('code', { type: 'custom', message })
@@ -66,20 +57,8 @@ export const AppSumoCodeRedemption = () => {
     },
   )
 
-  const { state: userState } = useUserState()
-  const { unauthorize } = useAuth()
-
   return (
     <VStack gap={20} fullWidth>
-      <HStack alignItems="center" gap={12}>
-        <LabeledValue name="Email">{userState?.email || ''}</LabeledValue>
-        <IconButton
-          title="Edit"
-          size="s"
-          icon={<EditIcon />}
-          onClick={unauthorize}
-        />
-      </HStack>
       <Form
         gap={4}
         onSubmit={handleSubmit((data) => {

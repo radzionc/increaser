@@ -6,7 +6,6 @@ import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { Center } from '@increaser/ui/ui/Center'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
-import { AuthDestination } from 'auth/AuthDestination'
 import { Text } from '@increaser/ui/ui/Text'
 import { AuthView } from './AuthView'
 
@@ -29,7 +28,6 @@ query identifyWithOAuth($input: IdentifyWithOAuthInput!) {
 
 interface OAuthParams {
   code: string
-  destination: AuthDestination
 }
 
 interface OAuthContentProps {
@@ -41,15 +39,14 @@ export const OAuthContent = ({ provider }: OAuthContentProps) => {
 
   useHandleQueryParams<OAuthParams>(
     useCallback(
-      ({ code, destination }) => {
+      ({ code }) => {
         const input = {
           provider,
           code,
-          redirectUri: getOAuthProviderRedirectUri(provider, destination),
+          redirectUri: getOAuthProviderRedirectUri(provider),
           timeZone: getTimeZone(),
         }
         identify({
-          destination,
           queryParams: { variables: { input }, query: identifyWithOAuthQuery },
         })
       },

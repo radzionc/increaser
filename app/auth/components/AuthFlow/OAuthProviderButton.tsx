@@ -11,7 +11,6 @@ import {
 } from 'auth/OAuthProvider'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
-import { useAuthDestination } from '../AuthDestinationProvider'
 
 interface Props {
   provider: OAuthProvider
@@ -23,9 +22,7 @@ const OAuthProviderUrlRecord = {
 }
 
 export const OAuthProviderButton = ({ provider }: Props) => {
-  const destination = useAuthDestination()
-
-  const redirectUri = getOAuthProviderRedirectUri(provider, destination)
+  const redirectUri = getOAuthProviderRedirectUri(provider)
   const url = OAuthProviderUrlRecord[provider](redirectUri)
 
   return (

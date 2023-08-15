@@ -1,22 +1,22 @@
-import { useAuth } from 'auth/hooks/useAuth'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { VStack } from '@increaser/ui/ui/Stack'
 
-import { AppSumoAuth } from './AppSumoAuth'
 import { AppSumoCodeRedemption } from './AppSumoCodeRedemption'
-import { AppSumoHeader } from './AppSumoHeader'
+import { FixedWidthContent } from 'components/reusable/fixed-width-content'
+import { PageTitle } from 'ui/PageTitle'
+import { UserStateOnly } from 'user/state/UserStateOnly'
+import { Page } from 'components/Page'
 
-export const AppSumoPage = () => {
-  const { isUserLoggedIn } = useAuth()
+const title = 'AppSumo & Increaser'
 
+export const AppSumoPage: Page = () => {
   return (
-    <VStack fullHeight fullWidth alignItems="center" justifyContent="center">
-      <Panel width={380}>
-        <VStack fullWidth alignItems="center" gap={20}>
-          <AppSumoHeader />
-          {isUserLoggedIn ? <AppSumoCodeRedemption /> : <AppSumoAuth />}
-        </VStack>
-      </Panel>
-    </VStack>
+    <FixedWidthContent>
+      <PageTitle title={title} documentTitle={`🌮 ${title}`} />
+      <UserStateOnly>
+        <Panel width={380}>
+          <AppSumoCodeRedemption />
+        </Panel>
+      </UserStateOnly>
+    </FixedWidthContent>
   )
 }

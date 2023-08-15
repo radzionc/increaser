@@ -1,4 +1,3 @@
-import { AuthDestination } from 'auth/AuthDestination'
 import { OAuthProvider } from 'auth/OAuthProvider'
 import { Path } from 'router/Path'
 import { assertDefined } from 'shared/utils/assertDefined'
@@ -11,11 +10,8 @@ const GOOGLE_SCOPE =
 const FACEBOOK_AUTH_URL = 'https://www.facebook.com/v4.0/dialog/oauth'
 const FACEBOOK_SCOPE = 'public_profile,email'
 
-export const getOAuthProviderRedirectUri = (
-  provider: OAuthProvider,
-  destination: AuthDestination,
-) =>
-  `${process.env.NEXT_PUBLIC_BASE_URL}${Path.OAuth}/${provider}?destination=${destination}`
+export const getOAuthProviderRedirectUri = (provider: OAuthProvider) =>
+  `${process.env.NEXT_PUBLIC_BASE_URL}${Path.OAuth}/${provider}`
 
 export const getGoogleOAuthUrl = (redirectUri: string) =>
   getURLWithQueryParams(GOOGLE_AUTH_URL, {

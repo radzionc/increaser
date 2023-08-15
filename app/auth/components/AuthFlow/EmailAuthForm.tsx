@@ -7,7 +7,6 @@ import { Button } from '@increaser/ui/ui/buttons/Button'
 import { Form } from '@increaser/ui/ui/Form/Form'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 
-import { useAuthDestination } from '../AuthDestinationProvider'
 import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
 import { getURLWithQueryParams } from 'shared/utils/getURLWithQueryParams'
@@ -23,8 +22,6 @@ mutation sendAuthLinkByEmail($input: SendAuthLinkByEmailInput!) {
 `
 
 export const EmailAuthForm = () => {
-  const destination = useAuthDestination()
-
   const { query } = useMainApi()
 
   const { push } = useRouter()
@@ -46,7 +43,6 @@ export const EmailAuthForm = () => {
         variables: {
           input: {
             email,
-            destination,
           },
         },
       })

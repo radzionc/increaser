@@ -1,23 +1,21 @@
 import { useAuth } from 'auth/hooks/useAuth'
-import { Path } from 'router/Path'
 import { ComponentWithChildrenProps } from 'shared/props'
 
 import { useUserState } from './UserStateContext'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useAuthRedirect } from 'auth/hooks/useAuthRedirect'
 
 export const UserStateOnly = ({ children }: ComponentWithChildrenProps) => {
   const { state } = useUserState()
-
-  const router = useRouter()
+  const { toAuthenticationPage } = useAuthRedirect()
 
   const { isUserLoggedIn } = useAuth()
 
   useEffect(() => {
     if (!isUserLoggedIn) {
-      router.push(Path.Landing)
+      toAuthenticationPage()
     }
-  }, [isUserLoggedIn, router])
+  }, [isUserLoggedIn, toAuthenticationPage])
 
   return state ? <>{children}</> : null
 }

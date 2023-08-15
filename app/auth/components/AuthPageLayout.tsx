@@ -4,6 +4,7 @@ import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { Topbar } from 'landing/components/Topbar'
 import styled from 'styled-components'
+import { UnauthenticatedOnly } from './UnauthenticatedOnly'
 
 const Wrapper = styled(VStack)`
   background: ${getColor('foreground')};
@@ -23,9 +24,11 @@ const Content = styled(VStack)`
 
 export const AuthPageLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
-    <Wrapper>
-      <Topbar />
-      <Content>{children}</Content>
-    </Wrapper>
+    <UnauthenticatedOnly>
+      <Wrapper>
+        <Topbar />
+        <Content>{children}</Content>
+      </Wrapper>
+    </UnauthenticatedOnly>
   )
 }

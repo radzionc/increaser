@@ -4,7 +4,6 @@ import { useCallback } from 'react'
 import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Center } from '@increaser/ui/ui/Center'
 import { Spinner } from '@increaser/ui/ui/Spinner'
-import { AuthDestination } from 'auth/AuthDestination'
 import { AuthView } from './AuthView'
 import { Text } from '@increaser/ui/ui/Text'
 
@@ -27,7 +26,6 @@ query identifyWithEmail($input: IdentifyWithEmailInput!) {
 
 interface EmailAuthParams {
   token: string
-  destination: AuthDestination
 }
 
 export const EmailAuthContent = () => {
@@ -35,7 +33,7 @@ export const EmailAuthContent = () => {
 
   useHandleQueryParams<EmailAuthParams>(
     useCallback(
-      ({ token, destination }) => {
+      ({ token }) => {
         const variables = {
           input: {
             token,
@@ -44,7 +42,6 @@ export const EmailAuthContent = () => {
         }
 
         identify({
-          destination,
           queryParams: { variables, query: identifyWithEmailQuery },
         })
       },

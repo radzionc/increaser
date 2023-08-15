@@ -1,12 +1,14 @@
-import { useUnauthorizedOnly } from 'auth/hooks/useUnauthorizedOnly'
+import { UnauthenticatedOnly } from 'auth/components/UnauthenticatedOnly'
 import { Page } from 'components/Page'
 import { LandingPage as LandingPageContent } from 'landing/components'
 import { WebsitePageLayout } from 'landing/components/WebsitePageLayout'
 
 export const LandingPage: Page = () => {
-  useUnauthorizedOnly()
-
-  return <LandingPageContent />
+  return (
+    <UnauthenticatedOnly>
+      <LandingPageContent />
+    </UnauthenticatedOnly>
+  )
 }
 
 export default LandingPage

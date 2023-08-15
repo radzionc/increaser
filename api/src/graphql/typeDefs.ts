@@ -37,7 +37,6 @@ const baseTypeDefs = gql`
 
   input SendAuthLinkByEmailInput {
     email: String!
-    destination: String!
   }
 
   input UpdateWeekTimeAllocationInput {
