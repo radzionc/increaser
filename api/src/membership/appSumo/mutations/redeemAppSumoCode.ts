@@ -2,7 +2,8 @@ import { OperationContext } from '../../../graphql/OperationContext'
 import { assertUserId } from '../../../auth/assertUserId'
 import * as appSumoCodesDb from '../db'
 import * as usersDb from '../../../users/db'
-import { UserInputError } from 'apollo-server-lambda'
+import { ApiErrorCode } from '../../../errors/ApiErrorCode'
+import { GraphQLError } from 'graphql'
 
 interface Input {
   code: string
@@ -17,11 +18,19 @@ export const redeemAppSumoCode = async (
 
   const appSumoCode = await appSumoCodesDb.getAppSumoCodeById(code)
   if (!appSumoCode) {
-    throw new UserInputError(`Code ${code} does not exist`)
+    throw new GraphQLError('Provided AppSumo code does not exist', {
+      extensions: {
+        code: ApiErrorCode.BadInput,
+      },
+    })
   }
 
   if (appSumoCode.userId && appSumoCode.userId !== userId) {
-    throw new UserInputError(`Code ${appSumoCode} is already redeemed`)
+    throw new GraphQLError('Provided AppSumo code is already redeemed', {
+      extensions: {
+        code: ApiErrorCode.BadInput,
+      },
+    })
   }
 
   await appSumoCodesDb.updateAppSumoCode(code, { userId })

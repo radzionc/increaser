@@ -4,7 +4,7 @@ export const sendEmailConfirmationLink = async (
   email: string,
   authLink: string,
 ) => {
-  const html = await getHTMLTemplate('auth')
+  const html = getHTMLTemplate('auth')
 
   await sendEmail({
     email,

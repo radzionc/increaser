@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 import * as usersTable from '../../users/db'
 
 export const appStatsTypeDefs = gql`

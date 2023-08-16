@@ -1,6 +1,6 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../graphql/OperationContext'
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 import { removeLastSet as removeLastSetService } from '../services/removeLastSet'
 
 export const removeLastSetTypeDefs = gql`

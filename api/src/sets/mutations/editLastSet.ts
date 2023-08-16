@@ -1,6 +1,6 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../graphql/OperationContext'
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 import { addSet } from '../services/addSet'
 import { Set } from '../../users/User'
 import { removeLastSet } from '../services/removeLastSet'

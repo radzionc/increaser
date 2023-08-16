@@ -1,8 +1,9 @@
-import { AuthenticationError } from 'apollo-server-lambda'
 import { assertEnvVar } from '../../../shared/assertEnvVar'
 import { getURLWithQueryParams } from '../../../shared/helpers/getURLWithQueryParams'
 import { fetchJSON } from './fetchJSON'
 import { OAuthValidator } from './OAuthValidator'
+import { GraphQLError } from 'graphql'
+import { ApiErrorCode } from '../../../errors/ApiErrorCode'
 
 const FACEBOOK_TOKEN_URL = 'https://graph.facebook.com/v4.0/oauth/access_token'
 const FACEBOOK_USER_INFO_URL = 'https://graph.facebook.com/me'
@@ -33,7 +34,14 @@ export const validateWithFacebook: OAuthValidator = async ({
   const { email, name }: RawFacebookUserInfo = await fetchJSON(dataUrl)
 
   if (!email) {
-    throw new AuthenticationError('No email provided by Facebook')
+    throw new GraphQLError(
+      `Your Facebook account doesn't provide an email. Please try a different authentication method.`,
+      {
+        extensions: {
+          code: ApiErrorCode.AUTHENTICATION,
+        },
+      },
+    )
   }
 
   return { email, name }

@@ -1,7 +1,8 @@
-import { AuthenticationError } from 'apollo-server-lambda'
+import { GraphQLError } from 'graphql'
 import { assertEnvVar } from '../../../shared/assertEnvVar'
 import { fetchJSON } from './fetchJSON'
 import { OAuthValidator } from './OAuthValidator'
+import { ApiErrorCode } from '../../../errors/ApiErrorCode'
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token'
 const GOOGLE_USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
@@ -42,7 +43,14 @@ export const validateWithGoogle: OAuthValidator = async ({
   )
 
   if (!email) {
-    throw new AuthenticationError('No email provided by Google')
+    throw new GraphQLError(
+      `Your Google account doesn't provide an email. Please try a different authentication method.`,
+      {
+        extensions: {
+          code: ApiErrorCode.AUTHENTICATION,
+        },
+      },
+    )
   }
 
   return {

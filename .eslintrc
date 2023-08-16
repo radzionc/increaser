@@ -10,5 +10,8 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "no-empty": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
 }

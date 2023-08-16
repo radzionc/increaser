@@ -2,7 +2,7 @@ import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../graphql/OperationContext'
 import { getId } from '../../shared/db/getId'
 import * as projectsDB from '../db'
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 
 import { defaultProjectProperties, Project } from '../Project'
 

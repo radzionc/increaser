@@ -8,5 +8,5 @@ interface EmailAuthTokenPayload {
 export const decodeEmailAuthToken = (token: string) => {
   const decoded = jwt.verify(token, assertEnvVar('SECRET'))
 
-  return decoded ? (decoded as EmailAuthTokenPayload).email : undefined
+  return (decoded as EmailAuthTokenPayload).email
 }

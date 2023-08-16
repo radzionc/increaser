@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../graphql/OperationContext'
 import { getId } from '../../shared/db/getId'

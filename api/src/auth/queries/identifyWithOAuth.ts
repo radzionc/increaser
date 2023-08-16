@@ -1,7 +1,7 @@
 import { GetValidatedUserArgs, getValidatedUser } from './getValidatedUser'
 import { OperationContext } from '../../graphql/OperationContext'
 import { authorizeUser } from './authorizeUser'
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 
 interface OAuthIdentificationResult {
   firstIdentification: boolean

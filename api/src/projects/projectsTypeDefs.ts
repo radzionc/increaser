@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 
 export const projectTypeDefs = gql`
   enum ProjectStatus {

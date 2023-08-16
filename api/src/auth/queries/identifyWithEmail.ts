@@ -1,7 +1,10 @@
 import { OperationContext } from '../../graphql/OperationContext'
 import { authorizeUser } from './authorizeUser'
 import { decodeEmailAuthToken } from '../helpers/decodeEmailAuthToken'
-import { AuthenticationError, gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
+import { GraphQLError } from 'graphql'
+import { ApiErrorCode } from '../../errors/ApiErrorCode'
+import { TokenExpiredError } from 'jsonwebtoken'
 
 interface OAuthIdentificationResult {
   firstIdentification: boolean
@@ -30,10 +33,19 @@ export const identifyWithEmail = async (
   { input: { token, timeZone } }: { input: Input },
   { country }: OperationContext,
 ): Promise<OAuthIdentificationResult> => {
-  const email = decodeEmailAuthToken(token)
-  if (!email) {
-    throw new AuthenticationError('Invalid auth token')
-  }
+  try {
+    const email = decodeEmailAuthToken(token)
 
-  return authorizeUser({ email, country, timeZone })
+    return authorizeUser({ email, country, timeZone })
+  } catch (err) {
+    let message = 'Invalid authentication token'
+    if (err instanceof TokenExpiredError) {
+      message = 'Authentication token expired'
+    }
+    throw new GraphQLError(message, {
+      extensions: {
+        code: ApiErrorCode.BadInput,
+      },
+    })
+  }
 }

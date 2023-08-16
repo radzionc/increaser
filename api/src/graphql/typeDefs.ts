@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-lambda'
+import gql from 'graphql-tag'
 import { identificationResultTypeDef } from '../auth/queries/identificationTypeDefs'
 import { identifyTypeDefs } from '../auth/queries/identify'
 import { identifyWithEmailTypeDefs } from '../auth/queries/identifyWithEmail'
