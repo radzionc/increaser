@@ -5,7 +5,7 @@ import { PersistentStorage } from './PersistentStorage'
 export function createUsePersistantStorageValueHook<T extends string>(
   storage: PersistentStorage<T>,
 ) {
-  function usePersistentStorageValue<V>(key: T, initialValue: V) {
+  function usePersistentState<V>(key: T, initialValue: V) {
     const [value, setValue] = useState<V>(() => {
       const valueFromStorage = storage.getItem<V>(key)
 
@@ -34,5 +34,5 @@ export function createUsePersistantStorageValueHook<T extends string>(
     return [value, setPersistentStorageValue] as const
   }
 
-  return usePersistentStorageValue
+  return usePersistentState
 }

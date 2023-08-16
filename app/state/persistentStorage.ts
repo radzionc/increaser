@@ -36,5 +36,5 @@ export const persistentStorage =
     ? new LocalStorage<PersistentStorageKey>()
     : new TemporaryStorage<PersistentStorageKey>()
 
-export const usePersistentStorageValue =
+export const usePersistentState =
   createUsePersistantStorageValueHook<PersistentStorageKey>(persistentStorage)

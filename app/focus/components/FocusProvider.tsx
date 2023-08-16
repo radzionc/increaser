@@ -21,7 +21,7 @@ import { useBrowserNotifications } from 'shared/hooks/useBrowserNotifcations'
 import { getLast } from 'shared/utils/getLast'
 import { isNotificationAllowed } from 'shared/utils/notification'
 import { PersistentStorageKey } from 'state/persistentStorage'
-import { usePersistentStorageValue } from 'state/persistentStorage'
+import { usePersistentState } from 'state/persistentStorage'
 import { MS_IN_MIN } from 'utils/time'
 
 import { useFocusSoundsState } from './FocusSounds/useFocusSoundsState'
@@ -42,7 +42,7 @@ export const FocusProvider = ({ children }: Props) => {
     useState(focusDuration)
 
   const [hasTimerSoundNotification, setHasTimerSoundNotification] =
-    usePersistentStorageValue<boolean>(
+    usePersistentState<boolean>(
       PersistentStorageKey.HasTimerSoundNotification,
       true,
     )
@@ -50,7 +50,7 @@ export const FocusProvider = ({ children }: Props) => {
   const todaySets = useTodaySets()
 
   const [hasTimerBrowserNotification, setHasTimerBrowserNotification] =
-    usePersistentStorageValue<boolean>(
+    usePersistentState<boolean>(
       PersistentStorageKey.HasTimerBrowserNotification,
       isNotificationAllowed(),
     )

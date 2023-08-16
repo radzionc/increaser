@@ -15,7 +15,7 @@ import { pluralizeName } from 'shared/utils/pluralize'
 import { range } from 'shared/utils/range'
 import { tryToSay } from 'shared/utils/tryToSay'
 import { PersistentStorageKey } from 'state/persistentStorage'
-import { usePersistentStorageValue } from 'state/persistentStorage'
+import { usePersistentState } from 'state/persistentStorage'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_MIN, MS_IN_SEC } from 'utils/time'
 
@@ -59,21 +59,20 @@ export const BreakProvider = ({ children }: Props) => {
   const sets = useTodaySets()
 
   const [hasBrowserNotification, setHasBrowserNotification] =
-    usePersistentStorageValue<boolean>(
+    usePersistentState<boolean>(
       PersistentStorageKey.HasBreakBrowserNotification,
       isNotificationAllowed(),
     )
   const [hasSoundNotification, setHasSoundNotification] =
-    usePersistentStorageValue<boolean>(
+    usePersistentState<boolean>(
       PersistentStorageKey.HasBreakSoundNotification,
       true,
     )
 
-  const [hasAutomaticBreak, setHasAutomaticBreak] =
-    usePersistentStorageValue<boolean>(
-      PersistentStorageKey.HasBreakAutomaticBreak,
-      true,
-    )
+  const [hasAutomaticBreak, setHasAutomaticBreak] = usePersistentState<boolean>(
+    PersistentStorageKey.HasBreakAutomaticBreak,
+    true,
+  )
 
   const lastSetEnd = useLastSetEnd()
   const { pathname } = useRouter()

@@ -6,7 +6,7 @@ import { Set } from 'sets/Set'
 import { useOnWindowCloseAlert } from 'shared/hooks/useOnWindowCloseAlert'
 import { ComponentWithChildrenProps } from 'shared/props'
 import { PersistentStorageKey } from 'state/persistentStorage'
-import { usePersistentStorageValue } from 'state/persistentStorage'
+import { usePersistentState } from 'state/persistentStorage'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
 import { SyncSet } from './SyncSet'
@@ -14,7 +14,7 @@ import { SyncSet } from './SyncSet'
 export const SetsManagerProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const [unsyncedSets, setUnsyncedSets] = usePersistentStorageValue<Set[]>(
+  const [unsyncedSets, setUnsyncedSets] = usePersistentState<Set[]>(
     PersistentStorageKey.UnsyncedSets,
     [],
   )

@@ -10,7 +10,7 @@ import {
   AUTHOR_TWITTER,
 } from 'shared/externalResources'
 import { PersistentStorageKey } from 'state/persistentStorage'
-import { usePersistentStorageValue } from 'state/persistentStorage'
+import { usePersistentState } from 'state/persistentStorage'
 import styled from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { Center } from '@increaser/ui/ui/Center'
@@ -36,7 +36,7 @@ const CopyEmail = styled(UnstyledButton)`
 
 export const SupportOnboarding = () => {
   const [supportOnboardingWasAt, setSupportOnboardingWasAt] =
-    usePersistentStorageValue<number | null>(
+    usePersistentState<number | null>(
       PersistentStorageKey.SupportOnboardingWasAt,
       null,
     )
