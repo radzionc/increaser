@@ -3,6 +3,7 @@ import { ApolloServer } from '@apollo/server'
 import {
   startServerAndCreateLambdaHandler,
   handlers,
+  middleware,
 } from '@as-integrations/aws-lambda'
 
 import { typeDefs } from './graphql/typeDefs'
@@ -26,10 +27,24 @@ const server = new ApolloServer<OperationContext>({
   },
 })
 
+const requestHandler = handlers.createAPIGatewayProxyEventRequestHandler()
+const corsMiddleware: middleware.MiddlewareFn<
+  typeof requestHandler
+> = async () => {
+  return (result) => {
+    result.headers = {
+      ...result.headers,
+      'Access-Control-Allow-Origin': '*',
+    }
+    return Promise.resolve()
+  }
+}
+
 const apolloHandler = startServerAndCreateLambdaHandler(
   server,
-  handlers.createAPIGatewayProxyEventV2RequestHandler(),
+  handlers.createAPIGatewayProxyEventRequestHandler(),
   {
+    middleware: [corsMiddleware],
     context: async ({ event: { headers } }): Promise<OperationContext> => {
       let userId: string | null = null
       const authHeader = headers['Authorization']
