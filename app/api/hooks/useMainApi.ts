@@ -1,5 +1,6 @@
 import { useAuth } from 'auth/hooks/useAuth'
 import { assertDefined } from 'shared/utils/assertDefined'
+import { ApiErrorCode } from '@increaser/api/src/errors/ApiErrorCode'
 
 export interface QueryMainApiParams {
   query: string
@@ -58,8 +59,7 @@ export const useMainApi = () => {
 
     if (errors?.length) {
       const { message, extensions } = errors[0]
-      if (extensions?.code === 'UNAUTHENTICATED') {
-        console.log('Unauthorize because of API UNAUTHENTICATED error')
+      if (extensions?.code === ApiErrorCode.Unauthenticated) {
         unauthorize()
       }
 

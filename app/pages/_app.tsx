@@ -5,7 +5,6 @@ import { ReactNode, useEffect, useState } from 'react'
 import { trackEvent } from 'analytics'
 import { useDev } from 'components/layout/useDev'
 import { ErrorBoundary } from '@sentry/nextjs'
-import { NetworkStateObserver } from 'api/components/NetworkStateObserver'
 import { getQueryClient } from 'api/queryClient'
 import { AuthProvider } from 'auth/components/AuthProvider'
 import { BreakProvider } from 'break/components/BreakProvider'
@@ -22,7 +21,6 @@ import { UserManagerProvider } from 'user/components/UserManagerProvider'
 import { UserStateProvider } from 'user/components/UserStateProvider'
 import { MembershipProvider } from 'membership/components/MembershipProvider'
 import { ThemeProvider } from 'ui/ThemeProvider'
-import { SnackbarProvider } from 'ui/Snackbar/SnackbarProvider'
 import { PresentationProvider } from 'ui/PresentationProvider'
 
 import { Open_Sans } from 'next/font/google'
@@ -56,38 +54,35 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <ThemeProvider>
       <GlobalStyle fontFamily={openSans.style.fontFamily} />
       <QueryClientProvider client={queryClient}>
-        <SnackbarProvider>
-          <ErrorBoundary fallback={<FullSizeErrorFallback />}>
-            <NetworkStateObserver />
-            <AuthProvider>
-              <UserStateProvider>
-                <PresentationProvider>
-                  <PWAProvider>
-                    <ConditionalUserState
-                      present={() => (
-                        <MembershipProvider>
-                          <UserManagerProvider>
-                            <ProjectsProvider>
-                              <HabitsProvider>
-                                <SetsManagerProvider>
-                                  <FocusProvider>
-                                    <Retro />
-                                    <BreakProvider>{component}</BreakProvider>
-                                  </FocusProvider>
-                                </SetsManagerProvider>
-                              </HabitsProvider>
-                            </ProjectsProvider>
-                          </UserManagerProvider>
-                        </MembershipProvider>
-                      )}
-                      missing={() => <>{component}</>}
-                    />
-                  </PWAProvider>
-                </PresentationProvider>
-              </UserStateProvider>
-            </AuthProvider>
-          </ErrorBoundary>
-        </SnackbarProvider>
+        <ErrorBoundary fallback={<FullSizeErrorFallback />}>
+          <AuthProvider>
+            <UserStateProvider>
+              <PresentationProvider>
+                <PWAProvider>
+                  <ConditionalUserState
+                    present={() => (
+                      <MembershipProvider>
+                        <UserManagerProvider>
+                          <ProjectsProvider>
+                            <HabitsProvider>
+                              <SetsManagerProvider>
+                                <FocusProvider>
+                                  <Retro />
+                                  <BreakProvider>{component}</BreakProvider>
+                                </FocusProvider>
+                              </SetsManagerProvider>
+                            </HabitsProvider>
+                          </ProjectsProvider>
+                        </UserManagerProvider>
+                      </MembershipProvider>
+                    )}
+                    missing={() => <>{component}</>}
+                  />
+                </PWAProvider>
+              </PresentationProvider>
+            </UserStateProvider>
+          </AuthProvider>
+        </ErrorBoundary>
       </QueryClientProvider>
     </ThemeProvider>
   )

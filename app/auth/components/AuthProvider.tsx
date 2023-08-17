@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }: Props) => {
   const queryClient = useQueryClient()
 
   const unauthorize = useCallback(() => {
-    console.log('Unauthorize!')
     queryClient.clear()
 
     setToken(undefined)
@@ -43,8 +42,6 @@ export const AuthProvider = ({ children }: Props) => {
       (tokenExpirationTime * MS_IN_SEC - Date.now()) / MS_IN_DAY
 
     if (daysBeforeTokenExpiration < 1) {
-      console.log('Unauthorize because token expires in less than one day')
-
       unauthorize()
     }
   }, [tokenExpirationTime, unauthorize])

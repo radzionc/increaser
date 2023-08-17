@@ -38,7 +38,7 @@ export const validateWithFacebook: OAuthValidator = async ({
       `Your Facebook account doesn't provide an email. Please try a different authentication method.`,
       {
         extensions: {
-          code: ApiErrorCode.AUTHENTICATION,
+          code: ApiErrorCode.Authentication,
         },
       },
     )
