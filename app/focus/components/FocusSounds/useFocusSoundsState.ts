@@ -1,4 +1,4 @@
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
@@ -12,7 +12,7 @@ export type FocusSoundsPersistentState = Pick<
 export const useFocusSoundsState = () => {
   const { focusSounds } = useAssertUserState()
   return usePersistentState<FocusSoundsPersistentState>(
-    PersistentStorageKey.FocusSounds,
+    PersistentStateKey.FocusSounds,
     {
       isEnabled: true,
       activeSoundUrl: focusSounds[0]?.url,

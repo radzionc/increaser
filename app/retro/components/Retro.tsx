@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { getDaySets } from 'sets/helpers/getDaySets'
 import { getYesterday } from 'shared/utils/getYesterday'
 import { isToday } from 'shared/utils/isToday'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
@@ -15,7 +15,7 @@ type RetroStage = (typeof retroStages)[number]
 export const Retro = () => {
   const [lastYesterdayRetroWasAt, setLastYesterdaytRetroWasAt] =
     usePersistentState<number | null>(
-      PersistentStorageKey.YesterdayRetroWasAt,
+      PersistentStateKey.YesterdayRetroWasAt,
       null,
     )
   const { lastUpdatedAt: userStateUpdatedAt } = useUserState()

@@ -2,33 +2,28 @@ import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { Path } from 'router/Path'
 import {
-  PersistentStorageKey,
-  persistentStorage,
+  PersistentStateKey,
+  managePersistentState,
 } from 'state/persistentStorage'
 
+const persistentPath = managePersistentState<string>(
+  PersistentStateKey.PathAttemptedWhileUnauthenticated,
+)
+
 export const useAuthRedirect = () => {
-  const { push, pathname } = useRouter()
+  const { replace, pathname } = useRouter()
 
   const toAuthenticationPage = useCallback(() => {
-    persistentStorage.setItem<string | undefined>(
-      PersistentStorageKey.PathAttemptedWhileUnauthenticated,
-      pathname,
-    )
-    push(Path.SignIn)
-  }, [pathname, push])
+    persistentPath.set(pathname)
+    replace(Path.SignIn)
+  }, [pathname, replace])
 
   const toAuthenticatedPage = useCallback(() => {
-    const destination =
-      persistentStorage.getItem<string | undefined>(
-        PersistentStorageKey.PathAttemptedWhileUnauthenticated,
-      ) ?? Path.Home
-    console.log('Redirect to authenticated page: ', destination)
-    push(destination)
-    persistentStorage.setItem(
-      PersistentStorageKey.PathAttemptedWhileUnauthenticated,
-      undefined,
-    )
-  }, [push])
+    persistentPath.get()
+    const destination = persistentPath.get() ?? Path.Home
+    replace(destination)
+    persistentPath.set(undefined)
+  }, [replace])
 
   return {
     toAuthenticationPage,

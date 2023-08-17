@@ -1,10 +1,7 @@
 import { AuthContext, AuthSessionInfo } from 'auth/context/AuthContext'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQueryClient } from 'react-query'
-import {
-  PersistentStorageKey,
-  usePersistentState,
-} from 'state/persistentStorage'
+import { PersistentStateKey, usePersistentState } from 'state/persistentStorage'
 import { MS_IN_DAY, MS_IN_SEC } from 'utils/time'
 
 interface Props {
@@ -13,12 +10,12 @@ interface Props {
 
 export const AuthProvider = ({ children }: Props) => {
   const [token, setToken] = usePersistentState<string | undefined>(
-    PersistentStorageKey.AuthToken,
+    PersistentStateKey.AuthToken,
     undefined,
   )
   const [tokenExpirationTime, setTokenExpirationTime] = usePersistentState<
     number | undefined
-  >(PersistentStorageKey.AuthTokenExpirationTime, undefined)
+  >(PersistentStateKey.AuthTokenExpirationTime, undefined)
 
   const isUserLoggedIn = !!token
 

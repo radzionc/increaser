@@ -1,8 +1,5 @@
 import { useEffect } from 'react'
-import {
-  PersistentStorageKey,
-  persistentStorage,
-} from 'state/persistentStorage'
+import { PersistentStateKey, persistentStorage } from 'state/persistentStorage'
 
 type Command = 'DEBUG_ACCOUNT'
 
@@ -19,9 +16,9 @@ export const useDev = () => {
     ) => {
       if (command === 'DEBUG_ACCOUNT') {
         // TO-DO: remove current user
-        persistentStorage.setItem(PersistentStorageKey.AuthToken, token)
+        persistentStorage.setItem(PersistentStateKey.AuthToken, token)
         persistentStorage.setItem(
-          PersistentStorageKey.AuthTokenExpirationTime,
+          PersistentStateKey.AuthTokenExpirationTime,
           tokenExpirationTime,
         )
       }

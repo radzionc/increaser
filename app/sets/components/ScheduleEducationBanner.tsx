@@ -1,6 +1,6 @@
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { SCHEDULE_EDUCATION_URL } from 'shared/externalResources'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { ThemeProvider } from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -15,7 +15,7 @@ import { darkTheme } from '@increaser/ui/ui/theme/darkTheme'
 export const ScheduleEducationBanner = () => {
   const [interactionDate, setInteractionDate] = usePersistentState<
     number | undefined
-  >(PersistentStorageKey.ScheduleEducationWasAt, undefined)
+  >(PersistentStateKey.ScheduleEducationWasAt, undefined)
 
   const handleInteraction = () => {
     setInteractionDate(Date.now())

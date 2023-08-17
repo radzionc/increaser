@@ -1,15 +1,12 @@
 import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
 import { PrefferedThemeProvider } from '@increaser/ui/ui/theme/PrefferedThemeProvider'
 import { ThemePreference } from '@increaser/ui/ui/theme/ThemePreference'
-import {
-  PersistentStorageKey,
-  usePersistentState,
-} from 'state/persistentStorage'
+import { PersistentStateKey, usePersistentState } from 'state/persistentStorage'
 
 export const ThemeProvider = ({ children }: ComponentWithChildrenProps) => {
   const [prefferedTheme, setPrefferedTheme] =
     usePersistentState<ThemePreference>(
-      PersistentStorageKey.ThemePreference,
+      PersistentStateKey.ThemePreference,
       'dark',
     )
 

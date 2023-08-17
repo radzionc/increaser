@@ -14,7 +14,7 @@ import {
 import { pluralizeName } from 'shared/utils/pluralize'
 import { range } from 'shared/utils/range'
 import { tryToSay } from 'shared/utils/tryToSay'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_MIN, MS_IN_SEC } from 'utils/time'
@@ -60,17 +60,17 @@ export const BreakProvider = ({ children }: Props) => {
 
   const [hasBrowserNotification, setHasBrowserNotification] =
     usePersistentState<boolean>(
-      PersistentStorageKey.HasBreakBrowserNotification,
+      PersistentStateKey.HasBreakBrowserNotification,
       isNotificationAllowed(),
     )
   const [hasSoundNotification, setHasSoundNotification] =
     usePersistentState<boolean>(
-      PersistentStorageKey.HasBreakSoundNotification,
+      PersistentStateKey.HasBreakSoundNotification,
       true,
     )
 
   const [hasAutomaticBreak, setHasAutomaticBreak] = usePersistentState<boolean>(
-    PersistentStorageKey.HasBreakAutomaticBreak,
+    PersistentStateKey.HasBreakAutomaticBreak,
     true,
   )
 

@@ -1,12 +1,9 @@
 import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
 import { useEffect } from 'react'
-import {
-  PersistentStorageKey,
-  usePersistentState,
-} from 'state/persistentStorage'
+import { PersistentStateKey, usePersistentState } from 'state/persistentStorage'
 
 interface ShowOnceProps extends ComponentWithChildrenProps {
-  storageKey: PersistentStorageKey
+  storageKey: PersistentStateKey
 }
 
 export const ShowOnce = ({ children, storageKey }: ShowOnceProps) => {

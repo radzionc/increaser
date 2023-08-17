@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from 'shared/utils/capitalizeFirstLetter'
 import { match } from 'shared/utils/match'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import styled from 'styled-components'
 import { VStack } from '@increaser/ui/ui/Stack'
@@ -21,7 +21,7 @@ type SoundsView = (typeof soundsViews)[number]
 
 export const FocusSoundsList = () => {
   const [view, setView] = usePersistentState<SoundsView>(
-    PersistentStorageKey.FocusSoundsView,
+    PersistentStateKey.FocusSoundsView,
     'all',
   )
   const { sounds, activeSoundUrl } = useFocusSounds()

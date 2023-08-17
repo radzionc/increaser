@@ -4,7 +4,7 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { Page } from 'components/Page'
 import { AppSumoPageContent } from './AppSumoPageContent'
 
-const title = 'AppSumo & Increaser'
+const title = 'AppSumo Lifetime Deal'
 
 export const AppSumoPage: Page = () => {
   return (

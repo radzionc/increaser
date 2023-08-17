@@ -1,6 +1,6 @@
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { HABITS_EDUCATION_URL } from 'shared/externalResources'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { ThemeProvider } from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -18,7 +18,7 @@ const titleColor = new HSLA(220, 45, 30)
 export const HabitsEducationBanner = () => {
   const [interactionDate, setInteractionDate] = usePersistentState<
     number | undefined
-  >(PersistentStorageKey.HabitsEducationWasAt, undefined)
+  >(PersistentStateKey.HabitsEducationWasAt, undefined)
 
   const handleInteraction = () => {
     setInteractionDate(Date.now())

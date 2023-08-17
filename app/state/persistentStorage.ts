@@ -1,8 +1,9 @@
 import { TemporaryStorage } from '@increaser/ui/state/TemporaryStorage'
 import { LocalStorage } from '@increaser/ui/state/LocalStorage'
-import { createUsePersistantStorageValueHook } from '@increaser/ui/state/createUsePersistantStorageValueHook'
+import { createPersistentStateHook } from '@increaser/ui/state/createPersistentStateHook'
+import { createPersistentStateManager } from '@increaser/ui/state/createPersistentStateManager'
 
-export enum PersistentStorageKey {
+export enum PersistentStateKey {
   OnboardedToBreak = 'onboarded-to-break',
   AuthToken = 'token',
   AuthTokenExpirationTime = 'tokenExpirationTime',
@@ -33,8 +34,11 @@ export enum PersistentStorageKey {
 
 export const persistentStorage =
   typeof window !== 'undefined'
-    ? new LocalStorage<PersistentStorageKey>()
-    : new TemporaryStorage<PersistentStorageKey>()
+    ? new LocalStorage<PersistentStateKey>()
+    : new TemporaryStorage<PersistentStateKey>()
 
 export const usePersistentState =
-  createUsePersistantStorageValueHook<PersistentStorageKey>(persistentStorage)
+  createPersistentStateHook<PersistentStateKey>(persistentStorage)
+
+export const managePersistentState =
+  createPersistentStateManager<PersistentStateKey>(persistentStorage)

@@ -1,5 +1,5 @@
 import { ExternalLink } from 'router/Link/ExternalLink'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import styled from 'styled-components'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { Text } from '@increaser/ui/ui/Text'
@@ -25,7 +25,7 @@ export const TwoDayRuleEducation = () => {
   if (!couldShow) return null
 
   return (
-    <ShowOnce storageKey={PersistentStorageKey.TwoDayRuleEducation}>
+    <ShowOnce storageKey={PersistentStateKey.TwoDayRuleEducation}>
       <Container to="https://youtu.be/bfLHTLQZ5nc">
         <Text color="supporting" size={14}>
           Two-day habit breaks set you back -{}{' '}

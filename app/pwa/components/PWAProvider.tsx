@@ -1,6 +1,6 @@
 import { trackEvent } from 'analytics'
 import { useCallback, useEffect, useState } from 'react'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { VStack } from '@increaser/ui/ui/Stack'
@@ -19,7 +19,7 @@ export const PWAProvider = ({ children }: Props) => {
     useState<BeforeInstallPromptEvent | null>(null)
 
   const [rejectedAt, setRejectedAt] = usePersistentState<number | undefined>(
-    PersistentStorageKey.SidebarInstallPromptWasRejectedAt,
+    PersistentStateKey.SidebarInstallPromptWasRejectedAt,
     undefined,
   )
 

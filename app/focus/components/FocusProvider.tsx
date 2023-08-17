@@ -20,7 +20,7 @@ import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useBrowserNotifications } from 'shared/hooks/useBrowserNotifcations'
 import { getLast } from 'shared/utils/getLast'
 import { isNotificationAllowed } from 'shared/utils/notification'
-import { PersistentStorageKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { MS_IN_MIN } from 'utils/time'
 
@@ -43,7 +43,7 @@ export const FocusProvider = ({ children }: Props) => {
 
   const [hasTimerSoundNotification, setHasTimerSoundNotification] =
     usePersistentState<boolean>(
-      PersistentStorageKey.HasTimerSoundNotification,
+      PersistentStateKey.HasTimerSoundNotification,
       true,
     )
 
@@ -51,7 +51,7 @@ export const FocusProvider = ({ children }: Props) => {
 
   const [hasTimerBrowserNotification, setHasTimerBrowserNotification] =
     usePersistentState<boolean>(
-      PersistentStorageKey.HasTimerBrowserNotification,
+      PersistentStateKey.HasTimerBrowserNotification,
       isNotificationAllowed(),
     )
 
