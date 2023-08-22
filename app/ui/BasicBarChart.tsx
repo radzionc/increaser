@@ -5,7 +5,7 @@ import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
 import { ReactNode } from 'react'
 import { sum } from 'shared/utils/sum'
-import { toPercents } from 'shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'
 
 export interface BarSegment {

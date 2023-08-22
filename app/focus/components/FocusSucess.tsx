@@ -1,6 +1,6 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { toPercents } from 'shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { CheckIcon } from '@increaser/ui/ui/icons/CheckIcon'

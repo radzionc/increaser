@@ -1,4 +1,4 @@
-import { range } from 'shared/utils/range'
+import { range } from '@increaser/utils/range'
 import styled from 'styled-components'
 import { VStack } from '@increaser/ui/ui//Stack'
 

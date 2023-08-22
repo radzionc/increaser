@@ -1,5 +1,5 @@
 import styled, { useTheme } from 'styled-components'
-import { toPercents } from '../../../shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import { PressTracker } from '../../PressTracker'
 import { defaultTransition } from '../../animations/transitions'
 import { HSLA } from '../../colors/HSLA'

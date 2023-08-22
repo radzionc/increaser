@@ -8,7 +8,7 @@ import { Panel } from './Panel/Panel'
 import { VStack } from './Stack'
 import { Text } from './Text'
 import { sum } from '../shared/utils/sum'
-import { toPercents } from '../shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import { getColor } from './theme/getters'
 
 export interface DistributionBarItem {

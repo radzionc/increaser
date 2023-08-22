@@ -1,4 +1,4 @@
-import { toPercents } from 'shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import styled, { keyframes } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'

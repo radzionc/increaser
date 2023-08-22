@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components'
 import { InputProps } from '../../shared/props'
-import { toPercents } from '../../shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import { SubscriptionCadence } from '../SubscriptionCadence'
 import { HStack } from '../../ui/Stack'
 import { Switch } from '../../ui/Switch/Switch'

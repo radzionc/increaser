@@ -1,7 +1,7 @@
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { formatTime } from 'shared/utils/formatTime'
-import { toPercents } from 'shared/utils/toPercents'
+import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_MIN } from 'utils/time'

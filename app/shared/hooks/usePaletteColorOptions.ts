@@ -1,6 +1,6 @@
 import { EntityWithColor } from 'shared/entities'
 import { getRandomElement } from 'shared/utils/getRandomElement'
-import { range } from 'shared/utils/range'
+import { range } from '@increaser/utils/range'
 import { labelColorsCount } from '@increaser/ui/ui/colors/generateLabelColorGetter'
 
 export const usePaletteColorOptions = (items: EntityWithColor[]) => {

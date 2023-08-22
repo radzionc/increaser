@@ -3,7 +3,7 @@ import {
   maxFocusDuration,
   recommendedFocusDurations,
 } from 'focus/FocusDuration'
-import { range } from 'shared/utils/range'
+import { range } from '@increaser/utils/range'
 import styled, { useTheme } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'

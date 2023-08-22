@@ -2,8 +2,8 @@ import { Text } from '@increaser/ui/ui/Text'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
-import { range } from 'shared/utils/range'
-import { toPercents } from 'shared/utils/toPercents'
+import { range } from '@increaser/utils/range'
+import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 
 const Container = styled.div`

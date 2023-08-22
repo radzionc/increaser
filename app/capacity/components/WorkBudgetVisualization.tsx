@@ -1,4 +1,4 @@
-import { range } from 'shared/utils/range'
+import { range } from '@increaser/utils/range'
 import { useTheme } from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { MIN_IN_HOUR } from 'utils/time'

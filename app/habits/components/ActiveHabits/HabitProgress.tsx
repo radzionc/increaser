@@ -1,5 +1,5 @@
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { range } from 'shared/utils/range'
+import { range } from '@increaser/utils/range'
 import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
 import { D_IN_WEEK, MS_IN_DAY, MS_IN_SEC } from 'utils/time'
 

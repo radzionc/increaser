@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useStartOfWeek } from 'shared/hooks/useStartOfWeek'
-import { range } from 'shared/utils/range'
+import { range } from '@increaser/utils/range'
 import { D_IN_WEEK, MS_IN_DAY } from 'utils/time'
 
 import { useCurrentWeekSets } from './useCurrentWeekSets'
