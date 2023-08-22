@@ -1,5 +1,4 @@
 import YouTubePlayer from 'react-player/lazy'
-import { assertDefined } from 'shared/utils/assertDefined'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
@@ -10,6 +9,7 @@ import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 
 import { useFocusSounds } from '../useFocusSounds'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 const Container = styled.div`
   overflow: hidden;
@@ -43,7 +43,7 @@ export const SoundsPlayer = () => {
   const { sounds, activeSoundUrl, isPlaying, updateIsPlaying } =
     useFocusSounds()
 
-  const sound = assertDefined(
+  const sound = shouldBeDefined(
     sounds.find((sound) => sound.url === activeSoundUrl),
   )
 

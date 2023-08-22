@@ -4,7 +4,6 @@ import { getSetDuration } from 'sets/helpers/getSetDuration'
 import { Set } from 'sets/Set'
 import { formatDuration } from 'shared/utils/formatDuration'
 import { formatTime } from 'shared/utils/formatTime'
-import { getLast } from 'shared/utils/getLast'
 import { toPercents } from 'shared/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
@@ -13,6 +12,7 @@ import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { ArrowLeftIcon } from '@increaser/ui/ui/icons/ArrowLeftIcon'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 interface Props {
   sets: Set[]
@@ -34,7 +34,7 @@ const Container = styled(Panel)`
 
 export const MinimalisticTimeline = ({ sets }: Props) => {
   const startedAt = sets[0].start
-  const finishedAt = getLast(sets).end
+  const finishedAt = getLastItem(sets).end
   const duration = finishedAt - startedAt
 
   const theme = useTheme()

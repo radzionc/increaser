@@ -1,4 +1,4 @@
-import { pluralize } from 'shared/utils/pluralize'
+import { pluralize } from '@increaser/utils/pluralize'
 import { toPercents } from 'shared/utils/toPercents'
 import { CheckSquareIcon } from '@increaser/ui/ui/icons/CheckSquareIcon'
 

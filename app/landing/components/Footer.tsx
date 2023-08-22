@@ -4,7 +4,7 @@ import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { LinkText } from '@increaser/ui/ui/Text/LinkText'
 import Link from 'next/link'
-import { assertDefined } from 'shared/utils/assertDefined'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 export const Footer = () => {
   const date = new Date()
@@ -15,7 +15,7 @@ export const Footer = () => {
           © {date.getFullYear()} {APP_NAME}
         </Text>
         <Text color="supporting">
-          v{assertDefined(process.env.NEXT_PUBLIC_VERSION)}
+          v{shouldBeDefined(process.env.NEXT_PUBLIC_VERSION)}
         </Text>
         <Link href={Path.TermsOfService}>
           <LinkText color="supporting">Terms</LinkText>

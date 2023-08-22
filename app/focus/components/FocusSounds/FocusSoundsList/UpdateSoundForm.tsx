@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 import { FinishableComponentProps } from 'shared/props'
 import { combineValidators } from 'shared/utils/combineValidators'
 import { getUniqueValueValidator } from 'shared/utils/getUniqueValueValidator'
-import { pick } from 'shared/utils/pick'
 import { validateUrl } from 'shared/utils/validateUrl'
 import { without } from 'shared/utils/without'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -11,6 +10,7 @@ import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 
 import { FocusSound } from '../FocusSoundsContext'
 import { useFocusSounds } from '../useFocusSounds'
+import { pick } from '@increaser/utils/pick'
 
 interface UpdateSoundFormProps extends FinishableComponentProps {
   sound: FocusSound

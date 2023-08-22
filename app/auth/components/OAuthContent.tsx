@@ -2,12 +2,12 @@ import { getOAuthProviderRedirectUri } from 'auth/helpers/OAuthProviderUrl'
 import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
 import { AUTH_PROVIDER_NAME, OAuthProvider } from 'auth/OAuthProvider'
 import { useCallback } from 'react'
-import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { Center } from '@increaser/ui/ui/Center'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { Text } from '@increaser/ui/ui/Text'
 import { AuthView } from './AuthView'
+import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
 
 const identificationQueryResult = `
 email
@@ -45,7 +45,7 @@ export const OAuthContent = ({ provider }: OAuthContentProps) => {
           provider,
           code,
           redirectUri: getOAuthProviderRedirectUri(provider),
-          timeZone: getTimeZone(),
+          timeZone: getCurrentTimezoneOffset(),
         }
         identify({
           queryParams: { variables: { input }, query: identifyWithOAuthQuery },

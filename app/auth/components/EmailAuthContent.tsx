@@ -1,11 +1,11 @@
 import { useIdentificationMutation } from 'auth/hooks/useIdentificationMutation'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { useCallback } from 'react'
-import { getTimeZone } from 'shared/utils/getTimeZone'
 import { Center } from '@increaser/ui/ui/Center'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { AuthView } from './AuthView'
 import { Text } from '@increaser/ui/ui/Text'
+import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
 
 const identificationQueryResult = `
 email
@@ -37,7 +37,7 @@ export const EmailAuthContent = () => {
         const variables = {
           input: {
             token,
-            timeZone: getTimeZone(),
+            timeZone: getCurrentTimezoneOffset(),
           },
         }
 

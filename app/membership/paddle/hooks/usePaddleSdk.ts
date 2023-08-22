@@ -3,12 +3,12 @@ import { useQuery } from 'react-query'
 import { createScript, getScriptBySrc, loadScript } from 'shared/utils/dom'
 
 import { PaddleSdk } from '../PaddleSdk'
-import { assertDefined } from 'shared/utils/assertDefined'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 export const paddleQueryKey = 'paddle'
 const paddleScriptSource = 'https://cdn.paddle.com/paddle/paddle.js'
 const paddleVendorId = Number(
-  assertDefined(process.env.NEXT_PUBLIC_PADDLE_VENDOR_ID),
+  shouldBeDefined(process.env.NEXT_PUBLIC_PADDLE_VENDOR_ID),
 )
 
 export const usePaddleSdk = () => {

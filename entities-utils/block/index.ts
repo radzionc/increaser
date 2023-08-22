@@ -1,21 +1,21 @@
 import { Set } from '@increaser/entities/User'
-import { getLast } from '@increaser/utils/getlast'
 import { getSetsDuration } from '../set/getSetsDuration'
 import { getDistanceBetweenSets } from '../set/getDistanceBetweenSets'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { Block } from '@increaser/entities/Block'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 export const blockDistanceInMinutes = 15
 
 export const targetBlockInMin = 90
 
 export const getBlockDuration = ({ sets }: Block) =>
-  getLast(sets).end - sets[0].start
+  getLastItem(sets).end - sets[0].start
 
 export const getBlockWorkDuration = ({ sets }: Block) => getSetsDuration(sets)
 
 export const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
-  getDistanceBetweenSets(getLast(prevBlock.sets), block.sets[0])
+  getDistanceBetweenSets(getLastItem(prevBlock.sets), block.sets[0])
 
 export const getBlocks = (sets: Set[]): Block[] => {
   const blocks: Block[] = []
@@ -34,7 +34,7 @@ export const getBlocks = (sets: Set[]): Block[] => {
       return
     }
 
-    getLast(blocks).sets.push(set)
+    getLastItem(blocks).sets.push(set)
   })
 
   return blocks

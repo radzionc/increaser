@@ -1,13 +1,13 @@
 export const getNotificationPermission = () => window?.Notification?.permission
 
-export const isNotificationAllowed = () =>
+export const areNotificationsAllowed = () =>
   getNotificationPermission() === 'granted'
 
-export const isNotificationBlocked = () =>
+export const areNotificationsBlocked = () =>
   getNotificationPermission() === 'denied'
 
 export const showNotification = (text: string) => {
-  if (!isNotificationAllowed()) return
+  if (!areNotificationsAllowed()) return
 
   try {
     const notification = new window.Notification(text)

@@ -4,7 +4,6 @@ import { useBreak } from 'break/hooks/useBreak'
 import { useLastSetEnd } from 'sets/hooks/useLastSetEnd'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { getLast } from 'shared/utils/getLast'
 import { toPercents } from 'shared/utils/toPercents'
 import styled, { css, useTheme } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
@@ -18,6 +17,7 @@ import { remindersCount } from '../BreakProvider'
 import { BreakSettings } from '../BreakSettings'
 import { BreakCountdown } from './BreakCountdown'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 const Wrapper = styled.div`
   position: relative;
@@ -76,7 +76,7 @@ export const BreakTimeline = () => {
   const todayStartedAt = useStartOfDay()
 
   const { colors } = useTheme()
-  const timelineInMinutes = getLast(breakMinutesOptions) + remindersCount
+  const timelineInMinutes = getLastItem(breakMinutesOptions) + remindersCount
   if (!lastSetEnd) return null
   const minutesPassed = (now - lastSetEnd) / MS_IN_MIN
 

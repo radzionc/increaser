@@ -1,17 +1,17 @@
+import { getLastItem } from '@increaser/utils/getLastItem'
 import {
   blockDistanceInMinutes,
   getBlocks,
   getFocusDurationForCurrentBlock,
 } from 'sets/Block'
 import { Set } from 'sets/Set'
-import { getLast } from 'shared/utils/getLast'
 import { MS_IN_MIN } from 'utils/time'
 
 export const focusDurations = [
   5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90,
 ] as const
 
-export const maxFocusDuration = getLast(focusDurations)
+export const maxFocusDuration = getLastItem(focusDurations)
 
 export const recommendedFocusDurations = [30, 46, 60, 90]
 
@@ -22,7 +22,7 @@ export type FocusDuration = (typeof focusDurations)[number]
 export const increaseFocusDuration = (lastSetDuration: number) => {
   return (
     focusDurations.find((option) => option > lastSetDuration) ??
-    getLast(focusDurations)
+    getLastItem(focusDurations)
   )
 }
 
@@ -46,13 +46,13 @@ export const suggestFocusDuration = ({
   if (!focusOptions.length) return defaultFocusDuration
 
   const willBeNewBlock = todaySets.length
-    ? now - getLast(todaySets).end > blockDistanceInMinutes * MS_IN_MIN
+    ? now - getLastItem(todaySets).end > blockDistanceInMinutes * MS_IN_MIN
     : true
 
   if (willBeNewBlock) return maxFocusDuration
 
   const blocks = getBlocks(todaySets)
-  const lastBlock = getLast(blocks)
+  const lastBlock = getLastItem(blocks)
 
   const focusDurationForCurrentBlock = getFocusDurationForCurrentBlock(
     lastBlock,

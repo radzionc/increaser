@@ -3,7 +3,6 @@ import {
   defaultFocusDuration,
   focusDurations,
 } from 'focus/FocusDuration'
-import { getLast } from 'shared/utils/getLast'
 import { DefaultTheme } from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { MS_IN_MIN } from 'utils/time'
@@ -11,6 +10,7 @@ import { MS_IN_MIN } from 'utils/time'
 import { getSetsSum } from './helpers/getSetsSum'
 import { Set } from './Set'
 import { getDistanceBetweenSets } from '@increaser/entities-utils/set/getDistanceBetweenSets'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 export interface Block {
   sets: Set[]
@@ -21,12 +21,12 @@ export const blockDistanceInMinutes = 15
 export const targetBlockInMin = 90
 
 export const getBlockDuration = ({ sets }: Block) =>
-  getLast(sets).end - sets[0].start
+  getLastItem(sets).end - sets[0].start
 
 export const getBlockWorkDuration = ({ sets }: Block) => getSetsSum(sets)
 
 export const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
-  getDistanceBetweenSets(getLast(prevBlock.sets), block.sets[0])
+  getDistanceBetweenSets(getLastItem(prevBlock.sets), block.sets[0])
 
 export const getBlocks = (sets: Set[]): Block[] => {
   const blocks: Block[] = []
@@ -45,7 +45,7 @@ export const getBlocks = (sets: Set[]): Block[] => {
       return
     }
 
-    getLast(blocks).sets.push(set)
+    getLastItem(blocks).sets.push(set)
   })
 
   return blocks
@@ -54,12 +54,12 @@ export const getBlocks = (sets: Set[]): Block[] => {
 export const getNextFocusDuration = (blocks: Block[]) => {
   if (blocks.length === 0) return defaultFocusDuration
 
-  const block = getLast(blocks)
+  const block = getLastItem(blocks)
 
   const workDurationInMin = getBlockWorkDuration(block) / MS_IN_MIN
 
   const now = Date.now()
-  const timeSinceLastSet = now - getLast(block.sets).end
+  const timeSinceLastSet = now - getLastItem(block.sets).end
   if (timeSinceLastSet > blockDistanceInMinutes * MS_IN_MIN)
     return defaultFocusDuration
 
@@ -81,7 +81,7 @@ export const getFocusDurationForCurrentBlock = (
   return (
     focusOptions.find(
       (option) => option + workDurationInMin >= targetBlockInMin,
-    ) || getLast(focusOptions)
+    ) || getLastItem(focusOptions)
   )
 }
 
@@ -96,7 +96,7 @@ export const shouldBeNewBlock = ({
 }: ShouldBeNewBlockParams) => {
   if (!sets.length) return true
 
-  const durationSinceLastSet = timestamp - getLast(sets).end
+  const durationSinceLastSet = timestamp - getLastItem(sets).end
 
   return durationSinceLastSet > blockDistanceInMinutes * MS_IN_MIN
 }

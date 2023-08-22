@@ -1,7 +1,7 @@
+import { getLastItem } from '@increaser/utils/getLastItem'
 import { Project } from 'projects/Project'
 import { shouldBeNewBlock } from 'sets/Block'
 import { Set } from 'sets/Set'
-import { getLast } from 'shared/utils/getLast'
 
 interface SuggestProjectParams {
   projects: Project[]
@@ -20,7 +20,7 @@ export const suggestProject = ({
   })
 
   if (!willBeNewBlock) {
-    const lastSetProjectId = getLast(todaySets).projectId
+    const lastSetProjectId = getLastItem(todaySets).projectId
     if (projects.find(({ id }) => id === lastSetProjectId)) {
       return lastSetProjectId
     }

@@ -6,12 +6,8 @@ import { getBlockWorkDuration, getBlocks, targetBlockInMin } from 'sets/Block'
 import { useLastSetEnd } from 'sets/hooks/useLastSetEnd'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { getLast } from 'shared/utils/getLast'
-import {
-  isNotificationAllowed,
-  showNotification,
-} from 'shared/utils/notification'
-import { pluralizeName } from 'shared/utils/pluralize'
+
+import { pluralizeName } from '@increaser/utils/pluralize'
 import { range } from 'shared/utils/range'
 import { tryToSay } from 'shared/utils/tryToSay'
 import { PersistentStateKey } from 'state/persistentStorage'
@@ -21,6 +17,11 @@ import { MS_IN_MIN, MS_IN_SEC } from 'utils/time'
 
 import { BreakContext, BreakDuration } from '../context/BreakContext'
 import { useRouter } from 'next/router'
+import { getLastItem } from '@increaser/utils/getLastItem'
+import {
+  areNotificationsAllowed,
+  showNotification,
+} from '@increaser/ui/notifications/utils'
 
 export const remindersCount = 5
 
@@ -61,7 +62,7 @@ export const BreakProvider = ({ children }: Props) => {
   const [hasBrowserNotification, setHasBrowserNotification] =
     usePersistentState<boolean>(
       PersistentStateKey.HasBreakBrowserNotification,
-      isNotificationAllowed(),
+      areNotificationsAllowed(),
     )
   const [hasSoundNotification, setHasSoundNotification] =
     usePersistentState<boolean>(
@@ -145,14 +146,14 @@ export const BreakProvider = ({ children }: Props) => {
     const wordayEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
     if (wordayEndsAt - now < 25 * MS_IN_MIN) return
 
-    const lastSet = getLast(sets)
+    const lastSet = getLastItem(sets)
     if (!lastSet || !lastSetEnd) return
 
     // TODO: implement a better solution
     if (now - lastSetEnd > 1 * MS_IN_SEC) return
 
     const blocks = getBlocks(sets)
-    const block = getLast(blocks)
+    const block = getLastItem(blocks)
     const blockWorkDuration = getBlockWorkDuration(block) / MS_IN_MIN
     if (blockWorkDuration + focusDurations[0] > targetBlockInMin) {
       return

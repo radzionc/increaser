@@ -2,14 +2,14 @@ import { trackEvent } from 'analytics'
 import { useMainApi } from 'api/hooks/useMainApi'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { validateEmail } from 'shared/utils/validateEmail'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { Form } from '@increaser/ui/ui/Form/Form'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 
 import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
-import { getURLWithQueryParams } from 'shared/utils/getURLWithQueryParams'
+import { validateEmail } from '@increaser/utils/validateEmail'
+import { addQueryParams } from '@increaser/utils/addQueryParams'
 
 interface EmailFormState {
   email: string
@@ -51,7 +51,7 @@ export const EmailAuthForm = () => {
     },
     {
       onSuccess: (email) => {
-        push(getURLWithQueryParams(Path.EmailConfirm, { email }))
+        push(addQueryParams(Path.EmailConfirm, { email }))
       },
     },
   )

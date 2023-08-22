@@ -1,4 +1,4 @@
-import { pluralize } from 'shared/utils/pluralize'
+import { pluralize } from '@increaser/utils/pluralize'
 import { ZapIcon } from '@increaser/ui/ui/icons/ZapIcon'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'

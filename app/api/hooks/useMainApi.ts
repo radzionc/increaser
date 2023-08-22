@@ -1,6 +1,6 @@
 import { useAuth } from 'auth/hooks/useAuth'
-import { assertDefined } from 'shared/utils/assertDefined'
 import { ApiErrorCode } from '@increaser/api/src/errors/ApiErrorCode'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 export interface QueryMainApiParams {
   query: string
@@ -43,7 +43,7 @@ export const useMainApi = () => {
   const query = async function queryMainApi<T>(
     payload: QueryMainApiParams,
   ): Promise<T> {
-    const mainApiUrl = assertDefined(process.env.NEXT_PUBLIC_API_URL)
+    const mainApiUrl = shouldBeDefined(process.env.NEXT_PUBLIC_API_URL)
 
     const response = await window.fetch(mainApiUrl, {
       method: 'POST',

@@ -1,4 +1,4 @@
-import { pluralize } from './pluralize'
+import { pluralize } from '@increaser/utils/pluralize'
 import { MS_IN_MIN, S_IN_MIN } from './time'
 
 type DurationUnit = 'ms' | 'min' | 's'

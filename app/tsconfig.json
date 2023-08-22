@@ -17,13 +17,6 @@
     "incremental": true,
     "baseUrl": "."
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "../entities-utils/block/index.ts",
-    "../entities-utils/set/getDistanceBetweenSets.ts",
-    "../entities-utils/habit/toHabitDate.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

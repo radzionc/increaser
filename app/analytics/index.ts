@@ -1,9 +1,9 @@
 import * as amplitude from '@amplitude/analytics-browser'
-import { assertDefined } from 'shared/utils/assertDefined'
-import { memoize } from 'shared/utils/memoize'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
+import { memoize } from '@increaser/utils/memoize'
 
 const initialize = memoize(() => {
-  const key = assertDefined(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY)
+  const key = shouldBeDefined(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY)
 
   amplitude.init(key)
 })

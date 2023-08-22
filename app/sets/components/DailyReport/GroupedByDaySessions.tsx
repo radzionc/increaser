@@ -5,7 +5,6 @@ import { getBlockColor, getBlockDuration, getBlocks } from 'sets/Block'
 import { getSetDuration } from 'sets/helpers/getSetDuration'
 import { useGroupedByDayCurrentWeekSets } from 'sets/hooks/useGroupedByDayCurrentWeekSets'
 import { useWeekday } from 'shared/hooks/useWeekday'
-import { getLast } from 'shared/utils/getLast'
 import { toPercents } from 'shared/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
@@ -20,6 +19,7 @@ import { CurrentTime } from './CurrentTime'
 import { ScheduleHourSpace } from './ScheduleHourSpace'
 import { Summary } from './Summary'
 import { Weekdays } from './Weekdays'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 const labelsWidth = 80
 
@@ -80,7 +80,7 @@ export const GroupedByDaySessions = () => {
     const startWorkHour = Math.floor(goalToStartWorkAt / MIN_IN_HOUR)
     if (starts.length < 1) return [startWorkHour, finishWorkHour]
 
-    const ends = groupedSets.map((sets) => getLast(sets).end)
+    const ends = groupedSets.map((sets) => getLastItem(sets).end)
     const startHour = Math.max(
       Math.min(toOrderedHours(starts)[0], startWorkHour),
       0,
@@ -88,7 +88,7 @@ export const GroupedByDaySessions = () => {
 
     const endHour = Math.min(
       24,
-      Math.max(getLast(toOrderedHours(ends)) + 1, finishWorkHour),
+      Math.max(getLastItem(toOrderedHours(ends)) + 1, finishWorkHour),
     )
 
     return [startHour, endHour]

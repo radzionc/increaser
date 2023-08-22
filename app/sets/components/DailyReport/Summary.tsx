@@ -4,7 +4,6 @@ import { useGroupedByDayCurrentWeekSets } from 'sets/hooks/useGroupedByDayCurren
 import { useWeekday } from 'shared/hooks/useWeekday'
 import { formatDuration } from 'shared/utils/formatDuration'
 import { formatTime } from 'shared/utils/formatTime'
-import { getLast } from 'shared/utils/getLast'
 import { match } from 'shared/utils/match'
 import styled, { useTheme } from 'styled-components'
 import { BarChart } from '@increaser/ui/ui/BarChart'
@@ -15,6 +14,7 @@ import { MS_IN_MIN } from 'utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { SummaryRow } from './SummaryRow'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 const Container = styled.div<{ labelsWidth: number }>`
   display: grid;
@@ -94,7 +94,7 @@ export const Summary = ({ labelsWidth }: SummaryProps) => {
         name="Finished at"
         days={days}
         renderDayStatistic={({ sets, startsAt }) => {
-          const finishedAt = getLast(sets).end
+          const finishedAt = getLastItem(sets).end
           const shouldFinishAt = startsAt + goalToFinishWorkBy * MS_IN_MIN
 
           return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'react-use'
-import { pick } from '../utils/pick'
 import { areEqual } from '../utils/areEqual'
+import { pick } from '@increaser/utils/pick'
 
 export type BoundingBox = Omit<DOMRect, 'toJSON'>
 

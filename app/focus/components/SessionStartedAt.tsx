@@ -1,16 +1,16 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { assertDefined } from 'shared/utils/assertDefined'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { Opener } from '@increaser/ui/ui/Opener'
 import { Text } from '@increaser/ui/ui/Text'
 
 import { UpdateSetProjectOverlay } from './UpdateSetProjectOverlay'
 import { UpdateSetStartTimeOverlay } from './UpdateSetStartTimeOverlay'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 export const SesssionStartedAt = () => {
   const { currentSet: optionalCurrentSet, updateStartTime } = useFocus()
-  const { startedAt, projectId } = assertDefined(optionalCurrentSet)
+  const { startedAt, projectId } = shouldBeDefined(optionalCurrentSet)
 
   const { projectsRecord } = useProjects()
   const project = projectsRecord[projectId]

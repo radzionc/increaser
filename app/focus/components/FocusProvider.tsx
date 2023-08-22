@@ -18,8 +18,6 @@ import { getSetDuration } from 'sets/helpers/getSetDuration'
 import { useSetsManager } from 'sets/hooks/useSetsManager'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useBrowserNotifications } from 'shared/hooks/useBrowserNotifcations'
-import { getLast } from 'shared/utils/getLast'
-import { isNotificationAllowed } from 'shared/utils/notification'
 import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { MS_IN_MIN } from 'utils/time'
@@ -27,6 +25,8 @@ import { MS_IN_MIN } from 'utils/time'
 import { useFocusSoundsState } from './FocusSounds/useFocusSoundsState'
 import { useRouter } from 'next/router'
 import { CurrentFocusGuard } from './CurrentFocusProvider'
+import { getLastItem } from '@increaser/utils/getLastItem'
+import { areNotificationsAllowed } from '@increaser/ui/notifications/utils'
 
 interface Props {
   children: ReactNode
@@ -52,7 +52,7 @@ export const FocusProvider = ({ children }: Props) => {
   const [hasTimerBrowserNotification, setHasTimerBrowserNotification] =
     usePersistentState<boolean>(
       PersistentStateKey.HasTimerBrowserNotification,
-      isNotificationAllowed(),
+      areNotificationsAllowed(),
     )
 
   const { permission } = useBrowserNotifications()
@@ -84,7 +84,7 @@ export const FocusProvider = ({ children }: Props) => {
     // TODO: move to ActiveFocusProvider
     if (!currentSet) return
 
-    if (focusDuration >= getLast(focusDurations)) return
+    if (focusDuration >= getLastItem(focusDurations)) return
 
     const increaseDurationIn =
       currentSet.startedAt + focusDuration * MS_IN_MIN - Date.now()

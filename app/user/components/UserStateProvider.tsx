@@ -1,3 +1,4 @@
+import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
 import { useMainApi } from 'api/hooks/useMainApi'
 import { useAuth } from 'auth/hooks/useAuth'
 import { habitsFragment } from 'habits/api/habitsFragment'
@@ -6,7 +7,6 @@ import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { setsFragment } from 'sets/api/setsFragment'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { getTimeZone } from 'shared/utils/getTimeZone'
 import { taskFragment } from 'tasks/api/taskFragment'
 import { UserStateContext, UserStateView } from 'user/state/UserStateContext'
 
@@ -87,7 +87,7 @@ export const UserStateProvider = ({ children }: Props) => {
         query: userStateQuery,
         variables: {
           input: {
-            timeZone: getTimeZone(),
+            timeZone: getCurrentTimezoneOffset(),
           },
         },
       })

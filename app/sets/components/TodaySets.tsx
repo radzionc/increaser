@@ -9,7 +9,6 @@ import {
 import { getSetDuration } from 'sets/helpers/getSetDuration'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { formatDuration } from 'shared/utils/formatDuration'
-import { getLast } from 'shared/utils/getLast'
 import { sum } from 'shared/utils/sum'
 import { toPercents } from 'shared/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
@@ -20,6 +19,7 @@ import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { MS_IN_HOUR, MS_IN_MIN } from 'utils/time'
 
 import { BlockBoundaries } from './BlockBoundaries'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 const Distance = styled.div`
   padding-right: 8px;
@@ -45,7 +45,7 @@ export const TodaySets = () => {
   if (!sets.length) return null
 
   const timelineStartedAt = sets[0].start
-  const timelineEndsAt = getLast(sets).end
+  const timelineEndsAt = getLastItem(sets).end
   const timelineDuration = timelineEndsAt - timelineStartedAt
 
   const blocks = getBlocks(sets)
@@ -113,7 +113,7 @@ export const TodaySets = () => {
                   style={{
                     position: 'absolute',
                     top: toPercents(
-                      (getLast(sets).end - timelineStartedAt) /
+                      (getLastItem(sets).end - timelineStartedAt) /
                         timelineDuration,
                     ),
                     height: toPercents(

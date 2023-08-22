@@ -2,13 +2,13 @@ import { useFocus } from 'focus/hooks/useFocus'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { formatDuration } from 'shared/utils/formatDuration'
-import { getLast } from 'shared/utils/getLast'
 import styled from 'styled-components'
 import {
   HStackSeparatedBy,
   dotSeparator,
 } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 const Boundary = styled(Text)`
   position: absolute;
@@ -29,7 +29,7 @@ export const CurrentTimeBoundary = ({ top }: Props) => {
 
   const todaySets = useTodaySets()
 
-  const lastSet = getLast(todaySets)
+  const lastSet = getLastItem(todaySets)
 
   return (
     <Boundary

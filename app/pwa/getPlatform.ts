@@ -1,4 +1,4 @@
-import { memoize } from 'shared/utils/memoize'
+import { memoize } from '@increaser/utils/memoize'
 
 import { Platform } from './Platform'
 

@@ -6,11 +6,11 @@ import {
 } from 'focus/FocusDuration'
 import { useEffect, useMemo, useState } from 'react'
 import { ComponentWithChildrenProps } from 'shared/props'
-import { getLast } from 'shared/utils/getLast'
 import { MS_IN_MIN } from 'utils/time'
 
 import { PreviewUserProject } from '../LandingUserStateProvider'
 import { CurrentFocusContext } from 'focus/components/CurrentFocusProvider'
+import { getLastItem } from '@increaser/utils/getLastItem'
 
 export const LandingPageFocusProvider = ({
   children,
@@ -28,7 +28,7 @@ export const LandingPageFocusProvider = ({
     // TODO: move to ActiveFocusProvider
     if (!currentSet) return
 
-    if (focusDuration >= getLast(focusDurations)) return
+    if (focusDuration >= getLastItem(focusDurations)) return
 
     const increaseDurationIn =
       currentSet.startedAt + focusDuration * MS_IN_MIN - Date.now()

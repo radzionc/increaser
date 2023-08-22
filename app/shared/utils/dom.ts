@@ -1,4 +1,4 @@
-import { memoize } from 'shared/utils/memoize'
+import { memoize } from '@increaser/utils/memoize'
 
 export const getScriptBySrc = (src: string) =>
   document.querySelectorAll(`script[src="${src}"]`)[0] as
