@@ -1,4 +1,4 @@
-import { getWeekday } from 'shared/utils/getWeekday'
+import { getWeekday } from '@increaser/utils/getWeekday'
 import { MS_IN_MIN } from 'utils/time'
 
 import { useRhythmicRerender } from './useRhythmicRerender'

@@ -1,6 +1,6 @@
 import { HabitResponse } from 'habits/Habit'
 import { useMutation } from 'react-query'
-import { getId } from 'shared/utils/getId'
+import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 import { MS_IN_SEC } from 'utils/time'
 

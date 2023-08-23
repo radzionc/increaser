@@ -1,5 +1,5 @@
 import { PerformanceScoreboard } from '@increaser/entities/PerformanceScoreboard'
-import { getValueProviderSetup } from 'shared/utils/getValueProviderSetup'
+import { getValueProviderSetup } from '@increaser/ui/state/getValueProviderSetup'
 
 export const {
   useValue: useCurrentMonthUsers,

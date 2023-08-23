@@ -1,5 +1,5 @@
 import { Project } from 'projects/Project'
-import { sum } from 'shared/utils/sum'
+import { sum } from '@increaser/utils/sum'
 
 import { ProjectView } from './ProjectView'
 import { CurrentProjectProvider } from './ProjectView/CurrentProjectProvider'

@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import { sum } from '../../shared/utils/sum'
 import { HSLA } from '../colors/HSLA'
 import { SvgArc, polarToCartesian } from './SvgArc'
+import { sum } from '@increaser/utils/sum'
 
 export interface PieChartItem {
   value: number

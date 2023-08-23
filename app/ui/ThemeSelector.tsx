@@ -4,7 +4,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { SelectOption } from '@increaser/ui/ui/inputs/Select/SelectOption'
 import { usePrefferedTheme } from '@increaser/ui/ui/theme/PrefferedThemeProvider'
 import { themePreferences } from '@increaser/ui/ui/theme/ThemePreference'
-import { capitalizeFirstLetter } from 'shared/utils/capitalizeFirstLetter'
+import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 
 export const ThemeSelector = () => {
   const { prefferedTheme, setPrefferedTheme } = usePrefferedTheme()

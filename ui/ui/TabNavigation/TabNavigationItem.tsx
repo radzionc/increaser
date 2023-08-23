@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { defaultTransitionCSS } from '../animations/transitions'
-import { match } from '../../shared/utils/match'
+import { match } from '@increaser/utils/match'
 import {
   InvisibleHTMLRadioProps,
   InvisibleHTMLRadio,

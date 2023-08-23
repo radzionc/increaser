@@ -1,6 +1,6 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useCallback, useMemo } from 'react'
-import { sum } from 'shared/utils/sum'
+import { sum } from '@increaser/utils/sum'
 import styled, { useTheme } from 'styled-components'
 import { Text } from '@increaser/ui/ui/Text'
 import { MIN_IN_HOUR, S_IN_HOUR } from 'utils/time'

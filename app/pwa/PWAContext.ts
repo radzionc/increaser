@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { createContextHook } from 'shared/utils/createContextHook'
+import { createContextHook } from '@increaser/ui/state/createContextHook'
 
 export interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>

@@ -2,7 +2,7 @@ import { useProjects } from 'projects/hooks/useProjects'
 import { DayProjects } from 'sets/components/DailyReport/DayProjects'
 import { MinimalisticTimeline } from 'sets/components/MinimalisticTimeline'
 import { getDaySets } from 'sets/helpers/getDaySets'
-import { getYesterday } from 'shared/utils/getYesterday'
+import { getYesterday } from '@increaser/utils/getYesterday'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
 

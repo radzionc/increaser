@@ -1,7 +1,7 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useEffect, useState } from 'react'
 import { useBoolean } from 'shared/hooks/useBoolean'
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/formatDuration'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'
 import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'

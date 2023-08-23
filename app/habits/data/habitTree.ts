@@ -1,4 +1,4 @@
-import { TreeNode } from 'shared/utils/tree'
+import { TreeNode } from '@increaser/utils/tree'
 
 import { HabitId } from './habits'
 

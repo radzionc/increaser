@@ -5,12 +5,12 @@ import styled from 'styled-components'
 import { HSLA } from '../colors/HSLA'
 import { HStack } from '../Stack'
 import { Text } from '../Text'
-import { enforceRange } from '../../shared/utils/enforceRange'
-import { MS_IN_HOUR, MS_IN_MIN } from '../../shared/utils/time'
-import { formatDuration } from '../../shared/utils/formatDuration'
+import { enforceRange } from '@increaser/utils/enforceRange'
+import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import { TimeSpace } from '../TimeSpace'
 import { EditorActiveSession } from '../../../app/focus/components/EditorActiveSession'
 import { BoundaryInteractiveArea } from '../../../app/focus/components/BoundaryInteractiveArea'
+import { formatDuration } from '@increaser/utils/formatDuration'
 
 export interface TimeInputProps {
   color: HSLA

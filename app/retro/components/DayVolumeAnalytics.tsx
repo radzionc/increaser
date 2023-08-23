@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { Set } from 'sets/Set'
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/formatDuration'
 import {
   HStackSeparatedBy,
   dotSeparator,

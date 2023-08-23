@@ -1,6 +1,10 @@
 import { reportError } from 'errors/errorMonitoring'
 import { useQuery } from 'react-query'
-import { createScript, getScriptBySrc, loadScript } from 'shared/utils/dom'
+import {
+  createScript,
+  getScriptBySrc,
+  loadScript,
+} from '@increaser/ui/dom/script'
 
 import { PaddleSdk } from '../PaddleSdk'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'

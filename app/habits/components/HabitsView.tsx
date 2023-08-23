@@ -1,4 +1,4 @@
-import { getViewSetup } from 'shared/utils/getViewSetup'
+import { getViewSetup } from '@increaser/ui/view/getViewSetup'
 import styled, { css } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'

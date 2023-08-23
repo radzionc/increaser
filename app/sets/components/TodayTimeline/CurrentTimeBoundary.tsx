@@ -1,7 +1,7 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/formatDuration'
 import styled from 'styled-components'
 import {
   HStackSeparatedBy,

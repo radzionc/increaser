@@ -1,6 +1,6 @@
 import { goalToFinishWorkByEmoji, goalToStartWorkAtEmoji } from 'sets/constants'
-import { formatTime } from 'shared/utils/formatTime'
-import { getDateFromMinutes } from 'shared/utils/getDateFromMinutes'
+import { formatTime } from '@increaser/utils/formatTime'
+import { getDateFromMinutes } from '@increaser/utils/getDateFromMinutes'
 import { range } from '@increaser/utils/range'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'

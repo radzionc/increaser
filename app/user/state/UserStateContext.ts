@@ -6,7 +6,7 @@ import { Membership } from 'membership'
 import { ProjectResponse } from 'projects/Project'
 import { createContext } from 'react'
 import { Set } from 'sets/Set'
-import { createContextHook } from 'shared/utils/createContextHook'
+import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { Task } from 'tasks/Task'
 import { WeekTimeAllocation } from 'weekTimeAllocation/WeekTimeAllocation'
 

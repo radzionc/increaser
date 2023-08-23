@@ -1,5 +1,5 @@
 import { Project, ProjectStatus } from '@increaser/entities/Project'
-import { randomInRange } from '@increaser/ui/shared/utils/randomInRange'
+import { randomInRange } from '@increaser/utils/randomInRange'
 import { range } from '@increaser/utils/range'
 import { sum } from '@increaser/utils/sum'
 import { MIN_IN_HOUR, MS_IN_WEEK, S_IN_HOUR } from '@increaser/utils/time'

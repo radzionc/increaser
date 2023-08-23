@@ -1,8 +1,8 @@
 import { createContext } from 'react'
-import { ComponentWithChildrenProps } from 'shared/props'
 
-import { capitalizeFirstLetter } from './capitalizeFirstLetter'
 import { createContextHook } from './createContextHook'
+import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
+import { ComponentWithChildrenProps } from '../shared/props'
 
 export function getValueProviderSetup<T>(name: string) {
   const ValueContext = createContext<T | undefined>(undefined)

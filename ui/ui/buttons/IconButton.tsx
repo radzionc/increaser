@@ -5,7 +5,7 @@ import { centerContentCSS } from '../utils/centerContentCSS'
 import { getCSSUnit } from '../utils/getCSSUnit'
 import { getSameDimensionsCSS } from '../utils/getSameDimensionsCSS'
 import { matchColor } from '../theme/getters'
-import { match } from '../../shared/utils/match'
+import { match } from '@increaser/utils/match'
 import { UnstyledButton } from './UnstyledButton'
 
 export const iconButtonSizes = ['s', 'm', 'l'] as const

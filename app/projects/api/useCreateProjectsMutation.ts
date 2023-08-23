@@ -1,6 +1,6 @@
 import { Project, ProjectResponse, ProjectStatus } from 'projects/Project'
 import { useMutation } from 'react-query'
-import { getId } from 'shared/utils/getId'
+import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
 import { createProejctMutation } from './useCreateProjectMutation'

@@ -1,4 +1,4 @@
-import { getViewSetup } from 'shared/utils/getViewSetup'
+import { getViewSetup } from '@increaser/ui/view/getViewSetup'
 import { ViewSelector } from '@increaser/ui/ui/inputs/Select/ViewSelector'
 
 export const habitViews = ['form', 'ideas'] as const

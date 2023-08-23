@@ -1,4 +1,4 @@
-import { formatTime } from 'shared/utils/formatTime'
+import { formatTime } from '@increaser/utils/formatTime'
 import { ClockIcon } from '@increaser/ui/ui/icons/ClockIcon'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'

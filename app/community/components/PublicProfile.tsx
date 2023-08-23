@@ -8,7 +8,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useState } from 'react'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
-import { getCountryFlagEmoji } from '@increaser/ui/shared/utils/getCountryFlagEmoji'
+import { getCountryFlagEmoji } from '@increaser/utils/getCountryFlagEmoji'
 
 export const PublicProfile = () => {
   const { isAnonymous, name, country } = useAssertUserState()

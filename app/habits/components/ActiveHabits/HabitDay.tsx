@@ -1,6 +1,6 @@
 import { useTrackHabitMutation } from 'habits/api/useTrackHabitMutation'
 import { useMemo } from 'react'
-import { isToday } from 'shared/utils/isToday'
+import { isToday } from '@increaser/utils/isToday'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'

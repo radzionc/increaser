@@ -1,7 +1,7 @@
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { useMembershipPricesQuery } from 'membership/hooks/useMembershipPricesQuery'
 import { useState } from 'react'
-import { capitalizeFirstLetter } from 'shared/utils/capitalizeFirstLetter'
+import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 import styled from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { SelectOption } from '@increaser/ui/ui/inputs/Select/SelectOption'

@@ -1,5 +1,5 @@
-import { degreesInCircle } from '../../shared/utils/degreesToRadians'
-import { enforceRange } from '../../shared/utils/enforceRange'
+import { degreesInCircle } from '@increaser/utils/degreesToRadians'
+import { enforceRange } from '@increaser/utils/enforceRange'
 
 export const hslaKeys = ['h', 's', 'l', 'a'] as const
 

@@ -1,5 +1,5 @@
-import { capitalizeFirstLetter } from 'shared/utils/capitalizeFirstLetter'
-import { match } from 'shared/utils/match'
+import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
+import { match } from '@increaser/utils/match'
 import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import styled from 'styled-components'

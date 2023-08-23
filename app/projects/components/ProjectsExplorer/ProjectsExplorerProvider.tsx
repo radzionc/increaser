@@ -4,7 +4,7 @@ import { Project } from 'projects/Project'
 import { createContext } from 'react'
 import { Path } from 'router/Path'
 import { ComponentWithChildrenProps } from 'shared/props'
-import { createContextHook } from 'shared/utils/createContextHook'
+import { createContextHook } from '@increaser/ui/state/createContextHook'
 
 export interface ProjectsExplorerState {
   currentProject: Project | null

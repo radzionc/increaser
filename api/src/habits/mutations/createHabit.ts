@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../graphql/OperationContext'
-import { getId } from '../../shared/db/getId'
+import { getId } from '@increaser/entities-utils/shared/getId'
 import { msInSec } from '../../shared/helpers/time'
 import * as habitsDB from '../db'
 import * as usersDB from '../../users/db'

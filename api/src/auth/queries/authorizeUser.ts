@@ -1,5 +1,5 @@
 import * as usersDB from '../../users/db'
-import { getId } from '../../shared/db/getId'
+import { getId } from '@increaser/entities-utils/shared/getId'
 import { getSanitizedName } from '../../shared/helpers/getSanitizedName'
 import { freeTrialDays } from '../../membership'
 import { msInDay } from '../../shared/helpers/time'

@@ -1,4 +1,4 @@
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/formatDuration'
 import { Circle } from '@increaser/ui/ui/Circle'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { HStack } from '@increaser/ui/ui/Stack'

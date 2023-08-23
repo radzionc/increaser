@@ -1,4 +1,4 @@
-import { degreesToRadians } from '../../shared/utils/degreesToRadians'
+import { degreesToRadians } from '@increaser/utils/degreesToRadians'
 import { HSLA } from '../colors/HSLA'
 
 interface Props {

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import { debounce } from '../../shared/utils/debounce'
+import { debounce } from '@increaser/utils/debounce'
 import { pick } from '@increaser/utils/pick'
 
 export interface ElementSize {

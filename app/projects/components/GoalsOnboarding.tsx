@@ -1,7 +1,7 @@
 import { ProjectsGoalsVisualization } from 'capacity/components/ProjectsGoalsVisualization'
 import { useProjects } from 'projects/hooks/useProjects'
 import { useEffect } from 'react'
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/formatDuration'
 import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'

@@ -1,6 +1,6 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useCallback, useMemo } from 'react'
-import { sum } from 'shared/utils/sum'
+import { sum } from '@increaser/utils/sum'
 import styled from 'styled-components'
 import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
 import { HStack } from '@increaser/ui/ui/Stack'

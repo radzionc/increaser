@@ -1,4 +1,3 @@
-import { MS_IN_SEC } from '@increaser/ui/shared/utils/time'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { interactiveCSS } from '@increaser/ui/ui/utils/interactiveCSS'
 import Link from 'next/link'
@@ -11,6 +10,7 @@ import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { SessionProgress } from './SessionProgress'
 import { CenterAbsolutely } from '@increaser/ui/ui/CenterAbsolutely'
+import { MS_IN_SEC } from '@increaser/utils/time'
 
 const Wrapper = styled.div`
   position: fixed;

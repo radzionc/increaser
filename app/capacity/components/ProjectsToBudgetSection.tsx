@@ -1,7 +1,7 @@
 import { Project } from 'projects/Project'
 import { getProjectOverBudgetTime } from 'projects/utils/getProjectOverBudgetTime'
 import React from 'react'
-import { formatDuration } from 'shared/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/formatDuration'
 import styled, { useTheme } from 'styled-components'
 import { Circle } from '@increaser/ui/ui/Circle'
 import { Text } from '@increaser/ui/ui/Text'

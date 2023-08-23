@@ -1,5 +1,5 @@
 import { getMonth, getYear, startOfMonth } from 'date-fns'
-import { Month } from 'shared/entities/Month'
+import { Month } from './Month'
 
 export const toMonth = (timestamp: number): Month => {
   const date = startOfMonth(new Date(timestamp))

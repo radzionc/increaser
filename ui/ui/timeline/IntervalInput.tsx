@@ -15,12 +15,12 @@ import { centerContentCSS } from '../utils/centerContentCSS'
 import { getIntervalDuration } from '../utils/getIntervalDuration'
 
 import { IntervalRect } from './IntervalRect'
-import { enforceRange } from '../../shared/utils/enforceRange'
+import { enforceRange } from '@increaser/utils/enforceRange'
 import { Interval } from '../../entities/Interval'
-import { formatDuration } from '../../shared/utils/formatDuration'
-import { MS_IN_HOUR, MS_IN_MIN } from '../../shared/utils/time'
+import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import { TimeSpace } from '../TimeSpace'
 import { PositionAbsolutelyCenterHorizontally } from '../PositionAbsolutelyCenterHorizontally'
+import { formatDuration } from '@increaser/utils/formatDuration'
 
 interface RenderContentParams {
   msToPx: (ms: number) => number

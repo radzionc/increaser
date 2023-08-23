@@ -1,5 +1,5 @@
 import { padWithZero } from '@increaser/utils/padWithZero'
-import { MIN_IN_HOUR, MS_IN_MIN, S_IN_HOUR, S_IN_MIN } from 'utils/time'
+import { MIN_IN_HOUR, MS_IN_MIN, S_IN_HOUR, S_IN_MIN } from './time'
 
 type DurationUnit = 'ms' | 'min' | 's' | 'h'
 

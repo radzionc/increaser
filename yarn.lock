@@ -2903,6 +2903,7 @@ __metadata:
   resolution: "@increaser/entities-utils@workspace:entities-utils"
   dependencies:
     date-fns: ^2.30.0
+    uuid: ^9.0.0
   languageName: unknown
   linkType: soft
 

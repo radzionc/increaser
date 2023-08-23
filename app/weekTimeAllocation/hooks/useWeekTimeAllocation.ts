@@ -1,6 +1,6 @@
 import { useProjects } from 'projects/hooks/useProjects'
 import { useMemo } from 'react'
-import { sum } from 'shared/utils/sum'
+import { sum } from '@increaser/utils/sum'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { getMinutesAllocatedToProjects } from 'weekTimeAllocation/helpers/getMinutesAllocatedToProjects'
 

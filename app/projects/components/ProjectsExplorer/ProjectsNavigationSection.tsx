@@ -1,6 +1,6 @@
 import { Project } from 'projects/Project'
 import { ReactNode } from 'react'
-import { capitalizeFirstLetter } from 'shared/utils/capitalizeFirstLetter'
+import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 import { Circle } from '@increaser/ui/ui/Circle'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'

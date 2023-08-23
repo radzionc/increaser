@@ -1,6 +1,6 @@
 import { useProjects } from 'projects/hooks/useProjects'
-import { formatDuration } from 'shared/utils/formatDuration'
-import { sum } from 'shared/utils/sum'
+import { formatDuration } from '@increaser/utils/formatDuration'
+import { sum } from '@increaser/utils/sum'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 

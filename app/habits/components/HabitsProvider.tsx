@@ -3,7 +3,7 @@ import { toHabit } from 'habits/helpers/toHabit'
 import { createContext, useMemo } from 'react'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from 'shared/props'
-import { createContextHook } from 'shared/utils/createContextHook'
+import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { useTheme } from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
 

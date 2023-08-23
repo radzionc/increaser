@@ -13,7 +13,7 @@ import { ShySection } from '../ShySection'
 import { labelColorsCount } from '../colors/generateLabelColorGetter'
 import { InputProps, StyledComponentWithColorProps } from '../../shared/props'
 import { range } from '@increaser/utils/range'
-import { splitBy } from '../../shared/utils/splitBy'
+import { splitBy } from '@increaser/utils/splitBy'
 
 interface ColorLabelInputProps extends InputProps<number> {
   usedValues?: Set<number>

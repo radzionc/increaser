@@ -1,5 +1,5 @@
 import { EntityWithColor } from 'shared/entities'
-import { getRandomElement } from 'shared/utils/getRandomElement'
+import { getRandomElement } from '@increaser/utils/getRandomElement'
 import { range } from '@increaser/utils/range'
 import { labelColorsCount } from '@increaser/ui/ui/colors/generateLabelColorGetter'
 
