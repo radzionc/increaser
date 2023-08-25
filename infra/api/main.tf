@@ -22,11 +22,6 @@ resource "aws_s3_bucket" "lambdas_storage" {
 #   source = data.archive_file.local_zipped_lambda.output_path
 # }
 
-resource "aws_cloudwatch_log_group" "api" {
-  name              = "tf-${var.name}"
-  retention_in_days = 14
-}
-
 resource "aws_lambda_function" "api" {
   function_name = "tf-${var.name}"
 
@@ -34,8 +29,8 @@ resource "aws_lambda_function" "api" {
   s3_key      = "lambda.zip"
   memory_size = "1024"
 
-  handler = "src/lambda.handler"
-  runtime = "nodejs14.x"
+  handler = "lambda.handler"
+  runtime = "nodejs18.x"
   timeout = "50"
   role    = aws_iam_role.api.arn
 

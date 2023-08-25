@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/src/lambda.js",
+    "start": "node dist/lambda.js",
     "build": "rm -rf ./dist && node build.mjs"
   },
   "dependencies": {

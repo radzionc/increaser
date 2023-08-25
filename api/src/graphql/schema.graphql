@@ -157,6 +157,69 @@ input SetInput {
   projectId: ID
 }
 
+type Set {
+  start: Float
+  end: Float
+  projectId: ID
+}
+
+enum MembershipProvider {
+  AppSumo
+  Paddle
+}
+
+type Subscription {
+  updateUrl: String
+  cancelUrl: String
+  planId: String
+  cancellationEffectiveDate: String
+  nextBillDate: String
+}
+
+type Membership {
+  provider: MembershipProvider!
+  subscription: Subscription
+}
+
+type FocusSound {
+  name: String!
+  url: String!
+  favourite: Boolean
+}
+
+type Task {
+  startedAt: Float
+  name: String
+  id: String
+  isCompleted: Boolean
+}
+
+type UserState {
+  sets: [Set]
+  prevSets: [Set]
+  projects: [Project]
+  id: ID
+  isAnonymous: Boolean
+  email: String
+  name: String
+  registrationDate: Float
+  freeTrialEnd: Float
+  weekTimeAllocation: [Float]
+  goalToStartWorkAt: Int
+  goalToFinishWorkBy: Int
+  goalToGoToBedAt: Int
+  membership: Membership
+  habits: [Habit]
+  primaryGoal: String
+  focusSounds: [FocusSound]
+  tasks: [Task]
+  country: String
+}
+
+input UserStateInput {
+  timeZone: Int
+}
+
 type Query {
   projects: [Project]
   identify: IdentificationResult

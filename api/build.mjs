@@ -7,7 +7,10 @@ const result = await esbuild.build({
   sourcemap: true,
   platform: 'node',
   target: 'es2020',
-  outfile: './dist/src/lambda.js',
+  outfile: './dist/lambda.js',
+  loader: {
+    '.graphql': 'file',
+  },
 })
 
 console.log(result)
