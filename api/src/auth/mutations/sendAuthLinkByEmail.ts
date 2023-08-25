@@ -13,7 +13,7 @@ export const sendAuthLinkByEmail = async (
 
   await sendEmailConfirmationLink(
     email,
-    `https://increaser.org/email-auth?token=${token}`,
+    `https://app.increaser.org/email-auth?token=${token}`,
   )
 
   return true

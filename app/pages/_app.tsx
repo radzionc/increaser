@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app'
 import { GlobalStyle } from '@increaser/ui/ui/GlobalStyle'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useState } from 'react'
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useDev } from 'components/layout/useDev'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { getQueryClient } from 'api/queryClient'
@@ -21,7 +21,6 @@ import { UserManagerProvider } from 'user/components/UserManagerProvider'
 import { UserStateProvider } from 'user/components/UserStateProvider'
 import { MembershipProvider } from 'membership/components/MembershipProvider'
 import { ThemeProvider } from 'ui/ThemeProvider'
-import { PresentationProvider } from 'ui/PresentationProvider'
 
 import { Open_Sans } from 'next/font/google'
 import { Page } from 'components/Page'
@@ -43,8 +42,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter()
   const { pathname } = router
   useEffect(() => {
-    console.log('Visit page: ', pathname)
-    trackEvent('Visit page', { pathname })
+    analytics.trackEvent('Visit page', { pathname })
   }, [pathname])
 
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
@@ -57,29 +55,27 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         <ErrorBoundary fallback={<FullSizeErrorFallback />}>
           <AuthProvider>
             <UserStateProvider>
-              <PresentationProvider>
-                <PWAProvider>
-                  <ConditionalUserState
-                    present={() => (
-                      <MembershipProvider>
-                        <UserManagerProvider>
-                          <ProjectsProvider>
-                            <HabitsProvider>
-                              <SetsManagerProvider>
-                                <FocusProvider>
-                                  <Retro />
-                                  <BreakProvider>{component}</BreakProvider>
-                                </FocusProvider>
-                              </SetsManagerProvider>
-                            </HabitsProvider>
-                          </ProjectsProvider>
-                        </UserManagerProvider>
-                      </MembershipProvider>
-                    )}
-                    missing={() => <>{component}</>}
-                  />
-                </PWAProvider>
-              </PresentationProvider>
+              <PWAProvider>
+                <ConditionalUserState
+                  present={() => (
+                    <MembershipProvider>
+                      <UserManagerProvider>
+                        <ProjectsProvider>
+                          <HabitsProvider>
+                            <SetsManagerProvider>
+                              <FocusProvider>
+                                <Retro />
+                                <BreakProvider>{component}</BreakProvider>
+                              </FocusProvider>
+                            </SetsManagerProvider>
+                          </HabitsProvider>
+                        </ProjectsProvider>
+                      </UserManagerProvider>
+                    </MembershipProvider>
+                  )}
+                  missing={() => <>{component}</>}
+                />
+              </PWAProvider>
             </UserStateProvider>
           </AuthProvider>
         </ErrorBoundary>

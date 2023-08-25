@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
@@ -21,7 +21,7 @@ export const PrimaryGoalOnboarding = ({ onNext }: Props) => {
       footer={
         <ContinueButton
           onClick={() => {
-            trackEvent(`Onboarding primary goal: ${primaryGoal}`)
+            analytics.trackEvent(`Onboarding primary goal: ${primaryGoal}`)
             onNext()
           }}
         />

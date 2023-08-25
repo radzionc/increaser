@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { getPlatform } from 'pwa/getPlatform'
 import { platformInfo } from 'pwa/platformInfo'
 import { usePWA } from 'pwa/PWAContext'
@@ -44,7 +44,7 @@ export const InstallPrompt = () => {
       <Container
         onClick={() => {
           installPromptEvent?.prompt()
-          trackEvent('Attempt Install')
+          analytics.trackEvent('Attempt Install')
         }}
       >
         <Text size={18} as="div">

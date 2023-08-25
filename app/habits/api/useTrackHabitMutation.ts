@@ -38,7 +38,7 @@ export const useTrackHabitMutation = () => {
 
     const habit = habits.find((habit) => habit.id === input.id)
     if (habit && input.value) {
-      trackEvent('Track habit', { name: habit.name })
+      analytics.trackEvent('Track habit', { name: habit.name })
     }
 
     await updateRemoteState<HabitResponse>({

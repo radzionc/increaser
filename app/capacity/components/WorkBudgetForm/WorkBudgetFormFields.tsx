@@ -2,7 +2,7 @@ import { WorkBudgetFormShape } from 'capacity/components/WorkBudgetForm/useWorkB
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { VStack } from '@increaser/ui/ui/Stack'
-import { MIN_IN_HOUR, S_IN_MIN } from 'utils/time'
+import { MIN_IN_HOUR, S_IN_MIN } from '@increaser/utils/time'
 import {
   defaultWeekendMinutes,
   defaultWorkdayMinutes,

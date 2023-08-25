@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { PrimaryGoalOnboarding } from 'capacity/components/PrimaryGoalOnboarding'
 import { HabitsOnboarding } from 'habits/components/HabitsOnboarding'
 import { GoalsOnboarding } from 'projects/components/GoalsOnboarding'
@@ -44,7 +44,7 @@ export const AllocationOnboarding = () => {
       goal={() => (
         <PrimaryGoalOnboarding
           onNext={() => {
-            trackEvent('Finish primary goal onboarding')
+            analytics.trackEvent('Finish primary goal onboarding')
             setStage('allocation')
           }}
         />
@@ -52,7 +52,7 @@ export const AllocationOnboarding = () => {
       allocation={() => (
         <WorkHoursOnboarding
           onNext={() => {
-            trackEvent('Finish work hours onboarding')
+            analytics.trackEvent('Finish work hours onboarding')
             setStage('projects')
           }}
         />
@@ -61,7 +61,7 @@ export const AllocationOnboarding = () => {
         <ProjectsOnboarding
           onBack={() => setStage('allocation')}
           onNext={() => {
-            trackEvent('Finish projects onboarding')
+            analytics.trackEvent('Finish projects onboarding')
             setStage('goals')
           }}
         />
@@ -69,7 +69,7 @@ export const AllocationOnboarding = () => {
       goals={() => (
         <GoalsOnboarding
           onNext={() => {
-            trackEvent('Finish goals onboarding')
+            analytics.trackEvent('Finish goals onboarding')
             setStage('schedule')
           }}
         />
@@ -77,7 +77,7 @@ export const AllocationOnboarding = () => {
       schedule={() => (
         <WorkScheduleOnboarding
           onNext={() => {
-            trackEvent('Finish schedule onboarding')
+            analytics.trackEvent('Finish schedule onboarding')
             setStage('habits')
           }}
         />
@@ -85,7 +85,7 @@ export const AllocationOnboarding = () => {
       habits={() => (
         <HabitsOnboarding
           onNext={() => {
-            trackEvent('Finish habits onboarding')
+            analytics.trackEvent('Finish habits onboarding')
             setStage(isPayingUser ? null : 'sale')
           }}
         />
@@ -93,7 +93,7 @@ export const AllocationOnboarding = () => {
       sale={() => (
         <SaleOnboarding
           onNext={() => {
-            trackEvent('Finish sale onboarding')
+            analytics.trackEvent('Finish sale onboarding')
             setStage(null)
           }}
         />

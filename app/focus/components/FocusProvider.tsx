@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import {
   CurrentSet,
   FocusContext,
@@ -20,7 +20,7 @@ import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useBrowserNotifications } from 'shared/hooks/useBrowserNotifcations'
 import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
-import { MS_IN_MIN } from 'utils/time'
+import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { useFocusSoundsState } from './FocusSounds/useFocusSoundsState'
 import { useRouter } from 'next/router'
@@ -67,7 +67,7 @@ export const FocusProvider = ({ children }: Props) => {
 
   const start = useCallback(
     ({ projectId, duration }: StartFocusParams) => {
-      trackEvent('Start focus session', {
+      analytics.trackEvent('Start focus session', {
         duration: focusDuration,
       })
       setCurrentSet({ projectId, startedAt: Date.now() })
@@ -135,7 +135,7 @@ export const FocusProvider = ({ children }: Props) => {
 
       setFocusDuration(getNextFocusDuration(blocks))
 
-      trackEvent('Finish focus session', {
+      analytics.trackEvent('Finish focus session', {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
         activeSoundUrl: focusSoundsState.activeSoundUrl,
       })

@@ -7,6 +7,8 @@ import { useIsScreenWidthLessThan } from '@increaser/ui/ui/hooks/useIsScreenWidt
 import { Text } from '@increaser/ui/ui/Text'
 import Link from 'next/link'
 import { ClientOnly } from 'ui/ClientOnly'
+import { ExternalLink } from 'router/Link/ExternalLink'
+import { WEBSITE_URL } from 'product'
 export const Placeholder = styled.div`
   flex-shrink: 0;
   height: 80px;
@@ -45,11 +47,11 @@ export const Topbar = () => {
               {isSmallScreen ? (
                 <div />
               ) : (
-                <Link href={Path.Landing}>
+                <ExternalLink openInSameTab to={WEBSITE_URL}>
                   <Text as="div" size={32}>
                     <ProductLogo />
                   </Text>
-                </Link>
+                </ExternalLink>
               )}
               <div ref={setElement}>
                 <Link href={Path.SignUp}>

@@ -5,7 +5,7 @@ import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MIN_IN_HOUR, MS_IN_MIN } from 'utils/time'
+import { MIN_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 
 export const useTodayTimelineBoundaries = () => {
   const todaySets = useTodaySets()

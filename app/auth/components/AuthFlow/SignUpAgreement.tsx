@@ -3,6 +3,7 @@ import { Path } from 'router/Path'
 import { APP_NAME } from 'shared/product'
 import { Text } from '@increaser/ui/ui/Text'
 import { LinkText } from '@increaser/ui/ui/Text/LinkText'
+import { WEBSITE_URL } from 'product'
 
 export const SignUpAgreement = () => {
   return (
@@ -10,11 +11,15 @@ export const SignUpAgreement = () => {
       By continuing, you agree to {APP_NAME}’s
       <br />
       <LinkText as="span">
-        <ExternalLink to={Path.TermsOfService}>Terms of Service</ExternalLink>
+        <ExternalLink to={`${WEBSITE_URL}/terms-of-service`}>
+          Terms of Service
+        </ExternalLink>
       </LinkText>{' '}
       and{' '}
       <LinkText as="span">
-        <ExternalLink to={Path.PrivacyPolicy}>Privacy Policy</ExternalLink>
+        <ExternalLink to={`${WEBSITE_URL}/privacy-policy`}>
+          Privacy Policy
+        </ExternalLink>
       </LinkText>
     </Text>
   )

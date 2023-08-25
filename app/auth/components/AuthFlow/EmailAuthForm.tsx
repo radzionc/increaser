@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useMainApi } from 'api/hooks/useMainApi'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
@@ -36,7 +36,7 @@ export const EmailAuthForm = () => {
 
   const { mutate: sendAuthLinkByEmail, isLoading } = useMutation(
     async ({ email }: EmailFormState) => {
-      trackEvent('Start identification with email')
+      analytics.trackEvent('Start identification with email')
 
       await query({
         query: sendAuthLinkByEmailMutation,

@@ -10,7 +10,7 @@ import { Button } from '@increaser/ui/ui/buttons/Button'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { IntervalInput } from '@increaser/ui/ui/timeline/IntervalInput'
 import { IntervalRect } from '@increaser/ui/ui/timeline/IntervalRect'
-import { MS_IN_HOUR } from 'utils/time'
+import { MS_IN_HOUR } from '@increaser/utils/time'
 import { endOfDay, endOfHour, startOfHour } from 'date-fns'
 interface Props extends ClosableComponentProps {}
 

@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useEffect } from 'react'
 import { ClosableComponentProps } from 'shared/props'
 import { Modal } from '@increaser/ui/ui/Modal'
@@ -10,7 +10,7 @@ import { ContinueButton } from 'ui/ContinueButton'
 
 export const YesterdayRetroOverlay = ({ onClose }: ClosableComponentProps) => {
   useEffect(() => {
-    trackEvent('Show yesterday retro')
+    analytics.trackEvent('Show yesterday retro')
   }, [])
 
   return (

@@ -4,7 +4,7 @@ import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { formatDuration } from '@increaser/utils/formatDuration'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MS_IN_MIN } from 'utils/time'
+import { MS_IN_MIN } from '@increaser/utils/time'
 import Link from 'next/link'
 
 export const EndOfWorkStatus = () => {

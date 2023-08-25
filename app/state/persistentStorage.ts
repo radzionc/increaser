@@ -30,6 +30,7 @@ export enum PersistentStateKey {
   ScheduleEducationWasAt = 'scheduleEducationWasAt',
   HabitsEducationWasAt = 'habitsEducationWasAt',
   PathAttemptedWhileUnauthenticated = 'pathAttemptedWhileUnauthenticated',
+  ReactQueryState = 'reactQueryState',
 }
 
 export const persistentStorage =

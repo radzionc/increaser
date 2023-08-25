@@ -1,18 +1,8 @@
-import { UnauthenticatedOnly } from 'auth/components/UnauthenticatedOnly'
-import { Page } from 'components/Page'
-import { LandingPage as LandingPageContent } from 'landing/components'
-import { WebsitePageLayout } from 'landing/components/WebsitePageLayout'
+import { AppPageLayout } from 'focus/components/AppPageLayout'
+import { HomePage } from 'home/components'
 
-export const LandingPage: Page = () => {
-  return (
-    <UnauthenticatedOnly>
-      <LandingPageContent />
-    </UnauthenticatedOnly>
-  )
-}
+export default HomePage
 
-export default LandingPage
-
-LandingPage.getLayout = function getLayout(page) {
-  return <WebsitePageLayout>{page}</WebsitePageLayout>
+HomePage.getLayout = function getLayout(page) {
+  return <AppPageLayout>{page}</AppPageLayout>
 }

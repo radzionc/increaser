@@ -9,7 +9,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
-import { S_IN_HOUR } from 'utils/time'
+import { S_IN_HOUR } from '@increaser/utils/time'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 import Link from 'next/link'

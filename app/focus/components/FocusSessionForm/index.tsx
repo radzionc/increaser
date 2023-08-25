@@ -15,7 +15,7 @@ import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MS_IN_MIN } from 'utils/time'
+import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { FocusDurationInput } from '../FocusDurationInput'
 import { FocusDurationText } from '../FocusDurationText'

@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useCallback, useEffect, useState } from 'react'
 import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
@@ -41,7 +41,7 @@ export const PWAProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const handleAppInstalledEvent = () => {
-      trackEvent('Finish Install')
+      analytics.trackEvent('Finish Install')
       setInstallPromptEvent(null)
       setIsInstallModalOpen(false)
     }

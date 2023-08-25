@@ -9,7 +9,7 @@ import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { MS_IN_SEC } from 'utils/time'
+import { MS_IN_SEC } from '@increaser/utils/time'
 
 import { TodayTimeline } from '../../sets/components/TodayTimeline'
 import { FinishSession } from './FinishSession'

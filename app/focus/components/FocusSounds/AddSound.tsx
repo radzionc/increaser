@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useForm } from 'react-hook-form'
 import { FinishableComponentProps } from 'shared/props'
 import { validateUrl } from '@increaser/utils/validation/validateUrl'
@@ -62,7 +62,7 @@ export const AddSound = ({ onFinish }: FinishableComponentProps) => {
                 },
                 ...sounds,
               ])
-              trackEvent('Add sound', { name, url })
+              analytics.trackEvent('Add sound', { name, url })
               onFinish()
             })}
             text="Add"

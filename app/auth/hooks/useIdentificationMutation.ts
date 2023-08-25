@@ -23,10 +23,10 @@ export const useIdentificationMutation = () => {
       await query<IdentificationQueryResult>(queryParams)
 
     updateSession({ token, tokenExpirationTime })
-    trackEvent('Finish identification')
+    analytics.trackEvent('Finish identification')
 
     if (firstIdentification) {
-      trackEvent('Finish Sign Up')
+      analytics.trackEvent('Finish Sign Up')
     }
   })
 }

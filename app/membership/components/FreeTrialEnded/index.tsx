@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { FREE_TRIAL_DAYS } from 'membership'
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
@@ -30,7 +30,7 @@ export const FreeTrialEnded = () => {
   }, [])
 
   const handleSubscriptionCadenceSelect = (period: SubscriptionCadence) => {
-    trackEvent(`Start ${period} membership checkout`)
+    analytics.trackEvent(`Start ${period} membership checkout`)
     setCadence(period)
   }
 

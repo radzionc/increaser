@@ -10,7 +10,7 @@ import styled, { useTheme } from 'styled-components'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MS_IN_MIN } from 'utils/time'
+import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { useTodayTimelineBoundaries } from './useTodayTimelineBoundaries'
 

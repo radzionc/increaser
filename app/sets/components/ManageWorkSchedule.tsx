@@ -4,7 +4,7 @@ import { useUpdateGoalToGoToBedAtMutation } from 'sets/hooks/useUpdateGoalToGoTo
 import { useUpdateGoalToStartWorkAtMutation } from 'sets/hooks/useUpdateGoalToStartWorkAtMutation'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MIN_IN_DAY, MIN_IN_HOUR } from 'utils/time'
+import { MIN_IN_DAY, MIN_IN_HOUR } from '@increaser/utils/time'
 
 import { ManageTimeBoundary } from './ManageTimeBoundary'
 import { TimeDistance } from './TimeDistance'

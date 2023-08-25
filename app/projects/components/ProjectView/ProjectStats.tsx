@@ -26,7 +26,7 @@ import {
   MS_IN_WEEK,
   S_IN_MIN,
   getShortWeekday,
-} from 'utils/time'
+} from '@increaser/utils/time'
 
 import { useCurrentProject } from './CurrentProjectProvider'
 

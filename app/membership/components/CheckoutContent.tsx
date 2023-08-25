@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { MembershipProvider } from 'membership'
 import { PaddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { useCallback } from 'react'
@@ -29,7 +29,7 @@ export const CheckoutContent = ({ period, onClose }: Props) => {
     updateState({ membership: { provider: MembershipProvider.Paddle } })
     pullRemoteState()
 
-    trackEvent('Buy Membership')
+    analytics.trackEvent('Buy Membership')
   }, [router, openMembershipSuccessModal, pullRemoteState, updateState])
 
   return (

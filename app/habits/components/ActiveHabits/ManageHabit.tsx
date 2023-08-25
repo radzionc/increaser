@@ -6,7 +6,7 @@ import { RefreshIcon } from '@increaser/ui/ui/icons/RefreshIcon'
 import { TrashBinIcon } from '@increaser/ui/ui/icons/TrashBinIcon'
 import { Menu } from '@increaser/ui/ui/Menu'
 import { MenuOption, MenuOptionProps } from '@increaser/ui/ui/Menu/MenuOption'
-import { MS_IN_SEC } from 'utils/time'
+import { MS_IN_SEC } from '@increaser/utils/time'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'
 

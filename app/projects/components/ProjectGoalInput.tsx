@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-import { MIN_IN_HOUR, S_IN_HOUR } from 'utils/time'
+import { MIN_IN_HOUR, S_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { useCurrentProject } from './ProjectView/CurrentProjectProvider'

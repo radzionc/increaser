@@ -13,7 +13,7 @@ import { tryToSay } from '@increaser/ui/notifications/utils/tryToSay'
 import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { MS_IN_MIN, MS_IN_SEC } from 'utils/time'
+import { MS_IN_MIN, MS_IN_SEC } from '@increaser/utils/time'
 
 import { BreakContext, BreakDuration } from '../context/BreakContext'
 import { useRouter } from 'next/router'

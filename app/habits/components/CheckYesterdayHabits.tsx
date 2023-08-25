@@ -2,7 +2,7 @@ import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { ExpandablePanel } from '@increaser/ui/ui/Panel/ExpandablePanel'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-import { MS_IN_DAY, MS_IN_SEC } from 'utils/time'
+import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 import { CheckDayHabitsTitle } from './CheckDayHabits/CheckDayHabitsTitle'
 import { HabitItem } from './CheckDayHabits/HabitItem'

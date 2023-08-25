@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useCallback } from 'react'
 import styled from 'styled-components'
@@ -21,7 +21,7 @@ export const FocusBrowserNotification = () => {
 
     window?.Notification.requestPermission((permission) => {
       if (permission === 'granted') {
-        trackEvent('Allow browser notifications')
+        analytics.trackEvent('Allow browser notifications')
         setHasTimerBrowserNotification(true)
       }
     })

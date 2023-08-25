@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { useMembershipPricesQuery } from 'membership/hooks/useMembershipPricesQuery'
 import { useEffect } from 'react'
 import { useBoolean } from 'shared/hooks/useBoolean'
@@ -25,7 +25,7 @@ export const MembershipProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (isFreeTrialEndedModalOpen) {
-      trackEvent('Open free trial ended modal')
+      analytics.trackEvent('Open free trial ended modal')
     }
   }, [isFreeTrialEndedModalOpen])
 

@@ -11,7 +11,7 @@ import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getShortWeekday } from 'utils/time'
+import { getShortWeekday } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 import Link from 'next/link'
 

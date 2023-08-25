@@ -4,7 +4,7 @@ import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { range } from '@increaser/utils/range'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { Text } from '@increaser/ui/ui/Text'
-import { MS_IN_DAY } from 'utils/time'
+import { MS_IN_DAY } from '@increaser/utils/time'
 
 import { useHabits } from '../HabitsProvider'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'

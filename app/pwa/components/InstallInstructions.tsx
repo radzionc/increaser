@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import { usePWA } from 'pwa/PWAContext'
 import { APP_NAME } from 'shared/product'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -12,7 +12,7 @@ export const InstallInstructions = () => {
       <Button
         onClick={() => {
           installPromptEvent.prompt()
-          trackEvent('Attempt Install')
+          analytics.trackEvent('Attempt Install')
         }}
       >
         Install {APP_NAME}

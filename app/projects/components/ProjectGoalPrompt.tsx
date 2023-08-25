@@ -8,7 +8,7 @@ import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenR
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
-import { MIN_IN_HOUR } from 'utils/time'
+import { MIN_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { useCurrentProject } from './ProjectView/CurrentProjectProvider'

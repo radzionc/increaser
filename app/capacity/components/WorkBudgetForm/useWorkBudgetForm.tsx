@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { MIN_IN_HOUR } from 'utils/time'
+import { MIN_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 export const maxHoursPerDay = 10

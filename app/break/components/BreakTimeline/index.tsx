@@ -10,7 +10,7 @@ import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { getColor } from '@increaser/ui/ui/theme/getters'
-import { MS_IN_MIN } from 'utils/time'
+import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { BreakEducation } from '../BreakEducation'
 import { remindersCount } from '../BreakProvider'

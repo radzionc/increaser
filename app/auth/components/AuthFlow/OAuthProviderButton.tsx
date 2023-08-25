@@ -1,4 +1,4 @@
-import { trackEvent } from 'analytics'
+import { analytics } from 'analytics'
 import {
   getFacebookOAuthUrl,
   getGoogleOAuthUrl,
@@ -32,7 +32,9 @@ export const OAuthProviderButton = ({ provider }: Props) => {
       style={{ width: '100%' }}
       openInSameTab
       onClick={() => {
-        trackEvent(`Start identification with ${AUTH_PROVIDER_NAME[provider]}`)
+        analytics.trackEvent(
+          `Start identification with ${AUTH_PROVIDER_NAME[provider]}`,
+        )
       }}
     >
       <IconCentricButton

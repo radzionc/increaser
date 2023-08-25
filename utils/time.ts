@@ -22,3 +22,6 @@ export const WEEKDAYS = [
   'Saturday',
   'Sunday',
 ] as const
+
+export const getShortWeekday = (weekday: number) =>
+  WEEKDAYS[weekday].slice(0, 3)

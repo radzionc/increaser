@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react'
 import { sum } from '@increaser/utils/sum'
 import styled, { useTheme } from 'styled-components'
 import { Text } from '@increaser/ui/ui/Text'
-import { MIN_IN_HOUR, S_IN_HOUR } from 'utils/time'
+import { MIN_IN_HOUR, S_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { useCurrentProject } from './CurrentProjectProvider'

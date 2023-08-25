@@ -1,0 +1,52 @@
+import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
+import styled from 'styled-components'
+
+interface Segment {
+  color: HSLA
+  proportion: number
+}
+
+interface Props {
+  className?: string
+  segments: Segment[]
+  height?: number
+  background?: HSLA
+}
+
+const Container = styled.div<{ height: number; $background?: HSLA }>`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: ${({ height }) => getCSSUnit(height)};
+  border-radius: 4px;
+  overflow: hidden;
+  background: ${({ theme, $background }) =>
+    ($background || theme.colors.mist).toCssValue()};
+`
+
+const Allocation = styled.div<{ $color: HSLA }>`
+  height: 100%;
+  background: ${({ $color }) => $color.toCssValue()};
+  ${defaultTransitionCSS};
+`
+
+export const AllocationLine = ({
+  segments,
+  className,
+  background,
+  height = 8,
+}: Props) => {
+  return (
+    <Container $background={background} className={className} height={height}>
+      {segments.map(({ color, proportion }, index) => (
+        <Allocation
+          key={index}
+          $color={color}
+          style={{ width: `${proportion * 100}%` }}
+        />
+      ))}
+    </Container>
+  )
+}

@@ -2,8 +2,9 @@ import { paddleQueryKey } from 'membership/paddle/hooks/usePaddleSdk'
 import { QueryClient, QueryKey } from 'react-query'
 import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental'
 import { persistQueryClient } from 'react-query/persistQueryClient-experimental'
-import { MS_IN_DAY } from 'utils/time'
+import { MS_IN_DAY } from '@increaser/utils/time'
 import { hasWindow } from '@increaser/ui/ui/utils/window'
+import { PersistentStateKey } from 'state/persistentStorage'
 
 const cacheTime = MS_IN_DAY * 5
 
@@ -18,7 +19,7 @@ export const getQueryClient = () => {
 
   const localStoragePersistor = createWebStoragePersistor({
     storage: (hasWindow ? window.localStorage : undefined)!,
-    key: 'REACT_QUERY_OFFLINE_CACHE_V1',
+    key: PersistentStateKey.ReactQueryState,
   })
 
   const doNotPersistQueries: QueryKey[] = [paddleQueryKey]

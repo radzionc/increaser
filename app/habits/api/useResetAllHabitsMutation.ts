@@ -1,7 +1,7 @@
 import { HabitResponse } from 'habits/Habit'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
-import { MS_IN_SEC } from 'utils/time'
+import { MS_IN_SEC } from '@increaser/utils/time'
 
 import { updateHabitMutation } from './useUpdateHabitMutation'
 

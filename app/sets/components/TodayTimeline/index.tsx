@@ -30,7 +30,7 @@ import {
   slashSeparator,
 } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
-import { MS_IN_MIN } from 'utils/time'
+import { MS_IN_MIN } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { BlockBoundaries } from '../BlockBoundaries'
