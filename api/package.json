@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/src/lambda.js",
-    "transpile": "esbuild src/lambda.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/src/lambda.js",
-    "build": "yarn clean & yarn transpile",
-    "clean": "rm -rf ./dist"
+    "build": "rm -rf ./dist && node build.mjs"
   },
   "dependencies": {
     "@apollo/server": "^4.9.1",
