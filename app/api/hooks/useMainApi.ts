@@ -1,5 +1,5 @@
 import { useAuth } from 'auth/hooks/useAuth'
-import { ApiErrorCode } from '@increaser/api/src/errors/ApiErrorCode'
+import { ApiErrorCode } from '@increaser/api/errors/ApiErrorCode'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 export interface QueryMainApiParams {

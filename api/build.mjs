@@ -1,7 +1,7 @@
 import * as esbuild from 'esbuild'
 
 const result = await esbuild.build({
-  entryPoints: ['./src/lambda.ts'],
+  entryPoints: ['./lambda.ts'],
   bundle: true,
   minify: true,
   sourcemap: true,
