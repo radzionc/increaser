@@ -1,5 +1,4 @@
 import { analytics } from 'analytics'
-import { useMainApi } from 'api/hooks/useMainApi'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -10,19 +9,21 @@ import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
 import { validateEmail } from '@increaser/utils/validation/validateEmail'
 import { addQueryParams } from '@increaser/utils/addQueryParams'
+import { useApi } from 'api/useApi'
+import { graphql } from '@increaser/api-interface/client'
 
 interface EmailFormState {
   email: string
 }
 
-const sendAuthLinkByEmailMutation = `
-mutation sendAuthLinkByEmail($input: SendAuthLinkByEmailInput!) {
-  sendAuthLinkByEmail(input: $input)
-}
-`
+const sendAuthLinkByEmailMutationDocument = graphql(`
+  mutation sendAuthLinkByEmail($input: SendAuthLinkByEmailInput!) {
+    sendAuthLinkByEmail(input: $input)
+  }
+`)
 
 export const EmailAuthForm = () => {
-  const { query } = useMainApi()
+  const { query } = useApi()
 
   const { push } = useRouter()
 
@@ -38,12 +39,9 @@ export const EmailAuthForm = () => {
     async ({ email }: EmailFormState) => {
       analytics.trackEvent('Start identification with email')
 
-      await query({
-        query: sendAuthLinkByEmailMutation,
-        variables: {
-          input: {
-            email,
-          },
+      await query(sendAuthLinkByEmailMutationDocument, {
+        input: {
+          email,
         },
       })
 

@@ -3,7 +3,7 @@ import { useMutation } from 'react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-import { createProejctMutation } from './useCreateProjectMutation'
+import { createProejctMutationDocument } from './useCreateProjectMutation'
 
 interface CreateProjectsParams {
   projects: Pick<Project, 'name' | 'emoji' | 'color'>[]
@@ -35,11 +35,8 @@ export const useCreateProjectsMutation = () => {
 
     const response = await Promise.all(
       inputs.map((input) => {
-        return updateRemoteState<ProjectResponse>({
-          query: createProejctMutation,
-          variables: {
-            input,
-          },
+        return updateRemoteState(createProejctMutationDocument, {
+          input,
         })
       }),
     )

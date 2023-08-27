@@ -1,22 +1,22 @@
-import { PrimaryGoal } from 'capacity/PrimaryGoal'
+import { graphql } from '@increaser/api-interface/client'
+import { UserState } from '@increaser/api-interface/client/graphql'
 import { useMutation } from 'react-query'
-import { Task } from 'tasks/Task'
-import { FocusSound, useUserState } from 'user/state/UserStateContext'
+import { useUserState } from 'user/state/UserStateContext'
 
-interface UpdateUserParams {
-  name?: string
-  primaryGoal?: PrimaryGoal
-  focusSounds?: FocusSound[]
-  tasks?: Task[]
-  isAnonymous?: boolean
-}
+type UpdateUserParams = Partial<
+  Pick<
+    UserState,
+    'name' | 'primaryGoal' | 'focusSounds' | 'tasks' | 'isAnonymous'
+  >
+>
 
-const updateUserMutation = `
-mutation updateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
-    name
+const updateUserMutationDocument = graphql(`
+  mutation updateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      name
+    }
   }
-}`
+`)
 
 export const useUpdateUserMutation = () => {
   const { updateState, updateRemoteState } = useUserState()
@@ -24,11 +24,8 @@ export const useUpdateUserMutation = () => {
   return useMutation(async (input: UpdateUserParams) => {
     updateState(input)
 
-    await updateRemoteState({
-      query: updateUserMutation,
-      variables: {
-        input,
-      },
+    await updateRemoteState(updateUserMutationDocument, {
+      input,
     })
   })
 }

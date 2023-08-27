@@ -11,9 +11,10 @@ import {
 } from 'auth/OAuthProvider'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
+import { AuthProvider } from '@increaser/api-interface/client/graphql'
 
 interface Props {
-  provider: OAuthProvider
+  provider: AuthProvider
 }
 
 const OAuthProviderUrlRecord = {

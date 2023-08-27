@@ -3,15 +3,31 @@ import { useMutation } from 'react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-import { projectFragment } from './projectFragment'
+import { graphql } from '@increaser/api-interface/client'
 
-export const createProejctMutation = `
-mutation createProject($input: CreateProjectInput!) {
-  createProject(input: $input) {
-    ${projectFragment}
+export const createProejctMutationDocument = graphql(`
+  mutation createProject($input: CreateProjectInput!) {
+    createProject(input: $input) {
+      id
+      name
+      color
+      status
+      emoji
+      total
+      allocatedMinutesPerWeek
+      weeks {
+        year
+        week
+        seconds
+      }
+      months {
+        year
+        month
+        seconds
+      }
+    }
   }
-}
-`
+`)
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void
@@ -48,12 +64,12 @@ export const useCreateProjectMutation = (
       updateState({ projects: [...projects, project] })
       params?.onOptimisticUpdate?.(project)
 
-      const projectResult = await updateRemoteState<Project>({
-        query: createProejctMutation,
-        variables: {
+      const projectResult = await updateRemoteState(
+        createProejctMutationDocument,
+        {
           input: input,
         },
-      })
+      )
 
       return projectResult as Project
     },

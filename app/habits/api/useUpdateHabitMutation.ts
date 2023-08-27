@@ -1,20 +1,21 @@
+import { graphql } from '@increaser/api-interface/client'
 import { HabitResponse } from 'habits/Habit'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-import { habitsFragment } from './habitsFragment'
-
-export const updateHabitMutation = `
-mutation updateHabit($input: UpdateHabitInput!) {
-  updateHabit(input: $input) {
-    ${habitsFragment}
+export const updateHabitMutationDocument = graphql(`
+  mutation updateHabit($input: UpdateHabitInput!) {
+    updateHabit(input: $input) {
+      id
+      name
+      emoji
+      color
+      startedAt
+      successes
+      order
+    }
   }
-}
-`
-
-interface UseUpdateHabitMutationParams {
-  onSuccess?: (habit: HabitResponse) => void
-}
+`)
 
 type UpdateHabitParams = Pick<HabitResponse, 'id'> &
   Partial<
@@ -24,9 +25,7 @@ type UpdateHabitParams = Pick<HabitResponse, 'id'> &
     >
   >
 
-export const useUpdateHabitMutation = (
-  params?: UseUpdateHabitMutationParams,
-) => {
+export const useUpdateHabitMutation = () => {
   const { updateState, updateRemoteState } = useUserState()
   const { habits } = useAssertUserState()
 
@@ -37,13 +36,10 @@ export const useUpdateHabitMutation = (
       ),
     })
 
-    const habitResult = await updateRemoteState<HabitResponse>({
-      query: updateHabitMutation,
-      variables: {
-        input,
-      },
+    const habitResult = await updateRemoteState(updateHabitMutationDocument, {
+      input,
     })
 
     return habitResult as HabitResponse
-  }, params)
+  })
 }

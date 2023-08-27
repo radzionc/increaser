@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import * as habitsDB from '../db'
 
 interface Input {

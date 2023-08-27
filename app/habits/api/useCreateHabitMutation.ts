@@ -4,15 +4,22 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 import { MS_IN_SEC } from '@increaser/utils/time'
 
-import { habitsFragment } from './habitsFragment'
+import { graphql } from '@increaser/api-interface/client'
+import { CreateHabitInput } from '@increaser/api-interface/client/graphql'
 
-const createHabitMutation = `
-mutation createHabit($input: CreateHabitInput!) {
-  createHabit(input: $input) {
-    ${habitsFragment}
+const createHabitMutationDocument = graphql(`
+  mutation createHabit($input: CreateHabitInput!) {
+    createHabit(input: $input) {
+      id
+      name
+      emoji
+      color
+      startedAt
+      successes
+      order
+    }
   }
-}
-`
+`)
 
 const getNewHabitOrder = (habits: HabitResponse[]) => {
   if (habits.length === 0) {
@@ -22,47 +29,29 @@ const getNewHabitOrder = (habits: HabitResponse[]) => {
   return Math.min(...habits.map(({ order }) => order)) - 10
 }
 
-interface UseCreateHabitMutationParams {
-  onSuccess?: (habit: HabitResponse) => void
-}
-
-export const useCreateHabitMutation = (
-  params?: UseCreateHabitMutationParams,
-) => {
+export const useCreateHabitMutation = () => {
   const { habits } = useAssertUserState()
   const { updateState, updateRemoteState } = useUserState()
 
-  return useMutation(
-    async ({
-      name,
+  return useMutation(async ({ name, color, emoji }: CreateHabitInput) => {
+    const input = {
+      id: getId(),
+      startedAt: Math.round(Date.now() / MS_IN_SEC),
       color,
       emoji,
-    }: Pick<HabitResponse, 'name' | 'color' | 'emoji'>) => {
-      const input = {
-        id: getId(),
-        startedAt: Math.round(Date.now() / MS_IN_SEC),
-        color,
-        emoji,
-        name,
-        order: getNewHabitOrder(habits),
-      }
+      name,
+      order: getNewHabitOrder(habits),
+    }
 
-      const habit: HabitResponse = {
-        ...input,
-        successes: [],
-      }
+    const habit = {
+      ...input,
+      successes: [],
+    }
 
-      updateState({ habits: [...habits, habit] })
+    updateState({ habits: [...habits, habit] })
 
-      const habitResult = await updateRemoteState<HabitResponse>({
-        query: createHabitMutation,
-        variables: {
-          input,
-        },
-      })
-
-      return habitResult as HabitResponse
-    },
-    params,
-  )
+    await updateRemoteState(createHabitMutationDocument, {
+      input,
+    })
+  })
 }

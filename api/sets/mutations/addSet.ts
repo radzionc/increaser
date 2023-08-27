@@ -1,5 +1,5 @@
 import { assertUserId } from '../../auth/assertUserId'
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import gql from 'graphql-tag'
 import { addSet as addSetService } from '../services/addSet'
 import { Set } from '../../users/User'

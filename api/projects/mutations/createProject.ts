@@ -1,5 +1,5 @@
 import { assertUserId } from '../../auth/assertUserId'
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import * as projectsDB from '../db'
 import gql from 'graphql-tag'

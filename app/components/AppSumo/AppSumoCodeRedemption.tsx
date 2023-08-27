@@ -1,4 +1,3 @@
-import { MainApiError, useMainApi } from 'api/hooks/useMainApi'
 import { MembershipProvider } from 'membership'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -8,23 +7,25 @@ import { Form } from '@increaser/ui/ui/Form/Form'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { useUserState } from 'user/state/UserStateContext'
+import { ApiError, useApi } from 'api/useApi'
+import { graphql } from '@increaser/api-interface/client'
 
 interface RedeemCodeFormState {
   code: string
 }
 
-const redeemAppSumoCodeMutation = `
-mutation redeemAppSumoCode($input: RedeemAppSumoCodeInput!) {
-  redeemAppSumoCode(input: $input)
-}
-`
+const redeemAppSumoCodeMutationDocument = graphql(`
+  mutation redeemAppSumoCode($input: RedeemAppSumoCodeInput!) {
+    redeemAppSumoCode(input: $input)
+  }
+`)
 
 export const AppSumoCodeRedemption = () => {
   const [code, setCode] = useState('')
 
   const { updateState: updateUserState } = useUserState()
 
-  const { query } = useMainApi()
+  const { query } = useApi()
 
   const {
     register,
@@ -38,12 +39,9 @@ export const AppSumoCodeRedemption = () => {
   const { mutate: redeemCode, isLoading } = useMutation(
     async ({ code }: RedeemCodeFormState) => {
       try {
-        await query({
-          query: redeemAppSumoCodeMutation,
-          variables: {
-            input: {
-              code,
-            },
+        await query(redeemAppSumoCodeMutationDocument, {
+          input: {
+            code,
           },
         })
 
@@ -51,7 +49,7 @@ export const AppSumoCodeRedemption = () => {
           membership: { provider: MembershipProvider.AppSumo },
         })
       } catch (error) {
-        const { message } = error as MainApiError
+        const { message } = error as ApiError
         setError('code', { type: 'custom', message })
       }
     },

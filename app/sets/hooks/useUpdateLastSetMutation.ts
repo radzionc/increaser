@@ -1,13 +1,14 @@
+import { graphql } from '@increaser/api-interface/client'
 import { useMutation } from 'react-query'
 import { Set } from 'sets/Set'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 import { updateLastArrayElement } from 'utils/updateLastArrayElement'
 
-export const updateLastSetMutation = `
-mutation editLastSet($set: SetInput!) {
-  editLastSet(set: $set)
-}
-`
+export const updateLastSetMutationDocument = graphql(`
+  mutation editLastSet($set: SetInput!) {
+    editLastSet(set: $set)
+  }
+`)
 
 export const useUpdateLastSetMutation = () => {
   const { sets } = useAssertUserState()
@@ -18,11 +19,8 @@ export const useUpdateLastSetMutation = () => {
       sets: updateLastArrayElement(sets, set),
     })
 
-    await updateRemoteState({
-      query: updateLastSetMutation,
-      variables: {
-        set,
-      },
+    await updateRemoteState(updateLastSetMutationDocument, {
+      set,
     })
   })
 }

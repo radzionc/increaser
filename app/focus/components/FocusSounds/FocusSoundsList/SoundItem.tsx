@@ -15,9 +15,9 @@ import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 
-import { FocusSound } from '../FocusSoundsContext'
 import { useFocusSounds } from '../useFocusSounds'
 import { ManageSound } from './ManageSound'
+import { FocusSound } from '@increaser/entities/FocusSound'
 
 const PlayIndicator = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};

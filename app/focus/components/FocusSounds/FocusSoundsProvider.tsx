@@ -3,8 +3,9 @@ import { ReactNode } from 'react'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
-import { FocusSound, FocusSoundsContext } from './FocusSoundsContext'
+import { FocusSoundsContext } from './FocusSoundsContext'
 import { useFocusSoundsState } from './useFocusSoundsState'
+import { FocusSound } from '@increaser/entities/FocusSound'
 
 interface Props {
   children: ReactNode

@@ -1,7 +1,7 @@
 export interface FocusSound {
   name: string
   url: string
-  favourite?: boolean
+  favourite?: boolean | null
 }
 
 export const defaultFocusSounds: FocusSound[] = [

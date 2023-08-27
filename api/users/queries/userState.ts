@@ -1,5 +1,5 @@
 import { assertUserId } from '../../auth/assertUserId'
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import { User } from '../User'
 import * as usersDB from '../db'
 import { DateTime } from 'luxon'

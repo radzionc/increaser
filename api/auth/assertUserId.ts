@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql'
-import { OperationContext } from '../graphql/OperationContext'
+import { OperationContext } from '../gql/OperationContext'
 import { ApiErrorCode } from '../errors/ApiErrorCode'
 
 export const assertUserId = ({ userId }: OperationContext) => {

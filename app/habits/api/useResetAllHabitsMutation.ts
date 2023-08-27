@@ -1,9 +1,8 @@
-import { HabitResponse } from 'habits/Habit'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 import { MS_IN_SEC } from '@increaser/utils/time'
 
-import { updateHabitMutation } from './useUpdateHabitMutation'
+import { updateHabitMutationDocument } from './useUpdateHabitMutation'
 
 export const useResetAllHabitsMutation = () => {
   const { updateState, updateRemoteState } = useUserState()
@@ -23,13 +22,10 @@ export const useResetAllHabitsMutation = () => {
 
     const response = await Promise.all(
       habits.map(({ id }) => {
-        return updateRemoteState<HabitResponse>({
-          query: updateHabitMutation,
-          variables: {
-            input: {
-              id,
-              ...sharedUpdateParams,
-            },
+        return updateRemoteState(updateHabitMutationDocument, {
+          input: {
+            id,
+            ...sharedUpdateParams,
           },
         })
       }),

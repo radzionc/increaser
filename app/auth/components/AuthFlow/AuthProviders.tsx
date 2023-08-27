@@ -1,11 +1,11 @@
-import { OAuthProvider } from 'auth/OAuthProvider'
 import { VStack } from '@increaser/ui/ui/Stack'
 
 import { OptionsDivider } from '../OptionsDivider'
 import { EmailAuthForm } from './EmailAuthForm'
 import { OAuthProviderButton } from './OAuthProviderButton'
+import { AuthProvider } from '@increaser/api-interface/client/graphql'
 
-const supportedOAuthProviders = [OAuthProvider.Google, OAuthProvider.Facebook]
+const supportedOAuthProviders = [AuthProvider.Google, AuthProvider.Facebook]
 
 export const AuthProviders = () => {
   return (

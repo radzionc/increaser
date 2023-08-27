@@ -25,7 +25,7 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
   const { register, handleSubmit, control } = useForm<PublicProfileFormShape>({
     defaultValues: {
       name,
-      country,
+      country: country as CountryCode,
     },
   })
 

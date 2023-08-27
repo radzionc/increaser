@@ -1,4 +1,4 @@
-import { setUserForTracking } from 'analytics'
+import { analytics } from 'analytics'
 import { setUserIdForErrorMonitoring } from 'errors/errorMonitoring'
 import { useEffect } from 'react'
 import { ComponentWithChildrenProps } from 'shared/props'
@@ -9,7 +9,7 @@ export const UserManagerProvider = ({
 }: ComponentWithChildrenProps) => {
   const { id } = useAssertUserState()
   useEffect(() => {
-    setUserForTracking(id)
+    analytics.setUser(id)
     setUserIdForErrorMonitoring(id)
   }, [id])
 

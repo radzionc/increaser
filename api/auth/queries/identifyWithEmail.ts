@@ -1,4 +1,4 @@
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import { authorizeUser } from './authorizeUser'
 import { decodeEmailAuthToken } from '../helpers/decodeEmailAuthToken'
 import gql from 'graphql-tag'

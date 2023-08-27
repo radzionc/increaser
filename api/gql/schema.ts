@@ -33,11 +33,7 @@ export type Scalars = {
 
 export type AppStats = {
   __typename?: 'AppStats'
-  registeredUsersNumber?: Maybe<Scalars['Int']['output']>
-}
-
-export type AskForRefundInput = {
-  description?: InputMaybe<Scalars['String']['input']>
+  registeredUsersNumber: Scalars['Int']['output']
 }
 
 export enum AuthProvider {
@@ -85,23 +81,23 @@ export type FocusSoundInput = {
 
 export type Habit = {
   __typename?: 'Habit'
-  color?: Maybe<Scalars['Int']['output']>
-  emoji?: Maybe<Scalars['String']['output']>
-  id?: Maybe<Scalars['ID']['output']>
-  name?: Maybe<Scalars['String']['output']>
-  order?: Maybe<Scalars['Float']['output']>
-  startedAt?: Maybe<Scalars['Float']['output']>
-  successes?: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  color: Scalars['Int']['output']
+  emoji: Scalars['String']['output']
+  id: Scalars['ID']['output']
+  name: Scalars['String']['output']
+  order: Scalars['Float']['output']
+  startedAt: Scalars['Float']['output']
+  successes: Array<Scalars['String']['output']>
 }
 
 export type IdentificationResult = {
   __typename?: 'IdentificationResult'
-  email?: Maybe<Scalars['String']['output']>
-  firstIdentification?: Maybe<Scalars['Boolean']['output']>
-  id?: Maybe<Scalars['ID']['output']>
+  email: Scalars['String']['output']
+  firstIdentification: Scalars['Boolean']['output']
+  id: Scalars['ID']['output']
   name?: Maybe<Scalars['String']['output']>
-  token?: Maybe<Scalars['String']['output']>
-  tokenExpirationTime?: Maybe<Scalars['Int']['output']>
+  token: Scalars['String']['output']
+  tokenExpirationTime: Scalars['Int']['output']
 }
 
 export type IdentifyWithEmailInput = {
@@ -130,7 +126,6 @@ export enum MembershipProvider {
 export type Mutation = {
   __typename?: 'Mutation'
   addSet?: Maybe<Scalars['Boolean']['output']>
-  askForRefund?: Maybe<Scalars['Boolean']['output']>
   createHabit?: Maybe<Habit>
   createProject?: Maybe<Project>
   deleteHabit?: Maybe<Scalars['Boolean']['output']>
@@ -151,10 +146,6 @@ export type Mutation = {
 
 export type MutationAddSetArgs = {
   set: SetInput
-}
-
-export type MutationAskForRefundArgs = {
-  askForRefundInput: AskForRefundInput
 }
 
 export type MutationCreateHabitArgs = {
@@ -217,17 +208,23 @@ export type MutationUpdateWeekTimeAllocationArgs = {
   input: UpdateWeekTimeAllocationInput
 }
 
+export enum PrimaryGoal {
+  Awareness = 'awareness',
+  WorkLess = 'workLess',
+  WorkMore = 'workMore',
+}
+
 export type Project = {
   __typename?: 'Project'
-  allocatedMinutesPerWeek?: Maybe<Scalars['Float']['output']>
-  color?: Maybe<Scalars['Int']['output']>
-  emoji?: Maybe<Scalars['String']['output']>
-  id?: Maybe<Scalars['ID']['output']>
-  months?: Maybe<Array<Maybe<ProjectMonth>>>
-  name?: Maybe<Scalars['String']['output']>
-  status?: Maybe<ProjectStatus>
-  total?: Maybe<Scalars['Float']['output']>
-  weeks?: Maybe<Array<Maybe<ProjectWeek>>>
+  allocatedMinutesPerWeek: Scalars['Float']['output']
+  color: Scalars['Int']['output']
+  emoji: Scalars['String']['output']
+  id: Scalars['ID']['output']
+  months: Array<ProjectMonth>
+  name: Scalars['String']['output']
+  status: ProjectStatus
+  total: Scalars['Float']['output']
+  weeks: Array<ProjectWeek>
 }
 
 export type ProjectMonth = {
@@ -251,12 +248,12 @@ export type ProjectWeek = {
 
 export type Query = {
   __typename?: 'Query'
-  appStats?: Maybe<AppStats>
-  identify?: Maybe<IdentificationResult>
-  identifyWithEmail?: Maybe<IdentificationResult>
-  identifyWithOAuth?: Maybe<IdentificationResult>
-  projects?: Maybe<Array<Maybe<Project>>>
-  userState?: Maybe<UserState>
+  appStats: AppStats
+  identify: IdentificationResult
+  identifyWithEmail: IdentificationResult
+  identifyWithOAuth: IdentificationResult
+  projects: Array<Project>
+  userState: UserState
 }
 
 export type QueryIdentifyWithEmailArgs = {
@@ -272,7 +269,7 @@ export type QueryUserStateArgs = {
 }
 
 export type RedeemAppSumoCodeInput = {
-  code?: InputMaybe<Scalars['String']['input']>
+  code: Scalars['String']['input']
 }
 
 export type SendAuthLinkByEmailInput = {
@@ -281,9 +278,9 @@ export type SendAuthLinkByEmailInput = {
 
 export type Set = {
   __typename?: 'Set'
-  end?: Maybe<Scalars['Float']['output']>
-  projectId?: Maybe<Scalars['ID']['output']>
-  start?: Maybe<Scalars['Float']['output']>
+  end: Scalars['Float']['output']
+  projectId: Scalars['ID']['output']
+  start: Scalars['Float']['output']
 }
 
 export type SetInput = {
@@ -294,19 +291,19 @@ export type SetInput = {
 
 export type Subscription = {
   __typename?: 'Subscription'
-  cancelUrl?: Maybe<Scalars['String']['output']>
-  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
-  nextBillDate?: Maybe<Scalars['String']['output']>
-  planId?: Maybe<Scalars['String']['output']>
-  updateUrl?: Maybe<Scalars['String']['output']>
+  cancelUrl: Scalars['String']['output']
+  cancellationEffectiveDate: Scalars['String']['output']
+  nextBillDate: Scalars['String']['output']
+  planId: Scalars['String']['output']
+  updateUrl: Scalars['String']['output']
 }
 
 export type Task = {
   __typename?: 'Task'
-  id?: Maybe<Scalars['String']['output']>
-  isCompleted?: Maybe<Scalars['Boolean']['output']>
-  name?: Maybe<Scalars['String']['output']>
-  startedAt?: Maybe<Scalars['Float']['output']>
+  id: Scalars['String']['output']
+  isCompleted: Scalars['Boolean']['output']
+  name: Scalars['String']['output']
+  startedAt: Scalars['Float']['output']
 }
 
 export type TaskInput = {
@@ -323,15 +320,15 @@ export type TrackHabitInput = {
 }
 
 export type UpdateGoalToFinishWorkByInput = {
-  goalToFinishWorkBy?: InputMaybe<Scalars['Int']['input']>
+  goalToFinishWorkBy: Scalars['Int']['input']
 }
 
 export type UpdateGoalToGoToBedAtInput = {
-  goalToGoToBedAt?: InputMaybe<Scalars['Int']['input']>
+  goalToGoToBedAt: Scalars['Int']['input']
 }
 
 export type UpdateGoalToStartWorkAtInput = {
-  goalToStartWorkAt?: InputMaybe<Scalars['Int']['input']>
+  goalToStartWorkAt: Scalars['Int']['input']
 }
 
 export type UpdateHabitInput = {
@@ -358,7 +355,7 @@ export type UpdateUserInput = {
   focusSounds?: InputMaybe<Array<InputMaybe<FocusSoundInput>>>
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
-  primaryGoal?: InputMaybe<Scalars['String']['input']>
+  primaryGoal?: InputMaybe<PrimaryGoal>
   tasks?: InputMaybe<Array<InputMaybe<TaskInput>>>
 }
 
@@ -366,38 +363,38 @@ export type UpdateUserResult = {
   __typename?: 'UpdateUserResult'
   focusSounds?: Maybe<Array<Maybe<FocusSound>>>
   name?: Maybe<Scalars['String']['output']>
-  primaryGoal?: Maybe<Scalars['String']['output']>
+  primaryGoal?: Maybe<PrimaryGoal>
 }
 
 export type UpdateWeekTimeAllocationInput = {
-  allocation?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+  allocation: Array<Scalars['Float']['input']>
 }
 
 export type UserState = {
   __typename?: 'UserState'
-  country?: Maybe<Scalars['String']['output']>
-  email?: Maybe<Scalars['String']['output']>
-  focusSounds?: Maybe<Array<Maybe<FocusSound>>>
-  freeTrialEnd?: Maybe<Scalars['Float']['output']>
-  goalToFinishWorkBy?: Maybe<Scalars['Int']['output']>
-  goalToGoToBedAt?: Maybe<Scalars['Int']['output']>
-  goalToStartWorkAt?: Maybe<Scalars['Int']['output']>
-  habits?: Maybe<Array<Maybe<Habit>>>
-  id?: Maybe<Scalars['ID']['output']>
-  isAnonymous?: Maybe<Scalars['Boolean']['output']>
-  membership?: Maybe<Membership>
-  name?: Maybe<Scalars['String']['output']>
-  prevSets?: Maybe<Array<Maybe<Set>>>
-  primaryGoal?: Maybe<Scalars['String']['output']>
-  projects?: Maybe<Array<Maybe<Project>>>
-  registrationDate?: Maybe<Scalars['Float']['output']>
-  sets?: Maybe<Array<Maybe<Set>>>
-  tasks?: Maybe<Array<Maybe<Task>>>
-  weekTimeAllocation?: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+  country: Scalars['String']['output']
+  email: Scalars['String']['output']
+  focusSounds: Array<FocusSound>
+  freeTrialEnd: Scalars['Float']['output']
+  goalToFinishWorkBy: Scalars['Int']['output']
+  goalToGoToBedAt: Scalars['Int']['output']
+  goalToStartWorkAt: Scalars['Int']['output']
+  habits: Array<Habit>
+  id: Scalars['ID']['output']
+  isAnonymous: Scalars['Boolean']['output']
+  membership: Membership
+  name: Scalars['String']['output']
+  prevSets: Array<Set>
+  primaryGoal: PrimaryGoal
+  projects: Array<Project>
+  registrationDate: Scalars['Float']['output']
+  sets: Array<Set>
+  tasks: Array<Task>
+  weekTimeAllocation: Array<Scalars['Float']['output']>
 }
 
 export type UserStateInput = {
-  timeZone?: InputMaybe<Scalars['Int']['input']>
+  timeZone: Scalars['Int']['input']
 }
 
 export type ResolverTypeWrapper<T> = Promise<T> | T
@@ -508,7 +505,6 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   AppStats: ResolverTypeWrapper<AppStats>
-  AskForRefundInput: AskForRefundInput
   AuthProvider: AuthProvider
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>
   CreateHabitInput: CreateHabitInput
@@ -527,6 +523,7 @@ export type ResolversTypes = {
   Membership: ResolverTypeWrapper<Membership>
   MembershipProvider: MembershipProvider
   Mutation: ResolverTypeWrapper<{}>
+  PrimaryGoal: PrimaryGoal
   Project: ResolverTypeWrapper<Project>
   ProjectMonth: ResolverTypeWrapper<ProjectMonth>
   ProjectStatus: ProjectStatus
@@ -556,7 +553,6 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   AppStats: AppStats
-  AskForRefundInput: AskForRefundInput
   Boolean: Scalars['Boolean']['output']
   CreateHabitInput: CreateHabitInput
   CreateProjectInput: CreateProjectInput
@@ -604,7 +600,7 @@ export type AppStatsResolvers<
     ResolversParentTypes['AppStats'] = ResolversParentTypes['AppStats'],
 > = {
   registeredUsersNumber?: Resolver<
-    Maybe<ResolversTypes['Int']>,
+    ResolversTypes['Int'],
     ParentType,
     ContextType
   >
@@ -631,17 +627,13 @@ export type HabitResolvers<
   ParentType extends
     ResolversParentTypes['Habit'] = ResolversParentTypes['Habit'],
 > = {
-  color?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
-  emoji?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  order?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
-  startedAt?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
-  successes?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['String']>>>,
-    ParentType,
-    ContextType
-  >
+  color?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  emoji?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  order?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  startedAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  successes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -650,20 +642,16 @@ export type IdentificationResultResolvers<
   ParentType extends
     ResolversParentTypes['IdentificationResult'] = ResolversParentTypes['IdentificationResult'],
 > = {
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   firstIdentification?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
+    ResolversTypes['Boolean'],
     ParentType,
     ContextType
   >
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  tokenExpirationTime?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType
-  >
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  tokenExpirationTime?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -695,12 +683,6 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationAddSetArgs, 'set'>
-  >
-  askForRefund?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType,
-    RequireFields<MutationAskForRefundArgs, 'askForRefundInput'>
   >
   createHabit?: Resolver<
     Maybe<ResolversTypes['Habit']>,
@@ -805,27 +787,23 @@ export type ProjectResolvers<
     ResolversParentTypes['Project'] = ResolversParentTypes['Project'],
 > = {
   allocatedMinutesPerWeek?: Resolver<
-    Maybe<ResolversTypes['Float']>,
+    ResolversTypes['Float'],
     ParentType,
     ContextType
   >
-  color?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
-  emoji?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>
+  color?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  emoji?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   months?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['ProjectMonth']>>>,
+    Array<ResolversTypes['ProjectMonth']>,
     ParentType,
     ContextType
   >
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  status?: Resolver<
-    Maybe<ResolversTypes['ProjectStatus']>,
-    ParentType,
-    ContextType
-  >
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  status?: Resolver<ResolversTypes['ProjectStatus'], ParentType, ContextType>
+  total?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   weeks?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['ProjectWeek']>>>,
+    Array<ResolversTypes['ProjectWeek']>,
     ParentType,
     ContextType
   >
@@ -859,35 +837,27 @@ export type QueryResolvers<
   ParentType extends
     ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
-  appStats?: Resolver<
-    Maybe<ResolversTypes['AppStats']>,
-    ParentType,
-    ContextType
-  >
+  appStats?: Resolver<ResolversTypes['AppStats'], ParentType, ContextType>
   identify?: Resolver<
-    Maybe<ResolversTypes['IdentificationResult']>,
+    ResolversTypes['IdentificationResult'],
     ParentType,
     ContextType
   >
   identifyWithEmail?: Resolver<
-    Maybe<ResolversTypes['IdentificationResult']>,
+    ResolversTypes['IdentificationResult'],
     ParentType,
     ContextType,
     RequireFields<QueryIdentifyWithEmailArgs, 'input'>
   >
   identifyWithOAuth?: Resolver<
-    Maybe<ResolversTypes['IdentificationResult']>,
+    ResolversTypes['IdentificationResult'],
     ParentType,
     ContextType,
     RequireFields<QueryIdentifyWithOAuthArgs, 'input'>
   >
-  projects?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Project']>>>,
-    ParentType,
-    ContextType
-  >
+  projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
   userState?: Resolver<
-    Maybe<ResolversTypes['UserState']>,
+    ResolversTypes['UserState'],
     ParentType,
     ContextType,
     RequireFields<QueryUserStateArgs, 'input'>
@@ -898,9 +868,9 @@ export type SetResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Set'] = ResolversParentTypes['Set'],
 > = {
-  end?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
-  projectId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>
-  start?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
+  end?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  projectId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+  start?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -910,31 +880,31 @@ export type SubscriptionResolvers<
     ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
 > = {
   cancelUrl?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
+    ResolversTypes['String'],
     'cancelUrl',
     ParentType,
     ContextType
   >
   cancellationEffectiveDate?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
+    ResolversTypes['String'],
     'cancellationEffectiveDate',
     ParentType,
     ContextType
   >
   nextBillDate?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
+    ResolversTypes['String'],
     'nextBillDate',
     ParentType,
     ContextType
   >
   planId?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
+    ResolversTypes['String'],
     'planId',
     ParentType,
     ContextType
   >
   updateUrl?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
+    ResolversTypes['String'],
     'updateUrl',
     ParentType,
     ContextType
@@ -946,14 +916,10 @@ export type TaskResolvers<
   ParentType extends
     ResolversParentTypes['Task'] = ResolversParentTypes['Task'],
 > = {
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  isCompleted?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType
-  >
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  startedAt?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  isCompleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  startedAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -969,7 +935,7 @@ export type UpdateUserResultResolvers<
   >
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   primaryGoal?: Resolver<
-    Maybe<ResolversTypes['String']>,
+    Maybe<ResolversTypes['PrimaryGoal']>,
     ParentType,
     ContextType
   >
@@ -981,82 +947,30 @@ export type UserStateResolvers<
   ParentType extends
     ResolversParentTypes['UserState'] = ResolversParentTypes['UserState'],
 > = {
-  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   focusSounds?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['FocusSound']>>>,
+    Array<ResolversTypes['FocusSound']>,
     ParentType,
     ContextType
   >
-  freeTrialEnd?: Resolver<
-    Maybe<ResolversTypes['Float']>,
-    ParentType,
-    ContextType
-  >
-  goalToFinishWorkBy?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType
-  >
-  goalToGoToBedAt?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType
-  >
-  goalToStartWorkAt?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType
-  >
-  habits?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Habit']>>>,
-    ParentType,
-    ContextType
-  >
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>
-  isAnonymous?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType
-  >
-  membership?: Resolver<
-    Maybe<ResolversTypes['Membership']>,
-    ParentType,
-    ContextType
-  >
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  prevSets?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Set']>>>,
-    ParentType,
-    ContextType
-  >
-  primaryGoal?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >
-  projects?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Project']>>>,
-    ParentType,
-    ContextType
-  >
-  registrationDate?: Resolver<
-    Maybe<ResolversTypes['Float']>,
-    ParentType,
-    ContextType
-  >
-  sets?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Set']>>>,
-    ParentType,
-    ContextType
-  >
-  tasks?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Task']>>>,
-    ParentType,
-    ContextType
-  >
+  freeTrialEnd?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  goalToFinishWorkBy?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  goalToGoToBedAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  goalToStartWorkAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  habits?: Resolver<Array<ResolversTypes['Habit']>, ParentType, ContextType>
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+  isAnonymous?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+  membership?: Resolver<ResolversTypes['Membership'], ParentType, ContextType>
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  prevSets?: Resolver<Array<ResolversTypes['Set']>, ParentType, ContextType>
+  primaryGoal?: Resolver<ResolversTypes['PrimaryGoal'], ParentType, ContextType>
+  projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
+  registrationDate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  sets?: Resolver<Array<ResolversTypes['Set']>, ParentType, ContextType>
+  tasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>
   weekTimeAllocation?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Float']>>>,
+    Array<ResolversTypes['Float']>,
     ParentType,
     ContextType
   >

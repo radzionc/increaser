@@ -1,4 +1,4 @@
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import { assertUserId } from '../assertUserId'
 import { generateAuthData } from '../generateAuthData'
 import * as usersDB from '../../users/db'

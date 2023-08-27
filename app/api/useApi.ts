@@ -1,25 +1,22 @@
 import { useAuth } from 'auth/hooks/useAuth'
 import { ApiErrorCode } from '@increaser/api/errors/ApiErrorCode'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
+import { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import { print } from 'graphql'
 
-export interface QueryMainApiParams {
-  query: string
-  variables?: Record<string, any>
-}
-
-interface MainApiResponse<T> {
-  data: Record<string, T>
-  errors: ApiError[]
-}
-
-interface ApiError {
+interface ApiErrorInfo {
   message: string
   extensions: {
     code: string
   }
 }
 
-export class MainApiError extends Error {}
+interface ApiResponse<T> {
+  data: T
+  errors: ApiErrorInfo[]
+}
+
+export class ApiError extends Error {}
 
 class HttpError extends Error {
   public status: number
@@ -30,7 +27,14 @@ class HttpError extends Error {
   }
 }
 
-export const useMainApi = () => {
+export type Variables = Record<string, unknown>
+
+export type QueryApi = <T, V extends Variables = Variables>(
+  document: TypedDocumentNode<T, V>,
+  variables?: V,
+) => Promise<T>
+
+export const useApi = () => {
   const { unauthorize, token } = useAuth()
 
   const headers: HeadersInit = {
@@ -40,22 +44,27 @@ export const useMainApi = () => {
     headers.Authorization = token
   }
 
-  const query = async function queryMainApi<T>(
-    payload: QueryMainApiParams,
-  ): Promise<T> {
-    const mainApiUrl = shouldBeDefined(process.env.NEXT_PUBLIC_API_URL)
+  const query: QueryApi = async <T, V>(
+    document: TypedDocumentNode<T, V>,
+    variables?: V,
+  ) => {
+    const apiUrl = shouldBeDefined(process.env.NEXT_PUBLIC_API_URL)
+    console.log(document)
 
-    const response = await window.fetch(mainApiUrl, {
+    const response = await window.fetch(apiUrl, {
       method: 'POST',
       headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        query: print(document),
+        variables,
+      }),
     })
 
     if (!response.ok) {
       throw new HttpError(response.status, response.statusText)
     }
 
-    const { data, errors } = (await response.json()) as MainApiResponse<T>
+    const { data, errors } = (await response.json()) as ApiResponse<T>
 
     if (errors?.length) {
       const { message, extensions } = errors[0]
@@ -63,10 +72,10 @@ export const useMainApi = () => {
         unauthorize()
       }
 
-      throw new MainApiError(message)
+      throw new ApiError(message)
     }
 
-    return Object.values(data)[0]
+    return data
   }
 
   return { query }

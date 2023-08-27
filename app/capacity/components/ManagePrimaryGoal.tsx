@@ -13,6 +13,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { PrimaryGoal } from '@increaser/api-interface/client/graphql'
 
 const Container = styled(UnstyledButton)`
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
@@ -64,7 +65,7 @@ export const ManagePrimaryGoal = () => {
             </Text>
           ),
           text: primaryGoalName[goal],
-          onSelect: () => updateUser({ primaryGoal: goal }),
+          onSelect: () => updateUser({ primaryGoal: goal as PrimaryGoal }),
         }))
 
         return options.map(({ text, icon, onSelect }) => (

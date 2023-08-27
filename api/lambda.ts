@@ -6,9 +6,9 @@ import {
   middleware,
 } from '@as-integrations/aws-lambda'
 
-import { typeDefs } from './graphql/typeDefs'
-import { resolvers } from './graphql/resolvers'
-import { OperationContext } from './graphql/OperationContext'
+import { typeDefs } from './gql/typeDefs'
+import { resolvers } from './gql/resolvers'
+import { OperationContext } from './gql/OperationContext'
 import { userIdFromToken } from './auth/userIdFromToken'
 
 AWSLambda.init({

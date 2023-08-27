@@ -1,0 +1,284 @@
+input UpdateProjectInput {
+  id: ID!
+  name: String
+  color: Int
+  status: ProjectStatus
+  emoji: String
+  allocatedMinutesPerWeek: Float
+}
+
+input DeleteProjectInput {
+  id: ID!
+}
+
+input SendAuthLinkByEmailInput {
+  email: String!
+}
+
+input UpdateWeekTimeAllocationInput {
+  allocation: [Float!]!
+}
+
+input UpdateGoalToStartWorkAtInput {
+  goalToStartWorkAt: Int!
+}
+
+input UpdateGoalToFinishWorkByInput {
+  goalToFinishWorkBy: Int!
+}
+
+input UpdateGoalToGoToBedAtInput {
+  goalToGoToBedAt: Int!
+}
+
+input RedeemAppSumoCodeInput {
+  code: String!
+}
+
+enum AuthProvider {
+  google
+  facebook
+}
+
+type Habit {
+  id: ID!
+  name: String!
+  emoji: String!
+  color: Int!
+  order: Float!
+  startedAt: Float!
+  successes: [String!]!
+}
+
+type IdentificationResult {
+  id: ID!
+  email: String!
+  name: String
+  token: String!
+  tokenExpirationTime: Int!
+  firstIdentification: Boolean!
+}
+
+input IdentifyWithOAuthInput {
+  provider: AuthProvider!
+  code: String!
+  redirectUri: String!
+  timeZone: Int!
+}
+
+input IdentifyWithEmailInput {
+  token: String!
+  timeZone: Int!
+}
+
+enum ProjectStatus {
+  ACTIVE
+  INACTIVE
+}
+
+type ProjectWeek {
+  year: Int!
+  week: Int!
+  seconds: Float!
+}
+
+type ProjectMonth {
+  year: Int!
+  month: Int!
+  seconds: Float!
+}
+
+type Project {
+  id: ID!
+  name: String!
+  emoji: String!
+  color: Int!
+  status: ProjectStatus!
+  total: Float!
+  allocatedMinutesPerWeek: Float!
+  weeks: [ProjectWeek!]!
+  months: [ProjectMonth!]!
+}
+
+type AppStats {
+  registeredUsersNumber: Int!
+}
+
+input CreateHabitInput {
+  id: String
+  name: String!
+  color: Int!
+  emoji: String!
+  order: Float
+  startedAt: Float
+}
+
+input CreateProjectInput {
+  id: String
+  name: String!
+  color: Int!
+  emoji: String!
+  allocatedMinutesPerWeek: Float!
+}
+
+input DeleteHabitInput {
+  id: ID!
+}
+
+input UpdateHabitInput {
+  id: ID!
+  name: String
+  color: Int
+  order: Float
+  emoji: String
+  startedAt: Float
+  successes: [String]
+}
+
+input SetInput {
+  start: Float!
+  end: Float!
+  projectId: ID
+}
+
+input TrackHabitInput {
+  id: ID!
+  date: String
+  value: Boolean
+}
+
+input SetInput {
+  start: Float!
+  end: Float!
+  projectId: ID
+}
+
+type Set {
+  start: Float!
+  end: Float!
+  projectId: ID!
+}
+
+enum MembershipProvider {
+  AppSumo
+  Paddle
+}
+
+type Subscription {
+  updateUrl: String!
+  cancelUrl: String!
+  planId: String!
+  cancellationEffectiveDate: String!
+  nextBillDate: String!
+}
+
+type Membership {
+  provider: MembershipProvider!
+  subscription: Subscription
+}
+
+type FocusSound {
+  name: String!
+  url: String!
+  favourite: Boolean
+}
+
+type Task {
+  startedAt: Float!
+  name: String!
+  id: String!
+  isCompleted: Boolean!
+}
+
+enum PrimaryGoal {
+  workMore
+  workLess
+  awareness
+}
+
+type UserState {
+  sets: [Set!]!
+  prevSets: [Set!]!
+  projects: [Project!]!
+  id: ID!
+  isAnonymous: Boolean!
+  email: String!
+  name: String!
+  registrationDate: Float!
+  freeTrialEnd: Float!
+  weekTimeAllocation: [Float!]!
+  goalToStartWorkAt: Int!
+  goalToFinishWorkBy: Int!
+  goalToGoToBedAt: Int!
+  membership: Membership!
+  habits: [Habit!]!
+  primaryGoal: PrimaryGoal!
+  focusSounds: [FocusSound!]!
+  tasks: [Task!]!
+  country: String!
+}
+
+input UserStateInput {
+  timeZone: Int!
+}
+
+type Query {
+  projects: [Project!]!
+  identify: IdentificationResult!
+  identifyWithOAuth(input: IdentifyWithOAuthInput!): IdentificationResult!
+  identifyWithEmail(input: IdentifyWithEmailInput!): IdentificationResult!
+  userState(input: UserStateInput!): UserState!
+  appStats: AppStats!
+}
+
+input FocusSoundInput {
+  name: String!
+  url: String!
+  favourite: Boolean
+}
+
+input TaskInput {
+  startedAt: Float!
+  name: String!
+  id: String!
+  isCompleted: Boolean!
+}
+
+input UpdateUserInput {
+  name: String
+  country: String
+  primaryGoal: PrimaryGoal
+  focusSounds: [FocusSoundInput]
+  tasks: [TaskInput]
+  isAnonymous: Boolean
+}
+
+type UpdateUserResult {
+  name: String
+  primaryGoal: PrimaryGoal
+  focusSounds: [FocusSound]
+}
+
+type Mutation {
+  sendAuthLinkByEmail(input: SendAuthLinkByEmailInput!): Boolean
+
+  updateProject(input: UpdateProjectInput!): Project
+  deleteProject(input: DeleteProjectInput!): Boolean
+
+  updateWeekTimeAllocation(input: UpdateWeekTimeAllocationInput!): [Float]
+  updateGoalToStartWorkAt(input: UpdateGoalToStartWorkAtInput!): Int
+  updateGoalToFinishWorkBy(input: UpdateGoalToFinishWorkByInput!): Int
+  updateGoalToGoToBedAt(input: UpdateGoalToGoToBedAtInput): Int
+
+  redeemAppSumoCode(input: RedeemAppSumoCodeInput): Boolean
+
+  createHabit(input: CreateHabitInput!): Habit
+  createProject(input: CreateProjectInput!): Project
+  deleteHabit(input: DeleteHabitInput!): Boolean
+  trackHabit(input: TrackHabitInput!): Boolean
+  updateHabit(input: UpdateHabitInput!): Habit
+  addSet(set: SetInput!): Boolean
+  editLastSet(set: SetInput!): Boolean
+  removeLastSet: Boolean
+  updateUser(input: UpdateUserInput!): UpdateUserResult
+}

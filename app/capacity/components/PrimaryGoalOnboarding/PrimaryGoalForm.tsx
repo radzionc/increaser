@@ -10,6 +10,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { LargeSelectOption } from 'ui/LargeSelectOption'
+import { PrimaryGoal } from '@increaser/api-interface/client/graphql'
 
 export const PrimaryGoalForm = () => {
   const { primaryGoal } = useAssertUserState()
@@ -26,7 +27,7 @@ export const PrimaryGoalForm = () => {
           value={primaryGoal}
           groupName="primaryGoal"
           isSelected={goal === primaryGoal}
-          onSelect={() => updateUser({ primaryGoal: goal })}
+          onSelect={() => updateUser({ primaryGoal: goal as PrimaryGoal })}
           key={goal}
         >
           <HStack alignItems="center" justifyContent="space-between">

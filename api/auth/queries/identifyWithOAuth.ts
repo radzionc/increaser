@@ -1,5 +1,5 @@
 import { GetValidatedUserArgs, getValidatedUser } from './getValidatedUser'
-import { OperationContext } from '../../graphql/OperationContext'
+import { OperationContext } from '../../gql/OperationContext'
 import { authorizeUser } from './authorizeUser'
 import gql from 'graphql-tag'
 

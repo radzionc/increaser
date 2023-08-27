@@ -1,13 +1,13 @@
-import { trackEvent } from 'analytics'
-import { HabitResponse } from 'habits/Habit'
+import { analytics } from 'analytics'
+import { graphql } from '@increaser/api-interface/client'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-const trackHabitMutation = `
-mutation trackHabit($input: TrackHabitInput!) {
-  trackHabit(input: $input)
-}
-`
+const trackHabitMutationDocument = graphql(`
+  mutation trackHabit($input: TrackHabitInput!) {
+    trackHabit(input: $input)
+  }
+`)
 
 interface TrackHabitParams {
   id: string
@@ -41,11 +41,8 @@ export const useTrackHabitMutation = () => {
       analytics.trackEvent('Track habit', { name: habit.name })
     }
 
-    await updateRemoteState<HabitResponse>({
-      query: trackHabitMutation,
-      variables: {
-        input,
-      },
+    await updateRemoteState(trackHabitMutationDocument, {
+      input,
     })
   })
 }

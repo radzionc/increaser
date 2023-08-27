@@ -1,66 +1,14 @@
 import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
-import { useMainApi } from 'api/hooks/useMainApi'
+import { UserState } from '@increaser/api-interface/client/graphql'
+import { useApi } from 'api/useApi'
 import { useAuth } from 'auth/hooks/useAuth'
-import { habitsFragment } from 'habits/api/habitsFragment'
-import { projectFragment } from 'projects/api/projectFragment'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
-import { setsFragment } from 'sets/api/setsFragment'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { taskFragment } from 'tasks/api/taskFragment'
-import { UserStateContext, UserStateView } from 'user/state/UserStateContext'
+import { UserStateContext } from 'user/state/UserStateContext'
+import { userStateQueryDocument } from 'user/state/userStateQueryDocument'
 
-const userStateQuery = `
-query userState($input: UserStateInput!) {
-  userState(input: $input) {
-    sets {
-      ${setsFragment}
-    }
-    prevSets {
-      ${setsFragment}
-    }
-    projects {
-      ${projectFragment}
-    }
-    habits {
-      ${habitsFragment}
-    }
-    tasks {
-      ${taskFragment}
-    }
-    email
-    id
-    name
-    country
-    isAnonymous
-    membership {
-      provider
-      subscription {
-        updateUrl
-        cancelUrl
-        planId
-        cancellationEffectiveDate
-        nextBillDate
-        planId
-      }
-    }
-    freeTrialEnd
-    registrationDate
-    weekTimeAllocation
-    goalToStartWorkAt
-    goalToFinishWorkBy
-    goalToGoToBedAt
-    primaryGoal
-    focusSounds {
-      name
-      url
-      favourite
-    }
-  }
-}
-`
-
-const userStateQueryKey = userStateQuery
+const userStateQueryKey = 'userState'
 
 interface Props {
   children: ReactNode
@@ -71,7 +19,7 @@ export const UserStateProvider = ({ children }: Props) => {
 
   const queryClient = useQueryClient()
 
-  const { query } = useMainApi()
+  const { query } = useApi()
 
   const dayStartedAt = useStartOfDay()
 
@@ -83,12 +31,9 @@ export const UserStateProvider = ({ children }: Props) => {
   } = useQuery(
     userStateQueryKey,
     async () => {
-      const userState: UserStateView = await query({
-        query: userStateQuery,
-        variables: {
-          input: {
-            timeZone: getCurrentTimezoneOffset(),
-          },
+      const { userState } = await query(userStateQueryDocument, {
+        input: {
+          timeZone: getCurrentTimezoneOffset(),
         },
       })
 
@@ -108,9 +53,9 @@ export const UserStateProvider = ({ children }: Props) => {
   }, [dataUpdatedAt, dayStartedAt, refetch])
 
   const updateState = useCallback(
-    (pieceOfState: Partial<UserStateView>) => {
-      queryClient.setQueryData<UserStateView>(userStateQueryKey, (state) => ({
-        ...((state || {}) as UserStateView),
+    (pieceOfState: Partial<UserState>) => {
+      queryClient.setQueryData<UserState>(userStateQueryKey, (state) => ({
+        ...((state || {}) as UserState),
         ...pieceOfState,
       }))
     },

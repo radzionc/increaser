@@ -5,12 +5,12 @@ import { Form } from '@increaser/ui/ui/Form/Form'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 import { without } from '@increaser/utils/without'
 
-import { FocusSound } from '../FocusSoundsContext'
 import { useFocusSounds } from '../useFocusSounds'
 import { pick } from '@increaser/utils/pick'
 import { combineValidators } from '@increaser/utils/validation/combineValidators'
 import { validateUrl } from '@increaser/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@increaser/utils/validation/getUniqueValueValidator'
+import { FocusSound } from '@increaser/entities/FocusSound'
 
 interface UpdateSoundFormProps extends FinishableComponentProps {
   sound: FocusSound

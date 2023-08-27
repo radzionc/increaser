@@ -2,20 +2,36 @@ import { Project } from 'projects/Project'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-import { projectFragment } from './projectFragment'
+import { graphql } from '@increaser/api-interface/client'
 
 interface UpdateProjectMutationInput {
   id: string
   fields: Partial<Project>
 }
 
-export const updateProjectMutation = `
+export const updateProjectMutationDocument = graphql(`
   mutation updateProject($input: UpdateProjectInput!) {
     updateProject(input: $input) {
-      ${projectFragment}
+      id
+      name
+      color
+      status
+      emoji
+      total
+      allocatedMinutesPerWeek
+      weeks {
+        year
+        week
+        seconds
+      }
+      months {
+        year
+        month
+        seconds
+      }
     }
   }
-`
+`)
 
 export const useUpdateProjectMutation = () => {
   const { projects } = useAssertUserState()
@@ -33,13 +49,10 @@ export const useUpdateProjectMutation = () => {
       }),
     })
 
-    const project = await updateRemoteState<Project>({
-      query: updateProjectMutation,
-      variables: {
-        input: {
-          id,
-          ...fields,
-        },
+    const project = await updateRemoteState(updateProjectMutationDocument, {
+      input: {
+        id,
+        ...fields,
       },
     })
 

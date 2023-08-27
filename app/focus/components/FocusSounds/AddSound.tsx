@@ -8,8 +8,8 @@ import { getUniqueValueValidator } from '@increaser/utils/validation/getUniqueVa
 import { combineValidators } from '@increaser/utils/validation/combineValidators'
 import { VStack } from '@increaser/ui/ui/Stack'
 
-import { FocusSound } from './FocusSoundsContext'
 import { useFocusSounds } from './useFocusSounds'
+import { FocusSound } from '@increaser/entities/FocusSound'
 
 export const AddSound = ({ onFinish }: FinishableComponentProps) => {
   const {

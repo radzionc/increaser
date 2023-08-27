@@ -59,7 +59,7 @@ export const ActiveHabitsList = () => {
                 <ActiveHabit />
               </CurrentHabitProvider>
             ))}
-            {provided.placeholder}
+            <>{provided.placeholder}</>
           </Container>
         )}
       </Droppable>
