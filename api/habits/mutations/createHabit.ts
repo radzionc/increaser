@@ -1,36 +1,14 @@
-import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { msInSec } from '../../shared/helpers/time'
-import * as habitsDB from '../db'
-import * as usersDB from '../../users/db'
-import { defaultHabitProperties, Habit } from '../Habit'
-
-interface Input {
-  name: string
-  color: number
-  emoji: string
-  order?: number
-}
-
-export const createHabitTypeDefs = gql`
-  input CreateHabitInput {
-    id: String
-    name: String!
-    color: Int!
-    emoji: String!
-    order: Float
-    startedAt: Float
-  }
-
-  extend type Mutation {
-    createHabit(input: CreateHabitInput!): Habit
-  }
-`
+import { getUserById } from '@increaser/db/user'
+import { MutationResolvers } from '../../gql/schema'
+import { putHabit } from '@increaser/db/habit'
+import { Habit, habitDefaultFields } from '@increaser/entities/Habit'
 
 const getNewHabitOrder = async (userId: string) => {
-  const { habits } = await usersDB.getUserById(userId)
+  const { habits } = await getUserById(userId)
 
   if (!habits.length) {
     return 0
@@ -39,24 +17,22 @@ const getNewHabitOrder = async (userId: string) => {
   return Math.min(...Object.values(habits).map((habit) => habit.order)) - 1
 }
 
-export const createHabit = async (
-  _: any,
-  { input }: { input: Input },
+export const createHabit: MutationResolvers['createHabit'] = async (
+  _,
+  { input },
   context: OperationContext,
 ): Promise<Habit> => {
   const userId = assertUserId(context)
 
   const habit: Habit = {
-    id: getId(),
-    startedAt: Math.round(Date.now() / msInSec),
-
-    ...defaultHabitProperties,
+    ...habitDefaultFields,
     ...input,
-
+    startedAt: input.startedAt ?? Math.round(Date.now() / msInSec),
+    id: input.id ?? getId(),
     order: input.order ?? (await getNewHabitOrder(userId)),
   }
 
-  await habitsDB.putHabit(userId, habit)
+  await putHabit(userId, habit)
 
   return habit
 }

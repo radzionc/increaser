@@ -15,22 +15,6 @@ input SendAuthLinkByEmailInput {
   email: String!
 }
 
-input UpdateWeekTimeAllocationInput {
-  allocation: [Float!]!
-}
-
-input UpdateGoalToStartWorkAtInput {
-  goalToStartWorkAt: Int!
-}
-
-input UpdateGoalToFinishWorkByInput {
-  goalToFinishWorkBy: Int!
-}
-
-input UpdateGoalToGoToBedAtInput {
-  goalToGoToBedAt: Int!
-}
-
 input RedeemAppSumoCodeInput {
   code: String!
 }
@@ -135,22 +119,16 @@ input UpdateHabitInput {
   successes: [String]
 }
 
-input SetInput {
-  start: Float!
-  end: Float!
-  projectId: ID
-}
-
 input TrackHabitInput {
   id: ID!
-  date: String
-  value: Boolean
+  date: String!
+  value: Boolean!
 }
 
 input SetInput {
   start: Float!
   end: Float!
-  projectId: ID
+  projectId: ID!
 }
 
 type Set {
@@ -168,8 +146,8 @@ type Subscription {
   updateUrl: String!
   cancelUrl: String!
   planId: String!
-  cancellationEffectiveDate: String!
-  nextBillDate: String!
+  cancellationEffectiveDate: String
+  nextBillDate: String
 }
 
 type Membership {
@@ -203,19 +181,19 @@ type UserState {
   id: ID!
   isAnonymous: Boolean!
   email: String!
-  name: String!
+  name: String
   registrationDate: Float!
   freeTrialEnd: Float!
   weekTimeAllocation: [Float!]!
   goalToStartWorkAt: Int!
   goalToFinishWorkBy: Int!
   goalToGoToBedAt: Int!
-  membership: Membership!
+  membership: Membership
   habits: [Habit!]!
   primaryGoal: PrimaryGoal!
   focusSounds: [FocusSound!]!
   tasks: [Task!]!
-  country: String!
+  country: String
 }
 
 input UserStateInput {
@@ -224,7 +202,6 @@ input UserStateInput {
 
 type Query {
   projects: [Project!]!
-  identify: IdentificationResult!
   identifyWithOAuth(input: IdentifyWithOAuthInput!): IdentificationResult!
   identifyWithEmail(input: IdentifyWithEmailInput!): IdentificationResult!
   userState(input: UserStateInput!): UserState!
@@ -248,15 +225,13 @@ input UpdateUserInput {
   name: String
   country: String
   primaryGoal: PrimaryGoal
-  focusSounds: [FocusSoundInput]
-  tasks: [TaskInput]
+  focusSounds: [FocusSoundInput!]
+  tasks: [TaskInput!]
+  weekTimeAllocation: [Float!]
+  goalToStartWorkAt: Int
+  goalToFinishWorkBy: Int
+  goalToGoToBedAt: Int
   isAnonymous: Boolean
-}
-
-type UpdateUserResult {
-  name: String
-  primaryGoal: PrimaryGoal
-  focusSounds: [FocusSound]
 }
 
 type Mutation {
@@ -265,12 +240,7 @@ type Mutation {
   updateProject(input: UpdateProjectInput!): Project
   deleteProject(input: DeleteProjectInput!): Boolean
 
-  updateWeekTimeAllocation(input: UpdateWeekTimeAllocationInput!): [Float]
-  updateGoalToStartWorkAt(input: UpdateGoalToStartWorkAtInput!): Int
-  updateGoalToFinishWorkBy(input: UpdateGoalToFinishWorkByInput!): Int
-  updateGoalToGoToBedAt(input: UpdateGoalToGoToBedAtInput): Int
-
-  redeemAppSumoCode(input: RedeemAppSumoCodeInput): Boolean
+  redeemAppSumoCode(input: RedeemAppSumoCodeInput!): Boolean
 
   createHabit(input: CreateHabitInput!): Habit
   createProject(input: CreateProjectInput!): Project
@@ -280,5 +250,5 @@ type Mutation {
   addSet(set: SetInput!): Boolean
   editLastSet(set: SetInput!): Boolean
   removeLastSet: Boolean
-  updateUser(input: UpdateUserInput!): UpdateUserResult
+  updateUser(input: UpdateUserInput!): Boolean
 }

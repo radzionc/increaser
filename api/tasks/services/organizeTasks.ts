@@ -1,9 +1,9 @@
+import { getUserById, updateUser } from '@increaser/db/user'
 import { inTimeZone } from '@increaser/utils/inTimeZone'
-import * as usersDb from '../../users/db'
 import { startOfDay } from 'date-fns'
 
 export const organizeTasks = async (userId: string) => {
-  const { tasks: oldTasks, timeZone } = await usersDb.getUserById(userId, [
+  const { tasks: oldTasks, timeZone } = await getUserById(userId, [
     'tasks',
     'timeZone',
   ])
@@ -19,7 +19,7 @@ export const organizeTasks = async (userId: string) => {
   })
 
   if (tasks.length !== oldTasks.length) {
-    await usersDb.updateUser(userId, {
+    await updateUser(userId, {
       tasks,
     })
   }

@@ -1,18 +1,8 @@
-import gql from 'graphql-tag'
-import * as usersTable from '../../users/db'
+import { QueryResolvers } from '../../gql/schema'
+import { getNumberOfUsers } from '@increaser/db/user'
 
-export const appStatsTypeDefs = gql`
-  type AppStats {
-    registeredUsersNumber: Int
-  }
-
-  extend type Query {
-    appStats: AppStats
-  }
-`
-
-export const appStats = async () => {
-  const registeredUsersNumber = await usersTable.getNumberOfUsers()
+export const appStats: QueryResolvers['appStats'] = async () => {
+  const registeredUsersNumber = await getNumberOfUsers()
 
   return {
     registeredUsersNumber,

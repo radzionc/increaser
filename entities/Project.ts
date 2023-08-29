@@ -10,10 +10,12 @@ export interface ProjectMonth {
   seconds: number
 }
 
-export enum ProjectStatus {
-  Inactive = 'INACTIVE',
-  Active = 'ACTIVE',
-}
+export const ProjectStatus = {
+  Active: 'ACTIVE',
+  Inactive: 'INACTIVE',
+} as const
+
+export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 
 export interface Project {
   id: string

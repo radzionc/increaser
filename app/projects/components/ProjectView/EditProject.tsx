@@ -1,6 +1,5 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useProjects } from 'projects/hooks/useProjects'
-import { Project } from 'projects/Project'
 import { Controller, useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from 'shared/hooks/usePaletteColorOptions'
 import { FinishableComponentProps } from 'shared/props'
@@ -11,8 +10,9 @@ import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { useCurrentProject } from './CurrentProjectProvider'
 import { EmojiInput } from 'ui/EmojiInput'
 import { MinimalisticTextInput } from 'ui/MinimalisticTextInput'
+import { EnhancedProject } from 'projects/Project'
 
-type ProjectFormShape = Pick<Project, 'name' | 'emoji' | 'color'>
+type ProjectFormShape = Pick<EnhancedProject, 'name' | 'emoji' | 'color'>
 
 export const EditProject = ({ onFinish }: FinishableComponentProps) => {
   const { id, name, emoji, color } = useCurrentProject()

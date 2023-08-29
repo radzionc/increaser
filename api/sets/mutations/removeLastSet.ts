@@ -1,15 +1,9 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
-import gql from 'graphql-tag'
 import { removeLastSet as removeLastSetService } from '../services/removeLastSet'
+import { MutationResolvers } from '../../gql/schema'
 
-export const removeLastSetTypeDefs = gql`
-  extend type Mutation {
-    removeLastSet: Boolean
-  }
-`
-
-export const removeLastSet = async (
+export const removeLastSet: MutationResolvers['removeLastSet'] = async (
   _: any,
   __: any,
   context: OperationContext,

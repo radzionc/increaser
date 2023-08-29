@@ -1,10 +1,9 @@
-import { AuthProvider } from '@increaser/api-interface/client/graphql'
 import { AuthPageLayout } from 'auth/components/AuthPageLayout'
 import { OAuthContent } from 'auth/components/OAuthContent'
 import { Page } from 'components/Page'
 
 export const OAuthPage: Page = () => {
-  return <OAuthContent provider={AuthProvider.Google} />
+  return <OAuthContent provider={'google'} />
 }
 
 export default OAuthPage

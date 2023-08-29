@@ -1,10 +1,10 @@
-import { Project } from 'projects/Project'
 import { sum } from '@increaser/utils/sum'
 
 import { ProjectView } from './ProjectView'
 import { CurrentProjectProvider } from './ProjectView/CurrentProjectProvider'
+import { EnhancedProject } from 'projects/Project'
 
-const sortProjects = (projects: Project[]) => {
+const sortProjects = (projects: EnhancedProject[]) => {
   return [...projects].sort((a, b) => {
     const currentWeekDiff = b.doneMinutesThisWeek - a.doneMinutesThisWeek
 
@@ -25,7 +25,7 @@ const sortProjects = (projects: Project[]) => {
 }
 
 interface Props {
-  projects: Project[]
+  projects: EnhancedProject[]
 }
 
 export const ProjectList = ({ projects }: Props) => {

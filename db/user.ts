@@ -6,10 +6,13 @@ import { getUpdateParams } from './utils/getUpdateParams'
 import {
   DeleteCommand,
   GetCommand,
+  PutCommand,
   ScanCommand,
   UpdateCommand,
 } from '@aws-sdk/lib-dynamodb'
 import { mergeParams } from './utils/mergeParams'
+import { DescribeTableCommand } from '@aws-sdk/client-dynamodb'
+import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 
 export const getUserItemParams = (id: string) => ({
   TableName: tableName.users,
@@ -89,6 +92,28 @@ export function getUserByEmail<T extends (keyof User)[]>(
 
 export const deleteUser = (id: string) => {
   const command = new DeleteCommand(getUserItemParams(id))
+
+  return dbDocClient.send(command)
+}
+
+export const getNumberOfUsers = async () => {
+  const command = new DescribeTableCommand({
+    TableName: tableName.users,
+  })
+
+  const tableInfo = await dbDocClient.send(command)
+
+  return shouldBeDefined(tableInfo.Table?.ItemCount)
+}
+
+export const putUser = (user: Omit<User, 'updatedAt'>) => {
+  const command = new PutCommand({
+    TableName: tableName.users,
+    Item: {
+      ...user,
+      updatedAt: Date.now(),
+    },
+  })
 
   return dbDocClient.send(command)
 }

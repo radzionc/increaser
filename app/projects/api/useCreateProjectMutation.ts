@@ -1,9 +1,9 @@
-import { Project, ProjectResponse, ProjectStatus } from 'projects/Project'
 import { useMutation } from 'react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
 import { graphql } from '@increaser/api-interface/client'
+import { Project } from '@increaser/entities/Project'
 
 export const createProejctMutationDocument = graphql(`
   mutation createProject($input: CreateProjectInput!) {
@@ -31,7 +31,7 @@ export const createProejctMutationDocument = graphql(`
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void
-  onOptimisticUpdate?: (project: ProjectResponse) => void
+  onOptimisticUpdate?: (project: Project) => void
 }
 
 export const useCreateProjectMutation = (
@@ -52,11 +52,11 @@ export const useCreateProjectMutation = (
         id: getId(),
       }
 
-      const project: ProjectResponse = {
+      const project: Project = {
         ...input,
 
         total: 0,
-        status: ProjectStatus.Active,
+        status: 'ACTIVE',
         weeks: [],
         months: [],
       }

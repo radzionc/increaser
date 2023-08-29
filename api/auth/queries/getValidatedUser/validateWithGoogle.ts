@@ -47,7 +47,7 @@ export const validateWithGoogle: OAuthValidator = async ({
       `Your Google account doesn't provide an email. Please try a different authentication method.`,
       {
         extensions: {
-          code: ApiErrorCode.PersistentStateKey,
+          code: ApiErrorCode.Authentication,
         },
       },
     )

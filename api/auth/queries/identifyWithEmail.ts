@@ -1,38 +1,16 @@
 import { OperationContext } from '../../gql/OperationContext'
 import { authorizeUser } from './authorizeUser'
 import { decodeEmailAuthToken } from '../helpers/decodeEmailAuthToken'
-import gql from 'graphql-tag'
 import { GraphQLError } from 'graphql'
 import { ApiErrorCode } from '../../errors/ApiErrorCode'
 import { TokenExpiredError } from 'jsonwebtoken'
+import { QueryResolvers } from '../../gql/schema'
 
-interface OAuthIdentificationResult {
-  firstIdentification: boolean
-  token: string
-  tokenExpirationTime: number
-}
-
-interface Input {
-  token: string
-  timeZone: number
-}
-
-export const identifyWithEmailTypeDefs = gql`
-  input IdentifyWithEmailInput {
-    token: String!
-    timeZone: Int!
-  }
-
-  extend type Query {
-    identifyWithEmail(input: IdentifyWithEmailInput!): IdentificationResult
-  }
-`
-
-export const identifyWithEmail = async (
-  _: any,
-  { input: { token, timeZone } }: { input: Input },
+export const identifyWithEmail: QueryResolvers['identifyWithEmail'] = async (
+  _,
+  { input: { token, timeZone } },
   { country }: OperationContext,
-): Promise<OAuthIdentificationResult> => {
+) => {
   try {
     const email = decodeEmailAuthToken(token)
 

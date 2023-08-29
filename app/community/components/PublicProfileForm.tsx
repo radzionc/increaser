@@ -13,7 +13,7 @@ interface PublicProfileFormProps {
 }
 
 interface PublicProfileFormShape {
-  name: string
+  name: string | null
   country: CountryCode | null
 }
 

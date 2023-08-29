@@ -1,22 +1,19 @@
 import { OperationContext } from '../../../gql/OperationContext'
 import { assertUserId } from '../../../auth/assertUserId'
-import * as appSumoCodesDb from '../db'
-import * as usersDb from '../../../users/db'
 import { ApiErrorCode } from '../../../errors/ApiErrorCode'
 import { GraphQLError } from 'graphql'
+import { MutationResolvers } from '../../../gql/schema'
+import { updateUser } from '@increaser/db/user'
+import { getAppSumoCodeById, updateAppSumoCode } from '@increaser/db/appSumo'
 
-interface Input {
-  code: string
-}
-
-export const redeemAppSumoCode = async (
-  _: any,
-  { input: { code } }: { input: Input },
+export const redeemAppSumoCode: MutationResolvers['redeemAppSumoCode'] = async (
+  _,
+  { input: { code } },
   context: OperationContext,
 ) => {
   const userId = assertUserId(context)
 
-  const appSumoCode = await appSumoCodesDb.getAppSumoCodeById(code)
+  const appSumoCode = await getAppSumoCodeById(code)
   if (!appSumoCode) {
     throw new GraphQLError('Provided AppSumo code does not exist', {
       extensions: {
@@ -33,6 +30,8 @@ export const redeemAppSumoCode = async (
     })
   }
 
-  await appSumoCodesDb.updateAppSumoCode(code, { userId })
-  await usersDb.updateUser(userId, { appSumo: { code } })
+  await updateAppSumoCode(code, { userId })
+  await updateUser(userId, { appSumo: { code } })
+
+  return true
 }

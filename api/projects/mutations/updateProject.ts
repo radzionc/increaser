@@ -1,25 +1,18 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
-import * as projectsDB from '../db'
+import { MutationResolvers } from '../../gql/schema'
+import * as projectsDb from '@increaser/db/project'
 
-interface Input {
-  id: string
-  name?: string
-  color?: number
-  emoji?: string
-  allocatedMinutesPerWeek?: number
-}
-
-export const updateProject = async (
-  _: any,
-  { input }: { input: Input },
+export const updateProject: MutationResolvers['updateProject'] = async (
+  _,
+  { input },
   context: OperationContext,
 ) => {
   const userId = assertUserId(context)
 
   const { id, ...fields } = input
 
-  const project = projectsDB.updateProject(userId, id, fields)
+  const project = projectsDb.updateProject(userId, id, fields)
 
   return project
 }

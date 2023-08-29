@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
-import * as habitsDB from '../db'
+import { getHabit, updateHabit } from '@increaser/db/habit'
+import { MutationResolvers } from '../../gql/schema'
 
 interface Input {
   id: string
@@ -21,16 +22,16 @@ export const trackHabitTypeDefs = gql`
   }
 `
 
-export const trackHabit = async (
-  _: any,
-  { input: { id, date, value } }: { input: Input },
+export const trackHabit: MutationResolvers['trackHabit'] = async (
+  _,
+  { input: { id, date, value } },
   context: OperationContext,
 ) => {
   const userId = assertUserId(context)
 
-  const { successes } = await habitsDB.getHabit(userId, id)
+  const { successes } = await getHabit(userId, id)
 
-  await habitsDB.updateHabit(userId, id, {
+  await updateHabit(userId, id, {
     successes: value
       ? [...successes, date]
       : successes.filter((d) => d !== date),

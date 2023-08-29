@@ -39,20 +39,12 @@ const documents = {
     types.AddSetDocument,
   '\n  mutation removeLastSet {\n    removeLastSet\n  }\n':
     types.RemoveLastSetDocument,
-  '\n  mutation updateGoalToFinishWorkBy($input: UpdateGoalToFinishWorkByInput!) {\n    updateGoalToFinishWorkBy(input: $input)\n  }\n':
-    types.UpdateGoalToFinishWorkByDocument,
-  '\n  mutation updateGoalToGoToBedAt($input: UpdateGoalToGoToBedAtInput!) {\n    updateGoalToGoToBedAt(input: $input)\n  }\n':
-    types.UpdateGoalToGoToBedAtDocument,
-  '\n  mutation updateGoalToStartWorkAt($input: UpdateGoalToStartWorkAtInput!) {\n    updateGoalToStartWorkAt(input: $input)\n  }\n':
-    types.UpdateGoalToStartWorkAtDocument,
   '\n  mutation editLastSet($set: SetInput!) {\n    editLastSet(set: $set)\n  }\n':
     types.EditLastSetDocument,
-  '\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      name\n    }\n  }\n':
+  '\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input)\n  }\n':
     types.UpdateUserDocument,
   '\n  query userState($input: UserStateInput!) {\n    userState(input: $input) {\n      sets {\n        start\n        end\n        projectId\n      }\n      prevSets {\n        start\n        end\n        projectId\n      }\n      projects {\n        id\n        name\n        color\n        status\n        emoji\n        total\n        allocatedMinutesPerWeek\n        weeks {\n          year\n          week\n          seconds\n        }\n        months {\n          year\n          month\n          seconds\n        }\n      }\n      habits {\n        id\n        name\n        emoji\n        color\n        startedAt\n        successes\n        order\n      }\n      tasks {\n        id\n        name\n        startedAt\n        isCompleted\n      }\n      email\n      id\n      name\n      country\n      isAnonymous\n      membership {\n        provider\n        subscription {\n          updateUrl\n          cancelUrl\n          planId\n          cancellationEffectiveDate\n          nextBillDate\n          planId\n        }\n      }\n      freeTrialEnd\n      registrationDate\n      weekTimeAllocation\n      goalToStartWorkAt\n      goalToFinishWorkBy\n      goalToGoToBedAt\n      primaryGoal\n      focusSounds {\n        name\n        url\n        favourite\n      }\n    }\n  }\n':
     types.UserStateDocument,
-  '\n  mutation updateWeekTimeAllocation($input: UpdateWeekTimeAllocationInput!) {\n    updateWeekTimeAllocation(input: $input)\n  }\n':
-    types.UpdateWeekTimeAllocationDocument,
 }
 
 /**
@@ -151,44 +143,20 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  mutation updateGoalToFinishWorkBy($input: UpdateGoalToFinishWorkByInput!) {\n    updateGoalToFinishWorkBy(input: $input)\n  }\n',
-): (typeof documents)['\n  mutation updateGoalToFinishWorkBy($input: UpdateGoalToFinishWorkByInput!) {\n    updateGoalToFinishWorkBy(input: $input)\n  }\n']
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: '\n  mutation updateGoalToGoToBedAt($input: UpdateGoalToGoToBedAtInput!) {\n    updateGoalToGoToBedAt(input: $input)\n  }\n',
-): (typeof documents)['\n  mutation updateGoalToGoToBedAt($input: UpdateGoalToGoToBedAtInput!) {\n    updateGoalToGoToBedAt(input: $input)\n  }\n']
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: '\n  mutation updateGoalToStartWorkAt($input: UpdateGoalToStartWorkAtInput!) {\n    updateGoalToStartWorkAt(input: $input)\n  }\n',
-): (typeof documents)['\n  mutation updateGoalToStartWorkAt($input: UpdateGoalToStartWorkAtInput!) {\n    updateGoalToStartWorkAt(input: $input)\n  }\n']
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
   source: '\n  mutation editLastSet($set: SetInput!) {\n    editLastSet(set: $set)\n  }\n',
 ): (typeof documents)['\n  mutation editLastSet($set: SetInput!) {\n    editLastSet(set: $set)\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      name\n    }\n  }\n',
-): (typeof documents)['\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      name\n    }\n  }\n']
+  source: '\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input)\n  }\n',
+): (typeof documents)['\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input)\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
   source: '\n  query userState($input: UserStateInput!) {\n    userState(input: $input) {\n      sets {\n        start\n        end\n        projectId\n      }\n      prevSets {\n        start\n        end\n        projectId\n      }\n      projects {\n        id\n        name\n        color\n        status\n        emoji\n        total\n        allocatedMinutesPerWeek\n        weeks {\n          year\n          week\n          seconds\n        }\n        months {\n          year\n          month\n          seconds\n        }\n      }\n      habits {\n        id\n        name\n        emoji\n        color\n        startedAt\n        successes\n        order\n      }\n      tasks {\n        id\n        name\n        startedAt\n        isCompleted\n      }\n      email\n      id\n      name\n      country\n      isAnonymous\n      membership {\n        provider\n        subscription {\n          updateUrl\n          cancelUrl\n          planId\n          cancellationEffectiveDate\n          nextBillDate\n          planId\n        }\n      }\n      freeTrialEnd\n      registrationDate\n      weekTimeAllocation\n      goalToStartWorkAt\n      goalToFinishWorkBy\n      goalToGoToBedAt\n      primaryGoal\n      focusSounds {\n        name\n        url\n        favourite\n      }\n    }\n  }\n',
 ): (typeof documents)['\n  query userState($input: UserStateInput!) {\n    userState(input: $input) {\n      sets {\n        start\n        end\n        projectId\n      }\n      prevSets {\n        start\n        end\n        projectId\n      }\n      projects {\n        id\n        name\n        color\n        status\n        emoji\n        total\n        allocatedMinutesPerWeek\n        weeks {\n          year\n          week\n          seconds\n        }\n        months {\n          year\n          month\n          seconds\n        }\n      }\n      habits {\n        id\n        name\n        emoji\n        color\n        startedAt\n        successes\n        order\n      }\n      tasks {\n        id\n        name\n        startedAt\n        isCompleted\n      }\n      email\n      id\n      name\n      country\n      isAnonymous\n      membership {\n        provider\n        subscription {\n          updateUrl\n          cancelUrl\n          planId\n          cancellationEffectiveDate\n          nextBillDate\n          planId\n        }\n      }\n      freeTrialEnd\n      registrationDate\n      weekTimeAllocation\n      goalToStartWorkAt\n      goalToFinishWorkBy\n      goalToGoToBedAt\n      primaryGoal\n      focusSounds {\n        name\n        url\n        favourite\n      }\n    }\n  }\n']
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: '\n  mutation updateWeekTimeAllocation($input: UpdateWeekTimeAllocationInput!) {\n    updateWeekTimeAllocation(input: $input)\n  }\n',
-): (typeof documents)['\n  mutation updateWeekTimeAllocation($input: UpdateWeekTimeAllocationInput!) {\n    updateWeekTimeAllocation(input: $input)\n  }\n']
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {}

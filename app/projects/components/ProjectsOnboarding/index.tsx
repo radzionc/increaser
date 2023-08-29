@@ -1,5 +1,5 @@
 import { useCreateProjectsMutation } from 'projects/api/useCreateProjectsMutation'
-import { Project, defaultEmojis } from 'projects/Project'
+import { EnhancedProject, defaultEmojis } from 'projects/Project'
 import { useEffect } from 'react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from 'shared/hooks/usePaletteColorOptions'
@@ -19,7 +19,7 @@ interface Props {
 }
 
 interface ProjectsSetupShape {
-  projects: Pick<Project, 'name' | 'emoji' | 'color'>[]
+  projects: Pick<EnhancedProject, 'name' | 'emoji' | 'color'>[]
 }
 
 export const ProjectsOnboarding = ({ onNext }: Props) => {

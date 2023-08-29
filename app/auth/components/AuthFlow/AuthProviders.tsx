@@ -5,7 +5,7 @@ import { EmailAuthForm } from './EmailAuthForm'
 import { OAuthProviderButton } from './OAuthProviderButton'
 import { AuthProvider } from '@increaser/api-interface/client/graphql'
 
-const supportedOAuthProviders = [AuthProvider.Google, AuthProvider.Facebook]
+const supportedOAuthProviders: AuthProvider[] = ['facebook', 'google']
 
 export const AuthProviders = () => {
   return (

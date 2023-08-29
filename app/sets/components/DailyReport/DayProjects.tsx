@@ -1,16 +1,16 @@
 import { ProjectTotal } from 'projects/components/ProjectTotal'
 import { getProjectsTotalRecord } from 'projects/helpers/getProjectsTotalRecord'
-import { Project } from 'projects/Project'
 import { useMemo } from 'react'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { Set } from 'sets/Set'
 import { useTheme } from 'styled-components'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { AllocationLine } from 'ui/AllocationLine'
+import { EnhancedProject } from 'projects/Project'
 
 interface Props {
   sets: Set[]
-  projectsRecord: Record<string, Project>
+  projectsRecord: Record<string, EnhancedProject>
 }
 
 export const DayProjects = ({ sets, projectsRecord }: Props) => {

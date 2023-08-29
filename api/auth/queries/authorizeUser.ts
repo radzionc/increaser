@@ -1,19 +1,15 @@
-import * as usersDB from '../../users/db'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getSanitizedName } from '../../shared/helpers/getSanitizedName'
 import { freeTrialDays } from '../../membership'
 import { msInDay } from '../../shared/helpers/time'
 import { generateAuthData } from '../generateAuthData'
-import {
-  defaultGoalToStartWorkAt,
-  defaultGoalToFinishWorkBy,
-  defaultGoalToGoToBedAt,
-} from '../../users/User'
+import { getUserByEmail, putUser } from '@increaser/db/user'
+import { userDefaultFields } from '@increaser/entities/User'
 
 interface AuthorizeUserParams {
   email: string
   name?: string
-  country: string | null
+  country?: string
   timeZone: number
 }
 
@@ -23,9 +19,7 @@ export const authorizeUser = async ({
   country,
   timeZone,
 }: AuthorizeUserParams) => {
-  let user = email
-    ? await usersDB.getUserByEmail(email, ['id', 'name', 'email'])
-    : undefined
+  let user = await getUserByEmail(email, ['id', 'name', 'email'])
 
   const isFirstIdentification = !user
   if (!user) {
@@ -37,23 +31,24 @@ export const authorizeUser = async ({
 
     const registrationDate = Date.now()
 
-    await usersDB.putUser({
+    await putUser({
       ...user,
+      ...userDefaultFields,
       country,
       timeZone,
       freeTrialEnd: registrationDate + freeTrialDays * msInDay,
       registrationDate,
-      goalToStartWorkAt: defaultGoalToStartWorkAt,
-      goalToFinishWorkBy: defaultGoalToFinishWorkBy,
-      goalToGoToBedAt: defaultGoalToGoToBedAt,
     })
   }
 
-  const authData = generateAuthData(user.id)
+  const { token, tokenExpirationTime } = generateAuthData(user.id)
 
   return {
-    ...user,
+    email,
     firstIdentification: isFirstIdentification,
-    ...authData,
+    token,
+    tokenExpirationTime,
+    name: user.name,
+    id: user.id,
   } as const
 }

@@ -1,4 +1,4 @@
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 
-export const getProjectBudgetProgress = (project: Project) =>
+export const getProjectBudgetProgress = (project: EnhancedProject) =>
   project.doneMinutesThisWeek / project.allocatedMinutesPerWeek

@@ -47,8 +47,8 @@ export type PrimaryGoal = (typeof primaryGoals)[number]
 export type User = {
   primaryGoal: PrimaryGoal
   id: string
-  email?: string
-  country: string
+  email: string
+  country?: string
   name?: string
   sets: Set[]
   prevSets: Set[]
@@ -79,7 +79,21 @@ export type User = {
   updatedAt: number
 }
 
-export const userDefaultFields: Partial<User> = {
+export const userDefaultFields: Pick<
+  User,
+  | 'focusSounds'
+  | 'sets'
+  | 'prevSets'
+  | 'tasks'
+  | 'projects'
+  | 'habits'
+  | 'weekTimeAllocation'
+  | 'primaryGoal'
+  | 'goalToStartWorkAt'
+  | 'goalToFinishWorkBy'
+  | 'goalToGoToBedAt'
+  | 'isAnonymous'
+> = {
   focusSounds: defaultFocusSounds,
   sets: [],
   prevSets: [],
@@ -88,4 +102,8 @@ export const userDefaultFields: Partial<User> = {
   habits: {},
   weekTimeAllocation: defaultWeekTimeAllocation,
   primaryGoal: 'workMore',
+  isAnonymous: true,
+  goalToStartWorkAt: defaultGoalToStartWorkAt,
+  goalToFinishWorkBy: defaultGoalToFinishWorkBy,
+  goalToGoToBedAt: defaultGoalToGoToBedAt,
 }

@@ -1,14 +1,10 @@
 import { validateWithGoogle } from './validateWithGoogle'
 import { validateWithFacebook } from './validateWithFacebook'
 import { ValidatorArgs } from './OAuthValidator'
-
-export enum OAuthProvider {
-  GOOGLE = 'google',
-  FACEBOOK = 'facebook',
-}
+import { AuthProvider } from '../../../gql/schema'
 
 export interface GetValidatedUserArgs extends ValidatorArgs {
-  provider: OAuthProvider
+  provider: AuthProvider
 }
 
 export const getValidatedUser = async ({
@@ -17,9 +13,10 @@ export const getValidatedUser = async ({
   redirectUri,
 }: GetValidatedUserArgs) => {
   const validate = {
-    [OAuthProvider.GOOGLE]: validateWithGoogle,
-    [OAuthProvider.FACEBOOK]: validateWithFacebook,
+    [AuthProvider.Google]: validateWithGoogle,
+    [AuthProvider.Facebook]: validateWithFacebook,
   }[provider]
+
   if (!validate) {
     throw new Error(`provider ${provider} is not supported`)
   }

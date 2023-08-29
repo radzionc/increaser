@@ -1,4 +1,4 @@
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 import styled, { css } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { Center } from '@increaser/ui/ui/Center'
@@ -14,7 +14,7 @@ import { ProjectGoalBadge } from './ProjectGoalBadge'
 interface ProjectRadioInputProps {
   value?: string
   onChange: (value: string) => void
-  options: Project[]
+  options: EnhancedProject[]
 }
 
 export const FocusProjectInput = ({

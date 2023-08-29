@@ -1,44 +1,19 @@
-import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
-import * as habitsDB from '../db'
+import * as habitsDB from '@increaser/db/habit'
+import { MutationResolvers } from '../../gql/schema'
+import { Habit } from '@increaser/entities/Habit'
 
-interface Input {
-  id: string
-  name?: string
-  color?: number
-  emoji?: string
-  startedAt?: number
-  successes?: string[]
-  order?: number
-}
-
-export const updateHabitTypeDefs = gql`
-  input UpdateHabitInput {
-    id: ID!
-    name: String
-    color: Int
-    order: Float
-    emoji: String
-    startedAt: Float
-    successes: [String]
-  }
-
-  extend type Mutation {
-    updateHabit(input: UpdateHabitInput!): Habit
-  }
-`
-
-export const updateHabit = async (
-  _: any,
-  { input }: { input: Input },
+export const updateHabit: MutationResolvers['updateHabit'] = async (
+  _,
+  { input },
   context: OperationContext,
 ) => {
   const userId = assertUserId(context)
 
   const { id, ...fields } = input
 
-  const habit = habitsDB.updateHabit(userId, id, fields)
+  const habit = habitsDB.updateHabit(userId, id, fields as Partial<Habit>)
 
   return habit
 }

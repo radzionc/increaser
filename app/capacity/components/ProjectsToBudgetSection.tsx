@@ -1,4 +1,3 @@
-import { Project } from 'projects/Project'
 import { getProjectOverBudgetTime } from 'projects/utils/getProjectOverBudgetTime'
 import React from 'react'
 import { formatDuration } from '@increaser/utils/formatDuration'
@@ -7,9 +6,10 @@ import { Circle } from '@increaser/ui/ui/Circle'
 import { Text } from '@increaser/ui/ui/Text'
 import { AllocationLine } from 'ui/AllocationLine'
 import { CheckCircleIcon } from '@increaser/ui/ui/icons/CheckCircleIcon'
+import { EnhancedProject } from 'projects/Project'
 
 interface ProjectsToBudgetSectionProps {
-  projects: Project[]
+  projects: EnhancedProject[]
 }
 
 const Container = styled.div`

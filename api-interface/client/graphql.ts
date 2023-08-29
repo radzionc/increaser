@@ -34,10 +34,7 @@ export type AppStats = {
   registeredUsersNumber: Scalars['Int']['output']
 }
 
-export enum AuthProvider {
-  Facebook = 'facebook',
-  Google = 'google',
-}
+export type AuthProvider = 'facebook' | 'google'
 
 export type CreateHabitInput = {
   color: Scalars['Int']['input']
@@ -116,10 +113,7 @@ export type Membership = {
   subscription?: Maybe<Subscription>
 }
 
-export enum MembershipProvider {
-  AppSumo = 'AppSumo',
-  Paddle = 'Paddle',
-}
+export type MembershipProvider = 'AppSumo' | 'Paddle'
 
 export type Mutation = {
   __typename?: 'Mutation'
@@ -133,13 +127,9 @@ export type Mutation = {
   removeLastSet?: Maybe<Scalars['Boolean']['output']>
   sendAuthLinkByEmail?: Maybe<Scalars['Boolean']['output']>
   trackHabit?: Maybe<Scalars['Boolean']['output']>
-  updateGoalToFinishWorkBy?: Maybe<Scalars['Int']['output']>
-  updateGoalToGoToBedAt?: Maybe<Scalars['Int']['output']>
-  updateGoalToStartWorkAt?: Maybe<Scalars['Int']['output']>
   updateHabit?: Maybe<Habit>
   updateProject?: Maybe<Project>
-  updateUser?: Maybe<UpdateUserResult>
-  updateWeekTimeAllocation?: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+  updateUser?: Maybe<Scalars['Boolean']['output']>
 }
 
 export type MutationAddSetArgs = {
@@ -167,7 +157,7 @@ export type MutationEditLastSetArgs = {
 }
 
 export type MutationRedeemAppSumoCodeArgs = {
-  input?: InputMaybe<RedeemAppSumoCodeInput>
+  input: RedeemAppSumoCodeInput
 }
 
 export type MutationSendAuthLinkByEmailArgs = {
@@ -176,18 +166,6 @@ export type MutationSendAuthLinkByEmailArgs = {
 
 export type MutationTrackHabitArgs = {
   input: TrackHabitInput
-}
-
-export type MutationUpdateGoalToFinishWorkByArgs = {
-  input: UpdateGoalToFinishWorkByInput
-}
-
-export type MutationUpdateGoalToGoToBedAtArgs = {
-  input?: InputMaybe<UpdateGoalToGoToBedAtInput>
-}
-
-export type MutationUpdateGoalToStartWorkAtArgs = {
-  input: UpdateGoalToStartWorkAtInput
 }
 
 export type MutationUpdateHabitArgs = {
@@ -202,15 +180,7 @@ export type MutationUpdateUserArgs = {
   input: UpdateUserInput
 }
 
-export type MutationUpdateWeekTimeAllocationArgs = {
-  input: UpdateWeekTimeAllocationInput
-}
-
-export enum PrimaryGoal {
-  Awareness = 'awareness',
-  WorkLess = 'workLess',
-  WorkMore = 'workMore',
-}
+export type PrimaryGoal = 'awareness' | 'workLess' | 'workMore'
 
 export type Project = {
   __typename?: 'Project'
@@ -232,10 +202,7 @@ export type ProjectMonth = {
   year: Scalars['Int']['output']
 }
 
-export enum ProjectStatus {
-  Active = 'ACTIVE',
-  Inactive = 'INACTIVE',
-}
+export type ProjectStatus = 'ACTIVE' | 'INACTIVE'
 
 export type ProjectWeek = {
   __typename?: 'ProjectWeek'
@@ -247,7 +214,6 @@ export type ProjectWeek = {
 export type Query = {
   __typename?: 'Query'
   appStats: AppStats
-  identify: IdentificationResult
   identifyWithEmail: IdentificationResult
   identifyWithOAuth: IdentificationResult
   projects: Array<Project>
@@ -283,15 +249,15 @@ export type Set = {
 
 export type SetInput = {
   end: Scalars['Float']['input']
-  projectId?: InputMaybe<Scalars['ID']['input']>
+  projectId: Scalars['ID']['input']
   start: Scalars['Float']['input']
 }
 
 export type Subscription = {
   __typename?: 'Subscription'
   cancelUrl: Scalars['String']['output']
-  cancellationEffectiveDate: Scalars['String']['output']
-  nextBillDate: Scalars['String']['output']
+  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
+  nextBillDate?: Maybe<Scalars['String']['output']>
   planId: Scalars['String']['output']
   updateUrl: Scalars['String']['output']
 }
@@ -312,21 +278,9 @@ export type TaskInput = {
 }
 
 export type TrackHabitInput = {
-  date?: InputMaybe<Scalars['String']['input']>
+  date: Scalars['String']['input']
   id: Scalars['ID']['input']
-  value?: InputMaybe<Scalars['Boolean']['input']>
-}
-
-export type UpdateGoalToFinishWorkByInput = {
-  goalToFinishWorkBy: Scalars['Int']['input']
-}
-
-export type UpdateGoalToGoToBedAtInput = {
-  goalToGoToBedAt: Scalars['Int']['input']
-}
-
-export type UpdateGoalToStartWorkAtInput = {
-  goalToStartWorkAt: Scalars['Int']['input']
+  value: Scalars['Boolean']['input']
 }
 
 export type UpdateHabitInput = {
@@ -350,27 +304,20 @@ export type UpdateProjectInput = {
 
 export type UpdateUserInput = {
   country?: InputMaybe<Scalars['String']['input']>
-  focusSounds?: InputMaybe<Array<InputMaybe<FocusSoundInput>>>
+  focusSounds?: InputMaybe<Array<FocusSoundInput>>
+  goalToFinishWorkBy?: InputMaybe<Scalars['Int']['input']>
+  goalToGoToBedAt?: InputMaybe<Scalars['Int']['input']>
+  goalToStartWorkAt?: InputMaybe<Scalars['Int']['input']>
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
   primaryGoal?: InputMaybe<PrimaryGoal>
-  tasks?: InputMaybe<Array<InputMaybe<TaskInput>>>
-}
-
-export type UpdateUserResult = {
-  __typename?: 'UpdateUserResult'
-  focusSounds?: Maybe<Array<Maybe<FocusSound>>>
-  name?: Maybe<Scalars['String']['output']>
-  primaryGoal?: Maybe<PrimaryGoal>
-}
-
-export type UpdateWeekTimeAllocationInput = {
-  allocation: Array<Scalars['Float']['input']>
+  tasks?: InputMaybe<Array<TaskInput>>
+  weekTimeAllocation?: InputMaybe<Array<Scalars['Float']['input']>>
 }
 
 export type UserState = {
   __typename?: 'UserState'
-  country: Scalars['String']['output']
+  country?: Maybe<Scalars['String']['output']>
   email: Scalars['String']['output']
   focusSounds: Array<FocusSound>
   freeTrialEnd: Scalars['Float']['output']
@@ -380,8 +327,8 @@ export type UserState = {
   habits: Array<Habit>
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
-  membership: Membership
-  name: Scalars['String']['output']
+  membership?: Maybe<Membership>
+  name?: Maybe<Scalars['String']['output']>
   prevSets: Array<Set>
   primaryGoal: PrimaryGoal
   projects: Array<Project>
@@ -586,33 +533,6 @@ export type RemoveLastSetMutation = {
   removeLastSet?: boolean | null
 }
 
-export type UpdateGoalToFinishWorkByMutationVariables = Exact<{
-  input: UpdateGoalToFinishWorkByInput
-}>
-
-export type UpdateGoalToFinishWorkByMutation = {
-  __typename?: 'Mutation'
-  updateGoalToFinishWorkBy?: number | null
-}
-
-export type UpdateGoalToGoToBedAtMutationVariables = Exact<{
-  input: UpdateGoalToGoToBedAtInput
-}>
-
-export type UpdateGoalToGoToBedAtMutation = {
-  __typename?: 'Mutation'
-  updateGoalToGoToBedAt?: number | null
-}
-
-export type UpdateGoalToStartWorkAtMutationVariables = Exact<{
-  input: UpdateGoalToStartWorkAtInput
-}>
-
-export type UpdateGoalToStartWorkAtMutation = {
-  __typename?: 'Mutation'
-  updateGoalToStartWorkAt?: number | null
-}
-
 export type EditLastSetMutationVariables = Exact<{
   set: SetInput
 }>
@@ -628,7 +548,7 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = {
   __typename?: 'Mutation'
-  updateUser?: { __typename?: 'UpdateUserResult'; name?: string | null } | null
+  updateUser?: boolean | null
 }
 
 export type UserStateQueryVariables = Exact<{
@@ -641,8 +561,8 @@ export type UserStateQuery = {
     __typename?: 'UserState'
     email: string
     id: string
-    name: string
-    country: string
+    name?: string | null
+    country?: string | null
     isAnonymous: boolean
     freeTrialEnd: number
     registrationDate: number
@@ -702,7 +622,7 @@ export type UserStateQuery = {
       startedAt: number
       isCompleted: boolean
     }>
-    membership: {
+    membership?: {
       __typename?: 'Membership'
       provider: MembershipProvider
       subscription?: {
@@ -710,10 +630,10 @@ export type UserStateQuery = {
         updateUrl: string
         cancelUrl: string
         planId: string
-        cancellationEffectiveDate: string
-        nextBillDate: string
+        cancellationEffectiveDate?: string | null
+        nextBillDate?: string | null
       } | null
-    }
+    } | null
     focusSounds: Array<{
       __typename?: 'FocusSound'
       name: string
@@ -721,15 +641,6 @@ export type UserStateQuery = {
       favourite?: boolean | null
     }>
   }
-}
-
-export type UpdateWeekTimeAllocationMutationVariables = Exact<{
-  input: UpdateWeekTimeAllocationInput
-}>
-
-export type UpdateWeekTimeAllocationMutation = {
-  __typename?: 'Mutation'
-  updateWeekTimeAllocation?: Array<number | null> | null
 }
 
 export const SendAuthLinkByEmailDocument = {
@@ -1457,150 +1368,6 @@ export const RemoveLastSetDocument = {
   RemoveLastSetMutation,
   RemoveLastSetMutationVariables
 >
-export const UpdateGoalToFinishWorkByDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'updateGoalToFinishWorkBy' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'input' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'UpdateGoalToFinishWorkByInput' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateGoalToFinishWorkBy' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'input' },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UpdateGoalToFinishWorkByMutation,
-  UpdateGoalToFinishWorkByMutationVariables
->
-export const UpdateGoalToGoToBedAtDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'updateGoalToGoToBedAt' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'input' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'UpdateGoalToGoToBedAtInput' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateGoalToGoToBedAt' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'input' },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UpdateGoalToGoToBedAtMutation,
-  UpdateGoalToGoToBedAtMutationVariables
->
-export const UpdateGoalToStartWorkAtDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'updateGoalToStartWorkAt' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'input' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'UpdateGoalToStartWorkAtInput' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateGoalToStartWorkAt' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'input' },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UpdateGoalToStartWorkAtMutation,
-  UpdateGoalToStartWorkAtMutationVariables
->
 export const EditLastSetDocument = {
   kind: 'Document',
   definitions: [
@@ -1682,12 +1449,6 @@ export const UpdateUserDocument = {
                 },
               },
             ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-              ],
-            },
           },
         ],
       },
@@ -1976,51 +1737,3 @@ export const UserStateDocument = {
     },
   ],
 } as unknown as DocumentNode<UserStateQuery, UserStateQueryVariables>
-export const UpdateWeekTimeAllocationDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'updateWeekTimeAllocation' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'input' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'UpdateWeekTimeAllocationInput' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateWeekTimeAllocation' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'input' },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UpdateWeekTimeAllocationMutation,
-  UpdateWeekTimeAllocationMutationVariables
->

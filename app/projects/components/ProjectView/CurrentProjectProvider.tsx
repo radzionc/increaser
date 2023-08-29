@@ -1,5 +1,5 @@
-import { Project } from 'projects/Project'
 import { getValueProviderSetup } from '@increaser/ui/state/getValueProviderSetup'
+import { EnhancedProject } from 'projects/Project'
 
 export const { useValue: useCurrentProject, provider: CurrentProjectProvider } =
-  getValueProviderSetup<Project>('Project')
+  getValueProviderSetup<EnhancedProject>('Project')

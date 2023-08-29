@@ -1,9 +1,9 @@
-import { Project, ProjectResponse, ProjectStatus } from 'projects/Project'
 import { useMutation } from 'react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
 import { createProejctMutationDocument } from './useCreateProjectMutation'
+import { Project } from '@increaser/entities/Project'
 
 interface CreateProjectsParams {
   projects: Pick<Project, 'name' | 'emoji' | 'color'>[]
@@ -20,11 +20,11 @@ export const useCreateProjectsMutation = () => {
       id: getId(),
     }))
 
-    const newProjects: ProjectResponse[] = inputs.map((input) => ({
+    const newProjects: Project[] = inputs.map((input) => ({
       ...input,
 
       total: 0,
-      status: ProjectStatus.Active,
+      status: 'ACTIVE',
       weeks: [],
       months: [],
 

@@ -1,17 +1,16 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
-import * as projectsDB from '../db'
+import { MutationResolvers } from '../../gql/schema'
+import * as projectsDb from '@increaser/db/project'
 
-interface Input {
-  id: string
-}
-
-export const deleteProject = async (
-  _: any,
-  { input: { id } }: { input: Input },
+export const deleteProject: MutationResolvers['deleteProject'] = async (
+  _,
+  { input: { id } },
   context: OperationContext,
 ) => {
   const userId = assertUserId(context)
 
-  await projectsDB.deleteProject(userId, id)
+  await projectsDb.deleteProject(userId, id)
+
+  return true
 }

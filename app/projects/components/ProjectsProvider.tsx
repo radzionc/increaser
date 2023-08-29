@@ -1,5 +1,4 @@
 import { toProject } from 'projects/helpers/toProject'
-import { Project, ProjectStatus } from 'projects/Project'
 import { createContext, useMemo } from 'react'
 import { useCurrentWeekSets } from 'sets/hooks/useCurrentWeekSets'
 import { useStartOfWeek } from 'shared/hooks/useStartOfWeek'
@@ -12,6 +11,7 @@ import { toWeek } from '@increaser/utils/toWeek'
 import { useTheme } from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_WEEK } from '@increaser/utils/time'
+import { EnhancedProject } from 'projects/Project'
 
 export const weeksToDisplay = 4
 
@@ -26,11 +26,11 @@ export interface WeekSummary {
 }
 
 interface ProjectsState {
-  projects: Project[]
-  activeProjects: Project[]
-  inactiveProjects: Project[]
-  allocatedProjects: Project[]
-  projectsRecord: Record<string, Project>
+  projects: EnhancedProject[]
+  activeProjects: EnhancedProject[]
+  inactiveProjects: EnhancedProject[]
+  allocatedProjects: EnhancedProject[]
+  projectsRecord: Record<string, EnhancedProject>
   weeks: WeekSummary[]
 }
 
@@ -38,8 +38,8 @@ const getProjectSortingNumber = ({
   allocatedMinutesPerWeek,
   doneMinutesThisWeek,
   status,
-}: Project) => {
-  if (status !== ProjectStatus.Active) return 100000000000
+}: EnhancedProject) => {
+  if (status !== 'ACTIVE') return 100000000000
   if (!allocatedMinutesPerWeek && !doneMinutesThisWeek) return 1000000000
   if (!allocatedMinutesPerWeek) return doneMinutesThisWeek
 

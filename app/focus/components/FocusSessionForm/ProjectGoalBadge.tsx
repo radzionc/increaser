@@ -1,4 +1,4 @@
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 import { useWeekday } from 'shared/hooks/useWeekday'
 import { sum } from '@increaser/utils/sum'
 import { useTheme } from 'styled-components'
@@ -10,7 +10,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 interface ProjectGoalBadgeProps {
-  project: Project
+  project: EnhancedProject
 }
 
 export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {

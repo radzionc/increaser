@@ -1,4 +1,3 @@
-import { Project } from 'projects/Project'
 import { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
@@ -9,6 +8,7 @@ import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCS
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 import Link from 'next/link'
 import { getProjectPath } from 'router/Path'
+import { EnhancedProject } from 'projects/Project'
 
 export const Container = styled(Link)<{
   selected: boolean
@@ -35,7 +35,7 @@ export const SmallScreenProjectNavigationItem = ({
   emoji,
   id,
   hslaColor,
-}: Project) => {
+}: EnhancedProject) => {
   const ref = useRef<HTMLAnchorElement>(null)
   const { currentProject } = useProjectExplorer()
   const isSelected = id === currentProject?.id

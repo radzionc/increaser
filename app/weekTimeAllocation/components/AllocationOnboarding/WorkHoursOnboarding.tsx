@@ -9,8 +9,8 @@ import { Modal } from '@increaser/ui/ui/Modal'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { getWeekTimeAllocation } from 'weekTimeAllocation/helpers/getWeekTimeAllocation'
-import { useUpdateWeekTimeAllocation } from 'weekTimeAllocation/hooks/useUpdateWeekTimeAllocation'
 import { ContinueButton } from 'ui/ContinueButton'
+import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 
 interface Props {
   onNext: () => void
@@ -29,7 +29,7 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
     name: 'weekendMinutes',
   })
 
-  const { mutate: updateAllocation } = useUpdateWeekTimeAllocation()
+  const { mutate: updateUser } = useUpdateUserMutation()
   const theme = useTheme()
 
   return (
@@ -60,11 +60,13 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
           </LabeledValue>
           <ContinueButton
             onClick={handleSubmit(({ workdayMinutes, weekendMinutes }) => {
-              const allocation = getWeekTimeAllocation(
+              const weekTimeAllocation = getWeekTimeAllocation(
                 workdayMinutes,
                 weekendMinutes,
               )
-              updateAllocation(allocation)
+              updateUser({
+                weekTimeAllocation,
+              })
               onNext()
             })}
           />

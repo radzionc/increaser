@@ -1,8 +1,8 @@
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 import { DefaultTheme } from 'styled-components'
 
 export const getProjectColor = (
-  projectsRecord: Record<string, Project>,
+  projectsRecord: Record<string, EnhancedProject>,
   theme: DefaultTheme,
   projectId = '',
 ) => {

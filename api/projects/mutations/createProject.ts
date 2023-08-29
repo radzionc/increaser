@@ -1,46 +1,25 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import * as projectsDB from '../db'
-import gql from 'graphql-tag'
 
 import { defaultProjectProperties, Project } from '../Project'
+import { MutationResolvers } from '../../gql/schema'
+import { putProject } from '@increaser/db/project'
 
-export const createProjectTypeDefs = gql`
-  input CreateProjectInput {
-    id: String
-    name: String!
-    color: Int!
-    emoji: String!
-    allocatedMinutesPerWeek: Float!
-  }
-
-  extend type Mutation {
-    createProject(input: CreateProjectInput!): Project
-  }
-`
-
-interface Input {
-  name: string
-  color: number
-  emoji: string
-  allocatedMinutesPerWeek: number
-}
-
-export const createProject = async (
-  _: any,
-  { input }: { input: Input },
+export const createProject: MutationResolvers['createProject'] = async (
+  _,
+  { input },
   context: OperationContext,
-): Promise<Project> => {
+) => {
   const userId = assertUserId(context)
 
   const project: Project = {
-    id: getId(),
     ...defaultProjectProperties,
     ...input,
+    id: input.id || getId(),
   }
 
-  await projectsDB.putProject(userId, project)
+  await putProject(userId, project)
 
   return project
 }

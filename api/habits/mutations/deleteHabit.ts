@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
-import * as habitsDB from '../db'
+import { MutationResolvers } from '../../gql/schema'
+import * as habitsDb from '@increaser/db/habit'
 
 interface Input {
   id: string
@@ -17,12 +18,14 @@ export const deleteHabitTypeDefs = gql`
   }
 `
 
-export const deleteHabit = async (
+export const deleteHabit: MutationResolvers['deleteHabit'] = async (
   _: any,
   { input: { id } }: { input: Input },
   context: OperationContext,
 ) => {
   const userId = assertUserId(context)
 
-  await habitsDB.deleteHabit(userId, id)
+  await habitsDb.deleteHabit(userId, id)
+
+  return true
 }

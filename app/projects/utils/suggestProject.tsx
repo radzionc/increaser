@@ -1,10 +1,10 @@
 import { getLastItem } from '@increaser/utils/getLastItem'
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 import { shouldBeNewBlock } from 'sets/Block'
 import { Set } from 'sets/Set'
 
 interface SuggestProjectParams {
-  projects: Project[]
+  projects: EnhancedProject[]
   todaySets: Set[]
 }
 

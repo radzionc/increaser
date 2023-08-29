@@ -1,10 +1,10 @@
-import * as usersDb from '../../users/db'
+import { getUserById, updateUser } from '@increaser/db/user'
 
 export const removeLastSet = async (userId: string) => {
-  const { sets } = await usersDb.getUserById(userId, ['sets'])
+  const { sets } = await getUserById(userId, ['sets'])
   const newSets = sets.slice(0, -1)
 
-  await usersDb.updateUser(userId, {
+  await updateUser(userId, {
     sets: newSets,
   })
 }

@@ -1,4 +1,4 @@
 export interface OperationContext {
-  userId: string | null
-  country: string | null
+  userId?: string
+  country?: string
 }

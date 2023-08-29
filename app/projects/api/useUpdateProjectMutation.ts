@@ -1,8 +1,8 @@
-import { Project } from 'projects/Project'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
 import { graphql } from '@increaser/api-interface/client'
+import { Project } from '@increaser/entities/Project'
 
 interface UpdateProjectMutationInput {
   id: string

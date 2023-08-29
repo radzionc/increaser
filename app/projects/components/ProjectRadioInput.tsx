@@ -1,4 +1,3 @@
-import { Project } from 'projects/Project'
 import styled, { css } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
@@ -8,11 +7,12 @@ import { Text } from '@increaser/ui/ui/Text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
+import { EnhancedProject } from 'projects/Project'
 
 interface ProjectRadioInputProps {
   value?: string
   onChange: (value: string) => void
-  options: Project[]
+  options: EnhancedProject[]
 }
 
 export const ProjectRadioInput = ({

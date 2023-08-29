@@ -1,7 +1,7 @@
-import { useProjectsRecord } from './useProjectsRecord'
+import { useProjects } from './useProjects'
 
 export const useProject = (id: string | null) => {
-  const record = useProjectsRecord()
+  const { projectsRecord } = useProjects()
 
-  return id ? record[id] || null : null
+  return id ? projectsRecord[id] || null : null
 }

@@ -1,6 +1,5 @@
 import { useDeleteProjectMutation } from 'projects/api/userDeleteProjectMutation'
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
-import { ProjectStatus } from 'projects/Project'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { TextButton } from '@increaser/ui/ui/buttons/TextButton'
 import { TrashBinIcon } from '@increaser/ui/ui/icons/TrashBinIcon'
@@ -46,7 +45,7 @@ export const DeleteProject = () => {
                 This action will remove all the analytics related to the
                 project.
               </Text>
-              {status === ProjectStatus.Active && (
+              {status === 'ACTIVE' && (
                 <Text color="supporting">
                   To keep the data but hide the project from other parts of the
                   app -{' '}
@@ -54,7 +53,7 @@ export const DeleteProject = () => {
                     onClick={() => {
                       updateProject({
                         id,
-                        fields: { status: ProjectStatus.Inactive },
+                        fields: { status: 'INACTIVE' },
                       })
                       onClose()
                     }}

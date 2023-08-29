@@ -1,4 +1,4 @@
-import schemaPath from './schema.graphql'
+import schemaPath from '@increaser/api-interface/schema.graphql'
 import path from 'path'
 
 import { readFileSync } from 'fs'

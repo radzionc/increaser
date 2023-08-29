@@ -1,11 +1,11 @@
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 import { ComponentProps } from 'react'
 import { Text } from '@increaser/ui/ui/Text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
 
 type Props = ComponentProps<typeof Text> & {
   emojiSize?: number
-  project: Pick<Project, 'emoji' | 'name'>
+  project: Pick<EnhancedProject, 'emoji' | 'name'>
 }
 
 export const ProjectNameWithEmoji = ({

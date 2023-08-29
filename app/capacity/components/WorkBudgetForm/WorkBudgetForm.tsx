@@ -3,16 +3,16 @@ import { WorkBudgetFormFields } from 'capacity/components/WorkBudgetForm/WorkBud
 import { useEffect } from 'react'
 import { UseFormReturn, useWatch } from 'react-hook-form'
 import { useTheme } from 'styled-components'
+import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useUserState } from 'user/state/UserStateContext'
 import { getWeekTimeAllocation } from 'weekTimeAllocation/helpers/getWeekTimeAllocation'
-import { useUpdateWeekTimeAllocation } from 'weekTimeAllocation/hooks/useUpdateWeekTimeAllocation'
 
 interface Props {
   form: UseFormReturn<WorkBudgetFormShape>
 }
 
 export const WorkBudgetForm = ({ form }: Props) => {
-  const { mutate: updateAllocation } = useUpdateWeekTimeAllocation()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const { control } = form
 
@@ -37,13 +37,15 @@ export const WorkBudgetForm = ({ form }: Props) => {
     })
 
     const timeout = setTimeout(() => {
-      updateAllocation(weekTimeAllocation)
+      updateUser({
+        weekTimeAllocation,
+      })
     }, 2000)
 
     return () => {
       clearTimeout(timeout)
     }
-  }, [updateAllocation, updateState, weekendMinutes, workdayMinutes])
+  }, [updateState, updateUser, weekendMinutes, workdayMinutes])
 
   const { colors } = useTheme()
 

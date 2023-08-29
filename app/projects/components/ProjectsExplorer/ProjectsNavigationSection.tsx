@@ -1,4 +1,3 @@
-import { Project } from 'projects/Project'
 import { ReactNode } from 'react'
 import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 import { Circle } from '@increaser/ui/ui/Circle'
@@ -7,11 +6,12 @@ import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 
 import { ProjectNavigationItem } from './ProjectNavigationItem'
+import { EnhancedProject } from 'projects/Project'
 
 interface ProjectsNavigationSectionProps {
   name: string
   color: HSLA
-  projects: Project[]
+  projects: EnhancedProject[]
   children?: ReactNode
 }
 

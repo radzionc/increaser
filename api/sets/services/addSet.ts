@@ -1,6 +1,6 @@
-import * as setsDb from '../db'
+import { putSet } from '@increaser/db/set'
 import { Set } from '../../users/User'
 
 export const addSet = async (userId: string, set: Set) => {
-  await setsDb.putSet(userId, set)
+  await putSet(userId, set)
 }

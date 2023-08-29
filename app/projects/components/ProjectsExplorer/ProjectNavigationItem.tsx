@@ -1,4 +1,3 @@
-import { Project } from 'projects/Project'
 import { useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
@@ -14,6 +13,7 @@ import { S_IN_HOUR } from '@increaser/utils/time'
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 import Link from 'next/link'
 import { getProjectPath } from 'router/Path'
+import { EnhancedProject } from 'projects/Project'
 
 export const IconWr = styled.div<{ selected: boolean }>`
   display: flex;
@@ -51,7 +51,7 @@ export const Container = styled(Panel)<{
   }
 `
 
-export const ProjectNavigationItem = (project: Project) => {
+export const ProjectNavigationItem = (project: EnhancedProject) => {
   const { currentProject } = useProjectExplorer()
 
   const ref = useRef<HTMLAnchorElement>(null)

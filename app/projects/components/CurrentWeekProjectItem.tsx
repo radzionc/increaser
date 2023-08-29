@@ -1,4 +1,3 @@
-import { Project, ProjectStatus } from 'projects/Project'
 import { formatDuration } from '@increaser/utils/formatDuration'
 import { useTheme } from 'styled-components'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
@@ -8,6 +7,7 @@ import {
 } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
 import { AllocationLine } from 'ui/AllocationLine'
+import { EnhancedProject } from 'projects/Project'
 
 export const CurrentWeekProjectItem = ({
   doneMinutesThisWeek,
@@ -16,14 +16,14 @@ export const CurrentWeekProjectItem = ({
   name,
   color,
   status,
-}: Project) => {
+}: EnhancedProject) => {
   const theme = useTheme()
 
   const isUnderBudget = !!(
     allocatedMinutesPerWeek && allocatedMinutesPerWeek > doneMinutesThisWeek
   )
 
-  const isActive = status === ProjectStatus.Active
+  const isActive = status === 'ACTIVE'
 
   return (
     <HStack

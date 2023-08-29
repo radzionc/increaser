@@ -1,7 +1,7 @@
-import { Project } from 'projects/Project'
+import { EnhancedProject } from 'projects/Project'
 
 export const getProjectEmoji = (
-  projectsRecord: Record<string, Project>,
+  projectsRecord: Record<string, EnhancedProject>,
   projectId = '',
 ) => {
   const project = projectsRecord[projectId]

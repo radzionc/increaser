@@ -1,4 +1,4 @@
-import aws from 'aws-sdk'
+import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2'
 
 type HtmlTemplate = 'auth' | 'appsumo-refund'
 
@@ -111,20 +111,20 @@ interface SendEmailParameters {
   source: string
 }
 
-const ses = new aws.SES({ region: 'us-east-1' })
+const client = new SESv2Client({ region: 'us-east-1' })
 
 export const sendEmail = ({
   email,
   body,
   subject,
   source,
-}: SendEmailParameters) =>
-  ses
-    .sendEmail({
-      Destination: {
-        ToAddresses: [email],
-      },
-      Message: {
+}: SendEmailParameters) => {
+  const command = new SendEmailCommand({
+    Destination: {
+      ToAddresses: [email],
+    },
+    Content: {
+      Simple: {
         Body: {
           Html: {
             Data: body,
@@ -134,6 +134,9 @@ export const sendEmail = ({
           Data: subject,
         },
       },
-      Source: source,
-    })
-    .promise()
+    },
+    FromEmailAddress: source,
+  })
+
+  return client.send(command)
+}

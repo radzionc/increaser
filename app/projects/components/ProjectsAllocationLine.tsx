@@ -1,15 +1,15 @@
 import { getProjectsTotalRecord } from 'projects/helpers/getProjectsTotalRecord'
-import { Project } from 'projects/Project'
 import { getProjectColor } from 'projects/utils/getProjectColor'
 import { Set } from 'sets/Set'
 import { useTheme } from 'styled-components'
 import { AllocationLine } from 'ui/AllocationLine'
 import { MS_IN_MIN } from '@increaser/utils/time'
+import { EnhancedProject } from 'projects/Project'
 
 interface Props {
   sets: Set[]
   allocatedMinutes: number
-  projectsRecord: Record<string, Project>
+  projectsRecord: Record<string, EnhancedProject>
 }
 
 export const ProjectsAllocationLine = ({

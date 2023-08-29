@@ -1,6 +1,6 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
-import { Project, ProjectStatus } from 'projects/Project'
 import { Switch } from '@increaser/ui/ui/Switch/Switch'
+import { Project } from '@increaser/entities/Project'
 
 type ProjectStatusToggleProps = Pick<Project, 'status' | 'id'>
 
@@ -10,15 +10,15 @@ export const ProjectStatusToggle = ({
 }: ProjectStatusToggleProps) => {
   const { mutate: updateProject } = useUpdateProjectMutation()
 
-  const isActive = status === ProjectStatus.Active
+  const isActive = status === 'ACTIVE'
 
   return (
     <Switch
       kind="primary"
       onChange={() => {
-        const fields = isActive
-          ? { status: ProjectStatus.Inactive, allocatedMinutesPerWeek: 0 }
-          : { status: ProjectStatus.Active }
+        const fields: Partial<Project> = isActive
+          ? { status: 'INACTIVE', allocatedMinutesPerWeek: 0 }
+          : { status: 'ACTIVE' }
 
         updateProject({
           id,

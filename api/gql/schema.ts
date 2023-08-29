@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql'
-export type Maybe<T> = T | null
-export type InputMaybe<T> = Maybe<T>
+export type Maybe<T> = T | undefined
+export type InputMaybe<T> = T | undefined
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
 }
@@ -36,11 +36,12 @@ export type AppStats = {
   registeredUsersNumber: Scalars['Int']['output']
 }
 
-export enum AuthProvider {
-  Facebook = 'facebook',
-  Google = 'google',
-}
+export const AuthProvider = {
+  Facebook: 'facebook',
+  Google: 'google',
+} as const
 
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
 export type CreateHabitInput = {
   color: Scalars['Int']['input']
   emoji: Scalars['String']['input']
@@ -118,11 +119,13 @@ export type Membership = {
   subscription?: Maybe<Subscription>
 }
 
-export enum MembershipProvider {
-  AppSumo = 'AppSumo',
-  Paddle = 'Paddle',
-}
+export const MembershipProvider = {
+  AppSumo: 'AppSumo',
+  Paddle: 'Paddle',
+} as const
 
+export type MembershipProvider =
+  (typeof MembershipProvider)[keyof typeof MembershipProvider]
 export type Mutation = {
   __typename?: 'Mutation'
   addSet?: Maybe<Scalars['Boolean']['output']>
@@ -135,13 +138,9 @@ export type Mutation = {
   removeLastSet?: Maybe<Scalars['Boolean']['output']>
   sendAuthLinkByEmail?: Maybe<Scalars['Boolean']['output']>
   trackHabit?: Maybe<Scalars['Boolean']['output']>
-  updateGoalToFinishWorkBy?: Maybe<Scalars['Int']['output']>
-  updateGoalToGoToBedAt?: Maybe<Scalars['Int']['output']>
-  updateGoalToStartWorkAt?: Maybe<Scalars['Int']['output']>
   updateHabit?: Maybe<Habit>
   updateProject?: Maybe<Project>
-  updateUser?: Maybe<UpdateUserResult>
-  updateWeekTimeAllocation?: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+  updateUser?: Maybe<Scalars['Boolean']['output']>
 }
 
 export type MutationAddSetArgs = {
@@ -169,7 +168,7 @@ export type MutationEditLastSetArgs = {
 }
 
 export type MutationRedeemAppSumoCodeArgs = {
-  input?: InputMaybe<RedeemAppSumoCodeInput>
+  input: RedeemAppSumoCodeInput
 }
 
 export type MutationSendAuthLinkByEmailArgs = {
@@ -178,18 +177,6 @@ export type MutationSendAuthLinkByEmailArgs = {
 
 export type MutationTrackHabitArgs = {
   input: TrackHabitInput
-}
-
-export type MutationUpdateGoalToFinishWorkByArgs = {
-  input: UpdateGoalToFinishWorkByInput
-}
-
-export type MutationUpdateGoalToGoToBedAtArgs = {
-  input?: InputMaybe<UpdateGoalToGoToBedAtInput>
-}
-
-export type MutationUpdateGoalToStartWorkAtArgs = {
-  input: UpdateGoalToStartWorkAtInput
 }
 
 export type MutationUpdateHabitArgs = {
@@ -204,16 +191,13 @@ export type MutationUpdateUserArgs = {
   input: UpdateUserInput
 }
 
-export type MutationUpdateWeekTimeAllocationArgs = {
-  input: UpdateWeekTimeAllocationInput
-}
+export const PrimaryGoal = {
+  Awareness: 'awareness',
+  WorkLess: 'workLess',
+  WorkMore: 'workMore',
+} as const
 
-export enum PrimaryGoal {
-  Awareness = 'awareness',
-  WorkLess = 'workLess',
-  WorkMore = 'workMore',
-}
-
+export type PrimaryGoal = (typeof PrimaryGoal)[keyof typeof PrimaryGoal]
 export type Project = {
   __typename?: 'Project'
   allocatedMinutesPerWeek: Scalars['Float']['output']
@@ -234,11 +218,12 @@ export type ProjectMonth = {
   year: Scalars['Int']['output']
 }
 
-export enum ProjectStatus {
-  Active = 'ACTIVE',
-  Inactive = 'INACTIVE',
-}
+export const ProjectStatus = {
+  Active: 'ACTIVE',
+  Inactive: 'INACTIVE',
+} as const
 
+export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 export type ProjectWeek = {
   __typename?: 'ProjectWeek'
   seconds: Scalars['Float']['output']
@@ -249,7 +234,6 @@ export type ProjectWeek = {
 export type Query = {
   __typename?: 'Query'
   appStats: AppStats
-  identify: IdentificationResult
   identifyWithEmail: IdentificationResult
   identifyWithOAuth: IdentificationResult
   projects: Array<Project>
@@ -285,15 +269,15 @@ export type Set = {
 
 export type SetInput = {
   end: Scalars['Float']['input']
-  projectId?: InputMaybe<Scalars['ID']['input']>
+  projectId: Scalars['ID']['input']
   start: Scalars['Float']['input']
 }
 
 export type Subscription = {
   __typename?: 'Subscription'
   cancelUrl: Scalars['String']['output']
-  cancellationEffectiveDate: Scalars['String']['output']
-  nextBillDate: Scalars['String']['output']
+  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
+  nextBillDate?: Maybe<Scalars['String']['output']>
   planId: Scalars['String']['output']
   updateUrl: Scalars['String']['output']
 }
@@ -314,21 +298,9 @@ export type TaskInput = {
 }
 
 export type TrackHabitInput = {
-  date?: InputMaybe<Scalars['String']['input']>
+  date: Scalars['String']['input']
   id: Scalars['ID']['input']
-  value?: InputMaybe<Scalars['Boolean']['input']>
-}
-
-export type UpdateGoalToFinishWorkByInput = {
-  goalToFinishWorkBy: Scalars['Int']['input']
-}
-
-export type UpdateGoalToGoToBedAtInput = {
-  goalToGoToBedAt: Scalars['Int']['input']
-}
-
-export type UpdateGoalToStartWorkAtInput = {
-  goalToStartWorkAt: Scalars['Int']['input']
+  value: Scalars['Boolean']['input']
 }
 
 export type UpdateHabitInput = {
@@ -352,27 +324,20 @@ export type UpdateProjectInput = {
 
 export type UpdateUserInput = {
   country?: InputMaybe<Scalars['String']['input']>
-  focusSounds?: InputMaybe<Array<InputMaybe<FocusSoundInput>>>
+  focusSounds?: InputMaybe<Array<FocusSoundInput>>
+  goalToFinishWorkBy?: InputMaybe<Scalars['Int']['input']>
+  goalToGoToBedAt?: InputMaybe<Scalars['Int']['input']>
+  goalToStartWorkAt?: InputMaybe<Scalars['Int']['input']>
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
   primaryGoal?: InputMaybe<PrimaryGoal>
-  tasks?: InputMaybe<Array<InputMaybe<TaskInput>>>
-}
-
-export type UpdateUserResult = {
-  __typename?: 'UpdateUserResult'
-  focusSounds?: Maybe<Array<Maybe<FocusSound>>>
-  name?: Maybe<Scalars['String']['output']>
-  primaryGoal?: Maybe<PrimaryGoal>
-}
-
-export type UpdateWeekTimeAllocationInput = {
-  allocation: Array<Scalars['Float']['input']>
+  tasks?: InputMaybe<Array<TaskInput>>
+  weekTimeAllocation?: InputMaybe<Array<Scalars['Float']['input']>>
 }
 
 export type UserState = {
   __typename?: 'UserState'
-  country: Scalars['String']['output']
+  country?: Maybe<Scalars['String']['output']>
   email: Scalars['String']['output']
   focusSounds: Array<FocusSound>
   freeTrialEnd: Scalars['Float']['output']
@@ -382,8 +347,8 @@ export type UserState = {
   habits: Array<Habit>
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
-  membership: Membership
-  name: Scalars['String']['output']
+  membership?: Maybe<Membership>
+  name?: Maybe<Scalars['String']['output']>
   prevSets: Array<Set>
   primaryGoal: PrimaryGoal
   projects: Array<Project>
@@ -538,14 +503,9 @@ export type ResolversTypes = {
   Task: ResolverTypeWrapper<Task>
   TaskInput: TaskInput
   TrackHabitInput: TrackHabitInput
-  UpdateGoalToFinishWorkByInput: UpdateGoalToFinishWorkByInput
-  UpdateGoalToGoToBedAtInput: UpdateGoalToGoToBedAtInput
-  UpdateGoalToStartWorkAtInput: UpdateGoalToStartWorkAtInput
   UpdateHabitInput: UpdateHabitInput
   UpdateProjectInput: UpdateProjectInput
   UpdateUserInput: UpdateUserInput
-  UpdateUserResult: ResolverTypeWrapper<UpdateUserResult>
-  UpdateWeekTimeAllocationInput: UpdateWeekTimeAllocationInput
   UserState: ResolverTypeWrapper<UserState>
   UserStateInput: UserStateInput
 }
@@ -582,14 +542,9 @@ export type ResolversParentTypes = {
   Task: Task
   TaskInput: TaskInput
   TrackHabitInput: TrackHabitInput
-  UpdateGoalToFinishWorkByInput: UpdateGoalToFinishWorkByInput
-  UpdateGoalToGoToBedAtInput: UpdateGoalToGoToBedAtInput
-  UpdateGoalToStartWorkAtInput: UpdateGoalToStartWorkAtInput
   UpdateHabitInput: UpdateHabitInput
   UpdateProjectInput: UpdateProjectInput
   UpdateUserInput: UpdateUserInput
-  UpdateUserResult: UpdateUserResult
-  UpdateWeekTimeAllocationInput: UpdateWeekTimeAllocationInput
   UserState: UserState
   UserStateInput: UserStateInput
 }
@@ -718,7 +673,7 @@ export type MutationResolvers<
     Maybe<ResolversTypes['Boolean']>,
     ParentType,
     ContextType,
-    Partial<MutationRedeemAppSumoCodeArgs>
+    RequireFields<MutationRedeemAppSumoCodeArgs, 'input'>
   >
   removeLastSet?: Resolver<
     Maybe<ResolversTypes['Boolean']>,
@@ -737,24 +692,6 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationTrackHabitArgs, 'input'>
   >
-  updateGoalToFinishWorkBy?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType,
-    RequireFields<MutationUpdateGoalToFinishWorkByArgs, 'input'>
-  >
-  updateGoalToGoToBedAt?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType,
-    Partial<MutationUpdateGoalToGoToBedAtArgs>
-  >
-  updateGoalToStartWorkAt?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType,
-    RequireFields<MutationUpdateGoalToStartWorkAtArgs, 'input'>
-  >
   updateHabit?: Resolver<
     Maybe<ResolversTypes['Habit']>,
     ParentType,
@@ -768,16 +705,10 @@ export type MutationResolvers<
     RequireFields<MutationUpdateProjectArgs, 'input'>
   >
   updateUser?: Resolver<
-    Maybe<ResolversTypes['UpdateUserResult']>,
+    Maybe<ResolversTypes['Boolean']>,
     ParentType,
     ContextType,
     RequireFields<MutationUpdateUserArgs, 'input'>
-  >
-  updateWeekTimeAllocation?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Float']>>>,
-    ParentType,
-    ContextType,
-    RequireFields<MutationUpdateWeekTimeAllocationArgs, 'input'>
   >
 }
 
@@ -838,11 +769,6 @@ export type QueryResolvers<
     ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
   appStats?: Resolver<ResolversTypes['AppStats'], ParentType, ContextType>
-  identify?: Resolver<
-    ResolversTypes['IdentificationResult'],
-    ParentType,
-    ContextType
-  >
   identifyWithEmail?: Resolver<
     ResolversTypes['IdentificationResult'],
     ParentType,
@@ -886,13 +812,13 @@ export type SubscriptionResolvers<
     ContextType
   >
   cancellationEffectiveDate?: SubscriptionResolver<
-    ResolversTypes['String'],
+    Maybe<ResolversTypes['String']>,
     'cancellationEffectiveDate',
     ParentType,
     ContextType
   >
   nextBillDate?: SubscriptionResolver<
-    ResolversTypes['String'],
+    Maybe<ResolversTypes['String']>,
     'nextBillDate',
     ParentType,
     ContextType
@@ -923,31 +849,12 @@ export type TaskResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
-export type UpdateUserResultResolvers<
-  ContextType = any,
-  ParentType extends
-    ResolversParentTypes['UpdateUserResult'] = ResolversParentTypes['UpdateUserResult'],
-> = {
-  focusSounds?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['FocusSound']>>>,
-    ParentType,
-    ContextType
-  >
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  primaryGoal?: Resolver<
-    Maybe<ResolversTypes['PrimaryGoal']>,
-    ParentType,
-    ContextType
-  >
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
-}
-
 export type UserStateResolvers<
   ContextType = any,
   ParentType extends
     ResolversParentTypes['UserState'] = ResolversParentTypes['UserState'],
 > = {
-  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   focusSounds?: Resolver<
     Array<ResolversTypes['FocusSound']>,
@@ -961,8 +868,12 @@ export type UserStateResolvers<
   habits?: Resolver<Array<ResolversTypes['Habit']>, ParentType, ContextType>
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   isAnonymous?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
-  membership?: Resolver<ResolversTypes['Membership'], ParentType, ContextType>
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  membership?: Resolver<
+    Maybe<ResolversTypes['Membership']>,
+    ParentType,
+    ContextType
+  >
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   prevSets?: Resolver<Array<ResolversTypes['Set']>, ParentType, ContextType>
   primaryGoal?: Resolver<ResolversTypes['PrimaryGoal'], ParentType, ContextType>
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
@@ -991,6 +902,5 @@ export type Resolvers<ContextType = any> = {
   Set?: SetResolvers<ContextType>
   Subscription?: SubscriptionResolvers<ContextType>
   Task?: TaskResolvers<ContextType>
-  UpdateUserResult?: UpdateUserResultResolvers<ContextType>
   UserState?: UserStateResolvers<ContextType>
 }

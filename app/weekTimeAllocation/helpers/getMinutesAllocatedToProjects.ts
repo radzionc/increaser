@@ -1,4 +1,4 @@
-import { Project } from 'projects/Project'
+import { Project } from '@increaser/entities/Project'
 import { sum } from '@increaser/utils/sum'
 
 export const getMinutesAllocatedToProjects = (projects: Project[]) =>
