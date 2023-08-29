@@ -2,7 +2,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 

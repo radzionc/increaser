@@ -3,7 +3,7 @@ import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCade
 import { CheckoutModal } from 'membership/components/CheckoutModal'
 import { MembershipSaleCard } from 'membership/components/MembershipSaleCard'
 import { useState } from 'react'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'

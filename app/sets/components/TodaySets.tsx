@@ -8,8 +8,8 @@ import {
 } from 'sets/Block'
 import { getSetDuration } from 'sets/helpers/getSetDuration'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
-import { formatDuration } from '@increaser/utils/formatDuration'
-import { sum } from '@increaser/utils/sum'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
+import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
@@ -19,7 +19,7 @@ import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 
 import { BlockBoundaries } from './BlockBoundaries'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 const Distance = styled.div`
   padding-right: 8px;

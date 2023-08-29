@@ -1,4 +1,4 @@
-import { ClickableComponentProps } from 'shared/props'
+import { ClickableComponentProps } from '@increaser/ui/props'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'

@@ -1,6 +1,6 @@
 import { TimelineSession } from 'focus/components/TimelineSession'
 import { Block, getBlockWorkDuration } from 'sets/Block'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import {
   defaultTransition,

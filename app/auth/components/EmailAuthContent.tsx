@@ -4,7 +4,7 @@ import { Center } from '@increaser/ui/ui/Center'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { AuthView } from './AuthView'
 import { Text } from '@increaser/ui/ui/Text'
-import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
+import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { useIdentifyWithEmailMutation } from 'auth/hooks/useIdentifyWithEmailMutation'
 
 interface EmailAuthParams {

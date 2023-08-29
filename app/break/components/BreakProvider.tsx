@@ -8,7 +8,7 @@ import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 
 import { pluralizeName } from '@increaser/utils/pluralize'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { tryToSay } from '@increaser/ui/notifications/utils/tryToSay'
 import { PersistentStateKey } from 'state/persistentStorage'
 import { usePersistentState } from 'state/persistentStorage'
@@ -17,7 +17,7 @@ import { MS_IN_MIN, MS_IN_SEC } from '@increaser/utils/time'
 
 import { BreakContext, BreakDuration } from '../context/BreakContext'
 import { useRouter } from 'next/router'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 import {
   areNotificationsAllowed,
   showNotification,

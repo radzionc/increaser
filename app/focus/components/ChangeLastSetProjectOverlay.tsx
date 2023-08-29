@@ -1,8 +1,8 @@
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { ChangeProjectOverlay } from 'projects/components/ChangeProjectOverlay'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useUpdateLastSetMutation } from 'sets/hooks/useUpdateLastSetMutation'
-import { ClosableComponentProps } from 'shared/props'
+import { ClosableComponentProps } from '@increaser/ui/props'
 
 interface Props extends ClosableComponentProps {}
 

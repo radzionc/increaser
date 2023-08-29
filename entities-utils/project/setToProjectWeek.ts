@@ -1,6 +1,6 @@
 import { ProjectWeek } from '@increaser/entities/Project'
 import { Set } from '@increaser/entities/User'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 import { getWeek, getYear } from 'date-fns'
 import { getSetDurationInSeconds } from '../set/getSetDurationInSeconds'
 

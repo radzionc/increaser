@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useProjects } from 'projects/hooks/useProjects'
 import { createContext } from 'react'
 import { Path } from 'router/Path'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { EnhancedProject } from 'projects/Project'
 

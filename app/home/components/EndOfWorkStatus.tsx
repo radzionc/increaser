@@ -1,7 +1,7 @@
 import { Path } from 'router/Path'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_MIN } from '@increaser/utils/time'

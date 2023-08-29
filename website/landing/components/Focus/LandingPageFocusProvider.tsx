@@ -5,12 +5,12 @@ import {
   increaseFocusDuration,
 } from 'focus/FocusDuration'
 import { useEffect, useMemo, useState } from 'react'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { PreviewUserProject } from '../LandingUserStateProvider'
 import { CurrentFocusContext } from 'focus/components/CurrentFocusProvider'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 export const LandingPageFocusProvider = ({
   children,

@@ -1,4 +1,4 @@
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 import {
   blockDistanceInMinutes,
   getBlocks,

@@ -4,8 +4,8 @@ import { dbDocClient } from '@increaser/db/dbClient'
 import { tableName } from '@increaser/db/tableName'
 
 import { ScanCommand } from '@aws-sdk/lib-dynamodb'
-import { getMonthStartedAt } from '@increaser/utils/getMonthStartedAt'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
+import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 import { MIN_IN_HOUR, MS_IN_DAY, MS_IN_MIN } from '@increaser/utils/time'
 import { uploadJsonToPublic } from '@increaser/public/uploadJsonToPublic'
 import {

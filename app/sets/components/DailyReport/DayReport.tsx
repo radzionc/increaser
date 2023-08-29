@@ -1,6 +1,6 @@
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { Day } from 'sets/hooks/useGroupedByDayCurrentWeekSets'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 import { VStack } from '@increaser/ui/ui/Stack'
 

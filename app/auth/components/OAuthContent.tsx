@@ -6,7 +6,7 @@ import { Center } from '@increaser/ui/ui/Center'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { Text } from '@increaser/ui/ui/Text'
 import { AuthView } from './AuthView'
-import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
+import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { useIdentifyWithOAuthMutation } from 'auth/hooks/identifyWithOAuthMutation'
 import { AuthProvider } from '@increaser/api-interface/client/graphql'
 

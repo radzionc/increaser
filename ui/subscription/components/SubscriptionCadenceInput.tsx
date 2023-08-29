@@ -1,5 +1,5 @@
 import { useTheme } from 'styled-components'
-import { InputProps } from '../../shared/props'
+import { InputProps } from '../../props'
 import { toPercents } from '@increaser/utils/toPercents'
 import { SubscriptionCadence } from '../SubscriptionCadence'
 import { HStack } from '../../ui/Stack'

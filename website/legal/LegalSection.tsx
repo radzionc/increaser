@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 

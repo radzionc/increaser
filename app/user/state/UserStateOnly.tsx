@@ -1,5 +1,5 @@
 import { useAuth } from 'auth/hooks/useAuth'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 
 import { useUserState } from './UserStateContext'
 import { useEffect } from 'react'

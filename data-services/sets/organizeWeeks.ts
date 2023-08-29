@@ -5,8 +5,8 @@ import { mergeIntoProjectWeeks } from '@increaser/entities-utils/project/mergeIn
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
 import { getUserById, updateUser } from '@increaser/db/user'
 import { splitSetsByTimestamp } from '@increaser/entities-utils/set/splitSetsByTimestamp'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
-import { getWeekStartedAt } from '@increaser/utils/getWeekStartedAt'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
+import { getWeekStartedAt } from '@increaser/utils/time/getWeekStartedAt'
 import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
 
 const projectsWeeksToStore = 4

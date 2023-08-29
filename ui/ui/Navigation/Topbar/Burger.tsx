@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { VStack } from '../../Stack'
 
 const Line = styled.div`

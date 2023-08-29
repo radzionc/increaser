@@ -17,7 +17,7 @@ import { remindersCount } from '../BreakProvider'
 import { BreakSettings } from '../BreakSettings'
 import { BreakCountdown } from './BreakCountdown'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 const Wrapper = styled.div`
   position: relative;

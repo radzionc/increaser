@@ -4,7 +4,7 @@ import { DefaultTheme, ThemeProvider } from 'styled-components'
 
 import { lightTheme } from './lightTheme'
 import { ThemePreference } from './ThemePreference'
-import { ComponentWithChildrenProps } from '../../shared/props'
+import { ComponentWithChildrenProps } from '../../props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { darkTheme } from './darkTheme'
 

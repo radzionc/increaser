@@ -2,8 +2,8 @@ import { getBlockColor, getBlocks } from 'sets/Block'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useGroupedByDayCurrentWeekSets } from 'sets/hooks/useGroupedByDayCurrentWeekSets'
 import { useWeekday } from 'shared/hooks/useWeekday'
-import { formatDuration } from '@increaser/utils/formatDuration'
-import { formatTime } from '@increaser/utils/formatTime'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
+import { formatTime } from '@increaser/utils/time/formatTime'
 import { match } from '@increaser/utils/match'
 import styled, { useTheme } from 'styled-components'
 import { BarChart } from '@increaser/ui/ui/BarChart'
@@ -14,7 +14,7 @@ import { MS_IN_MIN } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { SummaryRow } from './SummaryRow'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 const Container = styled.div<{ labelsWidth: number }>`
   display: grid;

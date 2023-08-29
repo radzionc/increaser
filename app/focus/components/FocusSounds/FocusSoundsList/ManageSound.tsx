@@ -1,4 +1,4 @@
-import { ClosableComponentProps } from 'shared/props'
+import { ClosableComponentProps } from '@increaser/ui/props'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
 

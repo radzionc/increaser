@@ -6,7 +6,7 @@ import { VStack } from '@increaser/ui/ui/Stack'
 import { ProjectsNavigation } from './ProjectsNavigation'
 import { SmallScreenProjectsNavigation } from './SmallScreenProjectsNavigation'
 import { ResponsiveContent } from 'ui/ResponsiveContent'
-import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 
 const NormalContainer = styled.div`
   display: grid;

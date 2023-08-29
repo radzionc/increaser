@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { useEffect } from 'react'
 import { PersistentStateKey, usePersistentState } from 'state/persistentStorage'
 

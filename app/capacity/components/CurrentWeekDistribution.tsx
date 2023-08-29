@@ -1,6 +1,6 @@
 import { useProjects } from 'projects/hooks/useProjects'
 import React, { useMemo } from 'react'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { Circle } from '@increaser/ui/ui/Circle'
 import { PieChart } from '@increaser/ui/ui/PieChart'

@@ -2,7 +2,7 @@ import { useAuth } from 'auth/hooks/useAuth'
 import { useRouter } from 'next/router'
 import { createContext, useCallback } from 'react'
 import { Path } from 'router/Path'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 
 export interface PresentationState {

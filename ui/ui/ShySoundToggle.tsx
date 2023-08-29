@@ -7,7 +7,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { InputProps } from '../shared/props'
+import { InputProps } from '../props'
 
 interface ShySoundToggleProps extends InputProps<boolean> {
   style?: React.CSSProperties

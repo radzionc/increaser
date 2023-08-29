@@ -1,6 +1,6 @@
 import { analytics } from 'analytics'
 import { useForm } from 'react-hook-form'
-import { FinishableComponentProps } from 'shared/props'
+import { FinishableComponentProps } from '@increaser/ui/props'
 import { validateUrl } from '@increaser/utils/validation/validateUrl'
 import { SubmitFormButton } from '@increaser/ui/ui/buttons/SubmitFormButton'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'

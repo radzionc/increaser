@@ -3,7 +3,7 @@ import { getSetsDuration } from '../set/getSetsDuration'
 import { getDistanceBetweenSets } from '../set/getDistanceBetweenSets'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { Block } from '@increaser/entities/Block'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 export const blockDistanceInMinutes = 15
 

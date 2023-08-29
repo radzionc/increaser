@@ -1,4 +1,4 @@
-import { sum } from '@increaser/utils/sum'
+import { sum } from '@increaser/utils/array/sum'
 
 import { ProjectView } from './ProjectView'
 import { CurrentProjectProvider } from './ProjectView/CurrentProjectProvider'

@@ -2,13 +2,13 @@ import styled from 'styled-components'
 import { getColor } from '../theme/getters'
 import { HStack, VStack } from '../Stack'
 import { Fragment, useMemo } from 'react'
-import { getHoursInRange } from '@increaser/utils/getHoursInRange'
+import { getHoursInRange } from '@increaser/utils/time/getHoursInRange'
 import { Text } from '../Text'
-import { formatTime } from '@increaser/utils/formatTime'
+import { formatTime } from '@increaser/utils/time/formatTime'
 import { PositionAbsolutelyCenterHorizontally } from '../PositionAbsolutelyCenterHorizontally'
 import { getCSSUnit } from '../utils/getCSSUnit'
 import { getVerticalPaddingCSS } from '../utils/getVerticalPaddingCSS'
-import { ComponentWithChildrenProps } from '../../shared/props'
+import { ComponentWithChildrenProps } from '../../props'
 
 interface TimeSpaceProps extends ComponentWithChildrenProps {
   startsAt: number

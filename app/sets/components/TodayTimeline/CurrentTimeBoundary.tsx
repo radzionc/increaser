@@ -1,14 +1,14 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import {
   HStackSeparatedBy,
   dotSeparator,
 } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 const Boundary = styled(Text)`
   position: absolute;

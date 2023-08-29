@@ -1,4 +1,4 @@
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { Set } from 'sets/Set'
 import { useAssertUserState } from 'user/state/UserStateContext'
 

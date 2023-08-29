@@ -1,4 +1,4 @@
-import { InputProps } from '../../../shared/props'
+import { InputProps } from '../../../props'
 import { FixedOptionsInput } from '../Combobox/FixedOptionsInput'
 import { CountryCode, countryNameRecord } from './countryNameRecord'
 

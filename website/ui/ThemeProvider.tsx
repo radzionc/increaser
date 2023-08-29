@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { PrefferedThemeProvider } from '@increaser/ui/ui/theme/PrefferedThemeProvider'
 import { ThemePreference } from '@increaser/ui/ui/theme/ThemePreference'
 import { useState } from 'react'

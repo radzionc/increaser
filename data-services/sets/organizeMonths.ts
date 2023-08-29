@@ -5,8 +5,8 @@ import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByPro
 import { splitSetsByTimestamp } from '@increaser/entities-utils/set/splitSetsByTimestamp'
 import { Project } from '@increaser/entities/Project'
 import { Set } from '@increaser/entities/User'
-import { getMonthStartedAt } from '@increaser/utils/getMonthStartedAt'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
+import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 
 const addNewSetsToProject = (project: Project, sets: Set[]) => {
   let netMonths = [...project.months]

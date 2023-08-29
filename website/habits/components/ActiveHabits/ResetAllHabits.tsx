@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { Text } from '@increaser/ui/ui/Text'
 import { MS_IN_DAY } from '@increaser/utils/time'

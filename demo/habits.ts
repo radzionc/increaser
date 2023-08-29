@@ -1,6 +1,6 @@
 import { startOfDay } from 'date-fns'
 import { Habit } from '@increaser/entities/Habit'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 

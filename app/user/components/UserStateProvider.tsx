@@ -1,4 +1,4 @@
-import { getCurrentTimezoneOffset } from '@increaser/utils/getCurrentTimezoneOffset'
+import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { UserState } from '@increaser/api-interface/client/graphql'
 import { useApi } from 'api/useApi'
 import { useAuth } from 'auth/hooks/useAuth'

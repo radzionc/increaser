@@ -1,4 +1,4 @@
-import { ClickableComponentProps } from 'shared/props'
+import { ClickableComponentProps } from '@increaser/ui/props'
 import { Center } from '@increaser/ui/ui/Center'
 import { Hoverable } from '@increaser/ui/ui/Hoverable'
 import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'

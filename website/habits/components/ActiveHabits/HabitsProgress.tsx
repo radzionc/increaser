@@ -1,5 +1,5 @@
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import styled, { useTheme } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'

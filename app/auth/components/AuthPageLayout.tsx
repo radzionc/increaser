@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
 import { getColor } from '@increaser/ui/ui/theme/getters'

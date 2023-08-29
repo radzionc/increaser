@@ -19,7 +19,7 @@ import { CurrentTime } from './CurrentTime'
 import { ScheduleHourSpace } from './ScheduleHourSpace'
 import { Summary } from './Summary'
 import { Weekdays } from './Weekdays'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 const labelsWidth = 80
 

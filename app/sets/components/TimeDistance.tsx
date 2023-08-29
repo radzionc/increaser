@@ -1,4 +1,4 @@
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { ChevronDownIcon } from '@increaser/ui/ui/icons/ChevronDownIcon'
 import { ChevronUpIcon } from '@increaser/ui/ui/icons/ChevronUpIcon'

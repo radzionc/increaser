@@ -1,5 +1,5 @@
 import { Set } from 'sets/Set'
-import { sum } from '@increaser/utils/sum'
+import { sum } from '@increaser/utils/array/sum'
 
 import { getSetDuration } from './getSetDuration'
 

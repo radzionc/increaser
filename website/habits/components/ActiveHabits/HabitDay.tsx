@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { isToday } from '@increaser/utils/isToday'
+import { isToday } from '@increaser/utils/time/isToday'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'

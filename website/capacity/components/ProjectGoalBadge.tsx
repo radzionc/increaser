@@ -1,6 +1,6 @@
 import { Project } from 'projects/Project'
 import { useWeekday } from 'shared/hooks/useWeekday'
-import { sum } from '@increaser/utils/sum'
+import { sum } from '@increaser/utils/array/sum'
 import { useTheme } from 'styled-components'
 import { Circle } from '@increaser/ui/ui/Circle'
 import { AlertTriangleIcon } from '@increaser/ui/ui/icons/AlertTriangeIcon'

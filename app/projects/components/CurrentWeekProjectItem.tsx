@@ -1,4 +1,4 @@
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { useTheme } from 'styled-components'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import {

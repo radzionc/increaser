@@ -2,7 +2,7 @@ import { Set } from '@increaser/entities/User'
 import { ProjectMonth } from '@increaser/entities/Project'
 import { getSetDurationInSeconds } from '../set/getSetDurationInSeconds'
 import { getMonth, getYear } from 'date-fns'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 
 export const setToProjectMonth = (
   set: Set,

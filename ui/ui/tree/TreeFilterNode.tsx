@@ -1,5 +1,5 @@
 import { handleWithStopPropagation } from 'shared/events'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { VStack } from '../Stack'

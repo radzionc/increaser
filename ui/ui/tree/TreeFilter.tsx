@@ -7,7 +7,7 @@ import { defaultTransitionCSS } from '../animations/transitions'
 import { getVerticalPaddingCSS } from '../utils/getVerticalPaddingCSS'
 import { Text } from '../Text'
 import { handleWithStopPropagation } from '../../shared/events'
-import { InputProps } from '../../shared/props'
+import { InputProps } from '../../props'
 import { TreeNode } from '@increaser/utils/tree'
 
 interface TreeFilterProps<T> extends InputProps<number[]> {

@@ -1,4 +1,4 @@
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { EnhancedProject } from 'projects/Project'
 import { shouldBeNewBlock } from 'sets/Block'
 import { Set } from 'sets/Set'

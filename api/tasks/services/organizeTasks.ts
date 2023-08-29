@@ -1,5 +1,5 @@
 import { getUserById, updateUser } from '@increaser/db/user'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 import { startOfDay } from 'date-fns'
 
 export const organizeTasks = async (userId: string) => {

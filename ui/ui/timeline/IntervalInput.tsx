@@ -20,7 +20,7 @@ import { Interval } from '../../entities/Interval'
 import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import { TimeSpace } from '../TimeSpace'
 import { PositionAbsolutelyCenterHorizontally } from '../PositionAbsolutelyCenterHorizontally'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 
 interface RenderContentParams {
   msToPx: (ms: number) => number

@@ -10,7 +10,7 @@ import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import { TimeSpace } from '../TimeSpace'
 import { EditorActiveSession } from '../../../app/focus/components/EditorActiveSession'
 import { BoundaryInteractiveArea } from '../../../app/focus/components/BoundaryInteractiveArea'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 
 export interface TimeInputProps {
   color: HSLA

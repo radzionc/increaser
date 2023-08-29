@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`

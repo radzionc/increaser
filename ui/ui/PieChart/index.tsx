@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import { HSLA } from '../colors/HSLA'
 import { SvgArc, polarToCartesian } from './SvgArc'
-import { sum } from '@increaser/utils/sum'
+import { sum } from '@increaser/utils/array/sum'
 
 export interface PieChartItem {
   value: number

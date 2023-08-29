@@ -1,6 +1,6 @@
 import { analytics } from 'analytics'
 import { useEffect } from 'react'
-import { ClosableComponentProps } from 'shared/props'
+import { ClosableComponentProps } from '@increaser/ui/props'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { VStack } from '@increaser/ui/ui/Stack'
 

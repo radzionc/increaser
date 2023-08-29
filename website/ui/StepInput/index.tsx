@@ -4,7 +4,7 @@ import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
 import { MinusIcon } from '@increaser/ui/ui/icons/MinusIcon'
 import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { InputProps } from 'shared/props'
+import { InputProps } from '@increaser/ui/props'
 import styled, { css } from 'styled-components'
 
 interface StepInputProps extends InputProps<number> {

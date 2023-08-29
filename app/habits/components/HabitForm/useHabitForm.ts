@@ -3,7 +3,7 @@ import { defaultHabitEmojis } from 'habits/Habit'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from 'shared/hooks/usePaletteColorOptions'
-import { getRandomElement } from '@increaser/utils/getRandomElement'
+import { getRandomElement } from '@increaser/utils/array/getRandomElement'
 import { useUserState } from 'user/state/UserStateContext'
 
 interface UseHabitFormParams {

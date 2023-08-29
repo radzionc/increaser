@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
 import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'

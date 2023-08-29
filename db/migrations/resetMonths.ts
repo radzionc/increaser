@@ -5,8 +5,8 @@ import { projectionExpression } from '../utils/projectionExpression'
 import { User } from '@increaser/entities/User'
 import { updateUser } from '../user'
 import { organizeWeeks } from '../../data-services/sets/organizeWeeks'
-import { inTimeZone } from '@increaser/utils/inTimeZone'
-import { getMonthStartedAt } from '@increaser/utils/getMonthStartedAt'
+import { inTimeZone } from '@increaser/utils/time/inTimeZone'
+import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const recursiveProcess = async (lastEvaluatedKey?: any) => {

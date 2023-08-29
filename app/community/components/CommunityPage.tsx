@@ -6,7 +6,7 @@ import { HStack } from '@increaser/ui/ui/Stack'
 import { PublicProfile } from './PublicProfile'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 import { ClientOnly } from 'ui/ClientOnly'
-import { getMonthName } from '@increaser/utils/getMonthName'
+import { getMonthName } from '@increaser/utils/time/getMonthName'
 
 export const CommunityPage: Page = () => {
   return (

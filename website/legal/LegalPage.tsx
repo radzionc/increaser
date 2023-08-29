@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
 import { Spacer } from '@increaser/ui/ui/Spacer'
 import { VStack } from '@increaser/ui/ui/Stack'

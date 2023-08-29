@@ -1,5 +1,5 @@
 import { useAuth } from 'auth/hooks/useAuth'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 
 import { useEffect } from 'react'
 import { useAuthRedirect } from 'auth/hooks/useAuthRedirect'

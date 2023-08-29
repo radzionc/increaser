@@ -1,5 +1,5 @@
 import { getCurrentTimezoneOffset } from './getCurrentTimezoneOffset'
-import { MS_IN_MIN } from './time'
+import { MS_IN_MIN } from '.'
 
 export const inTimeZone = (timestamp: number, targetTimeZoneOffset: number) => {
   const offsetDiff = targetTimeZoneOffset - getCurrentTimezoneOffset()

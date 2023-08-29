@@ -25,7 +25,7 @@ import { MS_IN_MIN } from '@increaser/utils/time'
 import { useFocusSoundsState } from './FocusSounds/useFocusSoundsState'
 import { useRouter } from 'next/router'
 import { CurrentFocusGuard } from './CurrentFocusProvider'
-import { getLastItem } from '@increaser/utils/getLastItem'
+import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { areNotificationsAllowed } from '@increaser/ui/notifications/utils'
 
 interface Props {

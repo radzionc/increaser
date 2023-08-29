@@ -1,8 +1,8 @@
 import { useProjects } from 'projects/hooks/useProjects'
 import { Path } from 'router/Path'
 import { useWeekday } from 'shared/hooks/useWeekday'
-import { formatDuration } from '@increaser/utils/formatDuration'
-import { sum } from '@increaser/utils/sum'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
+import { sum } from '@increaser/utils/array/sum'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import {

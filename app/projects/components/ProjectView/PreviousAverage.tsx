@@ -1,5 +1,5 @@
-import { formatDuration } from '@increaser/utils/formatDuration'
-import { sum } from '@increaser/utils/sum'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
+import { sum } from '@increaser/utils/array/sum'
 import { Text } from '@increaser/ui/ui/Text'
 
 import { useCurrentProject } from './CurrentProjectProvider'

@@ -1,4 +1,4 @@
-import { ClosableComponentProps } from 'shared/props'
+import { ClosableComponentProps } from '@increaser/ui/props'
 import { BottomSlideOver } from '@increaser/ui/ui/BottomSlideOver'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { ResponsiveView } from '@increaser/ui/ui/ResponsiveView'

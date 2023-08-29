@@ -9,7 +9,7 @@ import {
   defaultGoalToStartWorkAt,
 } from 'sets/constants'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
-import { ComponentWithChildrenProps } from 'shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { UserStateContext, UserStateView } from 'user/state/UserStateContext'
 import { MS_IN_DAY } from '@increaser/utils/time'
 import { defaultWeekTimeAllocation } from '@increaser/entities/WeekTimeAllocation'

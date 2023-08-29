@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@increaser/ui/shared/props'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { FocusNavigation } from './FocusNavigation'
 import { Navigation } from 'ui/Navigation'
 import { ConditionalUserState } from 'user/components/ConditionalUserState'

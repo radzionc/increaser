@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { labelColorsCount } from '@increaser/ui/ui/colors/generateLabelColorGetter'
 
 import { useProjects } from './useProjects'

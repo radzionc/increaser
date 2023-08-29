@@ -7,7 +7,7 @@ import { ElementSizeAware } from './ElementSizeAware'
 import { Panel } from './Panel/Panel'
 import { VStack } from './Stack'
 import { Text } from './Text'
-import { sum } from '@increaser/utils/sum'
+import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'
 import { getColor } from './theme/getters'
 

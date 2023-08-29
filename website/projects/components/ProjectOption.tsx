@@ -1,4 +1,4 @@
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'

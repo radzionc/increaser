@@ -4,7 +4,7 @@ import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
 import { ReactNode } from 'react'
-import { sum } from '@increaser/utils/sum'
+import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'
 

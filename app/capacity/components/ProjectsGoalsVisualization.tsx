@@ -1,5 +1,5 @@
 import { useProjects } from 'projects/hooks/useProjects'
-import { range } from '@increaser/utils/range'
+import { range } from '@increaser/utils/array/range'
 import { useTheme } from 'styled-components'
 import { CountableItemsVisualization } from 'ui/CountableItemsVisualization'
 import { MIN_IN_HOUR } from '@increaser/utils/time'

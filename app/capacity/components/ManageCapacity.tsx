@@ -1,5 +1,5 @@
 import { useWatch } from 'react-hook-form'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'

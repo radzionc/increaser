@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { FinishableComponentProps } from 'shared/props'
+import { FinishableComponentProps } from '@increaser/ui/props'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { Form } from '@increaser/ui/ui/Form/Form'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
-import { without } from '@increaser/utils/without'
+import { without } from '@increaser/utils/array/without'
 
 import { useFocusSounds } from '../useFocusSounds'
 import { pick } from '@increaser/utils/pick'

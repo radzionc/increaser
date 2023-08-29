@@ -2,7 +2,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useRhythmicRerender } from '@increaser/ui/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useCurrentMonthUsers } from './CurrentMonthUsersProvider'
-import { formatDuration } from '@increaser/utils/formatDuration'
+import { formatDuration } from '@increaser/utils/time/formatDuration'
 
 export const LastScoreboardUpdate = () => {
   const { createdAt } = useCurrentMonthUsers()
