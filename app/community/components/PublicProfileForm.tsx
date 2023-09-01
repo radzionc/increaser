@@ -49,10 +49,12 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
       }
       actions={
         <SameWidthChildrenRow gap={8}>
-          <Button type="button" kind="secondary" onClick={onCancel}>
+          <Button size="l" type="button" kind="secondary" onClick={onCancel}>
             Cancel
           </Button>
-          <Button kind="reversed">Update</Button>
+          <Button size="l" kind="reversed">
+            Update
+          </Button>
         </SameWidthChildrenRow>
       }
     />

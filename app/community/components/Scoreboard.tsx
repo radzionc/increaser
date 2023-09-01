@@ -1,4 +1,3 @@
-import { getCountryFlagEmoji } from '@increaser/utils/getCountryFlagEmoji'
 import { Fragment } from 'react'
 import { useCurrentMonthUsers } from './CurrentMonthUsersProvider'
 import { Text } from '@increaser/ui/ui/Text'
@@ -6,6 +5,7 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { Line } from '@increaser/ui/ui/Line'
 import { getColor } from '@increaser/ui/ui/theme/getters'
+import { ScoreboardDisplayName } from './ScoreboardDisplayName'
 
 const Container = styled.div`
   display: grid;
@@ -47,12 +47,7 @@ export const Scoreboard = () => {
             <Fragment key={index}>
               <Identity>
                 <Text weight="semibold">{index + 1}.</Text>
-                <Text color={country ? 'contrast' : 'shy'}>
-                  {country ? getCountryFlagEmoji(country) : '🏳️'}
-                </Text>
-                <Text weight="semibold" color={name ? 'regular' : 'shy'}>
-                  {name || 'Anonymous'}
-                </Text>
+                <ScoreboardDisplayName name={name} country={country} />
               </Identity>
 
               <Text color="supporting" weight="semibold">

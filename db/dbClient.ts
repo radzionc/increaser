@@ -5,4 +5,8 @@ const dbClient = new DynamoDBClient({
   region: process.env.AWS_REGION,
 })
 
-export const dbDocClient = DynamoDBDocumentClient.from(dbClient)
+export const dbDocClient = DynamoDBDocumentClient.from(dbClient, {
+  marshallOptions: {
+    removeUndefinedValues: true,
+  },
+})

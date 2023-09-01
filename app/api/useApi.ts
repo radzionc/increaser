@@ -49,7 +49,6 @@ export const useApi = () => {
     variables?: V,
   ) => {
     const apiUrl = shouldBeDefined(process.env.NEXT_PUBLIC_API_URL)
-    console.log(document)
 
     const response = await window.fetch(apiUrl, {
       method: 'POST',
