@@ -10,7 +10,7 @@ export const LastScoreboardUpdate = () => {
   const duration = now - createdAt
   return (
     <Text color="supporting" as="span" size={14} weight="regular">
-      updated{' '}
+      Updated{' '}
       {duration < MS_IN_MIN
         ? 'just now'
         : `${formatDuration(duration, 'ms')} ago`}

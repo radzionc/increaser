@@ -1,10 +1,16 @@
 import { Text } from '@increaser/ui/ui/Text'
-import { getCountryFlagEmoji } from '@increaser/utils/getCountryFlagEmoji'
+import { CountryFlag } from '@increaser/ui/ui/CountryFlag'
+import styled from 'styled-components'
 
 interface ScoreboardDisplayNameProps {
   name?: string
   country?: string
 }
+
+const Flag = styled(CountryFlag)`
+  border-radius: 2px;
+  width: 20px;
+`
 
 export const ScoreboardDisplayName = ({
   name,
@@ -12,9 +18,7 @@ export const ScoreboardDisplayName = ({
 }: ScoreboardDisplayNameProps) => {
   return (
     <>
-      <Text color={country ? 'contrast' : 'shy'}>
-        {country ? getCountryFlagEmoji(country) : '🏳️'}
-      </Text>
+      <Flag code={country} />
       <Text weight="semibold" color={name ? 'regular' : 'shy'}>
         {name || 'Anonymous'}
       </Text>
