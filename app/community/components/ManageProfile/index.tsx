@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { ManagePrivacy } from '../ManagePrivacy'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
@@ -9,6 +9,7 @@ import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
 import { PublicProfileForm } from '../PublicProfileForm'
 import { ScoreboardDisplayName } from '../ScoreboardDisplayName'
+import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
 
 export const ManageProfile = () => {
   const { isAnonymous, name, country } = useAssertUserState()
@@ -17,7 +18,7 @@ export const ManageProfile = () => {
 
   return (
     <Panel kind="secondary">
-      <VStack gap={20}>
+      <SeparatedByLine gap={20}>
         <HStack
           fullWidth
           justifyContent="space-between"
@@ -60,7 +61,7 @@ export const ManageProfile = () => {
             />
           </HStack>
         )}
-      </VStack>
+      </SeparatedByLine>
     </Panel>
   )
 }
