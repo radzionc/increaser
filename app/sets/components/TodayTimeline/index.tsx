@@ -30,12 +30,13 @@ import {
   slashSeparator,
 } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
-import { MS_IN_MIN } from '@increaser/utils/time'
+import { MS_IN_MIN, WEEKDAYS } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { BlockBoundaries } from '../BlockBoundaries'
 import { TodayTimelineHourSpace } from './TodayTimelineHourSpace'
 import { useTodayTimelineBoundaries } from './useTodayTimelineBoundaries'
+import { getWeekday } from '@increaser/utils/time/getWeekday'
 
 const Container = styled(Panel)`
   height: 100%;
@@ -88,12 +89,12 @@ export const TodayTimeline = ({ footer = null }: Props) => {
   return (
     <Container withSections>
       <VStack fullWidth gap={8}>
-        <LabeledValue name="Today">
+        <LabeledValue name={WEEKDAYS[getWeekday(new Date(now))]}>
           <HStackSeparatedBy
             separator={<Text color="shy">{slashSeparator}</Text>}
           >
-            <Text weight="bold">{formatDuration(setsTotal, 'ms')}</Text>
-            <Text color="supporting" size={14}>
+            <Text weight="semibold">{formatDuration(setsTotal, 'ms')}</Text>
+            <Text weight="semibold" color="shy">
               {formatDuration(allocatedMinutes, 'min')}
             </Text>
           </HStackSeparatedBy>
@@ -186,7 +187,6 @@ export const TodayTimeline = ({ footer = null }: Props) => {
               )
             })}
           </TodayTimelineHourSpace>
-          <EndOfWorkStatus />
         </VStack>
       </Content>
       {footer}

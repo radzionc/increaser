@@ -1,16 +1,10 @@
 import { Text } from '@increaser/ui/ui/Text'
-import { CountryFlag } from '@increaser/ui/ui/CountryFlag'
-import styled from 'styled-components'
+import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 
 interface ScoreboardDisplayNameProps {
   name?: string
   country?: string
 }
-
-const Flag = styled(CountryFlag)`
-  border-radius: 2px;
-  width: 20px;
-`
 
 export const ScoreboardDisplayName = ({
   name,
@@ -18,7 +12,7 @@ export const ScoreboardDisplayName = ({
 }: ScoreboardDisplayNameProps) => {
   return (
     <>
-      <Flag code={country} />
+      <ScoreboardCountryFlag code={country} />
       <Text weight="semibold" color={name ? 'regular' : 'shy'}>
         {name || 'Anonymous'}
       </Text>

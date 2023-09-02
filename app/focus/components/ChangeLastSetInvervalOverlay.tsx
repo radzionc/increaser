@@ -12,6 +12,7 @@ import { IntervalInput } from '@increaser/ui/ui/timeline/IntervalInput'
 import { IntervalRect } from '@increaser/ui/ui/timeline/IntervalRect'
 import { MS_IN_HOUR } from '@increaser/utils/time'
 import { endOfDay, endOfHour, startOfHour } from 'date-fns'
+import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 interface Props extends ClosableComponentProps {}
 
 const Session = styled(IntervalRect)``
@@ -24,8 +25,12 @@ export const ChangeLastSetIntervalOverlay = ({ onClose }: Props) => {
   const readonlyTodaySets = todaySets.slice(0, -1)
   const set = todaySets[todaySets.length - 1]
   const { projectsRecord } = useProjects()
+  const todayStartedAt = useStartOfDay()
 
-  const timelineStartsAt = startOfHour(set.start).getTime()
+  const timelineStartsAt = Math.max(
+    startOfHour(set.start - 2 * MS_IN_HOUR).getTime(),
+    todayStartedAt,
+  )
   const timelineEndsAt = Math.min(
     endOfDay(set.start).getTime(),
     timelineStartsAt + 4 * MS_IN_HOUR,

@@ -7,6 +7,7 @@ import { ScoreboardDisplayName } from './ScoreboardDisplayName'
 import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 
 const Row = styled.div`
   display: grid;
@@ -20,6 +21,7 @@ const Row = styled.div`
 const Outline = styled.div`
   pointer-events: none;
   position: absolute;
+  background: transparent;
   left: -10px;
   top: -8px;
   border-radius: 8px;
@@ -49,7 +51,7 @@ export const Scoreboard = () => {
         <ColumnName as="div">
           <Identity>
             <Text>#</Text>
-            <Text>🏳️</Text>
+            <ScoreboardCountryFlag />
             <Text>Name</Text>
           </Identity>
         </ColumnName>

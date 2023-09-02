@@ -1,4 +1,3 @@
-import { useFocus } from 'focus/hooks/useFocus'
 import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
 import { useStartOfDay } from 'shared/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
@@ -6,13 +5,14 @@ import { formatTime } from '@increaser/utils/time/formatTime'
 import { getDateFromMinutes } from '@increaser/utils/time/getDateFromMinutes'
 import { range } from '@increaser/utils/array/range'
 import { toPercents } from '@increaser/utils/toPercents'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { useTodayTimelineBoundaries } from './useTodayTimelineBoundaries'
+import { WorkdayLeftBlock } from './WorkdayLeftBlock'
 
 interface Props extends ComponentWithChildrenProps {}
 
@@ -48,11 +48,6 @@ const HourLine = styled.div`
   width: 100%;
 `
 
-const BoundaryLine = styled.div`
-  border-bottom: 1px dashed;
-  width: 100%;
-`
-
 const Content = styled.div<{ leftOffset: number }>`
   position: absolute;
   width: calc(100% - ${(p) => p.leftOffset}px);
@@ -61,9 +56,13 @@ const Content = styled.div<{ leftOffset: number }>`
   display: flex;
 `
 
+const WorkdayLeft = styled(WorkdayLeftBlock)`
+  width: calc(100% + 40px);
+  left: -20px;
+`
+
 const Boundary = styled(HourWr)`
   position: absolute;
-  width: 100%;
 `
 
 const hourLabelWidthInPx = 40
@@ -94,13 +93,16 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
   const timelineStartedAt = todayStartedAt + start * MS_IN_MIN
 
   const { goalToFinishWorkBy } = useAssertUserState()
-
-  const { colors } = useTheme()
-
-  const { currentSet } = useFocus()
+  const workEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
 
   return (
     <Container justifyContent="space-between" fullHeight fullWidth>
+      <WorkdayLeft
+        style={{
+          top: toPercents((now - timelineStartedAt) / timelineInMs),
+          height: toPercents((workEndsAt - now) / timelineInMs),
+        }}
+      />
       {range(stepsNumber).map((index) => {
         const minutes = start + index * lineMinutesStep
 
@@ -119,19 +121,17 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
             <HourContainer>
               <HourContent labelWidth={hourLabelWidthInPx}>
                 {shouldDisplayLabel ? (
-                  <Text color={isEndOfWorkday ? 'supporting' : 'shy'} size={14}>
+                  <Text
+                    weight={isEndOfWorkday ? 'semibold' : 'regular'}
+                    color={isEndOfWorkday ? 'contrast' : 'shy'}
+                    size={14}
+                  >
                     {formatTime(getDateFromMinutes(minutes).getTime())}
                   </Text>
                 ) : (
                   <div />
                 )}
-                <HourLine
-                  style={
-                    isEndOfWorkday
-                      ? { background: colors.textSupporting.toCssValue() }
-                      : undefined
-                  }
-                />
+                <HourLine />
               </HourContent>
             </HourContainer>
           </HourWr>
@@ -148,7 +148,6 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
             <Text weight="semibold" size={14}>
               {formatTime(now)}
             </Text>
-            {!currentSet && <BoundaryLine />}
           </HourContent>
         </HourContainer>
       </Boundary>

@@ -22,6 +22,7 @@ export const ProjectsAllocationLine = ({
 
   return (
     <AllocationLine
+      height={4}
       segments={Object.entries(projectsTotal)
         .sort((a, b) => b[1] - a[1])
         .map(([projectId, ms]) => ({
