@@ -4,7 +4,6 @@ import {
   TimelineSession,
 } from 'focus/components/TimelineSession'
 import { useFocus } from 'focus/hooks/useFocus'
-import { EndOfWorkStatus } from 'home/components/EndOfWorkStatus'
 import { ProjectsAllocationLine } from 'projects/components/ProjectsAllocationLine'
 import { ProjectTotal } from 'projects/components/ProjectTotal'
 import { getProjectsTotalRecord } from 'projects/helpers/getProjectsTotalRecord'
@@ -87,7 +86,7 @@ export const TodayTimeline = ({ footer = null }: Props) => {
   const projectsTotal = getProjectsTotalRecord(sets)
 
   return (
-    <Container withSections>
+    <Container withSections kind="secondary">
       <VStack fullWidth gap={8}>
         <LabeledValue name={WEEKDAYS[getWeekday(new Date(now))]}>
           <HStackSeparatedBy
