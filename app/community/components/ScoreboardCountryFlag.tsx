@@ -1,4 +1,4 @@
-import { CountryFlag } from '@increaser/ui/ui/CountryFlag'
+import { CountryFlag } from '@increaser/ui/country/CountryFlag'
 import styled from 'styled-components'
 
 export const ScoreboardCountryFlag = styled(CountryFlag)`

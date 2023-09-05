@@ -8,6 +8,7 @@ import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
+import { CountryCode } from '@increaser/utils/countryNameRecord'
 
 const Row = styled.div`
   display: grid;
@@ -70,7 +71,10 @@ export const Scoreboard = () => {
                 {id === myId && <Outline />}
                 <Identity>
                   <Text weight="semibold">{index + 1}.</Text>
-                  <ScoreboardDisplayName name={name} country={country} />
+                  <ScoreboardDisplayName
+                    name={name}
+                    country={country as CountryCode}
+                  />
                 </Identity>
 
                 <Text color="supporting" weight="semibold">

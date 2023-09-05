@@ -6,7 +6,7 @@ import { CountryInput } from '@increaser/ui/ui/inputs/CountryInput'
 import { Controller, useForm } from 'react-hook-form'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { CountryCode } from '@increaser/ui/ui/inputs/CountryInput/countryNameRecord'
+import { CountryCode } from '@increaser/utils/countryNameRecord'
 
 interface PublicProfileFormProps {
   onCancel: () => void

@@ -1,4 +1,4 @@
-import { CountryCode } from '@increaser/ui/ui/inputs/CountryInput/countryNameRecord'
+import { CountryCode } from '@increaser/utils/countryNameRecord'
 import { PrimaryGoal } from 'capacity/PrimaryGoal'
 import { HabitResponse } from 'habits/Habit'
 import { ProjectResponse } from 'projects/Project'

@@ -1,6 +1,9 @@
 import { InputProps } from '../../../props'
 import { FixedOptionsInput } from '../Combobox/FixedOptionsInput'
-import { CountryCode, countryNameRecord } from './countryNameRecord'
+import {
+  CountryCode,
+  countryNameRecord,
+} from '@increaser/utils/countryNameRecord'
 
 interface CountryInputProps extends InputProps<CountryCode | null> {}
 

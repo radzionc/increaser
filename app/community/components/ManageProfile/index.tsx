@@ -13,6 +13,7 @@ import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
 import { useEffectOnDependencyChange } from '@increaser/ui/hooks/useEffectOnDependencyChange'
 import styled from 'styled-components'
 import { InfoIcon } from '@increaser/ui/ui/icons/InfoIcon'
+import { CountryCode } from '@increaser/utils/countryNameRecord'
 
 const Message = styled(Text)`
   max-width: 100%;
@@ -68,7 +69,7 @@ export const ManageProfile = () => {
                   ) : (
                     <ScoreboardDisplayName
                       name={name ?? undefined}
-                      country={country ?? undefined}
+                      country={(country as CountryCode) ?? undefined}
                     />
                   )}
                 </HStack>
