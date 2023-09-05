@@ -8,10 +8,11 @@ import {
 } from '@increaser/ui/ui/animations/transitions'
 import { Text } from '@increaser/ui/ui/Text'
 import { MS_IN_MIN } from '@increaser/utils/time'
+import { getColor } from '@increaser/ui/ui/theme/getters'
 
 const Container = styled(TimelineSession)`
-  color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
-  border: 1px dashed;
+  color: ${getColor('textSupporting')};
+  border: 1px dashed ${getColor('textShy')};
   border-radius: 2px;
   display: flex;
   align-items: start;

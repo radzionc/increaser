@@ -58,7 +58,6 @@ export const countryNameRecord = {
   DJ: 'Djibouti',
   DM: 'Dominica',
   DO: 'Dominican Republic',
-  TP: 'East Timor',
   EC: 'Ecuador',
   EG: 'Egypt',
   SV: 'El Salvador',

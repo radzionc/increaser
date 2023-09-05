@@ -9,6 +9,7 @@ import { VStack } from '@increaser/ui/ui/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 import { CountryCode } from '@increaser/utils/countryNameRecord'
+import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
 
 const Row = styled.div`
   display: grid;
@@ -20,15 +21,10 @@ const Row = styled.div`
 `
 
 const Outline = styled.div`
-  pointer-events: none;
-  position: absolute;
+  ${getOutlineCSS(10, 8)};
   background: transparent;
-  left: -10px;
-  top: -8px;
   border-radius: 8px;
   border: 2px solid ${getColor('primary')};
-  width: calc(100% + 20px);
-  height: calc(100% + 16px);
 `
 
 const Identity = styled.div`

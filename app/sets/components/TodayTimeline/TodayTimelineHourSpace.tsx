@@ -13,6 +13,9 @@ import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { useTodayTimelineBoundaries } from './useTodayTimelineBoundaries'
 import { WorkdayLeftBlock } from './WorkdayLeftBlock'
+import { getColor } from '@increaser/ui/ui/theme/getters'
+import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
 
 interface Props extends ComponentWithChildrenProps {}
 
@@ -65,6 +68,44 @@ const Boundary = styled(HourWr)`
   position: absolute;
 `
 
+const CurrentTimeWrapper = styled.div`
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  ${centerContentCSS};
+`
+
+const CurrentTimeLine = styled.div`
+  position: absolute;
+  width: calc(100% + 40px);
+  left: -20px;
+  border-top: 2px solid ${getColor('primary')};
+`
+
+const EndOfWorkDayLine = styled.div`
+  position: absolute;
+  width: calc(100% + 40px);
+  left: -20px;
+  border-top: 2px solid ${getColor('textShy')};
+`
+
+const Outline = styled.div`
+  ${getOutlineCSS(6, 6)};
+  background: transparent;
+  border-radius: 8px;
+  border: 2px solid ${getColor('primary')};
+  background: ${getColor('background')};
+`
+
+const EndOfWorkdayOutline = styled.div`
+  ${getOutlineCSS(6, 6)};
+  background: transparent;
+  border-radius: 8px;
+  background: ${getColor('background')};
+  border: 2px solid ${getColor('textShy')};
+`
+
 const hourLabelWidthInPx = 40
 const lineMinutesStep = 30
 
@@ -103,6 +144,11 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
           height: toPercents((workEndsAt - now) / timelineInMs),
         }}
       />
+      <EndOfWorkDayLine
+        style={{
+          top: toPercents((workEndsAt - timelineStartedAt) / timelineInMs),
+        }}
+      />
       {range(stepsNumber).map((index) => {
         const minutes = start + index * lineMinutesStep
 
@@ -121,13 +167,24 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
             <HourContainer>
               <HourContent labelWidth={hourLabelWidthInPx}>
                 {shouldDisplayLabel ? (
-                  <Text
-                    weight={isEndOfWorkday ? 'semibold' : 'regular'}
-                    color={isEndOfWorkday ? 'contrast' : 'shy'}
-                    size={14}
-                  >
-                    {formatTime(getDateFromMinutes(minutes).getTime())}
-                  </Text>
+                  isEndOfWorkday ? (
+                    <CurrentTimeWrapper>
+                      {formatTime(now)}
+                      <EndOfWorkdayOutline />
+                      <Text
+                        weight="semibold"
+                        as="span"
+                        color="contrast"
+                        style={{ position: 'absolute' }}
+                      >
+                        {formatTime(getDateFromMinutes(minutes).getTime())}
+                      </Text>
+                    </CurrentTimeWrapper>
+                  ) : (
+                    <Text weight={'regular'} color={'shy'} size={14}>
+                      {formatTime(getDateFromMinutes(minutes).getTime())}
+                    </Text>
+                  )
                 ) : (
                   <div />
                 )}
@@ -138,6 +195,11 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
         )
       })}
 
+      <CurrentTimeLine
+        style={{
+          top: toPercents((now - timelineStartedAt) / timelineInMs),
+        }}
+      />
       <Boundary
         style={{
           top: toPercents((now - timelineStartedAt) / timelineInMs),
@@ -145,9 +207,18 @@ export const TodayTimelineHourSpace = ({ children }: Props) => {
       >
         <HourContainer>
           <HourContent labelWidth={hourLabelWidthInPx}>
-            <Text weight="semibold" size={14}>
+            <CurrentTimeWrapper>
               {formatTime(now)}
-            </Text>
+              <Outline />
+              <Text
+                weight="semibold"
+                as="span"
+                color="contrast"
+                style={{ position: 'absolute' }}
+              >
+                {formatTime(now)}
+              </Text>
+            </CurrentTimeWrapper>
           </HourContent>
         </HourContainer>
       </Boundary>
