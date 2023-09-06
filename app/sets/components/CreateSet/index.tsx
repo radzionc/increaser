@@ -11,7 +11,6 @@ import { CreateSetOverlay } from './CreateSetOverlay'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 
 const Container = styled.div`
-  border-top: 2px solid ${getColor('mist')};
   cursor: pointer;
   ${defaultTransitionCSS};
   color: ${getColor('text')};

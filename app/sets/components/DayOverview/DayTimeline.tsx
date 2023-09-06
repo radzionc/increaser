@@ -10,7 +10,7 @@ import { DayBlocks } from './DayBlocks'
 const Wrapper = styled.div`
   flex: 1;
   ${getHorizontalPaddingCSS(0)};
-  padding-bottom: 0px;
+  padding-bottom: 28px;
 `
 
 const Container = styled.div`
