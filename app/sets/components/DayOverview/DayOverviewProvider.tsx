@@ -50,7 +50,7 @@ export const DayOverviewProvider = ({
   const workdayEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
 
   const startsAt = useMemo(() => {
-    if (sets) {
+    if (sets.length) {
       return startOfHour(sets[0].start).getTime()
     }
 
@@ -58,7 +58,7 @@ export const DayOverviewProvider = ({
   }, [goalToStartWorkAt, sets, todayStartedAt])
 
   const endsAt = useMemo(() => {
-    if (!sets) {
+    if (!sets.length) {
       return workdayEndsAt
     }
     const lastSetEnd = getLastItem(sets).end
