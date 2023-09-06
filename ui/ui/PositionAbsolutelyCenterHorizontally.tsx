@@ -3,7 +3,7 @@ import { ComponentWithChildrenProps } from '../props'
 
 interface PositionAbsolutelyCenterHorizontallyProps
   extends ComponentWithChildrenProps {
-  top: number
+  top: React.CSSProperties['top']
   fullWidth?: boolean
 }
 

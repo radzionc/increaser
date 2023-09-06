@@ -8,16 +8,17 @@ import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 
 import { CreateSetOverlay } from './CreateSetOverlay'
+import { getColor } from '@increaser/ui/ui/theme/getters'
 
 const Container = styled.div`
+  border-top: 2px solid ${getColor('mist')};
   cursor: pointer;
   ${defaultTransitionCSS};
+  color: ${getColor('text')};
+  font-weight: 500;
   :hover {
-    background: ${({ theme }) =>
-      (theme.name === 'light'
-        ? theme.colors.mist
-        : theme.colors.mistExtra
-      ).toCssValue()};
+    color: ${getColor('contrast')};
+    background: ${getColor('mist')};
   }
 `
 

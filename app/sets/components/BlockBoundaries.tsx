@@ -12,7 +12,7 @@ import { getColor } from '@increaser/ui/ui/theme/getters'
 
 const Container = styled(TimelineSession)`
   color: ${getColor('textSupporting')};
-  border: 1px dashed ${getColor('textShy')};
+  border: 1px dashed ${getColor('textSupporting')};
   border-radius: 2px;
   display: flex;
   align-items: start;
@@ -50,7 +50,11 @@ export const BlockBoundaries = ({
   return (
     <Container className={className} style={style}>
       {shouldShowDuration && blockWorkDuration > 25 * MS_IN_MIN && (
-        <Text style={{ opacity: shouldShowDuration ? 1 : 0 }} weight="semibold">
+        <Text
+          size={14}
+          style={{ opacity: shouldShowDuration ? 1 : 0 }}
+          weight="semibold"
+        >
           {formatDuration(blockWorkDuration, 'ms')}
         </Text>
       )}

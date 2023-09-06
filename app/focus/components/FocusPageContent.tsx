@@ -11,7 +11,6 @@ import { Text } from '@increaser/ui/ui/Text'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { MS_IN_SEC } from '@increaser/utils/time'
 
-import { TodayTimeline } from '../../sets/components/TodayTimeline'
 import { FinishSession } from './FinishSession'
 import { FocusAssistance } from './FocusAssistance'
 import { FocusGoal } from './FocusGoal'
@@ -24,6 +23,7 @@ import { SlidingTime } from 'ui/SlidingTime'
 import { RhytmicRerender } from '@increaser/ui/ui/RhytmicRerender'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
+import { DayOverview } from 'sets/components/DayOverview'
 
 const Container = styled.div`
   max-height: 100%;
@@ -142,7 +142,7 @@ export const FocusPageContent = () => {
                 {size.width > 750 && (
                   <Side>
                     <ErrorBoundary>
-                      <TodayTimeline />
+                      <DayOverview />
                     </ErrorBoundary>
                   </Side>
                 )}

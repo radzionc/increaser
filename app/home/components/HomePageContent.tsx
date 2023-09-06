@@ -1,8 +1,6 @@
 import { BreakTimeline } from 'break/components/BreakTimeline'
 import { FocusSessionForm } from 'focus/components/FocusSessionForm'
 import { CheckTodayHabits } from 'habits/components/CheckDayHabits/CheckTodayHabits'
-import { CreateSet } from 'sets/components/CreateSet'
-import { TodayTimeline } from 'sets/components/TodayTimeline'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import styled from 'styled-components'
 import { TasksView } from 'tasks/components/TasksView'
@@ -15,6 +13,7 @@ import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOn
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { useFocus } from 'focus/hooks/useFocus'
+import { DayOverview } from 'sets/components/DayOverview'
 
 const Container = styled.div`
   display: flex;
@@ -69,10 +68,6 @@ export const HomePageContent = () => {
     </VStack>
   )
 
-  const timeline = (
-    <TodayTimeline footer={currentSet ? undefined : <CreateSet />} />
-  )
-
   return (
     <>
       <AllocationOnboarding />
@@ -85,7 +80,7 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   {content}
-                  {timeline}
+                  <DayOverview />
                 </MobileContent>
               ) : (
                 <Container>
@@ -96,7 +91,7 @@ export const HomePageContent = () => {
                   >
                     {content}
                   </VStack>
-                  {timeline}
+                  <DayOverview />
                 </Container>
               )}
             </VStack>

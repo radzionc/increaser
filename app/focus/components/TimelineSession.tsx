@@ -17,6 +17,6 @@ export const TimelineSession = styled.div<{ $color?: HSLA }>`
 export const SessionProjectIdentifier = styled.div<{ $color: HSLA }>`
   height: 100%;
   border-radius: 2px;
-  width: 8px;
+  width: 4px;
   background: ${({ $color }) => $color.toCssValue()};
 `
