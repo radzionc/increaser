@@ -25,8 +25,8 @@ export const DayTimeline = () => {
       <Container>
         <WorkdayLeftBlock />
         <TimelineMarks />
-        <DayBlocks />
         <CurrentTime />
+        <DayBlocks />
         <WorkdayEndStatus />
       </Container>
     </Wrapper>

@@ -24,6 +24,8 @@ import { ChangeLastSetIntervalOverlay } from './ChangeLastSetInvervalOverlay'
 import { ChangeLastSetProjectOverlay } from './ChangeLastSetProjectOverlay'
 import { SessionProjectIdentifier, TimelineSession } from './TimelineSession'
 import { Match } from '@increaser/ui/ui/Match'
+import { getColor } from '@increaser/ui/ui/theme/getters'
+import { interactiveCSS } from '@increaser/ui/ui/utils/interactiveCSS'
 
 interface Props {
   style: React.CSSProperties
@@ -32,45 +34,51 @@ interface Props {
   set: Set
 }
 
-const SessionDetails = styled(HStack)<{ $color: HSLA }>`
+const Wrapper = styled.div<{ $color: HSLA }>`
   position: absolute;
-  right: 0;
+  right: -2px;
   bottom: -30px;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+  background: ${getColor('background')};
+  border: 2px solid ${(props) => props.$color.toCssValue()};
+  border-top: none;
+`
+
+const SessionDetails = styled(HStack)`
   padding: 4px;
   padding-left: 8px;
-  border: 1px solid ${({ $color }) => $color.toCssValue()};
-  /* border-top: none; */
-  border-radius: 0 0 4px 4px;
-  cursor: pointer;
-  background: ${({ theme }) => theme.colors.foreground.toCssValue()};
+  ${interactiveCSS};
   z-index: 1;
+  background: ${getColor('mist')};
 
-  ${defaultTransitionCSS}
-
-  color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
+  color: ${getColor('textSupporting')};
 `
 
 const MoreButton = styled.div`
   ${centerContentCSS};
   ${getSameDimensionsCSS(20)}
-
-  border-radius: 4px;
   ${defaultTransitionCSS};
-  font-size: 14px;
 
-  /* background: ${({ theme }) => theme.colors.mist.toCssValue()}; */
+  font-size: 14px;
 `
 
-const Session = styled(TimelineSession)`
-  background: ${({ theme }) => theme.colors.mist.toCssValue()};
-  border-bottom: 1px solid ${({ $color }) => $color?.toCssValue()};
+const Duration = styled(Text)`
+  ${defaultTransitionCSS};
+  font-size: 14px;
+  font-weight: 500;
+`
+
+const Session = styled(TimelineSession)<{ $color: HSLA }>`
+  background: ${getColor('mist')};
+  border: 2px solid ${(props) => props.$color.toCssValue()};
 
   :hover ${SessionDetails} {
     color: ${({ theme }) => theme.colors.text.toCssValue()};
   }
 
   :hover ${MoreButton} {
-    background: ${({ theme }) => theme.colors.mistExtra.toCssValue()};
+    color: ${getColor('contrast')};
   }
 `
 
@@ -141,17 +149,19 @@ export const ManageLastSet = ({ style, color, className, set }: Props) => {
           >
             <VStack fullWidth fullHeight style={{ position: 'relative' }}>
               <SessionProjectIdentifier $color={color} />
-              <SessionDetails $color={color} gap={8}>
-                <Text weight="bold" size={14}>
-                  <EmojiTextPrefix
-                    emoji={getProjectEmoji(projectsRecord, set.projectId)}
-                  />
-                  {formatDuration(getSetDuration(set), 'ms')}
-                </Text>
-                <MoreButton>
-                  <MoreHorizontalIcon />
-                </MoreButton>
-              </SessionDetails>
+              <Wrapper $color={color}>
+                <SessionDetails gap={8}>
+                  <Duration>
+                    <EmojiTextPrefix
+                      emoji={getProjectEmoji(projectsRecord, set.projectId)}
+                    />
+                    {formatDuration(getSetDuration(set), 'ms')}
+                  </Duration>
+                  <MoreButton>
+                    <MoreHorizontalIcon />
+                  </MoreButton>
+                </SessionDetails>
+              </Wrapper>
             </VStack>
           </Session>
         )}
