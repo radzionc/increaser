@@ -21,6 +21,7 @@ import { FocusDurationInput } from '../FocusDurationInput'
 import { FocusDurationText } from '../FocusDurationText'
 import { FocusProjectInput } from './FocusProjectInput'
 import { ProjectGoal } from './ProjectGoal'
+import { WorkdayFinished } from './WorkdayFinished'
 
 // todo: warning when the workday end is close
 export const FocusSessionForm = () => {
@@ -91,7 +92,8 @@ export const FocusSessionForm = () => {
   }
 
   return (
-    <Panel kind="regular">
+    <Panel style={{ position: 'relative' }} kind="regular">
+      <WorkdayFinished />
       <VStack gap={32}>
         <FocusProjectInput
           options={activeProjects}
