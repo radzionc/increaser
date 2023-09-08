@@ -5,7 +5,6 @@ import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCade
 import { useState } from 'react'
 import { SubscriptionCadenceInput } from '@increaser/ui/subscription/components/SubscriptionCadenceInput'
 import { SubscriptionPrice } from '@increaser/ui/subscription/components/SubscriptionPrice'
-import { SubscriptionBenefit } from '@increaser/ui/subscription/components/SubscriptionBenefit'
 
 import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
 
@@ -17,6 +16,7 @@ import { Spinner } from '@increaser/ui/ui/Spinner'
 import { ContinueButton } from 'ui/ContinueButton'
 import { CheckoutModal } from 'membership/components/CheckoutModal'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
+import { SubscriptionBenefits } from './SubscriptionBenefits'
 
 interface Props {
   onNext: () => void
@@ -75,13 +75,7 @@ export const SaleOnboarding = ({ onNext }: Props) => {
                       year: prices.year.amount,
                     }}
                   />
-                  <VStack gap={8}>
-                    <SubscriptionBenefit benefit="Enhance your focus" />
-                    <SubscriptionBenefit benefit="Finish work faster" />
-                    <SubscriptionBenefit benefit="Accelerate your career" />
-                    <SubscriptionBenefit benefit="Develop positive habits" />
-                    <SubscriptionBenefit benefit="Boundaries for work-life balance" />
-                  </VStack>
+                  <SubscriptionBenefits />
                 </VStack>
               )
             }}

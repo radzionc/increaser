@@ -16,6 +16,7 @@ const IconWr = styled(Text)`
   margin-left: 4px;
   ${defaultTransitionCSS};
   color: ${getColor('textShy')};
+  vertical-align: middle;
 `
 
 const Container = styled(Text)`

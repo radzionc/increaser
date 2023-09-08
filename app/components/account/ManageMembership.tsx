@@ -1,14 +1,11 @@
 import { MembershipProvider } from 'membership'
-import { CheckoutModal } from 'membership/components/CheckoutModal'
 import { MembershipSaleCard } from 'membership/components/MembershipSaleCard'
-import { useState } from 'react'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { CancelMembership } from './CancelMembership'
 import { UpdateMembership } from './UpdateMembership'
-import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 
 const formatDate = (string: string) => {
   const [year, month, day] = string.split('-').map(Number)
@@ -18,8 +15,6 @@ const formatDate = (string: string) => {
 
 export const ManageMembership = () => {
   const { membership } = useAssertUserState()
-
-  const [period, setPeriod] = useState<SubscriptionCadence | null>(null)
 
   if (!membership) return null
 
@@ -59,10 +54,7 @@ export const ManageMembership = () => {
               {formatDate(cancellationEffectiveDate)}
             </Text>
           </Text>
-          <MembershipSaleCard onPurchaseRequest={setPeriod} />
-          {period && (
-            <CheckoutModal period={period} onClose={() => setPeriod(null)} />
-          )}
+          <MembershipSaleCard />
         </VStack>
       )
     }

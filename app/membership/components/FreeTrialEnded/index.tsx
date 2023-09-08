@@ -1,4 +1,3 @@
-import { analytics } from 'analytics'
 import { FREE_TRIAL_DAYS } from 'membership'
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
@@ -29,11 +28,6 @@ export const FreeTrialEnded = () => {
     setCadence(null)
   }, [])
 
-  const handleSubscriptionCadenceSelect = (period: SubscriptionCadence) => {
-    analytics.trackEvent(`Start ${period} membership checkout`)
-    setCadence(period)
-  }
-
   const { isSuccess: isPaddleLoaded } = usePaddleSdk()
 
   return (
@@ -52,9 +46,7 @@ export const FreeTrialEnded = () => {
           {!cadence && (
             <>
               <Spacer height={20} />
-              <SaleContent
-                onSubscriptionCadenceSelect={handleSubscriptionCadenceSelect}
-              />
+              <SaleContent />
             </>
           )}
           {isPaddleLoaded && (

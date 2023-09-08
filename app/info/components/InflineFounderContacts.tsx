@@ -1,4 +1,3 @@
-import copyToClipboard from 'copy-to-clipboard'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import {
   AUTHOR_EMAIL,
@@ -6,8 +5,6 @@ import {
   AUTHOR_TELEGRAM,
   AUTHOR_TWITTER,
 } from 'shared/externalResources'
-import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import {
   IconButton,
   IconButtonProps,
@@ -36,7 +33,9 @@ export const InlineFounderContacts = ({
   return (
     <HStack gap={16} alignItems="center" wrap="wrap">
       <CopyText content={AUTHOR_EMAIL}>
-        <Text size={size === 'm' ? 16 : 14}>{AUTHOR_EMAIL}</Text>
+        <Text as="span" size={size === 'm' ? 16 : 14}>
+          {AUTHOR_EMAIL}
+        </Text>
       </CopyText>
       <ExternalLink to={AUTHOR_TWITTER}>
         <IconButton

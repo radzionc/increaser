@@ -1,104 +1,80 @@
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { useMembershipPricesQuery } from 'membership/hooks/useMembershipPricesQuery'
 import { useState } from 'react'
-import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
-import styled from 'styled-components'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { SelectOption } from '@increaser/ui/ui/inputs/Select/SelectOption'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-interface Props {
-  onPurchaseRequest: (period: SubscriptionCadence) => void
-}
+import { QueryDependant } from '@increaser/ui/query/components/QueryDependant'
+import { SubscriptionCadenceInput } from '@increaser/ui/subscription/components/SubscriptionCadenceInput'
+import { SubscriptionPrice } from '@increaser/ui/subscription/components/SubscriptionPrice'
+import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
+import { Center } from '@increaser/ui/ui/Center'
+import { Spinner } from '@increaser/ui/ui/Spinner'
+import { SubscriptionBenefits } from 'sale/component/SubscriptionBenefits'
+import { CheckoutModal } from '../CheckoutModal'
+import { Button } from '@increaser/ui/ui/buttons/Button'
+import { Opener } from '@increaser/ui/ui/Opener'
 
-const SaveBadge = styled(Text)`
-  padding: 4px 8px;
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.success.toCssValue()};
-  color: ${({ theme }) =>
-    theme.colors.success.getVariant({ l: (l) => l * 0.2 }).toCssValue()};
-`
+export const MembershipSaleCard = () => {
+  const [cadence, setCadence] = useState<SubscriptionCadence>('year')
+  const { data, status } = useMembershipPricesQuery()
+  const [showCheckout, setShowCheckout] = useState(false)
 
-const montsInPeriod: Record<SubscriptionCadence, number> = {
-  month: 1,
-  year: 12,
-}
-
-export const MembershipSaleCard = ({ onPurchaseRequest }: Props) => {
-  const { data: prices } = useMembershipPricesQuery()
-  const [period, setPeriod] = useState<SubscriptionCadence>('year')
-
-  if (!prices) return null
-
-  const monthlyYearTotal = prices.month.amount * 12
-  const yearlySave = Math.round(
-    ((monthlyYearTotal - prices.year.amount) / monthlyYearTotal) * 100,
-  )
-
-  const price = period === 'year' ? prices.year : prices.month
+  if (showCheckout) {
+    return (
+      <CheckoutModal period={cadence} onClose={() => setShowCheckout(false)} />
+    )
+  }
 
   return (
-    <VStack style={{ minWidth: 320 }} alignItems="start" gap={20}>
-      <SameWidthChildrenRow fullWidth gap={8}>
-        {['monthly', 'yearly'].map((option) => {
-          const optionText = capitalizeFirstLetter(option)
-
-          return (
-            <SelectOption
-              isSelected={option === period}
-              value={option}
-              onSelect={() => setPeriod(option as SubscriptionCadence)}
-              groupName="membership-plan"
-              key={option}
-            >
-              {option === 'monthly' ? (
-                optionText
-              ) : (
-                <HStack alignItems="center" gap={8}>
-                  <Text>{optionText}</Text>
-                  <SaveBadge weight="semibold">save {yearlySave}%</SaveBadge>
-                </HStack>
-              )}
-            </SelectOption>
-          )
-        })}
-      </SameWidthChildrenRow>
-      <VStack fullWidth alignItems="center">
-        <HStack alignItems="center" gap={4}>
-          <HStack alignItems="center" gap={4}>
-            <Text color="regular">{price.currency}</Text>
-            <Text
-              color="regular"
-              style={{ textAlign: 'center' }}
-              size={26}
-              weight="bold"
-            >
-              {price.amount &&
-                (price.amount / montsInPeriod[period]).toFixed(2)}
-            </Text>
-          </HStack>
-          <Text color="supporting">/ mo</Text>
-        </HStack>
-        <Text
-          size={14}
-          color="supporting"
-          style={{
-            transition: 'none',
-            visibility: period === 'month' ? 'hidden' : 'initial',
-          }}
-        >
-          * {price.currency} {price.amount} per year
-        </Text>
-      </VStack>
-      <Button
-        kind="reversed"
-        size="xl"
-        style={{ width: '100%' }}
-        onClick={() => onPurchaseRequest(period)}
-      >
-        Purchase
-      </Button>
-    </VStack>
+    <QueryDependant
+      status={status}
+      data={data}
+      error={() => <Text>Failed to load subscription price</Text>}
+      loading={() => (
+        <Center>
+          <Spinner />
+        </Center>
+      )}
+      success={(prices) => {
+        return (
+          <VStack alignItems="start">
+            <VStack alignItems="center" gap={20}>
+              <SubscriptionCadenceInput
+                value={cadence}
+                onChange={setCadence}
+                saving={getYearlySubscriptionSavings(
+                  prices.year.amount,
+                  prices.month.amount,
+                )}
+              />
+              <SubscriptionPrice
+                currency={prices.year.currency}
+                cadence={cadence}
+                price={{
+                  month: prices.month.amount,
+                  year: prices.year.amount,
+                }}
+              />
+              <SubscriptionBenefits />
+              <Opener
+                renderContent={({ onClose }) => (
+                  <CheckoutModal period={cadence} onClose={onClose} />
+                )}
+                renderOpener={({ onOpen }) => (
+                  <Button
+                    style={{ width: '100%' }}
+                    onClick={onOpen}
+                    kind="reversed"
+                    size="l"
+                  >
+                    Purchase
+                  </Button>
+                )}
+              />
+            </VStack>
+          </VStack>
+        )
+      }}
+    />
   )
 }
