@@ -3,6 +3,7 @@ import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { interactiveCSS } from '@increaser/ui/ui/utils/interactiveCSS'
 
 interface Props {
   icon: React.ReactNode
@@ -14,7 +15,7 @@ interface Props {
 export const Container = styled.div<{ isSelected?: boolean }>`
   padding: 0 16px;
   height: 48px;
-  cursor: pointer;
+  ${interactiveCSS};
   display: flex;
   align-items: center;
   width: 100%;

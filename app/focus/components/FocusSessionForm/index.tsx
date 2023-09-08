@@ -22,6 +22,12 @@ import { FocusDurationText } from '../FocusDurationText'
 import { FocusProjectInput } from './FocusProjectInput'
 import { ProjectGoal } from './ProjectGoal'
 import { WorkdayFinished } from './WorkdayFinished'
+import styled from 'styled-components'
+
+const Container = styled(Panel)`
+  position: relative;
+  isolation: isolate;
+`
 
 // todo: warning when the workday end is close
 export const FocusSessionForm = () => {
@@ -92,8 +98,7 @@ export const FocusSessionForm = () => {
   }
 
   return (
-    <Panel style={{ position: 'relative' }} kind="regular">
-      <WorkdayFinished />
+    <Container style={{ position: 'relative' }} kind="regular">
       <VStack gap={32}>
         <FocusProjectInput
           options={activeProjects}
@@ -130,6 +135,7 @@ export const FocusSessionForm = () => {
         </Button>
         {!haveFinishedASet && <FocusDurationEducation />}
       </VStack>
-    </Panel>
+      <WorkdayFinished />
+    </Container>
   )
 }
