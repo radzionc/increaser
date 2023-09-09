@@ -1,5 +1,3 @@
-import { useMembership } from 'membership/components/MembershipContext'
-import { useIsLikeMember } from 'membership/hooks/useIsLikeMember'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { PlusCircleIcon } from '@increaser/ui/ui/icons/PlusCircleIcon'
@@ -9,6 +7,7 @@ import { Text } from '@increaser/ui/ui/Text'
 
 import { CreateSetOverlay } from './CreateSetOverlay'
 import { getColor } from '@increaser/ui/ui/theme/getters'
+import { MemberOnlyAction } from 'membership/components/MemberOnlyAction'
 
 const Container = styled.div`
   cursor: pointer;
@@ -22,18 +21,20 @@ const Container = styled.div`
 `
 
 export const CreateSet = () => {
-  const { openFreeTrialEndedModal } = useMembership()
-  const isLikeMember = useIsLikeMember()
-
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Container onClick={isLikeMember ? onOpen : openFreeTrialEndedModal}>
-          <HStack justifyContent="center" alignItems="center" gap={8}>
-            <PlusCircleIcon />
-            <Text>Add session</Text>
-          </HStack>
-        </Container>
+        <MemberOnlyAction
+          action={onOpen}
+          render={({ action }) => (
+            <Container onClick={action}>
+              <HStack justifyContent="center" alignItems="center" gap={8}>
+                <PlusCircleIcon />
+                <Text>Add session</Text>
+              </HStack>
+            </Container>
+          )}
+        />
       )}
       renderContent={({ onClose }) => <CreateSetOverlay onClose={onClose} />}
     />

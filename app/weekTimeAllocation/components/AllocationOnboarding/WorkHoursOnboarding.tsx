@@ -2,7 +2,6 @@ import { WorkBudgetBarChart } from 'capacity/components/WorkBudgetBarChart'
 import { useWorkBudgetForm } from 'capacity/components/WorkBudgetForm/useWorkBudgetForm'
 import { WorkBudgetFormFields } from 'capacity/components/WorkBudgetForm/WorkBudgetFormFields'
 import { useWatch } from 'react-hook-form'
-import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { useTheme } from 'styled-components'
 import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 import { Modal } from '@increaser/ui/ui/Modal'
@@ -11,6 +10,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { getWeekTimeAllocation } from 'weekTimeAllocation/helpers/getWeekTimeAllocation'
 import { ContinueButton } from 'ui/ContinueButton'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
 
 interface Props {
   onNext: () => void
@@ -54,8 +54,14 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
         <VStack fullWidth gap={12}>
           <LabeledValue name="Work budget">
             <Text weight="bold">
-              {formatDuration(workdayMinutes * 5 + weekendMinutes * 2, 'min')} /
-              week
+              {Math.round(
+                convertDuration(
+                  workdayMinutes * 5 + weekendMinutes * 2,
+                  'min',
+                  'h',
+                ),
+              )}
+              h / week
             </Text>
           </LabeledValue>
           <ContinueButton

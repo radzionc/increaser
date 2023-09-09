@@ -1,8 +1,6 @@
 import { FocusDuration, suggestFocusDuration } from 'focus/FocusDuration'
 import { useFocus } from 'focus/hooks/useFocus'
 import { FocusDurationEducation } from 'home/components/FocusDurationEducation'
-import { useMembership } from 'membership/components/MembershipContext'
-import { useIsLikeMember } from 'membership/hooks/useIsLikeMember'
 import { CurrentProjectProvider } from 'projects/components/ProjectView/CurrentProjectProvider'
 import { useProjects } from 'projects/hooks/useProjects'
 import { suggestProject } from 'projects/utils/suggestProject'
@@ -23,6 +21,7 @@ import { FocusProjectInput } from './FocusProjectInput'
 import { ProjectGoal } from './ProjectGoal'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
+import { MemberOnlyAction } from 'membership/components/MemberOnlyAction'
 
 const Container = styled(Panel)`
   position: relative;
@@ -87,9 +86,6 @@ export const FocusSessionForm = () => {
     return () => clearInterval(interval)
   }, [updateSuggestions])
 
-  const { openFreeTrialEndedModal } = useMembership()
-  const isLikeMember = useIsLikeMember()
-
   if (!projectId) return null
   const project = projectsRecord[projectId]
 
@@ -118,21 +114,19 @@ export const FocusSessionForm = () => {
             lastInteractionWasAt.current = Date.now()
           }}
         />
-        <Button
-          kind="reversed"
-          size="l"
-          onClick={() => {
-            if (isLikeMember) {
-              start({ projectId, duration: focusDuration })
-            } else {
-              openFreeTrialEndedModal()
-            }
-          }}
-        >
-          <Text as="div" style={{ wordBreak: 'keep-all' }}>
-            <FocusDurationText emoji={project.emoji} value={focusDuration} />
-          </Text>
-        </Button>
+        <MemberOnlyAction
+          action={() => start({ projectId, duration: focusDuration })}
+          render={({ action }) => (
+            <Button kind="reversed" size="l" onClick={action}>
+              <Text as="div" style={{ wordBreak: 'keep-all' }}>
+                <FocusDurationText
+                  emoji={project.emoji}
+                  value={focusDuration}
+                />
+              </Text>
+            </Button>
+          )}
+        />
         {!haveFinishedASet && <FocusDurationEducation />}
       </VStack>
       <WorkdayFinished />

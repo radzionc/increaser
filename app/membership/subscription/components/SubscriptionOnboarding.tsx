@@ -8,23 +8,19 @@ import { SubscriptionPrice } from '@increaser/ui/subscription/components/Subscri
 
 import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
 
-import { useMembershipPricesQuery } from 'membership/hooks/useMembershipPricesQuery'
-import { QueryDependant } from '@increaser/ui/query/components/QueryDependant'
-import { Text } from '@increaser/ui/ui/Text'
 import { Center } from '@increaser/ui/ui/Center'
-import { Spinner } from '@increaser/ui/ui/Spinner'
 import { ContinueButton } from 'ui/ContinueButton'
-import { CheckoutModal } from 'membership/components/CheckoutModal'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { SubscriptionBenefits } from './SubscriptionBenefits'
+import { CheckoutModal } from './CheckoutModal'
+import { SubscriptionPricesQueryDependant } from './SubscriptionPricesQueryDependant'
 
 interface Props {
   onNext: () => void
 }
 
-export const SaleOnboarding = ({ onNext }: Props) => {
+export const SubscriptionOnboarding = ({ onNext }: Props) => {
   const [cadence, setCadence] = useState<SubscriptionCadence>('year')
-  const { data, status } = useMembershipPricesQuery()
   const [showCheckout, setShowCheckout] = useState(false)
 
   if (showCheckout) {
@@ -47,15 +43,7 @@ export const SaleOnboarding = ({ onNext }: Props) => {
       }
       renderContent={() => {
         return (
-          <QueryDependant
-            status={status}
-            data={data}
-            error={() => <Text>Failed to load subscription price</Text>}
-            loading={() => (
-              <Center>
-                <Spinner />
-              </Center>
-            )}
+          <SubscriptionPricesQueryDependant
             success={(prices) => {
               return (
                 <VStack alignItems="center" gap={20}>

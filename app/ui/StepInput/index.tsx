@@ -55,7 +55,7 @@ export const StepInput = ({
         <MinusIcon />
       </Button>
       <Button
-        onClick={isStepDownEnabled ? () => onChange(value + step) : undefined}
+        onClick={isStepUpEnabled ? () => onChange(value + step) : undefined}
         isEnabled={isStepUpEnabled}
       >
         <PlusIcon />

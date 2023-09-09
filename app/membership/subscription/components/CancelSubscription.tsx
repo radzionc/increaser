@@ -1,10 +1,10 @@
-import { PaddleIFrame } from 'membership/components/PaddleIFrame'
-import { PaddleModal } from 'membership/components/PaddleModal'
 import { useCallback, useState } from 'react'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { PaddleModal } from '../../paddle/PaddleModal'
+import { PaddleIFrame } from '../../paddle/PaddleIFrame'
 
-export const CancelMembership = () => {
+export const CancelSubscription = () => {
   const [isPaddleOpen, setIsPaddleOpen] = useState(false)
 
   const onSuccess = useCallback(() => {

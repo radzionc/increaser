@@ -1,7 +1,7 @@
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 
 import { CheckoutContent } from './CheckoutContent'
-import { PaddleModal } from './PaddleModal'
+import { PaddleModal } from '../../paddle/PaddleModal'
 
 interface Props {
   period: SubscriptionCadence

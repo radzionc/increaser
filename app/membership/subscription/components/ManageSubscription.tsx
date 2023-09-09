@@ -1,11 +1,10 @@
-import { MembershipProvider } from 'membership'
-import { MembershipSaleCard } from 'membership/components/MembershipSaleCard'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
-
-import { CancelMembership } from './CancelMembership'
-import { UpdateMembership } from './UpdateMembership'
+import { UpdateSubscription } from './UpdateSubscription'
+import { CancelSubscription } from './CancelSubscription'
+import { Panel } from '@increaser/ui/ui/Panel/Panel'
+import { SubscriptionOffer } from './SubscriptionOffer'
 
 const formatDate = (string: string) => {
   const [year, month, day] = string.split('-').map(Number)
@@ -13,12 +12,12 @@ const formatDate = (string: string) => {
   return date.toLocaleString()
 }
 
-export const ManageMembership = () => {
+export const ManageSubscription = () => {
   const { membership } = useAssertUserState()
 
   if (!membership) return null
 
-  if (membership.provider === MembershipProvider.AppSumo) {
+  if (membership.provider === 'AppSumo') {
     return <Text>You have a life-time access!</Text>
   }
 
@@ -38,8 +37,8 @@ export const ManageMembership = () => {
                 {formatDate(nextBillDate)}
               </Text>
             </Text>
-            <UpdateMembership />
-            <CancelMembership />
+            <UpdateSubscription />
+            <CancelSubscription />
           </VStack>
         </HStack>
       )
@@ -54,7 +53,9 @@ export const ManageMembership = () => {
               {formatDate(cancellationEffectiveDate)}
             </Text>
           </Text>
-          <MembershipSaleCard />
+          <Panel>
+            <SubscriptionOffer />
+          </Panel>
         </VStack>
       )
     }

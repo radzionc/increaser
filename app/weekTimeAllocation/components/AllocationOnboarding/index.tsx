@@ -10,7 +10,7 @@ import { WorkHoursOnboarding } from './WorkHoursOnboarding'
 import { WorkScheduleOnboarding } from './WorkScheduleOnboarding'
 import { Match } from '@increaser/ui/ui/Match'
 import { useIsPayingUser } from 'membership/hooks/useIsPayingUser'
-import { SaleOnboarding } from 'sale/component/SaleOnboarding'
+import { SubscriptionOnboarding } from 'membership/subscription/components/SubscriptionOnboarding'
 
 type AllocationOnboardingStage =
   | 'goal'
@@ -91,7 +91,7 @@ export const AllocationOnboarding = () => {
         />
       )}
       sale={() => (
-        <SaleOnboarding
+        <SubscriptionOnboarding
           onNext={() => {
             analytics.trackEvent('Finish sale onboarding')
             setStage(null)

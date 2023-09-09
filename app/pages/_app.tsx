@@ -19,7 +19,6 @@ import { SetsManagerProvider } from 'sets/components/SetsManagerProvider'
 import { ConditionalUserState } from 'user/components/ConditionalUserState'
 import { UserManagerProvider } from 'user/components/UserManagerProvider'
 import { UserStateProvider } from 'user/components/UserStateProvider'
-import { MembershipProvider } from 'membership/components/MembershipProvider'
 import { ThemeProvider } from 'ui/ThemeProvider'
 
 import { Open_Sans } from 'next/font/google'
@@ -58,20 +57,18 @@ function MyApp({ Component, pageProps }: MyAppProps) {
               <PWAProvider>
                 <ConditionalUserState
                   present={() => (
-                    <MembershipProvider>
-                      <UserManagerProvider>
-                        <ProjectsProvider>
-                          <HabitsProvider>
-                            <SetsManagerProvider>
-                              <FocusProvider>
-                                <Retro />
-                                <BreakProvider>{component}</BreakProvider>
-                              </FocusProvider>
-                            </SetsManagerProvider>
-                          </HabitsProvider>
-                        </ProjectsProvider>
-                      </UserManagerProvider>
-                    </MembershipProvider>
+                    <UserManagerProvider>
+                      <ProjectsProvider>
+                        <HabitsProvider>
+                          <SetsManagerProvider>
+                            <FocusProvider>
+                              <Retro />
+                              <BreakProvider>{component}</BreakProvider>
+                            </FocusProvider>
+                          </SetsManagerProvider>
+                        </HabitsProvider>
+                      </ProjectsProvider>
+                    </UserManagerProvider>
                   )}
                   missing={() => <>{component}</>}
                 />

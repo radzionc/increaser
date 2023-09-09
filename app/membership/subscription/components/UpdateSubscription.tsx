@@ -1,10 +1,10 @@
-import { PaddleIFrame } from 'membership/components/PaddleIFrame'
-import { PaddleModal } from 'membership/components/PaddleModal'
 import { useState } from 'react'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { PaddleIFrame } from '../../paddle/PaddleIFrame'
+import { PaddleModal } from '../../paddle/PaddleModal'
 
-export const UpdateMembership = () => {
+export const UpdateSubscription = () => {
   const [isPaddleOpen, setIsPaddleOpen] = useState(false)
 
   const { membership } = useAssertUserState()

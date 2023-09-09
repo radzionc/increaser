@@ -1,4 +1,3 @@
-import { MembershipProvider } from 'membership'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
@@ -46,7 +45,7 @@ export const AppSumoCodeRedemption = () => {
         })
 
         updateUserState({
-          membership: { provider: MembershipProvider.AppSumo },
+          membership: { provider: 'AppSumo' },
         })
       } catch (error) {
         const { message } = error as ApiError

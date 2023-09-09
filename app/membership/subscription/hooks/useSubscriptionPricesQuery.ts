@@ -2,7 +2,7 @@ import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCade
 import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
 import { PaddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { PaddleSdk, PaddleSdkProductPrice } from 'membership/paddle/PaddleSdk'
-import { ProductPlanPrice } from 'membership/ProductPlanPrice'
+import { ProductPlanPrice } from 'membership/subscription/ProductPlanPrice'
 import { useQuery } from 'react-query'
 
 const getPaddleProductPrice = async (
@@ -26,13 +26,15 @@ const getPaddleProductPrice = async (
   return { currency, amount }
 }
 
-export const membershipPricesQueryKey = 'membershipPrices'
+export const subscriptionPricesQueryKey = 'subscriptionPrices'
 
-export const useMembershipPricesQuery = () => {
+export type SubscriptionPrices = Record<SubscriptionCadence, ProductPlanPrice>
+
+export const useSubscriptionPricesQuery = () => {
   const { data: paddleSdk } = usePaddleSdk()
 
   return useQuery(
-    membershipPricesQueryKey,
+    subscriptionPricesQueryKey,
     async () => {
       const [month, year] = await Promise.all(
         [PaddleProductCode.month, PaddleProductCode.year].map((product) =>
