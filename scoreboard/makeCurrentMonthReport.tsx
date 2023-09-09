@@ -60,18 +60,18 @@ export const makeCurrentMonthReport = async () => {
     ({ timeZone, sets, prevSets, id, isAnonymous, name, country }) => {
       const now = Date.now()
       const monthStartedAt = inTimeZone(getMonthStartedAt(now), timeZone)
-      const allSets = [...sets, ...prevSets].filter(
+      const currentMonthSets = [...sets, ...prevSets].filter(
         (set) => set.start > monthStartedAt,
       )
       if (monthStartedAt > now) return
       const days = Math.ceil((now - monthStartedAt) / MS_IN_DAY)
-      const total = getSetsDuration(allSets)
+      const total = getSetsDuration(currentMonthSets)
       const totalInMinutes = Math.round(total / MS_IN_MIN)
 
       const dailyAvgInMinutes = Math.round(totalInMinutes / days)
       if (dailyAvgInMinutes < 2 * MIN_IN_HOUR) return
 
-      const blocks = getBlocks(allSets)
+      const blocks = getBlocks(currentMonthSets)
 
       const avgBlockInMinutes = totalInMinutes / blocks.length
 

@@ -32,6 +32,8 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
   const { mutate: updateUser } = useUpdateUserMutation()
   const theme = useTheme()
 
+  const workBudgetInMin = workdayMinutes * 5 + weekendMinutes * 2
+
   return (
     <Modal
       title="What is your preferred number of working hours per week?"
@@ -54,14 +56,7 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
         <VStack fullWidth gap={12}>
           <LabeledValue name="Work budget">
             <Text weight="bold">
-              {Math.round(
-                convertDuration(
-                  workdayMinutes * 5 + weekendMinutes * 2,
-                  'min',
-                  'h',
-                ),
-              )}
-              h / week
+              {Math.round(convertDuration(workBudgetInMin, 'min', 'h'))}h / week
             </Text>
           </LabeledValue>
           <ContinueButton
