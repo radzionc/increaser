@@ -54,8 +54,14 @@ export const DayOverviewProvider = ({
       return startOfHour(sets[0].start).getTime()
     }
 
-    return todayStartedAt + goalToStartWorkAt * MS_IN_MIN
-  }, [goalToStartWorkAt, sets, todayStartedAt])
+    const workdayStartsAt = todayStartedAt + goalToStartWorkAt * MS_IN_MIN
+
+    if (currentTime < workdayStartsAt) {
+      return startOfHour(currentTime).getTime()
+    }
+
+    return workdayStartsAt
+  }, [currentTime, goalToStartWorkAt, sets, todayStartedAt])
 
   const endsAt = useMemo(() => {
     if (!sets.length) {
