@@ -1,6 +1,6 @@
 import { Topbar } from './Topbar'
 import styled, { css } from 'styled-components'
-import { useIsScreenWidthLessThan } from '@increaser/ui/ui/hooks/useIsScreenWidthLessThan'
+import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Sidebar } from './Sidebar'
 

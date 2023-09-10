@@ -1,7 +1,7 @@
 import { Spacer } from '@increaser/ui/ui/Spacer'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-import { useIsScreenWidthLessThan } from '@increaser/ui/ui/hooks/useIsScreenWidthLessThan'
+import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 import { APP_NAME } from 'shared/product'

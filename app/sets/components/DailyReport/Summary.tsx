@@ -1,7 +1,7 @@
 import { getBlockColor, getBlocks } from 'sets/Block'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useGroupedByDayCurrentWeekSets } from 'sets/hooks/useGroupedByDayCurrentWeekSets'
-import { useWeekday } from 'shared/hooks/useWeekday'
+import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { formatTime } from '@increaser/utils/time/formatTime'
 import { match } from '@increaser/utils/match'

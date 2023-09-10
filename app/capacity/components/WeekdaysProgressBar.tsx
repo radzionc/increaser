@@ -1,6 +1,6 @@
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
-import { useWeekday } from 'shared/hooks/useWeekday'
+import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { D_IN_WEEK, getShortWeekday } from '@increaser/utils/time'

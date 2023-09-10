@@ -1,4 +1,4 @@
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'

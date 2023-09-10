@@ -18,9 +18,9 @@ import { DropdownMenuPlacer } from './DropdownMenuPlacer'
 import { defaultInputShapeCSS } from '../config'
 import { CollapseToggleButton } from '../../buttons/CollapseToggleButton'
 import { getColor } from '../../theme/getters'
-import { useBoolean } from '../../../shared/hooks/useBoolean'
-import { useKeyPress } from '../../../shared/hooks/useKeyPress'
 import { Text } from '../../Text'
+import { useBoolean } from '../../../hooks/useBoolean'
+import { useKeyPress } from '../../../hooks/useKeyPress'
 
 interface Props<T> {
   label: React.ReactNode

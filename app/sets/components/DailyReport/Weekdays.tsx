@@ -1,4 +1,4 @@
-import { useWeekday } from 'shared/hooks/useWeekday'
+import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { WEEKDAYS, getShortWeekday } from '@increaser/utils/time'

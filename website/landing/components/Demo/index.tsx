@@ -1,5 +1,5 @@
 import YouTubePlayer from 'react-player/lazy'
-import { useBoolean } from 'shared/hooks/useBoolean'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled from 'styled-components'
 import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
 import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'

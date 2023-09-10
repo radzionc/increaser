@@ -1,6 +1,6 @@
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { formatDurationAsADigitalClock } from '@increaser/utils/time/formatDuration'
 import styled, { css, keyframes } from 'styled-components'
 

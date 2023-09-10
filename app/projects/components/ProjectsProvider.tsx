@@ -1,7 +1,7 @@
 import { toProject } from 'projects/helpers/toProject'
 import { createContext, useMemo } from 'react'
 import { useCurrentWeekSets } from 'sets/hooks/useCurrentWeekSets'
-import { useStartOfWeek } from 'shared/hooks/useStartOfWeek'
+import { useStartOfWeek } from '@increaser/ui/hooks/useStartOfWeek'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { areSameWeek } from '@increaser/utils/time/areSameWeek'
 import { getRecord } from '@increaser/utils/getRecord'

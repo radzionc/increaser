@@ -1,5 +1,5 @@
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { formatTime } from '@increaser/utils/time/formatTime'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'

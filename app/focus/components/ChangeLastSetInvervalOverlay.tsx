@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useUpdateLastSetMutation } from 'sets/hooks/useUpdateLastSetMutation'
 import { Interval } from 'shared/entities/Interval'
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { ClosableComponentProps } from '@increaser/ui/props'
 import styled, { useTheme } from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -12,7 +12,7 @@ import { IntervalInput } from '@increaser/ui/ui/timeline/IntervalInput'
 import { IntervalRect } from '@increaser/ui/ui/timeline/IntervalRect'
 import { MS_IN_HOUR } from '@increaser/utils/time'
 import { endOfDay, endOfHour, startOfHour } from 'date-fns'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 interface Props extends ClosableComponentProps {}
 
 const Session = styled(IntervalRect)``

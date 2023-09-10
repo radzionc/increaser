@@ -5,7 +5,7 @@ import { Path } from 'router/Path'
 import { getBlockWorkDuration, getBlocks, targetBlockInMin } from 'sets/Block'
 import { useLastSetEnd } from 'sets/hooks/useLastSetEnd'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 
 import { pluralizeName } from '@increaser/utils/pluralize'
 import { range } from '@increaser/utils/array/range'

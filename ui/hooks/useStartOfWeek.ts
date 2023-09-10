@@ -1,6 +1,6 @@
 import { MS_IN_DAY } from '@increaser/utils/time'
 
-import { useStartOfDay } from './useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { useWeekday } from './useWeekday'
 
 export const useStartOfWeek = () => {

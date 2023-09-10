@@ -1,6 +1,6 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useEffect, useState } from 'react'
-import { useBoolean } from 'shared/hooks/useBoolean'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'

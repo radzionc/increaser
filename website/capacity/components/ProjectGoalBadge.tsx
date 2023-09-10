@@ -1,5 +1,5 @@
 import { Project } from 'projects/Project'
-import { useWeekday } from 'shared/hooks/useWeekday'
+import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { sum } from '@increaser/utils/array/sum'
 import { useTheme } from 'styled-components'
 import { Circle } from '@increaser/ui/ui/Circle'

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { useBoolean } from '../shared/hooks/useBoolean'
 import { ClosableComponentProps } from '../props'
+import { useBoolean } from '../hooks/useBoolean'
 
 interface RenderOpenerParams {
   isOpen: boolean

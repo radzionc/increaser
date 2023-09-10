@@ -1,10 +1,10 @@
 import { Text } from '@increaser/ui/ui/Text'
-import { useRhythmicRerender } from '@increaser/ui/ui/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import styled from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
 

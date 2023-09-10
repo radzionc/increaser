@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
-
-import { useIsScreenWidthLessThan } from './hooks/useIsScreenWidthLessThan'
+import { useIsScreenWidthLessThan } from '../hooks/useIsScreenWidthLessThan'
 
 interface ResponsiveViewProps {
   small: () => ReactNode

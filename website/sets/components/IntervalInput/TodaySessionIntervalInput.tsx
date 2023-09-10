@@ -1,6 +1,6 @@
 import { useTodaySets } from 'sets/hooks/useTodaySets'
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import styled, { useTheme } from 'styled-components'
 import {
   IntervalInput,

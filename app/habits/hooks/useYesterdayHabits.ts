@@ -1,5 +1,5 @@
 import { useHabits } from 'habits/components/HabitsProvider'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { MS_IN_SEC } from '@increaser/utils/time'
 
 export const useYesterdayHabits = () => {

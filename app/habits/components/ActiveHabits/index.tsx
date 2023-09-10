@@ -1,4 +1,4 @@
-import { useBoolean } from 'shared/hooks/useBoolean'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled from 'styled-components'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { Spacer } from '@increaser/ui/ui/Spacer'

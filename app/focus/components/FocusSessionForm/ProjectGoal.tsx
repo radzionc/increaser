@@ -1,6 +1,6 @@
 import { useCurrentProject } from 'projects/components/ProjectView/CurrentProjectProvider'
 import { Path } from 'router/Path'
-import { useWeekday } from 'shared/hooks/useWeekday'
+import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'

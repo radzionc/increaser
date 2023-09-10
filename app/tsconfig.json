@@ -17,6 +17,11 @@
     "incremental": true,
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../ui/hooks/useStartOfMonth.ts"
+  ],
   "exclude": ["node_modules"]
 }

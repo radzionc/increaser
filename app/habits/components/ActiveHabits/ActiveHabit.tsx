@@ -1,5 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd'
-import { useBoolean } from 'shared/hooks/useBoolean'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled, { css } from 'styled-components'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'

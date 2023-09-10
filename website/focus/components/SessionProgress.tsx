@@ -1,6 +1,6 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { FillingBlock } from './FillingBlock'

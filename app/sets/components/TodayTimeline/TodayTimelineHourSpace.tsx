@@ -1,5 +1,5 @@
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { formatTime } from '@increaser/utils/time/formatTime'
 import { getDateFromMinutes } from '@increaser/utils/time/getDateFromMinutes'

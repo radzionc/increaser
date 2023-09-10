@@ -1,7 +1,7 @@
 import { CheckDayHabitsTitle } from 'habits/components/CheckDayHabits/CheckDayHabitsTitle'
 import { HabitItem } from 'habits/components/CheckDayHabits/HabitItem'
 import { useYesterdayHabits } from 'habits/hooks/useYesterdayHabits'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { MS_IN_DAY } from '@increaser/utils/time'

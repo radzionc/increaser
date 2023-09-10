@@ -1,5 +1,5 @@
 import { MS_IN_MIN } from '@increaser/utils/time'
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { startOfMonth, endOfMonth } from 'date-fns'
 import { AllocationLine } from 'ui/AllocationLine'
 import { useTheme } from 'styled-components'

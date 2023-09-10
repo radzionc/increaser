@@ -1,4 +1,4 @@
-import { useBoolean } from 'shared/hooks/useBoolean'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled from 'styled-components'
 import { navigationPathInfo } from 'ui/Navigation/navigationPathInfo'
 import { Sidebar } from 'ui/Navigation/Sidebar'

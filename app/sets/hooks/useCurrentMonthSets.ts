@@ -1,5 +1,5 @@
+import { useStartOfMonth } from '@increaser/ui/hooks/useStartOfMonth'
 import { useMemo } from 'react'
-import { useStartOfMonth } from 'shared/hooks/useStartOfMonth'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 export const useCurrentMonthSets = () => {

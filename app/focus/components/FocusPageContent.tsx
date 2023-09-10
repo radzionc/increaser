@@ -1,7 +1,7 @@
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { useOnWindowCloseAlert } from 'shared/hooks/useOnWindowCloseAlert'
+import { useOnWindowCloseAlert } from '@increaser/ui/hooks/useOnWindowCloseAlert'
 import { formatDurationAsADigitalClock } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'

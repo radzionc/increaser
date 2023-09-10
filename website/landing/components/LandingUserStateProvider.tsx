@@ -8,7 +8,7 @@ import {
   defaultGoalToGoToBedAt,
   defaultGoalToStartWorkAt,
 } from 'sets/constants'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { UserStateContext, UserStateView } from 'user/state/UserStateContext'
 import { MS_IN_DAY } from '@increaser/utils/time'

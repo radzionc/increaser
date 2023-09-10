@@ -1,4 +1,4 @@
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { useIsPayingUser } from './useIsPayingUser'

@@ -1,6 +1,6 @@
 import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
-import { useRhythmicRerender } from 'shared/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 export const FreeTrialStatus = () => {

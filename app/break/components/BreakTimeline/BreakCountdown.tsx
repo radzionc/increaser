@@ -1,6 +1,6 @@
 import { useBreak } from 'break/hooks/useBreak'
 import { useLastSetEnd } from 'sets/hooks/useLastSetEnd'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { HStackSeparatedBy } from '@increaser/ui/ui/StackSeparatedBy'
 import { Text } from '@increaser/ui/ui/Text'
 import { MS_IN_SEC } from '@increaser/utils/time'

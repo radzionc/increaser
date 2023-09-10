@@ -1,6 +1,6 @@
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useCurrentWeekSets } from 'sets/hooks/useCurrentWeekSets'
-import { useWeekday } from 'shared/hooks/useWeekday'
+import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { match } from '@increaser/utils/match'
 import { sum } from '@increaser/utils/array/sum'
 import { useAssertUserState } from 'user/state/UserStateContext'

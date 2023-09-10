@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useStartOfWeek } from 'shared/hooks/useStartOfWeek'
+import { useStartOfWeek } from '@increaser/ui/hooks/useStartOfWeek'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 export const useCurrentWeekSets = () => {

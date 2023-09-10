@@ -4,7 +4,7 @@ import { useApi } from 'api/useApi'
 import { useAuth } from 'auth/hooks/useAuth'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { UserStateContext } from 'user/state/UserStateContext'
 import { userStateQueryDocument } from 'user/state/userStateQueryDocument'
 

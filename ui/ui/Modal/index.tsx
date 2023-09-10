@@ -7,13 +7,13 @@ import { BodyPortal } from '../BodyPortal'
 import { ScreenCover } from '../ScreenCover'
 import { Spacer } from '../Spacer'
 import { HStack, VStack } from '../Stack'
-import { useIsScreenWidthLessThan } from '../hooks/useIsScreenWidthLessThan'
 import { getCSSUnit } from '../utils/getCSSUnit'
 import { getSameDimensionsCSS } from '../utils/getSameDimensionsCSS'
 import { roundedCSS } from '../utils/roundedCSS'
 import { CloseButton } from '../buttons/CloseButton'
 import { handleWithStopPropagation } from '../../shared/events'
 import { FocusTrap } from '../FocusTrap'
+import { useIsScreenWidthLessThan } from '../../hooks/useIsScreenWidthLessThan'
 
 interface RenderContentParams {
   isFullScreen: boolean

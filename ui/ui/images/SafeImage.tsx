@@ -1,4 +1,4 @@
-import { useBoolean } from 'shared/hooks/useBoolean'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import { ReactNode } from 'react'
 
 interface RenderParams {

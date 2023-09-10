@@ -1,7 +1,7 @@
 import { Habit } from 'habits/Habit'
 import { toHabit } from 'habits/helpers/toHabit'
 import { createContext, useMemo } from 'react'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { useTheme } from 'styled-components'

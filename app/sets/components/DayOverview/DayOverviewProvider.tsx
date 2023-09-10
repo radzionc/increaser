@@ -1,14 +1,14 @@
 import { Set } from '@increaser/entities/User'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
-import { useRhythmicRerender } from '@increaser/ui/ui/hooks/useRhythmicRerender'
+import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { startOfHour, endOfHour } from 'date-fns'
 import { useFocus } from 'focus/hooks/useFocus'
 import { createContext, useMemo } from 'react'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
-import { useStartOfDay } from 'shared/hooks/useStartOfDay'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 interface DayOverviewContextState {
