@@ -10,14 +10,9 @@ import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
 import { PublicProfileForm } from '../PublicProfileForm'
 import { ScoreboardDisplayName } from '../ScoreboardDisplayName'
 import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
-import styled from 'styled-components'
-import { InfoIcon } from '@increaser/ui/ui/icons/InfoIcon'
 import { CountryCode } from '@increaser/utils/countryNameRecord'
 import { TimeoutMessage } from '@increaser/ui/ui/TimeoutMessage'
-
-const Message = styled(Text)`
-  max-width: 100%;
-`
+import { UpdateProfileMessage } from './UpdateProfileMessage'
 
 export const ManageProfile = () => {
   const { isAnonymous, name, country } = useAssertUserState()
@@ -76,19 +71,7 @@ export const ManageProfile = () => {
         <TimeoutMessage
           deps={[isAnonymous, name, country]}
           timeout={5000}
-          render={() => (
-            <Message color="supporting" size={14} height="large">
-              <Text
-                centered
-                as="span"
-                style={{ marginRight: 8, verticalAlign: 'middle' }}
-              >
-                <InfoIcon />
-              </Text>
-              It could take up to 10 minutes for your changes to appear <br />{' '}
-              on the scoreboard.
-            </Message>
-          )}
+          render={() => <UpdateProfileMessage />}
         />
       </VStack>
     </Panel>
