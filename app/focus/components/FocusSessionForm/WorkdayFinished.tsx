@@ -10,13 +10,10 @@ import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import styled from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { UnlockIcon } from '@increaser/ui/ui/icons/UnlockIcon'
+import { takeWholeSpaceAbsolutely } from '@increaser/ui/css/takeWholeSpaceAbsolutely'
 
 const Overlay = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  ${takeWholeSpaceAbsolutely};
   ${centerContentCSS};
   background: ${(props) =>
     props.theme.colors.foreground.getVariant({ a: () => 0.9 }).toCssValue()};

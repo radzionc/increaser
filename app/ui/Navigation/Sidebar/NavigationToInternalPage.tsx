@@ -12,13 +12,11 @@ export const NavigationToInternalPage = ({ path }: Props) => {
 
   const { name, icon } = navigationPathInfo[path]
 
+  const isActive = path === '/' ? pathname === path : pathname.startsWith(path)
+
   return (
     <Link href={path}>
-      <NavigationItem
-        icon={icon}
-        name={name}
-        isActive={pathname.includes(path)}
-      />
+      <NavigationItem icon={icon} name={name} isActive={isActive} />
     </Link>
   )
 }

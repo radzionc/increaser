@@ -15,23 +15,12 @@ const Container = styled.div`
 `
 
 export const WorkdayEndStatus = () => {
-  const { workdayEndsAt, endsAt, startsAt, currentTime, sets } =
-    useDayOverview()
+  const { workdayEndsAt, endsAt, currentTime } = useDayOverview()
   const workEndsIn = workdayEndsAt - currentTime
-  const timespan = endsAt - startsAt
 
   if (endsAt > workdayEndsAt) {
     return null
   }
-
-  if (!sets.length) {
-    return null
-  }
-
-  console.log({
-    top: toPercents((currentTime - startsAt) / timespan),
-    height: toPercents((workEndsIn - currentTime) / timespan),
-  })
 
   return (
     <Container>
