@@ -2,7 +2,6 @@ import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { useDayOverview } from './DayOverviewProvider'
-import { toPercents } from '@increaser/utils/toPercents'
 
 const Container = styled.div`
   position: absolute;

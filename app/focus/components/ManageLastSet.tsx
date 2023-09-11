@@ -37,12 +37,11 @@ interface Props {
 const Wrapper = styled.div<{ $color: HSLA }>`
   position: absolute;
   right: -2px;
-  bottom: -30px;
-  border-radius: 0 0 4px 4px;
+  bottom: -38px;
+  border-radius: 8px;
   overflow: hidden;
   background: ${getColor('background')};
   border: 2px solid ${(props) => props.$color.toCssValue()};
-  border-top: none;
 `
 
 const SessionDetails = styled(HStack)`
@@ -71,7 +70,6 @@ const Duration = styled(Text)`
 
 const Session = styled(TimelineSession)<{ $color: HSLA }>`
   background: ${getColor('mist')};
-  border: 2px solid ${(props) => props.$color.toCssValue()};
 
   :hover ${SessionDetails} {
     color: ${({ theme }) => theme.colors.text.toCssValue()};
