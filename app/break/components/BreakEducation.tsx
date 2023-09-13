@@ -1,5 +1,5 @@
 import { ShowOnce } from 'state/ShowOnce'
-import { PersistentStateKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentState'
 import { ShyEducation } from 'ui/ShyEducation'
 
 export const BreakEducation = () => {

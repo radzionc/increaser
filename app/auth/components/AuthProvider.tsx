@@ -1,7 +1,7 @@
 import { AuthContext, AuthSessionInfo } from 'auth/context/AuthContext'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQueryClient } from 'react-query'
-import { PersistentStateKey, usePersistentState } from 'state/persistentStorage'
+import { PersistentStateKey, usePersistentState } from 'state/persistentState'
 import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 interface Props {

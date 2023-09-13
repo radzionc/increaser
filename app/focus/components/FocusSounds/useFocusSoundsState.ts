@@ -1,5 +1,5 @@
-import { PersistentStateKey } from 'state/persistentStorage'
-import { usePersistentState } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentState'
+import { usePersistentState } from 'state/persistentState'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { FocusSoundsState } from './FocusSoundsContext'

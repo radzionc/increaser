@@ -4,7 +4,7 @@ import { Path } from 'router/Path'
 import {
   PersistentStateKey,
   managePersistentState,
-} from 'state/persistentStorage'
+} from 'state/persistentState'
 
 const persistentPath = managePersistentState<string>(
   PersistentStateKey.PathAttemptedWhileUnauthenticated,

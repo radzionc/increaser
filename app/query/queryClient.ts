@@ -4,7 +4,7 @@ import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor
 import { persistQueryClient } from 'react-query/persistQueryClient-experimental'
 import { MS_IN_DAY } from '@increaser/utils/time'
 import { hasWindow } from '@increaser/ui/ui/utils/window'
-import { PersistentStateKey } from 'state/persistentStorage'
+import { PersistentStateKey } from 'state/persistentState'
 
 const cacheTime = MS_IN_DAY * 5
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { PersistentStateKey, persistentStorage } from 'state/persistentStorage'
+import { PersistentStateKey, persistentStorage } from 'state/persistentState'
 
 type Command = 'DEBUG_ACCOUNT'
 
