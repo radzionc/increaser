@@ -54,7 +54,11 @@ export const Topbar = () => {
                 </Link>
               )}
               <div ref={setElement}>
-                <ExternalLink to={`${APP_URL}/sign-up`}>
+                <ExternalLink
+                  openInSameTab
+                  isReferring
+                  to={`${APP_URL}/sign-up`}
+                >
                   <Button as="div" kind="reversed">
                     Sign up
                   </Button>
@@ -64,7 +68,11 @@ export const Topbar = () => {
             <Placeholder>
               {size && (
                 <SignInContainer rightSiblingWidth={size.width}>
-                  <ExternalLink to={`${APP_URL}/sign-in`}>
+                  <ExternalLink
+                    openInSameTab
+                    isReferring
+                    to={`${APP_URL}/sign-in`}
+                  >
                     <Button as="div" kind="ghost">
                       Sign in
                     </Button>

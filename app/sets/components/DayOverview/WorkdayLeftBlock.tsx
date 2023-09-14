@@ -11,9 +11,10 @@ const Block = styled.div`
 `
 
 export const WorkdayLeftBlock = () => {
-  const { workdayEndsAt, endsAt, startsAt, currentTime } = useDayOverview()
+  const { workdayEndsAt, timelineEndsAt, timelineStartsAt, currentTime } =
+    useDayOverview()
   const workEndsIn = workdayEndsAt - currentTime
-  const timespan = endsAt - startsAt
+  const timespan = timelineEndsAt - timelineStartsAt
 
   if (currentTime > workdayEndsAt) {
     return null
@@ -22,7 +23,7 @@ export const WorkdayLeftBlock = () => {
   return (
     <Block
       style={{
-        top: toPercents((currentTime - startsAt) / timespan),
+        top: toPercents((currentTime - timelineStartsAt) / timespan),
         height: toPercents(workEndsIn / timespan),
       }}
     />

@@ -8,7 +8,7 @@ interface Props {
 
 export const CTA = ({ text = 'Start now' }: Props) => {
   return (
-    <ExternalLink openInSameTab to={`${APP_URL}/sign-up`}>
+    <ExternalLink openInSameTab isReferring to={`${APP_URL}/sign-up`}>
       <Button as="div" kind="reversed" size="xl">
         {text}
       </Button>

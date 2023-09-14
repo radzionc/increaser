@@ -36,12 +36,12 @@ const Line = styled.div`
 `
 
 export const TimelineMarks = () => {
-  const { startsAt, endsAt } = useDayOverview()
+  const { timelineStartsAt, timelineEndsAt } = useDayOverview()
   const marks = useMemo(() => {
-    return getHoursInRange(startsAt, endsAt)
-  }, [endsAt, startsAt])
+    return getHoursInRange(timelineStartsAt, timelineEndsAt)
+  }, [timelineEndsAt, timelineStartsAt])
 
-  const timespan = endsAt - startsAt
+  const timespan = timelineEndsAt - timelineStartsAt
 
   return (
     <>
@@ -49,7 +49,7 @@ export const TimelineMarks = () => {
         return (
           <PositionAbsolutelyCenterHorizontally
             fullWidth
-            top={toPercents((mark - startsAt) / timespan)}
+            top={toPercents((mark - timelineStartsAt) / timespan)}
             key={mark}
           >
             <Container>

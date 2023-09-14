@@ -37,15 +37,16 @@ const Outline = styled.div`
 `
 
 export const CurrentTime = () => {
-  const { currentTime, startsAt, endsAt, workdayEndsAt } = useDayOverview()
+  const { currentTime, timelineStartsAt, timelineEndsAt, workdayEndsAt } =
+    useDayOverview()
 
-  if (currentTime > workdayEndsAt && endsAt === workdayEndsAt) {
+  if (currentTime > workdayEndsAt && timelineEndsAt === workdayEndsAt) {
     return null
   }
 
-  const timespan = endsAt - startsAt
+  const timespan = timelineEndsAt - timelineStartsAt
 
-  const top = toPercents((currentTime - startsAt) / timespan)
+  const top = toPercents((currentTime - timelineStartsAt) / timespan)
 
   return (
     <>

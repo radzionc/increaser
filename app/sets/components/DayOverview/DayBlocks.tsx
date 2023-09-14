@@ -36,9 +36,9 @@ const Container = styled.div`
 `
 
 export const DayBlocks = () => {
-  const { sets, startsAt, endsAt } = useDayOverview()
+  const { sets, timelineStartsAt, timelineEndsAt } = useDayOverview()
 
-  const timespan = endsAt - startsAt
+  const timespan = timelineEndsAt - timelineStartsAt
 
   const blocks = getBlocks(sets)
 
@@ -64,7 +64,7 @@ export const DayBlocks = () => {
                 block={block}
                 style={{
                   top: `calc(${toPercents(
-                    (sets[0].start - startsAt) / timespan,
+                    (sets[0].start - timelineStartsAt) / timespan,
                   )} - 2px)`,
                   height: `calc(${toPercents(blockDuration / timespan)} + 4px)`,
                   left: -2,
@@ -74,7 +74,7 @@ export const DayBlocks = () => {
               {sets.map((set, index) => {
                 const height = getSetDuration(set) / timespan
 
-                const top = (set.start - startsAt) / timespan
+                const top = (set.start - timelineStartsAt) / timespan
 
                 const style = {
                   height: toPercents(height),

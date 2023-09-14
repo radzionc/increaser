@@ -14,10 +14,10 @@ const Container = styled.div`
 `
 
 export const WorkdayEndStatus = () => {
-  const { workdayEndsAt, endsAt, currentTime } = useDayOverview()
+  const { workdayEndsAt, timelineEndsAt, currentTime } = useDayOverview()
   const workEndsIn = workdayEndsAt - currentTime
 
-  if (endsAt > workdayEndsAt) {
+  if (timelineEndsAt > workdayEndsAt) {
     return null
   }
 

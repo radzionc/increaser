@@ -1,5 +1,5 @@
 import { toProject } from 'projects/helpers/toProject'
-import { Project, ProjectStatus } from 'projects/Project'
+import { Project } from 'projects/Project'
 import { createContext, useMemo } from 'react'
 import { useCurrentWeekSets } from 'sets/hooks/useCurrentWeekSets'
 import { useStartOfWeek } from '@increaser/ui/hooks/useStartOfWeek'
@@ -39,7 +39,7 @@ const getProjectSortingNumber = ({
   doneMinutesThisWeek,
   status,
 }: Project) => {
-  if (status !== ProjectStatus.Active) return 100000000000
+  if (status !== 'ACTIVE') return 100000000000
   if (!allocatedMinutesPerWeek && !doneMinutesThisWeek) return 1000000000
   if (!allocatedMinutesPerWeek) return doneMinutesThisWeek
 

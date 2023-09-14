@@ -24,6 +24,8 @@ import { RhytmicRerender } from '@increaser/ui/ui/RhytmicRerender'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from 'sets/components/DayOverview'
+import { DayOverviewProvider } from 'sets/components/DayOverview/DayOverviewProvider'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 
 const Container = styled.div`
   max-height: 100%;
@@ -71,6 +73,8 @@ export const FocusPageContent = () => {
   const { projectId, startedAt } = useCurrentFocus()
 
   const { projectsRecord } = useProjects()
+
+  const todayStartedAt = useStartOfDay()
 
   useOnWindowCloseAlert('Please stop the timer first')
 
@@ -142,7 +146,9 @@ export const FocusPageContent = () => {
                 {size.width > 750 && (
                   <Side>
                     <ErrorBoundary>
-                      <DayOverview />
+                      <DayOverviewProvider dayTimestamp={todayStartedAt}>
+                        <DayOverview />
+                      </DayOverviewProvider>
                     </ErrorBoundary>
                   </Side>
                 )}

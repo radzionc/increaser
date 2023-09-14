@@ -1,9 +1,6 @@
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
 
-export enum ProjectStatus {
-  Inactive = 'INACTIVE',
-  Active = 'ACTIVE',
-}
+export type ProjectStatus = 'INACTIVE' | 'ACTIVE'
 
 export interface ProjectWeek {
   year: number

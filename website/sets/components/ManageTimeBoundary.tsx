@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { getDateFromMinutes } from '@increaser/utils/getDateFromMinutes'
+import { getDateFromMinutes } from '@increaser/utils/time/getDateFromMinutes'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { MinusIcon } from '@increaser/ui/ui/icons/MinusIcon'
 import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'

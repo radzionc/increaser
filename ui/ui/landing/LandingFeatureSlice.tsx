@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 import { LandingSlice } from './LandingSlice'
-import { reverseIf } from '@increaser/utils/reverseIf'
+import { reverseIf } from '@increaser/utils/array/reverseIf'
 import { IntersectionAware } from '../IntersectionAware'
 import { VStack } from '../Stack'
 import { Text } from '../Text'

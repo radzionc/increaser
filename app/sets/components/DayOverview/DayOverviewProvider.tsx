@@ -4,35 +4,44 @@ import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { MS_IN_MIN } from '@increaser/utils/time'
-import { startOfHour, endOfHour } from 'date-fns'
+import { startOfHour, endOfHour, isToday } from 'date-fns'
 import { useFocus } from 'focus/hooks/useFocus'
 import { createContext, useMemo } from 'react'
-import { useTodaySets } from 'sets/hooks/useTodaySets'
-import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
+import { startOfDay } from 'date-fns'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { getDaySets } from 'sets/helpers/getDaySets'
 
 interface DayOverviewContextState {
   sets: Set[]
   currentTime: number
-  startsAt: number
-  endsAt: number
+  timelineStartsAt: number
+  timelineEndsAt: number
   workdayEndsAt: number
+  dayStartedAt: number
 }
 
 const DayOverviewContext = createContext<DayOverviewContextState | undefined>(
   undefined,
 )
 
+interface DayOverviewProviderProps extends ComponentWithChildrenProps {
+  dayTimestamp: number
+}
+
 export const DayOverviewProvider = ({
   children,
-}: ComponentWithChildrenProps) => {
+  dayTimestamp,
+}: DayOverviewProviderProps) => {
   const currentTime = useRhythmicRerender()
-  const todaySets = useTodaySets()
+
+  const dayStartedAt = startOfDay(dayTimestamp ?? currentTime).getTime()
+
   const { currentSet } = useFocus()
+  const { sets: allSets } = useAssertUserState()
 
   const sets = useMemo(() => {
-    const result = [...todaySets]
-    if (currentSet) {
+    const result = getDaySets(allSets, dayStartedAt)
+    if (currentSet && isToday(dayStartedAt)) {
       result.push({
         start: currentSet.startedAt,
         end: currentTime,
@@ -41,29 +50,27 @@ export const DayOverviewProvider = ({
     }
 
     return result
-  }, [currentSet, currentTime, todaySets])
+  }, [allSets, currentSet, currentTime, dayStartedAt])
 
   const { goalToStartWorkAt, goalToFinishWorkBy } = useAssertUserState()
 
-  const todayStartedAt = useStartOfDay()
+  const workdayEndsAt = dayStartedAt + goalToFinishWorkBy * MS_IN_MIN
 
-  const workdayEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
-
-  const startsAt = useMemo(() => {
+  const timelineStartsAt = useMemo(() => {
     if (sets.length) {
       return startOfHour(sets[0].start).getTime()
     }
 
-    const workdayStartsAt = todayStartedAt + goalToStartWorkAt * MS_IN_MIN
+    const workdayStartsAt = dayStartedAt + goalToStartWorkAt * MS_IN_MIN
 
     if (currentTime < workdayStartsAt) {
       return startOfHour(currentTime).getTime()
     }
 
     return workdayStartsAt
-  }, [currentTime, goalToStartWorkAt, sets, todayStartedAt])
+  }, [currentTime, dayStartedAt, goalToStartWorkAt, sets])
 
-  const endsAt = useMemo(() => {
+  const timelineEndsAt = useMemo(() => {
     if (!sets.length) {
       return workdayEndsAt
     }
@@ -77,7 +84,14 @@ export const DayOverviewProvider = ({
 
   return (
     <DayOverviewContext.Provider
-      value={{ sets, currentTime, startsAt, endsAt, workdayEndsAt }}
+      value={{
+        sets,
+        currentTime,
+        timelineStartsAt,
+        timelineEndsAt,
+        workdayEndsAt,
+        dayStartedAt,
+      }}
     >
       {children}
     </DayOverviewContext.Provider>

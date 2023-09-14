@@ -14,17 +14,17 @@ import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
-import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { useProjects } from 'projects/hooks/useProjects'
 import { getProjectsTotalRecord } from 'projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
+import { getWeekday } from '@increaser/utils/time/getWeekday'
 
 export const AmountOverview = () => {
   const theme = useTheme()
-  const { sets } = useDayOverview()
+  const { sets, dayStartedAt } = useDayOverview()
   const setsTotal = getSetsSum(sets)
   const { allocation } = useWeekTimeAllocation()
-  const weekday = useWeekday()
+  const weekday = getWeekday(new Date(dayStartedAt))
   const { projectsRecord } = useProjects()
 
   const allocatedMinutes = allocation ? allocation[weekday] : 0
