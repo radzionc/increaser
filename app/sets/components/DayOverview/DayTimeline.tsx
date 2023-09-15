@@ -5,29 +5,53 @@ import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPad
 import { WorkdayEndStatus } from './WorkdayEndStatus'
 import { CurrentTime } from './CurrentTime'
 import { WorkdayLeftBlock } from './WorkdayLeftBlock'
-import { DayBlocks } from './DayBlocks'
+import { WorkBlocks } from './WorkBlocks'
+import { ManageLastSession } from './ManageLastSession'
+import {
+  botomPlaceholderHeightInPx,
+  minimumHourHeightInPx,
+  topPlaceholderHeightInPx,
+} from './config'
+import { useDayOverview } from './DayOverviewProvider'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
+import { takeWholeSpaceAbsolutely } from '@increaser/ui/css/takeWholeSpaceAbsolutely'
+import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
 
 const Wrapper = styled.div`
   flex: 1;
   ${getHorizontalPaddingCSS(0)};
-  padding-bottom: 28px;
+  position: relative;
+  min-height: 320px;
 `
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  ${takeWholeSpaceAbsolutely}
+  overflow: auto;
+  padding-bottom: ${botomPlaceholderHeightInPx}px;
+  padding-top: ${topPlaceholderHeightInPx}px;
+`
+
+const Content = styled.div`
+  ${takeWholeSpace};
   position: relative;
 `
 
 export const DayTimeline = () => {
+  const { timelineStartsAt, timelineEndsAt } = useDayOverview()
+  const timespan = timelineEndsAt - timelineStartsAt
+  const minHeight = convertDuration(timespan, 'ms', 'h') * minimumHourHeightInPx
+
   return (
     <Wrapper>
       <Container>
-        <WorkdayLeftBlock />
-        <TimelineMarks />
-        <CurrentTime />
-        <DayBlocks />
-        <WorkdayEndStatus />
+        <Content style={{ minHeight }}>
+          <WorkdayLeftBlock />
+          <TimelineMarks />
+          <CurrentTime />
+          <WorkdayEndStatus />
+          <WorkBlocks />
+          <ManageLastSession />
+        </Content>
       </Container>
     </Wrapper>
   )

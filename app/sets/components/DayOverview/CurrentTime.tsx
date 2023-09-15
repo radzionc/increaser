@@ -8,6 +8,7 @@ import { formatTime } from '@increaser/utils/time/formatTime'
 import { Text } from '@increaser/ui/ui/Text'
 import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 
 const Line = styled.div`
   width: 100%;
@@ -24,8 +25,6 @@ const Wrapper = styled.div`
 `
 
 const Time = styled(Text)`
-  font-weight: 600;
-  font-size: 14px;
   position: absolute;
 `
 
@@ -37,8 +36,18 @@ const Outline = styled.div`
 `
 
 export const CurrentTime = () => {
-  const { currentTime, timelineStartsAt, timelineEndsAt, workdayEndsAt } =
-    useDayOverview()
+  const {
+    currentTime,
+    timelineStartsAt,
+    timelineEndsAt,
+    workdayEndsAt,
+    dayStartedAt,
+  } = useDayOverview()
+
+  const todayStartedAt = useStartOfDay()
+  if (dayStartedAt !== todayStartedAt) {
+    return null
+  }
 
   if (currentTime > workdayEndsAt && timelineEndsAt === workdayEndsAt) {
     return null
@@ -56,7 +65,9 @@ export const CurrentTime = () => {
       <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
         <Wrapper>
           <Outline />
-          <Time>{formatTime(currentTime)}</Time>
+          <Time size={14} weight="bold">
+            {formatTime(currentTime)}
+          </Time>
         </Wrapper>
       </PositionAbsolutelyCenterHorizontally>
     </>

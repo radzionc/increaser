@@ -28,12 +28,11 @@ export const PositionAbsolutelyCenterHorizontally = ({
   children,
   fullWidth,
 }: PositionAbsolutelyCenterHorizontallyProps) => {
+  const width = fullWidth ? '100%' : undefined
   return (
-    <Wrapper style={{ top, width: fullWidth ? '100%' : undefined }}>
-      <Container style={{ width: fullWidth ? '100%' : undefined }}>
-        <Content style={{ width: fullWidth ? '100%' : undefined }}>
-          {children}
-        </Content>
+    <Wrapper style={{ top, width }}>
+      <Container style={{ width }}>
+        <Content style={{ width }}>{children}</Content>
       </Container>
     </Wrapper>
   )

@@ -9,9 +9,6 @@ export const blockDistanceInMinutes = 15
 
 export const targetBlockInMin = 90
 
-export const getBlockDuration = ({ sets }: Block) =>
-  getLastItem(sets).end - sets[0].start
-
 export const getBlockWorkDuration = ({ sets }: Block) => getSetsDuration(sets)
 
 export const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
@@ -38,4 +35,14 @@ export const getBlocks = (sets: Set[]): Block[] => {
   })
 
   return blocks
+}
+
+export const getBlockBoundaries = (block: Block) => ({
+  start: block.sets[0].start,
+  end: getLastItem(block.sets).end,
+})
+
+export const getBlockDuration = (block: Block) => {
+  const { start, end } = getBlockBoundaries(block)
+  return end - start
 }

@@ -3,7 +3,7 @@ import { useDayOverview } from './DayOverviewProvider'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { toPercents } from '@increaser/utils/toPercents'
 
-const Block = styled.div`
+const Container = styled.div`
   width: 100%;
   background: ${getColor('foreground')};
   position: absolute;
@@ -21,7 +21,7 @@ export const WorkdayLeftBlock = () => {
   }
 
   return (
-    <Block
+    <Container
       style={{
         top: toPercents((currentTime - timelineStartsAt) / timespan),
         height: toPercents(workEndsIn / timespan),

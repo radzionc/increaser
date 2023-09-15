@@ -2,6 +2,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { useDayOverview } from './DayOverviewProvider'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 
 const Container = styled.div`
   position: absolute;
@@ -14,8 +15,14 @@ const Container = styled.div`
 `
 
 export const WorkdayEndStatus = () => {
-  const { workdayEndsAt, timelineEndsAt, currentTime } = useDayOverview()
+  const { workdayEndsAt, timelineEndsAt, currentTime, dayStartedAt } =
+    useDayOverview()
   const workEndsIn = workdayEndsAt - currentTime
+
+  const todayStartedAt = useStartOfDay()
+  if (dayStartedAt !== todayStartedAt) {
+    return null
+  }
 
   if (timelineEndsAt > workdayEndsAt) {
     return null

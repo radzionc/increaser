@@ -14,6 +14,7 @@ import { formatTime } from '@increaser/utils/time/formatTime'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { getHoursInRange } from '@increaser/utils/time/getHoursInRange'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
 
 const Container = styled.div`
   display: grid;
@@ -25,8 +26,7 @@ const Container = styled.div`
 
 const Time = styled.div`
   ${centerContentCSS};
-  width: 100%;
-  height: 100%;
+  ${takeWholeSpace};
 `
 
 const Line = styled.div`
