@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { TimelineMarks } from './TimelineMarks'
-import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
 import { WorkdayEndStatus } from './WorkdayEndStatus'
 import { CurrentTime } from './CurrentTime'
 import { WorkdayLeftBlock } from './WorkdayLeftBlock'
@@ -19,7 +18,7 @@ import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
 
 const Wrapper = styled.div`
   flex: 1;
-  ${getHorizontalPaddingCSS(0)};
+  padding: 0;
   position: relative;
   min-height: 320px;
 `

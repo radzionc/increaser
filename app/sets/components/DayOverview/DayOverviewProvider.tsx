@@ -15,16 +15,22 @@ import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 interface DayOverviewContextState {
   sets: Set[]
   currentTime: number
+
   timelineStartsAt: number
   timelineEndsAt: number
-  workdayEndsAt: number
 
   dayStartedAt: number
+  workdayEndsAt: number
   setCurrentDay: (timestamp: number) => void
 }
 
 const DayOverviewContext = createContext<DayOverviewContextState | undefined>(
   undefined,
+)
+
+export const useDayOverview = createContextHook(
+  DayOverviewContext,
+  'DayOverview',
 )
 
 export const DayOverviewProvider = ({
@@ -104,8 +110,3 @@ export const DayOverviewProvider = ({
     </DayOverviewContext.Provider>
   )
 }
-
-export const useDayOverview = createContextHook(
-  DayOverviewContext,
-  'DayOverview',
-)

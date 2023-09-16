@@ -15,25 +15,23 @@ import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { useProjects } from 'projects/hooks/useProjects'
 import { getProjectsTotalRecord } from 'projects/helpers/getProjectsTotalRecord'
-import styled, { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components'
 import { getWeekday } from '@increaser/utils/time/getWeekday'
 
-const Container = styled(VStack)``
-
 export const AmountOverview = () => {
-  const theme = useTheme()
   const { sets, dayStartedAt } = useDayOverview()
   const setsTotal = getSetsSum(sets)
   const { allocation } = useWeekTimeAllocation()
   const weekday = getWeekday(new Date(dayStartedAt))
-  console.log(dayStartedAt, weekday)
-  const { projectsRecord } = useProjects()
 
   const allocatedMinutes = allocation ? allocation[weekday] : 0
   const projectsTotal = getProjectsTotalRecord(sets)
 
+  const { projectsRecord } = useProjects()
+  const theme = useTheme()
+
   return (
-    <Container fullWidth gap={8}>
+    <VStack fullWidth gap={8}>
       <VStack gap={4}>
         <HStack alignItems="center" justifyContent="space-between">
           <Text weight="semibold" color="supporting" size={14}>
@@ -69,6 +67,6 @@ export const AmountOverview = () => {
             />
           ))}
       </VStack>
-    </Container>
+    </VStack>
   )
 }

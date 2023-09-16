@@ -24,7 +24,6 @@ import { RhytmicRerender } from '@increaser/ui/ui/RhytmicRerender'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from 'sets/components/DayOverview'
-import { DayOverviewProvider } from 'sets/components/DayOverview/DayOverviewProvider'
 
 const Container = styled.div`
   max-height: 100%;
@@ -143,9 +142,7 @@ export const FocusPageContent = () => {
                 {size.width > 750 && (
                   <Side>
                     <ErrorBoundary>
-                      <DayOverviewProvider>
-                        <DayOverview />
-                      </DayOverviewProvider>
+                      <DayOverview />
                     </ErrorBoundary>
                   </Side>
                 )}

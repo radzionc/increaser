@@ -1,4 +1,4 @@
-import { useDayOverview } from './DayOverviewProvider'
+import { useDayOverview } from '../DayOverviewProvider'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { WorkBlock } from './WorkBlock'
 

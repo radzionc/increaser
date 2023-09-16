@@ -14,7 +14,6 @@ import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOn
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { useFocus } from 'focus/hooks/useFocus'
 import { DayOverview } from 'sets/components/DayOverview'
-import { DayOverviewProvider } from 'sets/components/DayOverview/DayOverviewProvider'
 
 const Container = styled.div`
   display: flex;
@@ -69,11 +68,7 @@ export const HomePageContent = () => {
     </VStack>
   )
 
-  const overview = (
-    <DayOverviewProvider>
-      <DayOverview />
-    </DayOverviewProvider>
-  )
+  const overview = <DayOverview />
 
   return (
     <>

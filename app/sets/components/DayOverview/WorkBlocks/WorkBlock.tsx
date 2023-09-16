@@ -1,25 +1,25 @@
 import { Block } from '@increaser/entities/Block'
 import styled from 'styled-components'
-import { useDayOverview } from './DayOverviewProvider'
+import { useDayOverview } from '../DayOverviewProvider'
 import {
   getBlockBoundaries,
   getBlockWorkDuration,
 } from '@increaser/entities-utils/block'
 import { toPercents } from '@increaser/utils/toPercents'
 import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
-import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import {
   horizontalPaddingInPx,
   timeLabelWidthInPx,
   timeLabelGapInPx,
-} from './config'
+} from '../config'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { transition } from '@increaser/ui/css/transition'
+import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
 
 interface WorkBlockProps {
   block: Block
@@ -32,7 +32,7 @@ const Container = styled.div`
   width: calc(100% - ${leftOffset}px - ${horizontalPaddingInPx}px);
   left: ${leftOffset}px;
   position: absolute;
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 const Content = styled.div`
@@ -41,7 +41,7 @@ const Content = styled.div`
 `
 
 const Outline = styled.div`
-  ${getOutlineCSS(2, 2)};
+  ${absoluteOutline(2, 2)};
   border-radius: 4px;
   border: 1px dashed ${getColor('textSupporting')};
 `

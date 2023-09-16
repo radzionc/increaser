@@ -3,7 +3,6 @@ import { useDayOverview } from './DayOverviewProvider'
 import { PositionAbsolutelyCenterHorizontally } from '@increaser/ui/ui/PositionAbsolutelyCenterHorizontally'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'
-import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
 import {
   horizontalPaddingInPx,
   timeLabelGapInPx,
@@ -13,20 +12,21 @@ import { Text } from '@increaser/ui/ui/Text'
 import { formatTime } from '@increaser/utils/time/formatTime'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { getHoursInRange } from '@increaser/utils/time/getHoursInRange'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { transition } from '@increaser/ui/css/transition'
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: ${timeLabelWidthInPx}px 1fr;
   align-items: center;
-  ${getHorizontalPaddingCSS(horizontalPaddingInPx)};
+  ${horizontalPadding(horizontalPaddingInPx)};
   gap: ${timeLabelGapInPx}px;
 `
 
 const Time = styled.div`
-  ${centerContentCSS};
+  ${centerContent};
   ${takeWholeSpace};
 `
 
@@ -34,7 +34,7 @@ const Line = styled.div`
   width: 100%;
   height: 1px;
   background: ${getColor('mist')};
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 export const TimelineMarks = () => {

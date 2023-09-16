@@ -1,5 +1,3 @@
-import { MS_IN_DAY } from '@increaser/utils/time'
-
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { useWeekday } from './useWeekday'
 import { convertDuration } from '@increaser/utils/time/convertDuration'

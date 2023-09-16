@@ -6,9 +6,9 @@ import { getColor } from '@increaser/ui/ui/theme/getters'
 import { horizontalPaddingInPx, timeLabelWidthInPx } from './config'
 import { formatTime } from '@increaser/utils/time/formatTime'
 import { Text } from '@increaser/ui/ui/Text'
-import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
 
 const Line = styled.div`
   width: 100%;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   width: ${timeLabelWidthInPx}px;
   margin-left: ${horizontalPaddingInPx}px;
   position: relative;
-  ${centerContentCSS}
+  ${centerContent}
   height: 20px;
 `
 
@@ -29,7 +29,7 @@ const Time = styled(Text)`
 `
 
 const Outline = styled.div`
-  ${getOutlineCSS(6, 6)};
+  ${absoluteOutline(6, 6)};
   background: ${getColor('background')};
   border-radius: 8px;
   border: 2px solid ${getColor('primary')};
