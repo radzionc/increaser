@@ -1,5 +1,6 @@
 import { Set } from '@increaser/entities/User'
 import { UIComponentProps } from '@increaser/ui/props'
+import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
@@ -16,11 +17,13 @@ const Container = styled.div`
   overflow: hidden;
   position: absolute;
   width: 100%;
+  ${defaultTransitionCSS};
 `
 
 const Identifier = styled.div`
   width: 4px;
   height: 100%;
+  ${defaultTransitionCSS};
 `
 
 export const WorkSession = ({ set, ...rest }: WorkSessionProps) => {

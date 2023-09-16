@@ -4,6 +4,7 @@ import { AmountOverview } from './AmountOverview'
 import { DayTimeline } from './DayTimeline'
 import { AddSession } from './AddSession'
 import { horizontalPaddingInPx } from './config'
+import { WeekNavigation } from './WeekNavigation'
 
 const Container = styled(Panel)`
   height: 100%;
@@ -12,6 +13,7 @@ const Container = styled(Panel)`
 export const DayOverview = () => {
   return (
     <Container padding={horizontalPaddingInPx} withSections kind="secondary">
+      <WeekNavigation />
       <AmountOverview />
       <DayTimeline />
       <AddSession />

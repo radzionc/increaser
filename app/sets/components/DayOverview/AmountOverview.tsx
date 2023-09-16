@@ -1,5 +1,4 @@
-import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import {
   HStackSeparatedBy,
   slashSeparator,
@@ -16,8 +15,10 @@ import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { useProjects } from 'projects/hooks/useProjects'
 import { getProjectsTotalRecord } from 'projects/helpers/getProjectsTotalRecord'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { getWeekday } from '@increaser/utils/time/getWeekday'
+
+const Container = styled(VStack)``
 
 export const AmountOverview = () => {
   const theme = useTheme()
@@ -25,28 +26,37 @@ export const AmountOverview = () => {
   const setsTotal = getSetsSum(sets)
   const { allocation } = useWeekTimeAllocation()
   const weekday = getWeekday(new Date(dayStartedAt))
+  console.log(dayStartedAt, weekday)
   const { projectsRecord } = useProjects()
 
   const allocatedMinutes = allocation ? allocation[weekday] : 0
   const projectsTotal = getProjectsTotalRecord(sets)
 
   return (
-    <VStack fullWidth gap={8}>
-      <LabeledValue name={WEEKDAYS[weekday]}>
-        <HStackSeparatedBy
-          separator={<Text color="shy">{slashSeparator}</Text>}
-        >
-          <Text weight="semibold">{formatDuration(setsTotal, 'ms')}</Text>
-          <Text weight="semibold" color="shy">
-            {formatDuration(allocatedMinutes, 'min')}
+    <Container fullWidth gap={8}>
+      <VStack gap={4}>
+        <HStack alignItems="center" justifyContent="space-between">
+          <Text weight="semibold" color="supporting" size={14}>
+            {WEEKDAYS[weekday]}
           </Text>
-        </HStackSeparatedBy>
-      </LabeledValue>
-      <ProjectsAllocationLine
-        projectsRecord={projectsRecord}
-        sets={sets}
-        allocatedMinutes={allocatedMinutes}
-      />
+          <HStackSeparatedBy
+            separator={<Text color="shy">{slashSeparator}</Text>}
+          >
+            <Text size={14} weight="semibold">
+              {formatDuration(setsTotal, 'ms')}
+            </Text>
+            <Text size={14} weight="semibold" color="shy">
+              {formatDuration(allocatedMinutes, 'min')}
+            </Text>
+          </HStackSeparatedBy>
+        </HStack>
+        <ProjectsAllocationLine
+          projectsRecord={projectsRecord}
+          sets={sets}
+          allocatedMinutes={allocatedMinutes}
+        />
+      </VStack>
+
       <VStack gap={4} fullWidth>
         {Object.entries(projectsTotal)
           .sort((a, b) => b[1] - a[1])
@@ -59,6 +69,6 @@ export const AmountOverview = () => {
             />
           ))}
       </VStack>
-    </VStack>
+    </Container>
   )
 }

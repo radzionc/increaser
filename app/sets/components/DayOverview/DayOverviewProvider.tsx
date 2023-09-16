@@ -6,10 +6,11 @@ import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { startOfHour, endOfHour, isToday } from 'date-fns'
 import { useFocus } from 'focus/hooks/useFocus'
-import { createContext, useMemo } from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { startOfDay } from 'date-fns'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { getDaySets } from 'sets/helpers/getDaySets'
+import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 
 interface DayOverviewContextState {
   sets: Set[]
@@ -17,26 +18,31 @@ interface DayOverviewContextState {
   timelineStartsAt: number
   timelineEndsAt: number
   workdayEndsAt: number
+
   dayStartedAt: number
+  setCurrentDay: (timestamp: number) => void
 }
 
 const DayOverviewContext = createContext<DayOverviewContextState | undefined>(
   undefined,
 )
 
-interface DayOverviewProviderProps extends ComponentWithChildrenProps {
-  dayTimestamp: number
-}
-
 export const DayOverviewProvider = ({
   children,
-  dayTimestamp,
-}: DayOverviewProviderProps) => {
+}: ComponentWithChildrenProps) => {
   const currentTime = useRhythmicRerender()
+  const todayStartedAt = useStartOfDay()
+  const [currentDay, setCurrentDay] = useState(todayStartedAt)
 
-  const dayStartedAt = startOfDay(dayTimestamp ?? currentTime).getTime()
+  const dayStartedAt = startOfDay(currentDay).getTime()
 
   const { currentSet } = useFocus()
+  useEffect(() => {
+    if (currentSet && dayStartedAt !== todayStartedAt) {
+      setCurrentDay(todayStartedAt)
+    }
+  }, [currentSet, dayStartedAt, todayStartedAt])
+
   const { sets: allSets } = useAssertUserState()
 
   const sets = useMemo(() => {
@@ -91,6 +97,7 @@ export const DayOverviewProvider = ({
         timelineEndsAt,
         workdayEndsAt,
         dayStartedAt,
+        setCurrentDay,
       }}
     >
       {children}

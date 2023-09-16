@@ -19,6 +19,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
+import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 
 interface WorkBlockProps {
   block: Block
@@ -31,6 +32,7 @@ const Container = styled.div`
   width: calc(100% - ${leftOffset}px - ${horizontalPaddingInPx}px);
   left: ${leftOffset}px;
   position: absolute;
+  ${defaultTransitionCSS};
 `
 
 const Content = styled.div`

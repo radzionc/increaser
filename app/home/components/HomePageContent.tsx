@@ -14,7 +14,6 @@ import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOn
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { useFocus } from 'focus/hooks/useFocus'
 import { DayOverview } from 'sets/components/DayOverview'
-import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { DayOverviewProvider } from 'sets/components/DayOverview/DayOverviewProvider'
 
 const Container = styled.div`
@@ -49,7 +48,6 @@ const MobileContent = styled(VStack)`
 export const HomePageContent = () => {
   const todaySets = useTodaySets()
   const { currentSet } = useFocus()
-  const todayStartAt = useStartOfDay()
 
   const content = (
     <VStack>
@@ -72,7 +70,7 @@ export const HomePageContent = () => {
   )
 
   const overview = (
-    <DayOverviewProvider dayTimestamp={todayStartAt}>
+    <DayOverviewProvider>
       <DayOverview />
     </DayOverviewProvider>
   )
