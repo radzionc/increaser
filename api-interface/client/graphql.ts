@@ -311,6 +311,7 @@ export type UpdateUserInput = {
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
   primaryGoal?: InputMaybe<PrimaryGoal>
+  sumbittedHabitsAt?: InputMaybe<Scalars['Float']['input']>
   tasks?: InputMaybe<Array<TaskInput>>
   weekTimeAllocation?: InputMaybe<Array<Scalars['Float']['input']>>
 }
@@ -334,6 +335,7 @@ export type UserState = {
   projects: Array<Project>
   registrationDate: Scalars['Float']['output']
   sets: Array<Set>
+  sumbittedHabitsAt?: Maybe<Scalars['Float']['output']>
   tasks: Array<Task>
   weekTimeAllocation: Array<Scalars['Float']['output']>
 }
@@ -571,6 +573,7 @@ export type UserStateQuery = {
     goalToFinishWorkBy: number
     goalToGoToBedAt: number
     primaryGoal: PrimaryGoal
+    sumbittedHabitsAt?: number | null
     sets: Array<{
       __typename?: 'Set'
       start: number
@@ -1728,6 +1731,10 @@ export const UserStateDocument = {
                       },
                     ],
                   },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'sumbittedHabitsAt' },
                 },
               ],
             },

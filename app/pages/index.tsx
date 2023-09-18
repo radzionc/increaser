@@ -1,8 +1,4 @@
-import { AppPageLayout } from 'focus/components/AppPageLayout'
 import { HomePage } from 'home/components'
+import { makeAppPage } from 'layout/makeAppPage'
 
-export default HomePage
-
-HomePage.getLayout = function getLayout(page) {
-  return <AppPageLayout>{page}</AppPageLayout>
-}
+export default makeAppPage(HomePage)

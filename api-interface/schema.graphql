@@ -194,6 +194,7 @@ type UserState {
   focusSounds: [FocusSound!]!
   tasks: [Task!]!
   country: String
+  sumbittedHabitsAt: Float
 }
 
 input UserStateInput {
@@ -232,6 +233,7 @@ input UpdateUserInput {
   goalToFinishWorkBy: Int
   goalToGoToBedAt: Int
   isAnonymous: Boolean
+  sumbittedHabitsAt: Float
 }
 
 type Mutation {

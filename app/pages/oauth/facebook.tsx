@@ -1,13 +1,4 @@
-import { AuthPageLayout } from 'auth/components/AuthPageLayout'
 import { OAuthContent } from 'auth/components/OAuthContent'
-import { Page } from 'components/Page'
+import { makeAuthPage } from 'layout/makeAuthPage'
 
-export const OAuthPage: Page = () => {
-  return <OAuthContent provider={'facebook'} />
-}
-
-export default OAuthPage
-
-OAuthPage.getLayout = function getLayout(page) {
-  return <AuthPageLayout>{page}</AuthPageLayout>
-}
+export default makeAuthPage(() => <OAuthContent provider={'facebook'} />)

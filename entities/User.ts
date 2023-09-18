@@ -77,6 +77,8 @@ export type User = {
   focusSounds: FocusSound[]
 
   updatedAt: number
+
+  sumbittedHabitsAt?: number
 }
 
 export const userDefaultFields: Pick<

@@ -1,11 +1,10 @@
-import { Page } from 'components/Page'
+import { makeProjectsPage } from 'layout/makeProjectsPage'
 import { useRouter } from 'next/router'
-import { ProjectsLayout } from 'projects/components/ProjectsLayout'
 import { useProjects } from 'projects/hooks/useProjects'
 import { useEffect } from 'react'
 import { Path, getProjectPath } from 'router/Path'
 
-const ProjectsPage: Page = () => {
+export default makeProjectsPage(() => {
   const { projects } = useProjects()
   const router = useRouter()
 
@@ -18,10 +17,4 @@ const ProjectsPage: Page = () => {
   }, [projects, router])
 
   return null
-}
-
-export default ProjectsPage
-
-ProjectsPage.getLayout = function getLayout(page) {
-  return <ProjectsLayout>{page}</ProjectsLayout>
-}
+})

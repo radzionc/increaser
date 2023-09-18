@@ -1,8 +1,4 @@
-import { AppPageLayout } from 'focus/components/AppPageLayout'
+import { makeAppPage } from 'layout/makeAppPage'
 import { SettingsPage } from 'settings/components'
 
-export default SettingsPage
-
-SettingsPage.getLayout = function getLayout(page) {
-  return <AppPageLayout>{page}</AppPageLayout>
-}
+export default makeAppPage(() => <SettingsPage />)

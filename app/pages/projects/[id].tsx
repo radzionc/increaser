@@ -1,8 +1,7 @@
-import { Page } from 'components/Page'
+import { makeProjectsPage } from 'layout/makeProjectsPage'
 import { useRouter } from 'next/router'
 import { ProjectView } from 'projects/components/ProjectView'
 import { CurrentProjectProvider } from 'projects/components/ProjectView/CurrentProjectProvider'
-import { ProjectsLayout } from 'projects/components/ProjectsLayout'
 import { useProjects } from 'projects/hooks/useProjects'
 import { useEffect } from 'react'
 import { Path } from 'router/Path'
@@ -11,7 +10,7 @@ interface ProjectPageParams {
   id?: string
 }
 
-const ProjectPage: Page = () => {
+export default makeProjectsPage(() => {
   const { projectsRecord } = useProjects()
   const router = useRouter()
 
@@ -31,10 +30,4 @@ const ProjectPage: Page = () => {
       <ProjectView />
     </CurrentProjectProvider>
   )
-}
-
-export default ProjectPage
-
-ProjectPage.getLayout = function getLayout(page) {
-  return <ProjectsLayout>{page}</ProjectsLayout>
-}
+})

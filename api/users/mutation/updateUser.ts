@@ -12,5 +12,5 @@ export const updateUser: MutationResolvers['updateUser'] = async (
 
   await usersDb.updateUser(userId, input)
 
-  return input
+  return true
 }

@@ -1,8 +1,4 @@
 import { AppSumoPage } from 'components/AppSumo'
-import { AppPageLayout } from 'focus/components/AppPageLayout'
+import { makeAppPage } from 'layout/makeAppPage'
 
-export default AppSumoPage
-
-AppSumoPage.getLayout = function getLayout(page) {
-  return <AppPageLayout>{page}</AppPageLayout>
-}
+export default makeAppPage(AppSumoPage)

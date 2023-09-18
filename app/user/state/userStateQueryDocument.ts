@@ -75,6 +75,7 @@ export const userStateQueryDocument = graphql(`
         url
         favourite
       }
+      sumbittedHabitsAt
     }
   }
 `)

@@ -7,27 +7,13 @@ import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
 import { QueryResolvers } from '../../gql/schema'
 import { getUserById, updateUser } from '@increaser/db/user'
 import { User } from '@increaser/entities/User'
+import {
+  Membership,
+  MembershipProvider,
+  Subscription,
+} from '@increaser/entities/Membership'
 
-enum MembershipProvider {
-  Paddle = 'Paddle',
-  AppSumo = 'AppSumo',
-}
-
-interface Subscription {
-  updateUrl: string
-  cancelUrl: string
-  subscriptionPlanId: string
-  cancellationEffectiveDate?: string
-  nextBillDate?: string
-  planId: string
-}
-
-interface Membership {
-  provider: MembershipProvider
-  subscription?: Subscription
-}
-
-const getMembership = (user: User): Membership | null => {
+const getMembership = (user: User): Membership | undefined => {
   if (user.appSumo) {
     return {
       provider: MembershipProvider.AppSumo,
@@ -71,7 +57,7 @@ const getMembership = (user: User): Membership | null => {
     }
   }
 
-  return null
+  return undefined
 }
 
 export const userState: QueryResolvers['userState'] = async (

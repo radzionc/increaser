@@ -1,13 +1,4 @@
-import { AuthPageLayout } from 'auth/components/AuthPageLayout'
 import { EmailConfirmContent } from 'auth/components/EmailConfirmContent'
-import { Page } from 'components/Page'
+import { makeAuthPage } from 'layout/makeAuthPage'
 
-export const EmailConfirmPage: Page = () => {
-  return <EmailConfirmContent />
-}
-
-export default EmailConfirmPage
-
-EmailConfirmPage.getLayout = function getLayout(page) {
-  return <AuthPageLayout>{page}</AuthPageLayout>
-}
+export default makeAuthPage(EmailConfirmContent)

@@ -1,8 +1,4 @@
 import { CommunityPage } from 'community/components/CommunityPage'
-import { AppPageLayout } from 'focus/components/AppPageLayout'
+import { makeAuthPage } from 'layout/makeAuthPage'
 
-export default CommunityPage
-
-CommunityPage.getLayout = function getLayout(page) {
-  return <AppPageLayout>{page}</AppPageLayout>
-}
+export default makeAuthPage(CommunityPage)

@@ -331,6 +331,7 @@ export type UpdateUserInput = {
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
   primaryGoal?: InputMaybe<PrimaryGoal>
+  sumbittedHabitsAt?: InputMaybe<Scalars['Float']['input']>
   tasks?: InputMaybe<Array<TaskInput>>
   weekTimeAllocation?: InputMaybe<Array<Scalars['Float']['input']>>
 }
@@ -354,6 +355,7 @@ export type UserState = {
   projects: Array<Project>
   registrationDate: Scalars['Float']['output']
   sets: Array<Set>
+  sumbittedHabitsAt?: Maybe<Scalars['Float']['output']>
   tasks: Array<Task>
   weekTimeAllocation: Array<Scalars['Float']['output']>
 }
@@ -879,6 +881,11 @@ export type UserStateResolvers<
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
   registrationDate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   sets?: Resolver<Array<ResolversTypes['Set']>, ParentType, ContextType>
+  sumbittedHabitsAt?: Resolver<
+    Maybe<ResolversTypes['Float']>,
+    ParentType,
+    ContextType
+  >
   tasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>
   weekTimeAllocation?: Resolver<
     Array<ResolversTypes['Float']>,

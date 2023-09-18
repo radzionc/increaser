@@ -14,6 +14,7 @@ import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOn
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { useFocus } from 'focus/hooks/useFocus'
 import { DayOverview } from 'sets/components/DayOverview'
+import { SubmitYesterdayHabits } from 'habits/components/SubmitYesterdayHabits'
 
 const Container = styled.div`
   display: flex;
@@ -61,6 +62,7 @@ export const HomePageContent = () => {
         <Panel kind="secondary">
           <SeparatedByLine gap={20}>
             <TasksView />
+            <SubmitYesterdayHabits />
             <CheckTodayHabits />
           </SeparatedByLine>
         </Panel>

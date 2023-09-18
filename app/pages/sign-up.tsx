@@ -1,13 +1,4 @@
-import { AuthPageLayout } from 'auth/components/AuthPageLayout'
 import { SignUpContent } from 'auth/components/SignUpContent'
-import { Page } from 'components/Page'
+import { makeAuthPage } from 'layout/makeAuthPage'
 
-export const SignUpPage: Page = () => {
-  return <SignUpContent />
-}
-
-export default SignUpPage
-
-SignUpPage.getLayout = function getLayout(page) {
-  return <AuthPageLayout>{page}</AuthPageLayout>
-}
+export default makeAuthPage(SignUpContent)

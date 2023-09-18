@@ -14,7 +14,6 @@ import { HabitsProvider } from 'habits/components/HabitsProvider'
 import { ProjectsProvider } from 'projects/components/ProjectsProvider'
 import { PWAProvider } from 'pwa/components/PWAProvider'
 import { QueryClientProvider } from 'react-query'
-import { Retro } from 'retro/components/Retro'
 import { SetsManagerProvider } from 'sets/components/SetsManagerProvider'
 import { ConditionalUserState } from 'user/components/ConditionalUserState'
 import { UserManagerProvider } from 'user/components/UserManagerProvider'
@@ -62,7 +61,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                         <HabitsProvider>
                           <SetsManagerProvider>
                             <FocusProvider>
-                              <Retro />
                               <BreakProvider>{component}</BreakProvider>
                             </FocusProvider>
                           </SetsManagerProvider>
