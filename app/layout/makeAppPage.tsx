@@ -1,4 +1,4 @@
-import { Page, GetLayout } from 'components/Page'
+import { Page, GetLayout } from 'layout/Page'
 import { AppPageLayout } from 'focus/components/AppPageLayout'
 
 const getAppPageLayout: GetLayout = (page) => (

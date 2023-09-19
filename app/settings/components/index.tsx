@@ -8,7 +8,7 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { NamedSection } from 'ui/NamedSection'
 import { PageTitle } from 'ui/PageTitle'
 import { ThemeSelector } from 'ui/ThemeSelector'
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 import { MembershipOverview } from 'membership/components/MembershipOverview'
 
 const title = 'Settings'

@@ -1,4 +1,4 @@
-import { Page, GetLayout } from 'components/Page'
+import { Page, GetLayout } from 'layout/Page'
 import { AuthPageLayout } from 'auth/components/AuthPageLayout'
 
 const getAuthPageLayout: GetLayout = (page) => (

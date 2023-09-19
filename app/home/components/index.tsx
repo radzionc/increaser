@@ -5,7 +5,7 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { HomePageContent } from './HomePageContent'
 import Head from 'next/head'
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 
 export const HomePage: Page = () => {
   return (

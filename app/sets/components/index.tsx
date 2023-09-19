@@ -5,7 +5,7 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { ScheduleEducationBanner } from './ScheduleEducationBanner'
 import { SessionsPageContent } from './SessionsPageContent'
 import { PageTitle } from 'ui/PageTitle'
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 
 const title = 'Work Schedule'
 

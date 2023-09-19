@@ -16,7 +16,7 @@ import {
   RenderHabitsView,
 } from './HabitsView'
 import { PageTitle } from 'ui/PageTitle'
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 
 export const HabitsPage: Page = () => {
   return (

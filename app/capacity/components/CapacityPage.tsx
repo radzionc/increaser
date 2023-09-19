@@ -6,7 +6,7 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { CapacityPageContent } from './CapacityPageContent'
 import { ManagePrimaryGoal } from './ManagePrimaryGoal'
 import { PageTitle } from 'ui/PageTitle'
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 
 const title = 'Manage Time'
 

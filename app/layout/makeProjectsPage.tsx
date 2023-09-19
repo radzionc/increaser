@@ -1,4 +1,4 @@
-import { Page, GetLayout } from 'components/Page'
+import { Page, GetLayout } from 'layout/Page'
 import { ProjectsLayout } from 'projects/components/ProjectsLayout'
 
 const getProjectsPageLayout: GetLayout = (page) => (

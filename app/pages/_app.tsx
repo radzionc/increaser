@@ -21,7 +21,7 @@ import { UserStateProvider } from 'user/components/UserStateProvider'
 import { ThemeProvider } from 'ui/ThemeProvider'
 
 import { Open_Sans } from 'next/font/google'
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 
 const openSans = Open_Sans({
   subsets: ['latin'],

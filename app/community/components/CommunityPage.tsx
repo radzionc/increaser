@@ -1,4 +1,4 @@
-import { Page } from 'components/Page'
+import { Page } from 'layout/Page'
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
 import { PageTitle } from 'ui/PageTitle'
 import { CurrentMonthUsers } from './CurrentMonthUsers'
