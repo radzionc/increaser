@@ -1,5 +1,3 @@
-import { getOAuthProviderRedirectUri } from 'auth/helpers/OAuthProviderUrl'
-import { AUTH_PROVIDER_NAME } from 'auth/OAuthProvider'
 import { useCallback } from 'react'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { Center } from '@increaser/ui/ui/Center'
@@ -9,6 +7,8 @@ import { AuthView } from './AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { useIdentifyWithOAuthMutation } from 'auth/hooks/identifyWithOAuthMutation'
 import { AuthProvider } from '@increaser/api-interface/client/graphql'
+import { getOAuthRedirectUri } from 'auth/helpers/OAuthProviderUrl'
+import { oauthProviderNameRecord } from 'auth/oauthProviderNameRecord'
 
 interface OAuthParams {
   code: string
@@ -28,7 +28,7 @@ export const OAuthContent = ({ provider }: OAuthContentProps) => {
         identify({
           provider,
           code,
-          redirectUri: getOAuthProviderRedirectUri(provider),
+          redirectUri: getOAuthRedirectUri(provider),
           timeZone: getCurrentTimezoneOffset(),
         })
       },
@@ -37,7 +37,7 @@ export const OAuthContent = ({ provider }: OAuthContentProps) => {
   )
 
   return (
-    <AuthView title={`Continue with ${AUTH_PROVIDER_NAME[provider]}`}>
+    <AuthView title={`Continue with ${oauthProviderNameRecord[provider]}`}>
       <Center>
         <Text size={80}>
           <Spinner />

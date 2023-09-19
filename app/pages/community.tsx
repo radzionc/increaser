@@ -1,4 +1,4 @@
 import { CommunityPage } from 'community/components/CommunityPage'
-import { makeAuthPage } from 'layout/makeAuthPage'
+import { makeAppPage } from 'layout/makeAppPage'
 
-export default makeAuthPage(CommunityPage)
+export default makeAppPage(CommunityPage)
