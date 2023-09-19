@@ -19,7 +19,7 @@ export const TasksView = () => {
     <TitledSection
       title={
         <HStack gap={8}>
-          <Text color="regular">Today tasks</Text>
+          <Text color="regular">Tasks</Text>
           {tasks.length > 0 && (
             <Text color="supporting" as="span">
               {tasks.filter((task) => task.isCompleted).length} / {tasks.length}

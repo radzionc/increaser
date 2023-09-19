@@ -59,10 +59,10 @@ export const HomePageContent = () => {
             <FocusSessionForm />
           </>
         )}
+        <SubmitYesterdayHabits />
         <Panel kind="secondary">
           <SeparatedByLine gap={20}>
             <TasksView />
-            <SubmitYesterdayHabits />
             <CheckTodayHabits />
           </SeparatedByLine>
         </Panel>
