@@ -1,21 +1,30 @@
-import { AuthContext, AuthSessionInfo } from 'auth/context/AuthContext'
-import { ReactNode, useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useQueryClient } from 'react-query'
-import { PersistentStateKey, usePersistentState } from 'state/persistentState'
-import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
+import { ComponentWithChildrenProps } from '@increaser/ui/props'
+import { createContextHook } from '@increaser/ui/state/createContextHook'
 
-interface Props {
-  children: ReactNode
+import { createContext } from 'react'
+import { useAuthToken } from 'auth/hooks/useAuthToken'
+import { useAuthTokenExpirationTime } from 'auth/hooks/useAuthTokenExpirationTime'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
+
+export type AuthSessionInfo = {
+  token: string
+  tokenExpirationTime: number
 }
 
-export const AuthProvider = ({ children }: Props) => {
-  const [token, setToken] = usePersistentState<string | undefined>(
-    PersistentStateKey.AuthToken,
-    undefined,
-  )
-  const [tokenExpirationTime, setTokenExpirationTime] = usePersistentState<
-    number | undefined
-  >(PersistentStateKey.AuthTokenExpirationTime, undefined)
+interface AuthState {
+  isUserLoggedIn: boolean
+  updateSession: (info: AuthSessionInfo) => void
+  unauthorize: () => void
+}
+
+export const AuthContext = createContext<AuthState | undefined>(undefined)
+
+export const AuthProvider = ({ children }: ComponentWithChildrenProps) => {
+  const [token, setToken] = useAuthToken()
+  const [tokenExpirationTime, setTokenExpirationTime] =
+    useAuthTokenExpirationTime()
 
   const isUserLoggedIn = !!token
 
@@ -38,19 +47,22 @@ export const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!tokenExpirationTime) return
-    const daysBeforeTokenExpiration =
-      (tokenExpirationTime * MS_IN_SEC - Date.now()) / MS_IN_DAY
 
-    if (daysBeforeTokenExpiration < 1) {
+    const tokenExpiresAt = convertDuration(tokenExpirationTime, 's', 'ms')
+    const tokenExpiresIn = tokenExpiresAt - Date.now()
+
+    if (convertDuration(tokenExpiresIn, 'ms', 'h') < 3) {
       unauthorize()
     }
   }, [tokenExpirationTime, unauthorize])
 
   return (
     <AuthContext.Provider
-      value={{ token, updateSession, unauthorize, isUserLoggedIn }}
+      value={{ updateSession, unauthorize, isUserLoggedIn }}
     >
       {children}
     </AuthContext.Provider>
   )
 }
+
+export const useAuth = createContextHook(AuthContext, 'AuthContext')

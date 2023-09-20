@@ -1,5 +1,5 @@
-import { useAuth } from 'auth/hooks/useAuth'
 import { Button } from '@increaser/ui/ui/buttons/Button'
+import { useAuth } from 'auth/components/AuthProvider'
 
 export const SignOut = () => {
   const { unauthorize } = useAuth()

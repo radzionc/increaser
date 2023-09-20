@@ -2,19 +2,18 @@ import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 import { Button, ButtonProps } from './Button'
-import { centerContentCSS } from '../utils/centerContentCSS'
-import { getHorizontalPaddingCSS } from '../utils/getHorizontalPaddingCSS'
+import { horizontalPadding } from '../../css/horizontalPadding'
+import { centerContent } from '../../css/centerContent'
 
 const Content = styled.div`
   position: relative;
   width: 100%;
-  ${centerContentCSS};
+  ${centerContent};
 `
 
 const IconWrapper = styled.div`
   position: absolute;
   left: 0;
-  font-size: 18px;
   display: flex;
 `
 
@@ -24,7 +23,7 @@ interface Props extends Omit<ButtonProps, 'children'> {
 }
 
 const Container = styled(Button)`
-  ${getHorizontalPaddingCSS(20)};
+  ${horizontalPadding(24)};
 `
 
 export const IconCentricButton = ({ icon, text, as, ...rest }: Props) => (

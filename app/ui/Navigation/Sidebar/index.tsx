@@ -1,4 +1,3 @@
-import { useAuth } from 'auth/hooks/useAuth'
 import { usePWA } from 'pwa/PWAContext'
 import { Path } from 'router/Path'
 import styled from 'styled-components'
@@ -6,6 +5,7 @@ import { InstallPrompt } from 'ui/Navigation/Sidebar/InstallPrompt'
 import { VStack } from '@increaser/ui/ui//Stack'
 
 import { NavigationToInternalPage } from './NavigationToInternalPage'
+import { useAuth } from 'auth/components/AuthProvider'
 
 const Container = styled.div`
   min-width: 260px;

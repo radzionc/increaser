@@ -1,8 +1,9 @@
-import { useAuth } from 'auth/hooks/useAuth'
 import { ApiErrorCode } from '@increaser/api/errors/ApiErrorCode'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { print } from 'graphql'
+import { useAuth } from 'auth/components/AuthProvider'
+import { useAuthToken } from 'auth/hooks/useAuthToken'
 
 interface ApiErrorInfo {
   message: string
@@ -27,6 +28,8 @@ class HttpError extends Error {
   }
 }
 
+export type QueryApiError = ApiError | HttpError
+
 export type Variables = Record<string, unknown>
 
 export type QueryApi = <T, V extends Variables = Variables>(
@@ -35,7 +38,8 @@ export type QueryApi = <T, V extends Variables = Variables>(
 ) => Promise<T>
 
 export const useApi = () => {
-  const { unauthorize, token } = useAuth()
+  const { unauthorize } = useAuth()
+  const [token] = useAuthToken()
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',

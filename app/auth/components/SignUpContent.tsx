@@ -6,7 +6,7 @@ import { AuthView } from './AuthView'
 export const SignUpContent = () => {
   return (
     <AuthView title="Join Increaser">
-      <VStack alignItems="center" fullWidth gap={24}>
+      <VStack fullWidth gap={24}>
         <AuthProviders />
         <SignUpAgreement />
       </VStack>

@@ -1,12 +1,12 @@
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { UserState } from '@increaser/api-interface/client/graphql'
 import { useApi } from 'api/useApi'
-import { useAuth } from 'auth/hooks/useAuth'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { UserStateContext } from 'user/state/UserStateContext'
 import { userStateQueryDocument } from 'user/state/userStateQueryDocument'
+import { useAuth } from 'auth/components/AuthProvider'
 
 const userStateQueryKey = 'userState'
 

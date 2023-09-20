@@ -5,14 +5,13 @@ const withPWA = require('next-pwa')({
 })
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // to test authorization
+  // disabled for authorization queries
   reactStrictMode: false,
   compiler: {
     styledComponents: true,
   },
   output: 'export',
   swcMinify: false,
-  // trailingSlash: true,
   transpilePackages: ['@increaser/ui'],
 }
 

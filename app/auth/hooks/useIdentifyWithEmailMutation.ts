@@ -1,10 +1,10 @@
 import { graphql } from '@increaser/api-interface/client'
 import { useMutation } from 'react-query'
 
-import { useAuth } from './useAuth'
 import { analytics } from 'analytics'
 import { useApi } from 'api/useApi'
 import { IdentifyWithEmailInput } from '@increaser/api-interface/client/graphql'
+import { useAuth } from 'auth/components/AuthProvider'
 
 const identifyWithEmailQueryDocument = graphql(`
   query identifyWithEmail($input: IdentifyWithEmailInput!) {

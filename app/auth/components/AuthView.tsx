@@ -8,8 +8,8 @@ interface AuthViewProps extends ComponentWithChildrenProps {
 }
 
 export const AuthView = ({ children, title }: AuthViewProps) => (
-  <VStack alignItems="center" gap={40}>
-    <Text color="contrast" weight="bold" size={24}>
+  <VStack gap={40}>
+    <Text centered color="contrast" weight="bold" size={24}>
       {title}
     </Text>
     {children}
