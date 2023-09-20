@@ -1,18 +1,17 @@
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { useCallback } from 'react'
-import { Center } from '@increaser/ui/ui/Center'
-import { Spinner } from '@increaser/ui/ui/Spinner'
 import { AuthView } from './AuthView'
-import { Text } from '@increaser/ui/ui/Text'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { useIdentifyWithEmailMutation } from 'auth/hooks/useIdentifyWithEmailMutation'
+import { AuthConfirmationStatus } from './AuthConfirmationStatus'
+import { QueryApiError } from 'api/useApi'
 
 interface EmailAuthParams {
   token: string
 }
 
 export const EmailAuthContent = () => {
-  const { mutate: identify } = useIdentifyWithEmailMutation()
+  const { mutate: identify, error } = useIdentifyWithEmailMutation()
 
   useHandleQueryParams<EmailAuthParams>(
     useCallback(
@@ -28,11 +27,7 @@ export const EmailAuthContent = () => {
 
   return (
     <AuthView title={`Continue with email`}>
-      <Center>
-        <Text size={80}>
-          <Spinner />
-        </Text>
-      </Center>
+      <AuthConfirmationStatus error={error as QueryApiError | undefined} />
     </AuthView>
   )
 }
