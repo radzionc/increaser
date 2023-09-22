@@ -15,10 +15,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
   '\n  mutation sendAuthLinkByEmail($input: SendAuthLinkByEmailInput!) {\n    sendAuthLinkByEmail(input: $input)\n  }\n':
     types.SendAuthLinkByEmailDocument,
-  '\n  query identifyWithOAuth($input: IdentifyWithOAuthInput!) {\n    identifyWithOAuth(input: $input) {\n      email\n      name\n      token\n      tokenExpirationTime\n      id\n      firstIdentification\n    }\n  }\n':
-    types.IdentifyWithOAuthDocument,
-  '\n  query identifyWithEmail($input: IdentifyWithEmailInput!) {\n    identifyWithEmail(input: $input) {\n      email\n      name\n      token\n      tokenExpirationTime\n      id\n      firstIdentification\n    }\n  }\n':
-    types.IdentifyWithEmailDocument,
+  '\n  query authSessionWithEmail($input: AuthSessionWithEmailInput!) {\n    authSessionWithEmail(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n':
+    types.AuthSessionWithEmailDocument,
+  '\n  query authSessionWithOAuth($input: AuthSessionWithOAuthInput!) {\n    authSessionWithOAuth(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n':
+    types.AuthSessionWithOAuthDocument,
   '\n  mutation redeemAppSumoCode($input: RedeemAppSumoCodeInput!) {\n    redeemAppSumoCode(input: $input)\n  }\n':
     types.RedeemAppSumoCodeDocument,
   '\n  mutation createHabit($input: CreateHabitInput!) {\n    createHabit(input: $input) {\n      id\n      name\n      emoji\n      color\n      startedAt\n      successes\n      order\n    }\n  }\n':
@@ -71,14 +71,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query identifyWithOAuth($input: IdentifyWithOAuthInput!) {\n    identifyWithOAuth(input: $input) {\n      email\n      name\n      token\n      tokenExpirationTime\n      id\n      firstIdentification\n    }\n  }\n',
-): (typeof documents)['\n  query identifyWithOAuth($input: IdentifyWithOAuthInput!) {\n    identifyWithOAuth(input: $input) {\n      email\n      name\n      token\n      tokenExpirationTime\n      id\n      firstIdentification\n    }\n  }\n']
+  source: '\n  query authSessionWithEmail($input: AuthSessionWithEmailInput!) {\n    authSessionWithEmail(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n',
+): (typeof documents)['\n  query authSessionWithEmail($input: AuthSessionWithEmailInput!) {\n    authSessionWithEmail(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query identifyWithEmail($input: IdentifyWithEmailInput!) {\n    identifyWithEmail(input: $input) {\n      email\n      name\n      token\n      tokenExpirationTime\n      id\n      firstIdentification\n    }\n  }\n',
-): (typeof documents)['\n  query identifyWithEmail($input: IdentifyWithEmailInput!) {\n    identifyWithEmail(input: $input) {\n      email\n      name\n      token\n      tokenExpirationTime\n      id\n      firstIdentification\n    }\n  }\n']
+  source: '\n  query authSessionWithOAuth($input: AuthSessionWithOAuthInput!) {\n    authSessionWithOAuth(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n',
+): (typeof documents)['\n  query authSessionWithOAuth($input: AuthSessionWithOAuthInput!) {\n    authSessionWithOAuth(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

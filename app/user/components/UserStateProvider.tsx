@@ -6,7 +6,7 @@ import { useQuery, useQueryClient } from 'react-query'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { UserStateContext } from 'user/state/UserStateContext'
 import { userStateQueryDocument } from 'user/state/userStateQueryDocument'
-import { useAuth } from 'auth/components/AuthProvider'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 const userStateQueryKey = 'userState'
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const UserStateProvider = ({ children }: Props) => {
-  const { isUserLoggedIn } = useAuth()
+  const [authSession] = useAuthSession()
 
   const queryClient = useQueryClient()
 
@@ -41,7 +41,7 @@ export const UserStateProvider = ({ children }: Props) => {
     },
     {
       keepPreviousData: true,
-      enabled: isUserLoggedIn,
+      enabled: Boolean(authSession),
       refetchOnWindowFocus: false,
     },
   )

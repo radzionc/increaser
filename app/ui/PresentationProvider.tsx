@@ -3,7 +3,7 @@ import { createContext, useCallback } from 'react'
 import { Path } from 'router/Path'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
-import { useAuth } from 'auth/components/AuthProvider'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 export interface PresentationState {
   onInteraction: (func: () => void) => void
@@ -16,18 +16,18 @@ export const PresentationContext = createContext<PresentationState | undefined>(
 interface Props extends ComponentWithChildrenProps {}
 
 export const PresentationProvider = ({ children }: Props) => {
-  const { isUserLoggedIn } = useAuth()
   const { push } = useRouter()
+  const [authSession] = useAuthSession()
 
   const onInteraction = useCallback(
     (func: () => void) => {
-      if (isUserLoggedIn) {
+      if (authSession) {
         func()
       } else {
         push(Path.SignUp)
       }
     },
-    [isUserLoggedIn, push],
+    [authSession, push],
   )
 
   return (

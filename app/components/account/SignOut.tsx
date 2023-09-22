@@ -1,11 +1,11 @@
 import { Button } from '@increaser/ui/ui/buttons/Button'
-import { useAuth } from 'auth/components/AuthProvider'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 export const SignOut = () => {
-  const { unauthorize } = useAuth()
+  const [, setAuthSession] = useAuthSession()
 
   return (
-    <Button kind="outlined" onClick={unauthorize}>
+    <Button kind="outlined" onClick={() => setAuthSession(undefined)}>
       Sign out
     </Button>
   )

@@ -16,3 +16,5 @@ export interface Membership {
   provider: MembershipProvider
   subscription?: Subscription
 }
+
+export const freeTrialDurationInDays = 14

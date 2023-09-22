@@ -1,5 +1,3 @@
-import { identifyWithOAuth } from '../auth/queries/identifyWithOAuth'
-import { identifyWithEmail } from '../auth/queries/identifyWithEmail'
 import { sendAuthLinkByEmail } from '../auth/mutations/sendAuthLinkByEmail'
 import { createProject } from '../projects/mutations/createProject'
 import { updateProject } from '../projects/mutations/updateProject'
@@ -16,13 +14,15 @@ import { addSet } from '../sets/mutations/addSet'
 import { editLastSet } from '../sets/mutations/editLastSet'
 import { removeLastSet } from '../sets/mutations/removeLastSet'
 import { Resolvers } from './schema'
+import { authSessionWithEmail } from '../auth/queries/authSessionWithEmail'
+import { authSessionWithOAuth } from '../auth/queries/authSessionWithOAuth'
 
 export const resolvers: Pick<Resolvers, 'Query' | 'Mutation'> = {
   Query: {
     appStats,
-    identifyWithOAuth,
-    identifyWithEmail,
     userState,
+    authSessionWithEmail,
+    authSessionWithOAuth,
   },
   Mutation: {
     sendAuthLinkByEmail,

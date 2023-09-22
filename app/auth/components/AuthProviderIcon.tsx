@@ -1,10 +1,10 @@
-import { AuthProvider } from '@increaser/api-interface/client/graphql'
+import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { Match } from '@increaser/ui/ui/Match'
 import { FacebookIcon } from '@increaser/ui/ui/icons/FacebookIcon'
 import { GoogleIcon } from '@increaser/ui/ui/icons/GoogleIcon'
 
 interface AuthProviderIconProps {
-  provider: AuthProvider
+  provider: OAuthProvider
 }
 
 export const AuthProviderIcon = ({ provider }: AuthProviderIconProps) => (

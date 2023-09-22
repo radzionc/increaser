@@ -5,8 +5,7 @@ import { createPersistentStateManager } from '@increaser/ui/state/createPersiste
 
 export enum PersistentStateKey {
   OnboardedToBreak = 'onboarded-to-break',
-  AuthToken = 'token',
-  AuthTokenExpirationTime = 'tokenExpirationTime',
+  AuthSession = 'auth-session',
   FocusDuration = 'focusDuration',
   HasTimerSoundNotification = 'hasTimerSoundNotification',
   HasTimerBrowserNotification = 'hasTimerBrowserNotification',

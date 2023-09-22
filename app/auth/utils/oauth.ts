@@ -1,29 +1,29 @@
 import { addQueryParams } from '@increaser/utils/addQueryParams'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
-import { AuthProvider } from '@increaser/api-interface/client/graphql'
+import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { Path } from 'router/Path'
 import { match } from '@increaser/utils/match'
 
-const oauthBaseUrlRecord: Record<AuthProvider, string> = {
+const oauthBaseUrlRecord: Record<OAuthProvider, string> = {
   google: 'https://accounts.google.com/o/oauth2/v2/auth',
   facebook: 'https://www.facebook.com/v4.0/dialog/oauth',
 }
 
-const oauthScopeRecord: Record<AuthProvider, string> = {
+const oauthScopeRecord: Record<OAuthProvider, string> = {
   google:
     'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
   facebook: 'public_profile,email',
 }
 
-const oauthClientIdRecord: Record<AuthProvider, string> = {
+const oauthClientIdRecord: Record<OAuthProvider, string> = {
   google: shouldBeDefined(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID),
   facebook: shouldBeDefined(process.env.NEXT_PUBLIC_FACEBOOK_APP_ID),
 }
 
-export const getOAuthRedirectUri = (provider: AuthProvider) =>
+export const getOAuthRedirectUri = (provider: OAuthProvider) =>
   `${process.env.NEXT_PUBLIC_BASE_URL}${Path.OAuth}/${provider}`
 
-export const getOAuthUrl = (provider: AuthProvider) => {
+export const getOAuthUrl = (provider: OAuthProvider) => {
   const baseUrl = oauthBaseUrlRecord[provider]
 
   const sharedQueryParams = {
@@ -33,7 +33,7 @@ export const getOAuthUrl = (provider: AuthProvider) => {
     response_type: 'code',
   }
 
-  const customQueryParams = match<AuthProvider, object>(provider, {
+  const customQueryParams = match<OAuthProvider, object>(provider, {
     google: () => ({
       access_type: 'offline',
       prompt: 'consent',

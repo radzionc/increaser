@@ -25,7 +25,7 @@ export const AuthConfirmationStatus = ({
       </Text>
       {error ? (
         <>
-          <Text centered height="large">
+          <Text style={{ wordBreak: 'break-word' }} centered height="large">
             {error.message}
           </Text>
           <Link style={{ width: '100%' }} href={Path.SignIn}>

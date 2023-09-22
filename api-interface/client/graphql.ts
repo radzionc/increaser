@@ -34,7 +34,24 @@ export type AppStats = {
   registeredUsersNumber: Scalars['Int']['output']
 }
 
-export type AuthProvider = 'facebook' | 'google'
+export type AuthSession = {
+  __typename?: 'AuthSession'
+  expiresAt: Scalars['Int']['output']
+  isFirst?: Maybe<Scalars['Boolean']['output']>
+  token: Scalars['String']['output']
+}
+
+export type AuthSessionWithEmailInput = {
+  code: Scalars['String']['input']
+  timeZone: Scalars['Int']['input']
+}
+
+export type AuthSessionWithOAuthInput = {
+  code: Scalars['String']['input']
+  provider: OAuthProvider
+  redirectUri: Scalars['String']['input']
+  timeZone: Scalars['Int']['input']
+}
 
 export type CreateHabitInput = {
   color: Scalars['Int']['input']
@@ -83,28 +100,6 @@ export type Habit = {
   order: Scalars['Float']['output']
   startedAt: Scalars['Float']['output']
   successes: Array<Scalars['String']['output']>
-}
-
-export type IdentificationResult = {
-  __typename?: 'IdentificationResult'
-  email: Scalars['String']['output']
-  firstIdentification: Scalars['Boolean']['output']
-  id: Scalars['ID']['output']
-  name?: Maybe<Scalars['String']['output']>
-  token: Scalars['String']['output']
-  tokenExpirationTime: Scalars['Int']['output']
-}
-
-export type IdentifyWithEmailInput = {
-  timeZone: Scalars['Int']['input']
-  token: Scalars['String']['input']
-}
-
-export type IdentifyWithOAuthInput = {
-  code: Scalars['String']['input']
-  provider: AuthProvider
-  redirectUri: Scalars['String']['input']
-  timeZone: Scalars['Int']['input']
 }
 
 export type Membership = {
@@ -180,6 +175,8 @@ export type MutationUpdateUserArgs = {
   input: UpdateUserInput
 }
 
+export type OAuthProvider = 'facebook' | 'google'
+
 export type PrimaryGoal = 'awareness' | 'workLess' | 'workMore'
 
 export type Project = {
@@ -214,18 +211,18 @@ export type ProjectWeek = {
 export type Query = {
   __typename?: 'Query'
   appStats: AppStats
-  identifyWithEmail: IdentificationResult
-  identifyWithOAuth: IdentificationResult
+  authSessionWithEmail: AuthSession
+  authSessionWithOAuth: AuthSession
   projects: Array<Project>
   userState: UserState
 }
 
-export type QueryIdentifyWithEmailArgs = {
-  input: IdentifyWithEmailInput
+export type QueryAuthSessionWithEmailArgs = {
+  input: AuthSessionWithEmailInput
 }
 
-export type QueryIdentifyWithOAuthArgs = {
-  input: IdentifyWithOAuthInput
+export type QueryAuthSessionWithOAuthArgs = {
+  input: AuthSessionWithOAuthInput
 }
 
 export type QueryUserStateArgs = {
@@ -353,37 +350,31 @@ export type SendAuthLinkByEmailMutation = {
   sendAuthLinkByEmail?: boolean | null
 }
 
-export type IdentifyWithOAuthQueryVariables = Exact<{
-  input: IdentifyWithOAuthInput
+export type AuthSessionWithEmailQueryVariables = Exact<{
+  input: AuthSessionWithEmailInput
 }>
 
-export type IdentifyWithOAuthQuery = {
+export type AuthSessionWithEmailQuery = {
   __typename?: 'Query'
-  identifyWithOAuth: {
-    __typename?: 'IdentificationResult'
-    email: string
-    name?: string | null
+  authSessionWithEmail: {
+    __typename?: 'AuthSession'
     token: string
-    tokenExpirationTime: number
-    id: string
-    firstIdentification: boolean
+    expiresAt: number
+    isFirst?: boolean | null
   }
 }
 
-export type IdentifyWithEmailQueryVariables = Exact<{
-  input: IdentifyWithEmailInput
+export type AuthSessionWithOAuthQueryVariables = Exact<{
+  input: AuthSessionWithOAuthInput
 }>
 
-export type IdentifyWithEmailQuery = {
+export type AuthSessionWithOAuthQuery = {
   __typename?: 'Query'
-  identifyWithEmail: {
-    __typename?: 'IdentificationResult'
-    email: string
-    name?: string | null
+  authSessionWithOAuth: {
+    __typename?: 'AuthSession'
     token: string
-    tokenExpirationTime: number
-    id: string
-    firstIdentification: boolean
+    expiresAt: number
+    isFirst?: boolean | null
   }
 }
 
@@ -694,13 +685,13 @@ export const SendAuthLinkByEmailDocument = {
   SendAuthLinkByEmailMutation,
   SendAuthLinkByEmailMutationVariables
 >
-export const IdentifyWithOAuthDocument = {
+export const AuthSessionWithEmailDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'identifyWithOAuth' },
+      name: { kind: 'Name', value: 'authSessionWithEmail' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -712,7 +703,7 @@ export const IdentifyWithOAuthDocument = {
             kind: 'NonNullType',
             type: {
               kind: 'NamedType',
-              name: { kind: 'Name', value: 'IdentifyWithOAuthInput' },
+              name: { kind: 'Name', value: 'AuthSessionWithEmailInput' },
             },
           },
         },
@@ -722,7 +713,7 @@ export const IdentifyWithOAuthDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'identifyWithOAuth' },
+            name: { kind: 'Name', value: 'authSessionWithEmail' },
             arguments: [
               {
                 kind: 'Argument',
@@ -736,18 +727,9 @@ export const IdentifyWithOAuthDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'token' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'tokenExpirationTime' },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'firstIdentification' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'expiresAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'isFirst' } },
               ],
             },
           },
@@ -756,16 +738,16 @@ export const IdentifyWithOAuthDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  IdentifyWithOAuthQuery,
-  IdentifyWithOAuthQueryVariables
+  AuthSessionWithEmailQuery,
+  AuthSessionWithEmailQueryVariables
 >
-export const IdentifyWithEmailDocument = {
+export const AuthSessionWithOAuthDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'identifyWithEmail' },
+      name: { kind: 'Name', value: 'authSessionWithOAuth' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -777,7 +759,7 @@ export const IdentifyWithEmailDocument = {
             kind: 'NonNullType',
             type: {
               kind: 'NamedType',
-              name: { kind: 'Name', value: 'IdentifyWithEmailInput' },
+              name: { kind: 'Name', value: 'AuthSessionWithOAuthInput' },
             },
           },
         },
@@ -787,7 +769,7 @@ export const IdentifyWithEmailDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'identifyWithEmail' },
+            name: { kind: 'Name', value: 'authSessionWithOAuth' },
             arguments: [
               {
                 kind: 'Argument',
@@ -801,18 +783,9 @@ export const IdentifyWithEmailDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'token' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'tokenExpirationTime' },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'firstIdentification' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'expiresAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'isFirst' } },
               ],
             },
           },
@@ -821,8 +794,8 @@ export const IdentifyWithEmailDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  IdentifyWithEmailQuery,
-  IdentifyWithEmailQueryVariables
+  AuthSessionWithOAuthQuery,
+  AuthSessionWithOAuthQueryVariables
 >
 export const RedeemAppSumoCodeDocument = {
   kind: 'Document',

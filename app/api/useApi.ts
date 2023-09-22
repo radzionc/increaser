@@ -2,8 +2,7 @@ import { ApiErrorCode } from '@increaser/api/errors/ApiErrorCode'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { print } from 'graphql'
-import { useAuth } from 'auth/components/AuthProvider'
-import { useAuthToken } from 'auth/hooks/useAuthToken'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 interface ApiErrorInfo {
   message: string
@@ -38,14 +37,13 @@ export type QueryApi = <T, V extends Variables = Variables>(
 ) => Promise<T>
 
 export const useApi = () => {
-  const { unauthorize } = useAuth()
-  const [token] = useAuthToken()
+  const [authSession, setAuthSession] = useAuthSession()
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   }
-  if (token) {
-    headers.Authorization = token
+  if (authSession) {
+    headers.Authorization = authSession.token
   }
 
   const query: QueryApi = async <T, V>(
@@ -72,7 +70,7 @@ export const useApi = () => {
     if (errors?.length) {
       const { message, extensions } = errors[0]
       if (extensions?.code === ApiErrorCode.Unauthenticated) {
-        unauthorize()
+        setAuthSession(undefined)
       }
 
       throw new ApiError(message)

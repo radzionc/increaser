@@ -5,7 +5,6 @@ import { InstallPrompt } from 'ui/Navigation/Sidebar/InstallPrompt'
 import { VStack } from '@increaser/ui/ui//Stack'
 
 import { NavigationToInternalPage } from './NavigationToInternalPage'
-import { useAuth } from 'auth/components/AuthProvider'
 
 const Container = styled.div`
   min-width: 260px;
@@ -17,9 +16,8 @@ const Container = styled.div`
 
 export const Sidebar = () => {
   const { installPromptEvent, isSidebarInstallPromptRejected } = usePWA()
-  const { isUserLoggedIn } = useAuth()
   const isInstallPromptEnabled =
-    isUserLoggedIn && installPromptEvent && !isSidebarInstallPromptRejected
+    installPromptEvent && !isSidebarInstallPromptRejected
 
   return (
     <Container>

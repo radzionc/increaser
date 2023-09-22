@@ -19,7 +19,7 @@ input RedeemAppSumoCodeInput {
   code: String!
 }
 
-enum AuthProvider {
+enum OAuthProvider {
   google
   facebook
 }
@@ -34,24 +34,21 @@ type Habit {
   successes: [String!]!
 }
 
-type IdentificationResult {
-  id: ID!
-  email: String!
-  name: String
+type AuthSession {
   token: String!
-  tokenExpirationTime: Int!
-  firstIdentification: Boolean!
+  expiresAt: Int!
+  isFirst: Boolean
 }
 
-input IdentifyWithOAuthInput {
-  provider: AuthProvider!
+input AuthSessionWithOAuthInput {
+  provider: OAuthProvider!
   code: String!
   redirectUri: String!
   timeZone: Int!
 }
 
-input IdentifyWithEmailInput {
-  token: String!
+input AuthSessionWithEmailInput {
+  code: String!
   timeZone: Int!
 }
 
@@ -201,14 +198,6 @@ input UserStateInput {
   timeZone: Int!
 }
 
-type Query {
-  projects: [Project!]!
-  identifyWithOAuth(input: IdentifyWithOAuthInput!): IdentificationResult!
-  identifyWithEmail(input: IdentifyWithEmailInput!): IdentificationResult!
-  userState(input: UserStateInput!): UserState!
-  appStats: AppStats!
-}
-
 input FocusSoundInput {
   name: String!
   url: String!
@@ -234,6 +223,14 @@ input UpdateUserInput {
   goalToGoToBedAt: Int
   isAnonymous: Boolean
   sumbittedHabitsAt: Float
+}
+
+type Query {
+  projects: [Project!]!
+  authSessionWithEmail(input: AuthSessionWithEmailInput!): AuthSession!
+  authSessionWithOAuth(input: AuthSessionWithOAuthInput!): AuthSession!
+  userState(input: UserStateInput!): UserState!
+  appStats: AppStats!
 }
 
 type Mutation {

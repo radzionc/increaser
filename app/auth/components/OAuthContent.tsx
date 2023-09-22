@@ -2,35 +2,35 @@ import { useCallback } from 'react'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { AuthView } from './AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
-import { useIdentifyWithOAuthMutation } from 'auth/hooks/identifyWithOAuthMutation'
-import { AuthProvider } from '@increaser/api-interface/client/graphql'
+import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { getOAuthRedirectUri } from 'auth/utils/oauth'
 import { oauthProviderNameRecord } from 'auth/oauthProviderNameRecord'
 import { AuthConfirmationStatus } from './AuthConfirmationStatus'
 import { QueryApiError } from 'api/useApi'
+import { useAuthenticateWithOAuthMutation } from 'auth/hooks/useAuthenticateWithOAuthMutation'
 
 interface OAuthParams {
   code: string
 }
 
 interface OAuthContentProps {
-  provider: AuthProvider
+  provider: OAuthProvider
 }
 
 export const OAuthContent = ({ provider }: OAuthContentProps) => {
-  const { mutate: identify, error } = useIdentifyWithOAuthMutation()
+  const { mutate: authenticate, error } = useAuthenticateWithOAuthMutation()
 
   useHandleQueryParams<OAuthParams>(
     useCallback(
       ({ code }) => {
-        identify({
+        authenticate({
           provider,
           code,
           redirectUri: getOAuthRedirectUri(provider),
           timeZone: getCurrentTimezoneOffset(),
         })
       },
-      [identify, provider],
+      [authenticate, provider],
     ),
   )
 

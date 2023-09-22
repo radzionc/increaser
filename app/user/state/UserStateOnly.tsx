@@ -3,19 +3,19 @@ import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { useUserState } from './UserStateContext'
 import { useEffect } from 'react'
 import { useAuthRedirect } from 'auth/hooks/useAuthRedirect'
-import { useAuth } from 'auth/components/AuthProvider'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 export const UserStateOnly = ({ children }: ComponentWithChildrenProps) => {
   const { state } = useUserState()
   const { toAuthenticationPage } = useAuthRedirect()
 
-  const { isUserLoggedIn } = useAuth()
+  const [authSession] = useAuthSession()
 
   useEffect(() => {
-    if (!isUserLoggedIn) {
+    if (!authSession) {
       toAuthenticationPage()
     }
-  }, [isUserLoggedIn, toAuthenticationPage])
+  }, [authSession, toAuthenticationPage])
 
   return state ? <>{children}</> : null
 }

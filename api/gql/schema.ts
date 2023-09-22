@@ -36,12 +36,25 @@ export type AppStats = {
   registeredUsersNumber: Scalars['Int']['output']
 }
 
-export const AuthProvider = {
-  Facebook: 'facebook',
-  Google: 'google',
-} as const
+export type AuthSession = {
+  __typename?: 'AuthSession'
+  expiresAt: Scalars['Int']['output']
+  isFirst?: Maybe<Scalars['Boolean']['output']>
+  token: Scalars['String']['output']
+}
 
-export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
+export type AuthSessionWithEmailInput = {
+  code: Scalars['String']['input']
+  timeZone: Scalars['Int']['input']
+}
+
+export type AuthSessionWithOAuthInput = {
+  code: Scalars['String']['input']
+  provider: OAuthProvider
+  redirectUri: Scalars['String']['input']
+  timeZone: Scalars['Int']['input']
+}
+
 export type CreateHabitInput = {
   color: Scalars['Int']['input']
   emoji: Scalars['String']['input']
@@ -89,28 +102,6 @@ export type Habit = {
   order: Scalars['Float']['output']
   startedAt: Scalars['Float']['output']
   successes: Array<Scalars['String']['output']>
-}
-
-export type IdentificationResult = {
-  __typename?: 'IdentificationResult'
-  email: Scalars['String']['output']
-  firstIdentification: Scalars['Boolean']['output']
-  id: Scalars['ID']['output']
-  name?: Maybe<Scalars['String']['output']>
-  token: Scalars['String']['output']
-  tokenExpirationTime: Scalars['Int']['output']
-}
-
-export type IdentifyWithEmailInput = {
-  timeZone: Scalars['Int']['input']
-  token: Scalars['String']['input']
-}
-
-export type IdentifyWithOAuthInput = {
-  code: Scalars['String']['input']
-  provider: AuthProvider
-  redirectUri: Scalars['String']['input']
-  timeZone: Scalars['Int']['input']
 }
 
 export type Membership = {
@@ -191,6 +182,12 @@ export type MutationUpdateUserArgs = {
   input: UpdateUserInput
 }
 
+export const OAuthProvider = {
+  Facebook: 'facebook',
+  Google: 'google',
+} as const
+
+export type OAuthProvider = (typeof OAuthProvider)[keyof typeof OAuthProvider]
 export const PrimaryGoal = {
   Awareness: 'awareness',
   WorkLess: 'workLess',
@@ -234,18 +231,18 @@ export type ProjectWeek = {
 export type Query = {
   __typename?: 'Query'
   appStats: AppStats
-  identifyWithEmail: IdentificationResult
-  identifyWithOAuth: IdentificationResult
+  authSessionWithEmail: AuthSession
+  authSessionWithOAuth: AuthSession
   projects: Array<Project>
   userState: UserState
 }
 
-export type QueryIdentifyWithEmailArgs = {
-  input: IdentifyWithEmailInput
+export type QueryAuthSessionWithEmailArgs = {
+  input: AuthSessionWithEmailInput
 }
 
-export type QueryIdentifyWithOAuthArgs = {
-  input: IdentifyWithOAuthInput
+export type QueryAuthSessionWithOAuthArgs = {
+  input: AuthSessionWithOAuthInput
 }
 
 export type QueryUserStateArgs = {
@@ -472,7 +469,9 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   AppStats: ResolverTypeWrapper<AppStats>
-  AuthProvider: AuthProvider
+  AuthSession: ResolverTypeWrapper<AuthSession>
+  AuthSessionWithEmailInput: AuthSessionWithEmailInput
+  AuthSessionWithOAuthInput: AuthSessionWithOAuthInput
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>
   CreateHabitInput: CreateHabitInput
   CreateProjectInput: CreateProjectInput
@@ -483,13 +482,11 @@ export type ResolversTypes = {
   FocusSoundInput: FocusSoundInput
   Habit: ResolverTypeWrapper<Habit>
   ID: ResolverTypeWrapper<Scalars['ID']['output']>
-  IdentificationResult: ResolverTypeWrapper<IdentificationResult>
-  IdentifyWithEmailInput: IdentifyWithEmailInput
-  IdentifyWithOAuthInput: IdentifyWithOAuthInput
   Int: ResolverTypeWrapper<Scalars['Int']['output']>
   Membership: ResolverTypeWrapper<Membership>
   MembershipProvider: MembershipProvider
   Mutation: ResolverTypeWrapper<{}>
+  OAuthProvider: OAuthProvider
   PrimaryGoal: PrimaryGoal
   Project: ResolverTypeWrapper<Project>
   ProjectMonth: ResolverTypeWrapper<ProjectMonth>
@@ -515,6 +512,9 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   AppStats: AppStats
+  AuthSession: AuthSession
+  AuthSessionWithEmailInput: AuthSessionWithEmailInput
+  AuthSessionWithOAuthInput: AuthSessionWithOAuthInput
   Boolean: Scalars['Boolean']['output']
   CreateHabitInput: CreateHabitInput
   CreateProjectInput: CreateProjectInput
@@ -525,9 +525,6 @@ export type ResolversParentTypes = {
   FocusSoundInput: FocusSoundInput
   Habit: Habit
   ID: Scalars['ID']['output']
-  IdentificationResult: IdentificationResult
-  IdentifyWithEmailInput: IdentifyWithEmailInput
-  IdentifyWithOAuthInput: IdentifyWithOAuthInput
   Int: Scalars['Int']['output']
   Membership: Membership
   Mutation: {}
@@ -564,6 +561,17 @@ export type AppStatsResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
+export type AuthSessionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['AuthSession'] = ResolversParentTypes['AuthSession'],
+> = {
+  expiresAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  isFirst?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
 export type FocusSoundResolvers<
   ContextType = any,
   ParentType extends
@@ -591,24 +599,6 @@ export type HabitResolvers<
   order?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   startedAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   successes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
-}
-
-export type IdentificationResultResolvers<
-  ContextType = any,
-  ParentType extends
-    ResolversParentTypes['IdentificationResult'] = ResolversParentTypes['IdentificationResult'],
-> = {
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  firstIdentification?: Resolver<
-    ResolversTypes['Boolean'],
-    ParentType,
-    ContextType
-  >
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  tokenExpirationTime?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -771,17 +761,17 @@ export type QueryResolvers<
     ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
   appStats?: Resolver<ResolversTypes['AppStats'], ParentType, ContextType>
-  identifyWithEmail?: Resolver<
-    ResolversTypes['IdentificationResult'],
+  authSessionWithEmail?: Resolver<
+    ResolversTypes['AuthSession'],
     ParentType,
     ContextType,
-    RequireFields<QueryIdentifyWithEmailArgs, 'input'>
+    RequireFields<QueryAuthSessionWithEmailArgs, 'input'>
   >
-  identifyWithOAuth?: Resolver<
-    ResolversTypes['IdentificationResult'],
+  authSessionWithOAuth?: Resolver<
+    ResolversTypes['AuthSession'],
     ParentType,
     ContextType,
-    RequireFields<QueryIdentifyWithOAuthArgs, 'input'>
+    RequireFields<QueryAuthSessionWithOAuthArgs, 'input'>
   >
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
   userState?: Resolver<
@@ -897,9 +887,9 @@ export type UserStateResolvers<
 
 export type Resolvers<ContextType = any> = {
   AppStats?: AppStatsResolvers<ContextType>
+  AuthSession?: AuthSessionResolvers<ContextType>
   FocusSound?: FocusSoundResolvers<ContextType>
   Habit?: HabitResolvers<ContextType>
-  IdentificationResult?: IdentificationResultResolvers<ContextType>
   Membership?: MembershipResolvers<ContextType>
   Mutation?: MutationResolvers<ContextType>
   Project?: ProjectResolvers<ContextType>

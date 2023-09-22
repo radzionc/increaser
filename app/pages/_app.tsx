@@ -6,7 +6,6 @@ import { analytics } from 'analytics'
 import { useDev } from 'components/layout/useDev'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { getQueryClient } from 'query/queryClient'
-import { AuthProvider } from 'auth/components/AuthProvider'
 import { BreakProvider } from 'break/components/BreakProvider'
 import { FullSizeErrorFallback } from 'errors/components/FullSizeErrorFallback'
 import { FocusProvider } from 'focus/components/FocusProvider'
@@ -51,28 +50,26 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <GlobalStyle fontFamily={openSans.style.fontFamily} />
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary fallback={<FullSizeErrorFallback />}>
-          <AuthProvider>
-            <UserStateProvider>
-              <PWAProvider>
-                <ConditionalUserState
-                  present={() => (
-                    <UserManagerProvider>
-                      <ProjectsProvider>
-                        <HabitsProvider>
-                          <SetsManagerProvider>
-                            <FocusProvider>
-                              <BreakProvider>{component}</BreakProvider>
-                            </FocusProvider>
-                          </SetsManagerProvider>
-                        </HabitsProvider>
-                      </ProjectsProvider>
-                    </UserManagerProvider>
-                  )}
-                  missing={() => <>{component}</>}
-                />
-              </PWAProvider>
-            </UserStateProvider>
-          </AuthProvider>
+          <UserStateProvider>
+            <PWAProvider>
+              <ConditionalUserState
+                present={() => (
+                  <UserManagerProvider>
+                    <ProjectsProvider>
+                      <HabitsProvider>
+                        <SetsManagerProvider>
+                          <FocusProvider>
+                            <BreakProvider>{component}</BreakProvider>
+                          </FocusProvider>
+                        </SetsManagerProvider>
+                      </HabitsProvider>
+                    </ProjectsProvider>
+                  </UserManagerProvider>
+                )}
+                missing={() => <>{component}</>}
+              />
+            </PWAProvider>
+          </UserStateProvider>
         </ErrorBoundary>
       </QueryClientProvider>
     </ThemeProvider>

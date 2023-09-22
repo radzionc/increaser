@@ -2,13 +2,13 @@ import { analytics } from 'analytics'
 
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
-import { AuthProvider } from '@increaser/api-interface/client/graphql'
+import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { getOAuthUrl } from 'auth/utils/oauth'
 import { oauthProviderNameRecord } from 'auth/oauthProviderNameRecord'
 import { AuthProviderIcon } from './AuthProviderIcon'
 
 interface OAuthOptionProps {
-  provider: AuthProvider
+  provider: OAuthProvider
 }
 
 export const OAuthOption = ({ provider }: OAuthOptionProps) => {

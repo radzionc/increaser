@@ -2,22 +2,22 @@ import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { useCallback } from 'react'
 import { AuthView } from './AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
-import { useIdentifyWithEmailMutation } from 'auth/hooks/useIdentifyWithEmailMutation'
 import { AuthConfirmationStatus } from './AuthConfirmationStatus'
 import { QueryApiError } from 'api/useApi'
+import { useAuthenticateWithEmailMutation } from 'auth/hooks/useAuthenticateWithEmailMutation'
 
 interface EmailAuthParams {
-  token: string
+  code: string
 }
 
 export const EmailAuthContent = () => {
-  const { mutate: identify, error } = useIdentifyWithEmailMutation()
+  const { mutate: identify, error } = useAuthenticateWithEmailMutation()
 
   useHandleQueryParams<EmailAuthParams>(
     useCallback(
-      ({ token }) => {
+      ({ code }) => {
         identify({
-          token,
+          code,
           timeZone: getCurrentTimezoneOffset(),
         })
       },
