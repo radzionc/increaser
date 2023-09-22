@@ -1,3 +1,4 @@
+import { CopyText } from '@increaser/ui/ui/CopyText'
 import { Spinner } from '@increaser/ui/ui/Spinner'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
@@ -6,6 +7,7 @@ import { InfoIcon } from '@increaser/ui/ui/icons/InfoIcon'
 import { QueryApiError } from 'api/useApi'
 import Link from 'next/link'
 import { Path } from 'router/Path'
+import { AUTHOR_EMAIL } from 'shared/externalResources'
 
 interface AuthConfirmationStatusProps {
   error?: QueryApiError
@@ -33,6 +35,12 @@ export const AuthConfirmationStatus = ({
               Go back
             </Button>
           </Link>
+          <Text centered color="supporting" size={14}>
+            Nothing helps? Email us at <br />
+            <CopyText color="regular" as="span" content={AUTHOR_EMAIL}>
+              {AUTHOR_EMAIL}
+            </CopyText>
+          </Text>
         </>
       ) : null}
     </VStack>
