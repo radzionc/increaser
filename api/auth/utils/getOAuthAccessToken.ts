@@ -3,6 +3,7 @@ import { OAuthProvider } from '../../gql/schema'
 import { addQueryParams } from '@increaser/utils/addQueryParams'
 import { assertEnvVar } from '../../shared/assertEnvVar'
 import { queryOAuthProvider } from './queryOAuthProvider'
+import { getSecret } from '../../utils/getSecret'
 
 interface GetOAuthAccessTokenParams {
   provider: OAuthProvider
@@ -29,7 +30,7 @@ export const getOAuthAccessToken = async ({
         method: 'POST',
         body: JSON.stringify({
           client_id: assertEnvVar('GOOGLE_CLIENT_ID'),
-          client_secret: assertEnvVar('GOOGLE_CLIENT_SECRET'),
+          client_secret: await getSecret('GOOGLE_CLIENT_SECRET'),
           redirect_uri: redirectUri,
           grant_type: 'authorization_code',
           code,
@@ -40,7 +41,7 @@ export const getOAuthAccessToken = async ({
         actionName,
         addQueryParams(FACEBOOK_TOKEN_URL, {
           client_id: assertEnvVar('FACEBOOK_CLIENT_ID'),
-          client_secret: assertEnvVar('FACEBOOK_CLIENT_SECRET'),
+          client_secret: await getSecret('FACEBOOK_CLIENT_SECRET'),
           redirect_uri: redirectUri,
           code,
         }),
