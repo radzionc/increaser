@@ -1,14 +1,14 @@
 import jwt from 'jsonwebtoken'
-import { assertEnvVar } from '../../shared/assertEnvVar'
 import { getTokenExpirationTime } from './getTokenExpirationTime'
+import { getSecret } from '../../utils/getSecret'
 
 const authLinkLifespanInSeconds = 20 * 60
 
-export const generateAuthLinkToken = (email: string) =>
+export const generateAuthLinkToken = async (email: string) =>
   jwt.sign(
     {
       email,
       exp: getTokenExpirationTime(authLinkLifespanInSeconds),
     },
-    assertEnvVar('SECRET'),
+    await getSecret('EMAIL_SECRET'),
   )

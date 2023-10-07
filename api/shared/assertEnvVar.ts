@@ -5,6 +5,9 @@ type VariableName =
   | 'FACEBOOK_CLIENT_SECRET'
   | 'GOOGLE_CLIENT_ID'
   | 'GOOGLE_CLIENT_SECRET'
+  | 'APP_URL'
+  | 'EMAIL_DOMAIN'
+  | 'EMAIL_SECRET'
 
 export const assertEnvVar = (name: VariableName): string => {
   const value = process.env[name]

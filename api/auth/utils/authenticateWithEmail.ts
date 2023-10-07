@@ -1,4 +1,4 @@
-import { assertEnvVar } from '../../shared/assertEnvVar'
+import { getSecret } from '../../utils/getSecret'
 import { AuthenticationResult } from './AuthenticationResult'
 import jwt from 'jsonwebtoken'
 
@@ -13,7 +13,8 @@ interface EmailCodePayload {
 export const authenticateWithEmail = async ({
   code,
 }: AuthenticateWithEmailParams): Promise<AuthenticationResult> => {
-  const { email } = jwt.verify(code, assertEnvVar('SECRET')) as EmailCodePayload
+  const secret = await getSecret('EMAIL_SECRET')
+  const { email } = jwt.verify(code, secret) as EmailCodePayload
 
   return {
     email,

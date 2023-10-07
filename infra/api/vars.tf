@@ -10,6 +10,12 @@ variable "table_prefix" {
 
 variable "secret" {}
 
+variable "email_secret" {}
+
+variable "app_url" {}
+
+variable "email_domain" {}
+
 variable "google_client_id" {}
 
 variable "google_client_secret" {}
