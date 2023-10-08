@@ -2,10 +2,11 @@ import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useState } from 'react'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
-import { CheckInboxLink } from './AuthFlow/CheckInboxLink'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { useRouter } from 'next/router'
 import { AuthView } from './AuthView'
+import { suggestInboxLink } from '@increaser/utils/suggestInboxLink'
+import { ExternalLink } from 'router/Link/ExternalLink'
 
 interface EmailConfirmQueryParams {
   email: string
@@ -16,6 +17,8 @@ export const EmailConfirmContent = () => {
   useHandleQueryParams<EmailConfirmQueryParams>(({ email }) => setEmail(email))
 
   const { back } = useRouter()
+
+  const inboxLink = email && suggestInboxLink(email, 'increaser')
 
   return (
     <AuthView title="Confirm your email">
@@ -31,7 +34,13 @@ export const EmailConfirmContent = () => {
           </Text>
 
           <VStack gap={4} fullWidth>
-            <CheckInboxLink email={email} />
+            {inboxLink && (
+              <ExternalLink style={{ width: '100%' }} to={inboxLink}>
+                <Button size="xl" as="div">
+                  Check your inbox
+                </Button>
+              </ExternalLink>
+            )}
             <Button onClick={back} size="xl" kind="ghostSecondary">
               Back
             </Button>
