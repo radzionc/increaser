@@ -1,19 +1,16 @@
-import { sendEmail } from '../email'
-import { render } from '@react-email/render'
-import AuthEmail from '@increaser/email/emails/AuthEmail'
 import { generateAuthLinkToken } from '../auth/helpers/generateAuthLinkToken'
+import { sendLoginLinkEmail } from '@increaser/email/utils/sendLogInLinkEmail'
+import { addQueryParams } from '@increaser/utils/addQueryParams'
+import { assertEnvVar } from '../shared/assertEnvVar'
 
 const sendAuthEmail = async (email: string) => {
-  const code = generateAuthLinkToken(email)
-  const url = `https://app.increaser.org/email-auth?url=${code}`
-
-  await sendEmail({
+  const code = await generateAuthLinkToken(email)
+  const loginUrl = addQueryParams(`${assertEnvVar('APP_URL')}/email-auth`, {
+    code,
+  })
+  await sendLoginLinkEmail({
+    loginUrl,
     email,
-    body: render(<AuthEmail url={url} email={email} />, {
-      pretty: true,
-    }),
-    subject: 'Log in to Increaser',
-    source: `Login <noreply@increaser.org>`,
   })
 }
 

@@ -1,3 +1,4 @@
+import { lightTheme } from '@increaser/ui/ui/theme/lightTheme'
 import {
   Body,
   Button,
@@ -12,15 +13,15 @@ import {
   Font,
 } from '@react-email/components'
 
-interface AuthEmailProps {
-  url: string
+export interface LoginLinkEmailProps {
+  loginUrl: string
   email: string
 }
 
-export const AuthEmail = ({
-  url,
+export const LoginLinkEmail = ({
+  loginUrl,
   email = 'john@gmail.com',
-}: AuthEmailProps) => (
+}: LoginLinkEmailProps) => (
   <Html>
     <Head>
       <Font
@@ -60,7 +61,7 @@ export const AuthEmail = ({
           This button will expire in 20 minutes.
         </Text>
         <Section style={buttonContainer}>
-          <Button pY={20} pX={20} style={button} href={url}>
+          <Button pY={20} pX={20} style={button} href={loginUrl}>
             Log in to Increaser
           </Button>
         </Section>
@@ -74,11 +75,11 @@ export const AuthEmail = ({
   </Html>
 )
 
-export default AuthEmail
+export default LoginLinkEmail
 
 const main = {
-  backgroundColor: '#ffffff',
-  color: '#000000',
+  backgroundColor: lightTheme.colors.background.toCssValue(),
+  color: lightTheme.colors.contrast.toCssValue(),
   fontFamily:
     'OpenSans,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 }
@@ -96,10 +97,10 @@ const heading = {
 }
 
 const button = {
-  backgroundColor: '#2282e2',
+  backgroundColor: lightTheme.colors.primary.toCssValue(),
   borderRadius: '8px',
   fontWeight: '700',
-  color: '#fff',
+  color: lightTheme.colors.background.toCssValue(),
   fontSize: '18px',
   textDecoration: 'none',
   textAlign: 'center' as const,
@@ -112,6 +113,6 @@ const buttonContainer = {
 
 const userEmail = {
   textDecoration: 'none',
-  color: '#2282e2',
+  color: lightTheme.colors.primary.toCssValue(),
   fontWeight: 700,
 }

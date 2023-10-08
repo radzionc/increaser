@@ -27,3 +27,7 @@ variable "facebook_client_secret" {}
 variable "linkedin_client_id" {}
 
 variable "linkedin_client_secret" {}
+
+variable "ses_aws_region" {
+  default = "us-east-1"
+}

@@ -45,6 +45,7 @@ resource "aws_lambda_function" "api" {
       FACEBOOK_CLIENT_SECRET : var.facebook_client_secret,
       APP_URL : var.app_url,
       EMAIL_DOMAIN : var.email_domain,
+      SES_AWS_REGION : var.ses_aws_region,
     }
   }
 }
