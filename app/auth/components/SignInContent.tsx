@@ -1,5 +1,5 @@
 import { AuthProviders } from './AuthFlow/AuthProviders'
-import { AuthView } from './AuthView'
+import { AuthView } from '@increaser/ui/auth/AuthView'
 
 export const SignInContent = () => {
   return (

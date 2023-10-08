@@ -17,7 +17,7 @@ const outlookInboxLink = 'https://outlook.live.com/mail/0/inbox'
 
 export const suggestInboxLink = (
   email: string,
-  sender: string,
+  sender?: string,
 ): string | undefined => {
   const emailProvider = extractEmailProvider(email)
   if (!emailProvider) return undefined
@@ -30,8 +30,11 @@ export const suggestInboxLink = (
 
   return match(emailProviderWithClient, {
     gmail: () => {
+      const url = 'https://mail.google.com/mail/u/0/#search'
+      if (!sender) return url
+
       const searchStr = encodeURIComponent(`from:@${sender}+in:anywhere`)
-      return ['https://mail.google.com/mail/u/0/#search', searchStr].join('/')
+      return [url, searchStr].join('/')
     },
     outlook: () => outlookInboxLink,
     hotmail: () => outlookInboxLink,

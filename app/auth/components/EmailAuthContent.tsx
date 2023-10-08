@@ -1,6 +1,6 @@
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
 import { useCallback } from 'react'
-import { AuthView } from './AuthView'
+import { AuthView } from '@increaser/ui/auth/AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { AuthConfirmationStatus } from './AuthConfirmationStatus'
 import { QueryApiError } from 'api/useApi'

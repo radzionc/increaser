@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useHandleQueryParams } from 'navigation/hooks/useHandleQueryParams'
-import { AuthView } from './AuthView'
+import { AuthView } from '@increaser/ui/auth/AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { getOAuthRedirectUri } from 'auth/utils/oauth'
