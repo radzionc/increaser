@@ -105,10 +105,19 @@ export type Habit = {
 export type Membership = {
   __typename?: 'Membership'
   provider: MembershipProvider
-  subscription?: Maybe<Subscription>
+  subscription?: Maybe<MembershipSubscription>
 }
 
 export type MembershipProvider = 'AppSumo' | 'Paddle'
+
+export type MembershipSubscription = {
+  __typename?: 'MembershipSubscription'
+  cancelUrl: Scalars['String']['output']
+  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
+  nextBillDate?: Maybe<Scalars['String']['output']>
+  planId: Scalars['String']['output']
+  updateUrl: Scalars['String']['output']
+}
 
 export type Mutation = {
   __typename?: 'Mutation'
@@ -252,12 +261,18 @@ export type SetInput = {
 
 export type Subscription = {
   __typename?: 'Subscription'
-  cancelUrl: Scalars['String']['output']
-  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
-  nextBillDate?: Maybe<Scalars['String']['output']>
-  planId: Scalars['String']['output']
-  updateUrl: Scalars['String']['output']
+  billingCycle: SubscriptionBillingCycle
+  endsAt?: Maybe<Scalars['Float']['output']>
+  nextBilledAt?: Maybe<Scalars['Float']['output']>
+  provider: SubscriptionProvider
+  status: SubscriptionStatus
 }
+
+export type SubscriptionBillingCycle = 'month' | 'year'
+
+export type SubscriptionProvider = 'paddleClassic'
+
+export type SubscriptionStatus = 'active' | 'canceled' | 'pastDue'
 
 export type Task = {
   __typename?: 'Task'
@@ -332,6 +347,7 @@ export type UserState = {
   projects: Array<Project>
   registrationDate: Scalars['Float']['output']
   sets: Array<Set>
+  subscription?: Maybe<Subscription>
   sumbittedHabitsAt?: Maybe<Scalars['Float']['output']>
   tasks: Array<Task>
   weekTimeAllocation: Array<Scalars['Float']['output']>
@@ -565,6 +581,14 @@ export type UserStateQuery = {
     goalToGoToBedAt: number
     primaryGoal: PrimaryGoal
     sumbittedHabitsAt?: number | null
+    subscription?: {
+      __typename?: 'Subscription'
+      provider: SubscriptionProvider
+      billingCycle: SubscriptionBillingCycle
+      status: SubscriptionStatus
+      nextBilledAt?: number | null
+      endsAt?: number | null
+    } | null
     sets: Array<{
       __typename?: 'Set'
       start: number
@@ -620,7 +644,7 @@ export type UserStateQuery = {
       __typename?: 'Membership'
       provider: MembershipProvider
       subscription?: {
-        __typename?: 'Subscription'
+        __typename?: 'MembershipSubscription'
         updateUrl: string
         cancelUrl: string
         planId: string
@@ -1473,6 +1497,35 @@ export const UserStateDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'subscription' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'provider' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'billingCycle' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'status' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'nextBilledAt' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'endsAt' },
+                      },
+                    ],
+                  },
+                },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'sets' },

@@ -107,7 +107,7 @@ export type Habit = {
 export type Membership = {
   __typename?: 'Membership'
   provider: MembershipProvider
-  subscription?: Maybe<Subscription>
+  subscription?: Maybe<MembershipSubscription>
 }
 
 export const MembershipProvider = {
@@ -117,6 +117,15 @@ export const MembershipProvider = {
 
 export type MembershipProvider =
   (typeof MembershipProvider)[keyof typeof MembershipProvider]
+export type MembershipSubscription = {
+  __typename?: 'MembershipSubscription'
+  cancelUrl: Scalars['String']['output']
+  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
+  nextBillDate?: Maybe<Scalars['String']['output']>
+  planId: Scalars['String']['output']
+  updateUrl: Scalars['String']['output']
+}
+
 export type Mutation = {
   __typename?: 'Mutation'
   addSet?: Maybe<Scalars['Boolean']['output']>
@@ -272,13 +281,34 @@ export type SetInput = {
 
 export type Subscription = {
   __typename?: 'Subscription'
-  cancelUrl: Scalars['String']['output']
-  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
-  nextBillDate?: Maybe<Scalars['String']['output']>
-  planId: Scalars['String']['output']
-  updateUrl: Scalars['String']['output']
+  billingCycle: SubscriptionBillingCycle
+  endsAt?: Maybe<Scalars['Float']['output']>
+  nextBilledAt?: Maybe<Scalars['Float']['output']>
+  provider: SubscriptionProvider
+  status: SubscriptionStatus
 }
 
+export const SubscriptionBillingCycle = {
+  Month: 'month',
+  Year: 'year',
+} as const
+
+export type SubscriptionBillingCycle =
+  (typeof SubscriptionBillingCycle)[keyof typeof SubscriptionBillingCycle]
+export const SubscriptionProvider = {
+  PaddleClassic: 'paddleClassic',
+} as const
+
+export type SubscriptionProvider =
+  (typeof SubscriptionProvider)[keyof typeof SubscriptionProvider]
+export const SubscriptionStatus = {
+  Active: 'active',
+  Canceled: 'canceled',
+  PastDue: 'pastDue',
+} as const
+
+export type SubscriptionStatus =
+  (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
 export type Task = {
   __typename?: 'Task'
   id: Scalars['String']['output']
@@ -352,6 +382,7 @@ export type UserState = {
   projects: Array<Project>
   registrationDate: Scalars['Float']['output']
   sets: Array<Set>
+  subscription?: Maybe<Subscription>
   sumbittedHabitsAt?: Maybe<Scalars['Float']['output']>
   tasks: Array<Task>
   weekTimeAllocation: Array<Scalars['Float']['output']>
@@ -485,6 +516,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']['output']>
   Membership: ResolverTypeWrapper<Membership>
   MembershipProvider: MembershipProvider
+  MembershipSubscription: ResolverTypeWrapper<MembershipSubscription>
   Mutation: ResolverTypeWrapper<{}>
   OAuthProvider: OAuthProvider
   PrimaryGoal: PrimaryGoal
@@ -499,6 +531,9 @@ export type ResolversTypes = {
   SetInput: SetInput
   String: ResolverTypeWrapper<Scalars['String']['output']>
   Subscription: ResolverTypeWrapper<{}>
+  SubscriptionBillingCycle: SubscriptionBillingCycle
+  SubscriptionProvider: SubscriptionProvider
+  SubscriptionStatus: SubscriptionStatus
   Task: ResolverTypeWrapper<Task>
   TaskInput: TaskInput
   TrackHabitInput: TrackHabitInput
@@ -527,6 +562,7 @@ export type ResolversParentTypes = {
   ID: Scalars['ID']['output']
   Int: Scalars['Int']['output']
   Membership: Membership
+  MembershipSubscription: MembershipSubscription
   Mutation: {}
   Project: Project
   ProjectMonth: ProjectMonth
@@ -613,10 +649,31 @@ export type MembershipResolvers<
     ContextType
   >
   subscription?: Resolver<
-    Maybe<ResolversTypes['Subscription']>,
+    Maybe<ResolversTypes['MembershipSubscription']>,
     ParentType,
     ContextType
   >
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
+export type MembershipSubscriptionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['MembershipSubscription'] = ResolversParentTypes['MembershipSubscription'],
+> = {
+  cancelUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  cancellationEffectiveDate?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >
+  nextBillDate?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >
+  planId?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  updateUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -797,33 +854,33 @@ export type SubscriptionResolvers<
   ParentType extends
     ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
 > = {
-  cancelUrl?: SubscriptionResolver<
-    ResolversTypes['String'],
-    'cancelUrl',
+  billingCycle?: SubscriptionResolver<
+    ResolversTypes['SubscriptionBillingCycle'],
+    'billingCycle',
     ParentType,
     ContextType
   >
-  cancellationEffectiveDate?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
-    'cancellationEffectiveDate',
+  endsAt?: SubscriptionResolver<
+    Maybe<ResolversTypes['Float']>,
+    'endsAt',
     ParentType,
     ContextType
   >
-  nextBillDate?: SubscriptionResolver<
-    Maybe<ResolversTypes['String']>,
-    'nextBillDate',
+  nextBilledAt?: SubscriptionResolver<
+    Maybe<ResolversTypes['Float']>,
+    'nextBilledAt',
     ParentType,
     ContextType
   >
-  planId?: SubscriptionResolver<
-    ResolversTypes['String'],
-    'planId',
+  provider?: SubscriptionResolver<
+    ResolversTypes['SubscriptionProvider'],
+    'provider',
     ParentType,
     ContextType
   >
-  updateUrl?: SubscriptionResolver<
-    ResolversTypes['String'],
-    'updateUrl',
+  status?: SubscriptionResolver<
+    ResolversTypes['SubscriptionStatus'],
+    'status',
     ParentType,
     ContextType
   >
@@ -871,6 +928,11 @@ export type UserStateResolvers<
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
   registrationDate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   sets?: Resolver<Array<ResolversTypes['Set']>, ParentType, ContextType>
+  subscription?: Resolver<
+    Maybe<ResolversTypes['Subscription']>,
+    ParentType,
+    ContextType
+  >
   sumbittedHabitsAt?: Resolver<
     Maybe<ResolversTypes['Float']>,
     ParentType,
@@ -891,6 +953,7 @@ export type Resolvers<ContextType = any> = {
   FocusSound?: FocusSoundResolvers<ContextType>
   Habit?: HabitResolvers<ContextType>
   Membership?: MembershipResolvers<ContextType>
+  MembershipSubscription?: MembershipSubscriptionResolvers<ContextType>
   Mutation?: MutationResolvers<ContextType>
   Project?: ProjectResolvers<ContextType>
   ProjectMonth?: ProjectMonthResolvers<ContextType>

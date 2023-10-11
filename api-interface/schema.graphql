@@ -139,7 +139,7 @@ enum MembershipProvider {
   Paddle
 }
 
-type Subscription {
+type MembershipSubscription {
   updateUrl: String!
   cancelUrl: String!
   planId: String!
@@ -149,7 +149,7 @@ type Subscription {
 
 type Membership {
   provider: MembershipProvider!
-  subscription: Subscription
+  subscription: MembershipSubscription
 }
 
 type FocusSound {
@@ -169,6 +169,29 @@ enum PrimaryGoal {
   workMore
   workLess
   awareness
+}
+
+enum SubscriptionProvider {
+  paddleClassic
+}
+
+enum SubscriptionBillingCycle {
+  month
+  year
+}
+
+enum SubscriptionStatus {
+  active
+  canceled
+  pastDue
+}
+
+type Subscription {
+  provider: SubscriptionProvider!
+  billingCycle: SubscriptionBillingCycle!
+  status: SubscriptionStatus!
+  nextBilledAt: Float
+  endsAt: Float
 }
 
 type UserState {
@@ -192,6 +215,7 @@ type UserState {
   tasks: [Task!]!
   country: String
   sumbittedHabitsAt: Float
+  subscription: Subscription
 }
 
 input UserStateInput {

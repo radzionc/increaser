@@ -9,7 +9,7 @@ import { addMonths, addYears } from 'date-fns'
 
 const getStatus = (user: PaddleClassicUser): SubscriptionStatus => {
   if (user.state === 'past_due') {
-    return 'past-due'
+    return 'pastDue'
   }
 
   if (user.state === 'cancelled') {
@@ -56,7 +56,7 @@ export const toSubscription = (
   const billingCycle = plan.billing_type
 
   return {
-    provider: 'paddle-classic',
+    provider: 'paddleClassic',
     billingCycle,
     status: getStatus(user),
     nextBilledAt: getNextBilledAt(user),

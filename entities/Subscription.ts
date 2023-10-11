@@ -1,8 +1,8 @@
 export type SubscriptionBillingCycle = 'month' | 'year'
 
-export type SubscriptionStatus = 'active' | 'canceled' | 'past-due'
+export type SubscriptionStatus = 'active' | 'canceled' | 'pastDue'
 
-export type SubscriptionProvider = 'paddle-classic'
+export type SubscriptionProvider = 'paddleClassic'
 
 export interface Subscription {
   provider: SubscriptionProvider

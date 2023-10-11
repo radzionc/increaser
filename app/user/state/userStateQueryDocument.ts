@@ -3,6 +3,13 @@ import { graphql } from '@increaser/api-interface/client'
 export const userStateQueryDocument = graphql(`
   query userState($input: UserStateInput!) {
     userState(input: $input) {
+      subscription {
+        provider
+        billingCycle
+        status
+        nextBilledAt
+        endsAt
+      }
       sets {
         start
         end
