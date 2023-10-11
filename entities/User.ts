@@ -1,6 +1,7 @@
 import { FocusSound, defaultFocusSounds } from './FocusSound'
 import { Habit } from './Habit'
 import { Project } from './Project'
+import { Subscription } from './Subscription'
 import {
   WeekTimeAllocation,
   defaultWeekTimeAllocation,
@@ -79,6 +80,8 @@ export type User = {
   updatedAt: number
 
   sumbittedHabitsAt?: number
+
+  subscription?: Subscription
 }
 
 export const userDefaultFields: Pick<

@@ -4817,6 +4817,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/paddle-classic-webhooks@workspace:paddle-classic-webhooks":
+  version: 0.0.0-use.local
+  resolution: "@increaser/paddle-classic-webhooks@workspace:paddle-classic-webhooks"
+  languageName: unknown
+  linkType: soft
+
+"@increaser/paddle-classic@workspace:paddle-classic":
+  version: 0.0.0-use.local
+  resolution: "@increaser/paddle-classic@workspace:paddle-classic"
+  dependencies:
+    date-fns: ^2.30.0
+  languageName: unknown
+  linkType: soft
+
 "@increaser/public@workspace:public":
   version: 0.0.0-use.local
   resolution: "@increaser/public@workspace:public"
