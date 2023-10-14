@@ -1,4 +1,4 @@
-export const isOneOf = <T>(items: readonly T[], item: any): T | undefined => {
+export const isOneOf = <T>(item: any, items: readonly T[]): T | undefined => {
   if (items.includes(item)) {
     return item
   }

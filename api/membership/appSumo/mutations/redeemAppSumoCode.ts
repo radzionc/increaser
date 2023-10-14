@@ -31,7 +31,11 @@ export const redeemAppSumoCode: MutationResolvers['redeemAppSumoCode'] = async (
   }
 
   await updateAppSumoCode(code, { userId })
-  await updateUser(userId, { appSumo: { code } })
+  await updateUser(userId, {
+    lifeTimeDeal: {
+      provider: 'appsumo',
+    },
+  })
 
   return true
 }

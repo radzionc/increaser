@@ -16,6 +16,7 @@ import { removeLastSet } from '../sets/mutations/removeLastSet'
 import { Resolvers } from './schema'
 import { authSessionWithEmail } from '../auth/queries/authSessionWithEmail'
 import { authSessionWithOAuth } from '../auth/queries/authSessionWithOAuth'
+import { manageSubscription } from '../membership/subscription/queries/manageSubscription'
 
 export const resolvers: Pick<Resolvers, 'Query' | 'Mutation'> = {
   Query: {
@@ -23,6 +24,7 @@ export const resolvers: Pick<Resolvers, 'Query' | 'Mutation'> = {
     userState,
     authSessionWithEmail,
     authSessionWithOAuth,
+    manageSubscription,
   },
   Mutation: {
     sendAuthLinkByEmail,

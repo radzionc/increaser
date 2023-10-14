@@ -44,7 +44,7 @@ export const CurrentWeekDistribution = () => {
           <React.Fragment key={id}>
             <Circle size={8} background={hslaColor} />
             <Text as="div" weight="semibold" size={14}>
-              {formatDuration(doneMinutesThisWeek, 'min')}
+              {formatDuration(doneMinutesThisWeek, 'min', { maxUnit: 'h' })}
             </Text>
             <Text size={14} cropped color="supporting">
               {name}

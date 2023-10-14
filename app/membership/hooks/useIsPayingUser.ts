@@ -1,20 +1,15 @@
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 export const useIsPayingUser = () => {
-  const { membership } = useAssertUserState()
+  const { subscription, lifeTimeDeal } = useAssertUserState()
 
-  if (!membership) return false
+  if (lifeTimeDeal) return true
 
-  const { subscription } = membership
-  if (!subscription) return true
+  if (subscription) {
+    if (!subscription.endsAt) return false
 
-  const { nextBillDate, cancellationEffectiveDate } = subscription
-
-  if (cancellationEffectiveDate) {
-    const [year, month, day] = cancellationEffectiveDate.split('-').map(Number)
-    const shouldBeCancelledAt = new Date(year, month - 1, day).getTime()
-    return shouldBeCancelledAt > Date.now()
+    return subscription.endsAt > Date.now()
   }
 
-  return !!nextBillDate
+  return false
 }

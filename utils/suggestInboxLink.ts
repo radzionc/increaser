@@ -23,8 +23,8 @@ export const suggestInboxLink = (
   if (!emailProvider) return undefined
 
   const emailProviderWithClient = isOneOf(
-    emailProvidersWithClient,
     emailProvider,
+    emailProvidersWithClient,
   )
   if (!emailProviderWithClient) return undefined
 

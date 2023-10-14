@@ -188,10 +188,19 @@ enum SubscriptionStatus {
 
 type Subscription {
   provider: SubscriptionProvider!
-  billingCycle: SubscriptionBillingCycle!
+  id: String!
+  planId: String!
   status: SubscriptionStatus!
   nextBilledAt: Float
   endsAt: Float
+}
+
+enum LifeTimeDealProvider {
+  appsumo
+}
+
+type LifeTimeDeal {
+  provider: LifeTimeDealProvider
 }
 
 type UserState {
@@ -216,6 +225,12 @@ type UserState {
   country: String
   sumbittedHabitsAt: Float
   subscription: Subscription
+  lifeTimeDeal: LifeTimeDeal
+}
+
+type ManageSubscription {
+  updateUrl: String!
+  cancelUrl: String!
 }
 
 input UserStateInput {
@@ -255,6 +270,7 @@ type Query {
   authSessionWithOAuth(input: AuthSessionWithOAuthInput!): AuthSession!
   userState(input: UserStateInput!): UserState!
   appStats: AppStats!
+  manageSubscription: ManageSubscription!
 }
 
 type Mutation {

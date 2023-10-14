@@ -1,5 +1,6 @@
 import { FocusSound, defaultFocusSounds } from './FocusSound'
 import { Habit } from './Habit'
+import { LifeTimeDeal } from './LifeTimeDeal'
 import { Project } from './Project'
 import { Subscription } from './Subscription'
 import {
@@ -82,6 +83,7 @@ export type User = {
   sumbittedHabitsAt?: number
 
   subscription?: Subscription
+  lifeTimeDeal?: LifeTimeDeal
 }
 
 export const userDefaultFields: Pick<

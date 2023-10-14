@@ -52,7 +52,7 @@ export const ProjectsCurrentWeek = () => {
         displayValue:
           total > 0 ? (
             <Text color={isToday ? 'regular' : 'supporting'}>
-              {formatDuration(total, 'ms')}
+              {formatDuration(total, 'ms', { maxUnit: 'h' })}
             </Text>
           ) : undefined,
         label: getShortWeekday(index),

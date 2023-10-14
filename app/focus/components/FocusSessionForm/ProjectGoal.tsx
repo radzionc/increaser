@@ -85,7 +85,9 @@ export const ProjectGoal = () => {
             <LabeledValue name="Weekly goal">
               <Text as="span" weight="bold">
                 {allocatedMinutesPerWeek > 0
-                  ? formatDuration(allocatedMinutesPerWeek, 'min')
+                  ? formatDuration(allocatedMinutesPerWeek, 'min', {
+                      maxUnit: 'h',
+                    })
                   : '-'}
               </Text>
             </LabeledValue>
@@ -172,10 +174,12 @@ export const ProjectGoal = () => {
               ? `${doneMinutesThisWeek > +target ? '+' : '-'} ${formatDuration(
                   Math.abs(target - doneMinutesThisWeek),
                   'min',
+                  { maxUnit: 'h' },
                 )}`
               : `+ ${formatDuration(
                   doneMinutesThisWeek - allocatedMinutesPerWeek,
                   'min',
+                  { maxUnit: 'h' },
                 )}`
             : ''}
         </Distance>

@@ -66,7 +66,7 @@ export const PreviousProjectsDistribution = () => {
               background={theme.colors.getLabelColor(projectsRecord[id].color)}
             />
             <Text as="div" weight="semibold" size={14}>
-              {formatDuration(seconds / weeksToDisplay, 's')}
+              {formatDuration(seconds / weeksToDisplay, 's', { maxUnit: 'h' })}
             </Text>
             <Text size={14} cropped color="supporting">
               {projectsRecord[id].name}

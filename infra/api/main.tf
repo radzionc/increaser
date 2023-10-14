@@ -46,6 +46,8 @@ resource "aws_lambda_function" "api" {
       APP_URL : var.app_url,
       EMAIL_DOMAIN : var.email_domain,
       SES_AWS_REGION : var.ses_aws_region,
+      PADDLE_API_KEY : var.paddle_api_key,
+      PADDLE_VENDOR_ID : var.paddle_vendor_id,
     }
   }
 }

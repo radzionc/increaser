@@ -169,6 +169,7 @@ export const ProjectStats = () => {
     return formatDuration(
       sum(applicableItems.map((data) => data.value)) / applicableItems.length,
       's',
+      { maxUnit: 'h' },
     )
   }, [data])
 
@@ -210,7 +211,7 @@ export const ProjectStats = () => {
               value > 0
                 ? () => (
                     <Text color={isCurrent ? 'contrast' : undefined}>
-                      {formatDuration(value, 's')}
+                      {formatDuration(value, 's', { maxUnit: 'h' })}
                     </Text>
                   )
                 : undefined,

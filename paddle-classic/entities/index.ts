@@ -5,6 +5,13 @@ export interface PaddleClassicSubscriptionPlan {
   billing_type: SubscriptionBillingCycle
 }
 
+export type PaddleClassicSubscriptionStatus =
+  | 'active'
+  | 'trialing'
+  | 'past_due'
+  | 'paused'
+  | 'deleted'
+
 export interface PaddleClassicUser {
   subscription_id: number
   plan_id: number
@@ -13,7 +20,7 @@ export interface PaddleClassicUser {
   marketing_consent: boolean
   update_url: string
   cancel_url: string
-  state: string
+  state: PaddleClassicSubscriptionStatus
   signup_date: string
   last_payment: {
     amount: number

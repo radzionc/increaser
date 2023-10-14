@@ -3,24 +3,30 @@ import {
   SubscriptionBillingCycle,
   SubscriptionStatus,
 } from '@increaser/entities/Subscription'
-import { PaddleClassicSubscriptionPlan, PaddleClassicUser } from '../entities'
+import {
+  PaddleClassicSubscriptionPlan,
+  PaddleClassicSubscriptionStatus,
+  PaddleClassicUser,
+} from '../entities'
 import { match } from '@increaser/utils/match'
 import { addMonths, addYears } from 'date-fns'
 
-const getStatus = (user: PaddleClassicUser): SubscriptionStatus => {
-  if (user.state === 'past_due') {
+export const fromPaddleClassicStatus = (
+  status: PaddleClassicSubscriptionStatus,
+): SubscriptionStatus => {
+  if (status === 'past_due') {
     return 'pastDue'
   }
 
-  if (user.state === 'cancelled') {
+  if (status === 'deleted') {
     return 'canceled'
   }
 
-  if (user.state === 'active') {
+  if (status === 'active') {
     return 'active'
   }
 
-  throw new Error(`Unknown subscription state ${user.state}`)
+  throw new Error(`Unknown subscription status: ${status}`)
 }
 
 const getNextBilledAt = (user: PaddleClassicUser): number | undefined => {
@@ -33,9 +39,8 @@ const getEndsAt = (
   billingCycle: SubscriptionBillingCycle,
   user: PaddleClassicUser,
 ): number | undefined => {
-  if (!user.last_payment) {
-    return undefined
-  }
+  if (user.state !== 'deleted') return undefined
+  if (!user.last_payment) return undefined
 
   const date = new Date(user.last_payment.date)
   return match(billingCycle, {
@@ -57,8 +62,9 @@ export const toSubscription = (
 
   return {
     provider: 'paddleClassic',
-    billingCycle,
-    status: getStatus(user),
+    id: user.subscription_id.toString(),
+    planId: user.plan_id.toString(),
+    status: fromPaddleClassicStatus(user.state),
     nextBilledAt: getNextBilledAt(user),
     endsAt: getEndsAt(billingCycle, user),
   }

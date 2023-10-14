@@ -51,7 +51,9 @@ export const ProjectGoalPrompt = () => {
           {allocatedMinutesPerWeek > 0 ? (
             <Text size={14} color="shy">
               <Text size={16} as="span" color="regular" weight="bold">
-                {formatDuration(allocatedMinutesPerWeek, 'min')}
+                {formatDuration(allocatedMinutesPerWeek, 'min', {
+                  maxUnit: 'h',
+                })}
               </Text>{' '}
               / week
             </Text>

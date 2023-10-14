@@ -45,7 +45,7 @@ export const ProjectOption = ({ name, emoji, onClick, minutes = 0 }: Props) => {
           <EmojiHeavyBlock
             emoji={emoji}
             title={name}
-            subtitle={formatDuration(minutes, 'min')}
+            subtitle={formatDuration(minutes, 'min', { maxUnit: 'h' })}
           />
         </HStack>
         <IconWrapper>

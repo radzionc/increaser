@@ -18,7 +18,9 @@ export const PreviousWeeklyAverage = () => {
         Previous avg:
       </Text>
       <Text color="supporting" size={14} weight="bold">
-        {total > 0 ? formatDuration(total / weeks.length, 's') : '-'}
+        {total > 0
+          ? formatDuration(total / weeks.length, 's', { maxUnit: 'h' })
+          : '-'}
       </Text>
     </HStack>
   )

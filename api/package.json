@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/lambda.js",
-    "build": "rm -rf ./dist && node build.mjs",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "build": "rm -rf ./dist && node build.mjs"
   },
   "dependencies": {
     "@apollo/server": "^4.9.1",

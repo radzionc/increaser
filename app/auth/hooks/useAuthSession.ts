@@ -14,6 +14,7 @@ export const useAuthSession = () => {
 
   const onChange = useCallback(
     (session: AuthSession | undefined) => {
+      console.log('Chage session', session)
       if (session) {
         analytics.trackEvent('Finish identification')
 

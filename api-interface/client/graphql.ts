@@ -102,6 +102,19 @@ export type Habit = {
   successes: Array<Scalars['String']['output']>
 }
 
+export type LifeTimeDeal = {
+  __typename?: 'LifeTimeDeal'
+  provider?: Maybe<LifeTimeDealProvider>
+}
+
+export type LifeTimeDealProvider = 'appsumo'
+
+export type ManageSubscription = {
+  __typename?: 'ManageSubscription'
+  cancelUrl: Scalars['String']['output']
+  updateUrl: Scalars['String']['output']
+}
+
 export type Membership = {
   __typename?: 'Membership'
   provider: MembershipProvider
@@ -222,6 +235,7 @@ export type Query = {
   appStats: AppStats
   authSessionWithEmail: AuthSession
   authSessionWithOAuth: AuthSession
+  manageSubscription: ManageSubscription
   projects: Array<Project>
   userState: UserState
 }
@@ -261,9 +275,10 @@ export type SetInput = {
 
 export type Subscription = {
   __typename?: 'Subscription'
-  billingCycle: SubscriptionBillingCycle
   endsAt?: Maybe<Scalars['Float']['output']>
+  id: Scalars['String']['output']
   nextBilledAt?: Maybe<Scalars['Float']['output']>
+  planId: Scalars['String']['output']
   provider: SubscriptionProvider
   status: SubscriptionStatus
 }
@@ -340,6 +355,7 @@ export type UserState = {
   habits: Array<Habit>
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
+  lifeTimeDeal?: Maybe<LifeTimeDeal>
   membership?: Maybe<Membership>
   name?: Maybe<Scalars['String']['output']>
   prevSets: Array<Set>
@@ -455,6 +471,17 @@ export type UpdateHabitMutation = {
     successes: Array<string>
     order: number
   } | null
+}
+
+export type ManageSubscriptionQueryVariables = Exact<{ [key: string]: never }>
+
+export type ManageSubscriptionQuery = {
+  __typename?: 'Query'
+  manageSubscription: {
+    __typename?: 'ManageSubscription'
+    updateUrl: string
+    cancelUrl: string
+  }
 }
 
 export type CreateProjectMutationVariables = Exact<{
@@ -584,10 +611,15 @@ export type UserStateQuery = {
     subscription?: {
       __typename?: 'Subscription'
       provider: SubscriptionProvider
-      billingCycle: SubscriptionBillingCycle
+      id: string
+      planId: string
       status: SubscriptionStatus
       nextBilledAt?: number | null
       endsAt?: number | null
+    } | null
+    lifeTimeDeal?: {
+      __typename?: 'LifeTimeDeal'
+      provider?: LifeTimeDealProvider | null
     } | null
     sets: Array<{
       __typename?: 'Set'
@@ -640,18 +672,6 @@ export type UserStateQuery = {
       startedAt: number
       isCompleted: boolean
     }>
-    membership?: {
-      __typename?: 'Membership'
-      provider: MembershipProvider
-      subscription?: {
-        __typename?: 'MembershipSubscription'
-        updateUrl: string
-        cancelUrl: string
-        planId: string
-        cancellationEffectiveDate?: string | null
-        nextBillDate?: string | null
-      } | null
-    } | null
     focusSounds: Array<{
       __typename?: 'FocusSound'
       name: string
@@ -1073,6 +1093,35 @@ export const UpdateHabitDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateHabitMutation, UpdateHabitMutationVariables>
+export const ManageSubscriptionDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'manageSubscription' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'manageSubscription' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'updateUrl' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'cancelUrl' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  ManageSubscriptionQuery,
+  ManageSubscriptionQueryVariables
+>
 export const CreateProjectDocument = {
   kind: 'Document',
   definitions: [
@@ -1507,9 +1556,10 @@ export const UserStateDocument = {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'provider' },
                       },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'billingCycle' },
+                        name: { kind: 'Name', value: 'planId' },
                       },
                       {
                         kind: 'Field',
@@ -1522,6 +1572,19 @@ export const UserStateDocument = {
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'endsAt' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'lifeTimeDeal' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'provider' },
                       },
                     ],
                   },
@@ -1669,55 +1732,6 @@ export const UserStateDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'country' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'isAnonymous' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'membership' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'provider' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'subscription' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'updateUrl' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'cancelUrl' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'planId' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: {
-                                kind: 'Name',
-                                value: 'cancellationEffectiveDate',
-                              },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'nextBillDate' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'planId' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'freeTrialEnd' },

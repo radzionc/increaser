@@ -55,11 +55,13 @@ export const CurrentWeekProjectItem = ({
               separator={<Text color="shy">{slashSeparator}</Text>}
             >
               <Text color="supporting" weight="bold">
-                {formatDuration(doneMinutesThisWeek, 'min')}
+                {formatDuration(doneMinutesThisWeek, 'min', { maxUnit: 'h' })}
               </Text>
               {allocatedMinutesPerWeek && (
                 <Text color="shy" weight="bold">
-                  {formatDuration(allocatedMinutesPerWeek, 'min')}
+                  {formatDuration(allocatedMinutesPerWeek, 'min', {
+                    maxUnit: 'h',
+                  })}
                 </Text>
               )}
             </HStackSeparatedBy>

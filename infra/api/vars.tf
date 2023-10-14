@@ -31,3 +31,7 @@ variable "linkedin_client_secret" {}
 variable "ses_aws_region" {
   default = "us-east-1"
 }
+
+variable "paddle_api_key" {}
+
+variable "paddle_vendor_id" {}

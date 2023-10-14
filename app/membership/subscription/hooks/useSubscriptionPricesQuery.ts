@@ -1,6 +1,6 @@
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
-import { PaddleProductCode } from 'membership/paddle/PaddleProductCode'
+import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { PaddleSdk, PaddleSdkProductPrice } from 'membership/paddle/PaddleSdk'
 import { ProductPlanPrice } from 'membership/subscription/ProductPlanPrice'
 import { useQuery } from 'react-query'
@@ -37,7 +37,7 @@ export const useSubscriptionPricesQuery = () => {
     subscriptionPricesQueryKey,
     async () => {
       const [month, year] = await Promise.all(
-        [PaddleProductCode.month, PaddleProductCode.year].map((product) =>
+        [paddleProductCode.month, paddleProductCode.year].map((product) =>
           getPaddleProductPrice(paddleSdk as PaddleSdk, product),
         ),
       )

@@ -6,7 +6,8 @@ export type SubscriptionProvider = 'paddleClassic'
 
 export interface Subscription {
   provider: SubscriptionProvider
-  billingCycle: SubscriptionBillingCycle
+  id: string
+  planId: string
   status: SubscriptionStatus
   nextBilledAt?: number
   endsAt?: number

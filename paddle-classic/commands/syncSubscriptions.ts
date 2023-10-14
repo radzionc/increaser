@@ -7,9 +7,8 @@ const syncSubscriptions = async () => {
   const plans =
     await queryPaddle<PaddleClassicSubscriptionPlan[]>('subscription/plans')
 
-  const users = await queryPaddle<PaddleClassicUser[]>('subscription/users', {
-    state: 'cancelled',
-  })
+  const users = await queryPaddle<PaddleClassicUser[]>('subscription/users')
+  console.log(users.length)
 
   await Promise.all(
     users.map(async (paddleUser) => {

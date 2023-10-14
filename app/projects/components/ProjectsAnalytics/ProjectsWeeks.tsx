@@ -27,7 +27,9 @@ export const ProjectsWeeks = () => {
         segments: sortSegments(segments),
         displayValue:
           seconds > 0 ? (
-            <Text color="supporting">{formatDuration(seconds, 's')}</Text>
+            <Text color="supporting">
+              {formatDuration(seconds, 's', { maxUnit: 'h' })}
+            </Text>
           ) : undefined,
         label: index === weeks.length - 1 ? 'Last week' : `Week #${week}`,
       }

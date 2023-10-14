@@ -4,11 +4,11 @@ import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 export const FreeTrialStatus = () => {
-  const { membership, freeTrialEnd } = useAssertUserState()
+  const { subscription, lifeTimeDeal, freeTrialEnd } = useAssertUserState()
 
   const now = useRhythmicRerender()
 
-  if (membership) {
+  if (subscription || lifeTimeDeal) {
     return null
   }
 
@@ -16,7 +16,7 @@ export const FreeTrialStatus = () => {
     <Text color="supporting" size={14}>
       {freeTrialEnd > now
         ? `${formatDuration(freeTrialEnd - now, 'ms')} of free trial left`
-        : 'Free trial expired'}
+        : 'Your free trial has ended'}
     </Text>
   )
 }

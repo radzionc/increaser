@@ -5,10 +5,14 @@ export const userStateQueryDocument = graphql(`
     userState(input: $input) {
       subscription {
         provider
-        billingCycle
+        id
+        planId
         status
         nextBilledAt
         endsAt
+      }
+      lifeTimeDeal {
+        provider
       }
       sets {
         start
@@ -59,17 +63,6 @@ export const userStateQueryDocument = graphql(`
       name
       country
       isAnonymous
-      membership {
-        provider
-        subscription {
-          updateUrl
-          cancelUrl
-          planId
-          cancellationEffectiveDate
-          nextBillDate
-          planId
-        }
-      }
       freeTrialEnd
       registrationDate
       weekTimeAllocation

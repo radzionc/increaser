@@ -1,5 +1,4 @@
 import { analytics } from 'analytics'
-import { PaddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { useCallback } from 'react'
 import { Path } from 'router/Path'
 import { useUserState } from 'user/state/UserStateContext'
@@ -7,6 +6,7 @@ import { useUserState } from 'user/state/UserStateContext'
 import { PaddleIFrame } from '../../paddle/PaddleIFrame'
 import { useRouter } from 'next/router'
 import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
+import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
 
 interface Props {
   period: SubscriptionCadence
@@ -31,7 +31,7 @@ export const CheckoutContent = ({ period, onClose }: Props) => {
     <PaddleIFrame
       onSuccess={onSuccess}
       onClose={onClose}
-      product={PaddleProductCode[period]}
+      product={paddleProductCode[period]}
     />
   )
 }

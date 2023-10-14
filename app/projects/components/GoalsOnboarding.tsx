@@ -49,13 +49,15 @@ export const GoalsOnboarding = ({ onNext }: Props) => {
             <Text as="div" size={14}>
               <HStack fullWidth justifyContent="space-between">
                 <LabeledValue name="Used">
-                  {formatDuration(allocatedMinutes, 'min')} /{' '}
+                  {formatDuration(allocatedMinutes, 'min', { maxUnit: 'h' })} /{' '}
                   <Text as="span" color="shy">
-                    {formatDuration(totalMinutes, 'min')}
+                    {formatDuration(totalMinutes, 'min', { maxUnit: 'h' })}
                   </Text>
                 </LabeledValue>
                 <LabeledValue name="Available">
-                  {formatDuration(totalMinutes - allocatedMinutes, 'min')}
+                  {formatDuration(totalMinutes - allocatedMinutes, 'min', {
+                    maxUnit: 'h',
+                  })}
                 </LabeledValue>
               </HStack>
             </Text>

@@ -6,9 +6,9 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { AppSumoCodeRedemption } from './AppSumoCodeRedemption'
 
 export const AppSumoPageContent = () => {
-  const { membership } = useAssertUserState()
+  const { lifeTimeDeal } = useAssertUserState()
 
-  if (membership && membership.provider === 'AppSumo') {
+  if (lifeTimeDeal && lifeTimeDeal.provider === 'appsumo') {
     return (
       <HStack alignItems="center" gap={8}>
         <Text color="success">

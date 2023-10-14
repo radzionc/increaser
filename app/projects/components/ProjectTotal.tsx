@@ -20,7 +20,7 @@ export const ProjectTotal = ({ name, color, value }: Props) => {
         </Text>
       </HStack>
       <Text nowrap size={14} weight="semibold" color="supporting">
-        {formatDuration(value, 'ms')}
+        {formatDuration(value, 'ms', { maxUnit: 'h' })}
       </Text>
     </HStack>
   )

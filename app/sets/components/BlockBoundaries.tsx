@@ -55,7 +55,7 @@ export const BlockBoundaries = ({
           style={{ opacity: shouldShowDuration ? 1 : 0 }}
           weight="semibold"
         >
-          {formatDuration(blockWorkDuration, 'ms')}
+          {formatDuration(blockWorkDuration, 'ms', { maxUnit: 'h' })}
         </Text>
       )}
     </Container>

@@ -15,7 +15,7 @@ export const PreviousAverage = () => {
     <Text size={14} color="supporting">
       Previous avg
       <Text weight="bold" style={{ marginLeft: 8 }} color="regular" as="span">
-        {formatDuration(value, 's')}
+        {formatDuration(value, 's', { maxUnit: 'h' })}
       </Text>
     </Text>
   )

@@ -23,6 +23,7 @@ export const DayAverage = () => {
               {formatDuration(
                 sum(totals.slice(0, passedWorkdays)) / passedWorkdays,
                 'ms',
+                { maxUnit: 'h' },
               )}
             </Text>
           </HStack>

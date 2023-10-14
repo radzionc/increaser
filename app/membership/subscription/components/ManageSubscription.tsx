@@ -1,65 +1,56 @@
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { UpdateSubscription } from './UpdateSubscription'
-import { CancelSubscription } from './CancelSubscription'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { SubscriptionOffer } from './SubscriptionOffer'
-
-const formatDate = (string: string) => {
-  const [year, month, day] = string.split('-').map(Number)
-  const date = new Date(year, month - 1, day)
-  return date.toLocaleString()
-}
+import { ManageSubscriptionActions } from './ManageSubscriptionActions'
+import { mirrorRecord } from '@increaser/utils/mirrorRecord'
+import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
+import { format } from 'date-fns'
 
 export const ManageSubscription = () => {
-  const { membership } = useAssertUserState()
+  const { subscription } = useAssertUserState()
 
-  if (!membership) return null
+  if (!subscription) return null
 
-  if (membership.provider === 'AppSumo') {
-    return <Text>You have a life-time access!</Text>
+  if (subscription.endsAt) {
+    if (subscription.endsAt < Date.now()) return null
+
+    return (
+      <Text>
+        Your subscription ends on{' '}
+        <Text as="span" weight="bold">
+          {format(subscription.endsAt, 'dd MMMM yyyy')}
+        </Text>
+      </Text>
+    )
   }
 
-  const { subscription } = membership
-
-  if (subscription) {
-    const { cancelUrl, nextBillDate, cancellationEffectiveDate } = subscription
-    if (!cancelUrl) return null
-
-    if (nextBillDate) {
-      return (
-        <HStack gap={32} wrap="wrap">
-          <VStack alignItems="stretch" gap={20}>
-            <Text>
-              Next payment:{' '}
-              <Text as="span" weight="bold">
-                {formatDate(nextBillDate)}
-              </Text>
-            </Text>
-            <UpdateSubscription />
-            <CancelSubscription />
-          </VStack>
-        </HStack>
-      )
-    }
-
-    if (cancellationEffectiveDate) {
-      return (
-        <VStack alignItems="start" gap={20} wrap="wrap">
-          <Text>
-            Member until:{' '}
-            <Text as="span" weight="bold">
-              {formatDate(cancellationEffectiveDate)}
-            </Text>
-          </Text>
-          <Panel>
-            <SubscriptionOffer />
-          </Panel>
-        </VStack>
-      )
-    }
+  if (subscription.status === 'canceled') {
+    return null
   }
 
-  return null
+  if (subscription.status === 'pastDue') {
+    return (
+      <VStack gap={8}>
+        <Text>
+          Your subscription is past due. Please update your payment method to
+          continue using the service.
+        </Text>
+        <ManageSubscriptionActions />
+      </VStack>
+    )
+  }
+
+  const billingCycle =
+    mirrorRecord(paddleProductCode)[Number(subscription.planId)]
+
+  const message = billingCycle
+    ? `Your subscription renews automatically every ${billingCycle}.`
+    : 'Your subscription renews automatically.'
+
+  return (
+    <VStack gap={16}>
+      <Text>{message}</Text>
+      <ManageSubscriptionActions />
+    </VStack>
+  )
 }

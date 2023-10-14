@@ -100,10 +100,14 @@ export const ProjectWeeklyGoal = ({ projectId }: ProjectWeeklyGoalProps) => {
             <HStackSeparatedBy
               separator={<Text color="shy">{slashSeparator}</Text>}
             >
-              <Text>{formatDuration(doneMinutesThisWeek, 'min')}</Text>
+              <Text>
+                {formatDuration(doneMinutesThisWeek, 'min', { maxUnit: 'h' })}
+              </Text>
               {allocatedMinutesPerWeek > 0 ? (
                 <Text color="supporting">
-                  {formatDuration(allocatedMinutesPerWeek, 'min')}
+                  {formatDuration(allocatedMinutesPerWeek, 'min', {
+                    maxUnit: 'h',
+                  })}
                 </Text>
               ) : (
                 <Link style={{ justifySelf: 'start' }} href={Path.Capacity}>

@@ -29,8 +29,10 @@ export const authorize = async ({
 
   await putUser(newUser)
 
+  const session = await getAuthSession(newUser.id)
+
   return {
-    ...getAuthSession(newUser.id),
+    ...session,
     isFirst: true,
   }
 }

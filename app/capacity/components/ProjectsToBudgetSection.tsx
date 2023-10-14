@@ -51,7 +51,9 @@ export const ProjectsToBudgetSection = ({
             {project.name}
           </Text>
           <Text weight="semibold" size={14} color="supporting">
-            {formatDuration(project.doneMinutesThisWeek, 'min')}
+            {formatDuration(project.doneMinutesThisWeek, 'min', {
+              maxUnit: 'h',
+            })}
           </Text>
           {project.allocatedMinutesPerWeek > 0 ? (
             <AllocationLine
@@ -90,6 +92,7 @@ export const ProjectsToBudgetSection = ({
                 {formatDuration(
                   Math.abs(getProjectOverBudgetTime(project)),
                   'min',
+                  { maxUnit: 'h' },
                 )}
               </Text>
             )}
