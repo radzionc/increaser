@@ -1,15 +1,9 @@
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { useHasActiveSubscription } from './useHasActiveSubscription'
 
 export const useIsPayingUser = () => {
-  const { subscription, lifeTimeDeal } = useAssertUserState()
+  const { lifeTimeDeal } = useAssertUserState()
+  const hasActiveSubscription = useHasActiveSubscription()
 
-  if (lifeTimeDeal) return true
-
-  if (subscription) {
-    if (!subscription.endsAt) return false
-
-    return subscription.endsAt > Date.now()
-  }
-
-  return false
+  return lifeTimeDeal || hasActiveSubscription
 }

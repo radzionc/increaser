@@ -1,4 +1,4 @@
-import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
+import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
 import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { PaddleSdk, PaddleSdkProductPrice } from 'membership/paddle/PaddleSdk'
@@ -28,7 +28,10 @@ const getPaddleProductPrice = async (
 
 export const subscriptionPricesQueryKey = 'subscriptionPrices'
 
-export type SubscriptionPrices = Record<SubscriptionCadence, ProductPlanPrice>
+export type SubscriptionPrices = Record<
+  SubscriptionBillingCycle,
+  ProductPlanPrice
+>
 
 export const useSubscriptionPricesQuery = () => {
   const { data: paddleSdk } = usePaddleSdk()
@@ -45,7 +48,7 @@ export const useSubscriptionPricesQuery = () => {
       return {
         month,
         year,
-      } as Record<SubscriptionCadence, ProductPlanPrice>
+      } as Record<SubscriptionBillingCycle, ProductPlanPrice>
     },
     {
       keepPreviousData: true,

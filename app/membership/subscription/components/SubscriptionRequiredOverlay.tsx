@@ -1,7 +1,6 @@
 import { ClosableComponentProps } from '@increaser/ui/props'
 import { Modal } from '@increaser/ui/ui/Modal'
 import { SubscriptionPricesQueryDependant } from './SubscriptionPricesQueryDependant'
-import { SubscriptionCadenceInput } from '@increaser/ui/subscription/components/SubscriptionCadenceInput'
 import { SubscriptionPrice } from '@increaser/ui/subscription/components/SubscriptionPrice'
 import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
 import { Opener } from '@increaser/ui/ui/Opener'
@@ -9,13 +8,15 @@ import { VStack } from '@increaser/ui/ui/Stack'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { CheckoutModal } from './CheckoutModal'
 import { SubscriptionBenefits } from './SubscriptionBenefits'
-import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { useState } from 'react'
+import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
+import { SubscriptionBillingCycleInput } from '@increaser/ui/subscription/components/SubscriptionBillingCycleInput'
 
 export const SubscriptionRequiredOverlay = ({
   onClose,
 }: ClosableComponentProps) => {
-  const [cadence, setCadence] = useState<SubscriptionCadence>('year')
+  const [billingCycle, setBillingCycle] =
+    useState<SubscriptionBillingCycle>('year')
 
   return (
     <Modal
@@ -26,9 +27,9 @@ export const SubscriptionRequiredOverlay = ({
           success={(prices) => (
             <VStack gap={28}>
               <VStack alignItems="center" gap={20}>
-                <SubscriptionCadenceInput
-                  value={cadence}
-                  onChange={setCadence}
+                <SubscriptionBillingCycleInput
+                  value={billingCycle}
+                  onChange={setBillingCycle}
                   saving={getYearlySubscriptionSavings(
                     prices.year.amount,
                     prices.month.amount,
@@ -36,7 +37,7 @@ export const SubscriptionRequiredOverlay = ({
                 />
                 <SubscriptionPrice
                   currency={prices.year.currency}
-                  cadence={cadence}
+                  billingCycle={billingCycle}
                   price={{
                     month: prices.month.amount,
                     year: prices.year.amount,
@@ -46,7 +47,10 @@ export const SubscriptionRequiredOverlay = ({
               </VStack>
               <Opener
                 renderContent={({ onClose }) => (
-                  <CheckoutModal period={cadence} onClose={onClose} />
+                  <CheckoutModal
+                    billingCycle={billingCycle}
+                    onClose={onClose}
+                  />
                 )}
                 renderOpener={({ onOpen }) => (
                   <Button

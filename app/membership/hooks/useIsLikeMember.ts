@@ -1,13 +1,9 @@
-import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
-import { useAssertUserState } from 'user/state/UserStateContext'
-
 import { useIsPayingUser } from './useIsPayingUser'
+import { useHasFreeTrial } from './useHasFreeTrial'
 
 export const useIsLikeMember = () => {
-  const { freeTrialEnd } = useAssertUserState()
+  const hasFreeTrial = useHasFreeTrial()
   const isPayingUser = useIsPayingUser()
 
-  const now = useRhythmicRerender(10000)
-
-  return Boolean(isPayingUser || (freeTrialEnd && freeTrialEnd > now))
+  return hasFreeTrial || isPayingUser
 }

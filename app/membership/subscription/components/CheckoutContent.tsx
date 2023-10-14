@@ -5,15 +5,15 @@ import { useUserState } from 'user/state/UserStateContext'
 
 import { PaddleIFrame } from '../../paddle/PaddleIFrame'
 import { useRouter } from 'next/router'
-import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
+import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 
 interface Props {
-  period: SubscriptionCadence
+  billingCycle: SubscriptionBillingCycle
   onClose: () => void
 }
 
-export const CheckoutContent = ({ period, onClose }: Props) => {
+export const CheckoutContent = ({ billingCycle, onClose }: Props) => {
   const router = useRouter()
   const { pullRemoteState, updateState } = useUserState()
 
@@ -31,7 +31,7 @@ export const CheckoutContent = ({ period, onClose }: Props) => {
     <PaddleIFrame
       onSuccess={onSuccess}
       onClose={onClose}
-      product={paddleProductCode[period]}
+      product={paddleProductCode[billingCycle]}
     />
   )
 }

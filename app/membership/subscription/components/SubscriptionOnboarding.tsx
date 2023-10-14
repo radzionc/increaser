@@ -1,9 +1,7 @@
 import { Modal } from '@increaser/ui/ui/Modal'
 import { VStack } from '@increaser/ui/ui/Stack'
-import { SubscriptionCadence } from '@increaser/ui/subscription/SubscriptionCadence'
 
 import { useState } from 'react'
-import { SubscriptionCadenceInput } from '@increaser/ui/subscription/components/SubscriptionCadenceInput'
 import { SubscriptionPrice } from '@increaser/ui/subscription/components/SubscriptionPrice'
 
 import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
@@ -14,17 +12,20 @@ import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
 import { SubscriptionBenefits } from './SubscriptionBenefits'
 import { CheckoutModal } from './CheckoutModal'
 import { SubscriptionPricesQueryDependant } from './SubscriptionPricesQueryDependant'
+import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
+import { SubscriptionBillingCycleInput } from '@increaser/ui/subscription/components/SubscriptionBillingCycleInput'
 
 interface Props {
   onNext: () => void
 }
 
 export const SubscriptionOnboarding = ({ onNext }: Props) => {
-  const [cadence, setCadence] = useState<SubscriptionCadence>('year')
+  const [billingCycle, setBillingCycle] =
+    useState<SubscriptionBillingCycle>('year')
   const [showCheckout, setShowCheckout] = useState(false)
 
   if (showCheckout) {
-    return <CheckoutModal period={cadence} onClose={onNext} />
+    return <CheckoutModal billingCycle={billingCycle} onClose={onNext} />
   }
 
   return (
@@ -47,9 +48,9 @@ export const SubscriptionOnboarding = ({ onNext }: Props) => {
             success={(prices) => {
               return (
                 <VStack alignItems="center" gap={20}>
-                  <SubscriptionCadenceInput
-                    value={cadence}
-                    onChange={setCadence}
+                  <SubscriptionBillingCycleInput
+                    value={billingCycle}
+                    onChange={setBillingCycle}
                     saving={getYearlySubscriptionSavings(
                       prices.year.amount,
                       prices.month.amount,
@@ -57,7 +58,7 @@ export const SubscriptionOnboarding = ({ onNext }: Props) => {
                   />
                   <SubscriptionPrice
                     currency={prices.year.currency}
-                    cadence={cadence}
+                    billingCycle={billingCycle}
                     price={{
                       month: prices.month.amount,
                       year: prices.year.amount,

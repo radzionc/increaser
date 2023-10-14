@@ -117,3 +117,15 @@ export const putUser = (user: Omit<User, 'updatedAt'>) => {
 
   return dbDocClient.send(command)
 }
+
+export const removeUserField = async (id: string, field: keyof User) => {
+  const command = new UpdateCommand({
+    ...getUserItemParams(id),
+    UpdateExpression: 'REMOVE #field',
+    ExpressionAttributeNames: {
+      '#field': field,
+    },
+  })
+
+  return dbDocClient.send(command)
+}

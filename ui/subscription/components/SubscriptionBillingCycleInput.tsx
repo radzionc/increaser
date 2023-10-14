@@ -1,21 +1,21 @@
 import { useTheme } from 'styled-components'
 import { InputProps } from '../../props'
 import { toPercents } from '@increaser/utils/toPercents'
-import { SubscriptionCadence } from '../SubscriptionCadence'
 import { HStack } from '../../ui/Stack'
 import { Switch } from '../../ui/Switch/Switch'
 import { Tag } from '../../ui/Tag'
+import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 
-interface SubscriptionCadenceInputProps
-  extends InputProps<SubscriptionCadence> {
+interface SubscriptionBillingCycleInputProps
+  extends InputProps<SubscriptionBillingCycle> {
   saving: number
 }
 
-export const SubscriptionCadenceInput = ({
+export const SubscriptionBillingCycleInput = ({
   value,
   onChange,
   saving,
-}: SubscriptionCadenceInputProps) => {
+}: SubscriptionBillingCycleInputProps) => {
   const { colors } = useTheme()
   return (
     <HStack alignItems="center" gap={8}>

@@ -1,21 +1,21 @@
+import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 import { VStack, HStack } from '../../ui/Stack'
 import { HStackSeparatedBy, slashSeparator } from '../../ui/StackSeparatedBy'
 import { Text } from '../../ui/Text'
-import { SubscriptionCadence } from '../SubscriptionCadence'
 
 interface SubscriptionPriceProps {
-  cadence: SubscriptionCadence
+  billingCycle: SubscriptionBillingCycle
   currency: string
-  price: Record<SubscriptionCadence, number>
+  price: Record<SubscriptionBillingCycle, number>
 }
 
-const monthsInPeriod: Record<SubscriptionCadence, number> = {
+const monthsInPeriod: Record<SubscriptionBillingCycle, number> = {
   month: 1,
   year: 12,
 }
 
 export const SubscriptionPrice = ({
-  cadence,
+  billingCycle,
   currency,
   price,
 }: SubscriptionPriceProps) => {
@@ -30,7 +30,7 @@ export const SubscriptionPrice = ({
           separator={<Text color="shy">{slashSeparator}</Text>}
         >
           <Text color="regular" size={32} weight="bold" as="span">
-            {(price[cadence] / monthsInPeriod[cadence]).toFixed(2)}
+            {(price[billingCycle] / monthsInPeriod[billingCycle]).toFixed(2)}
           </Text>
           <Text size={18} as="span" color="supporting">
             mo
@@ -42,11 +42,11 @@ export const SubscriptionPrice = ({
         color="supporting"
         style={{
           transition: 'none',
-          visibility: cadence === 'month' ? 'hidden' : 'initial',
+          visibility: billingCycle === 'month' ? 'hidden' : 'initial',
         }}
       >
         {currency}
-        {price[cadence]} per year
+        {price[billingCycle]} per year
       </Text>
     </VStack>
   )
