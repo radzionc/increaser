@@ -1,31 +1,34 @@
 import { analytics } from 'analytics'
-import { Modal } from '@increaser/ui/ui/Modal'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { PrimaryGoalForm } from './PrimaryGoalForm'
 import { ContinueButton } from 'ui/ContinueButton'
+import { Modal } from '@increaser/ui/modal'
+import { ClosableComponentProps } from '@increaser/ui/props'
 
-interface Props {
+interface PrimaryGoalOnboardingProps extends ClosableComponentProps {
   onNext: () => void
+  onClose: () => void
 }
 
-export const PrimaryGoalOnboarding = ({ onNext }: Props) => {
+export const PrimaryGoalOnboarding = ({
+  onNext,
+  onClose,
+}: PrimaryGoalOnboardingProps) => {
   const { primaryGoal } = useAssertUserState()
 
   return (
     <Modal
       title="What is your goal?"
-      hasImplicitClose={false}
       placement="top"
-      renderContent={() => <PrimaryGoalForm />}
-      footer={
-        <ContinueButton
-          onClick={() => {
-            analytics.trackEvent(`Onboarding primary goal: ${primaryGoal}`)
-            onNext()
-          }}
-        />
-      }
-    />
+      onClose={onClose}
+      onSubmit={() => {
+        analytics.trackEvent(`Onboarding primary goal: ${primaryGoal}`)
+        onNext()
+      }}
+      footer={<ContinueButton />}
+    >
+      <PrimaryGoalForm />
+    </Modal>
   )
 }

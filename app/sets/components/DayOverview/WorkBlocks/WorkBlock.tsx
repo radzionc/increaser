@@ -68,8 +68,9 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
     >
       <Content>
         <Outline />
-        {block.sets.map((set) => (
+        {block.sets.map((set, index) => (
           <WorkSession
+            key={index}
             set={set}
             style={{
               top: toPercents((set.start - start) / blockDuration),

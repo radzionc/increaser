@@ -57,13 +57,13 @@ export const TimeSpace = ({
       <Container style={{ height }}>
         <HStack fullHeight gap={8}>
           <VStack style={{ position: 'relative' }} fullHeight>
-            {marks.map((mark) => {
+            {marks.map((mark, index) => {
               const top = msToPx(mark - startsAt)
 
               const label = <Label>{formatTime(mark)}</Label>
 
               return (
-                <Fragment>
+                <Fragment key={index}>
                   <Transparent>{label}</Transparent>
                   <PositionAbsolutelyCenterHorizontally top={top}>
                     {label}
@@ -73,11 +73,15 @@ export const TimeSpace = ({
             })}
           </VStack>
           <VStack fullWidth fullHeight style={{ position: 'relative' }}>
-            {marks.map((mark) => {
+            {marks.map((mark, index) => {
               const top = msToPx(mark - startsAt)
 
               return (
-                <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
+                <PositionAbsolutelyCenterHorizontally
+                  key={index}
+                  fullWidth
+                  top={top}
+                >
                   <Line />
                 </PositionAbsolutelyCenterHorizontally>
               )

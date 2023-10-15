@@ -1,10 +1,10 @@
 import { SupportContacts } from 'communication/components/SupportContacts'
 import { Button } from '@increaser/ui/ui/buttons/Button'
-import { ModalTitleText } from '@increaser/ui/ui/Modal/ModalTitleText'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
+import { ModalTitleText } from '@increaser/ui/modal/ModalTitleText'
 
 export const ErrorFallbackCard = () => {
   return (

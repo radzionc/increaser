@@ -7,12 +7,13 @@ import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { ClosableComponentProps } from '@increaser/ui/props'
 import styled, { useTheme } from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
-import { Modal } from '@increaser/ui/ui/Modal'
 import { IntervalInput } from '@increaser/ui/ui/timeline/IntervalInput'
 import { IntervalRect } from '@increaser/ui/ui/timeline/IntervalRect'
 import { MS_IN_HOUR } from '@increaser/utils/time'
 import { endOfDay, endOfHour, startOfHour } from 'date-fns'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
+import { Modal } from '@increaser/ui/modal'
+
 interface Props extends ClosableComponentProps {}
 
 const Session = styled(IntervalRect)``
@@ -46,41 +47,37 @@ export const ChangeLastSetIntervalOverlay = ({ onClose }: Props) => {
     <Modal
       title="Update Session"
       onClose={onClose}
+      onSubmit={() => {
+        onClose()
+        updateLastSet({ ...set, ...value })
+      }}
       footer={
-        <Button
-          kind="reversed"
-          size="l"
-          onClick={() => {
-            onClose()
-            updateLastSet({ ...set, ...value })
-          }}
-        >
+        <Button kind="reversed" size="l">
           Update
         </Button>
       }
-      renderContent={() => (
-        <IntervalInput
-          timelineStartsAt={timelineStartsAt}
-          timelineEndsAt={timelineEndsAt}
-          color={projectsRecord[set.projectId].hslaColor}
-          value={value}
-          onChange={setValue}
-          renderContent={({ msToPx }) =>
-            readonlyTodaySets.map(({ start, end }, index) => {
-              return (
-                <Session
-                  key={index}
-                  $color={theme.colors.mistExtra}
-                  style={{
-                    top: msToPx(start - timelineStartsAt),
-                    height: msToPx(end - start),
-                  }}
-                />
-              )
-            })
-          }
-        />
-      )}
-    />
+    >
+      <IntervalInput
+        timelineStartsAt={timelineStartsAt}
+        timelineEndsAt={timelineEndsAt}
+        color={projectsRecord[set.projectId].hslaColor}
+        value={value}
+        onChange={setValue}
+        renderContent={({ msToPx }) =>
+          readonlyTodaySets.map(({ start, end }, index) => {
+            return (
+              <Session
+                key={index}
+                $color={theme.colors.mistExtra}
+                style={{
+                  top: msToPx(start - timelineStartsAt),
+                  height: msToPx(end - start),
+                }}
+              />
+            )
+          })
+        }
+      />
+    </Modal>
   )
 }
