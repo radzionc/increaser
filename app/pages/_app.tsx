@@ -3,7 +3,6 @@ import { GlobalStyle } from '@increaser/ui/ui/GlobalStyle'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useState } from 'react'
 import { analytics } from 'analytics'
-import { useDev } from 'components/layout/useDev'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { getQueryClient } from 'query/queryClient'
 import { BreakProvider } from 'break/components/BreakProvider'
@@ -32,8 +31,6 @@ type MyAppProps = AppProps & {
 }
 
 function MyApp({ Component, pageProps }: MyAppProps) {
-  useDev()
-
   const [queryClient] = useState(getQueryClient)
 
   const router = useRouter()
