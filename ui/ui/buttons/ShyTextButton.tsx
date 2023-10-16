@@ -29,7 +29,7 @@ const Underline = styled.span`
 
 export const ShyTextButton = ({ onClick, text, as }: Props) => {
   return (
-    <Container as={as} onClick={onClick}>
+    <Container type="button" as={as} onClick={onClick}>
       <Text
         size={14}
         nowrap

@@ -1,20 +1,19 @@
 import { CheckoutContent } from './CheckoutContent'
 import { PaddleModal } from '../../paddle/PaddleModal'
 import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
+import { ClosableComponentProps } from '@increaser/ui/props'
 
-interface Props {
+interface CheckoutModalProps extends ClosableComponentProps {
   billingCycle: SubscriptionBillingCycle
-  onClose: () => void
 }
 
-export const CheckoutModal = ({ billingCycle, onClose }: Props) => {
+export const CheckoutModal = ({
+  billingCycle,
+  onClose,
+}: CheckoutModalProps) => {
   return (
-    <PaddleModal
-      title="Increaser subscription"
-      onClose={onClose}
-      renderContent={() => (
-        <CheckoutContent onClose={onClose} billingCycle={billingCycle} />
-      )}
-    />
+    <PaddleModal title="Increaser subscription" onClose={onClose}>
+      <CheckoutContent onClose={onClose} billingCycle={billingCycle} />
+    </PaddleModal>
   )
 }

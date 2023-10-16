@@ -1,7 +1,7 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useState } from 'react'
 import { Button } from '@increaser/ui/ui/buttons/Button'
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 
 import { FocusDurationInput } from './FocusDurationInput'
 
@@ -18,23 +18,19 @@ export const UpdateFocusDurationOverlay = ({
 
   return (
     <Modal
+      onSubmit={() => {
+        setFocusDuration(value)
+        onClose()
+      }}
       footer={
-        <Button
-          kind="reversed"
-          onClick={() => {
-            setFocusDuration(value)
-            onClose()
-          }}
-          size="l"
-        >
+        <Button kind="reversed" size="l">
           Update
         </Button>
       }
       title="Focus goal"
       onClose={onClose}
-      renderContent={() => (
-        <FocusDurationInput value={value} onChange={setValue} />
-      )}
-    />
+    >
+      <FocusDurationInput value={value} onChange={setValue} />
+    </Modal>
   )
 }

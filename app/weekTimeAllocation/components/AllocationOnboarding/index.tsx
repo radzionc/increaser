@@ -43,6 +43,7 @@ export const AllocationOnboarding = () => {
       value={stage}
       goal={() => (
         <PrimaryGoalOnboarding
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish primary goal onboarding')
             setStage('allocation')
@@ -51,6 +52,7 @@ export const AllocationOnboarding = () => {
       )}
       allocation={() => (
         <WorkHoursOnboarding
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish work hours onboarding')
             setStage('projects')
@@ -60,6 +62,7 @@ export const AllocationOnboarding = () => {
       projects={() => (
         <ProjectsOnboarding
           onBack={() => setStage('allocation')}
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish projects onboarding')
             setStage('goals')
@@ -68,6 +71,7 @@ export const AllocationOnboarding = () => {
       )}
       goals={() => (
         <GoalsOnboarding
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish goals onboarding')
             setStage('schedule')
@@ -76,6 +80,7 @@ export const AllocationOnboarding = () => {
       )}
       schedule={() => (
         <WorkScheduleOnboarding
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish schedule onboarding')
             setStage('habits')
@@ -84,6 +89,7 @@ export const AllocationOnboarding = () => {
       )}
       habits={() => (
         <HabitsOnboarding
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish habits onboarding')
             setStage(isPayingUser ? null : 'sale')
@@ -92,6 +98,7 @@ export const AllocationOnboarding = () => {
       )}
       sale={() => (
         <SubscriptionOnboarding
+          onClose={() => setStage(null)}
           onNext={() => {
             analytics.trackEvent('Finish sale onboarding')
             setStage(null)

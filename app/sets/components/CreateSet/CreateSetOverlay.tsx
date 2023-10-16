@@ -7,7 +7,7 @@ import { Set } from 'sets/Set'
 import { useTheme } from 'styled-components'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { SubmitFormButton } from '@increaser/ui/ui/buttons/SubmitFormButton'
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
@@ -72,33 +72,32 @@ export const CreateSetOverlay = ({ onClose }: Props) => {
           </VStack>
         ) : undefined
       }
-      renderContent={() =>
-        isProjectSelected ? (
-          <VStack fullWidth>
-            <Controller
-              control={control}
-              name="interval"
-              render={({ field: { value, onChange } }) => {
-                return (
-                  <TodaySessionIntervalInput
-                    color={getProjectColor(projectsRecord, theme, projectId)}
-                    value={value}
-                    onChange={onChange}
-                  />
-                )
-              }}
-            />
-          </VStack>
-        ) : (
+    >
+      {isProjectSelected ? (
+        <VStack fullWidth>
           <Controller
             control={control}
-            name="projectId"
-            render={({ field: { onChange } }) => (
-              <SelectProject onSelect={onChange} />
-            )}
+            name="interval"
+            render={({ field: { value, onChange } }) => {
+              return (
+                <TodaySessionIntervalInput
+                  color={getProjectColor(projectsRecord, theme, projectId)}
+                  value={value}
+                  onChange={onChange}
+                />
+              )
+            }}
           />
-        )
-      }
-    />
+        </VStack>
+      ) : (
+        <Controller
+          control={control}
+          name="projectId"
+          render={({ field: { onChange } }) => (
+            <SelectProject onSelect={onChange} />
+          )}
+        />
+      )}
+    </Modal>
   )
 }

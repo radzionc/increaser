@@ -1,6 +1,6 @@
 import { ClosableComponentProps } from '@increaser/ui/props'
 import { BottomSlideOver } from '@increaser/ui/ui/BottomSlideOver'
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 import { ResponsiveView } from '@increaser/ui/ui/ResponsiveView'
 
 import { SelectProjectList } from './SelectProjectList'
@@ -35,11 +35,9 @@ export const ChangeProjectOverlay = ({
         </BottomSlideOver>
       )}
       normal={() => (
-        <Modal
-          title="Change project"
-          onClose={onClose}
-          renderContent={() => content}
-        />
+        <Modal title="Change project" onClose={onClose}>
+          {content}
+        </Modal>
       )}
     />
   )

@@ -6,14 +6,15 @@ import { usePaletteColorOptions } from 'shared/hooks/usePaletteColorOptions'
 import { getRandomElement } from '@increaser/utils/array/getRandomElement'
 import { ColorLabelInput } from '@increaser/ui/ui/inputs/ColorLabelInput'
 import { Line } from '@increaser/ui/ui/Line'
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { ContinueButton } from 'ui/ContinueButton'
 import { EmojiInput } from 'ui/EmojiInput'
 import { MinimalisticTextInput } from 'ui/MinimalisticTextInput'
+import { ClosableComponentProps } from '@increaser/ui/props'
 
-interface Props {
+interface Props extends ClosableComponentProps {
   onNext: () => void
   onBack: () => void
 }
@@ -22,7 +23,7 @@ interface ProjectsSetupShape {
   projects: Pick<EnhancedProject, 'name' | 'emoji' | 'color'>[]
 }
 
-export const ProjectsOnboarding = ({ onNext }: Props) => {
+export const ProjectsOnboarding = ({ onNext, onClose }: Props) => {
   const { mutate: createProjects } = useCreateProjectsMutation()
   const { register, control, watch } = useForm<ProjectsSetupShape>({
     defaultValues: {
@@ -58,17 +59,16 @@ export const ProjectsOnboarding = ({ onNext }: Props) => {
 
   return (
     <Modal
+      onClose={onClose}
       placement="top"
-      title={
-        <VStack gap={4}>
-          <Text>What projects do you want to track with Increaser?</Text>
-          <Text size={16} color="supporting">
-            <Text as="span" color="shy">
-              For example:
-            </Text>{' '}
-            job, content creation, study, freelance, business, planning
-          </Text>
-        </VStack>
+      title="What projects do you want to track with Increaser?"
+      subTitle={
+        <Text size={16} color="supporting">
+          <Text as="span" color="shy">
+            For example:
+          </Text>{' '}
+          job, content creation, study, freelance, business, planning
+        </Text>
       }
       footer={
         <ContinueButton
@@ -79,41 +79,40 @@ export const ProjectsOnboarding = ({ onNext }: Props) => {
           }}
         />
       }
-      renderContent={() => (
-        <VStack gap={20}>
-          <Line />
-          {fields.map((field, index) => {
-            return (
-              <HStack key={index} wrap="wrap" alignItems="center" gap={8}>
-                <Controller
-                  control={control}
-                  name={`projects.${index}.emoji`}
-                  render={({ field: { value, onChange } }) => (
-                    <EmojiInput value={value} onChange={onChange} />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name={`projects.${index}.color`}
-                  render={({ field: { value, onChange } }) => (
-                    <ColorLabelInput
-                      usedValues={
-                        new Set(usedColors.filter((color) => color !== index))
-                      }
-                      value={value}
-                      onChange={onChange}
-                    />
-                  )}
-                />
-                <MinimalisticTextInput
-                  placeholder="Project name"
-                  {...register(`projects.${index}.name`, { required: true })}
-                />
-              </HStack>
-            )
-          })}
-        </VStack>
-      )}
-    />
+    >
+      <VStack gap={20}>
+        <Line />
+        {fields.map((field, index) => {
+          return (
+            <HStack key={index} wrap="wrap" alignItems="center" gap={8}>
+              <Controller
+                control={control}
+                name={`projects.${index}.emoji`}
+                render={({ field: { value, onChange } }) => (
+                  <EmojiInput value={value} onChange={onChange} />
+                )}
+              />
+              <Controller
+                control={control}
+                name={`projects.${index}.color`}
+                render={({ field: { value, onChange } }) => (
+                  <ColorLabelInput
+                    usedValues={
+                      new Set(usedColors.filter((color) => color !== index))
+                    }
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <MinimalisticTextInput
+                placeholder="Project name"
+                {...register(`projects.${index}.name`, { required: true })}
+              />
+            </HStack>
+          )
+        })}
+      </VStack>
+    </Modal>
   )
 }

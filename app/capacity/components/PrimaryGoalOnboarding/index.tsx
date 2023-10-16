@@ -22,11 +22,14 @@ export const PrimaryGoalOnboarding = ({
       title="What is your goal?"
       placement="top"
       onClose={onClose}
-      onSubmit={() => {
-        analytics.trackEvent(`Onboarding primary goal: ${primaryGoal}`)
-        onNext()
-      }}
-      footer={<ContinueButton />}
+      footer={
+        <ContinueButton
+          onClick={() => {
+            analytics.trackEvent(`Onboarding primary goal: ${primaryGoal}`)
+            onNext()
+          }}
+        />
+      }
     >
       <PrimaryGoalForm />
     </Modal>

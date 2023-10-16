@@ -47,12 +47,15 @@ export const ChangeLastSetIntervalOverlay = ({ onClose }: Props) => {
     <Modal
       title="Update Session"
       onClose={onClose}
-      onSubmit={() => {
-        onClose()
-        updateLastSet({ ...set, ...value })
-      }}
       footer={
-        <Button kind="reversed" size="l">
+        <Button
+          onClick={() => {
+            onClose()
+            updateLastSet({ ...set, ...value })
+          }}
+          kind="reversed"
+          size="l"
+        >
           Update
         </Button>
       }

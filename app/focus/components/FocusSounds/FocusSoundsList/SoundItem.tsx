@@ -8,7 +8,7 @@ import { PauseIcon } from '@increaser/ui/ui/icons/PauseIcon'
 import { PlayIcon } from '@increaser/ui/ui/icons/PlayIcon'
 import { StarIcon } from '@increaser/ui/ui/icons/StarIcon'
 import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 import { OnHoverAction } from '@increaser/ui/ui/OnHoverAction'
 import { Opener } from '@increaser/ui/ui/Opener'
 import { HStack } from '@increaser/ui/ui/Stack'
@@ -101,13 +101,9 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
               />
             )}
             renderContent={({ onClose }) => (
-              <Modal
-                title="Manage sound"
-                onClose={onClose}
-                renderContent={() => (
-                  <ManageSound onClose={onClose} url={url} />
-                )}
-              />
+              <Modal title="Manage sound" onClose={onClose}>
+                <ManageSound onClose={onClose} url={url} />
+              </Modal>
             )}
           />
           <IconButton

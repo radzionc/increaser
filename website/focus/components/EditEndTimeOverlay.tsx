@@ -1,4 +1,4 @@
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { Button } from '@increaser/ui/ui/buttons/Button'
@@ -21,6 +21,7 @@ export const EditEndTimeOverlay = () => {
 
   return (
     <Modal
+      onClose={cancel}
       title={
         <VStack gap={4}>
           <Text>Forgot to stop the session?</Text>
@@ -30,27 +31,16 @@ export const EditEndTimeOverlay = () => {
           </Text>
         </VStack>
       }
-      renderContent={() => (
-        <SessionEndTimeInput
-          projectId={projectId}
-          startedAt={startedAt}
-          value={endedAt}
-          onChange={setEndedAt}
-        />
-      )}
+      onSubmit={() => {
+        stop({
+          setOverride: {
+            end: endedAt,
+          },
+        })
+      }}
       footer={
         <VStack gap={4}>
-          <Button
-            kind="reversed"
-            size="l"
-            onClick={() => {
-              stop({
-                setOverride: {
-                  end: endedAt,
-                },
-              })
-            }}
-          >
+          <Button kind="reversed" size="l">
             Update duration
           </Button>
           <Button kind="ghostSecondary" size="l" onClick={cancel}>
@@ -58,6 +48,13 @@ export const EditEndTimeOverlay = () => {
           </Button>
         </VStack>
       }
-    />
+    >
+      <SessionEndTimeInput
+        projectId={projectId}
+        startedAt={startedAt}
+        value={endedAt}
+        onChange={setEndedAt}
+      />
+    </Modal>
   )
 }

@@ -5,9 +5,11 @@ import { CloseIcon } from '../ui/icons/CloseIcon'
 import { centerContent } from '../css/centerContent'
 import { getColor } from '../ui/theme/getters'
 import { transition } from '../css/transition'
+import { sameDimensions } from '../css/sameDimensions'
 
 const IconWrapper = styled.div`
   font-size: 24px;
+  ${sameDimensions(24)};
   ${centerContent};
   ${transition};
 `

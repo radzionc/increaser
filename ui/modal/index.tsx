@@ -16,14 +16,15 @@ import { ModalContent } from './ModalContent'
 import { ModalCloseButton } from './ModalCloseButton'
 import { stopPropagation } from '../utils/stopPropagation'
 import { preventDefault } from '../utils/preventDefault'
+import { ModalSubTitleText } from './ModalSubTitleText'
 
-type ModalProps = TitledComponentProps &
+export type ModalProps = TitledComponentProps &
   ComponentWithChildrenProps &
   ClosableComponentProps & {
+    subTitle?: ReactNode
     placement?: ModalPlacement
     footer?: ReactNode
     width?: number
-    onSubmit?: () => void
   }
 
 const minHorizontalFreeSpaceForMist = 120
@@ -35,7 +36,7 @@ export const Modal = ({
   placement = 'center',
   footer,
   width = 400,
-  onSubmit,
+  subTitle,
 }: ModalProps) => {
   const isFullScreen = useIsScreenWidthLessThan(
     width + minHorizontalFreeSpaceForMist,
@@ -49,15 +50,20 @@ export const Modal = ({
         <FocusTrap>
           <ModalContainer
             onClick={stopPropagation()}
-            as={onSubmit ? 'form' : 'div'}
-            onSubmit={preventDefault(onSubmit)}
             placement={placement}
             width={isFullScreen ? undefined : width}
           >
-            <HStack alignItems="start" justifyContent="space-between">
-              <ModalTitleText>{title}</ModalTitleText>
-              <ModalCloseButton onClick={onClose} />
-            </HStack>
+            <VStack gap={8}>
+              <HStack
+                alignItems="start"
+                justifyContent="space-between"
+                gap={16}
+              >
+                <ModalTitleText>{title}</ModalTitleText>
+                <ModalCloseButton onClick={onClose} />
+              </HStack>
+              {subTitle && <ModalSubTitleText>{subTitle}</ModalSubTitleText>}
+            </VStack>
             <ModalContent>{children}</ModalContent>
             <VStack>{footer}</VStack>
           </ModalContainer>

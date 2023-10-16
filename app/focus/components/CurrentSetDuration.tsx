@@ -18,12 +18,15 @@ export const UpdateFocusDurationOverlay = ({
 
   return (
     <Modal
-      onSubmit={() => {
-        setFocusDuration(value)
-        onClose()
-      }}
       footer={
-        <Button kind="reversed" size="l">
+        <Button
+          onClick={() => {
+            setFocusDuration(value)
+            onClose()
+          }}
+          kind="reversed"
+          size="l"
+        >
           Update
         </Button>
       }

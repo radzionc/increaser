@@ -4,19 +4,20 @@ import { WorkBudgetFormFields } from 'capacity/components/WorkBudgetForm/WorkBud
 import { useWatch } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
-import { Modal } from '@increaser/ui/ui/Modal'
+import { Modal } from '@increaser/ui/modal'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { getWeekTimeAllocation } from 'weekTimeAllocation/helpers/getWeekTimeAllocation'
 import { ContinueButton } from 'ui/ContinueButton'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
+import { ClosableComponentProps } from '@increaser/ui/props'
 
-interface Props {
+interface Props extends ClosableComponentProps {
   onNext: () => void
 }
 
-export const WorkHoursOnboarding = ({ onNext }: Props) => {
+export const WorkHoursOnboarding = ({ onNext, onClose }: Props) => {
   const form = useWorkBudgetForm()
   const { handleSubmit, control } = form
 
@@ -37,21 +38,8 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
   return (
     <Modal
       title="What is your preferred number of working hours per week?"
-      hasImplicitClose={false}
       placement="top"
-      renderContent={() => (
-        <VStack gap={8}>
-          <WorkBudgetFormFields
-            workdayColor={theme.colors.success}
-            weekendColor={theme.colors.idle}
-            form={form}
-          />
-          <WorkBudgetBarChart
-            workdayMinutes={workdayMinutes}
-            weekendMinutes={weekendMinutes}
-          />
-        </VStack>
-      )}
+      onClose={onClose}
       footer={
         <VStack fullWidth gap={12}>
           <LabeledValue name="Work budget">
@@ -73,6 +61,18 @@ export const WorkHoursOnboarding = ({ onNext }: Props) => {
           />
         </VStack>
       }
-    />
+    >
+      <VStack gap={8}>
+        <WorkBudgetFormFields
+          workdayColor={theme.colors.success}
+          weekendColor={theme.colors.idle}
+          form={form}
+        />
+        <WorkBudgetBarChart
+          workdayMinutes={workdayMinutes}
+          weekendMinutes={weekendMinutes}
+        />
+      </VStack>
+    </Modal>
   )
 }

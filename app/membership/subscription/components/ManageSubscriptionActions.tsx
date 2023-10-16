@@ -28,17 +28,14 @@ export const ManageSubscriptionActions = () => {
               </Button>
             )}
             renderContent={({ onClose }) => (
-              <PaddleModal
-                onClose={onClose}
-                renderContent={() => (
-                  <PaddleIFrame
-                    override={updateUrl}
-                    product={planId}
-                    onSuccess={onClose}
-                    onClose={onClose}
-                  />
-                )}
-              />
+              <PaddleModal title="Update Subscription" onClose={onClose}>
+                <PaddleIFrame
+                  override={updateUrl}
+                  product={planId}
+                  onSuccess={onClose}
+                  onClose={onClose}
+                />
+              </PaddleModal>
             )}
           />
           <Opener
@@ -48,17 +45,14 @@ export const ManageSubscriptionActions = () => {
               </Button>
             )}
             renderContent={({ onClose }) => (
-              <PaddleModal
-                onClose={onClose}
-                renderContent={() => (
-                  <PaddleIFrame
-                    override={cancelUrl}
-                    product={planId}
-                    onSuccess={onClose}
-                    onClose={onClose}
-                  />
-                )}
-              />
+              <PaddleModal onClose={onClose} title="Cancel Subscription">
+                <PaddleIFrame
+                  override={cancelUrl}
+                  product={planId}
+                  onSuccess={onClose}
+                  onClose={onClose}
+                />
+              </PaddleModal>
             )}
           />
         </HStack>

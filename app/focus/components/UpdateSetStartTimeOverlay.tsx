@@ -4,11 +4,11 @@ import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { ClosableComponentProps } from '@increaser/ui/props'
 import { Button } from '@increaser/ui/ui/buttons/Button'
-import { Modal } from '@increaser/ui/ui/Modal'
 import { TimeInput } from '@increaser/ui/ui/timeline/TimeInput'
 import { MS_IN_HOUR } from '@increaser/utils/time'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { startOfHour } from 'date-fns'
+import { Modal } from '@increaser/ui/modal'
 
 interface Props extends ClosableComponentProps {
   onSubmit: (value: number) => void
@@ -32,30 +32,22 @@ export const UpdateSetStartTimeOverlay = ({ onClose, onSubmit }: Props) => {
   return (
     <Modal
       title="Session start time"
-      width={380}
       placement="top"
       onClose={onClose}
       footer={
-        <Button
-          kind="reversed"
-          onClick={() => {
-            onSubmit(value)
-          }}
-          size="l"
-        >
+        <Button onClick={() => onSubmit(value)} kind="reversed" size="l">
           Update
         </Button>
       }
-      renderContent={() => (
-        <TimeInput
-          intialValue={startedAt}
-          timelineStartsAt={timelineStartsAt}
-          timelineEndsAt={now}
-          color={projectsRecord[projectId].hslaColor}
-          value={value}
-          onChange={setValue}
-        />
-      )}
-    />
+    >
+      <TimeInput
+        intialValue={startedAt}
+        timelineStartsAt={timelineStartsAt}
+        timelineEndsAt={now}
+        color={projectsRecord[projectId].hslaColor}
+        value={value}
+        onChange={setValue}
+      />
+    </Modal>
   )
 }
