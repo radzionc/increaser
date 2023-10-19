@@ -63,12 +63,12 @@ export const ProjectsOnboarding = ({ onNext, onClose }: Props) => {
       placement="top"
       title="What projects do you want to track with Increaser?"
       subTitle={
-        <Text size={16} color="supporting">
+        <>
           <Text as="span" color="shy">
             For example:
           </Text>{' '}
           job, content creation, study, freelance, business, planning
-        </Text>
+        </>
       }
       footer={
         <ContinueButton
