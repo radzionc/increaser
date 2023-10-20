@@ -1,6 +1,6 @@
 import { Opener } from '@increaser/ui/ui/Opener'
 import { useIsLikeMember } from 'membership/hooks/useIsLikeMember'
-import { SubscriptionRequiredOverlay } from 'membership/subscription/components/SubscriptionRequiredOverlay'
+import { SubscriptionPrompt } from 'membership/subscription/components/SubscriptionPrompt'
 
 type Action = () => void
 
@@ -23,9 +23,7 @@ export const MemberOnlyAction = ({ action, render }: MemberOnlyActionProps) => {
   return (
     <Opener
       renderOpener={({ onOpen }) => render({ action: onOpen })}
-      renderContent={({ onClose }) => (
-        <SubscriptionRequiredOverlay onClose={onClose} />
-      )}
+      renderContent={({ onClose }) => <SubscriptionPrompt onClose={onClose} />}
     />
   )
 }

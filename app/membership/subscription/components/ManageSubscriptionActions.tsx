@@ -1,3 +1,5 @@
+import { PaddleIFrame } from '@increaser/paddle-ui/components/PaddleIFrame'
+import { PaddleModal } from '@increaser/paddle-ui/components/PaddleModal'
 import { useManageSubscriptionQuery } from '../hooks/useManageSubscriptionQuery'
 import { QueryDependant } from '@increaser/ui/query/components/QueryDependant'
 import { getQueryDependantDefaultProps } from '@increaser/ui/query/utils/getQueryDependantDefaultProps'
@@ -5,8 +7,6 @@ import { Opener } from '@increaser/ui/ui/Opener'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
-import { PaddleIFrame } from 'membership/paddle/PaddleIFrame'
-import { PaddleModal } from 'membership/paddle/PaddleModal'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 export const ManageSubscriptionActions = () => {
@@ -32,7 +32,6 @@ export const ManageSubscriptionActions = () => {
                 <PaddleIFrame
                   override={updateUrl}
                   product={planId}
-                  onSuccess={onClose}
                   onClose={onClose}
                 />
               </PaddleModal>
@@ -49,7 +48,6 @@ export const ManageSubscriptionActions = () => {
                 <PaddleIFrame
                   override={cancelUrl}
                   product={planId}
-                  onSuccess={onClose}
                   onClose={onClose}
                 />
               </PaddleModal>

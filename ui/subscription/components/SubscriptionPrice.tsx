@@ -2,6 +2,7 @@ import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 import { VStack, HStack } from '../../ui/Stack'
 import { HStackSeparatedBy, slashSeparator } from '../../ui/StackSeparatedBy'
 import { Text } from '../../ui/Text'
+import { MONTHS_IN_YEAR } from '@increaser/utils/time'
 
 interface SubscriptionPriceProps {
   billingCycle: SubscriptionBillingCycle
@@ -11,7 +12,7 @@ interface SubscriptionPriceProps {
 
 const monthsInPeriod: Record<SubscriptionBillingCycle, number> = {
   month: 1,
-  year: 12,
+  year: MONTHS_IN_YEAR,
 }
 
 export const SubscriptionPrice = ({

@@ -1,4 +1,3 @@
-import { reportError } from 'errors/errorMonitoring'
 import { useQuery } from 'react-query'
 import {
   createScript,
@@ -6,42 +5,45 @@ import {
   loadScript,
 } from '@increaser/ui/dom/script'
 
-import { PaddleSdk } from '../PaddleSdk'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
+import { PaddleSdk } from '../PaddleSdk'
 
 export const paddleQueryKey = 'paddle'
+
 const paddleScriptSource = 'https://cdn.paddle.com/paddle/paddle.js'
+
 const paddleVendorId = Number(
   shouldBeDefined(process.env.NEXT_PUBLIC_PADDLE_VENDOR_ID),
 )
+
+declare global {
+  interface Window {
+    Paddle?: PaddleSdk
+  }
+}
 
 export const usePaddleSdk = () => {
   return useQuery(
     paddleQueryKey,
     async () => {
       if (!window.Paddle) {
-        try {
-          const paddleScript =
-            getScriptBySrc(paddleScriptSource) ||
-            createScript(paddleScriptSource)
+        const paddleScript =
+          getScriptBySrc(paddleScriptSource) || createScript(paddleScriptSource)
 
-          await loadScript(paddleScript)
+        await loadScript(paddleScript)
 
-          const paddleSdk = window.Paddle as unknown as PaddleSdk
+        const paddleSdk = window.Paddle as unknown as PaddleSdk
 
-          paddleSdk.Setup({ vendor: paddleVendorId })
-        } catch (err) {
-          reportError(err, { context: 'Failed to load PaddeSDK' })
-        }
+        paddleSdk.Setup({ vendor: paddleVendorId })
       }
 
       return window.Paddle as PaddleSdk
     },
     {
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
       refetchOnMount: false,
+      refetchOnWindowFocus: false,
       refetchOnReconnect: false,
+      keepPreviousData: true,
       staleTime: Infinity,
     },
   )

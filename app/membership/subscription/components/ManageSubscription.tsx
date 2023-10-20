@@ -3,8 +3,10 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ManageSubscriptionActions } from './ManageSubscriptionActions'
 import { mirrorRecord } from '@increaser/utils/mirrorRecord'
-import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
 import { format } from 'date-fns'
+import { paddleProductCode } from '@increaser/paddle-ui/paddleProductCode'
+
+const subscriptionDateFormat = 'dd MMMM yyyy'
 
 export const ManageSubscription = () => {
   const { subscription } = useAssertUserState()
@@ -18,11 +20,13 @@ export const ManageSubscription = () => {
       <Text>
         Your subscription ends on{' '}
         <Text as="span" weight="bold">
-          {format(subscription.endsAt, 'dd MMMM yyyy')}
+          {format(subscription.endsAt, subscriptionDateFormat)}
         </Text>
       </Text>
     )
   }
+
+  console.log(subscription)
 
   if (subscription.status === 'canceled') {
     return null
@@ -43,13 +47,24 @@ export const ManageSubscription = () => {
   const billingCycle =
     mirrorRecord(paddleProductCode)[Number(subscription.planId)]
 
-  const message = billingCycle
-    ? `Your subscription renews automatically every ${billingCycle}.`
-    : 'Your subscription renews automatically.'
+  const messages = [
+    billingCycle
+      ? `Your subscription renews automatically every ${billingCycle}.`
+      : 'Your subscription renews automatically.',
+  ]
+
+  if (subscription.nextBilledAt) {
+    messages.push(
+      `Next billing date is ${format(
+        subscription.nextBilledAt,
+        subscriptionDateFormat,
+      )}.`,
+    )
+  }
 
   return (
     <VStack gap={16}>
-      <Text>{message}</Text>
+      <Text>{messages.join(' ')}</Text>
       <ManageSubscriptionActions />
     </VStack>
   )

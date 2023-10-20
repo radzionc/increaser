@@ -1,9 +1,10 @@
 import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
-import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
-import { paddleProductCode } from 'membership/paddle/PaddleProductCode'
-import { PaddleSdk, PaddleSdkProductPrice } from 'membership/paddle/PaddleSdk'
-import { ProductPlanPrice } from 'membership/subscription/ProductPlanPrice'
+
 import { useQuery } from 'react-query'
+import { PaddleSdk, PaddleSdkProductPrice } from '../PaddleSdk'
+import { ProductPlanPrice } from '../ProductPlanPrice'
+import { paddleProductCode } from '../paddleProductCode'
+import { usePaddleSdk } from './usePaddleSdk'
 
 const getPaddleProductPrice = async (
   Paddle: PaddleSdk,

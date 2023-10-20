@@ -1,61 +1,39 @@
-import { useState } from 'react'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { SubscriptionBillingCycleInput } from '@increaser/ui/subscription/components/SubscriptionBillingCycleInput'
 import { SubscriptionPrice } from '@increaser/ui/subscription/components/SubscriptionPrice'
-import { getYearlySubscriptionSavings } from '@increaser/ui/subscription/utils/getYearlySubscriptionSavings'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { Opener } from '@increaser/ui/ui/Opener'
-import { CheckoutModal } from './CheckoutModal'
-import { SubscriptionBenefits } from './SubscriptionBenefits'
-import { SubscriptionPricesQueryDependant } from './SubscriptionPricesQueryDependant'
-import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
+import { getAnnualSubscriptionSavings } from '@increaser/entities-utils/subscription/getAnnualSubscriptionSavings'
+import { useSubscriptionBillingCycle } from '@increaser/ui/subscription/components/SubscriptionBillingCycleProvider'
+import { MembershipBenefits } from 'membership/components/MembershipBenefits'
+import { SubscriptionPricesQueryDependant } from '@increaser/paddle-ui/components/SubscriptionPricesQueryDependant'
 
 export const SubscriptionOffer = () => {
-  const [billingCycle, setBillingCycle] =
-    useState<SubscriptionBillingCycle>('year')
+  const [billingCycle, setBillingCycle] = useSubscriptionBillingCycle()
 
   return (
-    <SubscriptionPricesQueryDependant
-      success={(prices) => {
-        return (
-          <VStack gap={28}>
-            <VStack alignItems="center" gap={20}>
-              <SubscriptionBillingCycleInput
-                value={billingCycle}
-                onChange={setBillingCycle}
-                saving={getYearlySubscriptionSavings(
-                  prices.year.amount,
-                  prices.month.amount,
-                )}
-              />
-              <SubscriptionPrice
-                currency={prices.year.currency}
-                billingCycle={billingCycle}
-                price={{
-                  month: prices.month.amount,
-                  year: prices.year.amount,
-                }}
-              />
-              <SubscriptionBenefits />
-            </VStack>
-            <Opener
-              renderContent={({ onClose }) => (
-                <CheckoutModal billingCycle={billingCycle} onClose={onClose} />
-              )}
-              renderOpener={({ onOpen }) => (
-                <Button
-                  style={{ width: '100%' }}
-                  onClick={onOpen}
-                  kind="reversed"
-                  size="l"
-                >
-                  Purchase
-                </Button>
+    <VStack alignItems="center" gap={20}>
+      <SubscriptionPricesQueryDependant
+        success={(prices) => (
+          <>
+            <SubscriptionBillingCycleInput
+              value={billingCycle}
+              onChange={setBillingCycle}
+              saving={getAnnualSubscriptionSavings(
+                prices.year.amount,
+                prices.month.amount,
               )}
             />
-          </VStack>
-        )
-      }}
-    />
+            <SubscriptionPrice
+              currency={prices.year.currency}
+              billingCycle={billingCycle}
+              price={{
+                month: prices.month.amount,
+                year: prices.year.amount,
+              }}
+            />
+          </>
+        )}
+      />
+      <MembershipBenefits />
+    </VStack>
   )
 }

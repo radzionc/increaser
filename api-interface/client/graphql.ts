@@ -611,7 +611,6 @@ export type UserStateQuery = {
     subscription?: {
       __typename?: 'Subscription'
       provider: SubscriptionProvider
-      id: string
       planId: string
       status: SubscriptionStatus
       nextBilledAt?: number | null
@@ -1556,7 +1555,6 @@ export const UserStateDocument = {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'provider' },
                       },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'planId' },

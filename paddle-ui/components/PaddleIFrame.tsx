@@ -1,12 +1,11 @@
-import { usePaddleSdk } from 'membership/paddle/hooks/usePaddleSdk'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
-import { useAssertUserState } from 'user/state/UserStateContext'
+import { usePaddleSdk } from '../hooks/usePaddleSdk'
+import { useManageSubscription } from '@increaser/ui/subscription/ManageSubscriptionContext'
 
 interface Props {
   onClose: () => void
-  onSuccess: (...args: any[]) => void
   override?: string
   product: string | number
 }
@@ -22,13 +21,11 @@ const Container = styled.div`
   }
 `
 
-export const PaddleIFrame = ({
-  onClose,
-  onSuccess,
-  override,
-  product,
-}: Props) => {
-  const { email, id } = useAssertUserState()
+export const PaddleIFrame = ({ onClose, override, product }: Props) => {
+  const {
+    user: { email, id },
+    onChange,
+  } = useManageSubscription()
 
   const className = `checkout-container-${product}`
 
@@ -37,13 +34,17 @@ export const PaddleIFrame = ({
   useEffect(() => {
     if (!paddleSdk) return
 
-    const parameters = {
+    paddleSdk.Checkout.open({
       method: 'inline',
       product: Number(product),
       allowQuantity: false,
       disableLogout: true,
       frameTarget: className,
-      successCallback: onSuccess,
+      successCallback: (payload) => {
+        console.log(`Paddle operation success: `, payload)
+        onChange()
+        onClose()
+      },
       closeCallback: onClose,
       frameInitialHeight: 450,
       email: email,
@@ -51,10 +52,8 @@ export const PaddleIFrame = ({
       override,
       frameStyle:
         'width:100%; min-width:312px; background-color: transparent; border: none;',
-    }
-
-    paddleSdk.Checkout.open(parameters)
-  }, [className, onClose, onSuccess, override, paddleSdk, product, email, id])
+    })
+  }, [className, onClose, override, paddleSdk, product, email, id])
 
   return <Container className={className} />
 }
