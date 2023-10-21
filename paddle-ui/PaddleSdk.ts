@@ -37,7 +37,7 @@ interface PaddleSdkOpenCheckoutParams {
 }
 
 interface OrderDetailsInfo {
-  order: {
+  order?: {
     subscription_id: string
   }
 }

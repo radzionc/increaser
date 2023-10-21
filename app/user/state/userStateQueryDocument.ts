@@ -4,6 +4,7 @@ export const userStateQueryDocument = graphql(`
   query userState($input: UserStateInput!) {
     userState(input: $input) {
       subscription {
+        id
         provider
         planId
         status

@@ -279,7 +279,7 @@ export type SubscriptionInput = {
 
 export type SubscriptionProvider = 'paddleClassic'
 
-export type SubscriptionStatus = 'active' | 'canceled' | 'pastDue'
+export type SubscriptionStatus = 'active' | 'pastDue'
 
 export type Task = {
   __typename?: 'Task'
@@ -475,6 +475,23 @@ export type ManageSubscriptionQuery = {
   }
 }
 
+export type SubscriptionQueryVariables = Exact<{
+  input: SubscriptionInput
+}>
+
+export type SubscriptionQuery = {
+  __typename?: 'Query'
+  subscription?: {
+    __typename?: 'Subscription'
+    id: string
+    provider: SubscriptionProvider
+    planId: string
+    status: SubscriptionStatus
+    nextBilledAt?: number | null
+    endsAt?: number | null
+  } | null
+}
+
 export type CreateProjectMutationVariables = Exact<{
   input: CreateProjectInput
 }>
@@ -601,6 +618,7 @@ export type UserStateQuery = {
     sumbittedHabitsAt?: number | null
     subscription?: {
       __typename?: 'Subscription'
+      id: string
       provider: SubscriptionProvider
       planId: string
       status: SubscriptionStatus
@@ -1112,6 +1130,65 @@ export const ManageSubscriptionDocument = {
   ManageSubscriptionQuery,
   ManageSubscriptionQueryVariables
 >
+export const SubscriptionDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'subscription' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'SubscriptionInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'subscription' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'provider' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'planId' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nextBilledAt' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'endsAt' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SubscriptionQuery, SubscriptionQueryVariables>
 export const CreateProjectDocument = {
   kind: 'Document',
   definitions: [
@@ -1542,6 +1619,7 @@ export const UserStateDocument = {
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'provider' },

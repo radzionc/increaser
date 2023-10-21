@@ -309,7 +309,6 @@ export type SubscriptionProvider =
   (typeof SubscriptionProvider)[keyof typeof SubscriptionProvider]
 export const SubscriptionStatus = {
   Active: 'active',
-  Canceled: 'canceled',
   PastDue: 'pastDue',
 } as const
 

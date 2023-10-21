@@ -1,14 +1,11 @@
-import { PaddleClassicUser } from '../entities'
-import { queryPaddle } from '../utils/queryPaddle'
+import { getSubscription } from '../utils/getSubscription'
 
-const getSubscription = async (id: string) => {
-  const [user] = await queryPaddle<PaddleClassicUser[]>('subscription/users', {
-    subscription_id: id,
-  })
+const run = async (id: string) => {
+  const subscription = await getSubscription(id)
 
-  console.log(user)
+  console.log(subscription)
 }
 
 const id = process.argv[2]
 
-getSubscription(id)
+run(id)

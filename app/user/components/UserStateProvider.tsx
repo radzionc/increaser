@@ -1,5 +1,5 @@
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
-import { UserState } from '@increaser/api-interface/client/graphql'
+import { UserStateQuery } from '@increaser/api-interface/client/graphql'
 import { useApi } from 'api/useApi'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
@@ -53,11 +53,14 @@ export const UserStateProvider = ({ children }: Props) => {
   }, [dataUpdatedAt, dayStartedAt, refetch])
 
   const updateState = useCallback(
-    (pieceOfState: Partial<UserState>) => {
-      queryClient.setQueryData<UserState>(userStateQueryKey, (state) => ({
-        ...((state || {}) as UserState),
-        ...pieceOfState,
-      }))
+    (pieceOfState: Partial<UserStateQuery['userState']>) => {
+      queryClient.setQueryData<UserStateQuery['userState']>(
+        userStateQueryKey,
+        (state) => ({
+          ...(state || ({} as UserStateQuery['userState'])),
+          ...pieceOfState,
+        }),
+      )
     },
     [queryClient],
   )

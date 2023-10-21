@@ -45,7 +45,9 @@ export const AppSumoCodeRedemption = () => {
         })
 
         updateUserState({
-          membership: { provider: 'AppSumo' },
+          lifeTimeDeal: {
+            provider: 'appsumo',
+          },
         })
       } catch (error) {
         const { message } = error as ApiError

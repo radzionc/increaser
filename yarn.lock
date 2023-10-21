@@ -3812,9 +3812,9 @@ __metadata:
     "@next/eslint-plugin-next": ^13.4.11
     "@sentry/nextjs": ^7.64.0
     "@types/node": 18.6.4
-    "@types/react": 18.0.17
+    "@types/react": latest
     "@types/react-beautiful-dnd": ^13.1.4
-    "@types/react-dom": 18.0.6
+    "@types/react-dom": latest
     "@types/styled-components": ^5.1.25
     "@types/uuid": ^9.0.2
     "@typescript-eslint/eslint-plugin": ^6.6.0
@@ -3827,9 +3827,9 @@ __metadata:
     next: ^13.4.12
     next-pwa: ^5.6.0
     next-sitemap: ^4.1.8
-    react: ^18.2.0
+    react: latest
     react-beautiful-dnd: ^13.1.1
-    react-dom: ^18.2.0
+    react-dom: latest
     react-hook-form: ^7.43.9
     react-is: ^18.2.0
     react-player: ^2.12.0
@@ -3968,14 +3968,14 @@ __metadata:
     "@floating-ui/react": ^0.24.1
     "@react-spring/web": ^9.7.2
     "@types/node": 18.6.4
-    "@types/react": 18.0.17
-    "@types/react-dom": 18.0.6
+    "@types/react": latest
+    "@types/react-dom": latest
     "@types/styled-components": ^5.1.25
     copy-to-clipboard: ^3.3.3
     date-fns: ^2.30.0
     focus-trap-react: ^10.2.3
-    react: ^18.2.0
-    react-dom: ^18.2.0
+    react: latest
+    react-dom: latest
     react-dropzone: ^14.2.3
     react-hook-form: ^7.43.9
     react-is: ^18.2.0
@@ -5968,6 +5968,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:latest":
+  version: 18.2.14
+  resolution: "@types/react-dom@npm:18.2.14"
+  dependencies:
+    "@types/react": "*"
+  checksum: 890289c70d1966c168037637c09cacefe6205bdd27a33252144a6b432595a2943775ac1a1accac0beddaeb67f8fdf721e076acb1adc990b08e51c3d9fd4e780c
+  languageName: node
+  linkType: hard
+
 "@types/react-redux@npm:^7.1.20":
   version: 7.1.28
   resolution: "@types/react-redux@npm:7.1.28"
@@ -5980,7 +5989,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
+"@types/react@npm:*, @types/react@npm:latest":
   version: 18.2.31
   resolution: "@types/react@npm:18.2.31"
   dependencies:
@@ -12927,7 +12936,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0, react-dom@npm:^18.2.0":
+"react-dom@npm:18.2.0, react-dom@npm:^18.2.0, react-dom@npm:latest":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -13138,7 +13147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0, react@npm:^18.2.0":
+"react@npm:18.2.0, react@npm:^18.2.0, react@npm:latest":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:

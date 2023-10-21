@@ -18,6 +18,10 @@ export const fromPaddleClassicStatus = (
     return 'pastDue'
   }
 
+  if (status === 'deleted') {
+    return 'active'
+  }
+
   if (status === 'active') {
     return 'active'
   }

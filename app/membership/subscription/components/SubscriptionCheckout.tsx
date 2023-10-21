@@ -6,6 +6,8 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { MembershipConfirmation } from 'membership/components/MembershipConfirmation'
+import { PaddleModal } from '@increaser/paddle-ui/components/PaddleModal'
+import { productName } from '@increaser/entities'
 
 export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
   const [subscriptionId, setSubscriptionId] = useState<string | undefined>()
@@ -16,12 +18,14 @@ export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
 
   if (!subscriptionId) {
     return (
-      <PaddleIFrame
-        user={user}
-        onClose={onClose}
-        product={paddleProductCode[billingCycle]}
-        onSuccess={setSubscriptionId}
-      />
+      <PaddleModal title={`${productName} Subscription`} onClose={onClose}>
+        <PaddleIFrame
+          user={user}
+          onClose={onClose}
+          product={paddleProductCode[billingCycle]}
+          onSuccess={setSubscriptionId}
+        />
+      </PaddleModal>
     )
   }
 
