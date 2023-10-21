@@ -1,10 +1,10 @@
-import { DeleteCommand, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb'
+import { DeleteCommand, GetCommand } from '@aws-sdk/lib-dynamodb'
 import { tableName } from '@increaser/db/tableName'
 import { AppSumoCode } from '@increaser/entities/AppSumoCode'
-import { getUpdateParams } from './utils/getUpdateParams'
-import { mergeParams } from './utils/mergeParams'
-import { projectionExpression } from './utils/projectionExpression'
-import { dbDocClient } from './dbClient'
+
+import { dbDocClient } from '@increaser/dynamodb/client'
+import { getPickParams } from '@increaser/dynamodb/getPickParams'
+import { updateItem } from '@increaser/dynamodb/updateItem'
 
 export const getAppSumoCodeItemParams = (id: string) => ({
   TableName: tableName.appSumoCodes,
@@ -15,21 +15,22 @@ export async function getAppSumoCodeById<T extends (keyof AppSumoCode)[]>(
   id: string,
   attributes?: T,
 ): Promise<Pick<AppSumoCode, T[number]> | undefined> {
-  const command = new GetCommand(
-    mergeParams(getAppSumoCodeItemParams(id), projectionExpression(attributes)),
-  )
+  const command = new GetCommand({
+    ...getAppSumoCodeItemParams(id),
+    ...getPickParams(attributes),
+  })
 
   const { Item } = await dbDocClient.send(command)
 
   return Item as Pick<AppSumoCode, T[number]>
 }
 
-export const updateAppSumoCode = (id: string, params: Partial<AppSumoCode>) => {
-  const command = new UpdateCommand({
-    ...getAppSumoCodeItemParams(id),
-    ...getUpdateParams(params),
+export const updateAppSumoCode = (id: string, fields: Partial<AppSumoCode>) => {
+  return updateItem({
+    tableName: tableName.appSumoCodes,
+    key: { id },
+    fields,
   })
-  return dbDocClient.send(command)
 }
 
 export const deleteAppSumoCode = async (id: string) => {

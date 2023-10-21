@@ -26,12 +26,6 @@ export const ManageSubscription = () => {
     )
   }
 
-  console.log(subscription)
-
-  if (subscription.status === 'canceled') {
-    return null
-  }
-
   if (subscription.status === 'pastDue') {
     return (
       <VStack gap={8}>

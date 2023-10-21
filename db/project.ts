@@ -1,8 +1,8 @@
 import { Project } from '@increaser/entities/Project'
 import { getUserById, getUserItemParams, updateUser } from './user'
 import { UpdateCommand } from '@aws-sdk/lib-dynamodb'
-import { dbDocClient } from './dbClient'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
+import { dbDocClient } from '@increaser/dynamodb/client'
 
 export const deleteProject = async (userId: string, projectId: string) => {
   const user = await getUserById(userId, ['projects'])

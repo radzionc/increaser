@@ -26,9 +26,9 @@ const test = async () => {
     'https://paddle-classic-webhooks.increaser.org',
     {
       method: 'POST',
-      body: formData.toString(), // Convert the formData to a string
+      body: formData.toString(),
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded', // Set the content type
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
     },
   )

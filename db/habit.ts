@@ -1,7 +1,7 @@
 import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb'
 import { Habit } from '@increaser/entities/Habit'
 import { getUserItemParams } from './user'
-import { dbDocClient } from './dbClient'
+import { dbDocClient } from '@increaser/dynamodb/client'
 
 export const putHabit = async (userId: string, habit: Habit) => {
   const command = new UpdateCommand({

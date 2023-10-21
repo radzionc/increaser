@@ -1,21 +1,33 @@
 import { ClosableComponentProps } from '@increaser/ui/props'
 import { useSubscriptionBillingCycle } from '@increaser/ui/subscription/components/SubscriptionBillingCycleProvider'
-import { productName } from '@increaser/entities'
-import { ManageSubscriptionProvider } from './ManageSubscriptionProvider'
-import { PaddleModal } from '@increaser/paddle-ui/components/PaddleModal'
 import { PaddleIFrame } from '@increaser/paddle-ui/components/PaddleIFrame'
 import { paddleProductCode } from '@increaser/paddle-ui/paddleProductCode'
+import { useAssertUserState } from 'user/state/UserStateContext'
+import { useState } from 'react'
+import { SyncSubscription } from './SyncSubscription'
+import { MembershipConfirmation } from 'membership/components/MembershipConfirmation'
 
 export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
+  const [subscriptionId, setSubscriptionId] = useState<string | undefined>()
+  const { subscription } = useAssertUserState()
+
   const [billingCycle] = useSubscriptionBillingCycle()
-  return (
-    <ManageSubscriptionProvider>
-      <PaddleModal title={`${productName} subscription`} onClose={onClose}>
-        <PaddleIFrame
-          onClose={onClose}
-          product={paddleProductCode[billingCycle]}
-        />
-      </PaddleModal>
-    </ManageSubscriptionProvider>
-  )
+  const user = useAssertUserState()
+
+  if (!subscriptionId) {
+    return (
+      <PaddleIFrame
+        user={user}
+        onClose={onClose}
+        product={paddleProductCode[billingCycle]}
+        onSuccess={setSubscriptionId}
+      />
+    )
+  }
+
+  if (subscription) {
+    return <MembershipConfirmation onFinish={onClose} />
+  }
+
+  return <SyncSubscription onFinish={onClose} subscriptionId={subscriptionId} />
 }

@@ -18,10 +18,6 @@ export const fromPaddleClassicStatus = (
     return 'pastDue'
   }
 
-  if (status === 'deleted') {
-    return 'canceled'
-  }
-
   if (status === 'active') {
     return 'active'
   }
@@ -40,7 +36,6 @@ const getEndsAt = (
   user: PaddleClassicUser,
 ): number | undefined => {
   if (user.state !== 'deleted') return undefined
-  if (!user.last_payment) return undefined
 
   const date = new Date(user.last_payment.date)
   return match(billingCycle, {
@@ -51,14 +46,16 @@ const getEndsAt = (
 
 export const toSubscription = (
   user: PaddleClassicUser,
-  plans: PaddleClassicSubscriptionPlan[],
-): Subscription => {
-  const plan = plans.find((plan) => plan.id === user.plan_id)
+  plan: PaddleClassicSubscriptionPlan,
+): Subscription | undefined => {
   if (!plan) {
     throw new Error(`Plan ${user.plan_id} not found`)
   }
 
-  const billingCycle = plan.billing_type
+  const endsAt = getEndsAt(plan.billing_type, user)
+  if (endsAt && endsAt < Date.now()) {
+    return undefined
+  }
 
   return {
     provider: 'paddleClassic',
@@ -66,6 +63,6 @@ export const toSubscription = (
     planId: user.plan_id.toString(),
     status: fromPaddleClassicStatus(user.state),
     nextBilledAt: getNextBilledAt(user),
-    endsAt: getEndsAt(billingCycle, user),
+    endsAt,
   }
 }

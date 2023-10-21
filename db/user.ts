@@ -1,8 +1,5 @@
 import { User } from '@increaser/entities/User'
-import { dbDocClient } from './dbClient'
 import { tableName } from './tableName'
-import { projectionExpression } from './utils/projectionExpression'
-import { getUpdateParams } from './utils/getUpdateParams'
 import {
   DeleteCommand,
   GetCommand,
@@ -10,9 +7,16 @@ import {
   ScanCommand,
   UpdateCommand,
 } from '@aws-sdk/lib-dynamodb'
-import { mergeParams } from './utils/mergeParams'
 import { DescribeTableCommand } from '@aws-sdk/client-dynamodb'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
+import {
+  getAttributeNameKey,
+  getAttributeParams,
+  getAttributeValueKey,
+} from '@increaser/dynamodb/attributes'
+import { getPickParams } from '@increaser/dynamodb/getPickParams'
+import { dbDocClient } from '@increaser/dynamodb/client'
+import { updateItem } from '@increaser/dynamodb/updateItem'
 
 export const getUserItemParams = (id: string) => ({
   TableName: tableName.users,
@@ -27,7 +31,7 @@ export async function getUserById<T extends (keyof User)[]>(
 ): Promise<Pick<User, T[number]>> {
   const command = new GetCommand({
     ...getUserItemParams(id),
-    ...projectionExpression(attributes),
+    ...getPickParams(attributes),
   })
   const { Item } = await dbDocClient.send(command)
 
@@ -38,16 +42,12 @@ export async function getUserById<T extends (keyof User)[]>(
   return Item as Pick<User, T[number]>
 }
 
-export const updateUser = async (id: string, params: Partial<User>) => {
-  const command = new UpdateCommand({
-    ...getUserItemParams(id),
-    ...getUpdateParams({
-      ...params,
-      updatedAt: Date.now(),
-    }),
+export const updateUser = async (id: string, fields: Partial<User>) => {
+  return updateItem({
+    tableName: tableName.users,
+    key: { id },
+    fields,
   })
-
-  return dbDocClient.send(command)
 }
 
 export function getUserByEmail<T extends (keyof User)[]>(
@@ -55,24 +55,20 @@ export function getUserByEmail<T extends (keyof User)[]>(
   attributes: T,
 ): Promise<Pick<User, T[number]> | null> {
   const recursiveProcess = async (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     lastEvaluatedKey?: any,
   ): Promise<Pick<User, T[number]> | null> => {
     const command = new ScanCommand({
       TableName: tableName.users,
       ExclusiveStartKey: lastEvaluatedKey,
-      FilterExpression: '#email = :email',
-      ExpressionAttributeValues: {
-        ':email': email,
-      },
-      ...mergeParams(
-        {
-          ExpressionAttributeNames: {
-            '#email': 'email',
-          },
-        },
-        projectionExpression(attributes),
-      ),
+      FilterExpression: `${getAttributeNameKey(
+        'email',
+      )} = ${getAttributeValueKey('email')}`,
+
+      ...getAttributeParams({
+        email,
+      }),
+
+      ...getPickParams([...attributes, 'email']),
     })
     const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
 

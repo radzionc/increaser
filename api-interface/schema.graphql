@@ -134,24 +134,6 @@ type Set {
   projectId: ID!
 }
 
-enum MembershipProvider {
-  AppSumo
-  Paddle
-}
-
-type MembershipSubscription {
-  updateUrl: String!
-  cancelUrl: String!
-  planId: String!
-  cancellationEffectiveDate: String
-  nextBillDate: String
-}
-
-type Membership {
-  provider: MembershipProvider!
-  subscription: MembershipSubscription
-}
-
 type FocusSound {
   name: String!
   url: String!
@@ -182,7 +164,6 @@ enum SubscriptionBillingCycle {
 
 enum SubscriptionStatus {
   active
-  canceled
   pastDue
 }
 
@@ -217,7 +198,6 @@ type UserState {
   goalToStartWorkAt: Int!
   goalToFinishWorkBy: Int!
   goalToGoToBedAt: Int!
-  membership: Membership
   habits: [Habit!]!
   primaryGoal: PrimaryGoal!
   focusSounds: [FocusSound!]!
@@ -264,6 +244,10 @@ input UpdateUserInput {
   sumbittedHabitsAt: Float
 }
 
+input SubscriptionInput {
+  id: String!
+}
+
 type Query {
   projects: [Project!]!
   authSessionWithEmail(input: AuthSessionWithEmailInput!): AuthSession!
@@ -271,6 +255,7 @@ type Query {
   userState(input: UserStateInput!): UserState!
   appStats: AppStats!
   manageSubscription: ManageSubscription!
+  subscription(input: SubscriptionInput!): Subscription
 }
 
 type Mutation {

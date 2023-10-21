@@ -121,28 +121,6 @@ export type ManageSubscription = {
   updateUrl: Scalars['String']['output']
 }
 
-export type Membership = {
-  __typename?: 'Membership'
-  provider: MembershipProvider
-  subscription?: Maybe<MembershipSubscription>
-}
-
-export const MembershipProvider = {
-  AppSumo: 'AppSumo',
-  Paddle: 'Paddle',
-} as const
-
-export type MembershipProvider =
-  (typeof MembershipProvider)[keyof typeof MembershipProvider]
-export type MembershipSubscription = {
-  __typename?: 'MembershipSubscription'
-  cancelUrl: Scalars['String']['output']
-  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
-  nextBillDate?: Maybe<Scalars['String']['output']>
-  planId: Scalars['String']['output']
-  updateUrl: Scalars['String']['output']
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
   addSet?: Maybe<Scalars['Boolean']['output']>
@@ -261,6 +239,7 @@ export type Query = {
   authSessionWithOAuth: AuthSession
   manageSubscription: ManageSubscription
   projects: Array<Project>
+  subscription?: Maybe<Subscription>
   userState: UserState
 }
 
@@ -270,6 +249,10 @@ export type QueryAuthSessionWithEmailArgs = {
 
 export type QueryAuthSessionWithOAuthArgs = {
   input: AuthSessionWithOAuthInput
+}
+
+export type QuerySubscriptionArgs = {
+  input: SubscriptionInput
 }
 
 export type QueryUserStateArgs = {
@@ -314,6 +297,10 @@ export const SubscriptionBillingCycle = {
 
 export type SubscriptionBillingCycle =
   (typeof SubscriptionBillingCycle)[keyof typeof SubscriptionBillingCycle]
+export type SubscriptionInput = {
+  id: Scalars['String']['input']
+}
+
 export const SubscriptionProvider = {
   PaddleClassic: 'paddleClassic',
 } as const
@@ -395,7 +382,6 @@ export type UserState = {
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
   lifeTimeDeal?: Maybe<LifeTimeDeal>
-  membership?: Maybe<Membership>
   name?: Maybe<Scalars['String']['output']>
   prevSets: Array<Set>
   primaryGoal: PrimaryGoal
@@ -537,9 +523,6 @@ export type ResolversTypes = {
   LifeTimeDeal: ResolverTypeWrapper<LifeTimeDeal>
   LifeTimeDealProvider: LifeTimeDealProvider
   ManageSubscription: ResolverTypeWrapper<ManageSubscription>
-  Membership: ResolverTypeWrapper<Membership>
-  MembershipProvider: MembershipProvider
-  MembershipSubscription: ResolverTypeWrapper<MembershipSubscription>
   Mutation: ResolverTypeWrapper<{}>
   OAuthProvider: OAuthProvider
   PrimaryGoal: PrimaryGoal
@@ -555,6 +538,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']['output']>
   Subscription: ResolverTypeWrapper<{}>
   SubscriptionBillingCycle: SubscriptionBillingCycle
+  SubscriptionInput: SubscriptionInput
   SubscriptionProvider: SubscriptionProvider
   SubscriptionStatus: SubscriptionStatus
   Task: ResolverTypeWrapper<Task>
@@ -586,8 +570,6 @@ export type ResolversParentTypes = {
   Int: Scalars['Int']['output']
   LifeTimeDeal: LifeTimeDeal
   ManageSubscription: ManageSubscription
-  Membership: Membership
-  MembershipSubscription: MembershipSubscription
   Mutation: {}
   Project: Project
   ProjectMonth: ProjectMonth
@@ -599,6 +581,7 @@ export type ResolversParentTypes = {
   SetInput: SetInput
   String: Scalars['String']['output']
   Subscription: {}
+  SubscriptionInput: SubscriptionInput
   Task: Task
   TaskInput: TaskInput
   TrackHabitInput: TrackHabitInput
@@ -682,45 +665,6 @@ export type ManageSubscriptionResolvers<
     ResolversParentTypes['ManageSubscription'] = ResolversParentTypes['ManageSubscription'],
 > = {
   cancelUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  updateUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
-}
-
-export type MembershipResolvers<
-  ContextType = any,
-  ParentType extends
-    ResolversParentTypes['Membership'] = ResolversParentTypes['Membership'],
-> = {
-  provider?: Resolver<
-    ResolversTypes['MembershipProvider'],
-    ParentType,
-    ContextType
-  >
-  subscription?: Resolver<
-    Maybe<ResolversTypes['MembershipSubscription']>,
-    ParentType,
-    ContextType
-  >
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
-}
-
-export type MembershipSubscriptionResolvers<
-  ContextType = any,
-  ParentType extends
-    ResolversParentTypes['MembershipSubscription'] = ResolversParentTypes['MembershipSubscription'],
-> = {
-  cancelUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  cancellationEffectiveDate?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >
-  nextBillDate?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >
-  planId?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   updateUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
@@ -884,6 +828,12 @@ export type QueryResolvers<
     ContextType
   >
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
+  subscription?: Resolver<
+    Maybe<ResolversTypes['Subscription']>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerySubscriptionArgs, 'input'>
+  >
   userState?: Resolver<
     ResolversTypes['UserState'],
     ParentType,
@@ -981,11 +931,6 @@ export type UserStateResolvers<
     ParentType,
     ContextType
   >
-  membership?: Resolver<
-    Maybe<ResolversTypes['Membership']>,
-    ParentType,
-    ContextType
-  >
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   prevSets?: Resolver<Array<ResolversTypes['Set']>, ParentType, ContextType>
   primaryGoal?: Resolver<ResolversTypes['PrimaryGoal'], ParentType, ContextType>
@@ -1018,8 +963,6 @@ export type Resolvers<ContextType = any> = {
   Habit?: HabitResolvers<ContextType>
   LifeTimeDeal?: LifeTimeDealResolvers<ContextType>
   ManageSubscription?: ManageSubscriptionResolvers<ContextType>
-  Membership?: MembershipResolvers<ContextType>
-  MembershipSubscription?: MembershipSubscriptionResolvers<ContextType>
   Mutation?: MutationResolvers<ContextType>
   Project?: ProjectResolvers<ContextType>
   ProjectMonth?: ProjectMonthResolvers<ContextType>

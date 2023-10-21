@@ -1,7 +1,7 @@
 import { UpdateCommand } from '@aws-sdk/lib-dynamodb'
 import { Set } from '@increaser/entities/User'
 import { getUserItemParams } from './user'
-import { dbDocClient } from './dbClient'
+import { dbDocClient } from '@increaser/dynamodb/client'
 
 export const putSet = async (userId: string, set: Set) => {
   const command = new UpdateCommand({

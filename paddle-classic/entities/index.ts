@@ -12,6 +12,12 @@ export type PaddleClassicSubscriptionStatus =
   | 'paused'
   | 'deleted'
 
+interface PaddlePayment {
+  amount: number
+  currency: string
+  date: string
+}
+
 export interface PaddleClassicUser {
   subscription_id: number
   plan_id: number
@@ -22,21 +28,12 @@ export interface PaddleClassicUser {
   cancel_url: string
   state: PaddleClassicSubscriptionStatus
   signup_date: string
-  last_payment: {
-    amount: number
-    currency: string
-    date: string
-  }
+  last_payment: PaddlePayment
   payment_information: {
     payment_method: string
     card_type: string
     last_four_digits: string
     expiry_date: string
   }
-  quantity: number
-  next_payment: {
-    amount: number
-    currency: string
-    date: string
-  }
+  next_payment?: PaddlePayment
 }

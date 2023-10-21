@@ -26,7 +26,7 @@ interface PaddleSdkOpenCheckoutParams {
   allowQuantity: boolean
   disableLogout: boolean
   frameTarget: string
-  successCallback: (info: CheckoutSuccessInfo) => void
+  successCallback?: (info: CheckoutSuccessInfo) => void
   closeCallback: () => void
   frameInitialHeight: number
   loadCallback?: () => void
@@ -34,6 +34,12 @@ interface PaddleSdkOpenCheckoutParams {
   passthrough: string
   override: any
   frameStyle: string
+}
+
+interface OrderDetailsInfo {
+  order: {
+    subscription_id: string
+  }
 }
 
 export interface PaddleSdk {
@@ -51,6 +57,9 @@ export interface PaddleSdk {
     set: (mode: 'sandbox') => void
   }
   Order: {
-    details: (checkoutId: string, callback: (info: any) => void) => void
+    details: (
+      checkoutId: string,
+      callback: (info: OrderDetailsInfo) => void,
+    ) => void
   }
 }

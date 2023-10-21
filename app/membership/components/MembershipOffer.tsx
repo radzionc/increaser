@@ -6,14 +6,12 @@ import { Button } from '@increaser/ui/ui/buttons/Button'
 import { SubscriptionCheckout } from 'membership/subscription/components/SubscriptionCheckout'
 import { SubscriptionOffer } from 'membership/subscription/components/SubscriptionOffer'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { isActiveSubscription } from '@increaser/entities-utils/subscription/isActiveSubscription'
 
 export const MembershipOffer = () => {
   const { lifeTimeDeal, subscription } = useAssertUserState()
 
-  const hasActiveSubscription =
-    subscription && !subscription.endsAt && subscription.status !== 'canceled'
-
-  if (lifeTimeDeal || hasActiveSubscription) {
+  if (lifeTimeDeal || (subscription && isActiveSubscription(subscription))) {
     return null
   }
 

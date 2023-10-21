@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from '@increaser/entities/User'
-import { dbDocClient } from '@increaser/db/dbClient'
 import { tableName } from '@increaser/db/tableName'
 
 import { ScanCommand } from '@aws-sdk/lib-dynamodb'
@@ -14,6 +12,7 @@ import {
 } from '@increaser/entities/PerformanceScoreboard'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
+import { dbDocClient } from '@increaser/dynamodb/client'
 
 type UserInfo = Pick<
   User,

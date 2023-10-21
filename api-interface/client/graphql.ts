@@ -115,23 +115,6 @@ export type ManageSubscription = {
   updateUrl: Scalars['String']['output']
 }
 
-export type Membership = {
-  __typename?: 'Membership'
-  provider: MembershipProvider
-  subscription?: Maybe<MembershipSubscription>
-}
-
-export type MembershipProvider = 'AppSumo' | 'Paddle'
-
-export type MembershipSubscription = {
-  __typename?: 'MembershipSubscription'
-  cancelUrl: Scalars['String']['output']
-  cancellationEffectiveDate?: Maybe<Scalars['String']['output']>
-  nextBillDate?: Maybe<Scalars['String']['output']>
-  planId: Scalars['String']['output']
-  updateUrl: Scalars['String']['output']
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
   addSet?: Maybe<Scalars['Boolean']['output']>
@@ -237,6 +220,7 @@ export type Query = {
   authSessionWithOAuth: AuthSession
   manageSubscription: ManageSubscription
   projects: Array<Project>
+  subscription?: Maybe<Subscription>
   userState: UserState
 }
 
@@ -246,6 +230,10 @@ export type QueryAuthSessionWithEmailArgs = {
 
 export type QueryAuthSessionWithOAuthArgs = {
   input: AuthSessionWithOAuthInput
+}
+
+export type QuerySubscriptionArgs = {
+  input: SubscriptionInput
 }
 
 export type QueryUserStateArgs = {
@@ -284,6 +272,10 @@ export type Subscription = {
 }
 
 export type SubscriptionBillingCycle = 'month' | 'year'
+
+export type SubscriptionInput = {
+  id: Scalars['String']['input']
+}
 
 export type SubscriptionProvider = 'paddleClassic'
 
@@ -356,7 +348,6 @@ export type UserState = {
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
   lifeTimeDeal?: Maybe<LifeTimeDeal>
-  membership?: Maybe<Membership>
   name?: Maybe<Scalars['String']['output']>
   prevSets: Array<Set>
   primaryGoal: PrimaryGoal
