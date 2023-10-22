@@ -48,31 +48,33 @@ export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
     <PaddleModal title={stepTitle[step.id]} onClose={onClose}>
       <Flow
         step={step}
-        paddle={() => (
-          <PaddleIFrame
-            user={user}
-            onClose={onClose}
-            product={paddleProductCode[billingCycle]}
-            onSuccess={(checkoutId) =>
-              setStep({ id: 'subscriptionId', checkoutId })
-            }
-          />
-        )}
-        subscriptionId={({ checkoutId }) => (
-          <QuerySubscriptionId
-            checkoutId={checkoutId}
-            onSuccess={(subscriptionId) =>
-              setStep({ id: 'subscription', subscriptionId })
-            }
-          />
-        )}
-        subscription={({ subscriptionId }) => (
-          <SyncSubscription
-            onFinish={onClose}
-            subscriptionId={subscriptionId}
-          />
-        )}
-        confirmation={() => <MembershipConfirmation onFinish={onClose} />}
+        steps={{
+          paddle: () => (
+            <PaddleIFrame
+              user={user}
+              onClose={onClose}
+              product={paddleProductCode[billingCycle]}
+              onSuccess={(checkoutId) =>
+                setStep({ id: 'subscriptionId', checkoutId })
+              }
+            />
+          ),
+          subscriptionId: ({ checkoutId }) => (
+            <QuerySubscriptionId
+              checkoutId={checkoutId}
+              onSuccess={(subscriptionId) =>
+                setStep({ id: 'subscription', subscriptionId })
+              }
+            />
+          ),
+          subscription: ({ subscriptionId }) => (
+            <SyncSubscription
+              onFinish={onClose}
+              subscriptionId={subscriptionId}
+            />
+          ),
+          confirmation: () => <MembershipConfirmation onFinish={onClose} />,
+        }}
       />
     </PaddleModal>
   )
