@@ -6,10 +6,10 @@ import { VStack } from '@increaser/ui/ui/Stack'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { InfoIcon } from '@increaser/ui/ui/icons/InfoIcon'
 import { AUTHOR_EMAIL } from 'shared/externalResources'
-import { useEffect } from 'react'
 import { Text } from '@increaser/ui/ui/Text'
 import { ApiError } from 'api/useApi'
 import { Modal } from '@increaser/ui/modal'
+import { useOnQuerySuccess } from '@increaser/ui/query/hooks/useOnQuerySuccess'
 
 interface SyncSubscriptionProps extends FinishableComponentProps {
   subscriptionId: string
@@ -19,12 +19,10 @@ export const SyncSubscription = ({
   subscriptionId,
   onFinish,
 }: SyncSubscriptionProps) => {
-  const { error, data } = useSubscriptionQuery(subscriptionId)
-  useEffect(() => {
-    if (data) {
-      onFinish?.()
-    }
-  }, [data, onFinish])
+  const query = useSubscriptionQuery(subscriptionId)
+  useOnQuerySuccess(query, onFinish)
+
+  const { error } = query
 
   return (
     <Modal

@@ -6,7 +6,7 @@ import { User } from '@increaser/entities/User'
 
 interface Props {
   onClose: () => void
-  onSuccess?: (subscriptionId?: string) => void
+  onSuccess?: (checkoutId: string) => void
   user: Pick<User, 'email' | 'id'>
   override?: string
   product: string | number
@@ -44,9 +44,7 @@ export const PaddleIFrame = ({
       disableLogout: true,
       frameTarget: className,
       successCallback: ({ checkout: { id } }) => {
-        window.Paddle?.Order.details(id, ({ order }) => {
-          onSuccess?.(order?.subscription_id)
-        })
+        onSuccess?.(id)
       },
       closeCallback: onClose,
       frameInitialHeight: 450,
