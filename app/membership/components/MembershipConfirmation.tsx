@@ -1,23 +1,33 @@
 import { productName } from '@increaser/entities'
+import { useBoolean } from '@increaser/ui/hooks/useBoolean'
+import { useEffectOnDependencyChange } from '@increaser/ui/hooks/useEffectOnDependencyChange'
 import { Modal } from '@increaser/ui/modal'
-import { FinishableComponentProps } from '@increaser/ui/props'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { InlineFounderContacts } from 'info/components/InflineFounderContacts'
+import { useIsPayingUser } from 'membership/hooks/useIsPayingUser'
 import { ContinueButton } from 'ui/ContinueButton'
 
-export const MembershipConfirmation = ({
-  onFinish,
-}: FinishableComponentProps) => {
+export const MembershipConfirmation = () => {
+  const [isOpen, { set: open, unset: close }] = useBoolean(false)
+  const isPayingUser = useIsPayingUser()
+  useEffectOnDependencyChange(() => {
+    if (isPayingUser) {
+      open()
+    }
+  }, [isPayingUser])
+
+  if (!isOpen) return null
+
   return (
     <Modal
       placement="top"
-      onClose={onFinish}
-      title="Welcome to Increaser!"
-      footer={<ContinueButton onClick={onFinish} />}
+      onClose={close}
+      title={`Welcome to ${productName}!`}
+      footer={<ContinueButton onClick={close} />}
     >
       <VStack gap={20}>
-        <Text>
+        <Text color="regular">
           Hey there! Thank you for subscribing to {productName}. I'm Radzion,
           and I'm excited for you to embark on this journey to enhanced
           productivity and a more balanced lifestyle. If you have any questions

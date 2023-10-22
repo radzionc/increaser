@@ -9,13 +9,20 @@ import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
+import { Match } from '@increaser/ui/ui/Match'
 
 type ManageSubscriptionAction = 'update' | 'cancel'
 
-export const ManageSubscriptionActions = () => {
-  const [action, setAction] = useState<ManageSubscriptionAction | null>(null)
-  const [subscriptionId, setSubscriptionId] = useState<string | null>(null)
+type Stage = ManageSubscriptionAction | 'sync'
 
+const stageTitle: Record<Stage, string> = {
+  update: 'Update Subscription',
+  cancel: 'Cancel Subscription',
+  sync: 'Syncing Subscription...',
+}
+
+export const ManageSubscriptionActions = () => {
+  const [stage, setStage] = useState<Stage | null>(null)
   const query = useManageSubscriptionQuery()
 
   const user = useAssertUserState()
@@ -32,45 +39,44 @@ export const ManageSubscriptionActions = () => {
           cancel: cancelUrl,
         }
 
-        const actionTitle: Record<ManageSubscriptionAction, string> = {
-          update: 'Update Subscription',
-          cancel: 'Cancel Subscription',
-        }
+        const renderActionContent = (action: ManageSubscriptionAction) => (
+          <PaddleIFrame
+            user={user}
+            override={actionUrl[action]}
+            product={planId}
+            onClose={() => setStage(null)}
+            onSuccess={() => {
+              setStage('sync')
+            }}
+          />
+        )
 
         return (
           <HStack alignItems="center" gap={20}>
-            <Button onClick={() => setAction('update')} kind="secondary">
+            <Button onClick={() => setStage('update')} kind="secondary">
               Update
             </Button>
-            <Button onClick={() => setAction('cancel')} kind="alert">
+            <Button onClick={() => setStage('cancel')} kind="alert">
               Cancel
             </Button>
 
-            {action && (
+            {stage && (
               <PaddleModal
-                title={actionTitle[action]}
-                onClose={() => setAction(null)}
+                title={stageTitle[stage]}
+                onClose={() => setStage(null)}
               >
-                <PaddleIFrame
-                  user={user}
-                  override={actionUrl[action]}
-                  product={planId}
-                  onClose={() => setAction(null)}
-                  onSuccess={() => {
-                    if (user.subscription) {
-                      setSubscriptionId(user.subscription.id)
-                    }
-                    setAction(null)
-                  }}
+                <Match
+                  value={stage}
+                  update={() => renderActionContent('update')}
+                  cancel={() => renderActionContent('cancel')}
+                  sync={() => (
+                    <SyncSubscription
+                      subscriptionId={subscription!.id}
+                      onFinish={() => setStage(null)}
+                    />
+                  )}
                 />
               </PaddleModal>
-            )}
-
-            {subscriptionId && (
-              <SyncSubscription
-                subscriptionId={subscriptionId}
-                onFinish={() => setSubscriptionId(null)}
-              />
             )}
           </HStack>
         )

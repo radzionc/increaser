@@ -33,13 +33,14 @@ export const InlineFounderContacts = ({
   return (
     <HStack gap={16} alignItems="center" wrap="wrap">
       <CopyText content={AUTHOR_EMAIL}>
-        <Text as="span" size={size === 'm' ? 16 : 14}>
+        <Text color="regular" as="span" size={size === 'm' ? 16 : 14}>
           {AUTHOR_EMAIL}
         </Text>
       </CopyText>
       <ExternalLink to={AUTHOR_TWITTER}>
         <IconButton
           {...iconButtonSharedProps}
+          kind="secondary"
           title="Twitter"
           icon={<TwitterIcon />}
         />
@@ -47,12 +48,14 @@ export const InlineFounderContacts = ({
       <ExternalLink to={AUTHOR_LINKEDIN}>
         <IconButton
           {...iconButtonSharedProps}
+          kind="secondary"
           title="LinkedIn"
           icon={<LinkedinIcon />}
         />
       </ExternalLink>
       <ExternalLink to={AUTHOR_TELEGRAM}>
         <IconButton
+          kind="secondary"
           {...iconButtonSharedProps}
           title="Telegram"
           icon={<TelegramIcon />}

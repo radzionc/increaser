@@ -20,6 +20,7 @@ import { ThemeProvider } from 'ui/ThemeProvider'
 
 import { Open_Sans } from 'next/font/google'
 import { Page } from 'layout/Page'
+import { MembershipConfirmation } from 'membership/components/MembershipConfirmation'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -57,6 +58,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                         <SetsManagerProvider>
                           <FocusProvider>
                             <BreakProvider>{component}</BreakProvider>
+                            <MembershipConfirmation />
                           </FocusProvider>
                         </SetsManagerProvider>
                       </HabitsProvider>

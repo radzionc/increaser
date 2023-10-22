@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
 import { usePaddleSdk } from '../hooks/usePaddleSdk'
 import { User } from '@increaser/entities/User'
 
@@ -12,15 +11,8 @@ interface Props {
   product: string | number
 }
 
-const contentMinHeight = getCSSUnit(600)
-
 const Container = styled.div`
   position: relative;
-  min-height: ${contentMinHeight};
-
-  iframe {
-    min-height: ${contentMinHeight};
-  }
 `
 
 export const PaddleIFrame = ({
@@ -51,8 +43,7 @@ export const PaddleIFrame = ({
       email: email,
       passthrough: JSON.stringify({ userId: id }),
       override,
-      frameStyle:
-        'width:100%; min-width:312px; background-color: transparent; border: none;',
+      frameStyle: 'width:100%; background-color: transparent; border: none;',
     })
   }, [className, onClose, override, paddleSdk, product, email, id])
 

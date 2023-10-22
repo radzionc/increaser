@@ -5,7 +5,6 @@ import { paddleProductCode } from '@increaser/paddle-ui/paddleProductCode'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
-import { MembershipConfirmation } from 'membership/components/MembershipConfirmation'
 import { PaddleModal } from '@increaser/paddle-ui/components/PaddleModal'
 import { productName } from '@increaser/entities'
 import { Flow } from '@increaser/ui/ui/Flow'
@@ -23,9 +22,6 @@ type SubscriptionCheckoutStep =
       id: 'subscription'
       subscriptionId: string
     }
-  | {
-      id: 'confirmation'
-    }
 
 type StepId = SubscriptionCheckoutStep['id']
 
@@ -33,7 +29,6 @@ const stepTitle: Record<StepId, string> = {
   paddle: `${productName} Subscription`,
   subscriptionId: 'Syncing Checkout...',
   subscription: 'Syncing Subscription...',
-  confirmation: 'Congratulations!',
 }
 
 export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
@@ -73,7 +68,6 @@ export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
               subscriptionId={subscriptionId}
             />
           ),
-          confirmation: () => <MembershipConfirmation onFinish={onClose} />,
         }}
       />
     </PaddleModal>

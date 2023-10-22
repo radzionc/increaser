@@ -58,7 +58,11 @@ export const ManageSubscription = () => {
 
   return (
     <VStack gap={16}>
-      <Text>{messages.join(' ')}</Text>
+      <VStack gap={4}>
+        {messages.map((message) => (
+          <Text key={message}>{message}</Text>
+        ))}
+      </VStack>
       <ManageSubscriptionActions />
     </VStack>
   )

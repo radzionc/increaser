@@ -21,6 +21,7 @@ export interface CheckoutSuccessInfo {
 }
 
 interface PaddleSdkOpenCheckoutParams {
+  displayModeTheme?: 'dark' | 'light'
   method: string
   product: number
   allowQuantity: boolean
@@ -28,7 +29,7 @@ interface PaddleSdkOpenCheckoutParams {
   frameTarget: string
   successCallback?: (info: CheckoutSuccessInfo) => void
   closeCallback: () => void
-  frameInitialHeight: number
+  frameInitialHeight?: number
   loadCallback?: () => void
   email?: string | null
   passthrough: string
@@ -38,7 +39,7 @@ interface PaddleSdkOpenCheckoutParams {
 
 interface OrderDetailsInfo {
   order?: {
-    subscription_id: string
+    subscription_id: number
   }
 }
 
@@ -60,6 +61,7 @@ export interface PaddleSdk {
     details: (
       checkoutId: string,
       callback: (info: OrderDetailsInfo) => void,
+      showLoader?: boolean,
     ) => void
   }
 }
