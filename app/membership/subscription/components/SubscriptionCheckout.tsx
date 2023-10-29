@@ -1,14 +1,14 @@
 import { ClosableComponentProps } from '@increaser/ui/props'
 import { useSubscriptionBillingCycle } from '@increaser/ui/subscription/components/SubscriptionBillingCycleProvider'
-import { PaddleIFrame } from '@increaser/paddle-ui/components/PaddleIFrame'
-import { paddleProductCode } from '@increaser/paddle-ui/paddleProductCode'
+import { PaddleIFrame } from '@increaser/paddle-classic-ui/components/PaddleIFrame'
+import { paddleProductCode } from '@increaser/paddle-classic-ui/paddleProductCode'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
-import { PaddleModal } from '@increaser/paddle-ui/components/PaddleModal'
+import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal'
 import { productName } from '@increaser/entities'
 import { Flow } from '@increaser/ui/ui/Flow'
-import { QuerySubscriptionId } from '@increaser/paddle-ui/components/QuerySubscriptionId'
+import { QuerySubscriptionId } from '@increaser/paddle-classic-ui/components/QuerySubscriptionId'
 
 type SubscriptionCheckoutStep =
   | {

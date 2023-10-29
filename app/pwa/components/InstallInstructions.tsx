@@ -1,9 +1,10 @@
 import { analytics } from 'analytics'
 import { usePWA } from 'pwa/PWAContext'
-import { APP_NAME } from 'shared/product'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
+import { productName } from '@increaser/entities'
+
 export const InstallInstructions = () => {
   const { installPromptEvent } = usePWA()
 
@@ -15,7 +16,7 @@ export const InstallInstructions = () => {
           analytics.trackEvent('Attempt Install')
         }}
       >
-        Install {APP_NAME}
+        Install {productName}
       </Button>
     )
   }

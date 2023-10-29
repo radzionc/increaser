@@ -1,4 +1,4 @@
-import { AUTHOR_EMAIL } from '../../../app/shared/externalResources'
+import { supportEmail } from '@increaser/entities'
 import { CopyText } from '../../ui/CopyText'
 import { Spinner } from '../../ui/Spinner'
 import { VStack } from '../../ui/Stack'
@@ -10,7 +10,6 @@ interface BlockingQueryProps {
 }
 
 export const BlockingQuery = ({ error }: BlockingQueryProps) => {
-  console.log(error)
   return (
     <VStack alignItems="center" gap={20}>
       <Text
@@ -32,8 +31,8 @@ export const BlockingQuery = ({ error }: BlockingQueryProps) => {
           </Text>
           <Text centered color="supporting" size={14}>
             Nothing helps? Email us at <br />
-            <CopyText color="regular" as="span" content={AUTHOR_EMAIL}>
-              {AUTHOR_EMAIL}
+            <CopyText color="regular" as="span" content={supportEmail}>
+              {supportEmail}
             </CopyText>
           </Text>
         </>

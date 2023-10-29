@@ -4,7 +4,7 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { ManageSubscriptionActions } from './ManageSubscriptionActions'
 import { mirrorRecord } from '@increaser/utils/mirrorRecord'
 import { format } from 'date-fns'
-import { paddleProductCode } from '@increaser/paddle-ui/paddleProductCode'
+import { paddleProductCode } from '@increaser/paddle-classic-ui/paddleProductCode'
 
 const subscriptionDateFormat = 'dd MMMM yyyy'
 

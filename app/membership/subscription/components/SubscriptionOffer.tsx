@@ -4,7 +4,7 @@ import { SubscriptionPrice } from '@increaser/ui/subscription/components/Subscri
 import { getAnnualSubscriptionSavings } from '@increaser/entities-utils/subscription/getAnnualSubscriptionSavings'
 import { useSubscriptionBillingCycle } from '@increaser/ui/subscription/components/SubscriptionBillingCycleProvider'
 import { MembershipBenefits } from 'membership/components/MembershipBenefits'
-import { SubscriptionPricesQueryDependant } from '@increaser/paddle-ui/components/SubscriptionPricesQueryDependant'
+import { SubscriptionPricesQueryDependant } from '@increaser/paddle-classic-ui/components/SubscriptionPricesQueryDependant'
 
 export const SubscriptionOffer = () => {
   const [billingCycle, setBillingCycle] = useSubscriptionBillingCycle()

@@ -4,7 +4,7 @@ import { Text } from '@increaser/ui/ui/Text'
 import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
 import Head from 'next/head'
 import { ReactNode } from 'react'
-import { APP_NAME } from 'shared/product'
+import { productName } from '@increaser/entities'
 
 interface Props {
   title: React.ReactNode
@@ -40,7 +40,7 @@ export const PageTitle = ({
       </HStack>
       {documentTitle && (
         <Head>
-          <title>{[documentTitle, APP_NAME].join(' | ')}</title>
+          <title>{[documentTitle, productName].join(' | ')}</title>
         </Head>
       )}
       {description && (

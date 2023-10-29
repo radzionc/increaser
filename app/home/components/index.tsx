@@ -6,12 +6,13 @@ import { UserStateOnly } from 'user/state/UserStateOnly'
 import { HomePageContent } from './HomePageContent'
 import Head from 'next/head'
 import { Page } from 'layout/Page'
+import { productName } from '@increaser/entities'
 
 export const HomePage: Page = () => {
   return (
     <FixedWidthContent style={{ display: 'flex', flexDirection: 'column' }}>
       <Head>
-        <title>🏠 Overview | Increaser</title>
+        <title>🏠 Overview | {productName}</title>
       </Head>
       <UserStateOnly>
         <ErrorBoundary fallback={<ErrorFallbackCard />}>

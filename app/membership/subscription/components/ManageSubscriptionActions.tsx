@@ -1,5 +1,5 @@
-import { PaddleIFrame } from '@increaser/paddle-ui/components/PaddleIFrame'
-import { PaddleModal } from '@increaser/paddle-ui/components/PaddleModal'
+import { PaddleIFrame } from '@increaser/paddle-classic-ui/components/PaddleIFrame'
+import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal'
 import { useManageSubscriptionQuery } from '../hooks/useManageSubscriptionQuery'
 import { QueryDependant } from '@increaser/ui/query/components/QueryDependant'
 import { getQueryDependantDefaultProps } from '@increaser/ui/query/utils/getQueryDependantDefaultProps'

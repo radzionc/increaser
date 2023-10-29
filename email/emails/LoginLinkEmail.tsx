@@ -1,3 +1,4 @@
+import { productName } from '@increaser/entities'
 import { lightTheme } from '@increaser/ui/ui/theme/lightTheme'
 import {
   Body,
@@ -45,31 +46,31 @@ export const LoginLinkEmail = ({
         fontStyle="normal"
       />
     </Head>
-    <Preview>Log in to Increaser</Preview>
+    <Preview>Log in to {productName}</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
           src={`https://increaser.org/images/logo.png`}
           width="68"
           height="68"
-          alt="Increaser"
+          alt={productName}
         />
-        <Heading style={heading}>Increaser</Heading>
+        <Heading style={heading}>{productName}</Heading>
         <Text>
-          Click the button below to log in to <b>Increaser</b>.
+          Click the button below to log in to <b>{productName}</b>.
           <br />
           This button will expire in 20 minutes.
         </Text>
         <Section style={buttonContainer}>
           <Button pY={20} pX={20} style={button} href={loginUrl}>
-            Log in to Increaser
+            Log in to {productName}
           </Button>
         </Section>
         <Text>
           Confirming this request will securely log you in using{' '}
           <a style={userEmail}>{email}</a>.
         </Text>
-        <Text>- Increaser Team</Text>
+        <Text>- {productName} Team</Text>
       </Container>
     </Body>
   </Html>

@@ -3,7 +3,6 @@ import { getPlatform } from 'pwa/getPlatform'
 import { platformInfo } from 'pwa/platformInfo'
 import { usePWA } from 'pwa/PWAContext'
 import { useMemo } from 'react'
-import { APP_NAME } from 'shared/product'
 import styled from 'styled-components'
 import {
   IconWrapper,
@@ -13,6 +12,7 @@ import { ArrowDownCircleIcon } from '@increaser/ui/ui/icons/ArrowDownCircleIcon'
 import { Text } from '@increaser/ui/ui/Text'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { CloseButton } from '@increaser/ui/ui/buttons/CloseButton'
+import { productName } from '@increaser/entities'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -60,7 +60,7 @@ export const InstallPrompt = () => {
               <div>
                 {platform
                   ? `Install on ${platformInfo[platform].name}`
-                  : `Install ${APP_NAME}`}
+                  : `Install ${productName}`}
               </div>
             </>
           </HStack>

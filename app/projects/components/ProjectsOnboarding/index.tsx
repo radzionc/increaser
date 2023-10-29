@@ -13,6 +13,7 @@ import { ContinueButton } from 'ui/ContinueButton'
 import { EmojiInput } from 'ui/EmojiInput'
 import { MinimalisticTextInput } from 'ui/MinimalisticTextInput'
 import { ClosableComponentProps } from '@increaser/ui/props'
+import { productName } from '@increaser/entities'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void
@@ -61,7 +62,7 @@ export const ProjectsOnboarding = ({ onNext, onClose }: Props) => {
     <Modal
       onClose={onClose}
       placement="top"
-      title="What projects do you want to track with Increaser?"
+      title={`What projects do you want to track with ${productName}?`}
       subTitle={
         <>
           <Text as="span" color="shy">

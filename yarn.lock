@@ -3915,6 +3915,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/paddle-classic-ui@workspace:paddle-classic-ui":
+  version: 0.0.0-use.local
+  resolution: "@increaser/paddle-classic-ui@workspace:paddle-classic-ui"
+  dependencies:
+    date-fns: ^2.30.0
+    react: ^18.2.0
+  languageName: unknown
+  linkType: soft
+
 "@increaser/paddle-classic-webhooks@workspace:paddle-classic-webhooks":
   version: 0.0.0-use.local
   resolution: "@increaser/paddle-classic-webhooks@workspace:paddle-classic-webhooks"
@@ -3928,15 +3937,6 @@ __metadata:
   resolution: "@increaser/paddle-classic@workspace:paddle-classic"
   dependencies:
     date-fns: ^2.30.0
-  languageName: unknown
-  linkType: soft
-
-"@increaser/paddle-ui@workspace:paddle-ui":
-  version: 0.0.0-use.local
-  resolution: "@increaser/paddle-ui@workspace:paddle-ui"
-  dependencies:
-    date-fns: ^2.30.0
-    react: ^18.2.0
   languageName: unknown
   linkType: soft
 
