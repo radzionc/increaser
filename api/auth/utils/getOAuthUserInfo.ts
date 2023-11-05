@@ -1,6 +1,6 @@
 import { match } from '@increaser/utils/match'
 import { OAuthProvider } from '../../gql/schema'
-import { addQueryParams } from '@increaser/utils/addQueryParams'
+import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { queryOAuthProvider } from './queryOAuthProvider'
 
 interface GetOAuthUserInfoParams {

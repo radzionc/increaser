@@ -1,6 +1,6 @@
 import { generateAuthLinkToken } from '../auth/helpers/generateAuthLinkToken'
 import { sendLoginLinkEmail } from '@increaser/email/utils/sendLogInLinkEmail'
-import { addQueryParams } from '@increaser/utils/addQueryParams'
+import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { assertEnvVar } from '../shared/assertEnvVar'
 
 const sendAuthEmail = async (email: string) => {

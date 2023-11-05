@@ -1,4 +1,4 @@
-import { addQueryParams } from '@increaser/utils/addQueryParams'
+import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { MutationResolvers } from '../../gql/schema'
 import { generateAuthLinkToken } from '../helpers/generateAuthLinkToken'
 import { assertEnvVar } from '../../shared/assertEnvVar'
