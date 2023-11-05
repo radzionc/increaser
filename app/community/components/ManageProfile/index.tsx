@@ -44,7 +44,7 @@ export const ManageProfile = () => {
               justifyContent="space-between"
             >
               <LabeledValue name="Name">
-                <HStack alignItems="center" gap={6}>
+                <HStack alignItems="center" gap={8}>
                   {isAnonymous ? (
                     <ScoreboardDisplayName />
                   ) : (
