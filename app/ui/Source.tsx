@@ -1,7 +1,7 @@
 import { Text } from '@increaser/ui/ui/Text'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import styled from 'styled-components'
-import { ExternalLinkIcon } from '@increaser/ui/ui/icons/ExternalLinkIcon'
+import { ExternalLinkIcon } from '@increaser/ui/icons/ExternalLinkIcon'
 
 interface SourceProps {
   text: string

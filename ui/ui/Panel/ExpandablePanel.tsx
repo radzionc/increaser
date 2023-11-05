@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '../animations/transitions'
-import { ChevronDownIcon } from '../icons/ChevronDownIcon'
+import { ChevronDownIcon } from '../../icons/ChevronDownIcon'
 import { HStack } from '../Stack'
 import { centerContentCSS } from '../utils/centerContentCSS'
 import { getSameDimensionsCSS } from '../utils/getSameDimensionsCSS'

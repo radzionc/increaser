@@ -2,7 +2,7 @@ import { useDeleteProjectMutation } from 'projects/api/userDeleteProjectMutation
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
 import { TextButton } from '@increaser/ui/ui/buttons/TextButton'
-import { TrashBinIcon } from '@increaser/ui/ui/icons/TrashBinIcon'
+import { TrashBinIcon } from '@increaser/ui/icons/TrashBinIcon'
 import { ConfirmationModal } from '@increaser/ui/modal/ConfirmationModal'
 import { Opener } from '@increaser/ui/ui/Opener'
 import { VStack } from '@increaser/ui/ui/Stack'

@@ -1,11 +1,11 @@
-import { CopyIcon } from './icons/CopyIcon'
+import { CopyIcon } from '../icons/CopyIcon'
 import styled from 'styled-components'
 import { getColor } from './theme/getters'
 import copy from 'copy-to-clipboard'
 import { defaultTransitionCSS } from './animations/transitions'
 import { useState } from 'react'
 import { Match } from './Match'
-import { CheckIcon } from './icons/CheckIcon'
+import { CheckIcon } from '../icons/CheckIcon'
 import { Text } from './Text'
 
 interface CopyTextProps extends React.ComponentProps<typeof Text> {

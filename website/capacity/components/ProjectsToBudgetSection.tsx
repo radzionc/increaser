@@ -6,7 +6,7 @@ import styled, { useTheme } from 'styled-components'
 import { Circle } from '@increaser/ui/ui/Circle'
 import { Text } from '@increaser/ui/ui/Text'
 import { AllocationLine } from 'ui/AllocationLine'
-import { CheckCircleIcon } from '@increaser/ui/ui/icons/CheckCircleIcon'
+import { CheckCircleIcon } from '@increaser/ui/icons/CheckCircleIcon'
 
 interface ProjectsToBudgetSectionProps {
   projects: Project[]

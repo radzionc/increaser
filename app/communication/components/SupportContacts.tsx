@@ -6,10 +6,10 @@ import {
   AUTHOR_TWITTER,
 } from 'shared/externalResources'
 import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
-import { EnvelopIcon } from '@increaser/ui/ui/icons/EnvelopIcon'
-import { LinkedinIcon } from '@increaser/ui/ui/icons/LinkedinIcon'
-import { TelegramIcon } from '@increaser/ui/ui/icons/TelegramIcon'
-import { TwitterIcon } from '@increaser/ui/ui/icons/TwitterIcon'
+import { EnvelopIcon } from '@increaser/ui/icons/EnvelopIcon'
+import { LinkedinIcon } from '@increaser/ui/icons/LinkedinIcon'
+import { TelegramIcon } from '@increaser/ui/icons/TelegramIcon'
+import { TwitterIcon } from '@increaser/ui/icons/TwitterIcon'
 import { VStack } from '@increaser/ui/ui/Stack'
 
 export const SupportContacts = () => (

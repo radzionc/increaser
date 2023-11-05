@@ -7,11 +7,11 @@ import { formatTime } from '@increaser/utils/time/formatTime'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { ArrowRightIcon } from '@increaser/ui/ui/icons/ArrowRightIcon'
+import { ArrowRightIcon } from '@increaser/ui/icons/ArrowRightIcon'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-import { ArrowLeftIcon } from '@increaser/ui/ui/icons/ArrowLeftIcon'
+import { ArrowLeftIcon } from '@increaser/ui/icons/ArrowLeftIcon'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 interface Props {

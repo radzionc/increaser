@@ -1,7 +1,22 @@
-import { CountryFlag } from '@increaser/ui/country/CountryFlag'
+import { CountryCode } from '@increaser/utils/countries'
+import { CountryFlag } from '@increaser/ui/countries/flags/CountryFlag'
+import { CountryFlagFrame } from '@increaser/ui/countries/CountryFlagFrame'
 import styled from 'styled-components'
+import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
 
-export const ScoreboardCountryFlag = styled(CountryFlag)`
+interface ScoreboardCountryFlagProps {
+  code?: CountryCode
+}
+
+const Container = styled(IconWrapper)`
+  font-size: 20px;
   border-radius: 2px;
-  width: 20px;
 `
+
+export const ScoreboardCountryFlag = ({ code }: ScoreboardCountryFlagProps) => {
+  return (
+    <Container>
+      {code ? <CountryFlag code={code} /> : <CountryFlagFrame />}
+    </Container>
+  )
+}

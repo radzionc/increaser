@@ -8,7 +8,7 @@ import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
 import { VStack } from '@increaser/ui/ui/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
-import { CountryCode } from '@increaser/utils/countryNameRecord'
+import { CountryCode } from '@increaser/utils/countries'
 import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
 
 const Row = styled.div`
@@ -30,8 +30,8 @@ const Outline = styled.div`
 const Identity = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 24px 24px 1fr;
-  gap: 4px;
+  grid-template-columns: 24px auto 1fr;
+  gap: 6px;
 `
 
 const ColumnName = styled(Text)`

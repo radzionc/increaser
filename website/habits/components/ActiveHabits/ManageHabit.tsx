@@ -1,7 +1,7 @@
 import { OpenMenuButton } from '@increaser/ui/ui/buttons/OpenMenuButton'
-import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
-import { RefreshIcon } from '@increaser/ui/ui/icons/RefreshIcon'
-import { TrashBinIcon } from '@increaser/ui/ui/icons/TrashBinIcon'
+import { EditIcon } from '@increaser/ui/icons/EditIcon'
+import { RefreshIcon } from '@increaser/ui/icons/RefreshIcon'
+import { TrashBinIcon } from '@increaser/ui/icons/TrashBinIcon'
 import { Menu } from '@increaser/ui/ui/Menu'
 import { MenuOption, MenuOptionProps } from '@increaser/ui/ui/Menu/MenuOption'
 

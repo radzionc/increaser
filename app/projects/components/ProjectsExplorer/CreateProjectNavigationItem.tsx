@@ -9,7 +9,7 @@ import {
 } from './ProjectNavigationItem'
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 
-import { ChevronRightIcon } from '@increaser/ui/ui/icons/ChevronRightIcon'
+import { ChevronRightIcon } from '@increaser/ui/icons/ChevronRightIcon'
 import Link from 'next/link'
 import { Path } from 'router/Path'
 

@@ -1,7 +1,7 @@
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
-import { ChevronDownIcon } from '@increaser/ui/ui/icons/ChevronDownIcon'
-import { ChevronUpIcon } from '@increaser/ui/ui/icons/ChevronUpIcon'
+import { ChevronDownIcon } from '@increaser/ui/icons/ChevronDownIcon'
+import { ChevronUpIcon } from '@increaser/ui/icons/ChevronUpIcon'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 

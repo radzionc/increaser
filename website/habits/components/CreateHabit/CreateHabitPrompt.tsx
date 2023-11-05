@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
 import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
 import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'
+import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
 import { HStack } from '@increaser/ui/ui/Stack'
 
 const Container = styled(UnstyledButton)`

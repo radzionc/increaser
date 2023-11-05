@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { ActionInsideInteractiveElement } from './ActionInsideInteractiveElement'
 import { defaultTransitionCSS } from './animations/transitions'
-import { CloseIcon } from './icons/CloseIcon'
+import { CloseIcon } from '../icons/CloseIcon'
 import { Panel } from './Panel/Panel'
 import { Text } from './Text'
 import { getColor } from './theme/getters'

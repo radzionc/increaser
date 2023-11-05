@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { ChevronRightIcon } from '@increaser/ui/ui/icons/ChevronRightIcon'
+import { ChevronRightIcon } from '@increaser/ui/icons/ChevronRightIcon'
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { HStack, VStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'

@@ -8,7 +8,7 @@ import {
   IconWrapper,
   Container as NavigationContainer,
 } from 'ui/Navigation/Sidebar/NavigationItem'
-import { ArrowDownCircleIcon } from '@increaser/ui/ui/icons/ArrowDownCircleIcon'
+import { ArrowDownCircleIcon } from '@increaser/ui/icons/ArrowDownCircleIcon'
 import { Text } from '@increaser/ui/ui/Text'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { CloseButton } from '@increaser/ui/ui/buttons/CloseButton'

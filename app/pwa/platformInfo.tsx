@@ -1,7 +1,7 @@
-import { AndroidIcon } from '@increaser/ui/ui/icons/AndroidIcon'
-import { AppleIcon } from '@increaser/ui/ui/icons/AppleIcon'
-import { LinuxIcon } from '@increaser/ui/ui/icons/LinuxIcon'
-import { WindowsIcon } from '@increaser/ui/ui/icons/WindowsIcon'
+import { AndroidIcon } from '@increaser/ui/icons/AndroidIcon'
+import { AppleIcon } from '@increaser/ui/icons/AppleIcon'
+import { LinuxIcon } from '@increaser/ui/icons/LinuxIcon'
+import { WindowsIcon } from '@increaser/ui/icons/WindowsIcon'
 
 import { Platform } from './Platform'
 

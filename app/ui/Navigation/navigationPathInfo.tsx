@@ -1,12 +1,12 @@
 import { Path } from 'router/Path'
-import { CalendarIcon } from '@increaser/ui/ui/icons/CalendarIcon'
-import { ClockIcon } from '@increaser/ui/ui/icons/ClockIcon'
-import { HomeIcon } from '@increaser/ui/ui/icons/HomeIcon'
-import { ListIcon } from '@increaser/ui/ui/icons/ListIcon'
-import { SettingsIcon } from '@increaser/ui/ui/icons/SettingsIcon'
-import { TableIcon } from '@increaser/ui/ui/icons/TableIcon'
-import { ZapIcon } from '@increaser/ui/ui/icons/ZapIcon'
-import { GlobeIcon } from '@increaser/ui/ui/icons/GlobeIcon'
+import { CalendarIcon } from '@increaser/ui/icons/CalendarIcon'
+import { ClockIcon } from '@increaser/ui/icons/ClockIcon'
+import { HomeIcon } from '@increaser/ui/icons/HomeIcon'
+import { ListIcon } from '@increaser/ui/icons/ListIcon'
+import { SettingsIcon } from '@increaser/ui/icons/SettingsIcon'
+import { TableIcon } from '@increaser/ui/icons/TableIcon'
+import { ZapIcon } from '@increaser/ui/icons/ZapIcon'
+import { GlobeIcon } from '@increaser/ui/icons/GlobeIcon'
 
 export const navigationPathInfo = {
   [Path.Home]: {

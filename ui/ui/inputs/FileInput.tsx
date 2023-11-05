@@ -6,7 +6,7 @@ import { Button } from '../buttons/Button'
 import { getColor } from '../theme/getters'
 import { VStack } from '../Stack'
 import { defaultTransitionCSS } from '../animations/transitions'
-import { UploadIcon } from '../icons/UploadIcon'
+import { UploadIcon } from '../../icons/UploadIcon'
 import { Text } from '../Text'
 
 interface Props {

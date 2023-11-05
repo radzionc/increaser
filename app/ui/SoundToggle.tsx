@@ -1,6 +1,6 @@
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
-import { NoVolumeIcon } from '@increaser/ui/ui/icons/NoVolumeIcon'
-import { VolumeIcon } from '@increaser/ui/ui/icons/VolumeIcon'
+import { NoVolumeIcon } from '@increaser/ui/icons/NoVolumeIcon'
+import { VolumeIcon } from '@increaser/ui/icons/VolumeIcon'
 
 interface SoundToggleProps {
   value: boolean

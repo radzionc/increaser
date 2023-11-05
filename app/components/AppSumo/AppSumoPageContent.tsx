@@ -1,7 +1,7 @@
 import { Panel } from '@increaser/ui/ui/Panel/Panel'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
-import { CheckCircleIcon } from '@increaser/ui/ui/icons/CheckCircleIcon'
+import { CheckCircleIcon } from '@increaser/ui/icons/CheckCircleIcon'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { AppSumoCodeRedemption } from './AppSumoCodeRedemption'
 

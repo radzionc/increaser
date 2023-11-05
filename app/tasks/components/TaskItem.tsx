@@ -1,5 +1,5 @@
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
-import { TrashBinIcon } from '@increaser/ui/ui/icons/TrashBinIcon'
+import { TrashBinIcon } from '@increaser/ui/icons/TrashBinIcon'
 import { OnHoverAction } from '@increaser/ui/ui/OnHoverAction'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'

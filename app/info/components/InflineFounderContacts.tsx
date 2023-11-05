@@ -9,9 +9,9 @@ import {
   IconButton,
   IconButtonProps,
 } from '@increaser/ui/ui/buttons/IconButton'
-import { LinkedinIcon } from '@increaser/ui/ui/icons/LinkedinIcon'
-import { TelegramIcon } from '@increaser/ui/ui/icons/TelegramIcon'
-import { TwitterIcon } from '@increaser/ui/ui/icons/TwitterIcon'
+import { LinkedinIcon } from '@increaser/ui/icons/LinkedinIcon'
+import { TelegramIcon } from '@increaser/ui/icons/TelegramIcon'
+import { TwitterIcon } from '@increaser/ui/icons/TwitterIcon'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { CopyText } from '@increaser/ui/ui/CopyText'

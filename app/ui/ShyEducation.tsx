@@ -1,6 +1,6 @@
 import { Text } from '@increaser/ui/ui/Text'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { ExternalLinkIcon } from '@increaser/ui/ui/icons/ExternalLinkIcon'
+import { ExternalLinkIcon } from '@increaser/ui/icons/ExternalLinkIcon'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import styled from 'styled-components'
 

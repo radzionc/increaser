@@ -1,5 +1,5 @@
 import { pluralize } from '@increaser/utils/pluralize'
-import { ZapIcon } from '@increaser/ui/ui/icons/ZapIcon'
+import { ZapIcon } from '@increaser/ui/icons/ZapIcon'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'
 import { HabitStatistic } from './HabitStatistic'

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { pluralize } from '@increaser/utils/pluralize'
-import { ZapIcon } from '@increaser/ui/ui/icons/ZapIcon'
+import { ZapIcon } from '@increaser/ui/icons/ZapIcon'
 
 import { useHabits } from '../HabitsProvider'
 import { HabitStatistic } from './HabitStatistic'

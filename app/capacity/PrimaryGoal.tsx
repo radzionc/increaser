@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import { DefaultTheme } from 'styled-components'
 import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { FireIcon } from '@increaser/ui/ui/icons/FireIcon'
-import { ForestIcon } from '@increaser/ui/ui/icons/ForestIcon'
-import { WavesIcon } from '@increaser/ui/ui/icons/WavesIcon'
+import { FireIcon } from '@increaser/ui/icons/FireIcon'
+import { ForestIcon } from '@increaser/ui/icons/ForestIcon'
+import { WavesIcon } from '@increaser/ui/icons/WavesIcon'
 
 export const primaryGoals = ['workLess', 'awareness', 'workMore'] as const
 

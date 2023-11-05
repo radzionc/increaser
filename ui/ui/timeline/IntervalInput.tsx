@@ -9,7 +9,7 @@ import {
 import { useEvent } from 'react-use'
 import styled, { css } from 'styled-components'
 import { HSLA } from '../colors/HSLA'
-import { MoveIcon } from '../icons/MoveIcon'
+import { MoveIcon } from '../../icons/MoveIcon'
 import { Text } from '../Text'
 import { centerContentCSS } from '../utils/centerContentCSS'
 import { getIntervalDuration } from '../utils/getIntervalDuration'

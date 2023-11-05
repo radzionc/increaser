@@ -1,4 +1,4 @@
-import { PlusIcon } from '@increaser/ui/ui/icons/PlusIcon'
+import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'

@@ -9,7 +9,7 @@ import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import styled from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { UnlockIcon } from '@increaser/ui/ui/icons/UnlockIcon'
+import { UnlockIcon } from '@increaser/ui/icons/UnlockIcon'
 import { takeWholeSpaceAbsolutely } from '@increaser/ui/css/takeWholeSpaceAbsolutely'
 
 const Overlay = styled.div`

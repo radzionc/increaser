@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Hoverable } from '../Hoverable'
 import { defaultTransitionCSS } from '../animations/transitions'
-import { CheckIcon } from '../icons/CheckIcon'
+import { CheckIcon } from '../../icons/CheckIcon'
 import {
   InvisibleHTMLCheckboxProps,
   InvisibleHTMLCheckbox,

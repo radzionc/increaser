@@ -1,6 +1,6 @@
 import { Text } from '@increaser/ui/ui/Text'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
-import { CountryCode } from '@increaser/utils/countryNameRecord'
+import { CountryCode } from '@increaser/utils/countries'
 
 interface ScoreboardDisplayNameProps {
   name?: string

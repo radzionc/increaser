@@ -1,8 +1,8 @@
 import styled, { css, useTheme } from 'styled-components'
 
 import { defaultTransitionCSS } from '../animations/transitions'
-import { CheckIcon } from '../icons/CheckIcon'
-import { CloseIcon } from '../icons/CloseIcon'
+import { CheckIcon } from '../../icons/CheckIcon'
+import { CloseIcon } from '../../icons/CloseIcon'
 import { HStack } from '../Stack'
 import { Text } from '../Text'
 import { getColor } from '../theme/getters'

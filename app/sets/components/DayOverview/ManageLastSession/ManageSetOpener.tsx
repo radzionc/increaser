@@ -1,7 +1,7 @@
 import { interactive } from '@increaser/ui/css/interactive'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { MoreHorizontalIcon } from '@increaser/ui/ui/icons/MoreHorizontalIcon'
+import { MoreHorizontalIcon } from '@increaser/ui/icons/MoreHorizontalIcon'
 import { getColor } from '@increaser/ui/ui/theme/getters'
 import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
 import { toPercents } from '@increaser/utils/toPercents'

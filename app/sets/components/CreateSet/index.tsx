@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { PlusCircleIcon } from '@increaser/ui/ui/icons/PlusCircleIcon'
+import { PlusCircleIcon } from '@increaser/ui/icons/PlusCircleIcon'
 import { Opener } from '@increaser/ui/ui/Opener'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'

@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { Center } from '../Center'
-import { ImageIcon } from '../icons/ImageIcon'
+import { ImageIcon } from '../../icons/ImageIcon'
 import { getColor } from '../theme/getters'
 
 interface Props {

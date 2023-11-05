@@ -8,7 +8,7 @@ import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
 import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
 import { validateEmail } from '@increaser/utils/validation/validateEmail'
-import { addQueryParams } from '@increaser/utils/addQueryParams'
+import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { useApi } from 'api/useApi'
 import { graphql } from '@increaser/api-interface/client'
 

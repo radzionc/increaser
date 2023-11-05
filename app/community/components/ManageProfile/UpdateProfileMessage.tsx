@@ -1,5 +1,5 @@
 import { Text } from '@increaser/ui/ui/Text'
-import { InfoIcon } from '@increaser/ui/ui/icons/InfoIcon'
+import { InfoIcon } from '@increaser/ui/icons/InfoIcon'
 
 export const UpdateProfileMessage = () => (
   <Text color="supporting" size={14} height="large">

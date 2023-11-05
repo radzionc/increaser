@@ -1,6 +1,6 @@
 import { pluralize } from '@increaser/utils/pluralize'
 import { toPercents } from '@increaser/utils/toPercents'
-import { CheckSquareIcon } from '@increaser/ui/ui/icons/CheckSquareIcon'
+import { CheckSquareIcon } from '@increaser/ui/icons/CheckSquareIcon'
 
 import { habitDaysToShow } from './config'
 import { HabitStatistic } from './HabitStatistic'

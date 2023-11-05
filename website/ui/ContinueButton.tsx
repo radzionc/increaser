@@ -1,5 +1,5 @@
 import { ButtonProps, Button } from '@increaser/ui/ui/buttons/Button'
-import { ArrowRightIcon } from '@increaser/ui/ui/icons/ArrowRightIcon'
+import { ArrowRightIcon } from '@increaser/ui/icons/ArrowRightIcon'
 import { HStack } from '@increaser/ui/ui/Stack'
 import { Text } from '@increaser/ui/ui/Text'
 

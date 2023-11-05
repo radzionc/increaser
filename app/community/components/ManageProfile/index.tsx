@@ -6,11 +6,11 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { useState } from 'react'
 import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
 import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
-import { EditIcon } from '@increaser/ui/ui/icons/EditIcon'
+import { EditIcon } from '@increaser/ui/icons/EditIcon'
 import { PublicProfileForm } from '../PublicProfileForm'
 import { ScoreboardDisplayName } from '../ScoreboardDisplayName'
 import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
-import { CountryCode } from '@increaser/utils/countryNameRecord'
+import { CountryCode } from '@increaser/utils/countries'
 import { TimeoutMessage } from '@increaser/ui/ui/TimeoutMessage'
 import { UpdateProfileMessage } from './UpdateProfileMessage'
 
@@ -44,7 +44,7 @@ export const ManageProfile = () => {
               justifyContent="space-between"
             >
               <LabeledValue name="Name">
-                <HStack alignItems="center" gap={8}>
+                <HStack alignItems="center" gap={6}>
                   {isAnonymous ? (
                     <ScoreboardDisplayName />
                   ) : (

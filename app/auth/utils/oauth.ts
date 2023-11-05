@@ -1,8 +1,8 @@
-import { addQueryParams } from '@increaser/utils/addQueryParams'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { Path } from 'router/Path'
 import { match } from '@increaser/utils/match'
+import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 
 const oauthBaseUrlRecord: Record<OAuthProvider, string> = {
   google: 'https://accounts.google.com/o/oauth2/v2/auth',
