@@ -28,6 +28,7 @@ export const ManageProfile = () => {
             justifyContent="space-between"
             alignItems="center"
             gap={16}
+            wrap="wrap"
           >
             <Text size={18} weight="bold">
               Your profile

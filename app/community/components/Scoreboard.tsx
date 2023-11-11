@@ -10,13 +10,13 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 import { CountryCode } from '@increaser/utils/countries'
 import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
+import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
 
 const Row = styled.div`
   display: grid;
   gap: 16px;
   align-items: center;
   align-content: center;
-  grid-template-columns: 240px 80px 80px;
   position: relative;
 `
 
@@ -42,9 +42,15 @@ export const Scoreboard = () => {
   const { users } = useCurrentMonthUsers()
   const { id: myId } = useAssertUserState()
 
+  const shouldHideAvgBlock = useIsScreenWidthLessThan(400)
+
+  const rowStyle = shouldHideAvgBlock
+    ? { gridTemplateColumns: '1fr 80px' }
+    : { gridTemplateColumns: '1fr 80px 80px' }
+
   return (
     <SeparatedByLine gap={16}>
-      <Row>
+      <Row style={rowStyle}>
         <ColumnName as="div">
           <Identity>
             <Text>#</Text>
@@ -52,7 +58,7 @@ export const Scoreboard = () => {
             <Text>Name</Text>
           </Identity>
         </ColumnName>
-        <ColumnName>Avg. block</ColumnName>
+        {!shouldHideAvgBlock && <ColumnName>Avg. block</ColumnName>}
         <ColumnName style={{ textAlign: 'end' }}>Daily avg.</ColumnName>
       </Row>
       <VStack gap={16}>
@@ -63,7 +69,7 @@ export const Scoreboard = () => {
               { dailyAvgInMinutes, name, country, avgBlockInMinutes, id },
               index,
             ) => (
-              <Row key={index}>
+              <Row style={rowStyle} key={index}>
                 {id === myId && <Outline />}
                 <Identity>
                   <Text weight="semibold">{index + 1}.</Text>
@@ -73,9 +79,11 @@ export const Scoreboard = () => {
                   />
                 </Identity>
 
-                <Text color="supporting" weight="semibold">
-                  {formatDuration(avgBlockInMinutes, 'min')}
-                </Text>
+                {!shouldHideAvgBlock && (
+                  <Text color="supporting" weight="semibold">
+                    {formatDuration(avgBlockInMinutes, 'min')}
+                  </Text>
+                )}
 
                 <Text weight="semibold" style={{ textAlign: 'end' }}>
                   {formatDuration(dailyAvgInMinutes, 'min')}

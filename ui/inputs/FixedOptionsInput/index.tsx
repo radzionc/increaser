@@ -20,7 +20,6 @@ import { inputContainer } from '../../css/inputContainer'
 import {
   useFloating,
   offset,
-  flip,
   shift,
   size,
   autoUpdate,
@@ -34,6 +33,7 @@ import { IconButton, iconButtonSizeRecord } from '../../buttons/IconButton'
 import { HStack } from '../../ui/Stack'
 import { Text } from '../../ui/Text'
 import { CollapseToggleButton } from '../../buttons/CollapseToggleButton'
+import { useHasFocusWithin } from '../../hooks/useHasFocusWithin'
 
 interface FixedOptionsInputProps<T> extends InputProps<T | null> {
   placeholder?: string
@@ -65,10 +65,6 @@ const TextInput = styled.input`
 
 const Container = styled.label`
   ${inputContainer};
-
-  :focus-within ${OptionsContainer} {
-    display: initial;
-  }
 `
 
 const ButtonsContainer = styled(HStack)`
@@ -127,7 +123,6 @@ export function FixedOptionsInput<T>({
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(4),
-      flip(),
       shift(),
       size({
         apply({ rects, elements }) {
@@ -138,6 +133,12 @@ export function FixedOptionsInput<T>({
       }),
     ],
   })
+
+  const labelHasFocusWithin = useHasFocusWithin(
+    floatingOptions.refs.domReference,
+  )
+
+  const areOptionsVisible = !shouldHideOptions && labelHasFocusWithin
 
   const listNav = useListNavigation(floatingOptions.context, {
     listRef,
@@ -215,7 +216,7 @@ export function FixedOptionsInput<T>({
               onClick={stopHidingOptions}
               aria-autocomplete="list"
             />
-            {!shouldHideOptions && (
+            {areOptionsVisible && (
               <OptionsContainer
                 {...getFloatingProps({
                   ref: floatingOptions.refs.setFloating,
@@ -249,22 +250,26 @@ export function FixedOptionsInput<T>({
           </Wrapper>
         </Container>
         <ButtonsContainer>
-          <IconButton
-            size={buttonSize}
-            icon={<CloseIcon />}
-            title="Clear"
-            kind="secondary"
-            onClick={() => {
-              onTextInputChange('')
-              inputElement.current?.focus()
-            }}
-          />
+          {textInputValue && (
+            <IconButton
+              size={buttonSize}
+              icon={<CloseIcon />}
+              title="Clear"
+              kind="secondary"
+              onClick={() => {
+                onTextInputChange('')
+                inputElement.current?.focus()
+              }}
+            />
+          )}
           <CollapseToggleButton
             size={buttonSize}
             kind="secondary"
-            isOpen={!shouldHideOptions}
+            isOpen={areOptionsVisible}
             onClick={() => {
-              toggleOptionsHiding()
+              if (labelHasFocusWithin) {
+                toggleOptionsHiding()
+              }
               inputElement.current?.focus()
             }}
           />
