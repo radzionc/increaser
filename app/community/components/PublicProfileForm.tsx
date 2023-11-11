@@ -2,11 +2,11 @@ import { Form } from '@increaser/ui/ui/Form/Form'
 import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
 import { Button } from '@increaser/ui/ui/buttons/Button'
 import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
-import { CountryInput } from '@increaser/ui/ui/inputs/CountryInput'
 import { Controller, useForm } from 'react-hook-form'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { CountryCode } from '@increaser/utils/countries'
+import { CountryInput } from '@increaser/ui/inputs/CountryInput'
 
 interface PublicProfileFormProps {
   onCancel: () => void
@@ -42,7 +42,11 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
             control={control}
             name="country"
             render={({ field: { value, onChange } }) => (
-              <CountryInput value={value} onChange={onChange} />
+              <CountryInput
+                label="Your country"
+                value={value}
+                onChange={onChange}
+              />
             )}
           />
         </>
