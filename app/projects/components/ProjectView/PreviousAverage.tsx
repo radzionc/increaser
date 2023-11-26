@@ -1,6 +1,6 @@
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 
 import { useCurrentProject } from './CurrentProjectProvider'
 

@@ -5,12 +5,12 @@ import {
   AUTHOR_TELEGRAM,
   AUTHOR_TWITTER,
 } from 'shared/externalResources'
-import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
+import { IconCentricButton } from '@increaser/ui/buttons/IconCentricButton'
 import { EnvelopIcon } from '@increaser/ui/icons/EnvelopIcon'
 import { LinkedinIcon } from '@increaser/ui/icons/LinkedinIcon'
 import { TelegramIcon } from '@increaser/ui/icons/TelegramIcon'
 import { TwitterIcon } from '@increaser/ui/icons/TwitterIcon'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 export const SupportContacts = () => (
   <VStack fullWidth gap={12}>

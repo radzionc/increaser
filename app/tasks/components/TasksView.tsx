@@ -1,7 +1,7 @@
 import { useBoolean } from '@increaser/ui/hooks/useBoolean'
-import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { TitledSection } from '@increaser/ui/Layout/TitledSection'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { AddTask } from './AddTask'

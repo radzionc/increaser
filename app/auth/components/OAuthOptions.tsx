@@ -1,5 +1,5 @@
 import { OAuthProvider } from '@increaser/api-interface/client/graphql'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { OAuthOption } from './OAuthOption'
 
 const options: OAuthProvider[] = ['google', 'facebook']

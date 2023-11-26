@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Center } from '@increaser/ui/ui/Center'
-import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
+import { Center } from '@increaser/ui/layout/Center'
+import { LandingSlice } from '@increaser/ui/landing/LandingSlice'
 
 import { ProductScreens } from './ProductScreens'
 import { UVP } from './UVP'

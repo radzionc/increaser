@@ -1,6 +1,6 @@
 import { ProjectWeeklyGoal } from './ProjectWeeklyGoal'
 import { useProjects } from 'projects/hooks/useProjects'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 export const ProjectsGoals = () => {
   const { allocatedProjects } = useProjects()

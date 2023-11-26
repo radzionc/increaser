@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { Set } from 'sets/Set'
 import { useTheme } from 'styled-components'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { AllocationLine } from 'ui/AllocationLine'
 
 interface Props {

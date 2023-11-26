@@ -3,13 +3,13 @@ import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal
 import { useManageSubscriptionQuery } from '../hooks/useManageSubscriptionQuery'
 import { QueryDependant } from '@increaser/ui/query/components/QueryDependant'
 import { getQueryDependantDefaultProps } from '@increaser/ui/query/utils/getQueryDependantDefaultProps'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Button } from '@increaser/ui/buttons/Button'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
-import { Match } from '@increaser/ui/ui/Match'
+import { Match } from '@increaser/ui/base/Match'
 
 type ManageSubscriptionAction = 'update' | 'cancel'
 

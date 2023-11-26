@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { productName } from '@increaser/entities'
 

@@ -7,14 +7,14 @@ import {
 } from '@increaser/entities-utils/block'
 import { toPercents } from '@increaser/utils/toPercents'
 import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import {
   horizontalPaddingInPx,
   timeLabelWidthInPx,
   timeLabelGapInPx,
 } from '../config'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'

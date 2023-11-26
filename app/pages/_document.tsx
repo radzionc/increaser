@@ -6,9 +6,8 @@ import Document, {
   DocumentContext,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import { MetaTags } from '@increaser/ui/metadata/MetaTags'
-import { AppIconMetaTags } from '@increaser/ui/metadata/AppIconMetaTags'
-import { productName } from '@increaser/entities'
+import { DocumentMetaTags } from '@increaser/ui/metadata/DocumentMetaTags'
+import { IconMetaTags } from 'icon/IconMetaTags'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -39,14 +38,11 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <MetaTags
-            title={productName}
-            description="Toolkit: Deep Work, Time Management, Habit Tracking"
+          <DocumentMetaTags
             image="images/increaser.png"
-            url={process.env.NEXT_PUBLIC_BASE_URL!}
             twitterId="@radzionc"
           />
-          <AppIconMetaTags />
+          <IconMetaTags />
         </Head>
         <body>
           <Main />

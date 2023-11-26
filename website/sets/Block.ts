@@ -4,7 +4,7 @@ import {
   focusDurations,
 } from 'focus/FocusDuration'
 import { DefaultTheme } from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { getSetsSum } from './helpers/getSetsSum'
@@ -112,8 +112,8 @@ export const getBlockColor = (
     durationInMin >= 60
       ? colors.success
       : durationInMin < 30
-      ? colors.alert
-      : mediumColor
+        ? colors.alert
+        : mediumColor
 
   return color?.toCssValue()
 }

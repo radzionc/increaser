@@ -1,10 +1,10 @@
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { round } from '@increaser/ui/css/round'
 import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { D_IN_WEEK, getShortWeekday } from '@increaser/utils/time'
-import { Match } from '@increaser/ui/ui/Match'
+import { Match } from '@increaser/ui/base/Match'
 
 const Wrapper = styled.div`
   height: 4px;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   position: relative;
-  ${roundedCSS};
+  ${round};
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
   height: 100%;
   overflow: hidden;

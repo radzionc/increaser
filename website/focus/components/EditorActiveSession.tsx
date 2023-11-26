@@ -1,5 +1,5 @@
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import styled from 'styled-components'
 
 export const EditorActiveSession = styled.div<{ $color: HSLA }>`
@@ -7,7 +7,7 @@ export const EditorActiveSession = styled.div<{ $color: HSLA }>`
   left: 0;
   width: 100%;
 
-  ${centerContentCSS}
+  ${centerContent}
 
   border-radius: 4px;
 

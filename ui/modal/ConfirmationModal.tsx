@@ -1,6 +1,6 @@
 import { Modal, ModalProps } from '.'
-import { SameWidthChildrenRow } from '../ui/Layout/SameWidthChildrenRow'
-import { Button, ButtonKind } from '../ui/buttons/Button'
+import { ButtonKind, Button } from '../buttons/Button'
+import { SameWidthChildrenRow } from '../layout/SameWidthChildrenRow'
 
 interface ConfirmationModalProps
   extends Omit<ModalProps, 'footer' | 'onClose'> {

@@ -21,7 +21,7 @@ export class AmplitudeAnalytics implements Analytics {
     amplitude.setUserId(id)
   }
 
-  trackEvent(name: string, data?: Record<string, any>) {
+  trackEvent(name: string, data?: Record<string, unknown>) {
     this.initialize()
     amplitude.track(name, data)
   }

@@ -1,8 +1,8 @@
+import { round } from '@increaser/ui/css/round'
+import { transition } from '@increaser/ui/css/transition'
 import React from 'react'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
 
 interface Props {
   src: string
@@ -15,10 +15,10 @@ interface Props {
 const ImageContainer = styled.div<{ side: number }>`
   height: ${(p) => p.side}px;
   width: ${(p) => p.side}px;
-  ${roundedCSS}
+  ${round}
   position: relative;
   border: 2px solid transparent;
-  ${defaultTransitionCSS};
+  ${transition};
   cursor: pointer;
   position: relative;
   overflow: hidden;

@@ -1,12 +1,12 @@
 import YouTubePlayer from 'react-player/lazy'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
+import { transition } from '@increaser/ui/css/transition'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
+import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
 import { PauseIcon } from '@increaser/ui/icons/PauseIcon'
 import { PlayIcon } from '@increaser/ui/icons/PlayIcon'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { useFocusSounds } from '../useFocusSounds'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
@@ -32,7 +32,7 @@ const Control = styled(UnstyledButton)`
 
   color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   :hover {
     color: ${({ theme }) => theme.colors.contrast.toCssValue()};

@@ -1,9 +1,9 @@
-import { OpenMenuButton } from '@increaser/ui/ui/buttons/OpenMenuButton'
+import { OpenMenuButton } from '@increaser/ui/buttons/OpenMenuButton'
 import { EditIcon } from '@increaser/ui/icons/EditIcon'
 import { RefreshIcon } from '@increaser/ui/icons/RefreshIcon'
 import { TrashBinIcon } from '@increaser/ui/icons/TrashBinIcon'
-import { Menu } from '@increaser/ui/ui/Menu'
-import { MenuOption, MenuOptionProps } from '@increaser/ui/ui/Menu/MenuOption'
+import { Menu } from '@increaser/ui/menu'
+import { MenuOption, MenuOptionProps } from '@increaser/ui/menu/MenuOption'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'
 

@@ -5,8 +5,8 @@ import {
   primaryGoals,
 } from 'capacity/PrimaryGoal'
 import { useTheme } from 'styled-components'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { LargeSelectOption } from 'ui/LargeSelectOption'

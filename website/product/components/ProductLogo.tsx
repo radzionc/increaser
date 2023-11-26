@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { IncreaserIcon } from './IncreaserIcon'
 
 const Logo = styled(Text)`

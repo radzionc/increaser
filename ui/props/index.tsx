@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { HSLA } from '../ui/colors/HSLA'
+import { HSLA } from '../colors/HSLA'
 
 export type ClosableComponentProps = {
   onClose: () => void
@@ -34,6 +34,10 @@ export interface InputProps<T> {
   onChange: (value: T) => void
 }
 
+export interface ComponentWithErrorProps {
+  error?: string
+}
+
 export interface TitledComponentProps {
   title: ReactNode
 }
@@ -49,4 +53,8 @@ export interface SelectableComponentProps<T> {
 export interface UIComponentProps {
   style?: React.CSSProperties
   className?: string
+}
+
+export interface LabeledComponentProps {
+  label: ReactNode
 }

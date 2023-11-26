@@ -3,9 +3,9 @@ import { transition } from '../../css/transition'
 import { horizontalPadding } from '../../css/horizontalPadding'
 import { textInputPadding } from '../../css/textInput'
 import { verticalPadding } from '../../css/verticalPadding'
+import { getColor } from '../../theme/getters'
 import { ComponentProps, forwardRef, useId } from 'react'
 import { interactive } from '../../css/interactive'
-import { getColor } from '../../ui/theme/getters'
 
 export const Container = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ export const Container = styled.div`
   }
 `
 
-export const OptionItem = forwardRef<
+export const FixedOptionsInputItem = forwardRef<
   HTMLDivElement,
   ComponentProps<typeof Container>
 >(({ children, active, ...rest }, ref) => {

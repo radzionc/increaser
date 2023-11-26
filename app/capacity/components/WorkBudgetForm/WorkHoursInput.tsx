@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { Text } from '@increaser/ui/ui/Text'
-import { getVerticalPaddingCSS } from '@increaser/ui/ui/utils/getVerticalPaddingCSS'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { Text } from '@increaser/ui/text'
 
 import { maxHoursPerDay } from './useWorkBudgetForm'
 import { ShyCheckbox } from 'ui/ShyCheckbox'
 import { CountInput } from 'ui/CountInput'
+import { verticalPadding } from '@increaser/ui/css/verticalPadding'
 
 interface WorkHoursInputProps {
   value: number
@@ -21,7 +21,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 120px 1fr 60px;
   align-items: center;
-  ${getVerticalPaddingCSS(8)}
+  ${verticalPadding(8)}
 
   > * {
     :last-child {

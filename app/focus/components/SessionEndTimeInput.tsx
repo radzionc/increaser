@@ -1,18 +1,18 @@
 import { InputProps } from '@increaser/ui/props'
 import { MS_IN_HOUR } from '@increaser/utils/time'
 import { endOfDay, startOfHour } from 'date-fns'
-import { TimeSpace } from '@increaser/ui/ui/TimeSpace'
+import { TimeSpace } from '@increaser/ui/timeline/TimeSpace'
 import { useCallback } from 'react'
 import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useProjects } from 'projects/hooks/useProjects'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
-import { PressTracker } from '@increaser/ui/ui/PressTracker'
+import { PressTracker } from '@increaser/ui/base/PressTracker'
 import { enforceRange } from '@increaser/utils/enforceRange'
-import { VStack } from '@increaser/ui/ui/Stack'
 import { EditorActiveSession } from './EditorActiveSession'
 import { BoundaryInteractiveArea } from './BoundaryInteractiveArea'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 interface SessionEndTimeInputProps extends InputProps<number> {
   projectId: string

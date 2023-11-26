@@ -1,6 +1,6 @@
 import { ProjectsProvider } from 'projects/components/ProjectsProvider'
 import styled from 'styled-components'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { ClosingArgument } from './ClosingArgument'
 import { DemoSlice } from './Demo'

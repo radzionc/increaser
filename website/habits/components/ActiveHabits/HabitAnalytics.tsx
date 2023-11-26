@@ -1,5 +1,5 @@
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { HabitConsistency } from './HabitConsistency'
 import { HabitStreak } from './HabitStreak'

@@ -4,11 +4,11 @@ import { useProjects } from 'projects/hooks/useProjects'
 import { useOnWindowCloseAlert } from '@increaser/ui/hooks/useOnWindowCloseAlert'
 import { formatDurationAsADigitalClock } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
-import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
-import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { ShyTextButton } from '@increaser/ui/buttons/ShyTextButton'
+import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { MS_IN_SEC } from '@increaser/utils/time'
 
 import { FinishSession } from './FinishSession'
@@ -18,12 +18,12 @@ import { FocusSounds } from './FocusSounds'
 import { FocusSuccess } from './FocusSucess'
 import { SessionProgress } from './SessionProgress'
 import { SesssionStartedAt } from './SessionStartedAt'
-import Head from 'next/head'
 import { SlidingTime } from 'ui/SlidingTime'
-import { RhytmicRerender } from '@increaser/ui/ui/RhytmicRerender'
+import { RhytmicRerender } from '@increaser/ui/base/RhytmicRerender'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from 'sets/components/DayOverview'
+import { PageMetaTags } from '@increaser/ui/metadata/PageMetaTags'
 
 const Container = styled.div`
   max-height: 100%;
@@ -38,7 +38,7 @@ const BlockWrapper = styled.div`
   height: 60%;
   width: 100%;
   position: relative;
-  ${centerContentCSS};
+  ${centerContent};
 
   @media (max-width: 400px) {
     height: 80%;
@@ -82,13 +82,9 @@ export const FocusPageContent = () => {
   return (
     <>
       <RhytmicRerender
-        render={() => {
-          return (
-            <Head>
-              <title>{formatDurationAsADigitalClock(getSeconds())}</title>
-            </Head>
-          )
-        }}
+        render={() => (
+          <PageMetaTags title={formatDurationAsADigitalClock(getSeconds())} />
+        )}
       />
       <ElementSizeAware
         render={({ setElement, size }) => (

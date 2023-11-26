@@ -1,9 +1,9 @@
-import { Menu } from '@increaser/ui/ui/Menu'
-import { Spinner } from '@increaser/ui/ui/Spinner'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { ExpandableInputOpener } from '@increaser/ui/ui/inputs/ExpandableInputOpener'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { Menu } from '@increaser/ui/menu'
+import { Spinner } from '@increaser/ui/loaders/Spinner'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { ExpandableInputOpener } from '@increaser/ui/inputs/ExpandableInputOpener'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { Suspense, lazy } from 'react'
 import styled from 'styled-components'
 
@@ -17,7 +17,7 @@ interface Props {
 const EmojiMartFallback = styled.div`
   width: 352px;
   height: 435px;
-  ${centerContentCSS};
+  ${centerContent};
 `
 
 export const EmojiInput = ({ value, onChange }: Props) => {

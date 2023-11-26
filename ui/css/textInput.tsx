@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
+import { getColor } from '../theme/getters'
 import { transition } from '../css/transition'
 import { toSizeUnit } from './toSizeUnit'
-import { getColor } from '../ui/theme/getters'
 
 export const textInputPadding = 12
 export const textInputHeight = 52

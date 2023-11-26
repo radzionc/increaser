@@ -1,9 +1,9 @@
 import { useTrackHabitMutation } from 'habits/api/useTrackHabitMutation'
 import { Habit } from 'habits/Habit'
 import styled from 'styled-components'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { ChecklistItem } from '@increaser/ui/ui/checklist/CheckListItem'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { ChecklistItem } from '@increaser/ui/checklist/CheckListItem'
 
 interface Props {
   habit: Habit

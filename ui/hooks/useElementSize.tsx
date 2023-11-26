@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from 'react'
 import { debounce } from '@increaser/utils/debounce'
 import { pick } from '@increaser/utils/pick'
+import { useLayoutEffect, useState } from 'react'
 
 export interface ElementSize {
   width: number

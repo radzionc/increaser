@@ -9,7 +9,6 @@ import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 
 import { pluralizeName } from '@increaser/utils/pluralize'
 import { range } from '@increaser/utils/array/range'
-import { tryToSay } from '@increaser/ui/notifications/utils/tryToSay'
 import { PersistentStateKey } from 'state/persistentState'
 import { usePersistentState } from 'state/persistentState'
 import { useAssertUserState } from 'user/state/UserStateContext'
@@ -22,6 +21,8 @@ import {
   areNotificationsAllowed,
   showNotification,
 } from '@increaser/ui/notifications/utils'
+import { attempt } from '@increaser/utils/attempt'
+import { speak } from '@increaser/ui/notifications/utils/speak'
 
 export const remindersCount = 5
 
@@ -104,11 +105,15 @@ export const BreakProvider = ({ children }: Props) => {
 
           const minutes = Math.round((now - lastSetEnd) / MS_IN_MIN)
           if (hasSoundNotification) {
-            tryToSay(
-              `The break started ${numberToText(minutes)} ${pluralizeName(
-                minutes,
-                'minute',
-              )} ago`,
+            attempt(
+              () =>
+                speak(
+                  `The break started ${numberToText(minutes)} ${pluralizeName(
+                    minutes,
+                    'minute',
+                  )} ago`,
+                ),
+              undefined,
             )
           }
           showNotification(
@@ -128,7 +133,7 @@ export const BreakProvider = ({ children }: Props) => {
         setTimeout(() => {
           showNotification(breakOverMessage)
           if (hasSoundNotification) {
-            tryToSay(breakOverMessage)
+            attempt(() => speak(breakOverMessage), undefined)
           }
         }, breakEnd - now),
       )

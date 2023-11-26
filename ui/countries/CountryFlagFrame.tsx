@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { flagAspectRatio } from './config'
-import { getColor } from '../ui/theme/getters'
+import { getColor } from '../theme/getters'
 import { fitInOneEm } from '../css/fitInOneEm'
+import { flagAspectRatio } from './config'
 
 export const CountryFlagFrame = styled.svg`
   ${fitInOneEm(flagAspectRatio)};

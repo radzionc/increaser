@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 
 const Container = styled.div<{ width: number | string }>`
-  max-width: ${({ width }) => getCSSUnit(width)};
-  width: ${({ width }) => getCSSUnit(width)};
+  max-width: ${({ width }) => toSizeUnit(width)};
+  width: ${({ width }) => toSizeUnit(width)};
   height: 100%;
   @media (max-width: 1250px) {
     width: 100%;

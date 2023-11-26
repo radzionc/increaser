@@ -1,8 +1,8 @@
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
 import styled from 'styled-components'
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
 
 import { GroupedByDaySessions } from './DailyReport/GroupedByDaySessions'
 import { ManageWorkSchedule } from './ManageWorkSchedule'

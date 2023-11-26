@@ -1,5 +1,5 @@
 import { getViewSetup } from '@increaser/ui/view/getViewSetup'
-import { ViewSelector } from '@increaser/ui/ui/inputs/Select/ViewSelector'
+import { ViewSelector } from '@increaser/ui/inputs/Select/ViewSelector'
 
 export const habitViews = ['form', 'ideas'] as const
 export type HabitView = (typeof habitViews)[number]

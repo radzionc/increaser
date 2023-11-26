@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 import styled, { useTheme } from 'styled-components'
-import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { LandingSlice } from '@increaser/ui/landing/LandingSlice'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { centerContent } from '@increaser/ui/css/centerContent'
 
 import { TestimonialItem } from './TestimonialItem'
 import { Testimonial } from './testimonials'
@@ -28,7 +28,7 @@ const TestimonialsGrid = styled.div`
 `
 
 const HeadlineContainer = styled.div`
-  ${centerContentCSS}
+  ${centerContent}
   min-height: 80px;
 `
 

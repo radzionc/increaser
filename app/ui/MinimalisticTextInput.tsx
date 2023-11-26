@@ -1,10 +1,10 @@
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { defaultInputShapeCSS } from '@increaser/ui/ui/inputs/config'
-import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { defaultInputShapeCSS } from '@increaser/ui/inputs/config'
+import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
 import styled from 'styled-components'
 
 export const MinimalisticTextInput = styled.input`
-  ${getHorizontalPaddingCSS(16)}
+  ${horizontalPadding(16)}
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
   border: 2px solid transparent;
   ${defaultInputShapeCSS};
@@ -13,7 +13,7 @@ export const MinimalisticTextInput = styled.input`
   color: ${({ theme }) => theme.colors.text.toCssValue()};
   font-weight: 500;
   font-size: 16px;
-  ${defaultTransitionCSS};
+  ${transition};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textShy.toCssValue()};

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
-import { Circle } from '@increaser/ui/ui/Circle'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Circle } from '@increaser/ui/layout/Circle'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { ProjectNavigationItem } from './ProjectNavigationItem'
 import { EnhancedProject } from 'projects/Project'

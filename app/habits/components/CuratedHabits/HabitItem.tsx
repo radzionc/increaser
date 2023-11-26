@@ -2,23 +2,23 @@ import { useCreateHabitMutation } from 'habits/api/useCreateHabitMutation'
 import { HabitInfo } from 'habits/data/habits'
 import { usePaletteColorOptions } from 'shared/hooks/usePaletteColorOptions'
 import styled, { useTheme } from 'styled-components'
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { Button } from '@increaser/ui/buttons/Button'
 import { CheckIcon } from '@increaser/ui/icons/CheckIcon'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Tag } from '@increaser/ui/ui/Tag'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Tag } from '@increaser/ui/tags/Tag'
+import { Text } from '@increaser/ui/text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
 
 import { useHabits } from '../HabitsProvider'
 
 const Added = styled.div`
   background: transparent;
-  ${getHorizontalPaddingCSS(20)}
+  ${horizontalPadding(20)}
   height: 40px;
   font-weight: 600px;
-  ${centerContentCSS};
+  ${centerContent};
 `
 
 interface HabitItemTag {

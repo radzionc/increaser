@@ -1,6 +1,6 @@
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 interface LegalSectionProps extends ComponentWithChildrenProps {
   title: string

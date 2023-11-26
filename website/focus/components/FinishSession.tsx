@@ -1,10 +1,10 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { startOfDay } from 'date-fns'
 import { MS_IN_HOUR } from '@increaser/utils/time'
@@ -14,8 +14,8 @@ import { EditEndTimeOverlay } from './EditEndTimeOverlay'
 const Container = styled(UnstyledButton)<{ $color: HSLA }>`
   font-size: 18px;
   font-weight: 600;
-  ${defaultTransitionCSS}
-  ${centerContentCSS};
+  ${transition}
+  ${centerContent};
   width: 100%;
   height: 100%;
   border: 2px solid ${({ theme }) => theme.colors.mist.toCssValue()};

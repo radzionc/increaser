@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { InfoIcon } from '@increaser/ui/icons/InfoIcon'
 
 export const UpdateProfileMessage = () => (

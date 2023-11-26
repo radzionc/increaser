@@ -1,6 +1,6 @@
-import { HStack } from '@increaser/ui/ui/Stack'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import styled from 'styled-components'
 
 interface CountableItemsVisualizationProps {
@@ -18,7 +18,7 @@ const Wr = styled(HStack)`
 const Box = styled.div`
   height: 100%;
   flex: 1;
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 export const CountableItemsVisualization = ({

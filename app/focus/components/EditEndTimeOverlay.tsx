@@ -1,5 +1,5 @@
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Button } from '@increaser/ui/buttons/Button'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { endOfDay } from 'date-fns'

@@ -1,9 +1,9 @@
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import {
   HStackSeparatedBy,
   dotSeparator,
-} from '@increaser/ui/ui/StackSeparatedBy'
-import { Text } from '@increaser/ui/ui/Text'
+} from '@increaser/ui/layout/StackSeparatedBy'
+import { Text } from '@increaser/ui/text'
 
 import { CTA } from './CTA'
 import { SliceTitle } from './shared/SliceTitle'

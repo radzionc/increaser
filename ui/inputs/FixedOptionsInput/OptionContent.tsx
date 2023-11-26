@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
+import { HStack } from '../../layout/Stack'
 import { textInputPadding } from '../../css/textInput'
 import { IconWrapper } from '../../icons/IconWrapper'
-import { identifierSize } from './config'
-import { HStack } from '../../ui/Stack'
-import { Text } from '../../ui/Text'
+import { fixedOptionsInputConfig } from './config'
+import { Text } from '../../text'
 
 interface OptionContentProps {
   identifier: ReactNode
@@ -12,7 +12,11 @@ interface OptionContentProps {
 
 export const OptionContent = ({ identifier, name }: OptionContentProps) => (
   <HStack alignItems="center" gap={textInputPadding}>
-    <IconWrapper style={{ fontSize: identifierSize }}>{identifier}</IconWrapper>
-    <Text cropped>{name}</Text>
+    <IconWrapper style={{ fontSize: fixedOptionsInputConfig.identifierSize }}>
+      {identifier}
+    </IconWrapper>
+    <Text as="div" cropped>
+      {name}
+    </Text>
   </HStack>
 )

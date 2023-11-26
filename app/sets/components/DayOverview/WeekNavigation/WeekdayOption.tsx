@@ -1,7 +1,7 @@
 import { centerContent } from '@increaser/ui/css/centerContent'
 import { interactive } from '@increaser/ui/css/interactive'
 import { transition } from '@increaser/ui/css/transition'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import styled, { css } from 'styled-components'
 
 interface WeekdayOptionProps {

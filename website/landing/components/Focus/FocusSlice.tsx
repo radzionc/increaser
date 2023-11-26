@@ -1,4 +1,4 @@
-import { LandingFeatureSlice } from '@increaser/ui/ui/landing/LandingFeatureSlice'
+import { LandingFeatureSlice } from '@increaser/ui/landing/LandingFeatureSlice'
 import { CTA } from '../CTA'
 import { FocusPreview } from './FocusPreview'
 import { LandingPageFocusProvider } from './LandingPageFocusProvider'

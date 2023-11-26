@@ -1,17 +1,17 @@
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { transition } from '@increaser/ui/css/transition'
 import { PlusCircleIcon } from '@increaser/ui/icons/PlusCircleIcon'
-import { Opener } from '@increaser/ui/ui/Opener'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Opener } from '@increaser/ui/base/Opener'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { CreateSetOverlay } from './CreateSetOverlay'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import { MemberOnlyAction } from 'membership/components/MemberOnlyAction'
 
 const Container = styled.div`
   cursor: pointer;
-  ${defaultTransitionCSS};
+  ${transition};
   color: ${getColor('text')};
   font-weight: 500;
   :hover {

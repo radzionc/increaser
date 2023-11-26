@@ -3,13 +3,13 @@ import { Path } from 'router/Path'
 import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
-import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { ShyTextButton } from '@increaser/ui/buttons/ShyTextButton'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import {
   HStackSeparatedBy,
   slashSeparator,
-} from '@increaser/ui/ui/StackSeparatedBy'
-import { Text } from '@increaser/ui/ui/Text'
+} from '@increaser/ui/layout/StackSeparatedBy'
+import { Text } from '@increaser/ui/text'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 import Link from 'next/link'
 import { ProjectGoalBadge } from './ProjectGoalBadge'

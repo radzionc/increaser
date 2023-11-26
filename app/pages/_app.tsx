@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { GlobalStyle } from '@increaser/ui/ui/GlobalStyle'
+import { GlobalStyle } from '@increaser/ui/css/GlobalStyle'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useState } from 'react'
 import { analytics } from 'analytics'

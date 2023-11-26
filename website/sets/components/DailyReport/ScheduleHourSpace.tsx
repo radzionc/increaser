@@ -4,9 +4,9 @@ import { getDateFromMinutes } from '@increaser/utils/time/getDateFromMinutes'
 import { range } from '@increaser/utils/array/range'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MIN_IN_HOUR } from '@increaser/utils/time'
 
@@ -41,7 +41,7 @@ const hourLabelLineGapInPx = 8
 const HourContent = styled.div<{ labelWidth: number }>`
   width: 100%;
   display: grid;
-  gap: ${getCSSUnit(hourLabelLineGapInPx)};
+  gap: ${toSizeUnit(hourLabelLineGapInPx)};
   grid-template-columns: ${({ labelWidth }) => labelWidth}px 1fr;
   align-items: center;
 `

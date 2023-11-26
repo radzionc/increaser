@@ -2,11 +2,11 @@ import { EnhancedProject } from 'projects/Project'
 import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { sum } from '@increaser/utils/array/sum'
 import { useTheme } from 'styled-components'
-import { Circle } from '@increaser/ui/ui/Circle'
+import { Circle } from '@increaser/ui/layout/Circle'
 import { AlertTriangleIcon } from '@increaser/ui/icons/AlertTriangeIcon'
 import { CheckDoubleIcon } from '@increaser/ui/icons/CheckDoubleIcon'
 import { CheckIcon } from '@increaser/ui/icons/CheckIcon'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 interface ProjectGoalBadgeProps {

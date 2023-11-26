@@ -1,9 +1,9 @@
 import { useBreak } from 'break/hooks/useBreak'
 import styled from 'styled-components'
-import { HStack } from '@increaser/ui/ui/Stack'
+import { HStack } from '@increaser/ui/layout/Stack'
 
 import { BreakBrowserNotification } from './BreakBrowserNotifications'
-import { ShySoundToggle } from '@increaser/ui/ui/ShySoundToggle'
+import { ShySoundToggle } from '@increaser/ui/notifications/components/ShySoundToggle'
 
 const Container = styled(HStack)`
   position: relative;

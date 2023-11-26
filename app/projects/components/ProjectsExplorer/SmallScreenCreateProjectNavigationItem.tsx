@@ -1,11 +1,12 @@
 import styled, { useTheme } from 'styled-components'
 import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 import { Container as NavigationItemContainer } from './SmallScreenProjectNavigationItem'
 import { Path } from 'router/Path'
+import Link from 'next/link'
 
 const Container = styled(NavigationItemContainer)`
   min-width: 86px;
@@ -21,15 +22,13 @@ export const SmallScreenCreateProjectNavigationItem = () => {
   const isSelected = currentProject === null
 
   return (
-    <Container
-      href={Path.CreateProject}
-      $color={colors.text}
-      selected={isSelected}
-    >
-      <HStack gap={4} alignItems="center">
-        <PlusIcon />
-        <Text>Project</Text>
-      </HStack>
-    </Container>
+    <Link href={Path.CreateProject}>
+      <Container $color={colors.text} selected={isSelected}>
+        <HStack gap={4} alignItems="center">
+          <PlusIcon />
+          <Text>Project</Text>
+        </HStack>
+      </Container>
+    </Link>
   )
 }

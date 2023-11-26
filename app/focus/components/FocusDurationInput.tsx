@@ -5,11 +5,11 @@ import {
 } from 'focus/FocusDuration'
 import { range } from '@increaser/utils/array/range'
 import styled, { useTheme } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { round } from '@increaser/ui/css/round'
 
 interface FocusDurationInputProps {
   value: FocusDuration
@@ -59,7 +59,7 @@ const InteractiveArea = styled.div<{ $color: HSLA; isSelected: boolean }>`
 const DurationTextWr = styled.div`
   position: absolute;
   width: 100%;
-  ${centerContentCSS};
+  ${centerContent};
   overflow: visible;
   top: -22px;
 `
@@ -70,9 +70,9 @@ const DurationText = styled(Text)`
 
 const Option = styled.div`
   width: 2px;
-  ${roundedCSS};
+  ${round};
   background: var(--color);
-  ${defaultTransitionCSS};
+  ${transition};
   position: relative;
 `
 

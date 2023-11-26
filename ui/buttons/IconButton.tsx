@@ -1,12 +1,12 @@
 import { ComponentProps, Ref, forwardRef } from 'react'
 import styled from 'styled-components'
+import { UnstyledButton } from './UnstyledButton'
+import { match } from '@increaser/utils/match'
 import { centerContent } from '../css/centerContent'
 import { sameDimensions } from '../css/sameDimensions'
-import { toSizeUnit } from '../css/toSizeUnit'
 import { transition } from '../css/transition'
-import { UnstyledButton } from '../ui/buttons/UnstyledButton'
-import { matchColor } from '../ui/theme/getters'
-import { match } from '@increaser/utils/match'
+import { matchColor } from '../theme/getters'
+import { toSizeUnit } from '../css/toSizeUnit'
 
 export const iconButtonSizes = ['s', 'm', 'l'] as const
 export type IconButtonSize = (typeof iconButtonSizes)[number]

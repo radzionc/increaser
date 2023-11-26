@@ -1,6 +1,6 @@
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { RadioInput } from '@increaser/ui/ui/inputs/RadioInput'
+import { RadioInput } from '@increaser/ui/inputs/RadioInput'
 import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 
 const privacyOptions = ['public', 'anonymous'] as const

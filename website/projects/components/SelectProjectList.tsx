@@ -1,6 +1,6 @@
 import { useProjects } from 'projects/hooks/useProjects'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
 import { LargeSelectOption } from 'ui/LargeSelectOption'
 

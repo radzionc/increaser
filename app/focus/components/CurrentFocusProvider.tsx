@@ -4,7 +4,6 @@ import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProject } from 'projects/hooks/useProject'
-import { tryToSay } from '@increaser/ui/notifications/utils/tryToSay'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { useRouter } from 'next/router'
@@ -12,7 +11,9 @@ import { Path } from 'router/Path'
 import { range } from '@increaser/utils/array/range'
 import { showNotification } from '@increaser/ui/notifications/utils'
 import { pluralize } from '@increaser/utils/pluralize'
-import { tryToPlaySound } from '@increaser/ui/notifications/utils/tryToPlaySound'
+import { attempt } from '@increaser/utils/attempt'
+import { speak } from '@increaser/ui/notifications/utils/speak'
+import { playSound } from '@increaser/ui/notifications/utils/playSound'
 
 interface CurrentFocusState extends CurrentSet {}
 
@@ -61,7 +62,7 @@ export const CurrentFocusProvider = ({
       )
 
       if (hasTimerSoundNotification) {
-        tryToPlaySound('audio/pristine-notificaiton.mp3')
+        attempt(() => playSound('audio/pristine-notificaiton.mp3'), undefined)
       }
     }
 
@@ -94,7 +95,10 @@ export const CurrentFocusProvider = ({
             }
 
             if (hasTimerSoundNotification) {
-              tryToPlaySound('audio/relax-notificaiton.mp3')
+              attempt(
+                () => playSound('audio/relax-notificaiton.mp3'),
+                undefined,
+              )
             }
           },
           startTime + minutes * MS_IN_MIN - Date.now(),
@@ -128,11 +132,15 @@ export const CurrentFocusProvider = ({
       }
 
       if (hasTimerSoundNotification) {
-        tryToSay(
-          `Your workday ends in ${pluralize(
-            remindMinBeforeWorkDayEnds,
-            'minute',
-          )}`,
+        attempt(
+          () =>
+            speak(
+              `Your workday ends in ${pluralize(
+                remindMinBeforeWorkDayEnds,
+                'minute',
+              )}`,
+            ),
+          undefined,
         )
       }
     }, showMessageIn - now)

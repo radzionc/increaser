@@ -1,9 +1,9 @@
 import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled from 'styled-components'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { CreateHabitPrompt } from '../CreateHabit/CreateHabitPrompt'
 import { useHabits } from '../HabitsProvider'

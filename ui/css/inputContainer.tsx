@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { transition } from './transition'
-import { getColor } from '../ui/theme/getters'
+import { getColor } from '../theme/getters'
 
 export const inputContainer = css`
   display: flex;

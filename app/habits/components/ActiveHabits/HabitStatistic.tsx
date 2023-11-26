@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { useTheme } from 'styled-components'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 type HabitStatisticKind = 'regular' | 'alert'
 

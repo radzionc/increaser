@@ -1,28 +1,28 @@
 import { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { sameDimensions } from '@increaser/ui/css/sameDimensions'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
-import Link from 'next/link'
 import { getProjectPath } from 'router/Path'
 import { EnhancedProject } from 'projects/Project'
+import Link from 'next/link'
 
-export const Container = styled(Link)<{
+export const Container = styled.div<{
   selected: boolean
   $color: HSLA
 }>`
-  ${getSameDimensionsCSS(48)};
+  ${sameDimensions(48)};
   font-size: 24px;
   border-radius: 8px;
-  ${centerContentCSS}
+  ${centerContent}
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   border: 2px solid ${({ theme }) => theme.colors.mist.toCssValue()};
-  ${defaultTransitionCSS}
+  ${transition}
   ${({ selected, theme, $color }) =>
     selected &&
     css`
@@ -36,7 +36,7 @@ export const SmallScreenProjectNavigationItem = ({
   id,
   hslaColor,
 }: EnhancedProject) => {
-  const ref = useRef<HTMLAnchorElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const { currentProject } = useProjectExplorer()
   const isSelected = id === currentProject?.id
 
@@ -51,13 +51,10 @@ export const SmallScreenProjectNavigationItem = ({
   }, [isSelected])
 
   return (
-    <Container
-      ref={ref}
-      href={getProjectPath(id)}
-      $color={hslaColor}
-      selected={isSelected}
-    >
-      {emoji}
-    </Container>
+    <Link href={getProjectPath(id)}>
+      <Container ref={ref} $color={hslaColor} selected={isSelected}>
+        {emoji}
+      </Container>
+    </Link>
   )
 }

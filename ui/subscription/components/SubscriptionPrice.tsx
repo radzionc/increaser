@@ -1,8 +1,11 @@
 import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
-import { VStack, HStack } from '../../ui/Stack'
-import { HStackSeparatedBy, slashSeparator } from '../../ui/StackSeparatedBy'
-import { Text } from '../../ui/Text'
 import { MONTHS_IN_YEAR } from '@increaser/utils/time'
+import { VStack, HStack } from '../../layout/Stack'
+import {
+  HStackSeparatedBy,
+  slashSeparator,
+} from '../../layout/StackSeparatedBy'
+import { Text } from '../../text'
 
 interface SubscriptionPriceProps {
   billingCycle: SubscriptionBillingCycle

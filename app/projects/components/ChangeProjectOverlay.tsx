@@ -1,7 +1,7 @@
 import { ClosableComponentProps } from '@increaser/ui/props'
-import { BottomSlideOver } from '@increaser/ui/ui/BottomSlideOver'
+import { BottomSlideOver } from '@increaser/ui/modal/BottomSlideOver'
 import { Modal } from '@increaser/ui/modal'
-import { ResponsiveView } from '@increaser/ui/ui/ResponsiveView'
+import { ResponsiveView } from '@increaser/ui/layout/ResponsiveView'
 
 import { SelectProjectList } from './SelectProjectList'
 

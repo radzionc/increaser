@@ -5,7 +5,7 @@ import styled, { useTheme } from 'styled-components'
 import {
   IntervalInput,
   IntervalInputProps,
-} from '@increaser/ui/ui/timeline/IntervalInput'
+} from '@increaser/ui/timeline/IntervalInput'
 
 import { IntervalRect } from './IntervalRect'
 

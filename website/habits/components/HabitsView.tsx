@@ -1,9 +1,9 @@
 import { getViewSetup } from '@increaser/ui/view/getViewSetup'
 import styled, { css } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { HStackSeparatedBy } from '@increaser/ui/ui/StackSeparatedBy'
-import { Text } from '@increaser/ui/ui/Text'
+import { transition } from '@increaser/ui/css/transition'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
+import { HStackSeparatedBy } from '@increaser/ui/layout/StackSeparatedBy'
+import { Text } from '@increaser/ui/text'
 
 export const habitViews = ['my', 'explore'] as const
 export type HabitsView = (typeof habitViews)[number]
@@ -23,7 +23,7 @@ const ViewOption = styled(UnstyledButton)<{ isSelected: boolean }>`
   color: ${({ isSelected, theme }) =>
     (isSelected ? theme.colors.text : theme.colors.textShy).toCssValue()};
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   ${({ isSelected, theme }) =>
     !isSelected &&

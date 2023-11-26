@@ -1,12 +1,12 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import styled from 'styled-components'
-import { HStack } from '@increaser/ui/ui/Stack'
+import { HStack } from '@increaser/ui/layout/Stack'
 
 import { FocusBrowserNotification } from '../FocusSettings/FocusBrowserNotification'
-import { Menu } from '@increaser/ui/ui/Menu'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { Menu } from '@increaser/ui/menu'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { SettingsIcon } from '@increaser/ui/icons/SettingsIcon'
-import { ShySoundToggle } from '@increaser/ui/ui/ShySoundToggle'
+import { ShySoundToggle } from '@increaser/ui/notifications/components/ShySoundToggle'
 
 const Container = styled(HStack)`
   position: relative;

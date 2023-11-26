@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components'
 import { Modal, ModalProps } from '@increaser/ui/modal'
-import { lightTheme } from '@increaser/ui/ui/theme/lightTheme'
+import { lightTheme } from '@increaser/ui/theme/lightTheme'
 
 export const PaddleModal = (props: ModalProps) => {
   return (

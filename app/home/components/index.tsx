@@ -4,16 +4,13 @@ import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { HomePageContent } from './HomePageContent'
-import Head from 'next/head'
 import { Page } from 'layout/Page'
-import { productName } from '@increaser/entities'
+import { PageMetaTags } from '@increaser/ui/metadata/PageMetaTags'
 
 export const HomePage: Page = () => {
   return (
     <FixedWidthContent style={{ display: 'flex', flexDirection: 'column' }}>
-      <Head>
-        <title>🏠 Overview | {productName}</title>
-      </Head>
+      <PageMetaTags title={`🏠 Overview | {productName`} />
       <UserStateOnly>
         <ErrorBoundary fallback={<ErrorFallbackCard />}>
           <HomePageContent />

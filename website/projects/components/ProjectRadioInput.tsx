@@ -1,13 +1,13 @@
 import { Project } from 'projects/Project'
 import styled, { css } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { InvisibleHTMLRadio } from '@increaser/ui/ui/inputs/InvisibleHTMLRadio'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { InvisibleHTMLRadio } from '@increaser/ui/inputs/InvisibleHTMLRadio'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
 
 interface ProjectRadioInputProps {
   value?: string
@@ -55,15 +55,15 @@ const Container = styled.div<{
   $color: HSLA
 }>`
   height: 48px;
-  ${getHorizontalPaddingCSS(12)}
+  ${horizontalPadding(12)}
   border-radius: 8px;
-  ${centerContentCSS}
+  ${centerContent}
   cursor: pointer;
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   border: 2px solid ${({ theme }) => theme.colors.mist.toCssValue()};
-  ${defaultTransitionCSS}
+  ${transition}
   ${({ selected, $color, theme }) =>
     selected
       ? css`

@@ -1,10 +1,10 @@
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { transition } from '@increaser/ui/css/transition'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { ArrowRightIcon } from '@increaser/ui/icons/ArrowRightIcon'
-import { inputBorderRadiusCSS } from '@increaser/ui/ui/inputs/config'
-import { HStack } from '@increaser/ui/ui/Stack'
+import { inputBorderRadiusCSS } from '@increaser/ui/inputs/config'
+import { HStack } from '@increaser/ui/layout/Stack'
 import { EmojiHeavyBlock } from 'ui/EmojiHeavyBlock'
 
 interface Props {
@@ -19,7 +19,7 @@ const Container = styled(UnstyledButton)`
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
   padding: 8px 16px;
 
-  ${defaultTransitionCSS};
+  ${transition};
 
   :hover {
     background: ${({ theme }) => theme.colors.mistExtra.toCssValue()};

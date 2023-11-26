@@ -1,5 +1,5 @@
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
-import { Switch } from '@increaser/ui/ui/Switch/Switch'
+import { Switch } from '@increaser/ui/inputs/Switch/Switch'
 import { Project } from '@increaser/entities/Project'
 
 type ProjectStatusToggleProps = Pick<Project, 'status' | 'id'>

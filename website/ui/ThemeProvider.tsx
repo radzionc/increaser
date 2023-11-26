@@ -1,6 +1,6 @@
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
-import { PrefferedThemeProvider } from '@increaser/ui/ui/theme/PrefferedThemeProvider'
-import { ThemePreference } from '@increaser/ui/ui/theme/ThemePreference'
+import { PrefferedThemeProvider } from '@increaser/ui/theme/PrefferedThemeProvider'
+import { ThemePreference } from '@increaser/ui/theme/ThemePreference'
 import { useState } from 'react'
 
 export const ThemeProvider = ({ children }: ComponentWithChildrenProps) => {

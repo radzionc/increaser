@@ -1,7 +1,7 @@
-import { Text } from '@increaser/ui/ui/Text'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
+import { Text } from '@increaser/ui/text'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { round } from '@increaser/ui/css/round'
 import { range } from '@increaser/utils/array/range'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
@@ -11,13 +11,13 @@ const Container = styled.div`
   height: 40px;
   position: relative;
   /* cursor: ew-resize; */
-  ${centerContentCSS}
+  ${centerContent}
 `
 
 const Option = styled.div`
   position: absolute;
   width: 2px;
-  ${roundedCSS};
+  ${round};
   background: var(--color);
 `
 
@@ -25,7 +25,7 @@ const Recommended = styled.div`
   position: absolute;
   height: 6px;
   width: 6px;
-  ${roundedCSS};
+  ${round};
   background: var(--color);
 `
 
@@ -40,14 +40,14 @@ const InteractiveArea = styled.div<{ $color: HSLA; isSelected: boolean }>`
       (isSelected ? $color : theme.colors.contrast).toCssValue()};
     color: var(--color);
   }
-  ${centerContentCSS}
+  ${centerContent}
 `
 
 const DurationTextWr = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  ${centerContentCSS};
+  ${centerContent};
   overflow: visible;
 `
 

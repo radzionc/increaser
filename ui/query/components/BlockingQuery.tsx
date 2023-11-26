@@ -1,8 +1,8 @@
 import { supportEmail } from '@increaser/entities'
-import { CopyText } from '../../ui/CopyText'
-import { Spinner } from '../../ui/Spinner'
-import { VStack } from '../../ui/Stack'
-import { Text } from '../../ui/Text'
+import { CopyText } from '../../text/CopyText'
+import { Spinner } from '../../loaders/Spinner'
+import { VStack } from '../../layout/Stack'
+import { Text } from '../../text'
 import { InfoIcon } from '../../icons/InfoIcon'
 
 interface BlockingQueryProps {

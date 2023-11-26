@@ -1,16 +1,16 @@
 import { interactive } from '@increaser/ui/css/interactive'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { transition } from '@increaser/ui/css/transition'
 import { MoreHorizontalIcon } from '@increaser/ui/icons/MoreHorizontalIcon'
-import { getColor } from '@increaser/ui/ui/theme/getters'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { getColor } from '@increaser/ui/theme/getters'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { toPercents } from '@increaser/utils/toPercents'
 import { getProjectEmoji } from 'projects/utils/getProjectEmoji'
 import styled, { useTheme } from 'styled-components'
 import { horizontalPaddingInPx } from '../config'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { useProjects } from 'projects/hooks/useProjects'
-import { RenderOpenerProps } from '@increaser/ui/ui/Menu/PopoverMenu'
+import { RenderOpenerProps } from '@increaser/ui/menu/PopoverMenu'
 import { Set } from '@increaser/entities/User'
 import { useDayOverview } from '../DayOverviewProvider'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
@@ -24,12 +24,12 @@ const Container = styled.div`
   right: ${horizontalPaddingInPx}px;
   border-radius: 8px;
   padding: 4px 8px;
-  ${centerContentCSS};
+  ${centerContent};
   font-size: 14px;
   border: 2px solid;
   background: ${getColor('background')};
   color: ${getColor('text')};
-  ${defaultTransitionCSS};
+  ${transition};
   :hover {
     color: ${getColor('contrast')};
   }

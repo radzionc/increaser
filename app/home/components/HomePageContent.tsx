@@ -4,17 +4,17 @@ import { CheckTodayHabits } from 'habits/components/CheckDayHabits/CheckTodayHab
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import styled from 'styled-components'
 import { TasksView } from 'tasks/components/TasksView'
-import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { hideScrollbarsCSS } from '@increaser/ui/ui/utils/hideScrollbarsCSS'
+import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { SeparatedByLine } from '@increaser/ui/layout/SeparatedByLine'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { AllocationOnboarding } from 'weekTimeAllocation/components/AllocationOnboarding'
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { useFocus } from 'focus/hooks/useFocus'
 import { DayOverview } from 'sets/components/DayOverview'
 import { SubmitYesterdayHabits } from 'habits/components/SubmitYesterdayHabits'
+import { hideScrollbars } from '@increaser/ui/css/hideScrollbars'
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ const Container = styled.div`
       max-height: 100%;
       overflow: auto;
       flex: 1;
-      ${hideScrollbarsCSS};
+      ${hideScrollbars};
     }
   }
 

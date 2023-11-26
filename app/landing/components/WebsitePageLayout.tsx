@@ -1,5 +1,5 @@
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { Topbar } from './Topbar'
 
 export const WebsitePageLayout = ({ children }: ComponentWithChildrenProps) => {

@@ -2,7 +2,7 @@ import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useCallback, useMemo } from 'react'
 import { sum } from '@increaser/utils/array/sum'
 import styled, { useTheme } from 'styled-components'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { MIN_IN_HOUR, S_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 

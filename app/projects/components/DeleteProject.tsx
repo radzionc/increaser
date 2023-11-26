@@ -1,12 +1,12 @@
 import { useDeleteProjectMutation } from 'projects/api/userDeleteProjectMutation'
 import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
-import { TextButton } from '@increaser/ui/ui/buttons/TextButton'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
+import { TextButton } from '@increaser/ui/buttons/TextButton'
 import { TrashBinIcon } from '@increaser/ui/icons/TrashBinIcon'
 import { ConfirmationModal } from '@increaser/ui/modal/ConfirmationModal'
-import { Opener } from '@increaser/ui/ui/Opener'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Opener } from '@increaser/ui/base/Opener'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { useCurrentProject } from './ProjectView/CurrentProjectProvider'
 

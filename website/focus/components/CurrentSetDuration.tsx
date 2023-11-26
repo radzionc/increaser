@@ -1,6 +1,6 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useState } from 'react'
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { Button } from '@increaser/ui/buttons/Button'
 import { Modal } from '@increaser/ui/modal'
 
 import { FocusDurationInput } from './FocusDurationInput'

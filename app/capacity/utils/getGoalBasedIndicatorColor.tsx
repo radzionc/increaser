@@ -1,6 +1,6 @@
 import { PrimaryGoal } from 'capacity/PrimaryGoal'
 import { match } from '@increaser/utils/match'
-import { TextColor } from '@increaser/ui/ui/Text'
+import { TextColor } from '@increaser/ui/text'
 
 export const getGoalBasedIndicatorColor = (
   goal: PrimaryGoal,

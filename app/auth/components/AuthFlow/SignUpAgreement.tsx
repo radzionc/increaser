@@ -1,6 +1,6 @@
 import { ExternalLink } from 'router/Link/ExternalLink'
-import { Text } from '@increaser/ui/ui/Text'
-import { LinkText } from '@increaser/ui/ui/Text/LinkText'
+import { Text } from '@increaser/ui/text'
+import { LinkText } from '@increaser/ui/text/LinkText'
 import { WEBSITE_URL } from 'product'
 import { productName } from '@increaser/entities'
 

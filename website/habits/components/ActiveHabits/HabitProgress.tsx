@@ -1,6 +1,6 @@
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { range } from '@increaser/utils/array/range'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
 import { D_IN_WEEK, MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'

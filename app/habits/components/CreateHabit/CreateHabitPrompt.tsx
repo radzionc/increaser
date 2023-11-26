@@ -1,16 +1,16 @@
 import { ClickableComponentProps } from '@increaser/ui/props'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { transition } from '@increaser/ui/css/transition'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
-import { HStack } from '@increaser/ui/ui/Stack'
+import { HStack } from '@increaser/ui/layout/Stack'
 
 const Container = styled(UnstyledButton)`
   padding: 16px 20px;
-  ${defaultBorderRadiusCSS};
+  ${borderRadius.m};
 
-  ${defaultTransitionCSS};
+  ${transition};
 
   border: 1px dashed ${({ theme }) => theme.colors.textShy.toCssValue()};
 

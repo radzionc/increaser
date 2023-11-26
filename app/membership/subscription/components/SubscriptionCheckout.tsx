@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal'
 import { productName } from '@increaser/entities'
-import { Flow } from '@increaser/ui/ui/Flow'
+import { Flow } from '@increaser/ui/base/Flow'
 import { QuerySubscriptionId } from '@increaser/paddle-classic-ui/components/QuerySubscriptionId'
 
 type SubscriptionCheckoutStep =

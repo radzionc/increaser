@@ -1,7 +1,7 @@
-import { Text } from '@increaser/ui/ui/Text'
-import { Tooltip } from '@increaser/ui/ui/Tooltip'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { Text } from '@increaser/ui/text'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { MinimizeIcon } from '@increaser/ui/icons/MinimizeIcon'
+import { Tooltip } from '@increaser/ui/tooltips/Tooltip'
 import Link from 'next/link'
 import { Path } from 'router/Path'
 

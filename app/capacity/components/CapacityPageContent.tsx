@@ -1,8 +1,8 @@
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
 import styled from 'styled-components'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { CurrentWeekPerformance } from './CurrentWeekPerformance'
 import { ManageCapacity } from './ManageCapacity'

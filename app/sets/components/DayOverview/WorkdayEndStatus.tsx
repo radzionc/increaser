@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { useDayOverview } from './DayOverviewProvider'

@@ -1,7 +1,7 @@
-import { ButtonProps, Button } from '@increaser/ui/ui/buttons/Button'
+import { ButtonProps, Button } from '@increaser/ui/buttons/Button'
 import { ArrowRightIcon } from '@increaser/ui/icons/ArrowRightIcon'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 interface Props
   extends Pick<ButtonProps, 'isLoading' | 'onClick' | 'isDisabled'> {

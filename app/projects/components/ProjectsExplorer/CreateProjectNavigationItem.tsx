@@ -1,7 +1,7 @@
 import styled, { useTheme } from 'styled-components'
-import { Circle } from '@increaser/ui/ui/Circle'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Circle } from '@increaser/ui/layout/Circle'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import {
   IconWr,

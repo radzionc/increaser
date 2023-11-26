@@ -1,7 +1,7 @@
 import { Set } from '@increaser/entities/User'
 import { transition } from '@increaser/ui/css/transition'
 import { UIComponentProps } from '@increaser/ui/props'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
 import { getProjectColor } from 'projects/utils/getProjectColor'

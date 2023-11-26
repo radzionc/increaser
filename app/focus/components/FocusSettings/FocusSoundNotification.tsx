@@ -1,5 +1,5 @@
 import { useFocus } from 'focus/hooks/useFocus'
-import { Switch } from '@increaser/ui/ui/Switch/Switch'
+import { Switch } from '@increaser/ui/inputs/Switch/Switch'
 
 export const FocusSoundNotification = () => {
   const {

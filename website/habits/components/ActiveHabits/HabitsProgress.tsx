@@ -1,9 +1,9 @@
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { range } from '@increaser/utils/array/range'
 import styled, { useTheme } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { transition } from '@increaser/ui/css/transition'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 import { useHabits } from '../HabitsProvider'
@@ -14,7 +14,7 @@ const HabitStatus = styled.div`
   width: 100%;
   border-radius: 2px;
   aspect-ratio: 1 / 1;
-  ${defaultTransitionCSS}
+  ${transition}
 `
 
 export const HabitsProgress = () => {

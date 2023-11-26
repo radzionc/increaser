@@ -6,18 +6,18 @@ import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { css, useTheme } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { Button } from '@increaser/ui/buttons/Button'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { getColor } from '@increaser/ui/theme/getters'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { BreakEducation } from '../BreakEducation'
 import { remindersCount } from '../BreakProvider'
 import { BreakSettings } from '../BreakSettings'
 import { BreakCountdown } from './BreakCountdown'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
+import { transition } from '@increaser/ui/css/transition'
 
 const Wrapper = styled.div`
   position: relative;
@@ -53,7 +53,7 @@ const BreakDurationContainer = styled(UnstyledButton)<{
   border-right: 1px solid ${getColor('mistExtra')};
   font-weight: 600;
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   ${({ isSelected, theme, isAvailable }) =>
     isSelected
@@ -61,12 +61,12 @@ const BreakDurationContainer = styled(UnstyledButton)<{
           color: ${theme.colors.contrast.toCssValue()};
         `
       : isAvailable
-      ? css`
-          :hover {
-            color: ${theme.colors.textSupporting.toCssValue()};
-          }
-        `
-      : css``}
+        ? css`
+            :hover {
+              color: ${theme.colors.textSupporting.toCssValue()};
+            }
+          `
+        : css``}
 `
 
 export const BreakTimeline = () => {

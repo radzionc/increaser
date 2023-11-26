@@ -1,4 +1,4 @@
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { OptionsDivider } from '../OptionsDivider'
 import { EmailAuthForm } from './EmailAuthForm'

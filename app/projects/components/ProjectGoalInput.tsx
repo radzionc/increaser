@@ -2,9 +2,9 @@ import { useUpdateProjectMutation } from 'projects/api/useUpdateProjectMutation'
 import { useCallback, useMemo } from 'react'
 import { sum } from '@increaser/utils/array/sum'
 import styled from 'styled-components'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { MIN_IN_HOUR, S_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
@@ -20,13 +20,13 @@ const Checkbox = styled(ShyCheckbox)`
     background: ${({ theme }) => theme.colors.mist.toCssValue()};
   }
 
-  ${defaultBorderRadiusCSS};
+  ${borderRadius.m};
 `
 
 const Container = styled(HStack)`
   padding: 2px;
   width: 100%;
-  ${defaultBorderRadiusCSS};
+  ${borderRadius.m};
   background: ${({ theme }) => theme.colors.background.toCssValue()};
   overflow: hidden;
 

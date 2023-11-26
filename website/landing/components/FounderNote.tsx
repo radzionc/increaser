@@ -1,9 +1,9 @@
 import styled, { useTheme } from 'styled-components'
-import { IntersectionAware } from '@increaser/ui/ui/IntersectionAware'
-import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { HighlightedText } from '@increaser/ui/ui/Text/HighlightedText'
+import { IntersectionAware } from '@increaser/ui/IntersectionAware'
+import { LandingSlice } from '@increaser/ui/landing/LandingSlice'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { HighlightedText } from '@increaser/ui/text/HighlightedText'
 
 import { CTA } from './CTA'
 

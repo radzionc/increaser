@@ -1,8 +1,8 @@
 import { ExternalLink } from 'router/Link/ExternalLink'
 import { PersistentStateKey } from 'state/persistentState'
 import styled from 'styled-components'
-import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
-import { Text } from '@increaser/ui/ui/Text'
+import { ShyTextButton } from '@increaser/ui/buttons/ShyTextButton'
+import { Text } from '@increaser/ui/text'
 
 import { useHabits } from '../HabitsProvider'
 import { ShowOnce } from 'state/ShowOnce'

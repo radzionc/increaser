@@ -7,10 +7,10 @@ import { useGroupedByDayCurrentWeekSets } from 'sets/hooks/useGroupedByDayCurren
 import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MIN_IN_HOUR, MS_IN_HOUR } from '@increaser/utils/time'
 
@@ -41,14 +41,14 @@ const SessionsContainer = styled.div`
   position: relative;
   height: 100%;
   flex: 1;
-  ${centerContentCSS}
+  ${centerContent}
 `
 
 const Session = styled.div`
   position: absolute;
   width: 100%;
   border-radius: 2px;
-  ${defaultTransitionCSS}
+  ${transition}
 `
 
 const Container = styled(VStack)`

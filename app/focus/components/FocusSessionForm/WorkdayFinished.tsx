@@ -1,7 +1,7 @@
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { Button } from '@increaser/ui/buttons/Button'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useState } from 'react'
 import { useLastSetEnd } from 'sets/hooks/useLastSetEnd'
@@ -14,7 +14,7 @@ import { takeWholeSpaceAbsolutely } from '@increaser/ui/css/takeWholeSpaceAbsolu
 
 const Overlay = styled.div`
   ${takeWholeSpaceAbsolutely};
-  ${centerContentCSS};
+  ${centerContent};
   background: ${(props) =>
     props.theme.colors.foreground.getVariant({ a: () => 0.9 }).toCssValue()};
 `

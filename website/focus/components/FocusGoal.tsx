@@ -1,13 +1,13 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { transition } from '@increaser/ui/css/transition'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { TargetIcon } from '@increaser/ui/icons/TargetIcon'
-import { Opener } from '@increaser/ui/ui/Opener'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
+import { Opener } from '@increaser/ui/base/Opener'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { sameDimensions } from '@increaser/ui/css/sameDimensions'
 
 import { UpdateFocusDurationOverlay } from './CurrentSetDuration'
 
@@ -19,15 +19,15 @@ const Wrapper = styled.div`
 
 const Container = styled(UnstyledButton)`
   border-radius: 20px;
-  ${getSameDimensionsCSS(40)};
+  ${sameDimensions(40)};
   background: ${({ theme }) => theme.colors.background.toCssValue()};
   border: 2px solid ${({ theme }) => theme.colors.mist.toCssValue()};
-  ${centerContentCSS};
+  ${centerContent};
   position: relative;
 
   color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
 
-  ${defaultTransitionCSS};
+  ${transition};
 
   &:hover {
     color: ${({ theme }) => theme.colors.text.toCssValue()};

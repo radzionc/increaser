@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 import { getDateFromMinutes } from '@increaser/utils/time/getDateFromMinutes'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { MinusIcon } from '@increaser/ui/icons/MinusIcon'
 import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
 
 interface ManageTimeBoundaryProps {

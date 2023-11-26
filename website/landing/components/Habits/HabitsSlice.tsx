@@ -1,6 +1,6 @@
 import { HabitsProvider } from 'habits/components/HabitsProvider'
-import { LandingFeatureSlice } from '@increaser/ui/ui/landing/LandingFeatureSlice'
-import { Text } from '@increaser/ui/ui/Text'
+import { LandingFeatureSlice } from '@increaser/ui/landing/LandingFeatureSlice'
+import { Text } from '@increaser/ui/text'
 
 import { CTA } from '../CTA'
 import { HabitsPreview } from './HabitsPreview'

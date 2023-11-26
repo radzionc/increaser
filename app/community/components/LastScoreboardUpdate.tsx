@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useCurrentMonthUsers } from './CurrentMonthUsersProvider'

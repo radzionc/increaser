@@ -1,16 +1,16 @@
-import { getColor } from '@increaser/ui/ui/theme/getters'
-import { interactiveCSS } from '@increaser/ui/ui/utils/interactiveCSS'
+import { getColor } from '@increaser/ui/theme/getters'
 import Link from 'next/link'
 import { Path } from 'router/Path'
 import styled from 'styled-components'
 import { SlidingTime } from 'ui/SlidingTime'
 import { useCurrentFocus } from './CurrentFocusProvider'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { transition } from '@increaser/ui/css/transition'
 import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { SessionProgress } from './SessionProgress'
-import { CenterAbsolutely } from '@increaser/ui/ui/CenterAbsolutely'
+import { CenterAbsolutely } from '@increaser/ui/layout/CenterAbsolutely'
 import { MS_IN_SEC } from '@increaser/utils/time'
+import { interactive } from '@increaser/ui/css/interactive'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -18,16 +18,16 @@ const Wrapper = styled.div`
   right: 8px;
 `
 
-const Container = styled(Link)`
+const Container = styled.div`
   height: 160px;
   width: 100px;
 
-  ${interactiveCSS};
+  ${interactive};
   background: ${getColor('foreground')};
   font-weight: 600;
   font-size: 28px;
-  ${centerContentCSS};
-  ${defaultTransitionCSS};
+  ${centerContent};
+  ${transition};
 
   :hover {
     transform: scale(1.05);
@@ -43,12 +43,14 @@ export const FocusNavigationSlice = () => {
 
   return (
     <Wrapper>
-      <Container href={Path.Focus}>
-        <SessionProgress />
-        <CenterAbsolutely>
-          <SlidingTime getSeconds={getSeconds} />
-        </CenterAbsolutely>
-      </Container>
+      <Link href={Path.Focus}>
+        <Container>
+          <SessionProgress />
+          <CenterAbsolutely>
+            <SlidingTime getSeconds={getSeconds} />
+          </CenterAbsolutely>
+        </Container>
+      </Link>
     </Wrapper>
   )
 }

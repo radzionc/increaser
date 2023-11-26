@@ -1,10 +1,10 @@
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
 import styled from 'styled-components'
 
 export const ListCard = styled.div`
   position: relative;
   overflow: hidden;
-  ${defaultBorderRadiusCSS}
+  ${borderRadius.m}
   background: ${({ theme }) => theme.colors.background.toCssValue()};
   padding: 20px;
 `

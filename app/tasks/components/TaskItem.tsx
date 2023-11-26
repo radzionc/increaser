@@ -1,11 +1,11 @@
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { TrashBinIcon } from '@increaser/ui/icons/TrashBinIcon'
-import { OnHoverAction } from '@increaser/ui/ui/OnHoverAction'
+import { OnHoverAction } from '@increaser/ui/base/OnHoverAction'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { useCurrentTask } from './CurrentTaskProvider'
-import { ChecklistItem } from '@increaser/ui/ui/checklist/CheckListItem'
+import { ChecklistItem } from '@increaser/ui/checklist/CheckListItem'
 
 export const TaskItem = () => {
   const task = useCurrentTask()

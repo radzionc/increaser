@@ -1,6 +1,6 @@
 import { range } from '@increaser/utils/array/range'
 import styled from 'styled-components'
-import { VStack } from '@increaser/ui/ui//Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 const Line = styled.div`
   width: 100%;

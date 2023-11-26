@@ -12,10 +12,10 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
-import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { TitledSection } from '@increaser/ui/Layout/TitledSection'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { MS_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 
 import { BlockBoundaries } from './BlockBoundaries'
@@ -24,7 +24,7 @@ import { getLastItem } from '@increaser/utils/array/getLastItem'
 const Distance = styled.div`
   padding-right: 8px;
   border-right: 1px dashed;
-  ${centerContentCSS};
+  ${centerContent};
   right: 0;
   font-size: 14px;
   font-weight: 500;

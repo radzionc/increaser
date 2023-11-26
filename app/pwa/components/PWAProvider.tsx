@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { PersistentStateKey } from 'state/persistentState'
 import { usePersistentState } from 'state/persistentState'
 import { Modal } from '@increaser/ui/modal'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { BeforeInstallPromptEvent, PWAContext } from '../PWAContext'
 import { InstallInstructions } from './InstallInstructions'

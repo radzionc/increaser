@@ -2,7 +2,7 @@ import { usePWA } from 'pwa/PWAContext'
 import { Path } from 'router/Path'
 import styled from 'styled-components'
 import { InstallPrompt } from 'ui/Navigation/Sidebar/InstallPrompt'
-import { VStack } from '@increaser/ui/ui//Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { NavigationToInternalPage } from './NavigationToInternalPage'
 

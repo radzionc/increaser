@@ -5,22 +5,22 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { LabeledValue } from '@increaser/ui/text/LabeledValue'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { getShortWeekday } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 import Link from 'next/link'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
 
 const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  ${defaultBorderRadiusCSS};
-  ${defaultTransitionCSS};
+  ${borderRadius.m};
+  ${transition};
   height: 52px;
   border: 1px solid ${({ theme }) => theme.colors.mist.toCssValue()};
   overflow: hidden;
@@ -47,7 +47,7 @@ const Day = styled.div`
 
 const Fill = styled.div`
   height: 100%;
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 const Distance = styled.div`
@@ -56,12 +56,12 @@ const Distance = styled.div`
   color: ${({ theme }) => theme.colors.alert.toCssValue()};
   border-top: 1px solid;
   font-size: 14px;
-  ${centerContentCSS};
+  ${centerContent};
   overflow: visible;
   white-space: nowrap;
   justify-content: end;
   padding-right: 6px;
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 export const ProjectGoal = () => {

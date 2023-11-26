@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { CountInput, CountInputProps } from '.'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 
 const Container = styled.div`
   display: grid;

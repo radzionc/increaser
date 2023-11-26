@@ -1,5 +1,5 @@
 import { goalToFinishWorkByEmoji, goalToStartWorkAtEmoji } from 'sets/constants'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MIN_IN_DAY, MIN_IN_HOUR } from '@increaser/utils/time'
 

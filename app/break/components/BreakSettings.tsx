@@ -1,6 +1,6 @@
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { SettingsIcon } from '@increaser/ui/icons/SettingsIcon'
-import { Menu } from '@increaser/ui/ui/Menu'
+import { Menu } from '@increaser/ui/menu'
 
 import { ManageAutomation } from './ManageAutomation'
 import { ManageBreakNotifications } from './ManageBreakNotifications'

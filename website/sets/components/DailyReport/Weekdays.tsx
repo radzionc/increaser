@@ -1,6 +1,6 @@
 import { useWeekday } from '@increaser/ui/hooks/useWeekday'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { WEEKDAYS, getShortWeekday } from '@increaser/utils/time'
 
 export const Weekdays = () => {

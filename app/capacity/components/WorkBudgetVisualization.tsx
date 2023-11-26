@@ -1,6 +1,6 @@
 import { range } from '@increaser/utils/array/range'
 import { useTheme } from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import { MIN_IN_HOUR } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { CountableItemsVisualization } from 'ui/CountableItemsVisualization'

@@ -1,13 +1,13 @@
 import { EnhancedProject } from 'projects/Project'
 import styled, { css } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { Center } from '@increaser/ui/ui/Center'
-import { InvisibleHTMLRadio } from '@increaser/ui/ui/inputs/InvisibleHTMLRadio'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getHorizontalPaddingCSS } from '@increaser/ui/ui/utils/getHorizontalPaddingCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { Center } from '@increaser/ui/layout/Center'
+import { InvisibleHTMLRadio } from '@increaser/ui/inputs/InvisibleHTMLRadio'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
 
 import { ProjectGoalBadge } from './ProjectGoalBadge'
 
@@ -61,9 +61,9 @@ const Option = styled.div<{
   selected: boolean
 }>`
   height: 52px;
-  ${getHorizontalPaddingCSS(12)}
+  ${horizontalPadding(12)}
   border-radius: 8px;
-  ${centerContentCSS}
+  ${centerContent}
   justify-content: start;
   cursor: pointer;
   position: relative;
@@ -72,9 +72,9 @@ const Option = styled.div<{
   overflow: hidden;
   text-overflow: ellipsis;
 
-  ${defaultTransitionCSS}
+  ${transition}
 
-  ${defaultTransitionCSS}
+  ${transition}
   color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
   border: 1px solid ${({ theme }) => theme.colors.background.toCssValue()};
   background: ${({ theme }) => theme.colors.background.toCssValue()};

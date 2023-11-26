@@ -1,8 +1,8 @@
 import { useFocus } from 'focus/hooks/useFocus'
 import { useProjects } from 'projects/hooks/useProjects'
-import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
-import { Opener } from '@increaser/ui/ui/Opener'
-import { Text } from '@increaser/ui/ui/Text'
+import { ShyTextButton } from '@increaser/ui/buttons/ShyTextButton'
+import { Opener } from '@increaser/ui/base/Opener'
+import { Text } from '@increaser/ui/text'
 
 import { UpdateSetProjectOverlay } from './UpdateSetProjectOverlay'
 import { UpdateSetStartTimeOverlay } from './UpdateSetStartTimeOverlay'

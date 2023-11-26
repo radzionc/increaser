@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useDayOverview } from './DayOverviewProvider'
-import { PositionAbsolutelyCenterHorizontally } from '@increaser/ui/ui/PositionAbsolutelyCenterHorizontally'
+import { PositionAbsolutelyCenterHorizontally } from '@increaser/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { toPercents } from '@increaser/utils/toPercents'
 import styled from 'styled-components'
 import {
@@ -8,9 +8,9 @@ import {
   timeLabelGapInPx,
   timeLabelWidthInPx,
 } from './config'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatTime } from '@increaser/utils/time/formatTime'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import { getHoursInRange } from '@increaser/utils/time/getHoursInRange'
 import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
 import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'

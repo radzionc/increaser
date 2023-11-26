@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useDayOverview } from './DayOverviewProvider'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import { toPercents } from '@increaser/utils/toPercents'
 
 const Container = styled.div`

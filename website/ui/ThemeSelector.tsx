@@ -1,9 +1,9 @@
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { SelectOption } from '@increaser/ui/ui/inputs/Select/SelectOption'
-import { usePrefferedTheme } from '@increaser/ui/ui/theme/PrefferedThemeProvider'
-import { themePreferences } from '@increaser/ui/ui/theme/ThemePreference'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { SelectOption } from '@increaser/ui/inputs/Select/SelectOption'
+import { usePrefferedTheme } from '@increaser/ui/theme/PrefferedThemeProvider'
+import { themePreferences } from '@increaser/ui/theme/ThemePreference'
 import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 
 export const ThemeSelector = () => {

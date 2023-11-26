@@ -6,9 +6,9 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { formatTime } from '@increaser/utils/time/formatTime'
 import { match } from '@increaser/utils/match'
 import styled, { useTheme } from 'styled-components'
-import { BarChart } from '@increaser/ui/ui/BarChart'
-import { Text } from '@increaser/ui/ui/Text'
-import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
+import { BarChart } from '@increaser/ui/BarChart'
+import { Text } from '@increaser/ui/text'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { MS_IN_MIN } from '@increaser/utils/time'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
@@ -18,7 +18,7 @@ import { getLastItem } from '@increaser/utils/array/getLastItem'
 
 const Container = styled.div<{ labelsWidth: number }>`
   display: grid;
-  grid-template-columns: ${({ labelsWidth }) => getCSSUnit(labelsWidth)} repeat(
+  grid-template-columns: ${({ labelsWidth }) => toSizeUnit(labelsWidth)} repeat(
       7,
       1fr
     );

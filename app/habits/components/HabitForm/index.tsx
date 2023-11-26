@@ -1,14 +1,15 @@
 import { Controller, UseFormReturn } from 'react-hook-form'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { Form } from '@increaser/ui/ui/Form/Form'
-import { ColorLabelInput } from '@increaser/ui/ui/inputs/ColorLabelInput'
-import { InputWrapperWithErrorMessage } from '@increaser/ui/ui/inputs/InputWrapper'
-import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
-import { HStack } from '@increaser/ui/ui/Stack'
+import { Button } from '@increaser/ui/buttons/Button'
+import { Form } from '@increaser/ui/form/components/Form'
+import { ColorLabelInput } from '@increaser/ui/inputs/ColorLabelInput'
+import { TextInput } from '@increaser/ui/inputs/TextInput'
+import { HStack } from '@increaser/ui/layout/Stack'
 
 import { useHabits } from '../HabitsProvider'
 import { HabitFormShape } from './HabitFormShape'
 import { EmojiInput } from 'ui/EmojiInput'
+import { InputContainer } from '@increaser/ui/inputs/InputContainer'
+import { LabelText } from '@increaser/ui/inputs/LabelText'
 
 interface Props {
   form: UseFormReturn<HabitFormShape>
@@ -49,7 +50,8 @@ export const HabitForm = ({
             alignItems="start"
             gap={20}
           >
-            <InputWrapperWithErrorMessage label="Emoji">
+            <InputContainer>
+              <LabelText>Emoji</LabelText>
               <Controller
                 control={control}
                 name="emoji"
@@ -57,8 +59,9 @@ export const HabitForm = ({
                   <EmojiInput value={value} onChange={onChange} />
                 )}
               />
-            </InputWrapperWithErrorMessage>
-            <InputWrapperWithErrorMessage label="Color">
+            </InputContainer>
+            <InputContainer>
+              <LabelText>Color</LabelText>
               <Controller
                 control={control}
                 name="color"
@@ -70,7 +73,7 @@ export const HabitForm = ({
                   />
                 )}
               />
-            </InputWrapperWithErrorMessage>
+            </InputContainer>
           </HStack>
         </>
       }

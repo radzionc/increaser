@@ -2,10 +2,10 @@ import { ProjectsGoalsVisualization } from 'capacity/components/ProjectsGoalsVis
 import { useProjects } from 'projects/hooks/useProjects'
 import { useEffect } from 'react'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
-import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
+import { LabeledValue } from '@increaser/ui/text/LabeledValue'
 import { Modal } from '@increaser/ui/modal'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { ProjectGoalInput } from './ProjectGoalInput'

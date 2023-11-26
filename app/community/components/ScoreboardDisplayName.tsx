@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 import { CountryCode } from '@increaser/utils/countries'
 

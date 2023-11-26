@@ -1,5 +1,5 @@
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ManageSubscriptionActions } from './ManageSubscriptionActions'
 import { mirrorRecord } from '@increaser/utils/mirrorRecord'

@@ -1,19 +1,19 @@
 import styled, { useTheme } from 'styled-components'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { Center } from '@increaser/ui/ui/Center'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
+import { Center } from '@increaser/ui/layout/Center'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import { MoreHorizontalIcon } from '@increaser/ui/icons/MoreHorizontalIcon'
 import { PauseIcon } from '@increaser/ui/icons/PauseIcon'
 import { PlayIcon } from '@increaser/ui/icons/PlayIcon'
 import { StarIcon } from '@increaser/ui/icons/StarIcon'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
 import { Modal } from '@increaser/ui/modal'
-import { OnHoverAction } from '@increaser/ui/ui/OnHoverAction'
-import { Opener } from '@increaser/ui/ui/Opener'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { OnHoverAction } from '@increaser/ui/base/OnHoverAction'
+import { Opener } from '@increaser/ui/base/Opener'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
 
 import { useFocusSounds } from '../useFocusSounds'
 import { ManageSound } from './ManageSound'
@@ -35,7 +35,7 @@ const SoundNumber = styled(Text)`
 const Identifier = styled.div`
   width: 100%;
   height: 100%;
-  ${centerContentCSS};
+  ${centerContent};
   position: relative;
 `
 

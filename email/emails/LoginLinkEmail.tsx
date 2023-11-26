@@ -1,5 +1,5 @@
 import { productName } from '@increaser/entities'
-import { lightTheme } from '@increaser/ui/ui/theme/lightTheme'
+import { lightTheme } from '@increaser/ui/theme/lightTheme'
 import {
   Body,
   Button,

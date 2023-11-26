@@ -1,8 +1,8 @@
 import { analytics } from 'analytics'
 import { usePWA } from 'pwa/PWAContext'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Button } from '@increaser/ui/buttons/Button'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { productName } from '@increaser/entities'
 
 export const InstallInstructions = () => {

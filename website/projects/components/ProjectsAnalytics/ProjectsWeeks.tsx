@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
 import { useTheme } from 'styled-components'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { BarSegment, Bar, BasicBarChart } from 'ui/BasicBarChart'
 
 export const sortSegments = (segments: BarSegment[]) =>

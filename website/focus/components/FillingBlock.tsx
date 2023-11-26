@@ -1,7 +1,7 @@
 import { toPercents } from '@increaser/utils/toPercents'
 import styled, { keyframes } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 
 interface Props {
   color: HSLA
@@ -33,7 +33,7 @@ export const getFireplaceKeyframes = () => keyframes`
 export const Filler = styled.div<{ $color: HSLA }>`
   width: 100%;
 
-  ${defaultTransitionCSS};
+  ${transition};
 
   background: linear-gradient(
     to bottom,

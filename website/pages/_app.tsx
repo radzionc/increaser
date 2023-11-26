@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { GlobalStyle } from '@increaser/ui/ui/GlobalStyle'
+import { GlobalStyle } from '@increaser/ui/GlobalStyle'
 import { ReactNode, useEffect } from 'react'
 
 import { ThemeProvider } from 'ui/ThemeProvider'

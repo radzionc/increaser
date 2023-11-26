@@ -1,16 +1,16 @@
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { transition } from '@increaser/ui/css/transition'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import {
   InvisibleHTMLRadioProps,
   InvisibleHTMLRadio,
-} from '@increaser/ui/ui/inputs/InvisibleHTMLRadio'
+} from '@increaser/ui/inputs/InvisibleHTMLRadio'
 import { ReactNode } from 'react'
 import styled, { css, useTheme } from 'styled-components'
 
 const Container = styled.div<{ isSelected: boolean; $color: HSLA }>`
-  ${defaultBorderRadiusCSS};
-  ${defaultTransitionCSS};
+  ${borderRadius.m};
+  ${transition};
   cursor: pointer;
   padding: 20px;
   width: 100%;

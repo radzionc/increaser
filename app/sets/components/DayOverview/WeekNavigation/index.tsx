@@ -8,10 +8,10 @@ import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { useFocus } from 'focus/hooks/useFocus'
 import { verticalPadding } from '@increaser/ui/css/verticalPadding'
 import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
 import { horizontalPaddingInPx } from '../config'
 import { WeekdayOption } from './WeekdayOption'
-import { InvisibleHTMLRadio } from '@increaser/ui/ui/inputs/InvisibleHTMLRadio'
+import { InvisibleHTMLRadio } from '@increaser/ui/inputs/InvisibleHTMLRadio'
 
 const Container = styled(SameWidthChildrenRow)`
   ${verticalPadding(2)}

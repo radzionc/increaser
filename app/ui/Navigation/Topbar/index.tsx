@@ -2,13 +2,13 @@ import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled from 'styled-components'
 import { navigationPathInfo } from 'ui/Navigation/navigationPathInfo'
 import { Sidebar } from 'ui/Navigation/Sidebar'
-import { ScreenCover } from '@increaser/ui/ui//ScreenCover'
-import { Spacer } from '@increaser/ui/ui//Spacer'
-import { HStack } from '@increaser/ui/ui//Stack'
-import { Text } from '@increaser/ui/ui//Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { SidebarOpener } from './SidebarOpener'
 import { useRouter } from 'next/router'
+import { CompleteMist } from '@increaser/ui/modal/CompleteMist'
+import { Spacer } from '@increaser/ui/layout/Spacer'
 
 const Container = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ const Container = styled.div`
   justify-items: center;
 `
 
-const Cover = styled(ScreenCover)`
+const Cover = styled(CompleteMist)`
   justify-content: flex-start;
 `
 

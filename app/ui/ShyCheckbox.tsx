@@ -1,17 +1,17 @@
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import {
   InvisibleHTMLCheckboxProps,
   InvisibleHTMLCheckbox,
-} from '@increaser/ui/ui/inputs/Checkbox/InvisibleHTMLCheckbox'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { croppedTextCSS } from '@increaser/ui/ui/utils/coppedTextCSS'
-import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
-import { roundedCSS } from '@increaser/ui/ui/utils/roundedCSS'
+} from '@increaser/ui/inputs/Checkbox/InvisibleHTMLCheckbox'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { sameDimensions } from '@increaser/ui/css/sameDimensions'
+import { round } from '@increaser/ui/css/round'
 import { ReactNode } from 'react'
 import styled, { css } from 'styled-components'
+import { cropText } from '@increaser/ui/css/cropText'
 
 interface CheckboxProps extends InvisibleHTMLCheckboxProps {
   label?: ReactNode
@@ -20,22 +20,22 @@ interface CheckboxProps extends InvisibleHTMLCheckboxProps {
 }
 
 const InputWr = styled.div<{ $color: HSLA; isChecked: boolean }>`
-  ${getSameDimensionsCSS(22)}
+  ${sameDimensions(22)}
   border: 2px solid ${({ $color, isChecked, theme }) =>
     (isChecked ? $color : theme.colors.textSupporting).toCssValue()};
-  ${roundedCSS};
-  ${defaultTransitionCSS}
-  ${centerContentCSS};
+  ${round};
+  ${transition}
+  ${centerContent};
 `
 
 const Input = styled.div<{ isChecked: boolean; $color: HSLA }>`
-  ${getSameDimensionsCSS(14)}
-  ${roundedCSS}:
-  ${centerContentCSS};
+  ${sameDimensions(14)}
+  ${round}:
+  ${centerContent};
 
   color: ${({ theme }) => theme.colors.background.toCssValue()};
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   background: ${({ theme, isChecked, $color }) =>
     isChecked ? $color.toCssValue() : theme.colors.mist.toCssValue()};
@@ -44,11 +44,11 @@ const Input = styled.div<{ isChecked: boolean; $color: HSLA }>`
 const Container = styled(HStack)<{ isChecked: boolean }>`
   color: ${({ theme }) => theme.colors.text.toCssValue()};
 
-  ${croppedTextCSS};
+  ${cropText};
 
   cursor: pointer;
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   :hover {
     color: ${({ theme }) => theme.colors.contrast.toCssValue()};

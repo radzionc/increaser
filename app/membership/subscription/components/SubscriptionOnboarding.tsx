@@ -1,16 +1,16 @@
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { useState } from 'react'
 
-import { Center } from '@increaser/ui/ui/Center'
+import { Center } from '@increaser/ui/layout/Center'
 import { ContinueButton } from 'ui/ContinueButton'
-import { ShyTextButton } from '@increaser/ui/ui/buttons/ShyTextButton'
+import { ShyTextButton } from '@increaser/ui/buttons/ShyTextButton'
 import { SubscriptionCheckout } from './SubscriptionCheckout'
 import { ClosableComponentProps } from '@increaser/ui/props'
 import { Modal } from '@increaser/ui/modal'
 import { SubscriptionOffer } from './SubscriptionOffer'
 import { SubscriptionBillingCycleProvider } from '@increaser/ui/subscription/components/SubscriptionBillingCycleProvider'
-import { Match } from '@increaser/ui/ui/Match'
+import { Match } from '@increaser/ui/base/Match'
 import { productName } from '@increaser/entities'
 
 interface Props extends ClosableComponentProps {

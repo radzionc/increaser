@@ -1,4 +1,4 @@
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { Button } from '@increaser/ui/buttons/Button'
 import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 export const SignOut = () => {

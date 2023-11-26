@@ -1,6 +1,6 @@
 import { CurrentWeekPerformance } from 'capacity/components/CurrentWeekPerformance'
-import { LandingFeatureSlice } from '@increaser/ui/ui/landing/LandingFeatureSlice'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { LandingFeatureSlice } from '@increaser/ui/landing/LandingFeatureSlice'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { CTA } from '../CTA'
 

@@ -1,4 +1,4 @@
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 
 export interface HabitResponse {
   id: string

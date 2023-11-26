@@ -1,5 +1,5 @@
-import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { ReactNode } from 'react'
 
 interface ResponsiveContentProps {

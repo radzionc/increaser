@@ -1,8 +1,8 @@
 import { Path } from 'router/Path'
 import { APP_NAME } from 'shared/product'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { LinkText } from '@increaser/ui/ui/Text/LinkText'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { LinkText } from '@increaser/ui/text/LinkText'
 import Link from 'next/link'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 

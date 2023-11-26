@@ -1,11 +1,11 @@
 import { ImageLink } from 'components/reusable/image-link'
 import styled from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { IntersectionAware } from '@increaser/ui/ui/IntersectionAware'
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { getHighlightedTextCSS } from '@increaser/ui/ui/Text/HighlightedText'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { IntersectionAware } from '@increaser/ui/IntersectionAware'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { getHighlightedTextCSS } from '@increaser/ui/text/HighlightedText'
 
 import { Testimonial } from './testimonials'
 

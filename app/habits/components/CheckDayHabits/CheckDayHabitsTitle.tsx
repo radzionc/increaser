@@ -1,6 +1,6 @@
 import { Habit } from 'habits/Habit'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 
 interface Props {

@@ -1,9 +1,9 @@
 import { useTheme } from 'styled-components'
 import { InputProps } from '../../props'
 import { toPercents } from '@increaser/utils/toPercents'
-import { HStack } from '../../ui/Stack'
-import { Switch } from '../../ui/Switch/Switch'
-import { Tag } from '../../ui/Tag'
+import { HStack } from '../../layout/Stack'
+import { Switch } from '../../inputs/Switch/Switch'
+import { Tag } from '../../tags/Tag'
 import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 
 interface SubscriptionBillingCycleInputProps

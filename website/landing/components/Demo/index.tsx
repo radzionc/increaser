@@ -1,13 +1,13 @@
 import YouTubePlayer from 'react-player/lazy'
 import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import styled from 'styled-components'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
-import { IntersectionAware } from '@increaser/ui/ui/IntersectionAware'
-import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { getVerticalMarginCSS } from '@increaser/ui/ui/utils/getVerticalMarginCSS'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
+import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
+import { IntersectionAware } from '@increaser/ui/IntersectionAware'
+import { LandingSlice } from '@increaser/ui/landing/LandingSlice'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { getVerticalMarginCSS } from '@increaser/ui/utils/getVerticalMarginCSS'
 import { APP_DEMO_URL } from 'shared/externalResources'
 
 const Container = styled(VStack)`
@@ -17,7 +17,7 @@ const Container = styled(VStack)`
 const youTubeVideoRatio = 9 / 16
 
 const PlayerWrapper = styled(VStack)<{ isActive: boolean }>`
-  ${defaultBorderRadiusCSS};
+  ${borderRadius.m};
   overflow: hidden;
   border: 2px dashed
     ${({ theme, isActive }) =>

@@ -1,8 +1,8 @@
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
-import { SameWidthChildrenRow } from '@increaser/ui/ui/Layout/SameWidthChildrenRow'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { ActiveHabits } from './ActiveHabits'

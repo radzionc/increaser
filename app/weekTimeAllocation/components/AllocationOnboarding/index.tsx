@@ -8,7 +8,7 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 
 import { WorkHoursOnboarding } from './WorkHoursOnboarding'
 import { WorkScheduleOnboarding } from './WorkScheduleOnboarding'
-import { Match } from '@increaser/ui/ui/Match'
+import { Match } from '@increaser/ui/base/Match'
 import { useIsPayingUser } from 'membership/hooks/useIsPayingUser'
 import { SubscriptionOnboarding } from 'membership/subscription/components/SubscriptionOnboarding'
 

@@ -2,9 +2,9 @@ import { useGroupedByWeekdaySetsTotal } from 'sets/hooks/useGroupedByWeekdaySets
 import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
-import { LabeledValue } from '@increaser/ui/ui/LabeledValue'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { LabeledValue } from '@increaser/ui/text/LabeledValue'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 export const DayAverage = () => {
   const totals = useGroupedByWeekdaySetsTotal()

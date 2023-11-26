@@ -1,12 +1,12 @@
-import { VStack } from '../ui/Stack'
-import { Text } from '../ui/Text'
+import { VStack } from '../layout/Stack'
+import { Text } from '../text'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { AuthView } from './AuthView'
 import { useHandleQueryParams } from '../navigation/hooks/useHandleQueryParams'
 import { suggestInboxLink } from '@increaser/utils/suggestInboxLink'
 import { ExternalLink } from '../navigation/Link/ExternalLink'
-import { Button } from '../ui/buttons/Button'
+import { Button } from '../buttons/Button'
 
 interface EmailConfirmQueryParams {
   email: string

@@ -1,4 +1,4 @@
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
+import { Panel } from '@increaser/ui/panel/Panel'
 
 import { CheckTodayHabits } from './CheckDayHabits/CheckTodayHabits'
 import { useHabits } from './HabitsProvider'

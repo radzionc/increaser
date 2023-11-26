@@ -1,16 +1,16 @@
 import { useCurrentMonthUsers } from './CurrentMonthUsersProvider'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { getColor } from '@increaser/ui/theme/getters'
 import { ScoreboardDisplayName } from './ScoreboardDisplayName'
-import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { SeparatedByLine } from '@increaser/ui/layout/SeparatedByLine'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 import { CountryCode } from '@increaser/utils/countries'
-import { getOutlineCSS } from '@increaser/ui/ui/utils/getOutlineCSS'
 import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
+import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
 
 const Row = styled.div`
   display: grid;
@@ -21,7 +21,7 @@ const Row = styled.div`
 `
 
 const Outline = styled.div`
-  ${getOutlineCSS(10, 8)};
+  ${absoluteOutline(10, 8)};
   background: transparent;
   border-radius: 8px;
   border: 2px solid ${getColor('primary')};

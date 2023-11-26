@@ -5,9 +5,9 @@ import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
 import { getTreeNode, getTreeValues } from '@increaser/utils/tree'
 import { withoutDuplicates } from '@increaser/utils/array/withoutDuplicates'
 import styled from 'styled-components'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { TreeFilter } from '@increaser/ui/ui/tree/TreeFilter'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { TreeFilter } from '@increaser/ui/tree/TreeFilter'
 
 import { HabitItem } from './HabitItem'
 

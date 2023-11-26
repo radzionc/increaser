@@ -1,19 +1,6 @@
 import { useEffect, RefObject } from 'react'
 import { useBoolean } from './useBoolean'
-
-const containsRelatedTarget = ({
-  currentTarget,
-  relatedTarget,
-}: FocusEvent) => {
-  if (
-    currentTarget instanceof HTMLElement &&
-    relatedTarget instanceof HTMLElement
-  ) {
-    return currentTarget.contains(relatedTarget)
-  }
-
-  return false
-}
+import { containsRelatedTarget } from '../utils/containsRelatedTarget'
 
 export function useHasFocusWithin(ref: RefObject<HTMLElement>): boolean {
   const [isFocused, { set: focus, unset: blur }] = useBoolean(false)

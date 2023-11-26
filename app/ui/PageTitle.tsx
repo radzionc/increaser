@@ -1,10 +1,10 @@
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
-import Head from 'next/head'
 import { ReactNode } from 'react'
 import { productName } from '@increaser/entities'
+import { PageMetaTags } from '@increaser/ui/metadata/PageMetaTags'
 
 interface Props {
   title: React.ReactNode
@@ -39,9 +39,7 @@ export const PageTitle = ({
         </>
       </HStack>
       {documentTitle && (
-        <Head>
-          <title>{[documentTitle, productName].join(' | ')}</title>
-        </Head>
+        <PageMetaTags title={[documentTitle, productName].join(' | ')} />
       )}
       {description && (
         <>

@@ -1,6 +1,6 @@
 import { Day } from 'sets/hooks/useGroupedByDayCurrentWeekSets'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 
 interface SummaryRowProps {
   name: string

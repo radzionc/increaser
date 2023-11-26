@@ -1,21 +1,21 @@
 import { useState } from 'react'
 import styled, { css } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { transition } from '@increaser/ui/css/transition'
+import { Button } from '@increaser/ui/buttons/Button'
 import { ArrowLeftIcon } from '@increaser/ui/icons/ArrowLeftIcon'
 import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Switch } from '@increaser/ui/ui/Switch/Switch'
-import { getVerticalPaddingCSS } from '@increaser/ui/ui/utils/getVerticalPaddingCSS'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Switch } from '@increaser/ui/inputs/Switch/Switch'
 
 import { AddSound } from './AddSound'
 import { FocusSoundsList } from './FocusSoundsList'
 import { useFocusSounds } from './useFocusSounds'
-import { Match } from '@increaser/ui/ui/Match'
+import { Match } from '@increaser/ui/base/Match'
+import { verticalPadding } from '@increaser/ui/css/verticalPadding'
 
 const Container = styled(Panel)<{ isActive: boolean }>`
-  ${defaultTransitionCSS};
+  ${transition};
   height: 100%;
 
   ${({ isActive }) =>
@@ -30,7 +30,7 @@ const Container = styled(Panel)<{ isActive: boolean }>`
 `
 
 const FocusModeSwitch = styled(Switch)`
-  ${getVerticalPaddingCSS(4)}
+  ${verticalPadding(4)}
   padding: 20px;
   padding-right: 0;
 `

@@ -2,11 +2,11 @@ import { analytics } from 'analytics'
 import { useBreak } from 'break/hooks/useBreak'
 import { useCallback } from 'react'
 import styled from 'styled-components'
-import { Switch } from '@increaser/ui/ui/Switch/Switch'
-import { getVerticalPaddingCSS } from '@increaser/ui/ui/utils/getVerticalPaddingCSS'
+import { Switch } from '@increaser/ui/inputs/Switch/Switch'
+import { verticalPadding } from '@increaser/ui/css/verticalPadding'
 
 const NotificationsSwitch = styled(Switch)`
-  ${getVerticalPaddingCSS(8)}
+  ${verticalPadding(8)}
 `
 
 export const BreakBrowserNotification = () => {

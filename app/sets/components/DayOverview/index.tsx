@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
+import { Panel } from '@increaser/ui/panel/Panel'
 import { AmountOverview } from './AmountOverview'
 import { DayTimeline } from './DayTimeline'
 import { AddSession } from './AddSession'

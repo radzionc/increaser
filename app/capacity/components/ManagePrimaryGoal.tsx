@@ -5,22 +5,22 @@ import {
   primaryGoals,
 } from 'capacity/PrimaryGoal'
 import styled, { useTheme } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { Menu } from '@increaser/ui/ui/Menu'
-import { MenuOption, MenuOptionProps } from '@increaser/ui/ui/Menu/MenuOption'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { Menu } from '@increaser/ui/menu'
+import { MenuOption, MenuOptionProps } from '@increaser/ui/menu/MenuOption'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { PrimaryGoal } from '@increaser/api-interface/client/graphql'
+import { transition } from '@increaser/ui/css/transition'
 
 const Container = styled(UnstyledButton)`
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
   padding: 8px 12px;
   border-radius: 8px;
 
-  ${defaultTransitionCSS}
+  ${transition}
 
   :hover {
     background: ${({ theme }) => theme.colors.mistExtra.toCssValue()};

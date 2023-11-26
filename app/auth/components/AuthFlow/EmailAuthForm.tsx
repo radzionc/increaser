@@ -1,9 +1,9 @@
 import { analytics } from 'analytics'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { Form } from '@increaser/ui/ui/Form/Form'
-import { TextInput } from '@increaser/ui/ui/inputs/TextInput'
+import { Button } from '@increaser/ui/buttons/Button'
+import { Form } from '@increaser/ui/form/components/Form'
+import { TextInput } from '@increaser/ui/inputs/TextInput'
 
 import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
@@ -11,6 +11,7 @@ import { validateEmail } from '@increaser/utils/validation/validateEmail'
 import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { useApi } from 'api/useApi'
 import { graphql } from '@increaser/api-interface/client'
+import { InputWithError } from '@increaser/ui/inputs/InputWithError'
 
 interface EmailFormState {
   email: string
@@ -61,17 +62,19 @@ export const EmailAuthForm = () => {
         sendAuthLinkByEmail(data)
       })}
       content={
-        <TextInput
-          label="Email address"
-          type="email"
-          autoFocus
-          placeholder="john@gmail.com"
-          {...register('email', {
-            required: 'Please enter your email',
-            validate: validateEmail,
-          })}
-          error={errors.email?.message}
-        />
+        <InputWithError error={errors.email?.message}>
+          <TextInput
+            label="Email address"
+            type="email"
+            autoFocus
+            placeholder="john@gmail.com"
+            {...register('email', {
+              required: 'Please enter your email',
+              validate: validateEmail,
+            })}
+            error={errors.email?.message}
+          />
+        </InputWithError>
       }
       actions={
         <Button size="l" isLoading={isLoading}>

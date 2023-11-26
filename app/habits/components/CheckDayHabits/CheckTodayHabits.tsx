@@ -1,6 +1,6 @@
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
-import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { TitledSection } from '@increaser/ui/Layout/TitledSection'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 import { CurrentHabitProvider } from '../CurrentHabitProvider'

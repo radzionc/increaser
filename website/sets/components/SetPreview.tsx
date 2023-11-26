@@ -4,9 +4,9 @@ import { getProjectColor } from 'projects/utils/getProjectColor'
 import { getSetDuration } from 'sets/helpers/getSetDuration'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled, { useTheme } from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 const Container = styled(HStack)<{ $color: HSLA }>`
   border-radius: 8px;

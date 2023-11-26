@@ -7,8 +7,8 @@ import { useWeekday } from '@increaser/ui/hooks/useWeekday'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { range } from '@increaser/utils/array/range'
 import { useTheme } from 'styled-components'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import {
   D_IN_WEEK,

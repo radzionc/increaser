@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
-import { LandingSlice } from '@increaser/ui/ui/landing/LandingSlice'
-import { Spacer } from '@increaser/ui/ui/Spacer'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { LandingSlice } from '@increaser/ui/landing/LandingSlice'
+import { Spacer } from '@increaser/ui/layout/Spacer'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 interface LegalPageProps extends ComponentWithChildrenProps {
   title: string

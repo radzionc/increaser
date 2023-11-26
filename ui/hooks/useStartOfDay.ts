@@ -1,22 +1,9 @@
 import { startOfDay } from 'date-fns'
-import { useEffect, useState } from 'react'
+import { useRhythmicRerender } from './useRhythmicRerender'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
-const getStartOfDay = () => startOfDay(new Date()).getTime()
-
 export const useStartOfDay = () => {
-  const [startOfDay, setStartOfDay] = useState(getStartOfDay)
+  const now = useRhythmicRerender(MS_IN_MIN)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newStartOfDay = getStartOfDay()
-      if (newStartOfDay !== startOfDay) {
-        setStartOfDay(newStartOfDay)
-      }
-    }, MS_IN_MIN * 5)
-
-    return () => clearInterval(interval)
-  }, [startOfDay])
-
-  return startOfDay
+  return startOfDay(now).getTime()
 }

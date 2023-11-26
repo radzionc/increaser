@@ -2,10 +2,10 @@ import { useTrackHabitMutation } from 'habits/api/useTrackHabitMutation'
 import { useMemo } from 'react'
 import { isToday } from '@increaser/utils/time/isToday'
 import styled from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { transition } from '@increaser/ui/css/transition'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { centerContent } from '@increaser/ui/css/centerContent'
 
 import { useActiveHabits } from './ActiveHabitsContext'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
@@ -32,10 +32,10 @@ const Container = styled(UnstyledButton)`
   position: relative;
 
   height: 32px;
-  ${centerContentCSS};
+  ${centerContent};
   width: 100%;
   border-radius: 4px;
-  ${defaultTransitionCSS};
+  ${transition};
   color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
   font-size: 12px;
 

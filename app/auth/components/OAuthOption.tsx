@@ -1,7 +1,7 @@
 import { analytics } from 'analytics'
 
 import { ExternalLink } from 'router/Link/ExternalLink'
-import { IconCentricButton } from '@increaser/ui/ui/buttons/IconCentricButton'
+import { IconCentricButton } from '@increaser/ui/buttons/IconCentricButton'
 import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { getOAuthUrl } from 'auth/utils/oauth'
 import { oauthProviderNameRecord } from 'auth/oauthProviderNameRecord'

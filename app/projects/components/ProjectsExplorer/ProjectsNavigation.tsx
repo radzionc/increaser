@@ -1,6 +1,6 @@
 import { useProjects } from 'projects/hooks/useProjects'
 import { useTheme } from 'styled-components'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { CreateProjectNavigationItem } from './CreateProjectNavigationItem'
 import { ProjectsNavigationSection } from './ProjectsNavigationSection'

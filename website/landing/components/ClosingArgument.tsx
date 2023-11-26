@@ -1,9 +1,9 @@
 import styled, { ThemeProvider } from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { IntersectionAware } from '@increaser/ui/ui/IntersectionAware'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { darkTheme } from '@increaser/ui/ui/theme/darkTheme'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { IntersectionAware } from '@increaser/ui/IntersectionAware'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { darkTheme } from '@increaser/ui/theme/darkTheme'
+import { centerContent } from '@increaser/ui/css/centerContent'
 
 import { CTA } from './CTA'
 import { Footer } from './Footer'
@@ -14,7 +14,7 @@ export const closingArgumentBackgroundColor: HSLA = new HSLA(240, 50, 1)
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  ${centerContentCSS}
+  ${centerContent}
   position: relative;
   overflow: hidden;
   background: ${closingArgumentBackgroundColor.toCssValue()};
@@ -35,7 +35,7 @@ const FooterWr = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0;
-  ${centerContentCSS}
+  ${centerContent}
   padding: 20px;
 `
 

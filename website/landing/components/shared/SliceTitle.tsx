@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 
 export const SliceTitle = (props: ComponentProps<typeof Text>) => (
   <Text

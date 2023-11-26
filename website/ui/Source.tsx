@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { ExternalLink } from 'router/Link/ExternalLink'
 import styled from 'styled-components'
 import { ExternalLinkIcon } from '@increaser/ui/icons/ExternalLinkIcon'

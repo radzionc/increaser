@@ -1,6 +1,6 @@
 import { ClosableComponentProps } from '@increaser/ui/props'
-import { Button } from '@increaser/ui/ui/buttons/Button'
-import { SeparatedByLine } from '@increaser/ui/ui/SeparatedByLine'
+import { Button } from '@increaser/ui/buttons/Button'
+import { SeparatedByLine } from '@increaser/ui/layout/SeparatedByLine'
 
 import { useFocusSounds } from '../useFocusSounds'
 import { UpdateSoundForm } from './UpdateSoundForm'

@@ -4,9 +4,9 @@ import React, { useMemo } from 'react'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { sum } from '@increaser/utils/array/sum'
 import styled, { useTheme } from 'styled-components'
-import { Circle } from '@increaser/ui/ui/Circle'
-import { PieChart } from '@increaser/ui/ui/PieChart'
-import { Text } from '@increaser/ui/ui/Text'
+import { Circle } from '@increaser/ui/layout/Circle'
+import { PieChart } from '@increaser/ui/charts/PieChart'
+import { Text } from '@increaser/ui/text'
 
 const Container = styled.div`
   display: grid;

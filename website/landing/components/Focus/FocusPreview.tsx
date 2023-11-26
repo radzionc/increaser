@@ -2,9 +2,9 @@ import { FocusGoal } from 'focus/components/FocusGoal'
 import { FocusSuccess } from 'focus/components/FocusSucess'
 import { SessionProgress } from 'focus/components/SessionProgress'
 import styled from 'styled-components'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { MS_IN_SEC } from '@increaser/utils/time'
 import { SlidingTime } from 'ui/SlidingTime'
 import { useCurrentFocus } from 'focus/components/CurrentFocusProvider'
@@ -13,7 +13,7 @@ const BlockWrapper = styled.div`
   height: 520px;
   width: 100%;
   position: relative;
-  ${centerContentCSS};
+  ${centerContent};
 `
 
 const TimeWrapper = styled.div`

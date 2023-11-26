@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { useAssertUserState } from 'user/state/UserStateContext'

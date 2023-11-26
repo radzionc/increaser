@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { DefaultTheme } from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 import { FireIcon } from '@increaser/ui/icons/FireIcon'
 import { ForestIcon } from '@increaser/ui/icons/ForestIcon'
 import { WavesIcon } from '@increaser/ui/icons/WavesIcon'

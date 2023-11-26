@@ -1,15 +1,15 @@
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import {
   HStackSeparatedBy,
   slashSeparator,
-} from '@increaser/ui/ui/StackSeparatedBy'
+} from '@increaser/ui/layout/StackSeparatedBy'
 import { WEEKDAYS } from '@increaser/utils/time'
 import { ProjectTotal } from 'projects/components/ProjectTotal'
 import { ProjectsAllocationLine } from 'projects/components/ProjectsAllocationLine'
 import { getProjectColor } from 'projects/utils/getProjectColor'
 import { getProjectName } from 'projects/utils/getProjectName'
 import { useDayOverview } from './DayOverviewProvider'
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { useWeekTimeAllocation } from 'weekTimeAllocation/hooks/useWeekTimeAllocation'

@@ -101,7 +101,7 @@ export type Key =
   | 'Y'
   | 'Z'
   | 'Meta'
-  | 'Mod'
+  | 'Mod' // Either Ctrl for windows or Meta in Mac
   | 'LeftWindowKey'
   | 'RightWindowKey'
   | 'Numpad0'
@@ -166,7 +166,7 @@ export const useKeyPress = (
 ) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key !== key && event.code !== key) return
+      if (event.key !== key) return
 
       if (shouldStopPropagation) {
         event.stopPropagation()

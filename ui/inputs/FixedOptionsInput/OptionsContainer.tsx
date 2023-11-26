@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { toSizeUnit } from '../../css/toSizeUnit'
-import { getColor } from '../../ui/theme/getters'
+import { getColor } from '../../theme/getters'
 import { textInputBorderRadius } from '../../css/textInput'
+import { toSizeUnit } from '../../css/toSizeUnit'
 
-export const OptionsContainer = styled.div`
-  z-index: 1;
+export const FixedOptionsInputOptionsContainer = styled.div`
   background: ${getColor('foreground')};
   border: 1px solid ${getColor('mist')};
 
@@ -12,4 +11,6 @@ export const OptionsContainer = styled.div`
   overflow: hidden;
   max-height: 280px;
   overflow-y: auto;
+
+  z-index: 1;
 `

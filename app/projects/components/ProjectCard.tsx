@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { S_IN_HOUR } from '@increaser/utils/time'
 import { EmojiHeavyBlock } from 'ui/EmojiHeavyBlock'
 

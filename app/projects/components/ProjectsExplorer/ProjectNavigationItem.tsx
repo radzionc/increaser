@@ -1,13 +1,13 @@
 import { useRef } from 'react'
 import styled, { css } from 'styled-components'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
+import { transition } from '@increaser/ui/css/transition'
 import { ChevronRightIcon } from '@increaser/ui/icons/ChevronRightIcon'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { getColor } from '@increaser/ui/ui/theme/getters'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { getColor } from '@increaser/ui/theme/getters'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { sameDimensions } from '@increaser/ui/css/sameDimensions'
 import { S_IN_HOUR } from '@increaser/utils/time'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
@@ -19,10 +19,10 @@ export const IconWr = styled.div<{ selected: boolean }>`
   display: flex;
   font-size: 24px;
   color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
-  ${defaultTransitionCSS};
+  ${transition};
 
-  ${getSameDimensionsCSS(40)};
-  ${centerContentCSS};
+  ${sameDimensions(40)};
+  ${centerContent};
   border-radius: 1000px;
 
   ${({ selected }) =>

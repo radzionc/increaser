@@ -1,10 +1,10 @@
 import { ProjectGoalInput } from 'projects/components/ProjectGoalInput'
 import { CurrentProjectProvider } from 'projects/components/ProjectView/CurrentProjectProvider'
 import { useProjects } from 'projects/hooks/useProjects'
-import { TitledSection } from '@increaser/ui/ui/Layout/TitledSection'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { TitledSection } from '@increaser/ui/Layout/TitledSection'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 
 import { ProjectsGoalsVisualization } from './ProjectsGoalsVisualization'
 

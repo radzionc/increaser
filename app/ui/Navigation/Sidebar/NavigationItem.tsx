@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { getColor } from '@increaser/ui/ui/theme/getters'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { interactiveCSS } from '@increaser/ui/ui/utils/interactiveCSS'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { getColor } from '@increaser/ui/theme/getters'
+import { transition } from '@increaser/ui/css/transition'
+import { interactive } from '@increaser/ui/css/interactive'
 
 interface Props {
   icon: React.ReactNode
@@ -15,11 +15,11 @@ interface Props {
 export const Container = styled.div<{ isSelected?: boolean }>`
   padding: 0 16px;
   height: 48px;
-  ${interactiveCSS};
+  ${interactive};
   display: flex;
   align-items: center;
   width: 100%;
-  ${defaultTransitionCSS};
+  ${transition};
   border-radius: 8px;
   font-weight: 500;
   color: ${getColor('textSupporting')};

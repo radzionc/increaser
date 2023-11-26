@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 
 export const IntervalRect = styled.div<{ $color: HSLA }>`
   position: absolute;

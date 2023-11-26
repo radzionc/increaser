@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { CloseIcon } from '@increaser/ui/icons/CloseIcon'
 import { EditIcon } from '@increaser/ui/icons/EditIcon'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
 
 import { DeleteProject } from '../DeleteProject'

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { Line } from '@increaser/ui/ui/Line'
-import { Panel } from '@increaser/ui/ui/Panel/Panel'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { Line } from '@increaser/ui/layout/Line'
+import { Panel } from '@increaser/ui/panel/Panel'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 import { ProjectsNavigation } from './ProjectsNavigation'
 import { SmallScreenProjectsNavigation } from './SmallScreenProjectsNavigation'

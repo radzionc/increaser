@@ -1,4 +1,4 @@
-import { IconButton } from '@increaser/ui/ui/buttons/IconButton'
+import { IconButton } from '@increaser/ui/buttons/IconButton'
 import { NoVolumeIcon } from '@increaser/ui/icons/NoVolumeIcon'
 import { VolumeIcon } from '@increaser/ui/icons/VolumeIcon'
 

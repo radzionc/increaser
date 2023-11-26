@@ -1,4 +1,4 @@
-import { Opener } from '@increaser/ui/ui/Opener'
+import { Opener } from '@increaser/ui/base/Opener'
 import { useIsLikeMember } from 'membership/hooks/useIsLikeMember'
 import { SubscriptionPrompt } from 'membership/subscription/components/SubscriptionPrompt'
 

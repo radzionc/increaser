@@ -1,5 +1,5 @@
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
-import { VStack } from '@increaser/ui/ui/Stack'
+import { VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { ScheduleEducationBanner } from './ScheduleEducationBanner'

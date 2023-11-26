@@ -1,4 +1,4 @@
-import { Button } from '@increaser/ui/ui/buttons/Button'
+import { Button } from '@increaser/ui/buttons/Button'
 import { APP_URL } from 'product'
 import { ExternalLink } from 'router/Link/ExternalLink'
 

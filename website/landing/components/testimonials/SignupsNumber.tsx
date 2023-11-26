@@ -1,4 +1,4 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 
 import { SliceTitle } from '../shared/SliceTitle'
 

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
+import { HSLA } from '@increaser/ui/colors/HSLA'
 
 export const TimelineSession = styled.div<{ $color?: HSLA }>`
   position: absolute;

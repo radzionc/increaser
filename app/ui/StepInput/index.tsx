@@ -1,9 +1,9 @@
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { UnstyledButton } from '@increaser/ui/ui/buttons/UnstyledButton'
+import { transition } from '@increaser/ui/css/transition'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
+import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { MinusIcon } from '@increaser/ui/icons/MinusIcon'
 import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { InputProps } from '@increaser/ui/props'
 import styled, { css } from 'styled-components'
 
@@ -14,10 +14,10 @@ interface StepInputProps extends InputProps<number> {
 }
 
 const Button = styled(UnstyledButton)<{ isEnabled: boolean }>`
-  ${centerContentCSS};
+  ${centerContent};
 
-  ${defaultTransitionCSS}
-  ${defaultBorderRadiusCSS}
+  ${transition}
+  ${borderRadius.m}
 
   aspect-ratio: 1 / 1;
 

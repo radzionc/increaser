@@ -1,10 +1,10 @@
 import { ComponentWithChildrenProps } from '@increaser/ui/props'
-import { VStack } from '@increaser/ui/ui/Stack'
-import { defaultBorderRadiusCSS } from '@increaser/ui/ui/borderRadius'
-import { getColor } from '@increaser/ui/ui/theme/getters'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { getColor } from '@increaser/ui/theme/getters'
 import { Topbar } from 'landing/components/Topbar'
 import styled from 'styled-components'
 import { UnauthenticatedOnly } from './UnauthenticatedOnly'
+import { borderRadius } from '@increaser/ui/css/borderRadius'
 
 const Wrapper = styled(VStack)`
   background: ${getColor('foreground')};
@@ -18,7 +18,7 @@ const Content = styled(VStack)`
   max-width: 400px;
   width: 100%;
   padding: 26px;
-  ${defaultBorderRadiusCSS};
+  ${borderRadius.m};
   background: ${getColor('background')};
 `
 

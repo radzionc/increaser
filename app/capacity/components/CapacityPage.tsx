@@ -1,6 +1,6 @@
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
-import { HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { CapacityPageContent } from './CapacityPageContent'

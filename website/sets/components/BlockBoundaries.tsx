@@ -2,11 +2,8 @@ import { TimelineSession } from 'focus/components/TimelineSession'
 import { Block, getBlockWorkDuration } from 'sets/Block'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
-import {
-  defaultTransition,
-  defaultTransitionCSS,
-} from '@increaser/ui/ui/animations/transitions'
-import { Text } from '@increaser/ui/ui/Text'
+import { defaultTransition, transition } from '@increaser/ui/css/transition'
+import { Text } from '@increaser/ui/text'
 import { MS_IN_MIN } from '@increaser/utils/time'
 
 const Container = styled(TimelineSession)`
@@ -21,7 +18,7 @@ const Container = styled(TimelineSession)`
   overflow: hidden;
   pointer-events: none;
 
-  ${defaultTransitionCSS};
+  ${transition};
 
   p {
     transition: ${defaultTransition} opacity;

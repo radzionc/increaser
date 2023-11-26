@@ -6,10 +6,10 @@ import { FinishableComponentProps } from '@increaser/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import styled from 'styled-components'
 import { Task } from 'tasks/Task'
-import { Box } from '@increaser/ui/ui/checklist/CheckListItem'
+import { Box } from '@increaser/ui/checklist/CheckListItem'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import { ChecklistItemFrame } from '@increaser/ui/ui/checklist/ChecklistItemFrame'
+import { ChecklistItemFrame } from '@increaser/ui/checklist/ChecklistItemFrame'
 
 interface TaskForm {
   name: string

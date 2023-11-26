@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components'
-import { ElementSizeAware } from '@increaser/ui/ui/ElementSizeAware'
-import { centerContentCSS } from '@increaser/ui/ui/utils/centerContentCSS'
-import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
-import { getSameDimensionsCSS } from '@increaser/ui/ui/utils/getSameDimensionsCSS'
+import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
+import { centerContent } from '@increaser/ui/css/centerContent'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
+import { sameDimensions } from '@increaser/ui/css/sameDimensions'
 import { ClientOnly } from 'ui/ClientOnly'
 
 const Container = styled.div`
-  ${centerContentCSS}
+  ${centerContent}
   overflow: hidden;
 
-  ${getSameDimensionsCSS('100%')}
+  ${sameDimensions('100%')}
 `
 
 const Content = styled.div`
@@ -29,8 +29,8 @@ const Screen = styled.div<{ width: number | string; height: number | string }>`
   background-position: -2px -2px;
 
   ${(props) => {
-    const width = getCSSUnit(props.width)
-    const height = getCSSUnit(props.height)
+    const width = toSizeUnit(props.width)
+    const height = toSizeUnit(props.height)
 
     return css`
       width: ${width};

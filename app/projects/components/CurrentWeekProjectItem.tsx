@@ -1,11 +1,11 @@
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { useTheme } from 'styled-components'
-import { HStack, VStack } from '@increaser/ui/ui/Stack'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import {
   HStackSeparatedBy,
   slashSeparator,
-} from '@increaser/ui/ui/StackSeparatedBy'
-import { Text } from '@increaser/ui/ui/Text'
+} from '@increaser/ui/layout/StackSeparatedBy'
+import { Text } from '@increaser/ui/text'
 import { AllocationLine } from 'ui/AllocationLine'
 import { EnhancedProject } from 'projects/Project'
 

@@ -1,7 +1,7 @@
 import { CountryCode } from '@increaser/utils/countries'
 import styled from 'styled-components'
+import { getColor } from '../theme/getters'
 import { CountryFlagFrame } from './CountryFlagFrame'
-import { getColor } from '../ui/theme/getters'
 import { SvgIconProps } from '../icons/SvgIconProps'
 
 export interface CountryFlagFallbackProps extends SvgIconProps {

@@ -1,10 +1,10 @@
-import { Text } from '@increaser/ui/ui/Text'
+import { Text } from '@increaser/ui/text'
 import {
   QueryDependant,
   QueryDependantProps,
 } from '@increaser/ui/query/components/QueryDependant'
-import { Center } from '@increaser/ui/ui/Center'
-import { Spinner } from '@increaser/ui/ui/Spinner'
+import { Center } from '@increaser/ui/layout/Center'
+import { Spinner } from '@increaser/ui/loaders/Spinner'
 import {
   SubscriptionPrices,
   useSubscriptionPricesQuery,

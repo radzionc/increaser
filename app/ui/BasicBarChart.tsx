@@ -1,8 +1,8 @@
-import { VStack, HStack } from '@increaser/ui/ui/Stack'
-import { Text } from '@increaser/ui/ui/Text'
-import { defaultTransitionCSS } from '@increaser/ui/ui/animations/transitions'
-import { HSLA } from '@increaser/ui/ui/colors/HSLA'
-import { getCSSUnit } from '@increaser/ui/ui/utils/getCSSUnit'
+import { VStack, HStack } from '@increaser/ui/layout/Stack'
+import { Text } from '@increaser/ui/text'
+import { transition } from '@increaser/ui/css/transition'
+import { HSLA } from '@increaser/ui/colors/HSLA'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { ReactNode } from 'react'
 import { sum } from '@increaser/utils/array/sum'
 import { toPercents } from '@increaser/utils/toPercents'
@@ -37,7 +37,7 @@ const SegmentsContainer = styled.div`
 
 const Segment = styled.div`
   width: 100%;
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 const DisplayValueWr = styled.div`
@@ -52,7 +52,7 @@ const DisplayValue = styled(Text)`
   white-space: nowrap;
   line-height: 1;
   bottom: 2px;
-  font-size: ${getCSSUnit(displayValueSize)};
+  font-size: ${toSizeUnit(displayValueSize)};
 `
 
 const Label = styled(Text)`
@@ -75,7 +75,7 @@ const TargetLine = styled.div`
 `
 
 const SegmentWr = styled(VStack)`
-  ${defaultTransitionCSS};
+  ${transition};
 `
 
 export const BasicBarChart = ({ bars, height, target, min }: Props) => {
@@ -88,7 +88,7 @@ export const BasicBarChart = ({ bars, height, target, min }: Props) => {
       gap={4}
       fullWidth
       style={{
-        height: getCSSUnit(height),
+        height: toSizeUnit(height),
         marginTop: displayValueSize,
         marginBottom: hasLabels ? displayValueSize : undefined,
         position: 'relative',
