@@ -2,13 +2,13 @@ import { assertUserId } from '../../auth/assertUserId'
 import { OperationContext } from '../../gql/OperationContext'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { msInSec } from '../../shared/helpers/time'
-import { getUserById } from '@increaser/db/user'
+import { getUser } from '@increaser/db/user'
 import { MutationResolvers } from '../../gql/schema'
 import { putHabit } from '@increaser/db/habit'
 import { Habit, habitDefaultFields } from '@increaser/entities/Habit'
 
 const getNewHabitOrder = async (userId: string) => {
-  const { habits } = await getUserById(userId)
+  const { habits } = await getUser(userId)
 
   if (!habits.length) {
     return 0

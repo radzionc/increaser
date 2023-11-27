@@ -1,4 +1,4 @@
-import { pick } from '@increaser/utils/pick'
+import { pick } from '@increaser/utils/record/pick'
 import { Set } from 'sets/Set'
 
 export const getSetHash = (set: Set) =>

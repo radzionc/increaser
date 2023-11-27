@@ -3,7 +3,7 @@ import { Set } from '@increaser/entities/User'
 import { setToProjectWeek } from '@increaser/entities-utils/project/setToProjectWeek'
 import { mergeIntoProjectWeeks } from '@increaser/entities-utils/project/mergeIntoProjectWeeks'
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
-import { getUserById, updateUser } from '@increaser/db/user'
+import { getUser, updateUser } from '@increaser/db/user'
 import { splitSetsByTimestamp } from '@increaser/entities-utils/set/splitSetsByTimestamp'
 import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 import { getWeekStartedAt } from '@increaser/utils/time/getWeekStartedAt'
@@ -25,7 +25,7 @@ const addNewSetsToProject = (project: Project, sets: Set[]) => {
 }
 
 export const organizeWeeks = async (userId: string) => {
-  const { sets, timeZone, projects, prevSets } = await getUserById(userId, [
+  const { sets, timeZone, projects, prevSets } = await getUser(userId, [
     'sets',
     'timeZone',
     'projects',

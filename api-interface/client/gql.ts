@@ -19,6 +19,8 @@ const documents = {
     types.AuthSessionWithEmailDocument,
   '\n  query authSessionWithOAuth($input: AuthSessionWithOAuthInput!) {\n    authSessionWithOAuth(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n':
     types.AuthSessionWithOAuthDocument,
+  '\n  query scoreboard($input: ScoreboardInput!) {\n    scoreboard(input: $input) {\n      id\n      myPosition\n      syncedAt\n      users {\n        dailyAvgInMinutes\n        avgBlockInMinutes\n        profile {\n          name\n          country\n        }\n      }\n    }\n  }\n':
+    types.ScoreboardDocument,
   '\n  mutation redeemAppSumoCode($input: RedeemAppSumoCodeInput!) {\n    redeemAppSumoCode(input: $input)\n  }\n':
     types.RedeemAppSumoCodeDocument,
   '\n  mutation createHabit($input: CreateHabitInput!) {\n    createHabit(input: $input) {\n      id\n      name\n      emoji\n      color\n      startedAt\n      successes\n      order\n    }\n  }\n':
@@ -83,6 +85,12 @@ export function graphql(
 export function graphql(
   source: '\n  query authSessionWithOAuth($input: AuthSessionWithOAuthInput!) {\n    authSessionWithOAuth(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n',
 ): (typeof documents)['\n  query authSessionWithOAuth($input: AuthSessionWithOAuthInput!) {\n    authSessionWithOAuth(input: $input) {\n      token\n      expiresAt\n      isFirst\n    }\n  }\n']
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query scoreboard($input: ScoreboardInput!) {\n    scoreboard(input: $input) {\n      id\n      myPosition\n      syncedAt\n      users {\n        dailyAvgInMinutes\n        avgBlockInMinutes\n        profile {\n          name\n          country\n        }\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query scoreboard($input: ScoreboardInput!) {\n    scoreboard(input: $input) {\n      id\n      myPosition\n      syncedAt\n      users {\n        dailyAvgInMinutes\n        avgBlockInMinutes\n        profile {\n          name\n          country\n        }\n      }\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

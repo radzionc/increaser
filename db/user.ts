@@ -2,7 +2,6 @@ import { User } from '@increaser/entities/User'
 import { tableName } from './tableName'
 import {
   DeleteCommand,
-  GetCommand,
   PutCommand,
   ScanCommand,
   UpdateCommand,
@@ -17,6 +16,7 @@ import {
 import { getPickParams } from '@increaser/dynamodb/getPickParams'
 import { dbDocClient } from '@increaser/dynamodb/client'
 import { updateItem } from '@increaser/dynamodb/updateItem'
+import { makeGetItem } from '@increaser/dynamodb/makeGetItem'
 
 export const getUserItemParams = (id: string) => ({
   TableName: tableName.users,
@@ -25,22 +25,10 @@ export const getUserItemParams = (id: string) => ({
   },
 })
 
-export async function getUserById<T extends (keyof User)[]>(
-  id: string,
-  attributes?: T,
-): Promise<Pick<User, T[number]>> {
-  const command = new GetCommand({
-    ...getUserItemParams(id),
-    ...getPickParams(attributes),
-  })
-  const { Item } = await dbDocClient.send(command)
-
-  if (!Item) {
-    throw new Error(`User with id=${id} not found`)
-  }
-
-  return Item as Pick<User, T[number]>
-}
+export const getUser = makeGetItem<string, User>({
+  tableName: tableName.users,
+  getKey: (id: string) => ({ id }),
+})
 
 export const updateUser = async (id: string, fields: Partial<User>) => {
   return updateItem({

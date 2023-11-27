@@ -36,7 +36,7 @@ export type AppStats = {
 
 export type AuthSession = {
   __typename?: 'AuthSession'
-  expiresAt: Scalars['Int']['output']
+  expiresAt: Scalars['Float']['output']
   isFirst?: Maybe<Scalars['Boolean']['output']>
   token: Scalars['String']['output']
 }
@@ -220,6 +220,7 @@ export type Query = {
   authSessionWithOAuth: AuthSession
   manageSubscription: ManageSubscription
   projects: Array<Project>
+  scoreboard: Scoreboard
   subscription?: Maybe<Subscription>
   userState: UserState
 }
@@ -232,6 +233,10 @@ export type QueryAuthSessionWithOAuthArgs = {
   input: AuthSessionWithOAuthInput
 }
 
+export type QueryScoreboardArgs = {
+  input: ScoreboardInput
+}
+
 export type QuerySubscriptionArgs = {
   input: SubscriptionInput
 }
@@ -242,6 +247,18 @@ export type QueryUserStateArgs = {
 
 export type RedeemAppSumoCodeInput = {
   code: Scalars['String']['input']
+}
+
+export type Scoreboard = {
+  __typename?: 'Scoreboard'
+  id: Scalars['String']['output']
+  myPosition?: Maybe<Scalars['Int']['output']>
+  syncedAt: Scalars['Float']['output']
+  users: Array<UserPerformanceRecord>
+}
+
+export type ScoreboardInput = {
+  id: Scalars['String']['input']
 }
 
 export type SendAuthLinkByEmailInput = {
@@ -324,9 +341,9 @@ export type UpdateProjectInput = {
 export type UpdateUserInput = {
   country?: InputMaybe<Scalars['String']['input']>
   focusSounds?: InputMaybe<Array<FocusSoundInput>>
-  goalToFinishWorkBy?: InputMaybe<Scalars['Int']['input']>
-  goalToGoToBedAt?: InputMaybe<Scalars['Int']['input']>
-  goalToStartWorkAt?: InputMaybe<Scalars['Int']['input']>
+  goalToFinishWorkBy?: InputMaybe<Scalars['Float']['input']>
+  goalToGoToBedAt?: InputMaybe<Scalars['Float']['input']>
+  goalToStartWorkAt?: InputMaybe<Scalars['Float']['input']>
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
   primaryGoal?: InputMaybe<PrimaryGoal>
@@ -335,15 +352,28 @@ export type UpdateUserInput = {
   weekTimeAllocation?: InputMaybe<Array<Scalars['Float']['input']>>
 }
 
+export type UserPerformanceRecord = {
+  __typename?: 'UserPerformanceRecord'
+  avgBlockInMinutes: Scalars['Float']['output']
+  dailyAvgInMinutes: Scalars['Float']['output']
+  profile?: Maybe<UserProfile>
+}
+
+export type UserProfile = {
+  __typename?: 'UserProfile'
+  country?: Maybe<Scalars['String']['output']>
+  name?: Maybe<Scalars['String']['output']>
+}
+
 export type UserState = {
   __typename?: 'UserState'
   country?: Maybe<Scalars['String']['output']>
   email: Scalars['String']['output']
   focusSounds: Array<FocusSound>
   freeTrialEnd: Scalars['Float']['output']
-  goalToFinishWorkBy: Scalars['Int']['output']
-  goalToGoToBedAt: Scalars['Int']['output']
-  goalToStartWorkAt: Scalars['Int']['output']
+  goalToFinishWorkBy: Scalars['Float']['output']
+  goalToGoToBedAt: Scalars['Float']['output']
+  goalToStartWorkAt: Scalars['Float']['output']
   habits: Array<Habit>
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
@@ -398,6 +428,30 @@ export type AuthSessionWithOAuthQuery = {
     token: string
     expiresAt: number
     isFirst?: boolean | null
+  }
+}
+
+export type ScoreboardQueryVariables = Exact<{
+  input: ScoreboardInput
+}>
+
+export type ScoreboardQuery = {
+  __typename?: 'Query'
+  scoreboard: {
+    __typename?: 'Scoreboard'
+    id: string
+    myPosition?: number | null
+    syncedAt: number
+    users: Array<{
+      __typename?: 'UserPerformanceRecord'
+      dailyAvgInMinutes: number
+      avgBlockInMinutes: number
+      profile?: {
+        __typename?: 'UserProfile'
+        name?: string | null
+        country?: string | null
+      } | null
+    }>
   }
 }
 
@@ -849,6 +903,93 @@ export const AuthSessionWithOAuthDocument = {
   AuthSessionWithOAuthQuery,
   AuthSessionWithOAuthQueryVariables
 >
+export const ScoreboardDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'scoreboard' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'ScoreboardInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'scoreboard' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'myPosition' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'syncedAt' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'users' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dailyAvgInMinutes' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avgBlockInMinutes' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'profile' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'country' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ScoreboardQuery, ScoreboardQueryVariables>
 export const RedeemAppSumoCodeDocument = {
   kind: 'Document',
   definitions: [

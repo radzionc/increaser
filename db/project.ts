@@ -1,11 +1,11 @@
 import { Project } from '@increaser/entities/Project'
-import { getUserById, getUserItemParams, updateUser } from './user'
+import { getUser, getUserItemParams, updateUser } from './user'
 import { UpdateCommand } from '@aws-sdk/lib-dynamodb'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import { dbDocClient } from '@increaser/dynamodb/client'
 
 export const deleteProject = async (userId: string, projectId: string) => {
-  const user = await getUserById(userId, ['projects'])
+  const user = await getUser(userId, ['projects'])
   if (!user) {
     throw new Error(`User with id ${userId} does not exist`)
   }
@@ -35,7 +35,7 @@ export const updateProject = async (
   projectId: string,
   fields: Partial<Omit<Project, 'id'>>,
 ) => {
-  const user = await getUserById(userId, ['projects'])
+  const user = await getUser(userId, ['projects'])
   if (!user) {
     throw new Error(`User with id ${userId} does not exist`)
   }

@@ -248,6 +248,28 @@ input SubscriptionInput {
   id: String!
 }
 
+input ScoreboardInput {
+  id: String!
+}
+
+type UserProfile {
+  name: String
+  country: String
+}
+
+type UserPerformanceRecord {
+  dailyAvgInMinutes: Float!
+  avgBlockInMinutes: Float!
+  profile: UserProfile
+}
+
+type Scoreboard {
+  id: String!
+  myPosition: Int
+  syncedAt: Float!
+  users: [UserPerformanceRecord!]!
+}
+
 type Query {
   projects: [Project!]!
   authSessionWithEmail(input: AuthSessionWithEmailInput!): AuthSession!
@@ -256,6 +278,7 @@ type Query {
   appStats: AppStats!
   manageSubscription: ManageSubscription!
   subscription(input: SubscriptionInput!): Subscription
+  scoreboard(input: ScoreboardInput!): Scoreboard!
 }
 
 type Mutation {

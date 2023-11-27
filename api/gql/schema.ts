@@ -38,7 +38,7 @@ export type AppStats = {
 
 export type AuthSession = {
   __typename?: 'AuthSession'
-  expiresAt: Scalars['Int']['output']
+  expiresAt: Scalars['Float']['output']
   isFirst?: Maybe<Scalars['Boolean']['output']>
   token: Scalars['String']['output']
 }
@@ -239,6 +239,7 @@ export type Query = {
   authSessionWithOAuth: AuthSession
   manageSubscription: ManageSubscription
   projects: Array<Project>
+  scoreboard: Scoreboard
   subscription?: Maybe<Subscription>
   userState: UserState
 }
@@ -251,6 +252,10 @@ export type QueryAuthSessionWithOAuthArgs = {
   input: AuthSessionWithOAuthInput
 }
 
+export type QueryScoreboardArgs = {
+  input: ScoreboardInput
+}
+
 export type QuerySubscriptionArgs = {
   input: SubscriptionInput
 }
@@ -261,6 +266,18 @@ export type QueryUserStateArgs = {
 
 export type RedeemAppSumoCodeInput = {
   code: Scalars['String']['input']
+}
+
+export type Scoreboard = {
+  __typename?: 'Scoreboard'
+  id: Scalars['String']['output']
+  myPosition?: Maybe<Scalars['Int']['output']>
+  syncedAt: Scalars['Float']['output']
+  users: Array<UserPerformanceRecord>
+}
+
+export type ScoreboardInput = {
+  id: Scalars['String']['input']
 }
 
 export type SendAuthLinkByEmailInput = {
@@ -357,9 +374,9 @@ export type UpdateProjectInput = {
 export type UpdateUserInput = {
   country?: InputMaybe<Scalars['String']['input']>
   focusSounds?: InputMaybe<Array<FocusSoundInput>>
-  goalToFinishWorkBy?: InputMaybe<Scalars['Int']['input']>
-  goalToGoToBedAt?: InputMaybe<Scalars['Int']['input']>
-  goalToStartWorkAt?: InputMaybe<Scalars['Int']['input']>
+  goalToFinishWorkBy?: InputMaybe<Scalars['Float']['input']>
+  goalToGoToBedAt?: InputMaybe<Scalars['Float']['input']>
+  goalToStartWorkAt?: InputMaybe<Scalars['Float']['input']>
   isAnonymous?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
   primaryGoal?: InputMaybe<PrimaryGoal>
@@ -368,15 +385,28 @@ export type UpdateUserInput = {
   weekTimeAllocation?: InputMaybe<Array<Scalars['Float']['input']>>
 }
 
+export type UserPerformanceRecord = {
+  __typename?: 'UserPerformanceRecord'
+  avgBlockInMinutes: Scalars['Float']['output']
+  dailyAvgInMinutes: Scalars['Float']['output']
+  profile?: Maybe<UserProfile>
+}
+
+export type UserProfile = {
+  __typename?: 'UserProfile'
+  country?: Maybe<Scalars['String']['output']>
+  name?: Maybe<Scalars['String']['output']>
+}
+
 export type UserState = {
   __typename?: 'UserState'
   country?: Maybe<Scalars['String']['output']>
   email: Scalars['String']['output']
   focusSounds: Array<FocusSound>
   freeTrialEnd: Scalars['Float']['output']
-  goalToFinishWorkBy: Scalars['Int']['output']
-  goalToGoToBedAt: Scalars['Int']['output']
-  goalToStartWorkAt: Scalars['Int']['output']
+  goalToFinishWorkBy: Scalars['Float']['output']
+  goalToGoToBedAt: Scalars['Float']['output']
+  goalToStartWorkAt: Scalars['Float']['output']
   habits: Array<Habit>
   id: Scalars['ID']['output']
   isAnonymous: Scalars['Boolean']['output']
@@ -531,6 +561,8 @@ export type ResolversTypes = {
   ProjectWeek: ResolverTypeWrapper<ProjectWeek>
   Query: ResolverTypeWrapper<{}>
   RedeemAppSumoCodeInput: RedeemAppSumoCodeInput
+  Scoreboard: ResolverTypeWrapper<Scoreboard>
+  ScoreboardInput: ScoreboardInput
   SendAuthLinkByEmailInput: SendAuthLinkByEmailInput
   Set: ResolverTypeWrapper<Set>
   SetInput: SetInput
@@ -546,6 +578,8 @@ export type ResolversTypes = {
   UpdateHabitInput: UpdateHabitInput
   UpdateProjectInput: UpdateProjectInput
   UpdateUserInput: UpdateUserInput
+  UserPerformanceRecord: ResolverTypeWrapper<UserPerformanceRecord>
+  UserProfile: ResolverTypeWrapper<UserProfile>
   UserState: ResolverTypeWrapper<UserState>
   UserStateInput: UserStateInput
 }
@@ -575,6 +609,8 @@ export type ResolversParentTypes = {
   ProjectWeek: ProjectWeek
   Query: {}
   RedeemAppSumoCodeInput: RedeemAppSumoCodeInput
+  Scoreboard: Scoreboard
+  ScoreboardInput: ScoreboardInput
   SendAuthLinkByEmailInput: SendAuthLinkByEmailInput
   Set: Set
   SetInput: SetInput
@@ -587,6 +623,8 @@ export type ResolversParentTypes = {
   UpdateHabitInput: UpdateHabitInput
   UpdateProjectInput: UpdateProjectInput
   UpdateUserInput: UpdateUserInput
+  UserPerformanceRecord: UserPerformanceRecord
+  UserProfile: UserProfile
   UserState: UserState
   UserStateInput: UserStateInput
 }
@@ -609,7 +647,7 @@ export type AuthSessionResolvers<
   ParentType extends
     ResolversParentTypes['AuthSession'] = ResolversParentTypes['AuthSession'],
 > = {
-  expiresAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  expiresAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   isFirst?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -827,6 +865,12 @@ export type QueryResolvers<
     ContextType
   >
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>
+  scoreboard?: Resolver<
+    ResolversTypes['Scoreboard'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryScoreboardArgs, 'input'>
+  >
   subscription?: Resolver<
     Maybe<ResolversTypes['Subscription']>,
     ParentType,
@@ -839,6 +883,22 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryUserStateArgs, 'input'>
   >
+}
+
+export type ScoreboardResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Scoreboard'] = ResolversParentTypes['Scoreboard'],
+> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  myPosition?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
+  syncedAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  users?: Resolver<
+    Array<ResolversTypes['UserPerformanceRecord']>,
+    ParentType,
+    ContextType
+  >
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
 export type SetResolvers<
@@ -906,6 +966,31 @@ export type TaskResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
+export type UserPerformanceRecordResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['UserPerformanceRecord'] = ResolversParentTypes['UserPerformanceRecord'],
+> = {
+  avgBlockInMinutes?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  dailyAvgInMinutes?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  profile?: Resolver<
+    Maybe<ResolversTypes['UserProfile']>,
+    ParentType,
+    ContextType
+  >
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
+export type UserProfileResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['UserProfile'] = ResolversParentTypes['UserProfile'],
+> = {
+  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
 export type UserStateResolvers<
   ContextType = any,
   ParentType extends
@@ -919,9 +1004,13 @@ export type UserStateResolvers<
     ContextType
   >
   freeTrialEnd?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
-  goalToFinishWorkBy?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
-  goalToGoToBedAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
-  goalToStartWorkAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  goalToFinishWorkBy?: Resolver<
+    ResolversTypes['Float'],
+    ParentType,
+    ContextType
+  >
+  goalToGoToBedAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  goalToStartWorkAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   habits?: Resolver<Array<ResolversTypes['Habit']>, ParentType, ContextType>
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   isAnonymous?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
@@ -967,8 +1056,11 @@ export type Resolvers<ContextType = any> = {
   ProjectMonth?: ProjectMonthResolvers<ContextType>
   ProjectWeek?: ProjectWeekResolvers<ContextType>
   Query?: QueryResolvers<ContextType>
+  Scoreboard?: ScoreboardResolvers<ContextType>
   Set?: SetResolvers<ContextType>
   Subscription?: SubscriptionResolvers<ContextType>
   Task?: TaskResolvers<ContextType>
+  UserPerformanceRecord?: UserPerformanceRecordResolvers<ContextType>
+  UserProfile?: UserProfileResolvers<ContextType>
   UserState?: UserStateResolvers<ContextType>
 }

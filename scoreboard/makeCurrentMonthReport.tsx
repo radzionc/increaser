@@ -5,7 +5,6 @@ import { ScanCommand } from '@aws-sdk/lib-dynamodb'
 import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
 import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 import { MIN_IN_HOUR, MS_IN_DAY, MS_IN_MIN } from '@increaser/utils/time'
-import { uploadJsonToPublic } from '@increaser/public/uploadJsonToPublic'
 import {
   PerformanceScoreboard,
   UserPerformanceRecord,
@@ -13,6 +12,15 @@ import {
 import { getBlocks } from '@increaser/entities-utils/block'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { dbDocClient } from '@increaser/dynamodb/client'
+import { toMonth } from '@increaser/utils/time/toMonth'
+import { monthToString } from '@increaser/utils/time/Month'
+import {
+  doesScoreboardExist,
+  putScoreboard,
+  updateScoreboard,
+} from '@increaser/db/scoreboard'
+import { omit } from '@increaser/utils/record/omit'
+import { order } from '@increaser/utils/array/order'
 
 type UserInfo = Pick<
   User,
@@ -73,24 +81,31 @@ export const makeCurrentMonthReport = async () => {
       const blocks = getBlocks(currentMonthSets)
 
       const avgBlockInMinutes = totalInMinutes / blocks.length
-
-      records.push({
+      const userRecord: UserPerformanceRecord = {
         id,
-        name: isAnonymous ? undefined : name,
-        country: isAnonymous ? undefined : country,
         dailyAvgInMinutes,
         avgBlockInMinutes,
-      })
+      }
+      if (!isAnonymous) {
+        userRecord.profile = {
+          name,
+          country,
+        }
+      }
+
+      records.push(userRecord)
     },
   )
 
   const content: PerformanceScoreboard = {
-    createdAt: Date.now(),
-    users: records,
+    id: monthToString(toMonth(Date.now())),
+    syncedAt: Date.now(),
+    users: order(records, (r) => r.dailyAvgInMinutes, 'desc'),
   }
 
-  await uploadJsonToPublic({
-    content,
-    path: 'month',
-  })
+  if (await doesScoreboardExist(content.id)) {
+    await updateScoreboard(content.id, omit(content, 'id'))
+  } else {
+    await putScoreboard(content)
+  }
 }

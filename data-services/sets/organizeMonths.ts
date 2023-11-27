@@ -1,4 +1,4 @@
-import { getUserById, updateUser } from '@increaser/db/user'
+import { getUser, updateUser } from '@increaser/db/user'
 import { mergeIntoProjectMonths } from '@increaser/entities-utils/project/mergeIntoProjectMonths'
 import { setToProjectMonth } from '@increaser/entities-utils/project/setToProjectMonth'
 import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
@@ -27,7 +27,7 @@ export const organizeMonths = async (userId: string) => {
     timeZone,
     projects,
     lastSyncedMonthEndedAt,
-  } = await getUserById(userId, [
+  } = await getUser(userId, [
     'sets',
     'prevSets',
     'timeZone',

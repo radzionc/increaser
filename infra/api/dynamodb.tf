@@ -9,13 +9,10 @@ resource "aws_dynamodb_table" "users" {
   }
 }
 
-resource "aws_dynamodb_table" "features" {
-  name         = "${var.table_prefix}features"
+resource "aws_dynamodb_table" "scoreboards" {
+  name         = "${var.table_prefix}scoreboards"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "id"
-
-  stream_enabled   = "true"
-  stream_view_type = "NEW_AND_OLD_IMAGES"
 
   attribute {
     name = "id"

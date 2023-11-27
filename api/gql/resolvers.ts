@@ -18,6 +18,7 @@ import { authSessionWithEmail } from '../auth/queries/authSessionWithEmail'
 import { authSessionWithOAuth } from '../auth/queries/authSessionWithOAuth'
 import { manageSubscription } from '../membership/subscription/queries/manageSubscription'
 import { subscription } from '../membership/subscription/queries/subscription'
+import { scoreboard } from '../scoreboard/query/scoreboard'
 
 export const resolvers: Pick<Resolvers, 'Query' | 'Mutation'> = {
   Query: {
@@ -27,6 +28,7 @@ export const resolvers: Pick<Resolvers, 'Query' | 'Mutation'> = {
     authSessionWithOAuth,
     manageSubscription,
     subscription,
+    scoreboard,
   },
   Mutation: {
     sendAuthLinkByEmail,

@@ -4,7 +4,7 @@ import { organizeTasks } from '../../tasks/services/organizeTasks'
 import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
 import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
 import { QueryResolvers } from '../../gql/schema'
-import { getUserById, updateUser } from '@increaser/db/user'
+import { getUser, updateUser } from '@increaser/db/user'
 
 export const userState: QueryResolvers['userState'] = async (
   _,
@@ -20,7 +20,7 @@ export const userState: QueryResolvers['userState'] = async (
 
   await organizeTasks(userId)
 
-  const user = await getUserById(userId)
+  const user = await getUser(userId)
 
   return {
     ...user,
