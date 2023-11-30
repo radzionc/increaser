@@ -2,7 +2,6 @@ import { analytics } from 'analytics'
 import { useProjects } from 'projects/hooks/useProjects'
 import { getProjectColor } from 'projects/utils/getProjectColor'
 import { Controller, useForm } from 'react-hook-form'
-import { useSetsManager } from 'sets/hooks/useSetsManager'
 import { Set } from 'sets/Set'
 import { useTheme } from 'styled-components'
 import { Button } from '@increaser/ui/buttons/Button'
@@ -13,6 +12,7 @@ import { MS_IN_MIN } from '@increaser/utils/time'
 
 import { TodaySessionIntervalInput } from '../IntervalInput/TodaySessionIntervalInput'
 import { SelectProject } from './SelectProject'
+import { useAddSetMutation } from 'sets/hooks/useAddSetMutation'
 
 interface Props {
   onClose: () => void
@@ -39,12 +39,12 @@ export const CreateSetOverlay = ({ onClose }: Props) => {
 
   const isProjectSelected = !!projectId
 
-  const { create: createSet } = useSetsManager()
+  const { mutate: addSet } = useAddSetMutation()
 
   const theme = useTheme()
 
   const onSubmit = ({ projectId, interval }: SetFormShape) => {
-    createSet({ projectId, ...interval })
+    addSet({ projectId, ...interval })
     analytics.trackEvent('Add session')
     onClose()
   }

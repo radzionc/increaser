@@ -12,7 +12,6 @@ import { HabitsProvider } from 'habits/components/HabitsProvider'
 import { ProjectsProvider } from 'projects/components/ProjectsProvider'
 import { PWAProvider } from 'pwa/components/PWAProvider'
 import { QueryClientProvider } from 'react-query'
-import { SetsManagerProvider } from 'sets/components/SetsManagerProvider'
 import { ConditionalUserState } from 'user/components/ConditionalUserState'
 import { UserManagerProvider } from 'user/components/UserManagerProvider'
 import { UserStateProvider } from 'user/components/UserStateProvider'
@@ -55,12 +54,10 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                   <UserManagerProvider>
                     <ProjectsProvider>
                       <HabitsProvider>
-                        <SetsManagerProvider>
-                          <FocusProvider>
-                            <BreakProvider>{component}</BreakProvider>
-                            <MembershipConfirmation />
-                          </FocusProvider>
-                        </SetsManagerProvider>
+                        <FocusProvider>
+                          <BreakProvider>{component}</BreakProvider>
+                          <MembershipConfirmation />
+                        </FocusProvider>
                       </HabitsProvider>
                     </ProjectsProvider>
                   </UserManagerProvider>

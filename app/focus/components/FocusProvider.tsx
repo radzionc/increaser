@@ -15,7 +15,6 @@ import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { Path } from 'router/Path'
 import { getBlocks, getNextFocusDuration } from 'sets/Block'
 import { getSetDuration } from 'sets/helpers/getSetDuration'
-import { useSetsManager } from 'sets/hooks/useSetsManager'
 import { useTodaySets } from 'sets/hooks/useTodaySets'
 import { useBrowserNotifications } from '@increaser/ui/hooks/useBrowserNotifcations'
 import { PersistentStateKey } from 'state/persistentState'
@@ -27,6 +26,7 @@ import { useRouter } from 'next/router'
 import { CurrentFocusGuard } from './CurrentFocusProvider'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { areNotificationsAllowed } from '@increaser/ui/notifications/utils'
+import { useAddSetMutation } from 'sets/hooks/useAddSetMutation'
 
 interface Props {
   children: ReactNode
@@ -109,7 +109,7 @@ export const FocusProvider = ({ children }: Props) => {
     setCurrentSet((set) => (set ? { ...set, projectId } : set))
   }, [])
 
-  const { create: createSet } = useSetsManager()
+  const { mutate: addSet } = useAddSetMutation()
 
   const cancel = useCallback(() => {
     setCurrentSet(undefined)
@@ -129,7 +129,7 @@ export const FocusProvider = ({ children }: Props) => {
       }
       const blocks = getBlocks([...todaySets, set])
 
-      createSet(set)
+      addSet(set)
 
       setCurrentSet(undefined)
 
@@ -140,7 +140,7 @@ export const FocusProvider = ({ children }: Props) => {
         activeSoundUrl: focusSoundsState.activeSoundUrl,
       })
     },
-    [createSet, currentSet, focusSoundsState.activeSoundUrl, todaySets, router],
+    [addSet, currentSet, focusSoundsState.activeSoundUrl, todaySets, router],
   )
 
   return (
