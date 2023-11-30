@@ -1,13 +1,8 @@
+import { recordMap } from '@increaser/utils/record/recordMap'
 import { analytics } from 'analytics'
-import { graphql } from '@increaser/api-interface/client'
+import { useApi } from 'api/hooks/useApi'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
-
-const trackHabitMutationDocument = graphql(`
-  mutation trackHabit($input: TrackHabitInput!) {
-    trackHabit(input: $input)
-  }
-`)
 
 interface TrackHabitParams {
   id: string
@@ -17,11 +12,12 @@ interface TrackHabitParams {
 
 export const useTrackHabitMutation = () => {
   const { habits } = useAssertUserState()
-  const { updateState, updateRemoteState } = useUserState()
+  const api = useApi()
+  const { updateState } = useUserState()
 
   return useMutation(async (input: TrackHabitParams) => {
     updateState({
-      habits: habits.map((habit) => {
+      habits: recordMap(habits, (habit) => {
         if (habit.id === input.id) {
           const { successes } = habit
           return {
@@ -36,13 +32,10 @@ export const useTrackHabitMutation = () => {
       }),
     })
 
-    const habit = habits.find((habit) => habit.id === input.id)
-    if (habit && input.value) {
-      analytics.trackEvent('Track habit', { name: habit.name })
+    if (input.value) {
+      analytics.trackEvent('Track habit', { name: habits[input.id].name })
     }
 
-    await updateRemoteState(trackHabitMutationDocument, {
-      input,
-    })
+    await api.call('trackHabit', input)
   })
 }

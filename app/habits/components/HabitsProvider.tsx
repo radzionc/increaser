@@ -6,6 +6,7 @@ import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { useTheme } from 'styled-components'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { order } from '@increaser/utils/array/order'
 
 interface HabitsState {
   habits: Habit[]
@@ -21,9 +22,13 @@ export const HabitsProvider = ({ children }: ComponentWithChildrenProps) => {
 
   const habits = useMemo(
     () =>
-      state.habits
-        .map((habit) => toHabit(habit, todayStartedAt, theme))
-        .sort((one, another) => one.order - another.order),
+      order(
+        Object.values(state.habits).map((habit) =>
+          toHabit(habit, todayStartedAt, theme),
+        ),
+        (h) => h.order,
+        'desc',
+      ),
     [state.habits, theme, todayStartedAt],
   )
 

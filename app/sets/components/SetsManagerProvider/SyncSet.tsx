@@ -1,5 +1,4 @@
-import { graphql } from '@increaser/api-interface/client'
-import { useApi } from 'api/useApi'
+import { useApi } from 'api/hooks/useApi'
 import { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import { Set } from 'sets/Set'
@@ -9,20 +8,12 @@ interface Props {
   onSuccess: () => void
 }
 
-const createSetMutationDocument = graphql(`
-  mutation addSet($set: SetInput!) {
-    addSet(set: $set)
-  }
-`)
-
 export const SyncSet = ({ set, onSuccess }: Props) => {
-  const { query } = useApi()
+  const api = useApi()
 
   const { mutate: syncSet } = useMutation(
     async () => {
-      await query(createSetMutationDocument, {
-        set,
-      })
+      await api.call('addSet', set)
     },
     {
       onSuccess,

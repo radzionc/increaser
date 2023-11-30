@@ -6,7 +6,7 @@ import { TextInput } from '@increaser/ui/inputs/TextInput'
 import { without } from '@increaser/utils/array/without'
 
 import { useFocusSounds } from '../useFocusSounds'
-import { pick } from '@increaser/utils/pick'
+import { pick } from '@increaser/utils/record/pick'
 import { combineValidators } from '@increaser/utils/validation/combineValidators'
 import { validateUrl } from '@increaser/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@increaser/utils/validation/getUniqueValueValidator'

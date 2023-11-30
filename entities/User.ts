@@ -1,3 +1,4 @@
+import { CountryCode } from '@increaser/utils/countries'
 import { FocusSound, defaultFocusSounds } from './FocusSound'
 import { Habit } from './Habit'
 import { LifeTimeDeal } from './LifeTimeDeal'
@@ -42,7 +43,7 @@ export interface Task {
   isCompleted: boolean
 }
 
-const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
+export const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
 
 export type PrimaryGoal = (typeof primaryGoals)[number]
 
@@ -50,7 +51,7 @@ export type User = {
   primaryGoal: PrimaryGoal
   id: string
   email: string
-  country?: string
+  country?: CountryCode
   name?: string
   sets: Set[]
   prevSets: Set[]

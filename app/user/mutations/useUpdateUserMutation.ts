@@ -1,26 +1,15 @@
-import { graphql } from '@increaser/api-interface/client'
-import {
-  UpdateUserInput,
-  UserState,
-} from '@increaser/api-interface/client/graphql'
+import { User } from '@increaser/entities/User'
+import { useApi } from 'api/hooks/useApi'
 import { useMutation } from 'react-query'
 import { useUserState } from 'user/state/UserStateContext'
 
-const updateUserMutationDocument = graphql(`
-  mutation updateUser($input: UpdateUserInput!) {
-    updateUser(input: $input)
-  }
-`)
-
 export const useUpdateUserMutation = () => {
-  const { updateState, updateRemoteState } = useUserState()
+  const api = useApi()
+  const { updateState } = useUserState()
 
-  return useMutation(async (input: UpdateUserInput) => {
-    updateState(input as Partial<UserState>)
+  return useMutation(async (input: Partial<User>) => {
+    updateState(input)
 
-    await updateRemoteState(updateUserMutationDocument, {
-      input,
-    })
+    return api.call('updateUser', input)
   })
 }
-;('')

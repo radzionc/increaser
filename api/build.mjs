@@ -8,9 +8,6 @@ const result = await esbuild.build({
   platform: 'node',
   target: 'es2020',
   outfile: './dist/lambda.js',
-  loader: {
-    '.graphql': 'file',
-  },
 })
 
 console.log(result)

@@ -1,12 +1,7 @@
-import { graphql } from '@increaser/api-interface/client'
+import { useApi } from 'api/hooks/useApi'
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
-
-const deleteHabitMutationDocument = graphql(`
-  mutation deleteHabit($input: DeleteHabitInput!) {
-    deleteHabit(input: $input)
-  }
-`)
+import { omit } from '@increaser/utils/record/omit'
 
 interface DeleteHabitParams {
   id: string
@@ -14,15 +9,14 @@ interface DeleteHabitParams {
 
 export const useDeleteHabitMutation = () => {
   const { habits } = useAssertUserState()
-  const { updateState, updateRemoteState } = useUserState()
+  const { updateState } = useUserState()
+  const api = useApi()
 
   return useMutation(async (input: DeleteHabitParams) => {
     updateState({
-      habits: habits.filter(({ id }) => id !== input.id),
+      habits: omit(habits, input.id),
     })
 
-    await updateRemoteState(deleteHabitMutationDocument, {
-      input,
-    })
+    await api.call('deleteHabit', input)
   })
 }

@@ -1,35 +1,37 @@
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 import { MS_IN_SEC } from '@increaser/utils/time'
+import { recordMap } from '@increaser/utils/record/recordMap'
 
-import { updateHabitMutationDocument } from './useUpdateHabitMutation'
+import { useApi } from 'api/hooks/useApi'
 
 export const useResetAllHabitsMutation = () => {
-  const { updateState, updateRemoteState } = useUserState()
+  const { updateState } = useUserState()
   const { habits } = useAssertUserState()
+  const api = useApi()
 
   return useMutation(async () => {
-    const sharedUpdateParams = {
+    const fields = {
       startedAt: Math.round(Date.now() / MS_IN_SEC),
       successes: [],
     }
+
     updateState({
-      habits: habits.map((habit) => ({
+      habits: recordMap(habits, (habit) => ({
         ...habit,
-        ...sharedUpdateParams,
+        ...fields,
       })),
     })
 
     const response = await Promise.all(
-      habits.map(({ id }) => {
-        return updateRemoteState(updateHabitMutationDocument, {
-          input: {
-            id,
-            ...sharedUpdateParams,
-          },
+      Object.keys(habits).map((id) => {
+        return api.call('updateHabit', {
+          id,
+          fields,
         })
       }),
     )
+
     return response
   })
 }

@@ -1,5 +1,4 @@
-import fetch from 'node-fetch'
-import { AuthenticationError } from '../../errors/AuthenticationError'
+import { ApiError } from '@increaser/api-interface/ApiError'
 
 export const queryOAuthProvider = async <T>(
   action: string,
@@ -13,7 +12,7 @@ export const queryOAuthProvider = async <T>(
       message = await response.text()
     } catch (err) {}
 
-    throw new AuthenticationError(`${action} failed: ${message}`)
+    throw new ApiError('invalidInput', `${action} failed: ${message}`)
   }
 
   return (await response.json()) as T

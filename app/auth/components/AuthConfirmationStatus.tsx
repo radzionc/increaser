@@ -4,13 +4,12 @@ import { VStack } from '@increaser/ui/layout/Stack'
 import { Text } from '@increaser/ui/text'
 import { Button } from '@increaser/ui/buttons/Button'
 import { InfoIcon } from '@increaser/ui/icons/InfoIcon'
-import { QueryApiError } from 'api/useApi'
 import Link from 'next/link'
 import { Path } from 'router/Path'
 import { AUTHOR_EMAIL } from 'shared/externalResources'
 
 interface AuthConfirmationStatusProps {
-  error?: QueryApiError
+  error?: Error
 }
 
 export const AuthConfirmationStatus = ({

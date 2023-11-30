@@ -4,10 +4,7 @@ import { HSLA } from '@increaser/ui/colors/HSLA'
 import { FireIcon } from '@increaser/ui/icons/FireIcon'
 import { ForestIcon } from '@increaser/ui/icons/ForestIcon'
 import { WavesIcon } from '@increaser/ui/icons/WavesIcon'
-
-export const primaryGoals = ['workLess', 'awareness', 'workMore'] as const
-
-export type PrimaryGoal = (typeof primaryGoals)[number]
+import { PrimaryGoal } from '@increaser/entities/User'
 
 export const primaryGoalName: Record<PrimaryGoal, string> = {
   workLess: 'Work less',

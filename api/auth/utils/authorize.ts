@@ -1,8 +1,8 @@
 import { getUserByEmail, putUser } from '@increaser/db/user'
-import { AuthSession } from '../../gql/schema'
 import { AuthenticationResult } from './AuthenticationResult'
 import { getAuthSession } from './getAuthSession'
 import { getUserInitialFields } from '@increaser/entities-utils/user/getUserInitialFields'
+import { AuthSession } from '@increaser/entities/AuthSession'
 
 interface AuthorizeParams extends AuthenticationResult {
   timeZone: number

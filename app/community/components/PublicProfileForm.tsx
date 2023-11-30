@@ -32,7 +32,10 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
   return (
     <Form
       onSubmit={handleSubmit((fields) => {
-        updateUser(fields)
+        updateUser({
+          name: fields.name ?? undefined,
+          country: fields.country ?? undefined,
+        })
         onCancel()
       })}
       content={

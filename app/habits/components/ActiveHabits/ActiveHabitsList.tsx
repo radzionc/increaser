@@ -43,7 +43,9 @@ export const ActiveHabitsList = () => {
 
       updateHabit({
         id: draggableId,
-        order,
+        fields: {
+          order,
+        },
       })
     },
     [habits, updateHabit],

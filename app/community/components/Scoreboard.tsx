@@ -9,7 +9,7 @@ import { ScoreboardCountryFlag } from './ScoreboardCountryFlag'
 import { CountryCode } from '@increaser/utils/countries'
 import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
 import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
-import { UserPerformanceRecord } from '@increaser/api-interface/client/graphql'
+import { UserPerformanceRecord } from '@increaser/entities/PerformanceScoreboard'
 
 const Row = styled.div`
   display: grid;

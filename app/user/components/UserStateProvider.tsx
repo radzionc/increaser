@@ -1,12 +1,11 @@
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
-import { UserStateQuery } from '@increaser/api-interface/client/graphql'
-import { useApi } from 'api/useApi'
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { UserStateContext } from 'user/state/UserStateContext'
-import { userStateQueryDocument } from 'user/state/userStateQueryDocument'
 import { useAuthSession } from 'auth/hooks/useAuthSession'
+import { User } from '@increaser/entities/User'
+import { useApi } from 'api/hooks/useApi'
 
 const userStateQueryKey = 'userState'
 
@@ -19,7 +18,7 @@ export const UserStateProvider = ({ children }: Props) => {
 
   const queryClient = useQueryClient()
 
-  const { query } = useApi()
+  const api = useApi()
 
   const dayStartedAt = useStartOfDay()
 
@@ -30,15 +29,10 @@ export const UserStateProvider = ({ children }: Props) => {
     dataUpdatedAt,
   } = useQuery(
     userStateQueryKey,
-    async () => {
-      const { userState } = await query(userStateQueryDocument, {
-        input: {
-          timeZone: getCurrentTimezoneOffset(),
-        },
-      })
-
-      return userState
-    },
+    () =>
+      api.call('user', {
+        timeZone: getCurrentTimezoneOffset(),
+      }),
     {
       keepPreviousData: true,
       enabled: Boolean(authSession),
@@ -53,14 +47,11 @@ export const UserStateProvider = ({ children }: Props) => {
   }, [dataUpdatedAt, dayStartedAt, refetch])
 
   const updateState = useCallback(
-    (pieceOfState: Partial<UserStateQuery['userState']>) => {
-      queryClient.setQueryData<UserStateQuery['userState']>(
-        userStateQueryKey,
-        (state) => ({
-          ...(state || ({} as UserStateQuery['userState'])),
-          ...pieceOfState,
-        }),
-      )
+    (pieceOfState: Partial<User>) => {
+      queryClient.setQueryData<User>(userStateQueryKey, (state) => ({
+        ...(state || ({} as User)),
+        ...pieceOfState,
+      }))
     },
     [queryClient],
   )
@@ -73,7 +64,6 @@ export const UserStateProvider = ({ children }: Props) => {
         pullRemoteState: refetch,
         isLoading,
         lastUpdatedAt: dataUpdatedAt,
-        updateRemoteState: query,
       }}
     >
       {children}

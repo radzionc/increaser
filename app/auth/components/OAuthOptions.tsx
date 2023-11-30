@@ -1,12 +1,10 @@
-import { OAuthProvider } from '@increaser/api-interface/client/graphql'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { OAuthOption } from './OAuthOption'
-
-const options: OAuthProvider[] = ['google', 'facebook']
+import { oAuthProviders } from '@increaser/entities/OAuthProvider'
 
 export const OAuthOptions = () => (
   <VStack gap={12}>
-    {options.map((provider) => (
+    {oAuthProviders.map((provider) => (
       <OAuthOption key={provider} provider={provider} />
     ))}
   </VStack>

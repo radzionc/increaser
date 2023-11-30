@@ -1,15 +1,13 @@
 import { createContext } from 'react'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
-import { UserStateQuery } from '@increaser/api-interface/client/graphql'
-import { QueryApi } from 'api/useApi'
+import { User } from '@increaser/entities/User'
 
 interface UserStateContextValue {
-  state: UserStateQuery['userState'] | null
-  updateState: (state: Partial<UserStateQuery['userState']>) => void
+  state: User | null
+  updateState: (state: Partial<User>) => void
   pullRemoteState: () => void
   isLoading: boolean
   lastUpdatedAt: number
-  updateRemoteState: QueryApi
 }
 
 export const UserStateContext = createContext<

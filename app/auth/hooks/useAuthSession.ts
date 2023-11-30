@@ -1,4 +1,4 @@
-import { AuthSession } from '@increaser/api-interface/client/graphql'
+import { AuthSession } from '@increaser/entities/AuthSession'
 import { analytics } from 'analytics'
 import { useCallback } from 'react'
 import { useQueryClient } from 'react-query'
@@ -14,7 +14,6 @@ export const useAuthSession = () => {
 
   const onChange = useCallback(
     (session: AuthSession | undefined) => {
-      console.log('Chage session', session)
       if (session) {
         analytics.trackEvent('Finish identification')
 

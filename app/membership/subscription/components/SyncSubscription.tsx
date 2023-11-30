@@ -14,5 +14,5 @@ export const SyncSubscription = ({
   const query = useSubscriptionQuery(subscriptionId)
   useOnQuerySuccess(query, onFinish)
 
-  return <BlockingQuery error={query.error} />
+  return <BlockingQuery error={query.error as Error} />
 }

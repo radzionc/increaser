@@ -9,22 +9,15 @@ import { useRouter } from 'next/router'
 import { Path } from 'router/Path'
 import { validateEmail } from '@increaser/utils/validation/validateEmail'
 import { addQueryParams } from '@increaser/utils/query/addQueryParams'
-import { useApi } from 'api/useApi'
-import { graphql } from '@increaser/api-interface/client'
 import { InputWithError } from '@increaser/ui/inputs/InputWithError'
+import { useApi } from 'api/hooks/useApi'
 
 interface EmailFormState {
   email: string
 }
 
-const sendAuthLinkByEmailMutationDocument = graphql(`
-  mutation sendAuthLinkByEmail($input: SendAuthLinkByEmailInput!) {
-    sendAuthLinkByEmail(input: $input)
-  }
-`)
-
 export const EmailAuthForm = () => {
-  const { query } = useApi()
+  const api = useApi()
 
   const { push } = useRouter()
 
@@ -40,10 +33,8 @@ export const EmailAuthForm = () => {
     async ({ email }: EmailFormState) => {
       analytics.trackEvent('Start identification with email')
 
-      await query(sendAuthLinkByEmailMutationDocument, {
-        input: {
-          email,
-        },
+      await api.call('sendAuthLinkByEmail', {
+        email,
       })
 
       return email

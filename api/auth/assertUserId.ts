@@ -1,14 +1,12 @@
-import { GraphQLError } from 'graphql'
-import { OperationContext } from '../gql/OperationContext'
-import { ApiErrorCode } from '../errors/ApiErrorCode'
+import { ApiError } from '@increaser/api-interface/ApiError'
+import { ApiResolverContext } from '../resolvers/ApiResolverContext'
 
-export const assertUserId = ({ userId }: OperationContext) => {
+export const assertUserId = ({ userId }: ApiResolverContext) => {
   if (!userId) {
-    throw new GraphQLError('Authentication required to perform this action', {
-      extensions: {
-        code: ApiErrorCode.Unauthenticated,
-      },
-    })
+    throw new ApiError(
+      'invalidAuthToken',
+      'Only authenticated user can perform this action',
+    )
   }
 
   return userId

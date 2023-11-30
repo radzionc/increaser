@@ -73,10 +73,10 @@ export const EditHabit = ({ onFinish }: EditHabitProps) => {
         </Button>
         <Button
           size="l"
-          onClick={handleSubmit((params) => {
+          onClick={handleSubmit((fields) => {
             updateHabit({
               id: habit.id,
-              ...params,
+              fields,
             })
             onFinish()
           })}

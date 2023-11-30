@@ -10,5 +10,5 @@ export const userIdFromToken = async (token: string) => {
 
   const decoded = jwt.verify(token, secret)
 
-  return decoded ? (decoded as DecodedToken).id : null
+  return decoded ? (decoded as DecodedToken).id : undefined
 }

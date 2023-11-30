@@ -2,7 +2,6 @@ import {
   getPrimaryGoalColor,
   primaryGoalIcon,
   primaryGoalName,
-  primaryGoals,
 } from 'capacity/PrimaryGoal'
 import { useTheme } from 'styled-components'
 import { HStack, VStack } from '@increaser/ui/layout/Stack'
@@ -10,7 +9,7 @@ import { Text } from '@increaser/ui/text'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { LargeSelectOption } from 'ui/LargeSelectOption'
-import { PrimaryGoal } from '@increaser/api-interface/client/graphql'
+import { PrimaryGoal, primaryGoals } from '@increaser/entities/User'
 
 export const PrimaryGoalForm = () => {
   const { primaryGoal } = useAssertUserState()

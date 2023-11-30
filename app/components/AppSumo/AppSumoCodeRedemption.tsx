@@ -6,25 +6,19 @@ import { Form } from '@increaser/ui/form/components/Form'
 import { TextInput } from '@increaser/ui/inputs/TextInput'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { useUserState } from 'user/state/UserStateContext'
-import { ApiError, useApi } from 'api/useApi'
-import { graphql } from '@increaser/api-interface/client'
+import { useApi } from 'api/hooks/useApi'
+import { getErrorMessage } from '@increaser/utils/getErrorMessage'
 
 interface RedeemCodeFormState {
   code: string
 }
-
-const redeemAppSumoCodeMutationDocument = graphql(`
-  mutation redeemAppSumoCode($input: RedeemAppSumoCodeInput!) {
-    redeemAppSumoCode(input: $input)
-  }
-`)
 
 export const AppSumoCodeRedemption = () => {
   const [code, setCode] = useState('')
 
   const { updateState: updateUserState } = useUserState()
 
-  const { query } = useApi()
+  const api = useApi()
 
   const {
     register,
@@ -38,10 +32,8 @@ export const AppSumoCodeRedemption = () => {
   const { mutate: redeemCode, isLoading } = useMutation(
     async ({ code }: RedeemCodeFormState) => {
       try {
-        await query(redeemAppSumoCodeMutationDocument, {
-          input: {
-            code,
-          },
+        await api.call('redeemAppSumoCode', {
+          code,
         })
 
         updateUserState({
@@ -50,8 +42,7 @@ export const AppSumoCodeRedemption = () => {
           },
         })
       } catch (error) {
-        const { message } = error as ApiError
-        setError('code', { type: 'custom', message })
+        setError('code', { type: 'custom', message: getErrorMessage(error) })
       }
     },
   )

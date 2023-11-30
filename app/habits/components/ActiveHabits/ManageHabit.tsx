@@ -38,8 +38,10 @@ export const ManageHabit = ({ onEdit }: ManageHabitProps) => {
               onSelect: () => {
                 updateHabit({
                   id,
-                  startedAt: Math.round(Date.now() / MS_IN_SEC),
-                  successes: [],
+                  fields: {
+                    startedAt: Math.round(Date.now() / MS_IN_SEC),
+                    successes: [],
+                  },
                 })
               },
             },

@@ -1,41 +1,18 @@
 import { useMutation } from 'react-query'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-import { graphql } from '@increaser/api-interface/client'
 import { Project } from '@increaser/entities/Project'
+import { useApi } from 'api/hooks/useApi'
 
 interface UpdateProjectMutationInput {
   id: string
   fields: Partial<Project>
 }
 
-export const updateProjectMutationDocument = graphql(`
-  mutation updateProject($input: UpdateProjectInput!) {
-    updateProject(input: $input) {
-      id
-      name
-      color
-      status
-      emoji
-      total
-      allocatedMinutesPerWeek
-      weeks {
-        year
-        week
-        seconds
-      }
-      months {
-        year
-        month
-        seconds
-      }
-    }
-  }
-`)
-
 export const useUpdateProjectMutation = () => {
   const { projects } = useAssertUserState()
-  const { updateState, updateRemoteState } = useUserState()
+  const { updateState } = useUserState()
+  const api = useApi()
 
   return useMutation(async ({ id, fields }: UpdateProjectMutationInput) => {
     updateState({
@@ -49,11 +26,9 @@ export const useUpdateProjectMutation = () => {
       }),
     })
 
-    const project = await updateRemoteState(updateProjectMutationDocument, {
-      input: {
-        id,
-        ...fields,
-      },
+    const project = await api.call('updateProject', {
+      id,
+      fields,
     })
 
     return project as Project | null

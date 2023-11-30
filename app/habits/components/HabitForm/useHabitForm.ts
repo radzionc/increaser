@@ -21,7 +21,7 @@ export const useHabitForm = ({
 
   const habits = useMemo(() => state?.habits || [], [state?.habits])
 
-  const { defaultColorOption } = usePaletteColorOptions(habits)
+  const { defaultColorOption } = usePaletteColorOptions(Object.values(habits))
 
   const getDefaultValues = useCallback(
     () => ({

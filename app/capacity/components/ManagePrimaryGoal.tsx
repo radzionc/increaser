@@ -2,7 +2,6 @@ import {
   getPrimaryGoalColor,
   primaryGoalIcon,
   primaryGoalName,
-  primaryGoals,
 } from 'capacity/PrimaryGoal'
 import styled, { useTheme } from 'styled-components'
 import { Menu } from '@increaser/ui/menu'
@@ -12,8 +11,8 @@ import { Text } from '@increaser/ui/text'
 import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
-import { PrimaryGoal } from '@increaser/api-interface/client/graphql'
 import { transition } from '@increaser/ui/css/transition'
+import { PrimaryGoal, primaryGoals } from '@increaser/entities/User'
 
 const Container = styled(UnstyledButton)`
   background: ${({ theme }) => theme.colors.mist.toCssValue()};

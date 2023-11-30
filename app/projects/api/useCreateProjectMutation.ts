@@ -2,32 +2,8 @@ import { useMutation } from 'react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 
-import { graphql } from '@increaser/api-interface/client'
 import { Project } from '@increaser/entities/Project'
-
-export const createProejctMutationDocument = graphql(`
-  mutation createProject($input: CreateProjectInput!) {
-    createProject(input: $input) {
-      id
-      name
-      color
-      status
-      emoji
-      total
-      allocatedMinutesPerWeek
-      weeks {
-        year
-        week
-        seconds
-      }
-      months {
-        year
-        month
-        seconds
-      }
-    }
-  }
-`)
+import { useApi } from 'api/hooks/useApi'
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void
@@ -38,7 +14,8 @@ export const useCreateProjectMutation = (
   params?: UseCreateProjectMutationParams,
 ) => {
   const { projects } = useAssertUserState()
-  const { updateState, updateRemoteState } = useUserState()
+  const api = useApi()
+  const { updateState } = useUserState()
 
   return useMutation(
     async (
@@ -54,7 +31,6 @@ export const useCreateProjectMutation = (
 
       const project: Project = {
         ...input,
-
         total: 0,
         status: 'ACTIVE',
         weeks: [],
@@ -64,14 +40,7 @@ export const useCreateProjectMutation = (
       updateState({ projects: [...projects, project] })
       params?.onOptimisticUpdate?.(project)
 
-      const projectResult = await updateRemoteState(
-        createProejctMutationDocument,
-        {
-          input: input,
-        },
-      )
-
-      return projectResult as Project
+      return api.call('createProject', input)
     },
     params,
   )

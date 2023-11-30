@@ -1,37 +1,20 @@
-import { graphql } from '@increaser/api-interface/client'
-import { SubscriptionQuery } from '@increaser/api-interface/client/graphql'
-import { useApi } from 'api/useApi'
-import { useQuery } from 'react-query'
+import { useOnQuerySuccess } from '@increaser/ui/query/hooks/useOnQuerySuccess'
+import { useApiQuery } from 'api/hooks/useApiQuery'
+import { useCallback } from 'react'
 import { useUserState } from 'user/state/UserStateContext'
 
-const subscriptionQueryDocument = graphql(`
-  query subscription($input: SubscriptionInput!) {
-    subscription(input: $input) {
-      id
-      provider
-      planId
-      status
-      nextBilledAt
-      endsAt
-    }
-  }
-`)
-
 export const useSubscriptionQuery = (id: string) => {
-  const { query } = useApi()
+  const query = useApiQuery('subscription', { id })
   const { updateState } = useUserState()
-
-  return useQuery<SubscriptionQuery['subscription'], Error>(
-    ['subscription', id],
-    async () => {
-      const { subscription } = await query(subscriptionQueryDocument, {
-        input: { id },
-      })
-
-      updateState({ subscription })
-
-      return subscription
-    },
-    {},
+  useOnQuerySuccess(
+    query,
+    useCallback(
+      (subscription) => {
+        updateState({ subscription })
+      },
+      [updateState],
+    ),
   )
+
+  return query
 }

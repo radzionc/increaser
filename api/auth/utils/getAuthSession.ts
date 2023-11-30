@@ -1,11 +1,13 @@
 import { convertDuration } from '@increaser/utils/time/convertDuration'
-import { AuthSession } from '../../gql/schema'
 import jwt from 'jsonwebtoken'
 import { getSecret } from '../../utils/getSecret'
+import { AuthSession } from '@increaser/entities/AuthSession'
 
 const tokenLifespanInDays = 300
 
-export const getAuthSession = async (id: string): Promise<AuthSession> => {
+export const getAuthSession = async (
+  id: string,
+): Promise<Omit<AuthSession, 'isFirst'>> => {
   const expiresAt = Math.round(
     convertDuration(Date.now(), 'ms', 's') +
       convertDuration(tokenLifespanInDays, 'd', 's'),

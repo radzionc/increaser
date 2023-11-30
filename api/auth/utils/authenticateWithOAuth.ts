@@ -1,9 +1,9 @@
 import { capitalizeFirstLetter } from '@increaser/utils/capitalizeFirstLetter'
-import { OAuthProvider } from '../../gql/schema'
 import { AuthenticationResult } from './AuthenticationResult'
 import { getOAuthAccessToken } from './getOAuthAccessToken'
 import { getOAuthUserInfo } from './getOAuthUserInfo'
-import { AuthenticationError } from '../../errors/AuthenticationError'
+import { OAuthProvider } from '@increaser/entities/OAuthProvider'
+import { ApiError } from '@increaser/api-interface/ApiError'
 
 interface AuthenticateWithOAuthParams {
   provider: OAuthProvider
@@ -28,7 +28,8 @@ export const authenticateWithOAuth = async ({
   })
 
   if (!email) {
-    throw new AuthenticationError(
+    throw new ApiError(
+      'invalidInput',
       `Your ${capitalizeFirstLetter(
         provider,
       )} account doesn't provide an email. Please try a different authentication method.`,
