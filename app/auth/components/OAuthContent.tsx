@@ -4,11 +4,12 @@ import { AuthView } from '@increaser/ui/auth/AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { getOAuthRedirectUri } from 'auth/utils/oauth'
 import { AuthConfirmationStatus } from './AuthConfirmationStatus'
-import { useAuthenticateWithOAuthMutation } from 'auth/hooks/useAuthenticateWithOAuthMutation'
 import {
   OAuthProvider,
   oAuthProviderName,
 } from '@increaser/entities/OAuthProvider'
+import { useApiMutation } from 'api/hooks/useApiMutation'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 interface OAuthParams {
   code: string
@@ -19,7 +20,14 @@ interface OAuthContentProps {
 }
 
 export const OAuthContent = ({ provider }: OAuthContentProps) => {
-  const { mutate: authenticate, error } = useAuthenticateWithOAuthMutation()
+  const [, updateSession] = useAuthSession()
+
+  const { mutate: authenticate, error } = useApiMutation(
+    'authSessionWithOAuth',
+    {
+      onSuccess: updateSession,
+    },
+  )
 
   useHandleQueryParams<OAuthParams>(
     useCallback(

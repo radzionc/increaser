@@ -1,6 +1,5 @@
 import { analytics } from 'analytics'
 import { useForm } from 'react-hook-form'
-import { useMutation } from 'react-query'
 import { Button } from '@increaser/ui/buttons/Button'
 import { Form } from '@increaser/ui/form/components/Form'
 import { TextInput } from '@increaser/ui/inputs/TextInput'
@@ -10,15 +9,13 @@ import { Path } from 'router/Path'
 import { validateEmail } from '@increaser/utils/validation/validateEmail'
 import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { InputWithError } from '@increaser/ui/inputs/InputWithError'
-import { useApi } from 'api/hooks/useApi'
+import { useApiMutation } from 'api/hooks/useApiMutation'
 
 interface EmailFormState {
   email: string
 }
 
 export const EmailAuthForm = () => {
-  const api = useApi()
-
   const { push } = useRouter()
 
   const {
@@ -29,28 +26,21 @@ export const EmailAuthForm = () => {
     mode: 'onSubmit',
   })
 
-  const { mutate: sendAuthLinkByEmail, isLoading } = useMutation(
-    async ({ email }: EmailFormState) => {
-      analytics.trackEvent('Start identification with email')
-
-      await api.call('sendAuthLinkByEmail', {
-        email,
-      })
-
-      return email
-    },
-    {
-      onSuccess: (email) => {
-        push(addQueryParams(Path.EmailConfirm, { email }))
-      },
-    },
+  const { mutate: sendAuthLinkByEmail, isLoading } = useApiMutation(
+    'sendAuthLinkByEmail',
   )
 
   return (
     <Form
       gap={4}
       onSubmit={handleSubmit((data) => {
-        sendAuthLinkByEmail(data)
+        analytics.trackEvent('Start identification with email')
+
+        sendAuthLinkByEmail(data, {
+          onSuccess: () => {
+            push(addQueryParams(Path.EmailConfirm, { email: data.email }))
+          },
+        })
       })}
       content={
         <InputWithError error={errors.email?.message}>

@@ -3,24 +3,32 @@ import { useCallback } from 'react'
 import { AuthView } from '@increaser/ui/auth/AuthView'
 import { getCurrentTimezoneOffset } from '@increaser/utils/time/getCurrentTimezoneOffset'
 import { AuthConfirmationStatus } from './AuthConfirmationStatus'
-import { useAuthenticateWithEmailMutation } from 'auth/hooks/useAuthenticateWithEmailMutation'
+import { useApiMutation } from 'api/hooks/useApiMutation'
+import { useAuthSession } from 'auth/hooks/useAuthSession'
 
 interface EmailAuthParams {
   code: string
 }
 
 export const EmailAuthContent = () => {
-  const { mutate: identify, error } = useAuthenticateWithEmailMutation()
+  const [, updateSession] = useAuthSession()
+
+  const { mutate: authenticateWithEmail, error } = useApiMutation(
+    'authSessionWithEmail',
+    {
+      onSuccess: updateSession,
+    },
+  )
 
   useHandleQueryParams<EmailAuthParams>(
     useCallback(
       ({ code }) => {
-        identify({
+        authenticateWithEmail({
           code,
           timeZone: getCurrentTimezoneOffset(),
         })
       },
-      [identify],
+      [authenticateWithEmail],
     ),
   )
 

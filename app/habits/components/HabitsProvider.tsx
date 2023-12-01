@@ -27,7 +27,7 @@ export const HabitsProvider = ({ children }: ComponentWithChildrenProps) => {
           toHabit(habit, todayStartedAt, theme),
         ),
         (h) => h.order,
-        'desc',
+        'asc',
       ),
     [state.habits, theme, todayStartedAt],
   )
