@@ -1,3 +1,3 @@
-import { makeCurrentMonthReport } from '../makeCurrentMonthReport'
+import { syncScoreboards } from '../syncScoreboards'
 
-makeCurrentMonthReport()
+syncScoreboards()

@@ -2,18 +2,16 @@ import { User } from '@increaser/entities/User'
 import { tableName } from '@increaser/db/tableName'
 
 import { ScanCommand } from '@aws-sdk/lib-dynamodb'
-import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
-import { inTimeZone } from '@increaser/utils/time/inTimeZone'
-import { MIN_IN_HOUR, MS_IN_DAY, MS_IN_MIN } from '@increaser/utils/time'
+import { MIN_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import {
   PerformanceScoreboard,
   UserPerformanceRecord,
+  scoreboardPeriodInDays,
+  scoreboardPeriods,
 } from '@increaser/entities/PerformanceScoreboard'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { dbDocClient } from '@increaser/dynamodb/client'
-import { toMonth } from '@increaser/utils/time/toMonth'
-import { monthToString } from '@increaser/utils/time/Month'
 import {
   doesScoreboardExist,
   putScoreboard,
@@ -21,13 +19,14 @@ import {
 } from '@increaser/db/scoreboard'
 import { omit } from '@increaser/utils/record/omit'
 import { order } from '@increaser/utils/array/order'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
 
 type UserInfo = Pick<
   User,
   'id' | 'name' | 'country' | 'sets' | 'prevSets' | 'timeZone' | 'isAnonymous'
 >
 
-export const makeCurrentMonthReport = async () => {
+export const syncScoreboards = async () => {
   const users: UserInfo[] = []
 
   const recursiveProcess = async (lastEvaluatedKey?: any) => {
@@ -62,50 +61,50 @@ export const makeCurrentMonthReport = async () => {
   await recursiveProcess()
 
   const records: UserPerformanceRecord[] = []
+  await Promise.all(
+    scoreboardPeriods.map(async (period) => {
+      users.forEach(({ sets, prevSets, id, isAnonymous, name, country }) => {
+        const days = scoreboardPeriodInDays[period]
+        const setsShouldStartForm =
+          Date.now() - convertDuration(days, 'd', 'ms')
+        const scoreboardSets = [...sets, ...prevSets].filter(
+          (set) => set.start > setsShouldStartForm,
+        )
+        const total = getSetsDuration(scoreboardSets)
+        const totalInMinutes = Math.round(total / MS_IN_MIN)
 
-  users.forEach(
-    ({ timeZone, sets, prevSets, id, isAnonymous, name, country }) => {
-      const now = Date.now()
-      const monthStartedAt = inTimeZone(getMonthStartedAt(now), timeZone)
-      const currentMonthSets = [...sets, ...prevSets].filter(
-        (set) => set.start > monthStartedAt,
-      )
-      if (monthStartedAt > now) return
-      const days = Math.ceil((now - monthStartedAt) / MS_IN_DAY)
-      const total = getSetsDuration(currentMonthSets)
-      const totalInMinutes = Math.round(total / MS_IN_MIN)
+        const dailyAvgInMinutes = Math.round(totalInMinutes / days)
+        if (dailyAvgInMinutes < 2 * MIN_IN_HOUR) return
 
-      const dailyAvgInMinutes = Math.round(totalInMinutes / days)
-      if (dailyAvgInMinutes < 2 * MIN_IN_HOUR) return
+        const blocks = getBlocks(scoreboardSets)
 
-      const blocks = getBlocks(currentMonthSets)
-
-      const avgBlockInMinutes = totalInMinutes / blocks.length
-      const userRecord: UserPerformanceRecord = {
-        id,
-        dailyAvgInMinutes,
-        avgBlockInMinutes,
-      }
-      if (!isAnonymous) {
-        userRecord.profile = {
-          name,
-          country,
+        const avgBlockInMinutes = totalInMinutes / blocks.length
+        const userRecord: UserPerformanceRecord = {
+          id,
+          dailyAvgInMinutes,
+          avgBlockInMinutes,
         }
+        if (!isAnonymous) {
+          userRecord.profile = {
+            name,
+            country,
+          }
+        }
+
+        records.push(userRecord)
+      })
+
+      const content: PerformanceScoreboard = {
+        id: period,
+        syncedAt: Date.now(),
+        users: order(records, (r) => r.dailyAvgInMinutes, 'desc'),
       }
 
-      records.push(userRecord)
-    },
+      if (await doesScoreboardExist(content.id)) {
+        await updateScoreboard(content.id, omit(content, 'id'))
+      } else {
+        await putScoreboard(content)
+      }
+    }),
   )
-
-  const content: PerformanceScoreboard = {
-    id: monthToString(toMonth(Date.now())),
-    syncedAt: Date.now(),
-    users: order(records, (r) => r.dailyAvgInMinutes, 'desc'),
-  }
-
-  if (await doesScoreboardExist(content.id)) {
-    await updateScoreboard(content.id, omit(content, 'id'))
-  } else {
-    await putScoreboard(content)
-  }
 }

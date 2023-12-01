@@ -3,8 +3,10 @@ import { mergeIntoProjectMonths } from '@increaser/entities-utils/project/mergeI
 import { setToProjectMonth } from '@increaser/entities-utils/project/setToProjectMonth'
 import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
 import { splitSetsByTimestamp } from '@increaser/entities-utils/set/splitSetsByTimestamp'
+import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
 import { Project } from '@increaser/entities/Project'
 import { Set } from '@increaser/entities/User'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
 import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 
@@ -68,9 +70,18 @@ export const organizeMonths = async (userId: string) => {
     return addNewSetsToProject(project, sets)
   })
 
+  const keepSetsStartedAfter =
+    Date.now() -
+    convertDuration(
+      Math.max(...Object.values(scoreboardPeriodInDays)),
+      'd',
+      'ms',
+    )
+
   await updateUser(userId, {
     projects: newProjects,
-    prevSets: splitSetsByTimestamp(prevSets, monthStartedAt).afterTimestamp,
+    prevSets: splitSetsByTimestamp(prevSets, keepSetsStartedAfter)
+      .afterTimestamp,
     lastSyncedMonthEndedAt: monthStartedAt,
   })
 }

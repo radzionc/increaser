@@ -1,8 +1,8 @@
-import { makeCurrentMonthReport } from './makeCurrentMonthReport'
+import { syncScoreboards } from './syncScoreboards'
 import { AWSLambda } from '@sentry/serverless'
 
 AWSLambda.init({
   dsn: process.env.SENTRY_KEY,
 })
 
-export const handler = AWSLambda.wrapHandler(makeCurrentMonthReport)
+export const handler = AWSLambda.wrapHandler(syncScoreboards)

@@ -29,7 +29,7 @@ const Outline = styled.div`
 const Identity = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 20px auto 1fr;
+  grid-template-columns: 28px auto 1fr;
   gap: 8px;
 `
 
