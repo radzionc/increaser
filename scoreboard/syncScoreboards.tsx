@@ -54,7 +54,7 @@ export const syncScoreboards = async () => {
             'ms',
           ),
       },
-      ProjectionExpression: '#id,#sets,,#name,#timeZone,#country,#isAnonymous',
+      ProjectionExpression: '#id,#sets,#name,#timeZone,#country,#isAnonymous',
     })
     const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
     if (Items) {
