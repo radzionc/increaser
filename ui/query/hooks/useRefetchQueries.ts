@@ -8,7 +8,7 @@ export const useRefetchQueries = () => {
     (...queryKeys: QueryKey[]) => {
       queryKeys.forEach((key) => {
         console.log('Invalidating query with key: ', key)
-        queryClient.refetchQueries(key)
+        queryClient.invalidateQueries(key)
       })
     },
     [queryClient],

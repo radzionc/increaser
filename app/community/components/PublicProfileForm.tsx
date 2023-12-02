@@ -7,7 +7,9 @@ import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
 import { CountryCode } from '@increaser/utils/countries'
 import { CountryInput } from '@increaser/ui/inputs/CountryInput'
 import { useApiMutation } from 'api/hooks/useApiMutation'
-import { useApiQuery } from 'api/hooks/useApiQuery'
+import { getApiQueryKey } from 'api/hooks/useApiQuery'
+import { useRefetchQueries } from '@increaser/ui/query/hooks/useRefetchQueries'
+import { scoreboardPeriods } from '@increaser/entities/PerformanceScoreboard'
 
 interface PublicProfileFormProps {
   onCancel: () => void
@@ -22,11 +24,13 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
   const { name, country } = useAssertUserState()
 
   const { updateState } = useUserState()
-  const { refetch: refetchScoreboard } = useApiQuery('scoreboard', {
-    id: 'month',
-  })
+  const refetch = useRefetchQueries()
   const { mutate: updateUser } = useApiMutation('updateUser', {
-    onSuccess: refetchScoreboard,
+    onSuccess: () => {
+      refetch(
+        ...scoreboardPeriods.map((id) => getApiQueryKey('scoreboard', { id })),
+      )
+    },
   })
 
   const { register, handleSubmit, control } = useForm<PublicProfileFormShape>({
