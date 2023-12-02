@@ -1,10 +1,12 @@
 import { User } from './User'
 
+export type UserProfile = Pick<User, 'name' | 'country'>
+
 export interface UserPerformanceRecord {
   dailyAvgInMinutes: number
   avgBlockInMinutes: number
   id: string
-  profile?: Pick<User, 'name' | 'country'>
+  profile?: UserProfile
 }
 
 export const scoreboardPeriods = ['month'] as const
@@ -17,5 +19,11 @@ export interface PerformanceScoreboard {
 }
 
 export const scoreboardPeriodInDays: Record<ScoreboardPeriod, number> = {
-  month: 4,
+  month: 5,
 }
+
+export const scoreboardSensitiveUserFields: (keyof User)[] = [
+  'isAnonymous',
+  'country',
+  'name',
+]

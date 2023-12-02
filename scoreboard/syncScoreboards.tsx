@@ -20,6 +20,7 @@ import {
 import { omit } from '@increaser/utils/record/omit'
 import { order } from '@increaser/utils/array/order'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
+import { getUserProfile } from '@increaser/entities-utils/scoreboard/getUserProfile'
 
 type UserInfo = Pick<
   User,
@@ -63,7 +64,8 @@ export const syncScoreboards = async () => {
   const records: UserPerformanceRecord[] = []
   await Promise.all(
     scoreboardPeriods.map(async (period) => {
-      users.forEach(({ sets, prevSets, id, isAnonymous, name, country }) => {
+      users.forEach((user) => {
+        const { sets, prevSets, id } = user
         const days = scoreboardPeriodInDays[period]
         const setsShouldStartForm =
           Date.now() - convertDuration(days, 'd', 'ms')
@@ -83,12 +85,7 @@ export const syncScoreboards = async () => {
           id,
           dailyAvgInMinutes,
           avgBlockInMinutes,
-        }
-        if (!isAnonymous) {
-          userRecord.profile = {
-            name,
-            country,
-          }
+          profile: getUserProfile(user),
         }
 
         records.push(userRecord)
