@@ -5,6 +5,7 @@ import {
 } from '@increaser/api-interface/ApiInterface'
 import { asyncFallbackChain } from '@increaser/utils/promise/asyncFallbackChain'
 import { joinPaths } from '@increaser/utils/query/joinPaths'
+import { safeResolve } from '@increaser/utils/promise/safeResolve'
 
 interface CallApiParams<M extends ApiMethodName> {
   baseUrl: string
@@ -55,5 +56,5 @@ export const callApi = async <M extends ApiMethodName>({
     throw error
   }
 
-  return response.json()
+  return safeResolve(response.json(), undefined)
 }

@@ -10,8 +10,6 @@ import { PublicProfileForm } from '../PublicProfileForm'
 import { ScoreboardDisplayName } from '../ScoreboardDisplayName'
 import { SeparatedByLine } from '@increaser/ui/layout/SeparatedByLine'
 import { CountryCode } from '@increaser/utils/countries'
-import { TimeoutMessage } from '@increaser/ui/base/TimeoutMessage'
-import { UpdateProfileMessage } from './UpdateProfileMessage'
 import { LabeledValue } from '@increaser/ui/text/LabeledValue'
 
 export const ManageProfile = () => {
@@ -69,11 +67,6 @@ export const ManageProfile = () => {
             </HStack>
           )}
         </SeparatedByLine>
-        <TimeoutMessage
-          deps={[isAnonymous, name, country]}
-          timeout={5000}
-          render={() => <UpdateProfileMessage />}
-        />
       </VStack>
     </Panel>
   )

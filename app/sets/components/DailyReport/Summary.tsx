@@ -108,11 +108,12 @@ export const Summary = ({ labelsWidth }: SummaryProps) => {
       <SummaryRow
         name="Avg. block"
         days={days}
-        renderDayStatistic={({ sets }) => {
+        renderDayStatistic={({ sets }, index) => {
           const avgInMin = getSetsSum(sets) / getBlocks(sets).length / MS_IN_MIN
 
           return (
             <Text
+              key={index}
               style={{
                 color: getBlockColor(
                   getSetsSum(sets) / getBlocks(sets).length,
