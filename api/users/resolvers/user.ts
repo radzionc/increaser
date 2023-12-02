@@ -1,9 +1,8 @@
 import { assertUserId } from '../../auth/assertUserId'
 import { organizeTasks } from '../../tasks/services/organizeTasks'
-import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
-import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
 import { getUser, updateUser } from '@increaser/db/user'
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
+import { ApiResolver } from '../../resolvers/ApiResolver'
+import { organizeSets } from '@increaser/data-services/sets/organizeSets'
 
 export const user: ApiResolver<'user'> = async ({
   input: { timeZone },
@@ -13,8 +12,7 @@ export const user: ApiResolver<'user'> = async ({
 
   await updateUser(userId, { timeZone })
 
-  await organizeWeeks(userId)
-  await organizeMonths(userId)
+  await organizeSets(userId)
 
   await organizeTasks(userId)
 

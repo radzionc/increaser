@@ -24,7 +24,7 @@ import { getUserProfile } from '@increaser/entities-utils/scoreboard/getUserProf
 
 type UserInfo = Pick<
   User,
-  'id' | 'name' | 'country' | 'sets' | 'prevSets' | 'timeZone' | 'isAnonymous'
+  'id' | 'name' | 'country' | 'sets' | 'timeZone' | 'isAnonymous'
 >
 
 export const syncScoreboards = async () => {
@@ -34,21 +34,27 @@ export const syncScoreboards = async () => {
     const command = new ScanCommand({
       ExclusiveStartKey: lastEvaluatedKey,
       TableName: tableName.users,
-      FilterExpression: 'size(#sets) > :size or size(#prevSets) > :size',
+      FilterExpression: 'size(#sets) > :size AND #updatedAt > :updatedAt',
       ExpressionAttributeNames: {
         '#id': 'id',
         '#sets': 'sets',
-        '#prevSets': 'prevSets',
         '#name': 'name',
         '#timeZone': 'timeZone',
         '#country': 'country',
         '#isAnonymous': 'isAnonymous',
+        '#updatedAt': 'updatedAt',
       },
       ExpressionAttributeValues: {
         ':size': 0,
+        ':updatedAt':
+          Date.now() -
+          convertDuration(
+            Math.max(...Object.values(scoreboardPeriodInDays)),
+            'd',
+            'ms',
+          ),
       },
-      ProjectionExpression:
-        '#id,#sets,#prevSets,#name,#timeZone,#country,#isAnonymous',
+      ProjectionExpression: '#id,#sets,,#name,#timeZone,#country,#isAnonymous',
     })
     const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
     if (Items) {
@@ -65,11 +71,11 @@ export const syncScoreboards = async () => {
   await Promise.all(
     scoreboardPeriods.map(async (period) => {
       users.forEach((user) => {
-        const { sets, prevSets, id } = user
+        const { sets, id } = user
         const days = scoreboardPeriodInDays[period]
         const setsShouldStartForm =
           Date.now() - convertDuration(days, 'd', 'ms')
-        const scoreboardSets = [...sets, ...prevSets].filter(
+        const scoreboardSets = sets.filter(
           (set) => set.start > setsShouldStartForm,
         )
         const total = getSetsDuration(scoreboardSets)

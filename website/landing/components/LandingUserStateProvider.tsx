@@ -30,7 +30,6 @@ export const LandingUserStateProvider = ({
   const [state, setState] = useState<UserStateView>(() => {
     return {
       focusSounds: [],
-      prevSets: [],
       primaryGoal: 'awareness',
       sets: getDemoSets(),
       projects: getDemoProjects(),

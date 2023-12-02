@@ -1,11 +1,11 @@
-import { getUser, updateUser } from '@increaser/db/user'
 import { mergeIntoProjectMonths } from '@increaser/entities-utils/project/mergeIntoProjectMonths'
 import { setToProjectMonth } from '@increaser/entities-utils/project/setToProjectMonth'
+import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
+import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
-import { splitSetsByTimestamp } from '@increaser/entities-utils/set/splitSetsByTimestamp'
 import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
 import { Project } from '@increaser/entities/Project'
-import { Set } from '@increaser/entities/User'
+import { Set, User } from '@increaser/entities/User'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { getMonthStartedAt } from '@increaser/utils/time/getMonthStartedAt'
 import { inTimeZone } from '@increaser/utils/time/inTimeZone'
@@ -22,41 +22,31 @@ const addNewSetsToProject = (project: Project, sets: Set[]) => {
   }
 }
 
-export const organizeMonths = async (userId: string) => {
-  const {
-    sets: currentWeekSets,
-    prevSets,
-    timeZone,
-    projects,
-    lastSyncedMonthEndedAt,
-  } = await getUser(userId, [
-    'sets',
-    'prevSets',
-    'timeZone',
-    'projects',
-    'lastSyncedMonthEndedAt',
-  ])
+type UserFields = Pick<
+  User,
+  'sets' | 'timeZone' | 'projects' | 'lastSyncedMonthEndedAt'
+>
 
-  const sets = [...prevSets, ...currentWeekSets]
-
+export const organizeMonths = ({
+  timeZone,
+  lastSyncedMonthEndedAt,
+  sets,
+  projects,
+}: UserFields): Partial<UserFields> => {
   const monthStartedAt = inTimeZone(getMonthStartedAt(Date.now()), timeZone)
 
   if (lastSyncedMonthEndedAt && monthStartedAt <= lastSyncedMonthEndedAt) {
-    return
+    return {}
   }
 
-  const { beforeTimestamp: previousMonthsSets } = splitSetsByTimestamp(
-    sets,
-    monthStartedAt,
-  )
+  const previousMonthsSets = getSetsFinishedBefore(sets, monthStartedAt)
 
   const unsyncedSets = lastSyncedMonthEndedAt
-    ? splitSetsByTimestamp(previousMonthsSets, lastSyncedMonthEndedAt)
-        .afterTimestamp
+    ? getSetsStartedAfter(previousMonthsSets, lastSyncedMonthEndedAt)
     : previousMonthsSets
 
   if (!unsyncedSets.length) {
-    return
+    return {}
   }
 
   const groupedSets = groupSetsByProject(unsyncedSets)
@@ -73,15 +63,14 @@ export const organizeMonths = async (userId: string) => {
   const keepSetsStartedAfter =
     Date.now() -
     convertDuration(
-      Math.max(...Object.values(scoreboardPeriodInDays)),
+      Math.max(...Object.values(scoreboardPeriodInDays), 31),
       'd',
       'ms',
     )
 
-  await updateUser(userId, {
+  return {
     projects: newProjects,
-    prevSets: splitSetsByTimestamp(prevSets, keepSetsStartedAfter)
-      .afterTimestamp,
+    sets: getSetsStartedAfter(sets, keepSetsStartedAfter),
     lastSyncedMonthEndedAt: monthStartedAt,
-  })
+  }
 }

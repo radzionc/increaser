@@ -54,7 +54,6 @@ export type User = {
   country?: CountryCode
   name?: string
   sets: Set[]
-  prevSets: Set[]
   registrationDate: number
   projects: Project[]
   habits: Record<string, Habit>
@@ -76,6 +75,7 @@ export type User = {
   timeZone: number
 
   lastSyncedMonthEndedAt?: number
+  lastSyncedWeekEndedAt?: number
 
   focusSounds: FocusSound[]
 
@@ -91,7 +91,6 @@ export const userDefaultFields: Pick<
   User,
   | 'focusSounds'
   | 'sets'
-  | 'prevSets'
   | 'tasks'
   | 'projects'
   | 'habits'
@@ -104,7 +103,6 @@ export const userDefaultFields: Pick<
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
-  prevSets: [],
   tasks: [],
   projects: [],
   habits: {},

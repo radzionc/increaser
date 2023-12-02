@@ -1,13 +1,13 @@
 import { Project } from '@increaser/entities/Project'
-import { Set } from '@increaser/entities/User'
+import { Set, User } from '@increaser/entities/User'
 import { setToProjectWeek } from '@increaser/entities-utils/project/setToProjectWeek'
 import { mergeIntoProjectWeeks } from '@increaser/entities-utils/project/mergeIntoProjectWeeks'
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
-import { getUser, updateUser } from '@increaser/db/user'
-import { splitSetsByTimestamp } from '@increaser/entities-utils/set/splitSetsByTimestamp'
 import { inTimeZone } from '@increaser/utils/time/inTimeZone'
 import { getWeekStartedAt } from '@increaser/utils/time/getWeekStartedAt'
 import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
+import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
+import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 
 const projectsWeeksToStore = 4
 
@@ -24,26 +24,34 @@ const addNewSetsToProject = (project: Project, sets: Set[]) => {
   }
 }
 
-export const organizeWeeks = async (userId: string) => {
-  const { sets, timeZone, projects, prevSets } = await getUser(userId, [
-    'sets',
-    'timeZone',
-    'projects',
-    'prevSets',
-  ])
+type UserFields = Pick<
+  User,
+  'sets' | 'timeZone' | 'projects' | 'lastSyncedWeekEndedAt'
+>
 
+export const organizeWeeks = ({
+  timeZone,
+  lastSyncedWeekEndedAt,
+  sets,
+  projects,
+}: UserFields): Partial<UserFields> => {
   const weekStartedAt = inTimeZone(getWeekStartedAt(Date.now()), timeZone)
 
-  const { beforeTimestamp, afterTimestamp } = splitSetsByTimestamp(
-    sets,
-    weekStartedAt,
-  )
-
-  if (!beforeTimestamp.length) {
-    return
+  if (lastSyncedWeekEndedAt && weekStartedAt <= lastSyncedWeekEndedAt) {
+    return {}
   }
 
-  const groupedSets = groupSetsByProject(beforeTimestamp)
+  const previousWeekSets = getSetsFinishedBefore(sets, weekStartedAt)
+
+  const unsyncedSets = lastSyncedWeekEndedAt
+    ? getSetsStartedAfter(previousWeekSets, lastSyncedWeekEndedAt)
+    : previousWeekSets
+
+  if (!unsyncedSets.length) {
+    return {}
+  }
+
+  const groupedSets = groupSetsByProject(unsyncedSets)
   const newProjects = projects.map((project) => {
     const sets = groupedSets[project.id]
 
@@ -54,9 +62,8 @@ export const organizeWeeks = async (userId: string) => {
     return addNewSetsToProject(project, sets)
   })
 
-  await updateUser(userId, {
+  return {
     projects: newProjects,
-    sets: afterTimestamp,
-    prevSets: [...prevSets, ...beforeTimestamp],
-  })
+    lastSyncedWeekEndedAt: weekStartedAt,
+  }
 }

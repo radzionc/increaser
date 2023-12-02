@@ -1,11 +1,6 @@
 import { User } from '@increaser/entities/User'
 import { tableName } from './tableName'
-import {
-  DeleteCommand,
-  PutCommand,
-  ScanCommand,
-  UpdateCommand,
-} from '@aws-sdk/lib-dynamodb'
+import { DeleteCommand, PutCommand, ScanCommand } from '@aws-sdk/lib-dynamodb'
 import { DescribeTableCommand } from '@aws-sdk/client-dynamodb'
 import { shouldBeDefined } from '@increaser/utils/shouldBeDefined'
 import {
@@ -34,7 +29,10 @@ export const updateUser = async (id: string, fields: Partial<User>) => {
   return updateItem({
     tableName: tableName.users,
     key: { id },
-    fields,
+    fields: {
+      ...fields,
+      updatedAt: Date.now(),
+    },
   })
 }
 
@@ -96,18 +94,6 @@ export const putUser = (user: Omit<User, 'updatedAt'>) => {
     Item: {
       ...user,
       updatedAt: Date.now(),
-    },
-  })
-
-  return dbDocClient.send(command)
-}
-
-export const removeUserField = async (id: string, field: keyof User) => {
-  const command = new UpdateCommand({
-    ...getUserItemParams(id),
-    UpdateExpression: 'REMOVE #field',
-    ExpressionAttributeNames: {
-      '#field': field,
     },
   })
 

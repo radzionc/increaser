@@ -16,7 +16,6 @@ export interface FocusSound {
 
 export interface UserStateView {
   sets: Set[]
-  prevSets: Set[]
   projects: ProjectResponse[]
   email: string
   id: string
