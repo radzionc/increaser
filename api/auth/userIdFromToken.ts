@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken'
-import { assertEnvVar } from '../shared/assertEnvVar'
+import { getSecret } from '../utils/getSecret'
 
 interface DecodedToken {
   id: string
 }
 
 export const userIdFromToken = async (token: string) => {
-  const secret = assertEnvVar('SECRET')
+  const secret = await getSecret('SECRET')
 
   const decoded = jwt.verify(token, secret)
 

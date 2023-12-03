@@ -5,15 +5,15 @@ import { LastScoreboardUpdate } from './LastScoreboardUpdate'
 import { Scoreboard } from './Scoreboard'
 import { Panel } from '@increaser/ui/panel/Panel'
 import { HStack, VStack } from '@increaser/ui/layout/Stack'
-import { useScoreboardQuery } from 'community/queries/useScoreboardQuery'
 import {
   ScoreboardPeriod,
   scoreboardPeriodInDays,
 } from '@increaser/entities/PerformanceScoreboard'
+import { useApiQuery } from 'api/hooks/useApiQuery'
 
 export const CurrentMonthUsers = () => {
   const scoreboardPeriod: ScoreboardPeriod = 'month'
-  const query = useScoreboardQuery(scoreboardPeriod)
+  const query = useApiQuery('scoreboard', { id: scoreboardPeriod })
 
   return (
     <Panel kind="secondary">

@@ -2,12 +2,12 @@ import express, { Router } from 'express'
 import cors from 'cors'
 import { implementation } from './resolvers'
 import { getErrorMessage } from '@increaser/utils/getErrorMessage'
-import { ApiMethodName } from '@increaser/api-interface/ApiInterface'
 import { ApiResolverParams } from './resolvers/ApiResolver'
 import { getResolverContext } from './resolvers/utils/getResolverContext'
 import { ApiError } from '@increaser/api-interface/ApiError'
 import { reportError } from './utils/reportError'
 import { pick } from '@increaser/utils/record/pick'
+import { ApiMethodName } from '@increaser/api-interface/ApiInterface'
 
 const router = Router()
 

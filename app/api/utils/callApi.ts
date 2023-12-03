@@ -51,8 +51,6 @@ export const callApi = async <M extends ApiMethodName>({
       async () => new Error(response.statusText),
     )
 
-    console.log(`Api call failed with ${JSON.stringify(error)}`)
-
     throw error
   }
 
