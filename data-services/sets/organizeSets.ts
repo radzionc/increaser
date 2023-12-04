@@ -14,7 +14,7 @@ export const organizeSets = async (userId: string) => {
   ])
 
   const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
-    (acc, organize) => organize({ ...user, ...acc }),
+    (acc, organize) => ({ ...acc, ...organize({ ...user, ...acc }) }),
     {},
   )
 

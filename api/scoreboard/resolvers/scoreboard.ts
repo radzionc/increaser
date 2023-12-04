@@ -1,7 +1,7 @@
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
 import { assertUserId } from '../../auth/assertUserId'
 import { getScoreboard } from '@increaser/db/scoreboard'
 import { omit } from '@increaser/utils/record/omit'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 
 export const scoreboard: ApiResolver<'scoreboard'> = async ({
   input: { id },

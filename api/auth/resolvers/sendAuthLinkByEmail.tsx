@@ -1,14 +1,14 @@
 import { addQueryParams } from '@increaser/utils/query/addQueryParams'
 import { generateAuthLinkToken } from '../helpers/generateAuthLinkToken'
-import { assertEnvVar } from '../../shared/assertEnvVar'
 import { sendLoginLinkEmail } from '@increaser/email/utils/sendLogInLinkEmail'
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
+import { ApiResolver } from '../../resolvers/ApiResolver'
+import { getEnvVar } from '../../getEnvVar'
 
 export const sendAuthLinkByEmail: ApiResolver<'sendAuthLinkByEmail'> = async ({
   input: { email },
-}): Promise<boolean> => {
+}) => {
   const code = await generateAuthLinkToken(email)
-  const loginUrl = addQueryParams(`${assertEnvVar('APP_URL')}/email-auth`, {
+  const loginUrl = addQueryParams(`${getEnvVar('APP_URL')}/email-auth`, {
     code,
   })
 
@@ -16,6 +16,4 @@ export const sendAuthLinkByEmail: ApiResolver<'sendAuthLinkByEmail'> = async ({
     loginUrl,
     email,
   })
-
-  return true
 }

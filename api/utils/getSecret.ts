@@ -1,11 +1,14 @@
-import { assertEnvVar } from '../shared/assertEnvVar'
-
 type SecretName =
-  | 'SECRET'
+  | 'JWT_SECRET'
   | 'FACEBOOK_CLIENT_SECRET'
   | 'GOOGLE_CLIENT_SECRET'
   | 'EMAIL_SECRET'
 
 export const getSecret = async (name: SecretName) => {
-  return assertEnvVar(name)
+  const value = process.env[name]
+  if (!value) {
+    throw new Error(`Missing ${name} environment variable`)
+  }
+
+  return value
 }

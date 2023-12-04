@@ -1,6 +1,6 @@
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
 import { assertUserId } from '../../auth/assertUserId'
 import { getHabit, updateHabit } from '@increaser/db/habit'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 
 export const trackHabit: ApiResolver<'trackHabit'> = async ({
   input: { id, date, value },

@@ -3,7 +3,7 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 
 import { defaultProjectProperties, Project } from '../Project'
 import { putProject } from '@increaser/db/project'
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 
 export const createProject: ApiResolver<'createProject'> = async ({
   input,

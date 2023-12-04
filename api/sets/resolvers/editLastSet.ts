@@ -1,5 +1,5 @@
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
 import { assertUserId } from '../../auth/assertUserId'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 import { addSet } from '../services/addSet'
 import { removeLastSet } from '../services/removeLastSet'
 

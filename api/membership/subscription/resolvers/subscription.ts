@@ -1,7 +1,7 @@
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
 import { assertUserId } from '../../../auth/assertUserId'
 import { updateUser } from '@increaser/db/user'
 import { getSubscription } from '@increaser/paddle-classic/utils/getSubscription'
+import { ApiResolver } from '../../../resolvers/ApiResolver'
 
 export const subscription: ApiResolver<'subscription'> = async ({
   input: { id: subscriptionId },

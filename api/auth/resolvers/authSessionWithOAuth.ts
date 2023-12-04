@@ -1,4 +1,4 @@
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 import { authenticateWithOAuth } from '../utils/authenticateWithOAuth'
 import { authorize } from '../utils/authorize'
 

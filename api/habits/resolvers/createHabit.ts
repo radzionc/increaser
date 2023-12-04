@@ -4,7 +4,7 @@ import { msInSec } from '../../shared/helpers/time'
 import { getUser } from '@increaser/db/user'
 import { putHabit } from '@increaser/db/habit'
 import { Habit, habitDefaultFields } from '@increaser/entities/Habit'
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 
 const getNewHabitOrder = async (userId: string) => {
   const { habits } = await getUser(userId)

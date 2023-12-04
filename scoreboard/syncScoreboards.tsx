@@ -1,7 +1,6 @@
 import { User } from '@increaser/entities/User'
 import { tableName } from '@increaser/db/tableName'
 
-import { ScanCommand } from '@aws-sdk/lib-dynamodb'
 import { MIN_IN_HOUR, MS_IN_MIN } from '@increaser/utils/time'
 import {
   PerformanceScoreboard,
@@ -11,7 +10,6 @@ import {
 } from '@increaser/entities/PerformanceScoreboard'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
-import { dbDocClient } from '@increaser/dynamodb/client'
 import {
   doesScoreboardExist,
   putScoreboard,
@@ -21,6 +19,7 @@ import { omit } from '@increaser/utils/record/omit'
 import { order } from '@increaser/utils/array/order'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { getUserProfile } from '@increaser/entities-utils/scoreboard/getUserProfile'
+import { totalScan } from '@increaser/dynamodb/totalScan'
 
 type UserInfo = Pick<
   User,
@@ -28,44 +27,30 @@ type UserInfo = Pick<
 >
 
 export const syncScoreboards = async () => {
-  const users: UserInfo[] = []
-
-  const recursiveProcess = async (lastEvaluatedKey?: any) => {
-    const command = new ScanCommand({
-      ExclusiveStartKey: lastEvaluatedKey,
-      TableName: tableName.users,
-      FilterExpression: 'size(#sets) > :size AND #updatedAt > :updatedAt',
-      ExpressionAttributeNames: {
-        '#id': 'id',
-        '#sets': 'sets',
-        '#name': 'name',
-        '#timeZone': 'timeZone',
-        '#country': 'country',
-        '#isAnonymous': 'isAnonymous',
-        '#updatedAt': 'updatedAt',
-      },
-      ExpressionAttributeValues: {
-        ':size': 0,
-        ':updatedAt':
-          Date.now() -
-          convertDuration(
-            Math.max(...Object.values(scoreboardPeriodInDays)),
-            'd',
-            'ms',
-          ),
-      },
-      ProjectionExpression: '#id,#sets,#name,#timeZone,#country,#isAnonymous',
-    })
-    const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
-    if (Items) {
-      users.push(...(Items as UserInfo[]))
-    }
-
-    if (LastEvaluatedKey) {
-      await recursiveProcess(LastEvaluatedKey)
-    }
-  }
-  await recursiveProcess()
+  const users = await totalScan<UserInfo>({
+    TableName: tableName.users,
+    FilterExpression: 'size(#sets) > :size AND #updatedAt > :updatedAt',
+    ExpressionAttributeNames: {
+      '#id': 'id',
+      '#sets': 'sets',
+      '#name': 'name',
+      '#timeZone': 'timeZone',
+      '#country': 'country',
+      '#isAnonymous': 'isAnonymous',
+      '#updatedAt': 'updatedAt',
+    },
+    ExpressionAttributeValues: {
+      ':size': 0,
+      ':updatedAt':
+        Date.now() -
+        convertDuration(
+          Math.max(...Object.values(scoreboardPeriodInDays)),
+          'd',
+          'ms',
+        ),
+    },
+    ProjectionExpression: '#id,#sets,#name,#timeZone,#country,#isAnonymous',
+  })
 
   const records: UserPerformanceRecord[] = []
   await Promise.all(

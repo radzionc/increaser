@@ -1,9 +1,9 @@
 import { match } from '@increaser/utils/match'
 import { addQueryParams } from '@increaser/utils/query/addQueryParams'
-import { assertEnvVar } from '../../shared/assertEnvVar'
 import { queryOAuthProvider } from './queryOAuthProvider'
 import { getSecret } from '../../utils/getSecret'
 import { OAuthProvider } from '@increaser/entities/OAuthProvider'
+import { getEnvVar } from '../../getEnvVar'
 
 interface GetOAuthAccessTokenParams {
   provider: OAuthProvider
@@ -29,7 +29,7 @@ export const getOAuthAccessToken = async ({
       queryOAuthProvider<TokenResponse>(actionName, GOOGLE_TOKEN_URL, {
         method: 'POST',
         body: JSON.stringify({
-          client_id: assertEnvVar('GOOGLE_CLIENT_ID'),
+          client_id: getEnvVar('GOOGLE_CLIENT_ID'),
           client_secret: await getSecret('GOOGLE_CLIENT_SECRET'),
           redirect_uri: redirectUri,
           grant_type: 'authorization_code',
@@ -40,7 +40,7 @@ export const getOAuthAccessToken = async ({
       queryOAuthProvider<TokenResponse>(
         actionName,
         addQueryParams(FACEBOOK_TOKEN_URL, {
-          client_id: assertEnvVar('FACEBOOK_CLIENT_ID'),
+          client_id: getEnvVar('FACEBOOK_CLIENT_ID'),
           client_secret: await getSecret('FACEBOOK_CLIENT_SECRET'),
           redirect_uri: redirectUri,
           code,

@@ -1,6 +1,6 @@
-import { ApiResolver } from '@increaser/api-interface/ApiResolver'
 import { assertUserId } from '../../auth/assertUserId'
 import * as projectsDb from '@increaser/db/project'
+import { ApiResolver } from '../../resolvers/ApiResolver'
 
 export const deleteProject: ApiResolver<'deleteProject'> = async ({
   input: { id },
