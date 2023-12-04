@@ -27,7 +27,7 @@ const Container = styled(HStack)`
   padding: 2px;
   width: 100%;
   ${borderRadius.m};
-  background: ${({ theme }) => theme.colors.background.toCssValue()};
+  background: ${({ theme }) => theme.colors.foreground.toCssValue()};
   overflow: hidden;
 
   > * {
