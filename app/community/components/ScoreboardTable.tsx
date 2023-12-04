@@ -42,7 +42,7 @@ interface ScoreboardProps {
   myPosition?: number
 }
 
-export const Scoreboard = ({ users, myPosition }: ScoreboardProps) => {
+export const ScoreboardTable = ({ users, myPosition }: ScoreboardProps) => {
   const shouldHideAvgBlock = useIsScreenWidthLessThan(400)
 
   const rowStyle = shouldHideAvgBlock

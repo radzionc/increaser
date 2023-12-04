@@ -1,11 +1,11 @@
 import { Page } from 'layout/Page'
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
 import { PageTitle } from 'ui/PageTitle'
-import { CurrentMonthUsers } from './CurrentMonthUsers'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 import { ClientOnly } from 'ui/ClientOnly'
 import { ManageProfile } from './ManageProfile'
+import { Scoreboard } from './CurrentMonthUsers'
 
 export const CommunityPage: Page = () => {
   return (
@@ -16,7 +16,7 @@ export const CommunityPage: Page = () => {
       <UserStateOnly>
         <VStack style={{ width: 'fit-content' }} gap={40}>
           <ManageProfile />
-          <CurrentMonthUsers />
+          <Scoreboard />
         </VStack>
       </UserStateOnly>
     </FixedWidthContent>

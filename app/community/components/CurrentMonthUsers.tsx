@@ -2,7 +2,7 @@ import { QueryDependant } from '@increaser/ui/query/components/QueryDependant'
 import { Spinner } from '@increaser/ui/loaders/Spinner'
 import { Text } from '@increaser/ui/text'
 import { LastScoreboardUpdate } from './LastScoreboardUpdate'
-import { Scoreboard } from './Scoreboard'
+import { ScoreboardTable } from './ScoreboardTable'
 import { Panel } from '@increaser/ui/panel/Panel'
 import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import {
@@ -11,7 +11,7 @@ import {
 } from '@increaser/entities/PerformanceScoreboard'
 import { useApiQuery } from 'api/hooks/useApiQuery'
 
-export const CurrentMonthUsers = () => {
+export const Scoreboard = () => {
   const scoreboardPeriod: ScoreboardPeriod = 'month'
   const query = useApiQuery('scoreboard', { id: scoreboardPeriod })
 
@@ -25,8 +25,8 @@ export const CurrentMonthUsers = () => {
           {...query}
           success={(value) => (
             <VStack gap={24}>
-              <Scoreboard
-                myPosition={value.myPosition ?? undefined}
+              <ScoreboardTable
+                myPosition={value.myPosition}
                 users={value.users}
               />
               <HStack fullWidth justifyContent="end">
