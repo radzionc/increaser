@@ -19,7 +19,7 @@ export interface PerformanceScoreboard {
 }
 
 export const scoreboardPeriodInDays: Record<ScoreboardPeriod, number> = {
-  month: 5,
+  month: 7,
 }
 
 export const scoreboardSensitiveUserFields: (keyof User)[] = [

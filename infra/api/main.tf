@@ -37,7 +37,7 @@ resource "aws_lambda_function" "api" {
   environment {
     variables = {
       SENTRY_KEY : var.sentry_key,
-      SECRET : var.secret,
+      JWT_SECRET : var.secret,
       EMAIL_SECRET : var.email_secret,
       GOOGLE_CLIENT_ID : var.google_client_id,
       GOOGLE_CLIENT_SECRET : var.google_client_secret,
