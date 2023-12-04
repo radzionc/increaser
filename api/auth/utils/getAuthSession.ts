@@ -12,7 +12,7 @@ export const getAuthSession = async (
     convertDuration(Date.now(), 'ms', 's') +
       convertDuration(tokenLifespanInDays, 'd', 's'),
   )
-  const secret = await getSecret('SECRET')
+  const secret = await getSecret('JWT_SECRET')
   const token = jwt.sign({ id, exp: expiresAt }, secret)
 
   return {
