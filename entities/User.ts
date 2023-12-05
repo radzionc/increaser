@@ -87,6 +87,24 @@ export type User = {
   lifeTimeDeal?: LifeTimeDeal
 }
 
+export const userReadonlyFields = [
+  'id',
+  'email',
+  'registrationDate',
+  'freeTrialEnd',
+  'appSumo',
+  'paddle',
+  'lastSyncedMonthEndedAt',
+  'lastSyncedWeekEndedAt',
+  'updatedAt',
+  'subscription',
+  'lifeTimeDeal',
+] as const
+
+export type UserReadonlyFields = (typeof userReadonlyFields)[number]
+
+export type UserEditableFields = Exclude<keyof User, UserReadonlyFields>
+
 export const userDefaultFields: Pick<
   User,
   | 'focusSounds'

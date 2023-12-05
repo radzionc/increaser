@@ -4,7 +4,7 @@ import { Habit } from '@increaser/entities/Habit'
 import { UserPerformanceRecord } from '@increaser/entities/PerformanceScoreboard'
 import { Project } from '@increaser/entities/Project'
 import { Subscription } from '@increaser/entities/Subscription'
-import { Set, User } from '@increaser/entities/User'
+import { Set, User, UserEditableFields } from '@increaser/entities/User'
 import { ApiMethod } from './ApiMethod'
 
 export interface ApiInterface {
@@ -27,25 +27,7 @@ export interface ApiInterface {
   >
 
   user: ApiMethod<{ timeZone: number }, User>
-  updateUser: ApiMethod<
-    Partial<
-      Pick<
-        User,
-        | 'name'
-        | 'country'
-        | 'primaryGoal'
-        | 'focusSounds'
-        | 'tasks'
-        | 'weekTimeAllocation'
-        | 'goalToStartWorkAt'
-        | 'goalToFinishWorkBy'
-        | 'goalToGoToBedAt'
-        | 'isAnonymous'
-        | 'sumbittedHabitsAt'
-      >
-    >,
-    undefined
-  >
+  updateUser: ApiMethod<Partial<Pick<User, UserEditableFields>>, undefined>
   manageSubscription: ApiMethod<
     undefined,
     {

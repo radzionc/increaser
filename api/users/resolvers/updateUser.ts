@@ -9,12 +9,20 @@ import { intersection } from '@increaser/utils/array/intersection'
 import { getScoreboard, updateScoreboard } from '@increaser/db/scoreboard'
 import { findBy } from '@increaser/utils/array/findBy'
 import { getUserProfile } from '@increaser/entities-utils/scoreboard/getUserProfile'
+import { userReadonlyFields } from '@increaser/entities/User'
 
 export const updateUser: ApiResolver<'updateUser'> = async ({
   input,
   context,
 }) => {
+  const hasReadonlyField =
+    intersection(Object.keys(input), [...userReadonlyFields]).length > 0
+  if (hasReadonlyField) {
+    throw new Error('You cannot update readonly fields')
+  }
+
   const userId = assertUserId(context)
+
   await usersDb.updateUser(userId, input)
 
   if (intersection(Object.keys(input), scoreboardSensitiveUserFields).length) {
