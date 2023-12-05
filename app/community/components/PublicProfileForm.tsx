@@ -3,13 +3,10 @@ import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
 import { Button } from '@increaser/ui/buttons/Button'
 import { TextInput } from '@increaser/ui/inputs/TextInput'
 import { Controller, useForm } from 'react-hook-form'
-import { useAssertUserState, useUserState } from 'user/state/UserStateContext'
+import { useAssertUserState } from 'user/state/UserStateContext'
 import { CountryCode } from '@increaser/utils/countries'
 import { CountryInput } from '@increaser/ui/inputs/CountryInput'
-import { useApiMutation } from 'api/hooks/useApiMutation'
-import { getApiQueryKey } from 'api/hooks/useApiQuery'
-import { useInvalidateQueries } from '@increaser/ui/query/hooks/useInvalidateQueries'
-import { scoreboardPeriods } from '@increaser/entities/PerformanceScoreboard'
+import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 
 interface PublicProfileFormProps {
   onCancel: () => void
@@ -23,20 +20,12 @@ interface PublicProfileFormShape {
 export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
   const { name, country } = useAssertUserState()
 
-  const { updateState } = useUserState()
-  const refetch = useInvalidateQueries()
-  const { mutate: updateUser } = useApiMutation('updateUser', {
-    onSuccess: () => {
-      refetch(
-        ...scoreboardPeriods.map((id) => getApiQueryKey('scoreboard', { id })),
-      )
-    },
-  })
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const { register, handleSubmit, control } = useForm<PublicProfileFormShape>({
     defaultValues: {
       name,
-      country: country as CountryCode,
+      country,
     },
   })
 
@@ -47,7 +36,6 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
           name: fields.name ?? undefined,
           country: fields.country ?? undefined,
         }
-        updateState(newFields)
         updateUser(newFields)
         onCancel()
       })}
