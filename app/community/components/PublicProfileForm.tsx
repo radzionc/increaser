@@ -8,7 +8,7 @@ import { CountryCode } from '@increaser/utils/countries'
 import { CountryInput } from '@increaser/ui/inputs/CountryInput'
 import { useApiMutation } from 'api/hooks/useApiMutation'
 import { getApiQueryKey } from 'api/hooks/useApiQuery'
-import { useRefetchQueries } from '@increaser/ui/query/hooks/useRefetchQueries'
+import { useInvalidateQueries } from '@increaser/ui/query/hooks/useInvalidateQueries'
 import { scoreboardPeriods } from '@increaser/entities/PerformanceScoreboard'
 
 interface PublicProfileFormProps {
@@ -24,7 +24,7 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
   const { name, country } = useAssertUserState()
 
   const { updateState } = useUserState()
-  const refetch = useRefetchQueries()
+  const refetch = useInvalidateQueries()
   const { mutate: updateUser } = useApiMutation('updateUser', {
     onSuccess: () => {
       refetch(
