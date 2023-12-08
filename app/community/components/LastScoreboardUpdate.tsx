@@ -8,7 +8,7 @@ interface LastScoreboardUpdateProps {
 }
 
 export const LastScoreboardUpdate = ({ value }: LastScoreboardUpdateProps) => {
-  const now = useRhythmicRerender()
+  const now = useRhythmicRerender(1000)
   const duration = now - value
 
   return (

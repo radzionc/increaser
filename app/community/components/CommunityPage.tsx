@@ -5,7 +5,7 @@ import { VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 import { ClientOnly } from 'ui/ClientOnly'
 import { ManageProfile } from './ManageProfile'
-import { Scoreboard } from './CurrentMonthUsers'
+import { Scoreboard } from './Scoreboard'
 
 export const CommunityPage: Page = () => {
   return (

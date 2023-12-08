@@ -9,7 +9,3 @@ variable "sentry_key" {
 variable "public_distribution_id" {
   default = "E23YYT6MVUHZE0"
 }
-
-variable "public_bucket_name" {
-  default = "public.increaser.org"
-}

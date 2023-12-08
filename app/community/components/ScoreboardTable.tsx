@@ -10,6 +10,7 @@ import { CountryCode } from '@increaser/utils/countries'
 import { useIsScreenWidthLessThan } from '@increaser/ui/hooks/useIsScreenWidthLessThan'
 import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
 import { UserPerformanceRecord } from '@increaser/entities/PerformanceScoreboard'
+import { order } from '@increaser/utils/array/order'
 
 const Row = styled.div`
   display: grid;
@@ -63,9 +64,8 @@ export const ScoreboardTable = ({ users, myPosition }: ScoreboardProps) => {
         <ColumnName style={{ textAlign: 'end' }}>Daily avg.</ColumnName>
       </Row>
       <VStack gap={16}>
-        {users
-          .sort((a, b) => b.dailyAvgInMinutes - a.dailyAvgInMinutes)
-          .map(({ dailyAvgInMinutes, profile, avgBlockInMinutes }, index) => (
+        {order(users, (u) => u.dailyAvgInMinutes, 'desc').map(
+          ({ dailyAvgInMinutes, profile, avgBlockInMinutes }, index) => (
             <Row style={rowStyle} key={index}>
               {myPosition === index && <Outline />}
               <Identity>
@@ -86,7 +86,8 @@ export const ScoreboardTable = ({ users, myPosition }: ScoreboardProps) => {
                 {formatDuration(dailyAvgInMinutes, 'min')}
               </Text>
             </Row>
-          ))}
+          ),
+        )}
       </VStack>
     </SeparatedByLine>
   )

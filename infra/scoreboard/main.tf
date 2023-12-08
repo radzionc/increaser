@@ -26,7 +26,6 @@ resource "aws_lambda_function" "service" {
     variables = {
       SENTRY_KEY : var.sentry_key,
       PUBLIC_DISTRIBUTION_ID : var.public_distribution_id,
-      PUBLIC_BUCKET_NAME: var.public_bucket_name,
     }
   }
 }

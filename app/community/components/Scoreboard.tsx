@@ -12,7 +12,7 @@ import {
 import { useApiQuery } from 'api/hooks/useApiQuery'
 
 export const Scoreboard = () => {
-  const scoreboardPeriod: ScoreboardPeriod = 'month'
+  const scoreboardPeriod: ScoreboardPeriod = 'week'
   const query = useApiQuery('scoreboard', { id: scoreboardPeriod })
 
   return (

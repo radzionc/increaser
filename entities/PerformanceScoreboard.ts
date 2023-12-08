@@ -9,7 +9,7 @@ export interface UserPerformanceRecord {
   profile?: UserProfile
 }
 
-export const scoreboardPeriods = ['month'] as const
+export const scoreboardPeriods = ['week'] as const
 export type ScoreboardPeriod = (typeof scoreboardPeriods)[number]
 
 export interface PerformanceScoreboard {
@@ -19,7 +19,7 @@ export interface PerformanceScoreboard {
 }
 
 export const scoreboardPeriodInDays: Record<ScoreboardPeriod, number> = {
-  month: 7,
+  week: 7,
 }
 
 export const scoreboardSensitiveUserFields: (keyof User)[] = [
