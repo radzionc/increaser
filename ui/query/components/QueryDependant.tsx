@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { useOnQuerySuccess } from '../hooks/useOnQuerySuccess'
 
 type QueryStatus = 'idle' | 'error' | 'loading' | 'success'
 
@@ -8,6 +9,8 @@ export interface QueryDependantProps<T> {
   error: () => ReactNode
   loading: () => ReactNode
   success: (data: T) => ReactNode
+  idle?: () => ReactNode
+  onSuccess?: (data: T) => void
 }
 
 export function QueryDependant<T>({
@@ -16,7 +19,11 @@ export function QueryDependant<T>({
   error,
   loading,
   success,
+  idle,
+  onSuccess = () => {},
 }: QueryDependantProps<T>) {
+  useOnQuerySuccess({ data }, onSuccess)
+
   if (status === 'error') {
     return <>{error()}</>
   }
@@ -25,9 +32,19 @@ export function QueryDependant<T>({
     return <>{loading()}</>
   }
 
-  if (data) {
+  if (data !== undefined) {
     return <>{success(data)}</>
+  }
+
+  if (status === 'idle' && idle) {
+    return <>{idle()}</>
   }
 
   return null
 }
+
+export type QueryDependantWrapperProps<T> = Pick<
+  QueryDependantProps<T>,
+  'success' | 'onSuccess'
+> &
+  Partial<Pick<QueryDependantProps<T>, 'error' | 'loading' | 'idle'>>

@@ -13,16 +13,17 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { UnstyledButton } from '@increaser/ui/buttons/UnstyledButton'
 import { transition } from '@increaser/ui/css/transition'
 import { PrimaryGoal, primaryGoals } from '@increaser/entities/User'
+import { getColor } from '@increaser/ui/theme/getters'
 
 const Container = styled(UnstyledButton)`
-  background: ${({ theme }) => theme.colors.mist.toCssValue()};
+  background: ${getColor('foreground')};
   padding: 8px 12px;
   border-radius: 8px;
 
   ${transition}
 
   :hover {
-    background: ${({ theme }) => theme.colors.mistExtra.toCssValue()};
+    background: ${getColor('mist')};
   }
 `
 

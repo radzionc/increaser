@@ -17,7 +17,6 @@ export const SubscriptionPricesQueryDependant = ({
   success,
 }: SubscriptionPricesQueryDependantProps) => {
   const query = useSubscriptionPricesQuery()
-  console.log(query)
 
   return (
     <QueryDependant

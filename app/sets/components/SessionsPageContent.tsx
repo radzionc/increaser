@@ -5,7 +5,6 @@ import { Spacer } from '@increaser/ui/layout/Spacer'
 import { HStack, VStack } from '@increaser/ui/layout/Stack'
 
 import { GroupedByDaySessions } from './DailyReport/GroupedByDaySessions'
-import { ManageWorkSchedule } from './ManageWorkSchedule'
 
 const Container = styled(HStack)`
   @media (max-width: 1000px) {
@@ -17,7 +16,6 @@ export const SessionsPageContent = () => {
   return (
     <ErrorBoundary fallback={<ErrorFallbackCard />}>
       <Container fullWidth gap={60}>
-        <ManageWorkSchedule />
         <VStack fullWidth>
           <GroupedByDaySessions />
         </VStack>
