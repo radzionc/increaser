@@ -1,22 +1,35 @@
-import { ManageWorkSchedule } from 'sets/components/ManageWorkSchedule'
 import { ContinueButton } from 'ui/ContinueButton'
 import { Modal } from '@increaser/ui/modal'
 import { ClosableComponentProps } from '@increaser/ui/props'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { ManageEndOfWorkday } from 'sets/components/ManageEndOfWorkday'
+import { ManageBedTime } from 'sets/components/ManageBedTime'
+import { TimeBoundaryDistance } from 'sets/components/TimeBoundaryDistance'
+import { useAssertUserState } from 'user/state/UserStateContext'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void
 }
 
 export const WorkScheduleOnboarding = ({ onNext, onClose }: Props) => {
+  const { goalToFinishWorkBy, goalToGoToBedAt } = useAssertUserState()
+
   return (
     <Modal
-      title="Finish work early"
+      title="Work Smarter, Not Harder"
       onClose={onClose}
-      subTitle="Start work early and relax in the evening for a better mood and sleep"
+      subTitle="Reclaim your evenings for better relaxation and a peaceful sleep."
       placement="top"
       footer={<ContinueButton onClick={onNext} />}
     >
-      <ManageWorkSchedule />
+      <VStack alignItems="center" gap={16}>
+        <ManageEndOfWorkday />
+        <TimeBoundaryDistance
+          direction="column"
+          value={goalToGoToBedAt - goalToFinishWorkBy}
+        />
+        <ManageBedTime />
+      </VStack>
     </Modal>
   )
 }
