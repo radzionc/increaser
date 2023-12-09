@@ -133,7 +133,7 @@ export const TimeBoundary = ({
   return (
     <>
       <Container>
-        <HStack alignItems="center" gap={8}>
+        <HStack style={{ minWidth: 132 }} alignItems="center" gap={8}>
           {icon}
           <Text as="div">{label}</Text>
         </HStack>

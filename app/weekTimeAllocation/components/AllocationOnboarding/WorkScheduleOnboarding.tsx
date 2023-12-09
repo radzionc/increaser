@@ -6,6 +6,7 @@ import { ManageEndOfWorkday } from 'sets/components/ManageEndOfWorkday'
 import { ManageBedTime } from 'sets/components/ManageBedTime'
 import { TimeBoundaryDistance } from 'sets/components/TimeBoundaryDistance'
 import { useAssertUserState } from 'user/state/UserStateContext'
+import { ManageStartOfWorkday } from 'sets/components/ManageStartOfWorkday'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void
@@ -23,6 +24,7 @@ export const WorkScheduleOnboarding = ({ onNext, onClose }: Props) => {
       footer={<ContinueButton onClick={onNext} />}
     >
       <VStack alignItems="center" gap={16}>
+        <ManageStartOfWorkday />
         <ManageEndOfWorkday />
         <TimeBoundaryDistance
           direction="column"
