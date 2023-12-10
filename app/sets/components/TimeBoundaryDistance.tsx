@@ -4,10 +4,11 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled, { css, useTheme } from 'styled-components'
 
 export type TimeBoundaryDistanceKind = 'success' | 'alert' | 'idle' | 'regular'
+export type TimeBoundaryDirection = 'row' | 'column'
 
 interface TimeBoundaryDistanceProps {
   value: number
-  direction?: 'row' | 'column'
+  direction?: TimeBoundaryDirection
   kind?: TimeBoundaryDistanceKind
 }
 
