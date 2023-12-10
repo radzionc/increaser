@@ -12,15 +12,17 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { dayMomentIcon } from '../dayMomentIcon'
 import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
 import { getDayMomentColor } from 'sets/utils/getDayMomentColor'
+import { HStack } from '@increaser/ui/layout/Stack'
 
 const Container = styled.div`
   position: relative;
+  width: 52px;
 `
 
-const MarkContainer = styled.div`
+const MarkContainer = styled(HStack)`
   display: grid;
   align-items: center;
-  grid-template-columns: 32px 12px;
+  grid-template-columns: 32px 18px;
   gap: 4px;
 `
 
@@ -57,10 +59,10 @@ export const SetsExplorerTimeMarks = () => {
           : undefined
 
         return (
-          <PositionAbsolutelyCenterHorizontally top={top}>
+          <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
             <MarkContainer>
               {isPrimaryMark ? (
-                <Text size={12} color="supporting" style={{ color }}>
+                <Text size={12} color="supporting">
                   {formatDayTimeBoudnary(minutes)}
                 </Text>
               ) : moment ? (

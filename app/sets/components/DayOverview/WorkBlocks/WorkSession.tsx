@@ -9,6 +9,7 @@ import styled, { useTheme } from 'styled-components'
 
 interface WorkSessionProps extends UIComponentProps {
   set: Set
+  showIdentifier?: boolean
 }
 
 const Container = styled.div`
@@ -26,7 +27,11 @@ const Identifier = styled.div`
   ${transition};
 `
 
-export const WorkSession = ({ set, ...rest }: WorkSessionProps) => {
+export const WorkSession = ({
+  set,
+  showIdentifier = true,
+  ...rest
+}: WorkSessionProps) => {
   const { projectsRecord } = useProjects()
   const { currentSet } = useFocus()
 
@@ -36,7 +41,9 @@ export const WorkSession = ({ set, ...rest }: WorkSessionProps) => {
 
   return (
     <Container {...rest}>
-      {!currentSet && <Identifier style={{ background: color.toCssValue() }} />}
+      {!currentSet && showIdentifier && (
+        <Identifier style={{ background: color.toCssValue() }} />
+      )}
     </Container>
   )
 }
