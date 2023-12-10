@@ -6,7 +6,6 @@ import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
 import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { daysGap } from './config'
 import { VStack } from '@increaser/ui/layout/Stack'
-import { SetsExplorerDaysChart } from './SetsExplorerDaysChart'
 
 const Wrapper = styled(VStack)`
   ${horizontalPadding(4)};
@@ -42,7 +41,6 @@ export const SetsExplorerDays = () => {
           <SetsExplorerDayView key={day.startedAt} day={day} />
         ))}
       </Container>
-      <SetsExplorerDaysChart />
     </Wrapper>
   )
 }
