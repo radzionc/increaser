@@ -3,9 +3,12 @@ import { match } from '@increaser/utils/match'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled, { css, useTheme } from 'styled-components'
 
+export type TimeBoundaryDistanceKind = 'success' | 'alert' | 'idle' | 'regular'
+
 interface TimeBoundaryDistanceProps {
   value: number
   direction?: 'row' | 'column'
+  kind?: TimeBoundaryDistanceKind
 }
 
 const DashedLine = styled.div`
@@ -17,6 +20,7 @@ const DashedLine = styled.div`
 `
 
 const Container = styled.div<{ direction: 'row' | 'column' }>`
+  flex: 1;
   gap: 4px;
   ${({ direction }) =>
     match(direction, {
@@ -38,14 +42,11 @@ const Container = styled.div<{ direction: 'row' | 'column' }>`
 export const TimeBoundaryDistance = ({
   value,
   direction = 'row',
+  kind = 'regular',
 }: TimeBoundaryDistanceProps) => {
   const theme = useTheme()
-  let color = theme.colors.success
-  if (value < 60) {
-    color = theme.colors.alert
-  } else if (value < 120) {
-    color = theme.colors.idle
-  }
+  const color =
+    kind === 'regular' ? theme.colors.textSupporting : theme.colors[kind]
 
   return (
     <Container style={{ color: color.toCssValue() }} direction={direction}>

@@ -5,6 +5,6 @@ import { DefaultTheme } from 'styled-components'
 export const getDayMomentColor = (dayMoment: DayMoment, theme: DefaultTheme) =>
   match(dayMoment, {
     goalToStartWorkAt: () => theme.colors.getLabelColor(2),
-    goalToFinishWorkBy: () => theme.colors.getLabelColor(4),
+    goalToFinishWorkBy: () => theme.colors.getLabelColor(1),
     goalToGoToBedAt: () => theme.colors.getLabelColor(9),
   })
