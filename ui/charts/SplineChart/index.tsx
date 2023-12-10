@@ -68,7 +68,7 @@ const createClosedPath = (
 
 export const SplineChart = ({ data, width, height }: SplineChartProps) => {
   const [path, closedPath] = useMemo(() => {
-    if (data.length === 0) return ''
+    if (data.length === 0) return ['', '']
 
     const normalizedData = normalize(data)
     const points = normalizedData.map((value, index) => ({
