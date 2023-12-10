@@ -44,10 +44,18 @@ export interface Task {
 }
 
 export const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
-
 export type PrimaryGoal = (typeof primaryGoals)[number]
 
-export type User = {
+export const dayMoments = [
+  'goalToStartWorkAt',
+  'goalToFinishWorkBy',
+  'goalToGoToBedAt',
+] as const
+export type DayMoment = (typeof dayMoments)[number]
+
+export type DayMoments = Record<DayMoment, number>
+
+export type User = DayMoments & {
   primaryGoal: PrimaryGoal
   id: string
   email: string
@@ -61,9 +69,6 @@ export type User = {
   freeTrialEnd: number
 
   weekTimeAllocation: WeekTimeAllocation
-  goalToStartWorkAt: number
-  goalToFinishWorkBy: number
-  goalToGoToBedAt: number
 
   isAnonymous: boolean
 
@@ -131,3 +136,11 @@ export const userDefaultFields: Pick<
   goalToFinishWorkBy: defaultGoalToFinishWorkBy,
   goalToGoToBedAt: defaultGoalToGoToBedAt,
 }
+
+export const dayMomentShortName: Record<DayMoment, string> = {
+  goalToStartWorkAt: 'start work',
+  goalToFinishWorkBy: 'finish work',
+  goalToGoToBedAt: 'go to bed',
+}
+
+export const dayMomentStepInMinutes = 30

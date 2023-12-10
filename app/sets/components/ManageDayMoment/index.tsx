@@ -1,12 +1,11 @@
 import { InputProps } from '@increaser/ui/props'
-import { ReactNode } from 'react'
 import { borderRadius } from '@increaser/ui/css/borderRadius'
 import { transition } from '@increaser/ui/css/transition'
 import { HStack } from '@increaser/ui/layout/Stack'
 import { Text } from '@increaser/ui/text'
 import { getColor } from '@increaser/ui/theme/getters'
 import { useRef, useState } from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { autoUpdate, offset, size } from '@floating-ui/dom'
 import {
   FloatingPortal,
@@ -23,11 +22,14 @@ import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
 import { interactive } from '@increaser/ui/css/interactive'
 import { TimeOption } from './TimeOption'
 import { formatDayTimeBoudnary } from '@increaser/entities-utils/user/formatDayTimeBoundary'
+import { DayMoment, dayMomentShortName } from '@increaser/entities/User'
+import { getDayMomentColor } from 'sets/utils/getDayMomentColor'
+import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
+import { dayMomentIcon } from '../dayMomentIcon'
 
-interface TimeBoundaryProps extends InputProps<number> {
+interface ManageDayMomentProps extends InputProps<number> {
   options: number[]
-  label: ReactNode
-  icon: ReactNode
+  dayMoment: DayMoment
 }
 
 const Container = styled.div`
@@ -84,13 +86,12 @@ const Outline = styled.div`
   border: 2px solid ${getColor('primary')};
 `
 
-export const TimeBoundary = ({
+export const ManageDayMoment = ({
   value,
   onChange,
   options,
-  label,
-  icon,
-}: TimeBoundaryProps) => {
+  dayMoment,
+}: ManageDayMomentProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const { refs, context, floatingStyles } = useFloating({
     placement: 'bottom',
@@ -102,7 +103,7 @@ export const TimeBoundary = ({
       size({
         apply({ elements, availableHeight }) {
           Object.assign(elements.floating.style, {
-            maxHeight: `${availableHeight}px`,
+            maxHeight: `${Math.min(availableHeight, 320)}px`,
           })
         },
         padding: 10,
@@ -130,12 +131,17 @@ export const TimeBoundary = ({
     ],
   )
 
+  const theme = useTheme()
+  const color = getDayMomentColor(dayMoment, theme)
+
   return (
     <>
       <Container>
         <HStack style={{ minWidth: 132 }} alignItems="center" gap={8}>
-          {icon}
-          <Text as="div">{label}</Text>
+          <IconWrapper style={{ color: color.toCssValue() }}>
+            {dayMomentIcon[dayMoment]}
+          </IconWrapper>
+          <Text as="div">{dayMomentShortName[dayMoment]}</Text>
         </HStack>
         <Interactive
           aria-labelledby="select-label"

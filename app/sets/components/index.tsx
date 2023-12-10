@@ -3,12 +3,12 @@ import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { ScheduleEducationBanner } from './ScheduleEducationBanner'
-import { SessionsPageContent } from './SessionsPageContent'
 import { PageTitle } from 'ui/PageTitle'
 import { Page } from 'layout/Page'
 import { ClientOnly } from 'ui/ClientOnly'
 import { Text } from '@increaser/ui/text'
 import { ManageSchedule } from './ManageSchedule'
+import { SetsExplorer } from './SetsExplorer'
 
 const title = 'Schedule'
 
@@ -33,7 +33,7 @@ export const SessionsPage: Page = () => {
           <ScheduleEducationBanner />
         </ClientOnly>
         <UserStateOnly>
-          <SessionsPageContent />
+          <SetsExplorer />
         </UserStateOnly>
       </VStack>
     </FixedWidthContent>
