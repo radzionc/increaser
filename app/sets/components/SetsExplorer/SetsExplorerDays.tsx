@@ -3,17 +3,25 @@ import { useSetsExplorer } from './SetsExplorerProvider'
 import { SetsExplorerDayView } from './SetsExplorerDayView'
 import { useEffect, useRef } from 'react'
 import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
+import { daysGap } from './config'
+import { VStack } from '@increaser/ui/layout/Stack'
+import { SetsExplorerDaysChart } from './SetsExplorerDaysChart'
 
-const Container = styled.div`
+const Wrapper = styled(VStack)`
   ${horizontalPadding(4)};
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
+  gap: ${toSizeUnit(daysGap)};
   overflow-x: auto;
   flex: 1;
   &::-webkit-scrollbar {
     height: 8px;
   }
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: ${toSizeUnit(daysGap)};
 `
 
 export const SetsExplorerDays = () => {
@@ -28,10 +36,13 @@ export const SetsExplorerDays = () => {
   }, [])
 
   return (
-    <Container ref={container}>
-      {days.map((day) => (
-        <SetsExplorerDayView key={day.startedAt} day={day} />
-      ))}
-    </Container>
+    <Wrapper ref={container}>
+      <Container>
+        {days.map((day) => (
+          <SetsExplorerDayView key={day.startedAt} day={day} />
+        ))}
+      </Container>
+      <SetsExplorerDaysChart />
+    </Wrapper>
   )
 }
