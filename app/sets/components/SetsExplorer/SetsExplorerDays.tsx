@@ -33,7 +33,7 @@ export const SetsExplorerDays = () => {
       const scrollWidth = element.scrollWidth
       element.scrollLeft = scrollWidth
     }
-  }, [])
+  }, [days.length])
 
   return (
     <Wrapper ref={container}>

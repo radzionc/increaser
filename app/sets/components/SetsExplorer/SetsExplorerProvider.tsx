@@ -7,6 +7,7 @@ import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { range } from '@increaser/utils/array/range'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
+import { PersistentStateKey, usePersistentState } from 'state/persistentState'
 
 export interface SetsExplorerDay {
   startedAt: number
@@ -17,6 +18,9 @@ interface SetsExplorerState {
   days: SetsExplorerDay[]
   startHour: number
   endHour: number
+
+  includesToday: boolean
+  setIncludesToday: (value: boolean) => void
 }
 
 const SetsExplorerContext = createContext<SetsExplorerState | undefined>(
@@ -27,6 +31,10 @@ export const SetsExplorerProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const { sets, goalToStartWorkAt, goalToFinishWorkBy } = useAssertUserState()
+  const [includesToday, setIncludesToday] = usePersistentState(
+    PersistentStateKey.IncludeTodayInSetsExplorer,
+    false,
+  )
 
   const days = useMemo(() => {
     const todayStartedAt = startOfDay(Date.now()).getTime()
@@ -51,8 +59,10 @@ export const SetsExplorerProvider = ({
       result[dayIndex].sets.push(set)
     })
 
-    return result
-  }, [sets])
+    if (includesToday) return result
+
+    return result.slice(0, -1)
+  }, [includesToday, sets])
 
   const [startHour, endHour] = useMemo(() => {
     const daysWithSets = days.filter(({ sets }) => sets.length > 0)
@@ -77,7 +87,9 @@ export const SetsExplorerProvider = ({
   }, [days, goalToFinishWorkBy, goalToStartWorkAt])
 
   return (
-    <SetsExplorerContext.Provider value={{ days, startHour, endHour }}>
+    <SetsExplorerContext.Provider
+      value={{ days, startHour, endHour, includesToday, setIncludesToday }}
+    >
       {children}
     </SetsExplorerContext.Provider>
   )
