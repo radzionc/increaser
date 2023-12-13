@@ -1,15 +1,17 @@
+import { ChevronDownIcon } from '@increaser/ui/icons/ChevronDownIcon'
+import { ChevronRightIcon } from '@increaser/ui/icons/ChevronRightIcon'
+import { ChevronUpIcon } from '@increaser/ui/icons/ChevronUpIcon'
+import { ChevronLeftIcon } from '@increaser/ui/icons/ChevronLeftIcon'
 import { Text } from '@increaser/ui/text'
-import { match } from '@increaser/utils/match'
+import { getColor } from '@increaser/ui/theme/getters'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
-import styled, { css, useTheme } from 'styled-components'
-
-export type TimeBoundaryDistanceKind = 'success' | 'alert' | 'idle' | 'regular'
-export type TimeBoundaryDirection = 'row' | 'column'
+import styled from 'styled-components'
+import { Direction } from '@increaser/utils/Direction'
+import { Stack } from '@increaser/ui/layout/Stack'
 
 interface TimeBoundaryDistanceProps {
   value: number
-  direction?: TimeBoundaryDirection
-  kind?: TimeBoundaryDistanceKind
+  direction: Direction
 }
 
 const DashedLine = styled.div`
@@ -20,40 +22,45 @@ const DashedLine = styled.div`
   flex: 1;
 `
 
-const Container = styled.div<{ direction: 'row' | 'column' }>`
+const Container = styled(Stack)`
   flex: 1;
-  gap: 4px;
-  ${({ direction }) =>
-    match(direction, {
-      row: () => css`
-        display: flex;
-        align-items: center;
-        width: 120px;
-      `,
-      column: () => css`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        height: 120px;
-      `,
-    })}
+  color: ${getColor('textShy')};
+  align-items: center;
+  flex-direction: ${({ direction }) => direction};
+  font-size: 14px;
+`
+
+const Content = styled(Text)`
+  padding: 4px;
+`
+
+const Connector = styled(Stack)`
+  flex: 1;
+  align-items: center;
+  flex-direction: ${({ direction }) => direction};
 `
 
 export const TimeBoundaryDistance = ({
   value,
-  direction = 'row',
-  kind = 'regular',
+  direction,
 }: TimeBoundaryDistanceProps) => {
-  const theme = useTheme()
-  const color =
-    kind === 'regular' ? theme.colors.textSupporting : theme.colors[kind]
-
+  const content = (
+    <Content color="supporting">{formatDuration(value, 'min')}</Content>
+  )
+  const contentDirection = ['up', 'down'].includes(direction) ? 'column' : 'row'
   return (
-    <Container style={{ color: color.toCssValue() }} direction={direction}>
-      <DashedLine />
-      <Text size={14}>{formatDuration(value, 'min')}</Text>
-      <DashedLine />
+    <Container direction={contentDirection}>
+      <Connector direction={contentDirection}>
+        {direction === 'up' && <ChevronUpIcon />}
+        {direction === 'left' && <ChevronLeftIcon />}
+        <DashedLine />
+      </Connector>
+      {content}
+      <Connector direction={contentDirection}>
+        <DashedLine />
+        {direction === 'down' && <ChevronDownIcon />}
+        {direction === 'right' && <ChevronRightIcon />}
+      </Connector>
     </Container>
   )
 }

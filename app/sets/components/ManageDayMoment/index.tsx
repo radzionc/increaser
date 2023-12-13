@@ -26,32 +26,26 @@ import { DayMoment, dayMomentShortName } from '@increaser/entities/User'
 import { getDayMomentColor } from 'sets/utils/getDayMomentColor'
 import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
 import { dayMomentIcon } from '../dayMomentIcon'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 
 interface ManageDayMomentProps extends InputProps<number> {
   options: number[]
   dayMoment: DayMoment
 }
 
-const Container = styled.div`
+const Container = styled.div<{ isActive: boolean }>`
   ${borderRadius.m};
+  ${interactive};
 
   display: flex;
+  justify-content: space-between;
+  min-width: 120px;
   flex-direction: row;
   gap: 1px;
   overflow: hidden;
-
-  > * {
-    padding: 8px 12px;
-    background: ${getColor('foreground')};
-  }
-`
-
-const Interactive = styled.div<{ isActive: boolean }>`
-  ${interactive};
-  outline: none;
-
+  padding: 8px 12px;
+  background: ${getColor('foreground')};
   ${transition};
-  font-weight: 600;
 
   ${({ isActive }) =>
     isActive &&
@@ -94,16 +88,17 @@ export const ManageDayMoment = ({
 }: ManageDayMomentProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const { refs, context, floatingStyles } = useFloating({
-    placement: 'bottom',
+    placement: 'bottom-end',
     open: isOpen,
     onOpenChange: setIsOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(4),
       size({
-        apply({ elements, availableHeight }) {
+        apply({ elements, availableHeight, rects }) {
           Object.assign(elements.floating.style, {
             maxHeight: `${Math.min(availableHeight, 320)}px`,
+            width: toSizeUnit(rects.reference.width),
           })
         },
         padding: 10,
@@ -136,23 +131,21 @@ export const ManageDayMoment = ({
 
   return (
     <>
-      <Container>
+      <Container
+        aria-labelledby="select-label"
+        aria-autocomplete="none"
+        isActive={isOpen}
+        tabIndex={0}
+        ref={refs.setReference}
+        {...getReferenceProps()}
+      >
         <HStack style={{ minWidth: 132 }} alignItems="center" gap={8}>
           <IconWrapper style={{ color: color.toCssValue() }}>
             {dayMomentIcon[dayMoment]}
           </IconWrapper>
           <Text as="div">{dayMomentShortName[dayMoment]}</Text>
         </HStack>
-        <Interactive
-          aria-labelledby="select-label"
-          aria-autocomplete="none"
-          isActive={isOpen}
-          tabIndex={0}
-          ref={refs.setReference}
-          {...getReferenceProps()}
-        >
-          {formatDayTimeBoudnary(value)}
-        </Interactive>
+        <Text weight="bold">{formatDayTimeBoudnary(value)}</Text>
       </Container>
       {isOpen && (
         <FloatingPortal>

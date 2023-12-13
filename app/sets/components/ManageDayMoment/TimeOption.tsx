@@ -1,3 +1,4 @@
+import { centerContent } from '@increaser/ui/css/centerContent'
 import { interactive } from '@increaser/ui/css/interactive'
 import { getColor } from '@increaser/ui/theme/getters'
 import styled, { css } from 'styled-components'
@@ -10,6 +11,7 @@ export const TimeOption = styled.div<{ isActive: boolean }>`
   padding: 8px 12px;
   font-weight: 500;
   border-radius: 8px;
+  ${centerContent};
 
   ${({ isActive }) =>
     isActive &&

@@ -10,6 +10,7 @@ interface Props extends ClosableComponentProps {
 export const WorkScheduleOnboarding = ({ onNext, onClose }: Props) => {
   return (
     <Modal
+      width={580}
       title="Work Smarter, Not Harder"
       onClose={onClose}
       subTitle="Reclaim your evenings for better relaxation and a peaceful sleep."

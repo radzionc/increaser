@@ -20,21 +20,10 @@ interface AppSumo {
 }
 
 const minInHour = 60
+export const defaultGoalToWakeUpAt = 7 * minInHour
 export const defaultGoalToStartWorkAt = 9 * minInHour
 export const defaultGoalToFinishWorkBy = 18 * minInHour
 export const defaultGoalToGoToBedAt = 22 * minInHour
-
-interface PaddleSubscription {
-  cancellation_effective_date?: string
-  next_bill_date?: string
-  cancel_url: string
-  checkout_id: string
-  // from https://developer.paddle.com/reference/ZG9jOjI1MzU0MDI2-subscription-status-reference
-  status: 'active' | 'past_due' | 'deleted'
-  subscription_id: string
-  subscription_plan_id: string
-  update_url: string
-}
 
 export interface Task {
   startedAt: number
@@ -47,6 +36,7 @@ export const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
 export type PrimaryGoal = (typeof primaryGoals)[number]
 
 export const dayMoments = [
+  'goalToWakeUpAt',
   'goalToStartWorkAt',
   'goalToFinishWorkBy',
   'goalToGoToBedAt',
@@ -73,8 +63,6 @@ export type User = DayMoments & {
   isAnonymous: boolean
 
   appSumo?: AppSumo
-
-  paddle?: PaddleSubscription
 
   ignoreEmails?: boolean
   timeZone: number
@@ -119,6 +107,7 @@ export const userDefaultFields: Pick<
   | 'habits'
   | 'weekTimeAllocation'
   | 'primaryGoal'
+  | 'goalToWakeUpAt'
   | 'goalToStartWorkAt'
   | 'goalToFinishWorkBy'
   | 'goalToGoToBedAt'
@@ -132,12 +121,14 @@ export const userDefaultFields: Pick<
   weekTimeAllocation: defaultWeekTimeAllocation,
   primaryGoal: 'workMore',
   isAnonymous: true,
+  goalToWakeUpAt: defaultGoalToWakeUpAt,
   goalToStartWorkAt: defaultGoalToStartWorkAt,
   goalToFinishWorkBy: defaultGoalToFinishWorkBy,
   goalToGoToBedAt: defaultGoalToGoToBedAt,
 }
 
 export const dayMomentShortName: Record<DayMoment, string> = {
+  goalToWakeUpAt: 'wake up',
   goalToStartWorkAt: 'start work',
   goalToFinishWorkBy: 'finish work',
   goalToGoToBedAt: 'go to bed',

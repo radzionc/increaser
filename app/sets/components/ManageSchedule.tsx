@@ -1,88 +1,76 @@
-import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import { ManageEndOfWorkday } from './ManageEndOfWorkday'
 import { ManageBedTime } from './ManageBedTime'
 import { useAssertUserState } from 'user/state/UserStateContext'
-import {
-  TimeBoundaryDirection,
-  TimeBoundaryDistance,
-  TimeBoundaryDistanceKind,
-} from './TimeBoundaryDistance'
+import { TimeBoundaryDistance } from './TimeBoundaryDistance'
 import { ManageStartOfWorkday } from './ManageStartOfWorkday'
-import { DayMoments } from '@increaser/entities/User'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@increaser/ui/base/ElementSizeAware'
-
-const getWorkEndToBedDistanceKind = ({
-  goalToGoToBedAt,
-  goalToFinishWorkBy,
-}: Pick<
-  DayMoments,
-  'goalToFinishWorkBy' | 'goalToGoToBedAt'
->): TimeBoundaryDistanceKind => {
-  const distance = goalToGoToBedAt - goalToFinishWorkBy
-
-  if (distance < convertDuration(2, 'h', 'min')) {
-    return 'idle'
-  }
-
-  if (distance < convertDuration(1, 'h', 'min')) {
-    return 'alert'
-  }
-
-  return 'success'
-}
+import { ManageWakeUp } from './ManageWakeUp'
+import { VStack } from '@increaser/ui/layout/Stack'
 
 const Wrapper = styled.div`
   width: 100%;
 `
 
+const gridMinWidth = 520
+
+const Grid = styled.div`
+  display: grid;
+  gap: 8px;
+  grid-template-rows: min-content 80px min-content;
+  grid-template-columns: min-content 1fr min-content;
+  width: 100%;
+  max-width: 580px;
+`
+
 export const ManageSchedule = () => {
-  const { goalToStartWorkAt, goalToFinishWorkBy, goalToGoToBedAt } =
-    useAssertUserState()
-
-  const renderContent = (direction: TimeBoundaryDirection) => {
-    const content = (
-      <>
-        <ManageStartOfWorkday />
-        <TimeBoundaryDistance
-          direction={direction}
-          kind="regular"
-          value={goalToFinishWorkBy - goalToStartWorkAt}
-        />
-        <ManageEndOfWorkday />
-        <TimeBoundaryDistance
-          direction={direction}
-          kind={getWorkEndToBedDistanceKind({
-            goalToFinishWorkBy,
-            goalToGoToBedAt,
-          })}
-          value={goalToGoToBedAt - goalToFinishWorkBy}
-        />
-        <ManageBedTime />
-      </>
-    )
-
-    if (direction === 'row') {
-      return (
-        <HStack fullWidth wrap="wrap" alignItems="center" gap={16}>
-          {content}
-        </HStack>
-      )
-    }
-
-    return (
-      <VStack gap={8} alignItems="center" style={{ height: 320 }}>
-        {content}
-      </VStack>
-    )
-  }
+  const {
+    goalToWakeUpAt,
+    goalToStartWorkAt,
+    goalToFinishWorkBy,
+    goalToGoToBedAt,
+  } = useAssertUserState()
 
   return (
     <ElementSizeAware
-      render={({ size, setElement }) => (
+      render={({ setElement, size }) => (
         <Wrapper ref={setElement}>
-          {renderContent(size && size.width < 800 ? 'column' : 'row')}
+          {size && size.width < gridMinWidth ? (
+            <VStack gap={16}>
+              <ManageWakeUp />
+              <ManageStartOfWorkday />
+              <ManageBedTime />
+              <ManageEndOfWorkday />
+            </VStack>
+          ) : (
+            <Grid>
+              <ManageWakeUp />
+              <TimeBoundaryDistance
+                direction="right"
+                value={goalToStartWorkAt - goalToWakeUpAt}
+              />
+              <ManageStartOfWorkday />
+              <TimeBoundaryDistance
+                direction="up"
+                value={
+                  convertDuration(24, 'h', 'min') -
+                  (goalToGoToBedAt - goalToWakeUpAt)
+                }
+              />
+              <div />
+              <TimeBoundaryDistance
+                direction="down"
+                value={goalToFinishWorkBy - goalToStartWorkAt}
+              />
+              <ManageBedTime />
+              <TimeBoundaryDistance
+                direction="left"
+                value={goalToGoToBedAt - goalToFinishWorkBy}
+              />
+              <ManageEndOfWorkday />
+            </Grid>
+          )}
         </Wrapper>
       )}
     />
