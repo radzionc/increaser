@@ -1,4 +1,3 @@
-import { Panel } from '@increaser/ui/panel/Panel'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { ScheduleCheckItem } from './ScheduleCheckItem'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
@@ -9,25 +8,20 @@ export const ScheduleReview = () => {
     useAssertUserState()
 
   return (
-    <Panel style={{ minWidth: 240 }} kind="secondary">
-      <VStack gap={12}>
-        <ScheduleCheckItem
-          value={
-            goalToGoToBedAt - goalToFinishWorkBy >=
-            convertDuration(2, 'h', 'min')
-          }
-          label="2 hours of rest before bed"
-        />
-        <ScheduleCheckItem
-          value={
-            convertDuration(24, 'h', 'min') -
-              goalToGoToBedAt +
-              goalToWakeUpAt >=
-            convertDuration(8, 'h', 'min')
-          }
-          label="8 hours of sleep"
-        />
-      </VStack>
-    </Panel>
+    <VStack style={{ minWidth: 240 }} gap={12}>
+      <ScheduleCheckItem
+        value={
+          goalToGoToBedAt - goalToFinishWorkBy >= convertDuration(2, 'h', 'min')
+        }
+        label="2 hours of relaxation before sleep"
+      />
+      <ScheduleCheckItem
+        value={
+          convertDuration(24, 'h', 'min') - goalToGoToBedAt + goalToWakeUpAt >=
+          convertDuration(8, 'h', 'min')
+        }
+        label="Optimal 8 hours of sleep for health"
+      />
+    </VStack>
   )
 }

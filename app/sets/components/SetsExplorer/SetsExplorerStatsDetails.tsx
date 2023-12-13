@@ -77,24 +77,24 @@ export const SetsExplorerStatsDetails = ({
   return (
     <>
       <SetsExplorerStatistic
-        title="Workday"
-        value={avgWorkday ? formatDuration(avgWorkday, 'ms') : '-'}
-      />
-      <SetsExplorerStatistic
-        title="Weekend"
-        value={avgWeekend ? formatDuration(avgWeekend, 'ms') : '-'}
-      />
-      <SetsExplorerStatistic
-        title="Block"
-        value={avgBlock ? formatDuration(avgBlock, 'ms') : '-'}
-      />
-      <SetsExplorerStatistic
         title="Start work"
         value={avgWorkdayStart ? avgWorkdayStart : '-'}
       />
       <SetsExplorerStatistic
         title="Finish work"
         value={avgWorkdayEnd ? avgWorkdayEnd : '-'}
+      />
+      <SetsExplorerStatistic
+        title="Block"
+        value={avgBlock ? formatDuration(avgBlock, 'ms') : '-'}
+      />
+      <SetsExplorerStatistic
+        title="Workday total"
+        value={avgWorkday ? formatDuration(avgWorkday, 'ms') : '-'}
+      />
+      <SetsExplorerStatistic
+        title="Weekend total"
+        value={avgWeekend ? formatDuration(avgWeekend, 'ms') : '-'}
       />
     </>
   )
