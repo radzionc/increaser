@@ -1,5 +1,5 @@
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
-import { VStack } from '@increaser/ui/layout/Stack'
+import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
 import { ScheduleEducationBanner } from './ScheduleEducationBanner'
@@ -8,6 +8,7 @@ import { Page } from 'layout/Page'
 import { ClientOnly } from 'ui/ClientOnly'
 import { ManageSchedule } from './ManageSchedule'
 import { SetsExplorer } from './SetsExplorer'
+import { ScheduleReview } from './ScheduleReview'
 
 const title = 'Schedule'
 
@@ -20,7 +21,10 @@ export const SessionsPage: Page = () => {
           <ScheduleEducationBanner />
         </ClientOnly>
         <UserStateOnly>
-          <ManageSchedule />
+          <HStack gap={40} fullWidth wrap="wrap">
+            <ManageSchedule />
+            <ScheduleReview />
+          </HStack>
           <SetsExplorer />
         </UserStateOnly>
       </VStack>

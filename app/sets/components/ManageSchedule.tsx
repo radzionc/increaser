@@ -10,7 +10,7 @@ import { ManageWakeUp } from './ManageWakeUp'
 import { VStack } from '@increaser/ui/layout/Stack'
 
 const Wrapper = styled.div`
-  width: 100%;
+  flex: 1;
 `
 
 const gridMinWidth = 520
@@ -21,7 +21,6 @@ const Grid = styled.div`
   grid-template-rows: min-content 80px min-content;
   grid-template-columns: min-content 1fr min-content;
   width: 100%;
-  max-width: 580px;
 `
 
 export const ManageSchedule = () => {
