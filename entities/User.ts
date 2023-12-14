@@ -8,6 +8,7 @@ import {
   WeekTimeAllocation,
   defaultWeekTimeAllocation,
 } from './WeekTimeAllocation'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
 
 export interface Set {
   start: number
@@ -19,11 +20,12 @@ interface AppSumo {
   code: string
 }
 
-const minInHour = 60
-export const defaultGoalToWakeUpAt = 7 * minInHour
-export const defaultGoalToStartWorkAt = 9 * minInHour
-export const defaultGoalToFinishWorkBy = 18 * minInHour
-export const defaultGoalToGoToBedAt = 22 * minInHour
+export const defaultGoalToWakeUpAt = convertDuration(7, 'h', 'min')
+export const defaultGoalToStartWorkAt = convertDuration(8, 'h', 'min')
+export const defaultFirstMealStartsAt = convertDuration(10, 'h', 'min')
+export const defaultGoalToFinishWorkBy = convertDuration(18, 'h', 'min')
+export const defaultLastMealStartsAt = convertDuration(18, 'h', 'min')
+export const defaultGoalToGoToBedAt = convertDuration(22, 'h', 'min')
 
 export interface Task {
   startedAt: number
@@ -37,7 +39,9 @@ export type PrimaryGoal = (typeof primaryGoals)[number]
 
 export const dayMoments = [
   'goalToWakeUpAt',
+  'firstMealStartsAt',
   'goalToStartWorkAt',
+  'lastMealStartsAt',
   'goalToFinishWorkBy',
   'goalToGoToBedAt',
 ] as const
@@ -112,6 +116,8 @@ export const userDefaultFields: Pick<
   | 'goalToFinishWorkBy'
   | 'goalToGoToBedAt'
   | 'isAnonymous'
+  | 'firstMealStartsAt'
+  | 'lastMealStartsAt'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -125,6 +131,8 @@ export const userDefaultFields: Pick<
   goalToStartWorkAt: defaultGoalToStartWorkAt,
   goalToFinishWorkBy: defaultGoalToFinishWorkBy,
   goalToGoToBedAt: defaultGoalToGoToBedAt,
+  firstMealStartsAt: defaultFirstMealStartsAt,
+  lastMealStartsAt: defaultLastMealStartsAt,
 }
 
 export const dayMomentShortName: Record<DayMoment, string> = {
@@ -132,6 +140,8 @@ export const dayMomentShortName: Record<DayMoment, string> = {
   goalToStartWorkAt: 'start work',
   goalToFinishWorkBy: 'finish work',
   goalToGoToBedAt: 'go to bed',
+  firstMealStartsAt: 'first meal',
+  lastMealStartsAt: 'last meal',
 }
 
 export const dayMomentStepInMinutes = 30

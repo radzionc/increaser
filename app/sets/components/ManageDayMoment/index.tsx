@@ -36,6 +36,7 @@ interface ManageDayMomentProps extends InputProps<number> {
 const Container = styled.div<{ isActive: boolean }>`
   ${borderRadius.m};
   ${interactive};
+  outline: none;
 
   display: flex;
   justify-content: space-between;
@@ -62,7 +63,6 @@ const Container = styled.div<{ isActive: boolean }>`
 const OptionsContainer = styled.div`
   ${borderRadius.m};
   overflow-y: auto;
-  outline: none;
 
   display: flex;
   flex-direction: column;

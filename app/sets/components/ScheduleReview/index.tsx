@@ -3,9 +3,19 @@ import { ScheduleCheckItem } from './ScheduleCheckItem'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { VStack } from '@increaser/ui/layout/Stack'
 
+const sleepHoursTarget = 8
+const intermittentFastingHoursTarget = 16
+const wakeUpFirstMealHoursTarget = 1
+const lastMealBedTimeHoursTarget = 3
+
 export const ScheduleReview = () => {
-  const { goalToFinishWorkBy, goalToGoToBedAt, goalToWakeUpAt } =
-    useAssertUserState()
+  const {
+    goalToFinishWorkBy,
+    goalToGoToBedAt,
+    goalToWakeUpAt,
+    firstMealStartsAt,
+    lastMealStartsAt,
+  } = useAssertUserState()
 
   return (
     <VStack style={{ minWidth: 240 }} gap={12}>
@@ -18,9 +28,31 @@ export const ScheduleReview = () => {
       <ScheduleCheckItem
         value={
           convertDuration(24, 'h', 'min') - goalToGoToBedAt + goalToWakeUpAt >=
-          convertDuration(8, 'h', 'min')
+          convertDuration(sleepHoursTarget, 'h', 'min')
         }
-        label="Optimal 8 hours of sleep for health"
+        label={`Optimal ${sleepHoursTarget} hours of sleep for health`}
+      />
+      <ScheduleCheckItem
+        value={
+          convertDuration(24, 'h', 'min') -
+            (lastMealStartsAt - firstMealStartsAt) >=
+          convertDuration(intermittentFastingHoursTarget, 'h', 'min')
+        }
+        label={`${intermittentFastingHoursTarget} hours of intermittent fasting`}
+      />
+      <ScheduleCheckItem
+        value={
+          firstMealStartsAt - goalToWakeUpAt >=
+          convertDuration(wakeUpFirstMealHoursTarget, 'h', 'min')
+        }
+        label={`${wakeUpFirstMealHoursTarget} hours between wake up and first meal`}
+      />
+      <ScheduleCheckItem
+        value={
+          goalToGoToBedAt - lastMealStartsAt >=
+          convertDuration(lastMealBedTimeHoursTarget, 'h', 'min')
+        }
+        label={`${lastMealBedTimeHoursTarget} hours between last meal and bed time`}
       />
     </VStack>
   )
