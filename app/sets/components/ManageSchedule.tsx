@@ -20,7 +20,7 @@ const gridMinWidth = 520
 const Grid = styled.div`
   display: grid;
   gap: 8px;
-  grid-template-rows: min-content 80px min-content;
+  grid-template-rows: min-content 80px min-content 80px min-content;
   grid-template-columns: min-content 1fr min-content;
   width: 100%;
 `
@@ -43,40 +43,47 @@ export const ManageSchedule = () => {
             <VStack gap={16}>
               <ManageWakeUp />
               <ManageStartOfWorkday />
-              <ManageBedTime />
-              <ManageEndOfWorkday />
               <ManageFirstMealStartsAt />
+              <ManageEndOfWorkday />
               <ManageLastMealStartsAt />
+              <ManageBedTime />
             </VStack>
           ) : (
             <VStack fullWidth gap={40}>
               <Grid>
-                <ManageWakeUp />
-                <TimeBoundaryDistance
-                  direction="right"
-                  value={goalToStartWorkAt - goalToWakeUpAt}
-                />
                 <ManageStartOfWorkday />
                 <TimeBoundaryDistance
+                  direction="right"
+                  value={goalToFinishWorkBy - goalToStartWorkAt}
+                />
+                <ManageEndOfWorkday />
+                <TimeBoundaryDistance
                   direction="up"
+                  value={goalToStartWorkAt - goalToWakeUpAt}
+                />
+                <div />
+                <TimeBoundaryDistance
+                  direction="down"
+                  value={goalToGoToBedAt - goalToFinishWorkBy}
+                />
+                <ManageWakeUp />
+                <TimeBoundaryDistance
+                  direction="left"
                   value={
                     convertDuration(24, 'h', 'min') -
                     (goalToGoToBedAt - goalToWakeUpAt)
                   }
                 />
-                <div />
-                <TimeBoundaryDistance
-                  direction="down"
-                  value={goalToFinishWorkBy - goalToStartWorkAt}
-                />
                 <ManageBedTime />
                 <TimeBoundaryDistance
-                  direction="left"
-                  value={goalToGoToBedAt - goalToFinishWorkBy}
+                  direction="down"
+                  value={firstMealStartsAt - goalToWakeUpAt}
                 />
-                <ManageEndOfWorkday />
-              </Grid>
-              <Grid style={{ gridTemplateRows: '1fr' }}>
+                <div />
+                <TimeBoundaryDistance
+                  direction="up"
+                  value={goalToGoToBedAt - lastMealStartsAt}
+                />
                 <ManageFirstMealStartsAt />
                 <TimeBoundaryDistance
                   direction="right"
