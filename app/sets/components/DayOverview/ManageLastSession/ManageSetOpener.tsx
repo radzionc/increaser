@@ -15,6 +15,7 @@ import { Set } from '@increaser/entities/User'
 import { useDayOverview } from '../DayOverviewProvider'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { getProjectColor } from 'projects/utils/getProjectColor'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
 
 const offsetInPx = 4
 
@@ -43,8 +44,9 @@ interface ManageSetOpener {
 export const ManageSetOpener = ({ set, openerProps }: ManageSetOpener) => {
   const { projectsRecord } = useProjects()
   const { start, end, projectId } = set
-  const { timelineEndsAt, timelineStartsAt } = useDayOverview()
-  const timespan = timelineEndsAt - timelineStartsAt
+  const { startHour, endHour, dayStartedAt } = useDayOverview()
+  const timespan = convertDuration(endHour - startHour, 'h', 'ms')
+  const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
 
   const theme = useTheme()
   const color = getProjectColor(projectsRecord, theme, projectId)

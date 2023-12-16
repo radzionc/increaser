@@ -12,7 +12,6 @@ import {
   topPlaceholderHeightInPx,
 } from './config'
 import { useDayOverview } from './DayOverviewProvider'
-import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { takeWholeSpaceAbsolutely } from '@increaser/ui/css/takeWholeSpaceAbsolutely'
 import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
 
@@ -36,9 +35,8 @@ const Content = styled.div`
 `
 
 export const DayTimeline = () => {
-  const { timelineStartsAt, timelineEndsAt } = useDayOverview()
-  const timespan = timelineEndsAt - timelineStartsAt
-  const minHeight = convertDuration(timespan, 'ms', 'h') * minimumHourHeightInPx
+  const { startHour, endHour } = useDayOverview()
+  const minHeight = (endHour - startHour) * minimumHourHeightInPx
 
   return (
     <Wrapper>

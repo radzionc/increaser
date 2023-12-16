@@ -2,7 +2,7 @@ import { ReactNode, useCallback, useMemo, useRef, useState } from 'react'
 import { InputProps } from '../../props'
 import { useEffectOnDependencyChange } from '../../hooks/useEffectOnDependencyChange'
 import { getSuggestions } from './getSuggestions'
-import { NoMatchesMessage } from './NoMatchesMessage'
+import { FixedOptionInputMessage } from './FixedOptionInputMessage'
 import { FixedOptionsInputItem } from './OptionItem'
 import { FixedOptionsInputOptionsContainer } from './OptionsContainer'
 import { FixedOptionsInputIdentifierWrapper } from './IdentifierWrapper'
@@ -13,7 +13,7 @@ import { useFloatingOptions } from './useFloatingOptions'
 import { FixedOptionsInputButtons } from './Buttons'
 import { LabelText } from '../LabelText'
 
-interface FixedOptionsInputProps<T> extends InputProps<T | null> {
+export interface FixedOptionsInputProps<T> extends InputProps<T | null> {
   placeholder?: string
   label?: ReactNode
 
@@ -24,7 +24,23 @@ interface FixedOptionsInputProps<T> extends InputProps<T | null> {
   getOptionName: (option: T) => string
   renderOptionIdentifier: (option: T) => ReactNode
   optionIdentifierPlaceholder: ReactNode
+
+  clearTextInputOnOptionSelect?: boolean
+  noOptionsMessage?: ReactNode
+  onTextInputValueChange?: (value: string) => void
 }
+
+export type FixedOptionsInputWrapperProps<T> = Pick<
+  FixedOptionsInputProps<T>,
+  | 'value'
+  | 'onChange'
+  | 'placeholder'
+  | 'label'
+  | 'options'
+  | 'noOptionsMessage'
+  | 'onTextInputValueChange'
+  | 'clearTextInputOnOptionSelect'
+>
 
 export function FixedOptionsInput<T>({
   value,
@@ -38,6 +54,9 @@ export function FixedOptionsInput<T>({
   renderOptionIdentifier,
   optionIdentifierPlaceholder,
   getOptionKey,
+  noOptionsMessage,
+  onTextInputValueChange,
+  clearTextInputOnOptionSelect,
 }: FixedOptionsInputProps<T>) {
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -74,25 +93,41 @@ export function FixedOptionsInput<T>({
   } = useFloatingOptions()
 
   useEffectOnDependencyChange(() => {
-    if (!value) return
+    if (!value) {
+      if (textInputValue) {
+        setTextInputValue('')
+      }
+    } else {
+      const valueName = getOptionName(value)
+      if (textInputValue === valueName) return
 
-    const valueName = getOptionName(value)
-    if (textInputValue === valueName) return
-
-    setTextInputValue(valueName)
+      setTextInputValue(valueName)
+    }
   }, [value])
+
+  const onOptionSelect = useCallback(
+    (option: T) => {
+      onChange(option)
+      if (clearTextInputOnOptionSelect) {
+        setTextInputValue('')
+      }
+    },
+    [clearTextInputOnOptionSelect, onChange],
+  )
 
   const onTextInputChange = useCallback(
     (newValue: string) => {
       showOptions()
 
-      if (value && newValue !== getOptionName(value)) {
+      onTextInputValueChange?.(newValue)
+
+      if (newValue === '') {
         onChange(null)
       }
 
       setTextInputValue(newValue)
     },
-    [getOptionName, onChange, showOptions, value],
+    [onChange, onTextInputValueChange, showOptions],
   )
 
   useEffectOnDependencyChange(() => {
@@ -109,7 +144,7 @@ export function FixedOptionsInput<T>({
       onKeyDown={(event) => {
         if (event.key === 'Enter' && activeIndex != null) {
           event.preventDefault()
-          onChange(optionsToDisplay[activeIndex])
+          onOptionSelect(optionsToDisplay[activeIndex])
           setActiveIndex(null)
           hideOptions()
         }
@@ -151,7 +186,7 @@ export function FixedOptionsInput<T>({
                     },
                     key: getOptionKey(option),
                     onClick: () => {
-                      onChange(option)
+                      onOptionSelect(option)
                       inputElement.current?.focus()
                       hideOptions()
                     },
@@ -162,13 +197,15 @@ export function FixedOptionsInput<T>({
                 </FixedOptionsInputItem>
               ))
             ) : (
-              <NoMatchesMessage />
+              <FixedOptionInputMessage>
+                {noOptionsMessage ?? 'No options'}
+              </FixedOptionInputMessage>
             )}
           </FixedOptionsInputOptionsContainer>
         )}
         <FixedOptionsInputButtons
           onClear={
-            textInputValue
+            textInputValue || value
               ? () => {
                   onTextInputChange('')
                   inputElement.current?.focus()

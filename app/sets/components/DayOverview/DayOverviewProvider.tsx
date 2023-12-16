@@ -3,24 +3,23 @@ import { ComponentWithChildrenProps } from '@increaser/ui/props'
 import { createContextHook } from '@increaser/ui/state/createContextHook'
 import { useRhythmicRerender } from '@increaser/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@increaser/utils/array/getLastItem'
-import { MS_IN_MIN } from '@increaser/utils/time'
-import { startOfHour, endOfHour, isToday } from 'date-fns'
+import { isToday } from 'date-fns'
 import { useFocus } from 'focus/hooks/useFocus'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { startOfDay } from 'date-fns'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { getDaySets } from 'sets/helpers/getDaySets'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
 
 interface DayOverviewContextState {
   sets: Set[]
   currentTime: number
 
-  timelineStartsAt: number
-  timelineEndsAt: number
+  startHour: number
+  endHour: number
 
   dayStartedAt: number
-  workdayEndsAt: number
   setCurrentDay: (timestamp: number) => void
 }
 
@@ -66,42 +65,42 @@ export const DayOverviewProvider = ({
 
   const { goalToStartWorkAt, goalToFinishWorkBy } = useAssertUserState()
 
-  const workdayEndsAt = dayStartedAt + goalToFinishWorkBy * MS_IN_MIN
-
-  const timelineStartsAt = useMemo(() => {
+  const startHour = useMemo(() => {
     if (sets.length) {
-      return startOfHour(sets[0].start).getTime()
+      return Math.floor(
+        convertDuration(sets[0].start - dayStartedAt, 'ms', 'h'),
+      )
     }
 
-    const workdayStartsAt = dayStartedAt + goalToStartWorkAt * MS_IN_MIN
-
-    if (currentTime < workdayStartsAt) {
-      return startOfHour(currentTime).getTime()
-    }
-
-    return workdayStartsAt
+    return Math.min(
+      Math.floor(convertDuration(goalToStartWorkAt, 'min', 'h')),
+      convertDuration(currentTime - dayStartedAt, 'ms', 'h'),
+    )
   }, [currentTime, dayStartedAt, goalToStartWorkAt, sets])
 
-  const timelineEndsAt = useMemo(() => {
+  const endHour = useMemo(() => {
+    const workdayEndsAtHour = Math.ceil(
+      convertDuration(goalToFinishWorkBy, 'min', 'h'),
+    )
     if (!sets.length) {
-      return workdayEndsAt
-    }
-    const lastSetEnd = getLastItem(sets).end
-    if (workdayEndsAt > lastSetEnd) {
-      return workdayEndsAt
+      return workdayEndsAtHour
     }
 
-    return endOfHour(lastSetEnd).getTime()
-  }, [sets, workdayEndsAt])
+    const lastSetEnd = getLastItem(sets).end
+
+    return Math.max(
+      workdayEndsAtHour,
+      Math.ceil(convertDuration(lastSetEnd - dayStartedAt, 'ms', 'h')),
+    )
+  }, [dayStartedAt, goalToFinishWorkBy, sets])
 
   return (
     <DayOverviewContext.Provider
       value={{
         sets,
         currentTime,
-        timelineStartsAt,
-        timelineEndsAt,
-        workdayEndsAt,
+        startHour,
+        endHour,
         dayStartedAt,
         setCurrentDay,
       }}

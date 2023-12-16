@@ -8,11 +8,7 @@ import {
 import { toPercents } from '@increaser/utils/toPercents'
 import { takeWholeSpace } from '@increaser/ui/css/takeWholeSpace'
 import { getColor } from '@increaser/ui/theme/getters'
-import {
-  horizontalPaddingInPx,
-  timeLabelWidthInPx,
-  timeLabelGapInPx,
-} from '../config'
+import { horizontalPaddingInPx, timeLabelGapInPx } from '../config'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { Text } from '@increaser/ui/text'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
@@ -20,13 +16,14 @@ import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { transition } from '@increaser/ui/css/transition'
 import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
+import { dayTimeLabelsWidthInPx } from 'sets/components/DayTimeLabels'
 
 interface WorkBlockProps {
   block: Block
 }
 
 const leftOffset =
-  horizontalPaddingInPx + timeLabelWidthInPx + timeLabelGapInPx * 2
+  horizontalPaddingInPx + dayTimeLabelsWidthInPx + timeLabelGapInPx * 3
 
 const Container = styled.div`
   width: calc(100% - ${leftOffset}px - ${horizontalPaddingInPx}px);
@@ -53,7 +50,9 @@ const Duration = styled(Text)`
 `
 
 export const WorkBlock = ({ block }: WorkBlockProps) => {
-  const { timelineStartsAt, timelineEndsAt } = useDayOverview()
+  const { startHour, endHour, dayStartedAt } = useDayOverview()
+  const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
+  const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const timespan = timelineEndsAt - timelineStartsAt
   const { start, end } = getBlockBoundaries(block)
   const blockDuration = end - start
@@ -79,7 +78,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
           />
         ))}
         {showDuration && (
-          <Duration color="supporting" size={14} weight="semibold">
+          <Duration size={12}>
             {formatDuration(getBlockWorkDuration(block), 'ms')}
           </Duration>
         )}

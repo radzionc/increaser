@@ -1,0 +1,98 @@
+import styled, { useTheme } from 'styled-components'
+import { range } from '@increaser/utils/array/range'
+import { PositionAbsolutelyCenterHorizontally } from '@increaser/ui/layout/PositionAbsolutelyCenterHorizontally'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
+import { Text } from '@increaser/ui/text'
+import { formatDayTimeBoudnary } from '@increaser/entities-utils/user/formatDayTimeBoundary'
+import { getColor } from '@increaser/ui/theme/getters'
+import { dayMomentStepInMinutes, dayMoments } from '@increaser/entities/User'
+import { useAssertUserState } from 'user/state/UserStateContext'
+import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
+import { getDayMomentColor } from 'sets/utils/getDayMomentColor'
+import { HStack } from '@increaser/ui/layout/Stack'
+import { dayMomentIcon } from './dayMomentIcon'
+import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
+import { toPercents } from '@increaser/utils/toPercents'
+
+export const dayTimeLabelsWidthInPx = 48
+export const dayTimeLabelTimeWidthInPx = 32
+
+const Container = styled.div`
+  position: relative;
+  width: ${toSizeUnit(dayTimeLabelsWidthInPx)};
+  height: 100%;
+`
+
+const MarkContainer = styled(HStack)`
+  display: grid;
+  align-items: center;
+  grid-template-columns: ${toSizeUnit(dayTimeLabelTimeWidthInPx)} ${toSizeUnit(
+      dayTimeLabelsWidthInPx - dayTimeLabelTimeWidthInPx,
+    )};
+  gap: 4px;
+`
+
+const Mark = styled.div`
+  height: 1px;
+  background: ${getColor('textShy')};
+  justify-self: end;
+`
+
+interface DayTimeLabelsProps {
+  startHour: number
+  endHour: number
+}
+
+export const DayTimeLabels = ({ startHour, endHour }: DayTimeLabelsProps) => {
+  const user = useAssertUserState()
+
+  const marksCount =
+    (endHour - startHour) /
+      convertDuration(dayMomentStepInMinutes, 'min', 'h') +
+    1
+
+  const theme = useTheme()
+
+  return (
+    <Container>
+      {range(marksCount).map((markIndex) => {
+        const minutesSinceStart = markIndex * dayMomentStepInMinutes
+        const minutes =
+          minutesSinceStart + convertDuration(startHour, 'h', 'min')
+        const top = toPercents(markIndex / (marksCount - 1))
+        const isPrimaryMark = minutes % 60 === 0
+        const moment = dayMoments.find((moment) => user[moment] === minutes)
+
+        const color = moment
+          ? getDayMomentColor(moment, theme).toCssValue()
+          : undefined
+
+        return (
+          <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
+            <MarkContainer>
+              {isPrimaryMark ? (
+                <Text size={12} color="supporting">
+                  {formatDayTimeBoudnary(minutes)}
+                </Text>
+              ) : moment ? (
+                <Mark
+                  style={{
+                    width: isPrimaryMark ? '100%' : '32%',
+                    background: color,
+                  }}
+                />
+              ) : (
+                <div />
+              )}
+              {moment && (
+                <IconWrapper style={{ color, fontSize: 14 }}>
+                  {dayMomentIcon[moment]}
+                </IconWrapper>
+              )}
+            </MarkContainer>
+          </PositionAbsolutelyCenterHorizontally>
+        )
+      })}
+    </Container>
+  )
+}

@@ -3,6 +3,8 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { useDayOverview } from './DayOverviewProvider'
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
+import { convertDuration } from '@increaser/utils/time/convertDuration'
+import { useAssertUserState } from 'user/state/UserStateContext'
 
 const Container = styled.div`
   position: absolute;
@@ -15,8 +17,11 @@ const Container = styled.div`
 `
 
 export const WorkdayEndStatus = () => {
-  const { workdayEndsAt, timelineEndsAt, currentTime, dayStartedAt } =
-    useDayOverview()
+  const { goalToFinishWorkBy } = useAssertUserState()
+  const { endHour, currentTime, dayStartedAt } = useDayOverview()
+  const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
+  const workdayEndsAt =
+    dayStartedAt + convertDuration(goalToFinishWorkBy, 'min', 'ms')
   const workEndsIn = workdayEndsAt - currentTime
 
   const todayStartedAt = useStartOfDay()
