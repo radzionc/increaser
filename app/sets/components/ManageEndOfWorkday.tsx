@@ -3,24 +3,24 @@ import { useAssertUserState } from 'user/state/UserStateContext'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { range } from '@increaser/utils/array/range'
 import { ManageDayMoment } from './ManageDayMoment'
-import { dayMomentStepInMinutes } from '@increaser/entities/User'
+import { dayMomentStep } from '@increaser/entities/DayMoments'
 
 const minOption = convertDuration(16, 'h', 'min')
 
 export const ManageEndOfWorkday = () => {
-  const { goalToFinishWorkBy, goalToGoToBedAt } = useAssertUserState()
+  const { finishWorkAt, goToBedAt } = useAssertUserState()
 
   const { mutate: updateUser } = useUpdateUserMutation()
-  const maxOption = goalToGoToBedAt
+  const maxOption = goToBedAt
   const options = range(
-    Math.round((maxOption - minOption) / dayMomentStepInMinutes) + 1,
-  ).map((step) => minOption + dayMomentStepInMinutes * step)
+    Math.round((maxOption - minOption) / dayMomentStep) + 1,
+  ).map((step) => minOption + dayMomentStep * step)
 
   return (
     <ManageDayMoment
-      dayMoment="goalToFinishWorkBy"
-      value={goalToFinishWorkBy}
-      onChange={(value) => updateUser({ goalToFinishWorkBy: value })}
+      dayMoment="finishWorkAt"
+      value={finishWorkAt}
+      onChange={(value) => updateUser({ finishWorkAt: value })}
       options={options}
     />
   )

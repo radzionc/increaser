@@ -13,12 +13,12 @@ const Container = styled.div`
 `
 
 export const WorkdayLeftBlock = () => {
-  const { goalToFinishWorkBy } = useAssertUserState()
+  const { finishWorkAt } = useAssertUserState()
   const { startHour, endHour, currentTime, dayStartedAt } = useDayOverview()
   const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
   const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const workdayEndsAt =
-    dayStartedAt + convertDuration(goalToFinishWorkBy, 'min', 'ms')
+    dayStartedAt + convertDuration(finishWorkAt, 'min', 'ms')
 
   const workEndsIn = workdayEndsAt - currentTime
   const timespan = timelineEndsAt - timelineStartsAt

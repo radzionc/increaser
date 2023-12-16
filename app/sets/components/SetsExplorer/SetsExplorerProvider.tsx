@@ -30,7 +30,7 @@ const SetsExplorerContext = createContext<SetsExplorerState | undefined>(
 export const SetsExplorerProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { sets, goalToStartWorkAt, goalToFinishWorkBy } = useAssertUserState()
+  const { sets, startWorkAt, finishWorkAt } = useAssertUserState()
   const [includesToday, setIncludesToday] = usePersistentState(
     PersistentStateKey.IncludeTodayInSetsExplorer,
     false,
@@ -68,7 +68,7 @@ export const SetsExplorerProvider = ({
     const daysWithSets = days.filter(({ sets }) => sets.length > 0)
     return [
       Math.min(
-        Math.floor(convertDuration(goalToStartWorkAt, 'min', 'h')),
+        Math.floor(convertDuration(startWorkAt, 'min', 'h')),
         ...daysWithSets.map(({ sets, startedAt }) => {
           return Math.floor(
             convertDuration(sets[0].start - startedAt, 'ms', 'h'),
@@ -76,7 +76,7 @@ export const SetsExplorerProvider = ({
         }),
       ),
       Math.max(
-        Math.ceil(convertDuration(goalToFinishWorkBy, 'min', 'h')),
+        Math.ceil(convertDuration(finishWorkAt, 'min', 'h')),
         ...daysWithSets.map(({ sets, startedAt }) => {
           return Math.ceil(
             convertDuration(getLastItem(sets).end - startedAt, 'ms', 'h'),
@@ -84,7 +84,7 @@ export const SetsExplorerProvider = ({
         }),
       ),
     ]
-  }, [days, goalToFinishWorkBy, goalToStartWorkAt])
+  }, [days, finishWorkAt, startWorkAt])
 
   return (
     <SetsExplorerContext.Provider

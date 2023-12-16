@@ -39,11 +39,11 @@ const Outline = styled.div`
 `
 
 export const CurrentTime = () => {
-  const { goalToFinishWorkBy } = useAssertUserState()
+  const { finishWorkAt } = useAssertUserState()
   const { currentTime, startHour, endHour, dayStartedAt } = useDayOverview()
 
   const workdayEndsAt =
-    dayStartedAt + convertDuration(goalToFinishWorkBy, 'min', 'ms')
+    dayStartedAt + convertDuration(finishWorkAt, 'min', 'ms')
   const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
 

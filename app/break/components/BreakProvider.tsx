@@ -57,7 +57,7 @@ export const BreakProvider = ({ children }: Props) => {
   const [breakDuration, setBreakDuration] = useState<BreakDuration>(undefined)
 
   const todayStartedAt = useStartOfDay()
-  const { goalToFinishWorkBy } = useAssertUserState()
+  const { finishWorkAt } = useAssertUserState()
   const sets = useTodaySets()
 
   const [hasBrowserNotification, setHasBrowserNotification] =
@@ -148,7 +148,7 @@ export const BreakProvider = ({ children }: Props) => {
     if (!hasAutomaticBreak) return
 
     const now = Date.now()
-    const wordayEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
+    const wordayEndsAt = todayStartedAt + finishWorkAt * MS_IN_MIN
     if (wordayEndsAt - now < 25 * MS_IN_MIN) return
 
     const lastSet = getLastItem(sets)
@@ -171,7 +171,7 @@ export const BreakProvider = ({ children }: Props) => {
     } else {
       setBreakDuration(breakMinutesOptions[1])
     }
-  }, [goalToFinishWorkBy, hasAutomaticBreak, lastSetEnd, sets, todayStartedAt])
+  }, [finishWorkAt, hasAutomaticBreak, lastSetEnd, sets, todayStartedAt])
 
   return (
     <BreakContext.Provider

@@ -27,12 +27,12 @@ const Grid = styled.div`
 
 export const ManageSchedule = () => {
   const {
-    goalToWakeUpAt,
-    goalToStartWorkAt,
-    goalToFinishWorkBy,
-    goalToGoToBedAt,
-    firstMealStartsAt,
-    lastMealStartsAt,
+    wakeUpAt,
+    startWorkAt,
+    finishWorkAt,
+    goToBedAt,
+    firstMealAt,
+    lastMealAt,
   } = useAssertUserState()
 
   return (
@@ -54,40 +54,39 @@ export const ManageSchedule = () => {
                 <ManageStartOfWorkday />
                 <TimeBoundaryDistance
                   direction="right"
-                  value={goalToFinishWorkBy - goalToStartWorkAt}
+                  value={finishWorkAt - startWorkAt}
                 />
                 <ManageEndOfWorkday />
                 <TimeBoundaryDistance
                   direction="up"
-                  value={goalToStartWorkAt - goalToWakeUpAt}
+                  value={startWorkAt - wakeUpAt}
                 />
                 <div />
                 <TimeBoundaryDistance
                   direction="down"
-                  value={goalToGoToBedAt - goalToFinishWorkBy}
+                  value={goToBedAt - finishWorkAt}
                 />
                 <ManageWakeUp />
                 <TimeBoundaryDistance
                   direction="left"
                   value={
-                    convertDuration(24, 'h', 'min') -
-                    (goalToGoToBedAt - goalToWakeUpAt)
+                    convertDuration(24, 'h', 'min') - (goToBedAt - wakeUpAt)
                   }
                 />
                 <ManageBedTime />
                 <TimeBoundaryDistance
                   direction="down"
-                  value={firstMealStartsAt - goalToWakeUpAt}
+                  value={firstMealAt - wakeUpAt}
                 />
                 <div />
                 <TimeBoundaryDistance
                   direction="up"
-                  value={goalToGoToBedAt - lastMealStartsAt}
+                  value={goToBedAt - lastMealAt}
                 />
                 <ManageFirstMealStartsAt />
                 <TimeBoundaryDistance
                   direction="right"
-                  value={lastMealStartsAt - firstMealStartsAt}
+                  value={lastMealAt - firstMealAt}
                 />
                 <ManageLastMealStartsAt />
               </Grid>

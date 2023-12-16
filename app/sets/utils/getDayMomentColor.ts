@@ -1,13 +1,13 @@
-import { DayMoment } from '@increaser/entities/User'
+import { DayMoment } from '@increaser/entities/DayMoments'
 import { match } from '@increaser/utils/match'
 import { DefaultTheme } from 'styled-components'
 
 export const getDayMomentColor = (dayMoment: DayMoment, theme: DefaultTheme) =>
   match(dayMoment, {
-    goalToWakeUpAt: () => theme.colors.getLabelColor(2),
-    goalToStartWorkAt: () => theme.colors.getLabelColor(3),
-    firstMealStartsAt: () => theme.colors.getLabelColor(4),
-    goalToFinishWorkBy: () => theme.colors.getLabelColor(6),
-    lastMealStartsAt: () => theme.colors.getLabelColor(7),
-    goalToGoToBedAt: () => theme.colors.getLabelColor(9),
+    wakeUpAt: () => theme.colors.getLabelColor(2),
+    startWorkAt: () => theme.colors.getLabelColor(3),
+    firstMealAt: () => theme.colors.getLabelColor(4),
+    finishWorkAt: () => theme.colors.getLabelColor(6),
+    lastMealAt: () => theme.colors.getLabelColor(7),
+    goToBedAt: () => theme.colors.getLabelColor(9),
   })

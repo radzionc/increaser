@@ -31,7 +31,7 @@ const Container = styled(Panel)`
 // todo: warning when the workday end is close
 export const FocusSessionForm = () => {
   const todayStartedAt = useStartOfDay()
-  const { goalToFinishWorkBy } = useAssertUserState()
+  const { finishWorkAt } = useAssertUserState()
   const todaySets = useTodaySets()
   const { projectsRecord, activeProjects } = useProjects()
   const { start } = useFocus()
@@ -43,7 +43,7 @@ export const FocusSessionForm = () => {
   const [focusDuration, setFocusDuration] = useState<FocusDuration>(
     suggestFocusDuration({
       todayStartedAt,
-      goalToFinishWorkBy,
+      finishWorkAt,
       todaySets,
     }),
   )
@@ -65,7 +65,7 @@ export const FocusSessionForm = () => {
     setFocusDuration(
       suggestFocusDuration({
         todayStartedAt,
-        goalToFinishWorkBy,
+        finishWorkAt,
         todaySets,
       }),
     )
@@ -76,7 +76,7 @@ export const FocusSessionForm = () => {
         todaySets,
       }),
     )
-  }, [activeProjects, goalToFinishWorkBy, todaySets, todayStartedAt])
+  }, [activeProjects, finishWorkAt, todaySets, todayStartedAt])
 
   useEffect(() => {
     updateSuggestions()

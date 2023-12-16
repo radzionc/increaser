@@ -5,7 +5,6 @@ import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { Text } from '@increaser/ui/text'
 import { formatDayTimeBoudnary } from '@increaser/entities-utils/user/formatDayTimeBoundary'
 import { getColor } from '@increaser/ui/theme/getters'
-import { dayMomentStepInMinutes, dayMoments } from '@increaser/entities/User'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
 import { getDayMomentColor } from 'sets/utils/getDayMomentColor'
@@ -13,6 +12,7 @@ import { HStack } from '@increaser/ui/layout/Stack'
 import { dayMomentIcon } from './dayMomentIcon'
 import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { toPercents } from '@increaser/utils/toPercents'
+import { dayMomentStep, dayMoments } from '@increaser/entities/DayMoments'
 
 export const dayTimeLabelsWidthInPx = 48
 export const dayTimeLabelTimeWidthInPx = 32
@@ -47,16 +47,14 @@ export const DayTimeLabels = ({ startHour, endHour }: DayTimeLabelsProps) => {
   const user = useAssertUserState()
 
   const marksCount =
-    (endHour - startHour) /
-      convertDuration(dayMomentStepInMinutes, 'min', 'h') +
-    1
+    (endHour - startHour) / convertDuration(dayMomentStep, 'min', 'h') + 1
 
   const theme = useTheme()
 
   return (
     <Container>
       {range(marksCount).map((markIndex) => {
-        const minutesSinceStart = markIndex * dayMomentStepInMinutes
+        const minutesSinceStart = markIndex * dayMomentStep
         const minutes =
           minutesSinceStart + convertDuration(startHour, 'h', 'min')
         const top = toPercents(markIndex / (marksCount - 1))

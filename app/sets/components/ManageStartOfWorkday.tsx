@@ -2,23 +2,22 @@ import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { range } from '@increaser/utils/array/range'
 import { ManageDayMoment } from './ManageDayMoment'
-import { dayMomentStepInMinutes } from '@increaser/entities/User'
+import { dayMomentStep } from '@increaser/entities/DayMoments'
 
 export const ManageStartOfWorkday = () => {
-  const { goalToFinishWorkBy, goalToStartWorkAt, goalToWakeUpAt } =
-    useAssertUserState()
+  const { finishWorkAt, startWorkAt, wakeUpAt } = useAssertUserState()
 
   const { mutate: updateUser } = useUpdateUserMutation()
-  const maxOption = goalToFinishWorkBy
+  const maxOption = finishWorkAt
   const options = range(
-    Math.round((maxOption - goalToWakeUpAt) / dayMomentStepInMinutes) + 1,
-  ).map((step) => goalToWakeUpAt + dayMomentStepInMinutes * step)
+    Math.round((maxOption - wakeUpAt) / dayMomentStep) + 1,
+  ).map((step) => wakeUpAt + dayMomentStep * step)
 
   return (
     <ManageDayMoment
-      dayMoment="goalToStartWorkAt"
-      value={goalToStartWorkAt}
-      onChange={(value) => updateUser({ goalToStartWorkAt: value })}
+      dayMoment="startWorkAt"
+      value={startWorkAt}
+      onChange={(value) => updateUser({ startWorkAt: value })}
       options={options}
     />
   )

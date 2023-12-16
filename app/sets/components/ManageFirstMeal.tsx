@@ -2,24 +2,23 @@ import { useUpdateUserMutation } from 'user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { range } from '@increaser/utils/array/range'
 import { ManageDayMoment } from './ManageDayMoment'
-import { dayMomentStepInMinutes } from '@increaser/entities/User'
+import { dayMomentStep } from '@increaser/entities/DayMoments'
 
 export const ManageFirstMealStartsAt = () => {
-  const { firstMealStartsAt, goalToWakeUpAt, lastMealStartsAt } =
-    useAssertUserState()
+  const { firstMealAt, wakeUpAt, lastMealAt } = useAssertUserState()
 
   const { mutate: updateUser } = useUpdateUserMutation()
-  const minOption = goalToWakeUpAt
-  const maxOption = lastMealStartsAt
+  const minOption = wakeUpAt
+  const maxOption = lastMealAt
   const options = range(
-    Math.round((maxOption - minOption) / dayMomentStepInMinutes) + 1,
-  ).map((step) => minOption + dayMomentStepInMinutes * step)
+    Math.round((maxOption - minOption) / dayMomentStep) + 1,
+  ).map((step) => minOption + dayMomentStep * step)
 
   return (
     <ManageDayMoment
-      dayMoment="firstMealStartsAt"
-      value={firstMealStartsAt}
-      onChange={(value) => updateUser({ firstMealStartsAt: value })}
+      dayMoment="firstMealAt"
+      value={firstMealAt}
+      onChange={(value) => updateUser({ firstMealAt: value })}
       options={options}
     />
   )

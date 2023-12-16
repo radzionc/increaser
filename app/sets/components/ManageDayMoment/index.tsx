@@ -22,11 +22,11 @@ import { absoluteOutline } from '@increaser/ui/css/absoluteOutline'
 import { interactive } from '@increaser/ui/css/interactive'
 import { TimeOption } from './TimeOption'
 import { formatDayTimeBoudnary } from '@increaser/entities-utils/user/formatDayTimeBoundary'
-import { DayMoment, dayMomentShortName } from '@increaser/entities/User'
 import { getDayMomentColor } from 'sets/utils/getDayMomentColor'
 import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
 import { dayMomentIcon } from '../dayMomentIcon'
 import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
+import { DayMoment, dayMomentShortName } from '@increaser/entities/DayMoments'
 
 interface ManageDayMomentProps extends InputProps<number> {
   options: number[]

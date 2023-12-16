@@ -26,8 +26,8 @@ export const WorkdayFinished = () => {
 
   const [isLocked, setIsLocked] = useState(true)
 
-  const { goalToFinishWorkBy } = useAssertUserState()
-  const workdayEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
+  const { finishWorkAt } = useAssertUserState()
+  const workdayEndsAt = todayStartedAt + finishWorkAt * MS_IN_MIN
 
   if (
     now < workdayEndsAt ||

@@ -17,11 +17,11 @@ const Container = styled.div`
 `
 
 export const WorkdayEndStatus = () => {
-  const { goalToFinishWorkBy } = useAssertUserState()
+  const { finishWorkAt } = useAssertUserState()
   const { endHour, currentTime, dayStartedAt } = useDayOverview()
   const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const workdayEndsAt =
-    dayStartedAt + convertDuration(goalToFinishWorkBy, 'min', 'ms')
+    dayStartedAt + convertDuration(finishWorkAt, 'min', 'ms')
   const workEndsIn = workdayEndsAt - currentTime
 
   const todayStartedAt = useStartOfDay()

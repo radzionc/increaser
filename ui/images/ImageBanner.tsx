@@ -40,6 +40,7 @@ const PositionAction = styled.div`
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely}
   padding: ${padding};
+  ${transition}
 `
 
 const Container = styled(Panel)`

@@ -28,17 +28,17 @@ export const increaseFocusDuration = (lastSetDuration: number) => {
 
 interface SuggestFocusDurationParams {
   todayStartedAt: number
-  goalToFinishWorkBy: number
+  finishWorkAt: number
   todaySets: Set[]
 }
 
 export const suggestFocusDuration = ({
   todayStartedAt,
-  goalToFinishWorkBy,
+  finishWorkAt,
   todaySets,
 }: SuggestFocusDurationParams): FocusDuration => {
   const now = Date.now()
-  const workdayEndsAt = todayStartedAt + goalToFinishWorkBy * MS_IN_MIN
+  const workdayEndsAt = todayStartedAt + finishWorkAt * MS_IN_MIN
   const workdayEndsInMinutes = Math.floor((workdayEndsAt - now) / MS_IN_MIN)
   const focusOptions = focusDurations.filter(
     (option) => option <= workdayEndsInMinutes,

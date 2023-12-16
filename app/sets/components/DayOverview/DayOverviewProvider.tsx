@@ -63,7 +63,7 @@ export const DayOverviewProvider = ({
     return result
   }, [allSets, currentSet, currentTime, dayStartedAt])
 
-  const { goalToStartWorkAt, goalToFinishWorkBy } = useAssertUserState()
+  const { startWorkAt, finishWorkAt } = useAssertUserState()
 
   const startHour = useMemo(() => {
     if (sets.length) {
@@ -73,14 +73,14 @@ export const DayOverviewProvider = ({
     }
 
     return Math.min(
-      Math.floor(convertDuration(goalToStartWorkAt, 'min', 'h')),
+      Math.floor(convertDuration(startWorkAt, 'min', 'h')),
       convertDuration(currentTime - dayStartedAt, 'ms', 'h'),
     )
-  }, [currentTime, dayStartedAt, goalToStartWorkAt, sets])
+  }, [currentTime, dayStartedAt, startWorkAt, sets])
 
   const endHour = useMemo(() => {
     const workdayEndsAtHour = Math.ceil(
-      convertDuration(goalToFinishWorkBy, 'min', 'h'),
+      convertDuration(finishWorkAt, 'min', 'h'),
     )
     if (!sets.length) {
       return workdayEndsAtHour
@@ -92,7 +92,7 @@ export const DayOverviewProvider = ({
       workdayEndsAtHour,
       Math.ceil(convertDuration(lastSetEnd - dayStartedAt, 'ms', 'h')),
     )
-  }, [dayStartedAt, goalToFinishWorkBy, sets])
+  }, [dayStartedAt, finishWorkAt, sets])
 
   return (
     <DayOverviewContext.Provider

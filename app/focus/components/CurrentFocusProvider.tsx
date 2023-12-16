@@ -42,7 +42,7 @@ export const CurrentFocusProvider = ({
     stop,
   } = useFocus()
 
-  const { goalToFinishWorkBy } = useAssertUserState()
+  const { finishWorkAt } = useAssertUserState()
 
   const startTime = currentSet?.startedAt as number
   const durationMs = (focusDuration as number) * MS_IN_MIN
@@ -118,7 +118,7 @@ export const CurrentFocusProvider = ({
   useEffect(() => {
     const now = Date.now()
     const showMessageIn =
-      now + (goalToFinishWorkBy - remindMinBeforeWorkDayEnds) * MS_IN_MIN
+      now + (finishWorkAt - remindMinBeforeWorkDayEnds) * MS_IN_MIN
     if (showMessageIn < now) return
 
     const timeout = setTimeout(() => {
@@ -148,11 +148,7 @@ export const CurrentFocusProvider = ({
     return () => {
       clearTimeout(timeout)
     }
-  }, [
-    goalToFinishWorkBy,
-    hasTimerBrowserNotification,
-    hasTimerSoundNotification,
-  ])
+  }, [finishWorkAt, hasTimerBrowserNotification, hasTimerSoundNotification])
 
   return (
     <CurrentFocusContext.Provider value={value}>
