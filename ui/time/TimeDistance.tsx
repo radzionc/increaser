@@ -8,16 +8,16 @@ import { formatDuration } from '@increaser/utils/time/formatDuration'
 import styled from 'styled-components'
 import { Direction } from '@increaser/utils/Direction'
 import { Stack } from '@increaser/ui/layout/Stack'
+import { Minutes } from '@increaser/utils/time/types'
 
-interface TimeBoundaryDistanceProps {
-  value: number
+interface TimeDistanceProps {
+  value: Minutes
   direction: Direction
 }
 
 const DashedLine = styled.div`
   border-top: 1px dashed;
   border-left: 1px dashed;
-
   height: 0px;
   flex: 1;
 `
@@ -37,13 +37,9 @@ const Content = styled(Text)`
 const Connector = styled(Stack)`
   flex: 1;
   align-items: center;
-  flex-direction: ${({ direction }) => direction};
 `
 
-export const TimeBoundaryDistance = ({
-  value,
-  direction,
-}: TimeBoundaryDistanceProps) => {
+export const TimeDistance = ({ value, direction }: TimeDistanceProps) => {
   const content = (
     <Content color="supporting">{formatDuration(value, 'min')}</Content>
   )

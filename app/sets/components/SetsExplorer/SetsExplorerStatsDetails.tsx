@@ -3,11 +3,11 @@ import { useMemo } from 'react'
 import { getBlocks } from 'sets/Block'
 import { getSetsSum } from 'sets/helpers/getSetsSum'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
-import { formatDayTimeBoudnary } from '@increaser/entities-utils/user/formatDayTimeBoundary'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { getAverage } from '@increaser/utils/math/getAverage'
 import { SetsExplorerStatistic } from './SetsExplorerStatistic'
 import { getWeekday } from '@increaser/utils/time/getWeekday'
+import { formatDailyEventTime } from '@increaser/utils/time/formatDailyEventTime'
 
 interface SetsExplorerStatsDetailsProps {
   days: SetsExplorerDay[]
@@ -37,7 +37,7 @@ export const SetsExplorerStatsDetails = ({
       daysWithSets.map((day) => day.sets[0].start - day.startedAt),
     )
 
-    return formatDayTimeBoudnary(convertDuration(ms, 'ms', 'min'))
+    return formatDailyEventTime(convertDuration(ms, 'ms', 'min'))
   }, [daysWithSets])
 
   const avgWorkdayEnd = useMemo(() => {
@@ -49,7 +49,7 @@ export const SetsExplorerStatsDetails = ({
       ),
     )
 
-    return formatDayTimeBoudnary(convertDuration(ms, 'ms', 'min'))
+    return formatDailyEventTime(convertDuration(ms, 'ms', 'min'))
   }, [daysWithSets])
 
   const avgWorkday = useMemo(() => {

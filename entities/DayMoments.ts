@@ -1,4 +1,5 @@
 import { convertDuration } from '@increaser/utils/time/convertDuration'
+import { Minutes } from '@increaser/utils/time/types'
 
 export const dayMoments = [
   'wakeUpAt',
@@ -11,7 +12,6 @@ export const dayMoments = [
 
 export type DayMoment = (typeof dayMoments)[number]
 
-export type Minutes = number
 export type DayMoments = Record<DayMoment, Minutes>
 
 export const dayMomentShortName: Record<DayMoment, string> = {

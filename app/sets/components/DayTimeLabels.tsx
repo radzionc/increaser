@@ -3,7 +3,6 @@ import { range } from '@increaser/utils/array/range'
 import { PositionAbsolutelyCenterHorizontally } from '@increaser/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { convertDuration } from '@increaser/utils/time/convertDuration'
 import { Text } from '@increaser/ui/text'
-import { formatDayTimeBoudnary } from '@increaser/entities-utils/user/formatDayTimeBoundary'
 import { getColor } from '@increaser/ui/theme/getters'
 import { useAssertUserState } from 'user/state/UserStateContext'
 import { IconWrapper } from '@increaser/ui/icons/IconWrapper'
@@ -13,6 +12,7 @@ import { dayMomentIcon } from './dayMomentIcon'
 import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { toPercents } from '@increaser/utils/toPercents'
 import { dayMomentStep, dayMoments } from '@increaser/entities/DayMoments'
+import { formatDailyEventTime } from '@increaser/utils/time/formatDailyEventTime'
 
 export const dayTimeLabelsWidthInPx = 48
 export const dayTimeLabelTimeWidthInPx = 32
@@ -66,11 +66,15 @@ export const DayTimeLabels = ({ startHour, endHour }: DayTimeLabelsProps) => {
           : undefined
 
         return (
-          <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
+          <PositionAbsolutelyCenterHorizontally
+            key={markIndex}
+            fullWidth
+            top={top}
+          >
             <MarkContainer>
               {isPrimaryMark ? (
                 <Text size={12} color="supporting">
-                  {formatDayTimeBoudnary(minutes)}
+                  {formatDailyEventTime(minutes)}
                 </Text>
               ) : moment ? (
                 <Mark
