@@ -63,7 +63,11 @@ export const ManageSchedule = () => {
   )
 
   const manageBedTime = (
-    <ManageDayMoment dayMoment="goToBedAt" min={finishWorkAt} max={goToBedAt} />
+    <ManageDayMoment
+      dayMoment="goToBedAt"
+      min={finishWorkAt}
+      max={convertDuration(1, 'd', 'min')}
+    />
   )
 
   return (

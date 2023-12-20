@@ -8,7 +8,7 @@ import {
   WeekTimeAllocation,
   defaultWeekTimeAllocation,
 } from './WeekTimeAllocation'
-import { DayMoment, dayMomentsDefaultValues } from './DayMoments'
+import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 
 export interface Set {
   start: number
@@ -29,8 +29,6 @@ export interface Task {
 
 export const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
 export type PrimaryGoal = (typeof primaryGoals)[number]
-
-export type DayMoments = Record<DayMoment, number>
 
 export type User = DayMoments & {
   primaryGoal: PrimaryGoal
