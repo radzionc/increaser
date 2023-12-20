@@ -1,5 +1,5 @@
 import { Form } from '@increaser/ui/form/components/Form'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { Button } from '@increaser/ui/buttons/Button'
 import { TextInput } from '@increaser/ui/inputs/TextInput'
 import { Controller, useForm } from 'react-hook-form'
@@ -56,14 +56,14 @@ export const PublicProfileForm = ({ onCancel }: PublicProfileFormProps) => {
         </>
       }
       actions={
-        <SameWidthChildrenRow gap={8}>
+        <UniformColumnGrid gap={8}>
           <Button size="l" type="button" kind="secondary" onClick={onCancel}>
             Cancel
           </Button>
           <Button size="l" kind="reversed">
             Update
           </Button>
-        </SameWidthChildrenRow>
+        </UniformColumnGrid>
       }
     />
   )

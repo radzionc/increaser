@@ -76,19 +76,13 @@ export const ManageDayMoment = ({
     (step) => min + dayMomentStep * step,
   )
 
-  const selectedIndex = options.indexOf(value)
-
   const {
     getReferenceProps,
-    setReferenceRef,
     getFloatingProps,
-    getItemProps,
+    getOptionProps,
     isOpen,
     setIsOpen,
     activeIndex,
-    setFloatingRef,
-    floatingStyles,
-    setOptionRef,
   } = useFloatingOptions({
     selectedIndex: options.indexOf(value),
   })
@@ -96,21 +90,9 @@ export const ManageDayMoment = ({
   const theme = useTheme()
   const color = getDayMomentColor(dayMoment, theme)
 
-  const onChange = (value: number) => {
-    updateUser({ [dayMoment]: value })
-    setIsOpen(false)
-  }
-
   return (
     <>
-      <Container
-        aria-labelledby="select-label"
-        aria-autocomplete="none"
-        isActive={isOpen}
-        tabIndex={0}
-        ref={setReferenceRef}
-        {...getReferenceProps()}
-      >
+      <Container isActive={isOpen} {...getReferenceProps()}>
         <HStack style={{ minWidth: 132 }} alignItems="center" gap={8}>
           <IconWrapper style={{ color: color.toCssValue() }}>
             {dayMomentIcon[dayMoment]}
@@ -120,28 +102,16 @@ export const ManageDayMoment = ({
         <Text weight="bold">{formatDailyEventTime(value)}</Text>
       </Container>
       {isOpen && (
-        <FloatingOptionsContainer
-          ref={setFloatingRef}
-          style={floatingStyles}
-          {...getFloatingProps()}
-        >
+        <FloatingOptionsContainer {...getFloatingProps()}>
           {options.map((option, index) => (
             <TimeOption
               isActive={activeIndex === index}
-              role="option"
-              tabIndex={activeIndex === index ? 0 : -1}
-              aria-selected={index === selectedIndex && index === activeIndex}
-              ref={setOptionRef(index)}
               key={option}
-              {...getItemProps({
-                onClick: () => {
-                  onChange(option)
-                },
-                onKeyDown(event) {
-                  if (event.key === 'Enter') {
-                    event.preventDefault()
-                    onChange(option)
-                  }
+              {...getOptionProps({
+                index,
+                onSelect: () => {
+                  updateUser({ [dayMoment]: option })
+                  setIsOpen(false)
                 },
               })}
             >

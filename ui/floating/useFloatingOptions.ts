@@ -15,6 +15,11 @@ interface FloatingOptionsParams {
   selectedIndex: number
 }
 
+interface GetOptionsPropsParams {
+  index: number
+  onSelect: () => void
+}
+
 export const useFloatingOptions = ({
   selectedIndex,
 }: FloatingOptionsParams) => {
@@ -56,19 +61,49 @@ export const useFloatingOptions = ({
     ],
   )
 
-  const setOptionRef = (index: number) => (element: HTMLElement | null) => {
-    optionsRef.current[index] = element
+  const getReferencePropsEnhanced = () => {
+    return getReferenceProps({
+      ref: refs.setReference,
+      tabIndex: 0,
+      'aria-autocomplete': 'none',
+      'aria-labelledby': 'select-label',
+    })
+  }
+
+  const getFloatingPropsEnhanced = () => {
+    return getFloatingProps({
+      ref: refs.setFloating,
+      style: floatingStyles,
+    })
+  }
+
+  const getOptionPropsEnhanced = ({
+    index,
+    onSelect,
+  }: GetOptionsPropsParams) => {
+    return getItemProps({
+      role: 'option',
+      tabIndex: activeIndex === index ? 0 : -1,
+      'aria-selected': index === selectedIndex && index === activeIndex,
+      onClick: onSelect,
+      ref: (element) => {
+        optionsRef.current[index] = element
+      },
+      onKeyDown: (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault()
+          onSelect()
+        }
+      },
+    })
   }
 
   return {
     isOpen,
     setIsOpen,
-    getReferenceProps,
-    setReferenceRef: refs.setReference,
-    setFloatingRef: refs.setFloating,
-    setOptionRef,
-    getFloatingProps,
-    getItemProps,
+    getReferenceProps: getReferencePropsEnhanced,
+    getFloatingProps: getFloatingPropsEnhanced,
+    getOptionProps: getOptionPropsEnhanced,
     activeIndex,
     floatingStyles,
   } as const

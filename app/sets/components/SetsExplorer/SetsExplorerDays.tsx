@@ -4,13 +4,13 @@ import { SetsExplorerDayView } from './SetsExplorerDayView'
 import { useEffect, useRef } from 'react'
 import { horizontalPadding } from '@increaser/ui/css/horizontalPadding'
 import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
-import { daysGap } from './config'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { SetsExplorerDaysChart } from './SetsExplorerDaysChart'
+import { setsExplorerConfig } from './config'
 
 const Wrapper = styled(VStack)`
   ${horizontalPadding(4)};
-  gap: ${toSizeUnit(daysGap)};
+  gap: ${toSizeUnit(setsExplorerConfig.daysGap)};
   overflow-x: auto;
   flex: 1;
   &::-webkit-scrollbar {
@@ -21,12 +21,13 @@ const Wrapper = styled(VStack)`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  gap: ${toSizeUnit(daysGap)};
+  gap: ${toSizeUnit(setsExplorerConfig.daysGap)};
 `
 
 export const SetsExplorerDays = () => {
   const { days } = useSetsExplorer()
   const container = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     const element = container.current
     if (element) {

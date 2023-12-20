@@ -14,12 +14,12 @@ export const ScheduleReview = () => {
     useAssertUserState()
 
   return (
-    <VStack style={{ maxWidth: 320 }} gap={16}>
+    <VStack style={{ maxWidth: 320, minWidth: 240 }} gap={16}>
       <Text weight="bold">Healthy schedule</Text>
-      <VStack style={{ minWidth: 240 }} gap={12}>
+      <VStack gap={12}>
         <ScheduleCheckItem
           value={
-            convertDuration(24, 'h', 'min') - (lastMealAt - firstMealAt) >=
+            convertDuration(1, 'd', 'min') - (lastMealAt - firstMealAt) >=
             convertDuration(intermittentFastingHoursTarget, 'h', 'min')
           }
           label={`${intermittentFastingHoursTarget} hours of intermittent fasting`}
@@ -41,7 +41,7 @@ export const ScheduleReview = () => {
         />
         <ScheduleCheckItem
           value={
-            convertDuration(24, 'h', 'min') - goToBedAt + wakeUpAt >=
+            convertDuration(1, 'd', 'min') - goToBedAt + wakeUpAt >=
             convertDuration(sleepHoursTarget, 'h', 'min')
           }
           label={`Optimal ${sleepHoursTarget} hours of sleep for health`}

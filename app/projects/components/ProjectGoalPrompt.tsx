@@ -4,7 +4,7 @@ import { useBoolean } from '@increaser/ui/hooks/useBoolean'
 import { formatDuration } from '@increaser/utils/time/formatDuration'
 import { Button } from '@increaser/ui/buttons/Button'
 import { PlusIcon } from '@increaser/ui/icons/PlusIcon'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import { Text } from '@increaser/ui/text'
 import { EmojiTextPrefix } from 'ui/EmojiTextPrefix'
@@ -80,7 +80,7 @@ export const ProjectGoalPrompt = () => {
               max={Math.round(freeMinutes / MIN_IN_HOUR)}
               color={hslaColor}
             />
-            <SameWidthChildrenRow gap={20}>
+            <UniformColumnGrid gap={20}>
               <Button size="l" onClick={finishCreatingGoal} kind="secondary">
                 Cancel
               </Button>
@@ -99,7 +99,7 @@ export const ProjectGoalPrompt = () => {
               >
                 Create
               </Button>
-            </SameWidthChildrenRow>
+            </UniformColumnGrid>
           </>
         )}
       </VStack>

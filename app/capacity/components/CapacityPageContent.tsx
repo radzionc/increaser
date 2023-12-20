@@ -1,7 +1,7 @@
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
 import styled from 'styled-components'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { VStack } from '@increaser/ui/layout/Stack'
 
 import { CurrentWeekPerformance } from './CurrentWeekPerformance'
@@ -10,7 +10,7 @@ import { ManageGoals } from './ManageGoals'
 import { PreviousCapacity } from './PreviousCapacity'
 import { Panel } from '@increaser/ui/panel/Panel'
 
-const Container = styled(SameWidthChildrenRow)`
+const Container = styled(UniformColumnGrid)`
   align-items: start;
 `
 

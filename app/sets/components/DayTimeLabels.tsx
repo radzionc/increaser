@@ -13,6 +13,7 @@ import { toSizeUnit } from '@increaser/ui/css/toSizeUnit'
 import { toPercents } from '@increaser/utils/toPercents'
 import { dayMomentStep, dayMoments } from '@increaser/entities/DayMoments'
 import { formatDailyEventTime } from '@increaser/utils/time/formatDailyEventTime'
+import { UIComponentProps } from '@increaser/ui/props'
 
 export const dayTimeLabelsWidthInPx = 48
 export const dayTimeLabelTimeWidthInPx = 32
@@ -38,12 +39,16 @@ const Mark = styled.div`
   justify-self: end;
 `
 
-interface DayTimeLabelsProps {
+interface DayTimeLabelsProps extends UIComponentProps {
   startHour: number
   endHour: number
 }
 
-export const DayTimeLabels = ({ startHour, endHour }: DayTimeLabelsProps) => {
+export const DayTimeLabels = ({
+  startHour,
+  endHour,
+  ...rest
+}: DayTimeLabelsProps) => {
   const user = useAssertUserState()
 
   const marksCount =
@@ -52,7 +57,7 @@ export const DayTimeLabels = ({ startHour, endHour }: DayTimeLabelsProps) => {
   const theme = useTheme()
 
   return (
-    <Container>
+    <Container {...rest}>
       {range(marksCount).map((markIndex) => {
         const minutesSinceStart = markIndex * dayMomentStep
         const minutes =

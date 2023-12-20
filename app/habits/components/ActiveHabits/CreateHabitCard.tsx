@@ -2,7 +2,7 @@ import { useCreateHabitMutation } from 'habits/api/useCreateHabitMutation'
 import { Controller } from 'react-hook-form'
 import { Button } from '@increaser/ui/buttons/Button'
 import { ColorLabelInput } from '@increaser/ui/inputs/ColorLabelInput'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { HStack, VStack } from '@increaser/ui/layout/Stack'
 import { Text } from '@increaser/ui/text'
 
@@ -55,7 +55,7 @@ export const CreateHabitCard = ({ onFinish }: CreateHabitCardProps) => {
             {...register('name', { required: true })}
           />
         </HStack>
-        <SameWidthChildrenRow gap={20}>
+        <UniformColumnGrid gap={20}>
           <Button size="l" onClick={onFinish} kind="secondary">
             Cancel
           </Button>
@@ -69,7 +69,7 @@ export const CreateHabitCard = ({ onFinish }: CreateHabitCardProps) => {
           >
             Create
           </Button>
-        </SameWidthChildrenRow>
+        </UniformColumnGrid>
       </VStack>
     </ListCard>
   )

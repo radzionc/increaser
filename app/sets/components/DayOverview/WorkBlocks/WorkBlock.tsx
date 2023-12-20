@@ -78,7 +78,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
           />
         ))}
         {showDuration && (
-          <Duration size={12}>
+          <Duration size={14}>
             {formatDuration(getBlockWorkDuration(block), 'ms')}
           </Duration>
         )}

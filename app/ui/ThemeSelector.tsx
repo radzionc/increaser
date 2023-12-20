@@ -1,4 +1,4 @@
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { Text } from '@increaser/ui/text'
 import { SelectOption } from '@increaser/ui/inputs/Select/SelectOption'
@@ -12,7 +12,7 @@ export const ThemeSelector = () => {
   return (
     <VStack style={{ width: 320 }} alignItems="start" gap={8}>
       <Text color="supporting">Theme</Text>
-      <SameWidthChildrenRow fullWidth gap={8}>
+      <UniformColumnGrid fullWidth gap={8}>
         {themePreferences.map((option) => (
           <SelectOption
             isSelected={option === prefferedTheme}
@@ -24,7 +24,7 @@ export const ThemeSelector = () => {
             {capitalizeFirstLetter(option)}
           </SelectOption>
         ))}
-      </SameWidthChildrenRow>
+      </UniformColumnGrid>
     </VStack>
   )
 }

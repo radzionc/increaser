@@ -1,6 +1,6 @@
 import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { range } from '@increaser/utils/array/range'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { D_IN_WEEK, MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
 import { useCurrentHabit } from '../CurrentHabitProvider'
@@ -12,7 +12,7 @@ export const HabitProgress = () => {
   const { successes, id, hslaColor, startedAt } = useCurrentHabit()
 
   return (
-    <SameWidthChildrenRow gap={4}>
+    <UniformColumnGrid gap={4}>
       {range(D_IN_WEEK).map((index) => {
         const timestamp = startOfDay - index * MS_IN_DAY
 
@@ -31,6 +31,6 @@ export const HabitProgress = () => {
           />
         )
       })}
-    </SameWidthChildrenRow>
+    </UniformColumnGrid>
   )
 }

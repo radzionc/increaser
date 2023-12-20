@@ -1,7 +1,7 @@
 import { FixedWidthContent } from 'components/reusable/fixed-width-content'
 import { ErrorBoundary } from 'errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from 'errors/components/ErrorFallbackCard'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { UserStateOnly } from 'user/state/UserStateOnly'
 
@@ -29,7 +29,7 @@ export const HabitsPage: Page = () => {
             <UserStateOnly>
               <RenderHabitsView
                 my={() => (
-                  <SameWidthChildrenRow
+                  <UniformColumnGrid
                     style={{ alignItems: 'start' }}
                     gap={40}
                     maxColumns={2}
@@ -40,7 +40,7 @@ export const HabitsPage: Page = () => {
                       <CheckYesterdayHabits />
                     </VStack>
                     <ActiveHabits />
-                  </SameWidthChildrenRow>
+                  </UniformColumnGrid>
                 )}
                 explore={() => <CuratedHabits />}
               />

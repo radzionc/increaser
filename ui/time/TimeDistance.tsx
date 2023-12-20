@@ -26,7 +26,6 @@ const Container = styled(Stack)`
   flex: 1;
   color: ${getColor('textShy')};
   align-items: center;
-  flex-direction: ${({ direction }) => direction};
   font-size: 14px;
 `
 

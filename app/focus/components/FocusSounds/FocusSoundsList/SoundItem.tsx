@@ -7,7 +7,7 @@ import { MoreHorizontalIcon } from '@increaser/ui/icons/MoreHorizontalIcon'
 import { PauseIcon } from '@increaser/ui/icons/PauseIcon'
 import { PlayIcon } from '@increaser/ui/icons/PlayIcon'
 import { StarIcon } from '@increaser/ui/icons/StarIcon'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { Modal } from '@increaser/ui/modal'
 import { OnHoverAction } from '@increaser/ui/base/OnHoverAction'
 import { Opener } from '@increaser/ui/base/Opener'
@@ -151,10 +151,10 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
           >
             {name}
           </Text>
-          <SameWidthChildrenRow style={actionSize} gap={0}>
+          <UniformColumnGrid style={actionSize} gap={0}>
             <div />
             <Center>{favourite && star}</Center>
-          </SameWidthChildrenRow>
+          </UniformColumnGrid>
         </Container>
       )}
     />

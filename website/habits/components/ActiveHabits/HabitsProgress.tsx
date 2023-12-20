@@ -2,7 +2,7 @@ import { useStartOfDay } from '@increaser/ui/hooks/useStartOfDay'
 import { range } from '@increaser/utils/array/range'
 import styled, { useTheme } from 'styled-components'
 import { transition } from '@increaser/ui/css/transition'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { VStack } from '@increaser/ui/layout/Stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@increaser/utils/time'
 
@@ -24,7 +24,7 @@ export const HabitsProgress = () => {
   const { colors } = useTheme()
 
   return (
-    <SameWidthChildrenRow gap={2}>
+    <UniformColumnGrid gap={2}>
       {range(habitDaysToShow).map((index) => {
         const dayTimestamp = startOfDay - index * MS_IN_DAY
         const habitDate = toHabitDate(new Date(dayTimestamp))
@@ -52,6 +52,6 @@ export const HabitsProgress = () => {
           </VStack>
         )
       })}
-    </SameWidthChildrenRow>
+    </UniformColumnGrid>
   )
 }

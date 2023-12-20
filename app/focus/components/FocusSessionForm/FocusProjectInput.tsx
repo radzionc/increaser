@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { transition } from '@increaser/ui/css/transition'
 import { Center } from '@increaser/ui/layout/Center'
 import { InvisibleHTMLRadio } from '@increaser/ui/inputs/InvisibleHTMLRadio'
-import { SameWidthChildrenRow } from '@increaser/ui/Layout/SameWidthChildrenRow'
+import { UniformColumnGrid } from '@increaser/ui/Layout/UniformColumnGrid'
 import { HStack } from '@increaser/ui/layout/Stack'
 import { Text } from '@increaser/ui/text'
 import { centerContent } from '@increaser/ui/css/centerContent'
@@ -27,7 +27,7 @@ export const FocusProjectInput = ({
   }
 
   return (
-    <SameWidthChildrenRow gap={4} minChildrenWidth={160}>
+    <UniformColumnGrid gap={4} minChildrenWidth={160}>
       {options.map((project) => {
         const { id, name } = project
         const isSelected = id === value
@@ -48,7 +48,7 @@ export const FocusProjectInput = ({
           </Option>
         )
       })}
-    </SameWidthChildrenRow>
+    </UniformColumnGrid>
   )
 }
 
