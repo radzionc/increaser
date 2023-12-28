@@ -1,0 +1,36 @@
+import { useGroupedByWeekdaySetsTotal } from '@increaser/app/sets/hooks/useGroupedByWeekdaySetsTotal'
+import { useWeekday } from '@lib/ui/hooks/useWeekday'
+import { formatDuration } from '@lib/utils/time/formatDuration'
+import { sum } from '@lib/utils/array/sum'
+import { LabeledValue } from '@lib/ui/text/LabeledValue'
+import { HStack } from '@lib/ui/layout/Stack'
+import { Text } from '@lib/ui/text'
+
+export const DayAverage = () => {
+  const totals = useGroupedByWeekdaySetsTotal()
+
+  const currentWeekday = useWeekday()
+
+  const passedWorkdays = Math.min(currentWeekday, 5)
+  const isNotMonday = passedWorkdays > 0
+
+  return (
+    <Text as="div" size={14}>
+      <LabeledValue name="Workday avg">
+        {isNotMonday ? (
+          <HStack alignItems="center" gap={4}>
+            <Text weight="bold">
+              {formatDuration(
+                sum(totals.slice(0, passedWorkdays)) / passedWorkdays,
+                'ms',
+                { maxUnit: 'h' },
+              )}
+            </Text>
+          </HStack>
+        ) : (
+          <Text>-</Text>
+        )}
+      </LabeledValue>
+    </Text>
+  )
+}

@@ -31,7 +31,7 @@ yarn add --dev @types/react @types/react-dom @types/styled-components eslint typ
 
 ```tsx
 import { GlobalStyle } from 'lib/ui/GlobalStyle'
-import { ThemeProvider } from 'ui/ThemeProvider'
+import { ThemeProvider } from '@increaser/app/ui/ThemeProvider'
 
 export const App = () => {
   return (

@@ -1,0 +1,68 @@
+import { useDeleteProjectMutation } from '@increaser/app/projects/api/userDeleteProjectMutation'
+import { useUpdateProjectMutation } from '@increaser/app/projects/api/useUpdateProjectMutation'
+import { IconButton } from '@lib/ui/buttons/IconButton'
+import { TextButton } from '@lib/ui/buttons/TextButton'
+import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
+import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
+import { Opener } from '@lib/ui/base/Opener'
+import { VStack } from '@lib/ui/layout/Stack'
+import { Text } from '@lib/ui/text'
+
+import { useCurrentProject } from './ProjectView/CurrentProjectProvider'
+
+export const DeleteProject = () => {
+  const { name, id, status } = useCurrentProject()
+
+  const { mutate: deleteProject } = useDeleteProjectMutation()
+
+  const { mutate: updateProject } = useUpdateProjectMutation()
+
+  return (
+    <Opener
+      renderOpener={({ onOpen }) => (
+        <IconButton
+          title="Delete"
+          kind="alert"
+          icon={<TrashBinIcon />}
+          onClick={onOpen}
+        />
+      )}
+      renderContent={({ onClose }) => (
+        <ConfirmationModal
+          title="Delete project"
+          onClose={onClose}
+          confirmActionText="Delete"
+          onConfirm={() => {
+            deleteProject({ id })
+          }}
+        >
+          <VStack gap={12}>
+            <Text color="supporting">
+              Are you sure you want to delete{' '}
+              <Text as="span" color="regular">
+                {name}?
+              </Text>{' '}
+              This action will remove all the analytics related to the project.
+            </Text>
+            {status === 'ACTIVE' && (
+              <Text color="supporting">
+                To keep the data but hide the project from other parts of the
+                app -{' '}
+                <TextButton
+                  onClick={() => {
+                    updateProject({
+                      id,
+                      fields: { status: 'INACTIVE' },
+                    })
+                    onClose()
+                  }}
+                  text="make it inactive."
+                />
+              </Text>
+            )}
+          </VStack>
+        </ConfirmationModal>
+      )}
+    />
+  )
+}

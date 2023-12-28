@@ -1,0 +1,104 @@
+import { getProjectOverBudgetTime } from '@increaser/app/projects/utils/getProjectOverBudgetTime'
+import React from 'react'
+import { formatDuration } from '@lib/utils/time/formatDuration'
+import styled, { useTheme } from 'styled-components'
+import { Circle } from '@lib/ui/layout/Circle'
+import { Text } from '@lib/ui/text'
+import { AllocationLine } from '@increaser/app/ui/AllocationLine'
+import { CheckCircleIcon } from '@lib/ui/icons/CheckCircleIcon'
+import { EnhancedProject } from '@increaser/app/projects/Project'
+
+interface ProjectsToBudgetSectionProps {
+  projects: EnhancedProject[]
+}
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr 80px 60px 80px;
+  align-items: center;
+  gap: 8px;
+`
+
+export const ProjectsToBudgetSection = ({
+  projects,
+}: ProjectsToBudgetSectionProps) => {
+  const theme = useTheme()
+
+  if (!projects.length) {
+    return null
+  }
+
+  return (
+    <Container>
+      <Circle size={8} background={theme.colors.mist} />
+      <Text size={14} color="shy">
+        Project
+      </Text>
+      <Text size={14} color="shy">
+        Total
+      </Text>
+      <Text size={14} color="shy">
+        Progress
+      </Text>
+      <Text style={{ justifySelf: 'end' }} size={14} color="shy">
+        Left
+      </Text>
+
+      {projects.map((project) => (
+        <React.Fragment key={project.id}>
+          <Circle size={8} background={project.hslaColor} />
+          <Text size={14} color="supporting">
+            {project.name}
+          </Text>
+          <Text weight="semibold" size={14} color="supporting">
+            {formatDuration(project.doneMinutesThisWeek, 'min', {
+              maxUnit: 'h',
+            })}
+          </Text>
+          {project.allocatedMinutesPerWeek > 0 ? (
+            <AllocationLine
+              segments={[
+                {
+                  proportion:
+                    project.doneMinutesThisWeek /
+                    project.allocatedMinutesPerWeek,
+                  color:
+                    project.doneMinutesThisWeek >
+                    project.allocatedMinutesPerWeek
+                      ? project.hslaColor
+                      : theme.colors.textSupporting,
+                },
+              ]}
+            />
+          ) : (
+            <div />
+          )}
+          <Text
+            size={14}
+            color={
+              project.doneMinutesThisWeek > project.allocatedMinutesPerWeek
+                ? 'regular'
+                : 'supporting'
+            }
+            as="div"
+            style={{ justifySelf: 'end' }}
+          >
+            {project.doneMinutesThisWeek > project.allocatedMinutesPerWeek ? (
+              <Text as="div" color="regular" style={{ display: 'flex' }}>
+                <CheckCircleIcon />
+              </Text>
+            ) : (
+              <Text>
+                {formatDuration(
+                  Math.abs(getProjectOverBudgetTime(project)),
+                  'min',
+                  { maxUnit: 'h' },
+                )}
+              </Text>
+            )}
+          </Text>
+        </React.Fragment>
+      ))}
+    </Container>
+  )
+}

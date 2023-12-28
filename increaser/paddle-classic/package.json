@@ -1,0 +1,11 @@
+{
+  "name": "@increaser/paddle-classic",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "date-fns": "^3.0.6"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

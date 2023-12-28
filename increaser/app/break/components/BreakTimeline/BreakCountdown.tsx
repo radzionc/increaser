@@ -1,0 +1,32 @@
+import { useBreak } from '@increaser/app/break/hooks/useBreak'
+import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
+import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
+import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
+import { Text } from '@lib/ui/text'
+import { MS_IN_SEC } from '@lib/utils/time'
+import { SlidingTime } from '@increaser/app/ui/SlidingTime'
+
+export const BreakCountdown = () => {
+  const { breakDuration } = useBreak()
+  const lastSetEnd = useLastSetEnd()
+  const todayStartedAt = useStartOfDay()
+
+  if (!lastSetEnd || todayStartedAt > lastSetEnd) return null
+
+  return (
+    <HStackSeparatedBy
+      separator={<Text color="shy">{breakDuration ? '/' : ''}</Text>}
+    >
+      <Text as="div" weight="bold" size={40} height="small">
+        <SlidingTime getSeconds={(now) => (now - lastSetEnd) / MS_IN_SEC} />
+      </Text>
+      <Text color={breakDuration ? 'supporting' : 'shy'} weight="bold">
+        {breakDuration
+          ? breakDuration === 'long'
+            ? 'long break'
+            : `${breakDuration} min break`
+          : 'since last session'}
+      </Text>
+    </HStackSeparatedBy>
+  )
+}
