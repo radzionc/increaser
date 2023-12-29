@@ -1,4 +1,4 @@
-import { Page } from '@increaser/app/layout/Page'
+import { Page } from '@lib/next-ui/Page'
 import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-width-content'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { VStack } from '@lib/ui/layout/Stack'

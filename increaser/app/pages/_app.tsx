@@ -17,7 +17,7 @@ import { UserManagerProvider } from '@increaser/app/user/components/UserManagerP
 import { UserStateProvider } from '@increaser/app/user/components/UserStateProvider'
 
 import { Open_Sans } from 'next/font/google'
-import { Page } from '@increaser/app/layout/Page'
+import { Page } from '@lib/next-ui/Page'
 import { MembershipConfirmation } from '@increaser/app/membership/components/MembershipConfirmation'
 import {
   PersistentStateKey,

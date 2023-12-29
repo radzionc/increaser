@@ -1,21 +1,33 @@
-import { createTsFile } from '@lib/codegen/utils/createTsFile'
-import { lightTheme } from '@lib/ui/theme/lightTheme'
-import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
+import { generateImages } from 'pwa-asset-generator'
+import { lightTheme } from '../../theme/lightTheme'
 import path from 'path'
 import fs from 'fs'
-import { generateImages } from 'pwa-asset-generator'
-import { darkTheme } from '@lib/ui/theme/darkTheme'
+import { darkTheme } from '../../theme/darkTheme'
+import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
+import { createTsFile } from '@lib/codegen/utils/createTsFile'
 
-const codeDirectory = path.resolve(__dirname, '../')
+interface GenerateIconMetaTagsParams {
+  lightModeIconPath: string
+  darkModeIconPath?: string
+  manifestPath: string
+  publicDirectory: string
+  iconImagesLocation?: string
+  codeDirectory: string
+}
 
-const lightModeIconPath = path.resolve(codeDirectory, 'light-mode-icon.svg')
-const darkModeIconPath = path.resolve(codeDirectory, 'dark-mode-icon.svg')
-const publicDirectory = path.resolve(__dirname, '../../public')
-const iconImagesLocation = 'images/icon'
-const imagesOutputDirectory = path.resolve(publicDirectory, iconImagesLocation)
-const manifestPath = path.resolve(publicDirectory, 'manifest.json')
+export const generateIconMetaTags = async ({
+  lightModeIconPath,
+  darkModeIconPath,
+  manifestPath,
+  publicDirectory,
+  iconImagesLocation = 'images/icon',
+  codeDirectory,
+}: GenerateIconMetaTagsParams) => {
+  const imagesOutputDirectory = path.resolve(
+    publicDirectory,
+    iconImagesLocation,
+  )
 
-const generateIconMetaTags = async () => {
   const generatorOutput = [
     await generateImages(lightModeIconPath, imagesOutputDirectory, {
       manifest: manifestPath,
@@ -34,7 +46,7 @@ const generateIconMetaTags = async () => {
     }),
   )
 
-  if (fs.existsSync(darkModeIconPath)) {
+  if (darkModeIconPath && fs.existsSync(darkModeIconPath)) {
     generatorOutput.push(
       await generateImages(darkModeIconPath, imagesOutputDirectory, {
         manifest: manifestPath,
@@ -69,8 +81,6 @@ const generateIconMetaTags = async () => {
     directory: codeDirectory,
     fileName: 'IconMetaTags',
     content,
-    generatedBy: 'icon/codegen/generateIconMetaTags.ts',
+    generatedBy: '@lib/ui/metadata/codegen/generateIconMetaTags.ts',
   })
 }
-
-generateIconMetaTags()

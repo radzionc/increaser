@@ -1,4 +1,4 @@
-import { Page, GetLayout } from '@increaser/app/layout/Page'
+import { Page, GetLayout } from '@lib/next-ui/Page'
 import { ProjectsLayout } from '@increaser/app/projects/components/ProjectsLayout'
 
 const getProjectsPageLayout: GetLayout = (page) => (

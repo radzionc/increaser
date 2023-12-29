@@ -6,7 +6,7 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { CapacityPageContent } from './CapacityPageContent'
 import { ManagePrimaryGoal } from './ManagePrimaryGoal'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
-import { Page } from '@increaser/app/layout/Page'
+import { Page } from '@lib/next-ui/Page'
 
 const title = 'Manage Time'
 

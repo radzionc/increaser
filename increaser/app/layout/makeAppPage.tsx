@@ -1,4 +1,4 @@
-import { Page, GetLayout } from '@increaser/app/layout/Page'
+import { Page, GetLayout } from '@lib/next-ui/Page'
 import { AppPageLayout } from '@increaser/app/focus/components/AppPageLayout'
 
 const getAppPageLayout: GetLayout = (page) => (

@@ -3,10 +3,10 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 
 import { PageTitle } from '@increaser/app/ui/PageTitle'
-import { Page } from '@increaser/app/layout/Page'
 import { ManageSchedule } from './ManageSchedule'
 import { SetsExplorer } from './SetsExplorer'
 import { ScheduleReview } from './ScheduleReview'
+import { Page } from '@lib/next-ui/Page'
 
 const title = 'Schedule'
 

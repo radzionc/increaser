@@ -8,8 +8,8 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { NamedSection } from '@increaser/app/ui/NamedSection'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { ThemeSelector } from '@increaser/app/ui/ThemeSelector'
-import { Page } from '@increaser/app/layout/Page'
 import { MembershipOverview } from '@increaser/app/membership/components/MembershipOverview'
+import { Page } from '@lib/next-ui/Page'
 
 const title = 'Settings'
 

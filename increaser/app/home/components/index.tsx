@@ -4,7 +4,7 @@ import { ErrorFallbackCard } from '@increaser/app/errors/components/ErrorFallbac
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 
 import { HomePageContent } from './HomePageContent'
-import { Page } from '@increaser/app/layout/Page'
+import { Page } from '@lib/next-ui/Page'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { productName } from '@increaser/entities'
 

@@ -16,7 +16,7 @@ import {
   RenderHabitsView,
 } from './HabitsView'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
-import { Page } from '@increaser/app/layout/Page'
+import { Page } from '@lib/next-ui/Page'
 
 export const HabitsPage: Page = () => {
   return (
