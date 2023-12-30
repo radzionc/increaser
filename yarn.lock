@@ -2991,6 +2991,7 @@ __metadata:
     next: "npm:14.0.4"
     react: "npm:^18"
     react-dom: "npm:^18"
+    styled-components: "npm:^6.1.6"
     typescript: "npm:^5"
   languageName: unknown
   linkType: soft

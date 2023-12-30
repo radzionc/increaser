@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   const [theme, setTheme] = usePersistentState<ThemePreference>(
     PersistentStateKey.ThemePreference,
-    'system',
+    'dark',
   )
 
   return (
