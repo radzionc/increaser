@@ -22,6 +22,16 @@ type WebsiteNavigationProps = ComponentWithChildrenProps & {
 
 const Wrapper = styled(VStack)`
   ${takeWholeSpace};
+  height: 100%;
+`
+
+const Container = styled.div`
+  max-height: 100%;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
 const Header = styled.div`
@@ -92,8 +102,10 @@ export const WebsiteNavigation = ({
             </TobbarContent>
           </HStack>
         </Header>
-        <Content>{children}</Content>
-        {footer}
+        <Container>
+          <Content>{children}</Content>
+          {footer}
+        </Container>
       </Wrapper>
       {isOverlayOpen && (
         <Overlay>

@@ -12,13 +12,9 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { OverlayNavigationItem } from '@lib/ui/website/navigation/OverlayNavigationItem'
 import { Footer } from '@lib/ui/website/navigation/Footer'
 import { Text } from '@lib/ui/text'
-import {
-  legalEntity,
-  supportEmail,
-  version,
-  youTubeChannel,
-} from '@increaser/config'
+import { legalEntity, supportEmail, youTubeChannel } from '@increaser/config'
 import { InteractiveText } from '@lib/ui/text/InteractiveText'
+import { Path } from '../navigation/Path'
 
 const LogoWrapper = styled(Link)`
   ${interactive};
@@ -75,14 +71,13 @@ export const getWebsitePageLayout: GetLayout = (page) => (
           <Text>
             © {new Date().getFullYear()} {legalEntity}
           </Text>
-          <Text>v{version}</Text>
           <Link href={appUrl}>
             <InteractiveText>App</InteractiveText>
           </Link>
-          <Link href="/privacy-policy">
+          <Link href={Path.PrivacyPolicy}>
             <InteractiveText>Privacy</InteractiveText>
           </Link>
-          <Link href="/terms-of-service">
+          <Link href={Path.TermsOfService}>
             <InteractiveText>Terms</InteractiveText>
           </Link>
           <ExternalLink to={`mailto:${supportEmail}`}>
