@@ -17,6 +17,7 @@ type WebsiteNavigationProps = ComponentWithChildrenProps & {
   logo: ReactNode
   renderTopbarItems: () => ReactNode
   renderOverlayItems: (props: ClosableComponentProps) => ReactNode
+  footer: ReactNode
 }
 
 const Wrapper = styled(VStack)`
@@ -47,11 +48,16 @@ const Overlay = styled(VStack)`
   gap: 4px;
 `
 
+const Content = styled.div`
+  flex: 1;
+`
+
 export const WebsiteNavigation = ({
   children,
   logo,
   renderOverlayItems,
   renderTopbarItems,
+  footer,
 }: WebsiteNavigationProps) => {
   const isSmallScreen = useIsScreenWidthLessThan(800)
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
@@ -86,7 +92,8 @@ export const WebsiteNavigation = ({
             </TobbarContent>
           </HStack>
         </Header>
-        {children}
+        <Content>{children}</Content>
+        {footer}
       </Wrapper>
       {isOverlayOpen && (
         <Overlay>
