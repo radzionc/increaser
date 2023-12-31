@@ -1,6 +1,7 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { PricingSlice } from './PricingSlice'
 import { PrimarySlice } from './PrimarySlice'
+import { DemoSlice } from './DemoSlice'
 
 export const LandingPage = () => (
   <>
@@ -9,6 +10,7 @@ export const LandingPage = () => (
       description="Increaser offers a unique solution for remote workers seeking to boost efficiency, track time, and develop positive habits for better career and health outcomes."
     />
     <PrimarySlice />
+    <DemoSlice />
     <PricingSlice />
   </>
 )
