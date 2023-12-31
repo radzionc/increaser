@@ -7,6 +7,6 @@ export const MembershipBenefits = () => (
     <MembershipBenefit benefit="Finish work faster" />
     <MembershipBenefit benefit="Accelerate your career" />
     <MembershipBenefit benefit="Develop positive habits" />
-    <MembershipBenefit benefit="Boundaries for work-life balance" />
+    <MembershipBenefit benefit="Establish work-life balance" />
   </VStack>
 )

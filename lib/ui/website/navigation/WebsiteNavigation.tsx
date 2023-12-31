@@ -39,6 +39,8 @@ const Header = styled.div`
     contentMaxWidth: websiteConfig.contentMaxWidth,
   })}
   height: ${toSizeUnit(websiteConfig.headerHeight)};
+  min-height: ${toSizeUnit(websiteConfig.headerHeight)};
+
   border-bottom: 1px solid ${getColor('mist')};
 `
 

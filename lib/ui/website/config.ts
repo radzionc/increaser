@@ -1,4 +1,4 @@
 export const websiteConfig = {
   contentMaxWidth: 1200,
-  headerHeight: 60,
+  headerHeight: 64,
 }

@@ -1,13 +1,4 @@
-import { Text } from '@lib/ui/text'
-import { Center } from '@lib/ui/layout/Center'
+import { LandingPage } from '../landing/LandingPage'
 import { makeWebsitePage } from '../layout/makeWebsitePage'
 
-export default makeWebsitePage(() => {
-  return (
-    <Center>
-      <Text color="contrast" as="h1">
-        Increaser is a tool for increasing your productivity
-      </Text>
-    </Center>
-  )
-})
+export default makeWebsitePage(LandingPage)
