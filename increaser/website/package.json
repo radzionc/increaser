@@ -10,6 +10,7 @@
     "generateIconMetaTags": "npx tsx icon/commands/generateIconMetaTags"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.3.8",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",

@@ -56,6 +56,7 @@ const Overlay = styled(VStack)`
   background: ${getColor('background')};
   ${verticalPadding(20)};
   gap: 4px;
+  z-index: 1;
 `
 
 const Content = styled.div`
