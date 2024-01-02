@@ -1,4 +1,4 @@
-export enum Path {
+export enum AppPath {
   OAuth = '/oauth',
   EmailAuth = '/email-auth',
   Home = '/',

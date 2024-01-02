@@ -12,8 +12,8 @@ import { S_IN_HOUR } from '@lib/utils/time'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 import Link from 'next/link'
-import { getProjectPath } from '@increaser/app/router/Path'
 import { EnhancedProject } from '@increaser/app/projects/Project'
+import { getProjectPath } from '@increaser/ui/navigation/AppPath'
 
 export const IconWr = styled.div<{ selected: boolean }>`
   display: flex;

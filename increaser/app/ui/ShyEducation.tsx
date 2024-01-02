@@ -1,8 +1,8 @@
 import { Text } from '@lib/ui/text'
 import { transition } from '@lib/ui/css/transition'
 import { ExternalLinkIcon } from '@lib/ui/icons/ExternalLinkIcon'
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import styled from 'styled-components'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 const Link = styled(ExternalLink)`
   color: ${({ theme }) => theme.colors.textShy.toCssValue()};

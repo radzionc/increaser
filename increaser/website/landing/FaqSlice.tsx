@@ -5,9 +5,9 @@ import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import styled from 'styled-components'
 import { productName } from '@increaser/config'
 import { TextButton } from '@lib/ui/buttons/TextButton'
-import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
-import { appUrl } from '../config'
 import { FaqItem } from '@lib/ui/website/FaqItem'
+import { AppLink } from '../navigation/AppLink'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 const Content = styled(VStack)`
   gap: 16px;
@@ -30,9 +30,9 @@ export const FaqSlice = () => {
             {productName} is available as a Progressive Web App (PWA), allowing
             you to 'install' it directly on your device for an app-like
             experience. To do this, simply navigate to{' '}
-            <ExternalLink to={appUrl} isReferring>
+            <AppLink to={AppPath.Home}>
               <TextButton text={productName} />
-            </ExternalLink>{' '}
+            </AppLink>{' '}
             on your mobile browser, and select 'Add to Home Screen' from your
             browser's menu. This will add {productName} to your device, making
             it accessible just like a regular app, but without the need to

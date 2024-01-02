@@ -7,13 +7,13 @@ import { useProject } from '@increaser/app/projects/hooks/useProject'
 import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRouter } from 'next/router'
-import { Path } from '@increaser/app/router/Path'
 import { range } from '@lib/utils/array/range'
 import { showNotification } from '@lib/ui/notifications/utils'
 import { pluralize } from '@lib/utils/pluralize'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { playSound } from '@lib/ui/notifications/utils/playSound'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 interface CurrentFocusState extends CurrentSet {}
 
@@ -164,7 +164,7 @@ export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
 
   useEffect(() => {
     if (!currentSet) {
-      router.replace(Path.Home)
+      router.replace(AppPath.Home)
     }
   }, [currentSet, router])
 

@@ -1,7 +1,6 @@
 import { breakMinutesOptions } from '@increaser/app/break/breakDuration'
 import { focusDurations } from '@increaser/app/focus/FocusDuration'
 import { ReactNode, useEffect, useState } from 'react'
-import { Path } from '@increaser/app/router/Path'
 import {
   getBlockWorkDuration,
   getBlocks,
@@ -27,6 +26,7 @@ import {
 } from '@lib/ui/notifications/utils'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 export const remindersCount = 5
 
@@ -84,7 +84,7 @@ export const BreakProvider = ({ children }: Props) => {
   const { pathname } = useRouter()
 
   useEffect(() => {
-    if (pathname === Path.Focus && breakDuration) {
+    if (pathname === AppPath.Focus && breakDuration) {
       setBreakDuration(undefined)
     }
   }, [breakDuration, pathname, setBreakDuration])

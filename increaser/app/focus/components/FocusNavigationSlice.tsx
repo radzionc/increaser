@@ -1,6 +1,5 @@
 import { getColor } from '@lib/ui/theme/getters'
 import Link from 'next/link'
-import { Path } from '@increaser/app/router/Path'
 import styled from 'styled-components'
 import { SlidingTime } from '@increaser/app/ui/SlidingTime'
 import { useCurrentFocus } from './CurrentFocusProvider'
@@ -11,6 +10,7 @@ import { SessionProgress } from './SessionProgress'
 import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { interactive } from '@lib/ui/css/interactive'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -43,7 +43,7 @@ export const FocusNavigationSlice = () => {
 
   return (
     <Wrapper>
-      <Link href={Path.Focus}>
+      <Link href={AppPath.Focus}>
         <Container>
           <SessionProgress />
           <CenterAbsolutely>

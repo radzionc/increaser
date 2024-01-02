@@ -5,8 +5,8 @@ import { Text } from '@lib/ui/text'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
 import { Container as NavigationItemContainer } from './SmallScreenProjectNavigationItem'
-import { Path } from '@increaser/app/router/Path'
 import Link from 'next/link'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 const Container = styled(NavigationItemContainer)`
   min-width: 86px;
@@ -22,7 +22,7 @@ export const SmallScreenCreateProjectNavigationItem = () => {
   const isSelected = currentProject === null
 
   return (
-    <Link href={Path.CreateProject}>
+    <Link href={AppPath.CreateProject}>
       <Container $color={colors.text} selected={isSelected}>
         <HStack gap={4} alignItems="center">
           <PlusIcon />

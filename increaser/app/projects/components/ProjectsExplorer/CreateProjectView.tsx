@@ -12,8 +12,8 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { MinimalisticTextInput } from '@increaser/app/ui/MinimalisticTextInput'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { useRouter } from 'next/router'
-import { getProjectPath } from '@increaser/app/router/Path'
 import { Project } from '@increaser/entities/Project'
+import { getProjectPath } from '@increaser/ui/navigation/AppPath'
 
 type ProjectFormShape = Pick<Project, 'name' | 'emoji' | 'color'>
 

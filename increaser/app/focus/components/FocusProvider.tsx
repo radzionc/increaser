@@ -12,7 +12,6 @@ import {
   increaseFocusDuration,
 } from '@increaser/app/focus/FocusDuration'
 import { ReactNode, useCallback, useEffect, useState } from 'react'
-import { Path } from '@increaser/app/router/Path'
 import { getBlocks, getNextFocusDuration } from '@increaser/app/sets/Block'
 import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
@@ -27,6 +26,7 @@ import { CurrentFocusGuard } from './CurrentFocusProvider'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { areNotificationsAllowed } from '@lib/ui/notifications/utils'
 import { useAddSetMutation } from '@increaser/app/sets/hooks/useAddSetMutation'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 interface Props {
   children: ReactNode
@@ -75,7 +75,7 @@ export const FocusProvider = ({ children }: Props) => {
         setFocusDuration(duration as FocusDuration)
       }
       setInitialFocusDuration((duration as FocusDuration) || focusDuration)
-      router.push(Path.Focus)
+      router.push(AppPath.Focus)
     },
     [focusDuration, router],
   )
@@ -113,14 +113,14 @@ export const FocusProvider = ({ children }: Props) => {
 
   const cancel = useCallback(() => {
     setCurrentSet(undefined)
-    router.push(Path.Home)
+    router.push(AppPath.Home)
   }, [router])
 
   const stop = useCallback(
     (params: StopFocusParams = {}) => {
       if (!currentSet) return
 
-      router.push(Path.Home)
+      router.push(AppPath.Home)
       const set = {
         start: currentSet.startedAt,
         end: Date.now(),

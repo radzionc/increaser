@@ -1,8 +1,8 @@
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import { Text } from '@lib/ui/text'
 import { LinkText } from '@lib/ui/text/LinkText'
 import { WEBSITE_URL } from '@increaser/app/product'
 import { productName } from '@increaser/entities'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 export const SignUpAgreement = () => {
   return (

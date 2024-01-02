@@ -1,6 +1,5 @@
 import { analytics } from '@increaser/app/analytics'
 
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import { IconCentricButton } from '@lib/ui/buttons/IconCentricButton'
 import { getOAuthUrl } from '@increaser/app/auth/utils/oauth'
 import { AuthProviderIcon } from './AuthProviderIcon'
@@ -8,6 +7,7 @@ import {
   OAuthProvider,
   oAuthProviderName,
 } from '@increaser/entities/OAuthProvider'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 interface OAuthOptionProps {
   provider: OAuthProvider

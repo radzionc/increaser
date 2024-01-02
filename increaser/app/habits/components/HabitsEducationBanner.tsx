@@ -1,4 +1,3 @@
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import { HABITS_EDUCATION_URL } from '@increaser/app/shared/externalResources'
 import { PersistentStateKey } from '@increaser/app/state/persistentState'
 import { usePersistentState } from '@increaser/app/state/persistentState'
@@ -12,6 +11,7 @@ import { SafeImage } from '@lib/ui/images/SafeImage'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 const titleColor = new HSLA(220, 45, 30)
 

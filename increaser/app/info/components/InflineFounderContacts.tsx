@@ -1,4 +1,3 @@
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import {
   AUTHOR_EMAIL,
   AUTHOR_LINKEDIN,
@@ -10,6 +9,7 @@ import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
 import { TwitterIcon } from '@lib/ui/icons/TwitterIcon'
 import { HStack } from '@lib/ui/layout/Stack'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { Text } from '@lib/ui/text'
 import { CopyText } from '@lib/ui/text/CopyText'
 

@@ -1,7 +1,7 @@
 import { round } from '@lib/ui/css/round'
 import { transition } from '@lib/ui/css/transition'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import React from 'react'
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import styled from 'styled-components'
 
 interface Props {

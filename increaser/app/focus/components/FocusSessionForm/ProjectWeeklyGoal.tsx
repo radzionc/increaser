@@ -1,5 +1,4 @@
 import { useProjects } from '@increaser/app/projects/hooks/useProjects'
-import { Path } from '@increaser/app/router/Path'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
@@ -16,6 +15,7 @@ import { ProjectGoalBadge } from './ProjectGoalBadge'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { useTheme } from 'styled-components'
 import { useMemo } from 'react'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 interface ProjectWeeklyGoalProps {
   projectId: string
@@ -110,7 +110,7 @@ export const ProjectWeeklyGoal = ({ projectId }: ProjectWeeklyGoalProps) => {
                   })}
                 </Text>
               ) : (
-                <Link style={{ justifySelf: 'start' }} href={Path.Capacity}>
+                <Link style={{ justifySelf: 'start' }} href={AppPath.Capacity}>
                   <ShyTextButton as="p" text="set weekly goal" />
                 </Link>
               )}

@@ -11,7 +11,7 @@ import { useProjectExplorer } from './ProjectsExplorerProvider'
 
 import { ChevronRightIcon } from '@lib/ui/icons/ChevronRightIcon'
 import Link from 'next/link'
-import { Path } from '@increaser/app/router/Path'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 const Container = styled(NavigationItemContainer)`
   border: 2px dashed ${({ theme }) => theme.colors.mistExtra.toCssValue()};
@@ -25,7 +25,7 @@ export const CreateProjectNavigationItem = () => {
   const isSelected = currentProject === null
 
   return (
-    <Link href={Path.CreateProject}>
+    <Link href={AppPath.CreateProject}>
       <Container selected={isSelected}>
         <HStack alignItems="center" justifyContent="space-between">
           <HStack

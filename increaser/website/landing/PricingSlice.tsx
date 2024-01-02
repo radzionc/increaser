@@ -3,12 +3,12 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
 import { SubscriptionOffer } from '@increaser/ui/subscription/SubscriptionOffer'
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
-import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
-import { signUpUrl } from '../config'
 import { Button } from '@lib/ui/buttons/Button'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
+import { AppLink } from '../navigation/AppLink'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 export const PricingSlice = () => {
   return (
@@ -23,11 +23,11 @@ export const PricingSlice = () => {
           <Panel>
             <VStack gap={20}>
               <SubscriptionOffer />
-              <ExternalLink isReferring openInSameTab to={signUpUrl}>
+              <AppLink to={AppPath.SignUp}>
                 <Button size="l" as="div" kind="primary">
                   Start free trial
                 </Button>
-              </ExternalLink>
+              </AppLink>
             </VStack>
           </Panel>
         </SubscriptionBillingCycleProvider>
