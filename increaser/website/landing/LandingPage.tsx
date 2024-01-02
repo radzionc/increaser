@@ -2,6 +2,9 @@ import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { PricingSlice } from './PricingSlice'
 import { PrimarySlice } from './PrimarySlice'
 import { DemoSlice } from './DemoSlice'
+import { FaqSlice } from './FaqSlice'
+import { ClosingArgumentSlice } from './ClosingArgumentSlice'
+import { FoundersNoteSlice } from './FoundersNoteSlice'
 
 export const LandingPage = () => (
   <>
@@ -12,5 +15,8 @@ export const LandingPage = () => (
     <PrimarySlice />
     <DemoSlice />
     <PricingSlice />
+    <FoundersNoteSlice />
+    <FaqSlice />
+    <ClosingArgumentSlice />
   </>
 )

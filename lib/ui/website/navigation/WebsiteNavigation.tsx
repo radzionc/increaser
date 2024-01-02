@@ -40,8 +40,6 @@ const Header = styled.div`
   })}
   height: ${toSizeUnit(websiteConfig.headerHeight)};
   min-height: ${toSizeUnit(websiteConfig.headerHeight)};
-
-  border-bottom: 1px solid ${getColor('mist')};
 `
 
 const TobbarContent = styled.div`
@@ -91,6 +89,7 @@ export const WebsiteNavigation = ({
                 <>
                   <div />
                   <IconButton
+                    size="l"
                     onClick={() => setIsOverlayOpen(!isOverlayOpen)}
                     title={
                       isOverlayOpen ? 'Close navigation' : 'Open navigation'

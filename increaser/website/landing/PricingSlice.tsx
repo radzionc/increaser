@@ -8,11 +8,12 @@ import { signUpUrl } from '../config'
 import { Button } from '@lib/ui/buttons/Button'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
+import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 
 export const PricingSlice = () => {
   return (
     <WebsiteSlice>
-      <VStack alignItems="center" gap={40}>
+      <WebsiteSliceContent>
         <WebsiteSectionHeader
           title="Affordable Plans for Unmatched Productivity Gains"
           subtitle={`Start your journey risk-free with a ${freeTrialDays}-day free trial,
@@ -22,7 +23,7 @@ export const PricingSlice = () => {
           <Panel>
             <VStack gap={20}>
               <SubscriptionOffer />
-              <ExternalLink to={signUpUrl}>
+              <ExternalLink isReferring openInSameTab to={signUpUrl}>
                 <Button size="l" as="div" kind="primary">
                   Start free trial
                 </Button>
@@ -30,7 +31,7 @@ export const PricingSlice = () => {
             </VStack>
           </Panel>
         </SubscriptionBillingCycleProvider>
-      </VStack>
+      </WebsiteSliceContent>
     </WebsiteSlice>
   )
 }

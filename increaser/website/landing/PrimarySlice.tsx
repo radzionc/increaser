@@ -26,7 +26,7 @@ export const PrimarySlice = () => (
         }
         subtitle="Crafted with Remote Workers' Needs at the Forefront"
       />
-      <ExternalLink to={signUpUrl}>
+      <ExternalLink isReferring openInSameTab to={signUpUrl}>
         <Button as="div" kind="primary" size="xl">
           Start now
         </Button>

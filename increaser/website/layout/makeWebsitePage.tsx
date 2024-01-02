@@ -36,12 +36,12 @@ export const getWebsitePageLayout: GetLayout = (page) => (
       <>
         <div />
         <HStack alignItems="center" gap={8}>
-          <ExternalLink to={signInUrl}>
+          <ExternalLink isReferring openInSameTab to={signInUrl}>
             <Button kind="ghost" as="div">
               Sign in
             </Button>
           </ExternalLink>
-          <ExternalLink to={signUpUrl}>
+          <ExternalLink isReferring openInSameTab to={signUpUrl}>
             <Button kind="reversed" as="div">
               Sign up
             </Button>
@@ -71,9 +71,9 @@ export const getWebsitePageLayout: GetLayout = (page) => (
           <Text>
             © {new Date().getFullYear()} {legalEntity}
           </Text>
-          <Link href={appUrl}>
+          <ExternalLink isReferring openInSameTab to={appUrl}>
             <InteractiveText>App</InteractiveText>
-          </Link>
+          </ExternalLink>
           <Link href={Path.PrivacyPolicy}>
             <InteractiveText>Privacy</InteractiveText>
           </Link>
