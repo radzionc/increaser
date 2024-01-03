@@ -7,6 +7,7 @@ import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { ScoreboardSlice } from './ScoreboardSlice'
 import { HabitsSlice } from './HabitsSlice'
+import { UserStateProvider } from './UserStateProvider'
 
 export const LandingPage = () => (
   <>
@@ -15,7 +16,9 @@ export const LandingPage = () => (
       description="Increaser offers a unique solution for remote workers seeking to boost efficiency, track time, and develop positive habits for better career and health outcomes."
     />
     <PrimarySlice />
-    <HabitsSlice />
+    <UserStateProvider>
+      <HabitsSlice />
+    </UserStateProvider>
     <DemoSlice />
     <ScoreboardSlice />
     <PricingSlice />

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { UserStateContext } from '@increaser/ui/state/UserStateContext'
+import { UserStateContext } from '@increaser/ui/user/UserStateContext'
 
 import { User } from '@increaser/entities/User'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
