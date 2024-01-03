@@ -5,12 +5,12 @@ import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { TextInput } from '@lib/ui/inputs/TextInput'
 import { HStack } from '@lib/ui/layout/Stack'
 
-import { useHabits } from '../HabitsProvider'
 import { HabitFormShape } from './HabitFormShape'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { Field } from '@lib/ui/inputs/Field'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 interface Props {
   form: UseFormReturn<HabitFormShape>

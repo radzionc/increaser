@@ -15,7 +15,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN } from '@lib/utils/time'
 
 import { FocusDurationInput } from '../FocusDurationInput'

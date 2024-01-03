@@ -3,7 +3,7 @@ import { useMutation } from 'react-query'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { removeLastArrayElement } from '@increaser/app/utils/removeLastArrayElement'
 
 export const useDeleteLastSetMutation = () => {

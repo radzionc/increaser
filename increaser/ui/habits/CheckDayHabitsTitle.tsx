@@ -1,12 +1,12 @@
-import { Habit } from '@increaser/app/habits/Habit'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { EnhancedHabit } from './EnhancedHabit'
 
 interface Props {
   date: Date
   dayName: string
-  habits: Habit[]
+  habits: EnhancedHabit[]
 }
 
 export const CheckDayHabitsTitle = ({ date, dayName, habits }: Props) => {

@@ -3,7 +3,7 @@ import { useMutation } from 'react-query'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 
 interface DeleteHabitParams {

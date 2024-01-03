@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'

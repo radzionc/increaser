@@ -9,7 +9,7 @@ import { range } from '@lib/utils/array/range'
 import { useTheme } from 'styled-components'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import {
   D_IN_WEEK,
   MS_IN_DAY,

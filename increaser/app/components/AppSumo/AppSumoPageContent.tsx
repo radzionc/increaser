@@ -2,7 +2,7 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { CheckCircleIcon } from '@lib/ui/icons/CheckCircleIcon'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { AppSumoCodeRedemption } from './AppSumoCodeRedemption'
 
 export const AppSumoPageContent = () => {

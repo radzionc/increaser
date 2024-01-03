@@ -6,7 +6,6 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { CreateHabitPrompt } from '../CreateHabit/CreateHabitPrompt'
-import { useHabits } from '../HabitsProvider'
 import { ActiveHabitsContext } from './ActiveHabitsContext'
 import { ActiveHabitsList } from './ActiveHabitsList'
 import { CreateHabitCard } from './CreateHabitCard'
@@ -14,6 +13,7 @@ import { HabitsProgress } from './HabitsProgress'
 import { HabitsStreak } from './HabitsStreak'
 import { HabitsSuccess } from './HabitsSuccess'
 import { ResetAllHabits } from './ResetAllHabits'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 const Container = styled(Panel)`
   padding: 16px;

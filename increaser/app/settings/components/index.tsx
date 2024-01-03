@@ -3,7 +3,7 @@ import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-widt
 import { InlineFounderContacts } from '@increaser/app/info/components/InflineFounderContacts'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useUserState } from '@increaser/app/user/state/UserStateContext'
+import { useUserState } from '@increaser/ui/user/UserStateContext'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { NamedSection } from '@increaser/app/ui/NamedSection'
 import { PageTitle } from '@increaser/app/ui/PageTitle'

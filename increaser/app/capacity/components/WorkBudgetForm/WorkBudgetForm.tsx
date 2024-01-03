@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { UseFormReturn, useWatch } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useUserState } from '@increaser/app/user/state/UserStateContext'
+import { useUserState } from '@increaser/ui/user/UserStateContext'
 import { getWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/helpers/getWeekTimeAllocation'
 
 interface Props {

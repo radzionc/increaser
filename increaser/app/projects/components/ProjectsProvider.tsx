@@ -9,7 +9,7 @@ import { range } from '@lib/utils/array/range'
 import { splitBy } from '@lib/utils/array/splitBy'
 import { toWeek } from '@lib/utils/time/toWeek'
 import { useTheme } from 'styled-components'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_WEEK } from '@lib/utils/time'
 import { EnhancedProject } from '@increaser/app/projects/Project'
 

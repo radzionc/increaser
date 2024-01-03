@@ -3,9 +3,9 @@ import { range } from '@lib/utils/array/range'
 import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
 import { D_IN_WEEK, MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
 
-import { useCurrentHabit } from '../CurrentHabitProvider'
 import { HabitDay } from './HabitDay'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 
 export const HabitProgress = () => {
   const startOfDay = useStartOfDay()

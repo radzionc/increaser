@@ -6,9 +6,9 @@ import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
 import { VStack } from '@lib/ui/layout/Stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
 
-import { useHabits } from '../HabitsProvider'
 import { habitDaysToShow } from './config'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 const HabitStatus = styled.div`
   width: 100%;

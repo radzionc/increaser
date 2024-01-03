@@ -2,7 +2,7 @@ import { analytics } from '@increaser/app/analytics'
 import { setUserIdForErrorMonitoring } from '@increaser/app/errors/errorMonitoring'
 import { useEffect } from 'react'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const UserManagerProvider = ({
   children,

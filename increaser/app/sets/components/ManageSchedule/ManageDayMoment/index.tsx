@@ -18,7 +18,7 @@ import {
 } from '@increaser/entities/DayMoments'
 import { range } from '@lib/utils/array/range'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'

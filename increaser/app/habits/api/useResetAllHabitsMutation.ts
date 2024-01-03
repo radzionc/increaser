@@ -2,7 +2,7 @@ import { useMutation } from 'react-query'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { recordMap } from '@lib/utils/record/recordMap'
 

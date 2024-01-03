@@ -4,10 +4,10 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
 
-import { CheckDayHabitsTitle } from './CheckDayHabits/CheckDayHabitsTitle'
-import { HabitItem } from './CheckDayHabits/HabitItem'
-import { useHabits } from './HabitsProvider'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
+import { CheckDayHabitsTitle } from '@increaser/ui/habits/CheckDayHabitsTitle'
+import { HabitItem } from '@increaser/ui/habits/HabitItem'
 
 export const CheckYesterdayHabits = () => {
   const { habits: currentHabits } = useHabits()

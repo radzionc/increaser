@@ -4,7 +4,7 @@ import { useApi } from '@increaser/api-ui/hooks/useApi'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 
 export const useAddSetMutation = () => {
   const api = useApi()

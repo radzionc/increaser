@@ -7,11 +7,11 @@ import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
-import { useCurrentHabit } from '../CurrentHabitProvider'
 import { useHabitForm } from '../HabitForm/useHabitForm'
-import { useHabits } from '../HabitsProvider'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { MinimalisticTextInput } from '@increaser/app/ui/MinimalisticTextInput'
+import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 interface EditHabitProps {
   onFinish: () => void

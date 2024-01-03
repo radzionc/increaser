@@ -6,7 +6,7 @@ import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDepen
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { Match } from '@lib/ui/base/Match'

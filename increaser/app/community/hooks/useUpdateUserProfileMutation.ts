@@ -4,7 +4,7 @@ import { User } from '@sentry/nextjs'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
 import { getApiQueryKey } from '@increaser/api-ui/hooks/useApiQuery'
 import { useMutation } from 'react-query'
-import { useUserState } from '@increaser/app/user/state/UserStateContext'
+import { useUserState } from '@increaser/ui/user/UserStateContext'
 
 export const useUpdateUserProfileMutation = () => {
   const invalidate = useInvalidateQueries()

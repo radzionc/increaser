@@ -3,16 +3,20 @@ import { TitledSection } from '@lib/ui/Layout/TitledSection'
 import { VStack } from '@lib/ui/layout/Stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
 
-import { CurrentHabitProvider } from '../CurrentHabitProvider'
-import { useHabits } from '../HabitsProvider'
+import { CurrentHabitProvider } from './CurrentHabitProvider'
 import { CheckDayHabitsTitle } from './CheckDayHabitsTitle'
 import { HabitItem } from './HabitItem'
-import { TwoDayRuleEducation } from './TwoDayRuleEducation'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { ReactNode } from 'react'
+import { useHabits } from './HabitsContext'
 
 const dayName = 'Today'
 
-export const CheckTodayHabits = () => {
+interface CheckTodayHabitsProps {
+  education?: ReactNode
+}
+
+export const CheckTodayHabits = ({ education }: CheckTodayHabitsProps) => {
   const startOfToday = useStartOfDay()
 
   const date = new Date(startOfToday)
@@ -31,7 +35,7 @@ export const CheckTodayHabits = () => {
         <CheckDayHabitsTitle habits={habits} date={date} dayName={dayName} />
       }
     >
-      <TwoDayRuleEducation />
+      {education}
       <VStack gap={16}>
         {existedHabits.map((habit) => (
           <CurrentHabitProvider key={habit.id} value={habit}>

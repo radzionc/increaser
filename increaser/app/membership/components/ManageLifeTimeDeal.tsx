@@ -1,5 +1,5 @@
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { productName } from '@increaser/entities'
 
 export const ManageLifeTimeDeal = () => {

@@ -1,5 +1,5 @@
-import { Habit } from '@increaser/app/habits/Habit'
 import { getValueProviderSetup } from '@lib/ui/state/getValueProviderSetup'
+import { EnhancedHabit } from './EnhancedHabit'
 
 export const { useValue: useCurrentHabit, provider: CurrentHabitProvider } =
-  getValueProviderSetup<Habit>('Habit')
+  getValueProviderSetup<EnhancedHabit>('Habit')

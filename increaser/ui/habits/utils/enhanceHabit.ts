@@ -1,15 +1,16 @@
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
-import { Habit, HabitResponse } from '@increaser/app/habits/Habit'
-import { getHabitStreak } from '@increaser/app/habits/utils/getHabitStreak'
 import { range } from '@lib/utils/array/range'
 import { DefaultTheme } from 'styled-components'
 import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
+import { Habit } from '@increaser/entities/Habit'
+import { EnhancedHabit } from '../EnhancedHabit'
+import { getHabitStreak } from '@increaser/entities-utils/habit/getHabitStreak'
 
-export const toHabit = (
-  habitResponse: HabitResponse,
+export const enhanceHabit = (
+  habitResponse: Habit,
   todayStartedAt: number,
   theme: DefaultTheme,
-): Habit => {
+): EnhancedHabit => {
   const successesSet = new Set(habitResponse.successes)
 
   const hasSuccessToday = successesSet.has(

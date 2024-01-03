@@ -1,12 +1,11 @@
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { HabitResponse } from '@increaser/app/habits/Habit'
 import { useMutation } from 'react-query'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 
 export const useUpdateHabitMutation = () => {
   const api = useApi()
@@ -20,8 +19,6 @@ export const useUpdateHabitMutation = () => {
       ),
     })
 
-    const habitResult = await api.call('updateHabit', input)
-
-    return habitResult as HabitResponse
+    return api.call('updateHabit', input)
   })
 }

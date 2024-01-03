@@ -1,7 +1,7 @@
 import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useMemo } from 'react'
 import { sum } from '@lib/utils/array/sum'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getMinutesAllocatedToProjects } from '@increaser/app/weekTimeAllocation/helpers/getMinutesAllocatedToProjects'
 
 export const useWeekTimeAllocation = () => {

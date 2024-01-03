@@ -8,10 +8,10 @@ import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { SubscriptionCheckout } from './SubscriptionCheckout'
 import { ClosableComponentProps } from '@lib/ui/props'
 import { Modal } from '@lib/ui/modal'
-import { SubscriptionOffer } from './SubscriptionOffer'
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { Match } from '@lib/ui/base/Match'
 import { productName } from '@increaser/entities'
+import { SubscriptionOffer } from '@increaser/ui/subscription/SubscriptionOffer'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void

@@ -4,8 +4,8 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { SubscriptionCheckout } from '@increaser/app/membership/subscription/components/SubscriptionCheckout'
-import { SubscriptionOffer } from '@increaser/app/membership/subscription/components/SubscriptionOffer'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { SubscriptionOffer } from '@increaser/ui/subscription/SubscriptionOffer'
 
 export const MembershipOffer = () => {
   const { lifeTimeDeal, subscription } = useAssertUserState()

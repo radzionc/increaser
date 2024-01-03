@@ -10,8 +10,7 @@ import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-
-import { useHabits } from '../HabitsProvider'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 const Added = styled.div`
   background: transparent;

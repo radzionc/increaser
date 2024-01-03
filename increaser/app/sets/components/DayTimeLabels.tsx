@@ -4,7 +4,7 @@ import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbs
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { getDayMomentColor } from '@increaser/app/sets/utils/getDayMomentColor'
 import { HStack } from '@lib/ui/layout/Stack'

@@ -4,7 +4,7 @@ import { HabitsOnboarding } from '@increaser/app/habits/components/HabitsOnboard
 import { GoalsOnboarding } from '@increaser/app/projects/components/GoalsOnboarding'
 import { ProjectsOnboarding } from '@increaser/app/projects/components/ProjectsOnboarding'
 import { useEffect, useState } from 'react'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { WorkHoursOnboarding } from './WorkHoursOnboarding'
 import { WorkScheduleOnboarding } from './WorkScheduleOnboarding'

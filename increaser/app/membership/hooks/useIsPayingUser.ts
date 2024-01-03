@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useHasActiveSubscription } from './useHasActiveSubscription'
 
 export const useIsPayingUser = () => {

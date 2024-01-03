@@ -2,7 +2,7 @@ import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { AddTask } from './AddTask'
 import { AddTaskButton } from './AddTaskButton'

@@ -4,7 +4,7 @@ import { Set } from '@increaser/app/sets/Set'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { updateLastArrayElement } from '@increaser/app/utils/updateLastArrayElement'
 
 export const useUpdateLastSetMutation = () => {

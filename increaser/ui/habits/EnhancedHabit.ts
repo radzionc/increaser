@@ -1,16 +1,7 @@
+import { Habit } from '@increaser/entities/Habit'
 import { HSLA } from '@lib/ui/colors/HSLA'
 
-export interface HabitResponse {
-  id: string
-  name: string
-  emoji: string
-  color: number
-  startedAt: number
-  order: number
-  successes: string[]
-}
-
-export interface Habit extends HabitResponse {
+export interface EnhancedHabit extends Habit {
   successesSet: Set<string>
   passedDays: number[]
   hslaColor: HSLA

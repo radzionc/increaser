@@ -1,8 +1,8 @@
 import { pluralize } from '@lib/utils/pluralize'
 import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 
-import { useCurrentHabit } from '../CurrentHabitProvider'
 import { HabitStatistic } from './HabitStatistic'
+import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 
 export const HabitStreak = () => {
   const habit = useCurrentHabit()

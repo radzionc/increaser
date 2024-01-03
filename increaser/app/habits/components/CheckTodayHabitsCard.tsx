@@ -1,7 +1,8 @@
 import { Panel } from '@lib/ui/panel/Panel'
 
-import { CheckTodayHabits } from './CheckDayHabits/CheckTodayHabits'
-import { useHabits } from './HabitsProvider'
+import { CheckTodayHabits } from '@increaser/ui/habits/CheckTodayHabits'
+import { TwoDayRuleEducation } from './CheckDayHabits/TwoDayRuleEducation'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 export const CheckTodayHabitsCard = () => {
   const { habits } = useHabits()
@@ -10,7 +11,7 @@ export const CheckTodayHabitsCard = () => {
 
   return (
     <Panel kind="secondary">
-      <CheckTodayHabits />
+      <CheckTodayHabits education={<TwoDayRuleEducation />} />
     </Panel>
   )
 }

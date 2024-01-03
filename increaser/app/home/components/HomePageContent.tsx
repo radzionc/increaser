@@ -1,6 +1,5 @@
 import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
 import { FocusSessionForm } from '@increaser/app/focus/components/FocusSessionForm'
-import { CheckTodayHabits } from '@increaser/app/habits/components/CheckDayHabits/CheckTodayHabits'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import styled from 'styled-components'
 import { TasksView } from '@increaser/app/tasks/components/TasksView'
@@ -15,6 +14,7 @@ import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { SubmitYesterdayHabits } from '@increaser/app/habits/components/SubmitYesterdayHabits'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
+import { CheckTodayHabits } from '@increaser/ui/habits/CheckTodayHabits'
 
 const Container = styled.div`
   display: flex;

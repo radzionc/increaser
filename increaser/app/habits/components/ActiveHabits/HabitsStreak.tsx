@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { pluralize } from '@lib/utils/pluralize'
 import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 
-import { useHabits } from '../HabitsProvider'
 import { HabitStatistic } from './HabitStatistic'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 export const HabitsStreak = () => {
   const { habits } = useHabits()

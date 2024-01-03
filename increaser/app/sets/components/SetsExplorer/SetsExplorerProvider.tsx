@@ -1,7 +1,7 @@
 import { Set } from '@increaser/entities/User'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContext, useMemo } from 'react'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { startOfDay } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { range } from '@lib/utils/array/range'

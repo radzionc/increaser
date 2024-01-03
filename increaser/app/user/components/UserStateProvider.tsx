@@ -2,7 +2,7 @@ import { getCurrentTimezoneOffset } from '@lib/utils/time/getCurrentTimezoneOffs
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { UserStateContext } from '@increaser/app/user/state/UserStateContext'
+import { UserStateContext } from '@increaser/ui/user/UserStateContext'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 import { User } from '@increaser/entities/User'
 import { useApi } from '@increaser/api-ui/hooks/useApi'

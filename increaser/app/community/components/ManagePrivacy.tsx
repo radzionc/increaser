@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { useUpdateUserProfileMutation } from '@increaser/app/community/hooks/useUpdateUserProfileMutation'

@@ -1,7 +1,7 @@
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const FreeTrialStatus = () => {
   const { subscription, lifeTimeDeal, freeTrialEnd } = useAssertUserState()

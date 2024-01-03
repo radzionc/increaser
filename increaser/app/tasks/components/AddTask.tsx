@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { Task } from '@increaser/app/tasks/Task'
 import { Box } from '@lib/ui/checklist/CheckListItem'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
 
 interface TaskForm {
