@@ -48,6 +48,7 @@ const Content = styled.div<{ isOpen: boolean }>`
           opacity: 0;
           overflow: hidden;
           transform: translateY(-8px);
+          visibility: hidden;
         `}
 `
 

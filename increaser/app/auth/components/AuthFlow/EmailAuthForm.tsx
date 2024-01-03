@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { validateEmail } from '@lib/utils/validation/validateEmail'
 import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { Field } from '@lib/ui/inputs/Field'
-import { useApiMutation } from '@increaser/app/api/hooks/useApiMutation'
+import { useApiMutation } from '@increaser/api-ui/hooks/useApiMutation'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 interface EmailFormState {

@@ -7,7 +7,7 @@ import {
 } from '@increaser/app/user/state/UserStateContext'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 
 const getNewHabitOrder = (habits: HabitResponse[]) => {
   if (habits.length === 0) {

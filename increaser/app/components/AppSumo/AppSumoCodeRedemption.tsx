@@ -6,7 +6,7 @@ import { TextInput } from '@lib/ui/inputs/TextInput'
 import { VStack } from '@lib/ui/layout/Stack'
 import { useUserState } from '@increaser/app/user/state/UserStateContext'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
-import { useApiMutation } from '@increaser/app/api/hooks/useApiMutation'
+import { useApiMutation } from '@increaser/api-ui/hooks/useApiMutation'
 import { Field } from '@lib/ui/inputs/Field'
 
 interface RedeemCodeFormState {

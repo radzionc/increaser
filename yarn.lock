@@ -2798,6 +2798,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/api-ui@workspace:increaser/api-ui":
+  version: 0.0.0-use.local
+  resolution: "@increaser/api-ui@workspace:increaser/api-ui"
+  dependencies:
+    "@types/react": "npm:^18.2.45"
+    react: "npm:^18.2.0"
+    react-query: "npm:^3.39.3"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/api@workspace:increaser/api":
   version: 0.0.0-use.local
   resolution: "@increaser/api@workspace:increaser/api"
@@ -8786,6 +8796,8 @@ __metadata:
     husky: "npm:^8.0.3"
     lint-staged: "npm:^15.2.0"
     prettier: "npm:^3.1.1"
+    react: "npm:^18.2.0"
+    react-query: "npm:^3.39.3"
     syncpack: "npm:^12.0.1"
     typescript: "npm:^5.3.3"
   languageName: unknown

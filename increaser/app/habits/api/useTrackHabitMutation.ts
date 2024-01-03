@@ -1,6 +1,6 @@
 import { recordMap } from '@lib/utils/record/recordMap'
 import { analytics } from '@increaser/app/analytics'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 import { useMutation } from 'react-query'
 import {
   useAssertUserState,

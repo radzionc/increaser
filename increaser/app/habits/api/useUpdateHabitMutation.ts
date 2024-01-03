@@ -1,6 +1,6 @@
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 import { HabitResponse } from '@increaser/app/habits/Habit'
 import { useMutation } from 'react-query'
 import {

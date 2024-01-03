@@ -5,7 +5,7 @@ import {
 } from '@increaser/app/user/state/UserStateContext'
 
 import { Project } from '@increaser/entities/Project'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 
 interface UpdateProjectMutationInput {
   id: string

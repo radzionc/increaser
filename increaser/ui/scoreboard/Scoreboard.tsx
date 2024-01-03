@@ -9,7 +9,7 @@ import {
   ScoreboardPeriod,
   scoreboardPeriodInDays,
 } from '@increaser/entities/PerformanceScoreboard'
-import { useApiQuery } from '@increaser/app/api/hooks/useApiQuery'
+import { useApiQuery } from '@increaser/api-ui/hooks/useApiQuery'
 
 export const Scoreboard = () => {
   const scoreboardPeriod: ScoreboardPeriod = 'week'

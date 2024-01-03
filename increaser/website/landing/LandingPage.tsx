@@ -5,6 +5,7 @@ import { DemoSlice } from './DemoSlice'
 import { FaqSlice } from './FaqSlice'
 import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
+import { ScoreboardSlice } from './ScoreboardSlice'
 
 export const LandingPage = () => (
   <>
@@ -14,6 +15,7 @@ export const LandingPage = () => (
     />
     <PrimarySlice />
     <DemoSlice />
+    <ScoreboardSlice />
     <PricingSlice />
     <FoundersNoteSlice />
     <FaqSlice />

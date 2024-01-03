@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { AuthView } from '@lib/ui/auth/AuthView'
 import { getCurrentTimezoneOffset } from '@lib/utils/time/getCurrentTimezoneOffset'
 import { AuthConfirmationStatus } from './AuthConfirmationStatus'
-import { useApiMutation } from '@increaser/app/api/hooks/useApiMutation'
+import { useApiMutation } from '@increaser/api-ui/hooks/useApiMutation'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 
 interface EmailAuthParams {
