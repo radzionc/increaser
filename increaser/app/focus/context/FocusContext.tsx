@@ -27,7 +27,6 @@ export interface FocusState {
 
   setFocusDuration: (duration: FocusDuration) => void
   focusDuration: FocusDuration
-  initialFocusDuration: FocusDuration
 
   setHasTimerSoundNotification: (value: boolean) => void
   hasTimerSoundNotification: boolean

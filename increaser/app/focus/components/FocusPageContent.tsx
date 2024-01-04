@@ -15,7 +15,6 @@ import { FinishSession } from './FinishSession'
 import { FocusAssistance } from './FocusAssistance'
 import { FocusGoal } from './FocusGoal'
 import { FocusSounds } from './FocusSounds'
-import { FocusSuccess } from './FocusSucess'
 import { SessionProgress } from './SessionProgress'
 import { SesssionStartedAt } from './SessionStartedAt'
 import { SlidingTime } from '@increaser/app/ui/SlidingTime'
@@ -48,6 +47,16 @@ const BlockWrapper = styled.div`
 const TimeWrapper = styled.div`
   position: absolute;
   z-index: 1;
+`
+
+const TimeContent = styled.div`
+  position: relative;
+  ${centerContent};
+`
+
+const FocusGoalPosition = styled.div`
+  position: absolute;
+  bottom: -32px;
 `
 
 const Side = styled(VStack)`
@@ -116,9 +125,14 @@ export const FocusPageContent = () => {
                         </VStack>
                       </PositionSettings>
                       <TimeWrapper>
-                        <Text as="div" weight="bold" size={64} height="small">
-                          <SlidingTime getSeconds={getSeconds} />
-                        </Text>
+                        <TimeContent>
+                          <Text as="div" weight="bold" size={64} height="small">
+                            <SlidingTime getSeconds={getSeconds} />
+                          </Text>
+                          <FocusGoalPosition>
+                            <FocusGoal />
+                          </FocusGoalPosition>
+                        </TimeContent>
                       </TimeWrapper>
                       <FinishSession
                         style={{
@@ -127,8 +141,6 @@ export const FocusPageContent = () => {
                           bottom: -30,
                         }}
                       />
-                      <FocusSuccess />
-                      <FocusGoal />
                     </BlockWrapper>
                     <div style={{ marginTop: 30 }}>
                       <ShyTextButton text="Cancel" onClick={cancel} />

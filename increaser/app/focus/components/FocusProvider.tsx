@@ -38,8 +38,6 @@ export const FocusProvider = ({ children }: Props) => {
   const [focusSoundsState] = useFocusSoundsState()
   const [focusDuration, setFocusDuration] =
     useState<FocusDuration>(defaultFocusDuration)
-  const [initialFocusDuration, setInitialFocusDuration] =
-    useState(focusDuration)
 
   const [hasTimerSoundNotification, setHasTimerSoundNotification] =
     usePersistentState<boolean>(
@@ -74,7 +72,6 @@ export const FocusProvider = ({ children }: Props) => {
       if (duration) {
         setFocusDuration(duration as FocusDuration)
       }
-      setInitialFocusDuration((duration as FocusDuration) || focusDuration)
       router.push(AppPath.Focus)
     },
     [focusDuration, router],
@@ -147,7 +144,6 @@ export const FocusProvider = ({ children }: Props) => {
     <FocusContext.Provider
       value={{
         start,
-        initialFocusDuration,
         updateStartTime,
         updateProject,
         stop,
