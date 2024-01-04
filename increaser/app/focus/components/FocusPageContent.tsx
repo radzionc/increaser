@@ -16,13 +16,14 @@ import { FocusAssistance } from './FocusAssistance'
 import { FocusGoal } from './FocusGoal'
 import { FocusSounds } from './FocusSounds'
 import { SessionProgress } from './SessionProgress'
-import { SesssionStartedAt } from './SessionStartedAt'
+import { SessionStartedAt } from './SessionStartedAt'
 import { SlidingTime } from '@increaser/app/ui/SlidingTime'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
+import { FocusProject } from './FocusProject'
 
 const Container = styled.div`
   max-height: 100%;
@@ -47,16 +48,12 @@ const BlockWrapper = styled.div`
 const TimeWrapper = styled.div`
   position: absolute;
   z-index: 1;
+  width: 100%;
 `
 
 const TimeContent = styled.div`
   position: relative;
   ${centerContent};
-`
-
-const FocusGoalPosition = styled.div`
-  position: absolute;
-  bottom: -32px;
 `
 
 const Side = styled(VStack)`
@@ -72,6 +69,14 @@ const PositionSettings = styled.div`
   position: absolute;
   top: 12px;
   right: 12px;
+`
+
+const PositionSessionInfo = styled.div`
+  position: absolute;
+  top: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 4px;
 `
 
 export const FocusPageContent = () => {
@@ -115,7 +120,6 @@ export const FocusPageContent = () => {
                     style={{ width: 320 }}
                     gap={12}
                   >
-                    <SesssionStartedAt />
                     <BlockWrapper>
                       <SessionProgress />
                       <PositionSettings>
@@ -124,14 +128,16 @@ export const FocusPageContent = () => {
                           <FocusAssistance />
                         </VStack>
                       </PositionSettings>
+                      <PositionSessionInfo>
+                        <SessionStartedAt />
+                        <FocusProject />
+                        <FocusGoal />
+                      </PositionSessionInfo>
                       <TimeWrapper>
                         <TimeContent>
                           <Text as="div" weight="bold" size={64} height="small">
                             <SlidingTime getSeconds={getSeconds} />
                           </Text>
-                          <FocusGoalPosition>
-                            <FocusGoal />
-                          </FocusGoalPosition>
                         </TimeContent>
                       </TimeWrapper>
                       <FinishSession

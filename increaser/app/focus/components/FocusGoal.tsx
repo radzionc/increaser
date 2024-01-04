@@ -1,18 +1,9 @@
 import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import styled from 'styled-components'
 
 import { UpdateFocusDurationOverlay } from './CurrentSetDuration'
 import { Opener } from '@lib/ui/base/Opener'
-import { getColor } from '@lib/ui/theme/getters'
-import { Button } from '@lib/ui/buttons/Button'
-
-const TimeButton = styled(Button)`
-  color: ${getColor('text')};
-  font-weight: 600;
-  :hover {
-    color: ${getColor('contrast')};
-  }
-`
+import { ShyFocusButton } from './ShyFocusButton'
+import { TargetIcon } from '@lib/ui/icons/TargetIcon'
 
 export const FocusGoal = () => {
   const { focusDuration } = useFocus()
@@ -20,9 +11,9 @@ export const FocusGoal = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <TimeButton size="xs" onClick={onOpen} kind="secondary">
+        <ShyFocusButton icon={<TargetIcon />} onClick={onOpen}>
           {focusDuration} min
-        </TimeButton>
+        </ShyFocusButton>
       )}
       renderContent={({ onClose }) => (
         <UpdateFocusDurationOverlay onClose={onClose} />
