@@ -10,12 +10,23 @@ import { DemoFocusProvider } from './DemoFocusProvider'
 import { Text } from '@lib/ui/text'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
+import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
 
 const BlockWrapper = styled.div`
-  height: 580px;
+  height: 540px;
   width: 320px;
   position: relative;
   ${centerContent};
+
+  @media (max-width: 800px) {
+    height: 400px;
+    width: 280px;
+  }
+`
+
+const PositionSessionInfo = styled.div`
+  position: absolute;
+  top: 12px;
 `
 
 export const FocusSlice = () => {
@@ -30,11 +41,18 @@ export const FocusSlice = () => {
           <DemoFocusProvider>
             <BlockWrapper>
               <SessionProgress />
-              <CenterAbsolutely>
-                <Text as="div" weight="bold" size={64} height="small">
-                  <FocusPassedTime />
-                </Text>
-              </CenterAbsolutely>
+              <PositionSessionInfo>
+                <FocusSessionInfo />
+              </PositionSessionInfo>
+              <Text
+                style={{ position: 'absolute' }}
+                as="div"
+                weight="bold"
+                size={64}
+                height="small"
+              >
+                <FocusPassedTime />
+              </Text>
             </BlockWrapper>
           </DemoFocusProvider>
         </ClientOnly>

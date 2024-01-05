@@ -9,19 +9,17 @@ import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { FinishSession } from './FinishSession'
 import { FocusAssistance } from './FocusAssistance'
-import { FocusGoal } from './FocusGoal'
 import { FocusSounds } from './FocusSounds'
-import { SessionStartedAt } from './SessionStartedAt'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
-import { FocusProject } from './FocusProject'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
+import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
 
 const Container = styled.div`
   max-height: 100%;
@@ -72,9 +70,6 @@ const PositionSettings = styled.div`
 const PositionSessionInfo = styled.div`
   position: absolute;
   top: 12px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 4px;
 `
 
 export const FocusPageContent = () => {
@@ -130,9 +125,7 @@ export const FocusPageContent = () => {
                         </VStack>
                       </PositionSettings>
                       <PositionSessionInfo>
-                        <SessionStartedAt />
-                        <FocusProject />
-                        <FocusGoal />
+                        <FocusSessionInfo />
                       </PositionSessionInfo>
                       <TimeWrapper>
                         <TimeContent>

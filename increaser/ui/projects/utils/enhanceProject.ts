@@ -1,9 +1,9 @@
-import { Set } from '@increaser/app/sets/Set'
 import { DefaultTheme } from 'styled-components'
 import { S_IN_MIN } from '@lib/utils/time'
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
 import { Project } from '@increaser/entities/Project'
 import { EnhancedProject } from '../EnhancedProject'
+import { Set } from '@increaser/entities/User'
 
 export const enhanceProject = (
   project: Project,
