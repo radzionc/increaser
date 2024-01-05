@@ -1,11 +1,11 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import { useCurrentFocus } from './CurrentFocusProvider'
 import { endOfDay } from 'date-fns'
 import { useState } from 'react'
 import { SessionEndTimeInput } from './SessionEndTimeInput'
 import { Modal } from '@lib/ui/modal'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 
 export const EditEndTimeOverlay = () => {
   const { cancel, stop } = useFocus()

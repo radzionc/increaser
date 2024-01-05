@@ -10,11 +10,11 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { AllocationOnboarding } from '@increaser/app/weekTimeAllocation/components/AllocationOnboarding'
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { SubmitYesterdayHabits } from '@increaser/app/habits/components/SubmitYesterdayHabits'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { CheckTodayHabits } from '@increaser/ui/habits/CheckTodayHabits'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 const Container = styled.div`
   display: flex;

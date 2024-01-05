@@ -1,8 +1,8 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 import { LargeSelectOption } from '@increaser/app/ui/LargeSelectOption'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface Props {
   onSelect: (projectId: string) => void

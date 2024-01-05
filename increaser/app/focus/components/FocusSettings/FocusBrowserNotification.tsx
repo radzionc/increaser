@@ -1,9 +1,9 @@
 import { analytics } from '@increaser/app/analytics'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { useCallback } from 'react'
 import styled from 'styled-components'
 import { Switch } from '@lib/ui/inputs/Switch/Switch'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 const NotificationsSwitch = styled(Switch)`
   ${verticalPadding(8)}

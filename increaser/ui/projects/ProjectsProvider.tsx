@@ -1,6 +1,4 @@
-import { toProject } from '@increaser/app/projects/helpers/toProject'
 import { createContext, useMemo } from 'react'
-import { useCurrentWeekSets } from '@increaser/app/sets/hooks/useCurrentWeekSets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { areSameWeek } from '@lib/utils/time/areSameWeek'
@@ -11,7 +9,10 @@ import { toWeek } from '@lib/utils/time/toWeek'
 import { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_WEEK } from '@lib/utils/time'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { createContextHook } from '@lib/ui/state/createContextHook'
+import { EnhancedProject } from './EnhancedProject'
+import { useCurrentWeekSets } from '../sets/hooks/useCurrentWeekSets'
+import { enhanceProject } from './utils/enhanceProject'
 
 export const weeksToDisplay = 4
 
@@ -60,7 +61,7 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
   const projects = useMemo(
     () =>
       state.projects
-        .map((project) => toProject(project, sets, theme))
+        .map((project) => enhanceProject(project, sets, theme))
         .sort(
           (one, another) =>
             getProjectSortingNumber(one) - getProjectSortingNumber(another),
@@ -128,3 +129,5 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
     </ProjectsContext.Provider>
   )
 }
+
+export const useProjects = createContextHook(ProjectsContext, 'ProjectsContext')

@@ -3,8 +3,7 @@ import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { range } from '@lib/utils/array/range'
 import { D_IN_WEEK, MS_IN_DAY } from '@lib/utils/time'
-
-import { useCurrentWeekSets } from './useCurrentWeekSets'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 export const useGroupedByWeekdaySetsTotal = () => {
   const sets = useCurrentWeekSets()

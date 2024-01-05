@@ -1,10 +1,10 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@lib/utils/time'
 
 import { FillingBlock } from './FillingBlock'
+import { useFocus } from './FocusContext'
 import { useCurrentFocus } from './CurrentFocusProvider'
+import { useProjects } from '../projects/ProjectsProvider'
 
 export const SessionProgress = () => {
   const now = useRhythmicRerender()

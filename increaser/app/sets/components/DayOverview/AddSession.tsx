@@ -1,7 +1,7 @@
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { useDayOverview } from './DayOverviewProvider'
 import { CreateSet } from '../CreateSet'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 export const AddSession = () => {
   const { currentSet } = useFocus()

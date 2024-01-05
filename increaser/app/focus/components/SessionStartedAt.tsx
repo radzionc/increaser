@@ -1,4 +1,3 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { Opener } from '@lib/ui/base/Opener'
 
 import { UpdateSetStartTimeOverlay } from './UpdateSetStartTimeOverlay'
@@ -6,6 +5,7 @@ import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import { formatTime } from '@lib/utils/time/formatTime'
 import { PlayIcon } from '@lib/ui/icons/PlayIcon'
 import { ShyFocusButton } from './ShyFocusButton'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 export const SessionStartedAt = () => {
   const { currentSet: optionalCurrentSet, updateStartTime } = useFocus()

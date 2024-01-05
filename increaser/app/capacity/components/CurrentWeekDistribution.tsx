@@ -1,10 +1,10 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import React, { useMemo } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { Circle } from '@lib/ui/layout/Circle'
 import { PieChart } from '@lib/ui/charts/PieChart'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 const Container = styled.div`
   display: grid;

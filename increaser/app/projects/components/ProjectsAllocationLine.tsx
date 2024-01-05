@@ -4,7 +4,7 @@ import { Set } from '@increaser/app/sets/Set'
 import { useTheme } from 'styled-components'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { MS_IN_MIN } from '@lib/utils/time'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 interface Props {
   sets: Set[]

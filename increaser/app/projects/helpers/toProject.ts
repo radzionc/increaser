@@ -3,7 +3,7 @@ import { DefaultTheme } from 'styled-components'
 import { S_IN_MIN } from '@lib/utils/time'
 import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
 import { Project } from '@increaser/entities/Project'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 export const toProject = (
   project: Project,

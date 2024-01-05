@@ -4,13 +4,13 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { isToday } from 'date-fns'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { startOfDay } from 'date-fns'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getDaySets } from '@increaser/app/sets/helpers/getDaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 interface DayOverviewContextState {
   sets: Set[]

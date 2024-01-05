@@ -1,29 +1,27 @@
 import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useOnWindowCloseAlert } from '@lib/ui/hooks/useOnWindowCloseAlert'
-import { formatDurationAsADigitalClock } from '@lib/utils/time/formatDuration'
+import { formatDuration } from '@lib/utils/time/formatDuration'
 import styled from 'styled-components'
 import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { MS_IN_SEC } from '@lib/utils/time'
-
 import { FinishSession } from './FinishSession'
 import { FocusAssistance } from './FocusAssistance'
 import { FocusGoal } from './FocusGoal'
 import { FocusSounds } from './FocusSounds'
-import { SessionProgress } from './SessionProgress'
 import { SessionStartedAt } from './SessionStartedAt'
-import { SlidingTime } from '@increaser/app/ui/SlidingTime'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
-import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { FocusProject } from './FocusProject'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
+import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 
 const Container = styled.div`
   max-height: 100%;
@@ -91,13 +89,16 @@ export const FocusPageContent = () => {
   const project = projectsRecord[projectId]
   if (!project) return null
 
-  const getSeconds = () => (Date.now() - startedAt) / MS_IN_SEC
-
   return (
     <>
       <RhytmicRerender
         render={() => (
-          <PageMetaTags title={formatDurationAsADigitalClock(getSeconds())} />
+          <PageMetaTags
+            title={formatDuration(Date.now() - startedAt, 'ms', {
+              kind: 'digitalClock',
+              minUnit: 's',
+            })}
+          />
         )}
       />
       <ElementSizeAware
@@ -136,7 +137,7 @@ export const FocusPageContent = () => {
                       <TimeWrapper>
                         <TimeContent>
                           <Text as="div" weight="bold" size={64} height="small">
-                            <SlidingTime getSeconds={getSeconds} />
+                            <FocusPassedTime />
                           </Text>
                         </TimeContent>
                       </TimeWrapper>

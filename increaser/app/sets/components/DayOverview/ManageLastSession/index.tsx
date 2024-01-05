@@ -1,5 +1,5 @@
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useDayOverview } from '../DayOverviewProvider'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { Menu } from '@lib/ui/menu'

@@ -1,6 +1,4 @@
 import { useCreateProjectMutation } from '@increaser/app/projects/api/useCreateProjectMutation'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
-import { defaultEmojis } from '@increaser/app/projects/Project'
 import { useEffect, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
@@ -14,6 +12,8 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { useRouter } from 'next/router'
 import { Project } from '@increaser/entities/Project'
 import { getProjectPath } from '@increaser/ui/navigation/AppPath'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { defaultEmojis } from '@increaser/ui/projects/EnhancedProject'
 
 type ProjectFormShape = Pick<Project, 'name' | 'emoji' | 'color'>
 

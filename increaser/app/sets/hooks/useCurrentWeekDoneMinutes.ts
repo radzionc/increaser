@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { MS_IN_MIN } from '@lib/utils/time'
-
-import { useCurrentWeekSets } from './useCurrentWeekSets'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 export const useCurrentWeekDoneMinutes = () => {
   const sets = useCurrentWeekSets()

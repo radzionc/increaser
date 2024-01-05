@@ -13,10 +13,10 @@ import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
 import { getWeekday } from '@lib/utils/time/getWeekday'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const AmountOverview = () => {
   const { sets, dayStartedAt } = useDayOverview()

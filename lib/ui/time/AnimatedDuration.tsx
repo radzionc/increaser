@@ -1,11 +1,13 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { formatDurationAsADigitalClock } from '@lib/utils/time/formatDuration'
 import styled, { css, keyframes } from 'styled-components'
+import { Milliseconds } from '@lib/utils/time/types'
+import { formatDuration } from '@lib/utils/time/formatDuration'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
-interface Props {
-  getSeconds: (now: number) => number
+interface AnimatedDurationProps {
+  getDuration: (currentTime: number) => Milliseconds
 }
 
 const CharacterContainer = styled.div`
@@ -31,13 +33,21 @@ const Character = styled(Text)<{ animationId?: string }>`
     `}
 `
 
-export const SlidingTime = ({ getSeconds }: Props) => {
+export const AnimatedDuration = ({ getDuration }: AnimatedDurationProps) => {
   const now = useRhythmicRerender()
 
-  const seconds = getSeconds(now)
-  const timeString = formatDurationAsADigitalClock(seconds)
-  const previousTimeString = formatDurationAsADigitalClock(
-    Math.max(0, seconds - 1),
+  const duration = getDuration(now)
+  const timeString = formatDuration(duration, 'ms', {
+    kind: 'digitalClock',
+    minUnit: 's',
+  })
+  const previousTimeString = formatDuration(
+    Math.max(0, duration - convertDuration(1, 's', 'ms')),
+    'ms',
+    {
+      kind: 'digitalClock',
+      minUnit: 's',
+    },
   )
 
   return (
@@ -48,7 +58,7 @@ export const SlidingTime = ({ getSeconds }: Props) => {
           previousCharacter !== character
             ? `${previousCharacter}${character}`
             : undefined
-        const color = index > timeString.length - 4 ? 'supporting' : 'regular'
+        const color = index > timeString.length - 4 ? 'supporting' : 'contrast'
 
         return (
           <CharacterContainer key={index}>

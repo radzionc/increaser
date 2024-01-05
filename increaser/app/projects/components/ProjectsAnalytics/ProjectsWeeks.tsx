@@ -1,10 +1,10 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useMemo } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { BarSegment, BasicBarChart } from '@increaser/app/ui/BasicBarChart'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const sortSegments = (segments: BarSegment[]) =>
   [...segments].sort((a, b) => a.value - b.value)

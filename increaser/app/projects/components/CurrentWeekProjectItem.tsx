@@ -7,7 +7,7 @@ import {
 } from '@lib/ui/layout/StackSeparatedBy'
 import { Text } from '@lib/ui/text'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 export const CurrentWeekProjectItem = ({
   doneMinutesThisWeek,

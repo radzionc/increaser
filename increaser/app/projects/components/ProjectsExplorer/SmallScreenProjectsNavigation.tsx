@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useMemo } from 'react'
 import styled from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -6,6 +5,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { SmallScreenCreateProjectNavigationItem } from './SmallScreenCreateProjectNavigationItem'
 import { SmallScreenProjectNavigationItem } from './SmallScreenProjectNavigationItem'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 const Container = styled(HStack)`
   gap: 8px;

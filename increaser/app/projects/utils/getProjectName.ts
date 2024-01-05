@@ -1,4 +1,4 @@
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 export const getProjectName = (
   projectsRecord: Record<string, EnhancedProject>,

@@ -1,6 +1,5 @@
 import { ProjectGoalInput } from '@increaser/app/projects/components/ProjectGoalInput'
 import { CurrentProjectProvider } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
@@ -10,6 +9,7 @@ import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { CollapseToggleButton } from '@lib/ui/buttons/CollapseToggleButton'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { sum } from '@lib/utils/array/sum'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const ManageGoals = () => {
   const { activeProjects } = useProjects()

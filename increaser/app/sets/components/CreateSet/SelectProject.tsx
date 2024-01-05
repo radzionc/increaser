@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import styled from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { HSLA } from '@lib/ui/colors/HSLA'
@@ -8,6 +7,7 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface Props {
   onSelect: (projectId: string) => void

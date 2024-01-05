@@ -1,7 +1,7 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { ChangeProjectOverlay } from '@increaser/app/projects/components/ChangeProjectOverlay'
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { ClosableComponentProps } from '@lib/ui/props'
-import { useCurrentFocus } from './CurrentFocusProvider'
 
 export const UpdateSetProjectOverlay = ({
   onClose,

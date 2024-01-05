@@ -6,7 +6,7 @@ import { Circle } from '@lib/ui/layout/Circle'
 import { Text } from '@lib/ui/text'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { CheckCircleIcon } from '@lib/ui/icons/CheckCircleIcon'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 interface ProjectsToBudgetSectionProps {
   projects: EnhancedProject[]

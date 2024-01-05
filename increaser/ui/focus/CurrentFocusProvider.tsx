@@ -1,9 +1,6 @@
-import { CurrentSet } from '@increaser/app/focus/context/FocusContext'
 import { createContext, useEffect } from 'react'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { MS_IN_MIN } from '@lib/utils/time'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import { useProject } from '@increaser/app/projects/hooks/useProject'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRouter } from 'next/router'
@@ -14,6 +11,8 @@ import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { playSound } from '@lib/ui/notifications/utils/playSound'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { CurrentSet, useFocus } from './FocusContext'
+import { useProject } from '../projects/hooks/useProject'
 
 interface CurrentFocusState extends CurrentSet {}
 

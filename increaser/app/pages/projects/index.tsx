@@ -1,8 +1,8 @@
 import { makeProjectsPage } from '@increaser/app/layout/makeProjectsPage'
 import { useRouter } from 'next/router'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useEffect } from 'react'
 import { AppPath, getProjectPath } from '@increaser/ui/navigation/AppPath'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export default makeProjectsPage(() => {
   const { projects } = useProjects()

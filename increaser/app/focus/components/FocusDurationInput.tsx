@@ -1,8 +1,3 @@
-import {
-  FocusDuration,
-  maxFocusDuration,
-  recommendedFocusDurations,
-} from '@increaser/app/focus/FocusDuration'
 import { range } from '@lib/utils/array/range'
 import styled, { useTheme } from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
@@ -10,6 +5,11 @@ import { HSLA } from '@lib/ui/colors/HSLA'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { round } from '@lib/ui/css/round'
+import {
+  FocusDuration,
+  maxFocusDuration,
+  recommendedFocusDurations,
+} from '@increaser/entities/FocusDuration'
 
 interface FocusDurationInputProps {
   value: FocusDuration

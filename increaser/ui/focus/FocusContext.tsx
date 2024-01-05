@@ -1,6 +1,7 @@
 import { Set } from '@increaser/entities/User'
-import { FocusDuration } from '@increaser/app/focus/FocusDuration'
 import { createContext } from 'react'
+import { createContextHook } from '@lib/ui/state/createContextHook'
+import { FocusDuration } from '@increaser/entities/FocusDuration'
 
 export interface StartFocusParams {
   projectId: string
@@ -36,3 +37,5 @@ export interface FocusState {
 }
 
 export const FocusContext = createContext<FocusState | undefined>(undefined)
+
+export const useFocus = createContextHook(FocusContext, 'FocusContext')

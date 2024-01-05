@@ -1,9 +1,9 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { range } from '@lib/utils/array/range'
 import { useTheme } from 'styled-components'
 import { CountableItemsVisualization } from '@increaser/app/ui/CountableItemsVisualization'
 import { MIN_IN_HOUR } from '@lib/utils/time'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const ProjectsGoalsVisualization = () => {
   const { totalMinutes } = useWeekTimeAllocation()

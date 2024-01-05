@@ -1,10 +1,9 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-
 import { Opener } from '@lib/ui/base/Opener'
 import { UpdateSetProjectOverlay } from './UpdateSetProjectOverlay'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
-import { useProjects } from '../../projects/hooks/useProjects'
 import { ShyFocusButton } from './ShyFocusButton'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const FocusProject = () => {
   const { currentSet: optionalCurrentSet } = useFocus()

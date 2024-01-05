@@ -8,6 +8,8 @@ import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { ScoreboardSlice } from './ScoreboardSlice'
 import { HabitsSlice } from './HabitsSlice'
 import { UserStateProvider } from './UserStateProvider'
+import { FocusSlice } from './FocusSlice'
+import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 
 export const LandingPage = () => (
   <>
@@ -17,7 +19,10 @@ export const LandingPage = () => (
     />
     <PrimarySlice />
     <UserStateProvider>
-      <HabitsSlice />
+      <ProjectsProvider>
+        <FocusSlice />
+        <HabitsSlice />
+      </ProjectsProvider>
     </UserStateProvider>
     <DemoSlice />
     <ScoreboardSlice />

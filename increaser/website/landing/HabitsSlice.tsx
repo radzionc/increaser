@@ -13,7 +13,7 @@ export const HabitsSlice = () => {
       <WebsiteSliceContent>
         <WebsiteSectionHeader
           title="Your Success Starts with Your Habits"
-          subtitle={`Embrace the journey of self-improvement with ${productName}'s intuitive habit tracking.`}
+          subtitle={`Embrace the journey of self-improvement with ${productName}'s intuitive habit tracking`}
         />
         <ClientOnly>
           <HabitsProvider>

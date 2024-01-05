@@ -1,6 +1,4 @@
 import { ProjectsWeeks } from '@increaser/app/projects/components/ProjectsAnalytics/ProjectsWeeks'
-import { weeksToDisplay } from '@increaser/app/projects/components/ProjectsProvider'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { sum } from '@lib/utils/array/sum'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -9,6 +7,10 @@ import { Text } from '@lib/ui/text'
 
 import { PreviousProjectsDistribution } from './PreviousProjectsDistribution'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import {
+  useProjects,
+  weeksToDisplay,
+} from '@increaser/ui/projects/ProjectsProvider'
 
 export const PreviousCapacity = () => {
   const { weeks: partialWeeks } = useProjects()

@@ -1,4 +1,4 @@
-import { useProjects } from './useProjects'
+import { useProjects } from '../ProjectsProvider'
 
 export const useProject = (id: string | null) => {
   const { projectsRecord } = useProjects()

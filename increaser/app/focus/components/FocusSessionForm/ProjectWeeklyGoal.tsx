@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
@@ -16,6 +15,7 @@ import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { useTheme } from 'styled-components'
 import { useMemo } from 'react'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface ProjectWeeklyGoalProps {
   projectId: string

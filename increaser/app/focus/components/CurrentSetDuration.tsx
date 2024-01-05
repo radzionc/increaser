@@ -1,9 +1,9 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import { useState } from 'react'
 import { Button } from '@lib/ui/buttons/Button'
 
 import { FocusDurationInput } from './FocusDurationInput'
 import { Modal } from '@lib/ui/modal'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 interface UpdateFocusDurationOverlayProps {
   onClose: () => void

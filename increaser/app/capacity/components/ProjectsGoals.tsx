@@ -1,5 +1,5 @@
 import { ProjectWeeklyGoal } from '@increaser/app/focus/components/FocusSessionForm/ProjectWeeklyGoal'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { VStack } from '@lib/ui/layout/Stack'
 
 export const ProjectsGoals = () => {

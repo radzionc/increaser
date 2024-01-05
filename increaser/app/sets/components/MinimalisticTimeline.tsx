@@ -1,4 +1,4 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
 import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
 import { Set } from '@increaser/app/sets/Set'

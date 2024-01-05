@@ -1,6 +1,6 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { getViewSetup } from '@lib/ui/view/getViewSetup'
 import { ViewSelector } from '@lib/ui/inputs/Select/ViewSelector'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const habitViews = ['active', 'inactive'] as const
 export type ProjectsView = (typeof habitViews)[number]

@@ -6,18 +6,12 @@ import {
 } from '@increaser/app/sets/Block'
 import { Set } from '@increaser/app/sets/Set'
 import { MS_IN_MIN } from '@lib/utils/time'
-
-export const focusDurations = [
-  5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90,
-] as const
-
-export const maxFocusDuration = getLastItem(focusDurations)
-
-export const recommendedFocusDurations = [30, 46, 60, 90]
-
-export const defaultFocusDuration: FocusDuration = 30
-
-export type FocusDuration = (typeof focusDurations)[number]
+import {
+  FocusDuration,
+  defaultFocusDuration,
+  focusDurations,
+  maxFocusDuration,
+} from '@increaser/entities/FocusDuration'
 
 export const increaseFocusDuration = (lastSetDuration: number) => {
   return (

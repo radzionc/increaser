@@ -1,7 +1,6 @@
 import { DayAverage } from '@increaser/app/projects/components/ProjectsAnalytics/DayAverage'
 import { ProjectsCurrentWeek } from '@increaser/app/projects/components/ProjectsAnalytics/ProjectsCurrentWeek'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
-import { useCurrentWeekSets } from '@increaser/app/sets/hooks/useCurrentWeekSets'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
@@ -12,6 +11,7 @@ import { CurrentWeekDistribution } from './CurrentWeekDistribution'
 import { CurrentWeekProgressBar } from './CurrentWeekProgressBar'
 import { ProjectsGoals } from './ProjectsGoals'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 export const CurrentWeekPerformance = () => {
   const sets = useCurrentWeekSets()

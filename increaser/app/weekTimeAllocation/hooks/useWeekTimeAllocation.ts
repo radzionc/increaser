@@ -1,4 +1,4 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useMemo } from 'react'
 import { sum } from '@lib/utils/array/sum'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'

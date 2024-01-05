@@ -1,5 +1,4 @@
 import { breakMinutesOptions } from '@increaser/app/break/breakDuration'
-import { focusDurations } from '@increaser/app/focus/FocusDuration'
 import { ReactNode, useEffect, useState } from 'react'
 import {
   getBlockWorkDuration,
@@ -27,6 +26,7 @@ import {
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { focusDurations } from '@increaser/entities/FocusDuration'
 
 export const remindersCount = 5
 
