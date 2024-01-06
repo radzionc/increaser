@@ -2,12 +2,14 @@ import { Button } from '@lib/ui/buttons/Button'
 import {
   ClickableComponentProps,
   ComponentWithChildrenProps,
+  UIComponentProps,
 } from '@lib/ui/props'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 
-type ShyFocusButtonProps = ComponentWithChildrenProps &
+type ShyFocusButtonProps = UIComponentProps &
+  ComponentWithChildrenProps &
   ClickableComponentProps & {
     icon?: React.ReactNode
   }
@@ -31,10 +33,10 @@ const Container = styled(Button)`
 
 export const ShyFocusButton = ({
   children,
-  onClick,
   icon,
+  ...rest
 }: ShyFocusButtonProps) => (
-  <Container size="xs" onClick={onClick} kind="secondary">
+  <Container size="xs" {...rest} kind="secondary">
     {icon && <IconWrapper>{icon}</IconWrapper>}
     {children}
   </Container>
