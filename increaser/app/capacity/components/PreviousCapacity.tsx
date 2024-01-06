@@ -11,6 +11,9 @@ import {
   useProjects,
   weeksToDisplay,
 } from '@increaser/ui/projects/ProjectsProvider'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { InfoIconFilled } from '@lib/ui/icons/InfoIconFilled'
+import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 
 export const PreviousCapacity = () => {
   const { weeks: partialWeeks } = useProjects()
@@ -26,15 +29,24 @@ export const PreviousCapacity = () => {
     <Panel kind="secondary">
       <TitledSection
         title={
-          <Text as="div" size={18} weight="bold" color="shy">
-            <HStack gap={8}>
-              <Text>Last {weeksToDisplay} weeks:</Text>
-              <Text color="regular" as="span">
-                {Math.round(convertDuration(total / weeks.length, 's', 'h'))}h /
-                week
-              </Text>
-            </HStack>
-          </Text>
+          <HStack alignItems="center" gap={8}>
+            <Text as="div" size={18} weight="bold" color="shy">
+              <HStack gap={8}>
+                <Text>Avg. week:</Text>
+                <Text color="regular" as="span">
+                  {Math.round(convertDuration(total / weeks.length, 's', 'h'))}h
+                </Text>
+              </HStack>
+            </Text>
+            <Tooltip
+              content={`Average is calculated based on the last ${weeksToDisplay} weeks.`}
+              renderOpener={(props) => (
+                <IconWrapper {...props} style={{ fontSize: 14 }}>
+                  <InfoIconFilled />
+                </IconWrapper>
+              )}
+            />
+          </HStack>
         }
       >
         <VStack gap={40}>

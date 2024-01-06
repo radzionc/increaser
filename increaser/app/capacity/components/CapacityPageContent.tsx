@@ -7,8 +7,8 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentWeekPerformance } from './CurrentWeekPerformance'
 import { ManageCapacity } from './ManageCapacity'
 import { ManageGoals } from './ManageGoals'
-import { PreviousCapacity } from './PreviousCapacity'
 import { Panel } from '@lib/ui/panel/Panel'
+import { TimeDistributionPanel } from '@increaser/ui/timeTracking/TimeDistributionPanel'
 
 const Container = styled(UniformColumnGrid)`
   align-items: start;
@@ -26,7 +26,7 @@ export const CapacityPageContent = () => {
             <ManageCapacity />
             <ManageGoals />
           </Panel>
-          <PreviousCapacity />
+          <TimeDistributionPanel />
         </VStack>
       </Container>
     </ErrorBoundary>
