@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "generateIconMetaTags": "npx tsx icon/commands/generateIconMetaTags"
@@ -12,6 +12,7 @@
   "dependencies": {
     "@amplitude/analytics-browser": "^2.3.8",
     "next": "14.0.4",
+    "next-sitemap": "^4.2.3",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.6"
