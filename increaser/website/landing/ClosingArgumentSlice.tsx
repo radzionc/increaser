@@ -16,6 +16,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   background-image: url('/images/stars.webp');
+  background-size: cover;
 `
 
 export const ClosingArgumentSlice = () => {
