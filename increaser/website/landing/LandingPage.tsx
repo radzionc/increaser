@@ -12,6 +12,7 @@ import { FocusSlice } from './FocusSlice'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { TimeTrackingSlice } from './TimeTrackingSlice'
 import { ScheduleSlice } from './ScheduleSlice'
+import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 
 export const LandingPage = () => (
   <>
@@ -28,6 +29,7 @@ export const LandingPage = () => (
         <ScheduleSlice />
       </ProjectsProvider>
     </UserStateProvider>
+    <TestimonialsSlice />
     <DemoSlice />
     <ScoreboardSlice />
     <PricingSlice />
