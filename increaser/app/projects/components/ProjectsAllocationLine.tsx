@@ -1,10 +1,10 @@
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
-import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
 import { Set } from '@increaser/app/sets/Set'
 import { useTheme } from 'styled-components'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { MS_IN_MIN } from '@lib/utils/time'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 
 interface Props {
   sets: Set[]

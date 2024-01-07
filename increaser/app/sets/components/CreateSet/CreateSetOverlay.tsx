@@ -1,5 +1,5 @@
 import { analytics } from '@increaser/app/analytics'
-import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import { Controller, useForm } from 'react-hook-form'
 import { Set } from '@increaser/app/sets/Set'
 import { useTheme } from 'styled-components'

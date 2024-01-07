@@ -4,7 +4,7 @@ import { UIComponentProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import styled, { useTheme } from 'styled-components'
 
 interface WorkSessionProps extends UIComponentProps {

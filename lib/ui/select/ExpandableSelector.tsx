@@ -11,6 +11,7 @@ import { HStack } from '../layout/Stack'
 import { InputProps, UIComponentProps } from '../props'
 import { getColor } from '../theme/getters'
 import { getHoverVariant } from '../theme/getHoverVariant'
+import { cropText } from '../css/cropText'
 
 export type ExpandableSelectorProp<T> = UIComponentProps &
   InputProps<T> & {
@@ -34,6 +35,17 @@ const activeContainer = css`
   }
 `
 
+const OptionContent = styled(HStack)`
+  overflow: hidden;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  > * {
+    ${cropText};
+  }
+`
+
 const Container = styled(HStack)<{ isActive: boolean; isDisabled?: boolean }>`
   ${borderRadius.s};
   outline: none;
@@ -41,7 +53,6 @@ const Container = styled(HStack)<{ isActive: boolean; isDisabled?: boolean }>`
   padding: 8px 12px;
   background: ${getColor('foreground')};
   ${transition};
-  font-size: 14px;
 
   align-items: center;
   gap: 4px;
@@ -66,7 +77,6 @@ const Container = styled(HStack)<{ isActive: boolean; isDisabled?: boolean }>`
 
 const OptionItem = styled.div<{ isActive: boolean }>`
   outline: none;
-  font-size: 14px;
   ${interactive};
   color: ${getColor('textSupporting')};
   position: relative;
@@ -118,7 +128,7 @@ export function ExpandableSelector<T>({
         {...referenceProps}
         {...rest}
       >
-        {renderOption(value)}
+        <OptionContent>{renderOption(value)}</OptionContent>
         <ToggleIconContainer isOpen={isOpen}>
           <ChevronDownIcon />
         </ToggleIconContainer>
@@ -128,7 +138,6 @@ export function ExpandableSelector<T>({
           {options.map((option, index) => (
             <OptionItem
               isActive={activeIndex === index}
-              key={getOptionKey(option)}
               {...getOptionProps({
                 index,
                 onSelect: () => {
@@ -137,7 +146,9 @@ export function ExpandableSelector<T>({
                 },
               })}
             >
-              {renderOption(option)}
+              <OptionContent key={getOptionKey(option)}>
+                {renderOption(option)}
+              </OptionContent>
               {option === value && <Outline />}
             </OptionItem>
           ))}
