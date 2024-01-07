@@ -29,7 +29,7 @@ export const dayMomentsDefaultValues: Record<DayMoment, Minutes> = {
   wakeUpAt: convertDuration(7, 'h', 'min'),
   startWorkAt: convertDuration(7, 'h', 'min') + dayMomentStep,
   firstMealAt: convertDuration(10, 'h', 'min'),
-  finishWorkAt: convertDuration(17, 'h', 'min') + dayMomentStep,
+  finishWorkAt: convertDuration(18, 'h', 'min'),
   lastMealAt: convertDuration(18, 'h', 'min'),
   goToBedAt: convertDuration(22, 'h', 'min'),
 }

@@ -14,8 +14,7 @@ const gridMinWidth = 520
 
 const Grid = styled.div`
   display: grid;
-  gap: 8px;
-  grid-template-rows: min-content 80px min-content 80px min-content;
+  gap: 20px 8px;
   grid-template-columns: min-content 1fr min-content;
   width: 100%;
 `
@@ -92,23 +91,20 @@ export const ManageSchedule = () => {
                   value={finishWorkAt - startWorkAt}
                 />
                 {manageFinishWork}
-                <TimeDistance direction="up" value={startWorkAt - wakeUpAt} />
-                <div />
-                <TimeDistance
-                  direction="down"
-                  value={goToBedAt - finishWorkAt}
-                />
                 {manageWakeUp}
-                <TimeDistance
-                  direction="left"
-                  value={
-                    convertDuration(1, 'd', 'min') - (goToBedAt - wakeUpAt)
-                  }
-                />
+                <VStack gap={4}>
+                  <TimeDistance
+                    direction="right"
+                    value={goToBedAt - wakeUpAt}
+                  />
+                  {/* <TimeDistance
+                    direction="left"
+                    value={
+                      convertDuration(1, 'd', 'min') - (goToBedAt - wakeUpAt)
+                    }
+                  /> */}
+                </VStack>
                 {manageBedTime}
-                <TimeDistance direction="down" value={firstMealAt - wakeUpAt} />
-                <div />
-                <TimeDistance direction="up" value={goToBedAt - lastMealAt} />
                 {manageFirstMeal}
                 <TimeDistance
                   direction="right"

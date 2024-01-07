@@ -11,6 +11,7 @@ import { UserStateProvider } from './UserStateProvider'
 import { FocusSlice } from './FocusSlice'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { TimeTrackingSlice } from './TimeTrackingSlice'
+import { ScheduleSlice } from './ScheduleSlice'
 
 export const LandingPage = () => (
   <>
@@ -24,6 +25,7 @@ export const LandingPage = () => (
         <FocusSlice />
         <TimeTrackingSlice />
         <HabitsSlice />
+        <ScheduleSlice />
       </ProjectsProvider>
     </UserStateProvider>
     <DemoSlice />

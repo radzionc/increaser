@@ -8,20 +8,20 @@ import { css } from 'styled-components'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { interactive } from '@lib/ui/css/interactive'
 import { TimeOption } from './TimeOption'
-import { getDayMomentColor } from '@increaser/app/sets/utils/getDayMomentColor'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { dayMomentIcon } from '../../dayMomentIcon'
 import {
   DayMoment,
   dayMomentShortName,
   dayMomentStep,
 } from '@increaser/entities/DayMoments'
 import { range } from '@lib/utils/array/range'
-import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
+import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
+import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
+import { useSchedule } from '../../ScheduleContext'
 
 interface ManageDayMomentProps {
   min: number
@@ -39,7 +39,7 @@ const Container = styled.div<{ isActive: boolean }>`
   flex-direction: row;
   gap: 1px;
   overflow: hidden;
-  padding: 8px 12px;
+  padding: 12px 16px;
   background: ${getColor('foreground')};
   ${transition};
 
@@ -70,7 +70,7 @@ export const ManageDayMoment = ({
   const user = useAssertUserState()
   const value = user[dayMoment]
 
-  const { mutate: updateUser } = useUpdateUserMutation()
+  const { updateDayMoment } = useSchedule()
 
   const options = range(Math.round((max - min) / dayMomentStep) + 1).map(
     (step) => min + dayMomentStep * step,
@@ -97,7 +97,9 @@ export const ManageDayMoment = ({
           <IconWrapper style={{ color: color.toCssValue() }}>
             {dayMomentIcon[dayMoment]}
           </IconWrapper>
-          <Text as="div">{dayMomentShortName[dayMoment]}</Text>
+          <Text weight="semibold" as="div">
+            {dayMomentShortName[dayMoment]}
+          </Text>
         </HStack>
         <Text weight="bold">{formatDailyEventTime(value)}</Text>
       </Container>
@@ -110,7 +112,7 @@ export const ManageDayMoment = ({
               {...getOptionProps({
                 index,
                 onSelect: () => {
-                  updateUser({ [dayMoment]: option })
+                  updateDayMoment(dayMoment, option)
                   setIsOpen(false)
                 },
               })}

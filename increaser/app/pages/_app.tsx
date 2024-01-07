@@ -25,6 +25,7 @@ import {
 import { ThemePreference } from '@lib/ui/theme/ThemePreference'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
+import { ScheduleProvider } from '../sets/components/ScheduleProvider'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -64,8 +65,10 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                     <ProjectsProvider>
                       <HabitsProvider>
                         <FocusProvider>
-                          <BreakProvider>{component}</BreakProvider>
-                          <MembershipConfirmation />
+                          <ScheduleProvider>
+                            <BreakProvider>{component}</BreakProvider>
+                            <MembershipConfirmation />
+                          </ScheduleProvider>
                         </FocusProvider>
                       </HabitsProvider>
                     </ProjectsProvider>
