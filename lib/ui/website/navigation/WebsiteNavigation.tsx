@@ -17,7 +17,7 @@ type WebsiteNavigationProps = ComponentWithChildrenProps & {
   logo: ReactNode
   renderTopbarItems: () => ReactNode
   renderOverlayItems: (props: ClosableComponentProps) => ReactNode
-  footer: ReactNode
+  footer?: ReactNode
 }
 
 const Wrapper = styled(VStack)`

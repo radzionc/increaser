@@ -11,9 +11,9 @@ import { Footer } from '@lib/ui/website/navigation/Footer'
 import { Text } from '@lib/ui/text'
 import { legalEntity, supportEmail, youTubeChannel } from '@increaser/config'
 import { InteractiveText } from '@lib/ui/text/InteractiveText'
-import { Path } from '../navigation/Path'
 import { AppLink } from '../navigation/AppLink'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { WebsitePath } from '@increaser/ui/navigation/WebsitePath'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 const LogoWrapper = styled(Link)`
@@ -70,10 +70,10 @@ export const getWebsitePageLayout: GetLayout = (page) => (
           <AppLink to={AppPath.Home}>
             <InteractiveText>App</InteractiveText>
           </AppLink>
-          <Link href={Path.PrivacyPolicy}>
+          <Link href={WebsitePath.PrivacyPolicy}>
             <InteractiveText>Privacy</InteractiveText>
           </Link>
-          <Link href={Path.TermsOfService}>
+          <Link href={WebsitePath.TermsOfService}>
             <InteractiveText>Terms</InteractiveText>
           </Link>
           <ExternalLink to={`mailto:${supportEmail}`}>
