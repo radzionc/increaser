@@ -1,17 +1,17 @@
-import { FlagIcon } from '@lib/ui/icons/FlagIcon'
-import { MoonIcon } from '@lib/ui/icons/MoonIcon'
-import { SunIcon } from '@lib/ui/icons/SunIcon'
-import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
-import { BreakfastIcon } from '@lib/ui/icons/BreakfastIcon'
-import { DinnerIcon } from '@lib/ui/icons/DinnerIcon'
+import { FlagIconFilled } from '@lib/ui/icons/FlagIconFilled'
+import { MoonIconFilled } from '@lib/ui/icons/MoonIconFilled'
+import { SunIconFilled } from '@lib/ui/icons/SunIconFilled'
+import { MugHotIcon } from '@lib/ui/icons/MugHotIcon'
+import { EggIconFilled } from '@lib/ui/icons/EggIconFilled'
+import { UtensilsIcon } from '@lib/ui/icons/UtensilsIcon'
 import { ReactNode } from 'react'
 import { DayMoment } from '@increaser/entities/DayMoments'
 
 export const dayMomentIcon: Record<DayMoment, ReactNode> = {
-  wakeUpAt: <SunIcon />,
-  startWorkAt: <CoffeeIcon />,
-  finishWorkAt: <FlagIcon />,
-  goToBedAt: <MoonIcon />,
-  firstMealAt: <BreakfastIcon />,
-  lastMealAt: <DinnerIcon />,
+  wakeUpAt: <SunIconFilled />,
+  startWorkAt: <MugHotIcon />,
+  finishWorkAt: <FlagIconFilled />,
+  goToBedAt: <MoonIconFilled />,
+  firstMealAt: <EggIconFilled />,
+  lastMealAt: <UtensilsIcon />,
 }

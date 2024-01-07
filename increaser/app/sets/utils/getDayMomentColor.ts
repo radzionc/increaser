@@ -8,6 +8,6 @@ export const getDayMomentColor = (dayMoment: DayMoment, theme: DefaultTheme) =>
     startWorkAt: () => theme.colors.getLabelColor(3),
     firstMealAt: () => theme.colors.getLabelColor(4),
     finishWorkAt: () => theme.colors.getLabelColor(6),
-    lastMealAt: () => theme.colors.getLabelColor(7),
+    lastMealAt: () => theme.colors.getLabelColor(0),
     goToBedAt: () => theme.colors.getLabelColor(9),
   })
