@@ -41,7 +41,7 @@ export const TimeDistributionPanel = () => {
           color: activeProject
             ? getProjectColor(projectsRecord, theme, activeProject)
             : theme.colors.mist,
-          label: index === weeks.length - 1 ? 'Last week' : `Week #${week}`,
+          label: index === weeks.length - 1 ? 'Last week' : `Week #${week + 1}`,
           renderValue: (value) =>
             value > 0 ? (
               <Text color="contrast">

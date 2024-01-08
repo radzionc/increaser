@@ -107,7 +107,7 @@ export const ProjectStats = () => {
           )
         })
         .map(({ seconds, week }) => ({
-          label: `Week #${week}`,
+          label: `Week #${week + 1}`,
           value: seconds,
         }))
 
