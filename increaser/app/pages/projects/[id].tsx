@@ -2,9 +2,9 @@ import { makeProjectsPage } from '@increaser/app/layout/makeProjectsPage'
 import { useRouter } from 'next/router'
 import { ProjectView } from '@increaser/app/projects/components/ProjectView'
 import { CurrentProjectProvider } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useEffect } from 'react'
-import { Path } from '@increaser/app/router/Path'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface ProjectPageParams {
   id?: string
@@ -19,7 +19,7 @@ export default makeProjectsPage(() => {
 
   useEffect(() => {
     if (!project) {
-      router.push(Path.Projects)
+      router.push(AppPath.Projects)
     }
   }, [project, router])
 

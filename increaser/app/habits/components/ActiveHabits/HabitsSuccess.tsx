@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 
-import { useHabits } from '../HabitsProvider'
 import { HabitSuccessStatistic } from './HabitSuccessStatistic'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 export const HabitsSuccess = () => {
   const { habits } = useHabits()

@@ -1,16 +1,13 @@
 import { getColor } from '@lib/ui/theme/getters'
 import Link from 'next/link'
-import { Path } from '@increaser/app/router/Path'
 import styled from 'styled-components'
-import { SlidingTime } from '@increaser/app/ui/SlidingTime'
-import { useCurrentFocus } from './CurrentFocusProvider'
 import { transition } from '@lib/ui/css/transition'
-import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { SessionProgress } from './SessionProgress'
 import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
-import { MS_IN_SEC } from '@lib/utils/time'
 import { interactive } from '@lib/ui/css/interactive'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
+import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -35,19 +32,13 @@ const Container = styled.div`
 `
 
 export const FocusNavigationSlice = () => {
-  const { startedAt } = useCurrentFocus()
-
-  const now = useRhythmicRerender()
-
-  const getSeconds = () => (now - startedAt) / MS_IN_SEC
-
   return (
     <Wrapper>
-      <Link href={Path.Focus}>
+      <Link href={AppPath.Focus}>
         <Container>
           <SessionProgress />
           <CenterAbsolutely>
-            <SlidingTime getSeconds={getSeconds} />
+            <FocusPassedTime />
           </CenterAbsolutely>
         </Container>
       </Link>

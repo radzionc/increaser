@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { Modal } from '@lib/ui/modal'
 import { Match } from '@lib/ui/base/Match'
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
-import { SubscriptionOffer } from './SubscriptionOffer'
 import { SubscriptionCheckout } from './SubscriptionCheckout'
+import { SubscriptionOffer } from '@increaser/ui/subscription/SubscriptionOffer'
 
 type SubscriptionPromptStage = 'offer' | 'checkout'
 

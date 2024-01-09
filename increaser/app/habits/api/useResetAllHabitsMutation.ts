@@ -2,11 +2,11 @@ import { useMutation } from 'react-query'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { recordMap } from '@lib/utils/record/recordMap'
 
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 
 export const useResetAllHabitsMutation = () => {
   const { updateState } = useUserState()

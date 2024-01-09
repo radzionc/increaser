@@ -1,5 +1,6 @@
 import { useDeleteHabitMutation } from '@increaser/app/habits/api/useDeleteHabitMutation'
 import { useUpdateHabitMutation } from '@increaser/app/habits/api/useUpdateHabitMutation'
+import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 import { OpenMenuButton } from '@lib/ui/buttons/OpenMenuButton'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
@@ -7,8 +8,6 @@ import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { Menu } from '@lib/ui/menu'
 import { MenuOption, MenuOptionProps } from '@lib/ui/menu/MenuOption'
 import { MS_IN_SEC } from '@lib/utils/time'
-
-import { useCurrentHabit } from '../CurrentHabitProvider'
 
 interface ManageHabitProps {
   onEdit: () => void

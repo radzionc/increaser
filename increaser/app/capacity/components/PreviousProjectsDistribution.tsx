@@ -1,5 +1,3 @@
-import { weeksToDisplay } from '@increaser/app/projects/components/ProjectsProvider'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import React, { useMemo } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
@@ -7,6 +5,10 @@ import styled, { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { Circle } from '@lib/ui/layout/Circle'
 import { PieChart } from '@lib/ui/charts/PieChart'
+import {
+  useProjects,
+  weeksToDisplay,
+} from '@increaser/ui/projects/ProjectsProvider'
 
 const Container = styled.div`
   display: grid;

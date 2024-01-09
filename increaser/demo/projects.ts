@@ -35,7 +35,7 @@ const projectsDescription: ProjectDescription[] = [
   },
   {
     id: DemoProject.Content,
-    color: 3,
+    color: 10,
     emoji: '📝',
     target: 4,
     hasGoal: true,

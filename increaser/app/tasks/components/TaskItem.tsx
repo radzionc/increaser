@@ -2,7 +2,7 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { useCurrentTask } from './CurrentTaskProvider'
 import { ChecklistItem } from '@lib/ui/checklist/CheckListItem'

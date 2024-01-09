@@ -6,7 +6,7 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { ProjectNavigationItem } from './ProjectNavigationItem'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 interface ProjectsNavigationSectionProps {
   name: string

@@ -1,10 +1,10 @@
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 import { useMutation } from 'react-query'
 import { Set } from '@increaser/app/sets/Set'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { updateLastArrayElement } from '@increaser/app/utils/updateLastArrayElement'
 
 export const useUpdateLastSetMutation = () => {

@@ -5,7 +5,7 @@ import { Text } from '@lib/ui/text'
 import { Button } from '@lib/ui/buttons/Button'
 import { InfoIcon } from '@lib/ui/icons/InfoIcon'
 import Link from 'next/link'
-import { Path } from '@increaser/app/router/Path'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { AUTHOR_EMAIL } from '@increaser/app/shared/externalResources'
 
 interface AuthConfirmationStatusProps {
@@ -29,7 +29,7 @@ export const AuthConfirmationStatus = ({
           <Text style={{ wordBreak: 'break-word' }} centered height="large">
             {error.message}
           </Text>
-          <Link style={{ width: '100%' }} href={Path.SignIn}>
+          <Link style={{ width: '100%' }} href={AppPath.SignIn}>
             <Button kind="secondary" style={{ width: '100%' }} size="l">
               Go back
             </Button>

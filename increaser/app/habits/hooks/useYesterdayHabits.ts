@@ -1,4 +1,4 @@
-import { useHabits } from '@increaser/app/habits/components/HabitsProvider'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { MS_IN_SEC } from '@lib/utils/time'
 

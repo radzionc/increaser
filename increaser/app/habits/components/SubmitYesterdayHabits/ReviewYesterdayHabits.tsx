@@ -1,11 +1,11 @@
-import { CheckDayHabitsTitle } from '@increaser/app/habits/components/CheckDayHabits/CheckDayHabitsTitle'
-import { HabitItem } from '@increaser/app/habits/components/CheckDayHabits/HabitItem'
 import { useYesterdayHabits } from '@increaser/app/habits/hooks/useYesterdayHabits'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
 import { VStack } from '@lib/ui/layout/Stack'
 import { MS_IN_DAY } from '@lib/utils/time'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { CheckDayHabitsTitle } from '@increaser/ui/habits/CheckDayHabitsTitle'
+import { HabitItem } from '@increaser/ui/habits/HabitItem'
 
 export const ReviewYesterdayHabits = () => {
   const startOfToday = useStartOfDay()

@@ -7,7 +7,7 @@ import { useTheme } from 'styled-components'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { LargeSelectOption } from '@increaser/app/ui/LargeSelectOption'
 import { PrimaryGoal, primaryGoals } from '@increaser/entities/User'
 

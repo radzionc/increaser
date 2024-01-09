@@ -3,7 +3,7 @@ import { useDayOverview } from './DayOverviewProvider'
 import { getColor } from '@lib/ui/theme/getters'
 import { toPercents } from '@lib/utils/toPercents'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 const Container = styled.div`
   width: 100%;

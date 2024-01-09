@@ -1,10 +1,10 @@
 import { useMutation } from 'react-query'
 import { Set } from '@increaser/entities/User'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 
 export const useAddSetMutation = () => {
   const api = useApi()

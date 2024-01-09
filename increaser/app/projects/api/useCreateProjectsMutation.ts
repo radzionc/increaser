@@ -3,10 +3,10 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 
 import { Project } from '@increaser/entities/Project'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
 
 interface CreateProjectsParams {
   projects: Pick<Project, 'name' | 'emoji' | 'color'>[]

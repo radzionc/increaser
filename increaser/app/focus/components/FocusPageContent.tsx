@@ -1,29 +1,25 @@
 import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useOnWindowCloseAlert } from '@lib/ui/hooks/useOnWindowCloseAlert'
-import { formatDurationAsADigitalClock } from '@lib/utils/time/formatDuration'
+import { formatDuration } from '@lib/utils/time/formatDuration'
 import styled from 'styled-components'
 import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { MS_IN_SEC } from '@lib/utils/time'
-
 import { FinishSession } from './FinishSession'
 import { FocusAssistance } from './FocusAssistance'
-import { FocusGoal } from './FocusGoal'
 import { FocusSounds } from './FocusSounds'
-import { FocusSuccess } from './FocusSucess'
-import { SessionProgress } from './SessionProgress'
-import { SesssionStartedAt } from './SessionStartedAt'
-import { SlidingTime } from '@increaser/app/ui/SlidingTime'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
-import { useCurrentFocus } from './CurrentFocusProvider'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
+import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
+import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
 
 const Container = styled.div`
   max-height: 100%;
@@ -48,6 +44,12 @@ const BlockWrapper = styled.div`
 const TimeWrapper = styled.div`
   position: absolute;
   z-index: 1;
+  width: 100%;
+`
+
+const TimeContent = styled.div`
+  position: relative;
+  ${centerContent};
 `
 
 const Side = styled(VStack)`
@@ -65,6 +67,11 @@ const PositionSettings = styled.div`
   right: 12px;
 `
 
+const PositionSessionInfo = styled.div`
+  position: absolute;
+  top: 12px;
+`
+
 export const FocusPageContent = () => {
   const { cancel } = useFocus()
 
@@ -77,13 +84,16 @@ export const FocusPageContent = () => {
   const project = projectsRecord[projectId]
   if (!project) return null
 
-  const getSeconds = () => (Date.now() - startedAt) / MS_IN_SEC
-
   return (
     <>
       <RhytmicRerender
         render={() => (
-          <PageMetaTags title={formatDurationAsADigitalClock(getSeconds())} />
+          <PageMetaTags
+            title={formatDuration(Date.now() - startedAt, 'ms', {
+              kind: 'digitalClock',
+              minUnit: 's',
+            })}
+          />
         )}
       />
       <ElementSizeAware
@@ -106,7 +116,6 @@ export const FocusPageContent = () => {
                     style={{ width: 320 }}
                     gap={12}
                   >
-                    <SesssionStartedAt />
                     <BlockWrapper>
                       <SessionProgress />
                       <PositionSettings>
@@ -115,10 +124,15 @@ export const FocusPageContent = () => {
                           <FocusAssistance />
                         </VStack>
                       </PositionSettings>
+                      <PositionSessionInfo>
+                        <FocusSessionInfo />
+                      </PositionSessionInfo>
                       <TimeWrapper>
-                        <Text as="div" weight="bold" size={64} height="small">
-                          <SlidingTime getSeconds={getSeconds} />
-                        </Text>
+                        <TimeContent>
+                          <Text as="div" weight="bold" size={64} height="small">
+                            <FocusPassedTime />
+                          </Text>
+                        </TimeContent>
                       </TimeWrapper>
                       <FinishSession
                         style={{
@@ -127,8 +141,6 @@ export const FocusPageContent = () => {
                           bottom: -30,
                         }}
                       />
-                      <FocusSuccess />
-                      <FocusGoal />
                     </BlockWrapper>
                     <div style={{ marginTop: 30 }}>
                       <ShyTextButton text="Cancel" onClick={cancel} />

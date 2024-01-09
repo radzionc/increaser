@@ -8,9 +8,9 @@ import {
 import { getNewOrder } from '@lib/utils/getNewOrder'
 import styled from 'styled-components'
 
-import { CurrentHabitProvider } from '../CurrentHabitProvider'
-import { useHabits } from '../HabitsProvider'
 import { ActiveHabit } from './ActiveHabit'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
+import { CurrentHabitProvider } from '@increaser/ui/habits/CurrentHabitProvider'
 
 const Container = styled.div`
   > * {

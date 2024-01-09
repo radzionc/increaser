@@ -4,16 +4,16 @@ import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbs
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { getDayMomentColor } from '@increaser/app/sets/utils/getDayMomentColor'
 import { HStack } from '@lib/ui/layout/Stack'
-import { dayMomentIcon } from './dayMomentIcon'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { toPercents } from '@lib/utils/toPercents'
 import { dayMomentStep, dayMoments } from '@increaser/entities/DayMoments'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { UIComponentProps } from '@lib/ui/props'
+import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
+import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
 
 export const dayTimeLabelsWidthInPx = 48
 export const dayTimeLabelTimeWidthInPx = 32

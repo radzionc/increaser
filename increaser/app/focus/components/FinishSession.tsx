@@ -1,15 +1,15 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import styled from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { useCurrentFocus } from './CurrentFocusProvider'
 import { startOfDay } from 'date-fns'
 import { MS_IN_HOUR } from '@lib/utils/time'
 import { useState } from 'react'
 import { EditEndTimeOverlay } from './EditEndTimeOverlay'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 
 const Container = styled(UnstyledButton)<{ $color: HSLA }>`
   font-size: 18px;

@@ -1,5 +1,4 @@
 import { ProjectsGoalsVisualization } from '@increaser/app/capacity/components/ProjectsGoalsVisualization'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useEffect } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
@@ -12,6 +11,7 @@ import { ProjectGoalInput } from './ProjectGoalInput'
 import { CurrentProjectProvider } from './ProjectView/CurrentProjectProvider'
 import { ContinueButton } from '@increaser/app/ui/ContinueButton'
 import { ClosableComponentProps } from '@lib/ui/props'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void

@@ -1,9 +1,9 @@
 import { ContinueButton } from '@increaser/app/ui/ContinueButton'
 import { Modal } from '@lib/ui/modal'
 import { ClosableComponentProps } from '@lib/ui/props'
-import { ManageSchedule } from '@increaser/app/sets/components/ManageSchedule'
 import { VStack } from '@lib/ui/layout/Stack'
 import { ScheduleReview } from '@increaser/app/sets/components/ScheduleReview'
+import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void

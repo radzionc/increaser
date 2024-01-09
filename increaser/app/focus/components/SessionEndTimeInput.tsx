@@ -5,7 +5,6 @@ import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
 import { useCallback } from 'react'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@lib/utils/time'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { PressTracker } from '@lib/ui/base/PressTracker'
@@ -13,6 +12,7 @@ import { enforceRange } from '@lib/utils/enforceRange'
 import { EditorActiveSession } from './EditorActiveSession'
 import { BoundaryInteractiveArea } from './BoundaryInteractiveArea'
 import { VStack } from '@lib/ui/layout/Stack'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface SessionEndTimeInputProps extends InputProps<number> {
   projectId: string

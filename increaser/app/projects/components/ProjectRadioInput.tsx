@@ -7,7 +7,7 @@ import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 interface ProjectRadioInputProps {
   value?: string

@@ -1,5 +1,4 @@
 import { useCreateProjectsMutation } from '@increaser/app/projects/api/useCreateProjectsMutation'
-import { EnhancedProject, defaultEmojis } from '@increaser/app/projects/Project'
 import { useEffect } from 'react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
@@ -14,6 +13,10 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { MinimalisticTextInput } from '@increaser/app/ui/MinimalisticTextInput'
 import { ClosableComponentProps } from '@lib/ui/props'
 import { productName } from '@increaser/entities'
+import {
+  EnhancedProject,
+  defaultEmojis,
+} from '@increaser/ui/projects/EnhancedProject'
 
 interface Props extends ClosableComponentProps {
   onNext: () => void

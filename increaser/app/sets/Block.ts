@@ -1,8 +1,3 @@
-import {
-  FocusDuration,
-  defaultFocusDuration,
-  focusDurations,
-} from '@increaser/app/focus/FocusDuration'
 import { DefaultTheme } from 'styled-components'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { MS_IN_MIN } from '@lib/utils/time'
@@ -11,6 +6,11 @@ import { getSetsSum } from './helpers/getSetsSum'
 import { Set } from './Set'
 import { getDistanceBetweenSets } from '@increaser/entities-utils/set/getDistanceBetweenSets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import {
+  FocusDuration,
+  defaultFocusDuration,
+  focusDurations,
+} from '@increaser/entities/FocusDuration'
 
 export interface Block {
   sets: Set[]

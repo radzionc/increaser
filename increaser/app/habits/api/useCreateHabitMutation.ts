@@ -1,15 +1,15 @@
-import { HabitResponse } from '@increaser/app/habits/Habit'
 import { useMutation } from 'react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import {
   useAssertUserState,
   useUserState,
-} from '@increaser/app/user/state/UserStateContext'
+} from '@increaser/ui/user/UserStateContext'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
-import { useApi } from '@increaser/app/api/hooks/useApi'
+import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { Habit } from '@increaser/entities/Habit'
 
-const getNewHabitOrder = (habits: HabitResponse[]) => {
+const getNewHabitOrder = (habits: Habit[]) => {
   if (habits.length === 0) {
     return 0
   }

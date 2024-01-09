@@ -5,11 +5,11 @@ import { Form } from '@lib/ui/form/components/Form'
 import { TextInput } from '@lib/ui/inputs/TextInput'
 
 import { useRouter } from 'next/router'
-import { Path } from '@increaser/app/router/Path'
 import { validateEmail } from '@lib/utils/validation/validateEmail'
 import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { Field } from '@lib/ui/inputs/Field'
-import { useApiMutation } from '@increaser/app/api/hooks/useApiMutation'
+import { useApiMutation } from '@increaser/api-ui/hooks/useApiMutation'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 interface EmailFormState {
   email: string
@@ -38,7 +38,7 @@ export const EmailAuthForm = () => {
 
         sendAuthLinkByEmail(data, {
           onSuccess: () => {
-            push(addQueryParams(Path.EmailConfirm, { email: data.email }))
+            push(addQueryParams(AppPath.EmailConfirm, { email: data.email }))
           },
         })
       })}

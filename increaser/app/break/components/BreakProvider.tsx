@@ -1,7 +1,5 @@
 import { breakMinutesOptions } from '@increaser/app/break/breakDuration'
-import { focusDurations } from '@increaser/app/focus/FocusDuration'
 import { ReactNode, useEffect, useState } from 'react'
-import { Path } from '@increaser/app/router/Path'
 import {
   getBlockWorkDuration,
   getBlocks,
@@ -15,7 +13,7 @@ import { pluralizeName } from '@lib/utils/pluralize'
 import { range } from '@lib/utils/array/range'
 import { PersistentStateKey } from '@increaser/app/state/persistentState'
 import { usePersistentState } from '@increaser/app/state/persistentState'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN, MS_IN_SEC } from '@lib/utils/time'
 
 import { BreakContext, BreakDuration } from '../context/BreakContext'
@@ -27,6 +25,8 @@ import {
 } from '@lib/ui/notifications/utils'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { focusDurations } from '@increaser/entities/FocusDuration'
 
 export const remindersCount = 5
 
@@ -84,7 +84,7 @@ export const BreakProvider = ({ children }: Props) => {
   const { pathname } = useRouter()
 
   useEffect(() => {
-    if (pathname === Path.Focus && breakDuration) {
+    if (pathname === AppPath.Focus && breakDuration) {
       setBreakDuration(undefined)
     }
   }, [breakDuration, pathname, setBreakDuration])

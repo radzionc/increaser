@@ -1,8 +1,8 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const PreviousWeeklyAverage = () => {
   const { weeks: partialWeeks } = useProjects()

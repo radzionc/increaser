@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { useState } from 'react'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useUpdateLastSetMutation } from '@increaser/app/sets/hooks/useUpdateLastSetMutation'
@@ -13,6 +12,7 @@ import { MS_IN_HOUR } from '@lib/utils/time'
 import { endOfDay, endOfHour, startOfHour } from 'date-fns'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Modal } from '@lib/ui/modal'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface Props extends ClosableComponentProps {}
 

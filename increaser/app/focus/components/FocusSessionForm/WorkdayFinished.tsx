@@ -8,7 +8,7 @@ import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import styled from 'styled-components'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { UnlockIcon } from '@lib/ui/icons/UnlockIcon'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 

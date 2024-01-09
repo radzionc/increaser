@@ -1,6 +1,5 @@
 import { analytics } from '@increaser/app/analytics'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
-import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import { Controller, useForm } from 'react-hook-form'
 import { Set } from '@increaser/app/sets/Set'
 import { useTheme } from 'styled-components'
@@ -13,6 +12,7 @@ import { MS_IN_MIN } from '@lib/utils/time'
 import { TodaySessionIntervalInput } from '../IntervalInput/TodaySessionIntervalInput'
 import { SelectProject } from './SelectProject'
 import { useAddSetMutation } from '@increaser/app/sets/hooks/useAddSetMutation'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 interface Props {
   onClose: () => void

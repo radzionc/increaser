@@ -6,7 +6,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { useRouter } from 'next/router'
 import { AuthView } from '@lib/ui/auth/AuthView'
 import { suggestInboxLink } from '@lib/utils/suggestInboxLink'
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 interface EmailConfirmQueryParams {
   email: string

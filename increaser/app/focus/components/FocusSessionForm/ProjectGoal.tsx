@@ -1,5 +1,4 @@
 import { useCurrentProject } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
-import { Path } from '@increaser/app/router/Path'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
@@ -14,6 +13,7 @@ import { getShortWeekday } from '@lib/utils/time'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
 import Link from 'next/link'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 const Container = styled.div`
   position: relative;
@@ -80,7 +80,7 @@ export const ProjectGoal = () => {
   return (
     <VStack gap={4}>
       <HStack fullWidth justifyContent="space-between">
-        <Link href={Path.Capacity}>
+        <Link href={AppPath.Capacity}>
           <Text as="div" size={14}>
             <LabeledValue name="Weekly goal">
               <Text as="span" weight="bold">

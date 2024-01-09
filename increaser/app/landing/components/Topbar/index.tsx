@@ -1,5 +1,4 @@
 import { ProductLogo } from '@increaser/app/product/components/ProductLogo'
-import { Path } from '@increaser/app/router/Path'
 import styled from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -7,8 +6,9 @@ import { useIsScreenWidthLessThan } from '@lib/ui/hooks/useIsScreenWidthLessThan
 import { Text } from '@lib/ui/text'
 import Link from 'next/link'
 import { ClientOnly } from '@increaser/app/ui/ClientOnly'
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import { WEBSITE_URL } from '@increaser/app/product'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 export const Placeholder = styled.div`
   flex-shrink: 0;
   height: 80px;
@@ -54,7 +54,7 @@ export const Topbar = () => {
                 </ExternalLink>
               )}
               <div ref={setElement}>
-                <Link href={Path.SignUp}>
+                <Link href={AppPath.SignUp}>
                   <Button as="div" kind="reversed">
                     Sign up
                   </Button>
@@ -64,7 +64,7 @@ export const Topbar = () => {
             <Placeholder>
               {size && (
                 <SignInContainer rightSiblingWidth={size.width}>
-                  <Link href={Path.SignIn}>
+                  <Link href={AppPath.SignIn}>
                     <Button as="div" kind="ghost">
                       Sign in
                     </Button>

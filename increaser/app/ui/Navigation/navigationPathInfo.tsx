@@ -1,4 +1,3 @@
-import { Path } from '@increaser/app/router/Path'
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { HomeIcon } from '@lib/ui/icons/HomeIcon'
@@ -7,37 +6,38 @@ import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
 import { TableIcon } from '@lib/ui/icons/TableIcon'
 import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 export const navigationPathInfo = {
-  [Path.Home]: {
+  [AppPath.Home]: {
     name: 'Home',
     icon: <HomeIcon />,
   },
-  [Path.Work]: {
+  [AppPath.Work]: {
     name: 'Focus',
     icon: <ClockIcon />,
   },
-  [Path.Capacity]: {
+  [AppPath.Capacity]: {
     name: 'Manage time',
     icon: <TableIcon />,
   },
-  [Path.Sessions]: {
+  [AppPath.Sessions]: {
     name: 'Schedule',
     icon: <CalendarIcon />,
   },
-  [Path.Projects]: {
+  [AppPath.Projects]: {
     name: 'Projects',
     icon: <ListIcon />,
   },
-  [Path.Account]: {
+  [AppPath.Account]: {
     name: 'Settings',
     icon: <SettingsIcon />,
   },
-  [Path.Habits]: {
+  [AppPath.Habits]: {
     name: 'Habits',
     icon: <ZapIcon />,
   },
-  [Path.Community]: {
+  [AppPath.Community]: {
     name: 'Community',
     icon: <GlobeIcon />,
   },

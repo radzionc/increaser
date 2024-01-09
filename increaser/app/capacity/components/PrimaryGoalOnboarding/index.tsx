@@ -1,5 +1,5 @@
 import { analytics } from '@increaser/app/analytics'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { PrimaryGoalForm } from './PrimaryGoalForm'
 import { ContinueButton } from '@increaser/app/ui/ContinueButton'

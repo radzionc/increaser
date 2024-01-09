@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useDayOverview } from './DayOverviewProvider'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 const Container = styled.div`
   position: absolute;

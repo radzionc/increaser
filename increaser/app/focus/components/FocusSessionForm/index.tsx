@@ -1,11 +1,6 @@
-import {
-  FocusDuration,
-  suggestFocusDuration,
-} from '@increaser/app/focus/FocusDuration'
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
+import { suggestFocusDuration } from '@increaser/app/focus/FocusDuration'
 import { FocusDurationEducation } from '@increaser/app/home/components/FocusDurationEducation'
 import { CurrentProjectProvider } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { suggestProject } from '@increaser/app/projects/utils/suggestProject'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHaveFinishedASet } from '@increaser/app/sets/hooks/useHaveFinishedASet'
@@ -15,7 +10,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN } from '@lib/utils/time'
 
 import { FocusDurationInput } from '../FocusDurationInput'
@@ -25,6 +20,9 @@ import { ProjectGoal } from './ProjectGoal'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnlyAction'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { FocusDuration } from '@increaser/entities/FocusDuration'
 
 const Container = styled(Panel)`
   position: relative;

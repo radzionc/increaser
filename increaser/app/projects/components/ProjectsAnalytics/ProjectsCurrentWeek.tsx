@@ -1,7 +1,6 @@
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useMemo } from 'react'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
-import { useCurrentWeekSets } from '@increaser/app/sets/hooks/useCurrentWeekSets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -9,7 +8,7 @@ import { range } from '@lib/utils/array/range'
 import { useTheme } from 'styled-components'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import {
   D_IN_WEEK,
   MS_IN_DAY,
@@ -19,6 +18,7 @@ import {
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { Bar, BasicBarChart } from '@increaser/app/ui/BasicBarChart'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 export const ProjectsCurrentWeek = () => {
   const currentWeekSets = useCurrentWeekSets()

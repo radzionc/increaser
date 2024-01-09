@@ -1,4 +1,3 @@
-import { useFocus } from '@increaser/app/focus/hooks/useFocus'
 import styled from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
 
@@ -7,6 +6,7 @@ import { Menu } from '@lib/ui/menu'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
 import { ShySoundToggle } from '@lib/ui/notifications/components/ShySoundToggle'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 const Container = styled(HStack)`
   position: relative;

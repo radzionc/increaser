@@ -1,5 +1,4 @@
 import { useUpdateProjectMutation } from '@increaser/app/projects/api/useUpdateProjectMutation'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { Controller, useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import { FinishableComponentProps } from '@lib/ui/props'
@@ -10,7 +9,8 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { useCurrentProject } from './CurrentProjectProvider'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { MinimalisticTextInput } from '@increaser/app/ui/MinimalisticTextInput'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 type ProjectFormShape = Pick<EnhancedProject, 'name' | 'emoji' | 'color'>
 

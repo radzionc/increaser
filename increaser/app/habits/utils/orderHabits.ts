@@ -1,4 +1,4 @@
-import { Habit } from '@increaser/app/habits/Habit'
+import { Habit } from '@increaser/entities/Habit'
 
 export const orderHabits = (habits: Habit[]) => {
   const orderedHabits = [...habits]

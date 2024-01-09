@@ -1,7 +1,7 @@
-import { EnhancedProject } from '@increaser/app/projects/Project'
 import { ComponentProps } from 'react'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 type Props = ComponentProps<typeof Text> & {
   emojiSize?: number

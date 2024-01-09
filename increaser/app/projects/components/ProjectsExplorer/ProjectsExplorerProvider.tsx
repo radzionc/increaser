@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { createContext } from 'react'
-import { Path } from '@increaser/app/router/Path'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { EnhancedProject } from '@increaser/app/projects/Project'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 export interface ProjectsExplorerState {
   currentProject: EnhancedProject | null
@@ -17,9 +16,6 @@ type ProjectsPathParams = {
 export const ProjectsExplorerContext = createContext<
   ProjectsExplorerState | undefined
 >(undefined)
-
-export const getPathToProject = (projectId: string) =>
-  `${Path.Projects}/${projectId}`
 
 export const ProjectsExplorerProvider = ({
   children,

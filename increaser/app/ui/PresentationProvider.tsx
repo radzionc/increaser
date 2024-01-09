@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { createContext, useCallback } from 'react'
-import { Path } from '@increaser/app/router/Path'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 export interface PresentationState {
   onInteraction: (func: () => void) => void
@@ -24,7 +24,7 @@ export const PresentationProvider = ({ children }: Props) => {
       if (authSession) {
         func()
       } else {
-        push(Path.SignUp)
+        push(AppPath.SignUp)
       }
     },
     [authSession, push],

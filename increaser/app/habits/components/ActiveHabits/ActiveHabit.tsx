@@ -5,14 +5,14 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 
-import { useCurrentHabit } from '../CurrentHabitProvider'
-import { useHabits } from '../HabitsProvider'
 import { useActiveHabits } from './ActiveHabitsContext'
 import { EditHabit } from './EditHabit'
 import { HabitAnalytics } from './HabitAnalytics'
 import { HabitProgress } from './HabitProgress'
 import { ManageHabit } from './ManageHabit'
 import { ListCard } from '@increaser/app/ui/ListCard'
+import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 const Card = styled(ListCard)<{ isDragging?: boolean }>`
   ${({ isDragging }) =>

@@ -9,7 +9,7 @@ import { Text } from '@lib/ui/text'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { dayTimeLabelTimeWidthInPx } from '../DayTimeLabels'
 

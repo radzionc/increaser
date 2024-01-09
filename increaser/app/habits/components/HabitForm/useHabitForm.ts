@@ -1,10 +1,10 @@
 import { HabitFormShape } from '@increaser/app/habits/components/HabitForm/HabitFormShape'
-import { defaultHabitEmojis } from '@increaser/app/habits/Habit'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import { getRandomElement } from '@lib/utils/array/getRandomElement'
-import { useUserState } from '@increaser/app/user/state/UserStateContext'
+import { useUserState } from '@increaser/ui/user/UserStateContext'
+import { defaultHabitEmojis } from '@increaser/ui/habits/EnhancedHabit'
 
 interface UseHabitFormParams {
   initialValues?: Partial<HabitFormShape>

@@ -7,10 +7,10 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { useHabitForm } from '../HabitForm/useHabitForm'
-import { useHabits } from '../HabitsProvider'
 import { ListCard } from '@increaser/app/ui/ListCard'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { MinimalisticTextInput } from '@increaser/app/ui/MinimalisticTextInput'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 interface CreateHabitCardProps {
   onFinish: () => void

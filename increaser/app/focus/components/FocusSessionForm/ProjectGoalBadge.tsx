@@ -1,4 +1,3 @@
-import { EnhancedProject } from '@increaser/app/projects/Project'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { sum } from '@lib/utils/array/sum'
 import { useTheme } from 'styled-components'
@@ -8,6 +7,7 @@ import { CheckDoubleIcon } from '@lib/ui/icons/CheckDoubleIcon'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { Text } from '@lib/ui/text'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 interface ProjectGoalBadgeProps {
   project: EnhancedProject

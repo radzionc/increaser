@@ -1,7 +1,7 @@
 import { useOnQuerySuccess } from '@lib/ui/query/hooks/useOnQuerySuccess'
-import { useApiQuery } from '@increaser/app/api/hooks/useApiQuery'
+import { useApiQuery } from '@increaser/api-ui/hooks/useApiQuery'
 import { useCallback } from 'react'
-import { useUserState } from '@increaser/app/user/state/UserStateContext'
+import { useUserState } from '@increaser/ui/user/UserStateContext'
 
 export const useSubscriptionQuery = (id: string) => {
   const query = useApiQuery('subscription', { id })

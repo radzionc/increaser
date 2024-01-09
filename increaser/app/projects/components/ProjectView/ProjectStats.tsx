@@ -2,7 +2,6 @@ import { startOfMonth, subMonths } from 'date-fns'
 import { useMemo, useState } from 'react'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { useCurrentMonthSets } from '@increaser/app/sets/hooks/useCurrentMonthSets'
-import { useCurrentWeekSets } from '@increaser/app/sets/hooks/useCurrentWeekSets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { areSameMonth } from '@lib/utils/time/areSameMonth'
@@ -29,6 +28,7 @@ import {
 } from '@lib/utils/time'
 
 import { useCurrentProject } from './CurrentProjectProvider'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 const projectStatsView = ['days', 'weeks', 'months'] as const
 type ProjectStatsView = (typeof projectStatsView)[number]
@@ -107,7 +107,7 @@ export const ProjectStats = () => {
           )
         })
         .map(({ seconds, week }) => ({
-          label: `Week #${week}`,
+          label: `Week #${week + 1}`,
           value: seconds,
         }))
 

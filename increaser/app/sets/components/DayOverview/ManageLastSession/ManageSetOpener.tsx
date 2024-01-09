@@ -9,13 +9,13 @@ import { getProjectEmoji } from '@increaser/app/projects/utils/getProjectEmoji'
 import styled, { useTheme } from 'styled-components'
 import { horizontalPaddingInPx } from '../config'
 import { Text } from '@lib/ui/text'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { RenderOpenerProps } from '@lib/ui/menu/PopoverMenu'
 import { Set } from '@increaser/entities/User'
 import { useDayOverview } from '../DayOverviewProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 const offsetInPx = 4
 

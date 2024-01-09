@@ -1,6 +1,6 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/app/user/state/UserStateContext'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ManageSubscriptionActions } from './ManageSubscriptionActions'
 import { mirrorRecord } from '@lib/utils/record/mirrorRecord'
 import { format } from 'date-fns'

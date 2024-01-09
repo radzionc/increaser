@@ -1,4 +1,3 @@
-import { EnhancedProject } from '@increaser/app/projects/Project'
 import styled, { css } from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { Center } from '@lib/ui/layout/Center'
@@ -10,6 +9,7 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 
 import { ProjectGoalBadge } from './ProjectGoalBadge'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 interface ProjectRadioInputProps {
   value?: string

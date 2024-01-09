@@ -6,9 +6,9 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 
 import { useProjectExplorer } from './ProjectsExplorerProvider'
-import { getProjectPath } from '@increaser/app/router/Path'
-import { EnhancedProject } from '@increaser/app/projects/Project'
 import Link from 'next/link'
+import { getProjectPath } from '@increaser/ui/navigation/AppPath'
+import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 export const Container = styled.div<{
   selected: boolean

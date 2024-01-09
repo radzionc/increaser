@@ -1,11 +1,11 @@
-import { ExternalLink } from '@increaser/app/router/Link/ExternalLink'
 import { PersistentStateKey } from '@increaser/app/state/persistentState'
 import styled from 'styled-components'
 import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { Text } from '@lib/ui/text'
 
-import { useHabits } from '../HabitsProvider'
 import { ShowOnce } from '@increaser/app/state/ShowOnce'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 const Container = styled(ExternalLink)`
   cursor: pointer;

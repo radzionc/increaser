@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { useUserState } from '@increaser/app/user/state/UserStateContext'
+import { useUserState } from '@increaser/ui/user/UserStateContext'
 
 interface ConditionalUserStateProps {
   present: () => ReactNode

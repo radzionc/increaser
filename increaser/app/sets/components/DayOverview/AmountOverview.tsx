@@ -6,17 +6,17 @@ import {
 import { WEEKDAYS } from '@lib/utils/time'
 import { ProjectTotal } from '@increaser/app/projects/components/ProjectTotal'
 import { ProjectsAllocationLine } from '@increaser/app/projects/components/ProjectsAllocationLine'
-import { getProjectColor } from '@increaser/app/projects/utils/getProjectColor'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import { getProjectName } from '@increaser/app/projects/utils/getProjectName'
 import { useDayOverview } from './DayOverviewProvider'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
-import { useProjects } from '@increaser/app/projects/hooks/useProjects'
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
 import { getWeekday } from '@lib/utils/time/getWeekday'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const AmountOverview = () => {
   const { sets, dayStartedAt } = useDayOverview()

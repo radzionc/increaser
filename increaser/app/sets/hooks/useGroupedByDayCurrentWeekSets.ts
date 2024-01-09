@@ -4,8 +4,7 @@ import { Set } from '@increaser/app/sets/Set'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { range } from '@lib/utils/array/range'
 import { D_IN_WEEK, MS_IN_DAY } from '@lib/utils/time'
-
-import { useCurrentWeekSets } from './useCurrentWeekSets'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 export interface Day {
   startsAt: number

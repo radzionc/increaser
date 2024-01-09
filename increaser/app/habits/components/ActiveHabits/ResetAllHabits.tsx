@@ -6,8 +6,8 @@ import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { Text } from '@lib/ui/text'
 import { MS_IN_DAY } from '@lib/utils/time'
 
-import { useHabits } from '../HabitsProvider'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useHabits } from '@increaser/ui/habits/HabitsContext'
 
 const minInactiveDays = 3
 
