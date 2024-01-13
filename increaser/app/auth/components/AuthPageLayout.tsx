@@ -7,26 +7,24 @@ import { interactive } from '@lib/ui/css/interactive'
 import { WebsiteLink } from '../../navigation/WebsiteLink'
 import { WebsitePath } from '@increaser/ui/navigation/WebsitePath'
 import { ProductLogo } from '@increaser/ui/ProductLogo'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import Link from 'next/link'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { Button } from '@lib/ui/buttons/Button'
 import { OverlayNavigationItem } from '@lib/ui/website/navigation/OverlayNavigationItem'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Panel } from '@lib/ui/panel/Panel'
+import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 
 const LogoWrapper = styled(WebsiteLink)`
   ${interactive};
   font-size: 20px;
 `
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+const Container = styled(VStack)`
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  ${takeWholeSpace};
 
   @media (max-width: 600px) {
     justify-content: start;
