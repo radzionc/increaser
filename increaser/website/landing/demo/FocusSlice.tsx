@@ -9,7 +9,6 @@ import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
 import { DemoFocusProvider } from './DemoFocusProvider'
 import { Text } from '@lib/ui/text'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
-import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
 import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
 
 const BlockWrapper = styled.div`

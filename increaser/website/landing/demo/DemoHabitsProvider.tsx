@@ -12,7 +12,9 @@ import { enhanceHabit } from '@increaser/ui/habits/utils/enhanceHabit'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 
-export const HabitsProvider = ({ children }: ComponentWithChildrenProps) => {
+export const DemoHabitsProvider = ({
+  children,
+}: ComponentWithChildrenProps) => {
   const todayStartedAt = useStartOfDay()
   const { habits } = useAssertUserState()
 

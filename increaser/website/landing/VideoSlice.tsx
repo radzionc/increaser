@@ -14,7 +14,7 @@ import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 const youTubeVideoRatio = 9 / 16
 
-const PlayerWrapper = styled(VStack)<{ isActive: boolean }>`
+const PlayerWrapper = styled.div<{ isActive: boolean }>`
   ${borderRadius.m};
   overflow: hidden;
   ${transition}
@@ -28,7 +28,7 @@ const PlayerWrapper = styled(VStack)<{ isActive: boolean }>`
     `}
 `
 
-export const DemoSlice = () => {
+export const VideoSlice = () => {
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
 
   return (

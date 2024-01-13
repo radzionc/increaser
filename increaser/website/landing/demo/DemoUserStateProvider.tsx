@@ -5,13 +5,15 @@ import { User } from '@increaser/entities/User'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { getDemoUser } from '@increaser/demo/getDemoUser'
 
-export const UserStateProvider = ({ children }: ComponentWithChildrenProps) => {
+export const DemoUserStateProvider = ({
+  children,
+}: ComponentWithChildrenProps) => {
   const [state, setState] = useState<User>(getDemoUser)
 
   const updateState = useCallback(
     (pieceOfState: Partial<User>) => {
       setState((state) => ({
-        ...(state || ({} as User)),
+        ...(state || {}),
         ...pieceOfState,
       }))
     },

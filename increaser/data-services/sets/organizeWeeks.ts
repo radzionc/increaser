@@ -2,7 +2,6 @@ import { Project } from '@increaser/entities/Project'
 import { Set, User } from '@increaser/entities/User'
 import { setToProjectWeek } from '@increaser/entities-utils/project/setToProjectWeek'
 import { mergeIntoProjectWeeks } from '@increaser/entities-utils/project/mergeIntoProjectWeeks'
-import { getSetsDurationInSeconds } from '@increaser/entities-utils/set/getSetsDurationInSeconds'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
@@ -20,7 +19,6 @@ const addNewSetsToProject = (project: Project, sets: Set[]) => {
   return {
     ...project,
     weeks: newWeeks.slice(-projectsWeeksToStore),
-    total: project.total + getSetsDurationInSeconds(sets),
   }
 }
 

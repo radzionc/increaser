@@ -1,7 +1,6 @@
 import { Project, ProjectStatus } from '@increaser/entities/Project'
 import { randomInRange } from '@lib/utils/randomInRange'
 import { range } from '@lib/utils/array/range'
-import { sum } from '@lib/utils/array/sum'
 import { MIN_IN_HOUR, MS_IN_WEEK, S_IN_HOUR } from '@lib/utils/time'
 import { toWeek } from '@lib/utils/time/toWeek'
 
@@ -87,7 +86,6 @@ const toProject = ({
     allocatedMinutesPerWeek: hasGoal ? target * MIN_IN_HOUR : 0,
     status: ProjectStatus.Active,
     weeks,
-    total: sum(weeks.map((week) => week.seconds)),
     months: [],
   }
 }

@@ -22,7 +22,6 @@ export interface Project {
   name: string
   color: number
   emoji: string
-  total: number
   status: ProjectStatus
   allocatedMinutesPerWeek: number
   weeks: ProjectWeek[]
@@ -31,9 +30,8 @@ export interface Project {
 
 export const projectDefaultFields: Pick<
   Project,
-  'total' | 'status' | 'allocatedMinutesPerWeek' | 'weeks' | 'months'
+  'status' | 'allocatedMinutesPerWeek' | 'weeks' | 'months'
 > = {
-  total: 0,
   status: ProjectStatus.Active,
   allocatedMinutesPerWeek: 0,
   weeks: [],

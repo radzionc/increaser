@@ -3,5 +3,3 @@ export enum WebsitePath {
   TermsOfService = '/terms-of-service',
   PrivacyPolicy = '/privacy-policy',
 }
-
-export const getProjectPath = (projectId: string) => `/projects/${projectId}`

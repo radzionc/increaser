@@ -1,17 +1,17 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { PricingSlice } from './PricingSlice'
 import { PrimarySlice } from './PrimarySlice'
-import { DemoSlice } from './DemoSlice'
+import { VideoSlice } from './VideoSlice'
 import { FaqSlice } from './FaqSlice'
 import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { ScoreboardSlice } from './ScoreboardSlice'
-import { HabitsSlice } from './HabitsSlice'
-import { UserStateProvider } from './UserStateProvider'
-import { FocusSlice } from './FocusSlice'
+import { HabitsSlice } from './demo/HabitsSlice'
+import { DemoUserStateProvider } from './demo/DemoUserStateProvider'
+import { FocusSlice } from './demo/FocusSlice'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
-import { TimeTrackingSlice } from './TimeTrackingSlice'
-import { ScheduleSlice } from './ScheduleSlice'
+import { TimeTrackingSlice } from './demo/TimeTrackingSlice'
+import { ScheduleSlice } from './demo/ScheduleSlice'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 
 export const LandingPage = () => (
@@ -21,16 +21,16 @@ export const LandingPage = () => (
       description="Increaser offers a unique solution for remote workers seeking to boost efficiency, track time, and develop positive habits for better career and health outcomes."
     />
     <PrimarySlice />
-    <UserStateProvider>
+    <DemoUserStateProvider>
       <ProjectsProvider>
         <FocusSlice />
         <TimeTrackingSlice />
         <HabitsSlice />
         <ScheduleSlice />
       </ProjectsProvider>
-    </UserStateProvider>
+    </DemoUserStateProvider>
     <TestimonialsSlice />
-    <DemoSlice />
+    <VideoSlice />
     <ScoreboardSlice />
     <PricingSlice />
     <FoundersNoteSlice />

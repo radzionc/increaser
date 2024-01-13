@@ -1,37 +1,19 @@
-import { centerContent } from '@lib/ui/css/centerContent'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { websiteConfig } from '@lib/ui/website/config'
-import styled, { ThemeProvider } from 'styled-components'
-import { Button } from '@lib/ui/buttons/Button'
-import { AppLink } from '../navigation/AppLink'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
-
-const Container = styled.div`
-  width: 100%;
-  min-height: calc(100vh - ${toSizeUnit(websiteConfig.headerHeight)});
-  ${centerContent}
-  position: relative;
-  overflow: hidden;
-  background-image: url('/images/stars.webp');
-  background-size: cover;
-`
+import { ThemeProvider } from 'styled-components'
+import { PrimaryCallToAction } from './PrimaryCallToAction'
+import { ClosingArgumentBackground } from '@lib/ui/website/ClosingArgumentBackground'
 
 export const ClosingArgumentSlice = () => {
   return (
     <ThemeProvider theme={darkTheme}>
-      <Container>
-        <WebsiteSliceContent style={{ zIndex: 1 }}>
+      <ClosingArgumentBackground imageUrl="images/closing-argument.webp">
+        <WebsiteSliceContent style={{ gap: 28, paddingBottom: 200 }}>
           <WebsiteSectionHeader title="Unleash Your Potential" />
-          <AppLink to={AppPath.SignUp}>
-            <Button as="div" kind="primary" size="xl">
-              Start now
-            </Button>
-          </AppLink>
+          <PrimaryCallToAction kind="reversed" />
         </WebsiteSliceContent>
-      </Container>
+      </ClosingArgumentBackground>
     </ThemeProvider>
   )
 }

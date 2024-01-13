@@ -1,19 +1,12 @@
-import { VStack } from '@lib/ui/layout/Stack'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import styled from 'styled-components'
 import { productName } from '@increaser/config'
 import { TextButton } from '@lib/ui/buttons/TextButton'
-import { FaqItem } from '@lib/ui/website/FaqItem'
+import { FaqItem } from '@lib/ui/website/faq/FaqItem'
+import { FaqContainer } from '@lib/ui/website/faq/FaqContainer'
 import { AppLink } from '../navigation/AppLink'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
-
-const Content = styled(VStack)`
-  gap: 16px;
-  max-width: 800px;
-  width: 100%;
-`
 
 export const FaqSlice = () => {
   return (
@@ -23,7 +16,7 @@ export const FaqSlice = () => {
           title="Questions? We're Here to Help"
           subtitle="Explore our FAQs and feel free to reach out directly to the founder for personalized answers."
         />
-        <Content>
+        <FaqContainer>
           <FaqItem title={`Will there be a mobile app for ${productName}?`}>
             At {productName}, we've optimized our platform to function
             seamlessly on all devices, so a separate mobile app isn't necessary.{' '}
@@ -93,7 +86,7 @@ export const FaqSlice = () => {
             needed to enhance productivity and focus across various work
             environments
           </FaqItem>
-        </Content>
+        </FaqContainer>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

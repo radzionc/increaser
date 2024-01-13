@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components'
 
-export const Icon = () => {
+export const ProductIcon = () => {
   const { colors } = useTheme()
 
   return (

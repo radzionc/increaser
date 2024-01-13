@@ -1,47 +1,19 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { Text } from '@lib/ui/text'
-import styled from 'styled-components'
-import { getColor } from '@lib/ui/theme/getters'
 import { FounderSignature } from './FounderSignature'
-import { CoverImage } from '@lib/ui/images/CoverImage'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { SafeImage } from '@lib/ui/images/SafeImage'
-import { round } from '@lib/ui/css/round'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-
-const Container = styled(VStack)`
-  gap: 16px;
-  max-width: 620px;
-  line-height: 1.5;
-`
-
-const Image = styled(CoverImage)`
-  ${sameDimensions(64)}
-  ${round};
-  border: 2px solid ${getColor('primary')};
-  @media (max-width: 600px) {
-    ${sameDimensions(36)}
-  }
-`
-
-const SignutureWrapper = styled(IconWrapper)`
-  color: ${getColor('contrast')};
-  font-size: 32px;
-  @media (max-width: 600px) {
-    font-size: 24px;
-  }
-`
+import { FoundersNote } from '@lib/ui/website/FoundersNote'
 
 export const FoundersNoteSlice = () => {
   return (
     <WebsiteSlice>
       <WebsiteSliceContent>
         <WebsiteSectionHeader title="Welcome to Your Productivity Partner Increaser" />
-        <Container>
+        <FoundersNote
+          avatarUrl="/images/founder-avatar.webp"
+          signature={<FounderSignature />}
+        >
           <Text>
             I'm Radzion, the creator of Increaser. This project started as my
             own quest to tackle the productivity challenges that knowledge
@@ -77,17 +49,7 @@ export const FoundersNoteSlice = () => {
             Join us in this journey to smarter, more efficient work habits.
             Together, let's make every minute productive.
           </Text>
-          <HStack gap={20} alignItems="center">
-            <SafeImage
-              fallback={null}
-              src="/images/founder-avatar.webp"
-              render={(props) => <Image alt="Founder" {...props} />}
-            />
-            <SignutureWrapper>
-              <FounderSignature />
-            </SignutureWrapper>
-          </HStack>
-        </Container>
+        </FoundersNote>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

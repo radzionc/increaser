@@ -5,7 +5,7 @@ import { LegalPageContent } from '@lib/ui/website/legal/LegalPageContent'
 import { LegalPageSection } from '@lib/ui/website/legal/LegalPageSection'
 import Link from 'next/link'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
-import { Path } from '../navigation/Path'
+import { WebsitePath } from '@increaser/ui/navigation/WebsitePath'
 
 const name = 'Privacy policy'
 
@@ -36,9 +36,9 @@ export default makeWebsitePage(() => {
         </LegalPageSection>
         <LegalPageSection title="Terms of Service">
           Please also read our{' '}
-          <Link href={Path.TermsOfService}>Terms of Service</Link>, establishing
-          the use, disclaimers, and limitations of liability governing the use
-          of our service.
+          <Link href={WebsitePath.TermsOfService}>Terms of Service</Link>,
+          establishing the use, disclaimers, and limitations of liability
+          governing the use of our service.
         </LegalPageSection>
         <LegalPageSection title="Your consent">
           By using our service, you consent to our Privacy Policy. You have the

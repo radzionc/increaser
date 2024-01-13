@@ -24,7 +24,7 @@ const LogoWrapper = styled(Link)`
 export const getWebsitePageLayout: GetLayout = (page) => (
   <WebsiteNavigation
     logo={
-      <LogoWrapper href="/">
+      <LogoWrapper href={WebsitePath.Home}>
         <ProductLogo />
       </LogoWrapper>
     }
