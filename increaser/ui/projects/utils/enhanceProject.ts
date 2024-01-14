@@ -3,10 +3,11 @@ import { Project } from '@increaser/entities/Project'
 import { EnhancedProject } from '../EnhancedProject'
 import { Set } from '@increaser/entities/User'
 import { sum } from '@lib/utils/array/sum'
-import { startOfMonth, startOfWeek } from 'date-fns'
+import { startOfMonth } from 'date-fns'
 import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 
 export const enhanceProject = (
   project: Project,
@@ -18,7 +19,7 @@ export const enhanceProject = (
   const monthStartedAt = startOfMonth(new Date()).getTime()
   const currentMonthSets = getSetsStartedAfter(projectSets, monthStartedAt)
 
-  const weekStartedAt = startOfWeek(new Date()).getTime()
+  const weekStartedAt = getWeekStartedAt(Date.now())
   const currentWeekSets = getSetsStartedAfter(projectSets, weekStartedAt)
 
   const projectDetails: EnhancedProject = {

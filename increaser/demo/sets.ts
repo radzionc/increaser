@@ -1,7 +1,7 @@
-import { startOfWeek } from 'date-fns'
 import { DemoProject } from './projects'
 import { getWeekday } from '@lib/utils/time/getWeekday'
 import { MS_IN_DAY, MS_IN_HOUR, MS_IN_MIN } from '@lib/utils/time'
+import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 
 type SetBoundaryDescriptor = [number, number]
 
@@ -318,7 +318,7 @@ const daySetsDescription: DaySetsDescription[] = [
 ]
 
 export const getDemoSets = () => {
-  const weekStartedAt = startOfWeek(new Date(), { weekStartsOn: 1 }).getTime()
+  const weekStartedAt = getWeekStartedAt(Date.now())
   const today = new Date()
   const weekday = getWeekday(today)
   const now = Date.now()

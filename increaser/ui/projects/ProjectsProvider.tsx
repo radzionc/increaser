@@ -69,8 +69,6 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
     [sets, state.projects, theme],
   )
 
-  console.log(projects)
-
   const [activeProjects, inactiveProjects] = useMemo(
     () => splitBy(projects, ({ status }) => (status === 'ACTIVE' ? 0 : 1)),
     [projects],
