@@ -7,7 +7,6 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { Panel } from '@lib/ui/panel/Panel'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { VStack } from '@lib/ui/layout/Stack'
-import { AllocationOnboarding } from '@increaser/app/weekTimeAllocation/components/AllocationOnboarding'
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
@@ -74,7 +73,6 @@ export const HomePageContent = () => {
 
   return (
     <>
-      <AllocationOnboarding />
       <ElementSizeAware
         render={({ size, setElement }) => {
           const shouldBeInOneColumn = size && size.width < 800
