@@ -6,17 +6,8 @@ import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { range } from '@lib/utils/array/range'
 import { useTheme } from 'styled-components'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import {
-  D_IN_WEEK,
-  MS_IN_DAY,
-  MS_IN_MIN,
-  getShortWeekday,
-} from '@lib/utils/time'
-import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
-import { AllocationLine } from '@increaser/app/ui/AllocationLine'
+import { D_IN_WEEK, MS_IN_DAY, getShortWeekday } from '@lib/utils/time'
 import { Bar, BasicBarChart } from '@increaser/app/ui/BasicBarChart'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
@@ -25,10 +16,6 @@ export const ProjectsCurrentWeek = () => {
 
   const startOfWeek = useStartOfWeek()
   const currentWeekday = useWeekday()
-
-  const { primaryGoal } = useAssertUserState()
-
-  const { allocation } = useWeekTimeAllocation()
 
   const theme = useTheme()
 
@@ -64,32 +51,5 @@ export const ProjectsCurrentWeek = () => {
     })
   }, [currentWeekday, groupedSets, theme])
 
-  return (
-    <VStack gap={16}>
-      <BasicBarChart height={140} bars={bars} />
-      {primaryGoal === 'workMore' && (
-        <HStack fullWidth gap={4}>
-          {range(D_IN_WEEK).map((index) => {
-            const daySets = groupedSets[index]
-            const total = getSetsSum(daySets) / MS_IN_MIN
-
-            return (
-              <AllocationLine
-                key={index}
-                segments={[
-                  {
-                    color:
-                      total < allocation[index]
-                        ? theme.colors.mistExtra
-                        : theme.colors.success,
-                    proportion: total / allocation[index],
-                  },
-                ]}
-              />
-            )
-          })}
-        </HStack>
-      )}
-    </VStack>
-  )
+  return <BasicBarChart height={140} bars={bars} />
 }

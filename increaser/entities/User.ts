@@ -27,11 +27,7 @@ export interface Task {
   isCompleted: boolean
 }
 
-export const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
-export type PrimaryGoal = (typeof primaryGoals)[number]
-
 export type User = DayMoments & {
-  primaryGoal: PrimaryGoal
   id: string
   email: string
   country?: CountryCode
@@ -91,7 +87,6 @@ export const userDefaultFields: Pick<
   | 'projects'
   | 'habits'
   | 'weekTimeAllocation'
-  | 'primaryGoal'
   | 'isAnonymous'
   | 'wakeUpAt'
   | 'firstMealAt'
@@ -106,7 +101,6 @@ export const userDefaultFields: Pick<
   projects: [],
   habits: {},
   weekTimeAllocation: defaultWeekTimeAllocation,
-  primaryGoal: 'workMore',
   isAnonymous: true,
   ...dayMomentsDefaultValues,
 }
