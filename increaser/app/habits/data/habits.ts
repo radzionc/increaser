@@ -26,6 +26,7 @@ export type HabitId =
   | 'help'
   | 'noWorkAfterDinner'
   | 'noElectronicsInBedroom'
+  | 'noCriticism'
 
 export const habitRecord: Record<HabitId, HabitInfo> = {
   sunlight: {
@@ -149,6 +150,12 @@ export const habitRecord: Record<HabitId, HabitInfo> = {
     name: 'No electronics in bedroom',
     description:
       'By disconnecting from screens before sleep, you allow your mind to unwind and promote better sleep while creating a space for genuine connection, conversation, and intimacy with your spouse. This habit also encourages a healthier morning routine, enabling you to start your day with focus and intention rather than being consumed by digital distractions.',
+  },
+  noCriticism: {
+    emoji: '🙅‍♀️',
+    name: 'No negative criticism',
+    description:
+      'Daily, take a moment to think before speaking when you feel upset or frustrated. Ask yourself: "Is my comment about the behavior or the person?" Aim to express concerns about actions, not character. This simple check helps you avoid hurtful criticism and keeps communication positive and constructive.',
   },
 } as const
 

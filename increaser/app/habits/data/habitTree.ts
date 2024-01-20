@@ -81,6 +81,7 @@ export const habitTree: HabitTreeNode = {
               'help',
               'noWorkAfterDinner',
               'noElectronicsInBedroom',
+              'noCriticism',
             ],
           },
           children: [],
