@@ -1,32 +1,15 @@
 import YouTubePlayer from 'react-player/lazy'
-import styled, { css } from 'styled-components'
 import { demoVideoUrl, productName } from '@increaser/config'
-import { borderRadius } from '@lib/ui/css/borderRadius'
 import { VStack } from '@lib/ui/layout/Stack'
 import { IntersectionAware } from '@lib/ui/base/IntersectionAware'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { getColor } from '@lib/ui/theme/getters'
-import { transition } from '@lib/ui/css/transition'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
+import { VideoHighlight } from '@lib/ui/website/VideoHighlight'
 
 const youTubeVideoRatio = 9 / 16
-
-const PlayerWrapper = styled.div<{ isActive: boolean }>`
-  ${borderRadius.m};
-  overflow: hidden;
-  ${transition}
-  border: 1px solid transparent;
-  ${({ isActive, theme }) =>
-    !isActive &&
-    css`
-      border-color: ${getColor('primary')};
-      box-shadow: 0 0 20px 5px
-        ${theme.colors.primary.getVariant({ a: () => 0.8 }).toCssValue()};
-    `}
-`
 
 export const VideoSlice = () => {
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
@@ -46,7 +29,7 @@ export const VideoSlice = () => {
                   <ElementSizeAware
                     render={({ setElement, size }) => {
                       return (
-                        <PlayerWrapper isActive={isPlaying} ref={setElement}>
+                        <VideoHighlight isActive={isPlaying} ref={setElement}>
                           {size && (
                             <YouTubePlayer
                               isActive
@@ -63,7 +46,7 @@ export const VideoSlice = () => {
                               }}
                             />
                           )}
-                        </PlayerWrapper>
+                        </VideoHighlight>
                       )
                     }}
                   />
