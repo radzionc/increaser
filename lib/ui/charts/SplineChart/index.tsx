@@ -92,17 +92,27 @@ export const SplineChart = ({ data, width, height }: SplineChartProps) => {
       height={height}
       viewBox={`0 0 ${width} ${height}`}
     >
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop
+            offset="0%"
+            stopColor={theme.colors.primary
+              .getVariant({ a: () => 0.4 })
+              .toCssValue()}
+          />
+          <stop
+            offset="100%"
+            stopColor={theme.colors.transparent.toCssValue()}
+          />
+        </linearGradient>
+      </defs>
       <path
         d={path}
         fill="none"
         stroke={theme.colors.primary.toCssValue()}
         strokeWidth="2"
       />
-      <path
-        d={closedPath}
-        fill={theme.colors.primary.getVariant({ a: () => 0.1 }).toCssValue()}
-        strokeWidth="0"
-      />
+      <path d={closedPath} fill="url(#gradient)" strokeWidth="0" />
     </svg>
   )
 }
