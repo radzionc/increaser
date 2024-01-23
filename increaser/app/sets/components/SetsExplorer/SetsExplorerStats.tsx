@@ -9,11 +9,12 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getAverage } from '@lib/utils/math/getAverage'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { StatisticPanel } from '@lib/ui/panel/StatisticPanel'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { getBlocks } from '@increaser/app/sets/Block'
 import { isWorkday } from '@lib/utils/time/isWorkday'
+import { Statistic } from '@lib/ui/layout/Statistic'
+import { Panel } from '@lib/ui/panel/Panel'
 
 const getFormattedAvgWorkdayStart = (days: SetsExplorerDay[]) => {
   const ms = getAverage(days.map((day) => day.sets[0].start - day.startedAt))
@@ -55,6 +56,12 @@ const getFormattedAvgWeekend = (days: SetsExplorerDay[]) => {
   return formatDuration(getSetsSum(sets) / weekends.length, 'ms')
 }
 
+const getFormattedAvgDay = (days: SetsExplorerDay[]) => {
+  const sets = days.flatMap((day) => day.sets)
+
+  return formatDuration(getSetsSum(sets) / days.length, 'ms')
+}
+
 export const SetsExplorerStats = () => {
   const { days, includesToday, setIncludesToday } = useSetsExplorer()
 
@@ -76,47 +83,70 @@ export const SetsExplorerStats = () => {
           label="include today"
         />
       </HStack>
-      <UniformColumnGrid gap={16} maxColumns={5} minChildrenWidth={160}>
-        <StatisticPanel
-          title="Start work"
-          value={
-            isEmpty(daysWithSets)
-              ? undefined
-              : getFormattedAvgWorkdayStart(daysWithSets)
-          }
-        />
-        <StatisticPanel
-          title="End work"
-          value={
-            isEmpty(daysWithSets)
-              ? undefined
-              : getFormattedAvgWorkdayEnd(daysWithSets)
-          }
-        />
-        <StatisticPanel
-          title="Block"
-          value={
-            isEmpty(daysWithSets)
-              ? undefined
-              : getFormattedAvgBlock(daysWithSets)
-          }
-        />
-        <StatisticPanel
-          title="Workday"
-          value={
-            isEmpty(daysWithSets)
-              ? undefined
-              : getFormattedAvgWorkday(daysWithSets)
-          }
-        />
-        <StatisticPanel
-          title="Weekend"
-          value={
-            isEmpty(daysWithSets)
-              ? undefined
-              : getFormattedAvgWeekend(daysWithSets)
-          }
-        />
+      <UniformColumnGrid gap={16} maxColumns={5} minChildrenWidth={120}>
+        <Panel>
+          <Statistic
+            title="Start work"
+            value={
+              isEmpty(daysWithSets)
+                ? undefined
+                : getFormattedAvgWorkdayStart(daysWithSets)
+            }
+          />
+        </Panel>
+        <Panel>
+          <Statistic
+            title="End work"
+            value={
+              isEmpty(daysWithSets)
+                ? undefined
+                : getFormattedAvgWorkdayEnd(daysWithSets)
+            }
+          />
+        </Panel>
+
+        <Panel>
+          <Statistic
+            title="Block"
+            value={
+              isEmpty(daysWithSets)
+                ? undefined
+                : getFormattedAvgBlock(daysWithSets)
+            }
+          />
+        </Panel>
+        <Panel style={{ gridColumn: 'span 2' }}>
+          <UniformColumnGrid gap={16} maxColumns={6} minChildrenWidth={80}>
+            <Statistic
+              title="Avg. Day"
+              value={
+                isEmpty(daysWithSets)
+                  ? undefined
+                  : getFormattedAvgDay(daysWithSets)
+              }
+            />
+            <Text color="supporting" as="div">
+              <Statistic
+                title="Workday"
+                value={
+                  isEmpty(daysWithSets)
+                    ? undefined
+                    : getFormattedAvgWorkday(daysWithSets)
+                }
+              />
+            </Text>
+            <Text color="supporting" as="div">
+              <Statistic
+                title="Weekend"
+                value={
+                  isEmpty(daysWithSets)
+                    ? undefined
+                    : getFormattedAvgWeekend(daysWithSets)
+                }
+              />
+            </Text>
+          </UniformColumnGrid>
+        </Panel>
       </UniformColumnGrid>
     </VStack>
   )

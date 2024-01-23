@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { VStack } from '@lib/ui/layout/Stack'
-import { SetsExplorerDaysChart } from './SetsExplorerDaysChart'
 import { setsExplorerConfig } from './config'
 
 const Wrapper = styled(VStack)`
@@ -43,7 +42,6 @@ export const SetsExplorerDays = () => {
           <SetsExplorerDayView key={day.startedAt} day={day} />
         ))}
       </Container>
-      <SetsExplorerDaysChart />
     </Wrapper>
   )
 }

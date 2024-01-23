@@ -1,6 +1,6 @@
 import { Set } from '@increaser/entities/User'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { createContext, useMemo } from 'react'
+import { createContext, useMemo, useState } from 'react'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { startOfDay } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -17,6 +17,14 @@ export interface SetsExplorerDay {
   sets: Set[]
 }
 
+export const setsStatistics = [
+  'startedWorkAt',
+  'finishedWorkAt',
+  'block',
+  'total',
+] as const
+export type SetsStatistic = (typeof setsStatistics)[number]
+
 interface SetsExplorerState {
   days: SetsExplorerDay[]
   startHour: number
@@ -24,6 +32,9 @@ interface SetsExplorerState {
 
   includesToday: boolean
   setIncludesToday: (value: boolean) => void
+
+  currentStatistic: SetsStatistic
+  setCurrentStatistic: (value: SetsStatistic) => void
 }
 
 const SetsExplorerContext = createContext<SetsExplorerState | undefined>(
@@ -38,6 +49,9 @@ export const SetsExplorerProvider = ({
     PersistentStateKey.IncludeTodayInSetsExplorer,
     false,
   )
+
+  const [currentStatistic, setCurrentStatistic] =
+    useState<SetsStatistic>('total')
 
   const days = useMemo(() => {
     const todayStartedAt = startOfDay(Date.now()).getTime()
@@ -91,7 +105,15 @@ export const SetsExplorerProvider = ({
 
   return (
     <SetsExplorerContext.Provider
-      value={{ days, startHour, endHour, includesToday, setIncludesToday }}
+      value={{
+        days,
+        startHour,
+        endHour,
+        includesToday,
+        setIncludesToday,
+        currentStatistic,
+        setCurrentStatistic,
+      }}
     >
       {children}
     </SetsExplorerContext.Provider>
