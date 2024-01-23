@@ -1,9 +1,9 @@
 import { ClosableComponentProps } from '@lib/ui/props'
 import { BottomSlideOver } from '@lib/ui/modal/BottomSlideOver'
 import { Modal } from '@lib/ui/modal'
-import { BasedOnScreenWidth } from '@lib/ui/layout/BasedOnScreenWidth'
 
 import { SelectProjectList } from './SelectProjectList'
+import { BasedOnScreenWidth } from '@lib/ui/layout/BasedOnScreenWidth'
 
 interface Props extends ClosableComponentProps {
   onSubmit: (projectId: string) => void
