@@ -1,7 +1,8 @@
 import { normalize } from '@lib/utils/math/normalize'
 import { useMemo } from 'react'
 import { Point } from '../../entities/Point'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
+import { transition } from '../../css/transition'
 
 interface SplineChartProps {
   data: number[]
@@ -66,6 +67,10 @@ const createClosedPath = (
   return path
 }
 
+const Path = styled.path`
+  ${transition}
+`
+
 export const SplineChart = ({ data, width, height }: SplineChartProps) => {
   const [path, closedPath] = useMemo(() => {
     if (data.length === 0) return ['', '']
@@ -106,13 +111,13 @@ export const SplineChart = ({ data, width, height }: SplineChartProps) => {
           />
         </linearGradient>
       </defs>
-      <path
+      <Path
         d={path}
         fill="none"
         stroke={theme.colors.primary.toCssValue()}
         strokeWidth="2"
       />
-      <path d={closedPath} fill="url(#gradient)" strokeWidth="0" />
+      <Path d={closedPath} fill="url(#gradient)" strokeWidth="0" />
     </svg>
   )
 }
