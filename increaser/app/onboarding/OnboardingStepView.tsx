@@ -11,6 +11,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
 
 type OnboardingStepViewProps = ComponentWithChildrenProps & {
   isDisabled?: boolean | string
@@ -38,6 +39,8 @@ export const OnboardingStepView = ({
   const { currentStep, setCurrentStep } = useOnboarding()
   const { push } = useRouter()
 
+  const { mutate: updateUser } = useUpdateUserMutation()
+
   return (
     <Container
       as="form"
@@ -49,6 +52,7 @@ export const OnboardingStepView = ({
           setCurrentStep(nextStep)
         } else {
           push(AppPath.Home)
+          updateUser({ finishedOnboardingAt: Date.now() })
         }
       })}
     >
@@ -57,6 +61,22 @@ export const OnboardingStepView = ({
       </Text>
       <Content>{children}</Content>
       <Footer>
+        {onboardingSteps.indexOf(currentStep) > 0 && (
+          <Button
+            onClick={() => {
+              const previousStep =
+                onboardingSteps[onboardingSteps.indexOf(currentStep) - 1]
+              if (previousStep) {
+                setCurrentStep(previousStep)
+              }
+            }}
+            kind="secondary"
+            type="button"
+            size="l"
+          >
+            Back
+          </Button>
+        )}
         <Button isDisabled={isDisabled} size="l">
           Next
         </Button>

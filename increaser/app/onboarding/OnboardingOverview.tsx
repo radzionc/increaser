@@ -5,7 +5,7 @@ import {
   onboardingStepTargetName,
 } from './OnboardingProvider'
 import { Text } from '@lib/ui/text'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { round } from '@lib/ui/css/round'
 import { getColor, matchColor } from '@lib/ui/theme/getters'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
@@ -25,19 +25,31 @@ const Container = styled(HStack)<{ isCurrent: boolean; isEnabled: boolean }>`
   align-items: center;
   gap: 8px;
   ${verticalPadding(8)}
+  ${transition};
 
   ${({ isEnabled }) => isEnabled && interactive};
+  ${({ isCurrent, isEnabled }) =>
+    isEnabled &&
+    !isCurrent &&
+    css`
+      &:hover {
+        color: ${getColor('text')};
+      }
+    `}
 `
 
-const CheckContainer = styled.div<{ isCurrent: boolean }>`
+const CheckContainer = styled.div<{ isCompleted: boolean }>`
   ${round};
   ${centerContent};
   background: ${getColor('mistExtra')};
 
   ${sameDimensions(24)};
-  ${transition};
 
-  color: ${getColor('success')};
+  color: ${matchColor('isCompleted', {
+    true: 'success',
+    false: 'transparent',
+  })};
+  font-size: 14px;
 `
 
 export const OnboardingOverview = () => {
@@ -55,12 +67,10 @@ export const OnboardingOverview = () => {
             onClick={isEnabled ? () => setCurrentStep(step) : undefined}
             isEnabled={isEnabled}
           >
-            <CheckContainer isCurrent={isCurrent}>
-              {isCompleted && (
-                <IconWrapper>
-                  <CheckIcon />
-                </IconWrapper>
-              )}
+            <CheckContainer isCompleted={isCompleted}>
+              <IconWrapper>
+                <CheckIcon />
+              </IconWrapper>
             </CheckContainer>
             <Text weight="semibold">{onboardingStepTargetName[step]}</Text>
           </Container>

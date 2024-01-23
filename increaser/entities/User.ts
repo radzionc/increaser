@@ -57,6 +57,8 @@ export type User = DayMoments & {
 
   sumbittedHabitsAt?: number
 
+  finishedOnboardingAt?: number
+
   subscription?: Subscription
   lifeTimeDeal?: LifeTimeDeal
 }

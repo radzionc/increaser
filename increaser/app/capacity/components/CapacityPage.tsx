@@ -4,6 +4,7 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { CapacityPageContent } from './CapacityPageContent'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { Page } from '@lib/next-ui/Page'
+import { RequiresOnboarding } from '../../onboarding/RequiresOnboarding'
 
 const title = 'Manage Time'
 
@@ -12,7 +13,9 @@ export const CapacityPage: Page = () => {
     <FixedWidthContent>
       <PageTitle documentTitle={`⏳ ${title}`} title={title} />
       <UserStateOnly>
-        <CapacityPageContent />
+        <RequiresOnboarding>
+          <CapacityPageContent />
+        </RequiresOnboarding>
       </UserStateOnly>
     </FixedWidthContent>
   )
