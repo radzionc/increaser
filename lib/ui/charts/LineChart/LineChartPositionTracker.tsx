@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import { takeWholeSpace } from '../css/takeWholeSpace'
-import { HoverTracker } from '../base/HoverTracker'
-import { HSLA } from '../colors/HSLA'
+import { takeWholeSpace } from '../../css/takeWholeSpace'
+import { HoverTracker } from '../../base/HoverTracker'
+import { HSLA } from '../../colors/HSLA'
 import { LineChartPosition } from './LineChartPosition'
+import { getClosestItemIndex } from '@lib/utils/math/getClosestItemIndex'
 
-type ChartPositionTrackerProps = {
+type LineChartPositionTrackerProps = {
   data: number[]
   color: HSLA
   onChange?: (index: number | null) => void
@@ -17,15 +18,15 @@ const Container = styled.div`
   left: 0;
 `
 
-export const ChartPositionTracker = ({
+export const LineChartPositionTracker = ({
   onChange,
   data,
   color,
-}: ChartPositionTrackerProps) => {
+}: LineChartPositionTrackerProps) => {
   return (
     <HoverTracker
       onChange={({ position }) => {
-        onChange?.(position ? Math.round(position.x * (data.length - 1)) : null)
+        onChange?.(position ? getClosestItemIndex(data, position.x) : null)
       }}
       render={({ props, position }) => {
         return (

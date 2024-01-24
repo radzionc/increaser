@@ -1,7 +1,6 @@
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { useSetsExplorer } from './SetsExplorerProvider'
 import styled, { useTheme } from 'styled-components'
-import { ChartPositionTracker } from '@lib/ui/charts/ChartPositionTracker'
 import { match } from '@lib/utils/match'
 import { useMemo, useState } from 'react'
 import { isEmpty } from '@lib/utils/array/isEmpty'
@@ -20,6 +19,7 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { LineChart } from '@lib/ui/charts/LineChart'
+import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
 
 const Container = styled(VStack)`
   gap: 4px;
@@ -129,7 +129,7 @@ export const SetsChart = () => {
                     height={chartHeight}
                     data={data}
                   />
-                  <ChartPositionTracker
+                  <LineChartPositionTracker
                     data={data}
                     color={color}
                     onChange={setSelectedDay}
