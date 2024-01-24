@@ -10,7 +10,7 @@ import { normalize } from '@lib/utils/math/normalize'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { addTopPadding } from '@lib/ui/charts/utils/addTopPadding'
-import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
+import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { Match } from '@lib/ui/base/Match'
@@ -80,7 +80,7 @@ export const SetsChart = () => {
           <Container ref={setElement}>
             {size && (
               <>
-                <ChartItemInfo
+                <LineChartItemInfo
                   minHeight={itemInfoHeight}
                   containerWidth={size.width}
                   data={data}

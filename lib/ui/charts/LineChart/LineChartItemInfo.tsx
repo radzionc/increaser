@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { ElementSizeAware } from '../base/ElementSizeAware'
-import { defaultTransition } from '../css/transition'
+import { ElementSizeAware } from '../../base/ElementSizeAware'
+import { defaultTransition } from '../../css/transition'
 
-type ChartItemInfoProps = {
+type LineChartItemInfoProps = {
   containerWidth: number
   minHeight: number
   data: number[]
@@ -22,13 +22,13 @@ const Content = styled.div`
   transition: ${defaultTransition} opacity;
 `
 
-export const ChartItemInfo = ({
+export const LineChartItemInfo = ({
   data,
   itemIndex,
   render,
   containerWidth,
   minHeight,
-}: ChartItemInfoProps) => {
+}: LineChartItemInfoProps) => {
   return (
     <Container style={{ minHeight }}>
       <ElementSizeAware
