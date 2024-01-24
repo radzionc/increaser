@@ -1,4 +1,3 @@
-import { normalize } from '@lib/utils/math/normalize'
 import { useMemo } from 'react'
 import { Point } from '../../entities/Point'
 import styled, { useTheme } from 'styled-components'
@@ -75,9 +74,8 @@ export const SplineChart = ({ data, width, height }: SplineChartProps) => {
   const [path, closedPath] = useMemo(() => {
     if (data.length === 0) return ['', '']
 
-    const normalizedData = normalize(data)
-    const points = normalizedData.map((value, index) => ({
-      x: index / (normalizedData.length - 1),
+    const points = data.map((value, index) => ({
+      x: index / (data.length - 1),
       y: value,
     }))
 
