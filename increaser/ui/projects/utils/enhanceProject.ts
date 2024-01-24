@@ -18,15 +18,18 @@ export const enhanceProject = (
 
   const monthStartedAt = startOfMonth(new Date()).getTime()
   const currentMonthSets = getSetsStartedAfter(projectSets, monthStartedAt)
+  console.log(project.name, monthStartedAt)
 
   const weekStartedAt = getWeekStartedAt(Date.now())
   const currentWeekSets = getSetsStartedAfter(projectSets, weekStartedAt)
 
+  const total =
+    sum(project.months.map((month) => month.seconds)) +
+    Math.round(convertDuration(getSetsDuration(currentMonthSets), 'ms', 's'))
+
   const projectDetails: EnhancedProject = {
     ...project,
-    total:
-      sum(project.months.map((month) => month.seconds)) +
-      Math.round(convertDuration(getSetsDuration(currentMonthSets), 'ms', 's')),
+    total,
     doneMinutesThisWeek: Math.round(
       convertDuration(getSetsDuration(currentWeekSets), 'ms', 'min'),
     ),
