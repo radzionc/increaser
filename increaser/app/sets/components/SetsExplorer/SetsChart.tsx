@@ -1,7 +1,6 @@
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { useSetsExplorer } from './SetsExplorerProvider'
 import styled, { useTheme } from 'styled-components'
-import { SplineChart } from '@lib/ui/charts/SplineChart'
 import { ChartPositionTracker } from '@lib/ui/charts/ChartPositionTracker'
 import { match } from '@lib/utils/match'
 import { useMemo, useState } from 'react'
@@ -20,6 +19,7 @@ import { formatTime } from '@lib/utils/time/formatTime'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
+import { LineChart } from '@lib/ui/charts/LineChart'
 
 const Container = styled(VStack)`
   gap: 4px;
@@ -124,7 +124,7 @@ export const SetsChart = () => {
                   }}
                 />
                 <div style={{ position: 'relative' }}>
-                  <SplineChart
+                  <LineChart
                     width={size.width}
                     height={chartHeight}
                     data={data}

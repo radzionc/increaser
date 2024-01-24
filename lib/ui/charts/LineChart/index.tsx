@@ -3,7 +3,7 @@ import { Point } from '../../entities/Point'
 import styled, { useTheme } from 'styled-components'
 import { transition } from '../../css/transition'
 
-interface SplineChartProps {
+interface LineChartProps {
   data: number[]
   height: number
   width: number
@@ -70,7 +70,7 @@ const Path = styled.path`
   ${transition}
 `
 
-export const SplineChart = ({ data, width, height }: SplineChartProps) => {
+export const LineChart = ({ data, width, height }: LineChartProps) => {
   const [path, closedPath] = useMemo(() => {
     if (data.length === 0) return ['', '']
 
