@@ -7,6 +7,7 @@ import { round } from '../css/round'
 import { toPercents } from '@lib/utils/toPercents'
 import { toSizeUnit } from '../css/toSizeUnit'
 import { PositionAbsolutelyCenterVertically } from '../layout/PositionAbsolutelyCenterVertically'
+import { PositionAbsolutelyByCenter } from '../layout/PositionAbsolutelyByCenter'
 
 type ChartPositionProps = {
   data: number[]
@@ -17,8 +18,7 @@ type ChartPositionProps = {
 const size = 12
 const lineWidth = 2
 
-const Container = styled.div`
-  position: absolute;
+const ChartPoint = styled.div`
   ${round};
   border: 2px solid ${getColor('contrast')};
   ${sameDimensions(size)};
@@ -30,7 +30,11 @@ const Line = styled.div`
   color: ${getColor('textShy')};
 `
 
-export const ChartPosition = ({ data, color, value }: ChartPositionProps) => {
+export const LineChartPosition = ({
+  data,
+  color,
+  value,
+}: ChartPositionProps) => {
   const width = data.length - 1
   const index = Math.round(value.x * width)
   const x = index / width
@@ -47,14 +51,15 @@ export const ChartPosition = ({ data, color, value }: ChartPositionProps) => {
       >
         <Line />
       </PositionAbsolutelyCenterVertically>
-      <Container
+      <PositionAbsolutelyByCenter
         style={{
           pointerEvents: 'none',
-          left: `calc(${toPercents(x)} - ${toSizeUnit(size / 2)})`,
-          bottom: `calc(${toPercents(y)} - ${toSizeUnit(size / 2)})`,
-          background: color.toCssValue(),
         }}
-      />
+        left={toPercents(x)}
+        top={toPercents(1 - y)}
+      >
+        <ChartPoint style={{ background: color.toCssValue() }} />
+      </PositionAbsolutelyByCenter>
     </>
   )
 }

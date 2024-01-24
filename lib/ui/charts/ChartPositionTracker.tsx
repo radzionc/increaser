@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { takeWholeSpace } from '../css/takeWholeSpace'
 import { HoverTracker } from '../base/HoverTracker'
 import { HSLA } from '../colors/HSLA'
-import { ChartPosition } from './ChartPosition'
+import { LineChartPosition } from './LineChartPosition'
 
 type ChartPositionTrackerProps = {
   data: number[]
@@ -32,7 +32,7 @@ export const ChartPositionTracker = ({
           <>
             <Container {...props} />
             {position && (
-              <ChartPosition data={data} color={color} value={position} />
+              <LineChartPosition data={data} color={color} value={position} />
             )}
           </>
         )
