@@ -8,7 +8,7 @@ import { getSetsSum } from '../../helpers/getSetsSum'
 import { normalize } from '@lib/utils/math/normalize'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { addTopPadding } from '@lib/ui/charts/utils/addTopPadding'
+import { dataVerticalPadding } from '@lib/ui/charts/utils/dataVerticalPadding'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
@@ -20,6 +20,7 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
+import { LineChartXAxes } from '@lib/ui/charts/LineChart/LineChartXAxes'
 
 const Container = styled(VStack)`
   gap: 4px;
@@ -27,7 +28,8 @@ const Container = styled(VStack)`
 `
 
 const chartHeight = 120
-const itemInfoHeight = 24
+const itemInfoMinHeight = 24
+const labelMinHeight = 18
 
 export const SetsChart = () => {
   const { currentStatistic, days } = useSetsExplorer()
@@ -47,7 +49,7 @@ export const SetsChart = () => {
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
-        const data = addTopPadding(
+        const data = dataVerticalPadding(
           normalize(
             match(currentStatistic, {
               startedWorkAt: () =>
@@ -73,7 +75,10 @@ export const SetsChart = () => {
               total: () => days.map((day) => getSetsSum(day.sets)),
             }),
           ),
-          0.2,
+          {
+            top: 0.2,
+            bottom: 0.2,
+          },
         )
 
         return (
@@ -81,7 +86,7 @@ export const SetsChart = () => {
             {size && (
               <>
                 <LineChartItemInfo
-                  minHeight={itemInfoHeight}
+                  minHeight={itemInfoMinHeight}
                   containerWidth={size.width}
                   data={data}
                   itemIndex={selectedDay}
@@ -135,6 +140,18 @@ export const SetsChart = () => {
                     onChange={setSelectedDay}
                   />
                 </div>
+                <LineChartXAxes
+                  data={data}
+                  expectedLabelWidth={40}
+                  labelsMinDistance={20}
+                  containerWidth={size.width}
+                  minHeight={labelMinHeight}
+                  renderLabel={(index) => (
+                    <Text size={12} color="supporting" nowrap>
+                      {format(days[index].startedAt, 'd MMM')}
+                    </Text>
+                  )}
+                />
               </>
             )}
           </Container>
