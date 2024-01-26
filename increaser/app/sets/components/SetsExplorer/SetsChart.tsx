@@ -128,6 +128,7 @@ export const SetsChart = () => {
                     width={size.width}
                     height={chartConfig.chartHeight}
                     data={data}
+                    color={color}
                   />
                   <LineChartPositionTracker
                     data={data}
