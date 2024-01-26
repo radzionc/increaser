@@ -5,7 +5,7 @@ import { HSLA } from '@lib/ui/colors/HSLA'
 import {
   InvisibleHTMLCheckboxProps,
   InvisibleHTMLCheckbox,
-} from '@lib/ui/inputs/Checkbox/InvisibleHTMLCheckbox'
+} from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { round } from '@lib/ui/css/round'

@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { ArrowRightIcon } from '@lib/ui/icons/ArrowRightIcon'
-import { inputBorderRadiusCSS } from '@lib/ui/inputs/config'
 import { HStack } from '@lib/ui/layout/Stack'
 import { EmojiHeavyBlock } from '@increaser/app/ui/EmojiHeavyBlock'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
 interface Props {
   name: string
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Container = styled(UnstyledButton)`
-  ${inputBorderRadiusCSS}
+  ${borderRadius.s}
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
   padding: 8px 16px;
 

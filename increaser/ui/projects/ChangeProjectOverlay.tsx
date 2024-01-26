@@ -1,7 +1,7 @@
 import { ClosableComponentProps } from '@lib/ui/props'
 import { BottomSlideOver } from '@lib/ui/modal/BottomSlideOver'
 import { Modal } from '@lib/ui/modal'
-import { ResponsiveView } from '@lib/ui/layout/ResponsiveView'
+import { BasedOnScreenWidth } from '@lib/ui/layout/BasedOnScreenWidth'
 
 import { SelectProjectList } from './SelectProjectList'
 
@@ -28,13 +28,14 @@ export const ChangeProjectOverlay = ({
   )
 
   return (
-    <ResponsiveView
-      small={() => (
+    <BasedOnScreenWidth
+      value={600}
+      less={() => (
         <BottomSlideOver onClose={onClose} title={title}>
           {content}
         </BottomSlideOver>
       )}
-      normal={() => (
+      more={() => (
         <Modal title="Change project" onClose={onClose}>
           {content}
         </Modal>

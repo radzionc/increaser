@@ -1,8 +1,8 @@
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { useSetsExplorer } from './SetsExplorerProvider'
-import styled, { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components'
 import { match } from '@lib/utils/match'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getSetsSum } from '../../helpers/getSetsSum'
 import { normalize } from '@lib/utils/math/normalize'
@@ -20,31 +20,26 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
-import { LineChartXAxes } from '@lib/ui/charts/LineChart/LineChartXAxes'
+import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 
-const Container = styled(VStack)`
-  gap: 4px;
-  position: relative;
-`
-
-const chartHeight = 120
-const itemInfoMinHeight = 24
-const labelMinHeight = 18
+const chartConfig = {
+  chartHeight: 120,
+  expectedLabelWidth: 58,
+  expectedLabelHeight: 18,
+  labelsMinDistance: 20,
+}
 
 export const SetsChart = () => {
   const { currentStatistic, days } = useSetsExplorer()
 
-  const [selectedDay, setSelectedDay] = useState<number | null>(null)
-
-  const daysWithSets = useMemo(
-    () => days.filter((day) => !isEmpty(day.sets)),
-    [days],
-  )
+  const [selectedDay, setSelectedDay] = useState<number>(days.length - 1)
+  const [isSelectedDayVisible, setIsSelectedDayVisible] =
+    useState<boolean>(false)
 
   const { colors } = useTheme()
   const color = colors.primary
 
-  if (isEmpty(daysWithSets)) return null
+  if (days.length < 2) return null
 
   return (
     <ElementSizeAware
@@ -82,14 +77,14 @@ export const SetsChart = () => {
         )
 
         return (
-          <Container ref={setElement}>
+          <VStack fullWidth gap={4} ref={setElement}>
             {size && (
               <>
                 <LineChartItemInfo
-                  minHeight={itemInfoMinHeight}
+                  itemIndex={selectedDay}
+                  isVisible={isSelectedDayVisible}
                   containerWidth={size.width}
                   data={data}
-                  itemIndex={selectedDay}
                   render={(index) => {
                     const day = days[index]
                     return (
@@ -128,24 +123,31 @@ export const SetsChart = () => {
                     )
                   }}
                 />
-                <div style={{ position: 'relative' }}>
+                <VStack style={{ position: 'relative' }}>
                   <LineChart
                     width={size.width}
-                    height={chartHeight}
+                    height={chartConfig.chartHeight}
                     data={data}
                   />
                   <LineChartPositionTracker
                     data={data}
                     color={color}
-                    onChange={setSelectedDay}
+                    onChange={(index) => {
+                      if (index === null) {
+                        setIsSelectedDayVisible(false)
+                      } else {
+                        setIsSelectedDayVisible(true)
+                        setSelectedDay(index)
+                      }
+                    }}
                   />
-                </div>
-                <LineChartXAxes
+                </VStack>
+                <ChartXAxis
                   data={data}
-                  expectedLabelWidth={40}
-                  labelsMinDistance={20}
+                  expectedLabelWidth={chartConfig.expectedLabelWidth}
+                  labelsMinDistance={chartConfig.labelsMinDistance}
                   containerWidth={size.width}
-                  minHeight={labelMinHeight}
+                  expectedLabelHeight={chartConfig.expectedLabelHeight}
                   renderLabel={(index) => (
                     <Text size={12} color="supporting" nowrap>
                       {format(days[index].startedAt, 'd MMM')}
@@ -154,7 +156,7 @@ export const SetsChart = () => {
                 />
               </>
             )}
-          </Container>
+          </VStack>
         )
       }}
     />
