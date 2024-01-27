@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const [queryClient] = useState(getQueryClient)
   const [theme, setTheme] = usePersistentState<ThemePreference>(
     PersistentStateKey.ThemePreference,
-    'system',
+    'dark',
   )
 
   const router = useRouter()
