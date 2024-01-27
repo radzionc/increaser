@@ -11,7 +11,6 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_WEEK } from '@lib/utils/time'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { EnhancedProject } from './EnhancedProject'
-import { useCurrentWeekSets } from '../sets/hooks/useCurrentWeekSets'
 import { enhanceProject } from './utils/enhanceProject'
 
 export const weeksToDisplay = 4
@@ -54,19 +53,17 @@ export const ProjectsContext = createContext<ProjectsState | undefined>(
 export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
   const state = useAssertUserState()
 
-  const sets = useCurrentWeekSets()
-
   const theme = useTheme()
 
   const projects = useMemo(
     () =>
       state.projects
-        .map((project) => enhanceProject(project, sets, theme))
+        .map((project) => enhanceProject(project, state.sets, theme))
         .sort(
           (one, another) =>
             getProjectSortingNumber(one) - getProjectSortingNumber(another),
         ),
-    [sets, state.projects, theme],
+    [state.projects, state.sets, theme],
   )
 
   const [activeProjects, inactiveProjects] = useMemo(
