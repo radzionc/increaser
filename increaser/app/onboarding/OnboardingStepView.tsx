@@ -23,6 +23,7 @@ const Container = styled(VStack)`
 
 const Content = styled(VStack)`
   flex: 1;
+  overflow-y: auto;
 `
 
 const Footer = styled(HStack)`
