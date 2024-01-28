@@ -8,7 +8,6 @@ import {
 } from './OnboardingProvider'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { Button } from '@lib/ui/buttons/Button'
-import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
@@ -19,7 +18,7 @@ type OnboardingStepViewProps = ComponentWithChildrenProps & {
 
 const Container = styled(VStack)`
   height: 100%;
-  gap: 24px;
+  gap: 40px;
 `
 
 const Content = styled(VStack)`
@@ -42,21 +41,8 @@ export const OnboardingStepView = ({
   const { mutate: updateUser } = useUpdateUserMutation()
 
   return (
-    <Container
-      as="form"
-      onSubmit={preventDefault(() => {
-        if (isDisabled) return
-        const nextStep =
-          onboardingSteps[onboardingSteps.indexOf(currentStep) + 1]
-        if (nextStep) {
-          setCurrentStep(nextStep)
-        } else {
-          push(AppPath.Home)
-          updateUser({ finishedOnboardingAt: Date.now() })
-        }
-      })}
-    >
-      <Text size={20} weight="bold">
+    <Container>
+      <Text color="contrast" size={20} weight="bold">
         {onboardingStepTargetName[currentStep]}
       </Text>
       <Content>{children}</Content>
@@ -77,7 +63,21 @@ export const OnboardingStepView = ({
             Back
           </Button>
         )}
-        <Button isDisabled={isDisabled} size="l">
+        <Button
+          onClick={() => {
+            if (isDisabled) return
+            const nextStep =
+              onboardingSteps[onboardingSteps.indexOf(currentStep) + 1]
+            if (nextStep) {
+              setCurrentStep(nextStep)
+            } else {
+              push(AppPath.Home)
+              updateUser({ finishedOnboardingAt: Date.now() })
+            }
+          }}
+          isDisabled={isDisabled}
+          size="l"
+        >
           Next
         </Button>
       </Footer>
