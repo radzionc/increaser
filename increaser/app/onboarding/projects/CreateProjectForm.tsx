@@ -87,7 +87,7 @@ export const CreateProjectForm = () => {
               />
             </InputContainer>
           </HStack>
-          <Button size="l" kind="secondary">
+          <Button kind="secondary" size="l">
             Create
           </Button>
         </VStack>
