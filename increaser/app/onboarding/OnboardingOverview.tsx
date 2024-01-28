@@ -15,6 +15,7 @@ import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { centerContent } from '@lib/ui/css/centerContent'
+import { without } from '@lib/utils/array/without'
 
 const Container = styled(HStack)<{ isCurrent: boolean; isEnabled: boolean }>`
   color: ${matchColor('isCurrent', {
@@ -60,7 +61,9 @@ export const OnboardingOverview = () => {
       {onboardingSteps.map((step) => {
         const isCompleted = completedSteps.includes(step)
         const isCurrent = currentStep === step
-        const isEnabled = isCompleted || isCurrent
+        const isEnabled =
+          isCompleted || without(onboardingSteps, ...completedSteps)[0] === step
+
         return (
           <Container
             isCurrent={isCurrent}
