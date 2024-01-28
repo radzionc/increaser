@@ -1,7 +1,7 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 import { createContext, useCallback, useState } from 'react'
+import { analytics } from '../analytics'
 
 export const onboardingSteps = [
   'projects',
@@ -45,11 +45,12 @@ export const OnboardingProvider = ({
     (step: OnboardingStep) => {
       setCurrentStep(step)
       const previousStep = onboardingSteps[onboardingSteps.indexOf(step) - 1]
-      if (previousStep) {
-        setCompletedSteps((prev) => withoutDuplicates([...prev, previousStep]))
+      if (previousStep && !completedSteps.includes(previousStep)) {
+        analytics.trackEvent(`Completed ${previousStep} onboarding step`)
+        setCompletedSteps((prev) => [...prev, previousStep])
       }
     },
-    [setCurrentStep],
+    [completedSteps],
   )
 
   return (

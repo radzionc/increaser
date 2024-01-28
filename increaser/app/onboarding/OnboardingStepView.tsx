@@ -11,6 +11,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
+import { analytics } from '../analytics'
 
 type OnboardingStepViewProps = ComponentWithChildrenProps & {
   isDisabled?: boolean | string
@@ -67,12 +68,14 @@ export const OnboardingStepView = ({
         <Button
           onClick={() => {
             if (isDisabled) return
+
             const nextStep =
               onboardingSteps[onboardingSteps.indexOf(currentStep) + 1]
             if (nextStep) {
               setCurrentStep(nextStep)
             } else {
               push(AppPath.Home)
+              analytics.trackEvent('Finished onboarding')
               updateUser({ finishedOnboardingAt: Date.now() })
             }
           }}
