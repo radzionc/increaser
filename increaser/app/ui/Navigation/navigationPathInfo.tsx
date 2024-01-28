@@ -1,5 +1,4 @@
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
-import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { HomeIcon } from '@lib/ui/icons/HomeIcon'
 import { ListIcon } from '@lib/ui/icons/ListIcon'
 import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
@@ -12,10 +11,6 @@ export const navigationPathInfo = {
   [AppPath.Home]: {
     name: 'Home',
     icon: <HomeIcon />,
-  },
-  [AppPath.Work]: {
-    name: 'Focus',
-    icon: <ClockIcon />,
   },
   [AppPath.Capacity]: {
     name: 'Manage time',
