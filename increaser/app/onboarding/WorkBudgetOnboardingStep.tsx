@@ -58,6 +58,11 @@ export const WorkBudgetOnboardingStep = () => {
   return (
     <OnboardingStepView>
       <VStack gap={40}>
+        <Text height="large">
+          Set your work budget by selecting the desired number of working hours
+          for weekdays and weekends. This ensures a balanced approach to
+          managing your time and commitments effectively.
+        </Text>
         <VStack style={{ maxWidth: 480 }} gap={60}>
           <VStack gap={28}>
             <WorkBudgetInput

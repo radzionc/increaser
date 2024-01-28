@@ -7,6 +7,7 @@ import { ProjectItem } from './ProjectItem'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
+import { Text } from '@lib/ui/text'
 
 export const ProjectsOnboardingStep = () => {
   const { activeProjects } = useProjects()
@@ -14,6 +15,12 @@ export const ProjectsOnboardingStep = () => {
   return (
     <OnboardingStepView isDisabled={isEmpty(activeProjects)}>
       <VStack gap={40}>
+        <Text height="large">
+          Begin by adding projects to track various work activities such as
+          studying, remote work, freelancing, business, and more. This step is
+          essential to effectively monitor and analyze your productivity across
+          different types of work.
+        </Text>
         <CreateProjectForm />
         {!isEmpty(activeProjects) && (
           <InputContainer as="div" style={{ gap: 8 }}>
