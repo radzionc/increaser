@@ -1,4 +1,4 @@
 import { makeAuthPage } from '@increaser/app/layout/makeAuthPage'
-import { ConfirmEmailAuthView } from '@lib/ui/auth/ConfirmEmailAuthView'
+import { EmailConfirmContent } from '../auth/components/EmailConfirmContent'
 
-export default makeAuthPage(() => <ConfirmEmailAuthView sender="increaser" />)
+export default makeAuthPage(EmailConfirmContent)
