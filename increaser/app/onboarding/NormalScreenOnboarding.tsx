@@ -1,26 +1,32 @@
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { OnboardingOverview } from './OnboardingOverview'
-import { CurrentOnboardingStep } from './CurrentOnboardingStep'
+import { OnboardingStepEducation } from './OnboardingStepEducation'
+import { OnboardingStepForm } from './OnboardingStepForm'
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr;
   height: 100%;
 
   > * {
     padding: 40px;
     overflow-y: auto;
 
-    &:last-child {
+    &:first-child {
       background: ${getColor('foreground')};
+    }
+
+    &:last-child {
+      border-left: 1px dashed ${getColor('mistExtra')};
     }
   }
 `
 
 export const NormalScreenOnboarding = () => (
   <Container>
-    <CurrentOnboardingStep />
     <OnboardingOverview />
+    <OnboardingStepForm />
+    <OnboardingStepEducation />
   </Container>
 )

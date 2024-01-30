@@ -12,7 +12,7 @@ export const onboardingSteps = [
   'publicProfile',
   'tasks',
 ] as const
-type OnboardingStep = (typeof onboardingSteps)[number]
+export type OnboardingStep = (typeof onboardingSteps)[number]
 
 export const onboardingStepTargetName: Record<OnboardingStep, string> = {
   projects: 'Add projects',

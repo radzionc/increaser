@@ -57,28 +57,39 @@ export const OnboardingOverview = () => {
   const { currentStep, setCurrentStep, completedSteps } = useOnboarding()
 
   return (
-    <VStack gap={4}>
-      {onboardingSteps.map((step) => {
-        const isCompleted = completedSteps.includes(step)
-        const isCurrent = currentStep === step
-        const isEnabled =
-          isCompleted || without(onboardingSteps, ...completedSteps)[0] === step
+    <VStack gap={20}>
+      <HStack alignItems="center" gap={8}>
+        <Text color="contrast" size={20} weight="bold">
+          Quick Setup{' '}
+        </Text>
+        <Text size={20} color="success" weight="bold">
+          {completedSteps.length} / {onboardingSteps.length}
+        </Text>
+      </HStack>
+      <VStack gap={4}>
+        {onboardingSteps.map((step) => {
+          const isCompleted = completedSteps.includes(step)
+          const isCurrent = currentStep === step
+          const isEnabled =
+            isCompleted ||
+            without(onboardingSteps, ...completedSteps)[0] === step
 
-        return (
-          <Container
-            isCurrent={isCurrent}
-            onClick={isEnabled ? () => setCurrentStep(step) : undefined}
-            isEnabled={isEnabled}
-          >
-            <CheckContainer isCompleted={isCompleted}>
-              <IconWrapper>
-                <CheckIcon />
-              </IconWrapper>
-            </CheckContainer>
-            <Text weight="semibold">{onboardingStepTargetName[step]}</Text>
-          </Container>
-        )
-      })}
+          return (
+            <Container
+              isCurrent={isCurrent}
+              onClick={isEnabled ? () => setCurrentStep(step) : undefined}
+              isEnabled={isEnabled}
+            >
+              <CheckContainer isCompleted={isCompleted}>
+                <IconWrapper>
+                  <CheckIcon />
+                </IconWrapper>
+              </CheckContainer>
+              <Text weight="semibold">{onboardingStepTargetName[step]}</Text>
+            </Container>
+          )
+        })}
+      </VStack>
     </VStack>
   )
 }
