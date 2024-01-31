@@ -16,6 +16,7 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { without } from '@lib/utils/array/without'
+import { OnboardingSection } from './OnboardingSection'
 
 const Container = styled(HStack)<{ isCurrent: boolean; isEnabled: boolean }>`
   color: ${matchColor('isCurrent', {
@@ -57,15 +58,16 @@ export const OnboardingOverview = () => {
   const { currentStep, setCurrentStep, completedSteps } = useOnboarding()
 
   return (
-    <VStack gap={20}>
-      <HStack alignItems="center" gap={8}>
-        <Text color="contrast" size={20} weight="bold">
-          Quick Setup{' '}
-        </Text>
-        <Text size={20} color="success" weight="bold">
-          {completedSteps.length} / {onboardingSteps.length}
-        </Text>
-      </HStack>
+    <OnboardingSection
+      title={
+        <HStack alignItems="center" gap={8}>
+          <Text>Quick Setup </Text>
+          <Text color="success">
+            {completedSteps.length} / {onboardingSteps.length}
+          </Text>
+        </HStack>
+      }
+    >
       <VStack gap={4}>
         {onboardingSteps.map((step) => {
           const isCompleted = completedSteps.includes(step)
@@ -90,6 +92,6 @@ export const OnboardingOverview = () => {
           )
         })}
       </VStack>
-    </VStack>
+    </OnboardingSection>
   )
 }

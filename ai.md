@@ -1,4 +1,4 @@
-dYou will be helping me with the tasks related to Increaser product. Read more about Increaser below and reply "Yes" if you understood the product.
+You will be helping me with the tasks related to Increaser product. Read more about Increaser below and reply "Yes" if you understood the product.
 
 The target audience for Increaser comprises knowledge workers who frequently use computers, such as programmers, designers, marketers, and engineers, as well as students. It is especially beneficial for remote workers, who often have greater control over their time and more flexibility to adopt practices that enhance productivity.
 

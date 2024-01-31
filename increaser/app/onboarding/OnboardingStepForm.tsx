@@ -1,5 +1,4 @@
 import { VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { onboardingStepTargetName, useOnboarding } from './OnboardingProvider'
 
@@ -12,11 +11,7 @@ import { ScheduleOnboardingStep } from './ScheduleOnboardingStep'
 import { DailyHabitsOnboardingStep } from './DailyHabitsOnboardingStep'
 import { PublicProfileOnboardingStep } from './PublicProfileOnboardingStep'
 import { TasksOnboardingStep } from './TasksOnboardingStep'
-
-const Container = styled(VStack)`
-  height: 100%;
-  gap: 40px;
-`
+import { OnboardingSection } from './OnboardingSection'
 
 const Content = styled(VStack)`
   flex: 1;
@@ -27,10 +22,7 @@ export const OnboardingStepForm = () => {
   const { currentStep } = useOnboarding()
 
   return (
-    <Container>
-      <Text color="contrast" size={20} weight="bold">
-        {onboardingStepTargetName[currentStep]}
-      </Text>
+    <OnboardingSection title={onboardingStepTargetName[currentStep]}>
       <Content>
         <Match
           value={currentStep}
@@ -44,6 +36,6 @@ export const OnboardingStepForm = () => {
         />
       </Content>
       <OnboardingPrimaryNavigation />
-    </Container>
+    </OnboardingSection>
   )
 }
