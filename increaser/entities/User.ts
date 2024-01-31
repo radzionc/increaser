@@ -25,6 +25,7 @@ export interface Task {
   id: string
   name: string
   isCompleted: boolean
+  deadlineAt: number
 }
 
 export type User = DayMoments & {
