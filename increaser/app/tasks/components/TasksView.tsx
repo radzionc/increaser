@@ -1,13 +1,13 @@
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { AddTask } from './AddTask'
 import { AddTaskButton } from './AddTaskButton'
-import { CurrentTaskProvider } from './CurrentTaskProvider'
-import { TaskItem } from './TaskItem'
+import { TasksList } from './TasksList'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
 export const TasksView = () => {
   const { tasks } = useAssertUserState()
@@ -28,18 +28,14 @@ export const TasksView = () => {
         </HStack>
       }
     >
-      <VStack gap={16}>
-        {tasks.map((task) => (
-          <CurrentTaskProvider value={task} key={task.id}>
-            <TaskItem />
-          </CurrentTaskProvider>
-        ))}
+      <SeparatedByLine gap={12}>
+        <TasksList />
         {isCreatingTask ? (
           <AddTask onFinish={stopCreatingTask} />
         ) : (
           <AddTaskButton onClick={startCreatingTask} />
         )}
-      </VStack>
+      </SeparatedByLine>
     </TitledSection>
   )
 }

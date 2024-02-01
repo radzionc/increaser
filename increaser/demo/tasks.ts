@@ -1,4 +1,5 @@
-import { Task } from '@increaser/entities/User'
+import { Task } from '@increaser/entities/Task'
+import { endOfDay } from 'date-fns'
 
 const tasks = [
   'Record a YouTube video',
@@ -14,5 +15,6 @@ export const getDemoTasks = (): Task[] => {
     name,
     startedAt,
     isCompleted: false,
+    deadlineAt: endOfDay(startedAt).getTime(),
   }))
 }

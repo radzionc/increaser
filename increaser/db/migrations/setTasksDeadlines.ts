@@ -3,9 +3,9 @@ import { tableName } from '../tableName'
 import { updateUser } from '../user'
 import { getPickParams } from '@lib/dynamodb/getPickParams'
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { Task } from '@increaser/entities/User'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { endOfDay } from 'date-fns'
+import { Task } from '@increaser/entities/Task'
 
 type OldUser = {
   id: string

@@ -6,6 +6,8 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { useCurrentTask } from './CurrentTaskProvider'
 import { ChecklistItem } from '@lib/ui/checklist/CheckListItem'
+import { HStack } from '@lib/ui/layout/Stack'
+import { ManageTaskDeadline } from './ManageTaskDeadline'
 
 export const TaskItem = () => {
   const task = useCurrentTask()
@@ -18,16 +20,19 @@ export const TaskItem = () => {
     <OnHoverAction
       actionPlacerStyles={{ right: 0 }}
       action={
-        <IconButton
-          title="Delete task"
-          kind="secondary"
-          icon={<TrashBinIcon />}
-          onClick={() => {
-            mutate({
-              tasks: tasks.filter((task) => task.id !== id),
-            })
-          }}
-        />
+        <HStack alignItems="center" gap={4}>
+          <ManageTaskDeadline />
+          <IconButton
+            kind="alert"
+            title="Delete task"
+            icon={<TrashBinIcon />}
+            onClick={() => {
+              mutate({
+                tasks: tasks.filter((task) => task.id !== id),
+              })
+            }}
+          />
+        </HStack>
       }
       render={() => (
         <ChecklistItem

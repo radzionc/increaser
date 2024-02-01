@@ -9,6 +9,7 @@ import {
   defaultWeekTimeAllocation,
 } from './WeekTimeAllocation'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
+import { Task } from './Task'
 
 export interface Set {
   start: number
@@ -19,15 +20,6 @@ export interface Set {
 interface AppSumo {
   code: string
 }
-
-export interface Task {
-  startedAt: number
-  id: string
-  name: string
-  isCompleted: boolean
-  deadlineAt: number
-}
-
 export type User = DayMoments & {
   id: string
   email: string

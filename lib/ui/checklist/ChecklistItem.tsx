@@ -70,7 +70,7 @@ export const ChecklistItem = ({
   const [showConfetti, setShowConfetti] = useState(false)
 
   return (
-    <Hoverable style={style} as="label">
+    <Hoverable verticalOffset={0} style={style} as="label">
       <ChecklistItemFrame>
         <Box isChecked={value}>{value && <CheckIcon />}</Box>
         {showConfetti && <Confetti x={20} y={-20} />}

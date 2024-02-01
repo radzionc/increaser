@@ -9,8 +9,8 @@ import { Box } from '@lib/ui/checklist/CheckListItem'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
-import { Task } from '@increaser/entities/User'
 import { endOfDay } from 'date-fns'
+import { Task } from '@increaser/entities/Task'
 
 interface TaskForm {
   name: string
