@@ -33,7 +33,7 @@ export const CheckYesterdayHabits = () => {
         </Text>
       }
       renderContent={() => (
-        <VStack gap={16}>
+        <VStack gap={4}>
           {habits.map((habit) => (
             <HabitItem
               date={toHabitDate(startOfYesterdayDate)}

@@ -12,6 +12,8 @@ export const getDeadlineType = ({
   deadlineAt,
   now,
 }: GetDeadlineTypeInput): DeadlineType => {
+  if (deadlineAt < now) return 'today'
+
   const todayEndsAt = endOfDay(now).getTime()
   if (deadlineAt <= todayEndsAt) return 'today'
 

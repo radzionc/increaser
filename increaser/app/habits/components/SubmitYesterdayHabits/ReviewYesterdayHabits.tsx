@@ -27,7 +27,7 @@ export const ReviewYesterdayHabits = () => {
         />
       }
     >
-      <VStack gap={16}>
+      <VStack gap={4}>
         {habits.map((habit) => (
           <HabitItem
             date={toHabitDate(startOfYesterdayDate)}
