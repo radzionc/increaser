@@ -1,13 +1,13 @@
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
-import { TitledSection } from '@lib/ui/Layout/TitledSection'
-import { HStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { AddTask } from './AddTask'
 import { AddTaskButton } from './AddTaskButton'
 import { TasksList } from './TasksList'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
+import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
+import { VStack } from '@lib/ui/layout/Stack'
+import { Text } from '@lib/ui/text'
 
 export const TasksView = () => {
   const { tasks } = useAssertUserState()
@@ -16,26 +16,18 @@ export const TasksView = () => {
     useBoolean(false)
 
   return (
-    <TitledSection
-      title={
-        <HStack gap={8}>
-          <Text color="regular">Tasks</Text>
-          {tasks.length > 0 && (
-            <Text color="supporting" as="span">
-              {tasks.filter((task) => task.isCompleted).length} / {tasks.length}
-            </Text>
-          )}
-        </HStack>
-      }
-    >
+    <VStack gap={20}>
+      <Text color="contrast" size={18} weight="semibold">
+        Tasks
+      </Text>
       <SeparatedByLine gap={12}>
-        <TasksList />
+        <NonEmptyOnly array={tasks} render={() => <TasksList />} />
         {isCreatingTask ? (
           <AddTask onFinish={stopCreatingTask} />
         ) : (
           <AddTaskButton onClick={startCreatingTask} />
         )}
       </SeparatedByLine>
-    </TitledSection>
+    </VStack>
   )
 }

@@ -7,7 +7,11 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskProvider } from './CurrentTaskProvider'
 import { TaskItem } from './TaskItem'
 import { Text } from '@lib/ui/text'
-import { DeadlineType, deadlineName } from '@increaser/entities/Task'
+import {
+  DeadlineType,
+  deadlineName,
+  deadlineTypes,
+} from '@increaser/entities/Task'
 
 export const TasksList = () => {
   const { tasks } = useAssertUserState()
@@ -22,19 +26,26 @@ export const TasksList = () => {
   )
 
   return (
-    <VStack gap={16}>
-      {Object.entries(groupedTasks).map(([deadlineType, tasks]) => (
-        <VStack gap={4} key={deadlineType}>
-          <Text weight="bold" size={14} color="supporting">
-            {deadlineName[deadlineType as DeadlineType].toUpperCase()}
-          </Text>
-          {tasks.map((task) => (
-            <CurrentTaskProvider value={task} key={task.id}>
-              <TaskItem />
-            </CurrentTaskProvider>
-          ))}
-        </VStack>
-      ))}
+    <VStack gap={8}>
+      {deadlineTypes.map((deadlineType) => {
+        const tasks = groupedTasks[deadlineType]
+        if (!tasks) {
+          return null
+        }
+
+        return (
+          <VStack gap={4} key={deadlineType}>
+            <Text weight="bold" size={12} color="supporting">
+              {deadlineName[deadlineType as DeadlineType].toUpperCase()}
+            </Text>
+            {tasks.map((task) => (
+              <CurrentTaskProvider value={task} key={task.id}>
+                <TaskItem />
+              </CurrentTaskProvider>
+            ))}
+          </VStack>
+        )
+      })}
     </VStack>
   )
 }
