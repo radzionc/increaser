@@ -5,15 +5,12 @@ import { getDeadlineType } from '@increaser/entities-utils/task/getDeadlineType'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 import { MenuOption, MenuOptionProps } from '@lib/ui/menu/MenuOption'
-import {
-  DeadlineType,
-  deadlineName,
-  deadlineTypes,
-} from '@increaser/entities/Task'
+import { DeadlineType, deadlineName } from '@increaser/entities/Task'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { Menu } from '@lib/ui/menu'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
 
 export const ManageTaskDeadline = () => {
   const { deadlineAt, id } = useCurrentTask()
@@ -50,7 +47,7 @@ export const ManageTaskDeadline = () => {
     <Menu
       title="Change deadline"
       renderContent={({ view, onClose }) => {
-        const options: MenuOptionProps[] = deadlineTypes.map(
+        const options: MenuOptionProps[] = getDeadlineTypes(Date.now()).map(
           (deadlineType) => ({
             text: deadlineName[deadlineType],
             onSelect: () => {
