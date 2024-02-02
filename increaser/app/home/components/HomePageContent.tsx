@@ -2,9 +2,7 @@ import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
 import { FocusSessionForm } from '@increaser/app/focus/components/FocusSessionForm'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import styled from 'styled-components'
-import { TasksView } from '@increaser/app/tasks/components/TasksView'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
@@ -57,9 +55,6 @@ export const HomePageContent = () => {
           </>
         )}
         <SubmitYesterdayHabits />
-        <Panel kind="secondary">
-          <TasksView />
-        </Panel>
       </VStack>
     </VStack>
   )

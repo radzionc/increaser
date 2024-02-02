@@ -9,8 +9,8 @@ import { Box } from '@lib/ui/checklist/CheckListItem'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
-import { endOfDay } from 'date-fns'
-import { Task } from '@increaser/entities/Task'
+import { DeadlineType, Task } from '@increaser/entities/Task'
+import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 
 interface TaskForm {
   name: string
@@ -29,7 +29,11 @@ const Input = styled.input`
   }
 `
 
-export const AddTask = ({ onFinish }: FinishableComponentProps) => {
+type AddTaskProps = FinishableComponentProps & {
+  deadlineType: DeadlineType
+}
+
+export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
   const { register, handleSubmit } = useForm<TaskForm>({
     mode: 'all',
     defaultValues: {
@@ -44,13 +48,12 @@ export const AddTask = ({ onFinish }: FinishableComponentProps) => {
 
   const createTask = ({ name }: TaskForm) => {
     const startedAt = Date.now()
-    const deadlineAt = endOfDay(startedAt).getTime()
     const task: Task = {
       name,
       id: getId(),
       isCompleted: false,
       startedAt,
-      deadlineAt,
+      deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
     }
     mutate({ tasks: [...tasks, task] })
     onFinish()

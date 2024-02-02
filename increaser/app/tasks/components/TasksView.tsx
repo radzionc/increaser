@@ -1,33 +1,47 @@
-import { useBoolean } from '@lib/ui/hooks/useBoolean'
+import { getDeadlineType } from '@increaser/entities-utils/task/getDeadlineType'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-
-import { AddTask } from './AddTask'
-import { AddTaskButton } from './AddTaskButton'
-import { TasksList } from './TasksList'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
-import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
+import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { groupItems } from '@lib/utils/array/groupItems'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { DeadlineType, deadlineName } from '@increaser/entities/Task'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
+import { CurrentTaskProvider } from './CurrentTaskProvider'
+import { TaskItem } from './TaskItem'
+import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
+import { CreateTask } from './CreateTask'
 
 export const TasksView = () => {
   const { tasks } = useAssertUserState()
 
-  const [isCreatingTask, { set: startCreatingTask, unset: stopCreatingTask }] =
-    useBoolean(false)
+  const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+
+  const groupedTasks = groupItems(tasks, (task) =>
+    getDeadlineType({
+      deadlineAt: task.deadlineAt,
+      now,
+    }),
+  )
+
+  const deadlineTypes = getDeadlineTypes(now)
 
   return (
-    <VStack gap={20}>
-      <Text color="contrast" size={18} weight="semibold">
-        Tasks
-      </Text>
-      <SeparatedByLine gap={12}>
-        <NonEmptyOnly array={tasks} render={() => <TasksList />} />
-        {isCreatingTask ? (
-          <AddTask onFinish={stopCreatingTask} />
-        ) : (
-          <AddTaskButton onClick={startCreatingTask} />
-        )}
-      </SeparatedByLine>
+    <VStack gap={40}>
+      {deadlineTypes.map((deadlineType) => {
+        return (
+          <VStack gap={4} key={deadlineType}>
+            <Text weight="semibold" size={12} color="supporting">
+              {deadlineName[deadlineType as DeadlineType].toUpperCase()}
+            </Text>
+            {groupedTasks[deadlineType]?.map((task) => (
+              <CurrentTaskProvider value={task} key={task.id}>
+                <TaskItem />
+              </CurrentTaskProvider>
+            ))}
+            <CreateTask deadlineType={deadlineType} />
+          </VStack>
+        )
+      })}
     </VStack>
   )
 }

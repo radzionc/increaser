@@ -6,6 +6,7 @@ import { TableIcon } from '@lib/ui/icons/TableIcon'
 import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
@@ -35,5 +36,9 @@ export const navigationPathInfo = {
   [AppPath.Community]: {
     name: 'Community',
     icon: <GlobeIcon />,
+  },
+  [AppPath.Tasks]: {
+    name: 'Tasks',
+    icon: <CheckSquareIcon />,
   },
 } as const

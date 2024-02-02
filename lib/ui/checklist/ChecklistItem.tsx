@@ -28,7 +28,7 @@ export const Box = styled.div<{ isChecked: boolean }>`
   ${centerContent};
 
   border-radius: 4px;
-  border: 2px solid ${getColor('textShy')};
+  border: 1px solid ${getColor('textSupporting')};
   color: ${getColor('background')};
 
   ${transition}

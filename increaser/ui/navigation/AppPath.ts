@@ -1,5 +1,6 @@
 export enum AppPath {
   OAuth = '/oauth',
+  Tasks = '/tasks',
   EmailAuth = '/email-auth',
   Home = '/',
   Projects = '/projects',
