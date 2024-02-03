@@ -10,7 +10,6 @@ import { CurrentTaskProvider } from './CurrentTaskProvider'
 import { TaskItem } from './TaskItem'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
 import { CreateTask } from './CreateTask'
-import { TasksDeadlinesOverview } from './TasksDeadlinesOverview'
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
@@ -28,8 +27,7 @@ export const TasksToDo = () => {
   const deadlineTypes = getDeadlineTypes(now)
 
   return (
-    <VStack gap={40}>
-      <TasksDeadlinesOverview />
+    <>
       {deadlineTypes.map((deadlineType) => {
         return (
           <VStack gap={4} key={deadlineType}>
@@ -45,6 +43,6 @@ export const TasksToDo = () => {
           </VStack>
         )
       })}
-    </VStack>
+    </>
   )
 }

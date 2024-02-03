@@ -9,14 +9,16 @@ import {
   TasksViewProvider,
   TasksViewSelector,
 } from './TasksView'
+import { TasksDeadlinesOverview } from './TasksDeadlinesOverview'
 
 export const TasksPage = () => {
   return (
     <FixedWidthContent>
       <TasksViewProvider>
         <PageTitle documentTitle={`🧘‍♀️ Habits`} title={<TasksViewSelector />} />
-        <VStack style={{ maxWidth: 520 }}>
+        <VStack gap={40} style={{ maxWidth: 520 }}>
           <UserStateOnly>
+            <TasksDeadlinesOverview />
             <RenderTasksView
               todo={() => <TasksToDo />}
               done={() => <TasksDone />}
