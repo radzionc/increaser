@@ -36,7 +36,7 @@ export const WeekDeadlinesOverview = ({
   const todayStartedAt = useStartOfDay()
 
   return (
-    <VStack gap={16}>
+    <VStack gap={12}>
       <VStack gap={4}>
         <HStack alignItems="center" gap={8}>
           <Text color="contrast" weight="semibold" size={14}>
