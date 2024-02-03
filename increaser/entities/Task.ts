@@ -20,3 +20,5 @@ export const deadlineName: Record<DeadlineType, string> = {
   thisWeek: 'This week',
   nextWeek: 'Next week',
 }
+
+export type TasksWeek = 'thisWeek' | 'nextWeek'

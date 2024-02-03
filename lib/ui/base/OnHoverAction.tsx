@@ -6,7 +6,7 @@ import { ElementSize } from '../hooks/useElementSize'
 import { transition } from '../css/transition'
 
 interface OnHoverActionRenderParams<T extends React.CSSProperties> {
-  actionSize: ElementSize
+  actionSize: ElementSize | null
   actionPlacerStyles: T
 }
 
@@ -43,11 +43,10 @@ export function OnHoverAction<T extends React.CSSProperties>({
       <ElementSizeAware
         render={({ setElement, size }) => (
           <>
-            {size &&
-              render({
-                actionPlacerStyles,
-                actionSize: size,
-              })}
+            {render({
+              actionPlacerStyles,
+              actionSize: size,
+            })}
             <ActionPlacer ref={setElement} style={actionPlacerStyles}>
               {action}
             </ActionPlacer>

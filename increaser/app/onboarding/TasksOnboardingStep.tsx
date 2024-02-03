@@ -1,5 +1,5 @@
-import { TasksView } from '../tasks/components/TasksView'
+import { TasksToDo } from '../tasks/components/TasksToDo'
 
 export const TasksOnboardingStep = () => {
-  return <TasksView />
+  return <TasksToDo />
 }

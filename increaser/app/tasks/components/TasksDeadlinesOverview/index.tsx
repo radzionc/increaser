@@ -14,7 +14,7 @@ export const TasksDeadlinesOverview = () => {
   )
 
   return (
-    <UniformColumnGrid maxChildrenWidth={240} minChildrenWidth={160} gap={20}>
+    <UniformColumnGrid minChildrenWidth={160} gap={20}>
       <WeekDeadlinesOverview
         name="This week"
         tasks={thisWeekTasks}

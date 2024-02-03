@@ -151,10 +151,12 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
           >
             {name}
           </Text>
-          <UniformColumnGrid style={actionSize} gap={0}>
-            <div />
-            <Center>{favourite && star}</Center>
-          </UniformColumnGrid>
+          {actionSize && (
+            <UniformColumnGrid style={actionSize} gap={0}>
+              <div />
+              <Center>{favourite && star}</Center>
+            </UniformColumnGrid>
+          )}
         </Container>
       )}
     />
