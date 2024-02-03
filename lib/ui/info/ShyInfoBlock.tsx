@@ -5,6 +5,7 @@ import { InfoIcon } from '../icons/InfoIcon'
 import { HStack } from '../layout/Stack'
 import { ComponentWithChildrenProps } from '../props'
 import { getColor } from '../theme/getters'
+import { verticalPadding } from '../css/verticalPadding'
 
 const Container = styled.div`
   ${borderRadius.s};
@@ -17,7 +18,7 @@ const Container = styled.div`
 const IconContainer = styled(IconWrapper)`
   color: ${getColor('textSupporting')};
   font-size: 18px;
-  margin-top: 4px;
+  ${verticalPadding(2)};
 `
 
 export const ShyInfoBlock = ({ children }: ComponentWithChildrenProps) => {

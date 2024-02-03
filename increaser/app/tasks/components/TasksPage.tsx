@@ -15,7 +15,7 @@ export const TasksPage = () => {
   return (
     <FixedWidthContent>
       <TasksViewProvider>
-        <PageTitle documentTitle={`🧘‍♀️ Habits`} title={<TasksViewSelector />} />
+        <PageTitle documentTitle={`✅ Tasks`} title={<TasksViewSelector />} />
         <VStack gap={40} style={{ maxWidth: 520 }}>
           <UserStateOnly>
             <TasksDeadlinesOverview />
