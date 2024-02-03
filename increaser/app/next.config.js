@@ -2,6 +2,7 @@
 // eslint-disable-next-line no-undef, @typescript-eslint/no-var-requires
 const withPWA = require('next-pwa')({
   dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
 })
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,7 +12,6 @@ const nextConfig = {
     styledComponents: true,
   },
   output: 'export',
-  swcMinify: false,
   transpilePackages: ['@increaser/ui'],
 }
 

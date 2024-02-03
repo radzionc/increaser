@@ -14,7 +14,6 @@ import { TasksDeadlinesOverview } from './TasksDeadlinesOverview'
 
 export const TasksView = () => {
   const { tasks } = useAssertUserState()
-
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
 
   const groupedTasks = groupItems(tasks, (task) =>

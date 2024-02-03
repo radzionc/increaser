@@ -18,7 +18,6 @@ export const enhanceProject = (
 
   const monthStartedAt = startOfMonth(new Date()).getTime()
   const currentMonthSets = getSetsStartedAfter(projectSets, monthStartedAt)
-  console.log(project.name, monthStartedAt)
 
   const weekStartedAt = getWeekStartedAt(Date.now())
   const currentWeekSets = getSetsStartedAfter(projectSets, weekStartedAt)

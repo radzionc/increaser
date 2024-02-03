@@ -20,10 +20,14 @@ export const getDeadlineType = ({
   const tomorrowEndsAt = todayEndsAt + convertDuration(1, 'd', 'ms')
   if (deadlineAt <= tomorrowEndsAt) return 'tomorrow'
 
-  const weekday = getWeekday(new Date(now))
+  const weekdayIndex = getWeekday(new Date(now))
   const thisWeekEndsAt =
     todayEndsAt +
-    convertDuration(convertDuration(1, 'w', 'd') - weekday, 'd', 'ms')
+    convertDuration(
+      convertDuration(1, 'w', 'd') - (weekdayIndex + 1),
+      'd',
+      'ms',
+    )
   if (deadlineAt <= thisWeekEndsAt) return 'thisWeek'
 
   return 'nextWeek'
