@@ -51,7 +51,6 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
     const task: Task = {
       name,
       id: getId(),
-      isCompleted: false,
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
     }

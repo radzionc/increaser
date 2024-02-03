@@ -1,6 +1,6 @@
 import { getUser, updateUser } from '@increaser/db/user'
+import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
-import { startOfDay } from 'date-fns'
 
 export const organizeTasks = async (userId: string) => {
   const { tasks: oldTasks, timeZone } = await getUser(userId, [
@@ -8,14 +8,12 @@ export const organizeTasks = async (userId: string) => {
     'timeZone',
   ])
 
-  const todayStartedAt = inTimeZone(startOfDay(Date.now()).getTime(), timeZone)
+  const weekStartedAt = inTimeZone(getWeekStartedAt(Date.now()), timeZone)
 
   const tasks = oldTasks.filter((task) => {
-    if (task.startedAt >= todayStartedAt) {
-      return true
-    }
+    if (!task.completedAt) return true
 
-    return !task.isCompleted
+    return task.completedAt >= weekStartedAt
   })
 
   if (tasks.length !== oldTasks.length) {

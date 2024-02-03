@@ -11,7 +11,7 @@ import { ManageTaskDeadline } from './ManageTaskDeadline'
 
 export const TaskItem = () => {
   const task = useCurrentTask()
-  const { id, name, isCompleted } = task
+  const { id, name, completedAt } = task
 
   const { tasks } = useAssertUserState()
   const { mutate } = useUpdateUserMutation()
@@ -44,14 +44,14 @@ export const TaskItem = () => {
                 if (task.id === id) {
                   return {
                     ...task,
-                    isCompleted: !isCompleted,
+                    completedAt: task.completedAt ? undefined : Date.now(),
                   }
                 }
                 return task
               }),
             })
           }}
-          value={isCompleted}
+          value={!!completedAt}
           name={name}
         />
       )}
