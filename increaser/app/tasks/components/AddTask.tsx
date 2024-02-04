@@ -5,12 +5,12 @@ import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import styled from 'styled-components'
-import { Box } from '@lib/ui/checklist/CheckListItem'
 import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
+import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 
 interface TaskForm {
   name: string
@@ -67,7 +67,7 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
         handleSubmit(createTask),
       )}
     >
-      <Box isChecked={false} />
+      <CheckStatus value={false} />
       <Input
         placeholder="Task name"
         autoFocus
