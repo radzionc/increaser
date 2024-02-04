@@ -14,11 +14,26 @@ import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
 import { transition } from '@lib/ui/css/transition'
 import { getColor } from '@lib/ui/theme/getters'
+import { cropText } from '@lib/ui/css/cropText'
+
+const Actions = styled(HStack)`
+  gap: 4px;
+  align-items: center;
+  opacity: 1;
+
+  @media (hover: hover) and (pointer: fine) {
+    opacity: 0;
+  }
+`
 
 const Container = styled(HStack)`
   width: 100%;
   align-items: center;
   gap: 8px;
+
+  &:hover ${Actions} {
+    opacity: 1;
+  }
 `
 
 const Check = styled(CheckStatus)``
@@ -26,6 +41,8 @@ const Check = styled(CheckStatus)``
 const Content = styled(ChecklistItemFrame)`
   ${interactive};
   ${transition};
+  overflow: hidden;
+
   &:hover {
     color: ${getColor('contrast')};
   }
@@ -33,6 +50,11 @@ const Content = styled(ChecklistItemFrame)`
   &:hover ${Check} {
     border-color: ${getColor('contrast')};
   }
+`
+
+const TaskName = styled(Text)`
+  ${cropText};
+  width: 100%;
 `
 
 export const TaskItem = () => {
@@ -48,7 +70,7 @@ export const TaskItem = () => {
     <Container>
       <Content as="label">
         <Check value={value} />
-        <Text>{name}</Text>
+        <TaskName>{name}</TaskName>
         <InvisibleHTMLCheckbox
           value={value}
           onChange={() => {
@@ -66,7 +88,7 @@ export const TaskItem = () => {
           }}
         />
       </Content>
-      <HStack alignItems="center" gap={4}>
+      <Actions>
         <ManageTaskDeadline />
         <IconButton
           kind="alert"
@@ -78,7 +100,7 @@ export const TaskItem = () => {
             })
           }}
         />
-      </HStack>
+      </Actions>
     </Container>
   )
 }
