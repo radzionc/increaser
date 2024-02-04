@@ -8,7 +8,9 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 export const TasksDone = () => {
   const { tasks } = useAssertUserState()
 
-  const completedTasks = tasks.filter((task) => !!task.completedAt)
+  const completedTasks = Object.values(tasks).filter(
+    (task) => !!task.completedAt,
+  )
   return (
     <VStack gap={20}>
       <ShyInfoBlock>

@@ -29,7 +29,7 @@ export type User = DayMoments & {
   registrationDate: number
   projects: Project[]
   habits: Record<string, Habit>
-  tasks: Task[]
+  tasks: Record<string, Task>
   freeTrialEnd: number
 
   weekTimeAllocation: WeekTimeAllocation
@@ -92,7 +92,7 @@ export const userDefaultFields: Pick<
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
-  tasks: [],
+  tasks: {},
   projects: [],
   habits: {},
   weekTimeAllocation: defaultWeekTimeAllocation,

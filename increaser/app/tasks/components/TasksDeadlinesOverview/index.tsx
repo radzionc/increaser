@@ -17,8 +17,9 @@ export const TasksDeadlinesOverview = () => {
   const weekStartedAt = useStartOfWeek()
   const nextWeekStartsAt = weekStartedAt + convertDuration(1, 'w', 'ms')
   const { tasks } = useAssertUserState()
-  const [thisWeekTasks, nextWeekTasks] = splitBy(tasks, (task) =>
-    task.deadlineAt > nextWeekStartsAt ? 1 : 0,
+  const [thisWeekTasks, nextWeekTasks] = splitBy(
+    Object.values(tasks),
+    (task) => (task.deadlineAt > nextWeekStartsAt ? 1 : 0),
   )
 
   return (

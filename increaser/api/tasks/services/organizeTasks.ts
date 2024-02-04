@@ -1,4 +1,5 @@
 import { getUser, updateUser } from '@increaser/db/user'
+import { recordFilter } from '@lib/utils/record/recordFilter'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 
@@ -10,10 +11,10 @@ export const organizeTasks = async (userId: string) => {
 
   const weekStartedAt = inTimeZone(getWeekStartedAt(Date.now()), timeZone)
 
-  const tasks = oldTasks.filter((task) => {
-    if (!task.completedAt) return true
+  const tasks = recordFilter(oldTasks, ({ value }) => {
+    if (!value.completedAt) return true
 
-    return task.completedAt >= weekStartedAt
+    return value.completedAt >= weekStartedAt
   })
 
   if (tasks.length !== oldTasks.length) {

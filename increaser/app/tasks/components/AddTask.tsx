@@ -5,12 +5,11 @@ import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import styled from 'styled-components'
-import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
+import { useCreateTaskMutation } from '../api/useCreateTaskMutation'
 
 interface TaskForm {
   name: string
@@ -41,8 +40,7 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
     },
   })
 
-  const { tasks } = useAssertUserState()
-  const { mutate } = useUpdateUserMutation()
+  const { mutate } = useCreateTaskMutation()
 
   useKey('Escape', onFinish)
 
@@ -54,7 +52,7 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
     }
-    mutate({ tasks: [...tasks, task] })
+    mutate(task)
     onFinish()
   }
 

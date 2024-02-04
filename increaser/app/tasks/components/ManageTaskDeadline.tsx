@@ -3,17 +3,15 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 import { MenuOption, MenuOptionProps } from '@lib/ui/menu/MenuOption'
 import { DeadlineType, deadlineName } from '@increaser/entities/Task'
-import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { Menu } from '@lib/ui/menu'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
+import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
 
 export const ManageTaskDeadline = () => {
   const { id } = useCurrentTask()
-  const { tasks } = useAssertUserState()
 
-  const { mutate: updateUser } = useUpdateUserMutation()
+  const { mutate } = useUpdateTaskMutation()
 
   const changeDeadline = (deadlineType: DeadlineType) => {
     const deadlineAt = getDeadlineAt({
@@ -21,15 +19,11 @@ export const ManageTaskDeadline = () => {
       deadlineType,
     })
 
-    updateUser({
-      tasks: tasks.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              deadlineAt,
-            }
-          : task,
-      ),
+    mutate({
+      id,
+      fields: {
+        deadlineAt,
+      },
     })
   }
 

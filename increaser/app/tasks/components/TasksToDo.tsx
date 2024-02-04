@@ -16,7 +16,7 @@ export const TasksToDo = () => {
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
 
   const groupedTasks = groupItems(
-    tasks.filter((task) => !task.completedAt),
+    Object.values(tasks).filter((task) => !task.completedAt),
     (task) =>
       getDeadlineType({
         deadlineAt: task.deadlineAt,

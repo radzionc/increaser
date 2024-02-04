@@ -1,7 +1,5 @@
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { useCurrentTask } from './CurrentTaskProvider'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -15,6 +13,8 @@ import { interactive } from '@lib/ui/css/interactive'
 import { transition } from '@lib/ui/css/transition'
 import { getColor } from '@lib/ui/theme/getters'
 import { cropText } from '@lib/ui/css/cropText'
+import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
+import { useDeleteTaskMutation } from '../api/useDeleteHabitMutation'
 
 const Actions = styled(HStack)`
   gap: 4px;
@@ -61,8 +61,8 @@ export const TaskItem = () => {
   const task = useCurrentTask()
   const { id, name, completedAt } = task
 
-  const { tasks } = useAssertUserState()
-  const { mutate } = useUpdateUserMutation()
+  const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: deleteTask } = useDeleteTaskMutation()
 
   const value = !!completedAt
 
@@ -74,16 +74,11 @@ export const TaskItem = () => {
         <InvisibleHTMLCheckbox
           value={value}
           onChange={() => {
-            mutate({
-              tasks: tasks.map((task) => {
-                if (task.id === id) {
-                  return {
-                    ...task,
-                    completedAt: task.completedAt ? undefined : Date.now(),
-                  }
-                }
-                return task
-              }),
+            updateTask({
+              id: task.id,
+              fields: {
+                completedAt: task.completedAt ? undefined : Date.now(),
+              },
             })
           }}
         />
@@ -95,8 +90,8 @@ export const TaskItem = () => {
           title="Delete task"
           icon={<TrashBinIcon />}
           onClick={() => {
-            mutate({
-              tasks: tasks.filter((task) => task.id !== id),
+            deleteTask({
+              id,
             })
           }}
         />
