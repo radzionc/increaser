@@ -66,7 +66,7 @@ export const TaskItem = () => {
               updateTask({
                 id: task.id,
                 fields: {
-                  completedAt: task.completedAt ? undefined : Date.now(),
+                  completedAt: task.completedAt ? null : Date.now(),
                 },
               })
             }}

@@ -2,7 +2,7 @@ export interface Task {
   startedAt: number
   id: string
   name: string
-  completedAt?: number
+  completedAt?: number | null
   deadlineAt: number
 }
 
