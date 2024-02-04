@@ -3,13 +3,18 @@ import { centerContent } from '../css/centerContent'
 import { getColor } from '../theme/getters'
 import { transition } from '../css/transition'
 import { CheckIcon } from '../icons/CheckIcon'
-import { UIComponentProps } from '../props'
+import { ComponentWithChildrenProps, UIComponentProps } from '../props'
+import React from 'react'
+import { interactive } from '../css/interactive'
+import { getHoverVariant } from '../theme/getHoverVariant'
 
 type CheckStatusProps = UIComponentProps & {
   value: boolean
-}
+  as?: React.ElementType
+  isInteractive?: boolean
+} & Partial<ComponentWithChildrenProps>
 
-const Container = styled.div<{ isChecked: boolean }>`
+const Container = styled.div<{ isChecked: boolean; isInteractive?: boolean }>`
   width: 100%;
   aspect-ratio: 1/1;
 
@@ -27,12 +32,30 @@ const Container = styled.div<{ isChecked: boolean }>`
       background: ${getColor('primary')};
       border-color: ${getColor('primary')};
     `};
+
+  ${({ isInteractive, isChecked }) =>
+    isInteractive &&
+    css`
+      ${interactive};
+      &:hover {
+        background: ${isChecked ? getColor('primary') : getColor('mist')};
+        border-color: ${isChecked
+          ? getHoverVariant('primary')
+          : getColor('contrast')};
+      }
+    `};
 `
 
-export const CheckStatus = ({ value, ...rest }: CheckStatusProps) => {
+export const CheckStatus = ({
+  value,
+  children,
+  isInteractive = false,
+  ...rest
+}: CheckStatusProps) => {
   return (
-    <Container {...rest} isChecked={value}>
+    <Container {...rest} isInteractive={isInteractive} isChecked={value}>
       {value && <CheckIcon />}
+      {children}
     </Container>
   )
 }

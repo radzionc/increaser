@@ -18,7 +18,7 @@ export const TasksDone = () => {
           ? `Tasks you've completed will be shown here. Keep up the good work!`
           : 'Completed tasks automatically clear each week, offering a fresh start and organized view.'}
       </ShyInfoBlock>
-      <VStack gap={4}>
+      <VStack>
         {completedTasks.map((task) => (
           <CurrentTaskProvider value={task} key={task.id}>
             <TaskItem />

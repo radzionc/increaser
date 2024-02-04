@@ -30,7 +30,7 @@ export const TasksToDo = () => {
     <>
       {deadlineTypes.map((deadlineType) => {
         return (
-          <VStack gap={4} key={deadlineType}>
+          <VStack key={deadlineType}>
             <Text weight="semibold" size={12} color="supporting">
               {deadlineName[deadlineType as DeadlineType].toUpperCase()}
             </Text>

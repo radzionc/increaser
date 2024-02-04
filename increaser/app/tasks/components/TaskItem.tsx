@@ -10,8 +10,6 @@ import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { Text } from '@lib/ui/text'
 import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
-import { transition } from '@lib/ui/css/transition'
-import { getColor } from '@lib/ui/theme/getters'
 import { cropText } from '@lib/ui/css/cropText'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
 import { useDeleteTaskMutation } from '../api/useDeleteHabitMutation'
@@ -36,20 +34,12 @@ const Container = styled(HStack)`
   }
 `
 
-const Check = styled(CheckStatus)``
+const Check = styled(CheckStatus)`
+  ${interactive};
+`
 
 const Content = styled(ChecklistItemFrame)`
-  ${interactive};
-  ${transition};
   overflow: hidden;
-
-  &:hover {
-    color: ${getColor('contrast')};
-  }
-
-  &:hover ${Check} {
-    border-color: ${getColor('contrast')};
-  }
 `
 
 const TaskName = styled(Text)`
@@ -68,20 +58,21 @@ export const TaskItem = () => {
 
   return (
     <Container>
-      <Content as="label">
-        <Check value={value} />
+      <Content>
+        <Check isInteractive forwardedAs="label" value={value}>
+          <InvisibleHTMLCheckbox
+            value={value}
+            onChange={() => {
+              updateTask({
+                id: task.id,
+                fields: {
+                  completedAt: task.completedAt ? undefined : Date.now(),
+                },
+              })
+            }}
+          />
+        </Check>
         <TaskName>{name}</TaskName>
-        <InvisibleHTMLCheckbox
-          value={value}
-          onChange={() => {
-            updateTask({
-              id: task.id,
-              fields: {
-                completedAt: task.completedAt ? undefined : Date.now(),
-              },
-            })
-          }}
-        />
       </Content>
       <Actions>
         <ManageTaskDeadline />
