@@ -30,16 +30,18 @@ export const TasksToDo = () => {
     <>
       {deadlineTypes.map((deadlineType) => {
         return (
-          <VStack key={deadlineType}>
+          <VStack gap={4} key={deadlineType}>
             <Text weight="semibold" size={12} color="supporting">
               {deadlineName[deadlineType as DeadlineType].toUpperCase()}
             </Text>
-            {groupedTasks[deadlineType]?.map((task) => (
-              <CurrentTaskProvider value={task} key={task.id}>
-                <TaskItem />
-              </CurrentTaskProvider>
-            ))}
-            <CreateTask deadlineType={deadlineType} />
+            <VStack>
+              {groupedTasks[deadlineType]?.map((task) => (
+                <CurrentTaskProvider value={task} key={task.id}>
+                  <TaskItem />
+                </CurrentTaskProvider>
+              ))}
+              <CreateTask deadlineType={deadlineType} />
+            </VStack>
           </VStack>
         )
       })}

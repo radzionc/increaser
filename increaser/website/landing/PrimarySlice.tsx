@@ -18,7 +18,7 @@ export const PrimarySlice = () => (
         title={
           <>
             From Chaos to Clarity
-            <br /> Transforms Your Workday
+            <br /> Transform Your Workday
             <br /> into Productive Bliss
           </>
         }

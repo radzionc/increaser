@@ -5,11 +5,11 @@ import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import styled from 'styled-components'
-import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { useCreateTaskMutation } from '../api/useCreateTaskMutation'
+import { TaskItemFrame } from './TaskItemFrame'
 
 interface TaskForm {
   name: string
@@ -19,6 +19,7 @@ const Input = styled.input`
   background: transparent;
   border: none;
   height: 100%;
+  margin: 0;
   width: 100%;
   outline: none;
   color: ${({ theme }) => theme.colors.text.toCssValue()};
@@ -57,7 +58,7 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
   }
 
   return (
-    <ChecklistItemFrame
+    <TaskItemFrame
       as="form"
       style={{ width: '100%' }}
       onBlur={handleSubmit(createTask, onFinish)}
@@ -71,6 +72,6 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
         autoFocus
         {...register('name', { required: true })}
       />
-    </ChecklistItemFrame>
+    </TaskItemFrame>
   )
 }
