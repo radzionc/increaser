@@ -13,7 +13,7 @@ export const EditableTaskName = () => {
 
     const timeout = setTimeout(() => {
       updateTask({ id: task.id, fields: { name: value } })
-    }, 200)
+    }, 500)
 
     return () => clearTimeout(timeout)
   })
