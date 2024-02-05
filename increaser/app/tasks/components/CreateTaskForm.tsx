@@ -47,20 +47,22 @@ export const CreateTaskForm = ({
   }
 
   return (
-    <TaskItemFrame
-      as="form"
-      style={{ width: '100%' }}
-      onBlur={handleSubmit(createTask, onFinish)}
-      onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(
-        handleSubmit(createTask),
-      )}
-    >
-      <CheckStatus value={false} />
-      <TaskNameInput
-        placeholder="Task name"
-        autoFocus
-        {...register('name', { required: true })}
-      />
-    </TaskItemFrame>
+    <div>
+      <TaskItemFrame
+        as="form"
+        onBlur={handleSubmit(createTask, onFinish)}
+        onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(
+          handleSubmit(createTask),
+        )}
+      >
+        <CheckStatus value={false} />
+        <TaskNameInput
+          placeholder="Task name"
+          autoFocus
+          autoComplete="off"
+          {...register('name', { required: true })}
+        />
+      </TaskItemFrame>
+    </div>
   )
 }

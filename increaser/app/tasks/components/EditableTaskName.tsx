@@ -22,6 +22,7 @@ export const EditableTaskName = () => {
 
   return (
     <TaskNameInput
+      autoComplete="off"
       onBlur={() => updateTask({ id: task.id, fields: { name: value } })}
       value={value}
       onChange={(e) => setValue(e.target.value)}

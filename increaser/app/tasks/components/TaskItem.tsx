@@ -10,15 +10,13 @@ import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
 import { useDeleteTaskMutation } from '../api/useDeleteHabitMutation'
-import { TaskItemFrame, taskItemMinHeight } from './TaskItemFrame'
+import { TaskItemFrame } from './TaskItemFrame'
 import { EditableTaskName } from './EditableTaskName'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const Actions = styled(HStack)`
   gap: 4px;
   align-items: center;
   opacity: 1;
-  height: ${toSizeUnit(taskItemMinHeight)};
 
   @media (hover: hover) and (pointer: fine) {
     opacity: 0;
@@ -28,6 +26,7 @@ const Actions = styled(HStack)`
 const Container = styled(HStack)`
   width: 100%;
   gap: 8px;
+  align-items: center;
 
   &:hover ${Actions} {
     opacity: 1;
