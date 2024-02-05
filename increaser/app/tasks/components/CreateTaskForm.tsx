@@ -4,36 +4,25 @@ import { useKey } from 'react-use'
 import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import styled from 'styled-components'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { useCreateTaskMutation } from '../api/useCreateTaskMutation'
 import { TaskItemFrame } from './TaskItemFrame'
+import { TaskNameInput } from './TaskNameInput'
 
 interface TaskForm {
   name: string
 }
 
-const Input = styled.input`
-  background: transparent;
-  border: none;
-  height: 100%;
-  margin: 0;
-  width: 100%;
-  outline: none;
-  color: ${({ theme }) => theme.colors.text.toCssValue()};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.textShy.toCssValue()};
-  }
-`
-
-type AddTaskProps = FinishableComponentProps & {
+type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
 }
 
-export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
+export const CreateTaskForm = ({
+  onFinish,
+  deadlineType,
+}: CreateTaskFormProps) => {
   const { register, handleSubmit } = useForm<TaskForm>({
     mode: 'all',
     defaultValues: {
@@ -67,7 +56,7 @@ export const AddTask = ({ onFinish, deadlineType }: AddTaskProps) => {
       )}
     >
       <CheckStatus value={false} />
-      <Input
+      <TaskNameInput
         placeholder="Task name"
         autoFocus
         {...register('name', { required: true })}
