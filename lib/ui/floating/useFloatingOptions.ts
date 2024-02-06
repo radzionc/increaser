@@ -13,7 +13,7 @@ import { useRef, useState } from 'react'
 import { toSizeUnit } from '../css/toSizeUnit'
 
 interface FloatingOptionsParams {
-  selectedIndex: number
+  selectedIndex: number | null
   floatingOptionsWidthSameAsOpener?: boolean
 }
 

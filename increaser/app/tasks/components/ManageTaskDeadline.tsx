@@ -5,11 +5,11 @@ import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { getDeadlineType } from '@increaser/entities-utils/task/getDeadlineType'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { Text } from '@lib/ui/text'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import styled from 'styled-components'
+import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 
 const IconContainer = styled(IconWrapper)`
   font-size: 18px;
@@ -22,10 +22,11 @@ export const ManageTaskDeadline = () => {
   const { mutate } = useUpdateTaskMutation()
 
   const now = useRhythmicRerender(1000)
-  const value = getDeadlineType({
+  const deadlineStatus = getDeadlineStatus({
     now,
     deadlineAt,
   })
+  const value = deadlineStatus === 'overdue' ? null : deadlineStatus
 
   const changeDeadline = (deadlineType: DeadlineType) => {
     const deadlineAt = getDeadlineAt({

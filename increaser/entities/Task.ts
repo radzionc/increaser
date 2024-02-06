@@ -13,12 +13,12 @@ export const deadlineTypes = [
   'nextWeek',
 ] as const
 export type DeadlineType = (typeof deadlineTypes)[number]
+export type DeadlineStatus = 'overdue' | DeadlineType
 
-export const deadlineName: Record<DeadlineType, string> = {
+export const deadlineName: Record<DeadlineStatus, string> = {
+  overdue: 'Overdue',
   today: 'Today',
   tomorrow: 'Tomorrow',
   thisWeek: 'This week',
   nextWeek: 'Next week',
 }
-
-export type TasksWeek = 'thisWeek' | 'nextWeek'

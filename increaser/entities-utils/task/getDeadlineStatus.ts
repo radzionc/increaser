@@ -1,18 +1,18 @@
-import { DeadlineType } from '@increaser/entities/Task'
+import { DeadlineStatus } from '@increaser/entities/Task'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getWeekday } from '@lib/utils/time/getWeekday'
 import { endOfDay } from 'date-fns'
 
-type GetDeadlineTypeInput = {
+type GetDeadlineStatusInput = {
   now: number
   deadlineAt: number
 }
 
-export const getDeadlineType = ({
+export const getDeadlineStatus = ({
   deadlineAt,
   now,
-}: GetDeadlineTypeInput): DeadlineType => {
-  if (deadlineAt < now) return 'today'
+}: GetDeadlineStatusInput): DeadlineStatus => {
+  if (deadlineAt < now) return 'overdue'
 
   const todayEndsAt = endOfDay(now).getTime()
   if (deadlineAt <= todayEndsAt) return 'today'
