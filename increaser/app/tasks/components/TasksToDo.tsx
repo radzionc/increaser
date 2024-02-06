@@ -15,6 +15,8 @@ import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineType
 import { CreateTask } from './CreateTask'
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
+import { order } from '@lib/utils/array/order'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
@@ -37,6 +39,12 @@ export const TasksToDo = () => {
   return (
     <>
       {groups.map((status) => {
+        const tasks = order(
+          groupedTasks[status] || [],
+          (task) => task.order,
+          'asc',
+        )
+
         return (
           <VStack gap={4} key={status}>
             <Text
@@ -47,12 +55,17 @@ export const TasksToDo = () => {
               {deadlineName[status as DeadlineType].toUpperCase()}
             </Text>
             <VStack>
-              {groupedTasks[status]?.map((task) => (
+              {tasks.map((task) => (
                 <CurrentTaskProvider value={task} key={task.id}>
                   <TaskItem />
                 </CurrentTaskProvider>
               ))}
-              {status !== 'overdue' && <CreateTask deadlineType={status} />}
+              {status !== 'overdue' && (
+                <CreateTask
+                  order={getLastItemOrder(tasks.map((task) => task.order))}
+                  deadlineType={status}
+                />
+              )}
             </VStack>
           </VStack>
         )

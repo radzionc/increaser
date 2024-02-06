@@ -9,7 +9,10 @@ export const createTask: ApiResolver<'createTask'> = async ({
 }): Promise<Task> => {
   const userId = assertUserId(context)
 
-  await putTask(userId, input)
+  await putTask(userId, {
+    ...input,
+    order: input.order ?? 0,
+  })
 
   return input
 }

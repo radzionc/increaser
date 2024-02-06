@@ -17,11 +17,13 @@ interface TaskForm {
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
+  order: number
 }
 
 export const CreateTaskForm = ({
   onFinish,
   deadlineType,
+  order,
 }: CreateTaskFormProps) => {
   const { register, handleSubmit, resetField } = useForm<TaskForm>({
     mode: 'all',
@@ -41,6 +43,7 @@ export const CreateTaskForm = ({
       id: getId(),
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
+      order,
     }
     mutate(task)
     resetField('name')

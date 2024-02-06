@@ -4,6 +4,7 @@ export interface Task {
   name: string
   completedAt?: number | null
   deadlineAt: number
+  order: number
 }
 
 export const deadlineTypes = [

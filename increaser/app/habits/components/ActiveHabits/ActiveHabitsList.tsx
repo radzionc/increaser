@@ -5,7 +5,7 @@ import {
   Droppable,
   OnDragEndResponder,
 } from 'react-beautiful-dnd'
-import { getNewOrder } from '@lib/utils/getNewOrder'
+import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import styled from 'styled-components'
 
 import { ActiveHabit } from './ActiveHabit'

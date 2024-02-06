@@ -12,12 +12,13 @@ export const getDemoTasks = (): Record<string, Task> => {
   const startedAt = Date.now()
 
   return getRecord(
-    tasks.map((name) => ({
+    tasks.map((name, order) => ({
       id: name,
       name,
       startedAt,
       isCompleted: false,
       deadlineAt: endOfDay(startedAt).getTime(),
+      order,
     })),
     (task) => task.id,
   )
