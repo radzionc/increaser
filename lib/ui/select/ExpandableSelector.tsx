@@ -16,9 +16,11 @@ import { cropText } from '../css/cropText'
 export type ExpandableSelectorProp<T> = UIComponentProps &
   InputProps<T> & {
     isDisabled?: boolean
-    options: T[]
+    options: readonly T[]
     getOptionKey: (option: T) => string
     renderOption: (option: T) => React.ReactNode
+    openerContent?: React.ReactNode
+    floatingOptionsWidthSameAsOpener?: boolean
   }
 
 const ToggleIconContainer = styled(IconWrapper)<{ isOpen: boolean }>`
@@ -105,6 +107,8 @@ export function ExpandableSelector<T>({
   isDisabled,
   renderOption,
   getOptionKey,
+  openerContent,
+  floatingOptionsWidthSameAsOpener,
   ...rest
 }: ExpandableSelectorProp<T>) {
   const {
@@ -115,6 +119,7 @@ export function ExpandableSelector<T>({
     setIsOpen,
     activeIndex,
   } = useFloatingOptions({
+    floatingOptionsWidthSameAsOpener,
     selectedIndex: options.indexOf(value),
   })
 
@@ -128,7 +133,7 @@ export function ExpandableSelector<T>({
         {...referenceProps}
         {...rest}
       >
-        <OptionContent>{renderOption(value)}</OptionContent>
+        <OptionContent>{openerContent ?? renderOption(value)}</OptionContent>
         <ToggleIconContainer isOpen={isOpen}>
           <ChevronDownIcon />
         </ToggleIconContainer>

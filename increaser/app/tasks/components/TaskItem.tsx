@@ -1,6 +1,3 @@
-import { IconButton } from '@lib/ui/buttons/IconButton'
-import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-
 import { useCurrentTask } from './CurrentTaskProvider'
 import { HStack } from '@lib/ui/layout/Stack'
 import { ManageTaskDeadline } from './ManageTaskDeadline'
@@ -9,9 +6,9 @@ import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
-import { useDeleteTaskMutation } from '../api/useDeleteHabitMutation'
 import { TaskItemFrame } from './TaskItemFrame'
 import { EditableTaskName } from './EditableTaskName'
+import { DeleteTask } from './DeleteTask'
 
 const Actions = styled(HStack)`
   gap: 4px;
@@ -19,7 +16,9 @@ const Actions = styled(HStack)`
   opacity: 1;
 
   @media (hover: hover) and (pointer: fine) {
-    opacity: 0;
+    &:not(:focus-within) {
+      opacity: 0;
+    }
   }
 `
 
@@ -39,10 +38,9 @@ const Check = styled(CheckStatus)`
 
 export const TaskItem = () => {
   const task = useCurrentTask()
-  const { id, completedAt } = task
+  const { completedAt } = task
 
   const { mutate: updateTask } = useUpdateTaskMutation()
-  const { mutate: deleteTask } = useDeleteTaskMutation()
 
   const value = !!completedAt
 
@@ -66,16 +64,7 @@ export const TaskItem = () => {
       </TaskItemFrame>
       <Actions>
         <ManageTaskDeadline />
-        <IconButton
-          kind="alert"
-          title="Delete task"
-          icon={<TrashBinIcon />}
-          onClick={() => {
-            deleteTask({
-              id,
-            })
-          }}
-        />
+        <DeleteTask />
       </Actions>
     </Container>
   )
