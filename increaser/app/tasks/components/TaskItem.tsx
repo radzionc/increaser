@@ -10,14 +10,15 @@ import { TaskItemFrame } from './TaskItemFrame'
 import { EditableTaskName } from './EditableTaskName'
 import { DeleteTask } from './DeleteTask'
 
-const Actions = styled(HStack)`
+const Actions = styled.div`
+  display: grid;
+  grid-template-columns: 60px 36px;
+  height: 36px;
   gap: 4px;
-  align-items: center;
-  opacity: 1;
 
   @media (hover: hover) and (pointer: fine) {
     &:not(:focus-within) {
-      opacity: 0;
+      /* opacity: 0; */
     }
   }
 `

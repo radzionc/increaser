@@ -7,8 +7,8 @@ import styled from 'styled-components'
 import { useDeleteTaskMutation } from '../api/useDeleteHabitMutation'
 
 const Container = styled(IconButton)`
-  height: 100%;
-  aspect-ratio: 1/1;
+  height: auto;
+  width: auto;
 `
 
 export const DeleteTask = () => {

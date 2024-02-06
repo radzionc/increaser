@@ -50,7 +50,7 @@ export const ManageTaskDeadline = () => {
         </IconContainer>
       }
       floatingOptionsWidthSameAsOpener={false}
-      style={{ height: '100%', width: 60, padding: 8 }}
+      style={{ height: '100%', padding: 8 }}
       value={value}
       onChange={changeDeadline}
       options={getDeadlineTypes(now)}
