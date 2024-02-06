@@ -18,7 +18,7 @@ const Actions = styled.div`
 
   @media (hover: hover) and (pointer: fine) {
     &:not(:focus-within) {
-      /* opacity: 0; */
+      opacity: 0;
     }
   }
 `

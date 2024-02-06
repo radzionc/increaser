@@ -23,7 +23,7 @@ export const CreateTaskForm = ({
   onFinish,
   deadlineType,
 }: CreateTaskFormProps) => {
-  const { register, handleSubmit } = useForm<TaskForm>({
+  const { register, handleSubmit, resetField } = useForm<TaskForm>({
     mode: 'all',
     defaultValues: {
       name: '',
@@ -43,7 +43,7 @@ export const CreateTaskForm = ({
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
     }
     mutate(task)
-    onFinish()
+    resetField('name')
   }
 
   return (
