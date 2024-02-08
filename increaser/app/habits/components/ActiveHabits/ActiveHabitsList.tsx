@@ -35,11 +35,11 @@ export const ActiveHabitsList = () => {
         return
       }
 
-      const order = getNewOrder(
-        habits.map(({ order }) => order),
-        source.index,
-        destination.index,
-      )
+      const order = getNewOrder({
+        orders: habits.map((habit) => habit.order),
+        sourceIndex: source.index,
+        destinationIndex: destination.index,
+      })
 
       updateHabit({
         id: draggableId,

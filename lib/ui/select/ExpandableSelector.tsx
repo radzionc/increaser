@@ -135,7 +135,7 @@ export function ExpandableSelector<T>({
         {...rest}
       >
         <OptionContent>
-          {openerContent ?? (value ? renderOption(value) : null)}
+          {openerContent ?? renderOption(value as T)}
         </OptionContent>
         <ToggleIconContainer isOpen={isOpen}>
           <ChevronDownIcon />
