@@ -1,5 +1,5 @@
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -12,9 +12,11 @@ export const useDeleteLastSetMutation = () => {
 
   const api = useApi()
 
-  return useMutation(async () => {
-    updateState({ sets: removeLastArrayElement(sets) })
+  return useMutation({
+    mutationFn: async () => {
+      updateState({ sets: removeLastArrayElement(sets) })
 
-    await api.call('removeLastSet', undefined)
+      await api.call('removeLastSet', undefined)
+    },
   })
 }

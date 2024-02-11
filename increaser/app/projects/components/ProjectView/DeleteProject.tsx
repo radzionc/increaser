@@ -6,12 +6,12 @@ import { useCurrentProject } from './CurrentProjectProvider'
 export const DeleteProject = () => {
   const { id } = useCurrentProject()
 
-  const { mutate: deleteProject, isLoading } = useDeleteProjectMutation()
+  const { mutate: deleteProject, isPending } = useDeleteProjectMutation()
 
   return (
     <Button
       kind="outlinedAlert"
-      isLoading={isLoading}
+      isLoading={isPending}
       onClick={() => {
         deleteProject({
           id,

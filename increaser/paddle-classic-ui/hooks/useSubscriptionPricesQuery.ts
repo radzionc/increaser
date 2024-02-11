@@ -1,6 +1,6 @@
 import { SubscriptionBillingCycle } from '@increaser/entities/Subscription'
 
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { PaddleSdk, PaddleSdkProductPrice } from '../PaddleSdk'
 import { ProductPlanPrice } from '../ProductPlanPrice'
 import { paddleProductCode } from '../paddleProductCode'
@@ -27,7 +27,7 @@ const getPaddleProductPrice = async (
   return { currency, amount }
 }
 
-export const subscriptionPricesQueryKey = 'subscriptionPrices'
+export const subscriptionPricesQueryKey = ['subscriptionPrices']
 
 export type SubscriptionPrices = Record<
   SubscriptionBillingCycle,
@@ -37,9 +37,9 @@ export type SubscriptionPrices = Record<
 export const useSubscriptionPricesQuery = () => {
   const { data: paddleSdk } = usePaddleSdk()
 
-  return useQuery(
-    subscriptionPricesQueryKey,
-    async () => {
+  return useQuery({
+    queryKey: subscriptionPricesQueryKey,
+    queryFn: async () => {
       const [month, year] = await Promise.all(
         [paddleProductCode.month, paddleProductCode.year].map((product) =>
           getPaddleProductPrice(paddleSdk as PaddleSdk, product),
@@ -51,13 +51,10 @@ export const useSubscriptionPricesQuery = () => {
         year,
       } as Record<SubscriptionBillingCycle, ProductPlanPrice>
     },
-    {
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      staleTime: Infinity,
-      enabled: !!paddleSdk,
-    },
-  )
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    staleTime: Infinity,
+    enabled: !!paddleSdk,
+  })
 }

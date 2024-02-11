@@ -27,7 +27,7 @@ export const AppSumoCodeRedemption = () => {
     mode: 'onSubmit',
   })
 
-  const { mutate: redeemCode, isLoading } = useApiMutation(
+  const { mutate: redeemCode, isPending } = useApiMutation(
     'redeemAppSumoCode',
     {
       onSuccess: () => {
@@ -64,7 +64,7 @@ export const AppSumoCodeRedemption = () => {
             />
           </Field>
         }
-        actions={<SubmitFormButton isLoading={isLoading} text={'Continue'} />}
+        actions={<SubmitFormButton isLoading={isPending} text={'Continue'} />}
       />
     </VStack>
   )

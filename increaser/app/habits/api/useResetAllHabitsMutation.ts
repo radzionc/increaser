@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -13,28 +13,30 @@ export const useResetAllHabitsMutation = () => {
   const { habits } = useAssertUserState()
   const api = useApi()
 
-  return useMutation(async () => {
-    const fields = {
-      startedAt: Math.round(Date.now() / MS_IN_SEC),
-      successes: [],
-    }
+  return useMutation({
+    mutationFn: async () => {
+      const fields = {
+        startedAt: Math.round(Date.now() / MS_IN_SEC),
+        successes: [],
+      }
 
-    updateState({
-      habits: recordMap(habits, (habit) => ({
-        ...habit,
-        ...fields,
-      })),
-    })
+      updateState({
+        habits: recordMap(habits, (habit) => ({
+          ...habit,
+          ...fields,
+        })),
+      })
 
-    const response = await Promise.all(
-      Object.keys(habits).map((id) => {
-        return api.call('updateHabit', {
-          id,
-          fields,
-        })
-      }),
-    )
+      const response = await Promise.all(
+        Object.keys(habits).map((id) => {
+          return api.call('updateHabit', {
+            id,
+            fields,
+          })
+        }),
+      )
 
-    return response
+      return response
+    },
   })
 }

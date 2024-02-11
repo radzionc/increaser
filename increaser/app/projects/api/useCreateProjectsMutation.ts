@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import {
   useAssertUserState,
@@ -17,26 +17,30 @@ export const useCreateProjectsMutation = () => {
   const api = useApi()
   const { updateState } = useUserState()
 
-  return useMutation(async (projectParams: CreateProjectsParams) => {
-    const inputs = projectParams.projects.map((projectParams) => ({
-      ...projectParams,
-      allocatedMinutesPerWeek: 0,
-      id: getId(),
-    }))
+  return useMutation({
+    mutationFn: async (projectParams: CreateProjectsParams) => {
+      const inputs = projectParams.projects.map((projectParams) => ({
+        ...projectParams,
+        allocatedMinutesPerWeek: 0,
+        id: getId(),
+      }))
 
-    const newProjects: Project[] = inputs.map((input) => ({
-      ...input,
+      const newProjects: Project[] = inputs.map((input) => ({
+        ...input,
 
-      total: 0,
-      status: 'ACTIVE',
-      weeks: [],
-      months: [],
+        total: 0,
+        status: 'ACTIVE',
+        weeks: [],
+        months: [],
 
-      allocatedMinutesPerWeek: 0,
-    }))
+        allocatedMinutesPerWeek: 0,
+      }))
 
-    updateState({ projects: [...projects, ...newProjects] })
+      updateState({ projects: [...projects, ...newProjects] })
 
-    return Promise.all(inputs.map((input) => api.call('createProject', input)))
+      return Promise.all(
+        inputs.map((input) => api.call('createProject', input)),
+      )
+    },
   })
 }

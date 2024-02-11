@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -11,9 +11,11 @@ export const useCreateTaskMutation = () => {
   const { updateState } = useUserState()
   const api = useApi()
 
-  return useMutation(async (task: ApiInterface['createTask']['input']) => {
-    updateState({ tasks: { ...tasks, [task.id]: task } })
+  return useMutation({
+    mutationFn: async (task: ApiInterface['createTask']['input']) => {
+      updateState({ tasks: { ...tasks, [task.id]: task } })
 
-    await api.call('createTask', task)
+      await api.call('createTask', task)
+    },
   })
 }

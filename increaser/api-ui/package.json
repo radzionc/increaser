@@ -6,8 +6,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-query": "^3.39.3"
+    "@tanstack/react-query": "^5.17.19",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.45"

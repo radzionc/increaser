@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import {
   useAssertUserState,
@@ -20,8 +20,8 @@ export const useCreateProjectMutation = (
   const api = useApi()
   const { updateState } = useUserState()
 
-  return useMutation(
-    async (
+  return useMutation({
+    mutationFn: async (
       projectParams: Pick<
         Project,
         'name' | 'color' | 'emoji' | 'allocatedMinutesPerWeek'
@@ -44,6 +44,6 @@ export const useCreateProjectMutation = (
 
       return api.call('createProject', input)
     },
-    params,
-  )
+    ...params,
+  })
 }

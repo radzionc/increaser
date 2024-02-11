@@ -3,7 +3,7 @@ import { useInvalidateQueries } from '@lib/ui/query/hooks/useInvalidateQueries'
 import { User } from '@sentry/nextjs'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
 import { getApiQueryKey } from '@increaser/api-ui/hooks/useApiQuery'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useUserState } from '@increaser/ui/user/UserStateContext'
 
 export const useUpdateUserProfileMutation = () => {
@@ -11,19 +11,17 @@ export const useUpdateUserProfileMutation = () => {
   const api = useApi()
   const { updateState } = useUserState()
 
-  return useMutation(
-    (fields: Partial<Pick<User, 'name' | 'country' | 'isAnonymous'>>) => {
+  return useMutation({
+    mutationFn: (
+      fields: Partial<Pick<User, 'name' | 'country' | 'isAnonymous'>>,
+    ) => {
       updateState(fields)
       return api.call('updateUser', fields)
     },
-    {
-      onSuccess: () => {
-        invalidate(
-          ...scoreboardPeriods.map((id) =>
-            getApiQueryKey('scoreboard', { id }),
-          ),
-        )
-      },
+    onSuccess: () => {
+      invalidate(
+        ...scoreboardPeriods.map((id) => getApiQueryKey('scoreboard', { id })),
+      )
     },
-  )
+  })
 }

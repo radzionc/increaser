@@ -1,19 +1,16 @@
 import { getCurrentTimezoneOffset } from '@lib/utils/time/getCurrentTimezoneOffset'
-import { ReactNode, useCallback, useEffect } from 'react'
-import { useQuery, useQueryClient } from 'react-query'
+import { useCallback, useEffect } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { UserStateContext } from '@increaser/ui/user/UserStateContext'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 import { User } from '@increaser/entities/User'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { ComponentWithChildrenProps } from '@lib/ui/props'
 
-const userStateQueryKey = 'userState'
+const userStateQueryKey = ['userState']
 
-interface Props {
-  children: ReactNode
-}
-
-export const UserStateProvider = ({ children }: Props) => {
+export const UserStateProvider = ({ children }: ComponentWithChildrenProps) => {
   const [authSession] = useAuthSession()
 
   const queryClient = useQueryClient()
@@ -27,18 +24,15 @@ export const UserStateProvider = ({ children }: Props) => {
     refetch,
     isLoading,
     dataUpdatedAt,
-  } = useQuery(
-    userStateQueryKey,
-    () =>
+  } = useQuery({
+    queryKey: userStateQueryKey,
+    queryFn: () =>
       api.call('user', {
         timeZone: getCurrentTimezoneOffset(),
       }),
-    {
-      keepPreviousData: true,
-      enabled: Boolean(authSession),
-      refetchOnWindowFocus: false,
-    },
-  )
+    enabled: Boolean(authSession),
+    refetchOnWindowFocus: false,
+  })
 
   useEffect(() => {
     if (dataUpdatedAt && dataUpdatedAt < dayStartedAt) {

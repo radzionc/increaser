@@ -20,9 +20,9 @@ export const SubscriptionPricesQueryDependant = ({
 
   return (
     <QueryDependant
-      {...query}
+      query={query}
       error={() => <Text>Failed to load subscription price</Text>}
-      loading={() => (
+      pending={() => (
         <Center>
           <Spinner />
         </Center>

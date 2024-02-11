@@ -1,5 +1,5 @@
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useApi } from './useApi'
 import {
   ApiInterface,
@@ -17,5 +17,8 @@ export const useApiQuery = <M extends ApiMethodName>(
 ) => {
   const { call } = useApi()
 
-  return useQuery(getApiQueryKey(method, input), () => call(method, input))
+  return useQuery({
+    queryKey: getApiQueryKey(method, input),
+    queryFn: () => call(method, input),
+  })
 }

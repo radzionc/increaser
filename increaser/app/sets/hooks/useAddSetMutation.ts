@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { Set } from '@increaser/entities/User'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
 import {
@@ -11,9 +11,11 @@ export const useAddSetMutation = () => {
   const { updateState } = useUserState()
   const { sets } = useAssertUserState()
 
-  return useMutation((set: Set) => {
-    updateState({ sets: [...sets, set] })
+  return useMutation({
+    mutationFn: (set: Set) => {
+      updateState({ sets: [...sets, set] })
 
-    return api.call('addSet', set)
+      return api.call('addSet', set)
+    },
   })
 }

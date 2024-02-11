@@ -1,7 +1,7 @@
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -12,13 +12,15 @@ export const useUpdateHabitMutation = () => {
   const { updateState } = useUserState()
   const { habits } = useAssertUserState()
 
-  return useMutation(async (input: ApiInterface['updateHabit']['input']) => {
-    updateState({
-      habits: recordMap(habits, (habit) =>
-        habit.id === input.id ? { ...habit, ...input.fields } : habit,
-      ),
-    })
+  return useMutation({
+    mutationFn: async (input: ApiInterface['updateHabit']['input']) => {
+      updateState({
+        habits: recordMap(habits, (habit) =>
+          habit.id === input.id ? { ...habit, ...input.fields } : habit,
+        ),
+      })
 
-    return api.call('updateHabit', input)
+      return api.call('updateHabit', input)
+    },
   })
 }

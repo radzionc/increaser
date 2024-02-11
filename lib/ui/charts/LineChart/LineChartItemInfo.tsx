@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import { ElementSizeAware } from '../../base/ElementSizeAware'
 import { defaultTransition } from '../../css/transition'
+import { ComponentWithChildrenProps } from '../../props'
 
-type LineChartItemInfoProps = {
+type LineChartItemInfoProps = ComponentWithChildrenProps & {
   containerWidth: number
   data: number[]
   isVisible: boolean
   itemIndex: number
-  render: (itemIndex: number) => React.ReactNode
 }
 
 const Container = styled.div`
@@ -16,7 +16,6 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: fit-content;
-  opacity: 1;
   white-space: nowrap;
   transition: ${defaultTransition} opacity;
 `
@@ -24,7 +23,7 @@ const Content = styled.div`
 export const LineChartItemInfo = ({
   data,
   itemIndex,
-  render,
+  children,
   containerWidth,
   isVisible,
 }: LineChartItemInfoProps) => {
@@ -62,7 +61,7 @@ export const LineChartItemInfo = ({
                 opacity: isVisible ? 1 : 0,
               }}
             >
-              {render(itemIndex)}
+              {children}
             </Content>
           )
         }}

@@ -1,7 +1,7 @@
 import { AuthSession } from '@increaser/entities/AuthSession'
 import { analytics } from '@increaser/app/analytics'
 import { useCallback } from 'react'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   PersistentStateKey,
   usePersistentState,

@@ -1,24 +1,24 @@
-import { QueryClient, QueryKey } from 'react-query'
-import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental'
-import { persistQueryClient } from 'react-query/persistQueryClient-experimental'
-import { MS_IN_DAY } from '@lib/utils/time'
+import { QueryClient, QueryKey } from '@tanstack/react-query'
 import { hasWindow } from '@lib/ui/utils/window'
 import { PersistentStateKey } from '@increaser/app/state/persistentState'
 import { paddleQueryKey } from '@increaser/paddle-classic-ui/hooks/usePaddleSdk'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+import { persistQueryClient } from '@tanstack/react-query-persist-client'
 
-const cacheTime = MS_IN_DAY * 5
+const maxAge = convertDuration(1, 'd', 'ms')
 
 export const getQueryClient = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        cacheTime,
+        gcTime: maxAge,
       },
     },
   })
 
-  const localStoragePersistor = createWebStoragePersistor({
-    storage: (hasWindow ? window.localStorage : undefined)!,
+  const localStoragePersistor = createSyncStoragePersister({
+    storage: hasWindow ? window.localStorage : undefined,
     key: PersistentStateKey.ReactQueryState,
   })
 
@@ -26,8 +26,8 @@ export const getQueryClient = () => {
 
   persistQueryClient({
     queryClient,
-    persistor: localStoragePersistor,
-    maxAge: cacheTime,
+    persister: localStoragePersistor,
+    maxAge,
     hydrateOptions: {},
     dehydrateOptions: {
       shouldDehydrateQuery: ({ queryKey }) => {

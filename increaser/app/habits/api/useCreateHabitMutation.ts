@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import {
   useAssertUserState,
@@ -14,8 +14,8 @@ export const useCreateHabitMutation = () => {
   const { updateState } = useUserState()
   const api = useApi()
 
-  return useMutation(
-    async ({
+  return useMutation({
+    mutationFn: async ({
       name,
       color,
       emoji,
@@ -41,5 +41,5 @@ export const useCreateHabitMutation = () => {
 
       await api.call('createHabit', input)
     },
-  )
+  })
 }

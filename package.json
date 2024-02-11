@@ -23,9 +23,5 @@
     "format": "eslint --fix && prettier --write",
     "typecheck": "yarn workspaces foreach --all run typecheck",
     "sync-packages": "syncpack fix-mismatches"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-query": "^3.39.3"
   }
 }

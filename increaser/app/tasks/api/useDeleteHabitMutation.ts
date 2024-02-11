@@ -1,5 +1,5 @@
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -15,11 +15,13 @@ export const useDeleteTaskMutation = () => {
   const { updateState } = useUserState()
   const api = useApi()
 
-  return useMutation(async (input: DeleteTaskParams) => {
-    updateState({
-      tasks: omit(tasks, input.id),
-    })
+  return useMutation({
+    mutationFn: async (input: DeleteTaskParams) => {
+      updateState({
+        tasks: omit(tasks, input.id),
+      })
 
-    await api.call('deleteTask', input)
+      await api.call('deleteTask', input)
+    },
   })
 }

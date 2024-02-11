@@ -76,6 +76,8 @@ export const SetsChart = () => {
           },
         )
 
+        const day = days[selectedDay]
+
         return (
           <VStack fullWidth gap={4} ref={setElement}>
             {size && (
@@ -85,44 +87,38 @@ export const SetsChart = () => {
                   isVisible={isSelectedDayVisible}
                   containerWidth={size.width}
                   data={data}
-                  render={(index) => {
-                    const day = days[index]
-                    return (
-                      <VStack>
-                        <Text color="contrast" weight="semibold">
-                          <Match
-                            value={currentStatistic}
-                            startedWorkAt={() =>
-                              isEmpty(day.sets)
-                                ? '-'
-                                : formatTime(day.sets[0].start)
-                            }
-                            finishedWorkAt={() =>
-                              isEmpty(day.sets)
-                                ? '-'
-                                : formatTime(getLastItem(day.sets).end)
-                            }
-                            block={() =>
-                              isEmpty(day.sets)
-                                ? '-'
-                                : formatDuration(
-                                    getSetsDuration(day.sets) /
-                                      getBlocks(day.sets).length,
-                                    'ms',
-                                  )
-                            }
-                            total={() =>
-                              formatDuration(getSetsSum(day.sets), 'ms')
-                            }
-                          />
-                        </Text>
-                        <Text color="supporting" size={14} weight="semibold">
-                          {format(day.startedAt, 'EEE d, MMM yyyy')}
-                        </Text>
-                      </VStack>
-                    )
-                  }}
-                />
+                >
+                  <VStack>
+                    <Text color="contrast" weight="semibold">
+                      <Match
+                        value={currentStatistic}
+                        startedWorkAt={() =>
+                          isEmpty(day.sets)
+                            ? '-'
+                            : formatTime(day.sets[0].start)
+                        }
+                        finishedWorkAt={() =>
+                          isEmpty(day.sets)
+                            ? '-'
+                            : formatTime(getLastItem(day.sets).end)
+                        }
+                        block={() =>
+                          isEmpty(day.sets)
+                            ? '-'
+                            : formatDuration(
+                                getSetsDuration(day.sets) /
+                                  getBlocks(day.sets).length,
+                                'ms',
+                              )
+                        }
+                        total={() => formatDuration(getSetsSum(day.sets), 'ms')}
+                      />
+                    </Text>
+                    <Text color="supporting" size={14} weight="semibold">
+                      {format(day.startedAt, 'EEE d, MMM yyyy')}
+                    </Text>
+                  </VStack>
+                </LineChartItemInfo>
                 <VStack style={{ position: 'relative' }}>
                   <LineChart
                     width={size.width}

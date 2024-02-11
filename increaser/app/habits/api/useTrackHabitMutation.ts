@@ -1,7 +1,7 @@
 import { recordMap } from '@lib/utils/record/recordMap'
 import { analytics } from '@increaser/app/analytics'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -13,8 +13,10 @@ export const useTrackHabitMutation = () => {
   const api = useApi()
   const { updateState } = useUserState()
 
-  return useMutation(
-    async (input: ApiInterface['trackHabit']['input']): Promise<void> => {
+  return useMutation({
+    mutationFn: async (
+      input: ApiInterface['trackHabit']['input'],
+    ): Promise<void> => {
       updateState({
         habits: recordMap(habits, (habit) => {
           if (habit.id === input.id) {
@@ -37,5 +39,5 @@ export const useTrackHabitMutation = () => {
 
       await api.call('trackHabit', input)
     },
-  )
+  })
 }

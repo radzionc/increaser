@@ -26,7 +26,7 @@ export const EmailAuthForm = () => {
     mode: 'onSubmit',
   })
 
-  const { mutate: sendAuthLinkByEmail, isLoading } = useApiMutation(
+  const { mutate: sendAuthLinkByEmail, isPending } = useApiMutation(
     'sendAuthLinkByEmail',
   )
 
@@ -57,7 +57,7 @@ export const EmailAuthForm = () => {
         </Field>
       }
       actions={
-        <Button size="l" isLoading={isLoading}>
+        <Button size="l" isLoading={isPending}>
           Continue
         </Button>
       }

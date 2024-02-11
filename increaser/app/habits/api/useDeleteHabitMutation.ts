@@ -1,5 +1,5 @@
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -15,11 +15,13 @@ export const useDeleteHabitMutation = () => {
   const { updateState } = useUserState()
   const api = useApi()
 
-  return useMutation(async (input: DeleteHabitParams) => {
-    updateState({
-      habits: omit(habits, input.id),
-    })
+  return useMutation({
+    mutationFn: async (input: DeleteHabitParams) => {
+      updateState({
+        habits: omit(habits, input.id),
+      })
 
-    await api.call('deleteHabit', input)
+      await api.call('deleteHabit', input)
+    },
   })
 }

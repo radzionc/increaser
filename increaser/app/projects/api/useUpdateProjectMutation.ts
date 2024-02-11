@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -17,23 +17,25 @@ export const useUpdateProjectMutation = () => {
   const { updateState } = useUserState()
   const api = useApi()
 
-  return useMutation(async ({ id, fields }: UpdateProjectMutationInput) => {
-    updateState({
-      projects: projects.map((project) => {
-        if (project.id !== id) return project
+  return useMutation({
+    mutationFn: async ({ id, fields }: UpdateProjectMutationInput) => {
+      updateState({
+        projects: projects.map((project) => {
+          if (project.id !== id) return project
 
-        return {
-          ...project,
-          ...fields,
-        }
-      }),
-    })
+          return {
+            ...project,
+            ...fields,
+          }
+        }),
+      })
 
-    const project = await api.call('updateProject', {
-      id,
-      fields,
-    })
+      const project = await api.call('updateProject', {
+        id,
+        fields,
+      })
 
-    return project as Project | null
+      return project as Project | null
+    },
   })
 }

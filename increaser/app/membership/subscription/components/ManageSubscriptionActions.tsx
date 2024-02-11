@@ -31,7 +31,7 @@ export const ManageSubscriptionActions = () => {
 
   return (
     <QueryDependant
-      {...query}
+      query={query}
       {...getQueryDependantDefaultProps('subscription management URLs')}
       success={({ updateUrl, cancelUrl }) => {
         const actionUrl: Record<ManageSubscriptionAction, string> = {

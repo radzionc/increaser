@@ -10,7 +10,7 @@ import { FullSizeErrorFallback } from '@increaser/app/errors/components/FullSize
 import { FocusProvider } from '@increaser/app/focus/components/FocusProvider'
 import { HabitsProvider } from '@increaser/app/habits/components/HabitsProvider'
 import { PWAProvider } from '@increaser/app/pwa/components/PWAProvider'
-import { QueryClientProvider } from 'react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { ConditionalUserState } from '@increaser/app/user/components/ConditionalUserState'
 import { UserManagerProvider } from '@increaser/app/user/components/UserManagerProvider'
 import { UserStateProvider } from '@increaser/app/user/components/UserStateProvider'

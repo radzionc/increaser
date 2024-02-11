@@ -1,5 +1,5 @@
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,
   useUserState,
@@ -20,8 +20,8 @@ export const useDeleteProjectMutation = (
   const { updateState } = useUserState()
   const api = useApi()
 
-  return useMutation(
-    async ({ id }: DeleteProjectMutationInput) => {
+  return useMutation({
+    mutationFn: async ({ id }: DeleteProjectMutationInput) => {
       updateState({
         projects: projects.filter((project) => project.id !== id),
       })
@@ -30,8 +30,6 @@ export const useDeleteProjectMutation = (
         id,
       })
     },
-    {
-      onSuccess: params?.onSuccess,
-    },
-  )
+    onSuccess: params?.onSuccess,
+  })
 }

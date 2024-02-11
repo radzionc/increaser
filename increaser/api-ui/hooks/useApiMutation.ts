@@ -2,7 +2,7 @@ import {
   ApiInterface,
   ApiMethodName,
 } from '@increaser/api-interface/ApiInterface'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useApi } from './useApi'
 
 interface ApiMutationOptions<M extends ApiMethodName> {
@@ -16,8 +16,8 @@ export const useApiMutation = <M extends ApiMethodName>(
 ) => {
   const api = useApi()
 
-  return useMutation(
-    (input: ApiInterface[M]['input']) => api.call(method, input),
-    options,
-  )
+  return useMutation({
+    mutationFn: (input: ApiInterface[M]['input']) => api.call(method, input),
+    ...options,
+  })
 }

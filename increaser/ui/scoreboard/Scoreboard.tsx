@@ -22,7 +22,7 @@ export const Scoreboard = () => {
           Last {scoreboardPeriodInDays[scoreboardPeriod]} Days Top Performers
         </Text>
         <QueryDependant
-          {...query}
+          query={query}
           success={(value) => (
             <VStack gap={24}>
               <ScoreboardTable
@@ -35,7 +35,7 @@ export const Scoreboard = () => {
             </VStack>
           )}
           error={() => <Text>Something went wrong</Text>}
-          loading={() => <Spinner />}
+          pending={() => <Spinner />}
         />
       </VStack>
     </Panel>
