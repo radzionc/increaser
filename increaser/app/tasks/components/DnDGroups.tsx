@@ -8,58 +8,6 @@ import {
   OnDragEndResponder,
 } from 'react-beautiful-dnd'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
-import styled, { css } from 'styled-components'
-import { HStack } from '@lib/ui/layout/Stack'
-import { getColor, matchColor } from '@lib/ui/theme/getters'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { defaultTransition } from '@lib/ui/css/transition'
-import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
-
-const dragHandleWidth = 36
-
-const DragHandle = styled.div<{ isDragging?: boolean }>`
-  position: absolute;
-  left: -${toSizeUnit(dragHandleWidth)};
-  height: 100%;
-  width: ${toSizeUnit(dragHandleWidth)};
-  font-size: 20px;
-  ${centerContent};
-  color: ${matchColor('isDragging', {
-    true: 'contrast',
-    false: 'textSupporting',
-  })};
-  transition: color ${defaultTransition};
-  ${({ isDragging }) =>
-    !isDragging &&
-    css`
-      &:hover {
-        color: ${getColor('text')};
-      }
-    `}
-
-  @media (hover: hover) and (pointer: fine) {
-    &:not(:focus-within) {
-      opacity: ${({ isDragging }) => (isDragging ? 1 : 0)};
-    }
-  }
-`
-
-const ItemWrapper = styled(HStack)<{ isDisabled?: boolean }>`
-  width: 100%;
-  align-items: center;
-  position: relative;
-  background: ${getColor('background')};
-  ${({ isDisabled }) =>
-    isDisabled &&
-    css`
-      pointer-events: none;
-    `}
-
-  &:hover ${DragHandle} {
-    opacity: 1;
-  }
-`
 
 export type ItemChangeParams<K> = {
   order: number
@@ -72,6 +20,14 @@ type RenderGroupParams<K> = {
   containerProps?: Record<string, any>
 }
 
+type RenderItemParams<I> = {
+  item: I
+  draggableProps?: Record<string, any>
+  dragHandleProps?: Record<string, any> | null
+  isDragging?: boolean
+  isDraggingEnabled?: boolean
+}
+
 export type DnDGroupsProps<K extends string, I> = {
   groups: Record<K, I[]>
   getGroupOrder: (group: K) => number
@@ -79,7 +35,7 @@ export type DnDGroupsProps<K extends string, I> = {
   getItemId: (item: I) => string
   onChange: (itemId: string, params: ItemChangeParams<K>) => void
   renderGroup: (params: RenderGroupParams<K>) => ReactNode
-  renderItem: (item: I) => ReactNode
+  renderItem: (params: RenderItemParams<I>) => ReactNode
 }
 
 export function DnDGroups<K extends string, I>({
@@ -151,23 +107,24 @@ export function DnDGroups<K extends string, I>({
                             index={index}
                             draggableId={getItemId(item)}
                           >
-                            {(provided, { isDragging }) => (
-                              <ItemWrapper
-                                ref={provided.innerRef}
-                                isDisabled={
-                                  currentItemId !== null &&
-                                  getItemId(item) !== currentItemId
-                                }
-                                {...provided.draggableProps}
-                              >
-                                <DragHandle
-                                  {...provided.dragHandleProps}
-                                  isDragging={isDragging}
-                                >
-                                  <GripVerticalIcon />
-                                </DragHandle>
-                                {renderItem(item)}
-                              </ItemWrapper>
+                            {(
+                              { dragHandleProps, draggableProps, innerRef },
+                              { isDragging },
+                            ) => (
+                              <>
+                                {renderItem({
+                                  item,
+                                  draggableProps: {
+                                    ...draggableProps,
+                                    ref: innerRef,
+                                  },
+                                  dragHandleProps,
+                                  isDraggingEnabled:
+                                    currentItemId === null ||
+                                    getItemId(item) !== currentItemId,
+                                  isDragging,
+                                })}
+                              </>
                             )}
                           </Draggable>
                         ))}

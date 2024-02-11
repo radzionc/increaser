@@ -22,10 +22,18 @@ import { recordMap } from '@lib/utils/record/recordMap'
 import { DnDGroups, ItemChangeParams } from './DnDGroups'
 import { CreateTask } from './CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { DragContainer, OnHoverDragContainer } from './DragContainer'
+import { DragHandle } from '@lib/ui/dnd/DragHandle'
+import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
+import { useMedia } from 'react-use'
+
+const hoverableDragHandleWidth = 36
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+
+  const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
 
   const groups = useMemo(() => {
     return {
@@ -100,11 +108,47 @@ export const TasksToDo = () => {
           </VStack>
         </VStack>
       )}
-      renderItem={(task) => (
-        <CurrentTaskProvider value={task} key={task.id}>
-          <TaskItem />
-        </CurrentTaskProvider>
-      )}
+      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+        const content = (
+          <CurrentTaskProvider value={item} key={item.id}>
+            <TaskItem />
+          </CurrentTaskProvider>
+        )
+        const dragHandle = (
+          <DragHandle
+            style={
+              isHoverEnabled
+                ? {
+                    position: 'absolute',
+                    left: -hoverableDragHandleWidth,
+                    width: hoverableDragHandleWidth,
+                  }
+                : {
+                    width: 40,
+                  }
+            }
+            isActive={isDragging}
+            {...dragHandleProps}
+          >
+            <GripVerticalIcon />
+          </DragHandle>
+        )
+        if (isHoverEnabled) {
+          return (
+            <OnHoverDragContainer isDragging={isDragging} {...draggableProps}>
+              {dragHandle}
+              {content}
+            </OnHoverDragContainer>
+          )
+        }
+
+        return (
+          <DragContainer {...draggableProps}>
+            {dragHandle}
+            {content}
+          </DragContainer>
+        )
+      }}
     />
   )
 }
