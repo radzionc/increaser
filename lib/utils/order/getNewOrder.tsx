@@ -1,3 +1,4 @@
+import { getLastItem } from '../array/getLastItem'
 import { isEmpty } from '../array/isEmpty'
 
 type GetNewOrderInput = {
@@ -11,10 +12,6 @@ export const getNewOrder = ({
   sourceIndex,
   destinationIndex,
 }: GetNewOrderInput): number => {
-  console.log({
-    orders,
-    destinationIndex,
-  })
   if (isEmpty(orders)) {
     return 0
   }
@@ -27,8 +24,18 @@ export const getNewOrder = ({
   const previousIndex = movedUp ? destinationIndex : destinationIndex - 1
   const previous = orders[previousIndex]
 
-  if (destinationIndex === orders.length - 1 && sourceIndex !== null) {
-    return previous + 1
+  console.log({
+    previous,
+    movedUp,
+    previousIndex,
+  })
+
+  const shouldBeLast =
+    (destinationIndex === orders.length - 1 && sourceIndex !== null) ||
+    destinationIndex > orders.length - 1
+
+  if (shouldBeLast) {
+    return getLastItem(orders) + 1
   }
 
   const nextIndex = movedUp ? destinationIndex + 1 : destinationIndex

@@ -1,14 +1,9 @@
 import { useCurrentTask } from './CurrentTaskProvider'
-import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
-import { DeadlineType, deadlineName } from '@increaser/entities/Task'
+import { DeadlineType } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
-import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { Text } from '@lib/ui/text'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import styled from 'styled-components'
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { groupItems } from '@lib/utils/array/groupItems'
@@ -16,12 +11,17 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
-const IconContainer = styled(IconWrapper)`
-  font-size: 18px;
-  width: 18px;
-`
+type RenderParams = {
+  value: DeadlineType | null
+  onChange: (value: DeadlineType) => void
+  options: readonly DeadlineType[]
+}
 
-export const ManageTaskDeadline = () => {
+type ManageTaskDeadlineProps = {
+  render: (params: RenderParams) => React.ReactNode
+}
+
+export const ManageTaskDeadline = ({ render }: ManageTaskDeadlineProps) => {
   const { tasks } = useAssertUserState()
   const { id, deadlineAt } = useCurrentTask()
 
@@ -68,21 +68,12 @@ export const ManageTaskDeadline = () => {
   }
 
   return (
-    <ExpandableSelector
-      openerContent={
-        <IconContainer>
-          <CalendarIcon />
-        </IconContainer>
-      }
-      floatingOptionsWidthSameAsOpener={false}
-      style={{ height: '100%', padding: 8 }}
-      value={value}
-      onChange={changeDeadline}
-      options={getDeadlineTypes(now)}
-      getOptionKey={(option) => option}
-      renderOption={(option) => (
-        <Text key={option}>{deadlineName[option]}</Text>
-      )}
-    />
+    <>
+      {render({
+        value,
+        onChange: changeDeadline,
+        options: getDeadlineTypes(now),
+      })}
+    </>
   )
 }
