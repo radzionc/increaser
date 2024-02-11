@@ -1,5 +1,4 @@
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
-import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { HomeIcon } from '@lib/ui/icons/HomeIcon'
 import { ListIcon } from '@lib/ui/icons/ListIcon'
 import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
@@ -7,15 +6,12 @@ import { TableIcon } from '@lib/ui/icons/TableIcon'
 import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
     name: 'Home',
     icon: <HomeIcon />,
-  },
-  [AppPath.Work]: {
-    name: 'Focus',
-    icon: <ClockIcon />,
   },
   [AppPath.Capacity]: {
     name: 'Manage time',
@@ -40,5 +36,9 @@ export const navigationPathInfo = {
   [AppPath.Community]: {
     name: 'Community',
     icon: <GlobeIcon />,
+  },
+  [AppPath.Tasks]: {
+    name: 'Tasks',
+    icon: <CheckSquareIcon />,
   },
 } as const

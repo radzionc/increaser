@@ -6,6 +6,7 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { ClientOnly } from '@increaser/app/ui/ClientOnly'
 import { ManageProfile } from './ManageProfile'
 import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
+import { RequiresOnboarding } from '../../onboarding/RequiresOnboarding'
 
 export const CommunityPage: Page = () => {
   return (
@@ -14,10 +15,12 @@ export const CommunityPage: Page = () => {
         <PageTitle documentTitle={`👋 Community`} title="Community" />
       </ClientOnly>
       <UserStateOnly>
-        <VStack style={{ width: 'fit-content' }} gap={40}>
-          <ManageProfile />
-          <Scoreboard />
-        </VStack>
+        <RequiresOnboarding>
+          <VStack style={{ width: 'fit-content' }} gap={40}>
+            <ManageProfile />
+            <Scoreboard />
+          </VStack>
+        </RequiresOnboarding>
       </UserStateOnly>
     </FixedWidthContent>
   )

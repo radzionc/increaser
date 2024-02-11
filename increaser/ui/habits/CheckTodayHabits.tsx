@@ -36,7 +36,7 @@ export const CheckTodayHabits = ({ education }: CheckTodayHabitsProps) => {
       }
     >
       {education}
-      <VStack gap={16}>
+      <VStack gap={4}>
         {existedHabits.map((habit) => (
           <CurrentHabitProvider key={habit.id} value={habit}>
             <HabitItem

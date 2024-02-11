@@ -1,55 +1,102 @@
-import { IconButton } from '@lib/ui/buttons/IconButton'
-import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
-import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-
 import { useCurrentTask } from './CurrentTaskProvider'
-import { ChecklistItem } from '@lib/ui/checklist/CheckListItem'
+import { HStack } from '@lib/ui/layout/Stack'
+import { ManageTaskDeadline } from './ManageTaskDeadline'
+import styled from 'styled-components'
+import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
+import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
+import { interactive } from '@lib/ui/css/interactive'
+import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
+import { TaskItemFrame } from './TaskItemFrame'
+import { EditableTaskName } from './EditableTaskName'
+import { DeleteTask } from './DeleteTask'
+import { useMedia } from 'react-use'
+import { ManageTaskSlideover } from './ManageTaskSlideover'
+import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
+import { Text } from '@lib/ui/text'
+import { deadlineName } from '@increaser/entities/Task'
+
+const OnHoverActions = styled.div`
+  display: grid;
+  grid-template-columns: 60px 36px;
+  height: 36px;
+  gap: 4px;
+
+  &:not(:focus-within) {
+    opacity: 0;
+  }
+`
+
+const Container = styled(HStack)`
+  width: 100%;
+  gap: 8px;
+  align-items: center;
+
+  &:hover ${OnHoverActions} {
+    opacity: 1;
+  }
+`
+
+const Check = styled(CheckStatus)`
+  ${interactive};
+`
 
 export const TaskItem = () => {
   const task = useCurrentTask()
-  const { id, name, isCompleted } = task
+  const { completedAt } = task
 
-  const { tasks } = useAssertUserState()
-  const { mutate } = useUpdateUserMutation()
+  const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
+
+  const { mutate: updateTask } = useUpdateTaskMutation()
+
+  const value = !!completedAt
 
   return (
-    <OnHoverAction
-      actionPlacerStyles={{ right: 0 }}
-      action={
-        <IconButton
-          title="Delete task"
-          kind="secondary"
-          icon={<TrashBinIcon />}
-          onClick={() => {
-            mutate({
-              tasks: tasks.filter((task) => task.id !== id),
-            })
-          }}
-        />
-      }
-      render={() => (
-        <ChecklistItem
-          shouldCrossOut
-          style={{ width: '100%' }}
-          onChange={() => {
-            mutate({
-              tasks: tasks.map((task) => {
-                if (task.id === id) {
-                  return {
-                    ...task,
-                    isCompleted: !isCompleted,
-                  }
+    <Container>
+      <TaskItemFrame>
+        <Check isInteractive forwardedAs="label" value={value}>
+          <InvisibleHTMLCheckbox
+            value={value}
+            onChange={() => {
+              updateTask({
+                id: task.id,
+                fields: {
+                  completedAt: task.completedAt ? null : Date.now(),
+                },
+              })
+            }}
+          />
+        </Check>
+        <EditableTaskName />
+      </TaskItemFrame>
+      {isHoverEnabled ? (
+        <OnHoverActions>
+          <ManageTaskDeadline
+            render={({ value, onChange, options }) => (
+              <ExpandableSelector
+                openerContent={
+                  <IconWrapper style={{ fontSize: 18 }}>
+                    <CalendarIcon />
+                  </IconWrapper>
                 }
-                return task
-              }),
-            })
-          }}
-          value={isCompleted}
-          name={name}
-        />
+                floatingOptionsWidthSameAsOpener={false}
+                style={{ height: '100%', padding: 8 }}
+                value={value}
+                onChange={onChange}
+                options={options}
+                getOptionKey={(option) => option}
+                renderOption={(option) => (
+                  <Text key={option}>{deadlineName[option]}</Text>
+                )}
+              />
+            )}
+          />
+          <DeleteTask />
+        </OnHoverActions>
+      ) : (
+        <ManageTaskSlideover />
       )}
-    />
+    </Container>
   )
 }

@@ -10,6 +10,7 @@ import { Text } from '@lib/ui/text'
 import { TreeFilter } from '@lib/ui/tree/TreeFilter'
 
 import { HabitItem } from './HabitItem'
+import { useIsScreenWidthLessThan } from '@lib/ui/hooks/useIsScreenWidthLessThan'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -74,16 +75,20 @@ export const CuratedHabits = () => {
         })),
     }))
 
+  const isSmallScreen = useIsScreenWidthLessThan(800)
+
   return (
     <Container>
-      <FilterWrapper>
-        <TreeFilter
-          tree={habitTree}
-          renderName={(value) => capitalizeFirstLetter(value.id)}
-          value={path}
-          onChange={setPath}
-        />
-      </FilterWrapper>
+      {!isSmallScreen && (
+        <FilterWrapper>
+          <TreeFilter
+            tree={habitTree}
+            renderName={(value) => capitalizeFirstLetter(value.id)}
+            value={path}
+            onChange={setPath}
+          />
+        </FilterWrapper>
+      )}
       <Content>
         <Text weight="bold" size={24}>
           {capitalizeFirstLetter(node.value.id)} habits{' '}

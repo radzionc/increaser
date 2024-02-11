@@ -7,15 +7,7 @@ import {
 import { MS_IN_SEC } from '@lib/utils/time'
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-import { Habit } from '@increaser/entities/Habit'
-
-const getNewHabitOrder = (habits: Habit[]) => {
-  if (habits.length === 0) {
-    return 0
-  }
-
-  return Math.min(...habits.map(({ order }) => order)) - 10
-}
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const useCreateHabitMutation = () => {
   const { habits } = useAssertUserState()
@@ -37,7 +29,7 @@ export const useCreateHabitMutation = () => {
         color,
         emoji,
         name,
-        order: getNewHabitOrder(Object.values(habits)),
+        order: getLastItemOrder(Object.values(habits).map((h) => h.order)),
       }
 
       const habit = {

@@ -30,7 +30,7 @@ export const HabitsProgress = () => {
         const habitDate = toHabitDate(new Date(dayTimestamp))
 
         return (
-          <VStack justifyContent="end" fullHeight key={index} gap={2}>
+          <VStack fullHeight key={index} gap={2}>
             {habits.map((habit, habitIndex) => {
               const isSuccess = new Set(habit.successes).has(habitDate)
               const hasExisted =

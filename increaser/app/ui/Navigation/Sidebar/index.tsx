@@ -25,6 +25,7 @@ export const Sidebar = () => {
         <VStack fullWidth gap={20}>
           <VStack fullWidth>
             <NavigationToInternalPage path={AppPath.Home} />
+            <NavigationToInternalPage path={AppPath.Tasks} />
             <NavigationToInternalPage path={AppPath.Capacity} />
             <NavigationToInternalPage path={AppPath.Habits} />
             <NavigationToInternalPage path={AppPath.Projects} />

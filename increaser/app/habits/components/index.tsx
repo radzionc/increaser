@@ -17,6 +17,7 @@ import {
 } from './HabitsView'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { Page } from '@lib/next-ui/Page'
+import { RequiresOnboarding } from '../../onboarding/RequiresOnboarding'
 
 export const HabitsPage: Page = () => {
   return (
@@ -27,23 +28,25 @@ export const HabitsPage: Page = () => {
           <HabitsEducationBanner />
           <ErrorBoundary fallback={<ErrorFallbackCard />}>
             <UserStateOnly>
-              <RenderHabitsView
-                my={() => (
-                  <UniformColumnGrid
-                    style={{ alignItems: 'start' }}
-                    gap={40}
-                    maxColumns={2}
-                    minChildrenWidth={320}
-                  >
-                    <VStack gap={20}>
-                      <CheckTodayHabitsCard />
-                      <CheckYesterdayHabits />
-                    </VStack>
-                    <ActiveHabits />
-                  </UniformColumnGrid>
-                )}
-                explore={() => <CuratedHabits />}
-              />
+              <RequiresOnboarding>
+                <RenderHabitsView
+                  my={() => (
+                    <UniformColumnGrid
+                      style={{ alignItems: 'start' }}
+                      gap={40}
+                      maxColumns={2}
+                      minChildrenWidth={320}
+                    >
+                      <VStack gap={20}>
+                        <CheckTodayHabitsCard />
+                        <CheckYesterdayHabits />
+                      </VStack>
+                      <ActiveHabits />
+                    </UniformColumnGrid>
+                  )}
+                  explore={() => <CuratedHabits />}
+                />
+              </RequiresOnboarding>
             </UserStateOnly>
           </ErrorBoundary>
         </VStack>

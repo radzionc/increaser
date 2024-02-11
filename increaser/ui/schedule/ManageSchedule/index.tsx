@@ -6,9 +6,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { ManageDayMoment } from './ManageDayMoment'
 import { TimeDistance } from '@lib/ui/time/TimeDistance'
 
-const Wrapper = styled.div`
-  flex: 1;
-`
+const Wrapper = styled.div``
 
 const gridMinWidth = 520
 

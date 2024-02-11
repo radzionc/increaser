@@ -69,7 +69,11 @@ export const TimeDistributionPanel = () => {
             <HStack wrap="wrap" alignItems="center" gap={8}>
               <HStackSeparatedBy separator={slashSeparator}>
                 <Text color="regular" as="span">
-                  {formatDuration(total / weeks.length, 's', { maxUnit: 'h' })}
+                  {total
+                    ? formatDuration(total / weeks.length, 's', {
+                        maxUnit: 'h',
+                      })
+                    : '-'}
                 </Text>
                 <Text color="shy" as="span">
                   week

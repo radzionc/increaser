@@ -9,6 +9,7 @@ import {
   defaultWeekTimeAllocation,
 } from './WeekTimeAllocation'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
+import { Task } from './Task'
 
 export interface Set {
   start: number
@@ -19,19 +20,7 @@ export interface Set {
 interface AppSumo {
   code: string
 }
-
-export interface Task {
-  startedAt: number
-  id: string
-  name: string
-  isCompleted: boolean
-}
-
-export const primaryGoals = ['workMore', 'workLess', 'awareness'] as const
-export type PrimaryGoal = (typeof primaryGoals)[number]
-
 export type User = DayMoments & {
-  primaryGoal: PrimaryGoal
   id: string
   email: string
   country?: CountryCode
@@ -40,7 +29,7 @@ export type User = DayMoments & {
   registrationDate: number
   projects: Project[]
   habits: Record<string, Habit>
-  tasks: Task[]
+  tasks: Record<string, Task>
   freeTrialEnd: number
 
   weekTimeAllocation: WeekTimeAllocation
@@ -60,6 +49,8 @@ export type User = DayMoments & {
   updatedAt: number
 
   sumbittedHabitsAt?: number
+
+  finishedOnboardingAt?: number
 
   subscription?: Subscription
   lifeTimeDeal?: LifeTimeDeal
@@ -91,7 +82,6 @@ export const userDefaultFields: Pick<
   | 'projects'
   | 'habits'
   | 'weekTimeAllocation'
-  | 'primaryGoal'
   | 'isAnonymous'
   | 'wakeUpAt'
   | 'firstMealAt'
@@ -102,11 +92,10 @@ export const userDefaultFields: Pick<
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
-  tasks: [],
+  tasks: {},
   projects: [],
   habits: {},
   weekTimeAllocation: defaultWeekTimeAllocation,
-  primaryGoal: 'workMore',
   isAnonymous: true,
   ...dayMomentsDefaultValues,
 }

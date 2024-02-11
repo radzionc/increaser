@@ -14,6 +14,9 @@ import { redeemAppSumoCode } from '../membership/appSumo/resolvers/redeemAppSumo
 import { createHabit } from '../habits/resolvers/createHabit'
 import { updateHabit } from '../habits/resolvers/updateHabit'
 import { deleteHabit } from '../habits/resolvers/deleteHabit'
+import { createTask } from '../tasks/resolvers/createTask'
+import { updateTask } from '../tasks/resolvers/updateTask'
+import { deleteTask } from '../tasks/resolvers/deleteTask'
 import { trackHabit } from '../habits/resolvers/trackHabit'
 import { addSet } from '../sets/resolvers/addSet'
 import { editLastSet } from '../sets/resolvers/editLastSet'
@@ -39,4 +42,7 @@ export const implementation: ApiImplementation = {
   addSet,
   editLastSet,
   removeLastSet,
+  createTask,
+  updateTask,
+  deleteTask,
 }

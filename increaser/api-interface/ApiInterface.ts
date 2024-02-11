@@ -6,6 +6,7 @@ import { Project } from '@increaser/entities/Project'
 import { Subscription } from '@increaser/entities/Subscription'
 import { Set, User, UserEditableFields } from '@increaser/entities/User'
 import { ApiMethod } from './ApiMethod'
+import { Task } from '@increaser/entities/Task'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -69,6 +70,16 @@ export interface ApiInterface {
   deleteProject: ApiMethod<{ id: string }, undefined>
 
   redeemAppSumoCode: ApiMethod<{ code: string }, undefined>
+
+  createTask: ApiMethod<Task, Task>
+  updateTask: ApiMethod<
+    {
+      id: string
+      fields: Partial<Omit<Task, 'id'>>
+    },
+    Task
+  >
+  deleteTask: ApiMethod<{ id: string }, undefined>
 
   createHabit: ApiMethod<Omit<Habit, 'successes'>, Habit>
   updateHabit: ApiMethod<

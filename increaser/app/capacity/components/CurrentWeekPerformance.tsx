@@ -8,7 +8,6 @@ import { Text } from '@lib/ui/text'
 import { MS_IN_MIN } from '@lib/utils/time'
 
 import { CurrentWeekDistribution } from './CurrentWeekDistribution'
-import { CurrentWeekProgressBar } from './CurrentWeekProgressBar'
 import { ProjectsGoals } from './ProjectsGoals'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
@@ -29,7 +28,6 @@ export const CurrentWeekPerformance = () => {
                 {Math.round(convertDuration(doneMinutes, 'min', 'h'))}h
               </Text>
             </HStack>
-            <CurrentWeekProgressBar />
           </VStack>
         }
       >

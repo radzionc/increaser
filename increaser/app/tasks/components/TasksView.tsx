@@ -1,45 +1,29 @@
-import { useBoolean } from '@lib/ui/hooks/useBoolean'
-import { TitledSection } from '@lib/ui/Layout/TitledSection'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { getViewSetup } from '@lib/ui/view/getViewSetup'
+import { PageTitleNavigation } from '@lib/ui/navigation/PageTitleNavigation'
 
-import { AddTask } from './AddTask'
-import { AddTaskButton } from './AddTaskButton'
-import { CurrentTaskProvider } from './CurrentTaskProvider'
-import { TaskItem } from './TaskItem'
+export const tasksViews = ['todo', 'done'] as const
+export type TasksView = (typeof tasksViews)[number]
 
-export const TasksView = () => {
-  const { tasks } = useAssertUserState()
+export const {
+  ViewProvider: TasksViewProvider,
+  useView: useTasksView,
+  RenderView: RenderTasksView,
+} = getViewSetup<TasksView>('todo', 'tasks')
 
-  const [isCreatingTask, { set: startCreatingTask, unset: stopCreatingTask }] =
-    useBoolean(false)
+const taskViewName: Record<TasksView, string> = {
+  todo: 'To Do',
+  done: 'Done',
+}
+
+export const TasksViewSelector = () => {
+  const { view, setView } = useTasksView()
 
   return (
-    <TitledSection
-      title={
-        <HStack gap={8}>
-          <Text color="regular">Tasks</Text>
-          {tasks.length > 0 && (
-            <Text color="supporting" as="span">
-              {tasks.filter((task) => task.isCompleted).length} / {tasks.length}
-            </Text>
-          )}
-        </HStack>
-      }
-    >
-      <VStack gap={16}>
-        {tasks.map((task) => (
-          <CurrentTaskProvider value={task} key={task.id}>
-            <TaskItem />
-          </CurrentTaskProvider>
-        ))}
-        {isCreatingTask ? (
-          <AddTask onFinish={stopCreatingTask} />
-        ) : (
-          <AddTaskButton onClick={startCreatingTask} />
-        )}
-      </VStack>
-    </TitledSection>
+    <PageTitleNavigation
+      value={view}
+      options={tasksViews}
+      onChange={setView}
+      getOptionName={(option) => taskViewName[option]}
+    />
   )
 }

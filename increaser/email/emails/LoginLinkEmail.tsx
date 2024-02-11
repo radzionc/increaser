@@ -50,7 +50,7 @@ export const LoginLinkEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://increaser.org/images/logo.png`}
+          src={`https://increaser.org/images/icon/favicon-196.png`}
           width="68"
           height="68"
           alt={productName}

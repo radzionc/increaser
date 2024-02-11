@@ -2,18 +2,13 @@ import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
 import { FocusSessionForm } from '@increaser/app/focus/components/FocusSessionForm'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import styled from 'styled-components'
-import { TasksView } from '@increaser/app/tasks/components/TasksView'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { Panel } from '@lib/ui/panel/Panel'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { VStack } from '@lib/ui/layout/Stack'
-import { AllocationOnboarding } from '@increaser/app/weekTimeAllocation/components/AllocationOnboarding'
 
 import { NoSetsHomeTitle } from './NoSetsHomeTitle'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { SubmitYesterdayHabits } from '@increaser/app/habits/components/SubmitYesterdayHabits'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
-import { CheckTodayHabits } from '@increaser/ui/habits/CheckTodayHabits'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 const Container = styled.div`
@@ -60,12 +55,6 @@ export const HomePageContent = () => {
           </>
         )}
         <SubmitYesterdayHabits />
-        <Panel kind="secondary">
-          <SeparatedByLine gap={20}>
-            <TasksView />
-            <CheckTodayHabits />
-          </SeparatedByLine>
-        </Panel>
       </VStack>
     </VStack>
   )
@@ -74,7 +63,6 @@ export const HomePageContent = () => {
 
   return (
     <>
-      <AllocationOnboarding />
       <ElementSizeAware
         render={({ size, setElement }) => {
           const shouldBeInOneColumn = size && size.width < 800

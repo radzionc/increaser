@@ -5,8 +5,13 @@ import { SetsExplorerDays } from './SetsExplorerDays'
 import { SetsExplorerStats } from './SetsExplorerStats'
 import { SetsChart } from './SetsChart'
 import { Line } from '@lib/ui/layout/Line'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 export const SetsExplorer = () => {
+  const { sets } = useAssertUserState()
+  if (isEmpty(sets)) return null
+
   return (
     <SetsExplorerProvider>
       <VStack gap={40}>
