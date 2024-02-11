@@ -108,7 +108,13 @@ export const TasksToDo = () => {
           </VStack>
         </VStack>
       )}
-      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+      renderItem={({
+        item,
+        draggableProps,
+        dragHandleProps,
+        isDragging,
+        isDraggingEnabled,
+      }) => {
         const content = (
           <CurrentTaskProvider value={item} key={item.id}>
             <TaskItem />
@@ -135,7 +141,11 @@ export const TasksToDo = () => {
         )
         if (isHoverEnabled) {
           return (
-            <OnHoverDragContainer isDragging={isDragging} {...draggableProps}>
+            <OnHoverDragContainer
+              isDraggingEnabled={isDraggingEnabled}
+              isDragging={isDragging}
+              {...draggableProps}
+            >
               {dragHandle}
               {content}
             </OnHoverDragContainer>
