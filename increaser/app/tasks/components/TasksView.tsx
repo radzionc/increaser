@@ -8,7 +8,10 @@ export const {
   ViewProvider: TasksViewProvider,
   useView: useTasksView,
   RenderView: RenderTasksView,
-} = getViewSetup<TasksView>('todo', 'tasks')
+} = getViewSetup<TasksView>({
+  defaultView: 'todo',
+  name: 'tasks',
+})
 
 const taskViewName: Record<TasksView, string> = {
   todo: 'To Do',

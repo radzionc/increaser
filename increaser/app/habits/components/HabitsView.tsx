@@ -8,7 +8,10 @@ export const {
   ViewProvider: HabitsViewProvider,
   useView: useHabitsView,
   RenderView: RenderHabitsView,
-} = getViewSetup<HabitsView>('my', 'habits')
+} = getViewSetup<HabitsView>({
+  defaultView: 'my',
+  name: 'habits',
+})
 
 const habitViewName: Record<HabitsView, string> = {
   my: 'My Habits',

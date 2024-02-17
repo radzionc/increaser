@@ -1,5 +1,4 @@
-import { FormEvent } from 'react'
-import { useForm } from 'react-hook-form'
+import { FormEvent, useState } from 'react'
 import { useKey } from 'react-use'
 import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
@@ -11,10 +10,6 @@ import { useCreateTaskMutation } from '../api/useCreateTaskMutation'
 import { TaskItemFrame } from './TaskItemFrame'
 import { TaskNameInput } from './TaskNameInput'
 
-interface TaskForm {
-  name: string
-}
-
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
   order: number
@@ -25,18 +20,13 @@ export const CreateTaskForm = ({
   deadlineType,
   order,
 }: CreateTaskFormProps) => {
-  const { register, handleSubmit, resetField } = useForm<TaskForm>({
-    mode: 'all',
-    defaultValues: {
-      name: '',
-    },
-  })
+  const [name, setName] = useState('')
 
   const { mutate } = useCreateTaskMutation()
 
   useKey('Escape', onFinish)
 
-  const createTask = ({ name }: TaskForm) => {
+  const createTask = () => {
     const startedAt = Date.now()
     const task: Task = {
       name,
@@ -46,24 +36,33 @@ export const CreateTaskForm = ({
       order,
     }
     mutate(task)
-    resetField('name')
+    setName('')
   }
 
   return (
     <div>
       <TaskItemFrame
         as="form"
-        onBlur={handleSubmit(createTask, onFinish)}
-        onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(
-          handleSubmit(createTask),
-        )}
+        onBlur={() => {
+          if (name) {
+            createTask()
+          } else {
+            onFinish()
+          }
+        }}
+        onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(() => {
+          if (name) {
+            createTask()
+          }
+        })}
       >
         <CheckStatus value={false} />
         <TaskNameInput
           placeholder="Task name"
           autoFocus
           autoComplete="off"
-          {...register('name', { required: true })}
+          onChange={(event) => setName(event.target.value)}
+          value={name}
         />
       </TaskItemFrame>
     </div>

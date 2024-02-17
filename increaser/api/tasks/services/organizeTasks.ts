@@ -1,4 +1,5 @@
 import { getUser, updateUser } from '@increaser/db/user'
+import { getRecordSize } from '@lib/utils/record/getRecordSize'
 import { recordFilter } from '@lib/utils/record/recordFilter'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
@@ -17,7 +18,7 @@ export const organizeTasks = async (userId: string) => {
     return value.completedAt >= weekStartedAt
   })
 
-  if (tasks.length !== oldTasks.length) {
+  if (getRecordSize(tasks) !== getRecordSize(oldTasks)) {
     await updateUser(userId, {
       tasks,
     })

@@ -1,4 +1,4 @@
-export interface Task {
+export type Task = {
   startedAt: number
   id: string
   name: string

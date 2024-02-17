@@ -7,8 +7,6 @@ import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { groupItems } from '@lib/utils/array/groupItems'
-import { getLastItem } from '@lib/utils/array/getLastItem'
-import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type RenderParams = {
@@ -48,13 +46,6 @@ export const ManageTaskDeadline = ({ render }: ManageTaskDeadlineProps) => {
           now,
         }),
     )
-
-    let order = 0
-    const groupTasks = groupedTasks[deadlineType] ?? []
-    if (groupTasks && !isEmpty(groupTasks)) {
-      order = getLastItem(groupTasks).order - 1
-      console.log({ groupTasks, order })
-    }
 
     mutate({
       id,

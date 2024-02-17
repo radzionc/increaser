@@ -1,31 +1,24 @@
 import { useCurrentTask } from './CurrentTaskProvider'
-import { useEffect, useState } from 'react'
 import { TaskNameInput } from './TaskNameInput'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
+import { InputDebounce } from '@lib/ui/inputs/InputDebounce'
 
 export const EditableTaskName = () => {
   const task = useCurrentTask()
 
   const { mutate: updateTask } = useUpdateTaskMutation()
 
-  useEffect(() => {
-    if (task.name === value) return
-
-    const timeout = setTimeout(() => {
-      updateTask({ id: task.id, fields: { name: value } })
-    }, 500)
-
-    return () => clearTimeout(timeout)
-  })
-
-  const [value, setValue] = useState(task.name)
-
   return (
-    <TaskNameInput
-      autoComplete="off"
-      onBlur={() => updateTask({ id: task.id, fields: { name: value } })}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
+    <InputDebounce
+      value={task.name}
+      onChange={(name) => updateTask({ id: task.id, fields: { name } })}
+      render={({ value, onChange }) => (
+        <TaskNameInput
+          autoComplete="off"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      )}
     />
   )
 }
