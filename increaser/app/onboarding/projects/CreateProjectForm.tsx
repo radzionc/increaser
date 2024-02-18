@@ -39,7 +39,7 @@ export const CreateProjectForm = () => {
   return (
     <InputContainer style={{ gap: 8 }} as="div">
       <LabelText size={16}>New project</LabelText>
-      <Panel kind="secondary" style={{ width: 'fit-content' }}>
+      <Panel kind="secondary" style={{ width: '100%' }}>
         <VStack
           gap={28}
           as="form"
@@ -78,7 +78,7 @@ export const CreateProjectForm = () => {
                 )}
               />
             </InputContainer>
-            <InputContainer style={{ width: 'fit-content' }}>
+            <InputContainer>
               <LabelText>Name</LabelText>
               <TextInput
                 placeholder="Project name"

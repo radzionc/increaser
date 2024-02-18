@@ -17,15 +17,16 @@ export const OnboardingStepEducation = () => {
   const { currentStep } = useOnboarding()
   return (
     <OnboardingSection title={onboardingStepTitle[currentStep]}>
-      <Text weight="semibold" size={18} height="large">
+      <Text weight="semibold" height="large">
         <Match
           value={currentStep}
           projects={() => (
             <>
-              Begin by adding projects to track various work activities such as
-              studying, remote work, freelancing, business, and more. This step
-              is essential to effectively monitor and analyze your productivity
-              across different types of work.
+              Initiate by setting up projects to categorize your focused
+              pursuits, like studying, remote work, freelancing, business
+              projects, or personal development. This is key to efficiently
+              monitoring and assessing your productivity in activities that
+              require sustained focus.
             </>
           )}
           workBudget={() => (
