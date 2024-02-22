@@ -2,6 +2,7 @@ import { Match } from '@lib/ui/base/Match'
 import { OnboardingStep, useOnboarding } from './OnboardingProvider'
 import { Text } from '@lib/ui/text'
 import { OnboardingSection } from './OnboardingSection'
+import { OnboardingVideo } from './OnboardingVideo'
 
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
@@ -17,23 +18,32 @@ export const OnboardingStepEducation = () => {
   const { currentStep } = useOnboarding()
   return (
     <OnboardingSection title={onboardingStepTitle[currentStep]}>
+      <OnboardingVideo />
       <Text weight="semibold" height="large">
         <Match
           value={currentStep}
           projects={() => (
             <>
-              Initiate by setting up projects to categorize your focused
-              pursuits, like studying, remote work, freelancing, business
-              projects, or personal development. This is key to efficiently
-              monitoring and assessing your productivity in activities that
-              require sustained focus.
+              Begin by adding projects that represent your focused endeavors,
+              such as studying, remote work, freelancing, or business projects.
+              This initial step is crucial as it allows you to organize your
+              work sessions, providing clarity and structure to your day. By
+              categorizing your activities, you'll be able to analyze your time
+              allocation and identify areas for improvement, ultimately
+              enhancing your productivity in tasks that demand concentration. Go
+              ahead and add your primary focused activities now, and keep in
+              mind, you can always introduce more projects later!
             </>
           )}
           workBudget={() => (
             <>
-              Set your work budget by selecting the desired number of working
-              hours for weekdays and weekends. This ensures a balanced approach
-              to managing your time and commitments effectively.
+              Define your work week by establishing a customized work budget,
+              creating harmony between professional and personal time. Decide on
+              your work hours for weekdays and weekends, fostering a routine
+              that maintains focus and promotes overall well-being. This
+              deliberate approach enables you to prioritize your time and energy
+              effectively. Set your work budget now to take charge of your
+              schedule and enhance your productivity.
             </>
           )}
           weeklyGoals={() => (
