@@ -1,15 +1,22 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { VStack } from '@lib/ui/layout/Stack'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { WeeklyGoalItem } from './WeeklyGoalItem'
 import { CreateWeeklyGoalForm } from './CreateWeeklyGoalForm'
+import { ProjectsGoalsVisualization } from '../../capacity/components/ProjectsGoalsVisualization'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { sum } from '@lib/utils/array/sum'
 
 export const WeeklyGoalsOnboardingStep = () => {
   const { activeProjects } = useProjects()
+  const { weekTimeAllocation } = useAssertUserState()
+  const totalMinutesAvailable = sum(weekTimeAllocation)
+  const allocatedMinutes = sum(
+    activeProjects.map((p) => p.allocatedMinutesPerWeek),
+  )
 
   const projectsWithGoals = activeProjects.filter(
     (project) => project.allocatedMinutesPerWeek,
@@ -17,19 +24,27 @@ export const WeeklyGoalsOnboardingStep = () => {
 
   return (
     <VStack style={{ maxWidth: 400 }} gap={40}>
-      <CreateWeeklyGoalForm />
-      <InputContainer as="div" style={{ gap: 8 }}>
+      <InputContainer style={{ gap: 8 }} as="div">
+        <LabelText size={16}>New weekly goal</LabelText>
+        {allocatedMinutes < totalMinutesAvailable ? (
+          <CreateWeeklyGoalForm />
+        ) : (
+          <ShyInfoBlock>You've allocated all your time!</ShyInfoBlock>
+        )}
+      </InputContainer>
+      <InputContainer as="div" style={{ gap: 16 }}>
         <LabelText size={16}>Your weekly goals</LabelText>
+        <ProjectsGoalsVisualization />
         {isEmpty(projectsWithGoals) ? (
           <ShyInfoBlock>
             With which project do you want to be more consistent?
           </ShyInfoBlock>
         ) : (
-          <UniformColumnGrid gap={16} minChildrenWidth={240}>
+          <VStack gap={8}>
             {projectsWithGoals.map((value) => (
               <WeeklyGoalItem value={value} key={value.id} />
             ))}
-          </UniformColumnGrid>
+          </VStack>
         )}
       </InputContainer>
     </VStack>

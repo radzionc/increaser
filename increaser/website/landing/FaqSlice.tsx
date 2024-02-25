@@ -24,7 +24,7 @@ export const FaqSlice = () => {
             you to 'install' it directly on your device for an app-like
             experience. To do this, simply navigate to{' '}
             <AppLink to={AppPath.Home}>
-              <TextButton text={productName} />
+              <TextButton>{productName}</TextButton>
             </AppLink>{' '}
             on your mobile browser, and select 'Add to Home Screen' from your
             browser's menu. This will add {productName} to your device, making

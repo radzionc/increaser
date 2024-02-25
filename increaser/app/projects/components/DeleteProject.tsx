@@ -56,8 +56,9 @@ export const DeleteProject = () => {
                     })
                     onClose()
                   }}
-                  text="make it inactive."
-                />
+                >
+                  make it inactive.
+                </TextButton>
               </Text>
             )}
           </VStack>

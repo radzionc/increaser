@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { toSizeUnit } from '../../../css/toSizeUnit'
 import { textInputPadding } from '../../../css/textInput'
 import { dropdownInputConfig } from '../config'
+import { centerContent } from '../../../css/centerContent'
 
 export const FixedOptionsInputIdentifierWrapper = styled.div`
   position: absolute;
@@ -9,4 +10,5 @@ export const FixedOptionsInputIdentifierWrapper = styled.div`
   left: ${toSizeUnit(textInputPadding)};
   pointer-events: none;
   display: flex;
+  ${centerContent};
 `
