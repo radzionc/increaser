@@ -89,7 +89,6 @@ export const OnboardingStepEducation = () => {
           )}
         />
       </Text>
-      <Line />
       <Match
         value={currentStep}
         projects={() => null}
@@ -97,12 +96,16 @@ export const OnboardingStepEducation = () => {
         weeklyGoals={() => null}
         schedule={() => null}
         dailyHabits={() => (
-          <VStack gap={28}>
-            <Text color="shy" weight="bold">
-              Habit ideas
-            </Text>
-            <CuratedHabits />
-          </VStack>
+          <>
+            <Line />
+
+            <VStack gap={28}>
+              <Text color="shy" weight="bold">
+                Habit ideas
+              </Text>
+              <CuratedHabits />
+            </VStack>
+          </>
         )}
         publicProfile={() => null}
         tasks={() => null}

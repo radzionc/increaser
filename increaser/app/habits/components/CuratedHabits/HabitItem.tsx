@@ -1,5 +1,5 @@
 import { useCreateHabitMutation } from '@increaser/app/habits/api/useCreateHabitMutation'
-import { HabitInfo } from '@increaser/app/habits/data/habits'
+import { HabitInfo, habitTagColors } from '@increaser/app/habits/data/habits'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import styled, { useTheme } from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'
@@ -11,6 +11,7 @@ import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
+import { ValueComponentProps } from '@lib/ui/props'
 
 const Added = styled.div`
   background: transparent;
@@ -20,26 +21,13 @@ const Added = styled.div`
   ${centerContent};
 `
 
-interface HabitItemTag {
-  name: string
-  color: number
-}
-
-interface HabitItemProps extends HabitInfo {
-  tags: HabitItemTag[]
-}
-
 const Container = styled(VStack)`
   min-width: 320px;
   width: 100%;
 `
 
-export const HabitItem = ({
-  name,
-  emoji,
-  description,
-  tags,
-}: HabitItemProps) => {
+export const HabitItem = ({ value }: ValueComponentProps<HabitInfo>) => {
+  const { emoji, tags, name, description } = value
   const { habits } = useHabits()
   const habitsNames = new Set(habits.map((habit) => habit.name))
   const isHabitAdded = habitsNames.has(name)
@@ -65,9 +53,9 @@ export const HabitItem = ({
             {name}
           </Text>
           <HStack gap={8} wrap="wrap">
-            {tags.map(({ color, name }) => (
-              <Tag $color={getLabelColor(color)} key={name}>
-                {name}
+            {tags.map((tag) => (
+              <Tag $color={getLabelColor(habitTagColors[tag])} key={name}>
+                {tag}
               </Tag>
             ))}
           </HStack>
