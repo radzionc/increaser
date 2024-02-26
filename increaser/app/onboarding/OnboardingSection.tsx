@@ -18,6 +18,7 @@ const Container = styled(VStack)`
 const Content = styled(VStack)`
   flex: 1;
   overflow-y: auto;
+  gap: 28px;
 `
 
 type OnboardingSectionProps = ComponentWithChildrenProps &

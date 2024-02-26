@@ -1,32 +1,18 @@
 import { habitRecord } from '@increaser/app/habits/data/habits'
 import { HabitTreeNode, habitTree } from '@increaser/app/habits/data/habitTree'
 import { useMemo, useState } from 'react'
-import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { getTreeNode, getTreeValues } from '@lib/utils/tree'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 import styled from 'styled-components'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
-import { TreeFilter } from '@lib/ui/tree/TreeFilter'
+import { HStack } from '@lib/ui/layout/Stack'
 
 import { HabitItem } from './HabitItem'
-import { useIsScreenWidthLessThan } from '@lib/ui/hooks/useIsScreenWidthLessThan'
 
 const Container = styled(HStack)`
   width: 100%;
   flex-wrap: wrap;
   gap: 40px;
   align-items: start;
-`
-
-const Content = styled(VStack)`
-  gap: 20px;
-  flex: 1;
-`
-
-const FilterWrapper = styled.div`
-  position: sticky;
-  top: 0;
 `
 
 // turn into tree helper
@@ -51,7 +37,7 @@ const getCategoriesColors = (
 const defaultColor = 3
 
 export const CuratedHabits = () => {
-  const [path, setPath] = useState<number[]>([])
+  const [path] = useState<number[]>([])
 
   const node = getTreeNode(habitTree, path)
 
@@ -75,31 +61,11 @@ export const CuratedHabits = () => {
         })),
     }))
 
-  const isSmallScreen = useIsScreenWidthLessThan(800)
-
   return (
     <Container>
-      {!isSmallScreen && (
-        <FilterWrapper>
-          <TreeFilter
-            tree={habitTree}
-            renderName={(value) => capitalizeFirstLetter(value.id)}
-            value={path}
-            onChange={setPath}
-          />
-        </FilterWrapper>
-      )}
-      <Content>
-        <Text weight="bold" size={24}>
-          {capitalizeFirstLetter(node.value.id)} habits{' '}
-          <Text as="span" color="supporting">
-            ({habits.length})
-          </Text>
-        </Text>
-        {habits.map((habit) => (
-          <HabitItem {...habit} key={habit.id} />
-        ))}
-      </Content>
+      {habits.map((habit) => (
+        <HabitItem {...habit} key={habit.id} />
+      ))}
     </Container>
   )
 }

@@ -31,6 +31,7 @@ interface HabitItemProps extends HabitInfo {
 
 const Container = styled(VStack)`
   min-width: 320px;
+  width: 100%;
 `
 
 export const HabitItem = ({
@@ -52,7 +53,12 @@ export const HabitItem = ({
 
   return (
     <Container gap={8}>
-      <HStack alignItems="start" gap={8} justifyContent="space-between">
+      <HStack
+        fullWidth
+        alignItems="start"
+        gap={8}
+        justifyContent="space-between"
+      >
         <VStack gap={4}>
           <Text weight="bold">
             <EmojiTextPrefix emoji={emoji} />

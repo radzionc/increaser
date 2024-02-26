@@ -3,6 +3,9 @@ import { OnboardingStep, useOnboarding } from './OnboardingProvider'
 import { Text } from '@lib/ui/text'
 import { OnboardingSection } from './OnboardingSection'
 import { OnboardingVideo } from './OnboardingVideo'
+import { CuratedHabits } from '../habits/components/CuratedHabits'
+import { Line } from '@lib/ui/layout/Line'
+import { VStack } from '@lib/ui/layout/Stack'
 
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
@@ -86,6 +89,24 @@ export const OnboardingStepEducation = () => {
           )}
         />
       </Text>
+      <Line />
+      <Match
+        value={currentStep}
+        projects={() => null}
+        workBudget={() => null}
+        weeklyGoals={() => null}
+        schedule={() => null}
+        dailyHabits={() => (
+          <VStack gap={28}>
+            <Text color="shy" weight="bold">
+              Habit ideas
+            </Text>
+            <CuratedHabits />
+          </VStack>
+        )}
+        publicProfile={() => null}
+        tasks={() => null}
+      />
     </OnboardingSection>
   )
 }
