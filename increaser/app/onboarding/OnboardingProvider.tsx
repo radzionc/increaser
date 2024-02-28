@@ -9,8 +9,8 @@ export const onboardingSteps = [
   'weeklyGoals',
   'schedule',
   'dailyHabits',
-  'publicProfile',
   'tasks',
+  'publicProfile',
 ] as const
 export type OnboardingStep = (typeof onboardingSteps)[number]
 
@@ -46,7 +46,9 @@ export const OnboardingProvider = ({
       setCurrentStep(step)
       const previousStep = onboardingSteps[onboardingSteps.indexOf(step) - 1]
       if (previousStep && !completedSteps.includes(previousStep)) {
-        analytics.trackEvent(`Completed ${previousStep} onboarding step`)
+        analytics.trackEvent(
+          `Completed onboarding step #${onboardingSteps.indexOf(previousStep)}`,
+        )
         setCompletedSteps((prev) => [...prev, previousStep])
       }
     },
