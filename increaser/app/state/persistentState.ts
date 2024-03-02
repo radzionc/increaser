@@ -24,8 +24,6 @@ export enum PersistentStateKey {
   TwoDayRuleEducation = 'twoDayRuleEducationWasAt',
   FocusDurationEducationWasAt = 'focusDurationEducationWasAt',
   FocusSoundsView = 'focusSoundsView',
-  ScheduleEducationWasAt = 'scheduleEducationWasAt',
-  HabitsEducationWasAt = 'habitsEducationWasAt',
   PathAttemptedWhileUnauthenticated = 'pathAttemptedWhileUnauthenticated',
   ReactQueryState = 'reactQueryState',
   IncludeTodayInSetsExplorer = 'includeTodayInSetsExplorer',

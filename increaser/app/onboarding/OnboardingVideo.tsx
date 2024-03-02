@@ -6,6 +6,8 @@ const onboardingYouTubeVideo: Partial<Record<OnboardingStep, string>> = {
   workBudget: 'https://youtu.be/TYsp-iDsBuM',
   weeklyGoals: 'https://youtu.be/T9C2mJk-LB4',
   schedule: 'https://youtu.be/__zDYzlKPrE',
+  dailyHabits: 'https://youtu.be/e2AQa9uHGz8',
+  tasks: 'https://youtu.be/IYMY2W4gDkw',
 }
 
 export const OnboardingVideo = () => {
