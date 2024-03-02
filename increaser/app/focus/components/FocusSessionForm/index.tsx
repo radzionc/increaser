@@ -1,9 +1,7 @@
 import { suggestFocusDuration } from '@increaser/app/focus/FocusDuration'
-import { FocusDurationEducation } from '@increaser/app/home/components/FocusDurationEducation'
 import { CurrentProjectProvider } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
 import { suggestProject } from '@increaser/app/projects/utils/suggestProject'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useHaveFinishedASet } from '@increaser/app/sets/hooks/useHaveFinishedASet'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Button } from '@lib/ui/buttons/Button'
@@ -29,8 +27,12 @@ const Container = styled(Panel)`
   isolation: isolate;
 `
 
+type FocusSessionFormProps = {
+  onFocusStart?: () => void
+}
+
 // todo: warning when the workday end is close
-export const FocusSessionForm = () => {
+export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
   const todayStartedAt = useStartOfDay()
   const { finishWorkAt } = useAssertUserState()
   const todaySets = useTodaySets()
@@ -38,8 +40,6 @@ export const FocusSessionForm = () => {
   const { start } = useFocus()
 
   const lastInteractionWasAt = useRef<number>()
-
-  const haveFinishedASet = useHaveFinishedASet()
 
   const [focusDuration, setFocusDuration] = useState<FocusDuration>(
     suggestFocusDuration({
@@ -95,7 +95,7 @@ export const FocusSessionForm = () => {
   }
 
   return (
-    <Container style={{ position: 'relative' }} kind="regular">
+    <Container style={{ position: 'relative' }} kind="secondary">
       <VStack gap={32}>
         <FocusProjectInput
           options={activeProjects}
@@ -116,7 +116,10 @@ export const FocusSessionForm = () => {
           }}
         />
         <MemberOnlyAction
-          action={() => start({ projectId, duration: focusDuration })}
+          action={() => {
+            start({ projectId, duration: focusDuration })
+            onFocusStart?.()
+          }}
           render={({ action }) => (
             <Button kind="reversed" size="l" onClick={action}>
               <Text as="div" style={{ wordBreak: 'keep-all' }}>
@@ -128,7 +131,6 @@ export const FocusSessionForm = () => {
             </Button>
           )}
         />
-        {!haveFinishedASet && <FocusDurationEducation />}
       </VStack>
       <WorkdayFinished />
     </Container>

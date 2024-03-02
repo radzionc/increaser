@@ -8,6 +8,7 @@ import { ScheduleOnboardingStep } from './ScheduleOnboardingStep'
 import { PublicProfileOnboardingStep } from './PublicProfileOnboardingStep'
 import { TasksOnboardingStep } from './TasksOnboardingStep'
 import { HabitsOnboardingStep } from './habits/HabitsOnboardingStep'
+import { FocusOnboardingStep } from './focus/FocusOnboardingStep'
 
 export const OnboardingStepFormContent = () => {
   const { currentStep } = useOnboarding()
@@ -22,6 +23,7 @@ export const OnboardingStepFormContent = () => {
       dailyHabits={() => <HabitsOnboardingStep />}
       publicProfile={() => <PublicProfileOnboardingStep />}
       tasks={() => <TasksOnboardingStep />}
+      focus={() => <FocusOnboardingStep />}
     />
   )
 }

@@ -14,6 +14,8 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { Button } from '@lib/ui/buttons/Button'
+import { suggestLabelColor } from '@lib/ui/theme/suggestLabelColor'
+import { useCallback } from 'react'
 
 type ProjectFormShape = Pick<Project, 'name' | 'emoji' | 'color'>
 
@@ -22,14 +24,18 @@ export const CreateProjectForm = () => {
 
   const { mutate: createProject } = useCreateProjectMutation()
 
-  const { usedColors, defaultColorOption } =
-    usePaletteColorOptions(activeProjects)
+  const { usedColors } = usePaletteColorOptions(activeProjects)
 
-  const getDefaultValues = () => ({
-    name: '',
-    emoji: getRandomElement(defaultEmojis),
-    color: defaultColorOption,
-  })
+  const getDefaultValues = useCallback(
+    () => ({
+      name: '',
+      emoji: getRandomElement(defaultEmojis),
+      color: suggestLabelColor({
+        used: activeProjects.map((project) => project.color),
+      }),
+    }),
+    [activeProjects],
+  )
 
   const { control, register, handleSubmit, reset } = useForm<ProjectFormShape>({
     mode: 'onSubmit',

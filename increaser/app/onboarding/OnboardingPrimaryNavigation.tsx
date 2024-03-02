@@ -4,8 +4,6 @@ import { onboardingSteps, useOnboarding } from './OnboardingProvider'
 import { Button } from '@lib/ui/buttons/Button'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
-import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
-import { analytics } from '../analytics'
 import { match } from '@lib/utils/match'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { OnboardingStep } from './OnboardingProvider'
@@ -18,10 +16,8 @@ const Container = styled(HStack)`
 `
 
 export const OnboardingPrimaryNavigation = () => {
-  const { currentStep, setCurrentStep } = useOnboarding()
+  const { currentStep, setCurrentStep, finishOnboarding } = useOnboarding()
   const { push } = useRouter()
-
-  const { mutate: updateUser } = useUpdateUserMutation()
 
   const { activeProjects } = useProjects()
 
@@ -50,9 +46,8 @@ export const OnboardingPrimaryNavigation = () => {
           if (nextStep) {
             setCurrentStep(nextStep)
           } else {
+            finishOnboarding()
             push(AppPath.Home)
-            analytics.trackEvent('Finished onboarding')
-            updateUser({ finishedOnboardingAt: Date.now() })
           }
         }}
         isDisabled={match<OnboardingStep, string | false>(currentStep, {
@@ -66,6 +61,7 @@ export const OnboardingPrimaryNavigation = () => {
           dailyHabits: () => false,
           publicProfile: () => false,
           tasks: () => false,
+          focus: () => false,
         })}
         size="l"
       >

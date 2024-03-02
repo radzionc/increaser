@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled.div`
   position: relative;
@@ -23,6 +24,7 @@ const Container = styled.div`
   ${borderRadius.m};
   ${transition};
   height: 52px;
+  background: ${getColor('foreground')};
   border: 1px solid ${({ theme }) => theme.colors.mist.toCssValue()};
   overflow: hidden;
 `
@@ -137,7 +139,7 @@ export const ProjectGoal = () => {
                     width: toPercents(minutes / totalMinutes),
                     color: (index === weekday
                       ? colors.text
-                      : colors.mistExtra
+                      : colors.textShy
                     ).toCssValue(),
                   }}
                 >

@@ -10,6 +10,7 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 
 import { ProjectGoalBadge } from './ProjectGoalBadge'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
+import { getColor } from '@lib/ui/theme/getters'
 
 interface ProjectRadioInputProps {
   value?: string
@@ -77,7 +78,7 @@ const Option = styled.div<{
   ${transition}
   color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
   border: 1px solid ${({ theme }) => theme.colors.background.toCssValue()};
-  background: ${({ theme }) => theme.colors.background.toCssValue()};
+  background: ${getColor('foreground')};
 
   ${({ selected, theme }) =>
     selected

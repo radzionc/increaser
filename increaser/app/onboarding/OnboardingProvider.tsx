@@ -2,6 +2,7 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { createContext, useCallback, useState } from 'react'
 import { analytics } from '../analytics'
+import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
 
 export const onboardingSteps = [
   'projects',
@@ -11,6 +12,7 @@ export const onboardingSteps = [
   'dailyHabits',
   'tasks',
   'publicProfile',
+  'focus',
 ] as const
 export type OnboardingStep = (typeof onboardingSteps)[number]
 
@@ -22,12 +24,14 @@ export const onboardingStepTargetName: Record<OnboardingStep, string> = {
   dailyHabits: 'Establish daily habits',
   publicProfile: 'Create public profile',
   tasks: 'List tasks',
+  focus: 'Start focus session',
 }
 
 type OnboardingState = {
   completedSteps: OnboardingStep[]
   currentStep: OnboardingStep
   setCurrentStep: (step: OnboardingStep) => void
+  finishOnboarding: () => void
 }
 
 const OnboardingContext = createContext<OnboardingState | undefined>(undefined)
@@ -55,12 +59,20 @@ export const OnboardingProvider = ({
     [completedSteps],
   )
 
+  const { mutate: updateUser } = useUpdateUserMutation()
+
+  const finishOnboarding = useCallback(() => {
+    analytics.trackEvent('Finished onboarding')
+    updateUser({ finishedOnboardingAt: Date.now() })
+  }, [updateUser])
+
   return (
     <OnboardingContext.Provider
       value={{
         currentStep,
         setCurrentStep: onCurrentStepChange,
         completedSteps,
+        finishOnboarding,
       }}
     >
       {children}
