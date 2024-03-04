@@ -1,4 +1,5 @@
-type ProductFeatureStatus = 'idea' | 'done'
+export const productFeatureStatuses = ['idea', 'done'] as const
+export type ProductFeatureStatus = (typeof productFeatureStatuses)[number]
 
 export type ProductFeature = {
   id: string

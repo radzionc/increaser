@@ -21,7 +21,7 @@ export const proposeFeature: ApiResolver<'proposeFeature'> = async ({
       feature.description,
       `Proposed by ${email}`,
       feature.id,
-    ].join('/n/n'),
+    ].join('\n\n'),
   )
 
   await putFeature({
