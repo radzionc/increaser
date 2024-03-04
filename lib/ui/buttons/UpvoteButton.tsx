@@ -9,8 +9,9 @@ import { VStack } from '../layout/Stack'
 import { IconWrapper } from '../icons/IconWrapper'
 import { Text } from '../text'
 import { CaretUpIcon } from '../icons/CareUpIcon'
+import { ClickableComponentProps } from '../props'
 
-type UpvoteButtonProps = {
+type UpvoteButtonProps = ClickableComponentProps & {
   value: boolean
   upvotes: number
 }
@@ -34,8 +35,12 @@ const Cotainer = styled(UnstyledButton)<{ value: boolean }>`
   }
 `
 
-export const UpvoteButton = ({ value, upvotes }: UpvoteButtonProps) => (
-  <Cotainer value={value}>
+export const UpvoteButton = ({
+  value,
+  upvotes,
+  ...rest
+}: UpvoteButtonProps) => (
+  <Cotainer {...rest} value={value}>
     <VStack alignItems="center">
       <IconWrapper style={{ fontSize: 20 }}>
         <CaretUpIcon />

@@ -5,6 +5,7 @@ import { dbDocClient } from '@lib/dynamodb/client'
 import { totalScan } from '@lib/dynamodb/totalScan'
 import { getPickParams } from '@lib/dynamodb/getPickParams'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
+import { updateItem } from '@lib/dynamodb/updateItem'
 
 export const putFeature = (value: ProductFeature) => {
   const command = new PutCommand({
@@ -24,15 +25,11 @@ export const updateFeature = async (
   id: string,
   fields: Partial<ProductFeature>,
 ) => {
-  return dbDocClient.send(
-    new PutCommand({
-      TableName: tableName.features,
-      Item: {
-        id,
-        ...fields,
-      },
-    }),
-  )
+  return updateItem({
+    tableName: tableName.features,
+    key: { id },
+    fields,
+  })
 }
 
 export const getAllFeatures = async <T extends (keyof ProductFeature)[]>(

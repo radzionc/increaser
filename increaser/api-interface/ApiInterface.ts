@@ -106,7 +106,7 @@ export interface ApiInterface {
     Omit<ProductFeature, 'isApproved' | 'status' | 'proposedBy' | 'upvotedBy'>,
     undefined
   >
-  voteForFeature: ApiMethod<{ id: string; vote: boolean }, undefined>
+  voteForFeature: ApiMethod<{ id: string }, undefined>
   features: ApiMethod<undefined, ProductFeatureResponse[]>
 }
 
