@@ -43,17 +43,17 @@ resource "aws_iam_policy" "api" {
       "Action": "dynamodb:*",
       "Resource": "${aws_dynamodb_table.users.arn}"
     },
-        {
+    {
       "Sid": "AllAPIActionsOnAppSumoCodes",
       "Effect": "Allow",
       "Action": "dynamodb:*",
       "Resource": "${aws_dynamodb_table.appSumoCodes.arn}"
     },
     {
-      "Sid": "AllAPIActionsOnTasks",
+      "Sid": "AllAPIActionsOnFeatures",
       "Effect": "Allow",
       "Action": "dynamodb:*",
-      "Resource": "${data.terraform_remote_state.tasks_runner.outputs.tasks_table_arn}"
+      "Resource": "${aws_dynamodb_table.features.arn}"
     },
     {
       "Sid": "AllAPIActionsOnScoreboards",

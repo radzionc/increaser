@@ -4,6 +4,8 @@ type VariableName =
   | 'GOOGLE_CLIENT_ID'
   | 'APP_URL'
   | 'EMAIL_DOMAIN'
+  | 'TELEGRAM_BOT_TOKEN'
+  | 'TELEGRAM_CHAT_ID'
 
 export const getEnvVar = (name: VariableName): string => {
   const value = process.env[name]

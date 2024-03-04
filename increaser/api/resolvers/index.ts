@@ -21,6 +21,9 @@ import { trackHabit } from '../habits/resolvers/trackHabit'
 import { addSet } from '../sets/resolvers/addSet'
 import { editLastSet } from '../sets/resolvers/editLastSet'
 import { removeLastSet } from '../sets/resolvers/removeLastSet'
+import { proposeFeature } from '../features/resolvers/proposeFeature'
+import { features } from '../features/resolvers/features'
+import { voteForFeature } from '../features/resolvers/voteForFeature'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -45,4 +48,7 @@ export const implementation: ApiImplementation = {
   createTask,
   updateTask,
   deleteTask,
+  proposeFeature,
+  features,
+  voteForFeature,
 }
