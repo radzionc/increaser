@@ -11,7 +11,7 @@ import { ProposeFeaturePrompt } from './ProposeFeaturePrompt'
 import { ProductFeatureList } from './ProductFeatureList'
 
 const Container = styled(Panel)`
-  min-width: 360px;
+  min-width: 320px;
   flex: 1;
 `
 
@@ -36,7 +36,9 @@ export const ProductFeaturesBoard = () => {
             idea={() => <ProposeFeaturePrompt />}
             done={() => null}
           />
-          <ProductFeatureList />
+          <VStack gap={8}>
+            <ProductFeatureList />
+          </VStack>
         </VStack>
       </Container>
     </ProductFeaturesViewProvider>

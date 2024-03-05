@@ -16,9 +16,14 @@ export const ProductFeatureItem = ({
     <Panel kind="secondary">
       <VStack gap={8}>
         <HStack alignItems="start" fullWidth gap={20}>
-          <Text style={{ flex: 1 }} height="large">
-            {value.name}
-          </Text>
+          <VStack gap={8}>
+            <Text weight="semibold" style={{ flex: 1 }} height="large">
+              {value.name}
+            </Text>
+            <Text height="large" color="supporting" size={14}>
+              {value.description}
+            </Text>
+          </VStack>
           <UpvoteButton
             onClick={() => {
               mutate({

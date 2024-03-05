@@ -8,7 +8,7 @@ import { getHoverVariant } from '../theme/getHoverVariant'
 import { VStack } from '../layout/Stack'
 import { IconWrapper } from '../icons/IconWrapper'
 import { Text } from '../text'
-import { CaretUpIcon } from '../icons/CareUpIcon'
+import { CaretUpIcon } from '../icons/CaretUpIcon'
 import { ClickableComponentProps } from '../props'
 
 type UpvoteButtonProps = ClickableComponentProps & {

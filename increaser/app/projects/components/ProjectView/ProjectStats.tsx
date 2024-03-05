@@ -187,7 +187,6 @@ export const ProjectStats = () => {
           getViewName={(v) => projectStatsViewName[v]}
           activeView={view}
           onSelect={setView}
-          groupName="stats"
           size="s"
         />
         <LabeledValue name="Previous avg">
