@@ -7,6 +7,8 @@ import { Subscription } from '@increaser/entities/Subscription'
 import { Set, User, UserEditableFields } from '@increaser/entities/User'
 import { ApiMethod } from './ApiMethod'
 import { Task } from '@increaser/entities/Task'
+import { ProductFeature } from '@increaser/entities/ProductFeature'
+import { ProductFeatureResponse } from './ProductFeatureResponse'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -99,6 +101,13 @@ export interface ApiInterface {
   addSet: ApiMethod<Set, undefined>
   editLastSet: ApiMethod<Set, undefined>
   removeLastSet: ApiMethod<undefined, undefined>
+
+  proposeFeature: ApiMethod<
+    Omit<ProductFeature, 'isApproved' | 'status' | 'proposedBy' | 'upvotedBy'>,
+    undefined
+  >
+  voteForFeature: ApiMethod<{ id: string }, undefined>
+  features: ApiMethod<undefined, ProductFeatureResponse[]>
 }
 
 export type ApiMethodName = keyof ApiInterface

@@ -6,7 +6,7 @@ import { toPercents } from '@lib/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { getShortWeekday } from '@lib/utils/time'
@@ -14,6 +14,8 @@ import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/u
 import Link from 'next/link'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled.div`
   position: relative;
@@ -22,6 +24,7 @@ const Container = styled.div`
   ${borderRadius.m};
   ${transition};
   height: 52px;
+  background: ${getColor('foreground')};
   border: 1px solid ${({ theme }) => theme.colors.mist.toCssValue()};
   overflow: hidden;
 `
@@ -79,7 +82,18 @@ export const ProjectGoal = () => {
 
   return (
     <VStack gap={4}>
-      <HStack fullWidth justifyContent="space-between">
+      <UniformColumnGrid gap={20} minChildrenWidth={80} maxChildrenWidth={140}>
+        <Text as="div" size={14}>
+          <LabeledValue name="This week">
+            <Text as="span" weight="bold">
+              {doneMinutesThisWeek > 0
+                ? formatDuration(doneMinutesThisWeek, 'min', {
+                    maxUnit: 'h',
+                  })
+                : '-'}
+            </Text>
+          </LabeledValue>
+        </Text>
         <Link href={AppPath.Capacity}>
           <Text as="div" size={14}>
             <LabeledValue name="Weekly goal">
@@ -93,7 +107,7 @@ export const ProjectGoal = () => {
             </LabeledValue>
           </Text>
         </Link>
-      </HStack>
+      </UniformColumnGrid>
       <Container
         style={{
           borderColor:
@@ -125,7 +139,7 @@ export const ProjectGoal = () => {
                     width: toPercents(minutes / totalMinutes),
                     color: (index === weekday
                       ? colors.text
-                      : colors.mistExtra
+                      : colors.textShy
                     ).toCssValue(),
                   }}
                 >

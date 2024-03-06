@@ -35,3 +35,7 @@ variable "ses_aws_region" {
 variable "paddle_api_key" {}
 
 variable "paddle_vendor_id" {}
+
+variable "telegram_bot_token" {}
+
+variable "telegram_chat_id" {}

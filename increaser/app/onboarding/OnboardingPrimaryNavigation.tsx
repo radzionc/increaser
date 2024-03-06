@@ -4,12 +4,6 @@ import { onboardingSteps, useOnboarding } from './OnboardingProvider'
 import { Button } from '@lib/ui/buttons/Button'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
-import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
-import { analytics } from '../analytics'
-import { match } from '@lib/utils/match'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { OnboardingStep } from './OnboardingProvider'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -18,12 +12,9 @@ const Container = styled(HStack)`
 `
 
 export const OnboardingPrimaryNavigation = () => {
-  const { currentStep, setCurrentStep } = useOnboarding()
+  const { currentStep, setCurrentStep, isNextStepDisabled } = useOnboarding()
+
   const { push } = useRouter()
-
-  const { mutate: updateUser } = useUpdateUserMutation()
-
-  const { activeProjects } = useProjects()
 
   return (
     <Container>
@@ -51,22 +42,9 @@ export const OnboardingPrimaryNavigation = () => {
             setCurrentStep(nextStep)
           } else {
             push(AppPath.Home)
-            analytics.trackEvent('Finished onboarding')
-            updateUser({ finishedOnboardingAt: Date.now() })
           }
         }}
-        isDisabled={match<OnboardingStep, string | false>(currentStep, {
-          projects: () =>
-            isEmpty(activeProjects)
-              ? 'You need to create at least one project'
-              : false,
-          workBudget: () => false,
-          weeklyGoals: () => false,
-          schedule: () => false,
-          dailyHabits: () => false,
-          publicProfile: () => false,
-          tasks: () => false,
-        })}
+        isDisabled={isNextStepDisabled}
         size="l"
       >
         Next

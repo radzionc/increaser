@@ -48,6 +48,8 @@ resource "aws_lambda_function" "api" {
       SES_AWS_REGION : var.ses_aws_region,
       PADDLE_API_KEY : var.paddle_api_key,
       PADDLE_VENDOR_ID : var.paddle_vendor_id,
+      TELEGRAM_BOT_TOKEN : var.telegram_bot_token,
+      TELEGRAM_CHAT_ID : var.telegram_chat_id
     }
   }
 }

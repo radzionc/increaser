@@ -1,18 +1,16 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { Source } from '@increaser/app/ui/Source'
 
 export const FocusDurationEducation = () => {
   return (
     <VStack gap={8}>
       <Text>
-        According to{' '}
-        <Source url="https://youtu.be/5HINgMMTzPE" text="Andrew Huberman" />,
-        the best duration for focused work is around 90 minutes. While you can
-        improve your ability to focus through different protocols, quality
-        sleep, and consistent physical activities, most of us are limited to two
-        or three 90 minutes blocks of deep work a day. Try doing more than that,
-        and you'll quickly experience diminishing returns in productivity.
+        According to Andrew Huberman, the best duration for focused work is
+        around 90 minutes. While you can improve your ability to focus through
+        different protocols, quality sleep, and consistent physical activities,
+        most of us are limited to two or three 90 minutes blocks of deep work a
+        day. Try doing more than that, and you'll quickly experience diminishing
+        returns in productivity.
       </Text>
       <Text>
         You can divide the 90-minute block into a few sessions with small breaks

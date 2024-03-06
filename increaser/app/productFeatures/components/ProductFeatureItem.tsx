@@ -1,0 +1,46 @@
+import { ProductFeatureResponse } from '@increaser/api-interface/ProductFeatureResponse'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { Panel } from '@lib/ui/panel/Panel'
+import { ComponentWithValueProps } from '@lib/ui/props'
+import { Text } from '@lib/ui/text'
+import { UpvoteButton } from '@lib/ui/buttons/UpvoteButton'
+import { useVoteForFeatureMutation } from '../hooks/useVoteForFeatureMutation'
+import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
+
+export const ProductFeatureItem = ({
+  value,
+}: ComponentWithValueProps<ProductFeatureResponse>) => {
+  const { mutate } = useVoteForFeatureMutation()
+
+  return (
+    <Panel kind="secondary">
+      <VStack gap={8}>
+        <HStack alignItems="start" fullWidth gap={20}>
+          <VStack gap={8}>
+            <Text weight="semibold" style={{ flex: 1 }} height="large">
+              {value.name}
+            </Text>
+            <Text height="large" color="supporting" size={14}>
+              {value.description}
+            </Text>
+          </VStack>
+          <UpvoteButton
+            onClick={() => {
+              mutate({
+                id: value.id,
+              })
+            }}
+            value={value.upvotedByMe}
+            upvotes={value.upvotes}
+          />
+        </HStack>
+        {!value.isApproved && (
+          <ShyInfoBlock>
+            Thank you! Your feature is awaiting approval and will be open for
+            voting soon."
+          </ShyInfoBlock>
+        )}
+      </VStack>
+    </Panel>
+  )
+}

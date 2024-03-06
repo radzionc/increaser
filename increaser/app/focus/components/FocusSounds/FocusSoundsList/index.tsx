@@ -41,7 +41,6 @@ export const FocusSoundsList = () => {
         getViewName={capitalizeFirstLetter}
         activeView={view}
         onSelect={setView}
-        groupName="sounds"
         size="s"
       />
       <Content fullHeight fullWidth gap={8} alignItems="center">

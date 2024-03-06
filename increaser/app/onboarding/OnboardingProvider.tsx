@@ -1,7 +1,12 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { createContext, useCallback, useState } from 'react'
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { analytics } from '../analytics'
+import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
+import { match } from '@lib/utils/match'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const onboardingSteps = [
   'projects',
@@ -9,8 +14,9 @@ export const onboardingSteps = [
   'weeklyGoals',
   'schedule',
   'dailyHabits',
-  'publicProfile',
   'tasks',
+  'publicProfile',
+  'focus',
 ] as const
 export type OnboardingStep = (typeof onboardingSteps)[number]
 
@@ -22,11 +28,13 @@ export const onboardingStepTargetName: Record<OnboardingStep, string> = {
   dailyHabits: 'Establish daily habits',
   publicProfile: 'Create public profile',
   tasks: 'List tasks',
+  focus: 'Start focus session',
 }
 
 type OnboardingState = {
   completedSteps: OnboardingStep[]
   currentStep: OnboardingStep
+  isNextStepDisabled: string | false
   setCurrentStep: (step: OnboardingStep) => void
 }
 
@@ -46,12 +54,48 @@ export const OnboardingProvider = ({
       setCurrentStep(step)
       const previousStep = onboardingSteps[onboardingSteps.indexOf(step) - 1]
       if (previousStep && !completedSteps.includes(previousStep)) {
-        analytics.trackEvent(`Completed ${previousStep} onboarding step`)
+        analytics.trackEvent(
+          `Completed onboarding step #${onboardingSteps.indexOf(previousStep)}`,
+        )
         setCompletedSteps((prev) => [...prev, previousStep])
       }
     },
     [completedSteps],
   )
+
+  const { mutate: updateUser } = useUpdateUserMutation()
+
+  const { activeProjects } = useProjects()
+  const isNextStepDisabled = useMemo(
+    () =>
+      match<OnboardingStep, string | false>(currentStep, {
+        projects: () =>
+          isEmpty(activeProjects)
+            ? 'You need to create at least one project'
+            : false,
+        workBudget: () => false,
+        weeklyGoals: () => false,
+        schedule: () => false,
+        dailyHabits: () => false,
+        publicProfile: () => false,
+        tasks: () => false,
+        focus: () => false,
+      }),
+    [activeProjects, currentStep],
+  )
+
+  const { finishedOnboardingAt } = useAssertUserState()
+  useEffect(() => {
+    if (finishedOnboardingAt) return
+    if (isNextStepDisabled) return
+
+    const isLastStep =
+      currentStep === onboardingSteps[onboardingSteps.length - 1]
+    if (!isLastStep) return
+
+    analytics.trackEvent('Finished onboarding')
+    updateUser({ finishedOnboardingAt: Date.now() })
+  }, [currentStep, finishedOnboardingAt, isNextStepDisabled, updateUser])
 
   return (
     <OnboardingContext.Provider
@@ -59,6 +103,7 @@ export const OnboardingProvider = ({
         currentStep,
         setCurrentStep: onCurrentStepChange,
         completedSteps,
+        isNextStepDisabled,
       }}
     >
       {children}

@@ -19,11 +19,7 @@ export const ProjectsOnboardingStep = () => {
         {isEmpty(activeProjects) ? (
           <ShyInfoBlock>Add at least one project to get started.</ShyInfoBlock>
         ) : (
-          <UniformColumnGrid
-            gap={16}
-            minChildrenWidth={160}
-            // maxChildrenWidth={200}
-          >
+          <UniformColumnGrid gap={16} minChildrenWidth={160}>
             {activeProjects.map((value) => (
               <ProjectItem value={value} key={value.id} />
             ))}

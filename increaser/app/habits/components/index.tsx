@@ -9,7 +9,6 @@ import { ActiveHabits } from './ActiveHabits'
 import { CheckTodayHabitsCard } from './CheckTodayHabitsCard'
 import { CheckYesterdayHabits } from './CheckYesterdayHabits'
 import { CuratedHabits } from './CuratedHabits'
-import { HabitsEducationBanner } from './HabitsEducationBanner'
 import {
   HabitsViewProvider,
   HabitsViewSelector,
@@ -25,7 +24,6 @@ export const HabitsPage: Page = () => {
       <HabitsViewProvider>
         <PageTitle documentTitle={`🧘‍♀️ Habits`} title={<HabitsViewSelector />} />
         <VStack gap={40}>
-          <HabitsEducationBanner />
           <ErrorBoundary fallback={<ErrorFallbackCard />}>
             <UserStateOnly>
               <RequiresOnboarding>

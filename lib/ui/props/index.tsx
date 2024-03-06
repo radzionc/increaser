@@ -59,6 +59,10 @@ export interface LabeledComponentProps {
   label: ReactNode
 }
 
+export interface ComponentWithValueProps<T> {
+  value: T
+}
+
 export type PromptProps = {
   onSuccess: () => void
   onCancel: () => void
