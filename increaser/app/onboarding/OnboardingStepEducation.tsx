@@ -1,12 +1,12 @@
 import { Match } from '@lib/ui/base/Match'
-import { OnboardingStep, useOnboarding } from './OnboardingProvider'
+import { useOnboarding } from './OnboardingProvider'
 import { Text } from '@lib/ui/text'
 import { OnboardingSection } from './OnboardingSection'
 import { OnboardingVideo } from './OnboardingVideo'
 import { CuratedHabits } from '../habits/components/CuratedHabits'
 import { VStack } from '@lib/ui/layout/Stack'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
-import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
+import { OnboardingStep } from './OnboardingStep'
 
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
@@ -14,7 +14,6 @@ const onboardingStepTitle: Record<OnboardingStep, string> = {
   weeklyGoals: 'Allocate Weekly Hours to Reach Your Project Goals',
   schedule: 'Design Your Day for Optimal Health and Productivity',
   dailyHabits: 'Build a Foundation of Daily Habits for Lasting Well-being',
-  publicProfile: 'Join the Community with a Public Profile',
   tasks: 'Elevate Your Day with Priority Tasks at a Glance',
   focus: 'Boost Your Focus with Targeted Work Sessions',
 }
@@ -79,14 +78,6 @@ export const OnboardingStepEducation = () => {
                   create a more structured and fulfilling daily routine.
                 </>
               )}
-              publicProfile={() => (
-                <>
-                  Decide how you want to be represented on the leaderboard: stay
-                  anonymous or showcase your name and country. This step
-                  determines your visibility among Increaser’s community of
-                  productive users.
-                </>
-              )}
               tasks={() => (
                 <>
                   Keep your focus razor-sharp with Increaser's task
@@ -145,7 +136,6 @@ export const OnboardingStepEducation = () => {
               <CuratedHabits />
             </VStack>
           )}
-          publicProfile={() => <Scoreboard />}
           tasks={() => null}
           focus={() => null}
         />

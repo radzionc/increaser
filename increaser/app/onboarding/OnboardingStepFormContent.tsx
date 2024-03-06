@@ -5,7 +5,6 @@ import { ProjectsOnboardingStep } from './projects/ProjectsOnboardingStep'
 import { WorkBudgetOnboardingStep } from './WorkBudgetOnboardingStep'
 import { WeeklyGoalsOnboardingStep } from './weeklyGoals/WeeklyGoalsOnboardingStep'
 import { ScheduleOnboardingStep } from './ScheduleOnboardingStep'
-import { PublicProfileOnboardingStep } from './PublicProfileOnboardingStep'
 import { TasksOnboardingStep } from './TasksOnboardingStep'
 import { HabitsOnboardingStep } from './habits/HabitsOnboardingStep'
 import { FocusOnboardingStep } from './focus/FocusOnboardingStep'
@@ -21,7 +20,6 @@ export const OnboardingStepFormContent = () => {
       weeklyGoals={() => <WeeklyGoalsOnboardingStep />}
       schedule={() => <ScheduleOnboardingStep />}
       dailyHabits={() => <HabitsOnboardingStep />}
-      publicProfile={() => <PublicProfileOnboardingStep />}
       tasks={() => <TasksOnboardingStep />}
       focus={() => <FocusOnboardingStep />}
     />

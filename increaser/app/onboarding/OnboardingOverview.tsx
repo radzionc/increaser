@@ -1,9 +1,5 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import {
-  useOnboarding,
-  onboardingSteps,
-  onboardingStepTargetName,
-} from './OnboardingProvider'
+import { useOnboarding } from './OnboardingProvider'
 import { Text } from '@lib/ui/text'
 import styled, { css } from 'styled-components'
 import { round } from '@lib/ui/css/round'
@@ -17,6 +13,7 @@ import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { without } from '@lib/utils/array/without'
 import { OnboardingSection } from './OnboardingSection'
+import { onboardingStepTargetName, onboardingSteps } from './OnboardingStep'
 
 const Container = styled(HStack)<{ isCurrent: boolean; isEnabled: boolean }>`
   color: ${matchColor('isCurrent', {

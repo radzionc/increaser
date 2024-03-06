@@ -1,7 +1,8 @@
 import { Modal } from '@lib/ui/modal'
 import { OnboardingStepFormContent } from './OnboardingStepFormContent'
-import { onboardingStepTargetName, useOnboarding } from './OnboardingProvider'
+import { useOnboarding } from './OnboardingProvider'
 import { OnboardingPrimaryNavigation } from './OnboardingPrimaryNavigation'
+import { onboardingStepTargetName } from './OnboardingStep'
 
 export const SmallScreenOnboarding = () => {
   const { currentStep } = useOnboarding()

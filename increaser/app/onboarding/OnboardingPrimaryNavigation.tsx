@@ -1,9 +1,10 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
-import { onboardingSteps, useOnboarding } from './OnboardingProvider'
+import { useOnboarding } from './OnboardingProvider'
 import { Button } from '@lib/ui/buttons/Button'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { onboardingSteps } from './OnboardingStep'
 
 const Container = styled(HStack)`
   width: 100%;

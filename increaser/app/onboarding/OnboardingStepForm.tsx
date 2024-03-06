@@ -1,8 +1,9 @@
-import { onboardingStepTargetName, useOnboarding } from './OnboardingProvider'
+import { useOnboarding } from './OnboardingProvider'
 
 import { OnboardingPrimaryNavigation } from './OnboardingPrimaryNavigation'
 import { OnboardingSection } from './OnboardingSection'
 import { OnboardingStepFormContent } from './OnboardingStepFormContent'
+import { onboardingStepTargetName } from './OnboardingStep'
 
 export const OnboardingStepForm = () => {
   const { currentStep } = useOnboarding()

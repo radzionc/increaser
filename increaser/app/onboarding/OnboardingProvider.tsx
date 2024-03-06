@@ -7,29 +7,7 @@ import { match } from '@lib/utils/match'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-
-export const onboardingSteps = [
-  'projects',
-  'workBudget',
-  'weeklyGoals',
-  'schedule',
-  'dailyHabits',
-  'tasks',
-  'publicProfile',
-  'focus',
-] as const
-export type OnboardingStep = (typeof onboardingSteps)[number]
-
-export const onboardingStepTargetName: Record<OnboardingStep, string> = {
-  projects: 'Add projects',
-  workBudget: 'Define work budget',
-  weeklyGoals: 'Outline weekly goals',
-  schedule: 'Arrange schedule',
-  dailyHabits: 'Establish daily habits',
-  publicProfile: 'Create public profile',
-  tasks: 'List tasks',
-  focus: 'Start focus session',
-}
+import { OnboardingStep, onboardingSteps } from './OnboardingStep'
 
 type OnboardingState = {
   completedSteps: OnboardingStep[]
@@ -77,7 +55,6 @@ export const OnboardingProvider = ({
         weeklyGoals: () => false,
         schedule: () => false,
         dailyHabits: () => false,
-        publicProfile: () => false,
         tasks: () => false,
         focus: () => false,
       }),

@@ -1,4 +1,5 @@
-import { OnboardingStep, useOnboarding } from './OnboardingProvider'
+import { useOnboarding } from './OnboardingProvider'
+import { OnboardingStep } from './OnboardingStep'
 import { OnboardingVideoPrompt } from './OnboardingVideoPrompt'
 
 const onboardingYouTubeVideo: Partial<Record<OnboardingStep, string>> = {
