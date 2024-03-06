@@ -1,7 +1,7 @@
 import { ProductFeatureResponse } from '@increaser/api-interface/ProductFeatureResponse'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
-import { ValueComponentProps } from '@lib/ui/props'
+import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { UpvoteButton } from '@lib/ui/buttons/UpvoteButton'
 import { useVoteForFeatureMutation } from '../hooks/useVoteForFeatureMutation'
@@ -9,7 +9,7 @@ import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 
 export const ProductFeatureItem = ({
   value,
-}: ValueComponentProps<ProductFeatureResponse>) => {
+}: ComponentWithValueProps<ProductFeatureResponse>) => {
   const { mutate } = useVoteForFeatureMutation()
 
   return (

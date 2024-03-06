@@ -59,7 +59,7 @@ export interface LabeledComponentProps {
   label: ReactNode
 }
 
-export interface ValueComponentProps<T> {
+export interface ComponentWithValueProps<T> {
   value: T
 }
 

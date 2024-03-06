@@ -11,7 +11,7 @@ import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
-import { ValueComponentProps } from '@lib/ui/props'
+import { ComponentWithValueProps } from '@lib/ui/props'
 
 const Added = styled.div`
   background: transparent;
@@ -26,7 +26,7 @@ const Container = styled(VStack)`
   width: 100%;
 `
 
-export const HabitItem = ({ value }: ValueComponentProps<HabitInfo>) => {
+export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
   const { emoji, tags, name, description } = value
   const { habits } = useHabits()
   const habitsNames = new Set(habits.map((habit) => habit.name))
