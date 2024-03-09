@@ -1,9 +1,8 @@
 import { interactive } from '@lib/ui/css/interactive'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getColor } from '@lib/ui/theme/getters'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import styled, { css } from 'styled-components'
-import { OnboardingVideoPlayer } from './OnboardingVideoPlayer'
 import { transition } from '@lib/ui/css/transition'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
@@ -12,7 +11,7 @@ import { YouTubeIcon } from '@lib/ui/icons/YouTubeIcon'
 import { CloseButton } from '@lib/ui/buttons/CloseButton'
 
 type OnboardingVideoPromptProps = {
-  youTubeVideoUrl: string
+  renderVideo: () => ReactNode
 }
 
 const Container = styled(Panel)<{ isInteractive: boolean }>`
@@ -29,7 +28,7 @@ const Container = styled(Panel)<{ isInteractive: boolean }>`
 `
 
 export const OnboardingVideoPrompt = ({
-  youTubeVideoUrl,
+  renderVideo,
 }: OnboardingVideoPromptProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -56,7 +55,7 @@ export const OnboardingVideoPrompt = ({
           <CloseButton kind="secondary" onClick={() => setIsOpen(false)} />
         )}
       </HStack>
-      {isOpen && <OnboardingVideoPlayer youTubeVideoUrl={youTubeVideoUrl} />}
+      {isOpen && renderVideo()}
     </Container>
   )
 }

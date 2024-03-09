@@ -1,6 +1,7 @@
 import { useOnboarding } from './OnboardingProvider'
 import { OnboardingStep } from './OnboardingStep'
-import { OnboardingVideoPrompt } from './OnboardingVideoPrompt'
+import { OnboardingVideoPrompt } from '@lib/ui/onboarding/OnboardingVideoPrompt'
+import { OnboardingVideoPlayer } from './OnboardingVideoPlayer'
 
 const onboardingYouTubeVideo: Partial<Record<OnboardingStep, string>> = {
   projects: 'https://youtu.be/PvDLR4rbWXw',
@@ -21,5 +22,11 @@ export const OnboardingVideo = () => {
     return null
   }
 
-  return <OnboardingVideoPrompt youTubeVideoUrl={youTubeVideoUrl} />
+  return (
+    <OnboardingVideoPrompt
+      renderVideo={() => (
+        <OnboardingVideoPlayer youTubeVideoUrl={youTubeVideoUrl} />
+      )}
+    />
+  )
 }
