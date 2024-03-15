@@ -5,10 +5,12 @@ import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { ProductFeatureItem } from './ProductFeatureItem'
 import { useProductFeaturesView } from './ProductFeaturesView'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const ProductFeatureList = () => {
   const featuresQuery = useApiQuery('features', undefined)
   const { view } = useProductFeaturesView()
+  const { id } = useAssertUserState()
 
   return (
     <QueryDependant
@@ -17,7 +19,8 @@ export const ProductFeatureList = () => {
       success={(features) => {
         const [myUnapprovedFeatures, otherFeatures] = splitBy(
           features.filter((feature) => view === feature.status),
-          (feature) => (feature.proposedByMe && !feature.isApproved ? 0 : 1),
+          (feature) =>
+            feature.proposedBy === id && !feature.isApproved ? 0 : 1,
         )
 
         return (

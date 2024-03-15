@@ -20,6 +20,7 @@ export interface Set {
 interface AppSumo {
   code: string
 }
+
 export type User = DayMoments & {
   id: string
   email: string

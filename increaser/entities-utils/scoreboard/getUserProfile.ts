@@ -5,9 +5,9 @@ export const getUserProfile = ({
   name,
   country,
   isAnonymous,
-}: Pick<User, 'name' | 'country' | 'isAnonymous'>): UserProfile | undefined =>
+}: Pick<User, 'name' | 'country' | 'isAnonymous'>): UserProfile | null =>
   isAnonymous
-    ? undefined
+    ? null
     : {
         country,
         name,

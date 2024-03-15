@@ -1,7 +1,10 @@
 import { OAuthProvider } from '@increaser/entities/OAuthProvider'
 import { AuthSession } from '@increaser/entities/AuthSession'
 import { Habit } from '@increaser/entities/Habit'
-import { UserPerformanceRecord } from '@increaser/entities/PerformanceScoreboard'
+import {
+  UserPerformanceRecord,
+  UserProfile,
+} from '@increaser/entities/PerformanceScoreboard'
 import { Project } from '@increaser/entities/Project'
 import { Subscription } from '@increaser/entities/Subscription'
 import { Set, User, UserEditableFields } from '@increaser/entities/User'
@@ -108,6 +111,8 @@ export interface ApiInterface {
   >
   voteForFeature: ApiMethod<{ id: string }, undefined>
   features: ApiMethod<undefined, ProductFeatureResponse[]>
+
+  userProfile: ApiMethod<{ id: string }, UserProfile | null>
 }
 
 export type ApiMethodName = keyof ApiInterface

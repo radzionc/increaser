@@ -15,10 +15,17 @@ export const features: ApiResolver<'features'> = async ({
     }
 
     result.push({
-      ...pick(feature, ['id', 'name', 'description', 'isApproved', 'status']),
+      ...pick(feature, [
+        'id',
+        'name',
+        'description',
+        'isApproved',
+        'status',
+        'proposedBy',
+        'createdAt',
+      ]),
       upvotes: feature.upvotedBy.length,
       upvotedByMe: Boolean(userId && feature.upvotedBy.includes(userId)),
-      proposedByMe: feature.proposedBy === userId,
     })
   })
 

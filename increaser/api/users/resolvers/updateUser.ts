@@ -40,7 +40,7 @@ export const updateUser: ApiResolver<'updateUser'> = async ({
           if (user.id !== userId) return user
           return {
             ...user,
-            profile: getUserProfile(userFields),
+            profile: getUserProfile(userFields) || undefined,
           }
         })
         await updateScoreboard(period, { users })

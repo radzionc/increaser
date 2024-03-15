@@ -76,7 +76,7 @@ export const syncScoreboards = async () => {
           id,
           dailyAvgInMinutes,
           avgBlockInMinutes,
-          profile: getUserProfile(user),
+          profile: getUserProfile(user) || undefined,
         }
 
         records.push(userRecord)

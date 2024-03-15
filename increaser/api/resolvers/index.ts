@@ -24,6 +24,7 @@ import { removeLastSet } from '../sets/resolvers/removeLastSet'
 import { proposeFeature } from '../features/resolvers/proposeFeature'
 import { features } from '../features/resolvers/features'
 import { voteForFeature } from '../features/resolvers/voteForFeature'
+import { userProfile } from '../users/resolvers/userProfile'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -51,4 +52,5 @@ export const implementation: ApiImplementation = {
   proposeFeature,
   features,
   voteForFeature,
+  userProfile,
 }
