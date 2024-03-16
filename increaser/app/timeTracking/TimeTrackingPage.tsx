@@ -1,9 +1,10 @@
 import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-width-content'
-import { VStack } from '@lib/ui/layout/Stack'
 
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { Page } from '@lib/next-ui/Page'
-import { Text } from '@lib/ui/text'
+import { TrackedTimeReportProvider } from './report/TrackedTimeReportProvider'
+import { TrackedTimeReport } from './report/TrackedTimeReport'
+import { UserStateOnly } from '../user/state/UserStateOnly'
 
 const title = 'Time Tracking'
 
@@ -11,9 +12,11 @@ export const TimeTrackingPage: Page = () => {
   return (
     <FixedWidthContent>
       <PageTitle documentTitle={`⏳ ${title}`} title={title} />
-      <VStack gap={80}>
-        <Text weight="bold">Time Tracking</Text>
-      </VStack>
+      <UserStateOnly>
+        <TrackedTimeReportProvider>
+          <TrackedTimeReport />
+        </TrackedTimeReportProvider>
+      </UserStateOnly>
     </FixedWidthContent>
   )
 }
