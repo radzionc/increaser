@@ -16,6 +16,7 @@ export enum AppPath {
   SignUp = '/sign-up',
   EmailConfirm = '/email-confirm',
   Onboarding = '/onboarding',
+  TimeTracking = '/time-tracking',
 }
 
 export const getProjectPath = (projectId: string) => `/projects/${projectId}`

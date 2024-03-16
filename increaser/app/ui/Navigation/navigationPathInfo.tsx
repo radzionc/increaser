@@ -7,6 +7,7 @@ import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
+import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
@@ -40,5 +41,9 @@ export const navigationPathInfo = {
   [AppPath.Tasks]: {
     name: 'Tasks',
     icon: <CheckSquareIcon />,
+  },
+  [AppPath.TimeTracking]: {
+    name: 'Time tracking',
+    icon: <ClockIcon />,
   },
 } as const
