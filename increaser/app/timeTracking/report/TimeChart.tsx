@@ -39,7 +39,7 @@ export const TimeChart = () => {
   return (
     <Container>
       <BarChart
-        minBarWidth={60}
+        minBarWidth={64}
         expectedLabelHeight={16}
         height={160}
         items={data.map((value, index) => {
@@ -50,10 +50,10 @@ export const TimeChart = () => {
                 'd MMM',
               ),
             week: () =>
-              format(
+              `week #${format(
                 firstTimeGroupStartedAt + convertDuration(index, 'w', 'ms'),
-                '#I',
-              ),
+                'I',
+              )}`,
             month: () =>
               format(addMonths(firstTimeGroupStartedAt, index), 'MMM yyyy'),
           })

@@ -53,6 +53,8 @@ export const ProjectsDistributionBreakdown = () => {
     'desc',
   ).filter(([, data]) => sum(data) > 0)
 
+  const summaryColor = activeProjectId ? 'shy' : 'contrast'
+
   return (
     <VStack gap={16}>
       <Row>
@@ -78,7 +80,7 @@ export const ProjectsDistributionBreakdown = () => {
             const statColor = activeProjectId
               ? activeProjectId === id
                 ? 'contrast'
-                : 'supporting'
+                : 'shy'
               : 'regular'
             return (
               <Row key={id}>
@@ -90,7 +92,9 @@ export const ProjectsDistributionBreakdown = () => {
                     ).toCssValue(),
                   }}
                 />
-                <Text cropped>{projectsRecord[id].name}</Text>
+                <Text color={statColor} cropped>
+                  {projectsRecord[id].name}
+                </Text>
                 <Text color={statColor} weight="semibold">
                   <EmphasizeNumbers
                     value={formatDuration(seconds, 's', {
@@ -118,20 +122,14 @@ export const ProjectsDistributionBreakdown = () => {
         <Row>
           <div />
           <div />
-          <Text
-            color={activeProjectId ? 'supporting' : 'contrast'}
-            weight="semibold"
-          >
+          <Text color={summaryColor} weight="semibold">
             <EmphasizeNumbers
               value={formatDuration(total, 's', {
                 maxUnit: 'h',
               })}
             />
           </Text>
-          <Text
-            color={activeProjectId ? 'supporting' : 'contrast'}
-            weight="semibold"
-          >
+          <Text color={summaryColor} weight="semibold">
             <EmphasizeNumbers
               value={formatDuration(
                 total / Object.values(projectsData)[0].length,
@@ -142,10 +140,7 @@ export const ProjectsDistributionBreakdown = () => {
               )}
             />
           </Text>
-          <Text
-            color={activeProjectId ? 'supporting' : 'contrast'}
-            weight="semibold"
-          >
+          <Text color={summaryColor} weight="semibold">
             <EmphasizeNumbers value="100%" />
           </Text>
         </Row>
