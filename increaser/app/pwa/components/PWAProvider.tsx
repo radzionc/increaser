@@ -19,9 +19,9 @@ export const PWAProvider = ({ children }: Props) => {
   const [installPromptEvent, setInstallPromptEvent] =
     useState<BeforeInstallPromptEvent | null>(null)
 
-  const [rejectedAt, setRejectedAt] = usePersistentState<number | undefined>(
+  const [rejectedAt, setRejectedAt] = usePersistentState<number | null>(
     PersistentStateKey.SidebarInstallPromptWasRejectedAt,
-    undefined,
+    null,
   )
 
   useEffect(() => {

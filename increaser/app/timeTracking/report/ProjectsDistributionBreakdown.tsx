@@ -10,6 +10,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { round } from '@lib/ui/css/round'
 import { order } from '@lib/utils/array/order'
 import { toPercents } from '@lib/utils/toPercents'
+import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 
 const Row = styled.div`
   display: grid;
@@ -17,6 +18,14 @@ const Row = styled.div`
   grid-template-columns: 8px 120px 80px 80px 80px;
   align-items: center;
   font-size: 14px;
+
+  > * {
+    &:last-child,
+    &:nth-last-child(2),
+    &:nth-last-child(3) {
+      justify-self: end;
+    }
+  }
 `
 
 const Circle = styled.div`
@@ -45,7 +54,7 @@ export const ProjectsDistributionBreakdown = () => {
   ).filter(([, data]) => sum(data) > 0)
 
   return (
-    <SeparatedByLine gap={8}>
+    <VStack gap={16}>
       <Row>
         <Circle style={{ background: colors.mist.toCssValue() }} />
         <Text cropped color="shy">
@@ -61,69 +70,86 @@ export const ProjectsDistributionBreakdown = () => {
           Share
         </Text>
       </Row>
-      <VStack gap={8}>
-        {items.map(([id, data]) => {
-          const seconds = sum(data)
-          const isPrimary = !activeProjectId || activeProjectId === id
-          const statColor = activeProjectId
-            ? activeProjectId === id
-              ? 'contrast'
-              : 'supporting'
-            : 'regular'
-          return (
-            <Row key={id}>
-              <Circle
-                style={{
-                  background: (isPrimary
-                    ? colors.getLabelColor(projectsRecord[id].color)
-                    : colors.mist
-                  ).toCssValue(),
-                }}
-              />
-              <Text cropped>{projectsRecord[id].name}</Text>
-              <Text color={statColor} weight="semibold">
-                {formatDuration(seconds, 's', {
-                  maxUnit: 'h',
-                })}
-              </Text>
-              <Text color={statColor} weight="semibold">
-                {formatDuration(seconds / data.length, 's', {
-                  maxUnit: 'h',
-                })}
-              </Text>
-              <Text color={statColor} weight="semibold">
-                {toPercents(seconds / total, 'round')}
-              </Text>
-            </Row>
-          )
-        })}
-      </VStack>
-      <Row>
-        <div />
-        <div />
-        <Text
-          color={activeProjectId ? 'supporting' : 'contrast'}
-          weight="semibold"
-        >
-          {formatDuration(total, 's', {
-            maxUnit: 'h',
+      <SeparatedByLine gap={12}>
+        <VStack gap={12}>
+          {items.map(([id, data]) => {
+            const seconds = sum(data)
+            const isPrimary = !activeProjectId || activeProjectId === id
+            const statColor = activeProjectId
+              ? activeProjectId === id
+                ? 'contrast'
+                : 'supporting'
+              : 'regular'
+            return (
+              <Row key={id}>
+                <Circle
+                  style={{
+                    background: (isPrimary
+                      ? colors.getLabelColor(projectsRecord[id].color)
+                      : colors.mist
+                    ).toCssValue(),
+                  }}
+                />
+                <Text cropped>{projectsRecord[id].name}</Text>
+                <Text color={statColor} weight="semibold">
+                  <EmphasizeNumbers
+                    value={formatDuration(seconds, 's', {
+                      maxUnit: 'h',
+                    })}
+                  />
+                </Text>
+                <Text color={statColor} weight="semibold">
+                  <EmphasizeNumbers
+                    value={formatDuration(seconds / data.length, 's', {
+                      maxUnit: 'h',
+                      kind: 'short',
+                    })}
+                  />
+                </Text>
+                <Text color={statColor} weight="semibold">
+                  <EmphasizeNumbers
+                    value={toPercents(seconds / total, 'round')}
+                  />
+                </Text>
+              </Row>
+            )
           })}
-        </Text>
-        <Text
-          color={activeProjectId ? 'supporting' : 'contrast'}
-          weight="semibold"
-        >
-          {formatDuration(total / Object.values(projectsData)[0].length, 's', {
-            maxUnit: 'h',
-          })}
-        </Text>
-        <Text
-          color={activeProjectId ? 'supporting' : 'contrast'}
-          weight="semibold"
-        >
-          100%
-        </Text>
-      </Row>
-    </SeparatedByLine>
+        </VStack>
+        <Row>
+          <div />
+          <div />
+          <Text
+            color={activeProjectId ? 'supporting' : 'contrast'}
+            weight="semibold"
+          >
+            <EmphasizeNumbers
+              value={formatDuration(total, 's', {
+                maxUnit: 'h',
+              })}
+            />
+          </Text>
+          <Text
+            color={activeProjectId ? 'supporting' : 'contrast'}
+            weight="semibold"
+          >
+            <EmphasizeNumbers
+              value={formatDuration(
+                total / Object.values(projectsData)[0].length,
+                's',
+                {
+                  maxUnit: 'h',
+                },
+              )}
+            />
+          </Text>
+          <Text
+            color={activeProjectId ? 'supporting' : 'contrast'}
+            weight="semibold"
+          >
+            <EmphasizeNumbers value="100%" />
+          </Text>
+        </Row>
+      </SeparatedByLine>
+    </VStack>
   )
 }

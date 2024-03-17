@@ -1,10 +1,10 @@
-import { PieChart } from '@lib/ui/charts/PieChart'
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import styled, { useTheme } from 'styled-components'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { sum } from '@lib/utils/array/sum'
 import { VStack } from '@lib/ui/layout/Stack'
 import { order } from '@lib/utils/array/order'
+import { MinimalisticPieChart } from '@lib/ui/charts/PieChart/MinimalisticPieChart'
 
 const Container = styled(VStack)`
   min-width: 200px;
@@ -24,8 +24,8 @@ export const ProjectsDistributionChart = () => {
 
   return (
     <Container>
-      <PieChart
-        items={items.map(([id, data]) => {
+      <MinimalisticPieChart
+        value={items.map(([id, data]) => {
           const seconds = sum(data)
           const shouldShow = !activeProjectId || activeProjectId === id
           return {

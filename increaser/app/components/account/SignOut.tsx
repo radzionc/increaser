@@ -5,7 +5,7 @@ export const SignOut = () => {
   const [, setAuthSession] = useAuthSession()
 
   return (
-    <Button kind="outlined" onClick={() => setAuthSession(undefined)}>
+    <Button kind="outlined" onClick={() => setAuthSession(null)}>
       Sign out
     </Button>
   )

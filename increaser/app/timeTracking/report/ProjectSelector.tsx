@@ -2,10 +2,16 @@ import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import { Text } from '@lib/ui/text'
+import { order } from '@lib/utils/array/order'
 
 export const ProjectSelector = () => {
-  const { activeProjects, inactiveProjects, projectsRecord } = useProjects()
+  const { projects, projectsRecord } = useProjects()
   const { activeProjectId, setState } = useTrackedTimeReport()
+
+  const options = [
+    null,
+    ...order(projects, (p) => p.total, 'desc').map((project) => project.id),
+  ]
 
   return (
     <ExpandableSelector
@@ -13,12 +19,7 @@ export const ProjectSelector = () => {
       onChange={(activeProjectId) =>
         setState((state) => ({ ...state, activeProjectId }))
       }
-      options={[
-        null,
-        ...[...activeProjects, ...inactiveProjects].map(
-          (project) => project.id,
-        ),
-      ]}
+      options={options}
       getOptionKey={(option) => (option ? option : 'all')}
       renderOption={(option) => (
         <>
