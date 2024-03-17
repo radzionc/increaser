@@ -6,7 +6,7 @@ import { TrackedTimeReportProvider } from './report/TrackedTimeReportProvider'
 import { TrackedTimeReport } from './report/TrackedTimeReport'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 
-const title = 'Time Tracking'
+const title = 'Track Time'
 
 export const TimeTrackingPage: Page = () => {
   return (

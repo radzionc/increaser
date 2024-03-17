@@ -8,16 +8,13 @@ export const TimeGroupingSelector = () => {
 
   return (
     <ExpandableSelector
-      style={{ width: 120 }}
       value={timeGrouping}
       onChange={(timeGrouping) =>
         setState((state) => ({ ...state, timeGrouping }))
       }
       options={timeGroupings}
       getOptionKey={formatTimeGrouping}
-      renderOption={(option) => (
-        <Text color="contrast">{formatTimeGrouping(option)}</Text>
-      )}
+      renderOption={(option) => <Text>{formatTimeGrouping(option)}</Text>}
     />
   )
 }

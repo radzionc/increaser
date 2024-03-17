@@ -8,13 +8,12 @@ export const TimeFrameSelector = () => {
 
   return (
     <ExpandableSelector<TimeFrame>
-      style={{ width: 152 }}
       value={timeFrame}
       onChange={(timeFrame) => setState((state) => ({ ...state, timeFrame }))}
       options={timeFrames[timeGrouping]}
       getOptionKey={(option) => (option ?? 'all').toString()}
       renderOption={(option) => (
-        <Text color="contrast">
+        <Text>
           {option === null ? 'All' : `Last ${option}`} {timeGrouping}s
         </Text>
       )}

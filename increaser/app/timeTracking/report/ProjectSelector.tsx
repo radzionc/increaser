@@ -9,7 +9,6 @@ export const ProjectSelector = () => {
 
   return (
     <ExpandableSelector
-      style={{ width: 132 }}
       value={activeProjectId}
       onChange={(activeProjectId) =>
         setState((state) => ({ ...state, activeProjectId }))

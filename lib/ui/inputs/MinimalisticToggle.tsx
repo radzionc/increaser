@@ -7,7 +7,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { transition } from '@lib/ui/css/transition'
-import { InputProps, LabeledComponentProps } from '../props'
+import { InputProps, LabeledComponentProps, UIComponentProps } from '../props'
 import { verticalPadding } from '../css/verticalPadding'
 
 const CheckContainer = styled.div`
@@ -38,15 +38,18 @@ const Check = styled.div`
   ${centerContent}
 `
 
-type MinimalisticToggleProps = InputProps<boolean> & LabeledComponentProps
+type MinimalisticToggleProps = InputProps<boolean> &
+  LabeledComponentProps &
+  UIComponentProps
 
 export const MinimalisticToggle = ({
   value,
   onChange,
   label,
+  ...rest
 }: MinimalisticToggleProps) => {
   return (
-    <Container onClick={() => onChange(!value)}>
+    <Container {...rest} onClick={() => onChange(!value)}>
       <HStack alignItems="center" gap={8}>
         <CheckContainer>{value && <Check />}</CheckContainer>
         <Text as="div">{label}</Text>
