@@ -1,21 +1,29 @@
-import { BarChart } from '@lib/ui/charts/BarChart'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import styled, { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components'
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
-import { match } from '@lib/utils/match'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { addMonths, format } from 'date-fns'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import { dataVerticalPadding } from '@lib/ui/charts/utils/dataVerticalPadding'
+import { normalize } from '@lib/utils/math/normalize'
+import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
+import { LineChart } from '@lib/ui/charts/LineChart'
+import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
+import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
+import { match } from '@lib/utils/match'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 
-const Container = styled(VStack)`
-  flex: 1;
-  min-width: 320px;
-  overflow-x: auto;
-`
+const chartConfig = {
+  chartHeight: 120,
+  expectedLabelWidth: 58,
+  expectedLabelHeight: 18,
+  labelsMinDistance: 20,
+}
 
 export const TimeChart = () => {
   const {
@@ -26,9 +34,8 @@ export const TimeChart = () => {
   } = useTrackedTimeReport()
 
   const { projectsRecord } = useProjects()
-  const theme = useTheme()
 
-  const data = useMemo(() => {
+  const totals = useMemo(() => {
     if (activeProjectId) {
       return projectsData[activeProjectId]
     }
@@ -36,43 +43,113 @@ export const TimeChart = () => {
     return mergeSameSizeDataArrays(Object.values(projectsData))
   }, [activeProjectId, projectsData])
 
-  return (
-    <Container>
-      <BarChart
-        minBarWidth={64}
-        expectedLabelHeight={16}
-        height={160}
-        items={data.map((value, index) => {
-          const label = match(timeGrouping, {
-            day: () =>
-              format(
-                firstTimeGroupStartedAt + convertDuration(index, 'd', 'ms'),
-                'd MMM',
-              ),
-            week: () =>
-              `week #${format(
-                firstTimeGroupStartedAt + convertDuration(index, 'w', 'ms'),
-                'I',
-              )}`,
-            month: () =>
-              format(addMonths(firstTimeGroupStartedAt, index), 'MMM yyyy'),
-          })
-          return {
-            value,
-            label: <Text>{label}</Text>,
-            color: activeProjectId
-              ? projectsRecord[activeProjectId].hslaColor
-              : theme.colors.foreground,
+  const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
+    totals.length - 1,
+  )
+  const [isSelectedDataPointVisible, setIsSelectedDataPointVisible] =
+    useState<boolean>(false)
 
-            renderValue:
-              value > 0
-                ? () => (
-                    <Text>{formatDuration(value, 's', { maxUnit: 'h' })}</Text>
-                  )
-                : undefined,
-          }
-        })}
-      />
-    </Container>
+  const { colors } = useTheme()
+  const color = activeProjectId
+    ? projectsRecord[activeProjectId].hslaColor
+    : colors.contrast
+
+  const getDataPointStartedAt = (index: number) =>
+    firstTimeGroupStartedAt +
+    match(timeGrouping, {
+      day: () => convertDuration(index, 'd', 'ms'),
+      week: () => convertDuration(index, 'w', 'ms'),
+      month: () => addMonths(firstTimeGroupStartedAt, index).getTime(),
+    })
+
+  const selectedDataPointStartedAt = getDataPointStartedAt(selectedDataPoint)
+
+  return (
+    <ElementSizeAware
+      render={({ setElement, size }) => {
+        const data = dataVerticalPadding(normalize(totals), {
+          top: 0.2,
+          bottom: 0.2,
+        })
+
+        return (
+          <VStack fullWidth gap={4} ref={setElement}>
+            {size && (
+              <>
+                <LineChartItemInfo
+                  itemIndex={selectedDataPoint}
+                  isVisible={isSelectedDataPointVisible}
+                  containerWidth={size.width}
+                  data={data}
+                >
+                  <VStack>
+                    <Text color="contrast" weight="semibold">
+                      <EmphasizeNumbers
+                        value={formatDuration(totals[selectedDataPoint], 's', {
+                          maxUnit: 'h',
+                        })}
+                      />
+                    </Text>
+                    <Text color="supporting" size={14} weight="semibold">
+                      {match(timeGrouping, {
+                        day: () =>
+                          format(selectedDataPointStartedAt, 'EEE d, MMM yyyy'),
+                        week: () =>
+                          `${format(
+                            selectedDataPointStartedAt,
+                            'd MMM',
+                          )} - ${format(
+                            selectedDataPointStartedAt +
+                              convertDuration(1, 'w', 'ms'),
+                            'd MMM',
+                          )}`,
+                        month: () =>
+                          format(selectedDataPointStartedAt, 'MMMM yyyy'),
+                      })}
+                    </Text>
+                  </VStack>
+                </LineChartItemInfo>
+                <VStack style={{ position: 'relative' }}>
+                  <LineChart
+                    width={size.width}
+                    height={chartConfig.chartHeight}
+                    data={data}
+                    color={color}
+                  />
+                  <LineChartPositionTracker
+                    data={data}
+                    color={color}
+                    onChange={(index) => {
+                      if (index === null) {
+                        setIsSelectedDataPointVisible(false)
+                      } else {
+                        setIsSelectedDataPointVisible(true)
+                        setSelectedDataPoint(index)
+                      }
+                    }}
+                  />
+                </VStack>
+                <ChartXAxis
+                  data={data}
+                  expectedLabelWidth={chartConfig.expectedLabelWidth}
+                  labelsMinDistance={chartConfig.labelsMinDistance}
+                  containerWidth={size.width}
+                  expectedLabelHeight={chartConfig.expectedLabelHeight}
+                  renderLabel={(index) => {
+                    const startedAt = getDataPointStartedAt(index)
+
+                    return (
+                      <Text size={12} color="supporting" nowrap>
+                        {format(startedAt, 'd MMM')}
+                      </Text>
+                    )
+                  }}
+                />
+              </>
+            )}
+          </VStack>
+        )
+      }}
+    />
   )
 }
