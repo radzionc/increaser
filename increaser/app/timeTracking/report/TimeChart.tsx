@@ -52,13 +52,12 @@ export const TimeChart = () => {
   const { colors } = useTheme()
   const color = activeProjectId
     ? projectsRecord[activeProjectId].hslaColor
-    : colors.contrast
+    : colors.primary
 
   const getDataPointStartedAt = (index: number) =>
-    firstTimeGroupStartedAt +
     match(timeGrouping, {
-      day: () => convertDuration(index, 'd', 'ms'),
-      week: () => convertDuration(index, 'w', 'ms'),
+      day: () => firstTimeGroupStartedAt + convertDuration(index, 'd', 'ms'),
+      week: () => firstTimeGroupStartedAt + convertDuration(index, 'w', 'ms'),
       month: () => addMonths(firstTimeGroupStartedAt, index).getTime(),
     })
 
