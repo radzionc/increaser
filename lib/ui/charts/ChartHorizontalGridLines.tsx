@@ -1,25 +1,22 @@
-import { ReactNode } from 'react'
 import { PositionAbsolutelyCenterHorizontally } from '../layout/PositionAbsolutelyCenterHorizontally'
 import { toPercents } from '@lib/utils/toPercents'
+import styled from 'styled-components'
+import { getColor } from '../theme/getters'
 
 type ChartYAxisProps = {
   data: number[]
-  renderLabel: (index: number) => ReactNode
-  expectedLabelWidth: number
 }
 
-export const ChartYAxis = ({
-  data,
-  expectedLabelWidth,
-  renderLabel,
-}: ChartYAxisProps) => {
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background: ${getColor('mist')};
+  z-index: 0;
+`
+
+export const ChartHorizontalGridLines = ({ data }: ChartYAxisProps) => {
   return (
-    <div
-      style={{
-        minWidth: expectedLabelWidth,
-        position: 'relative',
-      }}
-    >
+    <>
       {data.map((value, index) => {
         return (
           <PositionAbsolutelyCenterHorizontally
@@ -27,10 +24,10 @@ export const ChartYAxis = ({
             fullWidth
             key={index}
           >
-            {renderLabel(index)}
+            <Line />
           </PositionAbsolutelyCenterHorizontally>
         )
       })}
-    </div>
+    </>
   )
 }

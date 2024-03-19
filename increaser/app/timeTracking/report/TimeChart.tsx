@@ -10,7 +10,7 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { normalize } from '@lib/utils/math/normalize'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
-import { LineChart } from '@lib/ui/charts/LineChart'
+import { SharpLineChart } from '@lib/ui/charts/LineChart/SharpLineChart'
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
 import { match } from '@lib/utils/match'
@@ -18,6 +18,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { Spacer } from '@lib/ui/layout/Spacer'
+import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 
 const chartConfig = {
   chartHeight: 180,
@@ -85,6 +86,9 @@ export const TimeChart = () => {
           -2,
         )
 
+        const yLabels = [chartMinValue, chartMaxValue]
+        const yLabelsData = normalize([chartMinValue, chartMaxValue])
+
         return (
           <VStack fullWidth gap={20} ref={setElement}>
             {size && (
@@ -135,18 +139,19 @@ export const TimeChart = () => {
                 <HStack>
                   <ChartYAxis
                     expectedLabelWidth={chartConfig.expectedYAxisLabelWidth}
-                    renderLabel={(value) => (
-                      <Text key={value} size={12} color="supporting">
-                        {formatDuration(value, 's', {
+                    renderLabel={(index) => (
+                      <Text key={index} size={12} color="supporting">
+                        {formatDuration(yLabels[index], 's', {
                           maxUnit: 'h',
                           minUnit: 'h',
                         })}
                       </Text>
                     )}
-                    data={[chartMinValue, chartMaxValue]}
+                    data={yLabelsData}
                   />
                   <VStack style={{ position: 'relative' }}>
-                    <LineChart
+                    <ChartHorizontalGridLines data={yLabelsData} />
+                    <SharpLineChart
                       width={size.width - chartConfig.expectedYAxisLabelWidth}
                       height={chartConfig.chartHeight}
                       data={data}
