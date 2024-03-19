@@ -19,14 +19,8 @@ import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
-
-const chartConfig = {
-  chartHeight: 180,
-  expectedYAxisLabelWidth: 40,
-  expectedLabelWidth: 58,
-  expectedLabelHeight: 18,
-  labelsMinDistance: 20,
-}
+import { lineChartConfig } from './lineChartConfig'
+import { AllProjectsLineChart } from './AllProjectsLineChart'
 
 export const TimeChart = () => {
   const {
@@ -76,8 +70,6 @@ export const TimeChart = () => {
     ].map((value) => convertDuration(value, 'h', 's'))
   }, [totals])
 
-  console.log({ chartMinValue, chartMaxValue })
-
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
@@ -94,7 +86,7 @@ export const TimeChart = () => {
             {size && (
               <>
                 <HStack>
-                  <Spacer width={chartConfig.expectedYAxisLabelWidth} />
+                  <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
                   <LineChartItemInfo
                     itemIndex={selectedDataPoint}
                     isVisible={isSelectedDataPointVisible}
@@ -138,7 +130,7 @@ export const TimeChart = () => {
                 </HStack>
                 <HStack>
                   <ChartYAxis
-                    expectedLabelWidth={chartConfig.expectedYAxisLabelWidth}
+                    expectedLabelWidth={lineChartConfig.expectedYAxisLabelWidth}
                     renderLabel={(index) => (
                       <Text key={index} size={12} color="supporting">
                         {formatDuration(yLabels[index], 's', {
@@ -149,14 +141,32 @@ export const TimeChart = () => {
                     )}
                     data={yLabelsData}
                   />
-                  <VStack style={{ position: 'relative' }}>
+                  <VStack
+                    style={{
+                      position: 'relative',
+                      minHeight: lineChartConfig.chartHeight,
+                    }}
+                    fullWidth
+                  >
                     <ChartHorizontalGridLines data={yLabelsData} />
-                    <SharpLineChart
-                      width={size.width - chartConfig.expectedYAxisLabelWidth}
-                      height={chartConfig.chartHeight}
-                      data={data}
-                      color={color}
-                    />
+                    {activeProjectId ? (
+                      <SharpLineChart
+                        width={
+                          size.width - lineChartConfig.expectedYAxisLabelWidth
+                        }
+                        height={lineChartConfig.chartHeight}
+                        data={data}
+                        color={color}
+                      />
+                    ) : (
+                      <AllProjectsLineChart
+                        chartMin={chartMinValue}
+                        chartMax={chartMaxValue}
+                        width={
+                          size.width - lineChartConfig.expectedYAxisLabelWidth
+                        }
+                      />
+                    )}
                     <LineChartPositionTracker
                       data={data}
                       color={color}
@@ -173,13 +183,13 @@ export const TimeChart = () => {
                 </HStack>
 
                 <HStack>
-                  <Spacer width={chartConfig.expectedYAxisLabelWidth} />
+                  <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
                   <ChartXAxis
                     data={data}
-                    expectedLabelWidth={chartConfig.expectedLabelWidth}
-                    labelsMinDistance={chartConfig.labelsMinDistance}
+                    expectedLabelWidth={lineChartConfig.expectedLabelWidth}
+                    labelsMinDistance={lineChartConfig.labelsMinDistance}
                     containerWidth={size.width}
-                    expectedLabelHeight={chartConfig.expectedLabelHeight}
+                    expectedLabelHeight={lineChartConfig.expectedLabelHeight}
                     renderLabel={(index) => {
                       const startedAt = getDataPointStartedAt(index)
 

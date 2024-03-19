@@ -3,12 +3,16 @@ import { Point } from '../../entities/Point'
 import styled, { useTheme } from 'styled-components'
 import { transition } from '../../css/transition'
 import { HSLA } from '../../colors/HSLA'
+import { match } from '@lib/utils/match'
+
+type LineChartFillKind = 'gradient' | 'solid'
 
 interface LineChartProps {
   data: number[]
   height: number
   width: number
   color: HSLA
+  fillKind?: LineChartFillKind
 }
 
 const calculateControlPoints = (dataPoints: Point[]) => {
@@ -72,7 +76,13 @@ const Path = styled.path`
   ${transition}
 `
 
-export const LineChart = ({ data, width, height, color }: LineChartProps) => {
+export const LineChart = ({
+  data,
+  width,
+  height,
+  color,
+  fillKind = 'gradient',
+}: LineChartProps) => {
   const [path, closedPath] = useMemo(() => {
     if (data.length === 0) return ['', '']
 
@@ -97,20 +107,29 @@ export const LineChart = ({ data, width, height, color }: LineChartProps) => {
       height={height}
       viewBox={`0 0 ${width} ${height}`}
     >
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop
-            offset="0%"
-            stopColor={color.getVariant({ a: () => 0.4 }).toCssValue()}
-          />
-          <stop
-            offset="100%"
-            stopColor={theme.colors.transparent.toCssValue()}
-          />
-        </linearGradient>
-      </defs>
       <Path d={path} fill="none" stroke={color.toCssValue()} strokeWidth="2" />
-      <Path d={closedPath} fill="url(#gradient)" strokeWidth="0" />
+      {fillKind === 'gradient' && (
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop
+              offset="0%"
+              stopColor={color.getVariant({ a: () => 0.4 }).toCssValue()}
+            />
+            <stop
+              offset="100%"
+              stopColor={theme.colors.transparent.toCssValue()}
+            />
+          </linearGradient>
+        </defs>
+      )}
+      <Path
+        d={closedPath}
+        fill={match(fillKind, {
+          gradient: () => 'url(#gradient)',
+          solid: () => color.toCssValue(),
+        })}
+        strokeWidth="0"
+      />
     </svg>
   )
 }
