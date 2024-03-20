@@ -16,6 +16,7 @@ export const TrackedTimeReport = () => {
         wrap="wrap"
         justifyContent="space-between"
         alignItems="center"
+        fullWidth
         gap={20}
       >
         <TrackedTimeReportTitle />

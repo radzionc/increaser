@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
-import styled, { useTheme } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
@@ -11,13 +11,40 @@ import { round } from '@lib/ui/css/round'
 import { order } from '@lib/utils/array/order'
 import { toPercents } from '@lib/utils/toPercents'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
+import { transition } from '@lib/ui/css/transition'
+import { interactive } from '@lib/ui/css/interactive'
+import { getColor } from '@lib/ui/theme/getters'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 
-const Row = styled.div`
+const InteractiveRow = styled.div<{ isActive: boolean }>`
+  ${transition}
+  ${interactive}
+  ${borderRadius.s};
+
+  ${({ isActive }) =>
+    isActive
+      ? css`
+          color: ${getColor('contrast')};
+          background: ${getColor('mist')};
+        `
+      : css`
+          color: ${getColor('text')};
+          &:hover {
+            background: ${getColor('mist')};
+          }
+        `};
+`
+
+const RowContent = styled.div`
   display: grid;
   grid-gap: 8px;
   grid-template-columns: 8px 120px 80px 80px 80px;
   align-items: center;
   font-size: 14px;
+  ${verticalPadding(6)};
+  ${horizontalPadding(8)};
 
   > * {
     &:last-child,
@@ -36,7 +63,7 @@ const Circle = styled.div`
 
 export const ProjectsDistributionBreakdown = () => {
   const { projectsRecord } = useProjects()
-  const { projectsData, activeProjectId } = useTrackedTimeReport()
+  const { projectsData, activeProjectId, setState } = useTrackedTimeReport()
 
   const { colors } = useTheme()
 
@@ -53,12 +80,10 @@ export const ProjectsDistributionBreakdown = () => {
     'desc',
   ).filter(([, data]) => sum(data) > 0)
 
-  const summaryColor = activeProjectId ? 'shy' : 'contrast'
-
   return (
     <VStack style={{ alignSelf: 'center' }} gap={16}>
-      <Row>
-        <Circle style={{ background: colors.mist.toCssValue() }} />
+      <RowContent>
+        <div />
         <Text cropped color="shy">
           Project
         </Text>
@@ -71,79 +96,92 @@ export const ProjectsDistributionBreakdown = () => {
         <Text color="shy" weight="semibold">
           Share
         </Text>
-      </Row>
+      </RowContent>
       <SeparatedByLine gap={12}>
-        <VStack gap={12}>
+        <VStack gap={2}>
           {items.map(([id, data]) => {
             const seconds = sum(data)
             const isPrimary = !activeProjectId || activeProjectId === id
-            const statColor = activeProjectId
-              ? activeProjectId === id
-                ? 'contrast'
-                : 'shy'
-              : 'regular'
             return (
-              <Row key={id}>
-                <Circle
-                  style={{
-                    background: (isPrimary
-                      ? colors.getLabelColor(projectsRecord[id].color)
-                      : colors.mist
-                    ).toCssValue(),
-                  }}
-                />
-                <Text color={statColor} cropped>
-                  {projectsRecord[id].name}
-                </Text>
-                <Text color={statColor} weight="semibold">
-                  <EmphasizeNumbers
-                    value={formatDuration(seconds, 's', {
-                      maxUnit: 'h',
-                    })}
+              <InteractiveRow
+                onClick={() =>
+                  setState((state) => ({
+                    ...state,
+                    activeProjectId: id,
+                  }))
+                }
+                isActive={activeProjectId === id}
+              >
+                <RowContent key={id}>
+                  <Circle
+                    style={{
+                      background: (isPrimary
+                        ? colors.getLabelColor(projectsRecord[id].color)
+                        : colors.mist
+                      ).toCssValue(),
+                    }}
                   />
-                </Text>
-                <Text color={statColor} weight="semibold">
-                  <EmphasizeNumbers
-                    value={formatDuration(seconds / data.length, 's', {
-                      maxUnit: 'h',
-                      kind: 'short',
-                    })}
-                  />
-                </Text>
-                <Text color={statColor} weight="semibold">
-                  <EmphasizeNumbers
-                    value={toPercents(seconds / total, 'round')}
-                  />
-                </Text>
-              </Row>
+                  <Text cropped>{projectsRecord[id].name}</Text>
+                  <Text weight="semibold">
+                    <EmphasizeNumbers
+                      value={formatDuration(seconds, 's', {
+                        maxUnit: 'h',
+                      })}
+                    />
+                  </Text>
+                  <Text weight="semibold">
+                    <EmphasizeNumbers
+                      value={formatDuration(seconds / data.length, 's', {
+                        maxUnit: 'h',
+                        kind: 'short',
+                      })}
+                    />
+                  </Text>
+                  <Text weight="semibold">
+                    <EmphasizeNumbers
+                      value={toPercents(seconds / total, 'round')}
+                    />
+                  </Text>
+                </RowContent>
+              </InteractiveRow>
             )
           })}
         </VStack>
-        <Row>
-          <div />
-          <div />
-          <Text color={summaryColor} weight="semibold">
-            <EmphasizeNumbers
-              value={formatDuration(total, 's', {
-                maxUnit: 'h',
-              })}
-            />
-          </Text>
-          <Text color={summaryColor} weight="semibold">
-            <EmphasizeNumbers
-              value={formatDuration(
-                total / Object.values(projectsData)[0].length,
-                's',
-                {
+        <InteractiveRow
+          onClick={() =>
+            setState((state) => ({
+              ...state,
+              activeProjectId: null,
+            }))
+          }
+          isActive={!activeProjectId}
+        >
+          <RowContent>
+            <div />
+            <Text weight="semibold">All projects</Text>
+            <Text weight="semibold">
+              <EmphasizeNumbers
+                value={formatDuration(total, 's', {
                   maxUnit: 'h',
-                },
-              )}
-            />
-          </Text>
-          <Text color={summaryColor} weight="semibold">
-            <EmphasizeNumbers value="100%" />
-          </Text>
-        </Row>
+                })}
+              />
+            </Text>
+            <Text weight="semibold">
+              <EmphasizeNumbers
+                value={formatDuration(
+                  total / Object.values(projectsData)[0].length,
+                  's',
+                  {
+                    maxUnit: 'h',
+                  },
+                )}
+              />
+            </Text>
+            <Text weight="semibold">
+              <EmphasizeNumbers value="100%" />
+            </Text>
+          </RowContent>
+        </InteractiveRow>
       </SeparatedByLine>
     </VStack>
   )
