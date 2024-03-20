@@ -30,10 +30,7 @@ import { fromMonth, toMonth } from '@lib/utils/time/toMonth'
 import { areSameMonth } from '@lib/utils/time/areSameMonth'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 import { useCurrentMonthSets } from '../../sets/hooks/useCurrentMonthSets'
-import {
-  PersistentStateKey,
-  usePersistentState,
-} from '../../state/persistentState'
+import { useTrackedTimeReportPreferences } from './useTrackedTimeReportPreferences'
 
 type ProjectsData = Record<string, number[]>
 
@@ -43,8 +40,6 @@ type TrackedTimeReportState = {
   includeCurrentPeriod: boolean
   timeFrame: TimeFrame
 }
-
-const defaultTimeGrouping = 'week'
 
 type TrackedTimeReportProviderState = TrackedTimeReportState & {
   projectsData: ProjectsData
@@ -65,15 +60,7 @@ export const useTrackedTimeReport = createContextHook(
 export const TrackedTimeReportProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const [state, setState] = usePersistentState<TrackedTimeReportState>(
-    PersistentStateKey.TrackedTimeReportPreferences,
-    {
-      activeProjectId: null,
-      timeGrouping: defaultTimeGrouping,
-      includeCurrentPeriod: false,
-      timeFrame: timeFrames[defaultTimeGrouping][0],
-    },
-  )
+  const [state, setState] = useTrackedTimeReportPreferences()
 
   const { projects } = useProjects()
   const { sets } = useAssertUserState()
