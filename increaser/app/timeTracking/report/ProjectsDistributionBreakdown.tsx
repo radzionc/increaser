@@ -56,7 +56,7 @@ export const ProjectsDistributionBreakdown = () => {
   const summaryColor = activeProjectId ? 'shy' : 'contrast'
 
   return (
-    <VStack gap={16}>
+    <VStack style={{ alignSelf: 'center' }} gap={16}>
       <Row>
         <Circle style={{ background: colors.mist.toCssValue() }} />
         <Text cropped color="shy">
