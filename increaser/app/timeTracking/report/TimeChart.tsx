@@ -10,7 +10,6 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { normalize } from '@lib/utils/math/normalize'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
-import { SharpLineChart } from '@lib/ui/charts/LineChart/SharpLineChart'
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
 import { match } from '@lib/utils/match'
@@ -20,7 +19,7 @@ import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { lineChartConfig } from './lineChartConfig'
-import { AllProjectsLineChart } from './AllProjectsLineChart'
+import { ProjectsLineCharts } from './ProjectsLineCharts'
 
 export const TimeChart = () => {
   const {
@@ -149,24 +148,13 @@ export const TimeChart = () => {
                     fullWidth
                   >
                     <ChartHorizontalGridLines data={yLabelsData} />
-                    {activeProjectId ? (
-                      <SharpLineChart
-                        width={
-                          size.width - lineChartConfig.expectedYAxisLabelWidth
-                        }
-                        height={lineChartConfig.chartHeight}
-                        data={data}
-                        color={color}
-                      />
-                    ) : (
-                      <AllProjectsLineChart
-                        chartMin={chartMinValue}
-                        chartMax={chartMaxValue}
-                        width={
-                          size.width - lineChartConfig.expectedYAxisLabelWidth
-                        }
-                      />
-                    )}
+                    <ProjectsLineCharts
+                      chartMin={chartMinValue}
+                      chartMax={chartMaxValue}
+                      width={
+                        size.width - lineChartConfig.expectedYAxisLabelWidth
+                      }
+                    />
                     <LineChartPositionTracker
                       data={data}
                       color={color}

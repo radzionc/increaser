@@ -29,21 +29,31 @@ const ChartWrapper = styled.div`
   ${takeWholeSpaceAbsolutely};
 `
 
-type AllProjectsLineChartProps = {
+type ProjectsLineChartsProps = {
   width: number
   chartMin: number
   chartMax: number
 }
 
-export const AllProjectsLineChart = ({
+export const ProjectsLineCharts = ({
   width,
   chartMin,
   chartMax,
-}: AllProjectsLineChartProps) => {
+}: ProjectsLineChartsProps) => {
   const { projectsRecord } = useProjects()
-  const { projectsData } = useTrackedTimeReport()
+  const { projectsData, activeProjectId } = useTrackedTimeReport()
 
   const charts = useMemo(() => {
+    if (activeProjectId) {
+      const data = projectsData[activeProjectId]
+      return [
+        {
+          data: normalize([...data, chartMin, chartMax]).slice(0, -2),
+          color: projectsRecord[activeProjectId].hslaColor,
+        },
+      ]
+    }
+
     const entries = Object.entries(projectsData).filter(
       ([, data]) => sum(data) > 0,
     )
@@ -72,7 +82,7 @@ export const AllProjectsLineChart = ({
     })
 
     return result
-  }, [chartMax, chartMin, projectsData, projectsRecord])
+  }, [activeProjectId, chartMax, chartMin, projectsData, projectsRecord])
 
   return (
     <Container>
@@ -80,7 +90,7 @@ export const AllProjectsLineChart = ({
         {charts.map((chart, index) => (
           <ChartWrapper key={index}>
             <SharpLineChart
-              fillKind="solid"
+              fillKind={activeProjectId ? 'gradient' : 'solid'}
               data={chart.data}
               width={width}
               height={lineChartConfig.chartHeight}

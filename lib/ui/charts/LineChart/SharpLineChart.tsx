@@ -4,6 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import { transition } from '../../css/transition'
 import { HSLA } from '../../colors/HSLA'
 import { match } from '@lib/utils/match'
+import { Match } from '../../base/Match'
 
 type LineChartFillKind = 'gradient' | 'solid'
 
@@ -74,25 +75,39 @@ export const SharpLineChart = ({
       viewBox={`0 0 ${width} ${height}`}
     >
       <Path d={path} fill="none" stroke={color.toCssValue()} strokeWidth="2" />
-      {fillKind === 'gradient' && (
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop
-              offset="0%"
-              stopColor={color.getVariant({ a: () => 0.4 }).toCssValue()}
+      <Match
+        value={fillKind}
+        gradient={() => (
+          <>
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop
+                  offset="0%"
+                  stopColor={color.getVariant({ a: () => 0.4 }).toCssValue()}
+                />
+                <stop
+                  offset="100%"
+                  stopColor={theme.colors.transparent.toCssValue()}
+                />
+              </linearGradient>
+            </defs>
+          </>
+        )}
+        solid={() => (
+          <>
+            <Path
+              d={closedPath}
+              fill={theme.colors.background.toCssValue()}
+              strokeWidth="0"
             />
-            <stop
-              offset="100%"
-              stopColor={theme.colors.transparent.toCssValue()}
-            />
-          </linearGradient>
-        </defs>
-      )}
+          </>
+        )}
+      />
       <Path
         d={closedPath}
         fill={match(fillKind, {
           gradient: () => 'url(#gradient)',
-          solid: () => color.toCssValue(),
+          solid: () => color.getVariant({ a: () => 0.4 }).toCssValue(),
         })}
         strokeWidth="0"
       />
