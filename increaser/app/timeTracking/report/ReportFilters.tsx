@@ -8,6 +8,7 @@ export const ReportFilters = () => {
     <UniformColumnGrid
       style={{ minWidth: 320, flex: 1, justifyContent: 'end' }}
       minChildrenWidth={160}
+      maxChildrenWidth={180}
       gap={8}
     >
       <TimeGroupingSelector />

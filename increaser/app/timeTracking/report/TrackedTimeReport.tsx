@@ -11,7 +11,7 @@ import { TrackedTimeReportTitle } from './TrackedTimeReportTitle'
 
 export const TrackedTimeReport = () => {
   return (
-    <VStack gap={20}>
+    <VStack gap={16}>
       <HStack
         wrap="wrap"
         justifyContent="space-between"

@@ -30,7 +30,7 @@ const InteractiveRow = styled.div<{ isActive: boolean }>`
           background: ${getColor('mist')};
         `
       : css`
-          color: ${getColor('text')};
+          color: ${getColor('textSupporting')};
           &:hover {
             background: ${getColor('mist')};
           }
@@ -40,7 +40,7 @@ const InteractiveRow = styled.div<{ isActive: boolean }>`
 const RowContent = styled.div`
   display: grid;
   grid-gap: 8px;
-  grid-template-columns: 8px 120px 80px 80px 80px;
+  grid-template-columns: 8px 120px repeat(3, 92px);
   align-items: center;
   font-size: 14px;
   ${verticalPadding(6)};
@@ -63,7 +63,8 @@ const Circle = styled.div`
 
 export const ProjectsDistributionBreakdown = () => {
   const { projectsRecord } = useProjects()
-  const { projectsData, activeProjectId, setState } = useTrackedTimeReport()
+  const { projectsData, activeProjectId, setState, timeGrouping } =
+    useTrackedTimeReport()
 
   const { colors } = useTheme()
 
@@ -91,7 +92,7 @@ export const ProjectsDistributionBreakdown = () => {
           Total
         </Text>
         <Text color="shy" weight="semibold">
-          Average
+          Avg. {timeGrouping}
         </Text>
         <Text color="shy" weight="semibold">
           Share
