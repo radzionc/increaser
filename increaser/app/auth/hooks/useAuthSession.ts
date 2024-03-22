@@ -10,13 +10,13 @@ import {
 export const useAuthSession = () => {
   const queryClient = useQueryClient()
 
-  const [session, setSession] = usePersistentState<AuthSession | undefined>(
+  const [session, setSession] = usePersistentState<AuthSession | null>(
     PersistentStateKey.AuthSession,
-    undefined,
+    null,
   )
 
   const onChange = useCallback(
-    (session: AuthSession | undefined) => {
+    (session: AuthSession | null) => {
       if (session) {
         analytics.trackEvent('Finish identification')
 

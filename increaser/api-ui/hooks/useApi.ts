@@ -30,7 +30,7 @@ export const useApi = () => {
         return result
       } catch (err) {
         if (err instanceof ApiError && err.id === 'invalidAuthToken') {
-          setAuthSession(undefined)
+          setAuthSession(null)
         }
         throw err
       }

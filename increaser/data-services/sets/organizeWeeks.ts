@@ -8,17 +8,15 @@ import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByPro
 import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
 import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 
-const projectsWeeksToStore = 4
-
 const addNewSetsToProject = (project: Project, sets: Set[]) => {
-  let newWeeks = [...project.weeks]
+  let weeks = [...project.weeks]
   sets.map(setToProjectWeek).forEach((week) => {
-    newWeeks = mergeIntoProjectWeeks(newWeeks, week)
+    weeks = mergeIntoProjectWeeks(weeks, week)
   })
 
   return {
     ...project,
-    weeks: newWeeks.slice(-projectsWeeksToStore),
+    weeks,
   }
 }
 
