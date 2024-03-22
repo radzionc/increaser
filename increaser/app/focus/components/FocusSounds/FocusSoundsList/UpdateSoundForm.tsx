@@ -46,9 +46,7 @@ export const UpdateSoundForm = ({ onFinish, sound }: UpdateSoundFormProps) => {
       gap={8}
       onSubmit={handleSubmit(({ name, url }) => {
         updateSounds(
-          sounds.map((s) =>
-            s.url === sound.url ? { ...sound, name, url } : sound,
-          ),
+          sounds.map((s) => (s.url === sound.url ? { ...s, name, url } : s)),
         )
         onFinish()
       })}
