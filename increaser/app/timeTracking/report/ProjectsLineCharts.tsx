@@ -7,9 +7,9 @@ import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import styled from 'styled-components'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-import { SharpLineChart } from '@lib/ui/charts/LineChart/SharpLineChart'
 import { lineChartConfig } from './lineChartConfig'
 import { normalize } from '@lib/utils/math/normalize'
+import { LineChart } from '@lib/ui/charts/LineChart'
 
 type ChartDesription = {
   data: number[]
@@ -89,7 +89,8 @@ export const ProjectsLineCharts = ({
       <Content>
         {charts.map((chart, index) => (
           <ChartWrapper key={index}>
-            <SharpLineChart
+            <LineChart
+              dataPointsConnectionKind="sharp"
               fillKind={activeProjectId ? 'gradient' : 'solid'}
               data={chart.data}
               width={width}
