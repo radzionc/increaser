@@ -9,7 +9,6 @@ export enum AppPath {
   AppSumo = '/appsumo',
   Account = '/account',
   Habits = '/habits',
-  Capacity = '/capacity',
   CreateProject = '/projects/create',
   Community = '/community',
   SignIn = '/sign-in',
@@ -17,6 +16,8 @@ export enum AppPath {
   EmailConfirm = '/email-confirm',
   Onboarding = '/onboarding',
   TimeTracking = '/time-tracking',
+  WorkBudget = '/work-budget',
+  WeeklyGoals = '/weekly-goals',
 }
 
 export const getProjectPath = (projectId: string) => `/projects/${projectId}`

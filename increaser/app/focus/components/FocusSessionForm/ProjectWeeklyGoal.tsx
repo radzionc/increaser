@@ -110,7 +110,10 @@ export const ProjectWeeklyGoal = ({ projectId }: ProjectWeeklyGoalProps) => {
                   })}
                 </Text>
               ) : (
-                <Link style={{ justifySelf: 'start' }} href={AppPath.Capacity}>
+                <Link
+                  style={{ justifySelf: 'start' }}
+                  href={AppPath.WeeklyGoals}
+                >
                   <ShyTextButton as="p" text="set weekly goal" />
                 </Link>
               )}

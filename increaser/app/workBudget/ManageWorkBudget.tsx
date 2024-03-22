@@ -16,7 +16,7 @@ import { getShortWeekday } from '@lib/utils/time'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 
-export const WorkBudgetOnboardingStep = () => {
+export const ManageWorkBudget = () => {
   const { weekTimeAllocation } = useAssertUserState()
 
   const { mutate: updateUser } = useUpdateUserMutation()

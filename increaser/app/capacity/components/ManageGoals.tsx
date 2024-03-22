@@ -5,8 +5,6 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { ProjectsGoalsVisualization } from './ProjectsGoalsVisualization'
-import { useBoolean } from '@lib/ui/hooks/useBoolean'
-import { CollapseToggleButton } from '@lib/ui/buttons/CollapseToggleButton'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { sum } from '@lib/utils/array/sum'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
@@ -15,7 +13,6 @@ export const ManageGoals = () => {
   const { activeProjects } = useProjects()
 
   const projects = [...activeProjects].sort((a, b) => b.total - a.total)
-  const [isExpanded, { toggle }] = useBoolean(false)
 
   return (
     <>
@@ -39,20 +36,17 @@ export const ManageGoals = () => {
                 </Text>
               </HStack>
             </VStack>
-            <CollapseToggleButton onClick={toggle} isOpen={isExpanded} />
           </HStack>
         }
       >
         <ProjectsGoalsVisualization />
-        {isExpanded && (
-          <VStack gap={8}>
-            {projects.map((project) => (
-              <CurrentProjectProvider key={project.id} value={project}>
-                <ProjectGoalInput />
-              </CurrentProjectProvider>
-            ))}
-          </VStack>
-        )}
+        <VStack gap={8}>
+          {projects.map((project) => (
+            <CurrentProjectProvider key={project.id} value={project}>
+              <ProjectGoalInput />
+            </CurrentProjectProvider>
+          ))}
+        </VStack>
       </TitledSection>
     </>
   )
