@@ -6,7 +6,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { InfoIcon } from '@lib/ui/icons/InfoIcon'
 import Link from 'next/link'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
-import { AUTHOR_EMAIL } from '@increaser/app/shared/externalResources'
+import { founderEmail } from '@increaser/config'
 
 interface AuthConfirmationStatusProps {
   error?: Error
@@ -36,8 +36,8 @@ export const AuthConfirmationStatus = ({
           </Link>
           <Text centered color="supporting" size={14}>
             Nothing helps? Email us at <br />
-            <CopyText color="regular" as="span" content={AUTHOR_EMAIL}>
-              {AUTHOR_EMAIL}
+            <CopyText color="regular" as="span" content={founderEmail}>
+              {founderEmail}
             </CopyText>
           </Text>
         </>

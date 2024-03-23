@@ -7,12 +7,13 @@ import { Text } from '.'
 import { transition } from '../css/transition'
 import { CheckIcon } from '../icons/CheckIcon'
 import { CopyIcon } from '../icons/CopyIcon'
+import { IconWrapper } from '../icons/IconWrapper'
 
 interface CopyTextProps extends React.ComponentProps<typeof Text> {
   content: string
 }
 
-const IconWr = styled(Text)`
+const IconWr = styled(IconWrapper)`
   margin-left: 4px;
   ${transition};
   color: ${getColor('textShy')};

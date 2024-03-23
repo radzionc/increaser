@@ -1,6 +1,5 @@
 import { SignOut } from '@increaser/app/components/account/SignOut'
 import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-width-content'
-import { InlineFounderContacts } from '@increaser/app/info/components/InflineFounderContacts'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useUserState } from '@increaser/ui/user/UserStateContext'
@@ -32,9 +31,6 @@ export const SettingsPage: Page = () => {
             <VStack alignItems="start">
               <SignOut />
             </VStack>
-          </NamedSection>
-          <NamedSection name="Contact founder">
-            <InlineFounderContacts />
           </NamedSection>
         </VStack>
       </UserStateOnly>

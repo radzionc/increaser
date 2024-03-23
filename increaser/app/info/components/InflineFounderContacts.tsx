@@ -1,13 +1,13 @@
 import {
-  AUTHOR_EMAIL,
-  AUTHOR_LINKEDIN,
-  AUTHOR_TELEGRAM,
-  AUTHOR_TWITTER,
-} from '@increaser/app/shared/externalResources'
+  founderEmail,
+  founderLinkedInUrl,
+  founderTelegramUrl,
+  founderXUrl,
+} from '@increaser/config'
 import { IconButton, IconButtonProps } from '@lib/ui/buttons/IconButton'
 import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
-import { TwitterIcon } from '@lib/ui/icons/TwitterIcon'
+import { XIcon } from '@lib/ui/icons/XIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { Text } from '@lib/ui/text'
@@ -28,36 +28,36 @@ export const InlineFounderContacts = ({
   }
 
   return (
-    <HStack gap={16} alignItems="center" wrap="wrap">
-      <CopyText content={AUTHOR_EMAIL}>
-        <Text color="regular" as="span" size={size === 'm' ? 16 : 14}>
-          {AUTHOR_EMAIL}
+    <HStack
+      gap={16}
+      justifyContent="space-between"
+      alignItems="center"
+      wrap="wrap"
+    >
+      <CopyText content={founderEmail}>
+        <Text color="contrast" as="span" size={size === 'm' ? 16 : 14}>
+          {founderEmail}
         </Text>
       </CopyText>
-      <ExternalLink to={AUTHOR_TWITTER}>
-        <IconButton
-          {...iconButtonSharedProps}
-          kind="secondary"
-          title="Twitter"
-          icon={<TwitterIcon />}
-        />
-      </ExternalLink>
-      <ExternalLink to={AUTHOR_LINKEDIN}>
-        <IconButton
-          {...iconButtonSharedProps}
-          kind="secondary"
-          title="LinkedIn"
-          icon={<LinkedinIcon />}
-        />
-      </ExternalLink>
-      <ExternalLink to={AUTHOR_TELEGRAM}>
-        <IconButton
-          kind="secondary"
-          {...iconButtonSharedProps}
-          title="Telegram"
-          icon={<TelegramIcon />}
-        />
-      </ExternalLink>
+      <HStack gap={16} alignItems="center">
+        <ExternalLink to={founderXUrl}>
+          <IconButton {...iconButtonSharedProps} title="X" icon={<XIcon />} />
+        </ExternalLink>
+        <ExternalLink to={founderLinkedInUrl}>
+          <IconButton
+            {...iconButtonSharedProps}
+            title="LinkedIn"
+            icon={<LinkedinIcon />}
+          />
+        </ExternalLink>
+        <ExternalLink to={founderTelegramUrl}>
+          <IconButton
+            {...iconButtonSharedProps}
+            title="Telegram"
+            icon={<TelegramIcon />}
+          />
+        </ExternalLink>
+      </HStack>
     </HStack>
   )
 }
