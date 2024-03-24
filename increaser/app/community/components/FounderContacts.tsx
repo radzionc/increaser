@@ -1,4 +1,10 @@
-import { productName } from '@increaser/config'
+import {
+  founderEmail,
+  founderLinkedInUrl,
+  founderTelegramUrl,
+  founderXUrl,
+  productName,
+} from '@increaser/config'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
 import { Text } from '@lib/ui/text'
@@ -8,12 +14,32 @@ import styled from 'styled-components'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { getColor } from '@lib/ui/theme/getters'
-import { InlineFounderContacts } from '../../info/components/InflineFounderContacts'
+import { Button } from '@lib/ui/buttons/Button'
+import { EnvelopIcon } from '@lib/ui/icons/EnvelopIcon'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
+import { XIcon } from '@lib/ui/icons/XIcon'
+import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
+import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { centerContent } from '@lib/ui/css/centerContent'
 
 const Avatar = styled(CoverImage)`
   ${round};
   ${sameDimensions(40)}
   border: 1px solid ${getColor('success')};
+`
+
+const SocialLink = styled(ExternalLink)`
+  ${sameDimensions(40)}
+  ${borderRadius.s}
+  ${centerContent};
+  font-size: 24px;
+  color: ${getColor('contrast')};
+
+  &:hover {
+    background: ${getColor('mist')};
+  }
 `
 
 export const FounderContacts = () => {
@@ -39,7 +65,29 @@ export const FounderContacts = () => {
           great idea for a new feature? Share it in the "Product Features"
           section for others to vote on!
         </Text>
-        <InlineFounderContacts />
+        <HStack alignItems="center" wrap="wrap" justifyContent="space-between">
+          <ExternalLink to={`mailto:${founderEmail}`}>
+            <Button kind="secondary" as="div">
+              <HStack alignItems="center" gap={8}>
+                <IconWrapper>
+                  <EnvelopIcon />
+                </IconWrapper>
+                <Text>Get in touch</Text>
+              </HStack>
+            </Button>
+          </ExternalLink>
+          <HStack gap={16} alignItems="center">
+            <SocialLink to={founderXUrl}>
+              <XIcon />
+            </SocialLink>
+            <SocialLink to={founderLinkedInUrl}>
+              <LinkedinIcon />
+            </SocialLink>
+            <SocialLink to={founderTelegramUrl}>
+              <TelegramIcon />
+            </SocialLink>
+          </HStack>
+        </HStack>
       </VStack>
     </Panel>
   )
