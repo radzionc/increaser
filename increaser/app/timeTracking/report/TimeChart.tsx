@@ -5,7 +5,6 @@ import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import { useMemo, useState } from 'react'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { addMonths, format } from 'date-fns'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { normalize } from '@lib/utils/math/normalize'
@@ -20,6 +19,7 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { lineChartConfig } from './lineChartConfig'
 import { ProjectsLineCharts } from './ProjectsLineCharts'
+import { useTrackedTime } from './TrackedTimeProvider'
 
 export const TimeChart = () => {
   const {
@@ -29,7 +29,7 @@ export const TimeChart = () => {
     activeProjectId,
   } = useTrackedTimeReport()
 
-  const { projectsRecord } = useProjects()
+  const { projects } = useTrackedTime()
 
   const totals = useMemo(() => {
     if (activeProjectId) {
@@ -47,7 +47,7 @@ export const TimeChart = () => {
 
   const { colors } = useTheme()
   const color = activeProjectId
-    ? projectsRecord[activeProjectId].hslaColor
+    ? projects[activeProjectId].hslaColor
     : colors.primary
 
   const getDataPointStartedAt = (index: number) =>

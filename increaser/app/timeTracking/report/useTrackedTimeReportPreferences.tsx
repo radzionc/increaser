@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import {
   usePersistentState,
   PersistentStateKey,
@@ -6,6 +5,7 @@ import {
 import { timeFrames } from './TimeGrouping'
 import { TrackedTimeReportState } from './TrackedTimeReportState'
 import { useEffect } from 'react'
+import { useTrackedTime } from './TrackedTimeProvider'
 
 const defaultTimeGrouping = 'week'
 
@@ -20,10 +20,10 @@ export const useTrackedTimeReportPreferences = () => {
     },
   )
 
-  const { projectsRecord } = useProjects()
+  const { projects } = useTrackedTime()
 
   const hasWrongActiveProjectId =
-    state.activeProjectId !== null && !projectsRecord[state.activeProjectId]
+    state.activeProjectId !== null && !projects[state.activeProjectId]
 
   useEffect(() => {
     if (hasWrongActiveProjectId) {

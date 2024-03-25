@@ -1,14 +1,13 @@
-export interface ProjectWeek {
-  year: number
-  week: number
+import { Month } from '@lib/utils/time/Month'
+import { Week } from '@lib/utils/time/Week'
+
+export type EntityWithSeconds = {
   seconds: number
 }
 
-export interface ProjectMonth {
-  year: number
-  month: number
-  seconds: number
-}
+export type ProjectWeek = Week & EntityWithSeconds
+
+export type ProjectMonth = Month & EntityWithSeconds
 
 export const ProjectStatus = {
   Active: 'ACTIVE',

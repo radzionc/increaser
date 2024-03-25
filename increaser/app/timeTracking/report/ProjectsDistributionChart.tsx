@@ -1,10 +1,10 @@
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import styled, { useTheme } from 'styled-components'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { sum } from '@lib/utils/array/sum'
 import { VStack } from '@lib/ui/layout/Stack'
 import { order } from '@lib/utils/array/order'
 import { MinimalisticPieChart } from '@lib/ui/charts/PieChart/MinimalisticPieChart'
+import { useTrackedTime } from './TrackedTimeProvider'
 
 const Container = styled(VStack)`
   min-width: 200px;
@@ -14,7 +14,7 @@ const Container = styled(VStack)`
 export const ProjectsDistributionChart = () => {
   const { projectsData, activeProjectId } = useTrackedTimeReport()
   const { colors } = useTheme()
-  const { projectsRecord } = useProjects()
+  const { projects } = useTrackedTime()
 
   const items = order(
     Object.entries(projectsData),
@@ -30,9 +30,7 @@ export const ProjectsDistributionChart = () => {
           const shouldShow = !activeProjectId || activeProjectId === id
           return {
             value: seconds,
-            color: shouldShow
-              ? colors.getLabelColor(projectsRecord[id].color)
-              : colors.mist,
+            color: shouldShow ? projects[id].hslaColor : colors.mist,
             labelColor: shouldShow ? colors.contrast : colors.transparent,
           }
         })}

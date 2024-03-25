@@ -60,6 +60,7 @@ const Container = styled(HStack)<{ isActive: boolean; isDisabled?: boolean }>`
   align-items: center;
   gap: 4px;
   justify-content: space-between;
+  min-height: 40px;
 
   ${({ isDisabled }) =>
     isDisabled

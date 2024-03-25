@@ -3,7 +3,6 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import styled, { css, useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { VStack } from '@lib/ui/layout/Stack'
@@ -17,6 +16,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { useTrackedTime } from './TrackedTimeProvider'
 
 const InteractiveRow = styled.div<{ isActive: boolean }>`
   ${transition}
@@ -62,7 +62,7 @@ const Circle = styled.div`
 `
 
 export const ProjectsDistributionBreakdown = () => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useTrackedTime()
   const { projectsData, activeProjectId, setState, timeGrouping } =
     useTrackedTimeReport()
 
@@ -117,12 +117,12 @@ export const ProjectsDistributionBreakdown = () => {
                   <Circle
                     style={{
                       background: (isPrimary
-                        ? colors.getLabelColor(projectsRecord[id].color)
+                        ? projects[id].hslaColor
                         : colors.mist
                       ).toCssValue(),
                     }}
                   />
-                  <Text cropped>{projectsRecord[id].name}</Text>
+                  <Text cropped>{projects[id].name}</Text>
                   <Text weight="semibold">
                     <EmphasizeNumbers
                       value={formatDuration(seconds, 's', {

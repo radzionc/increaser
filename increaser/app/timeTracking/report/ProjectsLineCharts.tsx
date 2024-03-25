@@ -3,13 +3,13 @@ import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import { sum } from '@lib/utils/array/sum'
 import { order } from '@lib/utils/array/order'
 import { HSLA } from '@lib/ui/colors/HSLA'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import styled from 'styled-components'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { lineChartConfig } from './lineChartConfig'
 import { normalize } from '@lib/utils/math/normalize'
 import { LineChart } from '@lib/ui/charts/LineChart'
+import { useTrackedTime } from './TrackedTimeProvider'
 
 type ChartDesription = {
   data: number[]
@@ -40,7 +40,7 @@ export const ProjectsLineCharts = ({
   chartMin,
   chartMax,
 }: ProjectsLineChartsProps) => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useTrackedTime()
   const { projectsData, activeProjectId } = useTrackedTimeReport()
 
   const charts = useMemo(() => {
@@ -49,7 +49,7 @@ export const ProjectsLineCharts = ({
       return [
         {
           data: normalize([...data, chartMin, chartMax]).slice(0, -2),
-          color: projectsRecord[activeProjectId].hslaColor,
+          color: projects[activeProjectId].hslaColor,
         },
       ]
     }
@@ -66,7 +66,7 @@ export const ProjectsLineCharts = ({
       -2,
     )
     ordered.forEach(([projectId], index) => {
-      const { hslaColor } = projectsRecord[projectId]
+      const { hslaColor } = projects[projectId]
 
       const area = mergeSameSizeDataArrays(
         ordered.slice(index).map(([, data]) => data),
@@ -82,7 +82,7 @@ export const ProjectsLineCharts = ({
     })
 
     return result
-  }, [activeProjectId, chartMax, chartMin, projectsData, projectsRecord])
+  }, [activeProjectId, chartMax, chartMin, projects, projectsData])
 
   return (
     <Container>

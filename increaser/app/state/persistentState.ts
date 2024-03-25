@@ -28,6 +28,7 @@ export enum PersistentStateKey {
   ReactQueryState = 'reactQueryState',
   IncludeTodayInSetsExplorer = 'includeTodayInSetsExplorer',
   TrackedTimeReportPreferences = 'trackedTimeReportPreferences',
+  TrackedTimePreference = 'trackedTimePreference',
 }
 
 export const persistentStorage =

@@ -1,7 +1,7 @@
 import { createContext, useMemo } from 'react'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { areSameWeek } from '@lib/utils/time/areSameWeek'
+import { areSameWeek } from '@lib/utils/time/Week'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { range } from '@lib/utils/array/range'
 import { splitBy } from '@lib/utils/array/splitBy'

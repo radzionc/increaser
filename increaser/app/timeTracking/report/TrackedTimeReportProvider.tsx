@@ -8,8 +8,6 @@ import {
   useMemo,
 } from 'react'
 import { TimeFrame, TimeGrouping, timeFrames } from './TimeGrouping'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import {
   differenceInMonths,
   startOfDay,
@@ -18,19 +16,18 @@ import {
 } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { range } from '@lib/utils/array/range'
-import { sum } from '@lib/utils/array/sum'
-import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { match } from '@lib/utils/match'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
 import { fromWeek, toWeek } from '@lib/utils/time/toWeek'
-import { areSameWeek } from '@lib/utils/time/areSameWeek'
+import { areSameWeek } from '@lib/utils/time/Week'
 import { fromMonth, toMonth } from '@lib/utils/time/toMonth'
 import { areSameMonth } from '@lib/utils/time/areSameMonth'
-import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
-import { useCurrentMonthSets } from '../../sets/hooks/useCurrentMonthSets'
 import { useTrackedTimeReportPreferences } from './useTrackedTimeReportPreferences'
+import { useTrackedTime } from './TrackedTimeProvider'
+import { areSameDay, fromDay, toDay } from '@lib/utils/time/Day'
+import { EntityWithSeconds } from '@increaser/entities/Project'
 
 type ProjectsData = Record<string, number[]>
 
@@ -61,9 +58,7 @@ export const TrackedTimeReportProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const [state, setState] = useTrackedTimeReportPreferences()
-
-  const { projects } = useProjects()
-  const { sets } = useAssertUserState()
+  const { projects } = useTrackedTime()
 
   const { includeCurrentPeriod, timeFrame, timeGrouping } = state
 
@@ -87,36 +82,23 @@ export const TrackedTimeReportProvider = ({
     [timeGrouping, currentPeriodStartedAt],
   )
 
-  const firstTimeGroupStartedAt = useMemo(
-    () =>
+  const firstTimeGroupStartedAt = useMemo(() => {
+    const items = Object.values(projects).flatMap((project) =>
       match(timeGrouping, {
-        day: () => startOfDay(sets[0].start).getTime(),
-        week: () => {
-          const allWeeks = projects
-            .flatMap((project) => project.weeks)
-            .map(fromWeek)
-          return isEmpty(allWeeks)
-            ? currentPeriodStartedAt
-            : order(allWeeks, (v) => v, 'asc')[0]
-        },
-        month: () => {
-          const allMonths = projects
-            .flatMap((project) => project.months)
-            .map(fromMonth)
-          return isEmpty(allMonths)
-            ? currentPeriodStartedAt
-            : order(allMonths, (v) => v, 'asc')[0]
-        },
+        day: () => project.days.map(fromDay),
+        week: () => project.weeks.map(fromWeek),
+        month: () => project.months.map(fromMonth),
       }),
-    [currentPeriodStartedAt, projects, sets, timeGrouping],
-  )
+    )
+
+    return isEmpty(items)
+      ? currentPeriodStartedAt
+      : order(items, (v) => v, 'asc')[0]
+  }, [currentPeriodStartedAt, projects, timeGrouping])
 
   const lastTimeGroupStartedAt = includeCurrentPeriod
     ? currentPeriodStartedAt
     : previousPeriodStartedAt
-
-  const currentWeekSets = useCurrentWeekSets()
-  const currentMonthSets = useCurrentMonthSets()
 
   const projectsData = useMemo(() => {
     const totalDataPointsAvailable =
@@ -153,83 +135,35 @@ export const TrackedTimeReportProvider = ({
         : Math.min(totalDataPointsAvailable, timeFrame)
 
     const result: ProjectsData = {}
-    projects.forEach((project) => {
-      result[project.id] = range(dataPointsCount)
-        .map((index) =>
-          match(timeGrouping, {
-            day: () => {
-              const dayStartedAt =
-                lastTimeGroupStartedAt - convertDuration(index, 'd', 'ms')
-              return convertDuration(
-                sum(
-                  sets
-                    .filter((set) => set.projectId === project.id)
-                    .filter(
-                      (set) => startOfDay(set.start).getTime() === dayStartedAt,
-                    )
-                    .map(getSetDuration),
-                ),
-                'ms',
-                's',
-              )
-            },
-            week: () => {
-              const weekStartedAt =
-                lastTimeGroupStartedAt - convertDuration(index, 'w', 'ms')
+    Object.entries(projects).forEach(([id, { weeks, days, months }]) => {
+      result[id] = range(dataPointsCount)
+        .map((index) => {
+          const startedAt = match(timeGrouping, {
+            day: () =>
+              lastTimeGroupStartedAt - convertDuration(index, 'd', 'ms'),
+            week: () =>
+              lastTimeGroupStartedAt - convertDuration(index, 'w', 'ms'),
+            month: () => subMonths(lastTimeGroupStartedAt, index).getTime(),
+          })
 
-              if (weekStartedAt === currentPeriodStartedAt) {
-                return convertDuration(
-                  sum(
-                    currentWeekSets
-                      .filter((set) => set.projectId === project.id)
-                      .map(getSetDuration),
-                  ),
-                  'ms',
-                  's',
-                )
-              }
-              const week = project.weeks.find((week) =>
-                areSameWeek(week, toWeek(weekStartedAt)),
-              )
-              return week?.seconds ?? 0
-            },
-            month: () => {
-              const monthStartedAt = subMonths(
-                lastTimeGroupStartedAt,
-                index,
-              ).getTime()
-
-              if (monthStartedAt === currentPeriodStartedAt) {
-                return convertDuration(
-                  sum(
-                    currentMonthSets
-                      .filter((set) => set.projectId === project.id)
-                      .map(getSetDuration),
-                  ),
-                  'ms',
-                  's',
-                )
-              }
-
-              const month = project.months.find((month) =>
-                areSameMonth(month, toMonth(monthStartedAt)),
-              )
-              return month?.seconds ?? 0
-            },
-          }),
-        )
+          return (
+            match<TimeGrouping, EntityWithSeconds | undefined>(timeGrouping, {
+              day: () => days.find((day) => areSameDay(day, toDay(startedAt))),
+              week: () =>
+                weeks.find((week) => areSameWeek(week, toWeek(startedAt))),
+              month: () =>
+                months.find((month) => areSameMonth(month, toMonth(startedAt))),
+            })?.seconds || 0
+          )
+        })
         .reverse()
     })
 
     return result
   }, [
-    currentMonthSets,
-    currentPeriodStartedAt,
-    currentWeekSets,
     firstTimeGroupStartedAt,
     lastTimeGroupStartedAt,
     projects,
-    sets,
     timeFrame,
     timeGrouping,
   ])

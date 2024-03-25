@@ -5,7 +5,7 @@ import { useCurrentMonthSets } from '@increaser/app/sets/hooks/useCurrentMonthSe
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { areSameMonth } from '@lib/utils/time/areSameMonth'
-import { areSameWeek } from '@lib/utils/time/areSameWeek'
+import { areSameWeek } from '@lib/utils/time/Week'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { range } from '@lib/utils/array/range'
 import { sum } from '@lib/utils/array/sum'
