@@ -1,4 +1,4 @@
-import { ProjectWeek } from '@increaser/entities/Project'
+import { ProjectWeek } from '@increaser/entities/timeTracking'
 
 export const mergeIntoProjectWeeks = (
   weeks: ProjectWeek[],

@@ -2,7 +2,7 @@ import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { useTrackedTimeReport } from './TrackedTimeReportProvider'
 import { Text } from '@lib/ui/text'
 import { order } from '@lib/utils/array/order'
-import { useTrackedTime } from './TrackedTimeProvider'
+import { useTrackedTime } from './TrackedTimeContext'
 import { sum } from '@lib/utils/array/sum'
 
 export const ProjectSelector = () => {

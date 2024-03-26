@@ -19,7 +19,7 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { lineChartConfig } from './lineChartConfig'
 import { ProjectsLineCharts } from './ProjectsLineCharts'
-import { useTrackedTime } from './TrackedTimeProvider'
+import { useTrackedTime } from './TrackedTimeContext'
 
 export const TimeChart = () => {
   const {

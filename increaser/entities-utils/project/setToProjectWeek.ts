@@ -1,9 +1,9 @@
-import { ProjectWeek } from '@increaser/entities/Project'
 import { Set } from '@increaser/entities/User'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { getYear } from 'date-fns'
 import { getSetDurationInSeconds } from '../set/getSetDurationInSeconds'
 import { getWeekIndex } from '@lib/utils/time/getWeekIndex'
+import { ProjectWeek } from '@increaser/entities/timeTracking'
 
 export const setToProjectWeek = (
   set: Set,

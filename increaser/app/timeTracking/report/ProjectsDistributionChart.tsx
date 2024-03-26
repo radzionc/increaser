@@ -4,7 +4,7 @@ import { sum } from '@lib/utils/array/sum'
 import { VStack } from '@lib/ui/layout/Stack'
 import { order } from '@lib/utils/array/order'
 import { MinimalisticPieChart } from '@lib/ui/charts/PieChart/MinimalisticPieChart'
-import { useTrackedTime } from './TrackedTimeProvider'
+import { useTrackedTime } from './TrackedTimeContext'
 
 const Container = styled(VStack)`
   min-width: 200px;

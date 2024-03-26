@@ -3,9 +3,9 @@ import {
   PersistentStateKey,
 } from '../../state/persistentState'
 import { timeFrames } from './TimeGrouping'
+import { useTrackedTime } from './TrackedTimeContext'
 import { TrackedTimeReportState } from './TrackedTimeReportState'
 import { useEffect } from 'react'
-import { useTrackedTime } from './TrackedTimeProvider'
 
 const defaultTimeGrouping = 'week'
 

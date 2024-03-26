@@ -2,10 +2,7 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '../../state/persistentState'
-
-export type TrackedTimePreference = {
-  hideProjectNames: boolean
-}
+import { TrackedTimePreference } from './TrackedTimeContext'
 
 export const useTrackedTimePreference = () => {
   return usePersistentState<TrackedTimePreference>(

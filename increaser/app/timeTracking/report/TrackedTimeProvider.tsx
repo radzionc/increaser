@@ -1,8 +1,6 @@
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { createContextHook } from '@lib/ui/state/createContextHook'
 import { pick } from '@lib/utils/record/pick'
-import { Dispatch, SetStateAction, createContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { areSameDay, toDay } from '@lib/utils/time/Day'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -17,32 +15,11 @@ import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { order } from '@lib/utils/array/order'
 import { sum } from '@lib/utils/array/sum'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
+import { useTrackedTimePreference } from './useTrackedTimePreference'
 import {
-  TrackedTimePreference,
-  useTrackedTimePreference,
-} from './useTrackedTimePreference'
-import { ProjectDay } from '@increaser/entities/timeTracking'
-
-type TimeTrackingProjectData = Pick<
-  EnhancedProject,
-  'hslaColor' | 'name' | 'weeks' | 'months' | 'id' | 'emoji'
-> & {
-  days: ProjectDay[]
-}
-
-type TrackedTimeState = TrackedTimePreference & {
-  setState: Dispatch<SetStateAction<TrackedTimePreference>>
-  projects: Record<string, TimeTrackingProjectData>
-}
-
-const TrackedTimeContext = createContext<TrackedTimeState | undefined>(
-  undefined,
-)
-
-export const useTrackedTime = createContextHook(
+  TimeTrackingProjectData,
   TrackedTimeContext,
-  'useTrackedTime',
-)
+} from './TrackedTimeContext'
 
 export const TrackedTimeProvider = ({
   children,

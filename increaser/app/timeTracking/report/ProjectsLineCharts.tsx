@@ -9,7 +9,7 @@ import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { lineChartConfig } from './lineChartConfig'
 import { normalize } from '@lib/utils/math/normalize'
 import { LineChart } from '@lib/ui/charts/LineChart'
-import { useTrackedTime } from './TrackedTimeProvider'
+import { useTrackedTime } from './TrackedTimeContext'
 
 type ChartDesription = {
   data: number[]

@@ -16,7 +16,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { useTrackedTime } from './TrackedTimeProvider'
+import { useTrackedTime } from './TrackedTimeContext'
 
 const InteractiveRow = styled.div<{ isActive: boolean }>`
   ${transition}

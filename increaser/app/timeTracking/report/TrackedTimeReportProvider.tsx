@@ -25,9 +25,9 @@ import { areSameWeek } from '@lib/utils/time/Week'
 import { fromMonth, toMonth } from '@lib/utils/time/toMonth'
 import { areSameMonth } from '@lib/utils/time/areSameMonth'
 import { useTrackedTimeReportPreferences } from './useTrackedTimeReportPreferences'
-import { useTrackedTime } from './TrackedTimeProvider'
+import { useTrackedTime } from './TrackedTimeContext'
 import { areSameDay, fromDay, toDay } from '@lib/utils/time/Day'
-import { EntityWithSeconds } from '@increaser/entities/Project'
+import { EntityWithSeconds } from '@increaser/entities/timeTracking'
 
 type ProjectsData = Record<string, number[]>
 
