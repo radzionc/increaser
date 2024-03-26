@@ -11,9 +11,11 @@ const Container = styled(IconButton)`
 `
 
 export const ManageProjectsNamesVisibility = () => {
-  const { hideProjectNames, setState } = useTrackedTime()
+  const { shouldHideProjectNames, setState } = useTrackedTime()
 
-  const title = hideProjectNames ? 'Show project names' : 'Hide project names'
+  const title = shouldHideProjectNames
+    ? 'Show project names'
+    : 'Hide project names'
 
   return (
     <Tooltip
@@ -25,10 +27,10 @@ export const ManageProjectsNamesVisibility = () => {
             onClick={() =>
               setState((state) => ({
                 ...state,
-                hideProjectNames: !state.hideProjectNames,
+                shouldHideProjectNames: !state.shouldHideProjectNames,
               }))
             }
-            icon={hideProjectNames ? <EyeOffIcon /> : <EyeIcon />}
+            icon={shouldHideProjectNames ? <EyeOffIcon /> : <EyeIcon />}
           />
         </div>
       )}

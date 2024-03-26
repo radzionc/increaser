@@ -8,7 +8,7 @@ export const useTrackedTimePreference = () => {
   return usePersistentState<TrackedTimePreference>(
     PersistentStateKey.TrackedTimeReportPreferences,
     {
-      hideProjectNames: false,
+      shouldHideProjectNames: false,
     },
   )
 }

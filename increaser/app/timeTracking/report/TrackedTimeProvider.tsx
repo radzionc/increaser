@@ -12,14 +12,13 @@ import { areSameWeek } from '@lib/utils/time/Week'
 import { toMonth } from '@lib/utils/time/toMonth'
 import { areSameMonth } from '@lib/utils/time/Month'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { order } from '@lib/utils/array/order'
-import { sum } from '@lib/utils/array/sum'
-import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { useTrackedTimePreference } from './useTrackedTimePreference'
 import {
   TimeTrackingProjectData,
   TrackedTimeContext,
 } from './TrackedTimeContext'
+import { hideProjectNames } from './utils/hideProjectNames'
+import { mergeTrackedDataPoint } from './utils/mergeTrackedDataPoint'
 
 export const TrackedTimeProvider = ({
   children,
@@ -31,20 +30,14 @@ export const TrackedTimeProvider = ({
   const monthStartedAt = useStartOfMonth()
 
   const [state, setState] = useTrackedTimePreference()
+  const { shouldHideProjectNames } = state
 
   const projects = useMemo(() => {
     const result: Record<string, TimeTrackingProjectData> = {}
 
     allProjects.forEach((project) => {
       result[project.id] = {
-        ...pick(project, [
-          'id',
-          'hslaColor',
-          'name',
-          'weeks',
-          'months',
-          'emoji',
-        ]),
+        ...pick(project, ['id', 'hslaColor', 'name', 'weeks', 'months']),
         days: [],
       }
     })
@@ -54,89 +47,46 @@ export const TrackedTimeProvider = ({
 
       if (!project) return
 
-      const day = toDay(set.start)
       const seconds = convertDuration(getSetDuration(set), 'ms', 's')
 
-      const existingDayIndex = project.days.findIndex((d) => areSameDay(d, day))
-      if (existingDayIndex > -1) {
-        project.days = updateAtIndex(
-          project.days,
-          existingDayIndex,
-          (existingDay) => ({
-            ...existingDay,
-            seconds: existingDay.seconds + seconds,
-          }),
-        )
-      } else {
-        project.days.push({
+      const day = toDay(set.start)
+
+      project.days = mergeTrackedDataPoint({
+        groups: project.days,
+        dataPoint: {
           ...day,
           seconds,
-        })
-      }
+        },
+        areSameGroup: areSameDay,
+      })
 
       if (set.start > weekStartedAt) {
         const week = toWeek(set.start)
-        const existingWeekIndex = project.weeks.findIndex((w) =>
-          areSameWeek(w, week),
-        )
-        if (existingWeekIndex > -1) {
-          project.weeks = updateAtIndex(
-            project.weeks,
-            existingWeekIndex,
-            (existingWeek) => ({
-              ...existingWeek,
-              seconds: existingWeek.seconds + seconds,
-            }),
-          )
-        } else {
-          project.weeks.push({
+        project.weeks = mergeTrackedDataPoint({
+          groups: project.weeks,
+          dataPoint: {
             ...week,
             seconds,
-          })
-        }
+          },
+          areSameGroup: areSameWeek,
+        })
       }
 
       if (set.start > monthStartedAt) {
         const month = toMonth(set.start)
-        const existingMonthIndex = project.months.findIndex((m) =>
-          areSameMonth(m, month),
-        )
-        if (existingMonthIndex > -1) {
-          project.months = updateAtIndex(
-            project.months,
-            existingMonthIndex,
-            (existingMonth) => ({
-              ...existingMonth,
-              seconds: existingMonth.seconds + seconds,
-            }),
-          )
-        } else {
-          project.months.push({
+        project.months = mergeTrackedDataPoint({
+          groups: project.months,
+          dataPoint: {
             ...month,
             seconds,
-          })
-        }
+          },
+          areSameGroup: areSameMonth,
+        })
       }
     })
 
-    if (!state.hideProjectNames) {
-      return result
-    }
-
-    const orderedProjects = order(
-      Object.values(result),
-      (p) => sum(p.months.map((m) => m.seconds)),
-      'desc',
-    )
-
-    Object.keys(result).forEach((id) => {
-      const project = result[id]
-      const projectIndex = orderedProjects.findIndex((p) => p.id === id)
-      project.name = `Project #${projectIndex + 1}`
-    })
-
-    return result
-  }, [allProjects, monthStartedAt, sets, state.hideProjectNames, weekStartedAt])
+    return shouldHideProjectNames ? hideProjectNames(result) : result
+  }, [allProjects, monthStartedAt, sets, shouldHideProjectNames, weekStartedAt])
 
   return (
     <TrackedTimeContext.Provider value={{ projects, setState, ...state }}>

@@ -4,12 +4,12 @@ import { Dispatch, SetStateAction, createContext } from 'react'
 import { ProjectDay } from '@increaser/entities/timeTracking'
 
 export type TrackedTimePreference = {
-  hideProjectNames: boolean
+  shouldHideProjectNames: boolean
 }
 
 export type TimeTrackingProjectData = Pick<
   EnhancedProject,
-  'hslaColor' | 'name' | 'weeks' | 'months' | 'id' | 'emoji'
+  'hslaColor' | 'name' | 'weeks' | 'months' | 'id'
 > & {
   days: ProjectDay[]
 }
