@@ -1,6 +1,6 @@
 import { haveEqualFields } from '../record/haveEqualFields'
 
-export interface Month {
+export type Month = {
   year: number
   month: number
 }

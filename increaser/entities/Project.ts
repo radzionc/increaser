@@ -1,13 +1,4 @@
-import { Month } from '@lib/utils/time/Month'
-import { Week } from '@lib/utils/time/Week'
-
-export type EntityWithSeconds = {
-  seconds: number
-}
-
-export type ProjectWeek = Week & EntityWithSeconds
-
-export type ProjectMonth = Month & EntityWithSeconds
+import { ProjectMonth, ProjectWeek } from './timeTracking'
 
 export const ProjectStatus = {
   Active: 'ACTIVE',

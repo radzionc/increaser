@@ -11,7 +11,7 @@ import {
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 
-export interface Set {
+export type Set = {
   start: number
   end: number
   projectId: string

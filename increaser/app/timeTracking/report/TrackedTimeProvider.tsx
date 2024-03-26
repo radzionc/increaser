@@ -3,7 +3,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { pick } from '@lib/utils/record/pick'
 import { Dispatch, SetStateAction, createContext, useMemo } from 'react'
-import { Day, areSameDay, toDay } from '@lib/utils/time/Day'
+import { areSameDay, toDay } from '@lib/utils/time/Day'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
@@ -13,21 +13,15 @@ import { toWeek } from '@lib/utils/time/toWeek'
 import { areSameWeek } from '@lib/utils/time/Week'
 import { toMonth } from '@lib/utils/time/toMonth'
 import { areSameMonth } from '@lib/utils/time/Month'
-import { EntityWithSeconds } from '@increaser/entities/Project'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import {
-  PersistentStateKey,
-  usePersistentState,
-} from '../../state/persistentState'
 import { order } from '@lib/utils/array/order'
 import { sum } from '@lib/utils/array/sum'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
-
-type TrackedTimeMutableState = {
-  hideProjectNames: boolean
-}
-
-type ProjectDay = Day & EntityWithSeconds
+import {
+  TrackedTimePreference,
+  useTrackedTimePreference,
+} from './useTrackedTimePreference'
+import { ProjectDay } from '@increaser/entities/timeTracking'
 
 type TimeTrackingProjectData = Pick<
   EnhancedProject,
@@ -36,8 +30,8 @@ type TimeTrackingProjectData = Pick<
   days: ProjectDay[]
 }
 
-type TrackedTimeState = TrackedTimeMutableState & {
-  setState: Dispatch<SetStateAction<TrackedTimeMutableState>>
+type TrackedTimeState = TrackedTimePreference & {
+  setState: Dispatch<SetStateAction<TrackedTimePreference>>
   projects: Record<string, TimeTrackingProjectData>
 }
 
@@ -59,12 +53,7 @@ export const TrackedTimeProvider = ({
   const weekStartedAt = useStartOfWeek()
   const monthStartedAt = useStartOfMonth()
 
-  const [state, setState] = usePersistentState<TrackedTimeMutableState>(
-    PersistentStateKey.TrackedTimeReportPreferences,
-    {
-      hideProjectNames: false,
-    },
-  )
+  const [state, setState] = useTrackedTimePreference()
 
   const projects = useMemo(() => {
     const result: Record<string, TimeTrackingProjectData> = {}
