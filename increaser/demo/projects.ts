@@ -2,7 +2,7 @@ import { Project, ProjectStatus } from '@increaser/entities/Project'
 import { randomInRange } from '@lib/utils/randomInRange'
 import { range } from '@lib/utils/array/range'
 import { MIN_IN_HOUR, MS_IN_WEEK, S_IN_HOUR } from '@lib/utils/time'
-import { toWeek } from '@lib/utils/time/toWeek'
+import { toWeek } from '@lib/utils/time/Week'
 
 export enum DemoProject {
   Job = 'Remote job',

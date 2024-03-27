@@ -12,12 +12,6 @@ export const hideProjectNames = (
     'desc',
   )
 
-  Object.keys(projects).forEach((id) => {
-    const project = projects[id]
-    const projectIndex = orderedProjects.findIndex((p) => p.id === id)
-    project.name = `Project #${projectIndex + 1}`
-  })
-
   return recordMap(projects, (project) => {
     const projectIndex = orderedProjects.findIndex((p) => p.id === project.id)
     const name = `Project #${projectIndex + 1}`
