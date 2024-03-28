@@ -1,5 +1,5 @@
 import { IconButton } from '@lib/ui/buttons/IconButton'
-import { useTrackedTime } from './TrackedTimeContext'
+import { useTrackedTime } from './state/TrackedTimeContext'
 import { EyeOffIcon } from '@lib/ui/icons/EyeOffIcon'
 import { EyeIcon } from '@lib/ui/icons/EyeIcon'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'

@@ -1,5 +1,5 @@
 import { Text } from '@lib/ui/text'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import { pluralize } from '@lib/utils/pluralize'

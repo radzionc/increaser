@@ -1,6 +1,6 @@
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { Dispatch, SetStateAction, createContext } from 'react'
-import { TimeFrame, TimeGrouping } from './TimeGrouping'
+import { TimeFrame, TimeGrouping } from '../TimeGrouping'
 
 export type ProjectsTimeSeries = Record<string, number[]>
 

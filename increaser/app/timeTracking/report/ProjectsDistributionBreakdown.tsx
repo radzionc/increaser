@@ -3,7 +3,7 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import styled, { css, useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { VStack } from '@lib/ui/layout/Stack'
 import { round } from '@lib/ui/css/round'
@@ -16,7 +16,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { useTrackedTime } from './TrackedTimeContext'
+import { useTrackedTime } from './state/TrackedTimeContext'
 
 const InteractiveRow = styled.div<{ isActive: boolean }>`
   ${transition}

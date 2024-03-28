@@ -1,7 +1,7 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useTheme } from 'styled-components'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { useMemo, useState } from 'react'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { addMonths, format } from 'date-fns'
@@ -19,7 +19,7 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { lineChartConfig } from './lineChartConfig'
 import { ProjectsLineCharts } from './ProjectsLineCharts'
-import { useTrackedTime } from './TrackedTimeContext'
+import { useTrackedTime } from './state/TrackedTimeContext'
 
 export const TimeChart = () => {
   const {

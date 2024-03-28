@@ -12,11 +12,11 @@ import { areSameWeek } from '@lib/utils/time/Week'
 import { toMonth } from '@lib/utils/time/Month'
 import { areSameMonth } from '@lib/utils/time/Month'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { useTrackedTimePreference } from './useTrackedTimePreference'
+import { useTrackedTimePreference } from './state/useTrackedTimePreference'
 import {
   TimeTrackingProjectData,
   TrackedTimeContext,
-} from './TrackedTimeContext'
+} from './state/TrackedTimeContext'
 import { hideProjectNames } from './utils/hideProjectNames'
 import { mergeTrackedDataPoint } from './utils/mergeTrackedDataPoint'
 

@@ -1,36 +1,27 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useEffect, useMemo } from 'react'
 import { TimeGrouping, timeFrames } from './TimeGrouping'
 import {
+  differenceInDays,
   differenceInMonths,
-  startOfDay,
-  startOfMonth,
-  subMonths,
+  differenceInWeeks,
 } from 'date-fns'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { range } from '@lib/utils/array/range'
 import { match } from '@lib/utils/match'
-import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
 import { fromWeek, toWeek } from '@lib/utils/time/Week'
 import { areSameWeek } from '@lib/utils/time/Week'
 import { fromMonth, toMonth } from '@lib/utils/time/Month'
 import { areSameMonth } from '@lib/utils/time/Month'
-import { useTrackedTimeReportPreferences } from './useTrackedTimeReportPreferences'
-import { useTrackedTime } from './TrackedTimeContext'
+import { useTrackedTimeReportPreferences } from './state/useTrackedTimeReportPreferences'
+import { useTrackedTime } from './state/TrackedTimeContext'
 import { areSameDay, fromDay, toDay } from '@lib/utils/time/Day'
 import { EntityWithSeconds } from '@increaser/entities/timeTracking'
-import {
-  ProjectsTimeSeries,
-  TrackedTimeReportContext,
-} from './TrackedTimeReportContext'
-
-export const useTrackedTimeReport = createContextHook(
-  TrackedTimeReportContext,
-  'useTrackedTimeReport',
-)
+import { TrackedTimeReportContext } from './state/TrackedTimeReportContext'
+import { useCurrentPeriodStartedAt } from './hooks/useCurrentPeriodStartedAt'
+import { subtractPeriod } from './utils/subtractPeriod'
+import { recordMap } from '@lib/utils/record/recordMap'
 
 export const TrackedTimeReportProvider = ({
   children,
@@ -40,22 +31,14 @@ export const TrackedTimeReportProvider = ({
 
   const { includeCurrentPeriod, timeFrame, timeGrouping } = state
 
-  const currentPeriodStartedAt = useMemo(
-    () =>
-      match(timeGrouping, {
-        day: () => startOfDay(Date.now()).getTime(),
-        week: () => getWeekStartedAt(Date.now()),
-        month: () => startOfMonth(Date.now()).getTime(),
-      }),
-    [timeGrouping],
-  )
+  const currentPeriodStartedAt = useCurrentPeriodStartedAt(timeGrouping)
 
   const previousPeriodStartedAt = useMemo(
     () =>
-      match(timeGrouping, {
-        day: () => currentPeriodStartedAt - convertDuration(1, 'd', 'ms'),
-        week: () => currentPeriodStartedAt - convertDuration(1, 'w', 'ms'),
-        month: () => subMonths(currentPeriodStartedAt, 1).getTime(),
+      subtractPeriod({
+        value: currentPeriodStartedAt,
+        period: timeGrouping,
+        amount: 1,
       }),
     [timeGrouping, currentPeriodStartedAt],
   )
@@ -81,30 +64,12 @@ export const TrackedTimeReportProvider = ({
   const projectsTimeSeries = useMemo(() => {
     const totalDataPointsAvailable =
       match(timeGrouping, {
-        day: () => {
-          return Math.round(
-            convertDuration(
-              lastTimeGroupStartedAt - firstTimeGroupStartedAt,
-              'ms',
-              'd',
-            ),
-          )
-        },
-        week: () => {
-          return Math.round(
-            convertDuration(
-              lastTimeGroupStartedAt - firstTimeGroupStartedAt,
-              'ms',
-              'w',
-            ),
-          )
-        },
-        month: () => {
-          return differenceInMonths(
-            lastTimeGroupStartedAt,
-            firstTimeGroupStartedAt,
-          )
-        },
+        day: () =>
+          differenceInDays(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        week: () =>
+          differenceInWeeks(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        month: () =>
+          differenceInMonths(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
       }) + 1
 
     const dataPointsCount =
@@ -112,16 +77,13 @@ export const TrackedTimeReportProvider = ({
         ? totalDataPointsAvailable
         : Math.min(totalDataPointsAvailable, timeFrame)
 
-    const result: ProjectsTimeSeries = {}
-    Object.entries(projects).forEach(([id, { weeks, days, months }]) => {
-      result[id] = range(dataPointsCount)
+    return recordMap(projects, ({ days, weeks, months }) =>
+      range(dataPointsCount)
         .map((index) => {
-          const startedAt = match(timeGrouping, {
-            day: () =>
-              lastTimeGroupStartedAt - convertDuration(index, 'd', 'ms'),
-            week: () =>
-              lastTimeGroupStartedAt - convertDuration(index, 'w', 'ms'),
-            month: () => subMonths(lastTimeGroupStartedAt, index).getTime(),
+          const startedAt = subtractPeriod({
+            value: lastTimeGroupStartedAt,
+            period: timeGrouping,
+            amount: index,
           })
 
           return (
@@ -134,10 +96,8 @@ export const TrackedTimeReportProvider = ({
             })?.seconds || 0
           )
         })
-        .reverse()
-    })
-
-    return result
+        .reverse(),
+    )
   }, [
     firstTimeGroupStartedAt,
     lastTimeGroupStartedAt,

@@ -1,6 +1,6 @@
 import { Statistic } from '@lib/ui/layout/Statistic'
 import { Panel } from '@lib/ui/panel/Panel'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { useMemo } from 'react'
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { formatDuration } from '@lib/utils/time/formatDuration'

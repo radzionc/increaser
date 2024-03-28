@@ -1,4 +1,4 @@
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { isEmpty } from '@lib/utils/array/isEmpty'

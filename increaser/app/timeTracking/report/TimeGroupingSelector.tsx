@@ -1,5 +1,5 @@
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { Text } from '@lib/ui/text'
 import { formatTimeGrouping, timeGroupings } from './TimeGrouping'
 

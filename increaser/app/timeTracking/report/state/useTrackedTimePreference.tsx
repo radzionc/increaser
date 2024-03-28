@@ -1,7 +1,7 @@
 import {
   PersistentStateKey,
   usePersistentState,
-} from '../../state/persistentState'
+} from '../../../state/persistentState'
 import { TrackedTimePreference } from './TrackedTimeContext'
 
 export const useTrackedTimePreference = () => {

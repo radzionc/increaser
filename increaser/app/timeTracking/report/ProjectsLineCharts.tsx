@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { sum } from '@lib/utils/array/sum'
 import { order } from '@lib/utils/array/order'
 import { HSLA } from '@lib/ui/colors/HSLA'
@@ -9,7 +9,7 @@ import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { lineChartConfig } from './lineChartConfig'
 import { normalize } from '@lib/utils/math/normalize'
 import { LineChart } from '@lib/ui/charts/LineChart'
-import { useTrackedTime } from './TrackedTimeContext'
+import { useTrackedTime } from './state/TrackedTimeContext'
 
 type ChartDesription = {
   data: number[]

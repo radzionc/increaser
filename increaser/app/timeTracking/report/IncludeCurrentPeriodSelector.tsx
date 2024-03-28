@@ -1,4 +1,4 @@
-import { useTrackedTimeReport } from './TrackedTimeReportProvider'
+import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { TimeGrouping } from './TimeGrouping'
 import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'

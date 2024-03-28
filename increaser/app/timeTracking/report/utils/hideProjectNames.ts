@@ -1,5 +1,5 @@
 import { order } from '@lib/utils/array/order'
-import { TimeTrackingProjectData } from '../TrackedTimeContext'
+import { TimeTrackingProjectData } from '../state/TrackedTimeContext'
 import { sum } from '@lib/utils/array/sum'
 import { recordMap } from '@lib/utils/record/recordMap'
 
