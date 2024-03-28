@@ -41,11 +41,11 @@ export const ProjectsLineCharts = ({
   chartMax,
 }: ProjectsLineChartsProps) => {
   const { projects } = useTrackedTime()
-  const { projectsData, activeProjectId } = useTrackedTimeReport()
+  const { projectsTimeSeries, activeProjectId } = useTrackedTimeReport()
 
   const charts = useMemo(() => {
     if (activeProjectId) {
-      const data = projectsData[activeProjectId]
+      const data = projectsTimeSeries[activeProjectId]
       return [
         {
           data: normalize([...data, chartMin, chartMax]).slice(0, -2),
@@ -54,7 +54,7 @@ export const ProjectsLineCharts = ({
       ]
     }
 
-    const entries = Object.entries(projectsData).filter(
+    const entries = Object.entries(projectsTimeSeries).filter(
       ([, data]) => sum(data) > 0,
     )
 
@@ -82,7 +82,7 @@ export const ProjectsLineCharts = ({
     })
 
     return result
-  }, [activeProjectId, chartMax, chartMin, projects, projectsData])
+  }, [activeProjectId, chartMax, chartMin, projects, projectsTimeSeries])
 
   return (
     <Container>

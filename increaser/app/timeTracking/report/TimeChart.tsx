@@ -23,7 +23,7 @@ import { useTrackedTime } from './TrackedTimeContext'
 
 export const TimeChart = () => {
   const {
-    projectsData,
+    projectsTimeSeries,
     firstTimeGroupStartedAt,
     timeGrouping,
     activeProjectId,
@@ -33,11 +33,11 @@ export const TimeChart = () => {
 
   const totals = useMemo(() => {
     if (activeProjectId) {
-      return projectsData[activeProjectId]
+      return projectsTimeSeries[activeProjectId]
     }
 
-    return mergeSameSizeDataArrays(Object.values(projectsData))
-  }, [activeProjectId, projectsData])
+    return mergeSameSizeDataArrays(Object.values(projectsTimeSeries))
+  }, [activeProjectId, projectsTimeSeries])
 
   const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
     totals.length - 1,

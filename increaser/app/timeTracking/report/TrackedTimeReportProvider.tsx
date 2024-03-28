@@ -1,13 +1,7 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useEffect,
-  useMemo,
-} from 'react'
-import { TimeFrame, TimeGrouping, timeFrames } from './TimeGrouping'
+import { useEffect, useMemo } from 'react'
+import { TimeGrouping, timeFrames } from './TimeGrouping'
 import {
   differenceInMonths,
   startOfDay,
@@ -28,26 +22,10 @@ import { useTrackedTimeReportPreferences } from './useTrackedTimeReportPreferenc
 import { useTrackedTime } from './TrackedTimeContext'
 import { areSameDay, fromDay, toDay } from '@lib/utils/time/Day'
 import { EntityWithSeconds } from '@increaser/entities/timeTracking'
-
-type ProjectsData = Record<string, number[]>
-
-type TrackedTimeReportState = {
-  activeProjectId: string | null
-  timeGrouping: TimeGrouping
-  includeCurrentPeriod: boolean
-  timeFrame: TimeFrame
-}
-
-type TrackedTimeReportProviderState = TrackedTimeReportState & {
-  projectsData: ProjectsData
-  firstTimeGroupStartedAt: number
-  lastTimeGroupStartedAt: number
-  setState: Dispatch<SetStateAction<TrackedTimeReportState>>
-}
-
-const TrackedTimeReportContext = createContext<
-  TrackedTimeReportProviderState | undefined
->(undefined)
+import {
+  ProjectsTimeSeries,
+  TrackedTimeReportContext,
+} from './TrackedTimeReportContext'
 
 export const useTrackedTimeReport = createContextHook(
   TrackedTimeReportContext,
@@ -100,7 +78,7 @@ export const TrackedTimeReportProvider = ({
     ? currentPeriodStartedAt
     : previousPeriodStartedAt
 
-  const projectsData = useMemo(() => {
+  const projectsTimeSeries = useMemo(() => {
     const totalDataPointsAvailable =
       match(timeGrouping, {
         day: () => {
@@ -134,7 +112,7 @@ export const TrackedTimeReportProvider = ({
         ? totalDataPointsAvailable
         : Math.min(totalDataPointsAvailable, timeFrame)
 
-    const result: ProjectsData = {}
+    const result: ProjectsTimeSeries = {}
     Object.entries(projects).forEach(([id, { weeks, days, months }]) => {
       result[id] = range(dataPointsCount)
         .map((index) => {
@@ -182,7 +160,7 @@ export const TrackedTimeReportProvider = ({
       value={{
         ...state,
         setState,
-        projectsData,
+        projectsTimeSeries,
         firstTimeGroupStartedAt,
         lastTimeGroupStartedAt,
       }}

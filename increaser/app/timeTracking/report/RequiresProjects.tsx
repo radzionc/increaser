@@ -5,9 +5,9 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 
 export const RequiresProjects = ({ children }: ComponentWithChildrenProps) => {
-  const { projectsData } = useTrackedTimeReport()
+  const { projectsTimeSeries } = useTrackedTimeReport()
 
-  const hasData = !isEmpty(getRecordKeys(projectsData))
+  const hasData = !isEmpty(getRecordKeys(projectsTimeSeries))
 
   if (hasData) {
     return <>{children}</>

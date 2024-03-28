@@ -5,9 +5,9 @@ import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 export const RequiresTwoDataPoints = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { projectsData, timeGrouping } = useTrackedTimeReport()
+  const { projectsTimeSeries, timeGrouping } = useTrackedTimeReport()
 
-  const hasTwoDataPoints = Object.values(projectsData)[0].length > 1
+  const hasTwoDataPoints = Object.values(projectsTimeSeries)[0].length > 1
 
   if (hasTwoDataPoints) {
     return <>{children}</>

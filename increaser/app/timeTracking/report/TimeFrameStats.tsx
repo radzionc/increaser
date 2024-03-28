@@ -7,15 +7,16 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 
 export const TimeFrameStats = () => {
-  const { timeGrouping, projectsData, activeProjectId } = useTrackedTimeReport()
+  const { timeGrouping, projectsTimeSeries, activeProjectId } =
+    useTrackedTimeReport()
 
   const data = useMemo(() => {
     if (activeProjectId) {
-      return projectsData[activeProjectId]
+      return projectsTimeSeries[activeProjectId]
     }
 
-    return mergeSameSizeDataArrays(Object.values(projectsData))
-  }, [activeProjectId, projectsData])
+    return mergeSameSizeDataArrays(Object.values(projectsTimeSeries))
+  }, [activeProjectId, projectsTimeSeries])
 
   return (
     <>

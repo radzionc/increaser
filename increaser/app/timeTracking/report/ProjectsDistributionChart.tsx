@@ -12,12 +12,12 @@ const Container = styled(VStack)`
 `
 
 export const ProjectsDistributionChart = () => {
-  const { projectsData, activeProjectId } = useTrackedTimeReport()
+  const { projectsTimeSeries, activeProjectId } = useTrackedTimeReport()
   const { colors } = useTheme()
   const { projects } = useTrackedTime()
 
   const items = order(
-    Object.entries(projectsData),
+    Object.entries(projectsTimeSeries),
     ([, data]) => sum(data),
     'desc',
   ).filter(([, data]) => sum(data) > 0)

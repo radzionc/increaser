@@ -63,20 +63,20 @@ const Circle = styled.div`
 
 export const ProjectsDistributionBreakdown = () => {
   const { projects } = useTrackedTime()
-  const { projectsData, activeProjectId, setState, timeGrouping } =
+  const { projectsTimeSeries, activeProjectId, setState, timeGrouping } =
     useTrackedTimeReport()
 
   const { colors } = useTheme()
 
   const total = useMemo(
-    () => sum(Object.values(projectsData).flat()),
-    [projectsData],
+    () => sum(Object.values(projectsTimeSeries).flat()),
+    [projectsTimeSeries],
   )
 
   if (!total) return null
 
   const items = order(
-    Object.entries(projectsData),
+    Object.entries(projectsTimeSeries),
     ([, data]) => sum(data),
     'desc',
   ).filter(([, data]) => sum(data) > 0)
@@ -170,7 +170,7 @@ export const ProjectsDistributionBreakdown = () => {
             <Text weight="semibold">
               <EmphasizeNumbers
                 value={formatDuration(
-                  total / Object.values(projectsData)[0].length,
+                  total / Object.values(projectsTimeSeries)[0].length,
                   's',
                   {
                     maxUnit: 'h',
