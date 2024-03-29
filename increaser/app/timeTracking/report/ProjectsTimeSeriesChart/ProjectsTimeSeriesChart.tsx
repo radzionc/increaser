@@ -1,9 +1,8 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useTheme } from 'styled-components'
-import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
+import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { useMemo, useState } from 'react'
-import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { addMonths, format } from 'date-fns'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -19,25 +18,16 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { lineChartConfig } from './lineChartConfig'
 import { ProjectsLineCharts } from './ProjectsLineCharts'
-import { useTrackedTime } from './state/TrackedTimeContext'
+import { useTrackedTime } from '../state/TrackedTimeContext'
+import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
 
-export const TimeChart = () => {
-  const {
-    projectsTimeSeries,
-    firstTimeGroupStartedAt,
-    timeGrouping,
-    activeProjectId,
-  } = useTrackedTimeReport()
+export const ProjectsTimeSeriesChart = () => {
+  const { firstTimeGroupStartedAt, timeGrouping, activeProjectId } =
+    useTrackedTimeReport()
 
   const { projects } = useTrackedTime()
 
-  const totals = useMemo(() => {
-    if (activeProjectId) {
-      return projectsTimeSeries[activeProjectId]
-    }
-
-    return mergeSameSizeDataArrays(Object.values(projectsTimeSeries))
-  }, [activeProjectId, projectsTimeSeries])
+  const totals = useActiveTimeSeries()
 
   const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
     totals.length - 1,

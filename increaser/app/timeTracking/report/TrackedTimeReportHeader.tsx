@@ -3,8 +3,8 @@ import { BasedOnNumber } from '@lib/ui/layout/BasedOnNumber'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TrackedTimeReportTitle } from './TrackedTimeReportTitle'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
-import { ReportFilters } from './ReportFilters'
-import { ManageProjectsNamesVisibility } from './ManageProjectsNamesVisibility'
+import { ReportFilters } from './filters/ReportFilters'
+import { ManageProjectsNamesVisibility } from './filters/ManageProjectsNamesVisibility'
 import styled from 'styled-components'
 
 const FiltersRow = styled.div`

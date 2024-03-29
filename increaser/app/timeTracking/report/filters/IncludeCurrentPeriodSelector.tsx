@@ -1,16 +1,14 @@
-import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
-import { TimeGrouping } from './TimeGrouping'
+import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
+import { TimeGrouping } from '../TimeGrouping'
 import styled from 'styled-components'
-import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor, matchColor } from '@lib/ui/theme/getters'
-import { transition } from '@lib/ui/css/transition'
-import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { HStack } from '@lib/ui/layout/Stack'
 import { interactive } from '@lib/ui/css/interactive'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { Text } from '@lib/ui/text'
+import { SelectContainer } from '@lib/ui/select/SelectContainer'
 
 const currentPeriodName: Record<TimeGrouping, string> = {
   day: 'today',
@@ -18,20 +16,7 @@ const currentPeriodName: Record<TimeGrouping, string> = {
   month: 'this month',
 }
 
-const Container = styled(UnstyledButton)`
-  ${borderRadius.s};
-  outline: none;
-  border: 1px solid ${getColor('mist')};
-  padding: 8px 12px;
-  background: ${getColor('foreground')};
-  ${transition};
-
-  align-items: center;
-  gap: 4px;
-  justify-content: space-between;
-
-  font-size: 14px;
-
+const Container = styled(SelectContainer)`
   ${interactive};
 
   &:hover {
@@ -52,6 +37,7 @@ const Check = styled.div<{ isActive?: boolean }>`
 export const IncludeCurrentPeriodSelector = () => {
   const { includeCurrentPeriod, setState, timeGrouping } =
     useTrackedTimeReport()
+
   return (
     <Container
       onClick={() =>

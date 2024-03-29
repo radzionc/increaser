@@ -1,7 +1,7 @@
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
+import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { Text } from '@lib/ui/text'
-import { TimeFrame, timeFrames } from './TimeGrouping'
+import { TimeFrame, timeFrames } from '../TimeGrouping'
 
 export const TimeFrameSelector = () => {
   const { timeGrouping, timeFrame, setState } = useTrackedTimeReport()

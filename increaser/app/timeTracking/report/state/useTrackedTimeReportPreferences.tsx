@@ -4,7 +4,7 @@ import {
 } from '../../../state/persistentState'
 import { timeFrames } from '../TimeGrouping'
 import { useTrackedTime } from './TrackedTimeContext'
-import { TrackedTimeReportState } from '../TrackedTimeReportState'
+import { TrackedTimeReportState } from './TrackedTimeReportState'
 import { useEffect } from 'react'
 
 const defaultTimeGrouping = 'week'

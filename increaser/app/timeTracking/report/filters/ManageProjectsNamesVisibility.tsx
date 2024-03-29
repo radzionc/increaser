@@ -1,13 +1,14 @@
 import { IconButton } from '@lib/ui/buttons/IconButton'
-import { useTrackedTime } from './state/TrackedTimeContext'
+import { useTrackedTime } from '../state/TrackedTimeContext'
 import { EyeOffIcon } from '@lib/ui/icons/EyeOffIcon'
 import { EyeIcon } from '@lib/ui/icons/EyeIcon'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import styled from 'styled-components'
+import { selectContainerMinHeight } from '@lib/ui/select/SelectContainer'
 
 const Container = styled(IconButton)`
-  ${sameDimensions(40)}
+  ${sameDimensions(selectContainerMinHeight)}
 `
 
 export const ManageProjectsNamesVisibility = () => {
