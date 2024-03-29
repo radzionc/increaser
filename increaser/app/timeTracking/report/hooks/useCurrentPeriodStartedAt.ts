@@ -5,13 +5,13 @@ import { startOfDay, startOfMonth } from 'date-fns'
 import { match } from '@lib/utils/match'
 
 export const useCurrentPeriodStartedAt = (group: TimeGrouping) => {
-  return useMemo(
-    () =>
-      match(group, {
-        day: () => startOfDay(Date.now()).getTime(),
-        week: () => getWeekStartedAt(Date.now()),
-        month: () => startOfMonth(Date.now()).getTime(),
-      }),
-    [group],
-  )
+  return useMemo(() => {
+    const now = new Date()
+
+    return match(group, {
+      day: () => startOfDay(now).getTime(),
+      week: () => getWeekStartedAt(now.getTime()),
+      month: () => startOfMonth(now).getTime(),
+    })
+  }, [group])
 }

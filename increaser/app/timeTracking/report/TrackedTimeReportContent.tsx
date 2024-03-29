@@ -1,0 +1,36 @@
+import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { TimeChart } from './TimeChart'
+import { ProjectsDistributionChart } from './ProjectsDistributionChart'
+import { ProjectsDistributionBreakdown } from './ProjectsDistributionBreakdown'
+import { RequiresTrackedTime } from './RequiresTrackedTime'
+import { RequiresTwoDataPoints } from './RequiresTwoDataPoints'
+import { RequiresProjects } from './RequiresProjects'
+
+export const TrackedTimeReportContent = () => (
+  <VStack gap={20}>
+    <RequiresProjects>
+      <RequiresTrackedTime>
+        <HStack
+          justifyContent="space-between"
+          gap={40}
+          fullWidth
+          wrap="wrap"
+          alignItems="center"
+        >
+          <ProjectsDistributionBreakdown />
+          <VStack
+            style={{ flex: 1 }}
+            fullHeight
+            justifyContent="center"
+            alignItems="center"
+          >
+            <ProjectsDistributionChart />
+          </VStack>
+        </HStack>
+        <RequiresTwoDataPoints>
+          <TimeChart />
+        </RequiresTwoDataPoints>
+      </RequiresTrackedTime>
+    </RequiresProjects>
+  </VStack>
+)

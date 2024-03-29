@@ -43,6 +43,10 @@ export const TrackedTimeReportProvider = ({
     [timeGrouping, currentPeriodStartedAt],
   )
 
+  const lastTimeGroupStartedAt = includeCurrentPeriod
+    ? currentPeriodStartedAt
+    : previousPeriodStartedAt
+
   const firstTimeGroupStartedAt = useMemo(() => {
     const items = Object.values(projects).flatMap((project) =>
       match(timeGrouping, {
@@ -56,10 +60,6 @@ export const TrackedTimeReportProvider = ({
       ? currentPeriodStartedAt
       : order(items, (v) => v, 'asc')[0]
   }, [currentPeriodStartedAt, projects, timeGrouping])
-
-  const lastTimeGroupStartedAt = includeCurrentPeriod
-    ? currentPeriodStartedAt
-    : previousPeriodStartedAt
 
   const projectsTimeSeries = useMemo(() => {
     const totalDataPointsAvailable =

@@ -25,6 +25,7 @@ export const ChartXAxis = ({
   labelsMinDistance,
   renderLabel,
 }: ChartXAxisProps) => {
+  console.log(containerWidth)
   const stepInPx = containerWidth / (data.length - 1)
   const itemIndexes = useMemo(() => {
     let lastItemEnd = 0

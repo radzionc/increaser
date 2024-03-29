@@ -61,6 +61,11 @@ const Circle = styled.div`
   width: 100%;
 `
 
+const Container = styled(VStack)`
+  gap: 16px;
+  overflow-x: auto;
+`
+
 export const ProjectsDistributionBreakdown = () => {
   const { projects } = useTrackedTime()
   const { projectsTimeSeries, activeProjectId, setState, timeGrouping } =
@@ -82,7 +87,7 @@ export const ProjectsDistributionBreakdown = () => {
   ).filter(([, data]) => sum(data) > 0)
 
   return (
-    <VStack style={{ alignSelf: 'center' }} gap={16}>
+    <Container>
       <RowContent>
         <div />
         <Text cropped color="shy">
@@ -184,6 +189,6 @@ export const ProjectsDistributionBreakdown = () => {
           </RowContent>
         </InteractiveRow>
       </SeparatedByLine>
-    </VStack>
+    </Container>
   )
 }

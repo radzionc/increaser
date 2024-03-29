@@ -176,7 +176,9 @@ export const TimeChart = () => {
                     data={data}
                     expectedLabelWidth={lineChartConfig.expectedLabelWidth}
                     labelsMinDistance={lineChartConfig.labelsMinDistance}
-                    containerWidth={size.width}
+                    containerWidth={
+                      size.width - lineChartConfig.expectedYAxisLabelWidth
+                    }
                     expectedLabelHeight={lineChartConfig.expectedLabelHeight}
                     renderLabel={(index) => {
                       const startedAt = getDataPointStartedAt(index)
