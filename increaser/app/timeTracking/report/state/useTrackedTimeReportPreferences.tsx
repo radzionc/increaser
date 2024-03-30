@@ -4,13 +4,13 @@ import {
 } from '../../../state/persistentState'
 import { timeFrames } from '../TimeGrouping'
 import { useTrackedTime } from './TrackedTimeContext'
-import { TrackedTimeReportState } from './TrackedTimeReportState'
 import { useEffect } from 'react'
+import { TrackedTimeReportPreferences } from './TrackedTimeReportContext'
 
 const defaultTimeGrouping = 'week'
 
 export const useTrackedTimeReportPreferences = () => {
-  const [state, setState] = usePersistentState<TrackedTimeReportState>(
+  const [state, setState] = usePersistentState<TrackedTimeReportPreferences>(
     PersistentStateKey.TrackedTimeReportPreferences,
     {
       activeProjectId: null,

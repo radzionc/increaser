@@ -4,7 +4,7 @@ import { TimeFrame, TimeGrouping } from '../TimeGrouping'
 
 export type ProjectsTimeSeries = Record<string, number[]>
 
-type TrackedTimeReportPreferences = {
+export type TrackedTimeReportPreferences = {
   activeProjectId: string | null
   timeGrouping: TimeGrouping
   includeCurrentPeriod: boolean
