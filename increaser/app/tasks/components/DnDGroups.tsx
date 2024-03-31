@@ -64,7 +64,7 @@ export function DnDGroups<K extends string, I>({
 
       const groupId = destination.droppableId as K
 
-      const items = groups[groupId] || []
+      const items = order(groups[groupId] || [], getItemOrder, 'asc')
 
       onChange(draggableId, {
         order: getNewOrder({
