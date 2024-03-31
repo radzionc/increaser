@@ -5,7 +5,7 @@ import { MIN_IN_HOUR } from '@lib/utils/time'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
-export const ProjectsGoalsVisualization = () => {
+export const ProjectsBudgetVisualization = () => {
   const { totalMinutes } = useWeekTimeAllocation()
   const totalHours = totalMinutes / MIN_IN_HOUR
 

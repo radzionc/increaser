@@ -94,7 +94,7 @@ export const ProjectGoal = () => {
             </Text>
           </LabeledValue>
         </Text>
-        <Link href={AppPath.WeeklyGoals}>
+        <Link href={AppPath.ProjectsBudget}>
           <Text as="div" size={14}>
             <LabeledValue name="Weekly goal">
               <Text as="span" weight="bold">

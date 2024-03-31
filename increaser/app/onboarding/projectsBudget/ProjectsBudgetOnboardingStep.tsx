@@ -6,11 +6,11 @@ import { LabelText } from '@lib/ui/inputs/LabelText'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { WeeklyGoalItem } from './WeeklyGoalItem'
 import { CreateWeeklyGoalForm } from './CreateWeeklyGoalForm'
-import { ProjectsGoalsVisualization } from '../../capacity/components/ProjectsGoalsVisualization'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { sum } from '@lib/utils/array/sum'
+import { ProjectsBudgetVisualization } from '../../projects/budget/ProjectsBudgetVisualization'
 
-export const WeeklyGoalsOnboardingStep = () => {
+export const ProjectsBudgetOnboardingStep = () => {
   const { activeProjects } = useProjects()
   const { weekTimeAllocation } = useAssertUserState()
   const totalMinutesAvailable = sum(weekTimeAllocation)
@@ -34,7 +34,7 @@ export const WeeklyGoalsOnboardingStep = () => {
       </InputContainer>
       <InputContainer as="div" style={{ gap: 16 }}>
         <LabelText size={16}>Your weekly goals</LabelText>
-        <ProjectsGoalsVisualization />
+        <ProjectsBudgetVisualization />
         {isEmpty(projectsWithGoals) ? (
           <ShyInfoBlock>
             With which project do you want to be more consistent?

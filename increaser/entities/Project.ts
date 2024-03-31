@@ -7,6 +7,8 @@ export const ProjectStatus = {
 
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 
+type ProjectGoal = 'doMore' | 'doLess'
+
 export interface Project {
   id: string
   name: string
@@ -14,6 +16,7 @@ export interface Project {
   emoji: string
   status: ProjectStatus
   allocatedMinutesPerWeek: number
+  goal?: ProjectGoal | null
   weeks: ProjectWeek[]
   months: ProjectMonth[]
 }

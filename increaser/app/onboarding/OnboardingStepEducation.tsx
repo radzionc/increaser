@@ -11,7 +11,7 @@ import { OnboardingStep } from './OnboardingStep'
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
   workBudget: 'Balance Your Week with a Custom Work Budget',
-  weeklyGoals: 'Allocate Weekly Hours to Reach Your Project Goals',
+  projectsBudget: 'Allocate Weekly Hours to Reach Your Project Goals',
   schedule: 'Design Your Day for Optimal Health and Productivity',
   dailyHabits: 'Build a Foundation of Daily Habits for Lasting Well-being',
   tasks: 'Elevate Your Day with Priority Tasks at a Glance',
@@ -53,7 +53,7 @@ export const OnboardingStepEducation = () => {
                   take charge of your schedule and enhance your productivity.
                 </>
               )}
-              weeklyGoals={() => (
+              projectsBudget={() => (
                 <>
                   Establish weekly goals for key projects where increased effort
                   will be most impactful. This approach encourages targeted
@@ -126,7 +126,7 @@ export const OnboardingStepEducation = () => {
           value={currentStep}
           projects={() => null}
           workBudget={() => null}
-          weeklyGoals={() => null}
+          projectsBudget={() => null}
           schedule={() => null}
           dailyHabits={() => (
             <VStack gap={28}>

@@ -1,7 +1,7 @@
 export const onboardingSteps = [
   'projects',
   'workBudget',
-  'weeklyGoals',
+  'projectsBudget',
   'schedule',
   'dailyHabits',
   'tasks',
@@ -12,7 +12,7 @@ export type OnboardingStep = (typeof onboardingSteps)[number]
 export const onboardingStepTargetName: Record<OnboardingStep, string> = {
   projects: 'Add projects',
   workBudget: 'Define work budget',
-  weeklyGoals: 'Outline weekly goals',
+  projectsBudget: 'Set projects budget',
   schedule: 'Arrange schedule',
   dailyHabits: 'Establish daily habits',
   tasks: 'List tasks',

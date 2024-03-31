@@ -47,8 +47,8 @@ export const navigationPathInfo = {
     name: 'Work budget',
     icon: <LayersIcon />,
   },
-  [AppPath.WeeklyGoals]: {
-    name: 'Weekly goals',
+  [AppPath.ProjectsBudget]: {
+    name: 'Projects budget',
     icon: <TargetIcon />,
   },
 } as const
