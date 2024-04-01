@@ -15,13 +15,19 @@ import { Field } from '@lib/ui/inputs/Field'
 import { useUpdateProjectMutation } from '../../projects/api/useUpdateProjectMutation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { findBy } from '@lib/utils/array/findBy'
+import { ProjectGoal, projectGoals } from '@increaser/entities/Project'
+import { RadioInput } from '@lib/ui/inputs/RadioInput'
+import { match } from '@lib/utils/match'
+import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
+import { pluralize } from '@lib/utils/pluralize'
 
 type WeeklyGoalShape = {
   projectId: string | null
   hours: number | null
+  goal: ProjectGoal | null
 }
 
-export const CreateWeeklyGoalForm = () => {
+export const CreateProjectBudgetForm = () => {
   const { activeProjects } = useProjects()
   const projectsWithoutGoal = activeProjects.filter(
     (project) => !project.allocatedMinutesPerWeek,
@@ -42,6 +48,7 @@ export const CreateWeeklyGoalForm = () => {
         ? null
         : projectsWithoutGoal[0].id,
       hours: null,
+      goal: null,
     }),
     [projectsWithoutGoal],
   )
@@ -77,6 +84,7 @@ export const CreateWeeklyGoalForm = () => {
                 'h',
                 'min',
               ),
+              goal: value.goal,
             },
           })
         })}
@@ -102,13 +110,52 @@ export const CreateWeeklyGoalForm = () => {
           <Field>
             <HoursInput
               autoFocus
-              label="Weekly goal"
+              label="Budget"
               placeholder="Enter hours"
               max={freeHours}
               value={value.hours}
               onChange={(hours) => setValue((prev) => ({ ...prev, hours }))}
             />
           </Field>
+          {value.hours !== null && (
+            <VStack gap={12}>
+              <MinimalisticToggle
+                onChange={() =>
+                  setValue((prev) => ({
+                    ...prev,
+                    goal: prev.goal === null ? 'doMore' : null,
+                  }))
+                }
+                value={value.goal !== null}
+                label={`Set a goal to work ...`}
+              />
+              {value.goal !== null && (
+                <RadioInput
+                  style={{
+                    flexDirection: 'column',
+                    gap: 8,
+                  }}
+                  options={projectGoals}
+                  renderOption={(goal) =>
+                    match(goal, {
+                      doMore: () =>
+                        `At least ${pluralize(
+                          shouldBePresent(value.hours),
+                          'hour',
+                        )} / week`,
+                      doLess: () =>
+                        `No more than ${pluralize(
+                          shouldBePresent(value.hours),
+                          'hour',
+                        )} / week`,
+                    })
+                  }
+                  value={value.goal}
+                  onChange={(goal) => setValue((prev) => ({ ...prev, goal }))}
+                />
+              )}
+            </VStack>
+          )}
         </Fields>
 
         <Button isDisabled={!isValid} kind="secondary" size="l">

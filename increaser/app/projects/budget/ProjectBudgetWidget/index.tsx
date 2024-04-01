@@ -5,17 +5,14 @@ import { sum } from '@lib/utils/array/sum'
 import { toPercents } from '@lib/utils/toPercents'
 import styled, { useTheme } from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
-import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { getShortWeekday } from '@lib/utils/time'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
-import Link from 'next/link'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { getColor } from '@lib/ui/theme/getters'
+import { ProjectBudgetWidgetHeader } from './ProjectBudgetWidgetHeader'
 
 const Container = styled.div`
   position: relative;
@@ -25,7 +22,7 @@ const Container = styled.div`
   ${transition};
   height: 52px;
   background: ${getColor('foreground')};
-  border: 1px solid ${({ theme }) => theme.colors.mist.toCssValue()};
+  border: 1px solid ${getColor('mist')};
   overflow: hidden;
 `
 
@@ -56,7 +53,6 @@ const Fill = styled.div`
 const Distance = styled.div`
   position: absolute;
   top: 0;
-  color: ${({ theme }) => theme.colors.alert.toCssValue()};
   border-top: 1px solid;
   font-size: 14px;
   ${centerContent};
@@ -67,8 +63,9 @@ const Distance = styled.div`
   ${transition};
 `
 
-export const ProjectGoal = () => {
-  const { allocatedMinutesPerWeek, doneMinutesThisWeek } = useCurrentProject()
+export const ProjectBudgetWidget = () => {
+  const { allocatedMinutesPerWeek, doneMinutesThisWeek, goal } =
+    useCurrentProject()
   const { allocation, totalMinutes } = useWeekTimeAllocation()
 
   const weekday = useWeekday()
@@ -82,38 +79,14 @@ export const ProjectGoal = () => {
 
   return (
     <VStack gap={4}>
-      <UniformColumnGrid gap={20} minChildrenWidth={80} maxChildrenWidth={140}>
-        <Text as="div" size={14}>
-          <LabeledValue name="This week">
-            <Text as="span" weight="bold">
-              {doneMinutesThisWeek > 0
-                ? formatDuration(doneMinutesThisWeek, 'min', {
-                    maxUnit: 'h',
-                  })
-                : '-'}
-            </Text>
-          </LabeledValue>
-        </Text>
-        <Link href={AppPath.ProjectsBudget}>
-          <Text as="div" size={14}>
-            <LabeledValue name="Weekly goal">
-              <Text as="span" weight="bold">
-                {allocatedMinutesPerWeek > 0
-                  ? formatDuration(allocatedMinutesPerWeek, 'min', {
-                      maxUnit: 'h',
-                    })
-                  : '-'}
-              </Text>
-            </LabeledValue>
-          </Text>
-        </Link>
-      </UniformColumnGrid>
+      <ProjectBudgetWidgetHeader />
       <Container
         style={{
           borderColor:
             allocatedMinutesPerWeek &&
+            goal &&
             doneMinutesThisWeek >= allocatedMinutesPerWeek
-              ? colors.success.toCssValue()
+              ? (goal === 'doMore' ? colors.success : colors.alert).toCssValue()
               : undefined,
         }}
       >
@@ -150,41 +123,45 @@ export const ProjectGoal = () => {
               ))}
           </Days>
         )}
-        <Distance
-          style={{
-            borderColor:
-              doneMinutesThisWeek >= allocatedMinutesPerWeek
-                ? 'transparent'
-                : undefined,
-            left:
-              doneMinutesThisWeek < allocatedMinutesPerWeek
-                ? toPercents(
-                    target
-                      ? doneMinutesThisWeek < target
-                        ? doneMinutesThisWeek / allocatedMinutesPerWeek
-                        : target / allocatedMinutesPerWeek
-                      : 0,
-                  )
-                : undefined,
-            right:
-              doneMinutesThisWeek > allocatedMinutesPerWeek ? 6 : undefined,
-            width: toPercents(
-              target
+        {target && (
+          <Distance
+            style={{
+              borderColor:
+                doneMinutesThisWeek >= allocatedMinutesPerWeek
+                  ? 'transparent'
+                  : undefined,
+              left:
+                doneMinutesThisWeek < allocatedMinutesPerWeek
+                  ? toPercents(
+                      target
+                        ? doneMinutesThisWeek < target
+                          ? doneMinutesThisWeek / allocatedMinutesPerWeek
+                          : target / allocatedMinutesPerWeek
+                        : 0,
+                    )
+                  : undefined,
+              right:
+                doneMinutesThisWeek > allocatedMinutesPerWeek ? 6 : undefined,
+              width: toPercents(
+                target
+                  ? doneMinutesThisWeek < target
+                    ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
+                    : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek
+                  : 0,
+              ),
+              color: (goal
                 ? doneMinutesThisWeek < target
-                  ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
-                  : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek
-                : 0,
-            ),
-            color: (target
-              ? doneMinutesThisWeek < target
-                ? colors.alert
-                : colors.success
-              : colors.mist
-            ).toCssValue(),
-          }}
-        >
-          {target
-            ? allocatedMinutesPerWeek > doneMinutesThisWeek
+                  ? goal === 'doMore'
+                    ? colors.alert
+                    : colors.success
+                  : goal === 'doMore'
+                    ? colors.success
+                    : colors.alert
+                : colors.text
+              ).toCssValue(),
+            }}
+          >
+            {allocatedMinutesPerWeek > doneMinutesThisWeek
               ? `${doneMinutesThisWeek > +target ? '+' : '-'} ${formatDuration(
                   Math.abs(target - doneMinutesThisWeek),
                   'min',
@@ -194,9 +171,9 @@ export const ProjectGoal = () => {
                   doneMinutesThisWeek - allocatedMinutesPerWeek,
                   'min',
                   { maxUnit: 'h' },
-                )}`
-            : ''}
-        </Distance>
+                )}`}
+          </Distance>
+        )}
       </Container>
     </VStack>
   )

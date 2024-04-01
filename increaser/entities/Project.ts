@@ -7,7 +7,8 @@ export const ProjectStatus = {
 
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 
-type ProjectGoal = 'doMore' | 'doLess'
+export const projectGoals = ['doMore', 'doLess'] as const
+export type ProjectGoal = (typeof projectGoals)[number]
 
 export interface Project {
   id: string

@@ -14,13 +14,13 @@ interface ProjectGoalBadgeProps {
 }
 
 export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
-  const { allocatedMinutesPerWeek, doneMinutesThisWeek } = project
+  const { allocatedMinutesPerWeek, doneMinutesThisWeek, goal } = project
   const { allocation, totalMinutes } = useWeekTimeAllocation()
   const weekday = useWeekday()
 
   const { colors } = useTheme()
 
-  if (!allocatedMinutesPerWeek) {
+  if (!allocatedMinutesPerWeek || !goal) {
     return <Circle size={8} background={colors.textShy} />
   }
 
@@ -28,25 +28,40 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
     allocatedMinutesPerWeek *
     (sum(allocation.filter((_, index) => index <= weekday)) / totalMinutes)
 
-  if (doneMinutesThisWeek >= allocatedMinutesPerWeek) {
-    return (
-      <Text as="span" color="success">
-        <CheckDoubleIcon />
-      </Text>
-    )
-  }
+  if (goal === 'doMore') {
+    if (doneMinutesThisWeek >= allocatedMinutesPerWeek) {
+      return (
+        <Text as="span" color="success">
+          <CheckDoubleIcon />
+        </Text>
+      )
+    }
 
-  if (doneMinutesThisWeek >= target) {
+    if (doneMinutesThisWeek >= target) {
+      return (
+        <Text as="span" color="success">
+          <CheckIcon />
+        </Text>
+      )
+    }
+
     return (
-      <Text as="span" color="success">
-        <CheckIcon />
+      <Text as="span" color="alert">
+        <AlertTriangleIcon />
       </Text>
     )
   }
 
   return (
-    <Text as="span" color="alert">
-      <AlertTriangleIcon />
-    </Text>
+    <Circle
+      size={8}
+      background={
+        doneMinutesThisWeek >= allocatedMinutesPerWeek
+          ? colors.alert
+          : doneMinutesThisWeek > target
+            ? colors.idle
+            : colors.success
+      }
+    />
   )
 }

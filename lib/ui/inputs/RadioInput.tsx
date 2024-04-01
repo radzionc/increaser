@@ -5,13 +5,14 @@ import { interactive } from '../css/interactive'
 import { sameDimensions } from '../css/sameDimensions'
 import { transition } from '../css/transition'
 import { HStack } from '../layout/Stack'
-import { InputProps } from '../props'
+import { InputProps, UIComponentProps } from '../props'
 import { borderRadius } from '../css/borderRadius'
 import { useId } from 'react'
 import { Tooltip } from '../tooltips/Tooltip'
-import { centerContent } from '../css/centerContent'
 
-interface RadioInputProps<T extends string> extends InputProps<T> {
+interface RadioInputProps<T extends string>
+  extends InputProps<T>,
+    UIComponentProps {
   options: readonly T[]
   renderOption: (option: T) => React.ReactNode
   isOptionDisabled?: (option: T) => string | false
@@ -30,7 +31,8 @@ const Container = styled.label<{ selected: boolean; disabled?: boolean }>`
   padding: 12px 20px;
   min-height: 48px;
   ${borderRadius.m};
-  ${centerContent};
+  display: flex;
+  align-items: center;
   background: ${getColor('foreground')};
   ${transition};
   ${({ disabled }) =>
@@ -58,11 +60,12 @@ export const RadioInput = <T extends string>({
   options,
   renderOption,
   isOptionDisabled = () => false,
+  ...rest
 }: RadioInputProps<T>) => {
   const groupName = useId()
 
   return (
-    <HStack gap={4}>
+    <HStack gap={4} {...rest}>
       {options.map((option) => {
         const isSelected = option === value
         const disabledMessage = isOptionDisabled(option)
