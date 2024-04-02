@@ -59,7 +59,11 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
   ])
 
   const outlineColor = useMemo(() => {
-    if (goal === 'doMore' && doneMinutesThisWeek >= allocatedMinutesPerWeek) {
+    if (
+      goal === 'doMore' &&
+      allocatedMinutesPerWeek &&
+      doneMinutesThisWeek >= allocatedMinutesPerWeek
+    ) {
       return colors.success
     }
 

@@ -30,6 +30,7 @@ const Indicator = styled.div<{ selected: boolean }>`
 const Container = styled.label<{ selected: boolean; disabled?: boolean }>`
   padding: 12px 20px;
   min-height: 48px;
+  font-size: 14px;
   ${borderRadius.m};
   display: flex;
   align-items: center;
@@ -65,7 +66,7 @@ export const RadioInput = <T extends string>({
   const groupName = useId()
 
   return (
-    <HStack gap={4} {...rest}>
+    <HStack gap={8} {...rest}>
       {options.map((option) => {
         const isSelected = option === value
         const disabledMessage = isOptionDisabled(option)

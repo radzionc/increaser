@@ -1,6 +1,6 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { Panel } from '@lib/ui/panel/Panel'
-import { VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { Button } from '@lib/ui/buttons/Button'
 import { isEmpty } from '@lib/utils/array/isEmpty'
@@ -22,11 +22,17 @@ import {
   projectWorkingDays,
 } from '@increaser/entities/Project'
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
-import { match } from '@lib/utils/match'
 import { pluralize } from '@lib/utils/pluralize'
-import { Switch } from '@lib/ui/inputs/Switch/Switch'
+import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
+import { WithHint } from '@lib/ui/tooltips/WithHint'
+import { Text } from '@lib/ui/text'
+import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { TargetIcon } from '@lib/ui/icons/TargetIcon'
+import { match } from '@lib/utils/match'
+import { useTheme } from 'styled-components'
 
 type WeeklyGoalShape = {
   projectId: string | null
@@ -35,16 +41,23 @@ type WeeklyGoalShape = {
   workingDays: ProjectWorkingDays
 }
 
+const goalOptionName: Record<ProjectGoal, string> = {
+  doMore: 'at least',
+  doLess: 'no more than',
+}
+
 const workingDayOptionName: Record<ProjectWorkingDays, string> = {
   everyday: 'Every day',
   workdays: 'Monday to Friday',
 }
 
 export const CreateProjectBudgetForm = () => {
-  const { activeProjects } = useProjects()
+  const { activeProjects, projectsRecord } = useProjects()
   const projectsWithoutGoal = activeProjects.filter(
     (project) => !project.allocatedMinutesPerWeek,
   )
+
+  const { colors } = useTheme()
 
   const { weekTimeAllocation } = useAssertUserState()
   const totalWorkHours = convertDuration(sum(weekTimeAllocation), 'min', 'h')
@@ -83,114 +96,121 @@ export const CreateProjectBudgetForm = () => {
   const isValid = value.projectId !== null && value.hours !== null
 
   return (
-    <Panel kind="secondary" style={{ width: '100%' }}>
-      <VStack
-        gap={28}
-        as="form"
-        onSubmit={preventDefault(() => {
-          if (!isValid) return
+    <Panel
+      as="form"
+      onSubmit={preventDefault(() => {
+        if (!isValid) return
 
-          updateProject({
-            id: shouldBePresent(value.projectId),
-            fields: {
-              allocatedMinutesPerWeek: convertDuration(
-                shouldBePresent(value.hours),
-                'h',
-                'min',
-              ),
-              goal: value.goal,
-              workingDays: value.workingDays,
-            },
-          })
-        })}
-      >
-        <Fields>
-          <Field>
-            <ProjectInput
-              label="Project"
-              options={projectsWithoutGoal}
-              value={
-                projectsWithoutGoal.find(
-                  (project) => project.id === value.projectId,
-                ) ?? null
+        updateProject({
+          id: shouldBePresent(value.projectId),
+          fields: {
+            allocatedMinutesPerWeek: convertDuration(
+              shouldBePresent(value.hours),
+              'h',
+              'min',
+            ),
+            goal: value.goal,
+            workingDays: value.workingDays,
+          },
+        })
+      })}
+      withSections
+      kind="secondary"
+      style={{ width: '100%' }}
+    >
+      <Fields>
+        <Field>
+          <ProjectInput
+            label="Project"
+            options={projectsWithoutGoal}
+            value={
+              projectsWithoutGoal.find(
+                (project) => project.id === value.projectId,
+              ) ?? null
+            }
+            onChange={(project) => {
+              setValue((prev) => ({
+                ...prev,
+                projectId: project?.id ?? null,
+              }))
+            }}
+          />
+        </Field>
+        <Field>
+          <HoursInput
+            autoFocus
+            label={
+              <WithHint hint="Select the number of hours you aim to spend on this project each week.">
+                Budget
+              </WithHint>
+            }
+            placeholder="Enter hours"
+            max={freeHours}
+            value={value.hours}
+            onChange={(hours) => setValue((prev) => ({ ...prev, hours }))}
+          />
+        </Field>
+        <Field>
+          <InputContainer>
+            <LabelText>Working days</LabelText>
+            <RadioInput
+              options={projectWorkingDays}
+              renderOption={(option) => workingDayOptionName[option]}
+              value={value.workingDays}
+              onChange={(workingDays) =>
+                setValue((prev) => ({ ...prev, workingDays }))
               }
-              onChange={(project) => {
-                setValue((prev) => ({
-                  ...prev,
-                  projectId: project?.id ?? null,
-                }))
-              }}
             />
-          </Field>
-          <Field>
-            <HoursInput
-              autoFocus
-              label="Budget"
-              placeholder="Enter hours"
-              max={freeHours}
-              value={value.hours}
-              onChange={(hours) => setValue((prev) => ({ ...prev, hours }))}
-            />
-          </Field>
-          <Field>
-            <InputContainer>
-              <LabelText>Working days</LabelText>
+          </InputContainer>
+        </Field>
+      </Fields>
+      {value.hours !== null && value.projectId !== null && (
+        <VStack gap={20}>
+          <MinimalisticSwitch
+            onChange={() =>
+              setValue((prev) => ({
+                ...prev,
+                goal: prev.goal === null ? 'doMore' : null,
+              }))
+            }
+            value={value.goal !== null}
+            label={`Set a goal ${value.goal ? 'to work' : '...'}`}
+          />
+          {value.goal !== null && (
+            <>
               <RadioInput
-                style={{
-                  flexDirection: 'column',
-                  gap: 8,
-                }}
-                options={projectWorkingDays}
-                renderOption={(option) => workingDayOptionName[option]}
-                value={value.workingDays}
-                onChange={(workingDays) =>
-                  setValue((prev) => ({ ...prev, workingDays }))
+                options={projectGoals}
+                renderOption={(goal) =>
+                  capitalizeFirstLetter(goalOptionName[goal])
                 }
+                value={value.goal}
+                onChange={(goal) => setValue((prev) => ({ ...prev, goal }))}
               />
-            </InputContainer>
-          </Field>
-          {value.hours !== null && (
-            <VStack gap={12}>
-              <Switch
-                onChange={() =>
-                  setValue((prev) => ({
-                    ...prev,
-                    goal: prev.goal === null ? 'doMore' : null,
-                  }))
-                }
-                value={value.goal !== null}
-                label={`Set a goal to work ...`}
-              />
-              {value.goal !== null && (
-                <RadioInput
+              <HStack alignItems="center" gap={8}>
+                <IconWrapper
                   style={{
-                    flexDirection: 'column',
-                    gap: 8,
+                    color: match(value.goal, {
+                      doMore: () => colors.success,
+                      doLess: () => colors.alert,
+                    }).toCssValue(),
                   }}
-                  options={projectGoals}
-                  renderOption={(goal) =>
-                    match(goal, {
-                      doMore: () =>
-                        `At least ${pluralize(
-                          shouldBePresent(value.hours),
-                          'hour',
-                        )} / week`,
-                      doLess: () =>
-                        `No more than ${pluralize(
-                          shouldBePresent(value.hours),
-                          'hour',
-                        )} / week`,
-                    })
-                  }
-                  value={value.goal}
-                  onChange={(goal) => setValue((prev) => ({ ...prev, goal }))}
-                />
-              )}
-            </VStack>
+                >
+                  <TargetIcon />
+                </IconWrapper>
+                <Text color="regular" size={14}>
+                  <Text as="span" weight="bold" color="contrast">
+                    {capitalizeFirstLetter(goalOptionName[value.goal])}
+                  </Text>{' '}
+                  {pluralize(value.hours, 'hour')} of{' '}
+                  {projectsRecord[value.projectId].name} per week
+                </Text>
+              </HStack>
+            </>
           )}
-        </Fields>
-
-        <Button isDisabled={!isValid} kind="secondary" size="l">
+        </VStack>
+      )}
+      <VStack>
+        <Button isDisabled={!isValid} size="l">
           Create
         </Button>
       </VStack>
