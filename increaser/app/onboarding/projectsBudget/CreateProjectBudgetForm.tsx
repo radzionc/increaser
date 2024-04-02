@@ -15,16 +15,29 @@ import { Field } from '@lib/ui/inputs/Field'
 import { useUpdateProjectMutation } from '../../projects/api/useUpdateProjectMutation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { findBy } from '@lib/utils/array/findBy'
-import { ProjectGoal, projectGoals } from '@increaser/entities/Project'
+import {
+  ProjectGoal,
+  ProjectWorkingDays,
+  projectGoals,
+  projectWorkingDays,
+} from '@increaser/entities/Project'
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
 import { match } from '@lib/utils/match'
-import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
 import { pluralize } from '@lib/utils/pluralize'
+import { Switch } from '@lib/ui/inputs/Switch/Switch'
+import { InputContainer } from '@lib/ui/inputs/InputContainer'
+import { LabelText } from '@lib/ui/inputs/LabelText'
 
 type WeeklyGoalShape = {
   projectId: string | null
   hours: number | null
   goal: ProjectGoal | null
+  workingDays: ProjectWorkingDays
+}
+
+const workingDayOptionName: Record<ProjectWorkingDays, string> = {
+  everyday: 'Every day',
+  workdays: 'Monday to Friday',
 }
 
 export const CreateProjectBudgetForm = () => {
@@ -43,12 +56,13 @@ export const CreateProjectBudgetForm = () => {
   const freeHours = totalWorkHours - allocatedHours
 
   const getInitialValue = useCallback(
-    () => ({
+    (): WeeklyGoalShape => ({
       projectId: isEmpty(projectsWithoutGoal)
         ? null
         : projectsWithoutGoal[0].id,
       hours: null,
       goal: null,
+      workingDays: 'everyday',
     }),
     [projectsWithoutGoal],
   )
@@ -85,6 +99,7 @@ export const CreateProjectBudgetForm = () => {
                 'min',
               ),
               goal: value.goal,
+              workingDays: value.workingDays,
             },
           })
         })}
@@ -117,9 +132,26 @@ export const CreateProjectBudgetForm = () => {
               onChange={(hours) => setValue((prev) => ({ ...prev, hours }))}
             />
           </Field>
+          <Field>
+            <InputContainer>
+              <LabelText>Working days</LabelText>
+              <RadioInput
+                style={{
+                  flexDirection: 'column',
+                  gap: 8,
+                }}
+                options={projectWorkingDays}
+                renderOption={(option) => workingDayOptionName[option]}
+                value={value.workingDays}
+                onChange={(workingDays) =>
+                  setValue((prev) => ({ ...prev, workingDays }))
+                }
+              />
+            </InputContainer>
+          </Field>
           {value.hours !== null && (
             <VStack gap={12}>
-              <MinimalisticToggle
+              <Switch
                 onChange={() =>
                   setValue((prev) => ({
                     ...prev,

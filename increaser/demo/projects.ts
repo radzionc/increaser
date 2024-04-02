@@ -87,6 +87,7 @@ const toProject = ({
     status: ProjectStatus.Active,
     weeks,
     months: [],
+    workingDays: 'everyday',
   }
 }
 

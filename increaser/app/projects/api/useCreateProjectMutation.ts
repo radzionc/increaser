@@ -24,7 +24,7 @@ export const useCreateProjectMutation = (
     mutationFn: async (
       projectParams: Pick<
         Project,
-        'name' | 'color' | 'emoji' | 'allocatedMinutesPerWeek'
+        'name' | 'color' | 'emoji' | 'allocatedMinutesPerWeek' | 'workingDays'
       >,
     ) => {
       const input = {
