@@ -52,6 +52,7 @@ export const ProjectBudgetVisualization = () => {
       )}
       <Distance
         style={{
+          borderWidth: doneMinutesThisWeek > allocatedMinutesPerWeek ? 0 : 1,
           left:
             doneMinutesThisWeek < allocatedMinutesPerWeek
               ? toPercents(

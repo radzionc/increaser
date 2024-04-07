@@ -57,38 +57,6 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
     }),
   )
 
-  const updateSuggestions = useCallback(() => {
-    if (
-      lastInteractionWasAt.current &&
-      Date.now() - lastInteractionWasAt.current < MS_IN_MIN
-    ) {
-      return
-    }
-
-    setFocusDuration(
-      suggestFocusDuration({
-        todayStartedAt,
-        finishWorkAt,
-        todaySets,
-      }),
-    )
-
-    setProjectId(
-      suggestProject({
-        projects: activeProjects,
-        todaySets,
-      }),
-    )
-  }, [activeProjects, finishWorkAt, todaySets, todayStartedAt])
-
-  useEffect(() => {
-    updateSuggestions()
-
-    const interval = setInterval(updateSuggestions, MS_IN_MIN)
-
-    return () => clearInterval(interval)
-  }, [updateSuggestions])
-
   const options = useMemo(() => {
     const [projectsWithGoal, projectsWithoutGoal] = splitBy(
       activeProjects,
@@ -116,6 +84,38 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
       ),
     ]
   }, [activeProjects])
+
+  const updateSuggestions = useCallback(() => {
+    if (
+      lastInteractionWasAt.current &&
+      Date.now() - lastInteractionWasAt.current < MS_IN_MIN
+    ) {
+      return
+    }
+
+    setFocusDuration(
+      suggestFocusDuration({
+        todayStartedAt,
+        finishWorkAt,
+        todaySets,
+      }),
+    )
+
+    setProjectId(
+      suggestProject({
+        projects: options,
+        todaySets,
+      }),
+    )
+  }, [finishWorkAt, options, todaySets, todayStartedAt])
+
+  useEffect(() => {
+    updateSuggestions()
+
+    const interval = setInterval(updateSuggestions, MS_IN_MIN)
+
+    return () => clearInterval(interval)
+  }, [updateSuggestions])
 
   if (!projectId) return null
   const project = projectsRecord[projectId]
