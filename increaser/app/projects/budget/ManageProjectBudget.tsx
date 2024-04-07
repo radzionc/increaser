@@ -28,6 +28,9 @@ import { WithHint } from '@lib/ui/tooltips/WithHint'
 import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { ProjectOption } from '@increaser/ui/projects/ProjectInput/ProjectOption'
+import { formatDuration } from '@lib/utils/time/formatDuration'
+import { ProjectGoalShyIndicator } from './ProjectGoalShyIndicator'
 
 type WeeklyGoalShape = {
   projectId: string | null
@@ -148,6 +151,29 @@ export const ManageProjectBudget = () => {
                     : null,
                 }))
               }}
+              renderOption={(project) => (
+                <ProjectOption
+                  value={project}
+                  primaryStatistic={
+                    project.allocatedMinutesPerWeek ? (
+                      <Text nowrap size={14} weight="semibold">
+                        {formatDuration(
+                          project.allocatedMinutesPerWeek,
+                          'min',
+                          {
+                            minUnit: 'h',
+                            maxUnit: 'h',
+                            kind: 'long',
+                          },
+                        )}{' '}
+                        {project.goal && (
+                          <ProjectGoalShyIndicator value={project.goal} />
+                        )}
+                      </Text>
+                    ) : undefined
+                  }
+                />
+              )}
             />
           </Field>
           {value.projectId && (

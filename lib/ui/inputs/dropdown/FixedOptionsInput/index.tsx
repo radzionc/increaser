@@ -40,7 +40,8 @@ export type FixedOptionsInputWrapperProps<T> = Pick<
   | 'noOptionsMessage'
   | 'onTextInputValueChange'
   | 'clearTextInputOnOptionSelect'
->
+> &
+  Partial<Pick<FixedOptionsInputProps<T>, 'renderOption'>>
 
 export function FixedOptionsInput<T>({
   value,
