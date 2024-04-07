@@ -9,6 +9,8 @@ import { InputProps, UIComponentProps } from '../props'
 import { borderRadius } from '../css/borderRadius'
 import { useId } from 'react'
 import { Tooltip } from '../tooltips/Tooltip'
+import { toSizeUnit } from '../css/toSizeUnit'
+import { textInputHeight } from '../css/textInput'
 
 interface RadioInputProps<T extends string>
   extends InputProps<T>,
@@ -29,9 +31,9 @@ const Indicator = styled.div<{ selected: boolean }>`
 
 const Container = styled.label<{ selected: boolean; disabled?: boolean }>`
   padding: 12px 20px;
-  min-height: 48px;
+  min-height: ${toSizeUnit(textInputHeight)};
   font-size: 14px;
-  ${borderRadius.m};
+  ${borderRadius.s};
   display: flex;
   align-items: center;
   background: ${getColor('foreground')};

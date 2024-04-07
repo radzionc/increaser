@@ -1,14 +1,12 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { VStack } from '@lib/ui/layout/Stack'
-import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { ProjectBudgetItem } from '../../projects/budget/ProjectBudgetItem'
-import { CreateProjectBudgetForm } from './CreateProjectBudgetForm'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { sum } from '@lib/utils/array/sum'
 import { ProjectsBudgetOverview } from '../../projects/budget/ProjectsBudgetOverview'
 import { order } from '@lib/utils/array/order'
+import { ManageProjectBudget } from '../../projects/budget/ManageProjectBudget'
 
 export const ProjectsBudgetOnboardingStep = () => {
   const { activeProjects } = useProjects()
@@ -25,10 +23,7 @@ export const ProjectsBudgetOnboardingStep = () => {
   return (
     <VStack style={{ maxWidth: 400 }} gap={40}>
       {allocatedMinutes < totalMinutesAvailable ? (
-        <InputContainer style={{ gap: 8 }} as="div">
-          <LabelText>Add project budget</LabelText>
-          <CreateProjectBudgetForm />
-        </InputContainer>
+        <ManageProjectBudget />
       ) : (
         <ShyInfoBlock>You've allocated all your time!</ShyInfoBlock>
       )}

@@ -42,8 +42,8 @@ export const ProjectsBudgetOverview = () => {
             </Text>
           </LabeledValue>
           <LabeledValue labelColor="supporting" name="Free">
-            <Text color="contrast">
-              {freeMinutes > 0
+            <Text color={freeMinutes < 0 ? 'alert' : 'contrast'}>
+              {freeMinutes !== 0
                 ? formatDuration(freeMinutes, 'min', {
                     maxUnit: 'h',
                   })
