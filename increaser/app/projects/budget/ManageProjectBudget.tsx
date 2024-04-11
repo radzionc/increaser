@@ -3,7 +3,7 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { Button } from '@lib/ui/buttons/Button'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Fields } from '@lib/ui/inputs/Fields'
 import { ProjectInput } from '@increaser/ui/projects/ProjectInput'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -37,6 +37,7 @@ type WeeklyGoalShape = {
   hours: number | null
   goal: ProjectGoal | null
   workingDays: ProjectWorkingDays
+  hasBudget: boolean
 }
 
 const goalOptionName: Record<ProjectGoal, string> = {
@@ -66,6 +67,7 @@ export const ManageProjectBudget = () => {
       hours: null,
       goal: null,
       workingDays: 'everyday',
+      hasBudget: true,
     }),
     [],
   )
@@ -85,39 +87,19 @@ export const ManageProjectBudget = () => {
 
   const { mutate: updateProject } = useUpdateProjectMutation()
 
-  const errorMessage = useMemo(() => {
-    if (value.projectId === null) {
-      return 'Please select a project'
-    }
-
-    if (value.hours === null) {
-      return 'Please enter the number of hours'
-    }
-  }, [value.hours, value.projectId])
-
-  const isValid = !errorMessage
-
-  const canSetGoal = isValid
-
-  const submitButton = (
-    <Button isDisabled={errorMessage} size="l">
-      Submit
-    </Button>
-  )
-
   return (
     <InputContainer style={{ gap: 8 }} as="div">
       <LabelText>Update project budget</LabelText>
       <Panel
         as="form"
         onSubmit={preventDefault(() => {
-          if (!isValid) return
+          if (!value.projectId) return
 
           updateProject({
             id: shouldBePresent(value.projectId),
             fields: {
               allocatedMinutesPerWeek: convertDuration(
-                shouldBePresent(value.hours),
+                value.hours ?? 0,
                 'h',
                 'min',
               ),
@@ -130,89 +112,104 @@ export const ManageProjectBudget = () => {
         })}
         withSections
         kind="secondary"
-        style={canSetGoal ? undefined : { background: 'transparent' }}
       >
-        <Fields>
-          <Field>
-            <ProjectInput
-              label="Project"
-              options={activeProjects}
-              value={value.projectId ? projectsRecord[value.projectId] : null}
-              onChange={(project) => {
-                if (!project) {
-                  setValue(getInitialValue())
-                } else {
-                  const { id, allocatedMinutesPerWeek, goal, workingDays } =
-                    project
+        <ProjectInput
+          label="Project"
+          options={activeProjects}
+          value={value.projectId ? projectsRecord[value.projectId] : null}
+          onChange={(project) => {
+            if (!project) {
+              setValue(getInitialValue())
+            } else {
+              const { id, allocatedMinutesPerWeek, goal, workingDays } = project
+              setValue((prev) => ({
+                ...prev,
+                projectId: id,
+                hours: allocatedMinutesPerWeek
+                  ? convertDuration(allocatedMinutesPerWeek, 'min', 'h')
+                  : null,
+                goal: goal || null,
+                workingDays,
+              }))
+            }
+          }}
+          renderOption={(project) => (
+            <ProjectOption
+              value={project}
+              primaryStatistic={
+                project.allocatedMinutesPerWeek ? (
+                  <Text nowrap size={14} weight="semibold">
+                    {formatDuration(project.allocatedMinutesPerWeek, 'min', {
+                      minUnit: 'h',
+                      maxUnit: 'h',
+                      kind: 'long',
+                    })}{' '}
+                    {project.goal && (
+                      <ProjectGoalShyIndicator value={project.goal} />
+                    )}
+                  </Text>
+                ) : undefined
+              }
+            />
+          )}
+        />
+        {value.projectId && (
+          <VStack gap={20}>
+            <MinimalisticSwitch
+              onChange={() => {
+                if (value.hasBudget) {
                   setValue((prev) => ({
                     ...prev,
-                    projectId: id,
-                    hours: allocatedMinutesPerWeek
-                      ? convertDuration(allocatedMinutesPerWeek, 'min', 'h')
-                      : null,
-                    goal: goal || null,
-                    workingDays,
+                    hasBudget: false,
+                    hours: null,
+                    goal: null,
+                  }))
+                } else {
+                  setValue((prev) => ({
+                    ...prev,
+                    hasBudget: true,
                   }))
                 }
               }}
-              renderOption={(project) => (
-                <ProjectOption
-                  value={project}
-                  primaryStatistic={
-                    project.allocatedMinutesPerWeek ? (
-                      <Text nowrap size={14} weight="semibold">
-                        {formatDuration(
-                          project.allocatedMinutesPerWeek,
-                          'min',
-                          {
-                            minUnit: 'h',
-                            maxUnit: 'h',
-                            kind: 'long',
-                          },
-                        )}{' '}
-                        {project.goal && (
-                          <ProjectGoalShyIndicator value={project.goal} />
-                        )}
-                      </Text>
-                    ) : undefined
-                  }
-                />
-              )}
+              value={value.hasBudget}
+              label={`Has budget`}
             />
-          </Field>
-          {value.projectId && (
-            <>
-              <Field>
-                <HoursInput
-                  autoFocus
-                  label={
-                    <WithHint hint="Select the number of hours you aim to spend on this project each week.">
-                      Budget
-                    </WithHint>
-                  }
-                  placeholder="Enter hours"
-                  max={freeHours}
-                  value={value.hours}
-                  onChange={(hours) => setValue((prev) => ({ ...prev, hours }))}
-                />
-              </Field>
-              <Field>
-                <InputContainer>
-                  <LabelText>Working days</LabelText>
-                  <RadioInput
-                    options={projectWorkingDays}
-                    renderOption={(option) => workingDayOptionName[option]}
-                    value={value.workingDays}
-                    onChange={(workingDays) =>
-                      setValue((prev) => ({ ...prev, workingDays }))
+            {value.hasBudget && (
+              <Fields>
+                <Field>
+                  <HoursInput
+                    autoFocus
+                    label={
+                      <WithHint hint="Select the number of hours you aim to spend on this project each week.">
+                        Budget
+                      </WithHint>
+                    }
+                    placeholder="Enter hours"
+                    max={freeHours}
+                    value={value.hours}
+                    onChange={(hours) =>
+                      setValue((prev) => ({ ...prev, hours }))
                     }
                   />
-                </InputContainer>
-              </Field>
-            </>
-          )}
-        </Fields>
-        {canSetGoal && (
+                </Field>
+                <Field>
+                  <InputContainer>
+                    <LabelText>Working days</LabelText>
+                    <RadioInput
+                      options={projectWorkingDays}
+                      renderOption={(option) => workingDayOptionName[option]}
+                      value={value.workingDays}
+                      onChange={(workingDays) =>
+                        setValue((prev) => ({ ...prev, workingDays }))
+                      }
+                    />
+                  </InputContainer>
+                </Field>
+              </Fields>
+            )}
+          </VStack>
+        )}
+        {value.projectId && value.hours && (
           <VStack gap={20}>
             <MinimalisticSwitch
               onChange={() =>
@@ -257,7 +254,7 @@ export const ManageProjectBudget = () => {
             >
               Cancel
             </Button>
-            {submitButton}
+            <Button size="l">Submit</Button>
           </UniformColumnGrid>
         )}
       </Panel>
