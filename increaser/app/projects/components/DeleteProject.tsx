@@ -29,36 +29,39 @@ export const DeleteProject = () => {
       )}
       renderContent={({ onClose }) => (
         <ConfirmationModal
-          title="Delete project"
+          title="Confirm project deletion"
           onClose={onClose}
           confirmActionText="Delete"
+          width={480}
           onConfirm={() => {
             deleteProject({ id })
           }}
         >
           <VStack gap={12}>
-            <Text color="supporting">
+            <Text height="large" color="supporting">
               Are you sure you want to delete{' '}
               <Text as="span" color="regular">
                 {name}?
               </Text>{' '}
-              This action will remove all the analytics related to the project.
+              This action will permanently remove all data related to the
+              project, including tracked time.
             </Text>
-            {status === 'ACTIVE' && (
-              <Text color="supporting">
-                To keep the data but hide the project from other parts of the
-                app -{' '}
+            {status === 'active' && (
+              <Text height="large" color="supporting">
+                To retain the data, consider{' '}
                 <TextButton
+                  as="span"
                   onClick={() => {
                     updateProject({
                       id,
-                      fields: { status: 'INACTIVE' },
+                      fields: { status: 'inactive' },
                     })
                     onClose()
                   }}
                 >
-                  make it inactive.
-                </TextButton>
+                  archiving the project
+                </TextButton>{' '}
+                instead.
               </Text>
             )}
           </VStack>

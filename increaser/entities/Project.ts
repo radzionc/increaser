@@ -1,11 +1,7 @@
 import { ProjectMonth, ProjectWeek } from './timeTracking'
 
-export const ProjectStatus = {
-  Active: 'ACTIVE',
-  Inactive: 'INACTIVE',
-} as const
-
-export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
+export const projectsStatuses = ['active', 'inactive', 'archived'] as const
+export type ProjectStatus = (typeof projectsStatuses)[number]
 
 export const projectGoals = ['doMore', 'doLess'] as const
 export type ProjectGoal = (typeof projectGoals)[number]
@@ -30,7 +26,7 @@ export const projectDefaultFields: Pick<
   Project,
   'status' | 'allocatedMinutesPerWeek' | 'weeks' | 'months' | 'workingDays'
 > = {
-  status: ProjectStatus.Active,
+  status: 'active',
   allocatedMinutesPerWeek: 0,
   weeks: [],
   months: [],

@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import styled from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
 
@@ -16,20 +15,12 @@ const Container = styled(HStack)`
 `
 
 export const SmallScreenProjectsNavigation = () => {
-  const { activeProjects, inactiveProjects } = useProjects()
-
-  const sortedProjects = useMemo(
-    () =>
-      [...activeProjects, ...inactiveProjects].sort(
-        (a, b) => b.total - a.total,
-      ),
-    [activeProjects, inactiveProjects],
-  )
+  const { projects } = useProjects()
 
   return (
     <Container>
       <SmallScreenCreateProjectNavigationItem />
-      {sortedProjects.map((project) => (
+      {projects.map((project) => (
         <SmallScreenProjectNavigationItem key={project.id} {...project} />
       ))}
     </Container>

@@ -6,11 +6,7 @@ import {
 
 import { Project } from '@increaser/entities/Project'
 import { useApi } from '@increaser/api-ui/hooks/useApi'
-
-interface UpdateProjectMutationInput {
-  id: string
-  fields: Partial<Project>
-}
+import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 
 export const useUpdateProjectMutation = () => {
   const { projects } = useAssertUserState()
@@ -18,7 +14,10 @@ export const useUpdateProjectMutation = () => {
   const api = useApi()
 
   return useMutation({
-    mutationFn: async ({ id, fields }: UpdateProjectMutationInput) => {
+    mutationFn: async ({
+      id,
+      fields,
+    }: ApiInterface['updateProject']['input']) => {
       updateState({
         projects: projects.map((project) => {
           if (project.id !== id) return project

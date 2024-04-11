@@ -34,7 +34,7 @@ export const useCreateProjectMutation = (
 
       const project: Project = {
         ...input,
-        status: 'ACTIVE',
+        status: 'active',
         weeks: [],
         months: [],
       }

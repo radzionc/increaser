@@ -66,7 +66,13 @@ export interface ApiInterface {
       fields: Partial<
         Pick<
           Project,
-          'name' | 'color' | 'status' | 'emoji' | 'allocatedMinutesPerWeek'
+          | 'name'
+          | 'color'
+          | 'status'
+          | 'emoji'
+          | 'allocatedMinutesPerWeek'
+          | 'goal'
+          | 'workingDays'
         >
       >
     },
