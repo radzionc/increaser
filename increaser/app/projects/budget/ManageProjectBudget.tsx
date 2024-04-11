@@ -139,17 +139,21 @@ export const ManageProjectBudget = () => {
               options={activeProjects}
               value={value.projectId ? projectsRecord[value.projectId] : null}
               onChange={(project) => {
-                setValue((prev) => ({
-                  ...prev,
-                  projectId: project?.id ?? null,
-                  hours: project?.allocatedMinutesPerWeek
-                    ? convertDuration(
-                        project.allocatedMinutesPerWeek,
-                        'min',
-                        'h',
-                      )
-                    : null,
-                }))
+                if (!project) {
+                  setValue(getInitialValue())
+                } else {
+                  const { id, allocatedMinutesPerWeek, goal, workingDays } =
+                    project
+                  setValue((prev) => ({
+                    ...prev,
+                    projectId: id,
+                    hours: allocatedMinutesPerWeek
+                      ? convertDuration(allocatedMinutesPerWeek, 'min', 'h')
+                      : null,
+                    goal: goal || null,
+                    workingDays,
+                  }))
+                }
               }}
               renderOption={(project) => (
                 <ProjectOption
