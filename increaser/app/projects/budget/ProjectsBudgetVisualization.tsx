@@ -3,7 +3,8 @@ import { useTheme } from 'styled-components'
 import { CountableItemsVisualization } from '@increaser/app/ui/CountableItemsVisualization'
 import { MIN_IN_HOUR } from '@lib/utils/time'
 import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useMemo } from 'react'
+import { useBudgetedProjects } from './hooks/useBudgetedProjects'
 
 export const ProjectsBudgetVisualization = () => {
   const { totalMinutes } = useWeekTimeAllocation()
@@ -11,18 +12,21 @@ export const ProjectsBudgetVisualization = () => {
 
   const { colors } = useTheme()
 
-  const { activeProjects } = useProjects()
+  const projects = useBudgetedProjects()
 
-  const projects = [...activeProjects].sort((a, b) => b.total - a.total)
+  const items = useMemo(() => {
+    const result = projects
+      .map(({ hslaColor, allocatedMinutesPerWeek }) => {
+        const hours = allocatedMinutesPerWeek / MIN_IN_HOUR
+        return range(hours).map(() => hslaColor)
+      })
+      .flat()
+    if (result.length < totalHours) {
+      result.push(...range(totalHours - items.length).map(() => colors.mist))
+    }
 
-  const items = []
-  projects.forEach(({ hslaColor, allocatedMinutesPerWeek }) => {
-    const hours = allocatedMinutesPerWeek / MIN_IN_HOUR
-    items.push(...range(hours).map(() => hslaColor))
-  })
-  if (items.length < totalHours) {
-    items.push(...range(totalHours - items.length).map(() => colors.mist))
-  }
+    return result
+  }, [colors.mist, projects, totalHours])
 
   return <CountableItemsVisualization items={items} />
 }
