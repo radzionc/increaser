@@ -3,10 +3,7 @@ import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-widt
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { Page } from '@lib/next-ui/Page'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
-import { ProjectsBudgetOverview } from './ProjectsBudgetOverview'
-import { VStack } from '@lib/ui/layout/Stack'
-import { BudgetFreeTimePrompt } from './BudgetFreeTimePrompt'
-import { BudgetBreakdown } from './BudgetBreakdown'
+import { ManageProjectsBudget } from './ManageProjectsBudget'
 
 const title = 'Projects budget'
 
@@ -15,11 +12,7 @@ export const ProjectsBudgetPage: Page = () => {
     <FixedWidthContent>
       <PageTitle documentTitle={`🎯 ${title}`} title={title} />
       <UserStateOnly>
-        <VStack gap={40} style={{ maxWidth: 480 }}>
-          <ProjectsBudgetOverview />
-          <BudgetFreeTimePrompt />
-          <BudgetBreakdown />
-        </VStack>
+        <ManageProjectsBudget />
       </UserStateOnly>
     </FixedWidthContent>
   )

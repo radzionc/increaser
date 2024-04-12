@@ -2,6 +2,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { transition } from '@lib/ui/css/transition'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import styled from 'styled-components'
+import { round } from '@lib/ui/css/round'
 
 interface CountableItemsVisualizationProps {
   items: HSLA[]
@@ -11,7 +12,7 @@ const Wr = styled(HStack)`
   height: 12px;
   width: 100%;
   gap: 1px;
-  border-radius: 2px;
+  ${round};
   overflow: hidden;
 `
 

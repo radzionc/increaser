@@ -1,21 +1,15 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { VStack } from '@lib/ui/layout/Stack'
 import { ProjectBudgetItem } from '../../projects/budget/ProjectBudgetItem'
-import { order } from '@lib/utils/array/order'
+import { useBudgetedProjects } from './hooks/useBudgetedProjects'
 
 export const ProjectsBudgetList = () => {
-  const { activeProjects } = useProjects()
-  const projectsWithGoals = activeProjects.filter(
-    (project) => project.allocatedMinutesPerWeek,
-  )
+  const projects = useBudgetedProjects()
 
   return (
     <VStack gap={8}>
-      {order(projectsWithGoals, (p) => p.allocatedMinutesPerWeek, 'desc').map(
-        (value) => (
-          <ProjectBudgetItem value={value} key={value.id} />
-        ),
-      )}
+      {projects.map((project) => (
+        <ProjectBudgetItem key={project.id} value={project} />
+      ))}
     </VStack>
   )
 }

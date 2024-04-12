@@ -32,3 +32,13 @@ export const projectDefaultFields: Pick<
   months: [],
   workingDays: 'everyday',
 }
+
+export const goalOptionName: Record<ProjectGoal, string> = {
+  doMore: 'at least',
+  doLess: 'no more than',
+}
+
+export const workingDayOptionName: Record<ProjectWorkingDays, string> = {
+  everyday: 'Every day',
+  workdays: 'Monday to Friday',
+}
