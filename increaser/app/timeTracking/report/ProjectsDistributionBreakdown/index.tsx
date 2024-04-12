@@ -44,9 +44,10 @@ export const ProjectsDistributionBreakdown = () => {
                     activeProjectId: id,
                   }))
                 }
+                key={id}
                 isActive={activeProjectId === id}
               >
-                <BreakdownRowContent key={id}>
+                <BreakdownRowContent>
                   <ProjectIndicator
                     style={{
                       background: (isPrimary
