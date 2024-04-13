@@ -3,9 +3,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { round } from '@lib/ui/css/round'
 import { Panel } from '@lib/ui/panel/Panel'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { ProjectGoalShyIndicator } from './ProjectGoalShyIndicator'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
@@ -21,11 +19,6 @@ import { ManageProjectBudget } from './ManageProjectBudget'
 type WeeklyGoalItemProps = {
   value: EnhancedProject
 }
-
-const Identifier = styled.div`
-  ${sameDimensions(8)}
-  ${round};
-`
 
 const Container = styled(Panel)`
   font-size: 14px;
@@ -56,21 +49,21 @@ export const ProjectBudgetItem = ({ value }: WeeklyGoalItemProps) => {
               justifyContent="space-between"
             >
               <HStack alignItems="center" gap={8}>
-                <Identifier
-                  style={{ background: value.hslaColor.toCssValue() }}
-                />
-                <Text color="regular" cropped weight="semibold">
+                {<ProjectGoalShyIndicator value={value.goal ?? null} />}
+
+                <Text color="contrast" cropped weight="semibold">
                   {value.name}
                 </Text>
               </HStack>
-              <Text weight="bold" color="contrast">
-                {formatDuration(value.allocatedMinutesPerWeek, 'min', {
-                  kind: 'long',
-                  minUnit: 'h',
-                  maxUnit: 'h',
-                })}{' '}
-                {value.goal && <ProjectGoalShyIndicator value={value.goal} />}
-              </Text>
+              <HStack alignItems="center" gap={4}>
+                <Text weight="bold" color="contrast">
+                  {formatDuration(value.allocatedMinutesPerWeek, 'min', {
+                    kind: 'long',
+                    minUnit: 'h',
+                    maxUnit: 'h',
+                  })}{' '}
+                </Text>
+              </HStack>
             </HStack>
             <PanelButton onClick={onOpen}>
               <EditIcon />

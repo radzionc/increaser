@@ -1,12 +1,12 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import styled from 'styled-components'
 import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import Link from 'next/link'
 import { ProjectGoalShyIndicator } from '../ProjectGoalShyIndicator'
+import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -14,37 +14,39 @@ const Container = styled(HStack)`
   justify-content: space-between;
   gap: 20px;
   font-size: 14px;
+  position: relative;
 `
 
 export const ProjectBudgetWidgetHeader = () => {
-  const { allocatedMinutesPerWeek, doneMinutesThisWeek, goal } =
+  const { allocatedMinutesPerWeek, doneMinutesThisWeek, goal, name } =
     useCurrentProject()
 
   return (
     <Container>
-      <LabeledValue labelColor="supporting" name="This week">
-        <Text color="contrast">
-          {doneMinutesThisWeek > 0
-            ? formatDuration(doneMinutesThisWeek, 'min', {
-                maxUnit: 'h',
-              })
-            : '-'}
+      <HStack alignItems="center" gap={4}>
+        <ProjectGoalShyIndicator value={goal ?? null} />
+        <Text weight="semibold" color="contrast" size={14}>
+          {name}
         </Text>
-      </LabeledValue>
-      {allocatedMinutesPerWeek > 0 && (
-        <Link href={AppPath.ProjectsBudget}>
-          <LabeledValue labelColor="supporting" name={goal ? 'Goal' : 'Budget'}>
-            <HStack alignItems="center" gap={4}>
-              <Text weight="bold" color="contrast">
-                {formatDuration(allocatedMinutesPerWeek, 'min', {
+      </HStack>
+      <Link href={AppPath.ProjectsBudget}>
+        <HStackSeparatedBy separator="/">
+          <Text weight="semibold" color="contrast">
+            {doneMinutesThisWeek > 0
+              ? formatDuration(doneMinutesThisWeek, 'min', {
                   maxUnit: 'h',
-                })}{' '}
-                {goal && <ProjectGoalShyIndicator value={goal} />}
-              </Text>
-            </HStack>
-          </LabeledValue>
-        </Link>
-      )}
+                })
+              : '-'}
+          </Text>
+          {allocatedMinutesPerWeek > 0 && (
+            <Text color="supporting" weight="semibold">
+              {formatDuration(allocatedMinutesPerWeek, 'min', {
+                maxUnit: 'h',
+              })}{' '}
+            </Text>
+          )}
+        </HStackSeparatedBy>
+      </Link>
     </Container>
   )
 }

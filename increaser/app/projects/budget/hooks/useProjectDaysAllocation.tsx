@@ -33,7 +33,6 @@ export const useProjectDaysAllocation = () => {
     )
 
     const workdaysProjectsShare = workdaysProjectsBudget / totalBudget
-    console.log('workdaysProjectsShare', workdaysProjectsShare)
 
     const adjustedWorkdayShare = Math.max(
       0,
