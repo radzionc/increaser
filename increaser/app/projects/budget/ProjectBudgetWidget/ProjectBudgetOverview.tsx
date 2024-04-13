@@ -3,12 +3,11 @@ import { transition } from '@lib/ui/css/transition'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
-import { useWeekday } from '@lib/ui/hooks/useWeekday'
-import { useProjectDaysAllocation } from '../hooks/useProjectDaysAllocation'
 import { toPercents } from '@lib/utils/toPercents'
 import { useMemo } from 'react'
 import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
+import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 
 const Container = styled.div`
   position: relative;
@@ -39,12 +38,9 @@ export const ProjectBudgetOverview = () => {
   const { goal, allocatedMinutesPerWeek, doneMinutesThisWeek } =
     useCurrentProject()
 
-  const weekday = useWeekday()
-  const allocation = useProjectDaysAllocation()
-
   const { colors } = useTheme()
 
-  const hasReachedFinalDay = weekday + 1 >= allocation.length
+  const hasReachedFinalDay = useHasReachedFinalWorkday()
   const hasReachedGoal = useMemo(() => {
     if (!goal) return false
 

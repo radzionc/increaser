@@ -3,8 +3,7 @@ import { useCurrentProject } from '../../components/ProjectView/CurrentProjectPr
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { SummaryFrame, SummaryFrameDuration } from './SummaryFrame'
-import { useWeekday } from '@lib/ui/hooks/useWeekday'
-import { useProjectDaysAllocation } from '../hooks/useProjectDaysAllocation'
+import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 
 export const ProjectBudgetSummary = () => {
   const { goal, doneMinutesThisWeek, allocatedMinutesPerWeek } =
@@ -12,8 +11,7 @@ export const ProjectBudgetSummary = () => {
 
   const target = useCurrentDayTarget()
 
-  const weekday = useWeekday()
-  const allocation = useProjectDaysAllocation()
+  const hasReachedFinalDay = useHasReachedFinalWorkday()
 
   return (
     <Match
@@ -79,9 +77,16 @@ export const ProjectBudgetSummary = () => {
         }
 
         if (
-          doneMinutesThisWeek < allocatedMinutesPerWeek &&
-          weekday + 1 >= allocation.length
+          doneMinutesThisWeek <= allocatedMinutesPerWeek &&
+          hasReachedFinalDay
         ) {
+          if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
+            return (
+              <SummaryFrame weight="semibold" color="contrast" emoji="👌">
+                Exactly met your week's maximum work limit!
+              </SummaryFrame>
+            )
+          }
           return (
             <SummaryFrame emoji="👍">
               Under limit by{' '}
@@ -93,11 +98,29 @@ export const ProjectBudgetSummary = () => {
           )
         }
 
-        if (doneMinutesThisWeek < target) {
+        if (doneMinutesThisWeek <= target) {
+          if (doneMinutesThisWeek === target) {
+            return (
+              <SummaryFrame weight="semibold" color="contrast" emoji="✅">
+                Spot on! Worked just up to today's cap.
+              </SummaryFrame>
+            )
+          }
+
           return (
             <SummaryFrame emoji="🌿">
               <SummaryFrameDuration value={target - doneMinutesThisWeek} />{' '}
               under today’s milestone—well done!
+            </SummaryFrame>
+          )
+        }
+
+        if (doneMinutesThisWeek > target) {
+          return (
+            <SummaryFrame emoji="🚨">
+              You've gone over today's work limit by 1
+              <SummaryFrameDuration value={doneMinutesThisWeek - target} />.
+              Time to unwind!
             </SummaryFrame>
           )
         }
