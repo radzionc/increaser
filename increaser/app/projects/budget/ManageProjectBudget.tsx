@@ -62,8 +62,8 @@ export const ManageProjectBudget = ({
           fields: {
             allocatedMinutesPerWeek: convertDuration(
               shouldBePresent(value.hours),
-              'min',
               'h',
+              'min',
             ),
             goal: value.goal,
             workingDays: value.workingDays,

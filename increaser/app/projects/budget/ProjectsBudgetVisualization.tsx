@@ -22,7 +22,7 @@ export const ProjectsBudgetVisualization = () => {
       })
       .flat()
     if (result.length < totalHours) {
-      result.push(...range(totalHours - items.length).map(() => colors.mist))
+      result.push(...range(totalHours - result.length).map(() => colors.mist))
     }
 
     return result
