@@ -11,7 +11,7 @@ import { OnboardingStep } from './OnboardingStep'
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
   workBudget: 'Balance Your Week with a Custom Work Budget',
-  projectsBudget: 'Allocate Weekly Hours to Reach Your Project Goals',
+  projectsBudget: 'Strategize Your Week by Budgeting Time for Key Projects',
   schedule: 'Design Your Day for Optimal Health and Productivity',
   dailyHabits: 'Build a Foundation of Daily Habits for Lasting Well-being',
   tasks: 'Elevate Your Day with Priority Tasks at a Glance',
@@ -55,10 +55,15 @@ export const OnboardingStepEducation = () => {
               )}
               projectsBudget={() => (
                 <>
-                  Establish weekly goals for key projects where increased effort
-                  will be most impactful. This approach encourages targeted
-                  dedication and helps in tracking significant progress on the
-                  projects that truly benefit from extra attention.
+                  Take control of your week by smartly allocating time among
+                  your various commitments, whether they involve work, study, or
+                  personal projects. Set minimum hours to ensure steady progress
+                  on key areas like growing your business, or establish maximum
+                  hours to maintain balance and prevent overload. This method
+                  helps you prioritize effectively, ensuring you invest your
+                  time where it benefits you most. Start setting your project
+                  budgets and goals now to masterfully balance your diverse
+                  activities and advance towards your goals.
                 </>
               )}
               schedule={() => (

@@ -23,6 +23,7 @@ import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { ProjectBudgetWidget } from '../../../projects/budget/ProjectBudgetWidget'
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
+import { ProjectBudgetSummary } from '../../../projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
 
 const Container = styled(Panel)`
   position: relative;
@@ -136,7 +137,14 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
           }}
         />
         <CurrentProjectProvider value={project}>
-          <ProjectBudgetWidget />
+          <VStack gap={4}>
+            <ProjectBudgetWidget />
+            <VStack style={{ minHeight: 20 }}>
+              {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                <ProjectBudgetSummary />
+              )}
+            </VStack>
+          </VStack>
         </CurrentProjectProvider>
         <FocusDurationInput
           value={focusDuration}
