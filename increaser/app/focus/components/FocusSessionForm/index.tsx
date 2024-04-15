@@ -59,8 +59,12 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
   )
 
   const options = useMemo(() => {
-    const [projectsWithGoal, projectsWithoutGoal] = splitBy(
+    const [projectsWithBudget, projectsWithoutBudget] = splitBy(
       activeProjects,
+      (project) => (project.allocatedMinutesPerWeek ? 0 : 1),
+    )
+    const [projectsWithGoal, projectsWithoutGoal] = splitBy(
+      projectsWithBudget,
       (project) => (project.goal ? 0 : 1),
     )
 
@@ -76,13 +80,14 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
           project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
         'asc',
       ),
-      ...projectsWithoutGoal,
       ...order(
         doLessProjects,
         (project) =>
           project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
         'asc',
       ),
+      ...projectsWithoutGoal,
+      ...projectsWithoutBudget,
     ]
   }, [activeProjects])
 

@@ -17,8 +17,8 @@ const DayName = styled(Text)`
 const Day = styled(VStack)`
   height: 100%;
   border-right: 1px dashed;
-  align-items: end;
-  justify-content: end;
+  align-items: center;
+  justify-content: center;
   padding-right: 4px;
   opacity: 0;
   ${transition};
