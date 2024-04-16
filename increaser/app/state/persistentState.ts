@@ -27,8 +27,8 @@ export enum PersistentStateKey {
   PathAttemptedWhileUnauthenticated = 'pathAttemptedWhileUnauthenticated',
   ReactQueryState = 'reactQueryState',
   IncludeTodayInSetsExplorer = 'includeTodayInSetsExplorer',
-  TrackedTimeReportPreferences = 'trackedTimeReportPreferences',
-  TrackedTimePreference = 'trackedTimePreference',
+  TrackedTimeReportPreferences = 'trackedTimeReportPreferences2',
+  TrackedTimePreference = 'trackedTimePreference2',
 }
 
 export const persistentStorage =

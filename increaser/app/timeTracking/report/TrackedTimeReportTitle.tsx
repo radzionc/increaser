@@ -9,7 +9,8 @@ export const TrackedTimeReportTitle = () => {
 
   return (
     <Text weight="semibold" color="contrast">
-      {isEmpty(getRecordKeys(projectsTimeSeries))
+      {isEmpty(getRecordKeys(projectsTimeSeries)) ||
+      isEmpty(Object.values(projectsTimeSeries)[0])
         ? 'No data available'
         : `Last ${pluralize(
             Object.values(projectsTimeSeries)[0].length,

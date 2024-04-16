@@ -6,7 +6,7 @@ import { TrackedTimePreference } from './TrackedTimeContext'
 
 export const useTrackedTimePreference = () => {
   return usePersistentState<TrackedTimePreference>(
-    PersistentStateKey.TrackedTimeReportPreferences,
+    PersistentStateKey.TrackedTimePreference,
     {
       shouldHideProjectNames: false,
     },
