@@ -79,7 +79,9 @@ export const ProjectsTimeSeriesChart = () => {
                   <LineChartItemInfo
                     itemIndex={selectedDataPoint}
                     isVisible={isSelectedDataPointVisible}
-                    containerWidth={size.width}
+                    containerWidth={
+                      size.width - lineChartConfig.expectedYAxisLabelWidth
+                    }
                     data={data}
                   >
                     <VStack>

@@ -1,4 +1,4 @@
-import { Project, ProjectStatus } from '@increaser/entities/Project'
+import { Project } from '@increaser/entities/Project'
 import { randomInRange } from '@lib/utils/randomInRange'
 import { range } from '@lib/utils/array/range'
 import { MIN_IN_HOUR, MS_IN_WEEK, S_IN_HOUR } from '@lib/utils/time'
@@ -84,9 +84,10 @@ const toProject = ({
     color,
     emoji,
     allocatedMinutesPerWeek: hasGoal ? target * MIN_IN_HOUR : 0,
-    status: ProjectStatus.Active,
+    status: 'active',
     weeks,
     months: [],
+    workingDays: 'everyday',
   }
 }
 

@@ -12,7 +12,7 @@ export const NavigationToInternalPage = ({ path }: Props) => {
 
   const { name, icon } = navigationPathInfo[path]
 
-  const isActive = path === '/' ? pathname === path : pathname.startsWith(path)
+  const isActive = pathname === path
 
   return (
     <Link href={path}>

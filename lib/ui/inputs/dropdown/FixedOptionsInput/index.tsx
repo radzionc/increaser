@@ -40,7 +40,8 @@ export type FixedOptionsInputWrapperProps<T> = Pick<
   | 'noOptionsMessage'
   | 'onTextInputValueChange'
   | 'clearTextInputOnOptionSelect'
->
+> &
+  Partial<Pick<FixedOptionsInputProps<T>, 'renderOption'>>
 
 export function FixedOptionsInput<T>({
   value,
@@ -108,6 +109,7 @@ export function FixedOptionsInput<T>({
   const onOptionSelect = useCallback(
     (option: T) => {
       onChange(option)
+      inputElement.current?.blur()
       if (clearTextInputOnOptionSelect) {
         setTextInputValue('')
       }
@@ -138,8 +140,16 @@ export function FixedOptionsInput<T>({
 
   return (
     <InputContainer
-      onClick={() => {
-        inputElement.current?.focus()
+      onClick={(event) => {
+        const isClickComesFromInput = inputElement.current?.contains(
+          event.target as Node,
+        )
+        if (isClickComesFromInput) {
+          showOptions()
+        } else {
+          event.stopPropagation()
+          event.preventDefault()
+        }
       }}
       onKeyDown={(event: React.KeyboardEvent<HTMLLabelElement>) => {
         if (event.key === 'Enter' && activeIndex != null) {

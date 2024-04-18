@@ -23,7 +23,7 @@ export const CurrentWeekProjectItem = ({
     allocatedMinutesPerWeek && allocatedMinutesPerWeek > doneMinutesThisWeek
   )
 
-  const isActive = status === 'ACTIVE'
+  const isActive = status === 'active'
 
   return (
     <HStack

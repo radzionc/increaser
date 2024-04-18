@@ -1,52 +1,91 @@
-import { useWeekday } from '@lib/ui/hooks/useWeekday'
-import { sum } from '@lib/utils/array/sum'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { Circle } from '@lib/ui/layout/Circle'
-import { AlertTriangleIcon } from '@lib/ui/icons/AlertTriangeIcon'
-import { CheckDoubleIcon } from '@lib/ui/icons/CheckDoubleIcon'
-import { CheckIcon } from '@lib/ui/icons/CheckIcon'
-import { Text } from '@lib/ui/text'
-import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
+import { useMemo } from 'react'
+import { round } from '@lib/ui/css/round'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { useHasReachedFinalWorkday } from '../../../projects/budget/hooks/useHasReachedFinalWorkday'
+import { useCurrentDayTarget } from '../../../projects/budget/hooks/useCurrentDayTarget'
 
 interface ProjectGoalBadgeProps {
   project: EnhancedProject
 }
 
-export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
-  const { allocatedMinutesPerWeek, doneMinutesThisWeek } = project
-  const { allocation, totalMinutes } = useWeekTimeAllocation()
-  const weekday = useWeekday()
+const Outline = styled.div`
+  ${round};
+  border: 1px solid;
+  color: transparent;
+  ${sameDimensions(12)};
+  ${centerContent};
+`
 
+export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
+  const { allocatedMinutesPerWeek, doneMinutesThisWeek, goal } = project
   const { colors } = useTheme()
 
-  if (!allocatedMinutesPerWeek) {
-    return <Circle size={8} background={colors.textShy} />
-  }
+  const hasReachedFinalDay = useHasReachedFinalWorkday()
+  const target = useCurrentDayTarget()
 
-  const target =
-    allocatedMinutesPerWeek *
-    (sum(allocation.filter((_, index) => index <= weekday)) / totalMinutes)
+  const color = useMemo(() => {
+    if (!allocatedMinutesPerWeek) {
+      return colors.mist
+    }
 
-  if (doneMinutesThisWeek >= allocatedMinutesPerWeek) {
-    return (
-      <Text as="span" color="success">
-        <CheckDoubleIcon />
-      </Text>
-    )
-  }
+    if (!goal) {
+      return colors.textShy
+    }
 
-  if (doneMinutesThisWeek >= target) {
-    return (
-      <Text as="span" color="success">
-        <CheckIcon />
-      </Text>
-    )
-  }
+    if (doneMinutesThisWeek > allocatedMinutesPerWeek) {
+      return goal === 'doMore' ? colors.success : colors.alert
+    }
+
+    if (doneMinutesThisWeek < target) {
+      return goal === 'doMore' ? colors.idle : colors.success
+    }
+
+    return goal === 'doMore' ? colors.success : colors.idle
+  }, [
+    allocatedMinutesPerWeek,
+    colors.alert,
+    colors.idle,
+    colors.mist,
+    colors.success,
+    colors.textShy,
+    doneMinutesThisWeek,
+    goal,
+    target,
+  ])
+
+  const outlineColor = useMemo(() => {
+    if (!allocatedMinutesPerWeek || !goal) {
+      return colors.transparent
+    }
+
+    if (goal === 'doMore' && doneMinutesThisWeek >= allocatedMinutesPerWeek) {
+      return colors.success
+    }
+
+    if (hasReachedFinalDay && goal === 'doLess') {
+      return doneMinutesThisWeek <= allocatedMinutesPerWeek
+        ? colors.success
+        : colors.alert
+    }
+
+    return colors.transparent
+  }, [
+    allocatedMinutesPerWeek,
+    colors.alert,
+    colors.success,
+    colors.transparent,
+    doneMinutesThisWeek,
+    goal,
+    hasReachedFinalDay,
+  ])
 
   return (
-    <Text as="span" color="alert">
-      <AlertTriangleIcon />
-    </Text>
+    <Outline style={{ color: outlineColor.toCssValue() }}>
+      <Circle size={8} background={color} />
+    </Outline>
   )
 }

@@ -4,26 +4,28 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { CreateProjectNavigationItem } from './CreateProjectNavigationItem'
 import { ProjectsNavigationSection } from './ProjectsNavigationSection'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { projectsStatuses } from '@increaser/entities/Project'
+import { getProjectStatusColor } from '../../utils/getProjectStatusColor'
 
 export const ProjectsNavigation = () => {
-  const { activeProjects, inactiveProjects } = useProjects()
+  const { projects } = useProjects()
 
-  const { colors } = useTheme()
+  const theme = useTheme()
 
   return (
     <VStack gap={20} fullWidth>
-      <ProjectsNavigationSection
-        color={colors.success}
-        projects={activeProjects}
-        name="active"
-      >
-        <CreateProjectNavigationItem />
-      </ProjectsNavigationSection>
-      <ProjectsNavigationSection
-        color={colors.alert}
-        name="inactive"
-        projects={inactiveProjects}
-      />
+      {projectsStatuses.map((status) => {
+        return (
+          <ProjectsNavigationSection
+            key={status}
+            color={getProjectStatusColor(status, theme)}
+            name={status}
+            projects={projects.filter((project) => project.status === status)}
+          >
+            {status === 'active' && <CreateProjectNavigationItem />}
+          </ProjectsNavigationSection>
+        )
+      })}
     </VStack>
   )
 }

@@ -4,7 +4,6 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { areSameWeek } from '@lib/utils/time/Week'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { range } from '@lib/utils/array/range'
-import { splitBy } from '@lib/utils/array/splitBy'
 import { toWeek } from '@lib/utils/time/Week'
 import { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -28,7 +27,6 @@ export interface WeekSummary {
 interface ProjectsState {
   projects: EnhancedProject[]
   activeProjects: EnhancedProject[]
-  inactiveProjects: EnhancedProject[]
   allocatedProjects: EnhancedProject[]
   projectsRecord: Record<string, EnhancedProject>
   weeks: WeekSummary[]
@@ -39,7 +37,7 @@ const getProjectSortingNumber = ({
   doneMinutesThisWeek,
   status,
 }: EnhancedProject) => {
-  if (status !== 'ACTIVE') return 100000000000
+  if (status !== 'active') return 100000000000
   if (!allocatedMinutesPerWeek && !doneMinutesThisWeek) return 1000000000
   if (!allocatedMinutesPerWeek) return doneMinutesThisWeek
 
@@ -66,8 +64,8 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
     [state.projects, state.sets, theme],
   )
 
-  const [activeProjects, inactiveProjects] = useMemo(
-    () => splitBy(projects, ({ status }) => (status === 'ACTIVE' ? 0 : 1)),
+  const activeProjects = useMemo(
+    () => projects.filter(({ status }) => status === 'active'),
     [projects],
   )
 
@@ -114,7 +112,6 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
       value={{
         projects,
         activeProjects,
-        inactiveProjects,
         allocatedProjects,
         projectsRecord,
         weeks,

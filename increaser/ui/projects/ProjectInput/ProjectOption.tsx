@@ -6,16 +6,21 @@ import { Text } from '@lib/ui/text'
 
 import { textInputPadding } from '@lib/ui/css/textInput'
 import { ProjectIdentifier } from './ProjectIdentifier'
+import { ReactNode } from 'react'
 
 interface ProjectOptionProps {
   value: EnhancedProject
+  primaryStatistic?: ReactNode
 }
 
 const OptionContent = styled(HStack)`
   ${cropText};
 `
 
-export const ProjectOption = ({ value }: ProjectOptionProps) => {
+export const ProjectOption = ({
+  value,
+  primaryStatistic,
+}: ProjectOptionProps) => {
   return (
     <HStack
       alignItems="center"
@@ -28,10 +33,11 @@ export const ProjectOption = ({ value }: ProjectOptionProps) => {
     >
       <OptionContent alignItems="center" gap={textInputPadding}>
         <ProjectIdentifier>{value.emoji}</ProjectIdentifier>
-        <Text size={14} weight="semibold">
+        <Text cropped size={14} weight="semibold">
           {value.name}
         </Text>
       </OptionContent>
+      {primaryStatistic}
     </HStack>
   )
 }

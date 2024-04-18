@@ -11,6 +11,7 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { ProjectGoalBadge } from './ProjectGoalBadge'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { getColor } from '@lib/ui/theme/getters'
+import { CurrentProjectProvider } from '../../../projects/components/ProjectView/CurrentProjectProvider'
 
 interface ProjectRadioInputProps {
   value?: string
@@ -36,7 +37,9 @@ export const FocusProjectInput = ({
           <Option as="label" key={id} selected={isSelected}>
             <HStack style={{ maxWidth: '100%' }} alignItems="center" gap={8}>
               <Identifier>
-                <ProjectGoalBadge project={project} />
+                <CurrentProjectProvider value={project}>
+                  <ProjectGoalBadge project={project} />
+                </CurrentProjectProvider>
               </Identifier>
               <Text cropped>{name}</Text>
             </HStack>

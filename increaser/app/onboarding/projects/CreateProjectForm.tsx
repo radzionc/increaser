@@ -54,6 +54,7 @@ export const CreateProjectForm = () => {
               createProject({
                 ...project,
                 allocatedMinutesPerWeek: 0,
+                workingDays: 'everyday',
               })
               reset(getDefaultValues())
             }),

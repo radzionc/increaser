@@ -28,7 +28,7 @@ export const Sidebar = () => {
             <NavigationToInternalPage path={AppPath.Projects} />
             <NavigationToInternalPage path={AppPath.TimeTracking} />
             <NavigationToInternalPage path={AppPath.WorkBudget} />
-            <NavigationToInternalPage path={AppPath.WeeklyGoals} />
+            <NavigationToInternalPage path={AppPath.ProjectsBudget} />
             <NavigationToInternalPage path={AppPath.Habits} />
             <NavigationToInternalPage path={AppPath.Tasks} />
             <NavigationToInternalPage path={AppPath.Sessions} />

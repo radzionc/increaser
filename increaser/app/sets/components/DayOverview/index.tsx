@@ -9,6 +9,7 @@ import { DayOverviewProvider } from './DayOverviewProvider'
 
 const Container = styled(Panel)`
   height: 100%;
+  background: transparent;
 `
 
 export const DayOverview = () => {

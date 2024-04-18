@@ -52,7 +52,7 @@ export const OnboardingProvider = ({
             ? 'You need to create at least one project'
             : false,
         workBudget: () => false,
-        weeklyGoals: () => false,
+        projectsBudget: () => false,
         schedule: () => false,
         dailyHabits: () => false,
         tasks: () => false,

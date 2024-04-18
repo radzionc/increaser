@@ -86,6 +86,7 @@ export const CreateProjectView = () => {
             createProject({
               ...project,
               allocatedMinutesPerWeek: 0,
+              workingDays: 'everyday',
             })
           })}
         >

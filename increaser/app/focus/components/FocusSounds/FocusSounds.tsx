@@ -17,12 +17,14 @@ import { verticalPadding } from '@lib/ui/css/verticalPadding'
 const Container = styled(Panel)<{ isActive: boolean }>`
   ${transition};
   height: 100%;
+  background: transparent;
 
   ${({ isActive }) =>
     !isActive &&
     css`
       box-shadow: none;
       border-color: transparent;
+
       > * {
         background: transparent;
       }

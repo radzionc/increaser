@@ -10,10 +10,10 @@ import { DeleteProject } from '../DeleteProject'
 import { useCurrentProject } from './CurrentProjectProvider'
 import { EditProject } from './EditProject'
 import { ProjectStats } from './ProjectStats'
-import { ProjectStatusToggle } from './ProjectStatusToggle'
+import { ProjectStatusSelector } from './ProjectStatusSelector'
 
 export const ProjectView = () => {
-  const { emoji, id, status, name } = useCurrentProject()
+  const { emoji, id, name } = useCurrentProject()
 
   const [isEditing, setIsEditing] = useState(false)
   useEffect(() => {
@@ -62,7 +62,7 @@ export const ProjectView = () => {
           </HStack>
 
           <HStack alignItems="center" gap={20}>
-            <ProjectStatusToggle status={status} id={id} />
+            <ProjectStatusSelector />
             <DeleteProject />
           </HStack>
         </HStack>

@@ -1,7 +1,7 @@
 import { suggestFocusDuration } from '@increaser/app/focus/FocusDuration'
 import { CurrentProjectProvider } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
 import { suggestProject } from '@increaser/app/projects/utils/suggestProject'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Button } from '@lib/ui/buttons/Button'
@@ -14,13 +14,16 @@ import { MS_IN_MIN } from '@lib/utils/time'
 import { FocusDurationInput } from '../FocusDurationInput'
 import { FocusDurationText } from '../FocusDurationText'
 import { FocusProjectInput } from './FocusProjectInput'
-import { ProjectGoal } from './ProjectGoal'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnlyAction'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
+import { ProjectBudgetWidget } from '../../../projects/budget/ProjectBudgetWidget'
+import { splitBy } from '@lib/utils/array/splitBy'
+import { order } from '@lib/utils/array/order'
+import { ProjectBudgetSummary } from '../../../projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
 
 const Container = styled(Panel)`
   position: relative;
@@ -55,6 +58,39 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
     }),
   )
 
+  const options = useMemo(() => {
+    const [projectsWithBudget, projectsWithoutBudget] = splitBy(
+      activeProjects,
+      (project) => (project.allocatedMinutesPerWeek ? 0 : 1),
+    )
+    const [projectsWithGoal, projectsWithoutGoal] = splitBy(
+      projectsWithBudget,
+      (project) => (project.goal ? 0 : 1),
+    )
+
+    const [doMoreProjects, doLessProjects] = splitBy(
+      projectsWithGoal,
+      (project) => (project.goal === 'doMore' ? 0 : 1),
+    )
+
+    return [
+      ...order(
+        doMoreProjects,
+        (project) =>
+          project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
+        'asc',
+      ),
+      ...order(
+        doLessProjects,
+        (project) =>
+          project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
+        'asc',
+      ),
+      ...projectsWithoutGoal,
+      ...projectsWithoutBudget,
+    ]
+  }, [activeProjects])
+
   const updateSuggestions = useCallback(() => {
     if (
       lastInteractionWasAt.current &&
@@ -73,11 +109,11 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
 
     setProjectId(
       suggestProject({
-        projects: activeProjects,
+        projects: options,
         todaySets,
       }),
     )
-  }, [activeProjects, finishWorkAt, todaySets, todayStartedAt])
+  }, [finishWorkAt, options, todaySets, todayStartedAt])
 
   useEffect(() => {
     updateSuggestions()
@@ -98,7 +134,7 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
     <Container style={{ position: 'relative' }} kind="secondary">
       <VStack gap={32}>
         <FocusProjectInput
-          options={activeProjects}
+          options={options}
           value={projectId}
           onChange={(value) => {
             setProjectId(value)
@@ -106,7 +142,14 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
           }}
         />
         <CurrentProjectProvider value={project}>
-          <ProjectGoal />
+          <VStack gap={4}>
+            <ProjectBudgetWidget />
+            <VStack style={{ minHeight: 20 }}>
+              {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                <ProjectBudgetSummary />
+              )}
+            </VStack>
+          </VStack>
         </CurrentProjectProvider>
         <FocusDurationInput
           value={focusDuration}

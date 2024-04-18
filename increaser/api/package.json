@@ -17,14 +17,12 @@
     "date-fns": "^3.0.6",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
-    "luxon": "^1.17.2",
     "node-telegram-bot-api": "^0.64.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^8.5.1",
-    "@types/luxon": "^2.3.2",
     "@types/node": "^20.10.5",
     "@types/node-telegram-bot-api": "^0",
     "@types/uuid": "^9.0.2",
