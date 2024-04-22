@@ -1,10 +1,6 @@
-import { ProductFeatureResponse } from '@increaser/api-interface/ProductFeatureResponse'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Panel, panelDefaultPadding } from '@lib/ui/panel/Panel'
-import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
-import { UpvoteButton } from '@lib/ui/buttons/UpvoteButton'
-import { useVoteForFeatureMutation } from '../hooks/useVoteForFeatureMutation'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import styled from 'styled-components'
 import { maxTextLines } from '@lib/ui/css/maxTextLines'
@@ -15,10 +11,9 @@ import { Modal } from '@lib/ui/modal'
 import { interactive } from '@lib/ui/css/interactive'
 import { getColor } from '@lib/ui/theme/getters'
 import { transition } from '@lib/ui/css/transition'
-import { LabeledValue } from '@lib/ui/text/LabeledValue'
-import { format } from 'date-fns'
-import { UserProfileQueryDependant } from '../../community/components/UserProfileQueryDependant'
-import { ScoreboardDisplayName } from '@increaser/ui/scoreboard/ScoreboardDisplayName'
+import { useCurrentProductFeature } from './CurrentProductFeatureProvider'
+import { ProductFeatureDetails } from './ProductFeatureDetails'
+import { VoteForFeature } from './VoteForFeature'
 
 const Description = styled(Text)`
   ${maxTextLines(2)}
@@ -32,22 +27,8 @@ const Container = styled(Panel)`
   }
 `
 
-export const ProductFeatureItem = ({
-  value,
-}: ComponentWithValueProps<ProductFeatureResponse>) => {
-  const { mutate } = useVoteForFeatureMutation()
-
-  const votingAction = (
-    <UpvoteButton
-      onClick={() => {
-        mutate({
-          id: value.id,
-        })
-      }}
-      value={value.upvotedByMe}
-      upvotes={value.upvotes}
-    />
-  )
+export const ProductFeatureItem = () => {
+  const { name, description, isApproved } = useCurrentProductFeature()
 
   return (
     <ActionInsideInteractiveElement
@@ -64,16 +45,16 @@ export const ProductFeatureItem = ({
                 >
                   <VStack gap={8}>
                     <Text weight="semibold" style={{ flex: 1 }} height="large">
-                      {value.name}
+                      {name}
                     </Text>
 
                     <Description height="large" color="supporting" size={14}>
-                      {value.description}
+                      {description}
                     </Description>
                   </VStack>
                   <Spacer {...actionSize} />
                 </HStack>
-                {!value.isApproved && (
+                {!isApproved && (
                   <ShyInfoBlock>
                     Thank you! Your feature is awaiting approval and will be
                     open for voting soon."
@@ -83,40 +64,13 @@ export const ProductFeatureItem = ({
             </Container>
           )}
           renderContent={({ onClose }) => (
-            <Modal width={480} onClose={onClose} title={value.name}>
-              <VStack gap={18}>
-                <HStack
-                  fullWidth
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
-                  <VStack style={{ fontSize: 14 }} gap={8}>
-                    <LabeledValue name="Proposed at">
-                      {format(value.createdAt, 'dd MMM yyyy')}
-                    </LabeledValue>
-                    <LabeledValue name="Proposed by">
-                      <UserProfileQueryDependant
-                        id={value.proposedBy}
-                        success={(profile) => {
-                          return (
-                            <ScoreboardDisplayName
-                              name={profile?.name || 'Anonymous'}
-                              country={profile?.country}
-                            />
-                          )
-                        }}
-                      />
-                    </LabeledValue>
-                  </VStack>
-                  {votingAction}
-                </HStack>
-                <Text height="large">{value.description}</Text>
-              </VStack>
+            <Modal width={480} onClose={onClose} title={name}>
+              <ProductFeatureDetails />
             </Modal>
           )}
         />
       )}
-      action={votingAction}
+      action={<VoteForFeature />}
       actionPlacerStyles={{
         top: panelDefaultPadding,
         right: panelDefaultPadding,

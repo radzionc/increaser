@@ -6,6 +6,7 @@ import { order } from '@lib/utils/array/order'
 import { ProductFeatureItem } from './ProductFeatureItem'
 import { useProductFeaturesView } from './ProductFeaturesView'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { CurrentProductFeatureProvider } from './CurrentProductFeatureProvider'
 
 export const ProductFeatureList = () => {
   const featuresQuery = useApiQuery('features', undefined)
@@ -29,7 +30,9 @@ export const ProductFeatureList = () => {
               ...myUnapprovedFeatures,
               ...order(otherFeatures, (f) => f.upvotes, 'desc'),
             ].map((feature) => (
-              <ProductFeatureItem key={feature.id} value={feature} />
+              <CurrentProductFeatureProvider key={feature.id} value={feature}>
+                <ProductFeatureItem />
+              </CurrentProductFeatureProvider>
             ))}
           </>
         )
