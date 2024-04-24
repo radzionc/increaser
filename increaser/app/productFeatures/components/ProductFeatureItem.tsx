@@ -57,7 +57,7 @@ export const ProductFeatureItem = () => {
                 {!isApproved && (
                   <ShyInfoBlock>
                     Thank you! Your feature is awaiting approval and will be
-                    open for voting soon."
+                    open for voting soon.
                   </ShyInfoBlock>
                 )}
               </VStack>
