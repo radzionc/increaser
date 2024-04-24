@@ -27,8 +27,11 @@ import { toPercents } from '@lib/utils/toPercents'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
-import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
+import { HoverTracker } from '@lib/ui/base/HoverTracker'
+import { getClosestItemIndex } from '@lib/utils/math/getClosestItemIndex'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { getColor } from '@lib/ui/theme/getters'
 
 export const lineChartConfig = {
   chartHeight: 160,
@@ -55,6 +58,12 @@ const InfoContainer = styled(VStack)`
   font-size: 14px;
 `
 
+const Line = styled.div`
+  height: 100%;
+  border-left: ${toSizeUnit(2)} dashed;
+  color: ${getColor('textShy')};
+`
+
 export const CurrentWeekVsBudget = () => {
   const { allocation } = useWeekTimeAllocation()
 
@@ -64,6 +73,7 @@ export const CurrentWeekVsBudget = () => {
 
   const { colors } = useTheme()
   const budgetColor = colors.alert
+  const doneColor = colors.contrast
 
   const budgetTimeSeries = useMemo(() => {
     return allocation.reduce((acc, value) => {
@@ -89,18 +99,18 @@ export const CurrentWeekVsBudget = () => {
   const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
     D_IN_WEEK - 1,
   )
-  const [isSelectedDataPointVisible, setIsSelectedDataPointVisible] =
-    useState<boolean>(false)
 
   return (
     <Panel kind="secondary">
       <VStack gap={20}>
         <SectionTitle>
-          Current week{' '}
+          <Text as="span" style={{ color: doneColor.toCssValue() }}>
+            Current week
+          </Text>{' '}
           <Text as="span" color="shy">
             vs
           </Text>{' '}
-          <Text as="span" color="alert">
+          <Text as="span" style={{ color: budgetColor.toCssValue() }}>
             Budget
           </Text>
         </SectionTitle>
@@ -134,7 +144,7 @@ export const CurrentWeekVsBudget = () => {
                       <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
                       <LineChartItemInfo
                         itemIndex={selectedDataPoint}
-                        isVisible={isSelectedDataPointVisible}
+                        isVisible={true}
                         containerWidth={
                           size.width - lineChartConfig.expectedYAxisLabelWidth
                         }
@@ -142,7 +152,7 @@ export const CurrentWeekVsBudget = () => {
                       >
                         <InfoContainer gap={4}>
                           <LabeledValue name="Done">
-                            <Text color="contrast">
+                            <Text style={{ color: doneColor.toCssValue() }}>
                               {realTimeSeries[selectedDataPoint] ? (
                                 <EmphasizeNumbers
                                   value={formatDuration(
@@ -159,7 +169,7 @@ export const CurrentWeekVsBudget = () => {
                             </Text>
                           </LabeledValue>
                           <LabeledValue name="Expected">
-                            <Text color="contrast">
+                            <Text style={{ color: budgetColor.toCssValue() }}>
                               <EmphasizeNumbers
                                 value={formatDuration(
                                   budgetTimeSeries[selectedDataPoint],
@@ -221,22 +231,30 @@ export const CurrentWeekVsBudget = () => {
                                   (normalizedBudgetTimeSeries.length - 1))
                               }
                               height={lineChartConfig.chartHeight}
-                              color={colors.contrast}
+                              color={doneColor}
                             />
                           </ChartWrapper>
                         </Container>
-                        <LineChartPositionTracker
-                          data={normalizedBudgetTimeSeries}
-                          color={colors.mist}
-                          onChange={(index) => {
-                            if (index === null) {
-                              setIsSelectedDataPointVisible(false)
-                            } else {
-                              setIsSelectedDataPointVisible(true)
-                              setSelectedDataPoint(index)
-                            }
+
+                        <HoverTracker
+                          onChange={({ position }) => {
+                            setSelectedDataPoint(
+                              position
+                                ? getClosestItemIndex(D_IN_WEEK, position.x)
+                                : weekday,
+                            )
                           }}
+                          render={({ props }) => <ChartWrapper {...props} />}
                         />
+                        <PositionAbsolutelyCenterVertically
+                          style={{
+                            pointerEvents: 'none',
+                          }}
+                          fullHeight
+                          left={toPercents(selectedDataPoint / (D_IN_WEEK - 1))}
+                        >
+                          <Line />
+                        </PositionAbsolutelyCenterVertically>
                       </VStack>
                     </HStack>
 
@@ -249,9 +267,7 @@ export const CurrentWeekVsBudget = () => {
                         }}
                       >
                         {range(D_IN_WEEK).map((index) => {
-                          const isSelected =
-                            isSelectedDataPointVisible &&
-                            index === selectedDataPoint
+                          const isSelected = index === selectedDataPoint
                           return (
                             <PositionAbsolutelyCenterVertically
                               left={toPercents(index / (D_IN_WEEK - 1))}
