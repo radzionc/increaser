@@ -1,5 +1,4 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Panel } from '@lib/ui/panel/Panel'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { useMemo, useState } from 'react'
 import { useWeekTimeAllocation } from '../../weekTimeAllocation/hooks/useWeekTimeAllocation'
@@ -103,172 +102,170 @@ export const CurrentWeekVsBudget = () => {
   )
 
   return (
-    <Panel kind="secondary">
-      <VStack gap={20}>
-        <SectionTitle>Current week vs budget</SectionTitle>
-        <HStack>
-          <ElementSizeAware
-            render={({ setElement, size }) => {
-              const budgetTotal = getLastItem(budgetTimeSeries)
-              const yMax = Math.max(
-                getLastItem(budgetTimeSeries),
-                getLastItem(realTimeSeries),
-              )
+    <VStack gap={20}>
+      <SectionTitle>Current week vs budget</SectionTitle>
+      <HStack>
+        <ElementSizeAware
+          render={({ setElement, size }) => {
+            const budgetTotal = getLastItem(budgetTimeSeries)
+            const yMax = Math.max(
+              getLastItem(budgetTimeSeries),
+              getLastItem(realTimeSeries),
+            )
 
-              const yMin = Math.min(...budgetTimeSeries, ...realTimeSeries)
+            const yMin = Math.min(...budgetTimeSeries, ...realTimeSeries)
 
-              const normalizeData = (data: number[]) =>
-                normalize([...data, yMin, yMax]).slice(0, -2)
+            const normalizeData = (data: number[]) =>
+              normalize([...data, yMin, yMax]).slice(0, -2)
 
-              const yLabels = [budgetTimeSeries[0], budgetTotal]
-              const yLabelsData = normalizeData(yLabels)
+            const yLabels = [budgetTimeSeries[0], budgetTotal]
+            const yLabelsData = normalizeData(yLabels)
 
-              const normalizedBudgetTimeSeries = normalizeData(budgetTimeSeries)
-              const normalizedRealTimeSeries = normalizeData(realTimeSeries)
+            const normalizedBudgetTimeSeries = normalizeData(budgetTimeSeries)
+            const normalizedRealTimeSeries = normalizeData(realTimeSeries)
 
-              const renderContent = (size: ElementSize) => {
-                const lineChartWidth =
-                  size.width - lineChartConfig.expectedYAxisLabelWidth
-
-                return (
-                  <VStack gap={12}>
-                    <HStack>
-                      <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
-                      <LineChartItemInfo
-                        itemIndex={selectedDataPoint}
-                        isVisible={true}
-                        containerWidth={
-                          size.width - lineChartConfig.expectedYAxisLabelWidth
-                        }
-                        data={normalizedBudgetTimeSeries}
-                      >
-                        <InfoContainer>
-                          <TimeStatistic
-                            name="Done"
-                            value={realTimeSeries[selectedDataPoint]}
-                            color={doneColor}
-                          />
-                          <TimeStatistic
-                            name="Expected"
-                            value={budgetTimeSeries[selectedDataPoint]}
-                            color={budgetColor}
-                          />
-                        </InfoContainer>
-                      </LineChartItemInfo>
-                    </HStack>
-
-                    <HStack>
-                      <ChartYAxis
-                        expectedLabelWidth={
-                          lineChartConfig.expectedYAxisLabelWidth
-                        }
-                        renderLabel={(index) => (
-                          <Text key={index} size={12} color="supporting">
-                            {formatDuration(yLabels[index], 'min', {
-                              maxUnit: 'h',
-                              minUnit: 'h',
-                            })}
-                          </Text>
-                        )}
-                        data={yLabelsData}
-                      />
-                      <VStack
-                        style={{
-                          position: 'relative',
-                          minHeight: lineChartConfig.chartHeight,
-                        }}
-                        fullWidth
-                        gap={4}
-                      >
-                        <ChartHorizontalGridLines data={yLabelsData} />
-                        <Container>
-                          <ChartWrapper>
-                            <LineChart
-                              dataPointsConnectionKind="sharp"
-                              fillKind="none"
-                              data={normalizedBudgetTimeSeries}
-                              width={lineChartWidth}
-                              height={lineChartConfig.chartHeight}
-                              color={budgetColor}
-                            />
-                          </ChartWrapper>
-                          <ChartWrapper>
-                            <LineChart
-                              dataPointsConnectionKind="sharp"
-                              fillKind="none"
-                              data={normalizedRealTimeSeries}
-                              width={
-                                lineChartWidth *
-                                ((normalizedRealTimeSeries.length - 1) /
-                                  (normalizedBudgetTimeSeries.length - 1))
-                              }
-                              height={lineChartConfig.chartHeight}
-                              color={doneColor}
-                            />
-                          </ChartWrapper>
-                        </Container>
-
-                        <HoverTracker
-                          onChange={({ position }) => {
-                            setSelectedDataPoint(
-                              position
-                                ? getClosestItemIndex(D_IN_WEEK, position.x)
-                                : weekday,
-                            )
-                          }}
-                          render={({ props }) => <ChartWrapper {...props} />}
-                        />
-                        <PositionAbsolutelyCenterVertically
-                          style={{
-                            pointerEvents: 'none',
-                          }}
-                          fullHeight
-                          left={toPercents(selectedDataPoint / (D_IN_WEEK - 1))}
-                        >
-                          <Line />
-                        </PositionAbsolutelyCenterVertically>
-                      </VStack>
-                    </HStack>
-
-                    <HStack>
-                      <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
-
-                      <XAxisContainer
-                        style={{
-                          minHeight: lineChartConfig.expectedLabelHeight,
-                        }}
-                      >
-                        {range(D_IN_WEEK).map((index) => {
-                          const isSelected = index === selectedDataPoint
-                          return (
-                            <PositionAbsolutelyCenterVertically
-                              left={toPercents(index / (D_IN_WEEK - 1))}
-                            >
-                              <Text
-                                color={isSelected ? 'contrast' : 'shy'}
-                                size={12}
-                              >
-                                {getShortWeekday(index)}
-                              </Text>
-                            </PositionAbsolutelyCenterVertically>
-                          )
-                        })}
-                      </XAxisContainer>
-                    </HStack>
-                  </VStack>
-                )
-              }
+            const renderContent = (size: ElementSize) => {
+              const lineChartWidth =
+                size.width - lineChartConfig.expectedYAxisLabelWidth
 
               return (
-                <VStack fullWidth gap={20} ref={setElement}>
-                  {size && renderContent(size)}
+                <VStack gap={12}>
+                  <HStack>
+                    <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
+                    <LineChartItemInfo
+                      itemIndex={selectedDataPoint}
+                      isVisible={true}
+                      containerWidth={
+                        size.width - lineChartConfig.expectedYAxisLabelWidth
+                      }
+                      data={normalizedBudgetTimeSeries}
+                    >
+                      <InfoContainer>
+                        <TimeStatistic
+                          name="Done"
+                          value={realTimeSeries[selectedDataPoint]}
+                          color={doneColor}
+                        />
+                        <TimeStatistic
+                          name="Expected"
+                          value={budgetTimeSeries[selectedDataPoint]}
+                          color={budgetColor}
+                        />
+                      </InfoContainer>
+                    </LineChartItemInfo>
+                  </HStack>
+
+                  <HStack>
+                    <ChartYAxis
+                      expectedLabelWidth={
+                        lineChartConfig.expectedYAxisLabelWidth
+                      }
+                      renderLabel={(index) => (
+                        <Text key={index} size={12} color="supporting">
+                          {formatDuration(yLabels[index], 'min', {
+                            maxUnit: 'h',
+                            minUnit: 'h',
+                          })}
+                        </Text>
+                      )}
+                      data={yLabelsData}
+                    />
+                    <VStack
+                      style={{
+                        position: 'relative',
+                        minHeight: lineChartConfig.chartHeight,
+                      }}
+                      fullWidth
+                      gap={4}
+                    >
+                      <ChartHorizontalGridLines data={yLabelsData} />
+                      <Container>
+                        <ChartWrapper>
+                          <LineChart
+                            dataPointsConnectionKind="sharp"
+                            fillKind="none"
+                            data={normalizedBudgetTimeSeries}
+                            width={lineChartWidth}
+                            height={lineChartConfig.chartHeight}
+                            color={budgetColor}
+                          />
+                        </ChartWrapper>
+                        <ChartWrapper>
+                          <LineChart
+                            dataPointsConnectionKind="sharp"
+                            fillKind="none"
+                            data={normalizedRealTimeSeries}
+                            width={
+                              lineChartWidth *
+                              ((normalizedRealTimeSeries.length - 1) /
+                                (normalizedBudgetTimeSeries.length - 1))
+                            }
+                            height={lineChartConfig.chartHeight}
+                            color={doneColor}
+                          />
+                        </ChartWrapper>
+                      </Container>
+
+                      <HoverTracker
+                        onChange={({ position }) => {
+                          setSelectedDataPoint(
+                            position
+                              ? getClosestItemIndex(D_IN_WEEK, position.x)
+                              : weekday,
+                          )
+                        }}
+                        render={({ props }) => <ChartWrapper {...props} />}
+                      />
+                      <PositionAbsolutelyCenterVertically
+                        style={{
+                          pointerEvents: 'none',
+                        }}
+                        fullHeight
+                        left={toPercents(selectedDataPoint / (D_IN_WEEK - 1))}
+                      >
+                        <Line />
+                      </PositionAbsolutelyCenterVertically>
+                    </VStack>
+                  </HStack>
+
+                  <HStack>
+                    <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
+
+                    <XAxisContainer
+                      style={{
+                        minHeight: lineChartConfig.expectedLabelHeight,
+                      }}
+                    >
+                      {range(D_IN_WEEK).map((index) => {
+                        const isSelected = index === selectedDataPoint
+                        return (
+                          <PositionAbsolutelyCenterVertically
+                            left={toPercents(index / (D_IN_WEEK - 1))}
+                          >
+                            <Text
+                              color={isSelected ? 'contrast' : 'shy'}
+                              size={12}
+                            >
+                              {getShortWeekday(index)}
+                            </Text>
+                          </PositionAbsolutelyCenterVertically>
+                        )
+                      })}
+                    </XAxisContainer>
+                  </HStack>
                 </VStack>
               )
-            }}
-          />
-          <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
-        </HStack>
-      </VStack>
-    </Panel>
+            }
+
+            return (
+              <VStack fullWidth gap={20} ref={setElement}>
+                {size && renderContent(size)}
+              </VStack>
+            )
+          }}
+        />
+        <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
+      </HStack>
+    </VStack>
   )
 }
