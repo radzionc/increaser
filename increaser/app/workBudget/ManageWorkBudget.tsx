@@ -16,6 +16,7 @@ import { getShortWeekday } from '@lib/utils/time'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
+import { Panel } from '@lib/ui/panel/Panel'
 
 export const ManageWorkBudget = () => {
   const { weekTimeAllocation } = useAssertUserState()
@@ -56,51 +57,53 @@ export const ManageWorkBudget = () => {
   const theme = useTheme()
 
   return (
-    <VStack gap={20}>
-      <SectionTitle>
-        My preference ~{' '}
-        {formatDuration(sum(newWeekTimeAllocation), 'min', {
-          maxUnit: 'h',
-          kind: 'long',
-        })}{' '}
-        / week
-      </SectionTitle>
-      <VStack gap={40}>
-        <VStack gap={28}>
-          <WorkBudgetInput
-            value={workdayHours}
-            onChange={setWorkdayHours}
-            color={getWorkdayColor(theme)}
-            name="Workday"
-          />
-          <WorkBudgetInput
-            value={weekendHours}
-            onChange={setWeekendHours}
-            color={getWeekendColor(theme)}
-            name="Weekend"
+    <Panel>
+      <VStack gap={20}>
+        <SectionTitle>
+          My preference ~{' '}
+          {formatDuration(sum(newWeekTimeAllocation), 'min', {
+            maxUnit: 'h',
+            kind: 'long',
+          })}{' '}
+          / week
+        </SectionTitle>
+        <VStack gap={40}>
+          <VStack gap={28}>
+            <WorkBudgetInput
+              value={workdayHours}
+              onChange={setWorkdayHours}
+              color={getWorkdayColor(theme)}
+              name="Workday"
+            />
+            <WorkBudgetInput
+              value={weekendHours}
+              onChange={setWeekendHours}
+              color={getWeekendColor(theme)}
+              name="Weekend"
+            />
+          </VStack>
+          <BarChart
+            height={160}
+            items={newWeekTimeAllocation.map((value, index) => {
+              return {
+                value,
+                label: <Text>{getShortWeekday(index)}</Text>,
+                color:
+                  index < 5 ? getWorkdayColor(theme) : getWeekendColor(theme),
+
+                renderValue:
+                  value > 0
+                    ? () => (
+                        <Text>
+                          {formatDuration(value, 'min', { maxUnit: 'h' })}
+                        </Text>
+                      )
+                    : undefined,
+              }
+            })}
           />
         </VStack>
-        <BarChart
-          height={160}
-          items={newWeekTimeAllocation.map((value, index) => {
-            return {
-              value,
-              label: <Text>{getShortWeekday(index)}</Text>,
-              color:
-                index < 5 ? getWorkdayColor(theme) : getWeekendColor(theme),
-
-              renderValue:
-                value > 0
-                  ? () => (
-                      <Text>
-                        {formatDuration(value, 'min', { maxUnit: 'h' })}
-                      </Text>
-                    )
-                  : undefined,
-            }
-          })}
-        />
       </VStack>
-    </VStack>
+    </Panel>
   )
 }
