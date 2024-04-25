@@ -2,14 +2,14 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { useMemo, useState } from 'react'
-import { useWeekTimeAllocation } from '../weekTimeAllocation/hooks/useWeekTimeAllocation'
+import { useWeekTimeAllocation } from '../../weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 import { range } from '@lib/utils/array/range'
-import { getDaySets } from '../sets/helpers/getDaySets'
+import { getDaySets } from '../../sets/helpers/getDaySets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { getSetsSum } from '../sets/helpers/getSetsSum'
+import { getSetsSum } from '../../sets/helpers/getSetsSum'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
@@ -26,12 +26,11 @@ import { D_IN_WEEK, getShortWeekday } from '@lib/utils/time'
 import { toPercents } from '@lib/utils/toPercents'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
-import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
-import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
 import { getClosestItemIndex } from '@lib/utils/math/getClosestItemIndex'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
+import { TimeStatistic } from './TimeStatistic'
 
 export const lineChartConfig = {
   chartHeight: 160,
@@ -54,14 +53,17 @@ const XAxisContainer = styled.div`
   position: relative;
 `
 
-const InfoContainer = styled(VStack)`
+const InfoContainer = styled.div`
   font-size: 14px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 4px;
 `
 
 const Line = styled.div`
   height: 100%;
   border-left: ${toSizeUnit(2)} dashed;
-  color: ${getColor('textShy')};
+  color: ${getColor('mistExtra')};
 `
 
 export const CurrentWeekVsBudget = () => {
@@ -72,8 +74,8 @@ export const CurrentWeekVsBudget = () => {
   const weekStartedAt = useStartOfWeek()
 
   const { colors } = useTheme()
-  const budgetColor = colors.alert
-  const doneColor = colors.contrast
+  const budgetColor = colors.textShy
+  const doneColor = colors.primary
 
   const budgetTimeSeries = useMemo(() => {
     return allocation.reduce((acc, value) => {
@@ -103,17 +105,7 @@ export const CurrentWeekVsBudget = () => {
   return (
     <Panel kind="secondary">
       <VStack gap={20}>
-        <SectionTitle>
-          <Text as="span" style={{ color: doneColor.toCssValue() }}>
-            Current week
-          </Text>{' '}
-          <Text as="span" color="shy">
-            vs
-          </Text>{' '}
-          <Text as="span" style={{ color: budgetColor.toCssValue() }}>
-            Budget
-          </Text>
-        </SectionTitle>
+        <SectionTitle>Current week vs budget</SectionTitle>
         <HStack>
           <ElementSizeAware
             render={({ setElement, size }) => {
@@ -150,37 +142,17 @@ export const CurrentWeekVsBudget = () => {
                         }
                         data={normalizedBudgetTimeSeries}
                       >
-                        <InfoContainer gap={4}>
-                          <LabeledValue name="Done">
-                            <Text style={{ color: doneColor.toCssValue() }}>
-                              {realTimeSeries[selectedDataPoint] ? (
-                                <EmphasizeNumbers
-                                  value={formatDuration(
-                                    realTimeSeries[selectedDataPoint],
-                                    'min',
-                                    {
-                                      maxUnit: 'h',
-                                    },
-                                  )}
-                                />
-                              ) : (
-                                '-'
-                              )}
-                            </Text>
-                          </LabeledValue>
-                          <LabeledValue name="Expected">
-                            <Text style={{ color: budgetColor.toCssValue() }}>
-                              <EmphasizeNumbers
-                                value={formatDuration(
-                                  budgetTimeSeries[selectedDataPoint],
-                                  'min',
-                                  {
-                                    maxUnit: 'h',
-                                  },
-                                )}
-                              />
-                            </Text>
-                          </LabeledValue>
+                        <InfoContainer>
+                          <TimeStatistic
+                            name="Done"
+                            value={realTimeSeries[selectedDataPoint]}
+                            color={doneColor}
+                          />
+                          <TimeStatistic
+                            name="Expected"
+                            value={budgetTimeSeries[selectedDataPoint]}
+                            color={budgetColor}
+                          />
                         </InfoContainer>
                       </LineChartItemInfo>
                     </HStack>
