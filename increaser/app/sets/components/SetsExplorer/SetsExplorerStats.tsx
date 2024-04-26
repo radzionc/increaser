@@ -14,7 +14,7 @@ import { getAverage } from '@lib/utils/math/getAverage'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { getBlocks } from '@increaser/app/sets/Block'
 import { Statistic } from '@lib/ui/layout/Statistic'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -43,7 +43,7 @@ const getFormattedAvgWorkdayEnd = (days: SetsExplorerDay[]) => {
 const getFormattedAvgBlock = (days: SetsExplorerDay[]) => {
   const sets = days.flatMap((day) => day.sets)
   const blocks = getBlocks(sets)
-  const total = getSetsSum(sets)
+  const total = getSetsDuration(sets)
 
   return formatDuration(total / blocks.length, 'ms')
 }
@@ -54,7 +54,7 @@ const getFormattedAvgWorkday = (days: SetsExplorerDay[]) => {
 
   const sets = workdays.flatMap((day) => day.sets)
 
-  return formatDuration(getSetsSum(sets) / workdays.length, 'ms')
+  return formatDuration(getSetsDuration(sets) / workdays.length, 'ms')
 }
 
 const getFormattedAvgWeekend = (days: SetsExplorerDay[]) => {
@@ -63,13 +63,13 @@ const getFormattedAvgWeekend = (days: SetsExplorerDay[]) => {
 
   const sets = weekends.flatMap((day) => day.sets)
 
-  return formatDuration(getSetsSum(sets) / weekends.length, 'ms')
+  return formatDuration(getSetsDuration(sets) / weekends.length, 'ms')
 }
 
 const getFormattedAvgDay = (days: SetsExplorerDay[]) => {
   const sets = days.flatMap((day) => day.sets)
 
-  return formatDuration(getSetsSum(sets) / days.length, 'ms')
+  return formatDuration(getSetsDuration(sets) / days.length, 'ms')
 }
 
 const StatsPanel = styled(Panel)<{ isActive: boolean }>`

@@ -1,7 +1,7 @@
 import { analytics } from '@increaser/app/analytics'
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { getBlocks, getNextFocusDuration } from '@increaser/app/sets/Block'
-import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
+import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useBrowserNotifications } from '@lib/ui/hooks/useBrowserNotifcations'
 import { PersistentStateKey } from '@increaser/app/state/persistentState'

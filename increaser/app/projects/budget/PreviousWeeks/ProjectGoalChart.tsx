@@ -66,7 +66,7 @@ export const ProjectGoalChart = ({
                     containerWidth={
                       size.width - lineChartConfig.expectedYAxisLabelWidth
                     }
-                    data={data}
+                    dataPointsNumber={data.length}
                   >
                     <VStack>
                       <Text color="contrast" weight="semibold">

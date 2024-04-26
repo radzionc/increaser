@@ -1,6 +1,6 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
-import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
+import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { Set } from '@increaser/app/sets/Set'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { formatTime } from '@lib/utils/time/formatTime'

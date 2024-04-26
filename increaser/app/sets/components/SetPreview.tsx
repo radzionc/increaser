@@ -1,7 +1,7 @@
 import { ProjectNameWithEmoji } from '@increaser/app/projects/components/ProjectNameWithEmoji'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
-import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
+import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import styled, { useTheme } from 'styled-components'
 import { HSLA } from '@lib/ui/colors/HSLA'

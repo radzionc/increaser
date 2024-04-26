@@ -10,6 +10,7 @@ import { lineChartConfig } from './lineChartConfig'
 import { normalize } from '@lib/utils/math/normalize'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { useTrackedTime } from '../state/TrackedTimeContext'
+import { ComponentWithWidthProps } from '@lib/ui/props'
 
 type ChartDesription = {
   data: number[]
@@ -29,8 +30,7 @@ const ChartWrapper = styled.div`
   ${takeWholeSpaceAbsolutely};
 `
 
-type ProjectsLineChartsProps = {
-  width: number
+type ProjectsLineChartsProps = ComponentWithWidthProps & {
   chartMin: number
   chartMax: number
 }

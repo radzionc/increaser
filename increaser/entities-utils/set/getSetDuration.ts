@@ -1,3 +1,4 @@
 import { Set } from '@increaser/entities/User'
 
-export const getSetDuration = (set: Set) => Math.abs(set.end - set.start)
+export const getSetDuration = (set: Pick<Set, 'start' | 'end'>) =>
+  Math.abs(set.end - set.start)

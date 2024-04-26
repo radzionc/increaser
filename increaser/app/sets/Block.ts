@@ -2,7 +2,6 @@ import { DefaultTheme } from 'styled-components'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import { getSetsSum } from './helpers/getSetsSum'
 import { Set } from './Set'
 import { getDistanceBetweenSets } from '@increaser/entities-utils/set/getDistanceBetweenSets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -11,6 +10,7 @@ import {
   defaultFocusDuration,
   focusDurations,
 } from '@increaser/entities/FocusDuration'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 
 export interface Block {
   sets: Set[]
@@ -23,7 +23,7 @@ export const targetBlockInMin = 90
 export const getBlockDuration = ({ sets }: Block) =>
   getLastItem(sets).end - sets[0].start
 
-export const getBlockWorkDuration = ({ sets }: Block) => getSetsSum(sets)
+export const getBlockWorkDuration = ({ sets }: Block) => getSetsDuration(sets)
 
 export const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
   getDistanceBetweenSets(getLastItem(prevBlock.sets), block.sets[0])

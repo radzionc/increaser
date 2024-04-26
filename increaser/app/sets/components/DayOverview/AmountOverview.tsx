@@ -11,7 +11,7 @@ import { getProjectName } from '@increaser/app/projects/utils/getProjectName'
 import { useDayOverview } from './DayOverviewProvider'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
 import { getWeekday } from '@lib/utils/time/getWeekday'
@@ -21,7 +21,7 @@ import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 
 export const AmountOverview = () => {
   const { sets, dayStartedAt } = useDayOverview()
-  const setsTotal = getSetsSum(sets)
+  const setsTotal = getSetsDuration(sets)
   const weekday = getWeekday(new Date(dayStartedAt))
 
   const daysBudget = useDaysBudget()
