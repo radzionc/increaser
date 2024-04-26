@@ -6,11 +6,12 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { MIN_IN_HOUR, S_IN_HOUR } from '@lib/utils/time'
-import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 import { useCurrentProject } from './ProjectView/CurrentProjectProvider'
 import { ShyCheckbox } from '@increaser/app/ui/ShyCheckbox'
 import { StepInput } from '@increaser/app/ui/StepInput'
+import { useFreeHours } from '../budget/hooks/useFreeHours'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 const Checkbox = styled(ShyCheckbox)`
   flex: 1;
@@ -36,7 +37,7 @@ const Container = styled(HStack)`
 `
 
 export const ProjectGoalInput = () => {
-  const { freeMinutes } = useWeekTimeAllocation()
+  const freeHours = useFreeHours()
   const { name, allocatedMinutesPerWeek, hslaColor, id, weeks } =
     useCurrentProject()
 
@@ -58,7 +59,9 @@ export const ProjectGoalInput = () => {
     [id, updateProject],
   )
 
-  const maxHours = (allocatedMinutesPerWeek + freeMinutes) / MIN_IN_HOUR
+  const maxHours =
+    (allocatedMinutesPerWeek + convertDuration(freeHours, 'h', 'min')) /
+    MIN_IN_HOUR
 
   const defaultValue = useMemo(() => {
     if (weeks.length) {

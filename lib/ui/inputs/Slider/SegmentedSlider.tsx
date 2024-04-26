@@ -14,12 +14,12 @@ import { range } from '@lib/utils/array/range'
 import { HSLA } from '../../colors/HSLA'
 import { UniformColumnGrid } from '../../layout/UniformColumnGrid'
 
-type HoursInputProps = InputProps<number> & {
+type SegmentedSliderProps = InputProps<number> & {
   max: number
   color: HSLA
 }
 
-const hoursInputConfig = {
+const sliderConfig = {
   railHeight: 20,
   controlSize: 24,
 }
@@ -28,14 +28,14 @@ const Control = styled.div`
   transition: outline ${defaultTransition};
   outline: 4px solid transparent;
   width: 8px;
-  height: ${toSizeUnit(hoursInputConfig.controlSize)};
+  height: ${toSizeUnit(sliderConfig.controlSize)};
   background: ${getColor('contrast')};
   border-radius: 2px;
 `
 
 const Container = styled.label`
   width: 100%;
-  height: ${toSizeUnit(hoursInputConfig.controlSize + 4)};
+  height: ${toSizeUnit(sliderConfig.controlSize + 4)};
   ${interactive};
   ${centerContent};
   position: relative;
@@ -51,7 +51,7 @@ const Container = styled.label`
 
 const Line = styled(UniformColumnGrid)`
   width: 100%;
-  height: ${toSizeUnit(hoursInputConfig.railHeight)};
+  height: ${toSizeUnit(sliderConfig.railHeight)};
 
   border-radius: 4px;
   position: relative;
@@ -60,12 +60,12 @@ const Line = styled(UniformColumnGrid)`
 
 const Section = styled.div``
 
-export const HoursInput = ({
+export const SegmentedSlider = ({
   value,
   onChange,
   max,
   color,
-}: HoursInputProps) => {
+}: SegmentedSliderProps) => {
   const { colors } = useTheme()
 
   const xPosition = toPercents(value / max)

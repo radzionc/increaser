@@ -5,8 +5,9 @@ import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { sum } from '@lib/utils/array/sum'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { useWeekTimeAllocation } from '../../weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { Text } from '@lib/ui/text'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useWorkBudgetTotal } from '@increaser/ui/workBudget/hooks/useWorkBudgetTotal'
 
 const Container = styled(VStack)`
   gap: 8px;
@@ -15,13 +16,14 @@ const Container = styled(VStack)`
 
 export const ProjectsBudgetOverview = () => {
   const { activeProjects } = useProjects()
-  const { totalMinutes } = useWeekTimeAllocation()
+  const workBudetTotal = useWorkBudgetTotal()
 
   const allocatedMinutes = sum(
     activeProjects.map((p) => p.allocatedMinutesPerWeek),
   )
 
-  const freeMinutes = totalMinutes - allocatedMinutes
+  const freeMinutes =
+    convertDuration(workBudetTotal, 'h', 'min') - allocatedMinutes
 
   return (
     <Container>
@@ -53,7 +55,7 @@ export const ProjectsBudgetOverview = () => {
         </HStack>
         <LabeledValue labelColor="supporting" name="Work budget">
           <Text color="contrast">
-            {formatDuration(totalMinutes, 'min', {
+            {formatDuration(workBudetTotal, 'h', {
               maxUnit: 'h',
             })}
           </Text>

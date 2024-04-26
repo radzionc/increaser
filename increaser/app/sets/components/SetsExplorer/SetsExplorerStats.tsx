@@ -16,7 +16,6 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
 import { getBlocks } from '@increaser/app/sets/Block'
-import { isWorkday } from '@lib/utils/time/isWorkday'
 import { Statistic } from '@lib/ui/layout/Statistic'
 import { Panel } from '@lib/ui/panel/Panel'
 import styled from 'styled-components'
@@ -25,6 +24,7 @@ import { interactive } from '@lib/ui/css/interactive'
 import { Match } from '@lib/ui/base/Match'
 import { isLast } from '@lib/utils/array/isLast'
 import { transition } from '@lib/ui/css/transition'
+import { isWorkday } from '@lib/utils/time/workweek'
 
 const getFormattedAvgWorkdayStart = (days: SetsExplorerDay[]) => {
   const ms = getAverage(days.map((day) => day.sets[0].start - day.startedAt))

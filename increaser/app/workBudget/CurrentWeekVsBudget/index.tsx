@@ -1,7 +1,6 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { useMemo, useState } from 'react'
-import { useWeekTimeAllocation } from '../../weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 import { range } from '@lib/utils/array/range'
@@ -30,6 +29,7 @@ import { getClosestItemIndex } from '@lib/utils/math/getClosestItemIndex'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { TimeStatistic } from './TimeStatistic'
+import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 
 export const lineChartConfig = {
   chartHeight: 160,
@@ -66,8 +66,6 @@ const Line = styled.div`
 `
 
 export const CurrentWeekVsBudget = () => {
-  const { allocation } = useWeekTimeAllocation()
-
   const weekday = useWeekday()
   const sets = useCurrentWeekSets()
   const weekStartedAt = useStartOfWeek()
@@ -76,12 +74,14 @@ export const CurrentWeekVsBudget = () => {
   const budgetColor = colors.textShy
   const doneColor = colors.primary
 
+  const daysBudget = useDaysBudget()
+
   const budgetTimeSeries = useMemo(() => {
-    return allocation.reduce((acc, value) => {
+    return daysBudget.reduce((acc, value) => {
       const previous = acc[acc.length - 1] || 0
-      return [...acc, previous + value]
+      return [...acc, previous + convertDuration(value, 'h', 'min')]
     }, [] as number[])
-  }, [allocation])
+  }, [daysBudget])
 
   const realTimeSeries = useMemo(() => {
     return range(weekday + 1).reduce((acc, day) => {

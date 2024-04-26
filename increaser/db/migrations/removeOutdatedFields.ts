@@ -3,16 +3,18 @@ import { tableName } from '../tableName'
 import { getPickParams } from '@lib/dynamodb/getPickParams'
 import { updateItem } from '@lib/dynamodb/updateItem'
 
+const field = 'weekTimeAllocation' as const
+
 type OldUser = {
   id: string
-  primaryGoal: any
+  [field]: any
 }
 
 const removeOutdatedFields = async () => {
   const users = await totalScan<OldUser>({
     TableName: tableName.users,
-    ...getPickParams(['id', 'primaryGoal']),
-    FilterExpression: 'attribute_exists(primaryGoal)',
+    ...getPickParams(['id', field]),
+    FilterExpression: `attribute_exists(${field})`,
   })
 
   await Promise.all(
@@ -21,7 +23,7 @@ const removeOutdatedFields = async () => {
         tableName: tableName.users,
         key: { id: user.id },
         fields: {
-          primaryGoal: undefined,
+          [field]: undefined,
         },
       })
     }),
