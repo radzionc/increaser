@@ -118,7 +118,7 @@ export const ProjectBudgetSummary = () => {
         if (doneMinutesThisWeek > target) {
           return (
             <SummaryFrame emoji="🚨">
-              You've gone over today's work limit by 1
+              You've gone over today's work limit by{' '}
               <SummaryFrameDuration value={doneMinutesThisWeek - target} />.
               Time to unwind!
             </SummaryFrame>

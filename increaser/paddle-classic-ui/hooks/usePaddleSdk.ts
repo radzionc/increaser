@@ -39,5 +39,8 @@ export const usePaddleSdk = () => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: Infinity,
+    meta: {
+      disablePersist: true,
+    },
   })
 }
