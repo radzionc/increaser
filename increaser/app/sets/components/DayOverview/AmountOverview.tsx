@@ -11,20 +11,21 @@ import { getProjectName } from '@increaser/app/projects/utils/getProjectName'
 import { useDayOverview } from './DayOverviewProvider'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
-import { useWeekTimeAllocation } from '@increaser/app/weekTimeAllocation/hooks/useWeekTimeAllocation'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
 import { getWeekday } from '@lib/utils/time/getWeekday'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 
 export const AmountOverview = () => {
   const { sets, dayStartedAt } = useDayOverview()
-  const setsTotal = getSetsSum(sets)
-  const { allocation } = useWeekTimeAllocation()
+  const setsTotal = getSetsDuration(sets)
   const weekday = getWeekday(new Date(dayStartedAt))
 
-  const allocatedMinutes = allocation ? allocation[weekday] : 0
+  const daysBudget = useDaysBudget()
+  const currentDayBudget = daysBudget[weekday]
   const projectsTotal = getProjectsTotalRecord(sets)
 
   const { projectsRecord } = useProjects()
@@ -44,14 +45,14 @@ export const AmountOverview = () => {
               {formatDuration(setsTotal, 'ms')}
             </Text>
             <Text size={14} weight="semibold" color="shy">
-              {formatDuration(allocatedMinutes, 'min')}
+              {formatDuration(currentDayBudget, 'h')}
             </Text>
           </HStackSeparatedBy>
         </HStack>
         <ProjectsAllocationLine
           projectsRecord={projectsRecord}
           sets={sets}
-          allocatedMinutes={allocatedMinutes}
+          allocatedMinutes={convertDuration(currentDayBudget, 'h', 'min')}
         />
       </VStack>
 

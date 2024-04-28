@@ -1,27 +1,32 @@
 import { useMemo } from 'react'
-import { useWeekTimeAllocation } from '../../../weekTimeAllocation/hooks/useWeekTimeAllocation'
 import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
 import { range } from '@lib/utils/array/range'
-import { weekendsNumber, workdaysNumber } from '@lib/utils/time/isWorkday'
 import { sum } from '@lib/utils/array/sum'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWorkBudgetTotal'
 
 export const useProjectDaysAllocation = () => {
   const { activeProjects } = useProjects()
 
   const { workingDays } = useCurrentProject()
 
-  const { allocation, totalMinutes } = useWeekTimeAllocation()
+  const { workdayHours, weekendHours } = useAssertUserState()
 
   return useMemo(() => {
     if (workingDays === 'workdays') {
       return range(workdaysNumber).map(() => 1 / workdaysNumber)
     }
 
+    const workBudgetTotal = getWorkBudgetTotal({
+      workdayHours,
+      weekendHours,
+    })
+
     const plannedWorkdaysShare =
-      sum(allocation.slice(0, workdaysNumber)) / totalMinutes
-    const plannedWeekendsShare =
-      sum(allocation.slice(workdaysNumber)) / totalMinutes
+      (workdayHours * workdaysNumber) / workBudgetTotal
+    const plannedWeekendsShare = 1 - plannedWorkdaysShare
 
     const totalBudget = sum(
       activeProjects.map((project) => project.allocatedMinutesPerWeek),
@@ -47,5 +52,5 @@ export const useProjectDaysAllocation = () => {
       ...range(workdaysNumber).map(() => realWorkdaysShare / workdaysNumber),
       ...range(weekendsNumber).map(() => realWeekendsShare / weekendsNumber),
     ]
-  }, [activeProjects, allocation, totalMinutes, workingDays])
+  }, [activeProjects, weekendHours, workdayHours, workingDays])
 }

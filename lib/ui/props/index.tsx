@@ -67,3 +67,7 @@ export type PromptProps = {
   onSuccess: () => void
   onCancel: () => void
 }
+
+export type ComponentWithWidthProps = {
+  width: number
+}

@@ -7,15 +7,15 @@ import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { startOfDay } from 'date-fns'
 import { useMemo } from 'react'
-import { getSetDuration } from '../sets/helpers/getSetDuration'
 import { splitBy } from '@lib/utils/array/splitBy'
-import { isWorkday } from '@lib/utils/time/isWorkday'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { AvgDay } from './AvgDay'
 import { BarChart } from '@lib/ui/charts/BarChart'
 import { getWorkdayColor } from '@increaser/ui/workBudget/getWorkdayColor'
 import { getWeekendColor } from '@increaser/ui/workBudget/getWeekendColor'
 import { useTheme } from 'styled-components'
+import { isWorkday } from '@lib/utils/time/workweek'
+import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 
 const maxDays = 30
 const minDays = 7

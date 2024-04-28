@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { range } from '@lib/utils/array/range'
 import { D_IN_WEEK, MS_IN_DAY } from '@lib/utils/time'
@@ -17,7 +17,7 @@ export const useGroupedByWeekdaySetsTotal = () => {
       const daySets = sets.filter(
         (set) => set.end < dayEndsAt && set.start > dayStartsAt,
       )
-      return getSetsSum(daySets)
+      return getSetsDuration(daySets)
     })
   }, [sets, startOfWeek])
 }

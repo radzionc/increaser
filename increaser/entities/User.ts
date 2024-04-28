@@ -4,10 +4,7 @@ import { Habit } from './Habit'
 import { LifeTimeDeal } from './LifeTimeDeal'
 import { Project } from './Project'
 import { Subscription } from './Subscription'
-import {
-  WeekTimeAllocation,
-  defaultWeekTimeAllocation,
-} from './WeekTimeAllocation'
+import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 
@@ -21,41 +18,40 @@ interface AppSumo {
   code: string
 }
 
-export type User = DayMoments & {
-  id: string
-  email: string
-  country?: CountryCode
-  name?: string
-  sets: Set[]
-  registrationDate: number
-  projects: Project[]
-  habits: Record<string, Habit>
-  tasks: Record<string, Task>
-  freeTrialEnd: number
+export type User = DayMoments &
+  WorkBudget & {
+    id: string
+    email: string
+    country?: CountryCode
+    name?: string
+    sets: Set[]
+    registrationDate: number
+    projects: Project[]
+    habits: Record<string, Habit>
+    tasks: Record<string, Task>
+    freeTrialEnd: number
 
-  weekTimeAllocation: WeekTimeAllocation
+    isAnonymous: boolean
 
-  isAnonymous: boolean
+    appSumo?: AppSumo
 
-  appSumo?: AppSumo
+    ignoreEmails?: boolean
+    timeZone: number
 
-  ignoreEmails?: boolean
-  timeZone: number
+    lastSyncedMonthEndedAt?: number
+    lastSyncedWeekEndedAt?: number
 
-  lastSyncedMonthEndedAt?: number
-  lastSyncedWeekEndedAt?: number
+    focusSounds: FocusSound[]
 
-  focusSounds: FocusSound[]
+    updatedAt: number
 
-  updatedAt: number
+    sumbittedHabitsAt?: number
 
-  sumbittedHabitsAt?: number
+    finishedOnboardingAt?: number
 
-  finishedOnboardingAt?: number
-
-  subscription?: Subscription
-  lifeTimeDeal?: LifeTimeDeal
-}
+    subscription?: Subscription
+    lifeTimeDeal?: LifeTimeDeal
+  }
 
 export const userReadonlyFields = [
   'id',
@@ -82,7 +78,6 @@ export const userDefaultFields: Pick<
   | 'tasks'
   | 'projects'
   | 'habits'
-  | 'weekTimeAllocation'
   | 'isAnonymous'
   | 'wakeUpAt'
   | 'firstMealAt'
@@ -90,13 +85,15 @@ export const userDefaultFields: Pick<
   | 'lastMealAt'
   | 'finishWorkAt'
   | 'goToBedAt'
+  | 'workdayHours'
+  | 'weekendHours'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
   tasks: {},
   projects: [],
   habits: {},
-  weekTimeAllocation: defaultWeekTimeAllocation,
   isAnonymous: true,
+  ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }

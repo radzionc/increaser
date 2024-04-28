@@ -6,7 +6,7 @@ import {
   getBlocks,
   getDistanceBetweenBlocks,
 } from '@increaser/app/sets/Block'
-import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
+import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'

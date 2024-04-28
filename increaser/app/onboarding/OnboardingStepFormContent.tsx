@@ -8,6 +8,7 @@ import { HabitsOnboardingStep } from './habits/HabitsOnboardingStep'
 import { FocusOnboardingStep } from './focus/FocusOnboardingStep'
 import { ManageWorkBudget } from '../workBudget/ManageWorkBudget'
 import { ProjectsBudgetOnboardingStep } from './projectsBudget/ProjectsBudgetOnboardingStep'
+import { VStack } from '@lib/ui/layout/Stack'
 
 export const OnboardingStepFormContent = () => {
   const { currentStep } = useOnboarding()
@@ -16,7 +17,11 @@ export const OnboardingStepFormContent = () => {
     <Match
       value={currentStep}
       projects={() => <ProjectsOnboardingStep />}
-      workBudget={() => <ManageWorkBudget />}
+      workBudget={() => (
+        <VStack style={{ maxWidth: 440 }}>
+          <ManageWorkBudget />
+        </VStack>
+      )}
       projectsBudget={() => <ProjectsBudgetOnboardingStep />}
       schedule={() => <ScheduleOnboardingStep />}
       dailyHabits={() => <HabitsOnboardingStep />}

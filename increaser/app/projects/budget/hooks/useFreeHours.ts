@@ -1,16 +1,16 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useWorkBudgetTotal } from '@increaser/ui/workBudget/hooks/useWorkBudgetTotal'
 import { sum } from '@lib/utils/array/sum'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useWeekTimeAllocation } from '../../../weekTimeAllocation/hooks/useWeekTimeAllocation'
 
 export const useFreeHours = () => {
   const { activeProjects } = useProjects()
 
-  const { totalMinutes } = useWeekTimeAllocation()
+  const workBudgetTotal = useWorkBudgetTotal()
 
   const allocatedMinutes = sum(
     activeProjects.map((p) => p.allocatedMinutesPerWeek),
   )
 
-  return convertDuration(totalMinutes - allocatedMinutes, 'min', 'h')
+  return workBudgetTotal - convertDuration(allocatedMinutes, 'min', 'h')
 }

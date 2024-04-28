@@ -1,6 +1,6 @@
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useMemo } from 'react'
-import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -30,7 +30,7 @@ export const ProjectsCurrentWeek = () => {
   const bars: Bar[] = useMemo(() => {
     return range(D_IN_WEEK).map((index) => {
       const daySets = groupedSets[index]
-      const total = getSetsSum(daySets)
+      const total = getSetsDuration(daySets)
       const projectsTotal = getProjectsTotalRecord(daySets)
 
       const isToday = index === currentWeekday

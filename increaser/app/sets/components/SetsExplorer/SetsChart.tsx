@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 import { match } from '@lib/utils/match'
 import { useState } from 'react'
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { getSetsSum } from '../../helpers/getSetsSum'
 import { normalize } from '@lib/utils/math/normalize'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -65,9 +64,9 @@ export const SetsChart = () => {
                 days.map((day) =>
                   isEmpty(day.sets)
                     ? 0
-                    : getSetsSum(day.sets) / getBlocks(day.sets).length,
+                    : getSetsDuration(day.sets) / getBlocks(day.sets).length,
                 ),
-              total: () => days.map((day) => getSetsSum(day.sets)),
+              total: () => days.map((day) => getSetsDuration(day.sets)),
             }),
           ),
           {
@@ -86,7 +85,7 @@ export const SetsChart = () => {
                   itemIndex={selectedDay}
                   isVisible={isSelectedDayVisible}
                   containerWidth={size.width}
-                  data={data}
+                  dataPointsNumber={data.length}
                 >
                   <VStack>
                     <Text color="contrast" weight="semibold">
@@ -111,7 +110,9 @@ export const SetsChart = () => {
                                 'ms',
                               )
                         }
-                        total={() => formatDuration(getSetsSum(day.sets), 'ms')}
+                        total={() =>
+                          formatDuration(getSetsDuration(day.sets), 'ms')
+                        }
                       />
                     </Text>
                     <Text color="supporting" size={14} weight="semibold">

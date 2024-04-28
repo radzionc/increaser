@@ -1,6 +1,6 @@
 import { startOfMonth, subMonths } from 'date-fns'
 import { useMemo, useState } from 'react'
-import { getSetsSum } from '@increaser/app/sets/helpers/getSetsSum'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { useCurrentMonthSets } from '@increaser/app/sets/hooks/useCurrentMonthSets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
@@ -79,7 +79,7 @@ export const ProjectStats = () => {
         const dayStartsAt = weekStartedAt + MS_IN_DAY * index
         const dayEndsAt = dayStartsAt + MS_IN_DAY
         const value =
-          getSetsSum(
+          getSetsDuration(
             currentWeekSets.filter(
               (set) => set.end < dayEndsAt && set.start > dayStartsAt,
             ),
@@ -141,7 +141,7 @@ export const ProjectStats = () => {
           value: seconds,
         }))
 
-      const doneThisMonth = getSetsSum(currentMonthSets)
+      const doneThisMonth = getSetsDuration(currentMonthSets)
 
       result.push({
         isCurrent: true,

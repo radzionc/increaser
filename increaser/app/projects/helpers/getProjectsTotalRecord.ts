@@ -1,4 +1,4 @@
-import { getSetDuration } from '@increaser/app/sets/helpers/getSetDuration'
+import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { Set } from '@increaser/app/sets/Set'
 
 export const getProjectsTotalRecord = (sets: Set[]) =>
