@@ -14,18 +14,27 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { format } from 'date-fns'
 import { fromWeek } from '@lib/utils/time/Week'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
-import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
+import { toPercents } from '@lib/utils/toPercents'
+import styled from 'styled-components'
+import { getColor } from '@lib/ui/theme/getters'
 
 export const lineChartConfig = {
   chartHeight: 80,
-  expectedYAxisLabelWidth: 40,
+  expectedYAxisLabelWidth: 32,
   expectedLabelWidth: 58,
   expectedLabelHeight: 18,
   labelsMinDistance: 20,
 }
+
+const Line = styled.div`
+  border-bottom: 1px dashed ${getColor('textShy')};
+  width: 100%;
+  pointer-events: none;
+`
 
 export const ProjectGoalChart = ({
   value,
@@ -113,7 +122,12 @@ export const ProjectGoalChart = ({
                     }}
                     fullWidth
                   >
-                    <ChartHorizontalGridLines data={yLabelsData} />
+                    <PositionAbsolutelyCenterHorizontally
+                      top={toPercents(1 - yLabelsData[0])}
+                      fullWidth
+                    >
+                      <Line />
+                    </PositionAbsolutelyCenterHorizontally>
                     <LineChart
                       dataPointsConnectionKind="sharp"
                       fillKind={'gradient'}
