@@ -6,6 +6,15 @@ import { useCurrentProjectPrevWeeks } from '../hooks/useCurrentProjectPrevWeeks'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { previousWeeksConfig } from './PreviousWeeks/previousWeeksConfig'
 import { Circle } from '@lib/ui/layout/Circle'
+import styled from 'styled-components'
+import { round } from '@lib/ui/css/round'
+import { getColor } from '@lib/ui/theme/getters'
+
+const Pill = styled.div`
+  ${round};
+  padding: 4px 8px;
+  background: ${getColor('mist')};
+`
 
 export const ProjectPreviousWeeks = () => {
   const { name, hslaColor } = useCurrentProject()
@@ -22,11 +31,15 @@ export const ProjectPreviousWeeks = () => {
       ) : (
         <ShyInfoBlock>No time tracked in the previous weeks</ShyInfoBlock>
       )}
-      <HStack alignItems="center" justifyContent="end" fullWidth gap={6}>
-        <Circle size={6} background={hslaColor} />
-        <Text size={14} color="contrast" weight="semibold">
-          {name}
-        </Text>
+      <HStack alignItems="center" justifyContent="center" fullWidth gap={6}>
+        <Pill>
+          <HStack alignItems="center" fullWidth gap={8}>
+            <Circle size={8} background={hslaColor} />
+            <Text size={14} weight="semibold">
+              {name}
+            </Text>
+          </HStack>
+        </Pill>
       </HStack>
     </VStack>
   )
