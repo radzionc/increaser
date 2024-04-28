@@ -5,14 +5,18 @@ import { getDemoHabits } from './habits'
 import { getDemoProjects } from './projects'
 import { getDemoSets } from './sets'
 import { getDemoTasks } from './tasks'
+import { demoConfig } from './config'
+// import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
+// import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
 
 export const getDemoUser = (): User => {
-  return {
+  const user = {
     ...userDefaultFields,
-    id: 'demo',
-    email: 'john@mail.com',
+    id: demoConfig.userId,
+    email: demoConfig.userEmail,
     name: 'John',
     registrationDate: Date.now(),
+    finishedOnboardingAt: Date.now(),
     freeTrialEnd: Date.now() + convertDuration(100, 'd', 'ms'),
     updatedAt: Date.now(),
     timeZone: getCurrentTimezoneOffset(),
@@ -21,4 +25,16 @@ export const getDemoUser = (): User => {
     sets: getDemoSets(),
     tasks: getDemoTasks(),
   }
+
+  // const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
+  //   (acc, organize) => ({ ...acc, ...organize({ ...user, ...acc }) }),
+  //   {},
+  // )
+
+  // return {
+  //   ...user,
+  //   ...fields,
+  // }
+
+  return user
 }

@@ -55,19 +55,19 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [15, 20],
       end: [15, 55],
-      projectId: DemoProject.Job,
+      projectId: DemoProject.Business,
     },
     {
       start: [16, 2],
       end: [16, 40],
-      projectId: DemoProject.Job,
+      projectId: DemoProject.Business,
     },
   ],
   [
     {
       start: [8, 20],
       end: [9, 10],
-      projectId: DemoProject.Business,
+      projectId: DemoProject.Planning,
     },
     {
       start: [9, 15],
@@ -99,12 +99,12 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [15, 20],
       end: [16, 2],
-      projectId: DemoProject.Job,
+      projectId: DemoProject.Business,
     },
     {
       start: [16, 5],
       end: [16, 40],
-      projectId: DemoProject.Job,
+      projectId: DemoProject.Business,
     },
     {
       start: [16, 45],
@@ -116,17 +116,17 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [8, 35],
       end: [9, 5],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Content,
     },
     {
       start: [9, 8],
       end: [9, 38],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Content,
     },
     {
       start: [9, 48],
       end: [10, 25],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Content,
     },
 
     {
@@ -175,7 +175,7 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [9, 50],
       end: [10, 15],
-      projectId: DemoProject.Content,
+      projectId: DemoProject.Business,
     },
 
     {
@@ -214,7 +214,7 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [8, 40],
       end: [9, 6],
-      projectId: DemoProject.Content,
+      projectId: DemoProject.Planning,
     },
     {
       start: [9, 15],
@@ -246,31 +246,30 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [15, 20],
       end: [15, 55],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Job,
     },
     {
       start: [16, 3],
       end: [16, 40],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Job,
     },
   ],
   [
     {
       start: [8, 40],
       end: [9, 6],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Planning,
     },
     {
       start: [9, 15],
       end: [9, 38],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Content,
     },
     {
       start: [9, 48],
       end: [10, 25],
-      projectId: DemoProject.ProgrammingStudy,
+      projectId: DemoProject.Content,
     },
-
     {
       start: [11, 20],
       end: [12, 10],
@@ -281,12 +280,23 @@ const daySetsDescription: DaySetsDescription[] = [
       end: [12, 50],
       projectId: DemoProject.Content,
     },
+
+    {
+      start: [15, 20],
+      end: [16, 10],
+      projectId: DemoProject.Content,
+    },
+    {
+      start: [16, 18],
+      end: [16, 40],
+      projectId: DemoProject.Content,
+    },
   ],
   [
     {
       start: [8, 30],
       end: [9, 10],
-      projectId: DemoProject.Business,
+      projectId: DemoProject.Planning,
     },
     {
       start: [9, 15],
@@ -307,12 +317,12 @@ const daySetsDescription: DaySetsDescription[] = [
     {
       start: [12, 10],
       end: [12, 50],
-      projectId: DemoProject.Planning,
+      projectId: DemoProject.Business,
     },
     {
       start: [12, 55],
       end: [13, 20],
-      projectId: DemoProject.Planning,
+      projectId: DemoProject.Business,
     },
   ],
 ]
