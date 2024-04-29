@@ -23,11 +23,7 @@ export const ProjectPreviousWeeks = () => {
   return (
     <VStack gap={12}>
       {weeks.some((week) => week.seconds > 0) ? (
-        weeks.length > 1 ? (
-          <ProjectGoalChart value={weeks} />
-        ) : (
-          <ShyInfoBlock>Not enough data to display the chart</ShyInfoBlock>
-        )
+        <ProjectGoalChart value={weeks} />
       ) : (
         <ShyInfoBlock>No time tracked in the previous weeks</ShyInfoBlock>
       )}

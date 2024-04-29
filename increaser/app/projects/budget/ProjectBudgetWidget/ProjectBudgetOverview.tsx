@@ -8,6 +8,7 @@ import { useMemo } from 'react'
 import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
 import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
+import { match } from '@lib/utils/match'
 
 const Container = styled.div`
   position: relative;
@@ -53,6 +54,8 @@ export const ProjectBudgetOverview = () => {
 
   const target = useCurrentDayTarget()
 
+  const isUnderTarget = doneMinutesThisWeek < target
+
   return (
     <Container
       style={
@@ -78,22 +81,24 @@ export const ProjectBudgetOverview = () => {
           <Offset
             style={{
               left: toPercents(
-                doneMinutesThisWeek < target
+                isUnderTarget
                   ? doneMinutesThisWeek / allocatedMinutesPerWeek
                   : target / allocatedMinutesPerWeek,
               ),
               width: toPercents(
-                doneMinutesThisWeek < target
+                isUnderTarget
                   ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
                   : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek,
               ),
-              background: (doneMinutesThisWeek > target
-                ? goal === 'doMore'
-                  ? colors.success
-                  : colors.alert
-                : goal === 'doMore'
-                  ? colors.alert
-                  : colors.success
+              background: (isUnderTarget
+                ? match(goal, {
+                    doMore: () => colors.alert,
+                    doLess: () => colors.success,
+                  })
+                : match(goal, {
+                    doMore: () => colors.success,
+                    doLess: () => colors.alert,
+                  })
               ).toCssValue(),
             }}
           />

@@ -5,7 +5,6 @@ import { Text } from '@lib/ui/text'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { toPercents } from '@lib/utils/toPercents'
 import { getShortWeekday } from '@lib/utils/time'
-import { sum } from '@lib/utils/array/sum'
 import { useProjectDaysAllocation } from '../hooks/useProjectDaysAllocation'
 import { transition } from '@lib/ui/css/transition'
 
@@ -26,8 +25,6 @@ const Day = styled(VStack)`
 
 const Container = styled(HStack)`
   ${takeWholeSpaceAbsolutely};
-  left: 0;
-  top: 0;
   &:hover ${Day} {
     opacity: 1;
   }
@@ -39,18 +36,16 @@ export const ProjectBudgetWidgetDays = () => {
 
   const segments = useProjectDaysAllocation()
 
-  const totalMinutes = sum(segments)
-
   return (
     <Container>
-      {segments.map((minutes, index) => {
-        if (minutes === 0) return null
+      {segments.map((value, index) => {
+        if (value === 0) return null
 
         return (
           <Day
             key={index}
             style={{
-              width: toPercents(minutes / totalMinutes),
+              width: toPercents(value / 1),
               color: (index === weekday
                 ? colors.contrast
                 : colors.textSupporting

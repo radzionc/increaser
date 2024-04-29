@@ -1,7 +1,6 @@
 import { ProjectWeek } from '@increaser/entities/timeTracking'
 import { ComponentWithValueProps } from '@lib/ui/props'
-import { normalize } from '@lib/utils/math/normalize'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -16,11 +15,11 @@ import { fromWeek } from '@lib/utils/time/Week'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
-import { getLastItem } from '@lib/utils/array/getLastItem'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { toPercents } from '@lib/utils/toPercents'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
+import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 
 export const lineChartConfig = {
   chartHeight: 80,
@@ -40,17 +39,14 @@ export const ProjectGoalChart = ({
   value,
 }: ComponentWithValueProps<ProjectWeek[]>) => {
   const { allocatedMinutesPerWeek, hslaColor } = useCurrentProject()
-  const [data, normalizedGoal] = useMemo(() => {
-    const dataWithGoal = normalize([
-      ...value.map((week) => week.seconds),
-      convertDuration(allocatedMinutesPerWeek, 'min', 's'),
-    ])
-
-    return [dataWithGoal.slice(0, -1), getLastItem(dataWithGoal)]
-  }, [allocatedMinutesPerWeek, value])
+  const targets = [convertDuration(allocatedMinutesPerWeek, 'min', 's')]
+  const normalized = normalizeDataArrays({
+    done: value.map((week) => week.seconds),
+    targets,
+  })
 
   const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
-    data.length - 1,
+    value.length - 1,
   )
   const [isSelectedDataPointVisible, setIsSelectedDataPointVisible] =
     useState<boolean>(false)
@@ -60,9 +56,6 @@ export const ProjectGoalChart = ({
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
-        const yLabels = [allocatedMinutesPerWeek]
-        const yLabelsData = [normalizedGoal]
-
         return (
           <VStack fullWidth gap={20} ref={setElement}>
             {size && (
@@ -75,7 +68,7 @@ export const ProjectGoalChart = ({
                     containerWidth={
                       size.width - lineChartConfig.expectedYAxisLabelWidth
                     }
-                    dataPointsNumber={data.length}
+                    dataPointsNumber={value.length}
                   >
                     <VStack>
                       <Text color="contrast" weight="semibold">
@@ -107,13 +100,13 @@ export const ProjectGoalChart = ({
                     expectedLabelWidth={lineChartConfig.expectedYAxisLabelWidth}
                     renderLabel={(index) => (
                       <Text key={index} size={12} color="supporting">
-                        {formatDuration(yLabels[index], 'min', {
+                        {formatDuration(targets[index], 's', {
                           maxUnit: 'h',
                           minUnit: 'h',
                         })}
                       </Text>
                     )}
-                    data={yLabelsData}
+                    data={normalized.targets}
                   />
                   <VStack
                     style={{
@@ -123,7 +116,7 @@ export const ProjectGoalChart = ({
                     fullWidth
                   >
                     <PositionAbsolutelyCenterHorizontally
-                      top={toPercents(1 - yLabelsData[0])}
+                      top={toPercents(1 - normalized.targets[0])}
                       fullWidth
                     >
                       <Line />
@@ -131,7 +124,7 @@ export const ProjectGoalChart = ({
                     <LineChart
                       dataPointsConnectionKind="sharp"
                       fillKind={'gradient'}
-                      data={data}
+                      data={normalized.done}
                       width={
                         size.width - lineChartConfig.expectedYAxisLabelWidth
                       }
@@ -139,7 +132,7 @@ export const ProjectGoalChart = ({
                       color={hslaColor}
                     />
                     <LineChartPositionTracker
-                      data={data}
+                      data={normalized.done}
                       color={hslaColor}
                       onChange={(index) => {
                         if (index === null) {

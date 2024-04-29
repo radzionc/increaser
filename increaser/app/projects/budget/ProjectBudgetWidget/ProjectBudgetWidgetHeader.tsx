@@ -14,7 +14,6 @@ const Container = styled(HStack)`
   justify-content: space-between;
   gap: 20px;
   font-size: 14px;
-  position: relative;
 `
 
 export const ProjectBudgetWidgetHeader = () => {
@@ -25,7 +24,7 @@ export const ProjectBudgetWidgetHeader = () => {
     <Container>
       <HStack alignItems="center" gap={4}>
         <ProjectGoalShyIndicator value={goal ?? null} />
-        <Text weight="semibold" color="contrast" size={14}>
+        <Text weight="semibold" color="contrast">
           {name}
         </Text>
       </HStack>
@@ -42,7 +41,7 @@ export const ProjectBudgetWidgetHeader = () => {
             <Text color="supporting" weight="semibold">
               {formatDuration(allocatedMinutesPerWeek, 'min', {
                 maxUnit: 'h',
-              })}{' '}
+              })}
             </Text>
           )}
         </HStackSeparatedBy>

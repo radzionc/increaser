@@ -3,12 +3,9 @@ import { transition } from '@lib/ui/css/transition'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import styled from 'styled-components'
 import { round } from '@lib/ui/css/round'
+import { ComponentWithValueProps } from '../props'
 
-interface CountableItemsVisualizationProps {
-  items: HSLA[]
-}
-
-const Wr = styled(HStack)`
+const Container = styled(HStack)`
   height: 12px;
   width: 100%;
   gap: 1px;
@@ -23,13 +20,13 @@ const Box = styled.div`
 `
 
 export const CountableItemsVisualization = ({
-  items,
-}: CountableItemsVisualizationProps) => {
+  value,
+}: ComponentWithValueProps<HSLA[]>) => {
   return (
-    <Wr>
-      {items.map((color, i) => (
+    <Container>
+      {value.map((color, i) => (
         <Box key={i} style={{ backgroundColor: color.toCssValue() }} />
       ))}
-    </Wr>
+    </Container>
   )
 }

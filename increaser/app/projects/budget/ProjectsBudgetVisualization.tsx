@@ -1,6 +1,6 @@
 import { range } from '@lib/utils/array/range'
 import { useTheme } from 'styled-components'
-import { CountableItemsVisualization } from '@increaser/app/ui/CountableItemsVisualization'
+import { CountableItemsVisualization } from '@lib/ui/visual/CountableItemsVisualization'
 import { MIN_IN_HOUR } from '@lib/utils/time'
 import { useMemo } from 'react'
 import { useBudgetedProjects } from './hooks/useBudgetedProjects'
@@ -28,5 +28,5 @@ export const ProjectsBudgetVisualization = () => {
     return result
   }, [colors.mist, projects, workBudgetTotal])
 
-  return <CountableItemsVisualization items={items} />
+  return <CountableItemsVisualization value={items} />
 }
