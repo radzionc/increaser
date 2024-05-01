@@ -6,11 +6,11 @@ import { OnboardingVideoPlayer } from './OnboardingVideoPlayer'
 const onboardingYouTubeVideo: Partial<Record<OnboardingStep, string>> = {
   projects: 'https://youtu.be/PvDLR4rbWXw',
   workBudget: 'https://youtu.be/TYsp-iDsBuM',
-  projectsBudget: 'https://youtu.be/T9C2mJk-LB4',
+  projectsBudget: 'https://youtu.be/ijzSCHZGixw',
   schedule: 'https://youtu.be/__zDYzlKPrE',
   dailyHabits: 'https://youtu.be/e2AQa9uHGz8',
   tasks: 'https://youtu.be/IYMY2W4gDkw',
-  focus: 'https://youtu.be/5HINgMMTzPE',
+  focus: 'https://youtu.be/CBFz742sAFc',
 }
 
 export const OnboardingVideo = () => {
