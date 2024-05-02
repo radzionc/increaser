@@ -4,6 +4,7 @@ import { AppSumoCode } from '@increaser/entities/AppSumoCode'
 
 import { dbDocClient } from '@lib/dynamodb/client'
 import { getPickParams } from '@lib/dynamodb/getPickParams'
+import { totalScan } from '@lib/dynamodb/totalScan'
 import { updateItem } from '@lib/dynamodb/updateItem'
 
 export const getAppSumoCodeItemParams = (id: string) => ({
@@ -38,3 +39,11 @@ export const deleteAppSumoCode = async (id: string) => {
 
   return dbDocClient.send(command)
 }
+
+export const getAllAppSumoCodes = async <T extends (keyof AppSumoCode)[]>(
+  attributes?: T,
+) =>
+  totalScan<Pick<AppSumoCode, T[number]>>({
+    TableName: tableName.appSumoCodes,
+    ...getPickParams(attributes),
+  })
