@@ -5,6 +5,7 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
+import { order } from '@lib/utils/array/order'
 
 export const useAddSetMutation = () => {
   const api = useApi()
@@ -13,7 +14,7 @@ export const useAddSetMutation = () => {
 
   return useMutation({
     mutationFn: (set: Set) => {
-      updateState({ sets: [...sets, set] })
+      updateState({ sets: order([...sets, set], (set) => set.start, 'asc') })
 
       return api.call('addSet', set)
     },

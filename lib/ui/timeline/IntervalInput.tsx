@@ -21,6 +21,10 @@ import { centerContent } from '../css/centerContent'
 import { Text } from '../text'
 import { Interval } from '@lib/utils/interval/Interval'
 import { formatDuration } from '@lib/utils/time/formatDuration'
+import { formatTime } from '@lib/utils/time/formatTime'
+import { getColor } from '../theme/getters'
+import { HStackSeparatedBy, dotSeparator } from '../layout/StackSeparatedBy'
+import { VStack } from '../layout/Stack'
 
 interface RenderContentParams {
   msToPx: (ms: number) => number
@@ -34,17 +38,12 @@ export interface IntervalInputProps {
   timelineEndsAt: number
   minDuration?: number
   renderContent?: (params: RenderContentParams) => ReactNode
+  pxInHour?: number
 }
 
-const pxInHour = 60
-const pxInMs = pxInHour / MS_IN_HOUR
-const msToPx = (ms: number) => ms * pxInMs
-const pxToMs = (px: number) => px / pxInMs
 const defaultMinDurationInMin = 10
 
-const Wrapper = styled.div`
-  margin-bottom: 20px;
-`
+const Wrapper = styled.div``
 
 const Container = styled.div`
   width: 100%;
@@ -79,11 +78,13 @@ const InteractiveDragArea = styled.div`
   cursor: grab;
 `
 
-const DurationText = styled(Text)`
+const DurationText = styled(VStack)`
   position: absolute;
   width: 100%;
-  text-align: center;
-  transition: none;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${getColor('contrast')};
 `
 
 export const IntervalInput = ({
@@ -93,8 +94,13 @@ export const IntervalInput = ({
   timelineStartsAt,
   timelineEndsAt,
   renderContent,
+  pxInHour = 60,
   minDuration = defaultMinDurationInMin * MS_IN_MIN,
 }: IntervalInputProps) => {
+  const pxInMs = pxInHour / MS_IN_HOUR
+  const msToPx = (ms: number) => ms * pxInMs
+  const pxToMs = (px: number) => px / pxInMs
+
   const [activeControl, setActiveControl] =
     useState<IntervalEditorControl | null>(null)
 
@@ -103,8 +109,11 @@ export const IntervalInput = ({
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
-    intervalElement.current?.scrollIntoView()
-  }, [intervalElement])
+    intervalElement.current?.scrollIntoView({
+      block: 'nearest',
+      inline: 'start',
+    })
+  }, [value])
 
   const valueDuration = getIntervalDuration(value)
 
@@ -158,6 +167,8 @@ export const IntervalInput = ({
     onChange(getNewInterval())
   }
 
+  useEvent('mousemove', handleMouseMove)
+
   const cursor = useMemo(() => {
     if (!activeControl) return undefined
 
@@ -177,11 +188,7 @@ export const IntervalInput = ({
         startsAt={timelineStartsAt}
         endsAt={timelineEndsAt}
       >
-        <Container
-          ref={containerElement}
-          style={{ cursor }}
-          onMouseMove={handleMouseMove}
-        >
+        <Container ref={containerElement} style={{ cursor }}>
           {renderContent && renderContent({ msToPx })}
           <CurrentIntervalRect
             $color={color}
@@ -200,9 +207,16 @@ export const IntervalInput = ({
             style={{
               top: intervalEndInPx + 2,
             }}
-            weight="bold"
+            as="div"
           >
-            {formatDuration(valueDuration, 'ms')}
+            <HStackSeparatedBy separator={dotSeparator}>
+              <Text>
+                {formatTime(value.start)} - {formatTime(value.end)}
+              </Text>
+              <Text>
+                {formatDuration(valueDuration, 'ms', { kind: 'long' })}
+              </Text>
+            </HStackSeparatedBy>
           </DurationText>
 
           {!activeControl && (
