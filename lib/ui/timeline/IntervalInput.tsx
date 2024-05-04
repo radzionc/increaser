@@ -43,8 +43,6 @@ export interface IntervalInputProps {
 
 const defaultMinDurationInMin = 10
 
-const Wrapper = styled.div``
-
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -182,74 +180,70 @@ export const IntervalInput = ({
   const intervalDurationInPx = msToPx(valueDuration)
 
   return (
-    <Wrapper>
-      <TimeSpace
-        msToPx={msToPx}
-        startsAt={timelineStartsAt}
-        endsAt={timelineEndsAt}
-      >
-        <Container ref={containerElement} style={{ cursor }}>
-          {renderContent && renderContent({ msToPx })}
-          <CurrentIntervalRect
-            $color={color}
-            ref={intervalElement}
-            style={{
-              top: intervalStartInPx,
-              height: intervalDurationInPx,
-            }}
-          >
-            <MoveIconWr style={{ opacity: activeControl ? 0 : 1 }}>
-              <MoveIcon />
-            </MoveIconWr>
-          </CurrentIntervalRect>
+    <TimeSpace
+      msToPx={msToPx}
+      startsAt={timelineStartsAt}
+      endsAt={timelineEndsAt}
+    >
+      <Container ref={containerElement} style={{ cursor }}>
+        {renderContent && renderContent({ msToPx })}
+        <CurrentIntervalRect
+          $color={color}
+          ref={intervalElement}
+          style={{
+            top: intervalStartInPx,
+            height: intervalDurationInPx,
+          }}
+        >
+          <MoveIconWr style={{ opacity: activeControl ? 0 : 1 }}>
+            <MoveIcon />
+          </MoveIconWr>
+        </CurrentIntervalRect>
 
-          <DurationText
-            style={{
-              top: intervalEndInPx + 2,
-            }}
-            as="div"
-          >
-            <HStackSeparatedBy separator={dotSeparator}>
-              <Text>
-                {formatTime(value.start)} - {formatTime(value.end)}
-              </Text>
-              <Text>
-                {formatDuration(valueDuration, 'ms', { kind: 'long' })}
-              </Text>
-            </HStackSeparatedBy>
-          </DurationText>
+        <DurationText
+          style={{
+            top: intervalEndInPx + 2,
+          }}
+          as="div"
+        >
+          <HStackSeparatedBy separator={dotSeparator}>
+            <Text>
+              {formatTime(value.start)} - {formatTime(value.end)}
+            </Text>
+            <Text>{formatDuration(valueDuration, 'ms', { kind: 'long' })}</Text>
+          </HStackSeparatedBy>
+        </DurationText>
 
-          {!activeControl && (
-            <>
-              <InteractiveDragArea
-                style={{
-                  top: intervalStartInPx,
-                  height: intervalDurationInPx,
-                }}
-                onMouseDown={() => setActiveControl('position')}
+        {!activeControl && (
+          <>
+            <InteractiveDragArea
+              style={{
+                top: intervalStartInPx,
+                height: intervalDurationInPx,
+              }}
+              onMouseDown={() => setActiveControl('position')}
+            />
+
+            <PositionAbsolutelyCenterHorizontally
+              fullWidth
+              top={intervalStartInPx}
+            >
+              <InteractiveBoundaryArea
+                onMouseDown={() => setActiveControl('start')}
               />
+            </PositionAbsolutelyCenterHorizontally>
 
-              <PositionAbsolutelyCenterHorizontally
-                fullWidth
-                top={intervalStartInPx}
-              >
-                <InteractiveBoundaryArea
-                  onMouseDown={() => setActiveControl('start')}
-                />
-              </PositionAbsolutelyCenterHorizontally>
-
-              <PositionAbsolutelyCenterHorizontally
-                fullWidth
-                top={intervalEndInPx}
-              >
-                <InteractiveBoundaryArea
-                  onMouseDown={() => setActiveControl('end')}
-                />
-              </PositionAbsolutelyCenterHorizontally>
-            </>
-          )}
-        </Container>
-      </TimeSpace>
-    </Wrapper>
+            <PositionAbsolutelyCenterHorizontally
+              fullWidth
+              top={intervalEndInPx}
+            >
+              <InteractiveBoundaryArea
+                onMouseDown={() => setActiveControl('end')}
+              />
+            </PositionAbsolutelyCenterHorizontally>
+          </>
+        )}
+      </Container>
+    </TimeSpace>
   )
 }

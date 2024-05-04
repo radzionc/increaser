@@ -40,7 +40,7 @@ export const navigationPathInfo = {
     icon: <CheckSquareIcon />,
   },
   [AppPath.TimeTracking]: {
-    name: 'Track time',
+    name: 'Time tracking',
     icon: <ClockIcon />,
   },
   [AppPath.WorkBudget]: {

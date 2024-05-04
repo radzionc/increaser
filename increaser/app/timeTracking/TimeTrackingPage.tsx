@@ -6,43 +6,36 @@ import { TrackedTimeReportProvider } from './report/TrackedTimeReportProvider'
 import { TrackedTimeReport } from './report/TrackedTimeReport'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { TrackedTimeProvider } from './report/TrackedTimeProvider'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
-import { Button } from '@lib/ui/buttons/Button'
-import { AddSessionView } from './track/AddSessionView'
-import { useState } from 'react'
+import {
+  RenderTimeTrackingView,
+  TimeTrackingViewProvider,
+  TimeTrackingViewSelector,
+} from './TimeTrackingView'
+import { TrackTimeView } from './track/TrackTimeView'
 
-const title = 'Track Time'
+const title = 'Time tracking'
 
 export const TimeTrackingPage: Page = () => {
-  const [isAddingSession, setIsAddingSession] = useState(false)
   return (
-    <FixedWidthContent>
-      <PageTitle
-        documentTitle={`⏳ ${title}`}
-        title={
-          <HStack fullWidth alignItems="center" justifyContent="space-between">
-            <Text>{title}</Text>
-            {!isAddingSession && (
-              <Button onClick={() => setIsAddingSession(true)} kind="primary">
-                Add Session
-              </Button>
+    <TimeTrackingViewProvider>
+      <FixedWidthContent>
+        <PageTitle
+          documentTitle={`⏳ ${title}`}
+          title={<TimeTrackingViewSelector />}
+        />
+        <UserStateOnly>
+          <RenderTimeTrackingView
+            report={() => (
+              <TrackedTimeProvider>
+                <TrackedTimeReportProvider>
+                  <TrackedTimeReport />
+                </TrackedTimeReportProvider>
+              </TrackedTimeProvider>
             )}
-          </HStack>
-        }
-      />
-      <UserStateOnly>
-        <VStack gap={40}>
-          {isAddingSession && (
-            <AddSessionView onFinish={() => setIsAddingSession(false)} />
-          )}
-          <TrackedTimeProvider>
-            <TrackedTimeReportProvider>
-              <TrackedTimeReport />
-            </TrackedTimeReportProvider>
-          </TrackedTimeProvider>
-        </VStack>
-      </UserStateOnly>
-    </FixedWidthContent>
+            track={() => <TrackTimeView />}
+          />
+        </UserStateOnly>
+      </FixedWidthContent>
+    </TimeTrackingViewProvider>
   )
 }

@@ -12,6 +12,7 @@ import { ApiMethod } from './ApiMethod'
 import { Task } from '@increaser/entities/Task'
 import { ProductFeature } from '@increaser/entities/ProductFeature'
 import { ProductFeatureResponse } from './ProductFeatureResponse'
+import { Interval } from '@lib/utils/interval/Interval'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -107,7 +108,11 @@ export interface ApiInterface {
   >
   deleteHabit: ApiMethod<{ id: string }, undefined>
   trackHabit: ApiMethod<{ id: string; date: string; value: boolean }, undefined>
+
   addSet: ApiMethod<Set, undefined>
+  updateSet: ApiMethod<{ old: Interval; new: Set }, undefined>
+  deleteSet: ApiMethod<Interval, undefined>
+  // deprecated
   editLastSet: ApiMethod<Set, undefined>
   removeLastSet: ApiMethod<undefined, undefined>
 

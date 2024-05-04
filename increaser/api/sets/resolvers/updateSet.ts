@@ -1,13 +1,20 @@
 import { getUser, updateUser } from '@increaser/db/user'
 import { assertUserId } from '../../auth/assertUserId'
 import { ApiResolver } from '../../resolvers/ApiResolver'
-import { addSet as add } from '@increaser/entities-utils/set/addSet'
+import { updateSet as update } from '@increaser/entities-utils/set/updateSet'
 
-export const addSet: ApiResolver<'addSet'> = async ({ input, context }) => {
+export const updateSet: ApiResolver<'updateSet'> = async ({
+  input,
+  context,
+}) => {
   const userId = assertUserId(context)
   const { sets } = await getUser(userId, ['sets'])
 
   await updateUser(userId, {
-    sets: add({ sets, value: input }),
+    sets: update({
+      sets,
+      old: input.old,
+      new: input.new,
+    }),
   })
 }

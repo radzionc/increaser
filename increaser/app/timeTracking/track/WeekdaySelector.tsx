@@ -1,14 +1,15 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
-import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { range } from '@lib/utils/array/range'
 import { WEEKDAYS } from '@lib/utils/time'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useMemo } from 'react'
+import { useTrackTime } from './TrackTimeProvider'
 
-export const WeekdaySelector = ({ value, onChange }: InputProps<number>) => {
+export const WeekdaySelector = () => {
+  const { weekday, setState } = useTrackTime()
   const { lastSyncedMonthEndedAt, lastSyncedWeekEndedAt } = useAssertUserState()
   const currentWeekday = useWeekday()
   const weekStartedAt = useStartOfWeek()
@@ -35,8 +36,8 @@ export const WeekdaySelector = ({ value, onChange }: InputProps<number>) => {
   return (
     <ExpandableSelector
       style={{ width: 142 }}
-      value={value}
-      onChange={onChange}
+      value={weekday}
+      onChange={(weekday) => setState((state) => ({ ...state, weekday }))}
       options={options.toReversed()}
       getOptionKey={(option) => option.toString()}
       renderOption={(option) => {
