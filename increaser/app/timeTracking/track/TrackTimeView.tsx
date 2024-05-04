@@ -25,7 +25,7 @@ export const TrackTimeView = () => {
             {isAddingSession ? 'Add session' : 'Manage sessions'}
           </SectionTitle>
           <HStack alignItems="center" gap={8}>
-            <ProjectSelector />
+            {isAddingSession && <ProjectSelector />}
             <WeekdaySelector />
           </HStack>
         </HStack>
