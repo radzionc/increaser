@@ -112,9 +112,6 @@ export interface ApiInterface {
   addSet: ApiMethod<Set, undefined>
   updateSet: ApiMethod<{ old: Interval; new: Set }, undefined>
   deleteSet: ApiMethod<Interval, undefined>
-  // deprecated
-  editLastSet: ApiMethod<Set, undefined>
-  removeLastSet: ApiMethod<undefined, undefined>
 
   proposeFeature: ApiMethod<
     Omit<ProductFeature, 'isApproved' | 'status' | 'proposedBy' | 'upvotedBy'>,

@@ -3,20 +3,18 @@ import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { useEffect } from 'react'
 import { IntervalInput } from '@lib/ui/timeline/IntervalInput'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { WorkSession } from '../../sets/components/DayOverview/WorkBlocks/WorkSession'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useTrackTime } from './TrackTimeProvider'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { Sessions } from './Sessions'
+import { defaultIntervalDuration } from './config'
 
-const defaultIntervalDuration = 30
-
-export const AddSessionView = () => {
+export const EditIntervalView = () => {
   const currentWeekday = useWeekday()
   const { projectsRecord } = useProjects()
 
   const {
     dayInterval,
-    sets,
     weekday,
     projectId,
     interval: potentialInterval,
@@ -58,21 +56,7 @@ export const AddSessionView = () => {
       color={projectsRecord[projectId].hslaColor}
       value={interval}
       onChange={(interval) => setState((state) => ({ ...state, interval }))}
-      renderContent={({ msToPx }) => {
-        return sets.map((set, index) => {
-          return (
-            <WorkSession
-              key={index}
-              set={set}
-              showIdentifier
-              style={{
-                top: msToPx(set.start - dayInterval.start),
-                height: msToPx(set.end - set.start),
-              }}
-            />
-          )
-        })
-      }}
+      renderContent={() => <Sessions />}
     />
   )
 }

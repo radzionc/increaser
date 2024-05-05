@@ -6,12 +6,14 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { Button } from '@lib/ui/buttons/Button'
 import { ProjectSelector } from './ProjectSelector'
-import { AddSessionView } from './AddSessionView'
+import { EditIntervalView } from './EditIntervalView'
 import styled from 'styled-components'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ConfirmTrackAction } from './ConfirmTrackAction'
+import { defaultIntervalDuration } from './config'
+import { useMemo } from 'react'
 
 const Container = styled(VStack)`
   max-width: 440px;
@@ -33,11 +35,18 @@ const InternalContent = styled(TakeWholeSpaceAbsolutely)`
   padding: ${toSizeUnit(panelDefaultPadding)};
 `
 
-const defaultIntervalDuration = 30
-
 export const TrackTimeContent = () => {
-  const { currentAction, setState, dayInterval } = useTrackTime()
-  const isAddingSession = currentAction === 'add'
+  const { interval, currentSetIndex, setState, dayInterval } = useTrackTime()
+  const title = useMemo(() => {
+    if (currentSetIndex !== null) {
+      return 'Edit session'
+    }
+    if (interval) {
+      return 'Add session'
+    }
+
+    return 'Manage sessions'
+  }, [currentSetIndex, interval])
 
   return (
     <Container>
@@ -48,21 +57,19 @@ export const TrackTimeContent = () => {
         gap={20}
         wrap="wrap"
       >
-        <SectionTitle>
-          {isAddingSession ? 'Add session' : 'Manage sessions'}
-        </SectionTitle>
+        <SectionTitle>{title}</SectionTitle>
         <HStack alignItems="center" gap={8}>
-          {isAddingSession && <ProjectSelector />}
+          {interval && <ProjectSelector />}
           <WeekdaySelector />
         </HStack>
       </HStack>
       <Content kind="secondary" withSections>
         <InternalContentWr>
           <InternalContent>
-            {isAddingSession ? <AddSessionView /> : <DayOverview />}
+            {interval ? <EditIntervalView /> : <DayOverview />}
           </InternalContent>
         </InternalContentWr>
-        {isAddingSession ? (
+        {interval ? (
           <ConfirmTrackAction />
         ) : (
           <VStack alignItems="end">
@@ -70,7 +77,6 @@ export const TrackTimeContent = () => {
               onClick={() =>
                 setState((state) => ({
                   ...state,
-                  currentAction: 'add',
                   interval: {
                     start:
                       dayInterval.end -

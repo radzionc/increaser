@@ -16,12 +16,10 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Interval } from '@lib/utils/interval/Interval'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
-type TrackTimeAction = 'add'
-
 export type TrackTimeState = {
   weekday: number
   projectId: string
-  currentAction: TrackTimeAction | null
+  currentSetIndex: number | null
   interval: Interval | null
 }
 
@@ -43,8 +41,8 @@ export const TrackTimeProvider = ({ children }: ComponentWithChildrenProps) => {
   const [state, setState] = useState<TrackTimeState>({
     weekday: currentWeekday,
     projectId: activeProjects[0].id,
-    currentAction: null,
     interval: null,
+    currentSetIndex: null,
   })
 
   const { weekday } = state
