@@ -32,6 +32,7 @@ export const ProductFeaturesBoard = () => {
             </Text>
             <ProductFeaturesViewSelector />
           </HStack>
+
           <RenderProductFeaturesView
             idea={() => <ProposeFeaturePrompt />}
             done={() => null}
