@@ -12,13 +12,19 @@ import {
   TimeTrackingViewSelector,
 } from './TimeTrackingView'
 import { TrackTimeView } from './track/TrackTimeView'
+import styled from 'styled-components'
 
 const title = 'Time tracking'
+
+const PageContainer = styled(FixedWidthContent)`
+  display: flex;
+  flex-direction: column;
+`
 
 export const TimeTrackingPage: Page = () => {
   return (
     <TimeTrackingViewProvider>
-      <FixedWidthContent>
+      <PageContainer>
         <PageTitle
           documentTitle={`⏳ ${title}`}
           title={<TimeTrackingViewSelector />}
@@ -35,7 +41,7 @@ export const TimeTrackingPage: Page = () => {
             track={() => <TrackTimeView />}
           />
         </UserStateOnly>
-      </FixedWidthContent>
+      </PageContainer>
     </TimeTrackingViewProvider>
   )
 }
