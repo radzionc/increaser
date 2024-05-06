@@ -62,7 +62,7 @@ export const ConfirmTrackAction = () => {
   }
 
   return (
-    <HStack wrap="wrap" fullWidth justifyContent="space-between">
+    <HStack gap={12} wrap="wrap" fullWidth justifyContent="space-between">
       {currentSetIndex === null ? (
         <div />
       ) : (
