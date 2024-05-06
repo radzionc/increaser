@@ -1,7 +1,7 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
-import { Set } from '@increaser/app/sets/Set'
+import { Set } from '@increaser/entities/User'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { formatTime } from '@lib/utils/time/formatTime'
 import { toPercents } from '@lib/utils/toPercents'

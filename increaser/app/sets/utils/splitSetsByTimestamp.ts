@@ -1,4 +1,4 @@
-import { Set } from '../Set'
+import { Set } from '@increaser/entities/User'
 
 export const splitSetsByTimestamp = (sets: Set[], timestamp: number) => {
   const beforeTimestamp = [] as Set[]

@@ -9,7 +9,7 @@ import { useMemo } from 'react'
 import { useTrackTime } from './TrackTimeProvider'
 
 export const WeekdaySelector = () => {
-  const { weekday, setState, currentSetIndex } = useTrackTime()
+  const { weekday, setState } = useTrackTime()
   const { lastSyncedMonthEndedAt, lastSyncedWeekEndedAt } = useAssertUserState()
   const currentWeekday = useWeekday()
   const weekStartedAt = useStartOfWeek()
@@ -36,7 +36,6 @@ export const WeekdaySelector = () => {
   return (
     <ExpandableSelector
       style={{ width: 142 }}
-      isDisabled={currentSetIndex !== null}
       value={weekday}
       onChange={(weekday) => setState((state) => ({ ...state, weekday }))}
       options={options.toReversed()}

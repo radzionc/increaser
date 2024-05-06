@@ -37,32 +37,33 @@ type SessionProps = ComponentWithValueProps<Set> &
   }
 
 export const Session = ({ value, index, ...rest }: SessionProps) => {
-  const { interval, setState, currentSetIndex } = useTrackTime()
+  const { setState, currentSet } = useTrackTime()
   const { projectsRecord } = useProjects()
 
   const theme = useTheme()
 
   const color = getProjectColor(projectsRecord, theme, value.projectId)
 
-  if (currentSetIndex === index) {
+  if (currentSet?.index === index) {
     return null
   }
 
   return (
     <Container
-      onClick={() => {
-        if (interval) {
-          return
-        }
-
-        setState((state) => ({
-          ...state,
-          interval: value,
-          currentSetIndex: index,
-          projectId: value.projectId,
-        }))
-      }}
-      isInteractive={!interval}
+      onClick={
+        !currentSet
+          ? () => {
+              setState((state) => ({
+                ...state,
+                currentSet: {
+                  ...value,
+                  index,
+                },
+              }))
+            }
+          : undefined
+      }
+      isInteractive={!currentSet}
       $color={color}
       {...rest}
     >

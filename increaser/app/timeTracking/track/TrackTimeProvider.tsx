@@ -14,22 +14,24 @@ import { getDaySets } from '../../sets/helpers/getDaySets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Interval } from '@lib/utils/interval/Interval'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
-export type TrackTimeState = {
-  weekday: number
-  projectId: string
-  currentSetIndex: number | null
-  interval: Interval | null
+type TrackTimeSet = Set & {
+  index?: number
 }
 
-type TrackedTimeContextState = TrackTimeState & {
+export type TrackTimeMutableState = {
+  weekday: number
+  currentSet: TrackTimeSet | null
+}
+
+type TrackedTimeState = TrackTimeMutableState & {
+  setState: Dispatch<SetStateAction<TrackTimeMutableState>>
+
   sets: Set[]
   dayInterval: Interval
-  setState: Dispatch<SetStateAction<TrackTimeState>>
 }
 
-const TrackedTimeContext = createContext<TrackedTimeContextState | undefined>(
+const TrackedTimeContext = createContext<TrackedTimeState | undefined>(
   undefined,
 )
 
@@ -37,12 +39,9 @@ export const useTrackTime = createContextHook(TrackedTimeContext, 'TrackTime')
 
 export const TrackTimeProvider = ({ children }: ComponentWithChildrenProps) => {
   const currentWeekday = useWeekday()
-  const { activeProjects } = useProjects()
-  const [state, setState] = useState<TrackTimeState>({
+  const [state, setState] = useState<TrackTimeMutableState>({
     weekday: currentWeekday,
-    projectId: activeProjects[0].id,
-    interval: null,
-    currentSetIndex: null,
+    currentSet: null,
   })
 
   const { weekday } = state

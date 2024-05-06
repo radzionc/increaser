@@ -7,10 +7,9 @@ import { Subscription } from './Subscription'
 import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
+import { Interval } from '@lib/utils/interval/Interval'
 
-export type Set = {
-  start: number
-  end: number
+export type Set = Interval & {
   projectId: string
 }
 

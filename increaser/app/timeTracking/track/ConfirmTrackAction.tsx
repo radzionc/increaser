@@ -11,22 +11,19 @@ import { useUpdateSetMutation } from '../../sets/hooks/useUpdateSetMutation'
 import { useDeleteSetMutation } from '../../sets/hooks/useDeleteSetMutation'
 
 export const ConfirmTrackAction = () => {
-  const { interval, sets, projectId, setState, currentSetIndex } =
-    useTrackTime()
+  const { sets, setState, currentSet: potentialCurrentSet } = useTrackTime()
+  const currentSet = shouldBePresent(potentialCurrentSet)
 
   const isDisabled = useMemo(() => {
-    if (!interval) {
-      return 'Add a session interval'
-    }
-    if (
-      sets.some((set, index) =>
-        currentSetIndex === index ? false : areIntersecting(set, interval),
-      )
-    ) {
+    const hasIntersection = sets.some((set, index) =>
+      currentSet.index === index ? false : areIntersecting(set, currentSet),
+    )
+    if (hasIntersection) {
       return 'This session intersects with another session'
     }
+
     return false
-  }, [currentSetIndex, interval, sets])
+  }, [currentSet, sets])
 
   const { mutate: addSet } = useAddSetMutation()
   const { mutate: updateSet } = useUpdateSetMutation()
@@ -41,19 +38,13 @@ export const ConfirmTrackAction = () => {
   }
 
   const onSubmit = () => {
-    const { start, end } = shouldBePresent(interval)
-    const set = {
-      start,
-      end,
-      projectId,
-    }
-    if (currentSetIndex === null) {
-      addSet(set)
+    if (currentSet.index === undefined) {
+      addSet(currentSet)
       analytics.trackEvent('Add session')
     } else {
       updateSet({
-        old: sets[currentSetIndex],
-        new: set,
+        old: sets[currentSet.index],
+        new: currentSet,
       })
       analytics.trackEvent('Update session')
     }
@@ -63,12 +54,12 @@ export const ConfirmTrackAction = () => {
 
   return (
     <HStack gap={12} wrap="wrap" fullWidth justifyContent="space-between">
-      {currentSetIndex === null ? (
+      {currentSet.index === undefined ? (
         <div />
       ) : (
         <Button
           onClick={() => {
-            deleteSet(sets[currentSetIndex])
+            deleteSet(sets[shouldBePresent(currentSet.index)])
             analytics.trackEvent('Delete session')
             onComplete()
           }}

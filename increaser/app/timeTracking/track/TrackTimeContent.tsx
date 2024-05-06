@@ -36,17 +36,17 @@ const InternalContent = styled(TakeWholeSpaceAbsolutely)`
 `
 
 export const TrackTimeContent = () => {
-  const { interval, currentSetIndex, setState, dayInterval } = useTrackTime()
+  const { currentSet, setState, dayInterval } = useTrackTime()
   const title = useMemo(() => {
-    if (currentSetIndex !== null) {
+    if (!currentSet) {
+      return 'Manage sessions'
+    }
+    if (currentSet.index !== undefined) {
       return 'Edit session'
     }
-    if (interval) {
-      return 'Add session'
-    }
 
-    return 'Manage sessions'
-  }, [currentSetIndex, interval])
+    return 'Add session'
+  }, [currentSet])
 
   return (
     <Container>
@@ -59,17 +59,16 @@ export const TrackTimeContent = () => {
       >
         <SectionTitle>{title}</SectionTitle>
         <HStack alignItems="center" gap={8}>
-          {interval && <ProjectSelector />}
-          <WeekdaySelector />
+          {currentSet ? <ProjectSelector /> : <WeekdaySelector />}
         </HStack>
       </HStack>
       <Content kind="secondary" withSections>
         <InternalContentWr>
           <InternalContent>
-            {interval ? <EditIntervalView /> : <DayOverview />}
+            {currentSet ? <EditIntervalView /> : <DayOverview />}
           </InternalContent>
         </InternalContentWr>
-        {interval ? (
+        {currentSet ? (
           <ConfirmTrackAction />
         ) : (
           <VStack alignItems="end">
