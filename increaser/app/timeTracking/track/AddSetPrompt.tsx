@@ -1,8 +1,8 @@
 import { Button } from '@lib/ui/buttons/Button'
-import { useTrackTime } from './TrackTimeProvider'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { defaultIntervalDuration } from './config'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 
 export const AddSetPrompt = () => {
   const { activeProjects } = useProjects()

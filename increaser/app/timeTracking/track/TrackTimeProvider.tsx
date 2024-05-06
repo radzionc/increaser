@@ -1,41 +1,14 @@
-import { Set } from '@increaser/entities/User'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { createContextHook } from '@lib/ui/state/createContextHook'
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useMemo,
-  useState,
-} from 'react'
+import { useMemo, useState } from 'react'
 import { getDaySets } from '../../sets/helpers/getDaySets'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { Interval } from '@lib/utils/interval/Interval'
-
-type TrackTimeSet = Set & {
-  index?: number
-}
-
-export type TrackTimeMutableState = {
-  weekday: number
-  currentSet: TrackTimeSet | null
-}
-
-type TrackedTimeState = TrackTimeMutableState & {
-  setState: Dispatch<SetStateAction<TrackTimeMutableState>>
-
-  sets: Set[]
-  dayInterval: Interval
-}
-
-const TrackedTimeContext = createContext<TrackedTimeState | undefined>(
-  undefined,
-)
-
-export const useTrackTime = createContextHook(TrackedTimeContext, 'TrackTime')
+import {
+  TrackTimeContext,
+  TrackTimeMutableState,
+} from './state/TrackTimeContext'
 
 export const TrackTimeProvider = ({ children }: ComponentWithChildrenProps) => {
   const currentWeekday = useWeekday()
@@ -64,10 +37,10 @@ export const TrackTimeProvider = ({ children }: ComponentWithChildrenProps) => {
   }, [currentWeekSets, dayInterval.start])
 
   return (
-    <TrackedTimeContext.Provider
+    <TrackTimeContext.Provider
       value={{ ...state, dayInterval, sets, setState }}
     >
       {children}
-    </TrackedTimeContext.Provider>
+    </TrackTimeContext.Provider>
   )
 }

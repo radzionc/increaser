@@ -1,7 +1,7 @@
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const ProjectSelector = () => {

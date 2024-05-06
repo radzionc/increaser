@@ -1,7 +1,7 @@
 import { Button } from '@lib/ui/buttons/Button'
 
 import { analytics } from '../../analytics'
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useDeleteSetMutation } from '../../sets/hooks/useDeleteSetMutation'
 

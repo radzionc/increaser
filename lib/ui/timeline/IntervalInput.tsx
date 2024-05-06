@@ -1,11 +1,4 @@
-import {
-  MouseEventHandler,
-  ReactNode,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useEvent } from 'react-use'
 import styled, { css } from 'styled-components'
 import { HSLA } from '../colors/HSLA'
@@ -25,6 +18,7 @@ import { formatTime } from '@lib/utils/time/formatTime'
 import { getColor } from '../theme/getters'
 import { HStackSeparatedBy, dotSeparator } from '../layout/StackSeparatedBy'
 import { VStack } from '../layout/Stack'
+import { IntervalEditorControl } from './IntervalEditorControl'
 
 interface RenderContentParams {
   msToPx: (ms: number) => number
@@ -47,8 +41,6 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `
-
-type IntervalEditorControl = 'start' | 'end' | 'position'
 
 const MoveIconWr = styled.div`
   font-size: 16px;
@@ -102,7 +94,8 @@ export const IntervalInput = ({
   const [activeControl, setActiveControl] =
     useState<IntervalEditorControl | null>(null)
 
-  useEvent('mouseup', () => setActiveControl(null))
+  useEvent('pointerup', () => setActiveControl(null))
+  useEvent('pointercancel', () => setActiveControl(null))
 
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
@@ -115,7 +108,7 @@ export const IntervalInput = ({
 
   const valueDuration = getIntervalDuration(value)
 
-  const handleMouseMove: MouseEventHandler<HTMLDivElement> = ({ clientY }) => {
+  useEvent('pointermove', ({ clientY }) => {
     if (!activeControl) return
 
     const containerRect = containerElement?.current?.getBoundingClientRect()
@@ -163,9 +156,7 @@ export const IntervalInput = ({
     }
 
     onChange(getNewInterval())
-  }
-
-  useEvent('mousemove', handleMouseMove)
+  })
 
   const cursor = useMemo(() => {
     if (!activeControl) return undefined

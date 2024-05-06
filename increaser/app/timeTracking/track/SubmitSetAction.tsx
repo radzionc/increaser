@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useAddSetMutation } from '../../sets/hooks/useAddSetMutation'
 import { analytics } from '../../analytics'
 import { areIntersecting } from '@lib/utils/interval/areIntersecting'
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 import { useUpdateSetMutation } from '../../sets/hooks/useUpdateSetMutation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
@@ -26,13 +26,6 @@ export const SubmitSetAction = () => {
   const { mutate: addSet } = useAddSetMutation()
   const { mutate: updateSet } = useUpdateSetMutation()
 
-  const onComplete = () => {
-    setState((state) => ({
-      ...state,
-      currentSet: null,
-    }))
-  }
-
   const onSubmit = () => {
     if (currentSet.index === undefined) {
       addSet(currentSet)
@@ -45,7 +38,10 @@ export const SubmitSetAction = () => {
       analytics.trackEvent('Update session')
     }
 
-    onComplete()
+    setState((state) => ({
+      ...state,
+      currentSet: null,
+    }))
   }
 
   return (

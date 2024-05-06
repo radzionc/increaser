@@ -6,7 +6,7 @@ import styled, { css, useTheme } from 'styled-components'
 import { Set } from '@increaser/entities/User'
 import { LinesFiller } from './LinesFiller'
 import { HSLA } from '@lib/ui/colors/HSLA'
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 
 const Container = styled.div<{ isInteractive: boolean; $color: HSLA }>`
   border-radius: 2px;

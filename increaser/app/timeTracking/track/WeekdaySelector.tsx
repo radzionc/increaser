@@ -6,7 +6,7 @@ import { range } from '@lib/utils/array/range'
 import { WEEKDAYS } from '@lib/utils/time'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useMemo } from 'react'
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 
 export const WeekdaySelector = () => {
   const { weekday, setState, currentSet } = useTrackTime()

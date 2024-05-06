@@ -1,7 +1,7 @@
 import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/layout/Stack'
 
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 import { DeleteSetAction } from './DeleteSetAction'
 import { AddSetPrompt } from './AddSetPrompt'
 import { SubmitSetAction } from './SubmitSetAction'

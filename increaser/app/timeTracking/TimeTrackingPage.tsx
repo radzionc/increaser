@@ -11,8 +11,9 @@ import {
   TimeTrackingViewProvider,
   TimeTrackingViewSelector,
 } from './TimeTrackingView'
-import { TrackTimeView } from './track/TrackTimeView'
 import styled from 'styled-components'
+import { TrackTimeProvider } from './track/TrackTimeProvider'
+import { TrackTime } from './track/TrackTime'
 
 const title = 'Time tracking'
 
@@ -38,7 +39,11 @@ export const TimeTrackingPage: Page = () => {
                 </TrackedTimeReportProvider>
               </TrackedTimeProvider>
             )}
-            track={() => <TrackTimeView />}
+            track={() => (
+              <TrackTimeProvider>
+                <TrackTime />
+              </TrackTimeProvider>
+            )}
           />
         </UserStateOnly>
       </PageContainer>

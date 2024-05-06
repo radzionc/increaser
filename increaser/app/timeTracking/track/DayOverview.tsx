@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useTrackTime } from './TrackTimeProvider'
+import { useTrackTime } from './state/TrackTimeContext'
 import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
 import { ScrollIntoViewOnFirstAppearance } from '@lib/ui/base/ScrollIntoViewOnFirstAppearance'
 import { msToPx } from './config'
