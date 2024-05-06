@@ -21,7 +21,15 @@ export const EditIntervalView = () => {
       timelineEndsAt={dayInterval.end}
       color={projectsRecord[currentSet.projectId].hslaColor}
       value={currentSet}
-      onChange={(interval) => setState((state) => ({ ...state, interval }))}
+      onChange={(interval) =>
+        setState((state) => ({
+          ...state,
+          currentSet: {
+            ...shouldBePresent(state.currentSet),
+            ...interval,
+          },
+        }))
+      }
       renderContent={() => <Sessions />}
     />
   )
