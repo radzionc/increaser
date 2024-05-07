@@ -7,56 +7,14 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { msToPx, pxToMs } from './config'
 import { enforceRange } from '@lib/utils/enforceRange'
-import { centerContent } from '@lib/ui/css/centerContent'
 import { MoveIcon } from '@lib/ui/icons/MoveIcon'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
-import { VStack } from '@lib/ui/layout/Stack'
-import {
-  HStackSeparatedBy,
-  dotSeparator,
-} from '@lib/ui/layout/StackSeparatedBy'
-import { getColor } from '@lib/ui/theme/getters'
-import { formatTime } from '@lib/utils/time/formatTime'
-import styled, { css } from 'styled-components'
-import { IntervalRect } from '../../sets/components/IntervalInput/IntervalRect'
-import { Text } from '@lib/ui/text'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { formatDuration } from '@lib/utils/time/formatDuration'
-
-const MoveIconWr = styled.div`
-  font-size: 16px;
-`
-
-const CurrentIntervalRect = styled(IntervalRect)`
-  ${centerContent}
-
-  ${({ $color }) => css`
-    background: ${$color.getVariant({ a: () => 0.12 }).toCssValue()};
-    border: 2px solid ${$color.toCssValue()};
-    color: ${$color.toCssValue()};
-  `}
-`
-
-export const InteractiveBoundaryArea = styled.div`
-  width: 100%;
-  cursor: row-resize;
-  height: 10px;
-`
-
-const InteractiveDragArea = styled.div`
-  position: absolute;
-  width: 100%;
-  cursor: grab;
-`
-
-const DurationText = styled(VStack)`
-  position: absolute;
-  width: 100%;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: ${getColor('contrast')};
-`
+import { InteractiveBoundaryArea } from '@lib/ui/timeline/InteractiveBoundaryArea'
+import { FloatingIntervalDuration } from '@lib/ui/timeline/FloatingIntervalDuration'
+import { InteractiveDragArea } from '@lib/ui/timeline/InteractiveDragArea'
+import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 
 export const SetEditor = () => {
   const { projectsRecord } = useProjects()
@@ -150,24 +108,17 @@ export const SetEditor = () => {
           height: intervalDurationInPx,
         }}
       >
-        <MoveIconWr style={{ opacity: activeControl ? 0 : 1 }}>
+        <IconWrapper style={{ opacity: activeControl ? 0 : 1 }}>
           <MoveIcon />
-        </MoveIconWr>
+        </IconWrapper>
       </CurrentIntervalRect>
 
-      <DurationText
+      <FloatingIntervalDuration
         style={{
           top: intervalEndInPx + 2,
         }}
-        as="div"
-      >
-        <HStackSeparatedBy separator={dotSeparator}>
-          <Text>
-            {formatTime(value.start)} - {formatTime(value.end)}
-          </Text>
-          <Text>{formatDuration(valueDuration, 'ms', { kind: 'long' })}</Text>
-        </HStackSeparatedBy>
-      </DurationText>
+        value={value}
+      />
 
       {!activeControl && (
         <>

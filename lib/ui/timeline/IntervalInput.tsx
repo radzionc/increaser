@@ -1,24 +1,21 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useEvent } from 'react-use'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { HSLA } from '../colors/HSLA'
 
-import { IntervalRect } from './IntervalRect'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { MS_IN_HOUR, MS_IN_MIN } from '@lib/utils/time'
 import { MoveIcon } from '../icons/MoveIcon'
 import { PositionAbsolutelyCenterHorizontally } from '../layout/PositionAbsolutelyCenterHorizontally'
 import { TimeSpace } from './TimeSpace'
-import { centerContent } from '../css/centerContent'
-import { Text } from '../text'
 import { Interval } from '@lib/utils/interval/Interval'
-import { formatDuration } from '@lib/utils/time/formatDuration'
-import { formatTime } from '@lib/utils/time/formatTime'
-import { getColor } from '../theme/getters'
-import { HStackSeparatedBy, dotSeparator } from '../layout/StackSeparatedBy'
-import { VStack } from '../layout/Stack'
 import { IntervalEditorControl } from './IntervalEditorControl'
+import { InteractiveBoundaryArea } from './InteractiveBoundaryArea'
+import { FloatingIntervalDuration } from './FloatingIntervalDuration'
+import { InteractiveDragArea } from './InteractiveDragArea'
+import { CurrentIntervalRect } from './CurrentIntervalRect'
+import { TakeWholeSpace } from '../css/takeWholeSpace'
 
 interface RenderContentParams {
   msToPx: (ms: number) => number
@@ -37,44 +34,8 @@ export interface IntervalInputProps {
 
 const defaultMinDurationInMin = 10
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`
-
 const MoveIconWr = styled.div`
   font-size: 16px;
-`
-
-const CurrentIntervalRect = styled(IntervalRect)`
-  ${centerContent}
-
-  ${({ $color }) => css`
-    background: ${$color.getVariant({ a: () => 0.12 }).toCssValue()};
-    border: 2px solid ${$color.toCssValue()};
-    color: ${$color.toCssValue()};
-  `}
-`
-
-export const InteractiveBoundaryArea = styled.div`
-  width: 100%;
-  cursor: row-resize;
-  height: 10px;
-`
-
-const InteractiveDragArea = styled.div`
-  position: absolute;
-  width: 100%;
-  cursor: grab;
-`
-
-const DurationText = styled(VStack)`
-  position: absolute;
-  width: 100%;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: ${getColor('contrast')};
 `
 
 export const IntervalInput = ({
@@ -176,7 +137,7 @@ export const IntervalInput = ({
       startsAt={timelineStartsAt}
       endsAt={timelineEndsAt}
     >
-      <Container ref={containerElement} style={{ cursor }}>
+      <TakeWholeSpace ref={containerElement} style={{ cursor }}>
         {renderContent && renderContent({ msToPx })}
         <CurrentIntervalRect
           $color={color}
@@ -191,19 +152,12 @@ export const IntervalInput = ({
           </MoveIconWr>
         </CurrentIntervalRect>
 
-        <DurationText
+        <FloatingIntervalDuration
           style={{
             top: intervalEndInPx + 2,
           }}
-          as="div"
-        >
-          <HStackSeparatedBy separator={dotSeparator}>
-            <Text>
-              {formatTime(value.start)} - {formatTime(value.end)}
-            </Text>
-            <Text>{formatDuration(valueDuration, 'ms', { kind: 'long' })}</Text>
-          </HStackSeparatedBy>
-        </DurationText>
+          value={value}
+        />
 
         {!activeControl && (
           <>
@@ -234,7 +188,7 @@ export const IntervalInput = ({
             </PositionAbsolutelyCenterHorizontally>
           </>
         )}
-      </Container>
+      </TakeWholeSpace>
     </TimeSpace>
   )
 }
