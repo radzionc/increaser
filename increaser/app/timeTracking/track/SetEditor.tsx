@@ -127,7 +127,7 @@ export const SetEditor = () => {
               top: intervalStartInPx,
               height: intervalDurationInPx,
             }}
-            onMouseDown={() => setActiveControl('position')}
+            onPointerDown={() => setActiveControl('position')}
           />
 
           <PositionAbsolutelyCenterHorizontally
@@ -135,13 +135,13 @@ export const SetEditor = () => {
             top={intervalStartInPx}
           >
             <InteractiveBoundaryArea
-              onMouseDown={() => setActiveControl('start')}
+              onPointerDown={() => setActiveControl('start')}
             />
           </PositionAbsolutelyCenterHorizontally>
 
           <PositionAbsolutelyCenterHorizontally fullWidth top={intervalEndInPx}>
             <InteractiveBoundaryArea
-              onMouseDown={() => setActiveControl('end')}
+              onPointerDown={() => setActiveControl('end')}
             />
           </PositionAbsolutelyCenterHorizontally>
         </>

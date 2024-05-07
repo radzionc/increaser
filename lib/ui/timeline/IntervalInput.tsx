@@ -166,7 +166,7 @@ export const IntervalInput = ({
                 top: intervalStartInPx,
                 height: intervalDurationInPx,
               }}
-              onMouseDown={() => setActiveControl('position')}
+              onPointerDown={() => setActiveControl('position')}
             />
 
             <PositionAbsolutelyCenterHorizontally
@@ -174,7 +174,7 @@ export const IntervalInput = ({
               top={intervalStartInPx}
             >
               <InteractiveBoundaryArea
-                onMouseDown={() => setActiveControl('start')}
+                onPointerDown={() => setActiveControl('start')}
               />
             </PositionAbsolutelyCenterHorizontally>
 
@@ -183,7 +183,7 @@ export const IntervalInput = ({
               top={intervalEndInPx}
             >
               <InteractiveBoundaryArea
-                onMouseDown={() => setActiveControl('end')}
+                onPointerDown={() => setActiveControl('end')}
               />
             </PositionAbsolutelyCenterHorizontally>
           </>
