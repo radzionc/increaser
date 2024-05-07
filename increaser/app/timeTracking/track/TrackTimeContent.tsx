@@ -13,15 +13,16 @@ const Wrapper = styled.div`
   flex: 1;
   position: relative;
 `
-const DefaultScrollPosition = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-`
 
 const Container = styled(TakeWholeSpaceAbsolutely)`
   overflow-y: auto;
   padding: ${toSizeUnit(panelDefaultPadding)};
+`
+
+const DefaultScrollPosition = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
 `
 
 export const TrackTimeContent = () => {

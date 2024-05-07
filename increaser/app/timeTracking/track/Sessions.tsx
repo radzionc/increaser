@@ -1,6 +1,7 @@
 import { useTrackTime } from './state/TrackTimeContext'
 import { msToPx } from './config'
 import { Session } from './Session'
+import { getSetHash } from '../../sets/helpers/getSetHash'
 
 export const Sessions = () => {
   const { dayInterval, sets } = useTrackTime()
@@ -9,7 +10,7 @@ export const Sessions = () => {
     <>
       {sets.map((value, index) => (
         <Session
-          key={index}
+          key={getSetHash(value)}
           value={value}
           index={index}
           style={{

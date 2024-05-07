@@ -4,28 +4,32 @@ import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import styled, { css, useTheme } from 'styled-components'
 import { Set } from '@increaser/entities/User'
-import { LinesFiller } from './LinesFiller'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { useTrackTime } from './state/TrackTimeContext'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { LinesFiller } from '@lib/ui/visual/LinesFiller'
 
 const Container = styled.div<{ isInteractive: boolean; $color: HSLA }>`
-  border-radius: 2px;
-  overflow: hidden;
   position: absolute;
+  overflow: hidden;
   width: 100%;
+
+  ${borderRadius.xs};
   ${transition};
 
   color: ${({ $color }) => $color.getVariant({ a: () => 0.4 }).toCssValue()};
   background: ${({ $color }) =>
     $color.getVariant({ a: () => 0.1 }).toCssValue()};
 
-  border: 2px solid;
+  border: 2px solid
+    ${({ $color }) => $color.getVariant({ a: () => 0.6 }).toCssValue()};
 
   ${({ isInteractive, $color }) =>
     isInteractive &&
     css`
       cursor: pointer;
       &:hover {
+        border-color: ${$color.toCssValue()};
         color: ${$color.toCssValue()};
       }
     `}
@@ -67,7 +71,7 @@ export const Session = ({ value, index, ...rest }: SessionProps) => {
       $color={color}
       {...rest}
     >
-      <LinesFiller rotation={index % 2 === 0 ? 45 : -45} />
+      <LinesFiller density={0.28} rotation={45 * (index % 2 === 0 ? 1 : -1)} />
     </Container>
   )
 }
