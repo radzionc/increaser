@@ -8,7 +8,7 @@ export const useCurrentWeekSets = () => {
   const startOfWeek = useStartOfWeek()
 
   return useMemo(
-    () => sets.filter((set) => set.start > startOfWeek),
+    () => sets.filter((set) => set.start >= startOfWeek),
     [sets, startOfWeek],
   )
 }
