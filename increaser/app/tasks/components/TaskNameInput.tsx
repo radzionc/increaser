@@ -1,3 +1,5 @@
+import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { InputProps } from '@lib/ui/props'
 import { ComponentProps, useEffect, useRef } from 'react'
 import styled from 'styled-components'
@@ -10,6 +12,7 @@ const Container = styled.textarea`
   width: 100%;
   outline: none;
   color: ${({ theme }) => theme.colors.text.toCssValue()};
+  line-height: ${toSizeUnit(checklistItemContentMinHeight)};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textShy.toCssValue()};

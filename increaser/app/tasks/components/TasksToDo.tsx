@@ -26,6 +26,10 @@ import { DragContainer, OnHoverDragContainer } from './DragContainer'
 import { DragHandle } from '@lib/ui/dnd/DragHandle'
 import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
 import { useMedia } from 'react-use'
+import {
+  checklistItemContentMinHeight,
+  checklistItemVerticalPadding,
+} from '@lib/ui/checklist/ChecklistItemFrame'
 
 const hoverableDragHandleWidth = 36
 
@@ -126,8 +130,12 @@ export const TasksToDo = () => {
               isHoverEnabled
                 ? {
                     position: 'absolute',
+                    top: 0,
                     left: -hoverableDragHandleWidth,
                     width: hoverableDragHandleWidth,
+                    height:
+                      checklistItemContentMinHeight +
+                      checklistItemVerticalPadding * 2,
                   }
                 : {
                     width: 40,
