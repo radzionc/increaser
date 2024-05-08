@@ -60,9 +60,9 @@ export const CreateTaskForm = ({
         <TaskNameInput
           placeholder="Task name"
           autoFocus
-          autoComplete="off"
-          onChange={(event) => setName(event.target.value)}
+          onChange={setName}
           value={name}
+          onSubmit={createTask}
         />
       </TaskItemFrame>
     </div>

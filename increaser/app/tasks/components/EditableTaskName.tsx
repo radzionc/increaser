@@ -13,11 +13,7 @@ export const EditableTaskName = () => {
       value={task.name}
       onChange={(name) => updateTask({ id: task.id, fields: { name } })}
       render={({ value, onChange }) => (
-        <TaskNameInput
-          autoComplete="off"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        />
+        <TaskNameInput value={value} onChange={onChange} />
       )}
     />
   )
