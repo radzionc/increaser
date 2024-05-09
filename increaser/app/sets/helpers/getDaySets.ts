@@ -1,5 +1,5 @@
 import { endOfDay, startOfDay } from 'date-fns'
-import { Set } from '@increaser/app/sets/Set'
+import { Set } from '@increaser/entities/User'
 import { isInRange } from '@lib/utils/isInRange'
 
 export const getDaySets = (sets: Set[], timestamp: number) => {

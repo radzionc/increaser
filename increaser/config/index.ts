@@ -10,3 +10,6 @@ export const founderXUrl = 'https://twitter.com/radzionc'
 export const founderLinkedInUrl = 'https://linkedin.com/in/radzion'
 export const founderTelegramUrl = 'https://t.me/radzionc'
 export const founderEmail = 'radzion@increaser.org'
+
+export const productXUrl = 'https://twitter.com/increaser_app'
+export const productTelegramChannelUrl = 'https://t.me/increaser_app'

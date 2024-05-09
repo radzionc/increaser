@@ -5,6 +5,7 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
+import { addSet } from '@increaser/entities-utils/set/addSet'
 
 export const useAddSetMutation = () => {
   const api = useApi()
@@ -12,10 +13,10 @@ export const useAddSetMutation = () => {
   const { sets } = useAssertUserState()
 
   return useMutation({
-    mutationFn: (set: Set) => {
-      updateState({ sets: [...sets, set] })
+    mutationFn: (value: Set) => {
+      updateState({ sets: addSet({ sets, value }) })
 
-      return api.call('addSet', set)
+      return api.call('addSet', value)
     },
   })
 }

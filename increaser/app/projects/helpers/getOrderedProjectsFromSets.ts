@@ -1,5 +1,4 @@
-import { Set } from '@increaser/app/sets/Set'
-
+import { Set } from '@increaser/entities/User'
 import { getProjectsTotalRecord } from './getProjectsTotalRecord'
 
 export const getOrderedProjectsFromSets = (sets: Set[]) => {

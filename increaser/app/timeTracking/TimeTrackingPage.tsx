@@ -6,20 +6,47 @@ import { TrackedTimeReportProvider } from './report/TrackedTimeReportProvider'
 import { TrackedTimeReport } from './report/TrackedTimeReport'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { TrackedTimeProvider } from './report/TrackedTimeProvider'
+import {
+  RenderTimeTrackingView,
+  TimeTrackingViewProvider,
+  TimeTrackingViewSelector,
+} from './TimeTrackingView'
+import styled from 'styled-components'
+import { TrackTimeProvider } from './track/TrackTimeProvider'
+import { TrackTime } from './track/TrackTime'
 
-const title = 'Track Time'
+const title = 'Time tracking'
+
+const PageContainer = styled(FixedWidthContent)`
+  display: flex;
+  flex-direction: column;
+`
 
 export const TimeTrackingPage: Page = () => {
   return (
-    <FixedWidthContent>
-      <PageTitle documentTitle={`⏳ ${title}`} title={title} />
-      <UserStateOnly>
-        <TrackedTimeProvider>
-          <TrackedTimeReportProvider>
-            <TrackedTimeReport />
-          </TrackedTimeReportProvider>
-        </TrackedTimeProvider>
-      </UserStateOnly>
-    </FixedWidthContent>
+    <TimeTrackingViewProvider>
+      <PageContainer>
+        <PageTitle
+          documentTitle={`⏳ ${title}`}
+          title={<TimeTrackingViewSelector />}
+        />
+        <UserStateOnly>
+          <RenderTimeTrackingView
+            report={() => (
+              <TrackedTimeProvider>
+                <TrackedTimeReportProvider>
+                  <TrackedTimeReport />
+                </TrackedTimeReportProvider>
+              </TrackedTimeProvider>
+            )}
+            track={() => (
+              <TrackTimeProvider>
+                <TrackTime />
+              </TrackTimeProvider>
+            )}
+          />
+        </UserStateOnly>
+      </PageContainer>
+    </TimeTrackingViewProvider>
   )
 }

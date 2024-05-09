@@ -19,12 +19,12 @@ import { updateTask } from '../tasks/resolvers/updateTask'
 import { deleteTask } from '../tasks/resolvers/deleteTask'
 import { trackHabit } from '../habits/resolvers/trackHabit'
 import { addSet } from '../sets/resolvers/addSet'
-import { editLastSet } from '../sets/resolvers/editLastSet'
-import { removeLastSet } from '../sets/resolvers/removeLastSet'
 import { proposeFeature } from '../features/resolvers/proposeFeature'
 import { features } from '../features/resolvers/features'
 import { voteForFeature } from '../features/resolvers/voteForFeature'
 import { userProfile } from '../users/resolvers/userProfile'
+import { deleteSet } from '../sets/resolvers/deleteSet'
+import { updateSet } from '../sets/resolvers/updateSet'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -44,8 +44,6 @@ export const implementation: ApiImplementation = {
   deleteHabit,
   trackHabit,
   addSet,
-  editLastSet,
-  removeLastSet,
   createTask,
   updateTask,
   deleteTask,
@@ -53,4 +51,6 @@ export const implementation: ApiImplementation = {
   features,
   voteForFeature,
   userProfile,
+  deleteSet,
+  updateSet,
 }

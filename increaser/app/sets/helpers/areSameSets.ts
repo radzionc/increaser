@@ -1,4 +1,4 @@
-import { Set } from '@increaser/app/sets/Set'
+import { Set } from '@increaser/entities/User'
 
 import { getSetHash } from './getSetHash'
 

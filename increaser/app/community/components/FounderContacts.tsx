@@ -21,25 +21,12 @@ import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { XIcon } from '@lib/ui/icons/XIcon'
 import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
-import { borderRadius } from '@lib/ui/css/borderRadius'
-import { centerContent } from '@lib/ui/css/centerContent'
+import { SocialLink } from '@lib/ui/buttons/SocialLink'
 
 const Avatar = styled(CoverImage)`
   ${round};
   ${sameDimensions(40)}
   border: 1px solid ${getColor('success')};
-`
-
-const SocialLink = styled(ExternalLink)`
-  ${sameDimensions(40)}
-  ${borderRadius.s}
-  ${centerContent};
-  font-size: 24px;
-  color: ${getColor('contrast')};
-
-  &:hover {
-    background: ${getColor('mist')};
-  }
 `
 
 export const FounderContacts = () => {

@@ -1,6 +1,5 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
-import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import {
   ProductFeaturesViewProvider,
@@ -9,6 +8,7 @@ import {
 } from './ProductFeaturesView'
 import { ProposeFeaturePrompt } from './ProposeFeaturePrompt'
 import { ProductFeatureList } from './ProductFeatureList'
+import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 const Container = styled(Panel)`
   min-width: 320px;
@@ -27,11 +27,10 @@ export const ProductFeaturesBoard = () => {
             wrap="wrap"
             fullWidth
           >
-            <Text size={18} weight="bold">
-              Product Features
-            </Text>
+            <SectionTitle>Product features</SectionTitle>
             <ProductFeaturesViewSelector />
           </HStack>
+
           <RenderProductFeaturesView
             idea={() => <ProposeFeaturePrompt />}
             done={() => null}

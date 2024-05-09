@@ -4,7 +4,6 @@ import {
   getBlocks,
   getFocusDurationForCurrentBlock,
 } from '@increaser/app/sets/Block'
-import { Set } from '@increaser/app/sets/Set'
 import { MS_IN_MIN } from '@lib/utils/time'
 import {
   FocusDuration,
@@ -12,6 +11,7 @@ import {
   focusDurations,
   maxFocusDuration,
 } from '@increaser/entities/FocusDuration'
+import { Set } from '@increaser/entities/User'
 
 export const increaseFocusDuration = (lastSetDuration: number) => {
   return (

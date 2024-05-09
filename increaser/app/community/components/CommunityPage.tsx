@@ -10,6 +10,7 @@ import { RequiresOnboarding } from '../../onboarding/RequiresOnboarding'
 import { ProductFeaturesBoard } from '../../productFeatures/components/ProductFeaturesBoard'
 import { FounderContacts } from './FounderContacts'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { SubscribeForUpdatesPrompt } from './SubscribeForUpdatesPrompt'
 
 export const CommunityPage: Page = () => {
   return (
@@ -25,7 +26,10 @@ export const CommunityPage: Page = () => {
               <Scoreboard />
               <FounderContacts />
             </VStack>
-            <ProductFeaturesBoard />
+            <VStack gap={20}>
+              <SubscribeForUpdatesPrompt />
+              <ProductFeaturesBoard />
+            </VStack>
           </UniformColumnGrid>
         </RequiresOnboarding>
       </UserStateOnly>

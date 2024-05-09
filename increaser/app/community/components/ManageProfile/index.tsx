@@ -1,5 +1,4 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 import { ManagePrivacy } from '../ManagePrivacy'
 import { Panel } from '@lib/ui/panel/Panel'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -11,6 +10,7 @@ import { ScoreboardDisplayName } from '@increaser/ui/scoreboard/ScoreboardDispla
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { CountryCode } from '@lib/countries'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
+import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 export const ManageProfile = () => {
   const { isAnonymous, name, country } = useAssertUserState()
@@ -28,9 +28,7 @@ export const ManageProfile = () => {
             gap={16}
             wrap="wrap"
           >
-            <Text size={18} weight="bold">
-              Your profile
-            </Text>
+            <SectionTitle>Your profile</SectionTitle>
             <ManagePrivacy />
           </HStack>
           {isEditing ? (

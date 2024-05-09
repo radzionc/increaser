@@ -1,11 +1,12 @@
 import { TimelineSession } from '@increaser/app/focus/components/TimelineSession'
-import { Block, getBlockWorkDuration } from '@increaser/app/sets/Block'
+import { getBlockWorkDuration } from '@increaser/app/sets/Block'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import styled from 'styled-components'
 import { defaultTransition, transition } from '@lib/ui/css/transition'
 import { Text } from '@lib/ui/text'
 import { MS_IN_MIN } from '@lib/utils/time'
 import { getColor } from '@lib/ui/theme/getters'
+import { Block } from '@increaser/entities/Block'
 
 const Container = styled(TimelineSession)`
   color: ${getColor('textSupporting')};

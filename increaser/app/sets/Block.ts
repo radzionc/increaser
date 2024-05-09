@@ -2,7 +2,6 @@ import { DefaultTheme } from 'styled-components'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import { Set } from './Set'
 import { getDistanceBetweenSets } from '@increaser/entities-utils/set/getDistanceBetweenSets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import {
@@ -11,10 +10,8 @@ import {
   focusDurations,
 } from '@increaser/entities/FocusDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
-
-export interface Block {
-  sets: Set[]
-}
+import { Set } from '@increaser/entities/User'
+import { Block } from '@increaser/entities/Block'
 
 export const blockDistanceInMinutes = 15
 

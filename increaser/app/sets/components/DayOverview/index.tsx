@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Panel } from '@lib/ui/panel/Panel'
 import { AmountOverview } from './AmountOverview'
 import { DayTimeline } from './DayTimeline'
-import { AddSession } from './AddSession'
 import { horizontalPaddingInPx } from './config'
 import { WeekNavigation } from './WeekNavigation'
 import { DayOverviewProvider } from './DayOverviewProvider'
@@ -19,7 +18,6 @@ export const DayOverview = () => {
         <WeekNavigation />
         <AmountOverview />
         <DayTimeline />
-        <AddSession />
       </Container>
     </DayOverviewProvider>
   )

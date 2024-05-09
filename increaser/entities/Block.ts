@@ -1,5 +1,5 @@
 import { Set } from './User'
 
-export interface Block {
+export type Block = {
   sets: Set[]
 }

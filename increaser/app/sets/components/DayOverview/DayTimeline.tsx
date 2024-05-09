@@ -5,7 +5,6 @@ import { WorkdayEndStatus } from './WorkdayEndStatus'
 import { CurrentTime } from './CurrentTime'
 import { WorkdayLeftBlock } from './WorkdayLeftBlock'
 import { WorkBlocks } from './WorkBlocks'
-import { ManageLastSession } from './ManageLastSession'
 import {
   botomPlaceholderHeightInPx,
   minimumHourHeightInPx,
@@ -47,7 +46,6 @@ export const DayTimeline = () => {
           <CurrentTime />
           <WorkdayEndStatus />
           <WorkBlocks />
-          <ManageLastSession />
         </Content>
       </Container>
     </Wrapper>

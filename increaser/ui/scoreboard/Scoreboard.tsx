@@ -10,6 +10,7 @@ import {
   scoreboardPeriodInDays,
 } from '@increaser/entities/PerformanceScoreboard'
 import { useApiQuery } from '@increaser/api-ui/hooks/useApiQuery'
+import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 export const Scoreboard = () => {
   const scoreboardPeriod: ScoreboardPeriod = 'week'
@@ -18,9 +19,9 @@ export const Scoreboard = () => {
   return (
     <Panel kind="secondary">
       <VStack gap={24}>
-        <Text size={18} weight="semibold" color="regular">
-          Last {scoreboardPeriodInDays[scoreboardPeriod]} Days Top Performers
-        </Text>
+        <SectionTitle>
+          Last {scoreboardPeriodInDays[scoreboardPeriod]} days top performers
+        </SectionTitle>
         <QueryDependant
           query={query}
           success={(value) => (

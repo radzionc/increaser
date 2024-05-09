@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { getDaySets } from '@increaser/app/sets/helpers/getDaySets'
-import { Set } from '@increaser/app/sets/Set'
+import { Set } from '@increaser/entities/User'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { range } from '@lib/utils/array/range'
 import { D_IN_WEEK, MS_IN_DAY } from '@lib/utils/time'

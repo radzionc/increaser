@@ -1,4 +1,4 @@
-import { Set } from '@increaser/app/sets/Set'
+import { Set } from '@increaser/entities/User'
 
 export const groupSetsByProject = (sets: Set[]) => {
   const groupedSets: Record<string, Set[]> = {}
