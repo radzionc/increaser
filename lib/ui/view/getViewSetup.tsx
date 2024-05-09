@@ -1,15 +1,17 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useCallback, useState } from 'react'
 import { ComponentWithChildrenProps } from '../props'
 import { createContextHook } from '../state/createContextHook'
 
 type GetViewSetupInput<T extends string | number | symbol> = {
   defaultView: T
   name: string
+  onChange?: (view: T) => void
 }
 
 export function getViewSetup<T extends string | number | symbol>({
   defaultView,
   name,
+  onChange,
 }: GetViewSetupInput<T>) {
   interface ViewState {
     view: T
@@ -21,8 +23,13 @@ export function getViewSetup<T extends string | number | symbol>({
   const ViewProvider = ({ children }: ComponentWithChildrenProps) => {
     const [view, setView] = useState<T>(defaultView)
 
+    const handleChange = useCallback((newView: T) => {
+      setView(newView)
+      onChange?.(newView)
+    }, [])
+
     return (
-      <ViewContext.Provider value={{ view, setView }}>
+      <ViewContext.Provider value={{ view, setView: handleChange }}>
         {children}
       </ViewContext.Provider>
     )

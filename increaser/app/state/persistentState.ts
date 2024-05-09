@@ -29,6 +29,7 @@ export enum PersistentStateKey {
   IncludeTodayInSetsExplorer = 'includeTodayInSetsExplorer',
   TrackedTimeReportPreferences = 'trackedTimeReportPreferences2',
   TrackedTimePreference = 'trackedTimePreference2',
+  SelectFocusView = 'selectFocusView',
 }
 
 export const persistentStorage =

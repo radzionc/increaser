@@ -6,7 +6,7 @@ import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Button } from '@lib/ui/buttons/Button'
 import { Panel } from '@lib/ui/panel/Panel'
-import { VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN } from '@lib/utils/time'
@@ -24,6 +24,11 @@ import { ProjectBudgetWidget } from '../../../projects/budget/ProjectBudgetWidge
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { ProjectBudgetSummary } from '../../../projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
+import { SectionTitle } from '@lib/ui/text/SectionTitle'
+import {
+  SelectFocusViewProvider,
+  SelectFocusViewSelector,
+} from './SelectFocusView'
 
 const Container = styled(Panel)`
   position: relative;
@@ -131,51 +136,64 @@ export const FocusSessionForm = ({ onFocusStart }: FocusSessionFormProps) => {
   }
 
   return (
-    <Container style={{ position: 'relative' }} kind="secondary">
-      <VStack gap={32}>
-        <FocusProjectInput
-          options={options}
-          value={projectId}
-          onChange={(value) => {
-            setProjectId(value)
-            lastInteractionWasAt.current = Date.now()
-          }}
-        />
-        <CurrentProjectProvider value={project}>
-          <VStack gap={4}>
-            <ProjectBudgetWidget />
-            <VStack style={{ minHeight: 20 }}>
-              {project.goal && project.allocatedMinutesPerWeek > 0 && (
-                <ProjectBudgetSummary />
+    <SelectFocusViewProvider>
+      <VStack gap={12}>
+        <HStack
+          alignItems="center"
+          wrap="wrap"
+          justifyContent="space-between"
+          fullWidth
+        >
+          <SectionTitle>Start a focus session</SectionTitle>
+          <SelectFocusViewSelector />
+        </HStack>
+        <Container style={{ position: 'relative' }} kind="secondary">
+          <VStack gap={32}>
+            <FocusProjectInput
+              options={options}
+              value={projectId}
+              onChange={(value) => {
+                setProjectId(value)
+                lastInteractionWasAt.current = Date.now()
+              }}
+            />
+            <CurrentProjectProvider value={project}>
+              <VStack gap={4}>
+                <ProjectBudgetWidget />
+                <VStack style={{ minHeight: 20 }}>
+                  {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                    <ProjectBudgetSummary />
+                  )}
+                </VStack>
+              </VStack>
+            </CurrentProjectProvider>
+            <FocusDurationInput
+              value={focusDuration}
+              onChange={(value) => {
+                setFocusDuration(value)
+                lastInteractionWasAt.current = Date.now()
+              }}
+            />
+            <MemberOnlyAction
+              action={() => {
+                start({ projectId, duration: focusDuration })
+                onFocusStart?.()
+              }}
+              render={({ action }) => (
+                <Button kind="reversed" size="l" onClick={action}>
+                  <Text as="div" style={{ wordBreak: 'keep-all' }}>
+                    <FocusDurationText
+                      emoji={project.emoji}
+                      value={focusDuration}
+                    />
+                  </Text>
+                </Button>
               )}
-            </VStack>
+            />
           </VStack>
-        </CurrentProjectProvider>
-        <FocusDurationInput
-          value={focusDuration}
-          onChange={(value) => {
-            setFocusDuration(value)
-            lastInteractionWasAt.current = Date.now()
-          }}
-        />
-        <MemberOnlyAction
-          action={() => {
-            start({ projectId, duration: focusDuration })
-            onFocusStart?.()
-          }}
-          render={({ action }) => (
-            <Button kind="reversed" size="l" onClick={action}>
-              <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                <FocusDurationText
-                  emoji={project.emoji}
-                  value={focusDuration}
-                />
-              </Text>
-            </Button>
-          )}
-        />
+          <WorkdayFinished />
+        </Container>
       </VStack>
-      <WorkdayFinished />
-    </Container>
+    </SelectFocusViewProvider>
   )
 }
