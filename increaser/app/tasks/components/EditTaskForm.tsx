@@ -5,7 +5,7 @@ import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { TaskNameInput } from './TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from './TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentTask } from './CurrentTaskProvider'
@@ -112,13 +112,15 @@ export const EditTaskForm = () => {
         handleSubmit(),
       )}
     >
-      <TaskNameInput
-        placeholder="Task name"
-        autoFocus
-        onChange={setName}
-        value={name}
-        onSubmit={handleSubmit}
-      />
+      <VStack>
+        <TaskNameInput
+          placeholder="Task name"
+          autoFocus
+          onChange={setName}
+          value={name}
+          onSubmit={handleSubmit}
+        />
+      </VStack>
 
       <HStack
         wrap="wrap"
