@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useMemo, useState } from 'react'
 import { useKey } from 'react-use'
 import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
@@ -29,7 +29,15 @@ export const CreateTaskForm = ({
 
   useKey('Escape', onFinish)
 
-  const createTask = () => {
+  const isDisabled = useMemo(() => {
+    if (!name.trim()) {
+      return 'Name is required'
+    }
+  }, [name])
+
+  const handleSubmit = () => {
+    if (isDisabled) return
+
     const startedAt = Date.now()
     const task: Task = {
       name,
@@ -49,9 +57,7 @@ export const CreateTaskForm = ({
       kind="secondary"
       as="form"
       onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(() => {
-        if (name) {
-          createTask()
-        }
+        handleSubmit()
       })}
     >
       <TaskNameInput
@@ -59,7 +65,7 @@ export const CreateTaskForm = ({
         autoFocus
         onChange={setName}
         value={name}
-        onSubmit={createTask}
+        onSubmit={handleSubmit}
       />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <TaskProjectSelector value={projectId} onChange={setProjectId} />
@@ -67,7 +73,7 @@ export const CreateTaskForm = ({
           <Button onClick={onFinish} kind="secondary">
             Cancel
           </Button>
-          <Button>Add task</Button>
+          <Button isDisabled={isDisabled}>Add task</Button>
         </HStack>
       </HStack>
     </Panel>
