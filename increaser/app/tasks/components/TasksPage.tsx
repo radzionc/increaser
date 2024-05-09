@@ -1,4 +1,3 @@
-import { VStack } from '@lib/ui/layout/Stack'
 import { FixedWidthContent } from '../../components/reusable/fixed-width-content'
 import { PageTitle } from '../../ui/PageTitle'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
@@ -10,21 +9,25 @@ import {
   TasksViewSelector,
 } from './TasksView'
 import { TasksDeadlinesOverview } from './TasksDeadlinesOverview'
+import { TasksManagerProvider } from './TasksManagerProvider'
+import { TasksContainer } from './TasksContainer'
 
 export const TasksPage = () => {
   return (
     <FixedWidthContent>
       <TasksViewProvider>
         <PageTitle documentTitle={`✅ Tasks`} title={<TasksViewSelector />} />
-        <VStack gap={40} style={{ maxWidth: 520 }}>
+        <TasksContainer>
           <UserStateOnly>
-            <TasksDeadlinesOverview />
-            <RenderTasksView
-              todo={() => <TasksToDo />}
-              done={() => <TasksDone />}
-            />
+            <TasksManagerProvider>
+              <TasksDeadlinesOverview />
+              <RenderTasksView
+                todo={() => <TasksToDo />}
+                done={() => <TasksDone />}
+              />
+            </TasksManagerProvider>
           </UserStateOnly>
-        </VStack>
+        </TasksContainer>
       </TasksViewProvider>
     </FixedWidthContent>
   )

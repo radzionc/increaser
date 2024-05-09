@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components'
 export const DragContainer = styled(HStack)`
   width: 100%;
   gap: 4px;
-  align-items: center;
+  align-items: start;
   background: ${getColor('background')};
   position: relative;
 `
@@ -20,7 +20,6 @@ export const OnHoverDragContainer = styled(
   DragContainer,
 )<OnHoverDragContainerProps>`
   gap: 0;
-  align-items: center;
   ${({ isDraggingEnabled }) =>
     !isDraggingEnabled &&
     css`

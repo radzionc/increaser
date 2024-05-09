@@ -1,27 +1,32 @@
 import { useCurrentTask } from './CurrentTaskProvider'
 import { HStack } from '@lib/ui/layout/Stack'
-import { ManageTaskDeadline } from './ManageTaskDeadline'
 import styled from 'styled-components'
 import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
 import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
 import { TaskItemFrame } from './TaskItemFrame'
-import { EditableTaskName } from './EditableTaskName'
 import { DeleteTask } from './DeleteTask'
 import { useMedia } from 'react-use'
 import { ManageTaskSlideover } from './ManageTaskSlideover'
-import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 import { Text } from '@lib/ui/text'
-import { deadlineName } from '@increaser/entities/Task'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import {
+  checklistItemContentMinHeight,
+  checklistItemVerticalPadding,
+} from '@lib/ui/checklist/ChecklistItemFrame'
+import { IconButton } from '@lib/ui/buttons/IconButton'
+import { EditIcon } from '@lib/ui/icons/EditIcon'
+import { useTasksManager } from './TasksManagerProvider'
+import { EditTaskForm } from './EditTaskForm'
+import { TaskProject } from './TaskProject'
 
-const OnHoverActions = styled.div`
-  display: grid;
-  grid-template-columns: 60px 36px;
-  height: 36px;
+const OnHoverActions = styled(HStack)`
+  align-items: center;
   gap: 4px;
+  height: ${toSizeUnit(
+    checklistItemContentMinHeight + checklistItemVerticalPadding * 2,
+  )};
 
   &:not(:focus-within) {
     opacity: 0;
@@ -31,11 +36,16 @@ const OnHoverActions = styled.div`
 const Container = styled(HStack)`
   width: 100%;
   gap: 8px;
-  align-items: center;
+  align-items: start;
 
   &:hover ${OnHoverActions} {
     opacity: 1;
   }
+`
+
+const TaskName = styled(Text)`
+  line-height: ${toSizeUnit(checklistItemContentMinHeight)};
+  word-break: break-word;
 `
 
 const Check = styled(CheckStatus)`
@@ -46,11 +56,17 @@ export const TaskItem = () => {
   const task = useCurrentTask()
   const { completedAt } = task
 
+  const { setState, activeTaskId } = useTasksManager()
+
   const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
 
   const { mutate: updateTask } = useUpdateTaskMutation()
 
   const value = !!completedAt
+
+  if (activeTaskId === task.id) {
+    return <EditTaskForm />
+  }
 
   return (
     <Container>
@@ -68,29 +84,20 @@ export const TaskItem = () => {
             }}
           />
         </Check>
-        <EditableTaskName />
+        <TaskName>
+          <TaskProject />
+          {task.name}
+        </TaskName>
       </TaskItemFrame>
       {isHoverEnabled ? (
         <OnHoverActions>
-          <ManageTaskDeadline
-            render={({ value, onChange, options }) => (
-              <ExpandableSelector
-                openerContent={
-                  <IconWrapper style={{ fontSize: 18 }}>
-                    <CalendarIcon />
-                  </IconWrapper>
-                }
-                floatingOptionsWidthSameAsOpener={false}
-                style={{ height: '100%', padding: 8 }}
-                value={value}
-                onChange={onChange}
-                options={options}
-                getOptionKey={(option) => option}
-                renderOption={(option) => (
-                  <Text key={option}>{deadlineName[option]}</Text>
-                )}
-              />
-            )}
+          <IconButton
+            kind="secondary"
+            title="Edit task"
+            icon={<EditIcon />}
+            onClick={() =>
+              setState((state) => ({ ...state, activeTaskId: task.id }))
+            }
           />
           <DeleteTask />
         </OnHoverActions>

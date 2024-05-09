@@ -26,12 +26,18 @@ import { DragContainer, OnHoverDragContainer } from './DragContainer'
 import { DragHandle } from '@lib/ui/dnd/DragHandle'
 import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
 import { useMedia } from 'react-use'
+import {
+  checklistItemContentMinHeight,
+  checklistItemVerticalPadding,
+} from '@lib/ui/checklist/ChecklistItemFrame'
+import { useTasksManager } from './TasksManagerProvider'
 
 const hoverableDragHandleWidth = 36
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+  const { activeTaskId } = useTasksManager()
 
   const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
 
@@ -120,14 +126,23 @@ export const TasksToDo = () => {
             <TaskItem />
           </CurrentTaskProvider>
         )
+
+        if (activeTaskId) {
+          return content
+        }
+
         const dragHandle = (
           <DragHandle
             style={
               isHoverEnabled
                 ? {
                     position: 'absolute',
+                    top: 0,
                     left: -hoverableDragHandleWidth,
                     width: hoverableDragHandleWidth,
+                    height:
+                      checklistItemContentMinHeight +
+                      checklistItemVerticalPadding * 2,
                   }
                 : {
                     width: 40,
