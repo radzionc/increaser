@@ -10,19 +10,22 @@ import {
   TasksViewSelector,
 } from './TasksView'
 import { TasksDeadlinesOverview } from './TasksDeadlinesOverview'
+import { TasksManagerProvider } from './TasksManagerProvider'
 
 export const TasksPage = () => {
   return (
     <FixedWidthContent>
       <TasksViewProvider>
         <PageTitle documentTitle={`✅ Tasks`} title={<TasksViewSelector />} />
-        <VStack gap={40} style={{ maxWidth: 520 }}>
+        <VStack gap={40} style={{ maxWidth: 560 }}>
           <UserStateOnly>
-            <TasksDeadlinesOverview />
-            <RenderTasksView
-              todo={() => <TasksToDo />}
-              done={() => <TasksDone />}
-            />
+            <TasksManagerProvider>
+              <TasksDeadlinesOverview />
+              <RenderTasksView
+                todo={() => <TasksToDo />}
+                done={() => <TasksDone />}
+              />
+            </TasksManagerProvider>
           </UserStateOnly>
         </VStack>
       </TasksViewProvider>

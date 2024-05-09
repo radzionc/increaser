@@ -30,12 +30,14 @@ import {
   checklistItemContentMinHeight,
   checklistItemVerticalPadding,
 } from '@lib/ui/checklist/ChecklistItemFrame'
+import { useTasksManager } from './TasksManagerProvider'
 
 const hoverableDragHandleWidth = 36
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+  const { activeTaskId } = useTasksManager()
 
   const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
 
@@ -124,6 +126,11 @@ export const TasksToDo = () => {
             <TaskItem />
           </CurrentTaskProvider>
         )
+
+        if (activeTaskId) {
+          return content
+        }
+
         const dragHandle = (
           <DragHandle
             style={

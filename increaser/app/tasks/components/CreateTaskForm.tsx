@@ -5,10 +5,12 @@ import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { useCreateTaskMutation } from '../api/useCreateTaskMutation'
-import { TaskItemFrame } from './TaskItemFrame'
 import { TaskNameInput } from './TaskNameInput'
+import { Panel } from '@lib/ui/panel/Panel'
+import { HStack } from '@lib/ui/layout/Stack'
+import { TaskProjectSelector } from './TaskProjectSelector'
+import { Button } from '@lib/ui/buttons/Button'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -21,6 +23,7 @@ export const CreateTaskForm = ({
   order,
 }: CreateTaskFormProps) => {
   const [name, setName] = useState('')
+  const [projectId, setProjectId] = useState<string | null>(null)
 
   const { mutate } = useCreateTaskMutation()
 
@@ -34,37 +37,39 @@ export const CreateTaskForm = ({
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
       order,
+      projectId,
     }
     mutate(task)
     setName('')
   }
 
   return (
-    <div>
-      <TaskItemFrame
-        as="form"
-        onBlur={() => {
-          if (name) {
-            createTask()
-          } else {
-            onFinish()
-          }
-        }}
-        onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(() => {
-          if (name) {
-            createTask()
-          }
-        })}
-      >
-        <CheckStatus value={false} />
-        <TaskNameInput
-          placeholder="Task name"
-          autoFocus
-          onChange={setName}
-          value={name}
-          onSubmit={createTask}
-        />
-      </TaskItemFrame>
-    </div>
+    <Panel
+      withSections
+      kind="secondary"
+      as="form"
+      onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(() => {
+        if (name) {
+          createTask()
+        }
+      })}
+    >
+      <TaskNameInput
+        placeholder="Task name"
+        autoFocus
+        onChange={setName}
+        value={name}
+        onSubmit={createTask}
+      />
+      <HStack justifyContent="space-between" fullWidth alignItems="center">
+        <TaskProjectSelector value={projectId} onChange={setProjectId} />
+        <HStack alignItems="center" gap={8}>
+          <Button onClick={onFinish} kind="secondary">
+            Cancel
+          </Button>
+          <Button>Add task</Button>
+        </HStack>
+      </HStack>
+    </Panel>
   )
 }

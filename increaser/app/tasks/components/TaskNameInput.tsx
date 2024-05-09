@@ -1,21 +1,22 @@
 import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { InputProps } from '@lib/ui/props'
+import { getColor } from '@lib/ui/theme/getters'
 import { ComponentProps, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.textarea`
-  background: transparent;
+  background: ${getColor('background')};
   border: none;
   height: 100%;
   margin: 0;
   width: 100%;
   outline: none;
-  color: ${({ theme }) => theme.colors.text.toCssValue()};
+  color: ${getColor('text')};
   line-height: ${toSizeUnit(checklistItemContentMinHeight)};
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.textShy.toCssValue()};
+    color: ${getColor('textShy')};
   }
 
   overflow: hidden;
