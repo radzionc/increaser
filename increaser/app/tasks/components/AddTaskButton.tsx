@@ -26,7 +26,7 @@ const Container = styled(Hoverable)`
 export const AddTaskButton = ({ onClick }: ClickableComponentProps) => {
   return (
     <Container verticalOffset={0} onClick={onClick}>
-      <TaskItemFrame>
+      <TaskItemFrame style={{ alignItems: 'center' }}>
         <IconContainer>
           <PlusIcon />
         </IconContainer>

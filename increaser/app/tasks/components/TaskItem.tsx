@@ -31,7 +31,7 @@ const OnHoverActions = styled.div`
 const Container = styled(HStack)`
   width: 100%;
   gap: 8px;
-  align-items: center;
+  align-items: start;
 
   &:hover ${OnHoverActions} {
     opacity: 1;
