@@ -1,12 +1,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { useKey } from 'react-use'
 import { handleWithPreventDefault } from '@increaser/app/shared/events'
-import {
-  DeadlineStatus,
-  Task,
-  deadlineName,
-  deadlineTypes,
-} from '@increaser/entities/Task'
+import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { TaskNameInput } from './TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -19,11 +14,8 @@ import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineSta
 import { groupItems } from '@lib/utils/array/groupItems'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
-import { Text } from '@lib/ui/text'
 import { useTasksManager } from './TasksManagerProvider'
+import { TaskDeadlineInput } from './TaskDeadlineInput'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
@@ -137,28 +129,9 @@ export const EditTaskForm = () => {
       >
         <HStack alignItems="center" gap={8}>
           <TaskProjectSelector value={projectId} onChange={setProjectId} />
-          <ExpandableSelector
-            openerContent={
-              <HStack alignItems="center" gap={4}>
-                <IconWrapper style={{ fontSize: 18 }}>
-                  <CalendarIcon />
-                </IconWrapper>
-                <Text>
-                  {deadlineStatus === 'overdue'
-                    ? 'Deadline'
-                    : deadlineName[deadlineStatus]}
-                </Text>
-              </HStack>
-            }
-            floatingOptionsWidthSameAsOpener={false}
-            style={{ height: '100%', padding: 8 }}
+          <TaskDeadlineInput
             value={deadlineStatus}
             onChange={setDeadlineStatus}
-            options={deadlineTypes}
-            getOptionKey={(option) => option}
-            renderOption={(option) => (
-              <Text key={option}>{deadlineName[option]}</Text>
-            )}
           />
         </HStack>
         <HStack alignItems="center" gap={8}>
