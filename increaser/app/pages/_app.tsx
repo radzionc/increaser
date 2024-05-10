@@ -26,6 +26,7 @@ import { ThemePreference } from '@lib/ui/theme/ThemePreference'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
+import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -66,7 +67,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                       <HabitsProvider>
                         <FocusProvider>
                           <ScheduleProvider>
-                            <BreakProvider>{component}</BreakProvider>
+                            <BreakProvider>
+                              <FocusLauncherProvider>
+                                {component}
+                              </FocusLauncherProvider>
+                            </BreakProvider>
                             <MembershipConfirmation />
                           </ScheduleProvider>
                         </FocusProvider>

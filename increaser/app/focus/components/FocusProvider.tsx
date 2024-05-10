@@ -61,11 +61,11 @@ export const FocusProvider = ({ children }: Props) => {
   const [currentSet, setCurrentSet] = useState<CurrentSet | undefined>()
 
   const start = useCallback(
-    ({ projectId, duration }: StartFocusParams) => {
+    ({ projectId, duration, taskId }: StartFocusParams) => {
       analytics.trackEvent('Start focus session', {
         duration: focusDuration,
       })
-      setCurrentSet({ projectId, startedAt: Date.now() })
+      setCurrentSet({ projectId, startedAt: Date.now(), taskId })
       if (duration) {
         setFocusDuration(duration as FocusDuration)
       }

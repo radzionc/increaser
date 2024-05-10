@@ -5,12 +5,14 @@ import { FocusDuration } from '@increaser/entities/FocusDuration'
 
 export interface StartFocusParams {
   projectId: string
+  taskId?: string
   duration?: number
 }
 
 export interface CurrentSet {
   projectId: string
   startedAt: number
+  taskId?: string
 }
 
 export interface StopFocusParams {

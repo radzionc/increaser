@@ -1,5 +1,4 @@
 import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
-import { FocusSessionForm } from '@increaser/app/focus/components/FocusSessionForm'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -10,6 +9,7 @@ import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { SubmitYesterdayHabits } from '@increaser/app/habits/components/SubmitYesterdayHabits'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { FocusLauncher } from '../../focus/launcher'
 
 const Container = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ export const HomePageContent = () => {
         {currentSet ? null : (
           <>
             <BreakTimeline />
-            <FocusSessionForm />
+            <FocusLauncher />
           </>
         )}
         <SubmitYesterdayHabits />

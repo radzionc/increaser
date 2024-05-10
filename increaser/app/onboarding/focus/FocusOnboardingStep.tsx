@@ -1,10 +1,10 @@
 import { VStack } from '@lib/ui/layout/Stack'
-import { FocusSessionForm } from '../../focus/components/FocusSessionForm'
+import { FocusLauncher } from '../../focus/launcher'
 
 export const FocusOnboardingStep = () => {
   return (
     <VStack style={{ maxWidth: 520 }}>
-      <FocusSessionForm />
+      <FocusLauncher />
     </VStack>
   )
 }

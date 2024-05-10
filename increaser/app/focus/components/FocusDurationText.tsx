@@ -5,14 +5,14 @@ import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
 
 interface FocusDurationTextProps {
   value: number
-  emoji: string
+  emoji?: string
 }
 
 export const FocusDurationText = ({ value, emoji }: FocusDurationTextProps) => {
   return (
     <HStack alignItems="center" gap={4}>
       <Text weight="bold">
-        <EmojiTextPrefix emoji={emoji} />
+        {emoji && <EmojiTextPrefix emoji={emoji} />}
         Focus for {value} minutes
       </Text>
       <PlusIcon />
