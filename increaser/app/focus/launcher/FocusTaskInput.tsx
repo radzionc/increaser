@@ -7,15 +7,20 @@ import { FocusTaskOption } from './FocusTaskOption'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { CurrentTaskProvider } from '../../tasks/components/CurrentTaskProvider'
+import { order } from '@lib/utils/array/order'
 
 export const FocusTaskInput = () => {
   const { tasks } = useAssertUserState()
   const options = useMemo(() => {
-    return Object.values(tasks).filter(
-      (task) =>
-        task.projectId &&
-        !task.completedAt &&
-        getDeadlineStatus({ ...task, now: Date.now() }) === 'today',
+    return order(
+      Object.values(tasks).filter(
+        (task) =>
+          task.projectId &&
+          !task.completedAt &&
+          getDeadlineStatus({ ...task, now: Date.now() }) === 'today',
+      ),
+      (task) => task.order,
+      'asc',
     )
   }, [tasks])
 
