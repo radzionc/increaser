@@ -1,7 +1,4 @@
-import { centerContent } from '@lib/ui/css/centerContent'
-import { transition } from '@lib/ui/css/transition'
-import { getColor } from '@lib/ui/theme/getters'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentTask } from '../../tasks/components/CurrentTaskProvider'
@@ -12,43 +9,10 @@ import { TaskCheckBox } from '../../tasks/components/TaskCheckBox'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
 import { HStack } from '@lib/ui/layout/Stack'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-
-const padding = 12
-
-const Container = styled.div<{
-  selected: boolean
-}>`
-  padding: ${toSizeUnit(padding)};
-  border-radius: 8px;
-  ${centerContent}
-  justify-content: start;
-  cursor: pointer;
-  position: relative;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  ${transition}
-  color: ${getColor('textSupporting')};
-  border: 1px solid ${getColor('background')};
-  background: ${getColor('foreground')};
-
-  ${({ selected }) =>
-    selected
-      ? css`
-          background: ${getColor('background')};
-          color: ${getColor('text')};
-          border-color: ${getColor('text')};
-        `
-      : css`
-          &:hover {
-            border-color: ${getColor('mist')};
-            color: ${getColor('text')};
-          }
-        `}
-`
+import {
+  FocusOptionContainer,
+  focusOptionPadding,
+} from './FocusOptionContainer'
 
 const CheckBoxContainer = styled.div`
   ${sameDimensions(checklistItemContentMinHeight)};
@@ -63,11 +27,11 @@ export const FocusTaskOption = () => {
   return (
     <ActionInsideInteractiveElement
       actionPlacerStyles={{
-        left: padding,
-        top: padding,
+        left: focusOptionPadding,
+        top: focusOptionPadding,
       }}
       render={({ actionSize }) => (
-        <Container
+        <FocusOptionContainer
           onClick={() => {
             setState((state) => ({
               ...state,
@@ -77,11 +41,11 @@ export const FocusTaskOption = () => {
           }}
           selected={isSelected}
         >
-          <HStack gap={padding}>
+          <HStack gap={focusOptionPadding}>
             <Spacer {...actionSize} />
             <TaskPrimaryContent />
           </HStack>
-        </Container>
+        </FocusOptionContainer>
       )}
       action={
         <CheckBoxContainer>

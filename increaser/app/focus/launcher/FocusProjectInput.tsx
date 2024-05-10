@@ -1,15 +1,10 @@
-import styled, { css } from 'styled-components'
-import { transition } from '@lib/ui/css/transition'
+import styled from 'styled-components'
 import { Center } from '@lib/ui/layout/Center'
 import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
 import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-
 import { ProjectGoalBadge } from './ProjectGoalBadge'
-import { getColor } from '@lib/ui/theme/getters'
 import { CurrentProjectProvider } from '../../projects/components/ProjectView/CurrentProjectProvider'
 import { AddProjectsPrompt } from '../../projects/components/AddProjectsPrompt'
 import { useFocusLauncher } from './state/FocusLauncherContext'
@@ -17,6 +12,16 @@ import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useEffect, useMemo } from 'react'
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
+import { FocusOptionContainer } from './FocusOptionContainer'
+
+const Identifier = styled(Center)`
+  width: 16px;
+  font-size: 14px;
+`
+
+const Option = styled(FocusOptionContainer)`
+  height: 52px;
+`
 
 export const FocusProjectInput = () => {
   const { projectId, setState } = useFocusLauncher()
@@ -96,43 +101,3 @@ export const FocusProjectInput = () => {
     </UniformColumnGrid>
   )
 }
-
-const Identifier = styled(Center)`
-  width: 16px;
-  font-size: 14px;
-`
-
-const Option = styled.div<{
-  selected: boolean
-}>`
-  height: 52px;
-  ${horizontalPadding(12)}
-  border-radius: 8px;
-  ${centerContent}
-  justify-content: start;
-  cursor: pointer;
-  position: relative;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  ${transition}
-  color: ${getColor('textSupporting')};
-  border: 1px solid ${getColor('background')};
-  background: ${getColor('foreground')};
-
-  ${({ selected }) =>
-    selected
-      ? css`
-          background: ${getColor('background')};
-          color: ${getColor('text')};
-          border-color: ${getColor('text')};
-        `
-      : css`
-          &:hover {
-            border-color: ${getColor('mist')};
-            color: ${getColor('text')};
-          }
-        `}
-`
