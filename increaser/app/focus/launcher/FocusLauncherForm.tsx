@@ -25,6 +25,7 @@ import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import {
   RenderSelectFocusView,
   SelectFocusViewSelector,
+  useSelectFocusView,
 } from './SelectFocusView'
 import { FocusTaskInput } from './FocusTaskInput'
 import { useFocusLauncher } from './state/FocusLauncherContext'
@@ -44,6 +45,8 @@ export const FocusLauncherForm = () => {
   const { projectId, taskId } = useFocusLauncher()
 
   const lastInteractionWasAt = useRef<number>()
+
+  const { view } = useSelectFocusView()
 
   const [focusDuration, setFocusDuration] = useState<FocusDuration>(
     suggestFocusDuration({
@@ -126,7 +129,7 @@ export const FocusLauncherForm = () => {
             action={() => {
               start({
                 projectId: shouldBePresent(projectId),
-                taskId: taskId ?? undefined,
+                taskId: view === 'tasks' && taskId ? taskId : undefined,
                 duration: focusDuration,
               })
             }}
