@@ -41,7 +41,7 @@ export const FocusLauncherForm = () => {
   const todaySets = useTodaySets()
   const { projectsRecord } = useProjects()
   const { start } = useFocus()
-  const { projectId } = useFocusLauncher()
+  const { projectId, taskId } = useFocusLauncher()
 
   const lastInteractionWasAt = useRef<number>()
 
@@ -126,6 +126,7 @@ export const FocusLauncherForm = () => {
             action={() => {
               start({
                 projectId: shouldBePresent(projectId),
+                taskId: taskId ?? undefined,
                 duration: focusDuration,
               })
             }}
