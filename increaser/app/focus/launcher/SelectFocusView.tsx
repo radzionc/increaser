@@ -3,7 +3,8 @@ import { RadioInput } from '@lib/ui/inputs/RadioInput'
 import {
   PersistentStateKey,
   managePersistentState,
-} from '../../../state/persistentState'
+  usePersistentState,
+} from '../../state/persistentState'
 
 export const selectFocusViews = ['projects', 'tasks'] as const
 export type SelectFocusView = (typeof selectFocusViews)[number]
@@ -12,6 +13,13 @@ const persistentView = managePersistentState<SelectFocusView>(
   PersistentStateKey.SelectFocusView,
 )
 
+export const useSelectedFocusView = (initialState: SelectFocusView) => {
+  return usePersistentState<SelectFocusView>(
+    PersistentStateKey.SelectFocusView,
+    initialState,
+  )
+}
+
 export const {
   ViewProvider: SelectFocusViewProvider,
   useView: useSelectFocusView,
@@ -19,7 +27,7 @@ export const {
 } = getViewSetup<SelectFocusView>({
   defaultView: persistentView.get() ?? 'projects',
   name: 'SelectFocus',
-  onChange: persistentView.set,
+  useViewState: useSelectedFocusView,
 })
 
 const taskViewName: Record<SelectFocusView, string> = {

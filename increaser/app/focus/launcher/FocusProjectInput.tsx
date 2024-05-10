@@ -1,0 +1,138 @@
+import styled, { css } from 'styled-components'
+import { transition } from '@lib/ui/css/transition'
+import { Center } from '@lib/ui/layout/Center'
+import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
+import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
+import { HStack } from '@lib/ui/layout/Stack'
+import { Text } from '@lib/ui/text'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+
+import { ProjectGoalBadge } from './ProjectGoalBadge'
+import { getColor } from '@lib/ui/theme/getters'
+import { CurrentProjectProvider } from '../../projects/components/ProjectView/CurrentProjectProvider'
+import { AddProjectsPrompt } from '../../projects/components/AddProjectsPrompt'
+import { useFocusLauncher } from './state/FocusLauncherContext'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useEffect, useMemo } from 'react'
+import { splitBy } from '@lib/utils/array/splitBy'
+import { order } from '@lib/utils/array/order'
+
+export const FocusProjectInput = () => {
+  const { projectId, setState } = useFocusLauncher()
+  const { activeProjects } = useProjects()
+
+  const options = useMemo(() => {
+    const [projectsWithBudget, projectsWithoutBudget] = splitBy(
+      activeProjects,
+      (project) => (project.allocatedMinutesPerWeek ? 0 : 1),
+    )
+
+    const [projectsWithGoal, projectsWithoutGoal] = splitBy(
+      projectsWithBudget,
+      (project) => (project.goal ? 0 : 1),
+    )
+
+    const [doMoreProjects, doLessProjects] = splitBy(
+      projectsWithGoal,
+      (project) => (project.goal === 'doMore' ? 0 : 1),
+    )
+
+    return [
+      ...order(
+        doMoreProjects,
+        (project) =>
+          project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
+        'asc',
+      ),
+      ...projectsWithoutGoal,
+      ...order(
+        doLessProjects,
+        (project) =>
+          project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
+        'asc',
+      ),
+      ...projectsWithoutBudget,
+    ]
+  }, [activeProjects])
+
+  useEffect(() => {
+    const project = options.find((option) => option.id === projectId)
+    if (!project && options.length) {
+      setState((state) => ({ ...state, projectId: options[0].id }))
+    }
+  }, [options, projectId, setState])
+
+  if (!options.length) {
+    return <AddProjectsPrompt />
+  }
+
+  return (
+    <UniformColumnGrid gap={4} minChildrenWidth={160}>
+      {options.map((project) => {
+        const { id, name } = project
+        const isSelected = id === projectId
+        return (
+          <Option as="label" key={id} selected={isSelected}>
+            <HStack style={{ maxWidth: '100%' }} alignItems="center" gap={8}>
+              <Identifier>
+                <CurrentProjectProvider value={project}>
+                  <ProjectGoalBadge project={project} />
+                </CurrentProjectProvider>
+              </Identifier>
+              <Text cropped>{name}</Text>
+            </HStack>
+            <InvisibleHTMLRadio
+              isSelected={isSelected}
+              value={id}
+              groupName="project"
+              onSelect={() =>
+                setState((state) => ({ ...state, projectId: id }))
+              }
+            />
+          </Option>
+        )
+      })}
+    </UniformColumnGrid>
+  )
+}
+
+const Identifier = styled(Center)`
+  width: 16px;
+  font-size: 14px;
+`
+
+const Option = styled.div<{
+  selected: boolean
+}>`
+  height: 52px;
+  ${horizontalPadding(12)}
+  border-radius: 8px;
+  ${centerContent}
+  justify-content: start;
+  cursor: pointer;
+  position: relative;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  ${transition}
+  color: ${getColor('textSupporting')};
+  border: 1px solid ${getColor('background')};
+  background: ${getColor('foreground')};
+
+  ${({ selected }) =>
+    selected
+      ? css`
+          background: ${getColor('background')};
+          color: ${getColor('text')};
+          border-color: ${getColor('text')};
+        `
+      : css`
+          &:hover {
+            border-color: ${getColor('mist')};
+            color: ${getColor('text')};
+          }
+        `}
+`
