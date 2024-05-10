@@ -1,22 +1,16 @@
-import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { Text } from '@lib/ui/text'
-import styled from 'styled-components'
 import { useCurrentTask } from './CurrentTaskProvider'
 import { TaskProject } from './TaskProject'
-
-const Container = styled(Text)`
-  line-height: ${toSizeUnit(checklistItemContentMinHeight)};
-  word-break: break-word;
-`
+import { TaskTrackedTime } from './TaskTrackedTime'
+import { TaskTextContainer } from './TaskTextContainer'
 
 export const TaskPrimaryContent = () => {
   const { name } = useCurrentTask()
 
   return (
-    <Container>
+    <TaskTextContainer>
       <TaskProject />
+      <TaskTrackedTime />
       {name}
-    </Container>
+    </TaskTextContainer>
   )
 }

@@ -23,6 +23,9 @@ import {
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useUpdateTaskMutation } from '../../tasks/api/useUpdateTaskMutation'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { omit } from '@lib/utils/record/omit'
 
 interface Props {
   children: ReactNode
@@ -81,11 +84,35 @@ export const FocusProvider = ({ children }: Props) => {
   }, [])
 
   const { mutate: addSet } = useAddSetMutation()
+  const { mutate: updateTask } = useUpdateTaskMutation()
 
   const cancel = useCallback(() => {
     setCurrentSet(undefined)
     router.push(AppPath.Home)
   }, [router])
+
+  const { tasks } = useAssertUserState()
+
+  useEffect(() => {
+    if (!currentSet) return
+
+    const task = Object.values(tasks).find(
+      (task) => task.id === currentSet.taskId,
+    )
+
+    if (!task) return
+
+    if (task.completedAt) {
+      setCurrentSet(omit(currentSet, 'taskId'))
+      updateTask({
+        id: task.id,
+        fields: {
+          spentTime:
+            (task.spentTime || 0) + (Date.now() - currentSet.startedAt),
+        },
+      })
+    }
+  }, [currentSet, tasks, updateTask])
 
   const stop = useCallback(
     (params: StopFocusParams = {}) => {
@@ -102,6 +129,19 @@ export const FocusProvider = ({ children }: Props) => {
 
       addSet(set)
 
+      const task = Object.values(tasks).find(
+        (task) => task.id === currentSet.taskId,
+      )
+
+      if (task) {
+        updateTask({
+          id: task.id,
+          fields: {
+            spentTime: (task.spentTime || 0) + getSetDuration(set),
+          },
+        })
+      }
+
       setCurrentSet(undefined)
 
       setFocusDuration(getNextFocusDuration(blocks))
@@ -110,7 +150,7 @@ export const FocusProvider = ({ children }: Props) => {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
       })
     },
-    [addSet, currentSet, router, todaySets],
+    [addSet, currentSet, router, tasks, todaySets, updateTask],
   )
 
   return (
