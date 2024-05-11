@@ -8,7 +8,6 @@ import { PersistentStateKey } from '@increaser/app/state/persistentState'
 import { usePersistentState } from '@increaser/app/state/persistentState'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import { useFocusSoundsState } from './FocusSounds/useFocusSoundsState'
 import { useRouter } from 'next/router'
 import { areNotificationsAllowed } from '@lib/ui/notifications/utils'
 import { useAddSetMutation } from '@increaser/app/sets/hooks/useAddSetMutation'
@@ -32,7 +31,6 @@ interface Props {
 export const FocusProvider = ({ children }: Props) => {
   const router = useRouter()
 
-  const [focusSoundsState] = useFocusSoundsState()
   const [focusDuration, setFocusDuration] =
     useState<FocusDuration>(defaultFocusDuration)
 
@@ -110,10 +108,9 @@ export const FocusProvider = ({ children }: Props) => {
 
       analytics.trackEvent('Finish focus session', {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
-        activeSoundUrl: focusSoundsState.activeSoundUrl,
       })
     },
-    [addSet, currentSet, focusSoundsState.activeSoundUrl, todaySets, router],
+    [addSet, currentSet, router, todaySets],
   )
 
   return (
