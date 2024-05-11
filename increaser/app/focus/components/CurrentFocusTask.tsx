@@ -3,7 +3,8 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { TaskItemFrame } from '../../tasks/components/TaskItemFrame'
 import { CurrentTaskProvider } from '../../tasks/components/CurrentTaskProvider'
 import { TaskCheckBox } from '../../tasks/components/TaskCheckBox'
-import { TaskPrimaryContent } from '../../tasks/components/TaskPrimaryContent'
+import { TaskTextContainer } from '../../tasks/components/TaskTextContainer'
+import { TaskProject } from '../../tasks/components/TaskProject'
 
 export const CurrentFocusTask = () => {
   const { taskId } = useCurrentFocus()
@@ -19,7 +20,10 @@ export const CurrentFocusTask = () => {
       <div>
         <TaskItemFrame>
           <TaskCheckBox />
-          <TaskPrimaryContent />
+          <TaskTextContainer>
+            <TaskProject />
+            {task.name}
+          </TaskTextContainer>
         </TaskItemFrame>
       </div>
     </CurrentTaskProvider>

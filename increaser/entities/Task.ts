@@ -6,6 +6,7 @@ export type Task = {
   projectId?: string | null
   deadlineAt: number
   order: number
+  spentTime?: number
 }
 
 export const deadlineTypes = [
