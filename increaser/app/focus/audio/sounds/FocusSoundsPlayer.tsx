@@ -1,5 +1,5 @@
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import {
   FocusSound,
   useFocusSoundsPreference,
@@ -13,51 +13,53 @@ export const FocusSoundsPlayer = () => {
   const [focusAudioMode] = useFocusAudioMode()
   const [preference] = useFocusSoundsPreference()
 
-  const audioRef = useRef<Partial<Record<FocusSound, HTMLAudioElement>>>({})
+  const audioRecordRef = useRef<Partial<Record<FocusSound, HTMLAudioElement>>>(
+    {},
+  )
+
+  const stop = useCallback(() => {
+    Object.values(audioRecordRef.current).forEach((audio) =>
+      attempt(() => {
+        audio.pause()
+      }, undefined),
+    )
+  }, [])
 
   useEffect(() => {
-    const audioRecord = audioRef.current
-    if (!currentSet || focusAudioMode !== 'sounds') {
-      Object.values(audioRecord).forEach((audio) =>
+    const audioRecord = audioRecordRef.current
+    const isActive = currentSet && focusAudioMode === 'sounds'
+
+    if (isActive) {
+      Object.entries(preference).forEach(([sound, volume]) =>
         attempt(() => {
-          console.log('audio: ', audio)
-          audio.pause()
+          const id = sound as FocusSound
+          if (!audioRecord[id]) {
+            audioRecord[id] = new Audio(`audio/focus/${id}.mp3`)
+          }
+
+          const audio = shouldBePresent(audioRecord[id])
+          audio.play()
+          audio.volume = volume
+          audio.loop = true
         }, undefined),
       )
 
-      return
+      Object.entries(audioRecord).forEach(([sound, audio]) =>
+        attempt(() => {
+          const id = sound as FocusSound
+          if (!preference[id]) {
+            audio.pause()
+          }
+        }, undefined),
+      )
+    } else {
+      stop()
     }
-
-    Object.entries(preference).forEach(([sound, volume]) =>
-      attempt(() => {
-        const id = sound as FocusSound
-        if (!audioRecord[id]) {
-          audioRecord[id] = new Audio(`audio/focus/${id}.mp3`)
-        }
-        const audio = shouldBePresent(audioRecord[id])
-        audio.play()
-        audio.volume = volume
-        audio.loop = true
-      }, undefined),
-    )
-
-    Object.entries(audioRecord).forEach(([sound, audio]) =>
-      attempt(() => {
-        const id = sound as FocusSound
-        if (!preference[id]) {
-          audio.pause()
-        }
-      }, undefined),
-    )
 
     return () => {
-      Object.values(audioRecord).forEach((audio) =>
-        attempt(() => {
-          audio.pause()
-        }, undefined),
-      )
+      stop()
     }
-  }, [currentSet, focusAudioMode, preference])
+  }, [currentSet, focusAudioMode, preference, stop])
 
   return null
 }
