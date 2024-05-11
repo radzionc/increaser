@@ -27,6 +27,7 @@ import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
 import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
+import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -69,6 +70,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                           <ScheduleProvider>
                             <BreakProvider>
                               <FocusLauncherProvider>
+                                <FocusSoundsPlayer />
                                 {component}
                               </FocusLauncherProvider>
                             </BreakProvider>

@@ -75,7 +75,9 @@ export const SegmentedSlider = ({
       onChange={({ position }) => {
         if (position) {
           const newValue = Math.round(position.x * max)
-          onChange(newValue)
+          if (newValue !== value) {
+            onChange(newValue)
+          }
         }
       }}
       render={({ props }) => (

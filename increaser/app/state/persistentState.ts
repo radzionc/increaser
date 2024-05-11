@@ -30,6 +30,8 @@ export enum PersistentStateKey {
   TrackedTimeReportPreferences = 'trackedTimeReportPreferences2',
   TrackedTimePreference = 'trackedTimePreference2',
   SelectFocusView = 'selectFocusView',
+  FocusAudioMode = 'focusAudioMode',
+  FocusSoundsPreference = 'focusSoundsPreference',
 }
 
 export const persistentStorage =

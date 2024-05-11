@@ -3,14 +3,15 @@ export const MoonIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
     height="1em"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="feather feather-moon"
+    viewBox="0 0 56 56"
   >
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    <g fill="none" fill-rule="evenodd">
+      <path
+        fill="currentColor"
+        fill-rule="nonzero"
+        d="M5 28c0 13.807 11.193 25 25 25 5.831 0 11.434-2.192 15.91-5.972-.957.108-1.924.163-2.898.163C28.872 47.191 17.5 36.028 17.5 22a25.456 25.456 0 0 1 8.06-18.607C13.871 5.488 5 15.708 5 28zM31.288 2.785A22.482 22.482 0 0 0 20.5 22c0 12.359 10.017 22.191 22.512 22.191 2.414 0 4.775-.38 7.02-1.116 1.427-.468 2.58 1.217 1.627 2.377C46.275 52.007 38.37 56 30 56 14.536 56 2 43.464 2 28S14.536 0 30 0c.178 0 .356.002.534.005 1.5.028 2.034 1.998.754 2.78z"
+      ></path>
+      <path d="M0 0h56v56H0z"></path>
+    </g>
   </svg>
 )

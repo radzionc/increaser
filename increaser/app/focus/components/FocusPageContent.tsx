@@ -9,7 +9,6 @@ import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { FinishSession } from './FinishSession'
 import { FocusAssistance } from './FocusAssistance'
-import { FocusSounds } from './FocusSounds'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { ShrinkFocusView } from './ShrinkFocusView'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
@@ -21,6 +20,7 @@ import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
 import { CurrentFocusTask } from './CurrentFocusTask'
+import { FocusAudioWidget } from '../audio/FocusAudioWidget'
 
 const Container = styled.div`
   max-height: 100%;
@@ -105,7 +105,7 @@ export const FocusPageContent = () => {
                 {size.width > 1120 && (
                   <Side>
                     <ErrorBoundary>
-                      <FocusSounds />
+                      <FocusAudioWidget />
                     </ErrorBoundary>
                   </Side>
                 )}

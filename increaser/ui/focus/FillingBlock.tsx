@@ -2,6 +2,7 @@ import { toPercents } from '@lib/utils/toPercents'
 import styled, { keyframes } from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { HSLA } from '@lib/ui/colors/HSLA'
+import { getColor } from '@lib/ui/theme/getters'
 
 interface Props {
   color: HSLA
@@ -14,6 +15,7 @@ const Container = styled.div<{ $color: HSLA }>`
   display: flex;
   flex-direction: column;
   border-radius: 20px;
+  background: ${getColor('background')};
   overflow: hidden;
   border: 2px solid ${({ $color }) => $color.toCssValue()};
 `
