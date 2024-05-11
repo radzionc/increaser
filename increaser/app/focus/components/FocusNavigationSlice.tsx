@@ -1,4 +1,3 @@
-import { getColor } from '@lib/ui/theme/getters'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
@@ -20,7 +19,6 @@ const Container = styled.div`
   width: 100px;
 
   ${interactive};
-  background: ${getColor('foreground')};
   font-weight: 600;
   font-size: 28px;
   ${centerContent};
