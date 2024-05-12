@@ -5,6 +5,7 @@ import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { PrimaryCallToAction } from './PrimaryCallToAction'
+import { ToolkitPanel } from './toolkit/ToolkitPanel'
 
 const Container = styled(WebsiteSlice)`
   min-height: calc(100vh - ${toSizeUnit(websiteConfig.headerHeight)});
@@ -24,6 +25,7 @@ export const PrimarySlice = () => (
         }
         subtitle="Crafted with Remote Workers' Needs at the Forefront"
       />
+      <ToolkitPanel />
       <PrimaryCallToAction />
     </WebsiteSliceContent>
   </Container>
