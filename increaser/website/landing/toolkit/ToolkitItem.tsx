@@ -1,10 +1,15 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
-import { Tool, toolColor, toolNames, toolsIcons } from './tools'
 import styled, { useTheme } from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import {
+  ProductTool,
+  productToolColorRecord,
+  productToolPurposeRecord,
+} from '@increaser/entities/ProductTool'
+import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 
 const IconContainer = styled(IconWrapper)`
   font-size: 18px;
@@ -21,16 +26,22 @@ const Container = styled(HStack)`
   font-size: 14px;
 `
 
-export const ToolkitItem = ({ value }: ComponentWithValueProps<Tool>) => {
+export const ToolkitItem = ({
+  value,
+}: ComponentWithValueProps<ProductTool>) => {
   const { colors } = useTheme()
   return (
     <Container>
       <IconContainer
-        style={{ color: colors.getLabelColor(toolColor[value]).toCssValue() }}
+        style={{
+          color: colors
+            .getLabelColor(productToolColorRecord[value])
+            .toCssValue(),
+        }}
       >
-        {toolsIcons[value]}
+        {productToolIconRecord[value]}
       </IconContainer>
-      {toolNames[value]}
+      {productToolPurposeRecord[value]}
     </Container>
   )
 }

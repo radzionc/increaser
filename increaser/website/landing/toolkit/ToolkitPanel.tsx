@@ -1,7 +1,7 @@
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import styled from 'styled-components'
-import { tools } from './tools'
 import { ToolkitItem } from './ToolkitItem'
+import { productTools } from '@increaser/entities/ProductTool'
 
 const Content = styled(UniformColumnGrid)`
   max-width: 620px;
@@ -11,7 +11,7 @@ const Content = styled(UniformColumnGrid)`
 export const ToolkitPanel = () => {
   return (
     <Content minChildrenWidth={180} gap={8}>
-      {tools.map((tool) => (
+      {productTools.map((tool) => (
         <ToolkitItem key={tool} value={tool} />
       ))}
     </Content>
