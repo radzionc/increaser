@@ -1,6 +1,9 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { useEffect, useMemo } from 'react'
-import { TimeGrouping, timeFrames } from './TimeGrouping'
+import {
+  TimeGrouping,
+  timeFrames,
+} from '@increaser/ui/timeTracking/report/TimeGrouping'
 import {
   differenceInDays,
   differenceInMonths,
@@ -14,14 +17,14 @@ import { fromWeek, toWeek } from '@lib/utils/time/Week'
 import { areSameWeek } from '@lib/utils/time/Week'
 import { fromMonth, toMonth } from '@lib/utils/time/Month'
 import { areSameMonth } from '@lib/utils/time/Month'
-import { useTrackedTimeReportPreferences } from './state/useTrackedTimeReportPreferences'
-import { useTrackedTime } from './state/TrackedTimeContext'
+import { useTrackedTime } from '@increaser/ui/timeTracking/report/state/TrackedTimeContext'
 import { areSameDay, fromDay, toDay } from '@lib/utils/time/Day'
 import { EntityWithSeconds } from '@increaser/entities/timeTracking'
-import { TrackedTimeReportContext } from './state/TrackedTimeReportContext'
-import { useCurrentPeriodStartedAt } from './hooks/useCurrentPeriodStartedAt'
-import { subtractPeriod } from './utils/subtractPeriod'
+import { TrackedTimeReportContext } from '@increaser/ui/timeTracking/report/state/TrackedTimeReportContext'
+import { useCurrentPeriodStartedAt } from '@increaser/ui/timeTracking/report/hooks/useCurrentPeriodStartedAt'
+import { subtractPeriod } from '@increaser/ui/timeTracking/report/utils/subtractPeriod'
 import { recordMap } from '@lib/utils/record/recordMap'
+import { useTrackedTimeReportPreferences } from './state/useTrackedTimeReportPreferences'
 
 export const TrackedTimeReportProvider = ({
   children,

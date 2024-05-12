@@ -1,9 +1,9 @@
-import { PersistentStateKey } from '@increaser/app/state/persistentState'
+import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import styled from 'styled-components'
 import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { Text } from '@lib/ui/text'
 
-import { ShowOnce } from '@increaser/app/state/ShowOnce'
+import { ShowOnce } from '@increaser/ui/state/ShowOnce'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 

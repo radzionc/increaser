@@ -48,6 +48,7 @@ export const ProjectsLineCharts = ({
       const data = projectsTimeSeries[activeProjectId]
       return [
         {
+          key: activeProjectId,
           data: normalize([...data, chartMin, chartMax]).slice(0, -2),
           color: projects[activeProjectId].hslaColor,
         },
@@ -92,6 +93,7 @@ export const ProjectsLineCharts = ({
             <LineChart
               dataPointsConnectionKind="sharp"
               fillKind={activeProjectId ? 'gradient' : 'solid'}
+              key={index}
               data={chart.data}
               width={width}
               height={lineChartConfig.chartHeight}

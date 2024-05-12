@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import {
   PersistentStateKey,
   usePersistentState,
-} from '@increaser/app/state/persistentState'
+} from '@increaser/ui/state/persistentState'
 
 export const useAuthSession = () => {
   const queryClient = useQueryClient()

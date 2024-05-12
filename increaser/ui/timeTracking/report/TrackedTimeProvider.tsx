@@ -12,13 +12,13 @@ import { areSameWeek } from '@lib/utils/time/Week'
 import { toMonth } from '@lib/utils/time/Month'
 import { areSameMonth } from '@lib/utils/time/Month'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { useTrackedTimePreference } from './state/useTrackedTimePreference'
+import { useTrackedTimePreference } from '@increaser/ui/timeTracking/report/state/useTrackedTimePreference'
 import {
   TimeTrackingProjectData,
   TrackedTimeContext,
-} from './state/TrackedTimeContext'
-import { hideProjectNames } from './utils/hideProjectNames'
-import { mergeTrackedDataPoint } from './utils/mergeTrackedDataPoint'
+} from '@increaser/ui/timeTracking/report/state/TrackedTimeContext'
+import { hideProjectNames } from '@increaser/ui/timeTracking/report/utils/hideProjectNames'
+import { mergeTrackedDataPoint } from '@increaser/ui/timeTracking/report/utils/mergeTrackedDataPoint'
 
 export const TrackedTimeProvider = ({
   children,

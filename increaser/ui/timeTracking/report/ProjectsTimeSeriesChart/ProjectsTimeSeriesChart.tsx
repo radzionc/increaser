@@ -38,7 +38,7 @@ export const ProjectsTimeSeriesChart = () => {
   const { colors } = useTheme()
   const color = activeProjectId
     ? projects[activeProjectId].hslaColor
-    : colors.primary
+    : colors.transparent
 
   const getDataPointStartedAt = (index: number) =>
     match(timeGrouping, {

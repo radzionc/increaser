@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import {
   PersistentStateKey,
   managePersistentState,
-} from '@increaser/app/state/persistentState'
+} from '@increaser/ui/state/persistentState'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 const persistentPath = managePersistentState<string>(

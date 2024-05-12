@@ -8,7 +8,7 @@ import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import {
   usePersistentState,
   PersistentStateKey,
-} from '../state/persistentState'
+} from '@increaser/ui/state/persistentState'
 import { Page } from '@lib/next-ui/Page'
 import { useRouter } from 'next/router'
 import { analytics } from '../analytics'

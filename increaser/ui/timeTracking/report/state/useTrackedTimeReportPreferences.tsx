@@ -1,11 +1,11 @@
 import {
   usePersistentState,
   PersistentStateKey,
-} from '../../../state/persistentState'
-import { timeFrames } from '../TimeGrouping'
-import { useTrackedTime } from './TrackedTimeContext'
+} from '@increaser/ui/state/persistentState'
+import { timeFrames } from '@increaser/ui/timeTracking/report/TimeGrouping'
+import { useTrackedTime } from '@increaser/ui/timeTracking/report/state/TrackedTimeContext'
 import { useEffect } from 'react'
-import { TrackedTimeReportPreferences } from './TrackedTimeReportContext'
+import { TrackedTimeReportPreferences } from '@increaser/ui/timeTracking/report/state/TrackedTimeReportContext'
 
 const defaultTimeGrouping = 'week'
 

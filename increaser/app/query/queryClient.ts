@@ -3,7 +3,7 @@ import { hasWindow } from '@lib/ui/utils/window'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 import { persistQueryClient } from '@tanstack/react-query-persist-client'
-import { PersistentStateKey } from '../state/persistentState'
+import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 
 const maxAge = convertDuration(1, 'd', 'ms')
 

@@ -4,7 +4,7 @@ import {
   PersistentStateKey,
   managePersistentState,
   usePersistentState,
-} from '../../state/persistentState'
+} from '@increaser/ui/state/persistentState'
 
 export const selectFocusViews = ['projects', 'tasks'] as const
 export type SelectFocusView = (typeof selectFocusViews)[number]

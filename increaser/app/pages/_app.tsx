@@ -21,7 +21,7 @@ import { MembershipConfirmation } from '@increaser/app/membership/components/Mem
 import {
   PersistentStateKey,
   usePersistentState,
-} from '../state/persistentState'
+} from '@increaser/ui/state/persistentState'
 import { ThemePreference } from '@lib/ui/theme/ThemePreference'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'

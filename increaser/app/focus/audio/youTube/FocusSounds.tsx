@@ -13,7 +13,7 @@ import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import {
   PersistentStateKey,
   usePersistentState,
-} from '../../../state/persistentState'
+} from '@increaser/ui/state/persistentState'
 import styled from 'styled-components'
 import { SoundItem } from './FocusSoundsList/SoundItem'
 import { match } from '@lib/utils/match'

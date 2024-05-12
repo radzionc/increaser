@@ -1,8 +1,8 @@
+import { TrackedTimePreference } from '@increaser/ui/timeTracking/report/state/TrackedTimeContext'
 import {
   PersistentStateKey,
   usePersistentState,
-} from '../../../state/persistentState'
-import { TrackedTimePreference } from './TrackedTimeContext'
+} from '@increaser/ui/state/persistentState'
 
 export const useTrackedTimePreference = () => {
   return usePersistentState<TrackedTimePreference>(

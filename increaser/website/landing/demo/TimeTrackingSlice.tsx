@@ -3,7 +3,10 @@ import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { productName } from '@increaser/config'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
-import { TimeDistributionPanel } from '@increaser/ui/timeTracking/TimeDistributionPanel'
+import { TrackedTimeReportProvider } from '@increaser/ui/timeTracking/report/TrackedTimeReportProvider'
+import { TrackedTimeReport } from '@increaser/ui/timeTracking/report/TrackedTimeReport'
+import { TrackedTimeProvider } from '@increaser/ui/timeTracking/report/TrackedTimeProvider'
+import { VStack } from '@lib/ui/layout/Stack'
 
 export const TimeTrackingSlice = () => {
   return (
@@ -14,7 +17,13 @@ export const TimeTrackingSlice = () => {
           subtitle={`With ${productName}, time tracking and management become your superpowers`}
         />
         <ClientOnly>
-          <TimeDistributionPanel />
+          <TrackedTimeProvider>
+            <TrackedTimeReportProvider>
+              <VStack style={{ maxWidth: 920, width: '100%' }}>
+                <TrackedTimeReport />
+              </VStack>
+            </TrackedTimeReportProvider>
+          </TrackedTimeProvider>
         </ClientOnly>
       </WebsiteSliceContent>
     </WebsiteSlice>

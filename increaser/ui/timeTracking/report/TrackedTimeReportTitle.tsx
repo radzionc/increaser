@@ -1,4 +1,3 @@
-import { Text } from '@lib/ui/text'
 import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'

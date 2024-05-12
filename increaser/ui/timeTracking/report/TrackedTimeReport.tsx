@@ -6,7 +6,7 @@ import { TrackedTimeReportContent } from './TrackedTimeReportContent'
 
 export const TrackedTimeReport = () => {
   return (
-    <VStack gap={16}>
+    <VStack fullWidth gap={16}>
       <TrackedTimeReportHeader />
       <BasedOnScreenWidth
         value={600}

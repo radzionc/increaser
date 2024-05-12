@@ -9,7 +9,7 @@ import styled from 'styled-components'
 
 const FiltersRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 180px);
+  grid-template-columns: repeat(auto-fit, 180px);
   gap: 8px;
   flex: 1;
   justify-content: end;

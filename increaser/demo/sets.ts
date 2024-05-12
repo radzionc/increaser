@@ -1,7 +1,12 @@
 import { DemoProject } from './projects'
 import { getWeekday } from '@lib/utils/time/getWeekday'
-import { MS_IN_DAY, MS_IN_HOUR, MS_IN_MIN } from '@lib/utils/time'
-import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
+import { MS_IN_HOUR, MS_IN_MIN } from '@lib/utils/time'
+import { startOfMonth, subMonths, startOfDay } from 'date-fns'
+import { range } from '@lib/utils/array/range'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { isWorkday } from '@lib/utils/time/workweek'
+import { Set } from '@increaser/entities/User'
+import { randomlyPick } from '@lib/utils/array/randomlyPick'
 
 type SetBoundaryDescriptor = [number, number]
 
@@ -327,28 +332,55 @@ const daySetsDescription: DaySetsDescription[] = [
   ],
 ]
 
+const getRandomSets = (timestamp: number) => {
+  const options = isWorkday(timestamp)
+    ? daySetsDescription.slice(0, 5)
+    : daySetsDescription.slice(-2)
+
+  return randomlyPick(options)
+}
+
 export const getDemoSets = () => {
-  const weekStartedAt = getWeekStartedAt(Date.now())
   const today = new Date()
-  const weekday = getWeekday(today)
   const now = Date.now()
 
-  const sets = daySetsDescription
-    .slice(0, weekday + 1)
-    .map((sets, index) => {
-      const dayStartedAt = weekStartedAt + MS_IN_DAY * index
+  const firstDayStartedAt = startOfMonth(subMonths(now, 6)).getTime()
+  const todayStartedAt = startOfDay(now).getTime()
+  const daysNumber = Math.round(
+    convertDuration(todayStartedAt - firstDayStartedAt, 'ms', 'd'),
+  )
+  const currentWeekday = getWeekday(today)
+  const currentWeekStartedAt =
+    todayStartedAt - convertDuration(currentWeekday, 'd', 'ms')
 
-      const getTimestamp = ([hour, minute]: SetBoundaryDescriptor) =>
-        dayStartedAt + MS_IN_HOUR * hour + MS_IN_MIN * minute
+  const result: Set[] = []
+  range(daysNumber).forEach((index) => {
+    const dayStartedAt = firstDayStartedAt + convertDuration(index, 'd', 'ms')
 
-      return sets.map((set) => ({
-        ...set,
-        start: getTimestamp(set.start),
-        end: getTimestamp(set.end),
-      }))
+    const getTimestamp = ([hour, minute]: SetBoundaryDescriptor) =>
+      dayStartedAt + MS_IN_HOUR * hour + MS_IN_MIN * minute
+
+    const isCurrentWeek = dayStartedAt >= currentWeekStartedAt
+    const sets = isCurrentWeek
+      ? daySetsDescription[
+          Math.round(
+            convertDuration(dayStartedAt - currentWeekStartedAt, 'ms', 'd'),
+          )
+        ]
+      : getRandomSets(dayStartedAt)
+
+    sets.forEach((set) => {
+      const start = getTimestamp(set.start)
+      const end = getTimestamp(set.end)
+      if (end < now) {
+        result.push({
+          start,
+          end,
+          projectId: set.projectId,
+        })
+      }
     })
-    .flat()
-    .filter((set) => set.end < now)
+  })
 
-  return sets
+  return result
 }

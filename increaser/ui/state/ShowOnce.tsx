@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import {
   PersistentStateKey,
   usePersistentState,
-} from '@increaser/app/state/persistentState'
+} from '@increaser/ui/state/persistentState'
 
 interface ShowOnceProps extends ComponentWithChildrenProps {
   storageKey: PersistentStateKey
