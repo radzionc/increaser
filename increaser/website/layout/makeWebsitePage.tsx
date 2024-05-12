@@ -9,7 +9,12 @@ import { Button } from '@lib/ui/buttons/Button'
 import { OverlayNavigationItem } from '@lib/ui/website/navigation/OverlayNavigationItem'
 import { Footer } from '@lib/ui/website/navigation/Footer'
 import { Text } from '@lib/ui/text'
-import { legalEntity, supportEmail, youTubeChannel } from '@increaser/config'
+import {
+  legalEntity,
+  productTelegramChannelUrl,
+  productXUrl,
+  supportEmail,
+} from '@increaser/config'
 import { InteractiveText } from '@lib/ui/text/InteractiveText'
 import { AppLink } from '../navigation/AppLink'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
@@ -79,8 +84,11 @@ export const getWebsitePageLayout: GetLayout = (page) => (
           <ExternalLink to={`mailto:${supportEmail}`}>
             <InteractiveText>Get in touch</InteractiveText>
           </ExternalLink>
-          <ExternalLink to={youTubeChannel}>
-            <InteractiveText>YouTube</InteractiveText>
+          <ExternalLink to={productXUrl}>
+            <InteractiveText>X</InteractiveText>
+          </ExternalLink>
+          <ExternalLink to={productTelegramChannelUrl}>
+            <InteractiveText>Telegram</InteractiveText>
           </ExternalLink>
         </HStack>
       </Footer>
