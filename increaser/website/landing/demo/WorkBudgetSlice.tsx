@@ -1,5 +1,4 @@
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
-import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
@@ -17,24 +16,22 @@ const Content = styled(UniformColumnGrid)`
 
 export const WorkBudgetSlice = () => {
   return (
-    <WebsiteSlice>
-      <WebsiteSliceContent>
-        <WebsiteSectionHeader
-          title="Your Path to Better Work-Life Balance"
-          subtitle={`Optimize your work hours and enjoy more free time every day`}
-        />
-        <ClientOnly>
-          <Content minChildrenWidth={320} gap={40}>
-            <ManageWorkBudget />
-            <Panel kind="secondary">
-              <SeparatedByLine gap={24}>
-                <WorkBudgetDaysReport />
-                <WorkBudgetWeeksReport />
-              </SeparatedByLine>
-            </Panel>
-          </Content>
-        </ClientOnly>
-      </WebsiteSliceContent>
-    </WebsiteSlice>
+    <WebsiteSliceContent>
+      <WebsiteSectionHeader
+        title="Your Path to Better Work-Life Balance"
+        subtitle={`Optimize your work hours and enjoy more free time every day`}
+      />
+      <ClientOnly>
+        <Content minChildrenWidth={320} gap={40}>
+          <ManageWorkBudget />
+          <Panel kind="secondary">
+            <SeparatedByLine gap={24}>
+              <WorkBudgetDaysReport />
+              <WorkBudgetWeeksReport />
+            </SeparatedByLine>
+          </Panel>
+        </Content>
+      </ClientOnly>
+    </WebsiteSliceContent>
   )
 }

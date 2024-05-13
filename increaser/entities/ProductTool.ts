@@ -1,8 +1,8 @@
 export const productTools = [
+  'focus',
   'trackTime',
   'tasks',
   'workBudget',
-  'focus',
   'timePlanner',
   'habits',
   'schedule',

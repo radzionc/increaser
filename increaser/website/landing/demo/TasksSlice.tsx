@@ -1,5 +1,4 @@
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
-import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
@@ -20,27 +19,25 @@ export const TasksSlice = () => {
   const { tasks } = useAssertUserState()
 
   return (
-    <WebsiteSlice>
-      <WebsiteSliceContent>
-        <WebsiteSectionHeader
-          title="Stay on Top of Your To-Do List"
-          subtitle="Stay organized and never miss a deadline again by prioritizing your daily tasks"
-        />
-        <ClientOnly>
-          <Content>
-            <TasksManagerProvider>
-              {Object.values(tasks).map((task) => (
-                <CurrentTaskProvider key={task.id} value={task}>
-                  <TaskItemFrame>
-                    <TaskCheckBox />
-                    <TaskPrimaryContent />
-                  </TaskItemFrame>
-                </CurrentTaskProvider>
-              ))}
-            </TasksManagerProvider>
-          </Content>
-        </ClientOnly>
-      </WebsiteSliceContent>
-    </WebsiteSlice>
+    <WebsiteSliceContent>
+      <WebsiteSectionHeader
+        title="Stay on Top of Your To-Do List"
+        subtitle="Stay organized and never miss a deadline again by prioritizing your daily tasks"
+      />
+      <ClientOnly>
+        <Content>
+          <TasksManagerProvider>
+            {Object.values(tasks).map((task) => (
+              <CurrentTaskProvider key={task.id} value={task}>
+                <TaskItemFrame>
+                  <TaskCheckBox />
+                  <TaskPrimaryContent />
+                </TaskItemFrame>
+              </CurrentTaskProvider>
+            ))}
+          </TasksManagerProvider>
+        </Content>
+      </ClientOnly>
+    </WebsiteSliceContent>
   )
 }

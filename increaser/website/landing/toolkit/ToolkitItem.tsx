@@ -10,6 +10,9 @@ import {
   productToolPurposeRecord,
 } from '@increaser/entities/ProductTool'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
+import Link from 'next/link'
+import { transition } from '@lib/ui/css/transition'
+import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 
 const IconContainer = styled(IconWrapper)`
   font-size: 18px;
@@ -24,6 +27,10 @@ const Container = styled(HStack)`
   color: ${getColor('contrast')};
   font-weight: 500;
   font-size: 14px;
+  ${transition};
+  &:hover {
+    background: ${getHoverVariant('foreground')};
+  }
 `
 
 export const ToolkitItem = ({
@@ -31,17 +38,19 @@ export const ToolkitItem = ({
 }: ComponentWithValueProps<ProductTool>) => {
   const { colors } = useTheme()
   return (
-    <Container>
-      <IconContainer
-        style={{
-          color: colors
-            .getLabelColor(productToolColorRecord[value])
-            .toCssValue(),
-        }}
-      >
-        {productToolIconRecord[value]}
-      </IconContainer>
-      {productToolPurposeRecord[value]}
-    </Container>
+    <Link href={`#${value}`}>
+      <Container>
+        <IconContainer
+          style={{
+            color: colors
+              .getLabelColor(productToolColorRecord[value])
+              .toCssValue(),
+          }}
+        >
+          {productToolIconRecord[value]}
+        </IconContainer>
+        {productToolPurposeRecord[value]}
+      </Container>
+    </Link>
   )
 }
