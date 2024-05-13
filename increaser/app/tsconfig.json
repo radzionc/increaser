@@ -44,7 +44,11 @@
     "../ui/projects/budget/ProjectPreviousWeeks.tsx",
     "../ui/projects/budget/ProjectsBudgetList.tsx",
     "../ui/projects/budget/ProjectsBudgetOverview.tsx",
-    "../ui/projects/api/useUpdateProjectMutation.ts"
+    "../ui/projects/api/useUpdateProjectMutation.ts",
+    "../ui/tasks/TasksToDo.tsx",
+    "../ui/tasks/TasksView.tsx",
+    "../ui/tasks/TaskTextContainer.tsx",
+    "../ui/tasks/TaskTrackedTime.tsx"
   ],
   "exclude": ["node_modules", "next.config.js"]
 }

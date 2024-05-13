@@ -1,7 +1,7 @@
 import { useCurrentTask } from './CurrentTaskProvider'
 import { TaskProject } from './TaskProject'
-import { TaskTrackedTime } from './TaskTrackedTime'
-import { TaskTextContainer } from './TaskTextContainer'
+import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
+import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
 
 export const TaskPrimaryContent = () => {
   const { name } = useCurrentTask()

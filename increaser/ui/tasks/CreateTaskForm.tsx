@@ -1,16 +1,16 @@
 import { FormEvent, useMemo, useState } from 'react'
 import { useKey } from 'react-use'
-import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { useCreateTaskMutation } from '../api/useCreateTaskMutation'
+import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
 import { TaskNameInput } from './TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from './TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
+import { preventDefault } from '@lib/ui/utils/preventDefault'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -56,7 +56,7 @@ export const CreateTaskForm = ({
       withSections
       kind="secondary"
       as="form"
-      onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(() => {
+      onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() => {
         handleSubmit()
       })}
     >

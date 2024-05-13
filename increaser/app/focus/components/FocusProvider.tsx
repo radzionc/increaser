@@ -23,7 +23,7 @@ import {
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
-import { useUpdateTaskMutation } from '../../tasks/api/useUpdateTaskMutation'
+import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 

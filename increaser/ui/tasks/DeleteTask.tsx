@@ -3,7 +3,7 @@ import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 
 import { useCurrentTask } from './CurrentTaskProvider'
 
-import { useDeleteTaskMutation } from '../api/useDeleteHabitMutation'
+import { useDeleteTaskMutation } from '@increaser/ui/tasks/api/useDeleteHabitMutation'
 
 export const DeleteTask = () => {
   const { id } = useCurrentTask()

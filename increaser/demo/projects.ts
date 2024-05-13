@@ -36,7 +36,7 @@ const projectsDescription: ProjectDescription[] = [
   {
     id: DemoProject.Content,
     color: 10,
-    emoji: '📝',
+    emoji: '🎨',
     allocatedMinutesPerWeek: convertDuration(7, 'h', 'min'),
     goal: 'doMore',
     workingDays: 'everyday',

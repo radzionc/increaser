@@ -89,7 +89,7 @@ export function DnDGroups<K extends string, I>({
         const items = order(groups[groupId] || [], getItemOrder, 'asc')
 
         return (
-          <Droppable droppableId={groupId}>
+          <Droppable key={groupId} droppableId={groupId}>
             {(provided) => {
               return (
                 <>
@@ -101,33 +101,36 @@ export function DnDGroups<K extends string, I>({
                     },
                     content: (
                       <>
-                        {items.map((item, index) => (
-                          <Draggable
-                            key={getItemId(item)}
-                            index={index}
-                            draggableId={getItemId(item)}
-                          >
-                            {(
-                              { dragHandleProps, draggableProps, innerRef },
-                              { isDragging },
-                            ) => (
-                              <>
-                                {renderItem({
-                                  item,
-                                  draggableProps: {
-                                    ...draggableProps,
-                                    ref: innerRef,
-                                  },
-                                  dragHandleProps,
-                                  isDraggingEnabled:
-                                    currentItemId === null ||
-                                    getItemId(item) !== currentItemId,
-                                  isDragging,
-                                })}
-                              </>
-                            )}
-                          </Draggable>
-                        ))}
+                        {items.map((item, index) => {
+                          const key = getItemId(item)
+                          return (
+                            <Draggable
+                              key={key}
+                              index={index}
+                              draggableId={key}
+                            >
+                              {(
+                                { dragHandleProps, draggableProps, innerRef },
+                                { isDragging },
+                              ) => (
+                                <>
+                                  {renderItem({
+                                    item,
+                                    draggableProps: {
+                                      ...draggableProps,
+                                      ref: innerRef,
+                                    },
+                                    dragHandleProps,
+                                    isDraggingEnabled:
+                                      currentItemId === null ||
+                                      getItemId(item) !== currentItemId,
+                                    isDragging,
+                                  })}
+                                </>
+                              )}
+                            </Draggable>
+                          )
+                        })}
                         {provided.placeholder}
                       </>
                     ),

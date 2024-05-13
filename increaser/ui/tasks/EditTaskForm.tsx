@@ -1,6 +1,5 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { useKey } from 'react-use'
-import { handleWithPreventDefault } from '@increaser/app/shared/events'
 import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { TaskNameInput } from './TaskNameInput'
@@ -9,13 +8,14 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from './TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentTask } from './CurrentTaskProvider'
-import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
+import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useTasksManager } from './TasksManagerProvider'
 import { TaskDeadlineInput } from './TaskDeadlineInput'
+import { preventDefault } from '@lib/ui/utils/preventDefault'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
@@ -108,7 +108,7 @@ export const EditTaskForm = () => {
       withSections
       kind="secondary"
       as="form"
-      onSubmit={handleWithPreventDefault<FormEvent<HTMLFormElement>>(() =>
+      onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
         handleSubmit(),
       )}
     >

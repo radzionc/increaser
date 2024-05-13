@@ -10,19 +10,22 @@ import {
 } from '@increaser/entities/Task'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { CurrentTaskProvider } from './CurrentTaskProvider'
-import { TaskItem } from './TaskItem'
+import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
+import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useCallback, useMemo } from 'react'
-import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
+import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { DnDGroups, ItemChangeParams } from './DnDGroups'
-import { CreateTask } from './CreateTask'
+import { DnDGroups, ItemChangeParams } from '@increaser/ui/tasks/DnDGroups'
+import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { DragContainer, OnHoverDragContainer } from './DragContainer'
+import {
+  DragContainer,
+  OnHoverDragContainer,
+} from '@increaser/ui/tasks/DragContainer'
 import { DragHandle } from '@lib/ui/dnd/DragHandle'
 import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
 import { useMedia } from 'react-use'
@@ -30,7 +33,7 @@ import {
   checklistItemContentMinHeight,
   checklistItemVerticalPadding,
 } from '@lib/ui/checklist/ChecklistItemFrame'
-import { useTasksManager } from './TasksManagerProvider'
+import { useTasksManager } from '@increaser/ui/tasks/TasksManagerProvider'
 
 const hoverableDragHandleWidth = 36
 

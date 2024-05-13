@@ -1,4 +1,4 @@
-import { useCurrentTask } from './CurrentTaskProvider'
+import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'

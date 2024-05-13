@@ -6,6 +6,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "react-beautiful-dnd": "^13.1.1",
     "styled-components": "^6.1.6"
+  },
+  "devDependencies": {
+    "@types/react-beautiful-dnd": "^13.1.8"
   }
 }

@@ -1,16 +1,16 @@
-import { FixedWidthContent } from '../../components/reusable/fixed-width-content'
-import { PageTitle } from '../../ui/PageTitle'
-import { UserStateOnly } from '../../user/state/UserStateOnly'
-import { TasksDone } from './TasksDone'
-import { TasksToDo } from './TasksToDo'
+import { FixedWidthContent } from '../components/reusable/fixed-width-content'
+import { PageTitle } from '../ui/PageTitle'
+import { UserStateOnly } from '../user/state/UserStateOnly'
+import { TasksDone } from '@increaser/ui/tasks/TasksDone'
+import { TasksToDo } from '@increaser/ui/tasks/TasksToDo'
 import {
   RenderTasksView,
   TasksViewProvider,
   TasksViewSelector,
-} from './TasksView'
-import { TasksDeadlinesOverview } from './TasksDeadlinesOverview'
-import { TasksManagerProvider } from './TasksManagerProvider'
-import { TasksContainer } from './TasksContainer'
+} from '@increaser/ui/tasks/TasksView'
+import { TasksDeadlinesOverview } from '@increaser/ui/tasks/TasksDeadlinesOverview'
+import { TasksManagerProvider } from '@increaser/ui/tasks/TasksManagerProvider'
+import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
 
 export const TasksPage = () => {
   return (

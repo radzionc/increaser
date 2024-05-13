@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
-import { useUpdateTaskMutation } from '../api/useUpdateTaskMutation'
+import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 
 const Container = styled(CheckStatus)`
   ${interactive};
+  position: relative;
 `
 
 export const TaskCheckBox = () => {
