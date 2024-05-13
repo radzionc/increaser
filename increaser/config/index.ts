@@ -2,8 +2,6 @@ export const productName = 'Increaser'
 export const supportEmail = 'help@increaser.org'
 export const legalEntity = 'Radzion Chachura'
 export const version = '3.1.0'
-export const youTubeChannel =
-  'https://www.youtube.com/channel/UC15iv69GgcJWa8GoohNQzpw'
 export const freeTrialDays = 14
 export const demoVideoUrl = 'https://youtu.be/Ge2jNQ5Q4lc'
 export const founderXUrl = 'https://twitter.com/radzionc'
@@ -13,3 +11,4 @@ export const founderEmail = 'radzion@increaser.org'
 
 export const productXUrl = 'https://twitter.com/increaser_app'
 export const productTelegramChannelUrl = 'https://t.me/increaser_app'
+export const productYouTubeChannelUrl = 'https://www.youtube.com/@increaserapp'

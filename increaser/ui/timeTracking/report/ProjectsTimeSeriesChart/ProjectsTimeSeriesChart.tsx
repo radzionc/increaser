@@ -2,11 +2,10 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useTheme } from 'styled-components'
 import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { addMonths, format } from 'date-fns'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { normalize } from '@lib/utils/math/normalize'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
@@ -20,6 +19,10 @@ import { lineChartConfig } from './lineChartConfig'
 import { ProjectsLineCharts } from './ProjectsLineCharts'
 import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
+import { range } from '@lib/utils/array/range'
+import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
+
+const yLabelsCount = 4
 
 export const ProjectsTimeSeriesChart = () => {
   const { firstTimeGroupStartedAt, timeGrouping, activeProjectId } =
@@ -49,26 +52,34 @@ export const ProjectsTimeSeriesChart = () => {
 
   const selectedDataPointStartedAt = getDataPointStartedAt(selectedDataPoint)
 
-  const [chartMinValue, chartMaxValue] = useMemo(() => {
-    const minValue = Math.min(...totals)
-    const maxValue = Math.max(...totals)
+  const yLabels = useMemo(() => {
+    const minValue = Math.floor(convertDuration(Math.min(...totals), 's', 'h'))
+    const maxValue = Math.ceil(convertDuration(Math.max(...totals), 's', 'h'))
+    const distance = (maxValue - minValue) / (yLabelsCount - 1)
 
-    return [
-      Math.floor(convertDuration(minValue, 's', 'h')),
-      Math.ceil(convertDuration(maxValue, 's', 'h')),
-    ].map((value) => convertDuration(value, 'h', 's'))
+    return range(yLabelsCount)
+      .map((index) => minValue + index * distance)
+      .map((value) => convertDuration(value, 'h', 's'))
   }, [totals])
+
+  const normalize = useCallback(
+    (data: number[]) => {
+      const normalized = normalizeDataArrays({
+        data,
+        yLabels,
+      })
+      return normalized.data
+    },
+    [yLabels],
+  )
 
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
-        const data = normalize([...totals, chartMinValue, chartMaxValue]).slice(
-          0,
-          -2,
-        )
-
-        const yLabels = [chartMinValue, chartMaxValue]
-        const yLabelsData = normalize([chartMinValue, chartMaxValue])
+        const normalized = normalizeDataArrays({
+          totals,
+          yLabels,
+        })
 
         return (
           <VStack fullWidth gap={20} ref={setElement}>
@@ -82,7 +93,7 @@ export const ProjectsTimeSeriesChart = () => {
                     containerWidth={
                       size.width - lineChartConfig.expectedYAxisLabelWidth
                     }
-                    dataPointsNumber={data.length}
+                    dataPointsNumber={totals.length}
                   >
                     <VStack>
                       <Text color="contrast" weight="semibold">
@@ -122,15 +133,16 @@ export const ProjectsTimeSeriesChart = () => {
                 <HStack>
                   <ChartYAxis
                     expectedLabelWidth={lineChartConfig.expectedYAxisLabelWidth}
-                    renderLabel={(index) => (
-                      <Text key={index} size={12} color="supporting">
-                        {formatDuration(yLabels[index], 's', {
-                          maxUnit: 'h',
-                          minUnit: 'h',
-                        })}
-                      </Text>
-                    )}
-                    data={yLabelsData}
+                    renderLabel={(index) => {
+                      const hours = convertDuration(yLabels[index], 's', 'h')
+                      const str = hours % 1 === 0 ? hours : hours.toFixed(1)
+                      return (
+                        <Text key={index} size={12} color="supporting">
+                          {str}h
+                        </Text>
+                      )
+                    }}
+                    data={normalized.yLabels}
                   />
                   <VStack
                     style={{
@@ -139,16 +151,15 @@ export const ProjectsTimeSeriesChart = () => {
                     }}
                     fullWidth
                   >
-                    <ChartHorizontalGridLines data={yLabelsData} />
+                    <ChartHorizontalGridLines data={normalized.yLabels} />
                     <ProjectsLineCharts
-                      chartMin={chartMinValue}
-                      chartMax={chartMaxValue}
+                      normalize={normalize}
                       width={
                         size.width - lineChartConfig.expectedYAxisLabelWidth
                       }
                     />
                     <LineChartPositionTracker
-                      data={data}
+                      data={normalized.totals}
                       color={color}
                       onChange={(index) => {
                         if (index === null) {
@@ -165,7 +176,7 @@ export const ProjectsTimeSeriesChart = () => {
                 <HStack>
                   <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
                   <ChartXAxis
-                    data={data}
+                    data={normalized.totals}
                     expectedLabelWidth={lineChartConfig.expectedLabelWidth}
                     labelsMinDistance={lineChartConfig.labelsMinDistance}
                     containerWidth={

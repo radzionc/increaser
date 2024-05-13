@@ -7,7 +7,6 @@ import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays
 import styled from 'styled-components'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { lineChartConfig } from './lineChartConfig'
-import { normalize } from '@lib/utils/math/normalize'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { useTrackedTime } from '../state/TrackedTimeContext'
 import { ComponentWithWidthProps } from '@lib/ui/props'
@@ -31,14 +30,12 @@ const ChartWrapper = styled.div`
 `
 
 type ProjectsLineChartsProps = ComponentWithWidthProps & {
-  chartMin: number
-  chartMax: number
+  normalize: (data: number[]) => number[]
 }
 
 export const ProjectsLineCharts = ({
   width,
-  chartMin,
-  chartMax,
+  normalize,
 }: ProjectsLineChartsProps) => {
   const { projects } = useTrackedTime()
   const { projectsTimeSeries, activeProjectId } = useTrackedTimeReport()
@@ -49,7 +46,7 @@ export const ProjectsLineCharts = ({
       return [
         {
           key: activeProjectId,
-          data: normalize([...data, chartMin, chartMax]).slice(0, -2),
+          data: normalize(data),
           color: projects[activeProjectId].hslaColor,
         },
       ]
@@ -62,10 +59,7 @@ export const ProjectsLineCharts = ({
     const result: ChartDesription[] = []
     const ordered = order(entries, ([, data]) => sum(data), 'desc')
     const totals = mergeSameSizeDataArrays(ordered.map(([, data]) => data))
-    const normalizedTotals = normalize([...totals, chartMin, chartMax]).slice(
-      0,
-      -2,
-    )
+    const normalizedTotals = normalize(totals)
     ordered.forEach(([projectId], index) => {
       const { hslaColor } = projects[projectId]
 
@@ -83,7 +77,7 @@ export const ProjectsLineCharts = ({
     })
 
     return result
-  }, [activeProjectId, chartMax, chartMin, projects, projectsTimeSeries])
+  }, [activeProjectId, normalize, projects, projectsTimeSeries])
 
   return (
     <Container>

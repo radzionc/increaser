@@ -13,6 +13,7 @@ import {
   legalEntity,
   productTelegramChannelUrl,
   productXUrl,
+  productYouTubeChannelUrl,
   supportEmail,
 } from '@increaser/config'
 import { InteractiveText } from '@lib/ui/text/InteractiveText'
@@ -89,6 +90,9 @@ export const getWebsitePageLayout: GetLayout = (page) => (
           </ExternalLink>
           <ExternalLink to={productTelegramChannelUrl}>
             <InteractiveText>Telegram</InteractiveText>
+          </ExternalLink>
+          <ExternalLink to={productYouTubeChannelUrl}>
+            <InteractiveText>YouTube</InteractiveText>
           </ExternalLink>
         </HStack>
       </Footer>
