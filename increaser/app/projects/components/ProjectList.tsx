@@ -1,7 +1,7 @@
 import { sum } from '@lib/utils/array/sum'
 
 import { ProjectView } from './ProjectView'
-import { CurrentProjectProvider } from './ProjectView/CurrentProjectProvider'
+import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 const sortProjects = (projects: EnhancedProject[]) => {

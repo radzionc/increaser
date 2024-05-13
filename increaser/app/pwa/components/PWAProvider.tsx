@@ -1,7 +1,7 @@
 import { analytics } from '@increaser/app/analytics'
 import { useCallback, useEffect, useState } from 'react'
-import { PersistentStateKey } from '@increaser/app/state/persistentState'
-import { usePersistentState } from '@increaser/app/state/persistentState'
+import { PersistentStateKey } from '@increaser/ui/state/persistentState'
+import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { Modal } from '@lib/ui/modal'
 import { VStack } from '@lib/ui/layout/Stack'
 

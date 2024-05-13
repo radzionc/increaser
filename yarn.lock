@@ -2858,7 +2858,6 @@ __metadata:
     "@sentry/serverless": "npm:^7.61.1"
     "@types/cors": "npm:^2.8.17"
     "@types/jsonwebtoken": "npm:^8.5.1"
-    "@types/luxon": "npm:^2.3.2"
     "@types/node": "npm:^20.10.5"
     "@types/node-telegram-bot-api": "npm:^0"
     "@types/uuid": "npm:^9.0.2"
@@ -2868,7 +2867,6 @@ __metadata:
     esbuild: "npm:^0.18.20"
     express: "npm:^4.18.2"
     jsonwebtoken: "npm:^9.0.1"
-    luxon: "npm:^1.17.2"
     node-telegram-bot-api: "npm:^0.64.0"
     uuid: "npm:^9.0.1"
   languageName: unknown
@@ -2973,12 +2971,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@increaser/management@workspace:increaser/management":
-  version: 0.0.0-use.local
-  resolution: "@increaser/management@workspace:increaser/management"
-  languageName: unknown
-  linkType: soft
-
 "@increaser/paddle-classic-ui@workspace:increaser/paddle-classic-ui":
   version: 0.0.0-use.local
   resolution: "@increaser/paddle-classic-ui@workspace:increaser/paddle-classic-ui"
@@ -3029,6 +3021,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@increaser/ui@workspace:increaser/ui"
   dependencies:
+    "@types/react-beautiful-dnd": "npm:^13.1.8"
+    react-beautiful-dnd: "npm:^13.1.1"
     styled-components: "npm:^6.1.6"
   languageName: unknown
   linkType: soft
@@ -5090,13 +5084,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:^2.3.2":
-  version: 2.4.0
-  resolution: "@types/luxon@npm:2.4.0"
-  checksum: f5e5a9b10d7a76974ea03e1af7d6704edd1ce0bed1c1543461871e9bf173bbaafc92e19fe93a308ae02bd485bd4382e3fcbaabe4921adbcb344b29a85ba70f10
-  languageName: node
-  linkType: hard
-
 "@types/mime@npm:*":
   version: 3.0.4
   resolution: "@types/mime@npm:3.0.4"
@@ -5172,7 +5159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-beautiful-dnd@npm:^13.1.4":
+"@types/react-beautiful-dnd@npm:^13.1.4, @types/react-beautiful-dnd@npm:^13.1.8":
   version: 13.1.8
   resolution: "@types/react-beautiful-dnd@npm:13.1.8"
   dependencies:
@@ -10287,13 +10274,6 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: fc1fe2ee205f7c8855fa0f34c1ab0bcf14b6229e35579ec1fd1079f31d6fc8ef8eb6fd17f2f4d99788d7e339f50e047555551ebd5e434dda503696e7c6591825
-  languageName: node
-  linkType: hard
-
-"luxon@npm:^1.17.2":
-  version: 1.28.1
-  resolution: "luxon@npm:1.28.1"
-  checksum: dfba84bb3cd72f359c77115d374937c31eccdfa6b383284b6848c075f85e02269d4d9a717608944f2c11c4ca5d3df0fc18197ce4ca21313ddd72619b39ee034c
   languageName: node
   linkType: hard
 

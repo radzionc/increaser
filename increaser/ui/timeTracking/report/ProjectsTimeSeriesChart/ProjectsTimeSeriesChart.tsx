@@ -1,0 +1,204 @@
+import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { Text } from '@lib/ui/text'
+import { useTheme } from 'styled-components'
+import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
+import { useCallback, useMemo, useState } from 'react'
+import { addMonths, format } from 'date-fns'
+import { formatDuration } from '@lib/utils/time/formatDuration'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
+import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
+import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
+import { match } from '@lib/utils/match'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
+import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
+import { Spacer } from '@lib/ui/layout/Spacer'
+import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
+import { lineChartConfig } from './lineChartConfig'
+import { ProjectsLineCharts } from './ProjectsLineCharts'
+import { useTrackedTime } from '../state/TrackedTimeContext'
+import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
+import { range } from '@lib/utils/array/range'
+import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
+
+const yLabelsCount = 4
+
+export const ProjectsTimeSeriesChart = () => {
+  const { firstTimeGroupStartedAt, timeGrouping, activeProjectId } =
+    useTrackedTimeReport()
+
+  const { projects } = useTrackedTime()
+
+  const totals = useActiveTimeSeries()
+
+  const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
+    totals.length - 1,
+  )
+  const [isSelectedDataPointVisible, setIsSelectedDataPointVisible] =
+    useState<boolean>(false)
+
+  const { colors } = useTheme()
+  const color = activeProjectId
+    ? projects[activeProjectId].hslaColor
+    : colors.transparent
+
+  const getDataPointStartedAt = (index: number) =>
+    match(timeGrouping, {
+      day: () => firstTimeGroupStartedAt + convertDuration(index, 'd', 'ms'),
+      week: () => firstTimeGroupStartedAt + convertDuration(index, 'w', 'ms'),
+      month: () => addMonths(firstTimeGroupStartedAt, index).getTime(),
+    })
+
+  const selectedDataPointStartedAt = getDataPointStartedAt(selectedDataPoint)
+
+  const yLabels = useMemo(() => {
+    const minValue = Math.floor(convertDuration(Math.min(...totals), 's', 'h'))
+    const maxValue = Math.ceil(convertDuration(Math.max(...totals), 's', 'h'))
+    const distance = (maxValue - minValue) / (yLabelsCount - 1)
+
+    return range(yLabelsCount)
+      .map((index) => minValue + index * distance)
+      .map((value) => convertDuration(value, 'h', 's'))
+  }, [totals])
+
+  const normalize = useCallback(
+    (data: number[]) => {
+      const normalized = normalizeDataArrays({
+        data,
+        yLabels,
+      })
+      return normalized.data
+    },
+    [yLabels],
+  )
+
+  return (
+    <ElementSizeAware
+      render={({ setElement, size }) => {
+        const normalized = normalizeDataArrays({
+          totals,
+          yLabels,
+        })
+
+        return (
+          <VStack fullWidth gap={20} ref={setElement}>
+            {size && (
+              <>
+                <HStack>
+                  <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
+                  <LineChartItemInfo
+                    itemIndex={selectedDataPoint}
+                    isVisible={isSelectedDataPointVisible}
+                    containerWidth={
+                      size.width - lineChartConfig.expectedYAxisLabelWidth
+                    }
+                    dataPointsNumber={totals.length}
+                  >
+                    <VStack>
+                      <Text color="contrast" weight="semibold">
+                        <EmphasizeNumbers
+                          value={formatDuration(
+                            totals[selectedDataPoint],
+                            's',
+                            {
+                              maxUnit: 'h',
+                            },
+                          )}
+                        />
+                      </Text>
+                      <Text color="supporting" size={14} weight="semibold">
+                        {match(timeGrouping, {
+                          day: () =>
+                            format(
+                              selectedDataPointStartedAt,
+                              'EEE d, MMM yyyy',
+                            ),
+                          week: () =>
+                            `${format(
+                              selectedDataPointStartedAt,
+                              'd MMM',
+                            )} - ${format(
+                              selectedDataPointStartedAt +
+                                convertDuration(1, 'w', 'ms'),
+                              'd MMM',
+                            )}`,
+                          month: () =>
+                            format(selectedDataPointStartedAt, 'MMMM yyyy'),
+                        })}
+                      </Text>
+                    </VStack>
+                  </LineChartItemInfo>
+                </HStack>
+                <HStack>
+                  <ChartYAxis
+                    expectedLabelWidth={lineChartConfig.expectedYAxisLabelWidth}
+                    renderLabel={(index) => {
+                      const hours = convertDuration(yLabels[index], 's', 'h')
+                      const str = hours % 1 === 0 ? hours : hours.toFixed(1)
+                      return (
+                        <Text key={index} size={12} color="supporting">
+                          {str}h
+                        </Text>
+                      )
+                    }}
+                    data={normalized.yLabels}
+                  />
+                  <VStack
+                    style={{
+                      position: 'relative',
+                      minHeight: lineChartConfig.chartHeight,
+                    }}
+                    fullWidth
+                  >
+                    <ChartHorizontalGridLines data={normalized.yLabels} />
+                    <ProjectsLineCharts
+                      normalize={normalize}
+                      width={
+                        size.width - lineChartConfig.expectedYAxisLabelWidth
+                      }
+                    />
+                    <LineChartPositionTracker
+                      data={normalized.totals}
+                      color={color}
+                      onChange={(index) => {
+                        if (index === null) {
+                          setIsSelectedDataPointVisible(false)
+                        } else {
+                          setIsSelectedDataPointVisible(true)
+                          setSelectedDataPoint(index)
+                        }
+                      }}
+                    />
+                  </VStack>
+                </HStack>
+
+                <HStack>
+                  <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
+                  <ChartXAxis
+                    data={normalized.totals}
+                    expectedLabelWidth={lineChartConfig.expectedLabelWidth}
+                    labelsMinDistance={lineChartConfig.labelsMinDistance}
+                    containerWidth={
+                      size.width - lineChartConfig.expectedYAxisLabelWidth
+                    }
+                    expectedLabelHeight={lineChartConfig.expectedLabelHeight}
+                    renderLabel={(index) => {
+                      const startedAt = getDataPointStartedAt(index)
+
+                      return (
+                        <Text size={12} color="supporting" nowrap>
+                          {format(startedAt, 'd MMM')}
+                        </Text>
+                      )
+                    }}
+                  />
+                </HStack>
+              </>
+            )}
+          </VStack>
+        )
+      }}
+    />
+  )
+}

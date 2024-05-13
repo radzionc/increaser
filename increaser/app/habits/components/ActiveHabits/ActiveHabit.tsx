@@ -3,7 +3,7 @@ import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import styled, { css } from 'styled-components'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 
 import { useActiveHabits } from './ActiveHabitsContext'
 import { EditHabit } from './EditHabit'

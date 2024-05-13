@@ -6,7 +6,7 @@ import {
 import { MS_IN_SEC } from '@lib/utils/time'
 import { recordMap } from '@lib/utils/record/recordMap'
 
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 
 export const useResetAllHabitsMutation = () => {
   const { updateState } = useUserState()

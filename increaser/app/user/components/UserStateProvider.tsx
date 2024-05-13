@@ -5,7 +5,7 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { UserStateContext } from '@increaser/ui/user/UserStateContext'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 import { User } from '@increaser/entities/User'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 
 const userStateQueryKey = ['userState']

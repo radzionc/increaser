@@ -1,7 +1,7 @@
-import { TasksToDo } from '../tasks/components/TasksToDo'
-import { TasksDeadlinesOverview } from '../tasks/components/TasksDeadlinesOverview'
-import { TasksManagerProvider } from '../tasks/components/TasksManagerProvider'
-import { TasksContainer } from '../tasks/components/TasksContainer'
+import { TasksToDo } from '@increaser/ui/tasks/TasksToDo'
+import { TasksDeadlinesOverview } from '@increaser/ui/tasks/TasksDeadlinesOverview'
+import { TasksManagerProvider } from '@increaser/ui/tasks/TasksManagerProvider'
+import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
 
 export const TasksOnboardingStep = () => (
   <TasksContainer>

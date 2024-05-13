@@ -6,7 +6,7 @@ import { useEffect, useMemo } from 'react'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { CurrentTaskProvider } from '../../tasks/components/CurrentTaskProvider'
+import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { order } from '@lib/utils/array/order'
 
 export const FocusTaskInput = () => {

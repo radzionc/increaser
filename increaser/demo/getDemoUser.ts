@@ -6,8 +6,8 @@ import { getDemoProjects } from './projects'
 import { getDemoSets } from './sets'
 import { getDemoTasks } from './tasks'
 import { demoConfig } from './config'
-// import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
-// import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
+import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
+import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
 
 export const getDemoUser = (): User => {
   const user = {
@@ -26,15 +26,15 @@ export const getDemoUser = (): User => {
     tasks: getDemoTasks(),
   }
 
-  // const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
-  //   (acc, organize) => ({ ...acc, ...organize({ ...user, ...acc }) }),
-  //   {},
-  // )
+  const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
+    (acc, organize) => ({ ...acc, ...organize({ ...user, ...acc }) }),
+    {},
+  )
 
-  // return {
-  //   ...user,
-  //   ...fields,
-  // }
+  return {
+    ...user,
+    ...fields,
+  }
 
   return user
 }

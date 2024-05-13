@@ -1,6 +1,7 @@
-import { Opener } from '@lib/ui/base/Opener'
 import { useIsLikeMember } from '@increaser/app/membership/hooks/useIsLikeMember'
 import { SubscriptionPrompt } from '@increaser/app/membership/subscription/components/SubscriptionPrompt'
+import { useState } from 'react'
+import { analytics } from '../../analytics'
 
 type Action = () => void
 
@@ -16,14 +17,21 @@ interface MemberOnlyActionProps {
 export const MemberOnlyAction = ({ action, render }: MemberOnlyActionProps) => {
   const isLikeMember = useIsLikeMember()
 
+  const [isOpen, setIsOpen] = useState(false)
+
   if (isLikeMember) {
     return render({ action })
   }
 
   return (
-    <Opener
-      renderOpener={({ onOpen }) => render({ action: onOpen })}
-      renderContent={({ onClose }) => <SubscriptionPrompt onClose={onClose} />}
-    />
+    <>
+      {render({
+        action: () => {
+          setIsOpen(true)
+          analytics.trackEvent('Action requires membership')
+        },
+      })}
+      {isOpen && <SubscriptionPrompt onClose={() => setIsOpen(false)} />}
+    </>
   )
 }

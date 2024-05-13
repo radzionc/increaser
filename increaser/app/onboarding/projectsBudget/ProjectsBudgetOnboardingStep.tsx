@@ -1,4 +1,4 @@
-import { ManageProjectsBudget } from '../../projects/budget/ManageProjectsBudget'
+import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
 
 export const ProjectsBudgetOnboardingStep = () => {
   return <ManageProjectsBudget />

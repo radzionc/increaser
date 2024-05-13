@@ -4,7 +4,12 @@ import { SubscriptionPrice } from '@lib/subscription-ui/SubscriptionPrice'
 import { getAnnualSubscriptionSavings } from '@increaser/entities-utils/subscription/getAnnualSubscriptionSavings'
 import { useSubscriptionBillingCycle } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { SubscriptionPricesQueryDependant } from '@increaser/paddle-classic-ui/components/SubscriptionPricesQueryDependant'
-import { MembershipBenefits } from '../membership/MembershipBenefits'
+import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import {
+  productTools,
+  productToolNameRecord,
+} from '@increaser/entities/ProductTool'
+import { MembershipBenefit } from '@lib/ui/membership/components/MembershipBenefit'
 
 export const SubscriptionOffer = () => {
   const [billingCycle, setBillingCycle] = useSubscriptionBillingCycle()
@@ -33,7 +38,11 @@ export const SubscriptionOffer = () => {
           </>
         )}
       />
-      <MembershipBenefits />
+      <UniformColumnGrid fullWidth gap={8} minChildrenWidth={120}>
+        {productTools.map((tool) => (
+          <MembershipBenefit benefit={productToolNameRecord[tool]} key={tool} />
+        ))}
+      </UniformColumnGrid>
     </VStack>
   )
 }

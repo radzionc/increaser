@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { ReactNode } from 'react'
-import { useUpdateUserMutation } from '@increaser/app/user/mutations/useUpdateUserMutation'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { FocusSoundsContext } from './FocusSoundsContext'

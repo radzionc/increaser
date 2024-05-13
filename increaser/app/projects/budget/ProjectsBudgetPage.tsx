@@ -3,9 +3,9 @@ import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-widt
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { Page } from '@lib/next-ui/Page'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
-import { ManageProjectsBudget } from './ManageProjectsBudget'
+import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
-import { ProjectsBudgetReport } from './ProjectsBudgetReport'
+import { ProjectsBudgetReport } from '@increaser/ui/projects/budget/ProjectsBudgetReport'
 
 const title = 'Projects budget'
 

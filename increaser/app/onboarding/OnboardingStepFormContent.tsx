@@ -6,7 +6,7 @@ import { ScheduleOnboardingStep } from './ScheduleOnboardingStep'
 import { TasksOnboardingStep } from './TasksOnboardingStep'
 import { HabitsOnboardingStep } from './habits/HabitsOnboardingStep'
 import { FocusOnboardingStep } from './focus/FocusOnboardingStep'
-import { ManageWorkBudget } from '../workBudget/ManageWorkBudget'
+import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
 import { ProjectsBudgetOnboardingStep } from './projectsBudget/ProjectsBudgetOnboardingStep'
 import { VStack } from '@lib/ui/layout/Stack'
 

@@ -10,7 +10,7 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 import {
   PersistentStateKey,
   usePersistentState,
-} from '@increaser/app/state/persistentState'
+} from '@increaser/ui/state/persistentState'
 
 export interface SetsExplorerDay {
   startedAt: number

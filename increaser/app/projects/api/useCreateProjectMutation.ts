@@ -6,7 +6,7 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 
 import { Project } from '@increaser/entities/Project'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void

@@ -1,7 +1,7 @@
 import { useDeleteProjectMutation } from '@increaser/app/projects/api/userDeleteProjectMutation'
 import { Button } from '@lib/ui/buttons/Button'
 
-import { useCurrentProject } from './CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 
 export const DeleteProject = () => {
   const { id } = useCurrentProject()

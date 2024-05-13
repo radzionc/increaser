@@ -6,13 +6,12 @@ import { FaqSlice } from './FaqSlice'
 import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { ScoreboardSlice } from './ScoreboardSlice'
-import { HabitsSlice } from './demo/HabitsSlice'
 import { DemoUserStateProvider } from './demo/DemoUserStateProvider'
-import { FocusSlice } from './demo/FocusSlice'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
-import { TimeTrackingSlice } from './demo/TimeTrackingSlice'
-import { ScheduleSlice } from './demo/ScheduleSlice'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
+import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
+import { productTools } from '@increaser/entities/ProductTool'
+import { ProductToolSlice } from './demo/ProductToolSlice'
 
 export const LandingPage = () => (
   <>
@@ -22,12 +21,13 @@ export const LandingPage = () => (
     />
     <PrimarySlice />
     <DemoUserStateProvider>
-      <ProjectsProvider>
-        <FocusSlice />
-        <TimeTrackingSlice />
-        <HabitsSlice />
-        <ScheduleSlice />
-      </ProjectsProvider>
+      <MockApiProvider>
+        <ProjectsProvider>
+          {productTools.map((tool) => (
+            <ProductToolSlice key={tool} value={tool} />
+          ))}
+        </ProjectsProvider>
+      </MockApiProvider>
     </DemoUserStateProvider>
     <TestimonialsSlice />
     <VideoSlice />

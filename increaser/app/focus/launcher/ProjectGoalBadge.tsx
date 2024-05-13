@@ -5,8 +5,8 @@ import { useMemo } from 'react'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { useHasReachedFinalWorkday } from '../../projects/budget/hooks/useHasReachedFinalWorkday'
-import { useCurrentDayTarget } from '../../projects/budget/hooks/useCurrentDayTarget'
+import { useHasReachedFinalWorkday } from '@increaser/ui/projects/budget/hooks/useHasReachedFinalWorkday'
+import { useCurrentDayTarget } from '@increaser/ui/projects/budget/hooks/useCurrentDayTarget'
 
 interface ProjectGoalBadgeProps {
   project: EnhancedProject

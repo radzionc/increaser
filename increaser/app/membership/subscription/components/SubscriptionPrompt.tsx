@@ -20,6 +20,7 @@ export const SubscriptionPrompt = ({ onClose }: ClosableComponentProps) => {
           <Modal
             title="Subscribe to continue"
             onClose={onClose}
+            subTitle="Your free trial has ended. Upgrade to keep going!"
             footer={
               <Button
                 onClick={() => setStage('checkout')}
@@ -27,7 +28,7 @@ export const SubscriptionPrompt = ({ onClose }: ClosableComponentProps) => {
                 kind="reversed"
                 size="l"
               >
-                Purchase
+                Continue
               </Button>
             }
           >

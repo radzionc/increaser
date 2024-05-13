@@ -1,5 +1,5 @@
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { getApiQueryKey } from '@increaser/api-ui/hooks/useApiQuery'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 

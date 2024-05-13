@@ -1,10 +1,10 @@
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { TaskItemFrame } from '../../tasks/components/TaskItemFrame'
-import { CurrentTaskProvider } from '../../tasks/components/CurrentTaskProvider'
-import { TaskCheckBox } from '../../tasks/components/TaskCheckBox'
-import { TaskTextContainer } from '../../tasks/components/TaskTextContainer'
-import { TaskProject } from '../../tasks/components/TaskProject'
+import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
+import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
+import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
+import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
+import { TaskProject } from '@increaser/ui/tasks/TaskProject'
 
 export const CurrentFocusTask = () => {
   const { taskId } = useCurrentFocus()

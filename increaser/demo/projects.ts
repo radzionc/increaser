@@ -36,7 +36,7 @@ const projectsDescription: ProjectDescription[] = [
   {
     id: DemoProject.Content,
     color: 10,
-    emoji: '📝',
+    emoji: '🎨',
     allocatedMinutesPerWeek: convertDuration(7, 'h', 'min'),
     goal: 'doMore',
     workingDays: 'everyday',
@@ -50,9 +50,9 @@ const projectsDescription: ProjectDescription[] = [
   },
 ]
 
-const weeksToDisplay = 8
+const weeksToDisplay = 14
 
-const generateWeeks = (allocatedMinutesPerWeek: number) => {
+export const generateWeeks = (allocatedMinutesPerWeek: number) => {
   const now = Date.now()
   const shift = allocatedMinutesPerWeek * 0.1
 
@@ -75,7 +75,6 @@ const toProject = ({
   allocatedMinutesPerWeek,
   goal,
 }: ProjectDescription): Project => {
-  const weeks = generateWeeks(allocatedMinutesPerWeek)
   return {
     id,
     name: id,
@@ -83,7 +82,7 @@ const toProject = ({
     emoji,
     allocatedMinutesPerWeek,
     status: 'active',
-    weeks,
+    weeks: [],
     months: [],
     workingDays: 'everyday',
     goal,

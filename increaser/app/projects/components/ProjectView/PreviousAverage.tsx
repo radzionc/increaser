@@ -2,7 +2,7 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { Text } from '@lib/ui/text'
 
-import { useCurrentProject } from './CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 
 export const PreviousAverage = () => {
   const { weeks } = useCurrentProject()

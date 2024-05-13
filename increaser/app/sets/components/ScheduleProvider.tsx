@@ -1,7 +1,7 @@
 import { ScheduleContext } from '@increaser/ui/schedule/ScheduleContext'
 
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 
 export const ScheduleProvider = ({ children }: ComponentWithChildrenProps) => {
   const { mutate: updateUser } = useUpdateUserMutation()

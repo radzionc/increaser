@@ -1,5 +1,5 @@
-import { PersistentStateKey } from '@increaser/app/state/persistentState'
-import { usePersistentState } from '@increaser/app/state/persistentState'
+import { PersistentStateKey } from '@increaser/ui/state/persistentState'
+import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 import { FocusSoundsState } from './FocusSoundsContext'

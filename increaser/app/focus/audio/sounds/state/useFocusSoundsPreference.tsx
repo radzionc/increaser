@@ -1,7 +1,7 @@
 import {
   PersistentStateKey,
   usePersistentState,
-} from '../../../../state/persistentState'
+} from '@increaser/ui/state/persistentState'
 
 export const focusSounds = [
   'rain',

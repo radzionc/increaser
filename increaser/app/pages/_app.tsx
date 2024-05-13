@@ -21,13 +21,14 @@ import { MembershipConfirmation } from '@increaser/app/membership/components/Mem
 import {
   PersistentStateKey,
   usePersistentState,
-} from '../state/persistentState'
+} from '@increaser/ui/state/persistentState'
 import { ThemePreference } from '@lib/ui/theme/ThemePreference'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
 import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
 import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
+import { ApiProvider } from '../api/ApiProvider'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -59,32 +60,34 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <GlobalStyle fontFamily={openSans.style.fontFamily} />
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary fallback={<FullSizeErrorFallback />}>
-          <UserStateProvider>
-            <PWAProvider>
-              <ConditionalUserState
-                present={() => (
-                  <UserManagerProvider>
-                    <ProjectsProvider>
-                      <HabitsProvider>
-                        <FocusProvider>
-                          <ScheduleProvider>
-                            <BreakProvider>
-                              <FocusLauncherProvider>
-                                <FocusSoundsPlayer />
-                                {component}
-                              </FocusLauncherProvider>
-                            </BreakProvider>
-                            <MembershipConfirmation />
-                          </ScheduleProvider>
-                        </FocusProvider>
-                      </HabitsProvider>
-                    </ProjectsProvider>
-                  </UserManagerProvider>
-                )}
-                missing={() => <>{component}</>}
-              />
-            </PWAProvider>
-          </UserStateProvider>
+          <ApiProvider>
+            <UserStateProvider>
+              <PWAProvider>
+                <ConditionalUserState
+                  present={() => (
+                    <UserManagerProvider>
+                      <ProjectsProvider>
+                        <HabitsProvider>
+                          <FocusProvider>
+                            <ScheduleProvider>
+                              <BreakProvider>
+                                <FocusLauncherProvider>
+                                  <FocusSoundsPlayer />
+                                  {component}
+                                </FocusLauncherProvider>
+                              </BreakProvider>
+                              <MembershipConfirmation />
+                            </ScheduleProvider>
+                          </FocusProvider>
+                        </HabitsProvider>
+                      </ProjectsProvider>
+                    </UserManagerProvider>
+                  )}
+                  missing={() => <>{component}</>}
+                />
+              </PWAProvider>
+            </UserStateProvider>
+          </ApiProvider>
         </ErrorBoundary>
       </QueryClientProvider>
     </ThemeProvider>

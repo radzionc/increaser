@@ -1,6 +1,6 @@
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 import { useQuery } from '@tanstack/react-query'
-import { useApi } from './useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import {
   ApiInterface,
   ApiMethodName,

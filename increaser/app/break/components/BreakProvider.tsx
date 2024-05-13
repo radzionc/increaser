@@ -11,8 +11,8 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 
 import { pluralizeName } from '@lib/utils/pluralize'
 import { range } from '@lib/utils/array/range'
-import { PersistentStateKey } from '@increaser/app/state/persistentState'
-import { usePersistentState } from '@increaser/app/state/persistentState'
+import { PersistentStateKey } from '@increaser/ui/state/persistentState'
+import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN, MS_IN_SEC } from '@lib/utils/time'
 
