@@ -3,12 +3,13 @@ import { useSubscriptionBillingCycle } from '@lib/subscription-ui/SubscriptionBi
 import { PaddleIFrame } from '@increaser/paddle-classic-ui/components/PaddleIFrame'
 import { paddleProductCode } from '@increaser/paddle-classic-ui/paddleProductCode'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal'
 import { productName } from '@increaser/entities'
 import { Flow } from '@lib/ui/base/Flow'
 import { QuerySubscriptionId } from '@increaser/paddle-classic-ui/components/QuerySubscriptionId'
+import { analytics } from '../../../analytics'
 
 type SubscriptionCheckoutStep =
   | {
@@ -39,6 +40,10 @@ export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
   const [billingCycle] = useSubscriptionBillingCycle()
   const user = useAssertUserState()
 
+  useEffect(() => {
+    analytics.trackEvent('Start subscription checkout')
+  }, [])
+
   return (
     <PaddleModal title={stepTitle[step.id]} onClose={onClose}>
       <Flow
@@ -49,9 +54,10 @@ export const SubscriptionCheckout = ({ onClose }: ClosableComponentProps) => {
               user={user}
               onClose={onClose}
               product={paddleProductCode[billingCycle]}
-              onSuccess={(checkoutId) =>
+              onSuccess={(checkoutId) => {
                 setStep({ id: 'subscriptionId', checkoutId })
-              }
+                analytics.trackEvent('Subscription checkout success')
+              }}
             />
           ),
           subscriptionId: ({ checkoutId }) => (
