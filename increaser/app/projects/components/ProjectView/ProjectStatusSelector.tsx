@@ -1,6 +1,6 @@
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { useUpdateProjectMutation } from '../../api/useUpdateProjectMutation'
-import { useCurrentProject } from './CurrentProjectProvider'
+import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { projectsStatuses } from '@increaser/entities/Project'

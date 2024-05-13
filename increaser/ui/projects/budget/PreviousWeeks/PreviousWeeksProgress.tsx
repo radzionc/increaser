@@ -1,4 +1,4 @@
-import { CurrentProjectProvider } from '../../components/ProjectView/CurrentProjectProvider'
+import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { VStack } from '@lib/ui/layout/Stack'
 import { GoalsRequired } from '../GoalsRequired'
 import { ProjectPreviousWeeks } from '../ProjectPreviousWeeks'

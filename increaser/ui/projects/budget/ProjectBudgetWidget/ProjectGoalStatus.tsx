@@ -1,5 +1,5 @@
 import { Match } from '@lib/ui/base/Match'
-import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { SummaryFrame, SummaryFrameDuration } from './SummaryFrame'

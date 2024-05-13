@@ -1,4 +1,4 @@
-import { useCurrentProject } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { VStack } from '@lib/ui/layout/Stack'
 import { ProjectBudgetWidgetHeader } from './ProjectBudgetWidgetHeader'
 import { ProjectBudgetOverview } from './ProjectBudgetOverview'

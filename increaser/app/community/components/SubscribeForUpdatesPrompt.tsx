@@ -5,7 +5,7 @@ import { XIcon } from '@lib/ui/icons/XIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
-import { EmojiTextPrefix } from '../../ui/EmojiTextPrefix'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 
 export const SubscribeForUpdatesPrompt = () => {
   return (

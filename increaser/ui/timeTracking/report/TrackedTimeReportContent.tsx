@@ -20,7 +20,6 @@ export const TrackedTimeReportContent = () => (
           <ProjectsDistributionBreakdown />
           <VStack
             style={{ flex: 1 }}
-            fullHeight
             justifyContent="center"
             alignItems="center"
           >

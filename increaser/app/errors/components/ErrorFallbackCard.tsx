@@ -3,7 +3,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { ModalTitleText } from '@lib/ui/modal/ModalTitleText'
 
 export const ErrorFallbackCard = () => {

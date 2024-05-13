@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components'
 import { CountableItemsVisualization } from '@lib/ui/visual/CountableItemsVisualization'
 import { MIN_IN_HOUR } from '@lib/utils/time'
 import { useMemo } from 'react'
-import { useBudgetedProjects } from './hooks/useBudgetedProjects'
+import { useBudgetedProjects } from '@increaser/ui/projects/budget/hooks/useBudgetedProjects'
 import { useWorkBudgetTotal } from '@increaser/ui/workBudget/hooks/useWorkBudgetTotal'
 
 export const ProjectsBudgetVisualization = () => {

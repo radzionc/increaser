@@ -346,9 +346,9 @@ export const getDemoSets = () => {
 
   const firstDayStartedAt = startOfMonth(subMonths(now, 6)).getTime()
   const todayStartedAt = startOfDay(now).getTime()
-  const daysNumber = Math.round(
-    convertDuration(todayStartedAt - firstDayStartedAt, 'ms', 'd'),
-  )
+  const daysNumber =
+    Math.round(convertDuration(todayStartedAt - firstDayStartedAt, 'ms', 'd')) +
+    1
   const currentWeekday = getWeekday(today)
   const currentWeekStartedAt =
     todayStartedAt - convertDuration(currentWeekday, 'd', 'ms')

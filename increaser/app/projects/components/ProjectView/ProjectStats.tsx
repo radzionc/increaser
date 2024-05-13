@@ -27,7 +27,7 @@ import {
   getShortWeekday,
 } from '@lib/utils/time'
 
-import { useCurrentProject } from './CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
 
 const projectStatsView = ['days', 'weeks', 'months'] as const

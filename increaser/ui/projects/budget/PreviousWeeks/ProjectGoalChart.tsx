@@ -1,7 +1,7 @@
 import { ProjectWeek } from '@increaser/entities/timeTracking'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { useState } from 'react'
-import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { HStack, VStack } from '@lib/ui/layout/Stack'

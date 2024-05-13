@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 type Props = ComponentProps<typeof Text> & {

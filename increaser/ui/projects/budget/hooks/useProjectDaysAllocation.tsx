@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { range } from '@lib/utils/array/range'
 import { sum } from '@lib/utils/array/sum'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'

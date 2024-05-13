@@ -1,5 +1,5 @@
 import { suggestFocusDuration } from '@increaser/app/focus/FocusDuration'
-import { CurrentProjectProvider } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
+import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
@@ -19,8 +19,8 @@ import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnl
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
-import { ProjectBudgetWidget } from '../../projects/budget/ProjectBudgetWidget'
-import { ProjectBudgetSummary } from '../../projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
+import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
+import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import {
   RenderSelectFocusView,

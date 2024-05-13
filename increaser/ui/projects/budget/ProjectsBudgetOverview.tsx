@@ -1,6 +1,6 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
-import { ProjectsBudgetVisualization } from './ProjectsBudgetVisualization'
+import { ProjectsBudgetVisualization } from '@increaser/ui/projects/budget/ProjectsBudgetVisualization'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { Text } from '@lib/ui/text'

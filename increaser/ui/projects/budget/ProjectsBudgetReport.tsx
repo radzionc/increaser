@@ -1,7 +1,7 @@
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { Panel } from '@lib/ui/panel/Panel'
-import { CurrentWeekProgress } from './CurrentWeekProgress'
-import { PreviousWeeksProgress } from './PreviousWeeks/PreviousWeeksProgress'
+import { CurrentWeekProgress } from '@increaser/ui/projects/budget/CurrentWeekProgress'
+import { PreviousWeeksProgress } from '@increaser/ui/projects/budget/PreviousWeeks/PreviousWeeksProgress'
 
 export const ProjectsBudgetReport = () => (
   <Panel kind="secondary">

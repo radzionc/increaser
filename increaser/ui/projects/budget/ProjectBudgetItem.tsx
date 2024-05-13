@@ -6,15 +6,16 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { Panel } from '@lib/ui/panel/Panel'
 import { ProjectGoalShyIndicator } from './ProjectGoalShyIndicator'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { transition } from '@lib/ui/css/transition'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
-import { useUpdateProjectMutation } from '../api/useUpdateProjectMutation'
+import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { Opener } from '@lib/ui/base/Opener'
 import { ManageProjectBudget } from './ManageProjectBudget'
+import { interactive } from '@lib/ui/css/interactive'
+import { cropText } from '@lib/ui/css/cropText'
 
 type WeeklyGoalItemProps = {
   value: EnhancedProject
@@ -24,15 +25,21 @@ const Container = styled(Panel)`
   font-size: 14px;
 `
 
-const PanelButton = styled(UnstyledButton)`
+const PanelButton = styled.div`
+  ${interactive};
   height: 100%;
-  font-size: 20px;
+  aspect-ratio: 1/1;
+  font-size: 18px;
   ${centerContent};
   ${transition};
   &:hover {
     background: ${getHoverVariant('foreground')};
     color: ${getColor('contrast')};
   }
+`
+
+const Content = styled(HStack)`
+  ${cropText};
 `
 
 export const ProjectBudgetItem = ({ value }: WeeklyGoalItemProps) => {
@@ -47,16 +54,18 @@ export const ProjectBudgetItem = ({ value }: WeeklyGoalItemProps) => {
               fullWidth
               alignItems="center"
               justifyContent="space-between"
+              gap={8}
+              style={{ overflow: 'hidden' }}
             >
-              <HStack alignItems="center" gap={8}>
+              <Content alignItems="center" gap={8}>
                 {<ProjectGoalShyIndicator value={value.goal ?? null} />}
 
                 <Text color="contrast" cropped weight="semibold">
                   {value.name}
                 </Text>
-              </HStack>
+              </Content>
               <HStack alignItems="center" gap={4}>
-                <Text weight="bold" color="contrast">
+                <Text nowrap weight="bold" color="contrast">
                   {formatDuration(value.allocatedMinutesPerWeek, 'min', {
                     kind: 'long',
                     minUnit: 'h',

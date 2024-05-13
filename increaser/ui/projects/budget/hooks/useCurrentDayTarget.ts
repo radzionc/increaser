@@ -1,7 +1,7 @@
-import { useCurrentProject } from '@increaser/app/projects/components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { sum } from '@lib/utils/array/sum'
-import { useProjectDaysAllocation } from '../hooks/useProjectDaysAllocation'
+import { useProjectDaysAllocation } from './useProjectDaysAllocation'
 
 export const useCurrentDayTarget = () => {
   const { allocatedMinutesPerWeek } = useCurrentProject()

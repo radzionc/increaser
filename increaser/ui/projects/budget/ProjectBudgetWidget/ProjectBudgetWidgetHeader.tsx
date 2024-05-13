@@ -1,7 +1,7 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
-import { useCurrentProject } from '../../components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import Link from 'next/link'

@@ -15,6 +15,7 @@ import { ScheduleSlice } from './demo/ScheduleSlice'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { WorkBudgetSlice } from './demo/WorkBudgetSlice'
+import { ProjectsBudgetSlice } from './demo/ProjectsBudgetSlice'
 
 export const LandingPage = () => (
   <>
@@ -29,6 +30,7 @@ export const LandingPage = () => (
           <FocusSlice />
           <TimeTrackingSlice />
           <WorkBudgetSlice />
+          <ProjectsBudgetSlice />
           <HabitsSlice />
           <ScheduleSlice />
         </ProjectsProvider>

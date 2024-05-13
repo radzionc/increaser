@@ -1,6 +1,6 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '../../../ui/EmojiTextPrefix'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { ComponentProps } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 

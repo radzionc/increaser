@@ -1,5 +1,5 @@
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
-import { useCurrentProject } from '../components/ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useMemo } from 'react'
 import { range } from '@lib/utils/array/range'
 import { areSameWeek, toWeek } from '@lib/utils/time/Week'

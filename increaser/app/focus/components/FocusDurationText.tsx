@@ -1,7 +1,7 @@
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '@increaser/app/ui/EmojiTextPrefix'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 
 interface FocusDurationTextProps {
   value: number

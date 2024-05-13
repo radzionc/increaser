@@ -1,5 +1,4 @@
 import { useDeleteProjectMutation } from '@increaser/app/projects/api/userDeleteProjectMutation'
-import { useUpdateProjectMutation } from '@increaser/app/projects/api/useUpdateProjectMutation'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { TextButton } from '@lib/ui/buttons/TextButton'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
@@ -8,7 +7,8 @@ import { Opener } from '@lib/ui/base/Opener'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
-import { useCurrentProject } from './ProjectView/CurrentProjectProvider'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
+import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
