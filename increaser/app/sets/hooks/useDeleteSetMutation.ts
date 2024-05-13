@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import {
   useAssertUserState,
   useUserState,

@@ -1,6 +1,6 @@
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useMutation } from '@tanstack/react-query'
 import {
   useAssertUserState,

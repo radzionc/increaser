@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components'
 import { WorkBudgetInput } from '@increaser/ui/workBudget/WorkBudgetInput'
 import { getWorkdayColor } from '@increaser/ui/workBudget/getWorkdayColor'
 import { getWeekendColor } from '@increaser/ui/workBudget/getWeekendColor'
-import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { BarChart } from '@lib/ui/charts/BarChart'
 import { Text } from '@lib/ui/text'
 import { getShortWeekday } from '@lib/utils/time'
@@ -37,11 +37,11 @@ export const ManageWorkBudget = () => {
 
   return (
     <Panel>
-      <VStack gap={20}>
+      <VStack fullHeight gap={20}>
         <SectionTitle>
           My preference ~ {formattedWorkdBudgetTotal} / week
         </SectionTitle>
-        <VStack gap={40}>
+        <VStack style={{ flex: 1 }} justifyContent="space-between" gap={40}>
           <VStack gap={28}>
             <InputDebounce
               value={workdayHours}

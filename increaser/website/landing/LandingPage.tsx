@@ -13,6 +13,8 @@ import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { TimeTrackingSlice } from './demo/TimeTrackingSlice'
 import { ScheduleSlice } from './demo/ScheduleSlice'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
+import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
+import { WorkBudgetSlice } from './demo/WorkBudgetSlice'
 
 export const LandingPage = () => (
   <>
@@ -22,12 +24,15 @@ export const LandingPage = () => (
     />
     <PrimarySlice />
     <DemoUserStateProvider>
-      <ProjectsProvider>
-        <FocusSlice />
-        <TimeTrackingSlice />
-        <HabitsSlice />
-        <ScheduleSlice />
-      </ProjectsProvider>
+      <MockApiProvider>
+        <ProjectsProvider>
+          <FocusSlice />
+          <TimeTrackingSlice />
+          <WorkBudgetSlice />
+          <HabitsSlice />
+          <ScheduleSlice />
+        </ProjectsProvider>
+      </MockApiProvider>
     </DemoUserStateProvider>
     <TestimonialsSlice />
     <VideoSlice />

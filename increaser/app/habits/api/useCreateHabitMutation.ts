@@ -6,7 +6,7 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const useCreateHabitMutation = () => {

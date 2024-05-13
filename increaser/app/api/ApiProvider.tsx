@@ -1,24 +1,20 @@
-import {
-  ApiInterface,
-  ApiMethodName,
-} from '@increaser/api-interface/ApiInterface'
+import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { useAuthSession } from '../auth/hooks/useAuthSession'
+
+import { callApi } from '@increaser/api-ui/utils/callApi'
 import { useCallback } from 'react'
-import { callApi } from '../utils/callApi'
-import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
-import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 import { ApiError } from '@increaser/api-interface/ApiError'
+import { ApiContext, CallApi } from '@increaser/api-ui/state/ApiContext'
+import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 
 const baseUrl = shouldBeDefined(process.env.NEXT_PUBLIC_API_URL)
 
-export const useApi = () => {
+export const ApiProvider = ({ children }: ComponentWithChildrenProps) => {
   const [authSession, setAuthSession] = useAuthSession()
   const authToken = authSession?.token
 
-  const call = useCallback(
-    async <M extends ApiMethodName>(
-      method: M,
-      input: ApiInterface[M]['input'],
-    ) => {
+  const call: CallApi = useCallback(
+    async (method, input) => {
       try {
         const result = await callApi({
           baseUrl,
@@ -38,5 +34,5 @@ export const useApi = () => {
     [authToken, setAuthSession],
   )
 
-  return { call } as const
+  return <ApiContext.Provider value={{ call }}>{children}</ApiContext.Provider>
 }

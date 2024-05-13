@@ -23,7 +23,11 @@
     "../ui/timeTracking/report/state/useTrackedTimePreference.tsx",
     "../ui/timeTracking/report/state/useTrackedTimeReportPreferences.tsx",
     "../ui/timeTracking/report/TrackedTimeProvider.tsx",
-    "../ui/timeTracking/report/TrackedTimeReportProvider.tsx"
+    "../ui/timeTracking/report/TrackedTimeReportProvider.tsx",
+    "../ui/workBudget/WorkBudgetReport.tsx",
+    "../ui/workBudget/WorkBudgetWeeksReport.tsx",
+    "../ui/workBudget/AvgDay.tsx",
+    "../ui/workBudget/WorkBudgetDaysReport.tsx"
   ],
   "exclude": ["node_modules", "next.config.js"]
 }

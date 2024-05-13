@@ -1,7 +1,7 @@
 import { scoreboardPeriods } from '@increaser/entities/PerformanceScoreboard'
 import { useInvalidateQueries } from '@lib/ui/query/hooks/useInvalidateQueries'
 import { User } from '@sentry/nextjs'
-import { useApi } from '@increaser/api-ui/hooks/useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { getApiQueryKey } from '@increaser/api-ui/hooks/useApiQuery'
 import { useMutation } from '@tanstack/react-query'
 import { useUserState } from '@increaser/ui/user/UserStateContext'

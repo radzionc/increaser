@@ -3,7 +3,7 @@ import {
   ApiMethodName,
 } from '@increaser/api-interface/ApiInterface'
 import { useMutation } from '@tanstack/react-query'
-import { useApi } from './useApi'
+import { useApi } from '@increaser/api-ui/state/ApiContext'
 
 interface ApiMutationOptions<M extends ApiMethodName> {
   onSuccess?: (data: ApiInterface[M]['output']) => void
