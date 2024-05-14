@@ -1,34 +1,26 @@
 import { useCreateProjectMutation } from '@increaser/app/projects/api/useCreateProjectMutation'
-import { Controller, useForm } from 'react-hook-form'
-import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import { getRandomElement } from '@lib/utils/array/getRandomElement'
-import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { Project } from '@increaser/entities/Project'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { defaultEmojis } from '@increaser/ui/projects/EnhancedProject'
-import { TextInput } from '@lib/ui/inputs/TextInput'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { Panel } from '@lib/ui/panel/Panel'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { preventDefault } from '@lib/ui/utils/preventDefault'
+import { VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { suggestLabelColor } from '@lib/ui/theme/suggestLabelColor'
-import { useCallback } from 'react'
+import { useMemo, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
-
-type ProjectFormShape = Pick<Project, 'name' | 'emoji' | 'color'>
+import { ProjectFormFields } from './ProjectFormFields'
+import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { activeProjects } = useProjects()
 
   const { mutate: createProject } = useCreateProjectMutation()
 
-  const { usedColors } = usePaletteColorOptions(activeProjects)
-
-  const getDefaultValues = useCallback(
+  const [value, setValue] = useState<Pick<Project, 'name' | 'emoji' | 'color'>>(
     () => ({
       name: '',
       emoji: getRandomElement(defaultEmojis),
@@ -36,13 +28,13 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
         used: activeProjects.map((project) => project.color),
       }),
     }),
-    [activeProjects],
   )
 
-  const { control, register, handleSubmit } = useForm<ProjectFormShape>({
-    mode: 'onSubmit',
-    defaultValues: getDefaultValues(),
-  })
+  const isDisabled = useMemo(() => {
+    if (!value.name) {
+      return 'Name is required'
+    }
+  }, [value.name])
 
   return (
     <InputContainer style={{ gap: 8 }} as="div">
@@ -51,56 +43,27 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
         <VStack
           gap={28}
           as="form"
-          onSubmit={preventDefault(
-            handleSubmit((project) => {
+          {...getFormProps({
+            onClose: onFinish,
+            isDisabled,
+            onSubmit: () => {
               createProject({
-                ...project,
+                ...value,
                 allocatedMinutesPerWeek: 0,
                 workingDays: 'everyday',
               })
               onFinish()
-            }),
-          )}
+            },
+          })}
         >
-          <HStack alignItems="center" gap={12}>
-            <InputContainer style={{ width: 'fit-content' }} as="div">
-              <LabelText>Emoji</LabelText>
-              <Controller
-                control={control}
-                name="emoji"
-                render={({ field: { value, onChange } }) => (
-                  <EmojiInput value={value} onChange={onChange} />
-                )}
-              />
-            </InputContainer>
-            <InputContainer style={{ width: 'fit-content' }} as="div">
-              <LabelText>Color</LabelText>
-              <Controller
-                control={control}
-                name="color"
-                render={({ field: { value, onChange } }) => (
-                  <ColorLabelInput
-                    usedValues={new Set(usedColors)}
-                    value={value}
-                    onChange={onChange}
-                  />
-                )}
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelText>Name</LabelText>
-              <TextInput
-                placeholder="Project name"
-                autoComplete="off"
-                {...register('name', { required: true })}
-              />
-            </InputContainer>
-          </HStack>
+          <ProjectFormFields value={value} onChange={setValue} />
           <UniformColumnGrid gap={20}>
-            <Button kind="secondary" size="l" onClick={onFinish}>
+            <Button type="button" kind="secondary" size="l" onClick={onFinish}>
               Cancel
             </Button>
-            <Button size="l">Create</Button>
+            <Button isDisabled={isDisabled} size="l">
+              Create
+            </Button>
           </UniformColumnGrid>
         </VStack>
       </Panel>
