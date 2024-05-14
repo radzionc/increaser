@@ -11,6 +11,7 @@ import { useTheme } from 'styled-components'
 import { getProjectStatusColor } from '../utils/getProjectStatusColor'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { ProjectItem } from './ProjectItem'
+import { CreateProjectPrompt } from './CreateProjectPrompt'
 
 export const ProjectsGroup = ({
   value,
@@ -44,6 +45,7 @@ export const ProjectsGroup = ({
             <ProjectItem />
           </CurrentProjectProvider>
         ))}
+        {value === 'active' && <CreateProjectPrompt />}
       </VStack>
     </ExpandableSection>
   )

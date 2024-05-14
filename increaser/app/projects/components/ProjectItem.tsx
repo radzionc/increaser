@@ -11,34 +11,39 @@ import { Text } from '@lib/ui/text'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
-import { EditProject } from './EditProject'
+import { EditProjectForm } from './EditProjectForm'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { Circle } from '@lib/ui/layout/Circle'
+import { ProjectStatusSelector } from './ProjectStatusSelector'
+import {
+  SelectContainer,
+  selectContainerMinHeight,
+} from '@lib/ui/select/SelectContainer'
 
 const Container = styled(Panel)`
   font-size: 14px;
 `
 
+const EditButton = styled(SelectContainer)`
+  ${interactive};
+  ${sameDimensions(selectContainerMinHeight)};
+  ${centerContent};
+  ${transition};
+  &:hover {
+    background: ${getHoverVariant('foreground')};
+    color: ${getColor('contrast')};
+  }
+`
+
 const IdentifierContainer = styled.div`
-  background: ${getColor('background')};
-  border: 1px solid ${getColor('mistExtra')};
+  background: ${getColor('foreground')};
+  border: 1px solid ${getColor('mist')};
   ${centerContent};
   ${round};
   color: ${getColor('contrast')};
   ${sameDimensions(28)}
   font-size: 14px;
-`
-
-const PanelButton = styled.div`
-  ${interactive};
-  font-size: 18px;
-  ${centerContent};
-  ${transition};
-  &:hover {
-    background: ${getHoverVariant('mist')};
-    color: ${getColor('contrast')};
-  }
 `
 
 const Content = styled(HStack)`
@@ -52,13 +57,13 @@ export const ProjectItem = () => {
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
         isOpen ? null : (
-          <Container withSections direction="row">
+          <Container kind="secondary">
             <HStack
               fullWidth
               alignItems="center"
               justifyContent="space-between"
+              wrap="wrap"
               gap={8}
-              style={{ overflow: 'hidden' }}
             >
               <Content alignItems="center" gap={8}>
                 <IdentifierContainer>{emoji}</IdentifierContainer>
@@ -70,14 +75,17 @@ export const ProjectItem = () => {
                   {name}
                 </Text>
               </Content>
+              <HStack alignItems="center" gap={8}>
+                <ProjectStatusSelector />
+                <EditButton onClick={onOpen}>
+                  <EditIcon />
+                </EditButton>
+              </HStack>
             </HStack>
-            <PanelButton onClick={onOpen}>
-              <EditIcon />
-            </PanelButton>
           </Container>
         )
       }
-      renderContent={({ onClose }) => <EditProject onFinish={onClose} />}
+      renderContent={({ onClose }) => <EditProjectForm onFinish={onClose} />}
     />
   )
 }
