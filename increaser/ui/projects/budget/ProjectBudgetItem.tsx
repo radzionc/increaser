@@ -27,13 +27,11 @@ const Container = styled(Panel)`
 
 const PanelButton = styled.div`
   ${interactive};
-  height: 100%;
-  aspect-ratio: 1/1;
   font-size: 18px;
   ${centerContent};
   ${transition};
   &:hover {
-    background: ${getHoverVariant('foreground')};
+    background: ${getHoverVariant('mist')};
     color: ${getColor('contrast')};
   }
 `

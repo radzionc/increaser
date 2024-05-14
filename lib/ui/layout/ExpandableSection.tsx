@@ -11,7 +11,10 @@ import { IconWrapper } from '../icons/IconWrapper'
 import { Text } from '../text'
 import { ElementSizeAware } from '../base/ElementSizeAware'
 
-type ExpandableSectionProps = TitledComponentProps & ComponentWithChildrenProps
+type ExpandableSectionProps = TitledComponentProps &
+  ComponentWithChildrenProps & {
+    defaultIsOpen?: boolean
+  }
 
 const Container = styled(VStack)`
   gap: 4px;
@@ -55,12 +58,13 @@ const Content = styled.div<{ isOpen: boolean }>`
 export const ExpandableSection = ({
   title,
   children,
+  defaultIsOpen = false,
 }: ExpandableSectionProps) => {
-  const [isExpanded, { toggle }] = useBoolean(false)
+  const [isExpanded, { toggle }] = useBoolean(defaultIsOpen)
   return (
     <Container>
       <Header onClick={toggle}>
-        <Text weight="semibold" color="contrast">
+        <Text as="div" weight="semibold" color="contrast">
           {title}
         </Text>
         <Icon isOpen={isExpanded}>
