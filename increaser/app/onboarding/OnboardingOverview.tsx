@@ -5,6 +5,7 @@ import { without } from '@lib/utils/array/without'
 import { OnboardingSection } from './OnboardingSection'
 import { onboardingStepTargetName, onboardingSteps } from './OnboardingStep'
 import { OnboardingProgressItem } from '@lib/ui/onboarding/OnboardingProgressItem'
+import { ExitOnboarding } from './ExitOnboarding'
 
 export const OnboardingOverview = () => {
   const { currentStep, setCurrentStep, completedSteps } = useOnboarding()
@@ -20,25 +21,28 @@ export const OnboardingOverview = () => {
         </HStack>
       }
     >
-      <VStack gap={4}>
-        {onboardingSteps.map((step) => {
-          const isCompleted = completedSteps.includes(step)
-          const isCurrent = currentStep === step
-          const isEnabled =
-            isCompleted ||
-            without(onboardingSteps, ...completedSteps)[0] === step
+      <VStack style={{ flex: 1 }} justifyContent="space-between" gap={20}>
+        <VStack gap={4}>
+          {onboardingSteps.map((step) => {
+            const isCompleted = completedSteps.includes(step)
+            const isCurrent = currentStep === step
+            const isEnabled =
+              isCompleted ||
+              without(onboardingSteps, ...completedSteps)[0] === step
 
-          return (
-            <OnboardingProgressItem
-              key={step}
-              isCurrent={isCurrent}
-              isCompleted={isCompleted}
-              isEnabled={isEnabled}
-              onClick={() => setCurrentStep(step)}
-              name={onboardingStepTargetName[step]}
-            />
-          )
-        })}
+            return (
+              <OnboardingProgressItem
+                key={step}
+                isCurrent={isCurrent}
+                isCompleted={isCompleted}
+                isEnabled={isEnabled}
+                onClick={() => setCurrentStep(step)}
+                name={onboardingStepTargetName[step]}
+              />
+            )
+          })}
+        </VStack>
+        <ExitOnboarding />
       </VStack>
     </OnboardingSection>
   )
