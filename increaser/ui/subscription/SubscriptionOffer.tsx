@@ -38,7 +38,7 @@ export const SubscriptionOffer = () => {
           </>
         )}
       />
-      <UniformColumnGrid fullWidth gap={8} minChildrenWidth={120}>
+      <UniformColumnGrid fullWidth gap={8} minChildrenWidth={160}>
         {productTools.map((tool) => (
           <MembershipBenefit benefit={productToolNameRecord[tool]} key={tool} />
         ))}

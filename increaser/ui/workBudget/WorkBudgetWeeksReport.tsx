@@ -64,10 +64,12 @@ export const WorkBudgetWeeksReport = () => {
 
   if (weeks < minWeeks) {
     return (
-      <ShyInfoBlock>
-        After {minWeeks} weeks of using the app, you'll access a report that
-        shows your average work week.
-      </ShyInfoBlock>
+      <div>
+        <ShyInfoBlock>
+          After {minWeeks} weeks of using the app, you'll access a report that
+          shows your average work week.
+        </ShyInfoBlock>
+      </div>
     )
   }
 

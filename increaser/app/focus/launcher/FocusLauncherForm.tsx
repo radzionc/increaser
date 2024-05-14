@@ -96,6 +96,7 @@ export const FocusLauncherForm = () => {
         wrap="wrap"
         justifyContent="space-between"
         fullWidth
+        gap={8}
       >
         <SectionTitle>Start a focus session</SectionTitle>
         <SelectFocusViewSelector />

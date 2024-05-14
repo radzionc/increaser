@@ -1,6 +1,5 @@
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { VStack } from '@lib/ui/layout/Stack'
 import { useEffect, useMemo } from 'react'
 import { FocusTaskOption } from './FocusTaskOption'
@@ -8,6 +7,10 @@ import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { order } from '@lib/utils/array/order'
+import Link from 'next/link'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { Button } from '@lib/ui/buttons/Button'
+import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 
 export const FocusTaskInput = () => {
   const { tasks } = useAssertUserState()
@@ -39,9 +42,15 @@ export const FocusTaskInput = () => {
 
   if (!options.length) {
     return (
-      <ShyInfoBlock>
+      <ActionPrompt
+        action={
+          <Link style={{ alignSelf: 'end' }} href={AppPath.Tasks}>
+            <Button as="div">Manage tasks</Button>
+          </Link>
+        }
+      >
         You don't have any tasks for today with a project assigned.
-      </ShyInfoBlock>
+      </ActionPrompt>
     )
   }
 

@@ -71,10 +71,12 @@ export const WorkBudgetDaysReport = () => {
 
   if (days < minDays) {
     return (
-      <ShyInfoBlock>
-        After {minDays} days of using the app, you'll access a report that shows
-        your average work hours on weekdays and weekends.
-      </ShyInfoBlock>
+      <div>
+        <ShyInfoBlock>
+          After {minDays} days of using the app, you'll access a report that
+          shows your average work hours on weekdays and weekends.
+        </ShyInfoBlock>
+      </div>
     )
   }
 

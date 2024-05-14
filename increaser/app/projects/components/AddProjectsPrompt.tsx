@@ -1,5 +1,16 @@
-import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { Button } from '@lib/ui/buttons/Button'
+import Link from 'next/link'
+import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 
 export const AddProjectsPrompt = () => (
-  <ShyInfoBlock>Create a project to continue.</ShyInfoBlock>
+  <ActionPrompt
+    action={
+      <Link href={AppPath.CreateProject}>
+        <Button as="div">Add projects</Button>
+      </Link>
+    }
+  >
+    Create a project to continue.
+  </ActionPrompt>
 )
