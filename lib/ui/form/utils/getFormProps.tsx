@@ -2,7 +2,7 @@ import { preventDefault } from '../../utils/preventDefault'
 import { KeyboardEvent } from 'react'
 
 type GetFormPropsInput = {
-  onClose: () => void
+  onClose?: () => void
   onSubmit: () => void
   isDisabled?: boolean | string
 }
@@ -13,11 +13,13 @@ export const getFormProps = ({
   isDisabled = false,
 }: GetFormPropsInput) => {
   return {
-    onKeyDown: (event: KeyboardEvent<HTMLFormElement>) => {
-      if (event.key === 'Escape') {
-        onClose()
-      }
-    },
+    onKeyDown: onClose
+      ? (event: KeyboardEvent<HTMLFormElement>) => {
+          if (event.key === 'Escape') {
+            onClose()
+          }
+        }
+      : undefined,
     onSubmit: preventDefault(() => {
       if (isDisabled) return
 
