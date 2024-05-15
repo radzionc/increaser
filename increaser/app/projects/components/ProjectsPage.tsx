@@ -11,7 +11,7 @@ const title = 'Projects'
 export const ProjectsPage: Page = () => {
   return (
     <FixedWidthContent>
-      <VStack style={{ maxWidth: 560 }}>
+      <VStack style={{ maxWidth: 460 }}>
         <PageTitle documentTitle={`🎨 ${title}`} title={title} />
         <UserStateOnly>
           <GroupedProjects />

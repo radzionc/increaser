@@ -1,5 +1,4 @@
 import { useDeleteProjectMutation } from '@increaser/app/projects/api/userDeleteProjectMutation'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { TextButton } from '@lib/ui/buttons/TextButton'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
@@ -9,6 +8,28 @@ import { Text } from '@lib/ui/text'
 
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
+import {
+  SelectContainer,
+  selectContainerMinHeight,
+} from '@lib/ui/select/SelectContainer'
+import styled from 'styled-components'
+import { interactive } from '@lib/ui/css/interactive'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { transition } from '@lib/ui/css/transition'
+import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
+import { getColor } from '@lib/ui/theme/getters'
+
+const Button = styled(SelectContainer)`
+  ${interactive};
+  ${sameDimensions(selectContainerMinHeight)};
+  ${centerContent};
+  ${transition};
+  color: ${getColor('alert')};
+  &:hover {
+    background: ${getHoverVariant('foreground')};
+  }
+`
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -20,12 +41,9 @@ export const DeleteProject = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <IconButton
-          title="Delete"
-          kind="alert"
-          icon={<TrashBinIcon />}
-          onClick={onOpen}
-        />
+        <Button onClick={onOpen}>
+          <TrashBinIcon />
+        </Button>
       )}
       renderContent={({ onClose }) => (
         <ConfirmationModal

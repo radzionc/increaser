@@ -6,7 +6,6 @@ import { interactive } from '@lib/ui/css/interactive'
 import { transition } from '@lib/ui/css/transition'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { HStack } from '@lib/ui/layout/Stack'
-import { Panel } from '@lib/ui/panel/Panel'
 import { Text } from '@lib/ui/text'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
@@ -20,10 +19,8 @@ import {
   SelectContainer,
   selectContainerMinHeight,
 } from '@lib/ui/select/SelectContainer'
-
-const Container = styled(Panel)`
-  font-size: 14px;
-`
+import { ExpandablePanel } from '@lib/ui/panel/ExpandablePanel'
+import { DeleteProject } from './DeleteProject'
 
 const EditButton = styled(SelectContainer)`
   ${interactive};
@@ -57,32 +54,38 @@ export const ProjectItem = () => {
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
         isOpen ? null : (
-          <Container kind="secondary">
-            <HStack
-              fullWidth
-              alignItems="center"
-              justifyContent="space-between"
-              wrap="wrap"
-              gap={8}
-            >
-              <Content alignItems="center" gap={8}>
-                <IdentifierContainer>{emoji}</IdentifierContainer>
-                <IdentifierContainer>
-                  <Circle size={14} background={hslaColor} />
-                </IdentifierContainer>
+          <ExpandablePanel
+            kind="secondary"
+            header={
+              <HStack
+                fullWidth
+                alignItems="center"
+                justifyContent="space-between"
+                wrap="wrap"
+                gap={8}
+              >
+                <Content alignItems="center" gap={8}>
+                  <IdentifierContainer>{emoji}</IdentifierContainer>
+                  <IdentifierContainer>
+                    <Circle size={14} background={hslaColor} />
+                  </IdentifierContainer>
 
-                <Text color="contrast" cropped weight="semibold">
-                  {name}
-                </Text>
-              </Content>
+                  <Text color="contrast" cropped weight="semibold">
+                    {name}
+                  </Text>
+                </Content>
+              </HStack>
+            }
+            renderContent={() => (
               <HStack alignItems="center" gap={8}>
                 <ProjectStatusSelector />
                 <EditButton onClick={onOpen}>
                   <EditIcon />
                 </EditButton>
+                <DeleteProject />
               </HStack>
-            </HStack>
-          </Container>
+            )}
+          />
         )
       }
       renderContent={({ onClose }) => <EditProjectForm onFinish={onClose} />}
