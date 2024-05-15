@@ -4,15 +4,16 @@ import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
 import { useState } from 'react'
-import { ProjectFields } from '../../projects/components/ProjectForm/ProjectFields'
-import { getProjectDefaultFields } from '../../projects/components/ProjectForm/getProjectDefaultFields'
-import { useIsProjectFormDisabled } from '../../projects/components/ProjectForm/useIsProjectFormDisabled'
+import { FinishableComponentProps } from '@lib/ui/props'
+import { ProjectFormFields } from './ProjectFormFields'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { ProjectFormFields } from '../../projects/components/ProjectForm/ProjectFormFields'
+import { ProjectFields } from './ProjectFields'
+import { getProjectDefaultFields } from './getProjectDefaultFields'
+import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
+import { FormActions } from '@lib/ui/form/components/FormActions'
 
-export const CreateProjectForm = () => {
+export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { activeProjects } = useProjects()
 
   const { mutate: createProject } = useCreateProjectMutation()
@@ -28,11 +29,12 @@ export const CreateProjectForm = () => {
   return (
     <InputContainer style={{ gap: 8 }} as="div">
       <LabelText>New project</LabelText>
-      <Panel kind="secondary" style={{ width: '100%' }}>
+      <Panel kind="secondary">
         <VStack
           gap={28}
           as="form"
           {...getFormProps({
+            onClose: onFinish,
             isDisabled,
             onSubmit: () => {
               createProject({
@@ -40,14 +42,12 @@ export const CreateProjectForm = () => {
                 allocatedMinutesPerWeek: 0,
                 workingDays: 'everyday',
               })
-              setValue(getProjectDefaultFields({ projects: activeProjects }))
+              onFinish()
             },
           })}
         >
           <ProjectFormFields value={value} onChange={setValue} />
-          <Button kind="secondary" size="l">
-            Create
-          </Button>
+          <FormActions isDisabled={isDisabled} onCancel={onFinish} />
         </VStack>
       </Panel>
     </InputContainer>

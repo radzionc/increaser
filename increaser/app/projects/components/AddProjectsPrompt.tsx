@@ -6,7 +6,7 @@ import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 export const AddProjectsPrompt = () => (
   <ActionPrompt
     action={
-      <Link href={AppPath.CreateProject}>
+      <Link href={AppPath.Projects}>
         <Button as="div">Add projects</Button>
       </Link>
     }

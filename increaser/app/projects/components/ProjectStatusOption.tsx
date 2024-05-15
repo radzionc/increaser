@@ -3,9 +3,9 @@ import { Circle } from '@lib/ui/layout/Circle'
 import { HStack } from '@lib/ui/layout/Stack'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { getProjectStatusColor } from '../../utils/getProjectStatusColor'
 import { Text } from '@lib/ui/text'
 import { useTheme } from 'styled-components'
+import { getProjectStatusColor } from '../utils/getProjectStatusColor'
 
 export const ProjectStatusOption = ({
   value,

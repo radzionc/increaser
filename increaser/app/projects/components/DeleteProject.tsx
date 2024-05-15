@@ -1,5 +1,4 @@
 import { useDeleteProjectMutation } from '@increaser/app/projects/api/userDeleteProjectMutation'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { TextButton } from '@lib/ui/buttons/TextButton'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
@@ -9,6 +8,7 @@ import { Text } from '@lib/ui/text'
 
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
+import { IconButton } from '@lib/ui/buttons/IconButton'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -21,9 +21,10 @@ export const DeleteProject = () => {
     <Opener
       renderOpener={({ onOpen }) => (
         <IconButton
-          title="Delete"
+          size="l"
           kind="alert"
           icon={<TrashBinIcon />}
+          title="Delete project"
           onClick={onOpen}
         />
       )}
@@ -54,7 +55,7 @@ export const DeleteProject = () => {
                   onClick={() => {
                     updateProject({
                       id,
-                      fields: { status: 'inactive' },
+                      fields: { status: 'archived' },
                     })
                     onClose()
                   }}

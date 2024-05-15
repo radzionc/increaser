@@ -7,6 +7,7 @@ import {
 
 import { Project } from '@increaser/entities/Project'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
+import { analytics } from '../../analytics'
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void
@@ -38,6 +39,8 @@ export const useCreateProjectMutation = (
         weeks: [],
         months: [],
       }
+
+      analytics.trackEvent('Create project', { name: project.name })
 
       updateState({ projects: [...projects, project] })
       params?.onOptimisticUpdate?.(project)
