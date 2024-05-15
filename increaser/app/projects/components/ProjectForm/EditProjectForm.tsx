@@ -1,34 +1,32 @@
-import { useCreateProjectMutation } from '@increaser/app/projects/api/useCreateProjectMutation'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
-import { ProjectFormFields } from './ProjectFormFields'
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
+import { pick } from '@lib/utils/record/pick'
+import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { ProjectFields } from './ProjectFields'
-import { getProjectDefaultFields } from './getProjectDefaultFields'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
+import { ProjectFields } from './ProjectFields'
+import { ProjectFormFields } from './ProjectFormFields'
 import { FormActions } from '@lib/ui/form/components/FormActions'
 
-export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
-  const { activeProjects } = useProjects()
+export const EditProjectForm = ({ onFinish }: FinishableComponentProps) => {
+  const project = useCurrentProject()
 
-  const { mutate: createProject } = useCreateProjectMutation()
+  const { mutate: updateProject } = useUpdateProjectMutation()
 
   const [value, setValue] = useState<ProjectFields>(() =>
-    getProjectDefaultFields({
-      projects: activeProjects,
-    }),
+    pick(project, ['name', 'emoji', 'color']),
   )
 
   const isDisabled = useIsProjectFormDisabled(value)
 
   return (
     <InputContainer style={{ gap: 8 }} as="div">
-      <LabelText>New project</LabelText>
+      <LabelText>Edit project</LabelText>
       <Panel kind="secondary">
         <VStack
           gap={28}
@@ -37,10 +35,9 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
             onClose: onFinish,
             isDisabled,
             onSubmit: () => {
-              createProject({
-                ...value,
-                allocatedMinutesPerWeek: 0,
-                workingDays: 'everyday',
+              updateProject({
+                id: project.id,
+                fields: value,
               })
               onFinish()
             },
