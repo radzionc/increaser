@@ -8,28 +8,7 @@ import { Text } from '@lib/ui/text'
 
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
-import {
-  SelectContainer,
-  selectContainerMinHeight,
-} from '@lib/ui/select/SelectContainer'
-import styled from 'styled-components'
-import { interactive } from '@lib/ui/css/interactive'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { transition } from '@lib/ui/css/transition'
-import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
-import { getColor } from '@lib/ui/theme/getters'
-
-const Button = styled(SelectContainer)`
-  ${interactive};
-  ${sameDimensions(selectContainerMinHeight)};
-  ${centerContent};
-  ${transition};
-  color: ${getColor('alert')};
-  &:hover {
-    background: ${getHoverVariant('foreground')};
-  }
-`
+import { IconButton } from '@lib/ui/buttons/IconButton'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -41,9 +20,13 @@ export const DeleteProject = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Button onClick={onOpen}>
-          <TrashBinIcon />
-        </Button>
+        <IconButton
+          size="l"
+          kind="alert"
+          icon={<TrashBinIcon />}
+          title="Delete project"
+          onClick={onOpen}
+        />
       )}
       renderContent={({ onClose }) => (
         <ConfirmationModal
@@ -72,7 +55,7 @@ export const DeleteProject = () => {
                   onClick={() => {
                     updateProject({
                       id,
-                      fields: { status: 'inactive' },
+                      fields: { status: 'archived' },
                     })
                     onClose()
                   }}

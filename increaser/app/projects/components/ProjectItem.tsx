@@ -2,12 +2,9 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { Opener } from '@lib/ui/base/Opener'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { cropText } from '@lib/ui/css/cropText'
-import { interactive } from '@lib/ui/css/interactive'
-import { transition } from '@lib/ui/css/transition'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { EditProjectForm } from './ProjectForm/EditProjectForm'
@@ -15,23 +12,9 @@ import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { Circle } from '@lib/ui/layout/Circle'
 import { ProjectStatusSelector } from './ProjectStatusSelector'
-import {
-  SelectContainer,
-  selectContainerMinHeight,
-} from '@lib/ui/select/SelectContainer'
 import { ExpandablePanel } from '@lib/ui/panel/ExpandablePanel'
 import { DeleteProject } from './DeleteProject'
-
-const EditButton = styled(SelectContainer)`
-  ${interactive};
-  ${sameDimensions(selectContainerMinHeight)};
-  ${centerContent};
-  ${transition};
-  &:hover {
-    background: ${getHoverVariant('foreground')};
-    color: ${getColor('contrast')};
-  }
-`
+import { IconButton } from '@lib/ui/buttons/IconButton'
 
 const IdentifierContainer = styled.div`
   background: ${getColor('foreground')};
@@ -79,9 +62,12 @@ export const ProjectItem = () => {
             renderContent={() => (
               <HStack alignItems="center" gap={8}>
                 <ProjectStatusSelector />
-                <EditButton onClick={onOpen}>
-                  <EditIcon />
-                </EditButton>
+                <IconButton
+                  title="Edit project"
+                  size="l"
+                  onClick={onOpen}
+                  icon={<EditIcon />}
+                />
                 <DeleteProject />
               </HStack>
             )}
