@@ -15,6 +15,8 @@ import { FloatingIntervalDuration } from '@lib/ui/timeline/FloatingIntervalDurat
 import { InteractiveDragArea } from '@lib/ui/timeline/InteractiveDragArea'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
+import { useTheme } from 'styled-components'
 
 export const SetEditor = () => {
   const { projectsRecord } = useProjects()
@@ -34,6 +36,8 @@ export const SetEditor = () => {
       inline: 'start',
     })
   }, [value])
+
+  const theme = useTheme()
 
   useEvent('pointermove', ({ clientY }) => {
     if (!activeControl) return
@@ -101,7 +105,7 @@ export const SetEditor = () => {
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
       <CurrentIntervalRect
-        $color={projectsRecord[value.projectId].hslaColor}
+        $color={getProjectColor(projectsRecord, theme, value.projectId)}
         ref={intervalElement}
         style={{
           top: intervalStartInPx,

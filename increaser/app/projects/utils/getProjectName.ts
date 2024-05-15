@@ -1,3 +1,4 @@
+import { unknownProjectName } from '@increaser/entities/TrackedTime'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 
 export const getProjectName = (
@@ -6,5 +7,5 @@ export const getProjectName = (
 ) => {
   const project = projectsRecord[projectId]
 
-  return project?.name ?? 'Unknown'
+  return project?.name ?? unknownProjectName
 }

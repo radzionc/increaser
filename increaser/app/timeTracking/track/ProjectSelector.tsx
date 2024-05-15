@@ -3,6 +3,8 @@ import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
 import { useTrackTime } from './state/TrackTimeContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { unknownProjectKey } from '@increaser/entities/TrackedTime'
+import { getProjectName } from '../../projects/utils/getProjectName'
 
 export const ProjectSelector = () => {
   const { currentSet, setState } = useTrackTime()
@@ -23,13 +25,13 @@ export const ProjectSelector = () => {
         }))
       }
       options={activeProjects.map((project) => project.id)}
-      getOptionKey={(option) => option}
+      getOptionKey={(option) => option || unknownProjectKey}
       renderOption={(option) => (
         <>
           {option && (
             <Text color="contrast">{projectsRecord[option].emoji}</Text>
           )}
-          <Text>{option ? projectsRecord[option].name : 'All projects'}</Text>
+          <Text>{getProjectName(projectsRecord, option)}</Text>
         </>
       )}
     />

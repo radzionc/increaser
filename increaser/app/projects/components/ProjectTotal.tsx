@@ -3,11 +3,12 @@ import { Circle } from '@lib/ui/layout/Circle'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
+import { Seconds } from '@lib/utils/time/types'
 
 interface Props {
   name: string
   color?: HSLA
-  value: number
+  value: Seconds
 }
 
 export const ProjectTotal = ({ name, color, value }: Props) => {
@@ -20,7 +21,7 @@ export const ProjectTotal = ({ name, color, value }: Props) => {
         </Text>
       </HStack>
       <Text nowrap size={14} weight="semibold" color="supporting">
-        {formatDuration(value, 'ms', { maxUnit: 'h' })}
+        {formatDuration(value, 's', { maxUnit: 'h' })}
       </Text>
     </HStack>
   )

@@ -82,8 +82,6 @@ const toProject = ({
     emoji,
     allocatedMinutesPerWeek,
     status: 'active',
-    weeks: [],
-    months: [],
     workingDays: 'everyday',
     goal,
   }

@@ -1,5 +1,3 @@
-import { ProjectMonth, ProjectWeek } from './timeTracking'
-
 export const projectsStatuses = ['active', 'inactive', 'archived'] as const
 export type ProjectStatus = (typeof projectsStatuses)[number]
 
@@ -17,19 +15,15 @@ export interface Project {
   status: ProjectStatus
   allocatedMinutesPerWeek: number
   goal?: ProjectGoal | null
-  weeks: ProjectWeek[]
-  months: ProjectMonth[]
   workingDays: ProjectWorkingDays
 }
 
 export const projectDefaultFields: Pick<
   Project,
-  'status' | 'allocatedMinutesPerWeek' | 'weeks' | 'months' | 'workingDays'
+  'status' | 'allocatedMinutesPerWeek' | 'workingDays'
 > = {
   status: 'active',
   allocatedMinutesPerWeek: 0,
-  weeks: [],
-  months: [],
   workingDays: 'everyday',
 }
 

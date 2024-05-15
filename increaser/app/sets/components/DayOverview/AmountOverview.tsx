@@ -12,12 +12,12 @@ import { useDayOverview } from './DayOverviewProvider'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
-import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
 import { getWeekday } from '@lib/utils/time/getWeekday'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
+import { setsToTimeSpentOnProjects } from '@increaser/entities-utils/set/setsToTimeSpentOnProjects'
 
 export const AmountOverview = () => {
   const { sets, dayStartedAt } = useDayOverview()
@@ -26,7 +26,7 @@ export const AmountOverview = () => {
 
   const daysBudget = useDaysBudget()
   const currentDayBudget = daysBudget[weekday]
-  const projectsTotal = getProjectsTotalRecord(sets)
+  const timeSpentOnProjects = setsToTimeSpentOnProjects(sets)
 
   const { projectsRecord } = useProjects()
   const theme = useTheme()
@@ -57,14 +57,14 @@ export const AmountOverview = () => {
       </VStack>
 
       <VStack gap={4} fullWidth>
-        {Object.entries(projectsTotal)
+        {Object.entries(timeSpentOnProjects)
           .sort((a, b) => b[1] - a[1])
-          .map(([projectId]) => (
+          .map(([projectId, amount]) => (
             <ProjectTotal
               key={projectId}
               name={getProjectName(projectsRecord, projectId)}
               color={getProjectColor(projectsRecord, theme, projectId)}
-              value={projectsTotal[projectId]}
+              value={amount}
             />
           ))}
       </VStack>

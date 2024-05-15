@@ -8,9 +8,10 @@ import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
+import { TrackedTime } from './TrackedTime'
 
 export type Set = Interval & {
-  projectId: string
+  projectId?: string
 }
 
 interface AppSumo {
@@ -29,6 +30,9 @@ export type User = DayMoments &
     habits: Record<string, Habit>
     tasks: Record<string, Task>
     freeTrialEnd: number
+
+    weeks: TrackedTime
+    months: TrackedTime
 
     isAnonymous: boolean
 
@@ -86,11 +90,15 @@ export const userDefaultFields: Pick<
   | 'goToBedAt'
   | 'workdayHours'
   | 'weekendHours'
+  | 'weeks'
+  | 'months'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
   tasks: {},
   projects: [],
+  weeks: {},
+  months: {},
   habits: {},
   isAnonymous: true,
   ...defaultWorkBudget,
