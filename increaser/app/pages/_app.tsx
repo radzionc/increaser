@@ -62,30 +62,30 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         <ErrorBoundary fallback={<FullSizeErrorFallback />}>
           <ApiProvider>
             <UserStateProvider>
-              <PWAProvider>
-                <ConditionalUserState
-                  present={() => (
-                    <UserManagerProvider>
-                      <ProjectsProvider>
-                        <HabitsProvider>
-                          <FocusProvider>
-                            <ScheduleProvider>
-                              <BreakProvider>
-                                <FocusLauncherProvider>
+              <FocusLauncherProvider>
+                <PWAProvider>
+                  <ConditionalUserState
+                    present={() => (
+                      <UserManagerProvider>
+                        <ProjectsProvider>
+                          <HabitsProvider>
+                            <FocusProvider>
+                              <ScheduleProvider>
+                                <BreakProvider>
                                   <FocusSoundsPlayer />
                                   {component}
-                                </FocusLauncherProvider>
-                              </BreakProvider>
-                              <MembershipConfirmation />
-                            </ScheduleProvider>
-                          </FocusProvider>
-                        </HabitsProvider>
-                      </ProjectsProvider>
-                    </UserManagerProvider>
-                  )}
-                  missing={() => <>{component}</>}
-                />
-              </PWAProvider>
+                                </BreakProvider>
+                                <MembershipConfirmation />
+                              </ScheduleProvider>
+                            </FocusProvider>
+                          </HabitsProvider>
+                        </ProjectsProvider>
+                      </UserManagerProvider>
+                    )}
+                    missing={() => <>{component}</>}
+                  />
+                </PWAProvider>
+              </FocusLauncherProvider>
             </UserStateProvider>
           </ApiProvider>
         </ErrorBoundary>
