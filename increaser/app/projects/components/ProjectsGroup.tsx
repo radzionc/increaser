@@ -24,6 +24,10 @@ export const ProjectsGroup = ({
     return projects.filter((p) => p.status === value)
   }, [projects, value])
 
+  if (items.length === 0 && value !== 'active') {
+    return null
+  }
+
   return (
     <ExpandableSection
       defaultIsOpen={value === 'active'}
