@@ -1,32 +1,26 @@
 import { useCreateProjectMutation } from '@increaser/app/projects/api/useCreateProjectMutation'
-import { getRandomElement } from '@lib/utils/array/getRandomElement'
-import { Project } from '@increaser/entities/Project'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { defaultEmojis } from '@increaser/ui/projects/EnhancedProject'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
-import { suggestLabelColor } from '@lib/ui/theme/suggestLabelColor'
 import { useMemo, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { ProjectFormFields } from './ProjectFormFields'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
+import { ProjectFields } from './ProjectFields'
+import { getProjectDefaultFields } from './getProjectDefaultFields'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { activeProjects } = useProjects()
 
   const { mutate: createProject } = useCreateProjectMutation()
 
-  const [value, setValue] = useState<Pick<Project, 'name' | 'emoji' | 'color'>>(
-    () => ({
-      name: '',
-      emoji: getRandomElement(defaultEmojis),
-      color: suggestLabelColor({
-        used: activeProjects.map((project) => project.color),
-      }),
+  const [value, setValue] = useState<ProjectFields>(() =>
+    getProjectDefaultFields({
+      projects: activeProjects,
     }),
   )
 

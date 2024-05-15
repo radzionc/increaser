@@ -7,7 +7,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
-import { CreateProjectForm } from './CreateProejctForm'
+import { CreateProjectForm } from './ProjectForm/CreateProejctForm'
 
 const Container = styled(Panel)`
   ${interactive};
