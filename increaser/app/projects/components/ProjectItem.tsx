@@ -15,6 +15,7 @@ import { ProjectStatusSelector } from './ProjectStatusSelector'
 import { ExpandablePanel } from '@lib/ui/panel/ExpandablePanel'
 import { DeleteProject } from './DeleteProject'
 import { IconButton } from '@lib/ui/buttons/IconButton'
+import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
 
 const IdentifierContainer = styled.div`
   background: ${getColor('foreground')};
@@ -31,7 +32,7 @@ const Content = styled(HStack)`
 `
 
 export const ProjectItem = () => {
-  const { name, emoji, hslaColor } = useCurrentProject()
+  const { name, emoji, hslaColor, id } = useCurrentProject()
 
   return (
     <Opener
@@ -61,7 +62,7 @@ export const ProjectItem = () => {
             }
             renderContent={() => (
               <HStack alignItems="center" gap={8}>
-                <ProjectStatusSelector />
+                {couldProjectStatusBeChanged(id) && <ProjectStatusSelector />}
                 <IconButton
                   title="Edit project"
                   size="l"

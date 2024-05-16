@@ -11,6 +11,7 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from './TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
+import { otherProject } from '@increaser/entities/Project'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -23,7 +24,7 @@ export const CreateTaskForm = ({
   order,
 }: CreateTaskFormProps) => {
   const [name, setName] = useState('')
-  const [projectId, setProjectId] = useState<string | null>(null)
+  const [projectId, setProjectId] = useState<string>(otherProject.id)
 
   const { mutate } = useCreateTaskMutation()
 
