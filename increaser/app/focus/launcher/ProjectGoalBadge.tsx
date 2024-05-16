@@ -1,16 +1,15 @@
 import styled, { useTheme } from 'styled-components'
 import { Circle } from '@lib/ui/layout/Circle'
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { useMemo } from 'react'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { useHasReachedFinalWorkday } from '@increaser/ui/projects/budget/hooks/useHasReachedFinalWorkday'
 import { useCurrentDayTarget } from '@increaser/ui/projects/budget/hooks/useCurrentDayTarget'
-
-interface ProjectGoalBadgeProps {
-  project: EnhancedProject
-}
+import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
+import { useProject } from '@increaser/ui/projects/hooks/useProject'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
+import { getProjectDoneMinutes } from '@increaser/ui/projects/utils/getProjectDoneMinutes'
 
 const Outline = styled.div`
   ${round};
@@ -20,14 +19,22 @@ const Outline = styled.div`
   ${centerContent};
 `
 
-export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
-  const { allocatedMinutesPerWeek, doneMinutesThisWeek, goal } = project
+export const ProjectGoalBadge = () => {
+  const projectId = useCurrentProject()
+  const project = useProject(projectId)
   const { colors } = useTheme()
+  const sets = useCurrentWeekSets()
 
   const hasReachedFinalDay = useHasReachedFinalWorkday()
   const target = useCurrentDayTarget()
 
   const color = useMemo(() => {
+    if (!project) {
+      return colors.mist
+    }
+
+    const { allocatedMinutesPerWeek, goal } = project
+
     if (!allocatedMinutesPerWeek) {
       return colors.mist
     }
@@ -35,6 +42,8 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
     if (!goal) {
       return colors.textShy
     }
+
+    const doneMinutesThisWeek = getProjectDoneMinutes({ sets, id: projectId })
 
     if (doneMinutesThisWeek > allocatedMinutesPerWeek) {
       return goal === 'doMore' ? colors.success : colors.alert
@@ -46,21 +55,29 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
 
     return goal === 'doMore' ? colors.success : colors.idle
   }, [
-    allocatedMinutesPerWeek,
     colors.alert,
     colors.idle,
     colors.mist,
     colors.success,
     colors.textShy,
-    doneMinutesThisWeek,
-    goal,
+    project,
+    projectId,
+    sets,
     target,
   ])
 
   const outlineColor = useMemo(() => {
+    if (!project) {
+      return colors.transparent
+    }
+
+    const { allocatedMinutesPerWeek, goal } = project
+
     if (!allocatedMinutesPerWeek || !goal) {
       return colors.transparent
     }
+
+    const doneMinutesThisWeek = getProjectDoneMinutes({ sets, id: projectId })
 
     if (goal === 'doMore' && doneMinutesThisWeek >= allocatedMinutesPerWeek) {
       return colors.success
@@ -74,13 +91,13 @@ export const ProjectGoalBadge = ({ project }: ProjectGoalBadgeProps) => {
 
     return colors.transparent
   }, [
-    allocatedMinutesPerWeek,
     colors.alert,
     colors.success,
     colors.transparent,
-    doneMinutesThisWeek,
-    goal,
     hasReachedFinalDay,
+    project,
+    projectId,
+    sets,
   ])
 
   return (

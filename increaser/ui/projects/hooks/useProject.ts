@@ -1,7 +1,8 @@
-import { useProjects } from '../ProjectsProvider'
+import { findBy } from '@lib/utils/array/findBy'
+import { useAssertUserState } from '../../user/UserStateContext'
 
-export const useProject = (id: string | null) => {
-  const { projectsRecord } = useProjects()
+export const useProject = (id?: string | null) => {
+  const { projects } = useAssertUserState()
 
-  return id ? projectsRecord[id] || null : null
+  return findBy(projects, 'id', id)
 }

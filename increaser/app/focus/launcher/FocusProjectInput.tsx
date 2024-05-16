@@ -8,11 +8,14 @@ import { ProjectGoalBadge } from './ProjectGoalBadge'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { AddProjectsPrompt } from '../../projects/components/AddProjectsPrompt'
 import { useFocusLauncher } from './state/FocusLauncherContext'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useEffect, useMemo } from 'react'
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { FocusOptionContainer } from './FocusOptionContainer'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
+import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
+import { getProjectDoneMinutes } from '@increaser/ui/projects/utils/getProjectDoneMinutes'
+import { getProjectName } from '@increaser/ui/projects/utils/getProjectName'
 
 const Identifier = styled(Center)`
   width: 16px;
@@ -25,7 +28,8 @@ const Option = styled(FocusOptionContainer)`
 
 export const FocusProjectInput = () => {
   const { projectId, setState } = useFocusLauncher()
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
+  const sets = useCurrentWeekSets()
 
   const options = useMemo(() => {
     const [projectsWithBudget, projectsWithoutBudget] = splitBy(
@@ -43,28 +47,35 @@ export const FocusProjectInput = () => {
       (project) => (project.goal === 'doMore' ? 0 : 1),
     )
 
-    return [
+    const projectIds = [
       ...order(
         doMoreProjects,
         (project) =>
-          project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
+          getProjectDoneMinutes({
+            sets,
+            id: project.id,
+          }) / project.allocatedMinutesPerWeek,
         'asc',
       ),
       ...projectsWithoutGoal,
       ...order(
         doLessProjects,
         (project) =>
-          project.doneMinutesThisWeek / project.allocatedMinutesPerWeek,
+          getProjectDoneMinutes({
+            sets,
+            id: project.id,
+          }) / project.allocatedMinutesPerWeek,
         'asc',
       ),
       ...projectsWithoutBudget,
-    ]
-  }, [activeProjects])
+    ].map((project) => project.id)
+
+    return [...projectIds, null]
+  }, [activeProjects, sets])
 
   useEffect(() => {
-    const project = options.find((option) => option.id === projectId)
-    if (!project && options.length) {
-      setState((state) => ({ ...state, projectId: options[0].id }))
+    if (projectId === undefined) {
+      setState((state) => ({ ...state, projectId: options[0] }))
     }
   }, [options, projectId, setState])
 
@@ -74,25 +85,29 @@ export const FocusProjectInput = () => {
 
   return (
     <UniformColumnGrid gap={4} minChildrenWidth={160}>
-      {options.map((project) => {
-        const { id, name } = project
+      {options.map((id, index) => {
         const isSelected = id === projectId
         return (
           <Option as="label" key={id} selected={isSelected}>
             <HStack style={{ maxWidth: '100%' }} alignItems="center" gap={8}>
               <Identifier>
-                <CurrentProjectProvider value={project}>
-                  <ProjectGoalBadge project={project} />
+                <CurrentProjectProvider value={id}>
+                  <ProjectGoalBadge />
                 </CurrentProjectProvider>
               </Identifier>
-              <Text cropped>{name}</Text>
+              <Text cropped>
+                {getProjectName({
+                  id,
+                  projects: activeProjects,
+                })}
+              </Text>
             </HStack>
             <InvisibleHTMLRadio
               isSelected={isSelected}
-              value={id}
+              value={index}
               groupName="project"
               onSelect={() =>
-                setState((state) => ({ ...state, projectId: id }))
+                setState((state) => ({ ...state, projectId: options[index] }))
               }
             />
           </Option>

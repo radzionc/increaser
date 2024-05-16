@@ -24,7 +24,6 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { ThemePreference } from '@lib/ui/theme/ThemePreference'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
-import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
 import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
 import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
@@ -67,19 +66,17 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                   <ConditionalUserState
                     present={() => (
                       <UserManagerProvider>
-                        <ProjectsProvider>
-                          <HabitsProvider>
-                            <FocusProvider>
-                              <ScheduleProvider>
-                                <BreakProvider>
-                                  <FocusSoundsPlayer />
-                                  {component}
-                                </BreakProvider>
-                                <MembershipConfirmation />
-                              </ScheduleProvider>
-                            </FocusProvider>
-                          </HabitsProvider>
-                        </ProjectsProvider>
+                        <HabitsProvider>
+                          <FocusProvider>
+                            <ScheduleProvider>
+                              <BreakProvider>
+                                <FocusSoundsPlayer />
+                                {component}
+                              </BreakProvider>
+                              <MembershipConfirmation />
+                            </ScheduleProvider>
+                          </FocusProvider>
+                        </HabitsProvider>
                       </UserManagerProvider>
                     )}
                     missing={() => <>{component}</>}

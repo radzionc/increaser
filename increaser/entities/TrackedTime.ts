@@ -1,11 +1,6 @@
 import { Seconds } from '@lib/utils/time/types'
+import { ActivityKey } from './Activity'
 
-export const unknownProjectKey = 'unknown' as const
-export const unknownProjectName = 'Unknown'
-type UnknownProjectKey = typeof unknownProjectKey
+export type TimeSpentOnActivitys = Record<ActivityKey, Seconds>
 
-type TrackedTimeProjectKey = string | UnknownProjectKey
-
-export type TimeSpentOnProjects = Record<TrackedTimeProjectKey, Seconds>
-
-export type TrackedTime = Record<string, TimeSpentOnProjects>
+export type TrackedTime = Record<string, TimeSpentOnActivitys>

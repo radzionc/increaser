@@ -1,14 +1,20 @@
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
-import { DefaultTheme } from 'styled-components'
+import { Project } from '@increaser/entities/Project'
+import { HSLA } from '@lib/ui/colors/HSLA'
+import { ThemeColors } from '@lib/ui/theme/ThemeColors'
+import { findBy } from '@lib/utils/array/findBy'
 
-export const getProjectColor = (
-  projectsRecord: Record<string, EnhancedProject>,
-  theme: DefaultTheme,
-  projectId = '',
-) => {
-  const project = projectsRecord[projectId]
+type GetProjectColorInput = {
+  projects: Project[]
+  colors: ThemeColors
+  id?: string
+}
 
-  if (!project) return theme.colors.mist
+export const getProjectColor = ({
+  projects,
+  colors,
+  id,
+}: GetProjectColorInput): HSLA => {
+  const project = findBy(projects, 'id', id)
 
-  return theme.colors.getLabelColor(project.color)
+  return project ? colors.getLabelColor(project.color) : colors.mist
 }

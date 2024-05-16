@@ -2,7 +2,7 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 import { Dispatch, SetStateAction, createContext } from 'react'
 
 export type FocusLauncherMutableState = {
-  projectId: string | null
+  projectId: string | null | undefined
   taskId: string | null
 }
 

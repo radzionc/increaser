@@ -5,9 +5,9 @@ import { analytics } from '../analytics'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { match } from '@lib/utils/match'
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { OnboardingStep, onboardingSteps } from './OnboardingStep'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 type OnboardingState = {
   completedSteps: OnboardingStep[]
@@ -43,7 +43,7 @@ export const OnboardingProvider = ({
 
   const { mutate: updateUser } = useUpdateUserMutation()
 
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
   const isNextStepDisabled = useMemo(
     () =>
       match<OnboardingStep, string | false>(currentStep, {

@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { CreateProjectForm } from './CreateProjectForm'
 import { VStack } from '@lib/ui/layout/Stack'
@@ -7,9 +6,10 @@ import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 export const ProjectsOnboardingStep = () => {
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
 
   return (
     <VStack style={{ maxWidth: 440 }} gap={40}>

@@ -9,9 +9,12 @@ import { Text } from '@lib/ui/text'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { IconButton } from '@lib/ui/buttons/IconButton'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useProject } from '@increaser/ui/projects/hooks/useProject'
 
 export const DeleteProject = () => {
-  const { name, id, status } = useCurrentProject()
+  const projectId = useCurrentProject()
+  const { name, id } = shouldBePresent(useProject(projectId))
 
   const { mutate: deleteProject } = useDeleteProjectMutation()
 

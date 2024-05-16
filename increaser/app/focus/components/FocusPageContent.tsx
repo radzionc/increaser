@@ -15,7 +15,6 @@ import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
@@ -76,14 +75,9 @@ const PositionSessionInfo = styled.div`
 export const FocusPageContent = () => {
   const { cancel } = useFocus()
 
-  const { projectId, startedAt, taskId } = useCurrentFocus()
-
-  const { projectsRecord } = useProjects()
+  const { startedAt, taskId } = useCurrentFocus()
 
   useOnWindowCloseAlert('Please stop the timer first')
-
-  const project = projectsRecord[projectId]
-  if (!project) return null
 
   return (
     <>

@@ -1,5 +1,5 @@
-import { Project } from '@increaser/entities/Project'
 import { getValueProviderSetup } from '@lib/ui/state/getValueProviderSetup'
+import { TrackedTimeActivityKey } from '@increaser/entities/TrackedTime'
 
 export const { useValue: useCurrentProject, provider: CurrentProjectProvider } =
-  getValueProviderSetup<Project>('Project')
+  getValueProviderSetup<TrackedTimeActivityKey>('TrackedTimeActivity')

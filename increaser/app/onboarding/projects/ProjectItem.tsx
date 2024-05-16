@@ -1,13 +1,10 @@
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { IncludedItem } from '@lib/ui/inputs/IncludedItem'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useDeleteProjectMutation } from '../../projects/api/userDeleteProjectMutation'
 import styled from 'styled-components'
-
-type ProjectItemProps = {
-  value: EnhancedProject
-}
+import { ComponentWithValueProps } from '@lib/ui/props'
+import { Project } from '@increaser/entities/Project'
 
 const Content = styled(HStack)`
   overflow: hidden;
@@ -21,7 +18,7 @@ const Container = styled(IncludedItem)`
   padding-left: 16px;
 `
 
-export const ProjectItem = ({ value }: ProjectItemProps) => {
+export const ProjectItem = ({ value }: ComponentWithValueProps<Project>) => {
   const { mutate: deleteProject } = useDeleteProjectMutation()
 
   return (

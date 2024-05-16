@@ -11,7 +11,7 @@ import { Interval } from '@lib/utils/interval/Interval'
 import { TrackedTime } from './TrackedTime'
 
 export type Set = Interval & {
-  projectId?: string
+  projectId?: string | null
 }
 
 interface AppSumo {

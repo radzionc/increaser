@@ -9,7 +9,7 @@ export const FocusLauncherProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const [state, setState] = useState<FocusLauncherMutableState>({
-    projectId: null,
+    projectId: undefined,
     taskId: null,
   })
 

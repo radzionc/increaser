@@ -12,7 +12,7 @@ import { enforceRange } from '@lib/utils/enforceRange'
 import { EditorActiveSession } from './EditorActiveSession'
 import { BoundaryInteractiveArea } from './BoundaryInteractiveArea'
 import { VStack } from '@lib/ui/layout/Stack'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useProjectColor } from '@increaser/ui/projects/hooks/useProjectColor'
 
 interface SessionEndTimeInputProps extends InputProps<number> {
   projectId: string
@@ -37,8 +37,7 @@ export const SessionEndTimeInput = ({
   const timeSpaceDuration = timeSpaceEndsAt - timeSpaceStartsAt
   const msToPx = useCallback((ms: number) => (ms / MS_IN_HOUR) * pxInHour, [])
 
-  const { projectsRecord } = useProjects()
-  const color = projectsRecord[projectId].hslaColor
+  const color = useProjectColor(projectId)
 
   const handleMove = (y: number) => {
     const time = timeSpaceStartsAt + y * timeSpaceDuration

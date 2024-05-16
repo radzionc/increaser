@@ -1,6 +1,6 @@
 import { suggestFocusDuration } from '@increaser/app/focus/FocusDuration'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Button } from '@lib/ui/buttons/Button'
@@ -16,7 +16,6 @@ import { FocusProjectInput } from './FocusProjectInput'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnlyAction'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
@@ -30,6 +29,8 @@ import {
 import { FocusTaskInput } from './FocusTaskInput'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useProjectEmoji } from '@increaser/ui/projects/hooks/useProjectEmoji'
+import { useProject } from '@increaser/ui/projects/hooks/useProject'
 
 const Container = styled(Panel)`
   position: relative;
@@ -40,9 +41,10 @@ export const FocusLauncherForm = () => {
   const todayStartedAt = useStartOfDay()
   const { finishWorkAt } = useAssertUserState()
   const todaySets = useTodaySets()
-  const { projectsRecord } = useProjects()
   const { start } = useFocus()
   const { projectId, taskId } = useFocusLauncher()
+  const emoji = useProjectEmoji(projectId)
+  const project = useProject(projectId)
 
   const lastInteractionWasAt = useRef<number>()
 
@@ -81,14 +83,6 @@ export const FocusLauncherForm = () => {
     return () => clearInterval(interval)
   }, [updateSuggestions])
 
-  const project = projectId ? projectsRecord[projectId] : null
-
-  const isDisabled = useMemo(() => {
-    if (!project) {
-      return `Select a project to start a focus session`
-    }
-  }, [project])
-
   return (
     <VStack gap={12}>
       <HStack
@@ -107,18 +101,16 @@ export const FocusLauncherForm = () => {
             projects={() => <FocusProjectInput />}
             tasks={() => <FocusTaskInput />}
           />
-          {project && (
-            <CurrentProjectProvider value={project}>
-              <VStack gap={4}>
-                <ProjectBudgetWidget />
-                <VStack style={{ minHeight: 20 }}>
-                  {project.goal && project.allocatedMinutesPerWeek > 0 && (
-                    <ProjectBudgetSummary />
-                  )}
-                </VStack>
+          <CurrentProjectProvider value={projectId ?? null}>
+            <VStack gap={4}>
+              <ProjectBudgetWidget />
+              <VStack style={{ minHeight: 20 }}>
+                {project?.goal && project?.allocatedMinutesPerWeek > 0 && (
+                  <ProjectBudgetSummary />
+                )}
               </VStack>
-            </CurrentProjectProvider>
-          )}
+            </VStack>
+          </CurrentProjectProvider>
           <FocusDurationInput
             value={focusDuration}
             onChange={(value) => {
@@ -135,17 +127,9 @@ export const FocusLauncherForm = () => {
               })
             }}
             render={({ action }) => (
-              <Button
-                isDisabled={isDisabled}
-                kind="reversed"
-                size="l"
-                onClick={action}
-              >
+              <Button kind="reversed" size="l" onClick={action}>
                 <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                  <FocusDurationText
-                    emoji={project?.emoji}
-                    value={focusDuration}
-                  />
+                  <FocusDurationText emoji={emoji} value={focusDuration} />
                 </Text>
               </Button>
             )}

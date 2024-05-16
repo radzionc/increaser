@@ -7,11 +7,14 @@ export type ProjectGoal = (typeof projectGoals)[number]
 export const projectWorkingDays = ['everyday', 'workdays'] as const
 export type ProjectWorkingDays = (typeof projectWorkingDays)[number]
 
-export interface Project {
-  id: string
+export type ProjectInfo = {
   name: string
   color: number
   emoji: string
+}
+
+export type Project = ProjectInfo & {
+  id: string
   status: ProjectStatus
   allocatedMinutesPerWeek: number
   goal?: ProjectGoal | null
