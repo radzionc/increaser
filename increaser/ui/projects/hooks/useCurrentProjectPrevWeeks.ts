@@ -1,12 +1,14 @@
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
-import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useMemo } from 'react'
 import { range } from '@lib/utils/array/range'
-import { areSameWeek, toWeek } from '@lib/utils/time/Week'
+import { toWeek, weekToString } from '@lib/utils/time/Week'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useAssertUserState } from '../../user/UserStateContext'
+import { useCurrentProject } from '../CurrentProjectProvider'
 
 export const useCurrentProjectPrevWeeks = (maxWeeks: number) => {
-  const { weeks } = useCurrentProject()
+  const { weeks } = useAssertUserState()
+  const { id } = useCurrentProject()
 
   const currentWeekStartedAt = useStartOfWeek()
 
@@ -16,7 +18,8 @@ export const useCurrentProjectPrevWeeks = (maxWeeks: number) => {
         const weekStartedAt =
           currentWeekStartedAt - convertDuration(i + 1, 'w', 'ms')
         const week = toWeek(weekStartedAt)
-        const seconds = weeks.find((w) => areSameWeek(w, week))?.seconds || 0
+        const weekKey = weekToString(week)
+        const seconds = weeks[weekKey]?.[id] ?? 0
 
         return {
           ...week,
@@ -24,5 +27,5 @@ export const useCurrentProjectPrevWeeks = (maxWeeks: number) => {
         }
       })
       .reverse()
-  }, [maxWeeks, currentWeekStartedAt, weeks])
+  }, [currentWeekStartedAt, id, maxWeeks, weeks])
 }

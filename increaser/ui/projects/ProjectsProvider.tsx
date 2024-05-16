@@ -1,35 +1,17 @@
 import { createContext, useMemo } from 'react'
-import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { areSameWeek } from '@lib/utils/time/Week'
 import { getRecord } from '@lib/utils/record/getRecord'
-import { range } from '@lib/utils/array/range'
-import { toWeek } from '@lib/utils/time/Week'
 import { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { MS_IN_WEEK } from '@lib/utils/time'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { EnhancedProject } from './EnhancedProject'
 import { enhanceProject } from './utils/enhanceProject'
-
-export const weeksToDisplay = 4
-
-export interface WeekSummaryProject {
-  seconds: number
-  id: string
-}
-export interface WeekSummary {
-  year: number
-  week: number
-  projects: WeekSummaryProject[]
-}
 
 interface ProjectsState {
   projects: EnhancedProject[]
   activeProjects: EnhancedProject[]
   allocatedProjects: EnhancedProject[]
   projectsRecord: Record<string, EnhancedProject>
-  weeks: WeekSummary[]
 }
 
 const getProjectSortingNumber = ({
@@ -82,31 +64,6 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
     [projects],
   )
 
-  const startOfWeek = useStartOfWeek()
-
-  const weeks: WeekSummary[] = useMemo(() => {
-    return range(weeksToDisplay).map((index) => {
-      const week = toWeek(startOfWeek - (weeksToDisplay - index) * MS_IN_WEEK)
-      const projectsWithWeek = [] as WeekSummaryProject[]
-      projects.forEach((project) => {
-        const projectWeek = project.weeks.find((partialWeek) =>
-          areSameWeek(partialWeek, week),
-        )
-        if (projectWeek) {
-          projectsWithWeek.push({
-            seconds: projectWeek.seconds,
-            id: project.id,
-          })
-        }
-      })
-
-      return {
-        ...week,
-        projects: projectsWithWeek.sort((a, b) => a.seconds - b.seconds),
-      }
-    })
-  }, [projects, startOfWeek])
-
   return (
     <ProjectsContext.Provider
       value={{
@@ -114,7 +71,6 @@ export const ProjectsProvider = ({ children }: ComponentWithChildrenProps) => {
         activeProjects,
         allocatedProjects,
         projectsRecord,
-        weeks,
       }}
     >
       {children}

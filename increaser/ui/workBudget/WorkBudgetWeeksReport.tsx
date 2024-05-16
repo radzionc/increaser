@@ -9,13 +9,18 @@ import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 
 import { useTheme } from 'styled-components'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { fromWeek, toWeek } from '@lib/utils/time/Week'
+import {
+  fromWeek,
+  stringToWeek,
+  toWeek,
+  weekToString,
+} from '@lib/utils/time/Week'
 import { order } from '@lib/utils/array/order'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { BarChart } from '@lib/ui/charts/BarChart'
+import { useAssertUserState } from '../user/UserStateContext'
 
 const maxWeeks = 4
 const minWeeks = 2
@@ -23,46 +28,37 @@ const minWeeks = 2
 export const WorkBudgetWeeksReport = () => {
   const weekStartedAt = useStartOfWeek()
 
-  const { projects } = useProjects()
+  const { weeks } = useAssertUserState()
 
   const lastWeekStartedAt = weekStartedAt - convertDuration(1, 'w', 'ms')
 
   const firstWeekStartedAt = useMemo(() => {
-    const allWeeks = projects.flatMap((project) => project.weeks).map(fromWeek)
+    const allWeeks = Object.keys(weeks).map(stringToWeek).map(fromWeek)
     if (!allWeeks.length) return lastWeekStartedAt
 
     return Math.max(
       lastWeekStartedAt - convertDuration(maxWeeks, 'w', 'ms'),
       order(allWeeks, (v) => v, 'asc')[0],
     )
-  }, [lastWeekStartedAt, projects])
+  }, [lastWeekStartedAt, weeks])
 
-  const weeks =
+  const weeksNumber =
     Math.round(lastWeekStartedAt - firstWeekStartedAt) /
     convertDuration(1, 'w', 'ms')
 
   const totals = useMemo(() => {
-    const result = range(weeks).map(() => 0)
-
-    projects
-      .flatMap((project) => project.weeks)
-      .forEach(({ week, year, seconds }) => {
-        const weekStartedAt = fromWeek({ week, year })
-        const weekIndex = Math.round(
-          (weekStartedAt - firstWeekStartedAt) / convertDuration(1, 'w', 'ms'),
-        )
-
-        if (weekIndex < 0 || weekIndex >= weeks) return
-
-        result[weekIndex] += seconds
-      })
-
-    return result
-  }, [firstWeekStartedAt, projects, weeks])
+    return range(weeksNumber).map((index) => {
+      const weekStartedAt =
+        firstWeekStartedAt + convertDuration(index, 'w', 'ms')
+      const weekString = weekToString(toWeek(weekStartedAt))
+      const timeRecord = weeks[weekString] || {}
+      return sum(Object.values(timeRecord))
+    })
+  }, [firstWeekStartedAt, weeks, weeksNumber])
 
   const theme = useTheme()
 
-  if (weeks < minWeeks) {
+  if (weeksNumber < minWeeks) {
     return (
       <div>
         <ShyInfoBlock>
@@ -76,12 +72,12 @@ export const WorkBudgetWeeksReport = () => {
   return (
     <VStack gap={20}>
       <Text color="contrast" weight="semibold">
-        Last {weeks} weeks report
+        Last {weeksNumber} weeks report
       </Text>
       <UniformColumnGrid gap={20}>
         <LabeledValue labelColor="supporting" name={`Avg. week`}>
           <Text as="span" color="contrast">
-            {formatDuration(sum(totals) / weeks, 's', { maxUnit: 'h' })}
+            {formatDuration(sum(totals) / weeksNumber, 's', { maxUnit: 'h' })}
           </Text>
         </LabeledValue>
       </UniformColumnGrid>

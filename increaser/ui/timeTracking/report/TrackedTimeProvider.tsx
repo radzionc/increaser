@@ -19,12 +19,14 @@ import {
 } from '@increaser/ui/timeTracking/report/state/TrackedTimeContext'
 import { hideProjectNames } from '@increaser/ui/timeTracking/report/utils/hideProjectNames'
 import { mergeTrackedDataPoint } from '@increaser/ui/timeTracking/report/utils/mergeTrackedDataPoint'
+import { trackedTimeToProjectWeeks } from '@increaser/entities-utils/project/trackedTimeToProjectWeeks'
+import { trackedTimeToProjectMonths } from '@increaser/entities-utils/project/trackedTimeToProjectMonths'
 
 export const TrackedTimeProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const { projects: allProjects } = useProjects()
-  const { sets } = useAssertUserState()
+  const { sets, weeks, months } = useAssertUserState()
 
   const weekStartedAt = useStartOfWeek()
   const monthStartedAt = useStartOfMonth()
@@ -35,10 +37,15 @@ export const TrackedTimeProvider = ({
   const projects = useMemo(() => {
     const result: Record<string, TimeTrackingProjectData> = {}
 
+    const weeksRecord = trackedTimeToProjectWeeks({ trackedTime: weeks })
+    const monthsRecord = trackedTimeToProjectMonths({ trackedTime: months })
+
     allProjects.forEach((project) => {
       result[project.id] = {
-        ...pick(project, ['id', 'hslaColor', 'name', 'weeks', 'months']),
+        ...pick(project, ['id', 'hslaColor', 'name']),
         days: [],
+        weeks: weeksRecord[project.id] ?? [],
+        months: monthsRecord[project.id] ?? [],
       }
     })
 
@@ -86,7 +93,15 @@ export const TrackedTimeProvider = ({
     })
 
     return shouldHideProjectNames ? hideProjectNames(result) : result
-  }, [allProjects, monthStartedAt, sets, shouldHideProjectNames, weekStartedAt])
+  }, [
+    allProjects,
+    monthStartedAt,
+    months,
+    sets,
+    shouldHideProjectNames,
+    weekStartedAt,
+    weeks,
+  ])
 
   return (
     <TrackedTimeContext.Provider value={{ projects, setState, ...state }}>

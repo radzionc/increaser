@@ -36,8 +36,6 @@ export const useCreateProjectMutation = (
       const project: Project = {
         ...input,
         status: 'active',
-        weeks: [],
-        months: [],
       }
 
       analytics.trackEvent('Create project', { name: project.name })

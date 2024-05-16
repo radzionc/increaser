@@ -8,6 +8,7 @@ import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
+import { TrackedTime } from './TrackedTime'
 
 export type Set = Interval & {
   projectId: string
@@ -39,6 +40,9 @@ export type User = DayMoments &
 
     lastSyncedMonthEndedAt?: number
     lastSyncedWeekEndedAt?: number
+
+    weeks: TrackedTime
+    months: TrackedTime
 
     focusSounds: FocusSound[]
 
@@ -86,6 +90,8 @@ export const userDefaultFields: Pick<
   | 'goToBedAt'
   | 'workdayHours'
   | 'weekendHours'
+  | 'weeks'
+  | 'months'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -93,6 +99,8 @@ export const userDefaultFields: Pick<
   projects: [otherProject],
   habits: {},
   isAnonymous: true,
+  weeks: {},
+  months: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }
