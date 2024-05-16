@@ -27,16 +27,13 @@ export const trackTime = ({
     }
 
     const { projectId } = set
-    if (!result[periodKey][projectId]) {
-      result[periodKey] = {
-        ...result[periodKey],
-        [projectId]: 0,
-      }
-    }
 
-    result[periodKey][projectId] += Math.round(
-      convertDuration(getSetDuration(set), 'ms', 's'),
-    )
+    const seconds = Math.round(convertDuration(getSetDuration(set), 'ms', 's'))
+
+    result[periodKey] = {
+      ...result[periodKey],
+      [projectId]: (result[periodKey][projectId] ?? 0) + seconds,
+    }
   })
 
   return result
