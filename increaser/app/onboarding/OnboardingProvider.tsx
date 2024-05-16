@@ -4,8 +4,6 @@ import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { analytics } from '../analytics'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { match } from '@lib/utils/match'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { OnboardingStep, onboardingSteps } from './OnboardingStep'
 
@@ -43,14 +41,10 @@ export const OnboardingProvider = ({
 
   const { mutate: updateUser } = useUpdateUserMutation()
 
-  const { activeProjects } = useProjects()
   const isNextStepDisabled = useMemo(
     () =>
       match<OnboardingStep, string | false>(currentStep, {
-        projects: () =>
-          isEmpty(activeProjects)
-            ? 'You need to create at least one project'
-            : false,
+        projects: () => false,
         workBudget: () => false,
         projectsBudget: () => false,
         schedule: () => false,
@@ -58,7 +52,7 @@ export const OnboardingProvider = ({
         tasks: () => false,
         focus: () => false,
       }),
-    [activeProjects, currentStep],
+    [currentStep],
   )
 
   const { finishedOnboardingAt } = useAssertUserState()

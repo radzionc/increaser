@@ -3,7 +3,7 @@ export type Task = {
   id: string
   name: string
   completedAt?: number | null
-  projectId?: string | null
+  projectId: string
   deadlineAt: number
   order: number
   spentTime?: number

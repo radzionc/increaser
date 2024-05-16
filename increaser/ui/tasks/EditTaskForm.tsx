@@ -21,9 +21,7 @@ export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
   const task = useCurrentTask()
   const [name, setName] = useState(task.name)
-  const [projectId, setProjectId] = useState<string | null>(
-    task.projectId ?? null,
-  )
+  const [projectId, setProjectId] = useState<string>(task.projectId)
   const currentDeadlineStatus = getDeadlineStatus({
     now: Date.now(),
     deadlineAt: task.deadlineAt,

@@ -48,7 +48,7 @@ export const ExitOnboarding = () => {
           <Content>
             <Text>
               You’re about to exit the onboarding process. Completing it will
-              help you set up your account for the best experience with
+              help you set up your account for the best experience with{' '}
               {productName}, making you more organized and productive from the
               start.
             </Text>

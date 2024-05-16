@@ -1,12 +1,12 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
+import { useProjects } from '../projects/ProjectsProvider'
 
 export const TaskProjectSelector = ({
   value,
   onChange,
-}: InputProps<string | null>) => {
+}: InputProps<string>) => {
   const { activeProjects, projectsRecord } = useProjects()
 
   return (
@@ -18,9 +18,7 @@ export const TaskProjectSelector = ({
       getOptionKey={(option) => option}
       renderOption={(option) => (
         <>
-          {option && (
-            <Text color="contrast">{projectsRecord[option].emoji}</Text>
-          )}
+          <Text color="contrast">{projectsRecord[option].emoji}</Text>
           <Text>{option ? projectsRecord[option].name : 'No project'}</Text>
         </>
       )}

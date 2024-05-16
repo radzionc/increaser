@@ -3,6 +3,7 @@ import { IncludedItem } from '@lib/ui/inputs/IncludedItem'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useDeleteProjectMutation } from '../../projects/api/userDeleteProjectMutation'
+import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import styled from 'styled-components'
 
 type ProjectItemProps = {
@@ -25,7 +26,13 @@ export const ProjectItem = ({ value }: ProjectItemProps) => {
   const { mutate: deleteProject } = useDeleteProjectMutation()
 
   return (
-    <Container onRemove={() => deleteProject({ id: value.id })}>
+    <Container
+      onRemove={
+        couldProjectBeDeleted(value.id)
+          ? () => deleteProject({ id: value.id })
+          : undefined
+      }
+    >
       <Content>
         <Text color="contrast" size={18}>
           {value.emoji}

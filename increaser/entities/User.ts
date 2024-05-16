@@ -2,7 +2,7 @@ import { CountryCode } from '@lib/countries'
 import { FocusSound, defaultFocusSounds } from './FocusSound'
 import { Habit } from './Habit'
 import { LifeTimeDeal } from './LifeTimeDeal'
-import { Project } from './Project'
+import { Project, otherProject } from './Project'
 import { Subscription } from './Subscription'
 import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
@@ -90,7 +90,7 @@ export const userDefaultFields: Pick<
   focusSounds: defaultFocusSounds,
   sets: [],
   tasks: {},
-  projects: [],
+  projects: [otherProject],
   habits: {},
   isAnonymous: true,
   ...defaultWorkBudget,

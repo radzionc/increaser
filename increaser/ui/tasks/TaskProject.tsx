@@ -6,8 +6,6 @@ export const TaskProject = () => {
   const { projectId } = useCurrentTask()
   const { projectsRecord } = useProjects()
 
-  if (!projectId) return null
-
   const { emoji } = projectsRecord[projectId]
 
   return <EmojiTextPrefix emoji={emoji} />
