@@ -26,14 +26,15 @@ const addTrackedTime = async () => {
 
   await Promise.all(
     users.map((user) => {
+      const projectIds = user.projects.map((project) => project.id)
       const projectWeeksRecord = makeRecord(
-        user.projects.map((project) => project.id),
+        projectIds,
         (projectId) =>
           user.projects.find((project) => project.id === projectId)?.weeks ??
           [],
       )
       const projectMonthsRecord = makeRecord(
-        user.projects.map((project) => project.id),
+        projectIds,
         (projectId) =>
           user.projects.find((project) => project.id === projectId)?.months ??
           [],
