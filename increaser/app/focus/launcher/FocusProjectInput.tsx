@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Center } from '@lib/ui/layout/Center'
 import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
 import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { ProjectGoalBadge } from './ProjectGoalBadge'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
@@ -13,6 +13,7 @@ import { useEffect, useMemo } from 'react'
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { FocusOptionContainer } from './FocusOptionContainer'
+import { otherProject } from '@increaser/entities/Project'
 
 const Identifier = styled(Center)`
   width: 16px;
@@ -73,31 +74,36 @@ export const FocusProjectInput = () => {
   }
 
   return (
-    <UniformColumnGrid gap={4} minChildrenWidth={160}>
-      {options.map((project) => {
-        const { id, name } = project
-        const isSelected = id === projectId
-        return (
-          <Option as="label" key={id} selected={isSelected}>
-            <HStack style={{ maxWidth: '100%' }} alignItems="center" gap={8}>
-              <Identifier>
-                <CurrentProjectProvider value={project}>
-                  <ProjectGoalBadge project={project} />
-                </CurrentProjectProvider>
-              </Identifier>
-              <Text cropped>{name}</Text>
-            </HStack>
-            <InvisibleHTMLRadio
-              isSelected={isSelected}
-              value={id}
-              groupName="project"
-              onSelect={() =>
-                setState((state) => ({ ...state, projectId: id }))
-              }
-            />
-          </Option>
-        )
-      })}
-    </UniformColumnGrid>
+    <VStack gap={20}>
+      {options.every((option) => option.id === otherProject.id) && (
+        <AddProjectsPrompt />
+      )}
+      <UniformColumnGrid gap={4} minChildrenWidth={160}>
+        {options.map((project) => {
+          const { id, name } = project
+          const isSelected = id === projectId
+          return (
+            <Option as="label" key={id} selected={isSelected}>
+              <HStack style={{ maxWidth: '100%' }} alignItems="center" gap={8}>
+                <Identifier>
+                  <CurrentProjectProvider value={project}>
+                    <ProjectGoalBadge project={project} />
+                  </CurrentProjectProvider>
+                </Identifier>
+                <Text cropped>{name}</Text>
+              </HStack>
+              <InvisibleHTMLRadio
+                isSelected={isSelected}
+                value={id}
+                groupName="project"
+                onSelect={() =>
+                  setState((state) => ({ ...state, projectId: id }))
+                }
+              />
+            </Option>
+          )
+        })}
+      </UniformColumnGrid>
+    </VStack>
   )
 }
