@@ -9,6 +9,7 @@ import { Text } from '@lib/ui/text'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { IconButton } from '@lib/ui/buttons/IconButton'
+import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -16,6 +17,10 @@ export const DeleteProject = () => {
   const { mutate: deleteProject } = useDeleteProjectMutation()
 
   const { mutate: updateProject } = useUpdateProjectMutation()
+
+  if (!couldProjectBeDeleted(id)) {
+    return null
+  }
 
   return (
     <Opener

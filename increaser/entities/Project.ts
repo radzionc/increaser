@@ -42,3 +42,15 @@ export const workingDayOptionName: Record<ProjectWorkingDays, string> = {
   everyday: 'Every day',
   workdays: 'Monday to Friday',
 }
+
+export const otherProject: Project = {
+  id: 'other',
+  name: 'Other',
+  color: 0,
+  emoji: '❔',
+  status: 'active',
+  allocatedMinutesPerWeek: 0,
+  weeks: [],
+  months: [],
+  workingDays: 'everyday',
+}
