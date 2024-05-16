@@ -1,7 +1,4 @@
 import { Project } from '@increaser/entities/Project'
-import { randomInRange } from '@lib/utils/randomInRange'
-import { range } from '@lib/utils/array/range'
-import { toWeek } from '@lib/utils/time/Week'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export enum DemoProject {
@@ -50,24 +47,6 @@ const projectsDescription: ProjectDescription[] = [
   },
 ]
 
-const weeksToDisplay = 14
-
-export const generateWeeks = (allocatedMinutesPerWeek: number) => {
-  const now = Date.now()
-  const shift = allocatedMinutesPerWeek * 0.1
-
-  return range(weeksToDisplay).map((index) => {
-    const value = randomInRange(
-      allocatedMinutesPerWeek - shift,
-      allocatedMinutesPerWeek + shift,
-    )
-    return {
-      ...toWeek(now - convertDuration(index + 1, 'w', 'ms')),
-      seconds: convertDuration(value, 'min', 's'),
-    }
-  })
-}
-
 const toProject = ({
   id,
   color,
@@ -82,8 +61,6 @@ const toProject = ({
     emoji,
     allocatedMinutesPerWeek,
     status: 'active',
-    weeks: [],
-    months: [],
     workingDays: 'everyday',
     goal,
   }

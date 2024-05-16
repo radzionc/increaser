@@ -1,37 +1,23 @@
-import { mergeIntoProjectMonths } from '@increaser/entities-utils/project/mergeIntoProjectMonths'
-import { setToProjectMonth } from '@increaser/entities-utils/project/setToProjectMonth'
 import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
 import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
-import { groupSetsByProject } from '@increaser/entities-utils/set/groupSetsByProject'
 import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
-import { Project } from '@increaser/entities/Project'
-import { Set, User } from '@increaser/entities/User'
+import { User } from '@increaser/entities/User'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getMonthStartedAt } from '@lib/utils/time/getMonthStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
-
-const addNewSetsToProject = (project: Project, sets: Set[]) => {
-  let netMonths = [...project.months]
-  sets.map(setToProjectMonth).forEach((month) => {
-    netMonths = mergeIntoProjectMonths(netMonths, month)
-  })
-
-  return {
-    ...project,
-    months: netMonths,
-  }
-}
+import { trackTime } from './trackTime'
+import { monthToString, toMonth } from '@lib/utils/time/Month'
 
 type UserFields = Pick<
   User,
-  'sets' | 'timeZone' | 'projects' | 'lastSyncedMonthEndedAt'
+  'sets' | 'timeZone' | 'months' | 'lastSyncedMonthEndedAt'
 >
 
 export const organizeMonths = ({
   timeZone,
   lastSyncedMonthEndedAt,
   sets,
-  projects,
+  months,
 }: UserFields): Partial<UserFields> => {
   const monthStartedAt = inTimeZone(getMonthStartedAt(Date.now()), timeZone)
 
@@ -49,17 +35,6 @@ export const organizeMonths = ({
     return {}
   }
 
-  const groupedSets = groupSetsByProject(unsyncedSets)
-  const newProjects = projects.map((project) => {
-    const sets = groupedSets[project.id]
-
-    if (!sets) {
-      return project
-    }
-
-    return addNewSetsToProject(project, sets)
-  })
-
   const keepSetsStartedAfter =
     Date.now() -
     convertDuration(
@@ -69,7 +44,12 @@ export const organizeMonths = ({
     )
 
   return {
-    projects: newProjects,
+    months: trackTime({
+      sets: unsyncedSets,
+      trackedTime: months,
+      getPeriodKey: (timestamp) => monthToString(toMonth(timestamp)),
+      targetTimeZoneOffset: timeZone,
+    }),
     sets: getSetsStartedAfter(sets, keepSetsStartedAfter),
     lastSyncedMonthEndedAt: monthStartedAt,
   }

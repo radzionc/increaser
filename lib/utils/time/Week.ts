@@ -28,3 +28,12 @@ export const fromWeek = ({ year, week }: Week): number => {
 
   return getWeekStartedAt(date.getTime())
 }
+
+export const weekToString = ({ year, week }: Week): string =>
+  [week, year].join('-')
+
+export const stringToWeek = (str: string): Week => {
+  const [week, year] = str.split('-').map(Number)
+
+  return { week, year }
+}
