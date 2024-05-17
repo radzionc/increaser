@@ -13,6 +13,7 @@ import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord
 import Link from 'next/link'
 import { transition } from '@lib/ui/css/transition'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
+import { getProductToolUrl } from '../../navigation/productTool'
 
 const IconContainer = styled(IconWrapper)`
   font-size: 18px;
@@ -38,7 +39,7 @@ export const ToolkitItem = ({
 }: ComponentWithValueProps<ProductTool>) => {
   const { colors } = useTheme()
   return (
-    <Link href={`#${value}`}>
+    <Link href={getProductToolUrl(value)}>
       <Container>
         <IconContainer
           style={{
