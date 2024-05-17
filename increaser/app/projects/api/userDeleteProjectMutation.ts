@@ -17,7 +17,7 @@ export const useDeleteProjectMutation = (
   params?: UseDeleteProjectMutationParams,
 ) => {
   const { projects } = useAssertUserState()
-  const { updateState } = useUserState()
+  const { updateState, pullRemoteState } = useUserState()
   const api = useApi()
 
   return useMutation({
@@ -26,9 +26,10 @@ export const useDeleteProjectMutation = (
         projects: projects.filter((project) => project.id !== id),
       })
 
-      return api.call('deleteProject', {
+      await api.call('deleteProject', {
         id,
       })
+      pullRemoteState()
     },
     onSuccess: params?.onSuccess,
   })

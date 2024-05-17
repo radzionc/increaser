@@ -10,6 +10,7 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
+import { otherProject } from '@increaser/entities/Project'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -46,15 +47,18 @@ export const DeleteProject = () => {
           <VStack gap={12}>
             <Text height="large" color="supporting">
               Are you sure you want to delete{' '}
-              <Text as="span" color="regular">
-                {name}?
+              <Text as="span" color="contrast">
+                {name}
               </Text>{' '}
-              This action will permanently remove all data related to the
-              project, including tracked time.
+              ? All associated data will be reassigned to the{' '}
+              <Text as="span" color="contrast">
+                {otherProject.name}
+              </Text>{' '}
+              project.
             </Text>
-            {status === 'active' && (
+            {status !== 'archived' && (
               <Text height="large" color="supporting">
-                To retain the data, consider{' '}
+                If you prefer, you can{' '}
                 <TextButton
                   as="span"
                   onClick={() => {
@@ -65,7 +69,7 @@ export const DeleteProject = () => {
                     onClose()
                   }}
                 >
-                  archiving the project
+                  archive this project
                 </TextButton>{' '}
                 instead.
               </Text>

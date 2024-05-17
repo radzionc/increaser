@@ -25,6 +25,7 @@ import { useCurrentPeriodStartedAt } from '@increaser/ui/timeTracking/report/hoo
 import { subtractPeriod } from '@increaser/ui/timeTracking/report/utils/subtractPeriod'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useTrackedTimeReportPreferences } from './state/useTrackedTimeReportPreferences'
+import { isMoreThanZero } from '@lib/utils/isMoreThanZero'
 
 export const TrackedTimeReportProvider = ({
   children,
@@ -117,6 +118,15 @@ export const TrackedTimeReportProvider = ({
       }))
     }
   }, [setState, timeFrame, timeGrouping])
+
+  useEffect(() => {
+    if (
+      state.activeProjectId &&
+      !projectsTimeSeries[state.activeProjectId].some(isMoreThanZero)
+    ) {
+      setState((state) => ({ ...state, activeProjectId: null }))
+    }
+  }, [projectsTimeSeries, setState, state.activeProjectId])
 
   return (
     <TrackedTimeReportContext.Provider

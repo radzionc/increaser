@@ -8,6 +8,7 @@ import { getDemoTasks } from './tasks'
 import { demoConfig } from './config'
 import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
 import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
+import { otherProject } from '@increaser/entities/Project'
 
 export const getDemoUser = (): User => {
   const user = {
@@ -21,7 +22,7 @@ export const getDemoUser = (): User => {
     updatedAt: Date.now(),
     timeZone: getCurrentTimezoneOffset(),
     habits: getDemoHabits(),
-    projects: getDemoProjects(),
+    projects: [otherProject, ...getDemoProjects()],
     sets: getDemoSets(),
     tasks: getDemoTasks(),
   }
@@ -35,6 +36,4 @@ export const getDemoUser = (): User => {
     ...user,
     ...fields,
   }
-
-  return user
 }
