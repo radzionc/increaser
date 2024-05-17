@@ -37,8 +37,10 @@ export const workingDayOptionName: Record<ProjectWorkingDays, string> = {
   workdays: 'Monday to Friday',
 }
 
+export const otherProjectId = 'other'
+
 export const otherProject: Project = {
-  id: 'other',
+  id: otherProjectId,
   name: 'Other',
   color: 0,
   emoji: '❔',

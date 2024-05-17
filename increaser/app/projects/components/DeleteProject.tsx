@@ -10,7 +10,8 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
-import { otherProject } from '@increaser/entities/Project'
+import { otherProjectId } from '@increaser/entities/Project'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -18,6 +19,8 @@ export const DeleteProject = () => {
   const { mutate: deleteProject } = useDeleteProjectMutation()
 
   const { mutate: updateProject } = useUpdateProjectMutation()
+
+  const { projectsRecord } = useProjects()
 
   if (!couldProjectBeDeleted(id)) {
     return null
@@ -52,7 +55,7 @@ export const DeleteProject = () => {
               </Text>{' '}
               ? All associated data will be reassigned to the{' '}
               <Text as="span" color="contrast">
-                {otherProject.name}
+                {projectsRecord[otherProjectId].name}
               </Text>{' '}
               project.
             </Text>
