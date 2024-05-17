@@ -5,6 +5,7 @@ import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
 import { TaskProject } from '@increaser/ui/tasks/TaskProject'
+import { CurrentFocusTaskTrackedTime } from '@increaser/app/focus/components/CurrentFocusTaskTrackedTime'
 
 export const CurrentFocusTask = () => {
   const { taskId } = useCurrentFocus()
@@ -22,6 +23,7 @@ export const CurrentFocusTask = () => {
           <TaskCheckBox />
           <TaskTextContainer>
             <TaskProject />
+            <CurrentFocusTaskTrackedTime />
             {task.name}
           </TaskTextContainer>
         </TaskItemFrame>
