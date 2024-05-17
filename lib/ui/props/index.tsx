@@ -71,3 +71,7 @@ export type PromptProps = {
 export type ComponentWithWidthProps = {
   width: number
 }
+
+export type ComponentWithActiveState = {
+  isActive: boolean
+}
