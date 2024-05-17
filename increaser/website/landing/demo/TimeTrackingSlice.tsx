@@ -7,10 +7,15 @@ import { TrackedTimeReport } from '@increaser/ui/timeTracking/report/TrackedTime
 import { TrackedTimeProvider } from '@increaser/ui/timeTracking/report/TrackedTimeProvider'
 import { VStack } from '@lib/ui/layout/Stack'
 
-export const TimeTrackingSlice = () => {
+type TimeTrackingSliceProps = {
+  titleAs?: React.ElementType
+}
+
+export const TimeTrackingSlice = ({ titleAs }: TimeTrackingSliceProps) => {
   return (
     <WebsiteSliceContent>
       <WebsiteSectionHeader
+        titleAs={titleAs}
         title="Time Well Spent, Goals Well Achieved"
         subtitle={`With ${productName}, time tracking and management become your superpowers`}
       />

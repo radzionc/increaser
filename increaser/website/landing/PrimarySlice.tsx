@@ -1,18 +1,11 @@
-import styled from 'styled-components'
-import { websiteConfig } from '@lib/ui/website/config'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
-import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
+import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { PrimaryCallToAction } from './PrimaryCallToAction'
 import { ToolkitPanel } from './toolkit/ToolkitPanel'
 
-const Container = styled(WebsiteSlice)`
-  min-height: calc(100vh - ${toSizeUnit(websiteConfig.headerHeight)});
-`
-
 export const PrimarySlice = () => (
-  <Container>
+  <PrimaryWebsiteSlice>
     <WebsiteSliceContent>
       <WebsiteSectionHeader
         titleAs="h1"
@@ -28,5 +21,5 @@ export const PrimarySlice = () => (
       <ToolkitPanel />
       <PrimaryCallToAction />
     </WebsiteSliceContent>
-  </Container>
+  </PrimaryWebsiteSlice>
 )
