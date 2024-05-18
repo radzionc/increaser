@@ -1,4 +1,7 @@
-import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
+import {
+  WebsiteSectionHeader,
+  WebsiteSectionHeaderProps,
+} from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
@@ -10,12 +13,15 @@ const Content = styled(VStack)`
   width: 100%;
 `
 
-export const ProjectsBudgetSlice = () => {
+export const ProjectsBudgetSlice = (
+  props: Partial<WebsiteSectionHeaderProps>,
+) => {
   return (
     <WebsiteSliceContent>
       <WebsiteSectionHeader
         title="Balance Your Time, Boost Your Efficiency"
         subtitle="Ensure balanced attention across all your projects without burning out"
+        {...props}
       />
       <ClientOnly>
         <Content>

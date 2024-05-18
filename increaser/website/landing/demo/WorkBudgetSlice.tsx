@@ -1,4 +1,7 @@
-import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
+import {
+  WebsiteSectionHeader,
+  WebsiteSectionHeaderProps,
+} from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
@@ -14,12 +17,13 @@ const Content = styled(UniformColumnGrid)`
   width: 100%;
 `
 
-export const WorkBudgetSlice = () => {
+export const WorkBudgetSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   return (
     <WebsiteSliceContent>
       <WebsiteSectionHeader
         title="Your Path to Better Work-Life Balance"
         subtitle={`Optimize your work hours and enjoy more free time every day`}
+        {...props}
       />
       <ClientOnly>
         <Content minChildrenWidth={320} gap={40}>

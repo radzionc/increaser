@@ -1,4 +1,7 @@
-import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
+import {
+  WebsiteSectionHeader,
+  WebsiteSectionHeaderProps,
+} from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
@@ -15,7 +18,7 @@ const Content = styled(VStack)`
   width: 100%;
 `
 
-export const TasksSlice = () => {
+export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   const { tasks } = useAssertUserState()
 
   return (
@@ -23,6 +26,7 @@ export const TasksSlice = () => {
       <WebsiteSectionHeader
         title="Stay on Top of Your To-Do List"
         subtitle="Stay organized and never miss a deadline again by prioritizing your daily tasks"
+        {...props}
       />
       <ClientOnly>
         <Content>
