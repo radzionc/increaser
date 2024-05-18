@@ -20,7 +20,9 @@ export const FocusTaskInput = () => {
         (task) =>
           task.projectId &&
           !task.completedAt &&
-          getDeadlineStatus({ ...task, now: Date.now() }) === 'today',
+          ['overdue', 'today'].includes(
+            getDeadlineStatus({ ...task, now: Date.now() }),
+          ),
       ),
       (task) => task.order,
       'asc',
