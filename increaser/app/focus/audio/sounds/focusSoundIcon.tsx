@@ -18,7 +18,7 @@ import { SnowIcon } from '@lib/ui/icons/SnowIcon'
 import { KeyboardIcon } from '@lib/ui/icons/KeyboardIcon'
 import { WaterfallIcon } from '@lib/ui/icons/WaterfallIcon'
 import { RoadIcon } from '@lib/ui/icons/RoadIcon'
-import { WindowIcon } from '@lib/ui/icons/WindowIcon'
+import { RainyWindowIcon } from '@lib/ui/icons/RainyWindowIcon'
 import { ReactNode } from 'react'
 import { FocusSound } from './state/useFocusSoundsPreference'
 
@@ -42,6 +42,6 @@ export const focusSoundIcon: Record<FocusSound, ReactNode> = {
   snow: <SnowIcon />,
   keyboard: <KeyboardIcon />,
   waterfall: <WaterfallIcon />,
-  window: <WindowIcon />,
+  window: <RainyWindowIcon />,
   road: <RoadIcon />,
 }

@@ -1,13 +1,15 @@
 export const BirdIcon = () => (
   <svg
-    stroke="currentColor"
-    fill="currentColor"
-    stroke-width="0"
-    viewBox="0 0 256 256"
-    height="1em"
-    width="1em"
     xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <path d="M236.44,73.34,213.21,57.86A60,60,0,0,0,96,76V93.19L1.75,211A8,8,0,0,0,8,224H112A104.11,104.11,0,0,0,216,120V100.28l20.44-13.62a8,8,0,0,0,0-13.32ZM110.15,141.12l-40,48a8,8,0,0,1-12.3-10.24l40-48a8,8,0,1,1,12.3,10.24ZM164,80a12,12,0,1,1,12-12A12,12,0,0,1,164,80Z"></path>
+    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c13 8 20-5 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
   </svg>
 )

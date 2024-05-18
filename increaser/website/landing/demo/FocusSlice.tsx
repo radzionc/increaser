@@ -1,4 +1,7 @@
-import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
+import {
+  WebsiteSectionHeader,
+  WebsiteSectionHeaderProps,
+} from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { productName } from '@increaser/config'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
@@ -27,12 +30,13 @@ const PositionSessionInfo = styled.div`
   top: 12px;
 `
 
-export const FocusSlice = () => {
+export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   return (
     <WebsiteSliceContent>
       <WebsiteSectionHeader
         title="Sharper Focus, Better Results"
         subtitle={`${productName}'s tools are designed to help you achieve maximum productivity`}
+        {...props}
       />
       <ClientOnly>
         <DemoFocusProvider>

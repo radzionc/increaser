@@ -12,7 +12,7 @@ import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInterac
 import { VStack } from '@lib/ui/layout/Stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import { getColor, matchColor } from '@lib/ui/theme/getters'
+import { getColor } from '@lib/ui/theme/getters'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { focusSoundIcon } from './focusSoundIcon'
@@ -20,13 +20,15 @@ import { focusSoundIcon } from './focusSoundIcon'
 const Container = styled(UnstyledButton)<{ isActive: boolean }>`
   width: 100%;
   font-size: 32px;
-  color: ${matchColor('isActive', {
-    true: 'text',
-    false: 'textShy',
-  })};
+  color: ${({ isActive, theme }) =>
+    (isActive
+      ? theme.colors.contrast
+      : theme.colors.foreground.getVariant({ l: () => 32 })
+    ).toCssValue()};
+
   ${transition};
   &:hover {
-    color: ${getColor('text')};
+    color: ${getColor('contrast')};
   }
 `
 
