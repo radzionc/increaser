@@ -6,6 +6,7 @@ export const productToolPageRecord: Partial<Record<ProductTool, string>> = {
   tasks: '/tasks',
   workBudget: '/work-budget',
   timePlanner: '/time-planner',
+  schedule: '/schedule',
 }
 
 export const getProductToolUrl = (tool: ProductTool) => {
