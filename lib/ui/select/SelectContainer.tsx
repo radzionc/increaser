@@ -24,6 +24,6 @@ export const SelectContainer = styled(HStack)`
   outline: 1px solid transparent;
   &:focus,
   &:active {
-    outline: 1px solid ${getColor('primary')};
+    outline: 1px solid ${getColor('contrast')};
   }
 `

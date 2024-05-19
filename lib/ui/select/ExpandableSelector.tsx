@@ -13,6 +13,7 @@ import { SelectContainer } from './SelectContainer'
 import { borderRadius } from '../css/borderRadius'
 import { OptionItem } from './OptionItem'
 import { CollapsableStateIndicator } from '../layout/CollapsableStateIndicator'
+import { FloatingFocusManager } from '@floating-ui/react'
 
 export type ExpandableSelectorProp<T> = UIComponentProps & {
   value: T | null
@@ -68,6 +69,15 @@ const Container = styled(SelectContainer)<{
         `}
 
   ${({ isActive }) => isActive && activeContainer}
+
+  outline: 1px solid transparent;
+  &:active {
+    outline: 1px solid ${getColor('primary')};
+  }
+
+  &:focus {
+    outline: 1px solid ${getColor('primary')};
+  }
 `
 
 const Outline = styled.div`
@@ -95,7 +105,7 @@ export function ExpandableSelector<T>({
     isOpen,
     setIsOpen,
     activeIndex,
-    refs,
+    context,
   } = useFloatingOptions({
     floatingOptionsWidthSameAsOpener,
     selectedIndex: value === null ? null : options.indexOf(value),
@@ -117,28 +127,27 @@ export function ExpandableSelector<T>({
         <ToggleIconContainer isOpen={isOpen} />
       </Container>
       {isOpen && !isDisabled && (
-        <FloatingOptionsContainer {...getFloatingProps()}>
-          {options.map((option, index) => (
-            <OptionItem
-              isActive={activeIndex === index}
-              {...getOptionProps({
-                index,
-                onSelect: () => {
-                  onChange(option)
-                  setIsOpen(false)
-                  if (refs.reference.current instanceof HTMLElement) {
-                    refs.reference.current?.focus()
-                  }
-                },
-              })}
-            >
-              <OptionContent key={getOptionKey(option)}>
-                {renderOption(option)}
-              </OptionContent>
-              {option === value && <Outline />}
-            </OptionItem>
-          ))}
-        </FloatingOptionsContainer>
+        <FloatingFocusManager context={context} modal returnFocus>
+          <FloatingOptionsContainer {...getFloatingProps()}>
+            {options.map((option, index) => (
+              <OptionItem
+                isActive={activeIndex === index}
+                {...getOptionProps({
+                  index,
+                  onSelect: () => {
+                    onChange(option)
+                    setIsOpen(false)
+                  },
+                })}
+              >
+                <OptionContent key={getOptionKey(option)}>
+                  {renderOption(option)}
+                </OptionContent>
+                {option === value && <Outline />}
+              </OptionItem>
+            ))}
+          </FloatingOptionsContainer>
+        </FloatingFocusManager>
       )}
     </>
   )

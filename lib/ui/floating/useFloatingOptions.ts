@@ -113,5 +113,6 @@ export const useFloatingOptions = ({
     activeIndex,
     floatingStyles,
     refs,
+    context,
   } as const
 }
