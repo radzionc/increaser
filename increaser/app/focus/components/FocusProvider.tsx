@@ -157,7 +157,7 @@ export const FocusProvider = ({ children }: Props) => {
     [addSet, currentSet, router, tasks, todaySets, updateTaskMutation],
   )
 
-  const updateTask = useCallback((value: FocusTask) => {
+  const updateTask = useCallback((value: FocusTask | undefined) => {
     setCurrentSet((set) => (set ? { ...set, task: value } : set))
   }, [])
 

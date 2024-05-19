@@ -8,11 +8,14 @@ import { CurrentFocusTaskTrackedTime } from '@increaser/app/focus/components/Cur
 import styled from 'styled-components'
 import { cropText } from '@lib/ui/css/cropText'
 import { SelectContainer } from '@lib/ui/select/SelectContainer'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { SelectFocusTask } from './SelectFocusTask'
+import { IconButton } from '@lib/ui/buttons/IconButton'
+import { CloseIcon } from '@lib/ui/icons/CloseIcon'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 const Container = styled(SelectContainer)`
-  ${verticalPadding(0)}
+  padding: 0 4px 0 8px;
+
   ${cropText};
 `
 
@@ -25,6 +28,7 @@ const Content = styled(TaskTextContainer)`
 export const CurrentFocusTask = () => {
   const { task: focusTask } = useCurrentFocus()
   const { tasks } = useAssertUserState()
+  const { updateTask } = useFocus()
 
   if (!focusTask) {
     return <SelectFocusTask />
@@ -42,6 +46,12 @@ export const CurrentFocusTask = () => {
             {task.name}
           </Content>
         </TaskItemFrame>
+        <IconButton
+          kind="secondary"
+          title="Remove task"
+          icon={<CloseIcon />}
+          onClick={() => updateTask(undefined)}
+        />
       </Container>
     </CurrentTaskProvider>
   )

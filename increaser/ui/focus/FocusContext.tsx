@@ -32,7 +32,7 @@ export interface FocusState {
   currentSet: CurrentSet | undefined
   updateStartTime: (value: number) => void
   updateProject: (value: string) => void
-  updateTask: (value: FocusTask) => void
+  updateTask: (value: FocusTask | undefined) => void
 
   setFocusDuration: (duration: FocusDuration) => void
   focusDuration: FocusDuration
