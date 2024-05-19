@@ -95,6 +95,7 @@ export function ExpandableSelector<T>({
     isOpen,
     setIsOpen,
     activeIndex,
+    refs,
   } = useFloatingOptions({
     floatingOptionsWidthSameAsOpener,
     selectedIndex: value === null ? null : options.indexOf(value),
@@ -125,6 +126,9 @@ export function ExpandableSelector<T>({
                 onSelect: () => {
                   onChange(option)
                   setIsOpen(false)
+                  if (refs.reference.current instanceof HTMLElement) {
+                    refs.reference.current?.focus()
+                  }
                 },
               })}
             >
