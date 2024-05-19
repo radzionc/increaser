@@ -4,30 +4,43 @@ import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
-import { TaskProject } from '@increaser/ui/tasks/TaskProject'
 import { CurrentFocusTaskTrackedTime } from '@increaser/app/focus/components/CurrentFocusTaskTrackedTime'
+import styled from 'styled-components'
+import { cropText } from '@lib/ui/css/cropText'
+import { SelectContainer } from '@lib/ui/select/SelectContainer'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
+
+const Container = styled(SelectContainer)`
+  ${verticalPadding(0)}
+  ${cropText};
+`
+
+const Content = styled(TaskTextContainer)`
+  ${cropText};
+  max-width: 280px;
+  font-size: 14px;
+`
 
 export const CurrentFocusTask = () => {
-  const { taskId } = useCurrentFocus()
+  const { task: focusTask } = useCurrentFocus()
   const { tasks } = useAssertUserState()
 
-  const task = Object.values(tasks).find((task) => task.id === taskId)
+  const task = Object.values(tasks).find((task) => task.id === focusTask?.id)
   if (!task || task.completedAt) {
     return null
   }
 
   return (
     <CurrentTaskProvider value={task}>
-      <div>
+      <Container>
         <TaskItemFrame>
           <TaskCheckBox />
-          <TaskTextContainer>
-            <TaskProject />
+          <Content>
             <CurrentFocusTaskTrackedTime />
             {task.name}
-          </TaskTextContainer>
+          </Content>
         </TaskItemFrame>
-      </div>
+      </Container>
     </CurrentTaskProvider>
   )
 }

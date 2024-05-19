@@ -66,7 +66,12 @@ export const FocusProvider = ({ children }: Props) => {
       analytics.trackEvent('Start focus session', {
         duration: focusDuration,
       })
-      setCurrentSet({ projectId, startedAt: Date.now(), taskId })
+      const startedAt = Date.now()
+      setCurrentSet({
+        projectId,
+        startedAt,
+        task: taskId ? { id: taskId, startedAt } : undefined,
+      })
       if (duration) {
         setFocusDuration(duration as FocusDuration)
       }
@@ -94,21 +99,21 @@ export const FocusProvider = ({ children }: Props) => {
   const { tasks } = useAssertUserState()
 
   useEffect(() => {
-    if (!currentSet) return
+    if (!currentSet || !currentSet.task) return
 
-    const task = Object.values(tasks).find(
-      (task) => task.id === currentSet.taskId,
-    )
+    const { id, startedAt } = currentSet.task
 
-    if (!task) return
+    const task = Object.values(tasks).find((task) => task.id === id)
 
-    if (task.completedAt) {
-      setCurrentSet(omit(currentSet, 'taskId'))
+    if (!task) {
+      setCurrentSet(omit(currentSet, 'task'))
+    }
+
+    if (task && task.completedAt) {
       updateTask({
         id: task.id,
         fields: {
-          spentTime:
-            (task.spentTime || 0) + (Date.now() - currentSet.startedAt),
+          spentTime: (task.spentTime || 0) + (Date.now() - startedAt),
         },
       })
     }
@@ -129,15 +134,13 @@ export const FocusProvider = ({ children }: Props) => {
 
       addSet(set)
 
-      const task = Object.values(tasks).find(
-        (task) => task.id === currentSet.taskId,
-      )
-
-      if (task) {
+      const { task } = currentSet
+      if (task && task.id in tasks) {
+        const { spentTime } = tasks[task.id]
         updateTask({
           id: task.id,
           fields: {
-            spentTime: (task.spentTime || 0) + getSetDuration(set),
+            spentTime: (spentTime || 0) + (Date.now() - task.startedAt),
           },
         })
       }
@@ -152,6 +155,17 @@ export const FocusProvider = ({ children }: Props) => {
     },
     [addSet, currentSet, router, tasks, todaySets, updateTask],
   )
+
+  useEffect(() => {
+    if (!currentSet) return
+
+    const { task } = currentSet
+    if (!task) return
+
+    if (tasks[task.id].projectId !== currentSet.projectId) {
+      setCurrentSet(omit(currentSet, 'task'))
+    }
+  }, [currentSet, tasks])
 
   return (
     <FocusContext.Provider
