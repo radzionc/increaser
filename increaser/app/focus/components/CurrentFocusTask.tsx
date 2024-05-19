@@ -7,22 +7,23 @@ import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
 import { CurrentFocusTaskTrackedTime } from '@increaser/app/focus/components/CurrentFocusTaskTrackedTime'
 import styled from 'styled-components'
 import { cropText } from '@lib/ui/css/cropText'
-import { SelectContainer } from '@lib/ui/select/SelectContainer'
 import { SelectFocusTask } from './SelectFocusTask'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-
-const Container = styled(SelectContainer)`
-  padding: 0 4px 0 8px;
-
-  ${cropText};
-`
+import { HStack } from '@lib/ui/layout/Stack'
 
 const Content = styled(TaskTextContainer)`
   ${cropText};
-  max-width: 280px;
   font-size: 14px;
+`
+
+const Container = styled(HStack)`
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  ${cropText};
 `
 
 export const CurrentFocusTask = () => {

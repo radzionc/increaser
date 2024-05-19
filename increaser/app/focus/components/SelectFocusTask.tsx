@@ -63,7 +63,6 @@ export const SelectFocusTask = () => {
       }}
       value={null}
       options={options}
-      floatingOptionsWidthSameAsOpener={false}
     />
   )
 }

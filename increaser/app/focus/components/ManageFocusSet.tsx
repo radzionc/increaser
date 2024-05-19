@@ -1,41 +1,36 @@
-import styled from 'styled-components'
-import { focusPageHorizontalPadding } from './focusPageHorizontalPadding'
-import { HStack } from '@lib/ui/layout/Stack'
-import { FocusAssistance } from './FocusAssistance'
-import { ShrinkFocusView } from './ShrinkFocusView'
-import { getColor } from '@lib/ui/theme/getters'
-import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
-import { FocusGoal } from '@increaser/ui/focus/FocusGoal'
-import { FocusProjectSelector } from './FocusProjectSelector'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { CurrentFocusTask } from './CurrentFocusTask'
+import { VStack } from '@lib/ui/layout/Stack'
 
-const Container = styled(HStack)`
-  align-items: center;
-  justify-content: space-between;
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+
+import { FocusGoal } from '@increaser/ui/focus/FocusGoal'
+import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
+import { CurrentFocusTask } from './CurrentFocusTask'
+import { FocusProjectSelector } from './FocusProjectSelector'
+import styled from 'styled-components'
+
+const Header = styled.div`
+  display: grid;
+  grid-template-columns: 80px 80px minmax(0, 1fr);
   gap: 8px;
-  flex-wrap: wrap;
-  width: 100%;
-  min-height: 60px;
-  ${verticalPadding(8)};
-  ${focusPageHorizontalPadding};
-  border-bottom: 1px solid ${getColor('mist')};
-  flex-shrink: 0;
 `
 
 export const ManageFocusSet = () => {
+  const { projectId } = useCurrentFocus()
+
+  const { projectsRecord } = useProjects()
+
+  const project = projectsRecord[projectId]
+  if (!project) return null
+
   return (
-    <Container>
-      <HStack wrap="wrap" gap={8}>
+    <VStack style={{ width: 320 }} fullWidth gap={8}>
+      <Header>
         <SessionStartedAt />
         <FocusGoal />
         <FocusProjectSelector />
-        <CurrentFocusTask />
-      </HStack>
-      <HStack gap={8}>
-        <FocusAssistance />
-        <ShrinkFocusView />
-      </HStack>
-    </Container>
+      </Header>
+      <CurrentFocusTask />
+    </VStack>
   )
 }

@@ -16,7 +16,9 @@ import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { FocusAudioWidget } from '../audio/FocusAudioWidget'
-import { focusPageHorizontalPadding } from './focusPageHorizontalPadding'
+import { ShrinkFocusView } from './ShrinkFocusView'
+import { FocusAssistance } from './FocusAssistance'
+import { ManageFocusSet } from './ManageFocusSet'
 
 const Container = styled.div`
   max-height: 100%;
@@ -24,12 +26,11 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  padding-bottom: 20px;
-  ${focusPageHorizontalPadding};
+  padding: 40px 4% 20px 4%;
 `
 
 const BlockWrapper = styled.div`
-  height: 60%;
+  height: 68%;
   width: 100%;
   position: relative;
   ${centerContent};
@@ -57,6 +58,12 @@ const Side = styled(VStack)`
 
 const Content = styled(VStack)`
   flex: 1;
+`
+
+const PositionSettings = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 12px;
 `
 
 export const FocusPageContent = () => {
@@ -94,15 +101,22 @@ export const FocusPageContent = () => {
                   </Side>
                 )}
                 <Content fullHeight alignItems="center" justifyContent="center">
+                  <ManageFocusSet />
                   <VStack
                     alignItems="center"
                     justifyContent="center"
                     fullHeight
                     style={{ width: 320 }}
-                    gap={12}
+                    gap={40}
                   >
                     <BlockWrapper>
                       <SessionProgress />
+                      <PositionSettings>
+                        <VStack gap={4}>
+                          <ShrinkFocusView />
+                          <FocusAssistance />
+                        </VStack>
+                      </PositionSettings>
                       <TimeWrapper>
                         <TimeContent>
                           <Text as="div" weight="bold" size={64} height="small">
@@ -118,7 +132,7 @@ export const FocusPageContent = () => {
                         }}
                       />
                     </BlockWrapper>
-                    <div style={{ marginTop: 30 }}>
+                    <div>
                       <ShyTextButton text="Cancel" onClick={cancel} />
                     </div>
                   </VStack>

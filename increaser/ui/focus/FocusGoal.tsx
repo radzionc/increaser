@@ -7,6 +7,7 @@ import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
+import { formatDuration } from '@lib/utils/time/formatDuration'
 
 const IconContainer = styled(IconWrapper)`
   color: ${getColor('textShy')};
@@ -17,20 +18,24 @@ export const FocusGoal = () => {
 
   return (
     <ExpandableSelector
+      showToggle={false}
       openerContent={
         <HStack gap={8} alignItems="center">
           <IconContainer>
             <ClockIcon />
           </IconContainer>
-          <Text>{focusDuration} min</Text>
+          <Text>
+            {formatDuration(focusDuration, 'min', { maxUnit: 'min' })}
+          </Text>
         </HStack>
       }
       getOptionKey={(duration) => duration.toString()}
-      renderOption={(duration) => `${duration} min`}
+      renderOption={(duration) =>
+        formatDuration(duration, 'min', { maxUnit: 'min' })
+      }
       onChange={setFocusDuration}
       value={focusDuration}
       options={focusDurations}
-      floatingOptionsWidthSameAsOpener={false}
     />
   )
 }

@@ -6,4 +6,5 @@ import styled from 'styled-components'
 export const TaskTextContainer = styled(Text)`
   line-height: ${toSizeUnit(checklistItemContentMinHeight)};
   word-break: break-word;
+  width: 100%;
 `
