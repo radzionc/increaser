@@ -30,6 +30,7 @@ export const FocusGoal = () => {
       onChange={setFocusDuration}
       value={focusDuration}
       options={focusDurations}
+      floatingOptionsWidthSameAsOpener={false}
     />
   )
 }

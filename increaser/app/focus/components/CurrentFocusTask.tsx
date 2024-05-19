@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { cropText } from '@lib/ui/css/cropText'
 import { SelectContainer } from '@lib/ui/select/SelectContainer'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { SelectFocusTask } from './SelectFocusTask'
 
 const Container = styled(SelectContainer)`
   ${verticalPadding(0)}
@@ -25,10 +26,11 @@ export const CurrentFocusTask = () => {
   const { task: focusTask } = useCurrentFocus()
   const { tasks } = useAssertUserState()
 
-  const task = Object.values(tasks).find((task) => task.id === focusTask?.id)
-  if (!task || task.completedAt) {
-    return null
+  if (!focusTask) {
+    return <SelectFocusTask />
   }
+
+  const task = tasks[focusTask.id]
 
   return (
     <CurrentTaskProvider value={task}>

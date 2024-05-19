@@ -19,6 +19,7 @@ import {
 import {
   CurrentSet,
   FocusContext,
+  FocusTask,
   StartFocusParams,
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
@@ -89,7 +90,7 @@ export const FocusProvider = ({ children }: Props) => {
   }, [])
 
   const { mutate: addSet } = useAddSetMutation()
-  const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: updateTaskMutation } = useUpdateTaskMutation()
 
   const cancel = useCallback(() => {
     setCurrentSet(undefined)
@@ -103,21 +104,21 @@ export const FocusProvider = ({ children }: Props) => {
 
     const { id, startedAt } = currentSet.task
 
-    const task = Object.values(tasks).find((task) => task.id === id)
+    const task = tasks[id]
 
-    if (!task) {
+    if (!task || task.completedAt) {
       setCurrentSet(omit(currentSet, 'task'))
     }
 
-    if (task && task.completedAt) {
-      updateTask({
+    if (task.completedAt) {
+      updateTaskMutation({
         id: task.id,
         fields: {
           spentTime: (task.spentTime || 0) + (Date.now() - startedAt),
         },
       })
     }
-  }, [currentSet, tasks, updateTask])
+  }, [currentSet, tasks, updateTaskMutation])
 
   const stop = useCallback(
     (params: StopFocusParams = {}) => {
@@ -137,7 +138,7 @@ export const FocusProvider = ({ children }: Props) => {
       const { task } = currentSet
       if (task && task.id in tasks) {
         const { spentTime } = tasks[task.id]
-        updateTask({
+        updateTaskMutation({
           id: task.id,
           fields: {
             spentTime: (spentTime || 0) + (Date.now() - task.startedAt),
@@ -153,8 +154,12 @@ export const FocusProvider = ({ children }: Props) => {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
       })
     },
-    [addSet, currentSet, router, tasks, todaySets, updateTask],
+    [addSet, currentSet, router, tasks, todaySets, updateTaskMutation],
   )
+
+  const updateTask = useCallback((value: FocusTask) => {
+    setCurrentSet((set) => (set ? { ...set, task: value } : set))
+  }, [])
 
   useEffect(() => {
     if (!currentSet) return
@@ -173,6 +178,7 @@ export const FocusProvider = ({ children }: Props) => {
         start,
         updateStartTime,
         updateProject,
+        updateTask,
         stop,
         cancel,
         currentSet,
