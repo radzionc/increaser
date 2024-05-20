@@ -3,6 +3,11 @@ import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 
+export type FocusTask = {
+  id: string
+  startedAt: number
+}
+
 export interface StartFocusParams {
   projectId: string
   taskId?: string
@@ -12,7 +17,7 @@ export interface StartFocusParams {
 export interface CurrentSet {
   projectId: string
   startedAt: number
-  taskId?: string
+  task?: FocusTask
 }
 
 export interface StopFocusParams {
@@ -27,6 +32,7 @@ export interface FocusState {
   currentSet: CurrentSet | undefined
   updateStartTime: (value: number) => void
   updateProject: (value: string) => void
+  updateTask: (value: FocusTask | undefined) => void
 
   setFocusDuration: (duration: FocusDuration) => void
   focusDuration: FocusDuration

@@ -11,7 +11,6 @@ import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
 import { DemoFocusProvider } from './DemoFocusProvider'
 import { Text } from '@lib/ui/text'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
-import { FocusSessionInfo } from '@increaser/ui/focus/FocusSessionInfo'
 
 const BlockWrapper = styled.div`
   height: 540px;
@@ -23,11 +22,6 @@ const BlockWrapper = styled.div`
     height: 400px;
     width: 280px;
   }
-`
-
-const PositionSessionInfo = styled.div`
-  position: absolute;
-  top: 12px;
 `
 
 export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
@@ -42,9 +36,6 @@ export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
         <DemoFocusProvider>
           <BlockWrapper>
             <SessionProgress />
-            <PositionSessionInfo>
-              <FocusSessionInfo />
-            </PositionSessionInfo>
             <Text
               style={{ position: 'absolute' }}
               as="div"

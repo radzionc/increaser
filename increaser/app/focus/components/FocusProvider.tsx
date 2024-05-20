@@ -19,6 +19,7 @@ import {
 import {
   CurrentSet,
   FocusContext,
+  FocusTask,
   StartFocusParams,
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
@@ -66,13 +67,17 @@ export const FocusProvider = ({ children }: Props) => {
       analytics.trackEvent('Start focus session', {
         duration: focusDuration,
       })
-      setCurrentSet({ projectId, startedAt: Date.now(), taskId })
+      const startedAt = Date.now()
+      setCurrentSet({
+        projectId,
+        startedAt,
+        task: taskId ? { id: taskId, startedAt } : undefined,
+      })
       if (duration) {
         setFocusDuration(duration as FocusDuration)
       }
-      router.push(AppPath.Focus)
     },
-    [focusDuration, router],
+    [focusDuration],
   )
 
   const updateStartTime = useCallback((startedAt: number) => {
@@ -84,7 +89,7 @@ export const FocusProvider = ({ children }: Props) => {
   }, [])
 
   const { mutate: addSet } = useAddSetMutation()
-  const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: updateTaskMutation } = useUpdateTaskMutation()
 
   const cancel = useCallback(() => {
     setCurrentSet(undefined)
@@ -94,25 +99,25 @@ export const FocusProvider = ({ children }: Props) => {
   const { tasks } = useAssertUserState()
 
   useEffect(() => {
-    if (!currentSet) return
+    if (!currentSet || !currentSet.task) return
 
-    const task = Object.values(tasks).find(
-      (task) => task.id === currentSet.taskId,
-    )
+    const { id, startedAt } = currentSet.task
 
-    if (!task) return
+    const task = tasks[id]
+
+    if (!task || task.completedAt) {
+      setCurrentSet(omit(currentSet, 'task'))
+    }
 
     if (task.completedAt) {
-      setCurrentSet(omit(currentSet, 'taskId'))
-      updateTask({
+      updateTaskMutation({
         id: task.id,
         fields: {
-          spentTime:
-            (task.spentTime || 0) + (Date.now() - currentSet.startedAt),
+          spentTime: (task.spentTime || 0) + (Date.now() - startedAt),
         },
       })
     }
-  }, [currentSet, tasks, updateTask])
+  }, [currentSet, tasks, updateTaskMutation])
 
   const stop = useCallback(
     (params: StopFocusParams = {}) => {
@@ -129,15 +134,13 @@ export const FocusProvider = ({ children }: Props) => {
 
       addSet(set)
 
-      const task = Object.values(tasks).find(
-        (task) => task.id === currentSet.taskId,
-      )
-
-      if (task) {
-        updateTask({
+      const { task } = currentSet
+      if (task && task.id in tasks) {
+        const { spentTime } = tasks[task.id]
+        updateTaskMutation({
           id: task.id,
           fields: {
-            spentTime: (task.spentTime || 0) + getSetDuration(set),
+            spentTime: (spentTime || 0) + (Date.now() - task.startedAt),
           },
         })
       }
@@ -150,8 +153,23 @@ export const FocusProvider = ({ children }: Props) => {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
       })
     },
-    [addSet, currentSet, router, tasks, todaySets, updateTask],
+    [addSet, currentSet, router, tasks, todaySets, updateTaskMutation],
   )
+
+  const updateTask = useCallback((value: FocusTask | undefined) => {
+    setCurrentSet((set) => (set ? { ...set, task: value } : set))
+  }, [])
+
+  useEffect(() => {
+    if (!currentSet) return
+
+    const { task } = currentSet
+    if (!task) return
+
+    if (tasks[task.id].projectId !== currentSet.projectId) {
+      setCurrentSet(omit(currentSet, 'task'))
+    }
+  }, [currentSet, tasks])
 
   return (
     <FocusContext.Provider
@@ -159,6 +177,7 @@ export const FocusProvider = ({ children }: Props) => {
         start,
         updateStartTime,
         updateProject,
+        updateTask,
         stop,
         cancel,
         currentSet,

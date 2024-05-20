@@ -51,7 +51,7 @@ export const FocusTaskInput = () => {
           </Link>
         }
       >
-        You don't have any tasks for today with a project assigned.
+        You don't have any tasks for today.
       </ActionPrompt>
     )
   }
