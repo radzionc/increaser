@@ -18,7 +18,6 @@ export const FocusGoal = () => {
 
   return (
     <ExpandableSelector
-      showToggle={false}
       openerContent={
         <HStack gap={8} alignItems="center">
           <IconContainer>

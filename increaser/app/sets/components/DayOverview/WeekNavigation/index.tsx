@@ -5,7 +5,6 @@ import { useDayOverview } from '../DayOverviewProvider'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
@@ -22,11 +21,6 @@ export const WeekNavigation = () => {
   const todayStartedAt = useStartOfDay()
   const weekStartedAt = useStartOfWeek()
   const { setCurrentDay, dayStartedAt } = useDayOverview()
-  const { currentSet } = useFocus()
-
-  if (currentSet) {
-    return null
-  }
 
   return (
     <Container rowHeight={horizontalPaddingInPx * 1.6} gap={1} fullWidth>

@@ -31,6 +31,7 @@ export const PageTitle = ({
             weight="semibold"
             style={{ flex: 1 }}
             as="div"
+            color="contrast"
             size={isSmallScreen ? 24 : 32}
           >
             {title}

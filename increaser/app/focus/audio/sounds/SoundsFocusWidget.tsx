@@ -4,7 +4,7 @@ import { FocusSoundOption } from './FocusSoundOption'
 
 export const SoundsFocusWidget = () => {
   return (
-    <UniformColumnGrid gap={4} maxColumns={3}>
+    <UniformColumnGrid gap={4} minChildrenWidth={120}>
       {focusSounds.map((sound) => (
         <FocusSoundOption key={sound} value={sound} />
       ))}

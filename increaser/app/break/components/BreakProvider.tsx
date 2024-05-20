@@ -17,7 +17,6 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN, MS_IN_SEC } from '@lib/utils/time'
 
 import { BreakContext, BreakDuration } from '../context/BreakContext'
-import { useRouter } from 'next/router'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import {
   areNotificationsAllowed,
@@ -25,8 +24,8 @@ import {
 } from '@lib/ui/notifications/utils'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { focusDurations } from '@increaser/entities/FocusDuration'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 
 export const remindersCount = 5
 
@@ -63,6 +62,7 @@ export const BreakProvider = ({ children }: Props) => {
   const todayStartedAt = useStartOfDay()
   const { finishWorkAt } = useAssertUserState()
   const sets = useTodaySets()
+  const { currentSet } = useFocus()
 
   const [hasBrowserNotification, setHasBrowserNotification] =
     usePersistentState<boolean>(
@@ -81,13 +81,12 @@ export const BreakProvider = ({ children }: Props) => {
   )
 
   const lastSetEnd = useLastSetEnd()
-  const { pathname } = useRouter()
 
   useEffect(() => {
-    if (pathname === AppPath.Focus && breakDuration) {
+    if (currentSet && breakDuration) {
       setBreakDuration(undefined)
     }
-  }, [breakDuration, pathname, setBreakDuration])
+  }, [breakDuration, currentSet])
 
   useEffect(() => {
     if (!breakDuration || !lastSetEnd) return

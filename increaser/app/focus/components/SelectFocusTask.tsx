@@ -41,6 +41,7 @@ export const SelectFocusTask = () => {
 
   return (
     <ExpandableSelector
+      style={{ width: '100%' }}
       openerContent={
         <HStack gap={8} alignItems="center">
           <IconContainer>

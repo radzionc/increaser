@@ -7,6 +7,7 @@ export const FocusProjectSelector = () => {
 
   return (
     <ActiveProjectSelector
+      style={{ width: 142 }}
       value={shouldBePresent(currentSet).projectId}
       onChange={(projectId) => updateProject(projectId)}
     />

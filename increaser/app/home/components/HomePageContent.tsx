@@ -1,15 +1,15 @@
 import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
-import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { NoSetsHomeTitle } from './NoSetsHomeTitle'
+import { HomePageTitle } from './HomePageTitle'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { SubmitYesterdayHabits } from '@increaser/app/habits/components/SubmitYesterdayHabits'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusLauncher } from '../../focus/launcher'
+import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
 
 const Container = styled.div`
   display: flex;
@@ -41,20 +41,21 @@ const MobileContent = styled(VStack)`
 `
 
 export const HomePageContent = () => {
-  const todaySets = useTodaySets()
   const { currentSet } = useFocus()
 
   const content = (
     <VStack>
-      {!todaySets.length && <NoSetsHomeTitle />}
+      <HomePageTitle />
       <VStack gap={40}>
-        {currentSet ? null : (
+        {currentSet ? (
+          <FocusSetWidget />
+        ) : (
           <>
             <BreakTimeline />
             <FocusLauncher />
+            <SubmitYesterdayHabits />
           </>
         )}
-        <SubmitYesterdayHabits />
       </VStack>
     </VStack>
   )

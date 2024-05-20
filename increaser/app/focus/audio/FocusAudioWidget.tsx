@@ -9,8 +9,8 @@ import { SoundsFocusWidget } from './sounds/SoundsFocusWidget'
 
 const Container = styled(Panel)<{ isActive: boolean }>`
   ${transition};
-  height: 100%;
   background: transparent;
+  width: 100%;
 
   ${({ isActive }) =>
     !isActive &&

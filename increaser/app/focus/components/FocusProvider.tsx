@@ -76,9 +76,8 @@ export const FocusProvider = ({ children }: Props) => {
       if (duration) {
         setFocusDuration(duration as FocusDuration)
       }
-      router.push(AppPath.Focus)
     },
-    [focusDuration, router],
+    [focusDuration],
   )
 
   const updateStartTime = useCallback((startedAt: number) => {
