@@ -12,17 +12,16 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { HStack } from '@lib/ui/layout/Stack'
-import { TaskProject } from '@increaser/ui/tasks/TaskProject'
-import { Panel } from '@lib/ui/panel/Panel'
+import { SelectContainer } from '@lib/ui/select/SelectContainer'
 
 const Content = styled(TaskTextContainer)`
   ${cropText};
   font-size: 14px;
 `
 
-const Wrapper = styled(Panel)`
+const Wrapper = styled(SelectContainer)`
   width: 100%;
-  padding: 4px 8px 4px 12px;
+  padding: 0 4px 0 8px;
 `
 
 const Container = styled(HStack)`
@@ -46,18 +45,18 @@ export const CurrentFocusTask = () => {
 
   return (
     <CurrentTaskProvider value={task}>
-      <Wrapper kind="secondary">
+      <Wrapper>
         <Container>
           <TaskItemFrame>
             <TaskCheckBox />
             <Content>
-              <TaskProject />
               <CurrentFocusTaskTrackedTime />
               {task.name}
             </Content>
           </TaskItemFrame>
           <IconButton
             title="Remove task"
+            kind="secondary"
             icon={<CloseIcon />}
             onClick={() => updateTask(undefined)}
           />

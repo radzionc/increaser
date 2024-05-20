@@ -16,6 +16,7 @@ export const TaskProjectSelector = ({
       onChange={onChange}
       options={activeProjects.map((project) => project.id)}
       getOptionKey={(option) => option}
+      returnFocus
       renderOption={(option) => (
         <>
           <Text color="contrast">{projectsRecord[option].emoji}</Text>

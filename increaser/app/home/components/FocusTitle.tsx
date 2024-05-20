@@ -5,7 +5,6 @@ import { FocusAssistance } from '../../focus/components/FocusAssistance'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusGoal } from '@increaser/ui/focus/FocusGoal'
 import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
-import { FocusProjectSelector } from '../../focus/components/FocusProjectSelector'
 
 export const FocusTitle = () => {
   return (
@@ -19,11 +18,10 @@ export const FocusTitle = () => {
             gap={8}
             wrap="wrap"
           >
-            <Text>Focus</Text>
+            <Text>Focus Session</Text>
             <HStack wrap="wrap" alignItems="center" gap={8}>
               <SessionStartedAt />
               <FocusGoal />
-              <FocusProjectSelector />
               <FocusAssistance />
             </HStack>
           </HStack>

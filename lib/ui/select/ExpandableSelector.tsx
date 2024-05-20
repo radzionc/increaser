@@ -25,6 +25,7 @@ export type ExpandableSelectorProp<T> = UIComponentProps & {
   openerContent?: React.ReactNode
   floatingOptionsWidthSameAsOpener?: boolean
   showToggle?: boolean
+  returnFocus?: boolean
 }
 
 const ToggleIconContainer = styled(CollapsableStateIndicator)`
@@ -98,6 +99,7 @@ export function ExpandableSelector<T>({
   openerContent,
   floatingOptionsWidthSameAsOpener,
   showToggle = true,
+  returnFocus = false,
   ...rest
 }: ExpandableSelectorProp<T>) {
   const {
@@ -129,7 +131,7 @@ export function ExpandableSelector<T>({
         {showToggle && <ToggleIconContainer isOpen={isOpen} />}
       </Container>
       {isOpen && !isDisabled && (
-        <FloatingFocusManager context={context} modal returnFocus>
+        <FloatingFocusManager context={context} modal returnFocus={returnFocus}>
           <FloatingOptionsContainer {...getFloatingProps()}>
             {options.map((option, index) => (
               <OptionItem
