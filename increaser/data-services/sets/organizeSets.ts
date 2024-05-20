@@ -9,6 +9,8 @@ export const organizeSets = async (userId: string) => {
     'sets',
     'timeZone',
     'projects',
+    'weeks',
+    'months',
     'lastSyncedWeekEndedAt',
     'lastSyncedMonthEndedAt',
   ])
