@@ -1,45 +1,16 @@
-import styled from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
 
 import { FocusBrowserNotification } from '../FocusSettings/FocusBrowserNotification'
-import { Menu } from '@lib/ui/menu'
-import { IconButton } from '@lib/ui/buttons/IconButton'
-import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
-import { ShySoundToggle } from '@lib/ui/notifications/components/ShySoundToggle'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { FocusSoundNotifications } from '@lib/ui/notifications/components/ShySoundToggle'
+import { LabeledValue } from '@lib/ui/text/LabeledValue'
 
-const Container = styled(HStack)`
-  position: relative;
-`
-
-export const FocusAssistance = () => {
-  const {
-    hasTimerSoundNotification,
-    setHasTimerSoundNotification,
-    hasTimerBrowserNotification,
-  } = useFocus()
-
+export const FocusNotifications = () => {
   return (
-    <Menu
-      title="Focus settings"
-      renderContent={() => (
-        <Container alignItems="center" gap={16}>
-          <FocusBrowserNotification />
-          <ShySoundToggle
-            value={hasTimerSoundNotification}
-            style={{ opacity: Number(hasTimerBrowserNotification) }}
-            onChange={setHasTimerSoundNotification}
-          />
-        </Container>
-      )}
-      renderOpener={(props) => (
-        <IconButton
-          size="l"
-          title="Focus settings"
-          icon={<SettingsIcon />}
-          {...props}
-        />
-      )}
-    />
+    <LabeledValue name="Notifications">
+      <HStack alignItems="center" gap={8}>
+        <FocusBrowserNotification />
+        <FocusSoundNotifications />
+      </HStack>
+    </LabeledValue>
   )
 }

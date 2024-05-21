@@ -1,13 +1,7 @@
 import { analytics } from '@increaser/app/analytics'
 import { useBreak } from '@increaser/app/break/hooks/useBreak'
 import { useCallback } from 'react'
-import styled from 'styled-components'
-import { Switch } from '@lib/ui/inputs/Switch/Switch'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
-
-const NotificationsSwitch = styled(Switch)`
-  ${verticalPadding(8)}
-`
+import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
 
 export const BreakBrowserNotification = () => {
   const { hasBrowserNotification, setHasBrowserNotification } = useBreak()
@@ -27,8 +21,8 @@ export const BreakBrowserNotification = () => {
   }, [hasBrowserNotification, setHasBrowserNotification])
 
   return (
-    <NotificationsSwitch
-      label="Notifications"
+    <MinimalisticSwitch
+      label="Browser notifications"
       onChange={handleChange}
       value={hasBrowserNotification}
     />

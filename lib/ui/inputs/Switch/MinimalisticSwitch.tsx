@@ -41,11 +41,11 @@ const Wrapper = styled(HStack)`
 
   ${transition};
 
-  :hover {
+  &:hover {
     color: ${getColor('contrast')};
   }
 
-  :hover ${Control} {
+  &:hover ${Control} {
     transform: scale(1.08);
   }
 `

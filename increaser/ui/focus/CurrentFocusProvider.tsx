@@ -53,12 +53,12 @@ export const CurrentFocusProvider = ({
     const now = Date.now()
     if (endTime < now) return
 
-    if (!hasTimerBrowserNotification) return
-
     const onTimerFinish = async () => {
-      showNotification(
-        `✅ ${focusDuration}-min session ${project ? project.emoji : ''}`,
-      )
+      if (hasTimerBrowserNotification) {
+        showNotification(
+          `✅ ${focusDuration}-min session ${project ? project.emoji : ''}`,
+        )
+      }
 
       if (hasTimerSoundNotification) {
         attempt(() => playSound('audio/pristine-notificaiton.mp3'), undefined)

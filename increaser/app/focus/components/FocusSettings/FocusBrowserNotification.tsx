@@ -1,13 +1,7 @@
 import { analytics } from '@increaser/app/analytics'
 import { useCallback } from 'react'
-import styled from 'styled-components'
-import { Switch } from '@lib/ui/inputs/Switch/Switch'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-
-const NotificationsSwitch = styled(Switch)`
-  ${verticalPadding(8)}
-`
+import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
 
 export const FocusBrowserNotification = () => {
   const { hasTimerBrowserNotification, setHasTimerBrowserNotification } =
@@ -28,8 +22,8 @@ export const FocusBrowserNotification = () => {
   }, [hasTimerBrowserNotification, setHasTimerBrowserNotification])
 
   return (
-    <NotificationsSwitch
-      label="Notifications"
+    <MinimalisticToggle
+      label="Browser"
       onChange={handleChange}
       value={hasTimerBrowserNotification}
     />

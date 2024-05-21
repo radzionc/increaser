@@ -1,21 +1,32 @@
-import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { CurrentFocusTask } from '../CurrentFocusTask'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { MinimalisticFocusSet } from '../MinimalisticFocusSet'
-import { FocusProjectSelector } from '../FocusProjectSelector'
+import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
+import { FocusNotifications } from '../FocusAssistance'
+import styled from 'styled-components'
+
+const Footer = styled(HStack)`
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 14px;
+`
 
 export const FocusSetWidget = () => {
   return (
-    <CurrentFocusGuard>
-      <VStack gap={40}>
-        <HStack alignItems="center" fullWidth gap={8}>
-          <FocusProjectSelector />
-          <CurrentFocusTask />
-        </HStack>
+    <VStack gap={40}>
+      <CurrentFocusTask />
+      <VStack gap={4}>
         <MinimalisticFocusSet />
-        <FocusAudioWidget />
+        <Footer>
+          <SessionStartedAt />
+          <FocusNotifications />
+        </Footer>
       </VStack>
-    </CurrentFocusGuard>
+      <FocusAudioWidget />
+    </VStack>
   )
 }

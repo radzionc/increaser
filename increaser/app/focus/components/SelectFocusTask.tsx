@@ -11,7 +11,6 @@ import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { Text } from '@lib/ui/text'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 
 const IconContainer = styled(IconWrapper)`
   color: ${getColor('textShy')};
@@ -21,7 +20,6 @@ export const SelectFocusTask = () => {
   const { projectId } = useCurrentFocus()
   const { updateTask } = useFocus()
   const { tasks } = useAssertUserState()
-  const { projectsRecord } = useProjects()
   const options = useMemo(() => {
     return order(
       Object.values(tasks).filter(
@@ -38,12 +36,7 @@ export const SelectFocusTask = () => {
   }, [projectId, tasks])
 
   if (!options.length) {
-    return (
-      <Text size={14} color="supporting">
-        You don't have any tasks for today with "
-        {projectsRecord[projectId].name}" assigned
-      </Text>
-    )
+    return null
   }
 
   return (
@@ -54,7 +47,7 @@ export const SelectFocusTask = () => {
           <IconContainer>
             <CheckSquareIcon />
           </IconContainer>
-          Select a "{projectsRecord[projectId].name}" task
+          Select a task
         </HStack>
       }
       getOptionKey={(task) => task.id}

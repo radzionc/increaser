@@ -1,32 +1,35 @@
 import { Text } from '@lib/ui/text'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { HStack } from '@lib/ui/layout/Stack'
-import { FocusAssistance } from '../../focus/components/FocusAssistance'
-import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusGoal } from '@increaser/ui/focus/FocusGoal'
-import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
+import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { FocusProjectSelector } from '../../focus/components/FocusProjectSelector'
 
 export const FocusTitle = () => {
+  const { projectId } = useCurrentFocus()
+  const { focusDuration } = useFocus()
+  const { projectsRecord } = useProjects()
   return (
-    <CurrentFocusGuard>
-      <PageTitle
-        title={
-          <HStack
-            fullWidth
-            alignItems="center"
-            justifyContent="space-between"
-            gap={8}
-            wrap="wrap"
-          >
-            <Text>Focus Session</Text>
-            <HStack wrap="wrap" alignItems="center" gap={8}>
-              <SessionStartedAt />
-              <FocusGoal />
-              <FocusAssistance />
-            </HStack>
+    <PageTitle
+      title={
+        <HStack
+          fullWidth
+          alignItems="center"
+          justifyContent="space-between"
+          gap={8}
+          wrap="wrap"
+        >
+          <Text>
+            {projectsRecord[projectId].name} {focusDuration} min session
+          </Text>
+          <HStack wrap="wrap" alignItems="center" gap={8}>
+            <FocusProjectSelector />
+            <FocusGoal />
           </HStack>
-        }
-      />
-    </CurrentFocusGuard>
+        </HStack>
+      }
+    />
   )
 }
