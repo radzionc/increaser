@@ -1,7 +1,6 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { CurrentFocusTask } from '../CurrentFocusTask'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
-import { MinimalisticFocusSet } from '../MinimalisticFocusSet'
+import { MinimalisticFocusSet } from './MinimalisticFocusSet'
 import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
 import { FocusNotifications } from '../FocusAssistance'
 import styled from 'styled-components'
@@ -18,7 +17,6 @@ const Footer = styled(HStack)`
 export const FocusSetWidget = () => {
   return (
     <VStack gap={40}>
-      <CurrentFocusTask />
       <VStack gap={4}>
         <MinimalisticFocusSet />
         <Footer>
