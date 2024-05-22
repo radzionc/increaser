@@ -1,7 +1,7 @@
 import { analytics } from '@increaser/app/analytics'
 import { useCallback } from 'react'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 export const FocusBrowserNotification = () => {
   const { hasTimerBrowserNotification, setHasTimerBrowserNotification } =
@@ -22,7 +22,8 @@ export const FocusBrowserNotification = () => {
   }, [hasTimerBrowserNotification, setHasTimerBrowserNotification])
 
   return (
-    <MinimalisticSwitch
+    <Switch
+      size="s"
       label="Browser notifications"
       onChange={handleChange}
       value={hasTimerBrowserNotification}

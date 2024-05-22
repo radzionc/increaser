@@ -1,7 +1,7 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 
 import { FocusBrowserNotification } from '../FocusSettings/FocusBrowserNotification'
-import { FocusSoundNotifications } from '@lib/ui/notifications/components/ShySoundToggle'
+import { FocusSoundNotifications } from '@lib/ui/notifications/components/FocusSoundNotifications'
 import { Menu } from '@lib/ui/menu'
 import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
 import { Button } from '@lib/ui/buttons/Button'

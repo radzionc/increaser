@@ -7,7 +7,7 @@ import {
 import { HStack } from '@lib/ui/layout/Stack'
 import { useIsFocusAudioEnabled } from './state/useIsFocusAudioEnabled'
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
-import { Switch } from '@lib/ui/inputs/Switch/Switch'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 const headerHeight = 48
 

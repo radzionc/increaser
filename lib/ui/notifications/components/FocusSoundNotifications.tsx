@@ -1,11 +1,12 @@
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { MinimalisticSwitch } from '../../inputs/Switch/MinimalisticSwitch'
+import { Switch } from '../../inputs/Switch'
 
 export const FocusSoundNotifications = () => {
   const { hasTimerSoundNotification, setHasTimerSoundNotification } = useFocus()
 
   return (
-    <MinimalisticSwitch
+    <Switch
+      size="s"
       label="Sound notifications"
       onChange={setHasTimerSoundNotification}
       value={hasTimerSoundNotification}

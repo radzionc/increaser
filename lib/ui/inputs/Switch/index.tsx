@@ -1,4 +1,4 @@
-import styled, { css, useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import { HStack } from '../../layout/Stack'
 import { Text } from '../../text'
@@ -9,25 +9,24 @@ import { centerContent } from '../../css/centerContent'
 import { interactive } from '../../css/interactive'
 import { toSizeUnit } from '../../css/toSizeUnit'
 import { getColor } from '../../theme/getters'
-import { UIComponentProps } from '../../props'
+import { UIComponentProps, InputProps } from '../../props'
+import { match } from '@lib/utils/match'
 
-type SwitchKind = 'regular' | 'primary'
+type SwitchSize = 'm' | 's'
 
-type SwitchProps = UIComponentProps & {
-  value: boolean
-  kind?: SwitchKind
-  onChange: (value: boolean) => void
-  label?: string
-  className?: string
-}
-
-const switchHeight = 24
-const switchWidth = switchHeight * 1.58
+type SwitchProps = UIComponentProps &
+  InputProps<boolean> & {
+    size?: SwitchSize
+    label?: string
+  }
+const switchHeight: Record<SwitchSize, number> = { m: 24, s: 20 }
 const spacing = 2
-const controlSize = switchHeight - spacing * 2
 
-const Control = styled.div`
-  ${sameDimensions(controlSize)};
+const getControlSize = (size: SwitchSize) => switchHeight[size] - spacing * 2
+const getSwitchWidth = (size: SwitchSize) => switchHeight[size] * 1.58
+
+const Control = styled.div<{ size: SwitchSize }>`
+  ${({ size }) => sameDimensions(getControlSize(size))};
 
   ${round};
   ${transition};
@@ -38,18 +37,8 @@ const Control = styled.div`
   font-size: 14px;
 `
 
-const Wrapper = styled(HStack)<{ kind: SwitchKind }>`
+const Wrapper = styled(HStack)`
   ${interactive};
-
-  ${({ kind }) =>
-    kind === 'primary' &&
-    css`
-      padding: 2px;
-      padding-right: 10px;
-      background: ${getColor('background')};
-      border: 1px solid ${getColor('mist')};
-      ${round};
-    `}
 
   color: ${getColor('textSupporting')};
   ${transition};
@@ -63,9 +52,9 @@ const Wrapper = styled(HStack)<{ kind: SwitchKind }>`
   }
 `
 
-const Container = styled.div`
-  width: ${toSizeUnit(switchWidth)};
-  height: ${toSizeUnit(switchHeight)};
+const Container = styled.div<{ size: SwitchSize }>`
+  width: ${({ size }) => toSizeUnit(getSwitchWidth(size))};
+  height: ${({ size }) => toSizeUnit(switchHeight[size])};
 
   display: flex;
   align-items: center;
@@ -79,7 +68,7 @@ export const Switch = ({
   value,
   onChange,
   label,
-  kind = 'regular',
+  size = 'm',
   ...rest
 }: SwitchProps) => {
   const { colors } = useTheme()
@@ -90,22 +79,28 @@ export const Switch = ({
       alignItems="center"
       gap={8}
       id={label}
-      kind={kind}
       {...rest}
     >
       <Container
+        size={size}
         style={{
           background: (value ? colors.primary : colors.textShy).toCssValue(),
         }}
       >
         <Control
+          size={size}
           style={{
-            marginLeft: value ? switchWidth - controlSize - spacing : spacing,
+            marginLeft: value
+              ? getSwitchWidth(size) - getControlSize(size) - spacing
+              : spacing,
           }}
         />
       </Container>
       {label && (
-        <Text size={16} weight="semibold">
+        <Text
+          size={match(size, { m: () => 16, s: () => 14 })}
+          weight="semibold"
+        >
           {label}
         </Text>
       )}
