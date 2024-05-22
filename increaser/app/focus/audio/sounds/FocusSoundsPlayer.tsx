@@ -7,9 +7,11 @@ import {
 import { useFocusAudioMode } from '../state/useFocusAudioMode'
 import { attempt } from '@lib/utils/attempt'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
 
 export const FocusSoundsPlayer = () => {
   const { currentSet } = useFocus()
+  const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [focusAudioMode] = useFocusAudioMode()
   const [preference] = useFocusSoundsPreference()
 
@@ -27,7 +29,8 @@ export const FocusSoundsPlayer = () => {
 
   useEffect(() => {
     const audioRecord = audioRecordRef.current
-    const isActive = currentSet && focusAudioMode === 'sounds'
+    const isActive =
+      currentSet && focusAudioMode === 'sounds' && isFocusAudioEnabled
 
     if (isActive) {
       Object.entries(preference).forEach(([sound, volume]) =>
@@ -59,7 +62,7 @@ export const FocusSoundsPlayer = () => {
     return () => {
       stop()
     }
-  }, [currentSet, focusAudioMode, preference, stop])
+  }, [currentSet, focusAudioMode, isFocusAudioEnabled, preference, stop])
 
   return null
 }

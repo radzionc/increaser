@@ -8,8 +8,9 @@ import { round } from '../../css/round'
 import { transition } from '../../css/transition'
 import { centerContent } from '../../css/centerContent'
 import { toSizeUnit } from '../../css/toSizeUnit'
+import { UIComponentProps } from '../../props'
 
-interface SwitchProps {
+type MinimalisticSwitchProps = UIComponentProps & {
   value: boolean
   onChange: (value: boolean) => void
   label?: string
@@ -61,10 +62,16 @@ const Container = styled.div`
   ${transition};
 `
 
-export const MinimalisticSwitch = ({ value, onChange, label }: SwitchProps) => {
+export const MinimalisticSwitch = ({
+  value,
+  onChange,
+  label,
+  ...rest
+}: MinimalisticSwitchProps) => {
   const { colors } = useTheme()
   return (
     <Wrapper
+      {...rest}
       onClick={() => onChange(!value)}
       as="label"
       alignItems="center"

@@ -6,6 +6,8 @@ import { FocusAudioModeSelector } from './FocusAudioModeSelector'
 import { Match } from '@lib/ui/base/Match'
 import { YouTubeFocusWidget } from './youTube/YouTubeFocusWidget'
 import { SoundsFocusWidget } from './sounds/SoundsFocusWidget'
+import { VStack } from '@lib/ui/layout/Stack'
+import { useIsFocusAudioEnabled } from './state/useIsFocusAudioEnabled'
 
 const Container = styled(Panel)`
   ${transition};
@@ -14,17 +16,21 @@ const Container = styled(Panel)`
 `
 
 export const FocusAudioWidget = () => {
+  const [isEnabled] = useIsFocusAudioEnabled()
   const [mode] = useFocusAudioMode()
 
   return (
-    <Container kind="secondary" withSections>
+    <VStack gap={8}>
       <FocusAudioModeSelector />
-      <Match
-        value={mode}
-        none={() => null}
-        youtube={() => <YouTubeFocusWidget />}
-        sounds={() => <SoundsFocusWidget />}
-      />
-    </Container>
+      {isEnabled && (
+        <Container kind="secondary" withSections>
+          <Match
+            value={mode}
+            youtube={() => <YouTubeFocusWidget />}
+            sounds={() => <SoundsFocusWidget />}
+          />
+        </Container>
+      )}
+    </VStack>
   )
 }

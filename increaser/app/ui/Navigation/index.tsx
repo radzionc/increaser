@@ -28,7 +28,8 @@ const ScreenWidthTopbarContent = styled.div`
 
 const ScreenWidthSidebarContent = styled(VStack)`
   ${contentCSS}
-  padding: 40px 4% 20px 4%;
+  padding: 40px 4% 0 4%;
+  max-height: calc(100% - 20px);
 `
 
 export const Navigation = ({ children }: Props) => {

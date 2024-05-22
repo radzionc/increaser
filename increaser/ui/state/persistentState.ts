@@ -30,7 +30,8 @@ export enum PersistentStateKey {
   TrackedTimeReportPreferences = 'trackedTimeReportPreferences2',
   TrackedTimePreference = 'trackedTimePreference2',
   SelectFocusView = 'selectFocusView',
-  FocusAudioMode = 'focusAudioMode',
+  FocusAudioMode = 'focusAudioMode2',
+  IsFocusAudioEnabled = 'isFocusAudioEnabled',
   FocusSoundsPreference = 'focusSoundsPreference',
 }
 

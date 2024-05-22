@@ -8,13 +8,12 @@ import { transition } from '../../css/transition'
 import { centerContent } from '../../css/centerContent'
 import { interactive } from '../../css/interactive'
 import { toSizeUnit } from '../../css/toSizeUnit'
-import { CheckIcon } from '../../icons/CheckIcon'
-import { CloseIcon } from '../../icons/CloseIcon'
 import { getColor } from '../../theme/getters'
+import { UIComponentProps } from '../../props'
 
 type SwitchKind = 'regular' | 'primary'
 
-interface SwitchProps {
+type SwitchProps = UIComponentProps & {
   value: boolean
   kind?: SwitchKind
   onChange: (value: boolean) => void
@@ -22,10 +21,10 @@ interface SwitchProps {
   className?: string
 }
 
-const height = 28
-const width = height * 1.58
+const switchHeight = 24
+const switchWidth = switchHeight * 1.58
 const spacing = 2
-const controlSize = height - spacing * 2
+const controlSize = switchHeight - spacing * 2
 
 const Control = styled.div`
   ${sameDimensions(controlSize)};
@@ -65,8 +64,8 @@ const Wrapper = styled(HStack)<{ kind: SwitchKind }>`
 `
 
 const Container = styled.div`
-  width: ${toSizeUnit(width)};
-  height: ${toSizeUnit(height)};
+  width: ${toSizeUnit(switchWidth)};
+  height: ${toSizeUnit(switchHeight)};
 
   display: flex;
   align-items: center;
@@ -81,7 +80,7 @@ export const Switch = ({
   onChange,
   label,
   kind = 'regular',
-  className,
+  ...rest
 }: SwitchProps) => {
   const { colors } = useTheme()
   return (
@@ -92,20 +91,18 @@ export const Switch = ({
       gap={8}
       id={label}
       kind={kind}
-      className={className}
+      {...rest}
     >
       <Container
         style={{
-          background: (value ? colors.mistExtra : colors.mist).toCssValue(),
+          background: (value ? colors.primary : colors.textShy).toCssValue(),
         }}
       >
         <Control
           style={{
-            marginLeft: value ? width - controlSize - spacing : spacing,
+            marginLeft: value ? switchWidth - controlSize - spacing : spacing,
           }}
-        >
-          {value ? <CheckIcon /> : <CloseIcon />}
-        </Control>
+        />
       </Container>
       {label && (
         <Text size={16} weight="semibold">
