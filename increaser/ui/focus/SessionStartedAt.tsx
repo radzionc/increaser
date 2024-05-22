@@ -14,7 +14,7 @@ export const SessionStartedAt = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <LabeledValue name="Started at">
+        <LabeledValue labelColor="supporting" name="Started at">
           <ShyTextButton onClick={onOpen} text={formatTime(startedAt)} />
         </LabeledValue>
       )}
