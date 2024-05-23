@@ -15,9 +15,12 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 
-import { useFocusSounds } from '../useFocusSounds'
 import { ManageSound } from './ManageSound'
 import { FocusSound } from '@increaser/entities/FocusSound'
+import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
+import { useYouTubeFocusMusic } from '../YouTubeFocusMusicProvider'
 
 const PlayIndicator = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
@@ -71,14 +74,10 @@ const Star = styled(StarIcon)<{ $color: HSLA }>`
 `
 
 export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
-  const {
-    isPlaying,
-    updateSounds,
-    activeSoundUrl,
-    updateActiveSoundUrl,
-    updateIsPlaying,
-    sounds,
-  } = useFocusSounds()
+  const [{ url: activeSoundUrl }, setPreference] = useYouTubeFocusPreference()
+  const { focusSounds } = useAssertUserState()
+  const { setState, isPlaying } = useYouTubeFocusMusic()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const isActive = activeSoundUrl === url
 
@@ -111,8 +110,8 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
             kind="secondary"
             icon={star}
             onClick={() => {
-              updateSounds(
-                sounds.map((sound) => {
+              updateUser({
+                focusSounds: focusSounds.map((sound) => {
                   if (sound.url === url) {
                     return {
                       ...sound,
@@ -121,7 +120,7 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
                   }
                   return sound
                 }),
-              )
+              })
             }}
           />
         </HStack>
@@ -131,9 +130,12 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
           style={{ padding: `2px ${actionPlacerStyles.right}px` }}
           onClick={() => {
             if (isActive) {
-              updateIsPlaying(!isPlaying)
+              setState((state) => ({ ...state, isPlaying: !state.isPlaying }))
             } else {
-              updateActiveSoundUrl(url)
+              setPreference((state) => ({
+                ...state,
+                url,
+              }))
             }
           }}
           key={url}

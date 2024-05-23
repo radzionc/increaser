@@ -8,8 +8,10 @@ import { PlayIcon } from '@lib/ui/icons/PlayIcon'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
-import { useFocusSounds } from '../useFocusSounds'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
+import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useYouTubeFocusMusic } from '../YouTubeFocusMusicProvider'
 
 const Container = styled.div`
   overflow: hidden;
@@ -40,12 +42,13 @@ const Control = styled(UnstyledButton)`
 `
 
 export const SoundsPlayer = () => {
-  const { sounds, activeSoundUrl, isPlaying, updateIsPlaying } =
-    useFocusSounds()
+  const [{ url }] = useYouTubeFocusPreference()
+  const { focusSounds } = useAssertUserState()
+  const { isPlaying, setState } = useYouTubeFocusMusic()
 
-  const sound = shouldBeDefined(
-    sounds.find((sound) => sound.url === activeSoundUrl),
-  )
+  if (!url) return null
+
+  const sound = shouldBeDefined(focusSounds.find((sound) => sound.url === url))
 
   return (
     <Wrapper>
@@ -65,17 +68,18 @@ export const SoundsPlayer = () => {
                   height={height}
                   url={sound.url}
                   playing={isPlaying}
-                  onPause={() => updateIsPlaying(false)}
-                  onPlay={() => updateIsPlaying(true)}
+                  onPause={() =>
+                    setState((state) => ({ ...state, isPlaying: false }))
+                  }
+                  onPlay={() =>
+                    setState((state) => ({ ...state, isPlaying: true }))
+                  }
                   volume={0.8}
                   config={{
                     youtube: {
                       playerVars: {
                         autoplay: 1,
                         controls: 0,
-                        modestbranding: 1,
-                        rel: 0,
-                        showinfo: 0,
                         iv_load_policy: 3,
                       },
                     },
@@ -88,7 +92,7 @@ export const SoundsPlayer = () => {
       />
       <Control
         onClick={() => {
-          updateIsPlaying(!isPlaying)
+          setState((state) => ({ ...state, isPlaying: !isPlaying }))
         }}
       >
         <HStack gap={8} fullWidth alignItems="center">

@@ -5,13 +5,14 @@ import { Form } from '@lib/ui/form/components/Form'
 import { TextInput } from '@lib/ui/inputs/TextInput'
 import { without } from '@lib/utils/array/without'
 
-import { useFocusSounds } from '../useFocusSounds'
 import { pick } from '@lib/utils/record/pick'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
 import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { FocusSound } from '@increaser/entities/FocusSound'
 import { Field } from '@lib/ui/inputs/Field'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 
 interface UpdateSoundFormProps extends FinishableComponentProps {
   sound: FocusSound
@@ -29,12 +30,13 @@ export const UpdateSoundForm = ({ onFinish, sound }: UpdateSoundFormProps) => {
     defaultValues: pick(sound, ['name', 'url']),
   })
 
-  const { updateSounds, sounds } = useFocusSounds()
+  const { focusSounds } = useAssertUserState()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const validateUnique = getUniqueValueValidator(
     new Set(
       without(
-        sounds.map((sound) => sound.url),
+        focusSounds.map((sound) => sound.url),
         sound.url,
       ),
     ),
@@ -45,9 +47,11 @@ export const UpdateSoundForm = ({ onFinish, sound }: UpdateSoundFormProps) => {
     <Form
       gap={8}
       onSubmit={handleSubmit(({ name, url }) => {
-        updateSounds(
-          sounds.map((s) => (s.url === sound.url ? { ...s, name, url } : s)),
-        )
+        updateUser({
+          focusSounds: focusSounds.map((s) =>
+            s.url === sound.url ? { ...s, name, url } : s,
+          ),
+        })
         onFinish()
       })}
       actions={

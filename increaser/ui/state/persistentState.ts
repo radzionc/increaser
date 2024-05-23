@@ -33,6 +33,7 @@ export enum PersistentStateKey {
   FocusAudioMode = 'focusAudioMode2',
   IsFocusAudioEnabled = 'isFocusAudioEnabled',
   FocusSoundsPreference = 'focusSoundsPreference',
+  YouTubeFocusPreference = 'youTubeFocusPreference',
 }
 
 export const persistentStorage =

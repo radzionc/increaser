@@ -2,20 +2,24 @@ import { ClosableComponentProps } from '@lib/ui/props'
 import { Button } from '@lib/ui/buttons/Button'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
-import { useFocusSounds } from '../useFocusSounds'
 import { UpdateSoundForm } from './UpdateSoundForm'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 
 interface ManageSoundProps extends ClosableComponentProps {
   url: string
 }
 
 export const ManageSound = ({ onClose, url }: ManageSoundProps) => {
-  const { sounds, updateSounds } = useFocusSounds()
+  const { focusSounds } = useAssertUserState()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
-  const sound = sounds.find((sound) => sound.url === url)
+  const sound = focusSounds.find((sound) => sound.url === url)
 
   const handleDelete = () => {
-    updateSounds(sounds.filter((sound) => sound.url !== url))
+    updateUser({
+      focusSounds: focusSounds.filter((sound) => sound.url !== url),
+    })
     onClose()
   }
 
