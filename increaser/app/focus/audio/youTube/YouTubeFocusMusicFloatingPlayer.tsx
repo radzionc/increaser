@@ -7,11 +7,11 @@ import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { HStack } from '@lib/ui/layout/Stack'
 import { getColor } from '@lib/ui/theme/getters'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { Text } from '@lib/ui/text'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
+import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
+import { ManageCurrentYouTubeMusic } from './ManageCurrentYouTubeMusic'
+import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   z-index: 1;
   ${borderRadius.m};
   overflow: hidden;
-  border: 2px solid ${getColor('mist')};
+  border: 2px solid ${getHoverVariant('foreground')};
 `
 
 const Header = styled(HStack)`
@@ -30,8 +30,6 @@ const Header = styled(HStack)`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  font-size: 14px;
-  font-weight: 500;
 `
 
 export const YouTubeFocusMusicFloatingPlayer = () => {
@@ -39,8 +37,8 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
   const [focusAudioMode] = useFocusAudioMode()
   const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [{ url }] = useYouTubeFocusPreference()
-  const { focusSounds } = useAssertUserState()
   const [, setIsEnabled] = useIsFocusAudioEnabled()
+  const { isPlaying } = useYouTubeFocusMusic()
 
   const isActive =
     currentSet && focusAudioMode === 'youtube' && isFocusAudioEnabled && url
@@ -49,14 +47,10 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
     return null
   }
 
-  const { name } = shouldBePresent(
-    focusSounds.find((sound) => sound.url === url),
-  )
-
   return (
     <Wrapper>
       <Header>
-        <Text>{name}</Text>
+        <ManageCurrentYouTubeMusic />
         <IconButton
           kind="secondary"
           title="Turn off music"
@@ -64,7 +58,7 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
           icon={<CloseIcon />}
         />
       </Header>
-      <YouTubeFocusMusicPlayer />
+      {isPlaying && <YouTubeFocusMusicPlayer />}
     </Wrapper>
   )
 }

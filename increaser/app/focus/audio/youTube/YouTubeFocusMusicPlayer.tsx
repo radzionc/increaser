@@ -13,7 +13,7 @@ const youTubeVideoRatio = 9 / 16
 const Container = styled.div`
   overflow: hidden;
   width: 100%;
-  background: ${getColor('mist')};
+  background: ${getColor('foreground')};
 `
 
 export const YouTubeFocusMusicPlayer = () => {

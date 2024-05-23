@@ -44,9 +44,9 @@ export const HomePageContent = () => {
   const { currentSet } = useFocus()
 
   const content = (
-    <VStack>
+    <VStack style={{ flex: 1 }}>
       <HomePageTitle />
-      <VStack gap={40}>
+      <VStack style={{ flex: 1 }} gap={40}>
         {currentSet ? (
           <FocusSetWidget />
         ) : (

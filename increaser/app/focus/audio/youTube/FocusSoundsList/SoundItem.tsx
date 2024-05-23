@@ -21,6 +21,8 @@ import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { useYouTubeFocusMusic } from '../YouTubeFocusMusicProvider'
+import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const PlayIndicator = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
@@ -43,6 +45,9 @@ const Identifier = styled.div`
 `
 
 const Container = styled(UnstyledButton)`
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px ${toSizeUnit(panelDefaultPadding)};
   width: 100%;
   display: grid;
   grid-template-columns: 32px 1fr auto;
@@ -87,7 +92,8 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
 
   return (
     <OnHoverAction
-      actionPlacerStyles={{ right: 8 }}
+      style={{ width: '100%' }}
+      actionPlacerStyles={{ right: panelDefaultPadding }}
       action={
         <HStack alignItems="center" gap={0}>
           <Opener
@@ -125,9 +131,8 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
           />
         </HStack>
       }
-      render={({ actionSize, actionPlacerStyles }) => (
+      render={({ actionSize }) => (
         <Container
-          style={{ padding: `2px ${actionPlacerStyles.right}px` }}
           onClick={() => {
             if (isActive) {
               setState((state) => ({ ...state, isPlaying: !state.isPlaying }))

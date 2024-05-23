@@ -16,7 +16,7 @@ const Footer = styled(HStack)`
 
 export const FocusSetWidget = () => {
   return (
-    <VStack gap={40}>
+    <VStack style={{ flex: 1 }} gap={40}>
       <VStack gap={4}>
         <MinimalisticFocusSet />
         <Footer>

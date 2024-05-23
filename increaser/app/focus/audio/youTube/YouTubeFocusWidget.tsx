@@ -17,6 +17,8 @@ import { SoundItem } from './FocusSoundsList/SoundItem'
 import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 
 const focusSoundsViews = ['player', 'add'] as const
 type FocusSoundsView = (typeof focusSoundsViews)[number]
@@ -25,9 +27,15 @@ const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
 
 const Content = styled(VStack)`
+  align-items: start;
+  padding: 0;
+  ${verticalPadding(8)}
   flex: 1;
-  overflow-y: auto;
-  padding: 4px 0;
+  position: relative;
+`
+
+const Container = styled(ScrollableFlexboxFiller)`
+  min-height: 400px;
 `
 
 export const YouTubeFocusWidget = () => {
@@ -83,13 +91,13 @@ export const YouTubeFocusWidget = () => {
       <Match
         value={view}
         player={() => (
-          <Content fullHeight fullWidth gap={8} alignItems="center">
-            <VStack fullWidth>
+          <Container>
+            <Content fullHeight fullWidth alignItems="center">
               {soundsToDisplay.map((sound, index) => (
                 <SoundItem key={index} index={index} {...sound} />
               ))}
-            </VStack>
-          </Content>
+            </Content>
+          </Container>
         )}
         add={() => (
           <AddSound
