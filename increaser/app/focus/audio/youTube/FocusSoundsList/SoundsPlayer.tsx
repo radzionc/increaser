@@ -70,7 +70,14 @@ export const SoundsPlayer = () => {
                   volume={0.8}
                   config={{
                     youtube: {
-                      playerVars: { autoplay: 1 },
+                      playerVars: {
+                        autoplay: 1,
+                        controls: 0,
+                        modestbranding: 1,
+                        rel: 0,
+                        showinfo: 0,
+                        iv_load_policy: 3,
+                      },
                     },
                   }}
                 />

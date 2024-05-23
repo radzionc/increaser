@@ -42,6 +42,10 @@ export const defaultFocusSounds: FocusSound[] = [
     url: 'https://youtu.be/1RcVIuZ8Wdk',
   },
   {
+    name: 'Study with me',
+    url: 'https://youtu.be/dXVltYviNEM',
+  },
+  {
     name: 'Lofi hip hop',
     url: 'https://youtu.be/n61ULEU7CO0',
   },
@@ -58,6 +62,10 @@ export const defaultFocusSounds: FocusSound[] = [
     url: 'https://youtu.be/CfPxlb8-ZQ0',
   },
   {
+    name: 'Chill Lo-fi hip hop',
+    url: 'https://youtu.be/gf4bH0u7DGM',
+  },
+  {
     name: 'Classic music',
     url: 'https://youtu.be/mIYzp5rcTvU',
   },
@@ -68,6 +76,14 @@ export const defaultFocusSounds: FocusSound[] = [
   {
     name: 'Synthwave',
     url: 'https://youtu.be/k3WkJq478To',
+  },
+  {
+    name: 'Christmas Jazz Instrumental Music',
+    url: 'https://www.youtube.com/live/DuzgYOiMwVk',
+  },
+  {
+    name: 'Winter Woods Music',
+    url: 'https://youtu.be/5RHTt4_XVVU',
   },
   {
     name: 'Brown noise',
