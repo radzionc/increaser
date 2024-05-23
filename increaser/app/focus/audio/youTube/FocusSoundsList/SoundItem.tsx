@@ -33,9 +33,7 @@ const PlayIndicator = styled.div<{ isActive: boolean }>`
   color: ${({ theme }) => theme.colors.text.toCssValue()};
 `
 
-const SoundNumber = styled(Text)`
-  transition: none;
-`
+const SoundNumber = styled(Text)``
 
 const Identifier = styled.div`
   width: 100%;
@@ -50,7 +48,7 @@ const Container = styled(UnstyledButton)`
   padding: 4px ${toSizeUnit(panelDefaultPadding)};
   width: 100%;
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: minmax(24px, auto) 1fr auto;
   align-items: center;
   gap: 8px;
   justify-items: start;

@@ -1,23 +1,38 @@
-import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
-import { HomeIcon } from '@lib/ui/icons/HomeIcon'
 import { ListIcon } from '@lib/ui/icons/ListIcon'
 import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
-import { ZapIcon } from '@lib/ui/icons/ZapIcon'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
-import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
-import { ClockIcon } from '@lib/ui/icons/ClockIcon'
-import { LayersIcon } from '@lib/ui/icons/LayersIcon'
-import { TargetIcon } from '@lib/ui/icons/TargetIcon'
+import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
+import { productToolNameRecord } from '@increaser/entities/ProductTool'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
-    name: 'Home',
-    icon: <HomeIcon />,
+    name: 'Focus',
+    icon: productToolIconRecord.focus,
   },
   [AppPath.Sessions]: {
     name: 'Schedule',
-    icon: <CalendarIcon />,
+    icon: productToolIconRecord.schedule,
+  },
+  [AppPath.Habits]: {
+    name: 'Habits',
+    icon: productToolIconRecord.habits,
+  },
+  [AppPath.Tasks]: {
+    name: 'Tasks',
+    icon: productToolIconRecord.tasks,
+  },
+  [AppPath.TimeTracking]: {
+    name: 'Time tracking',
+    icon: productToolIconRecord.trackTime,
+  },
+  [AppPath.WorkBudget]: {
+    name: productToolNameRecord.workBudget,
+    icon: productToolIconRecord.workBudget,
+  },
+  [AppPath.ProjectsBudget]: {
+    name: productToolNameRecord.timePlanner,
+    icon: productToolIconRecord.timePlanner,
   },
   [AppPath.Projects]: {
     name: 'Projects',
@@ -27,28 +42,8 @@ export const navigationPathInfo = {
     name: 'Settings',
     icon: <SettingsIcon />,
   },
-  [AppPath.Habits]: {
-    name: 'Habits',
-    icon: <ZapIcon />,
-  },
   [AppPath.Community]: {
     name: 'Community',
     icon: <GlobeIcon />,
-  },
-  [AppPath.Tasks]: {
-    name: 'Tasks',
-    icon: <CheckSquareIcon />,
-  },
-  [AppPath.TimeTracking]: {
-    name: 'Time tracking',
-    icon: <ClockIcon />,
-  },
-  [AppPath.WorkBudget]: {
-    name: 'Work budget',
-    icon: <LayersIcon />,
-  },
-  [AppPath.ProjectsBudget]: {
-    name: 'Projects budget',
-    icon: <TargetIcon />,
   },
 } as const
