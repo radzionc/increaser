@@ -2,8 +2,8 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { MinimalisticFocusSet } from './MinimalisticFocusSet'
 import { SessionStartedAt } from '@increaser/ui/focus/SessionStartedAt'
-import { FocusNotifications } from '../FocusAssistance'
 import styled from 'styled-components'
+import { FocusNotifications } from '../FocusNotifications'
 
 const Footer = styled(HStack)`
   align-items: center;

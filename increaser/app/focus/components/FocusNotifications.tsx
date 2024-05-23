@@ -1,11 +1,11 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 
-import { FocusBrowserNotification } from '../FocusSettings/FocusBrowserNotification'
-import { FocusSoundNotifications } from '@lib/ui/notifications/components/FocusSoundNotifications'
+import { FocusBrowserNotification } from './FocusSettings/FocusBrowserNotification'
 import { Menu } from '@lib/ui/menu'
 import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
 import { Button } from '@lib/ui/buttons/Button'
 import { Text } from '@lib/ui/text'
+import { FocusSoundNotifications } from './FocusSoundNotifications'
 
 const title = 'Notifications settings'
 

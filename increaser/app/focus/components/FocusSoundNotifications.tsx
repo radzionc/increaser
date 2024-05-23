@@ -1,5 +1,5 @@
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { Switch } from '../../inputs/Switch'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 export const FocusSoundNotifications = () => {
   const { hasTimerSoundNotification, setHasTimerSoundNotification } = useFocus()
