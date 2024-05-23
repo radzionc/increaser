@@ -1,6 +1,5 @@
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import styled from 'styled-components'
-import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { useTrackTime } from './state/TrackTimeContext'
 import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
@@ -8,14 +7,10 @@ import { msToPx } from './config'
 import { Sessions } from './Sessions'
 import { ScrollIntoViewOnFirstAppearance } from '@lib/ui/base/ScrollIntoViewOnFirstAppearance'
 import { SetEditor } from './SetEditor'
+import { VStack } from '@lib/ui/layout/Stack'
+import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 
-const Wrapper = styled.div`
-  flex: 1;
-  position: relative;
-`
-
-const Container = styled(TakeWholeSpaceAbsolutely)`
-  overflow-y: auto;
+const Content = styled(VStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
 `
 
@@ -29,8 +24,8 @@ export const TrackTimeContent = () => {
   const { currentSet, dayInterval } = useTrackTime()
 
   return (
-    <Wrapper>
-      <Container>
+    <ScrollableFlexboxFiller>
+      <Content>
         <TimeSpace
           msToPx={msToPx}
           startsAt={dayInterval.start}
@@ -42,7 +37,7 @@ export const TrackTimeContent = () => {
             render={(props) => <DefaultScrollPosition {...props} />}
           />
         </TimeSpace>
-      </Container>
-    </Wrapper>
+      </Content>
+    </ScrollableFlexboxFiller>
   )
 }

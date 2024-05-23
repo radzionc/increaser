@@ -15,9 +15,14 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 
-import { useFocusSounds } from '../useFocusSounds'
 import { ManageSound } from './ManageSound'
 import { FocusSound } from '@increaser/entities/FocusSound'
+import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
+import { useYouTubeFocusMusic } from '../YouTubeFocusMusicProvider'
+import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const PlayIndicator = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
@@ -28,9 +33,7 @@ const PlayIndicator = styled.div<{ isActive: boolean }>`
   color: ${({ theme }) => theme.colors.text.toCssValue()};
 `
 
-const SoundNumber = styled(Text)`
-  transition: none;
-`
+const SoundNumber = styled(Text)``
 
 const Identifier = styled.div`
   width: 100%;
@@ -40,9 +43,12 @@ const Identifier = styled.div`
 `
 
 const Container = styled(UnstyledButton)`
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px ${toSizeUnit(panelDefaultPadding)};
   width: 100%;
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: minmax(24px, auto) 1fr auto;
   align-items: center;
   gap: 8px;
   justify-items: start;
@@ -71,14 +77,10 @@ const Star = styled(StarIcon)<{ $color: HSLA }>`
 `
 
 export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
-  const {
-    isPlaying,
-    updateSounds,
-    activeSoundUrl,
-    updateActiveSoundUrl,
-    updateIsPlaying,
-    sounds,
-  } = useFocusSounds()
+  const [{ url: activeSoundUrl }, setPreference] = useYouTubeFocusPreference()
+  const { focusSounds } = useAssertUserState()
+  const { setState, isPlaying } = useYouTubeFocusMusic()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const isActive = activeSoundUrl === url
 
@@ -88,7 +90,8 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
 
   return (
     <OnHoverAction
-      actionPlacerStyles={{ right: 8 }}
+      style={{ width: '100%' }}
+      actionPlacerStyles={{ right: panelDefaultPadding }}
       action={
         <HStack alignItems="center" gap={0}>
           <Opener
@@ -111,8 +114,8 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
             kind="secondary"
             icon={star}
             onClick={() => {
-              updateSounds(
-                sounds.map((sound) => {
+              updateUser({
+                focusSounds: focusSounds.map((sound) => {
                   if (sound.url === url) {
                     return {
                       ...sound,
@@ -121,19 +124,21 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
                   }
                   return sound
                 }),
-              )
+              })
             }}
           />
         </HStack>
       }
-      render={({ actionSize, actionPlacerStyles }) => (
+      render={({ actionSize }) => (
         <Container
-          style={{ padding: `2px ${actionPlacerStyles.right}px` }}
           onClick={() => {
             if (isActive) {
-              updateIsPlaying(!isPlaying)
+              setState((state) => ({ ...state, isPlaying: !state.isPlaying }))
             } else {
-              updateActiveSoundUrl(url)
+              setPreference((state) => ({
+                ...state,
+                url,
+              }))
             }
           }}
           key={url}

@@ -7,10 +7,10 @@ import { TextInput } from '@lib/ui/inputs/TextInput'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
 import { VStack } from '@lib/ui/layout/Stack'
-
-import { useFocusSounds } from './useFocusSounds'
 import { FocusSound } from '@increaser/entities/FocusSound'
 import { Field } from '@lib/ui/inputs/Field'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 
 export const AddSound = ({ onFinish }: FinishableComponentProps) => {
   const {
@@ -24,10 +24,11 @@ export const AddSound = ({ onFinish }: FinishableComponentProps) => {
 
   const url = watch('url')
 
-  const { updateSounds, sounds } = useFocusSounds()
+  const { focusSounds } = useAssertUserState()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const validateUnique = getUniqueValueValidator(
-    new Set(sounds.map((sound) => sound.url)),
+    new Set(focusSounds.map((sound) => sound.url)),
     'sound',
   )
 
@@ -57,14 +58,16 @@ export const AddSound = ({ onFinish }: FinishableComponentProps) => {
           </Field>
           <SubmitFormButton
             onClick={handleSubmit(({ name, url }) => {
-              updateSounds([
-                {
-                  name,
-                  url,
-                  favourite: true,
-                },
-                ...sounds,
-              ])
+              updateUser({
+                focusSounds: [
+                  {
+                    name,
+                    url,
+                    favourite: true,
+                  },
+                  ...focusSounds,
+                ],
+              })
               analytics.trackEvent('Add sound', { name, url })
               onFinish()
             })}

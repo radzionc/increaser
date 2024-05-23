@@ -1,11 +1,12 @@
 import { useBreak } from '@increaser/app/break/hooks/useBreak'
-import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 export const ManageAutomation = () => {
   const { hasAutomaticBreak, setHasAutomaticBreak } = useBreak()
 
   return (
-    <MinimalisticSwitch
+    <Switch
+      size="s"
       label="Start break automatically"
       onChange={setHasAutomaticBreak}
       value={hasAutomaticBreak}

@@ -12,16 +12,19 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { HStack } from '@lib/ui/layout/Stack'
-import { SelectContainer } from '@lib/ui/select/SelectContainer'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { getColor } from '@lib/ui/theme/getters'
+import { focusSetWidgetConfig } from './config'
 
 const Content = styled(TaskTextContainer)`
   ${cropText};
   font-size: 14px;
 `
 
-const Wrapper = styled(SelectContainer)`
+const Wrapper = styled.div`
   width: 100%;
-  padding: 0 4px 0 8px;
+  background: ${getColor('background')};
+  padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
 `
 
 const Container = styled(HStack)`

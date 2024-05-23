@@ -6,11 +6,11 @@ import {
 } from '@increaser/entities/Project'
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
 import { pluralize } from '@lib/utils/pluralize'
-import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
 import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { InputProps } from '@lib/ui/props'
 import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 type ProjectGoalInputProps = InputProps<ProjectGoal | null> & {
   project: EnhancedProject
@@ -25,7 +25,8 @@ export const ProjectGoalInput = ({
 }: ProjectGoalInputProps) => {
   return (
     <VStack gap={20}>
-      <MinimalisticSwitch
+      <Switch
+        size="s"
         onChange={() => onChange(value ? null : 'doMore')}
         value={value !== null}
         label={`Set a goal ${value ? 'to work' : '...'}`}

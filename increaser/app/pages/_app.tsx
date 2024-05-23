@@ -29,6 +29,8 @@ import { ScheduleProvider } from '../sets/components/ScheduleProvider'
 import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
 import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
 import { ApiProvider } from '../api/ApiProvider'
+import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMusicProvider'
+import { YouTubeFocusMusicFloatingPlayer } from '../focus/audio/youTube/YouTubeFocusMusicFloatingPlayer'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -64,26 +66,29 @@ function MyApp({ Component, pageProps }: MyAppProps) {
             <UserStateProvider>
               <FocusLauncherProvider>
                 <PWAProvider>
-                  <ConditionalUserState
-                    present={() => (
-                      <UserManagerProvider>
-                        <ProjectsProvider>
-                          <HabitsProvider>
-                            <FocusProvider>
-                              <ScheduleProvider>
-                                <BreakProvider>
-                                  <FocusSoundsPlayer />
-                                  {component}
-                                </BreakProvider>
-                                <MembershipConfirmation />
-                              </ScheduleProvider>
-                            </FocusProvider>
-                          </HabitsProvider>
-                        </ProjectsProvider>
-                      </UserManagerProvider>
-                    )}
-                    missing={() => <>{component}</>}
-                  />
+                  <YouTubeFocusMusicProvider>
+                    <ConditionalUserState
+                      present={() => (
+                        <UserManagerProvider>
+                          <ProjectsProvider>
+                            <HabitsProvider>
+                              <FocusProvider>
+                                <ScheduleProvider>
+                                  <BreakProvider>
+                                    <FocusSoundsPlayer />
+                                    <YouTubeFocusMusicFloatingPlayer />
+                                    {component}
+                                  </BreakProvider>
+                                  <MembershipConfirmation />
+                                </ScheduleProvider>
+                              </FocusProvider>
+                            </HabitsProvider>
+                          </ProjectsProvider>
+                        </UserManagerProvider>
+                      )}
+                      missing={() => <>{component}</>}
+                    />
+                  </YouTubeFocusMusicProvider>
                 </PWAProvider>
               </FocusLauncherProvider>
             </UserStateProvider>

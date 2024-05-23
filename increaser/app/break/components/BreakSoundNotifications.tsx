@@ -1,11 +1,12 @@
 import { useBreak } from '@increaser/app/break/hooks/useBreak'
-import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 export const BreakSoundNotification = () => {
   const { hasSoundNotification, setHasSoundNotification } = useBreak()
 
   return (
-    <MinimalisticSwitch
+    <Switch
+      size="s"
       label="Sound notifications"
       onChange={setHasSoundNotification}
       value={hasSoundNotification}

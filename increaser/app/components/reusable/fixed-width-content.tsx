@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Spacer } from '@lib/ui/layout/Spacer'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ComponentWithChildrenProps, UIComponentProps } from '@lib/ui/props'
 
@@ -26,7 +25,6 @@ export const FixedWidthContent = ({
   return (
     <Container width={width} {...rest}>
       {children}
-      <Spacer height={20} />
     </Container>
   )
 }

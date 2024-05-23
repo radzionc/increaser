@@ -1,7 +1,7 @@
 import { analytics } from '@increaser/app/analytics'
 import { useBreak } from '@increaser/app/break/hooks/useBreak'
 import { useCallback } from 'react'
-import { MinimalisticSwitch } from '@lib/ui/inputs/Switch/MinimalisticSwitch'
+import { Switch } from '@lib/ui/inputs/Switch'
 
 export const BreakBrowserNotification = () => {
   const { hasBrowserNotification, setHasBrowserNotification } = useBreak()
@@ -21,7 +21,8 @@ export const BreakBrowserNotification = () => {
   }, [hasBrowserNotification, setHasBrowserNotification])
 
   return (
-    <MinimalisticSwitch
+    <Switch
+      size="s"
       label="Browser notifications"
       onChange={handleChange}
       value={hasBrowserNotification}

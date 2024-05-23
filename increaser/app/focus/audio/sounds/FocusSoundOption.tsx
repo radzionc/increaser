@@ -16,6 +16,11 @@ import { getColor } from '@lib/ui/theme/getters'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { focusSoundIcon } from './focusSoundIcon'
+import { centerContent } from '@lib/ui/css/centerContent'
+
+const Wrapper = styled(ActionInsideInteractiveElement)`
+  ${centerContent};
+`
 
 const Container = styled(UnstyledButton)<{ isActive: boolean }>`
   width: 100%;
@@ -45,8 +50,13 @@ export const FocusSoundOption = ({
   const isActive = value in proference
 
   return (
-    <ActionInsideInteractiveElement
-      actionPlacerStyles={{ bottom: 0, left: 0, width: '100%' }}
+    <Wrapper
+      actionPlacerStyles={{
+        bottom: 0,
+        width: '100%',
+        maxWidth: 86,
+        pointerEvents: isActive ? undefined : 'none',
+      }}
       render={({ actionSize }) => (
         <Container
           isActive={isActive}

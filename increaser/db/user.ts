@@ -12,6 +12,7 @@ import { getPickParams } from '@lib/dynamodb/getPickParams'
 import { dbDocClient } from '@lib/dynamodb/client'
 import { updateItem } from '@lib/dynamodb/updateItem'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
+import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 
 export const getUserItemParams = (id: string) => ({
   TableName: tableName.users,
@@ -54,7 +55,7 @@ export function getUserByEmail<T extends (keyof User)[]>(
         email,
       }),
 
-      ...getPickParams([...attributes, 'email']),
+      ...getPickParams(withoutDuplicates([...attributes, 'email'])),
     })
     const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
 

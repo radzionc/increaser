@@ -10,7 +10,7 @@ interface Props {
   title: React.ReactNode
   description?: string
   children?: ReactNode
-  documentTitle?: string
+  documentTitle?: ReactNode
 }
 
 const SMALL_SCREEN_BREAKPOINT = 600

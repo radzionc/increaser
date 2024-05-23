@@ -4,7 +4,7 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { isToday } from 'date-fns'
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useMemo, useState } from 'react'
 import { startOfDay } from 'date-fns'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getDaySets } from '@increaser/app/sets/helpers/getDaySets'
@@ -42,11 +42,6 @@ export const DayOverviewProvider = ({
   const dayStartedAt = startOfDay(currentDay).getTime()
 
   const { currentSet } = useFocus()
-  useEffect(() => {
-    if (currentSet && dayStartedAt !== todayStartedAt) {
-      setCurrentDay(todayStartedAt)
-    }
-  }, [currentSet, dayStartedAt, todayStartedAt])
 
   const { sets: allSets } = useAssertUserState()
 

@@ -3,11 +3,10 @@ import {
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
 
-export const focusAudioModes = ['none', 'youtube', 'sounds'] as const
+export const focusAudioModes = ['youtube', 'sounds'] as const
 export type FocusAudioMode = (typeof focusAudioModes)[number]
 
 export const focusAduioModeName: Record<FocusAudioMode, string> = {
-  none: 'Silent',
   youtube: 'YouTube',
   sounds: 'Sounds',
 }
