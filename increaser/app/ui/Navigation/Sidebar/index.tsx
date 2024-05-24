@@ -34,7 +34,6 @@ export const Sidebar = () => {
             <NavigationToInternalPage path={AppPath.Habits} />
             <NavigationToInternalPage path={AppPath.Tasks} />
             <NavigationToInternalPage path={AppPath.Sessions} />
-            <NavigationToInternalPage path={AppPath.Community} />
             <NavigationToInternalPage
               path={AppPath.Plan}
               decoration={
@@ -43,6 +42,7 @@ export const Sidebar = () => {
                 </UserStateOnly>
               }
             />
+            <NavigationToInternalPage path={AppPath.Community} />
 
             {isInstallPromptEnabled && <InstallPrompt />}
           </VStack>
