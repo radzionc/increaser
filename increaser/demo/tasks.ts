@@ -9,6 +9,7 @@ type TaskDescription = {
   name: string
   projectId: DemoProject
   isCompleted: boolean
+  isOverdue?: boolean
   minutes?: number
 }
 
@@ -22,7 +23,8 @@ const tasks: TaskDescription[] = [
   {
     name: 'Review code for the new feature',
     projectId: DemoProject.Job,
-    isCompleted: true,
+    isCompleted: false,
+    isOverdue: true,
     minutes: 26,
   },
   {
@@ -53,16 +55,20 @@ export const getDemoTasks = (): Record<string, Task> => {
   const startedAt = Date.now()
 
   return getRecord(
-    tasks.map(({ projectId, name, isCompleted, minutes }, order) => ({
-      id: getId(),
-      name,
-      projectId,
-      startedAt,
-      spentTime: minutes ? convertDuration(minutes, 'min', 'ms') : undefined,
-      completedAt: isCompleted ? Date.now() : null,
-      deadlineAt: endOfDay(startedAt).getTime(),
-      order,
-    })),
+    tasks.map(
+      ({ projectId, name, isCompleted, minutes, isOverdue }, order) => ({
+        id: getId(),
+        name,
+        projectId,
+        startedAt,
+        spentTime: minutes ? convertDuration(minutes, 'min', 'ms') : undefined,
+        completedAt: isCompleted ? Date.now() : null,
+        deadlineAt: isOverdue
+          ? startedAt - convertDuration(1, 'd', 'ms')
+          : endOfDay(startedAt).getTime(),
+        order,
+      }),
+    ),
     (task) => task.id,
   )
 }
