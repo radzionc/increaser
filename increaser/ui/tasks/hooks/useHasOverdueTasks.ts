@@ -5,7 +5,8 @@ export const useHasOverdueTasks = () => {
   const { tasks } = useAssertUserState()
 
   return Object.values(tasks).some(
-    ({ deadlineAt }) =>
+    ({ deadlineAt, completedAt }) =>
+      !completedAt &&
       getDeadlineStatus({ deadlineAt, now: Date.now() }) === 'overdue',
   )
 }
