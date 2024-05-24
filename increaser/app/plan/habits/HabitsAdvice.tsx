@@ -28,10 +28,18 @@ export const HabitsAdvice = () => {
         is key because it keeps your momentum going and helps you build strong,
         lasting routines. Missing one day is okay, but avoiding two-day gaps is
         crucial for staying on track. You've got this!{' '}
-        <TextButton as="span" onClick={() => setIsExpanded(!isExpanded)}>
-          Read more
-        </TextButton>{' '}
-        for advice on staying consistent today.
+        {isExpanded ? (
+          <TextButton as="span" onClick={() => setIsExpanded(false)}>
+            Read less
+          </TextButton>
+        ) : (
+          <>
+            <TextButton as="span" onClick={() => setIsExpanded(true)}>
+              Read more
+            </TextButton>{' '}
+            for advice on staying consistent today.
+          </>
+        )}
       </Text>
       {isExpanded && (
         <VStack gap={8}>

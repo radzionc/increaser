@@ -15,7 +15,7 @@ import { getColor } from '@lib/ui/theme/getters'
 const Content = styled(VStack)`
   gap: 20px;
   color: ${getColor('textSupporting')};
-  font-size: 14px;
+  /* font-size: 14px; */
   line-height: 1.5;
 `
 
