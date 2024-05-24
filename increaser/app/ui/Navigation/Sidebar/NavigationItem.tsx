@@ -4,8 +4,9 @@ import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import { transition } from '@lib/ui/css/transition'
 import { interactive } from '@lib/ui/css/interactive'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
-interface Props {
+export type NavigationItemProps = {
   icon: React.ReactNode
   name: React.ReactNode
   isActive?: boolean
@@ -20,9 +21,10 @@ export const Container = styled.div<{ isSelected?: boolean }>`
   align-items: center;
   width: 100%;
   ${transition};
-  border-radius: 8px;
+  ${borderRadius.s};
   font-weight: 500;
   color: ${getColor('textSupporting')};
+  position: relative;
 
   &:hover {
     background: ${getColor('mist')};
@@ -52,16 +54,16 @@ export const NavigationItem = ({
   name,
   isActive,
   decoration = null,
-}: Props) => {
+}: NavigationItemProps) => {
   return (
     <Container isSelected={isActive}>
-      <Text size={18} style={{ position: 'relative' }} as="div">
+      <Text size={18} as="div">
         <HStack gap={8}>
           <IconWrapper>{icon}</IconWrapper>
           <div>{name}</div>
         </HStack>
-        {decoration}
       </Text>
+      {decoration}
     </Container>
   )
 }
