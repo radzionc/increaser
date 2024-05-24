@@ -4,18 +4,12 @@ import { ReviewYesterdayHabits } from './ReviewYesterdayHabits'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
-import styled from 'styled-components'
-import { getColor } from '@lib/ui/theme/getters'
-
-const Container = styled(Panel)`
-  border: 2px dashed ${getColor('primary')};
-`
 
 export const SubmitYesterdayHabits = () => {
   const { mutate: updateUser } = useUpdateUserMutation()
 
   return (
-    <Container kind="secondary">
+    <Panel kind="secondary">
       <Form
         onSubmit={() => {
           updateUser({
@@ -29,6 +23,6 @@ export const SubmitYesterdayHabits = () => {
           </HStack>
         }
       />
-    </Container>
+    </Panel>
   )
 }
