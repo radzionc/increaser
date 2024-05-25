@@ -10,7 +10,7 @@ import {
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
 import styled from 'styled-components'
-import { SoundItem } from './FocusSoundsList/SoundItem'
+import { SoundItem } from './SoundItem'
 import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
