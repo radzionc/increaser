@@ -1,5 +1,7 @@
-import { analytics } from '@increaser/app/analytics'
-import { FinishableComponentProps } from '@lib/ui/props'
+import {
+  ComponentWithValueProps,
+  FinishableComponentProps,
+} from '@lib/ui/props'
 import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
@@ -11,26 +13,34 @@ import { useState } from 'react'
 import { validate } from '@lib/ui/form/utils/validate'
 import { FormActions } from '@lib/ui/form/components/FormActions'
 import styled from 'styled-components'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
-import { MusicFormShape } from './musicForm/MusicFormShape'
-import { MusicFormFields } from './musicForm/MusicFormFields'
+import { MusicFormShape } from './MusicFormShape'
+import { MusicFormFields } from './MusicFormFields'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(VStack)`
-  ${horizontalPadding(panelDefaultPadding)};
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  width: 100%;
+  border-bottom: 2px solid ${getColor('mist')};
+  border-top: 2px solid ${getColor('mist')};
 `
 
-export const AddSound = ({ onFinish }: FinishableComponentProps) => {
-  const [value, setValue] = useState<MusicFormShape>({
-    url: '',
-    name: '',
-  })
+export const EditSoundForm = ({
+  onFinish,
+  value: initialValue,
+}: FinishableComponentProps & ComponentWithValueProps<MusicFormShape>) => {
+  const [value, setValue] = useState<MusicFormShape>(initialValue)
 
   const { focusSounds } = useAssertUserState()
   const { mutate: updateUser } = useUpdateUserMutation()
 
   const validateUnique = getUniqueValueValidator(
-    new Set(focusSounds.map((sound) => sound.url)),
+    new Set(
+      focusSounds
+        .filter((sound) => sound.url !== initialValue.url)
+        .map((sound) => sound.url),
+    ),
     'sound',
   )
 
@@ -55,15 +65,10 @@ export const AddSound = ({ onFinish }: FinishableComponentProps) => {
           onClose: onFinish,
           onSubmit: () => {
             updateUser({
-              focusSounds: [
-                {
-                  ...value,
-                  favourite: true,
-                },
-                ...focusSounds,
-              ],
+              focusSounds: focusSounds.map((sound) =>
+                sound.url === initialValue.url ? { ...sound, ...value } : sound,
+              ),
             })
-            analytics.trackEvent('Add sound', value)
             onFinish()
           },
         })}

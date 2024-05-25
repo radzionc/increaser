@@ -17,4 +17,5 @@ export enum AppPath {
   TimeTracking = '/time-tracking',
   WorkBudget = '/work-budget',
   ProjectsBudget = '/projects-budget',
+  Plan = '/plan',
 }

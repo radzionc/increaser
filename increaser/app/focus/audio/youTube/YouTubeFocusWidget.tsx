@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import { Button } from '@lib/ui/buttons/Button'
-import { ArrowLeftIcon } from '@lib/ui/icons/ArrowLeftIcon'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 
 import { AddSound } from './AddSound'
-import { Match } from '@lib/ui/base/Match'
 import { TabNavigation } from '@lib/ui/navigation/TabNavigation'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import {
@@ -13,15 +10,12 @@ import {
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
 import styled from 'styled-components'
-import { SoundItem } from './FocusSoundsList/SoundItem'
+import { SoundItem } from './SoundItem'
 import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
-
-const focusSoundsViews = ['player', 'add'] as const
-type FocusSoundsView = (typeof focusSoundsViews)[number]
+import { IconButton } from '@lib/ui/buttons/IconButton'
 
 const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
@@ -40,8 +34,7 @@ const Container = styled(ScrollableFlexboxFiller)`
 
 export const YouTubeFocusWidget = () => {
   const { focusSounds } = useAssertUserState()
-  const { setState } = useYouTubeFocusMusic()
-  const [view, setView] = useState<FocusSoundsView>('player')
+  const [isAddingVideo, setIsAddingVideo] = useState(false)
 
   const [soundsView, setSoundsView] = usePersistentState<SoundsView>(
     PersistentStateKey.FocusSoundsView,
@@ -61,52 +54,32 @@ export const YouTubeFocusWidget = () => {
           getViewName={capitalizeFirstLetter}
           activeView={soundsView}
           onSelect={setSoundsView}
-          size="s"
         />
-        <Match
-          value={view}
-          player={() => (
-            <Button
-              onClick={() => {
-                setState((state) => ({ ...state, isPlaying: false }))
-                setView('add')
-              }}
-              size="s"
-              kind="secondary"
-            >
-              <HStack alignItems="center" gap={8}>
-                <PlusIcon /> Add
-              </HStack>
-            </Button>
-          )}
-          add={() => (
-            <Button onClick={() => setView('player')} size="s" kind="secondary">
-              <HStack alignItems="center" gap={8}>
-                <ArrowLeftIcon /> Back
-              </HStack>
-            </Button>
-          )}
-        />
-      </HStack>
-      <Match
-        value={view}
-        player={() => (
-          <Container>
-            <Content fullHeight fullWidth alignItems="center">
-              {soundsToDisplay.map((sound, index) => (
-                <SoundItem key={index} index={index} {...sound} />
-              ))}
-            </Content>
-          </Container>
-        )}
-        add={() => (
-          <AddSound
-            onFinish={() => {
-              setView('player')
+        {!isAddingVideo && (
+          <IconButton
+            icon={<PlusIcon />}
+            title="Add YouTube video"
+            onClick={() => {
+              setIsAddingVideo(true)
             }}
+            size="l"
           />
         )}
-      />
+      </HStack>
+      {isAddingVideo && (
+        <AddSound
+          onFinish={() => {
+            setIsAddingVideo(false)
+          }}
+        />
+      )}
+      <Container>
+        <Content fullHeight fullWidth alignItems="center">
+          {soundsToDisplay.map((sound, index) => (
+            <SoundItem key={index} index={index} {...sound} />
+          ))}
+        </Content>
+      </Container>
     </>
   )
 }

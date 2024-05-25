@@ -14,6 +14,6 @@ export const focusAduioModeName: Record<FocusAudioMode, string> = {
 export const useFocusAudioMode = () => {
   return usePersistentState<FocusAudioMode>(
     PersistentStateKey.FocusAudioMode,
-    'sounds',
+    'youtube',
   )
 }

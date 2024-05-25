@@ -4,6 +4,7 @@ import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
+import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
@@ -45,5 +46,9 @@ export const navigationPathInfo = {
   [AppPath.Community]: {
     name: 'Community',
     icon: <GlobeIcon />,
+  },
+  [AppPath.Plan]: {
+    name: 'Start the day',
+    icon: <CoffeeIcon />,
   },
 } as const

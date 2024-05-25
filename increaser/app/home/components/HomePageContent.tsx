@@ -5,7 +5,6 @@ import { VStack } from '@lib/ui/layout/Stack'
 
 import { HomePageTitle } from './HomePageTitle'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
-import { SubmitYesterdayHabits } from '@increaser/app/habits/components/SubmitYesterdayHabits'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusLauncher } from '../../focus/launcher'
@@ -53,7 +52,6 @@ export const HomePageContent = () => {
           <>
             <BreakTimeline />
             <FocusLauncher />
-            <SubmitYesterdayHabits />
           </>
         )}
       </VStack>
