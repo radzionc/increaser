@@ -1,4 +1,3 @@
-import { Panel } from '@lib/ui/panel/Panel'
 import { PlanSection } from '../PlanSection'
 import { useHasOverdueTasks } from '@increaser/ui/tasks/hooks/useHasOverdueTasks'
 import { TasksToDo } from '@increaser/ui/tasks/TasksToDo'
@@ -13,13 +12,11 @@ export const TasksReview = () => {
       title="Review overdue tasks"
       index={2}
     >
-      <Panel kind="secondary">
-        <TasksContainer style={{ paddingLeft: 20 }}>
-          <TasksManagerProvider>
-            <TasksToDo />
-          </TasksManagerProvider>
-        </TasksContainer>
-      </Panel>
+      <TasksContainer>
+        <TasksManagerProvider>
+          <TasksToDo />
+        </TasksManagerProvider>
+      </TasksContainer>
     </PlanSection>
   )
 }

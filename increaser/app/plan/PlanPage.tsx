@@ -15,7 +15,7 @@ export const PlanPage = () => {
       <TasksViewProvider>
         <PageTitle documentTitle={`☕️ ${title}`} title={title} />
         <UserStateOnly>
-          <VStack style={{ maxWidth: 580 }} gap={40}>
+          <VStack style={{ maxWidth: 580 }}>
             <HabitsReview />
             <TasksReview />
           </VStack>

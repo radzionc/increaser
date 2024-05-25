@@ -45,7 +45,7 @@ export const HabitsAdvice = () => {
         <VStack gap={8}>
           {Object.entries(advice).map(([title, description], index) => (
             <Text key={title}>
-              <Text weight="semibold" as="span" color="regular">
+              <Text weight="semibold" as="span" color="contrast">
                 {index + 1}. {title}:
               </Text>{' '}
               {description}
