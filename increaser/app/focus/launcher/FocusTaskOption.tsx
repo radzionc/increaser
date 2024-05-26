@@ -13,9 +13,17 @@ import {
   FocusOptionContainer,
   focusOptionPadding,
 } from './FocusOptionContainer'
+import { cropText } from '@lib/ui/css/cropText'
 
 const CheckBoxContainer = styled.div`
   ${sameDimensions(checklistItemContentMinHeight)};
+`
+
+const Content = styled(HStack)`
+  ${cropText};
+  > * {
+    ${cropText};
+  }
 `
 
 export const FocusTaskOption = () => {
@@ -41,10 +49,10 @@ export const FocusTaskOption = () => {
           }}
           selected={isSelected}
         >
-          <HStack gap={focusOptionPadding}>
+          <Content gap={focusOptionPadding}>
             <Spacer {...actionSize} />
             <TaskPrimaryContent />
-          </HStack>
+          </Content>
         </FocusOptionContainer>
       )}
       action={

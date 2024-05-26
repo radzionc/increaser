@@ -44,7 +44,7 @@ export const WeekDeadlinesOverview = ({
           </Text>
           <Text weight="semibold" size={14} color="supporting">
             {format(startedAt, 'MMM d')} -{' '}
-            {format(startedAt + convertDuration(1, 'w', 'ms'), 'MMM d')}
+            {format(startedAt + convertDuration(6, 'd', 'ms'), 'MMM d')}
           </Text>
         </HStack>
         <HStack alignItems="center" justifyContent="space-between">

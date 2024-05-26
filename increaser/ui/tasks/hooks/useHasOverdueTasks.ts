@@ -1,12 +1,8 @@
-import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useOverdueTasks } from './useOverdueTasks'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 export const useHasOverdueTasks = () => {
-  const { tasks } = useAssertUserState()
+  const overdueTasks = useOverdueTasks()
 
-  return Object.values(tasks).some(
-    ({ deadlineAt, completedAt }) =>
-      !completedAt &&
-      getDeadlineStatus({ deadlineAt, now: Date.now() }) === 'overdue',
-  )
+  return !isEmpty(overdueTasks)
 }

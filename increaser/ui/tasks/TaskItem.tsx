@@ -59,7 +59,6 @@ export const TaskItem = () => {
       {isHoverEnabled ? (
         <OnHoverActions>
           <IconButton
-            kind="secondary"
             title="Edit task"
             icon={<EditIcon />}
             onClick={() =>
