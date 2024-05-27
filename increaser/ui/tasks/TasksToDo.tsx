@@ -26,16 +26,9 @@ import {
   DragContainer,
   OnHoverDragContainer,
 } from '@increaser/ui/tasks/DragContainer'
-import { DragHandle } from '@lib/ui/dnd/DragHandle'
-import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
 import { useMedia } from 'react-use'
-import {
-  checklistItemContentMinHeight,
-  checklistItemVerticalPadding,
-} from '@lib/ui/checklist/ChecklistItemFrame'
 import { useTasksManager } from '@increaser/ui/tasks/TasksManagerProvider'
-
-const hoverableDragHandleWidth = 36
+import { TaskDragHandle } from './TaskDragHandle'
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
@@ -130,40 +123,18 @@ export const TasksToDo = () => {
           </CurrentTaskProvider>
         )
 
-        if (activeTaskId) {
-          return content
-        }
+        const isEnabled = isDraggingEnabled && !activeTaskId
 
         const dragHandle = (
-          <DragHandle
-            style={
-              isHoverEnabled
-                ? {
-                    position: 'absolute',
-                    top: 0,
-                    left: -hoverableDragHandleWidth,
-                    width: hoverableDragHandleWidth,
-                    height:
-                      checklistItemContentMinHeight +
-                      checklistItemVerticalPadding * 2,
-                  }
-                : {
-                    width: 40,
-                  }
-            }
-            isActive={isDragging}
+          <TaskDragHandle
+            isEnabled={isEnabled}
+            isActive={isDragging ?? false}
             {...dragHandleProps}
-          >
-            <GripVerticalIcon />
-          </DragHandle>
+          />
         )
         if (isHoverEnabled) {
           return (
-            <OnHoverDragContainer
-              isDraggingEnabled={isDraggingEnabled}
-              isDragging={isDragging}
-              {...draggableProps}
-            >
+            <OnHoverDragContainer isDragging={isDragging} {...draggableProps}>
               {dragHandle}
               {content}
             </OnHoverDragContainer>

@@ -1,9 +1,8 @@
-import { useHaveToSubmitYesterdayHabits } from '../habits/hooks/useHaveToSubmitYesterdayHabits'
 import styled from 'styled-components'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { useHasOverdueTasks } from '@increaser/ui/tasks/hooks/useHasOverdueTasks'
+import { useIsStartDaySetupCompleted } from './useIsStartDaySetupCompleted'
 
 const Container = styled.div`
   ${absoluteOutline(2, 2)};
@@ -12,9 +11,7 @@ const Container = styled.div`
 `
 
 export const NavigateToPlanDecoration = () => {
-  const haveToSubmitYesterdayHabits = useHaveToSubmitYesterdayHabits()
-  const hasOverdueTasks = useHasOverdueTasks()
-  const isActive = haveToSubmitYesterdayHabits || hasOverdueTasks
+  const isCompleted = useIsStartDaySetupCompleted()
 
-  return isActive ? <Container /> : null
+  return isCompleted ? null : <Container />
 }

@@ -108,6 +108,7 @@ export const EditTaskForm = () => {
       withSections
       kind="secondary"
       as="form"
+      style={{ width: '100%' }}
       onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
         handleSubmit(),
       )}

@@ -1,4 +1,3 @@
-import { PlanSection } from '../PlanSection'
 import { useHasOverdueTasks } from '@increaser/ui/tasks/hooks/useHasOverdueTasks'
 import { TasksManagerProvider } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
@@ -11,11 +10,7 @@ export const OverdueTasksReview = () => {
   const hasOverdueTasks = useHasOverdueTasks()
 
   return (
-    <PlanSection
-      isCompleted={!hasOverdueTasks}
-      title="Review overdue tasks"
-      index={2}
-    >
+    <>
       {hasOverdueTasks ? (
         <TasksContainer>
           <TasksManagerProvider>
@@ -30,6 +25,6 @@ export const OverdueTasksReview = () => {
           </Text>
         </Panel>
       )}
-    </PlanSection>
+    </>
   )
 }
