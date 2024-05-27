@@ -9,6 +9,15 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
+import { matchColor } from '@lib/ui/theme/getters'
+import styled from 'styled-components'
+
+const Icon = styled(IconWrapper)<{ isOverdue: boolean }>`
+  color: ${matchColor('isOverdue', {
+    true: 'idle',
+    false: 'text',
+  })};
+`
 
 export const TaskDeadlineInput = ({
   value,
@@ -19,10 +28,10 @@ export const TaskDeadlineInput = ({
       style={{ width: 142 }}
       openerContent={
         <HStack alignItems="center" gap={8}>
-          <IconWrapper style={{ fontSize: 14 }}>
+          <Icon isOverdue={value === 'overdue'} style={{ fontSize: 14 }}>
             <CalendarIcon />
-          </IconWrapper>
-          <Text>{value === 'overdue' ? 'Deadline' : deadlineName[value]}</Text>
+          </Icon>
+          <Text>{deadlineName[value]}</Text>
         </HStack>
       }
       value={value}

@@ -19,16 +19,13 @@ const Container = styled(ActionInsideInteractiveElement)`
 `
 
 const Outline = styled(TakeWholeSpace)`
-  ${absoluteOutline(8, 2)};
+  ${absoluteOutline(8, 0)};
   ${borderRadius.s};
   pointer-events: none;
 `
 
 const Content = styled(TaskItemFrame)`
   ${interactive};
-  /* &:hover {
-    background: ${getColor('foreground')};
-  } */
 
   &:hover ${Outline} {
     background: ${getColor('mist')};
