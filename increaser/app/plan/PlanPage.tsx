@@ -5,7 +5,7 @@ import { TasksViewProvider } from '@increaser/ui/tasks/TasksView'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { VStack } from '@lib/ui/layout/Stack'
 import { HabitsReview } from './habits/HabitsReview'
-import { TasksReview } from './tasks/TasksReview'
+import { OverdueTasksReview } from './tasks/OverdueTasksReview'
 
 const title = 'Start the day'
 
@@ -17,7 +17,7 @@ export const PlanPage = () => {
         <UserStateOnly>
           <VStack style={{ maxWidth: 580 }}>
             <HabitsReview />
-            <TasksReview />
+            <OverdueTasksReview />
           </VStack>
         </UserStateOnly>
       </TasksViewProvider>
