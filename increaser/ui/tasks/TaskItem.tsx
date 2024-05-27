@@ -1,75 +1,69 @@
 import { useCurrentTask } from './CurrentTaskProvider'
-import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 import { TaskItemFrame } from './TaskItemFrame'
-import { DeleteTask } from './DeleteTask'
-import { useMedia } from 'react-use'
-import { ManageTaskSlideover } from './ManageTaskSlideover'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import {
-  checklistItemContentMinHeight,
-  checklistItemVerticalPadding,
-} from '@lib/ui/checklist/ChecklistItemFrame'
-import { IconButton } from '@lib/ui/buttons/IconButton'
-import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { useTasksManager } from './TasksManagerProvider'
 import { EditTaskForm } from './EditTaskForm'
 import { TaskPrimaryContent } from './TaskPrimaryContent'
 import { TaskCheckBox } from './TaskCheckBox'
+import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
+import { Spacer } from '@lib/ui/layout/Spacer'
+import { interactive } from '@lib/ui/css/interactive'
+import { checklistItemVerticalPadding } from '@lib/ui/checklist/ChecklistItemFrame'
+import { getColor } from '@lib/ui/theme/getters'
+import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
+import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
-const OnHoverActions = styled(HStack)`
-  align-items: center;
-  gap: 4px;
-  height: ${toSizeUnit(
-    checklistItemContentMinHeight + checklistItemVerticalPadding * 2,
-  )};
-
-  &:not(:focus-within) {
-    opacity: 0;
-  }
+const Container = styled(ActionInsideInteractiveElement)`
+  width: 100%;
 `
 
-const Container = styled(HStack)`
-  width: 100%;
-  gap: 8px;
-  align-items: start;
+const Outline = styled(TakeWholeSpace)`
+  ${absoluteOutline(8, 2)};
+  ${borderRadius.s};
+  pointer-events: none;
+`
 
-  &:hover ${OnHoverActions} {
-    opacity: 1;
+const Content = styled(TaskItemFrame)`
+  ${interactive};
+  /* &:hover {
+    background: ${getColor('foreground')};
+  } */
+
+  &:hover ${Outline} {
+    background: ${getColor('mist')};
   }
 `
 
 export const TaskItem = () => {
   const task = useCurrentTask()
 
-  const { setState, activeTaskId } = useTasksManager()
-
-  const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
+  const { activeTaskId, setState } = useTasksManager()
 
   if (activeTaskId === task.id) {
     return <EditTaskForm />
   }
 
   return (
-    <Container>
-      <TaskItemFrame>
-        <TaskCheckBox />
-        <TaskPrimaryContent />
-      </TaskItemFrame>
-      {isHoverEnabled ? (
-        <OnHoverActions>
-          <IconButton
-            title="Edit task"
-            icon={<EditIcon />}
-            onClick={() =>
-              setState((state) => ({ ...state, activeTaskId: task.id }))
-            }
-          />
-          <DeleteTask />
-        </OnHoverActions>
-      ) : (
-        <ManageTaskSlideover />
+    <Container
+      render={({ actionSize }) => (
+        <>
+          <Content
+            onClick={() => {
+              setState((state) => ({
+                ...state,
+                activeTaskId: task.id,
+              }))
+            }}
+          >
+            <Spacer {...actionSize} />
+            <TaskPrimaryContent />
+            <Outline />
+          </Content>
+        </>
       )}
-    </Container>
+      action={<TaskCheckBox />}
+      actionPlacerStyles={{ left: 0, top: checklistItemVerticalPadding }}
+    />
   )
 }
