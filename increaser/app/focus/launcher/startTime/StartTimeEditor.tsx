@@ -20,6 +20,8 @@ import {
 } from '@lib/ui/layout/StackSeparatedBy'
 import { getColor } from '@lib/ui/theme/getters'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useTodaySets } from '../../../sets/hooks/useTodaySets'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -33,6 +35,8 @@ export const StartTimeEditor = () => {
   const [isActive, setIsActive] = useState(false)
 
   const { colors } = useTheme()
+
+  const todaySets = useTodaySets()
 
   const { startedAt, setState, projectId } = useFocusLauncher()
   const value = shouldBePresent(startedAt)
@@ -59,7 +63,9 @@ export const StartTimeEditor = () => {
 
     const timestamp = interval.start + pxToMs(clientY - containerRect.top)
 
-    const startedAt = enforceRange(timestamp, interval.start, now)
+    const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
+
+    const startedAt = enforceRange(timestamp, min, now)
 
     setState((state) => ({
       ...state,
