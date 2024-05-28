@@ -27,6 +27,7 @@ import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
+import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 
 interface Props {
   children: ReactNode
@@ -189,7 +190,10 @@ export const FocusProvider = ({ children }: Props) => {
       }}
     >
       {currentSet ? (
-        <CurrentFocusGuard>{children}</CurrentFocusGuard>
+        <CurrentFocusGuard>
+          {children}
+          <FocusAutoStop />
+        </CurrentFocusGuard>
       ) : (
         <>{children}</>
       )}
