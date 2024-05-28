@@ -7,6 +7,7 @@ import { NavigationToInternalPage } from './NavigationToInternalPage'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { UserStateOnly } from '../../../user/state/UserStateOnly'
 import { NavigateToPlanDecoration } from '../../../plan/NavigateToPlanDecoration'
+import { FocusNavigationDecoration } from '@increaser/ui/focus/FocusNavigationDecoration'
 
 const Container = styled.div`
   min-width: 260px;
@@ -26,7 +27,14 @@ export const Sidebar = () => {
       <VStack alignItems="center" fullHeight justifyContent="space-between">
         <VStack fullWidth gap={20}>
           <VStack gap={4} fullWidth>
-            <NavigationToInternalPage path={AppPath.Home} />
+            <NavigationToInternalPage
+              path={AppPath.Home}
+              decoration={
+                <UserStateOnly>
+                  <FocusNavigationDecoration />
+                </UserStateOnly>
+              }
+            />
             <NavigationToInternalPage path={AppPath.Projects} />
             <NavigationToInternalPage path={AppPath.TimeTracking} />
             <NavigationToInternalPage path={AppPath.WorkBudget} />
