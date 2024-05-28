@@ -30,6 +30,9 @@ import {
 import { FocusTaskInput } from './FocusTaskInput'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { InputContainer } from '@lib/ui/inputs/InputContainer'
+import { LabelText } from '@lib/ui/inputs/LabelText'
+import { FocusStartTime } from './startTime/FocusStartTime'
 
 const Container = styled(Panel)`
   position: relative;
@@ -42,7 +45,7 @@ export const FocusLauncherForm = () => {
   const todaySets = useTodaySets()
   const { projectsRecord } = useProjects()
   const { start } = useFocus()
-  const { projectId, taskId } = useFocusLauncher()
+  const { projectId, taskId, startedAt } = useFocusLauncher()
 
   const lastInteractionWasAt = useRef<number>()
 
@@ -101,24 +104,28 @@ export const FocusLauncherForm = () => {
         <SectionTitle>Start a focus session</SectionTitle>
         <SelectFocusViewSelector />
       </HStack>
-      <Container style={{ position: 'relative' }} kind="secondary">
-        <VStack gap={32}>
+      <Container withSections kind="secondary">
+        <InputContainer style={{ gap: 12 }} as="div">
+          <LabelText>Select a {view}</LabelText>
           <RenderSelectFocusView
             projects={() => <FocusProjectInput />}
             tasks={() => <FocusTaskInput />}
           />
-          {project && (
-            <CurrentProjectProvider value={project}>
-              <VStack gap={4}>
-                <ProjectBudgetWidget />
-                <VStack style={{ minHeight: 20 }}>
-                  {project.goal && project.allocatedMinutesPerWeek > 0 && (
-                    <ProjectBudgetSummary />
-                  )}
-                </VStack>
+        </InputContainer>
+        {project && (
+          <CurrentProjectProvider value={project}>
+            <VStack gap={4}>
+              <ProjectBudgetWidget />
+              <VStack style={{ minHeight: 20 }}>
+                {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                  <ProjectBudgetSummary />
+                )}
               </VStack>
-            </CurrentProjectProvider>
-          )}
+            </VStack>
+          </CurrentProjectProvider>
+        )}
+        <FocusStartTime />
+        <VStack gap={32}>
           <FocusDurationInput
             value={focusDuration}
             onChange={(value) => {
@@ -132,6 +139,7 @@ export const FocusLauncherForm = () => {
                 projectId: shouldBePresent(projectId),
                 taskId: view === 'tasks' && taskId ? taskId : undefined,
                 duration: focusDuration,
+                startedAt: startedAt ?? Date.now(),
               })
             }}
             render={({ action }) => (

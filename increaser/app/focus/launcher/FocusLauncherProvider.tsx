@@ -11,6 +11,7 @@ export const FocusLauncherProvider = ({
   const [state, setState] = useState<FocusLauncherMutableState>({
     projectId: null,
     taskId: null,
+    startedAt: null,
   })
 
   return (

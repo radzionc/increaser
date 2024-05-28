@@ -5,7 +5,6 @@ import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import styled, { css, useTheme } from 'styled-components'
 import { Set } from '@increaser/entities/User'
 import { HSLA } from '@lib/ui/colors/HSLA'
-import { useTrackTime } from './state/TrackTimeContext'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { LinesFiller } from '@lib/ui/visual/LinesFiller'
 
@@ -38,36 +37,20 @@ const Container = styled.div<{ isInteractive: boolean; $color: HSLA }>`
 type SessionProps = ComponentWithValueProps<Set> &
   UIComponentProps & {
     index: number
+    onSelect?: () => void
   }
 
-export const Session = ({ value, index, ...rest }: SessionProps) => {
-  const { setState, currentSet } = useTrackTime()
+export const Session = ({ value, index, onSelect, ...rest }: SessionProps) => {
   const { projectsRecord } = useProjects()
 
   const theme = useTheme()
 
   const color = getProjectColor(projectsRecord, theme, value.projectId)
 
-  if (currentSet?.index === index) {
-    return null
-  }
-
   return (
     <Container
-      onClick={
-        !currentSet
-          ? () => {
-              setState((state) => ({
-                ...state,
-                currentSet: {
-                  ...value,
-                  index,
-                },
-              }))
-            }
-          : undefined
-      }
-      isInteractive={!currentSet}
+      onClick={onSelect}
+      isInteractive={!!onSelect}
       $color={color}
       {...rest}
     >

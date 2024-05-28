@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, createContext } from 'react'
 export type FocusLauncherMutableState = {
   projectId: string | null
   taskId: string | null
+  startedAt: number | null
 }
 
 type FocusLauncherState = FocusLauncherMutableState & {

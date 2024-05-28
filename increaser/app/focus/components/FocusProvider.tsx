@@ -63,11 +63,10 @@ export const FocusProvider = ({ children }: Props) => {
   const [currentSet, setCurrentSet] = useState<CurrentSet | undefined>()
 
   const start = useCallback(
-    ({ projectId, duration, taskId }: StartFocusParams) => {
+    ({ projectId, duration, taskId, startedAt }: StartFocusParams) => {
       analytics.trackEvent('Start focus session', {
         duration: focusDuration,
       })
-      const startedAt = Date.now()
       setCurrentSet({
         projectId,
         startedAt,
