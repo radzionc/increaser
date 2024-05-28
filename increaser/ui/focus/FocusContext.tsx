@@ -12,6 +12,7 @@ export interface StartFocusParams {
   projectId: string
   taskId?: string
   duration?: number
+  startedAt: number
 }
 
 export interface CurrentSet {

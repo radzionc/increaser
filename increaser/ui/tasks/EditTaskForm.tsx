@@ -16,6 +16,7 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useTasksManager } from './TasksManagerProvider'
 import { TaskDeadlineInput } from './TaskDeadlineInput'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
+import { useDeleteTaskMutation } from './api/useDeleteTaskMutation'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
@@ -31,6 +32,7 @@ export const EditTaskForm = () => {
   )
 
   const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: deleteTask } = useDeleteTaskMutation()
 
   const { setState } = useTasksManager()
 
@@ -106,11 +108,12 @@ export const EditTaskForm = () => {
       withSections
       kind="secondary"
       as="form"
+      style={{ width: '100%' }}
       onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
         handleSubmit(),
       )}
     >
-      <VStack>
+      <VStack gap={28}>
         <TaskNameInput
           placeholder="Task name"
           autoFocus
@@ -118,6 +121,13 @@ export const EditTaskForm = () => {
           value={name}
           onSubmit={handleSubmit}
         />
+        <HStack alignItems="center" gap={8}>
+          <TaskProjectSelector value={projectId} onChange={setProjectId} />
+          <TaskDeadlineInput
+            value={deadlineStatus}
+            onChange={setDeadlineStatus}
+          />
+        </HStack>
       </VStack>
 
       <HStack
@@ -127,13 +137,16 @@ export const EditTaskForm = () => {
         alignItems="center"
         gap={20}
       >
-        <HStack alignItems="center" gap={8}>
-          <TaskProjectSelector value={projectId} onChange={setProjectId} />
-          <TaskDeadlineInput
-            value={deadlineStatus}
-            onChange={setDeadlineStatus}
-          />
-        </HStack>
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deleteTask({ id: task.id })
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
         <HStack alignItems="center" gap={8}>
           <Button isDisabled={isDisabled} onClick={onFinish} kind="secondary">
             Cancel

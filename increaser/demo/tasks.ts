@@ -28,6 +28,12 @@ const tasks: TaskDescription[] = [
     minutes: 26,
   },
   {
+    name: 'Submit expenses',
+    projectId: DemoProject.Job,
+    isCompleted: false,
+    isOverdue: true,
+  },
+  {
     name: 'Launch the new marketing campaign',
     projectId: DemoProject.Business,
     isCompleted: true,

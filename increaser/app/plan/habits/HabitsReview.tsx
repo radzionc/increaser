@@ -1,7 +1,6 @@
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { SubmitYesterdayHabits } from '../../habits/components/SubmitYesterdayHabits'
 import { useHaveToSubmitYesterdayHabits } from '../../habits/hooks/useHaveToSubmitYesterdayHabits'
-import { PlanSection } from '../PlanSection'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddHabitsPrompt } from '../../habits/components/AddHabitsPrompt'
 import { useYesterdayHabits } from '../../habits/hooks/useYesterdayHabits'
@@ -14,11 +13,7 @@ export const HabitsReview = () => {
   const yesterdayHabits = useYesterdayHabits()
 
   return (
-    <PlanSection
-      isCompleted={!haveToSubmitYesterdayHabits}
-      title="Review yesterday habits"
-      index={1}
-    >
+    <>
       {haveToSubmitYesterdayHabits ? (
         <SubmitYesterdayHabits />
       ) : isEmpty(habits) ? (
@@ -28,6 +23,6 @@ export const HabitsReview = () => {
       ) : (
         <TodayHabitsGuidance />
       )}
-    </PlanSection>
+    </>
   )
 }

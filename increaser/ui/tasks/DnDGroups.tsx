@@ -25,7 +25,7 @@ type RenderItemParams<I> = {
   draggableProps?: Record<string, any>
   dragHandleProps?: Record<string, any> | null
   isDragging?: boolean
-  isDraggingEnabled?: boolean
+  isDraggingEnabled: boolean
 }
 
 export type DnDGroupsProps<K extends string, I> = {
@@ -122,8 +122,7 @@ export function DnDGroups<K extends string, I>({
                                     },
                                     dragHandleProps,
                                     isDraggingEnabled:
-                                      currentItemId === null ||
-                                      getItemId(item) !== currentItemId,
+                                      isDragging || !currentItemId,
                                     isDragging,
                                   })}
                                 </>
