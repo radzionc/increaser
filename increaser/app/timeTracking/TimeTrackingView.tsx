@@ -1,17 +1,10 @@
-import { getViewSetup } from '@lib/ui/view/getViewSetup'
+import { getTimeTrackingPath } from '@increaser/ui/navigation/AppPath'
 import { PageTitleNavigation } from '@lib/ui/navigation/PageTitleNavigation'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useRouter } from 'next/router'
 
 export const timeTrackingViews = ['report', 'track'] as const
 export type TimeTrackingView = (typeof timeTrackingViews)[number]
-
-export const {
-  ViewProvider: TimeTrackingViewProvider,
-  useView: useTimeTrackingView,
-  RenderView: RenderTimeTrackingView,
-} = getViewSetup<TimeTrackingView>({
-  defaultView: 'report',
-  name: 'TimeTracking',
-})
 
 const timeTrackingViewName: Record<TimeTrackingView, string> = {
   report: 'Statistics',
@@ -19,13 +12,15 @@ const timeTrackingViewName: Record<TimeTrackingView, string> = {
 }
 
 export const TimeTrackingViewSelector = () => {
-  const { view, setView } = useTimeTrackingView()
+  const { pathname, push } = useRouter()
+
+  const view = getLastItem(pathname.split('/')) as TimeTrackingView
 
   return (
     <PageTitleNavigation
       value={view}
       options={timeTrackingViews}
-      onChange={setView}
+      onChange={(view) => push(getTimeTrackingPath(view))}
       getOptionName={(option) => timeTrackingViewName[option]}
     />
   )
