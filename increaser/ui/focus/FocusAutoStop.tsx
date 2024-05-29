@@ -42,6 +42,7 @@ export const FocusAutoStop = () => {
     stop({
       setOverride: {
         end,
+        isEndEstimated: true,
       },
     })
   }, [focusDuration, setDayEndsAt, startedAt, stop])

@@ -12,6 +12,7 @@ import { TrackedTime } from './TrackedTime'
 
 export type Set = Interval & {
   projectId: string
+  isEndEstimated?: boolean | null
 }
 
 interface AppSumo {
