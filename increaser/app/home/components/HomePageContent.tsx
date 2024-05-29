@@ -9,6 +9,7 @@ import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusLauncher } from '../../focus/launcher'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
+import { EditAutoStoppedSetPrompt } from '@increaser/ui/focus/EditAutoStoppedSetPrompt'
 
 const Container = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ export const HomePageContent = () => {
         ) : (
           <>
             <BreakTimeline />
+            <EditAutoStoppedSetPrompt />
             <FocusLauncher />
           </>
         )}

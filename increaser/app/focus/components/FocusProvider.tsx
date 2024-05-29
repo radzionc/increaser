@@ -8,10 +8,8 @@ import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import { useRouter } from 'next/router'
 import { areNotificationsAllowed } from '@lib/ui/notifications/utils'
 import { useAddSetMutation } from '@increaser/app/sets/hooks/useAddSetMutation'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
 import {
   FocusDuration,
   defaultFocusDuration,
@@ -27,14 +25,13 @@ import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
+import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 
 interface Props {
   children: ReactNode
 }
 
 export const FocusProvider = ({ children }: Props) => {
-  const router = useRouter()
-
   const [focusDuration, setFocusDuration] =
     useState<FocusDuration>(defaultFocusDuration)
 
@@ -92,8 +89,7 @@ export const FocusProvider = ({ children }: Props) => {
 
   const cancel = useCallback(() => {
     setCurrentSet(undefined)
-    router.push(AppPath.Home)
-  }, [router])
+  }, [])
 
   const { tasks } = useAssertUserState()
 
@@ -122,18 +118,20 @@ export const FocusProvider = ({ children }: Props) => {
     (params: StopFocusParams = {}) => {
       if (!currentSet) return
 
-      router.push(AppPath.Home)
       const set = {
         start: currentSet.startedAt,
         end: Date.now(),
         projectId: currentSet.projectId,
         ...params?.setOverride,
       }
+      const { task } = currentSet
+
+      setCurrentSet(undefined)
+
       const blocks = getBlocks([...todaySets, set])
 
       addSet(set)
 
-      const { task } = currentSet
       if (task && task.id in tasks) {
         const { spentTime } = tasks[task.id]
         updateTaskMutation({
@@ -144,15 +142,13 @@ export const FocusProvider = ({ children }: Props) => {
         })
       }
 
-      setCurrentSet(undefined)
-
       setFocusDuration(getNextFocusDuration(blocks))
 
       analytics.trackEvent('Finish focus session', {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
       })
     },
-    [addSet, currentSet, router, tasks, todaySets, updateTaskMutation],
+    [addSet, currentSet, tasks, todaySets, updateTaskMutation],
   )
 
   const updateTask = useCallback((value: FocusTask | undefined) => {
@@ -189,7 +185,10 @@ export const FocusProvider = ({ children }: Props) => {
       }}
     >
       {currentSet ? (
-        <CurrentFocusGuard>{children}</CurrentFocusGuard>
+        <CurrentFocusGuard>
+          {children}
+          <FocusAutoStop />
+        </CurrentFocusGuard>
       ) : (
         <>{children}</>
       )}
