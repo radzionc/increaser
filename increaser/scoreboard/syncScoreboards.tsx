@@ -1,7 +1,7 @@
 import { User } from '@increaser/entities/User'
 import { tableName } from '@increaser/db/tableName'
 
-import { MIN_IN_HOUR, MS_IN_MIN } from '@lib/utils/time'
+import { MS_IN_MIN } from '@lib/utils/time'
 import {
   PerformanceScoreboard,
   UserPerformanceRecord,
@@ -67,7 +67,7 @@ export const syncScoreboards = async () => {
         const totalInMinutes = Math.round(total / MS_IN_MIN)
 
         const dailyAvgInMinutes = Math.round(totalInMinutes / days)
-        if (dailyAvgInMinutes < 2 * MIN_IN_HOUR) return
+        if (dailyAvgInMinutes < convertDuration(3, 'h', 'min')) return
 
         const blocks = getBlocks(scoreboardSets)
 

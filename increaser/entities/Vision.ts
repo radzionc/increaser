@@ -8,7 +8,7 @@ export type VisionAttributeStatus = (typeof visionAttributeStatuses)[number]
 
 export type VisionAttribute = {
   id: string
-  order: string
+  order: number
   name: string
   status: VisionAttributeStatus
 }

@@ -29,4 +29,5 @@ export enum AppPath {
   WorkBudget = '/work-budget',
   ProjectsBudget = '/projects-budget',
   Plan = '/plan',
+  Vision = '/vision',
 }
