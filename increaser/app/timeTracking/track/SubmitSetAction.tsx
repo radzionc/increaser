@@ -31,9 +31,15 @@ export const SubmitSetAction = () => {
       addSet(currentSet)
       analytics.trackEvent('Add session')
     } else {
+      const newValue = { ...currentSet }
+      const oldValue = sets[currentSet.index]
+      if (oldValue.isEndEstimated) {
+        newValue.isEndEstimated = null
+      }
+
       updateSet({
-        old: sets[currentSet.index],
-        new: currentSet,
+        old: oldValue,
+        new: newValue,
       })
       analytics.trackEvent('Update session')
     }
