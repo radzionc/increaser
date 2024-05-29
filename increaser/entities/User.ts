@@ -9,6 +9,7 @@ import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
 import { TrackedTime } from './TrackedTime'
+import { Vision } from './Vision'
 
 export type Set = Interval & {
   projectId: string
@@ -55,6 +56,8 @@ export type User = DayMoments &
 
     subscription?: Subscription
     lifeTimeDeal?: LifeTimeDeal
+
+    vision: Vision
   }
 
 export const userReadonlyFields = [
@@ -93,6 +96,7 @@ export const userDefaultFields: Pick<
   | 'weekendHours'
   | 'weeks'
   | 'months'
+  | 'vision'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -102,6 +106,7 @@ export const userDefaultFields: Pick<
   isAnonymous: true,
   weeks: {},
   months: {},
+  vision: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }
