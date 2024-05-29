@@ -4,6 +4,10 @@ export type TimeTrackingView = (typeof timeTrackingViews)[number]
 export const getTimeTrackingPath = (view: TimeTrackingView) =>
   `/${timeTrackingBasePath}/${view}`
 
+export const getEditSetPath = (hash: string) => {
+  return `${getTimeTrackingPath('track')}?edit=${hash}`
+}
+
 export enum AppPath {
   OAuth = '/oauth',
   Tasks = '/tasks',

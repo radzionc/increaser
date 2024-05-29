@@ -5,29 +5,30 @@ import { useCurrentWeekSets } from '../sets/hooks/useCurrentWeekSets'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 import { Button } from '@lib/ui/buttons/Button'
 import Link from 'next/link'
-import { AppPath } from '../navigation/AppPath'
+import { getEditSetPath } from '../navigation/AppPath'
+import { getSetHash } from '@increaser/app/sets/helpers/getSetHash'
 
 export const EditAutoStoppedSetPrompt = () => {
   const sets = useCurrentWeekSets()
   const { lastSyncedMonthEndedAt, lastSyncedWeekEndedAt } = useAssertUserState()
 
-  const shouldShowPrompt = useMemo(() => {
+  const setToEdit = useMemo(() => {
     const lastSet = getLastItem(sets)
-    if (!lastSet || !lastSet.isEndEstimated) return false
+    if (!lastSet || !lastSet.isEndEstimated) return null
 
     const minStartedAt = Math.max(
       lastSyncedMonthEndedAt ?? 0,
       lastSyncedWeekEndedAt ?? 0,
     )
 
-    return lastSet.start >= minStartedAt
+    return lastSet.start >= minStartedAt ? lastSet : null
   }, [lastSyncedMonthEndedAt, lastSyncedWeekEndedAt, sets])
 
-  if (shouldShowPrompt) {
+  if (setToEdit) {
     return (
       <ActionPrompt
         action={
-          <Link href={AppPath.TrackTime}>
+          <Link href={getEditSetPath(getSetHash(setToEdit))}>
             <Button as="div">Edit</Button>
           </Link>
         }
