@@ -22,7 +22,7 @@ import { recordMap } from '@lib/utils/record/recordMap'
 import { DnDGroups, ItemChangeParams } from '@increaser/ui/tasks/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { DragContainer } from '@increaser/ui/tasks/DragContainer'
+import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useTasksManager } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TaskDragHandle } from './TaskDragHandle'
 
@@ -114,7 +114,10 @@ export const TasksToDo = () => {
         const isEnabled = isDraggingEnabled && !activeTaskId
 
         return (
-          <DragContainer isActive={isDragging ?? false} {...draggableProps}>
+          <DraggableItemContainer
+            isActive={isDragging ?? false}
+            {...draggableProps}
+          >
             <TaskDragHandle
               isEnabled={isEnabled}
               isActive={isDragging ?? false}
@@ -123,7 +126,7 @@ export const TasksToDo = () => {
             <CurrentTaskProvider value={item} key={item.id}>
               <TaskItem />
             </CurrentTaskProvider>
-          </DragContainer>
+          </DraggableItemContainer>
         )
       }}
     />

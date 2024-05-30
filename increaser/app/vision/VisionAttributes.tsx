@@ -6,12 +6,12 @@ import { DnDList, ItemChangeParams } from './DnDList'
 import { useUpdateVisionAttributeMutation } from './api/useUpdateVisionAttributeMutation'
 import { useCallback } from 'react'
 import { useVisionManager } from './VisionManagerProvider'
-import { DragContainer } from '@increaser/ui/tasks/DragContainer'
 import { order } from '@lib/utils/array/order'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
+import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -58,7 +58,10 @@ export const VisionAttributes = () => {
         const isEnabled = isDraggingEnabled && !activeItemId
 
         return (
-          <DragContainer isActive={isDragging ?? false} {...draggableProps}>
+          <DraggableItemContainer
+            isActive={isDragging ?? false}
+            {...draggableProps}
+          >
             <DragHandle
               isEnabled={isEnabled}
               isActive={isDragging ?? false}
@@ -67,7 +70,7 @@ export const VisionAttributes = () => {
             <CurrentVisionAttributeProvider key={item.id} value={item}>
               <VisionAttributeItem />
             </CurrentVisionAttributeProvider>
-          </DragContainer>
+          </DraggableItemContainer>
         )
       }}
     />

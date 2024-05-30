@@ -4,7 +4,7 @@ import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
-export const DragContainer = styled(HStack)<ComponentWithActiveState>`
+export const DraggableItemContainer = styled(HStack)<ComponentWithActiveState>`
   width: 100%;
   gap: 4px;
   align-items: start;
