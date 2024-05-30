@@ -35,6 +35,7 @@ export const Sidebar = () => {
                 </UserStateOnly>
               }
             />
+            <NavigationToInternalPage path={AppPath.Vision} />
             <NavigationToInternalPage path={AppPath.Projects} />
             <NavigationToInternalPage path={AppPath.TimeTracking} />
             <NavigationToInternalPage path={AppPath.WorkBudget} />

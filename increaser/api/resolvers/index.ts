@@ -25,6 +25,9 @@ import { voteForFeature } from '../features/resolvers/voteForFeature'
 import { userProfile } from '../users/resolvers/userProfile'
 import { deleteSet } from '../sets/resolvers/deleteSet'
 import { updateSet } from '../sets/resolvers/updateSet'
+import { createVisionAttribute } from '../vision/resolvers/createVisionAttribute'
+import { updateVisionAttribute } from '../vision/resolvers/updateVisionAttribute'
+import { deleteVisionAttribute } from '../vision/resolvers/deleteVisionAttribute'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -53,4 +56,7 @@ export const implementation: ApiImplementation = {
   userProfile,
   deleteSet,
   updateSet,
+  createVisionAttribute,
+  updateVisionAttribute,
+  deleteVisionAttribute,
 }

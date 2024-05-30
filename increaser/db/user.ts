@@ -13,6 +13,7 @@ import { dbDocClient } from '@lib/dynamodb/client'
 import { updateItem } from '@lib/dynamodb/updateItem'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
+import { totalScan } from '@lib/dynamodb/totalScan'
 
 export const getUserItemParams = (id: string) => ({
   TableName: tableName.users,
@@ -99,4 +100,11 @@ export const putUser = (user: Omit<User, 'updatedAt'>) => {
   })
 
   return dbDocClient.send(command)
+}
+
+export const getAllUsers = async <T extends (keyof User)[]>(attributes: T) => {
+  return totalScan<Pick<User, T[number]>>({
+    TableName: tableName.users,
+    ...getPickParams(attributes),
+  })
 }

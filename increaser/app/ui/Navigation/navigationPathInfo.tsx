@@ -5,6 +5,7 @@ import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
 import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
+import { StarIcon } from '@lib/ui/icons/StarIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
@@ -50,5 +51,9 @@ export const navigationPathInfo = {
   [AppPath.Plan]: {
     name: 'Start the day',
     icon: <CoffeeIcon />,
+  },
+  [AppPath.Vision]: {
+    name: 'Life vision',
+    icon: <StarIcon />,
   },
 } as const

@@ -8,6 +8,7 @@ import { useFocusAudioMode } from '../state/useFocusAudioMode'
 import { attempt } from '@lib/utils/attempt'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
+import { Howl } from 'howler'
 
 export const FocusSoundsPlayer = () => {
   const { currentSet } = useFocus()
@@ -15,14 +16,12 @@ export const FocusSoundsPlayer = () => {
   const [focusAudioMode] = useFocusAudioMode()
   const [preference] = useFocusSoundsPreference()
 
-  const audioRecordRef = useRef<Partial<Record<FocusSound, HTMLAudioElement>>>(
-    {},
-  )
+  const audioRecordRef = useRef<Partial<Record<FocusSound, Howl>>>({})
 
   const stop = useCallback(() => {
-    Object.values(audioRecordRef.current).forEach((audio) =>
+    Object.values(audioRecordRef.current).forEach((howl) =>
       attempt(() => {
-        audio.pause()
+        howl.stop()
       }, undefined),
     )
   }, [])
@@ -37,21 +36,24 @@ export const FocusSoundsPlayer = () => {
         attempt(() => {
           const id = sound as FocusSound
           if (!audioRecord[id]) {
-            audioRecord[id] = new Audio(`audio/focus/${id}.mp3`)
+            audioRecord[id] = new Howl({
+              src: [`audio/focus/${id}.mp3`],
+              loop: true,
+              volume: volume,
+            })
           }
 
-          const audio = shouldBePresent(audioRecord[id])
-          audio.play()
-          audio.volume = volume
-          audio.loop = true
+          const howl = shouldBePresent(audioRecord[id])
+          howl.play()
+          howl.volume(volume)
         }, undefined),
       )
 
-      Object.entries(audioRecord).forEach(([sound, audio]) =>
+      Object.entries(audioRecord).forEach(([sound, howl]) =>
         attempt(() => {
           const id = sound as FocusSound
           if (!preference[id]) {
-            audio.pause()
+            howl.stop()
           }
         }, undefined),
       )

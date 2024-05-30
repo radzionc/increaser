@@ -13,6 +13,7 @@ import { Task } from '@increaser/entities/Task'
 import { ProductFeature } from '@increaser/entities/ProductFeature'
 import { ProductFeatureResponse } from './ProductFeatureResponse'
 import { Interval } from '@lib/utils/interval/Interval'
+import { VisionAttribute } from '@increaser/entities/Vision'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -121,6 +122,16 @@ export interface ApiInterface {
   features: ApiMethod<undefined, ProductFeatureResponse[]>
 
   userProfile: ApiMethod<{ id: string }, UserProfile | null>
+
+  createVisionAttribute: ApiMethod<VisionAttribute, VisionAttribute>
+  updateVisionAttribute: ApiMethod<
+    {
+      id: string
+      fields: Partial<Omit<VisionAttribute, 'id'>>
+    },
+    VisionAttribute
+  >
+  deleteVisionAttribute: ApiMethod<{ id: string }, undefined>
 }
 
 export type ApiMethodName = keyof ApiInterface
