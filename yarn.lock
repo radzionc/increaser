@@ -2885,9 +2885,10 @@ __metadata:
     "@tanstack/query-sync-storage-persister": "npm:^5.20.1"
     "@tanstack/react-query": "npm:^5.17.19"
     "@tanstack/react-query-persist-client": "npm:^5.20.1"
+    "@types/howler": "npm:^2"
     "@types/node": "npm:^20.10.5"
     "@types/react": "npm:^18.2.45"
-    "@types/react-beautiful-dnd": "npm:^13.1.4"
+    "@types/react-beautiful-dnd": "npm:^13.1.8"
     "@types/react-dom": "npm:^18.2.18"
     "@types/uuid": "npm:^9.0.2"
     "@typescript-eslint/eslint-plugin": "npm:^6.15.0"
@@ -2895,10 +2896,11 @@ __metadata:
     date-fns: "npm:^3.0.6"
     emoji-mart: "npm:^5.5.2"
     eslint: "npm:^8.56.0"
-    eslint-config-next: "npm:^13.4.10"
+    eslint-config-next: "npm:14.0.4"
+    howler: "npm:^2.2.4"
     next: "npm:^14.0.4"
     next-pwa: "npm:^5.6.0"
-    next-sitemap: "npm:^4.1.8"
+    next-sitemap: "npm:^4.2.3"
     pwa-asset-generator: "npm:^6.3.1"
     react: "npm:^18.2.0"
     react-beautiful-dnd: "npm:^13.1.1"
@@ -2908,7 +2910,7 @@ __metadata:
     react-player: "npm:^2.12.0"
     react-to-print: "npm:^2.14.12"
     react-use: "npm:^17.4.2"
-    styled-components: "npm:^6.1.3"
+    styled-components: "npm:^6.1.6"
     typescript: "npm:^5.3.3"
     uuid: "npm:^9.0.1"
     yup: "npm:^0.32.11"
@@ -3032,17 +3034,17 @@ __metadata:
   resolution: "@increaser/website@workspace:increaser/website"
   dependencies:
     "@amplitude/analytics-browser": "npm:^2.3.8"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^18"
-    "@types/react-dom": "npm:^18"
-    eslint: "npm:^8"
+    "@types/node": "npm:^20.10.5"
+    "@types/react": "npm:^18.2.45"
+    "@types/react-dom": "npm:^18.2.18"
+    eslint: "npm:^8.56.0"
     eslint-config-next: "npm:14.0.4"
-    next: "npm:14.0.4"
+    next: "npm:^14.0.4"
     next-sitemap: "npm:^4.2.3"
-    react: "npm:^18"
-    react-dom: "npm:^18"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
     styled-components: "npm:^6.1.6"
-    typescript: "npm:^5"
+    typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
 
@@ -3155,7 +3157,7 @@ __metadata:
     "@types/react-dom": "npm:^18.2.18"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-    styled-components: "npm:^6.1.3"
+    styled-components: "npm:^6.1.6"
   languageName: unknown
   linkType: soft
 
@@ -3190,7 +3192,7 @@ __metadata:
     react-hook-form: "npm:^7.49.2"
     react-spring: "npm:^9.7.3"
     react-use: "npm:^17.4.2"
-    styled-components: "npm:^6.1.3"
+    styled-components: "npm:^6.1.6"
   languageName: unknown
   linkType: soft
 
@@ -3239,21 +3241,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:13.5.6, @next/eslint-plugin-next@npm:^13.4.11":
-  version: 13.5.6
-  resolution: "@next/eslint-plugin-next@npm:13.5.6"
-  dependencies:
-    glob: "npm:7.1.7"
-  checksum: f9194688aed283e0b1703c77533faada2686c44322c03bc9a1f9af90d5e7ba023bbe3b417aa97236a88dabd1c1054a68b5a4f1c3f9869b51a7f014007afeb0c4
-  languageName: node
-  linkType: hard
-
 "@next/eslint-plugin-next@npm:14.0.4":
   version: 14.0.4
   resolution: "@next/eslint-plugin-next@npm:14.0.4"
   dependencies:
     glob: "npm:7.1.7"
   checksum: 17871e2a86b66584b9eff8796a76d0c59ae62626dd8d0ae1cb7ca6977decf6273eb935d67e204f575a9ba0574a1c289329e6bbcb70d866e4c7f2879597cbd55a
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:^13.4.11":
+  version: 13.5.6
+  resolution: "@next/eslint-plugin-next@npm:13.5.6"
+  dependencies:
+    glob: "npm:7.1.7"
+  checksum: f9194688aed283e0b1703c77533faada2686c44322c03bc9a1f9af90d5e7ba023bbe3b417aa97236a88dabd1c1054a68b5a4f1c3f9869b51a7f014007afeb0c4
   languageName: node
   linkType: hard
 
@@ -5040,6 +5042,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/howler@npm:^2":
+  version: 2.2.11
+  resolution: "@types/howler@npm:2.2.11"
+  checksum: 2875810bc1c076cfe7117adaecb88bdd12126b674329488d2b35d4906d15375f606c91cba8ee671fb09bbe2728fd5d396616e9b5144c7a8fca0bdd49e2d410e7
+  languageName: node
+  linkType: hard
+
 "@types/http-errors@npm:*":
   version: 2.0.4
   resolution: "@types/http-errors@npm:2.0.4"
@@ -5122,7 +5131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20, @types/node@npm:^20.10.5":
+"@types/node@npm:*, @types/node@npm:^20.10.5":
   version: 20.10.5
   resolution: "@types/node@npm:20.10.5"
   dependencies:
@@ -5159,7 +5168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-beautiful-dnd@npm:^13.1.4, @types/react-beautiful-dnd@npm:^13.1.8":
+"@types/react-beautiful-dnd@npm:^13.1.8":
   version: 13.1.8
   resolution: "@types/react-beautiful-dnd@npm:13.1.8"
   dependencies:
@@ -5168,7 +5177,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18, @types/react-dom@npm:^18.2.18":
+"@types/react-dom@npm:^18.2.18":
   version: 18.2.18
   resolution: "@types/react-dom@npm:18.2.18"
   dependencies:
@@ -5189,7 +5198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18, @types/react@npm:^18.2.45":
+"@types/react@npm:*, @types/react@npm:^18.2.45":
   version: 18.2.46
   resolution: "@types/react@npm:18.2.46"
   dependencies:
@@ -7623,29 +7632,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:^13.4.10":
-  version: 13.5.6
-  resolution: "eslint-config-next@npm:13.5.6"
-  dependencies:
-    "@next/eslint-plugin-next": "npm:13.5.6"
-    "@rushstack/eslint-patch": "npm:^1.3.3"
-    "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0"
-    eslint-import-resolver-node: "npm:^0.3.6"
-    eslint-import-resolver-typescript: "npm:^3.5.2"
-    eslint-plugin-import: "npm:^2.28.1"
-    eslint-plugin-jsx-a11y: "npm:^6.7.1"
-    eslint-plugin-react: "npm:^7.33.2"
-    eslint-plugin-react-hooks: "npm:^4.5.0 || 5.0.0-canary-7118f5dd7-20230705"
-  peerDependencies:
-    eslint: ^7.23.0 || ^8.0.0
-    typescript: ">=3.3.1"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 3399d3c18d48d01a2e662b9da699d36641d32b859d5bc7541f9fb063de49f5fbefb8cb2226d3906c268cc667bc536e353fce6c7334953961eb030c73547fa0f9
-  languageName: node
-  linkType: hard
-
 "eslint-import-resolver-node@npm:^0.3.6, eslint-import-resolver-node@npm:^0.3.9":
   version: 0.3.9
   resolution: "eslint-import-resolver-node@npm:0.3.9"
@@ -7801,7 +7787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8, eslint@npm:^8.56.0":
+"eslint@npm:^8.56.0":
   version: 8.56.0
   resolution: "eslint@npm:8.56.0"
   dependencies:
@@ -8849,6 +8835,13 @@ __metadata:
   dependencies:
     lru-cache: "npm:^10.0.1"
   checksum: 5f740ecf3c70838e27446ff433a9a9a583de8747f7b661390b373ad12ca47edb937136e79999a4f953d0953079025a11df173f1fd9f7d52b0277b2fb9433e1c7
+  languageName: node
+  linkType: hard
+
+"howler@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "howler@npm:2.2.4"
+  checksum: e4177f6581ede99fdec68c2dc16a01e74ed3e4f3b28d4804030246f74f15a50311bd3d4d332a6e968a296e6bae1d0a8c8703e8e22d98ef8f5a3299e545e2fe55
   languageName: node
   linkType: hard
 
@@ -10729,7 +10722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sitemap@npm:^4.1.8, next-sitemap@npm:^4.2.3":
+"next-sitemap@npm:^4.2.3":
   version: 4.2.3
   resolution: "next-sitemap@npm:4.2.3"
   dependencies:
@@ -10746,7 +10739,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:14.0.4, next@npm:^14.0.4":
+"next@npm:^14.0.4":
   version: 14.0.4
   resolution: "next@npm:14.0.4"
   dependencies:
@@ -11814,7 +11807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0, react-dom@npm:^18, react-dom@npm:^18.2.0":
+"react-dom@npm:18.2.0, react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -12007,7 +12000,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0, react@npm:^18, react@npm:^18.2.0":
+"react@npm:18.2.0, react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -13189,7 +13182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.1.3, styled-components@npm:^6.1.6":
+"styled-components@npm:^6.1.6":
   version: 6.1.6
   resolution: "styled-components@npm:6.1.6"
   dependencies:
@@ -13778,7 +13771,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5, typescript@npm:^5.3.3":
+"typescript@npm:^5.3.3":
   version: 5.3.3
   resolution: "typescript@npm:5.3.3"
   bin:
@@ -13788,7 +13781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
   resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
   bin:
