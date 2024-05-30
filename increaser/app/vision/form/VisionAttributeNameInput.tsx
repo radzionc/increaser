@@ -3,9 +3,11 @@ import { ComponentProps } from 'react'
 import styled from 'styled-components'
 
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { visionItemContentMinHeight } from '../config'
 
 const Container = styled(MultilineTextInput)`
-  line-height: 24px;
+  line-height: ${toSizeUnit(visionItemContentMinHeight)};
 `
 
 type VisionAttributeNameInputProps = InputProps<string> &
