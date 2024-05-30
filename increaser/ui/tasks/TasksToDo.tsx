@@ -22,11 +22,7 @@ import { recordMap } from '@lib/utils/record/recordMap'
 import { DnDGroups, ItemChangeParams } from '@increaser/ui/tasks/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import {
-  DragContainer,
-  OnHoverDragContainer,
-} from '@increaser/ui/tasks/DragContainer'
-import { useMedia } from 'react-use'
+import { DragContainer } from '@increaser/ui/tasks/DragContainer'
 import { useTasksManager } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TaskDragHandle } from './TaskDragHandle'
 
@@ -34,8 +30,6 @@ export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const { activeTaskId } = useTasksManager()
-
-  const isHoverEnabled = useMedia('(hover: hover) and (pointer: fine)')
 
   const groups = useMemo(() => {
     return {
@@ -117,34 +111,18 @@ export const TasksToDo = () => {
         isDragging,
         isDraggingEnabled,
       }) => {
-        const content = (
-          <CurrentTaskProvider value={item} key={item.id}>
-            <TaskItem />
-          </CurrentTaskProvider>
-        )
-
         const isEnabled = isDraggingEnabled && !activeTaskId
 
-        const dragHandle = (
-          <TaskDragHandle
-            isEnabled={isEnabled}
-            isActive={isDragging ?? false}
-            {...dragHandleProps}
-          />
-        )
-        if (isHoverEnabled) {
-          return (
-            <OnHoverDragContainer isDragging={isDragging} {...draggableProps}>
-              {dragHandle}
-              {content}
-            </OnHoverDragContainer>
-          )
-        }
-
         return (
-          <DragContainer {...draggableProps}>
-            {dragHandle}
-            {content}
+          <DragContainer isActive={isDragging ?? false} {...draggableProps}>
+            <TaskDragHandle
+              isEnabled={isEnabled}
+              isActive={isDragging ?? false}
+              {...dragHandleProps}
+            />
+            <CurrentTaskProvider value={item} key={item.id}>
+              <TaskItem />
+            </CurrentTaskProvider>
           </DragContainer>
         )
       }}

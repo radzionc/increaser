@@ -30,7 +30,7 @@ export const CreateVisionAttributeForm = ({
     if (isDisabled) return
 
     const orders = Object.values(vision).map((attribute) => attribute.order)
-    const order = orders.length ? Math.min(...orders) - 1 : 0
+    const order = orders.length ? Math.max(...orders) + 1 : 0
     mutate({
       id: getId(),
       name,

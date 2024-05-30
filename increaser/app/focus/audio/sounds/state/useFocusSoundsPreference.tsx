@@ -40,3 +40,11 @@ export const useFocusSoundsPreference = () => {
     },
   )
 }
+
+// export const focusSoundNameRecord: Record<FocusSound, string> = {
+//   rain: 'Rain',
+//   storm: 'Storm',
+//   snow: 'Walk in snow',
+//   waterfall: 'Waterfall',
+//   stream: 'Stream',
+// }

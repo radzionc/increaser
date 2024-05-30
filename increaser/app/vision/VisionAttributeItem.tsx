@@ -14,6 +14,7 @@ import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
 const Container = styled(Hoverable)`
   ${verticalPadding(visionItemVerticalPadding)};
   text-align: start;
+  width: 100%;
 `
 
 const Name = styled(Text)`
