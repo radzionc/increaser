@@ -9,6 +9,7 @@ import { Opener } from '@lib/ui/base/Opener'
 import { CreateVisionAttributeForm } from './form/CreateVisionAttributeForm'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { visionItemVerticalPadding } from './config'
 
 const IconContainer = styled(IconWrapper)`
   color: ${getColor('primary')};
@@ -16,7 +17,7 @@ const IconContainer = styled(IconWrapper)`
 
 const Container = styled(Hoverable)`
   color: ${getColor('textSupporting')};
-  ${verticalPadding(8)};
+  ${verticalPadding(visionItemVerticalPadding)};
   ${transition};
   &:hover {
     color: ${getColor('primary')};

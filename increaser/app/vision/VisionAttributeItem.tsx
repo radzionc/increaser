@@ -8,11 +8,11 @@ import { useVisionManager } from './VisionManagerProvider'
 import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { visionItemContentMinHeight } from './config'
+import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
 
 const Container = styled(Hoverable)`
-  ${verticalPadding(8)};
+  ${verticalPadding(visionItemVerticalPadding)};
   text-align: start;
 `
 
