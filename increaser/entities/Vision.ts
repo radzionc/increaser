@@ -6,6 +6,16 @@ export const visionAttributeStatuses = [
 ] as const
 export type VisionAttributeStatus = (typeof visionAttributeStatuses)[number]
 
+export const visionAttributeStatusNameRecord: Record<
+  VisionAttributeStatus,
+  string
+> = {
+  done: 'Done',
+  maintainance: 'Maintainance',
+  inProgress: 'In progress',
+  toDo: 'To do',
+}
+
 export type VisionAttribute = {
   id: string
   order: number

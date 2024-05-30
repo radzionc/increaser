@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -8,6 +8,8 @@ import { useCreateVisionAttributeMutation } from '../api/useCreateVisionAttribut
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { VisionAttributeStatus } from '@increaser/entities/Vision'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { VisionAttributeNameInput } from './VisionAttributeNameInput'
+import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -24,6 +26,20 @@ export const CreateVisionAttributeForm = ({
     }
   }, [name])
 
+  const onSubmit = useCallback(() => {
+    if (isDisabled) return
+
+    const orders = Object.values(vision).map((attribute) => attribute.order)
+    const order = orders.length ? Math.min(...orders) - 1 : 0
+    mutate({
+      id: getId(),
+      name,
+      status,
+      order,
+    })
+    onFinish()
+  }, [isDisabled, mutate, name, onFinish, status, vision])
+
   return (
     <Panel
       withSections
@@ -32,36 +48,24 @@ export const CreateVisionAttributeForm = ({
       {...getFormProps({
         onClose: onFinish,
         isDisabled,
-        onSubmit: () => {
-          const orders = Object.values(vision).map(
-            (attribute) => attribute.order,
-          )
-          const order = orders.length ? Math.min(...orders) - 1 : 0
-          mutate({
-            id: getId(),
-            name,
-            status,
-            order,
-          })
-        },
+        onSubmit,
       })}
     >
       <VStack>
-        <TaskNameInput
-          placeholder="Task name"
+        <VisionAttributeNameInput
           autoFocus
           onChange={setName}
           value={name}
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         />
       </VStack>
       <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <TaskProjectSelector value={projectId} onChange={setProjectId} />
+        <VisionAttributeStatusSelector value={status} onChange={setStatus} />
         <HStack alignItems="center" gap={8}>
           <Button onClick={onFinish} kind="secondary">
             Cancel
           </Button>
-          <Button isDisabled={isDisabled}>Add task</Button>
+          <Button isDisabled={isDisabled}>Submit</Button>
         </HStack>
       </HStack>
     </Panel>
