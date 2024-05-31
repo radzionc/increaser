@@ -12,6 +12,7 @@ import {
 import { Page } from '@lib/next-ui/Page'
 import { useRouter } from 'next/router'
 import { analytics } from '../analytics'
+import { WebsiteLayout } from '../layout/WebsiteLayout'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -42,7 +43,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={theme} onChange={setTheme}>
         <GlobalStyle fontFamily={openSans.style.fontFamily} />
-        {component}
+        <WebsiteLayout>{component}</WebsiteLayout>
       </ThemeProvider>
     </QueryClientProvider>
   )
