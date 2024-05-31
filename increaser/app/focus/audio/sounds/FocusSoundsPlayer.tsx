@@ -1,14 +1,12 @@
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useCallback, useEffect, useRef } from 'react'
-import {
-  FocusSound,
-  useFocusSoundsPreference,
-} from './state/useFocusSoundsPreference'
+import { useFocusSoundsPreference } from './state/useFocusSoundsPreference'
 import { useFocusAudioMode } from '../state/useFocusAudioMode'
 import { attempt } from '@lib/utils/attempt'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
 import { Howl } from 'howler'
+import { FocusSound } from '../focusSounds'
 
 export const FocusSoundsPlayer = () => {
   const { currentSet } = useFocus()
