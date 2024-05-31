@@ -13,6 +13,50 @@ type TaskDescription = {
   minutes?: number
 }
 
+// const tasks: TaskDescription[] = [
+//   {
+//     name: 'Prepare for the sprint planning',
+//     projectId: DemoProject.Job,
+//     isCompleted: true,
+//     minutes: 80,
+//   },
+//   {
+//     name: 'Review code for the new feature',
+//     projectId: DemoProject.Job,
+//     isCompleted: false,
+//     isOverdue: true,
+//     minutes: 26,
+//   },
+//   {
+//     name: 'Submit expenses',
+//     projectId: DemoProject.Job,
+//     isCompleted: false,
+//     isOverdue: true,
+//   },
+//   {
+//     name: 'Launch the new marketing campaign',
+//     projectId: DemoProject.Business,
+//     isCompleted: true,
+//     minutes: 48,
+//   },
+//   {
+//     name: 'Edit and upload the latest YouTube video',
+//     projectId: DemoProject.Content,
+//     isCompleted: false,
+//     minutes: 35,
+//   },
+//   {
+//     name: 'Plan the next content series',
+//     projectId: DemoProject.Content,
+//     isCompleted: false,
+//   },
+//   {
+//     name: 'Pay taxes',
+//     projectId: DemoProject.Planning,
+//     isCompleted: false,
+//   },
+// ]
+
 const tasks: TaskDescription[] = [
   {
     name: 'Prepare for the sprint planning',
@@ -23,15 +67,8 @@ const tasks: TaskDescription[] = [
   {
     name: 'Review code for the new feature',
     projectId: DemoProject.Job,
-    isCompleted: false,
-    isOverdue: true,
+    isCompleted: true,
     minutes: 26,
-  },
-  {
-    name: 'Submit expenses',
-    projectId: DemoProject.Job,
-    isCompleted: false,
-    isOverdue: true,
   },
   {
     name: 'Launch the new marketing campaign',
