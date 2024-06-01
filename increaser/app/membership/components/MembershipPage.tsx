@@ -5,7 +5,6 @@ import { UserStateOnly } from '../../user/state/UserStateOnly'
 import { MembershipOverview } from './MembershipOverview'
 import { MembershipPageTitle } from './MembershipPageTitle'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
-import { Panel } from '@lib/ui/panel/Panel'
 import { MembershipPersuasion } from './MembershipPersuasion'
 
 const title = 'Membership'
@@ -23,11 +22,13 @@ export const MembershipPage = () => {
           }
         />
         <UserStateOnly>
-          <UniformColumnGrid gap={40} minChildrenWidth={320}>
+          <UniformColumnGrid
+            style={{ alignItems: 'start' }}
+            gap={40}
+            minChildrenWidth={320}
+          >
             <MembershipOverview />
-            <Panel>
-              <MembershipPersuasion />
-            </Panel>
+            <MembershipPersuasion />
           </UniformColumnGrid>
         </UserStateOnly>
       </TasksViewProvider>

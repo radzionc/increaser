@@ -9,14 +9,12 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Tag } from '@lib/ui/tags/Tag'
 import { getAnnualSubscriptionSavings } from '@increaser/entities-utils/subscription/getAnnualSubscriptionSavings'
 import { toPercents } from '@lib/utils/toPercents'
-import { getColor } from '@lib/ui/theme/getters'
 
 const Header = styled(HStack)`
   padding: 0;
   position: relative;
   align-items: center;
   width: 100%;
-  border-bottom: 2px solid ${getColor('mist')};
 
   > * {
     padding: ${toSizeUnit(panelDefaultPadding)};

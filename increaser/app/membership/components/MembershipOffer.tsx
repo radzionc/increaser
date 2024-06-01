@@ -1,12 +1,19 @@
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { SubscriptionCheckout } from '@increaser/app/membership/subscription/components/SubscriptionCheckout'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { SubscriptionBillingCycleSelector } from './SubscriptionBillingCycleSelector'
 import { Panel } from '@lib/ui/panel/Panel'
 import styled from 'styled-components'
+import { getColor } from '@lib/ui/theme/getters'
+import { SubscriptionBillingCycleSelector } from '@increaser/ui/subscription/SubscriptionBillingCycleSelector'
 
 const Container = styled(Panel)`
   gap: 0px;
+
+  > * {
+    &:first-child {
+      border-bottom: 2px solid ${getColor('mist')};
+    }
+  }
 `
 
 export const MembershipOffer = () => {
