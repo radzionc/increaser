@@ -30,4 +30,5 @@ export enum AppPath {
   ProjectsBudget = '/projects-budget',
   Plan = '/plan',
   Vision = '/vision',
+  Membership = '/membership',
 }

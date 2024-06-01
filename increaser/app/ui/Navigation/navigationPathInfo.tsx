@@ -6,6 +6,7 @@ import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
 import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
 import { StarIcon } from '@lib/ui/icons/StarIcon'
+import { CrownIcon } from '@lib/ui/icons/CrownIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
@@ -55,5 +56,9 @@ export const navigationPathInfo = {
   [AppPath.Vision]: {
     name: 'Life vision',
     icon: <StarIcon />,
+  },
+  [AppPath.Membership]: {
+    name: 'Membership',
+    icon: <CrownIcon />,
   },
 } as const
