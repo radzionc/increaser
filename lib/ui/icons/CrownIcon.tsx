@@ -13,8 +13,8 @@ export const CrownIcon = () => (
     <path
       d="M5 17.5H19"
       stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
   </svg>
 )

@@ -1,16 +1,16 @@
-import { FinishableComponentProps } from '@lib/ui/props'
 import { useSubscriptionQuery } from '../hooks/useSubscriptionQuery'
 import { useOnQuerySuccess } from '@lib/ui/query/hooks/useOnQuerySuccess'
 import { BlockingQuery } from '@lib/ui/query/components/BlockingQuery'
 import { supportEmail } from '@increaser/config'
 
-interface SyncSubscriptionProps extends FinishableComponentProps {
+interface SyncSubscriptionProps {
   subscriptionId: string
+  onFinish?: () => void
 }
 
 export const SyncSubscription = ({
   subscriptionId,
-  onFinish,
+  onFinish = () => {},
 }: SyncSubscriptionProps) => {
   const query = useSubscriptionQuery(subscriptionId)
   useOnQuerySuccess(query, onFinish)
