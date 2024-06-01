@@ -8,6 +8,8 @@ import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { UserStateOnly } from '../../../user/state/UserStateOnly'
 import { NavigateToPlanDecoration } from '../../../plan/NavigateToPlanDecoration'
 import { FocusNavigationDecoration } from '@increaser/ui/focus/FocusNavigationDecoration'
+import { getColor } from '@lib/ui/theme/getters'
+import { MembershipNavigationDecoration } from '../../../membership/components/MembershipNavigationDecoration'
 
 const Container = styled.div`
   min-width: 260px;
@@ -15,6 +17,11 @@ const Container = styled.div`
   background: ${({ theme }) => theme.colors.foreground.toCssValue()};
   padding: 40px 8px 20px 8px;
   overflow: auto;
+`
+
+const Footer = styled(VStack)`
+  padding-top: 4px;
+  border-top: 1px solid ${getColor('mist')};
 `
 
 export const Sidebar = () => {
@@ -56,9 +63,17 @@ export const Sidebar = () => {
             {isInstallPromptEnabled && <InstallPrompt />}
           </VStack>
         </VStack>
-        <VStack gap={20} fullWidth>
+        <Footer gap={4} fullWidth>
+          <NavigationToInternalPage
+            path={AppPath.Membership}
+            decoration={
+              <UserStateOnly>
+                <MembershipNavigationDecoration />
+              </UserStateOnly>
+            }
+          />
           <NavigationToInternalPage path={AppPath.Account} />
-        </VStack>
+        </Footer>
       </VStack>
     </Container>
   )

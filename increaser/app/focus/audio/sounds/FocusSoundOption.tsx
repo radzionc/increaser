@@ -1,8 +1,5 @@
 import styled from 'styled-components'
-import {
-  FocusSound,
-  useFocusSoundsPreference,
-} from './state/useFocusSoundsPreference'
+import { useFocusSoundsPreference } from './state/useFocusSoundsPreference'
 import { transition } from '@lib/ui/css/transition'
 
 import { Slider } from '@lib/ui/inputs/Slider'
@@ -17,6 +14,8 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { focusSoundIcon } from './focusSoundIcon'
 import { centerContent } from '@lib/ui/css/centerContent'
+import { FocusSound, focusSoundNameRecord } from '../focusSounds'
+import { Text } from '@lib/ui/text'
 
 const Wrapper = styled(ActionInsideInteractiveElement)`
   ${centerContent};
@@ -40,6 +39,10 @@ const Container = styled(UnstyledButton)<{ isActive: boolean }>`
 const SliderContainer = styled.div`
   width: 100%;
   ${horizontalPadding(8)}
+`
+
+const BottomSpacer = styled(Spacer)`
+  ${centerContent};
 `
 
 export const FocusSoundOption = ({
@@ -67,9 +70,15 @@ export const FocusSoundOption = ({
           }
         >
           <VStack alignItems="center" gap={8}>
-            <Spacer {...actionSize} />
+            <Spacer {...actionSize}></Spacer>
             <IconWrapper>{focusSoundIcon[value]}</IconWrapper>
-            <Spacer {...actionSize} />
+            <BottomSpacer {...actionSize}>
+              {!isActive && (
+                <Text color="supporting" size={12}>
+                  {focusSoundNameRecord[value]}
+                </Text>
+              )}
+            </BottomSpacer>
           </VStack>
         </Container>
       )}

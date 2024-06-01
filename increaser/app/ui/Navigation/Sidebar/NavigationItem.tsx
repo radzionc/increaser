@@ -5,6 +5,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { transition } from '@lib/ui/css/transition'
 import { interactive } from '@lib/ui/css/interactive'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { ComponentWithActiveState } from '@lib/ui/props'
 
 export type NavigationItemProps = {
   icon: React.ReactNode
@@ -13,9 +14,9 @@ export type NavigationItemProps = {
   decoration?: React.ReactNode
 }
 
-export const Container = styled.div<{ isSelected?: boolean }>`
-  padding: 0 16px;
-  height: 48px;
+export const Container = styled.div<ComponentWithActiveState>`
+  padding: 0 12px;
+  height: 44px;
   ${interactive};
   display: flex;
   align-items: center;
@@ -34,11 +35,11 @@ export const Container = styled.div<{ isSelected?: boolean }>`
     background: ${getColor('mistExtra')};
   }
 
-  ${({ isSelected, theme }) =>
-    isSelected &&
+  ${({ isActive }) =>
+    isActive &&
     css`
-      background: ${theme.colors.mist.toCssValue()};
-      color: ${theme.colors.text.toCssValue()};
+      background: ${getColor('mist')};
+      color: ${getColor('contrast')};
     `}
 `
 
@@ -52,12 +53,12 @@ export const IconWrapper = styled.div`
 export const NavigationItem = ({
   icon,
   name,
-  isActive,
+  isActive = false,
   decoration = null,
 }: NavigationItemProps) => {
   return (
-    <Container isSelected={isActive}>
-      <Text size={18} as="div">
+    <Container isActive={isActive}>
+      <Text as="div">
         <HStack gap={8}>
           <IconWrapper>{icon}</IconWrapper>
           <div>{name}</div>

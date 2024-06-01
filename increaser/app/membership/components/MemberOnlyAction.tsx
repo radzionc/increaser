@@ -1,7 +1,7 @@
 import { useIsLikeMember } from '@increaser/app/membership/hooks/useIsLikeMember'
-import { SubscriptionPrompt } from '@increaser/app/membership/subscription/components/SubscriptionPrompt'
-import { useState } from 'react'
 import { analytics } from '../../analytics'
+import { useRouter } from 'next/router'
+import { AppPath } from '@increaser/ui/navigation/AppPath'
 
 type Action = () => void
 
@@ -17,7 +17,7 @@ interface MemberOnlyActionProps {
 export const MemberOnlyAction = ({ action, render }: MemberOnlyActionProps) => {
   const isLikeMember = useIsLikeMember()
 
-  const [isOpen, setIsOpen] = useState(false)
+  const { push } = useRouter()
 
   if (isLikeMember) {
     return render({ action })
@@ -27,11 +27,10 @@ export const MemberOnlyAction = ({ action, render }: MemberOnlyActionProps) => {
     <>
       {render({
         action: () => {
-          setIsOpen(true)
+          push(AppPath.Membership)
           analytics.trackEvent('Action requires membership')
         },
       })}
-      {isOpen && <SubscriptionPrompt onClose={() => setIsOpen(false)} />}
     </>
   )
 }

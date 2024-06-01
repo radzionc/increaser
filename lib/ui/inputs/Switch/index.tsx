@@ -1,4 +1,4 @@
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 
 import { HStack } from '../../layout/Stack'
 import { Text } from '../../text'
@@ -8,7 +8,7 @@ import { transition } from '../../css/transition'
 import { centerContent } from '../../css/centerContent'
 import { interactive } from '../../css/interactive'
 import { toSizeUnit } from '../../css/toSizeUnit'
-import { getColor } from '../../theme/getters'
+import { getColor, matchColor } from '../../theme/getters'
 import { UIComponentProps, InputProps } from '../../props'
 import { match } from '@lib/utils/match'
 
@@ -52,9 +52,13 @@ const Wrapper = styled(HStack)`
   }
 `
 
-const Container = styled.div<{ size: SwitchSize }>`
+const Container = styled.div<{ isActive: boolean; size: SwitchSize }>`
   width: ${({ size }) => toSizeUnit(getSwitchWidth(size))};
   height: ${({ size }) => toSizeUnit(switchHeight[size])};
+  background: ${matchColor('isActive', {
+    true: 'primary',
+    false: 'textShy',
+  })};
 
   display: flex;
   align-items: center;
@@ -71,7 +75,6 @@ export const Switch = ({
   size = 'm',
   ...rest
 }: SwitchProps) => {
-  const { colors } = useTheme()
   return (
     <Wrapper
       onClick={() => onChange(!value)}
@@ -81,12 +84,7 @@ export const Switch = ({
       id={label}
       {...rest}
     >
-      <Container
-        size={size}
-        style={{
-          background: (value ? colors.primary : colors.textShy).toCssValue(),
-        }}
-      >
+      <Container size={size} isActive={value}>
         <Control
           size={size}
           style={{

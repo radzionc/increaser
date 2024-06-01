@@ -1,12 +1,18 @@
 import { freeTrialDays } from '@increaser/config'
-import { VStack } from '@lib/ui/layout/Stack'
 import { Panel } from '@lib/ui/panel/Panel'
-import { SubscriptionOffer } from '@increaser/ui/subscription/SubscriptionOffer'
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
+import { SubscriptionBillingCycleSelector } from '@increaser/ui/subscription/SubscriptionBillingCycleSelector'
 import { PrimaryCallToAction } from './PrimaryCallToAction'
+import styled from 'styled-components'
+import { SubscriptionFeatures } from '@increaser/ui/subscription/SubscriptionFeatures'
+
+const Container = styled(Panel)`
+  max-width: 400px;
+  width: 100%;
+`
 
 export const PricingSlice = () => {
   return (
@@ -18,14 +24,11 @@ export const PricingSlice = () => {
           no card required`}
         />
         <SubscriptionBillingCycleProvider>
-          <Panel>
-            <VStack gap={20}>
-              <SubscriptionOffer />
-              <PrimaryCallToAction size="l">
-                Start free trial
-              </PrimaryCallToAction>
-            </VStack>
-          </Panel>
+          <Container withSections kind="secondary">
+            <SubscriptionBillingCycleSelector />
+            <SubscriptionFeatures />
+            <PrimaryCallToAction size="l">Start free trial</PrimaryCallToAction>
+          </Container>
         </SubscriptionBillingCycleProvider>
       </WebsiteSliceContent>
     </WebsiteSlice>

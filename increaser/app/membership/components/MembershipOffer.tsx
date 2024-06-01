@@ -1,11 +1,20 @@
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
-import { Opener } from '@lib/ui/base/Opener'
-import { Panel } from '@lib/ui/panel/Panel'
-import { VStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
 import { SubscriptionCheckout } from '@increaser/app/membership/subscription/components/SubscriptionCheckout'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { SubscriptionOffer } from '@increaser/ui/subscription/SubscriptionOffer'
+import { Panel } from '@lib/ui/panel/Panel'
+import styled from 'styled-components'
+import { getColor } from '@lib/ui/theme/getters'
+import { SubscriptionBillingCycleSelector } from '@increaser/ui/subscription/SubscriptionBillingCycleSelector'
+
+const Container = styled(Panel)`
+  gap: 0px;
+
+  > * {
+    &:first-child {
+      border-bottom: 2px solid ${getColor('mist')};
+    }
+  }
+`
 
 export const MembershipOffer = () => {
   const { lifeTimeDeal, subscription } = useAssertUserState()
@@ -15,27 +24,11 @@ export const MembershipOffer = () => {
   }
 
   return (
-    <Panel>
-      <SubscriptionBillingCycleProvider>
-        <VStack gap={28}>
-          <SubscriptionOffer />
-          <Opener
-            renderContent={({ onClose }) => (
-              <SubscriptionCheckout onClose={onClose} />
-            )}
-            renderOpener={({ onOpen }) => (
-              <Button
-                style={{ width: '100%' }}
-                onClick={onOpen}
-                kind="reversed"
-                size="l"
-              >
-                Purchase
-              </Button>
-            )}
-          />
-        </VStack>
-      </SubscriptionBillingCycleProvider>
-    </Panel>
+    <SubscriptionBillingCycleProvider>
+      <Container kind="secondary" withSections>
+        <SubscriptionBillingCycleSelector />
+        <SubscriptionCheckout />
+      </Container>
+    </SubscriptionBillingCycleProvider>
   )
 }

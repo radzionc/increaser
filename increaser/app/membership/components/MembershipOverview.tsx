@@ -8,7 +8,7 @@ import { MembershipOffer } from './MembershipOffer'
 
 export const MembershipOverview = () => {
   return (
-    <VStack alignItems="start" gap={20}>
+    <VStack fullWidth gap={20}>
       <ManageSubscription />
       <ManageLifeTimeDeal />
       <MembersTelegram />

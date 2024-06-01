@@ -19,8 +19,15 @@ import { KeyboardIcon } from '@lib/ui/icons/KeyboardIcon'
 import { WaterfallIcon } from '@lib/ui/icons/WaterfallIcon'
 import { RoadIcon } from '@lib/ui/icons/RoadIcon'
 import { RainyWindowIcon } from '@lib/ui/icons/RainyWindowIcon'
+import { HorseIcon } from '@lib/ui/icons/HorseIcon'
+import { SnorkelIcon } from '@lib/ui/icons/SnorkelIcon'
+import { FireworksIcon } from '@lib/ui/icons/FireworksIcon'
+import { PapersStackIcon } from '@lib/ui/icons/PapersStackIcon'
+import { BubblesIcon } from '@lib/ui/icons/BubblesIcon'
+
 import { ReactNode } from 'react'
-import { FocusSound } from './state/useFocusSoundsPreference'
+import { FocusSound } from '../focusSounds'
+import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 
 export const focusSoundIcon: Record<FocusSound, ReactNode> = {
   rain: <RainIcon />,
@@ -44,4 +51,10 @@ export const focusSoundIcon: Record<FocusSound, ReactNode> = {
   waterfall: <WaterfallIcon />,
   window: <RainyWindowIcon />,
   road: <RoadIcon />,
+  horse: <HorseIcon />,
+  fireworks: <FireworksIcon />,
+  underwater: <SnorkelIcon />,
+  paper: <PapersStackIcon />,
+  clock: <ClockIcon />,
+  bubbles: <BubblesIcon />,
 }

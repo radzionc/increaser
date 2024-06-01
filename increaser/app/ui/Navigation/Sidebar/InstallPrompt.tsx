@@ -42,6 +42,7 @@ export const InstallPrompt = () => {
   return (
     <Wrapper>
       <Container
+        isActive={false}
         onClick={() => {
           installPromptEvent?.prompt()
           analytics.trackEvent('Attempt Install')
