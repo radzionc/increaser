@@ -19,7 +19,7 @@ import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMuta
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { DnDGroups, ItemChangeParams } from '@increaser/ui/tasks/DnDGroups'
+import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'

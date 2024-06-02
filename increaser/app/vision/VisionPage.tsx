@@ -9,6 +9,8 @@ import styled from 'styled-components'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { ExpandableSection } from '@lib/ui/layout/ExpandableSection'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { AddGoal } from '@increaser/ui/goals/AddGoal'
+import { Goals } from '@increaser/ui/goals/Goals'
 
 const title = 'Achieve your dreams'
 
@@ -55,8 +57,8 @@ export const VisionPage = () => {
               <UserStateOnly>
                 <VStack>
                   <ActiveItemIdProvider initialValue={null}>
-                    <VisionAttributes />
-                    <AddVisionAttribute />
+                    <Goals />
+                    <AddGoal />
                   </ActiveItemIdProvider>
                 </VStack>
               </UserStateOnly>
