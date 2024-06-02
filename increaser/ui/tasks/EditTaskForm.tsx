@@ -13,10 +13,10 @@ import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineSta
 import { groupItems } from '@lib/utils/array/groupItems'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { useTasksManager } from './TasksManagerProvider'
 import { TaskDeadlineInput } from './TaskDeadlineInput'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { useDeleteTaskMutation } from './api/useDeleteTaskMutation'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
@@ -34,14 +34,11 @@ export const EditTaskForm = () => {
   const { mutate: updateTask } = useUpdateTaskMutation()
   const { mutate: deleteTask } = useDeleteTaskMutation()
 
-  const { setState } = useTasksManager()
+  const [, setActiveItemId] = useActiveItemId()
 
   const onFinish = useCallback(() => {
-    setState((state) => ({
-      ...state,
-      activeTaskId: null,
-    }))
-  }, [setState])
+    setActiveItemId(null)
+  }, [setActiveItemId])
 
   useEffect(() => {
     return () => {

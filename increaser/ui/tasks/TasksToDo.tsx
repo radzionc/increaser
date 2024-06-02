@@ -23,13 +23,13 @@ import { DnDGroups, ItemChangeParams } from '@increaser/ui/tasks/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
-import { useTasksManager } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TaskDragHandle } from './TaskDragHandle'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
-  const { activeTaskId } = useTasksManager()
+  const [activeTaskId] = useActiveItemId()
 
   const groups = useMemo(() => {
     return {

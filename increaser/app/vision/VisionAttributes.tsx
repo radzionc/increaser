@@ -5,13 +5,13 @@ import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider
 import { DnDList, ItemChangeParams } from './DnDList'
 import { useUpdateVisionAttributeMutation } from './api/useUpdateVisionAttributeMutation'
 import { useCallback } from 'react'
-import { useVisionManager } from './VisionManagerProvider'
 import { order } from '@lib/utils/array/order'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -23,7 +23,7 @@ export const VisionAttributes = () => {
   const { vision } = useAssertUserState()
   const items = order(Object.values(vision), (item) => item.order, 'asc')
 
-  const { activeItemId } = useVisionManager()
+  const [activeItemId] = useActiveItemId()
 
   const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
 

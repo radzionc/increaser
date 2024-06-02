@@ -4,12 +4,12 @@ import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { useVisionManager } from './VisionManagerProvider'
 import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled(Hoverable)`
   ${verticalPadding(visionItemVerticalPadding)};
@@ -28,7 +28,7 @@ const Name = styled(Text)`
 export const VisionAttributeItem = () => {
   const { name, status, id } = useCurrentVisionAttribute()
 
-  const { activeItemId, setState } = useVisionManager()
+  const [activeItemId, setActiveItemId] = useActiveItemId()
 
   if (activeItemId === id) {
     return <EditVisionAttributeForm />
@@ -37,10 +37,7 @@ export const VisionAttributeItem = () => {
   return (
     <Container
       onClick={() => {
-        setState((state) => ({
-          ...state,
-          activeItemId: id,
-        }))
+        setActiveItemId(id)
       }}
       verticalOffset={0}
     >

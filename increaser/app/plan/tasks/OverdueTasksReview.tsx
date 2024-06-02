@@ -1,10 +1,10 @@
 import { useHasOverdueTasks } from '@increaser/ui/tasks/hooks/useHasOverdueTasks'
-import { TasksManagerProvider } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
 import { Panel } from '@lib/ui/panel/Panel'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { Text } from '@lib/ui/text'
 import { OverdueTasks } from './OverdueTasks'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const OverdueTasksReview = () => {
   const hasOverdueTasks = useHasOverdueTasks()
@@ -13,9 +13,9 @@ export const OverdueTasksReview = () => {
     <>
       {hasOverdueTasks ? (
         <TasksContainer>
-          <TasksManagerProvider>
+          <ActiveItemIdProvider initialValue={null}>
             <OverdueTasks />
-          </TasksManagerProvider>
+          </ActiveItemIdProvider>
         </TasksContainer>
       ) : (
         <Panel>

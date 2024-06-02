@@ -11,9 +11,9 @@ import {
 } from '@increaser/entities/Vision'
 import { useUpdateVisionAttributeMutation } from '../api/useUpdateVisionAttributeMutation'
 import { useDeleteVisionAttributeMutation } from '../api/useDeleteVisionAttributeMutation'
-import { useVisionManager } from '../VisionManagerProvider'
 import { VisionAttributeNameInput } from './VisionAttributeNameInput'
 import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -25,14 +25,11 @@ export const EditVisionAttributeForm = () => {
   const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
   const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
 
-  const { setState } = useVisionManager()
+  const [, setActiveItemId] = useActiveItemId()
 
   const onFinish = useCallback(() => {
-    setState((state) => ({
-      ...state,
-      activeItemId: null,
-    }))
-  }, [setState])
+    setActiveItemId(null)
+  }, [setActiveItemId])
 
   useEffect(() => {
     return () => {

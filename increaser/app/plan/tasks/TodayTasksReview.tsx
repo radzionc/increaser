@@ -1,8 +1,8 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { TasksManagerProvider } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TasksToDo } from '@increaser/ui/tasks/TasksToDo'
 import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const TodayTasksReview = () => {
   return (
@@ -15,9 +15,9 @@ export const TodayTasksReview = () => {
         disciplined and make choices based on what truly matters.
       </ShyInfoBlock>
       <TasksContainer>
-        <TasksManagerProvider>
+        <ActiveItemIdProvider initialValue={null}>
           <TasksToDo />
-        </TasksManagerProvider>
+        </ActiveItemIdProvider>
       </TasksContainer>
     </VStack>
   )
