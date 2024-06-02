@@ -9,6 +9,8 @@ import { demoConfig } from './config'
 import { organizeMonths } from '@increaser/data-services/sets/organizeMonths'
 import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
 import { otherProject } from '@increaser/entities/Project'
+import { getDemoVision } from './vision'
+import { getDemoGoals } from './goals'
 
 export const getDemoUser = (): User => {
   const user = {
@@ -25,6 +27,8 @@ export const getDemoUser = (): User => {
     projects: [otherProject, ...getDemoProjects()],
     sets: getDemoSets(),
     tasks: getDemoTasks(),
+    vision: getDemoVision(),
+    goals: getDemoGoals(),
   }
 
   const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
