@@ -10,6 +10,7 @@ import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
 import { TrackedTime } from './TrackedTime'
 import { Vision } from './Vision'
+import { Goals } from './Goal'
 
 export type Set = Interval & {
   projectId: string
@@ -58,6 +59,7 @@ export type User = DayMoments &
     lifeTimeDeal?: LifeTimeDeal
 
     vision: Vision
+    goals: Goals
   }
 
 export const userReadonlyFields = [
@@ -97,6 +99,7 @@ export const userDefaultFields: Pick<
   | 'weeks'
   | 'months'
   | 'vision'
+  | 'goals'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -107,6 +110,7 @@ export const userDefaultFields: Pick<
   weeks: {},
   months: {},
   vision: {},
+  goals: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }

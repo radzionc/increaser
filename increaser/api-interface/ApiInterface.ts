@@ -14,6 +14,7 @@ import { ProductFeature } from '@increaser/entities/ProductFeature'
 import { ProductFeatureResponse } from './ProductFeatureResponse'
 import { Interval } from '@lib/utils/interval/Interval'
 import { VisionAttribute } from '@increaser/entities/Vision'
+import { Goal } from '@increaser/entities/Goal'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -132,6 +133,16 @@ export interface ApiInterface {
     VisionAttribute
   >
   deleteVisionAttribute: ApiMethod<{ id: string }, undefined>
+
+  createGoal: ApiMethod<Goal, Goal>
+  updateGoal: ApiMethod<
+    {
+      id: string
+      fields: Partial<Omit<Goal, 'id'>>
+    },
+    Goal
+  >
+  deleteGoal: ApiMethod<{ id: string }, undefined>
 }
 
 export type ApiMethodName = keyof ApiInterface

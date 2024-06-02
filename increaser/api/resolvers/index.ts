@@ -28,6 +28,9 @@ import { updateSet } from '../sets/resolvers/updateSet'
 import { createVisionAttribute } from '../vision/resolvers/createVisionAttribute'
 import { updateVisionAttribute } from '../vision/resolvers/updateVisionAttribute'
 import { deleteVisionAttribute } from '../vision/resolvers/deleteVisionAttribute'
+import { createGoal } from '../goals/resolvers/createGoal'
+import { deleteGoal } from '../goals/resolvers/deleteGoal'
+import { updateGoal } from '../goals/resolvers/updateGoal'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -59,4 +62,7 @@ export const implementation: ApiImplementation = {
   createVisionAttribute,
   updateVisionAttribute,
   deleteVisionAttribute,
+  createGoal,
+  updateGoal,
+  deleteGoal,
 }
