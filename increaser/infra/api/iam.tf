@@ -44,6 +44,14 @@ resource "aws_iam_policy" "api" {
       "Resource": "${aws_dynamodb_table.users.arn}"
     },
     {
+      "Sid": "QueryOnUsersEmailIndex",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:Query"
+      ],
+      "Resource": "${aws_dynamodb_table.users.arn}/index/EmailIndex"
+    },
+    {
       "Sid": "AllAPIActionsOnAppSumoCodes",
       "Effect": "Allow",
       "Action": "dynamodb:*",
@@ -60,15 +68,6 @@ resource "aws_iam_policy" "api" {
       "Effect": "Allow",
       "Action": "dynamodb:*",
       "Resource": "${aws_dynamodb_table.scoreboards.arn}"
-    },
-    {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*",
-      "Effect": "Allow"
     },
     {
       "Action": [
