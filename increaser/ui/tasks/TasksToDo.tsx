@@ -19,17 +19,17 @@ import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMuta
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { DnDGroups, ItemChangeParams } from '@increaser/ui/tasks/DnDGroups'
+import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
-import { useTasksManager } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TaskDragHandle } from './TaskDragHandle'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
-  const { activeTaskId } = useTasksManager()
+  const [activeTaskId] = useActiveItemId()
 
   const groups = useMemo(() => {
     return {

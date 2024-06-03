@@ -1,18 +1,18 @@
 import { HStack } from '@lib/ui/layout/Stack'
-import { useCurrentVisionAttribute } from './CurrentVisionAttributeProvider'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
-import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
+import { goalContentMinHeight, goalVerticalPadding } from './config'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { useCurrentGoal } from './CurrentGoalProvider'
+import { EditGoalForm } from './form/EditGoalForm'
+import { GoalStatusTag } from './GoalStatusTag'
 
 const Container = styled(Hoverable)`
-  ${verticalPadding(visionItemVerticalPadding)};
+  ${verticalPadding(goalVerticalPadding)};
   text-align: start;
   width: 100%;
 `
@@ -22,16 +22,16 @@ const Name = styled(Text)`
   color: ${getColor('contrast')};
   font-weight: 500;
   font-size: 14px;
-  line-height: ${toSizeUnit(visionItemContentMinHeight)};
+  line-height: ${toSizeUnit(goalContentMinHeight)};
 `
 
-export const VisionAttributeItem = () => {
-  const { name, status, id } = useCurrentVisionAttribute()
+export const GoalItem = () => {
+  const { name, status, id } = useCurrentGoal()
 
   const [activeItemId, setActiveItemId] = useActiveItemId()
 
   if (activeItemId === id) {
-    return <EditVisionAttributeForm />
+    return <EditGoalForm />
   }
 
   return (
@@ -43,7 +43,7 @@ export const VisionAttributeItem = () => {
     >
       <HStack alignItems="start" justifyContent="space-between" gap={8}>
         <Name>{name}</Name>
-        <VisionAttributeStatusTag value={status} />
+        <GoalStatusTag value={status} />
       </HStack>
     </Container>
   )

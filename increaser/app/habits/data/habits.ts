@@ -47,6 +47,7 @@ export type HabitId =
   | 'noWorkAfterDinner'
   | 'noElectronicsInBedroom'
   | 'noCriticism'
+  | 'coldShower'
 
 export const habitRecord: Record<HabitId, HabitInfo> = {
   sunlight: {
@@ -199,18 +200,11 @@ export const habitRecord: Record<HabitId, HabitInfo> = {
     description:
       'Daily, take a moment to think before speaking when you feel upset or frustrated. Ask yourself: "Is my comment about the behavior or the person?" Aim to express concerns about actions, not character. This simple check helps you avoid hurtful criticism and keeps communication positive and constructive.',
   },
+  coldShower: {
+    emoji: '❄️',
+    tags: ['health', 'energy', 'mind'],
+    name: 'Cold shower',
+    description:
+      'Taking a cold shower boosts your energy levels, improves circulation, and enhances mental clarity. It can also help reduce stress and improve mood, making it a powerful way to start your day.',
+  },
 } as const
-
-/*
-ChatGPT prompt:
-Write a three sentences max copy for a habit-tracker app persuading the user and explaining why they should do "X" habit.
-*/
-
-// TODO:
-// - ? have an orgasm before bed
-// - smth about sugar & processed foods
-// - smth about protein
-// - walk x amount of steps
-// - drink x amount of water + morning water
-// - wear blue light blocking glasses
-// - how to make shared learning session work

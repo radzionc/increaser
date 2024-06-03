@@ -1,30 +1,28 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
-import { VisionAttributeItem } from './VisionAttributeItem'
-import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider'
+import { GoalItem } from './GoalItem'
+import { CurrentGoalProvider } from './CurrentGoalProvider'
 import { DnDList } from '../../../lib/dnd/DnDList'
-import { useUpdateVisionAttributeMutation } from './api/useUpdateVisionAttributeMutation'
+import { useUpdateGoalMutation } from './api/useUpdateGoalMutation'
 import { order } from '@lib/utils/array/order'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { goalContentMinHeight, goalVerticalPadding } from './config'
 
 const DragHandle = styled(ListItemDragHandle)`
-  height: ${toSizeUnit(
-    visionItemContentMinHeight + visionItemVerticalPadding * 2,
-  )};
+  height: ${toSizeUnit(goalContentMinHeight + goalVerticalPadding * 2)};
 `
 
-export const VisionAttributes = () => {
-  const { vision } = useAssertUserState()
-  const items = order(Object.values(vision), (item) => item.order, 'asc')
+export const Goals = () => {
+  const { goals } = useAssertUserState()
+  const items = order(Object.values(goals), (item) => item.order, 'asc')
 
   const [activeItemId] = useActiveItemId()
 
-  const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
+  const { mutate: updateGoal } = useUpdateGoalMutation()
 
   return (
     <DnDList
@@ -32,7 +30,7 @@ export const VisionAttributes = () => {
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
       onChange={(id, { order }) => {
-        updateVisionAttribute({
+        updateGoal({
           id,
           fields: {
             order,
@@ -61,9 +59,9 @@ export const VisionAttributes = () => {
               isActive={isDragging ?? false}
               {...dragHandleProps}
             />
-            <CurrentVisionAttributeProvider key={item.id} value={item}>
-              <VisionAttributeItem />
-            </CurrentVisionAttributeProvider>
+            <CurrentGoalProvider key={item.id} value={item}>
+              <GoalItem />
+            </CurrentGoalProvider>
           </DraggableItemContainer>
         )
       }}

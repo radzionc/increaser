@@ -9,8 +9,8 @@ import {
   TasksViewSelector,
 } from '@increaser/ui/tasks/TasksView'
 import { TasksDeadlinesOverview } from '@increaser/ui/tasks/TasksDeadlinesOverview'
-import { TasksManagerProvider } from '@increaser/ui/tasks/TasksManagerProvider'
 import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const TasksPage = () => {
   return (
@@ -19,13 +19,13 @@ export const TasksPage = () => {
         <PageTitle documentTitle={`✅ Tasks`} title={<TasksViewSelector />} />
         <TasksContainer>
           <UserStateOnly>
-            <TasksManagerProvider>
+            <ActiveItemIdProvider initialValue={null}>
               <TasksDeadlinesOverview />
               <RenderTasksView
                 todo={() => <TasksToDo />}
                 done={() => <TasksDone />}
               />
-            </TasksManagerProvider>
+            </ActiveItemIdProvider>
           </UserStateOnly>
         </TasksContainer>
       </TasksViewProvider>

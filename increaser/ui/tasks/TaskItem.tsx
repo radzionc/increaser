@@ -1,7 +1,6 @@
 import { useCurrentTask } from './CurrentTaskProvider'
 import styled from 'styled-components'
 import { TaskItemFrame } from './TaskItemFrame'
-import { useTasksManager } from './TasksManagerProvider'
 import { EditTaskForm } from './EditTaskForm'
 import { TaskPrimaryContent } from './TaskPrimaryContent'
 import { TaskCheckBox } from './TaskCheckBox'
@@ -13,6 +12,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;
@@ -35,7 +35,7 @@ const Content = styled(TaskItemFrame)`
 export const TaskItem = () => {
   const task = useCurrentTask()
 
-  const { activeTaskId, setState } = useTasksManager()
+  const [activeTaskId, setActiveTaskId] = useActiveItemId()
 
   if (activeTaskId === task.id) {
     return <EditTaskForm />
@@ -47,10 +47,7 @@ export const TaskItem = () => {
         <>
           <Content
             onClick={() => {
-              setState((state) => ({
-                ...state,
-                activeTaskId: task.id,
-              }))
+              setActiveTaskId(task.id)
             }}
           >
             <Spacer {...actionSize} />

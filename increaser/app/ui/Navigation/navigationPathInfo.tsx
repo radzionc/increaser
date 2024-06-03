@@ -54,7 +54,7 @@ export const navigationPathInfo = {
     icon: <CoffeeIcon />,
   },
   [AppPath.Vision]: {
-    name: 'Life vision',
+    name: 'Vision & Goals',
     icon: <StarIcon />,
   },
   [AppPath.Membership]: {

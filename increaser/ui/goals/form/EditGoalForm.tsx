@@ -4,26 +4,21 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
-import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
-import {
-  VisionAttribute,
-  VisionAttributeStatus,
-} from '@increaser/entities/Vision'
-import { useUpdateVisionAttributeMutation } from '../api/useUpdateVisionAttributeMutation'
-import { useDeleteVisionAttributeMutation } from '../api/useDeleteVisionAttributeMutation'
-import { VisionAttributeNameInput } from './VisionAttributeNameInput'
-import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
+import { useCurrentGoal } from '../CurrentGoalProvider'
+import { Goal, GoalStatus } from '@increaser/entities/Goal'
+import { useUpdateGoalMutation } from '../api/useUpdateGoalMutation'
+import { useDeleteGoalMutation } from '../api/useDeleteGoalMutation'
+import { GoalNameInput } from './GoalNameInput'
+import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
-export const EditVisionAttributeForm = () => {
-  const visionAttribute = useCurrentVisionAttribute()
-  const [name, setName] = useState(visionAttribute.name)
-  const [status, setStatus] = useState<VisionAttributeStatus>(
-    visionAttribute.status,
-  )
+export const EditGoalForm = () => {
+  const goalAttribute = useCurrentGoal()
+  const [name, setName] = useState(goalAttribute.name)
+  const [status, setStatus] = useState<GoalStatus>(goalAttribute.status)
 
-  const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
-  const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
+  const { mutate: updateGoal } = useUpdateGoalMutation()
+  const { mutate: deleteGoal } = useDeleteGoalMutation()
 
   const [, setActiveItemId] = useActiveItemId()
 
@@ -50,16 +45,16 @@ export const EditVisionAttributeForm = () => {
       return
     }
 
-    const fields: Partial<Omit<VisionAttribute, 'id'>> = {}
-    if (name !== visionAttribute.name) {
+    const fields: Partial<Omit<Goal, 'id'>> = {}
+    if (name !== goalAttribute.name) {
       fields.name = name
     }
-    if (status !== visionAttribute.status) {
+    if (status !== goalAttribute.status) {
       fields.status = status
     }
 
-    updateVisionAttribute({
-      id: visionAttribute.id,
+    updateGoal({
+      id: goalAttribute.id,
       fields,
     })
     onFinish()
@@ -76,14 +71,14 @@ export const EditVisionAttributeForm = () => {
       )}
     >
       <VStack gap={28}>
-        <VisionAttributeNameInput
+        <GoalNameInput
           autoFocus
           onChange={setName}
           value={name}
           onSubmit={handleSubmit}
         />
         <VStack alignItems="start">
-          <VisionAttributeStatusSelector value={status} onChange={setStatus} />
+          <GoalStatusSelector value={status} onChange={setStatus} />
         </VStack>
       </VStack>
 
@@ -98,7 +93,7 @@ export const EditVisionAttributeForm = () => {
           kind="alert"
           type="button"
           onClick={() => {
-            deleteVisionAttribute({ id: visionAttribute.id })
+            deleteGoal({ id: goalAttribute.id })
             onFinish()
           }}
         >

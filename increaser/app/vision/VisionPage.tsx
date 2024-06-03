@@ -7,9 +7,12 @@ import { VisionAttributes } from './VisionAttributes'
 import { AddVisionAttribute } from './AddVisionAttribute'
 import styled from 'styled-components'
 import { UserStateOnly } from '../user/state/UserStateOnly'
-import { VisionManagerProvider } from './VisionManagerProvider'
+import { ExpandableSection } from '@lib/ui/layout/ExpandableSection'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { AddGoal } from '@increaser/ui/goals/AddGoal'
+import { Goals } from '@increaser/ui/goals/Goals'
 
-const title = 'Define your perfect life vision'
+const title = 'Achieve your dreams'
 
 const Container = styled(VStack)`
   gap: 40px;
@@ -22,22 +25,45 @@ export const VisionPage = () => {
       <TasksViewProvider>
         <PageTitle documentTitle={`✨ ${title}`} title={title} />
         <Container>
-          <ShyInfoBlock>
-            Creating a clear list of your perfect life vision helps you stay
-            focused and make decisions that align with your goals. Be specific,
-            prioritize your goals, and regularly review your progress to ensure
-            you're on the right path. This approach keeps you motivated and
-            adaptable, leading to a fulfilling and purpose-driven life.
-          </ShyInfoBlock>
-
-          <UserStateOnly>
-            <VStack>
-              <VisionManagerProvider>
-                <VisionAttributes />
-                <AddVisionAttribute />
-              </VisionManagerProvider>
+          <ExpandableSection defaultIsOpen title="Your perfect life vision">
+            <VStack gap={20}>
+              <ShyInfoBlock>
+                Envision your ideal life by describing specific attributes that
+                define your perfect world, such as a happy marriage, a fit body,
+                or financial independence. Ensure each attribute clearly
+                resonates with your long-term aspirations and reflects what
+                truly matters to you. Keep your vision clear and concise, making
+                it easy to visualize and strive towards daily.
+              </ShyInfoBlock>
+              <UserStateOnly>
+                <VStack>
+                  <ActiveItemIdProvider initialValue={null}>
+                    <VisionAttributes />
+                    <AddVisionAttribute />
+                  </ActiveItemIdProvider>
+                </VStack>
+              </UserStateOnly>
             </VStack>
-          </UserStateOnly>
+          </ExpandableSection>
+          <ExpandableSection defaultIsOpen title="Your goals">
+            <VStack gap={20}>
+              <ShyInfoBlock>
+                Set practical and achievable goals that will bring you closer to
+                your perfect life vision. Break down each goal into manageable
+                steps, and focus on consistent progress rather than perfection.
+                Remember to track your progress and adjust your goals as needed
+                to stay aligned with your evolving vision.
+              </ShyInfoBlock>
+              <UserStateOnly>
+                <VStack>
+                  <ActiveItemIdProvider initialValue={null}>
+                    <Goals />
+                    <AddGoal />
+                  </ActiveItemIdProvider>
+                </VStack>
+              </UserStateOnly>
+            </VStack>
+          </ExpandableSection>
         </Container>
       </TasksViewProvider>
     </FixedWidthContent>
