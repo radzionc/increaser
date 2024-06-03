@@ -1,1 +1,1 @@
-export type Education = 'vision' | 'goals'
+export type Education = 'vision' | 'goals' | 'todayTasks'
