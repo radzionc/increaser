@@ -33,6 +33,10 @@ export const ProductEducationBlock = ({
 
   const { mutate } = useUpdateUserMutation()
 
+  if (completedEducation.includes(value)) {
+    return null
+  }
+
   return (
     <EducationBlock
       onSubmit={() =>
