@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { useCurrentVisionAttribute } from './CurrentVisionAttributeProvider'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
@@ -10,6 +10,9 @@ import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { getColor } from '@lib/ui/theme/getters'
+import { SafeImage } from '@lib/ui/images/SafeImage'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { visionImageAspectRatio } from './visionImageAspectRatio'
 
 const Container = styled(Hoverable)`
   ${verticalPadding(visionItemVerticalPadding)};
@@ -25,8 +28,15 @@ const Name = styled(Text)`
   line-height: ${toSizeUnit(visionItemContentMinHeight)};
 `
 
+const Image = styled.img`
+  ${visionImageAspectRatio};
+  width: 100%;
+  ${borderRadius.m};
+  object-fit: cover;
+`
+
 export const VisionAttributeItem = () => {
-  const { name, status, id } = useCurrentVisionAttribute()
+  const { name, status, id, imageUrl } = useCurrentVisionAttribute()
 
   const [activeItemId, setActiveItemId] = useActiveItemId()
 
@@ -41,10 +51,15 @@ export const VisionAttributeItem = () => {
       }}
       verticalOffset={0}
     >
-      <HStack alignItems="start" justifyContent="space-between" gap={8}>
-        <Name>{name}</Name>
-        <VisionAttributeStatusTag value={status} />
-      </HStack>
+      <VStack gap={8}>
+        <HStack alignItems="start" justifyContent="space-between" gap={8}>
+          <Name>{name}</Name>
+          <VisionAttributeStatusTag value={status} />
+        </HStack>
+        {imageUrl && (
+          <SafeImage src={imageUrl} render={(props) => <Image {...props} />} />
+        )}
+      </VStack>
     </Container>
   )
 }
