@@ -103,6 +103,7 @@ export const userDefaultFields: Pick<
   | 'months'
   | 'vision'
   | 'goals'
+  | 'completedEducation'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -114,6 +115,7 @@ export const userDefaultFields: Pick<
   months: {},
   vision: {},
   goals: {},
+  completedEducation: [],
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }
