@@ -9,6 +9,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(Hoverable)`
   ${verticalPadding(visionItemVerticalPadding)};
@@ -19,6 +20,7 @@ const Container = styled(Hoverable)`
 const Name = styled(Text)`
   text-align: start;
   font-weight: 500;
+  color: ${getColor('contrast')};
   font-size: 14px;
   line-height: ${toSizeUnit(visionItemContentMinHeight)};
 `

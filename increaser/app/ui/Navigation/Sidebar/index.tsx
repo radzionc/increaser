@@ -52,6 +52,7 @@ export const Sidebar = () => {
             <NavigationToInternalPage path={AppPath.Tasks} />
             <NavigationToInternalPage path={AppPath.Sessions} />
             <NavigationToInternalPage path={AppPath.Vision} />
+            <NavigationToInternalPage path={AppPath.Goals} />
             <NavigationToInternalPage path={AppPath.Projects} />
 
             {isInstallPromptEnabled && <InstallPrompt />}

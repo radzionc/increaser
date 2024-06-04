@@ -6,17 +6,17 @@ import styled from 'styled-components'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { VisionAttributes } from './VisionAttributes'
-import { AddVisionAttribute } from './AddVisionAttribute'
+import { Goals } from '@increaser/ui/goals/Goals'
+import { AddGoal } from '@increaser/ui/goals/AddGoal'
 
-const title = 'Your perfect life vision'
+const title = 'Your goals'
 
 const Container = styled(VStack)`
   gap: 40px;
   max-width: 560px;
 `
 
-export const VisionPage = () => {
+export const GoalsPage = () => {
   return (
     <FixedWidthContent>
       <TasksViewProvider>
@@ -24,11 +24,11 @@ export const VisionPage = () => {
         <UserStateOnly>
           <Container>
             <VStack gap={20}>
-              <ProductEducationBlock value="vision" />
+              <ProductEducationBlock value="goals" />
               <VStack>
                 <ActiveItemIdProvider initialValue={null}>
-                  <VisionAttributes />
-                  <AddVisionAttribute />
+                  <Goals />
+                  <AddGoal />
                 </ActiveItemIdProvider>
               </VStack>
             </VStack>

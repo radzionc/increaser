@@ -9,6 +9,7 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentGoal } from './CurrentGoalProvider'
 import { EditGoalForm } from './form/EditGoalForm'
 import { GoalStatusTag } from './GoalStatusTag'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(Hoverable)`
   ${verticalPadding(goalVerticalPadding)};
@@ -19,6 +20,7 @@ const Container = styled(Hoverable)`
 const Name = styled(Text)`
   text-align: start;
   font-weight: 500;
+  color: ${getColor('contrast')};
   font-size: 14px;
   line-height: ${toSizeUnit(goalContentMinHeight)};
 `
