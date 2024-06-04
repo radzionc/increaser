@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
-import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
@@ -19,7 +18,6 @@ const Container = styled(Hoverable)`
 
 const Name = styled(Text)`
   text-align: start;
-  color: ${getColor('contrast')};
   font-weight: 500;
   font-size: 14px;
   line-height: ${toSizeUnit(visionItemContentMinHeight)};

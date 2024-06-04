@@ -3,7 +3,6 @@ import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { goalContentMinHeight, goalVerticalPadding } from './config'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -19,7 +18,6 @@ const Container = styled(Hoverable)`
 
 const Name = styled(Text)`
   text-align: start;
-  color: ${getColor('contrast')};
   font-weight: 500;
   font-size: 14px;
   line-height: ${toSizeUnit(goalContentMinHeight)};
