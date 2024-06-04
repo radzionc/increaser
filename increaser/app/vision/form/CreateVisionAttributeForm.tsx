@@ -37,10 +37,11 @@ export const CreateVisionAttributeForm = ({
       id: getId(),
       name,
       status,
+      imageUrl,
       order,
     })
     onFinish()
-  }, [isDisabled, mutate, name, onFinish, status, vision])
+  }, [imageUrl, isDisabled, mutate, name, onFinish, status, vision])
 
   return (
     <Panel

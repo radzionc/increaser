@@ -11,11 +11,15 @@ import { useDeleteGoalMutation } from '../api/useDeleteGoalMutation'
 import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { GoalDeadlineInput } from './GoalDeadlineInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
   const [name, setName] = useState(goalAttribute.name)
   const [status, setStatus] = useState<GoalStatus>(goalAttribute.status)
+  const [deadlineAt, setDeadlineAt] = useState<number | null>(
+    goalAttribute.deadlineAt ?? null,
+  )
 
   const { mutate: updateGoal } = useUpdateGoalMutation()
   const { mutate: deleteGoal } = useDeleteGoalMutation()
@@ -52,6 +56,9 @@ export const EditGoalForm = () => {
     if (status !== goalAttribute.status) {
       fields.status = status
     }
+    if (deadlineAt !== goalAttribute.deadlineAt) {
+      fields.deadlineAt = deadlineAt
+    }
 
     updateGoal({
       id: goalAttribute.id,
@@ -81,7 +88,7 @@ export const EditGoalForm = () => {
           <GoalStatusSelector value={status} onChange={setStatus} />
         </VStack>
       </VStack>
-
+      <GoalDeadlineInput value={deadlineAt} onChange={setDeadlineAt} />
       <HStack
         wrap="wrap"
         justifyContent="space-between"
