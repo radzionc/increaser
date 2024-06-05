@@ -39,3 +39,7 @@ variable "paddle_vendor_id" {}
 variable "telegram_bot_token" {}
 
 variable "telegram_chat_id" {}
+
+variable "public_bucket_name" {}
+
+variable "public_bucket_region" {}

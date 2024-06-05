@@ -143,6 +143,14 @@ export interface ApiInterface {
     Goal
   >
   deleteGoal: ApiMethod<{ id: string }, undefined>
+
+  getFileUploadUrl: ApiMethod<
+    { contentType: string },
+    {
+      url: string
+      key: string
+    }
+  >
 }
 
 export type ApiMethodName = keyof ApiInterface

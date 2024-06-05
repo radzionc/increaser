@@ -31,6 +31,7 @@ import { deleteVisionAttribute } from '../vision/resolvers/deleteVisionAttribute
 import { createGoal } from '../goals/resolvers/createGoal'
 import { deleteGoal } from '../goals/resolvers/deleteGoal'
 import { updateGoal } from '../goals/resolvers/updateGoal'
+import { getFileUploadUrl } from '../users/resolvers/getFileUploadUrl'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -65,4 +66,5 @@ export const implementation: ApiImplementation = {
   createGoal,
   updateGoal,
   deleteGoal,
+  getFileUploadUrl,
 }

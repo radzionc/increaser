@@ -141,4 +141,21 @@ resource "aws_route53_record" "frontend_record" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "frontend" {
+  bucket = aws_s3_bucket.frontend.id
+
+  rule {
+    id     = "delete_temp_files_after_1_day"
+    status = "Enabled"
+
+    filter {
+      prefix = "temp/"
+    }
+
+    expiration {
+      days = 1
+    }
+  }
+}
+
 data "aws_caller_identity" "current" {}

@@ -21,6 +21,7 @@ export type VisionAttribute = {
   order: number
   name: string
   status: VisionAttributeStatus
+  imageId?: string | null
   imageUrl?: string | null
 }
 
