@@ -91,7 +91,8 @@ resource "aws_iam_policy" "api" {
       "Effect": "Allow",
       "Action": [
         "s3:PutObject",
-        "s3:GetObject"
+        "s3:GetObject",
+        "s3:DeleteObject"
       ],
       "Resource": [
         "arn:aws:s3:::${var.public_bucket_name}",

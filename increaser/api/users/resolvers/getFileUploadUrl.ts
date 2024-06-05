@@ -18,7 +18,7 @@ export const getFileUploadUrl: ApiResolver<'getFileUploadUrl'> = async ({
 
   const command = new PutObjectCommand({
     Bucket: getEnvVar('PUBLIC_BUCKET_NAME'),
-    Key: `temp/${getId()}`,
+    Key: key,
     ContentType: contentType,
   })
 

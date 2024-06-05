@@ -1,5 +1,4 @@
-provider "aws" {
-}
+provider "aws" {}
 
 terraform {
   backend "s3" {
@@ -18,7 +17,7 @@ resource "aws_s3_bucket_cors_configuration" "frontend" {
 
   cors_rule {
     allowed_headers = ["*"]
-    allowed_methods = ["GET"]
+    allowed_methods = ["GET", "PUT", "POST", "DELETE", "HEAD"]
     allowed_origins = ["*"]
     expose_headers  = ["ETag"]
     max_age_seconds = 3000

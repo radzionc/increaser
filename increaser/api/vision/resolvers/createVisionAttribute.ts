@@ -13,6 +13,7 @@ export const createVisionAttribute: ApiResolver<
   if (input.imageId) {
     const newImageId = getPublicBucketUserFileKey(userId, input.imageId)
     await movePublicBucketFile(input.imageId, newImageId)
+    input.imageId = newImageId
   }
 
   await visionDb.putVisionAttribute(userId, {

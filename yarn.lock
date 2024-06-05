@@ -3478,6 +3478,7 @@ __metadata:
   dependencies:
     "@types/react-beautiful-dnd": "npm:^13.1.8"
     react-beautiful-dnd: "npm:^13.1.1"
+    react-dropzone: "npm:^14.2.3"
     styled-components: "npm:^6.1.6"
   languageName: unknown
   linkType: soft

@@ -27,6 +27,7 @@ export const updateVisionAttribute: ApiResolver<
     if (fields.imageId) {
       const newImageId = getPublicBucketUserFileKey(userId, fields.imageId)
       await movePublicBucketFile(fields.imageId, newImageId)
+      fields.imageId = newImageId
     }
   }
 
