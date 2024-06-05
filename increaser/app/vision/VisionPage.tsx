@@ -6,8 +6,8 @@ import styled from 'styled-components'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { VisionAttributes } from './VisionAttributes'
-import { AddVisionAttribute } from './AddVisionAttribute'
+import { VisionAttributes } from '@increaser/ui/vision/VisionAttributes'
+import { AddVisionAttribute } from '@increaser/ui/vision/AddVisionAttribute'
 
 const title = 'Your perfect life vision'
 
