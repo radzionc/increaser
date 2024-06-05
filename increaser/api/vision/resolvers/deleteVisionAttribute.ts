@@ -1,8 +1,8 @@
 import { assertUserId } from '../../auth/assertUserId'
 import * as visionDb from '@increaser/db/vision'
 import { ApiResolver } from '../../resolvers/ApiResolver'
-import { deletePublicBucketFile } from '../../../public/deletePublicBucketFile'
-import { getPublicBucketUserFileKey } from '../../../public/getPublicBucketUserFileKey'
+import { deletePublicBucketFile } from '@increaser/public/deletePublicBucketFile'
+import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 
 export const deleteVisionAttribute: ApiResolver<
   'deleteVisionAttribute'

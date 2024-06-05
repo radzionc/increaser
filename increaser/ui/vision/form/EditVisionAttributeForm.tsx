@@ -22,7 +22,7 @@ export const EditVisionAttributeForm = () => {
   const [status, setStatus] = useState<VisionAttributeStatus>(
     visionAttribute.status,
   )
-  const [imageUrl, setImageUrl] = useState(visionAttribute.imageUrl)
+  const [imageId, setImageId] = useState(visionAttribute.imageId)
 
   const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
   const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
@@ -59,8 +59,8 @@ export const EditVisionAttributeForm = () => {
     if (status !== visionAttribute.status) {
       fields.status = status
     }
-    if (imageUrl !== visionAttribute.imageUrl) {
-      fields.imageUrl = imageUrl
+    if (imageId !== visionAttribute.imageId) {
+      fields.imageId = imageId
     }
 
     updateVisionAttribute({
@@ -91,7 +91,7 @@ export const EditVisionAttributeForm = () => {
           <VisionAttributeStatusSelector value={status} onChange={setStatus} />
         </VStack>
       </VStack>
-      <VisionImageInput value={imageUrl ?? null} onChange={setImageUrl} />
+      <VisionImageInput value={imageId ?? null} onChange={setImageId} />
 
       <HStack
         wrap="wrap"

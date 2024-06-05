@@ -13,11 +13,13 @@ export const useCreateVisionAttributeMutation = () => {
 
   return useMutation({
     mutationFn: async (
-      value: ApiInterface['createVisionAttribute']['input'],
+      input: ApiInterface['createVisionAttribute']['input'],
     ) => {
-      updateState({ vision: { ...vision, [value.id]: value } })
+      updateState({ vision: { ...vision, [input.id]: input } })
 
-      await api.call('createVisionAttribute', value)
+      const value = await api.call('createVisionAttribute', input)
+
+      updateState({ vision: { ...vision, [value.id]: value } })
     },
   })
 }

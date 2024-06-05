@@ -15,12 +15,14 @@ export const updateVisionAttribute: ApiResolver<
   const { id, fields } = input
 
   if (
-    oldVisionAttribute.imageId &&
+    fields.imageId !== undefined &&
     oldVisionAttribute.imageId !== fields.imageId
   ) {
-    await deletePublicBucketFile(
-      getPublicBucketUserFileKey(userId, oldVisionAttribute.imageId),
-    )
+    if (oldVisionAttribute.imageId) {
+      await deletePublicBucketFile(
+        getPublicBucketUserFileKey(userId, oldVisionAttribute.imageId),
+      )
+    }
 
     if (fields.imageId) {
       const newImageId = getPublicBucketUserFileKey(userId, fields.imageId)

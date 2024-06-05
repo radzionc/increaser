@@ -18,7 +18,7 @@ export const CreateVisionAttributeForm = ({
   const { vision } = useAssertUserState()
   const [name, setName] = useState('')
   const [status, setStatus] = useState<VisionAttributeStatus>('inProgress')
-  const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [imageId, setImageId] = useState<string | null>(null)
 
   const { mutate } = useCreateVisionAttributeMutation()
 
@@ -37,11 +37,11 @@ export const CreateVisionAttributeForm = ({
       id: getId(),
       name,
       status,
-      imageUrl,
+      imageId,
       order,
     })
     onFinish()
-  }, [imageUrl, isDisabled, mutate, name, onFinish, status, vision])
+  }, [imageId, isDisabled, mutate, name, onFinish, status, vision])
 
   return (
     <Panel
@@ -60,7 +60,7 @@ export const CreateVisionAttributeForm = ({
         value={name}
         onSubmit={onSubmit}
       />
-      <VisionImageInput value={imageUrl ?? null} onChange={setImageUrl} />
+      <VisionImageInput value={imageId ?? null} onChange={setImageId} />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <VisionAttributeStatusSelector value={status} onChange={setStatus} />
         <HStack alignItems="center" gap={8}>
