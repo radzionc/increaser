@@ -1,10 +1,11 @@
 import { Vision, VisionAttribute } from '@increaser/entities/Vision'
+import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 import { getRecord } from '@lib/utils/record/getRecord'
+import { demoConfig } from './config'
 
-type VisionAttributeDescription = Pick<
-  VisionAttribute,
-  'name' | 'status' | 'imageUrl'
->
+type VisionAttributeDescription = Pick<VisionAttribute, 'name' | 'status'> & {
+  imageName: string
+}
 
 const items: VisionAttributeDescription[] = [
   // {
@@ -14,7 +15,7 @@ const items: VisionAttributeDescription[] = [
   {
     name: 'Nature is within a walking distance from my house',
     status: 'maintainance',
-    imageUrl: '/images/vision/nature.webp',
+    imageName: 'nature.webp',
   },
   // {
   //   name: 'Wake up without an alarm',
@@ -23,7 +24,7 @@ const items: VisionAttributeDescription[] = [
   {
     name: 'Live in my own house',
     status: 'inProgress',
-    imageUrl: '/images/vision/house.webp',
+    imageName: 'house.webp',
   },
   // {
   //   name: 'No worries about money',
@@ -32,7 +33,7 @@ const items: VisionAttributeDescription[] = [
   {
     name: 'A fulfilling work with a high level of freedom',
     status: 'inProgress',
-    imageUrl: '/images/vision/work.webp',
+    imageName: 'work.webp',
   },
   // {
   //   name: 'Having kids',
@@ -42,7 +43,12 @@ const items: VisionAttributeDescription[] = [
 
 export const getDemoVision = (): Vision => {
   return getRecord(
-    items.map((item, order) => ({ ...item, id: item.name, order })),
+    items.map((item, order) => ({
+      ...item,
+      id: item.name,
+      order,
+      imageId: getPublicBucketUserFileKey(demoConfig.userId, item.imageName),
+    })),
     (item) => item.id,
   )
 }

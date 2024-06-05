@@ -9,6 +9,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { visionImageAspectRatio } from './visionImageAspectRatio'
+import { getPublicFileUrl } from '../storage/getPublicFileUrl'
 
 const Name = styled(Text)`
   text-align: start;
@@ -26,7 +27,7 @@ const Image = styled.img`
 `
 
 export const VisionAttributeItemContent = () => {
-  const { name, status, imageUrl } = useCurrentVisionAttribute()
+  const { name, status, imageId } = useCurrentVisionAttribute()
 
   return (
     <VStack gap={8}>
@@ -34,8 +35,11 @@ export const VisionAttributeItemContent = () => {
         <Name>{name}</Name>
         <VisionAttributeStatusTag value={status} />
       </HStack>
-      {imageUrl && (
-        <SafeImage src={imageUrl} render={(props) => <Image {...props} />} />
+      {imageId && (
+        <SafeImage
+          src={getPublicFileUrl(imageId)}
+          render={(props) => <Image {...props} />}
+        />
       )}
     </VStack>
   )
