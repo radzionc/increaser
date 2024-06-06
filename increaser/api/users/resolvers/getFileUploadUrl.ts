@@ -2,9 +2,9 @@ import { assertUserId } from '../../auth/assertUserId'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { getEnvVar } from '../../getEnvVar'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getS3Client } from '@increaser/public/getS3Client'
+import { getPublicBucketName } from '@increaser/public/getPublicBucketName'
 
 export const getFileUploadUrl: ApiResolver<'getFileUploadUrl'> = async ({
   input: { contentType },
@@ -17,7 +17,7 @@ export const getFileUploadUrl: ApiResolver<'getFileUploadUrl'> = async ({
   const key = `temp/${getId()}`
 
   const command = new PutObjectCommand({
-    Bucket: getEnvVar('PUBLIC_BUCKET_NAME'),
+    Bucket: getPublicBucketName(),
     Key: key,
     ContentType: contentType,
   })
