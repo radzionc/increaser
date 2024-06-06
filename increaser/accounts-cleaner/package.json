@@ -1,0 +1,19 @@
+{
+  "name": "@increaser/accounts-cleaner",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.478.0",
+    "@sentry/serverless": "^7.61.1"
+  },
+  "scripts": {
+    "transpile": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "build": "yarn clean & yarn transpile",
+    "clean": "rm -rf ./dist lambda.zip",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.20"
+  }
+}

@@ -3282,6 +3282,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@increaser/accounts-cleaner@workspace:increaser/accounts-cleaner":
+  version: 0.0.0-use.local
+  resolution: "@increaser/accounts-cleaner@workspace:increaser/accounts-cleaner"
+  dependencies:
+    "@aws-sdk/lib-dynamodb": "npm:^3.478.0"
+    "@sentry/serverless": "npm:^7.61.1"
+    esbuild: "npm:^0.18.20"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/api-interface@workspace:increaser/api-interface":
   version: 0.0.0-use.local
   resolution: "@increaser/api-interface@workspace:increaser/api-interface"
