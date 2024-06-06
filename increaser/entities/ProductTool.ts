@@ -6,6 +6,7 @@ export const productTools = [
   'timePlanner',
   'habits',
   'schedule',
+  'vision',
 ] as const
 export type ProductTool = (typeof productTools)[number]
 
@@ -17,6 +18,7 @@ export const productToolPurposeRecord: Record<ProductTool, string> = {
   focus: 'Rich deep focus',
   habits: 'Track daily habits',
   schedule: 'Set a schedule',
+  vision: 'Have a vision',
 }
 
 export const productToolNameRecord: Record<ProductTool, string> = {
@@ -27,6 +29,7 @@ export const productToolNameRecord: Record<ProductTool, string> = {
   focus: 'Deep work timer',
   habits: 'Habit tracking',
   schedule: 'Scheduling',
+  vision: 'Vision board',
 }
 
 export const productToolColorRecord: Record<ProductTool, number> = {
@@ -37,4 +40,5 @@ export const productToolColorRecord: Record<ProductTool, number> = {
   habits: 3,
   focus: 5,
   schedule: 10,
+  vision: 3,
 }

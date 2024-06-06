@@ -50,6 +50,8 @@ resource "aws_lambda_function" "api" {
       PADDLE_VENDOR_ID : var.paddle_vendor_id,
       TELEGRAM_BOT_TOKEN : var.telegram_bot_token,
       TELEGRAM_CHAT_ID : var.telegram_chat_id
+      PUBLIC_BUCKET_NAME: var.public_bucket_name
+      PUBLIC_BUCKET_REGION: var.public_bucket_region
     }
   }
 }

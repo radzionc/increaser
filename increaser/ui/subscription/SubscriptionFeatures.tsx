@@ -50,6 +50,12 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
       user-friendly <b>Scheduling</b> tool.
     </>
   ),
+  vision: (
+    <>
+      Create your perfect life vision and track your progress with our{' '}
+      <b>Vision</b> tool.
+    </>
+  ),
 }
 
 const lineHeight = 20
@@ -74,7 +80,7 @@ export const SubscriptionFeatures = () => {
   return (
     <VStack gap={20}>
       {productTools.map((tool) => (
-        <HStack gap={8}>
+        <HStack key={tool} gap={8}>
           <Icon value={tool} />
           <Container key={tool}>{productToolDescriptionRecord[tool]}</Container>
         </HStack>

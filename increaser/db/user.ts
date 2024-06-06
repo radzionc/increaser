@@ -1,6 +1,6 @@
 import { User } from '@increaser/entities/User'
 import { tableName } from './tableName'
-import { DeleteCommand, PutCommand, ScanCommand } from '@aws-sdk/lib-dynamodb'
+import { DeleteCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb'
 import { DescribeTableCommand } from '@aws-sdk/client-dynamodb'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import {
@@ -42,36 +42,22 @@ export function getUserByEmail<T extends (keyof User)[]>(
   email: string,
   attributes: T,
 ): Promise<Pick<User, T[number]> | null> {
-  const recursiveProcess = async (
-    lastEvaluatedKey?: any,
-  ): Promise<Pick<User, T[number]> | null> => {
-    const command = new ScanCommand({
-      TableName: tableName.users,
-      ExclusiveStartKey: lastEvaluatedKey,
-      FilterExpression: `${getAttributeNameKey(
-        'email',
-      )} = ${getAttributeValueKey('email')}`,
+  const command = new QueryCommand({
+    TableName: tableName.users,
+    IndexName: 'EmailIndex',
+    KeyConditionExpression: `${getAttributeNameKey(
+      'email',
+    )} = ${getAttributeValueKey('email')}`,
+    ...getAttributeParams({ email }),
+    ...getPickParams(withoutDuplicates([...attributes, 'email'])),
+  })
 
-      ...getAttributeParams({
-        email,
-      }),
-
-      ...getPickParams(withoutDuplicates([...attributes, 'email'])),
-    })
-    const { Items, LastEvaluatedKey } = await dbDocClient.send(command)
-
+  return dbDocClient.send(command).then(({ Items }) => {
     if (Items?.length) {
       return Items[0] as Pick<User, T[number]>
     }
-
-    if (LastEvaluatedKey) {
-      return await recursiveProcess(LastEvaluatedKey)
-    }
-
     return null
-  }
-
-  return recursiveProcess()
+  })
 }
 
 export const deleteUser = (id: string) => {

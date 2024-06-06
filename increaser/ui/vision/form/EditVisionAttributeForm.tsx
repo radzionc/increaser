@@ -14,6 +14,7 @@ import { useDeleteVisionAttributeMutation } from '../api/useDeleteVisionAttribut
 import { VisionAttributeNameInput } from './VisionAttributeNameInput'
 import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { VisionImageInput } from './VisionImageInput'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -21,6 +22,7 @@ export const EditVisionAttributeForm = () => {
   const [status, setStatus] = useState<VisionAttributeStatus>(
     visionAttribute.status,
   )
+  const [imageId, setImageId] = useState(visionAttribute.imageId)
 
   const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
   const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
@@ -57,6 +59,9 @@ export const EditVisionAttributeForm = () => {
     if (status !== visionAttribute.status) {
       fields.status = status
     }
+    if (imageId !== visionAttribute.imageId) {
+      fields.imageId = imageId
+    }
 
     updateVisionAttribute({
       id: visionAttribute.id,
@@ -86,6 +91,7 @@ export const EditVisionAttributeForm = () => {
           <VisionAttributeStatusSelector value={status} onChange={setStatus} />
         </VStack>
       </VStack>
+      <VisionImageInput value={imageId ?? null} onChange={setImageId} />
 
       <HStack
         wrap="wrap"

@@ -5,9 +5,11 @@ import styled from 'styled-components'
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight } from '../config'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(MultilineTextInput)`
   line-height: ${toSizeUnit(visionItemContentMinHeight)};
+  background: ${getColor('background')};
 `
 
 type VisionAttributeNameInputProps = InputProps<string> &

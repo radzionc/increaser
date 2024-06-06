@@ -11,6 +11,7 @@ import { Interval } from '@lib/utils/interval/Interval'
 import { TrackedTime } from './TrackedTime'
 import { Vision } from './Vision'
 import { Goals } from './Goal'
+import { Education } from './Education'
 
 export type Set = Interval & {
   projectId: string
@@ -48,6 +49,8 @@ export type User = DayMoments &
     months: TrackedTime
 
     focusSounds: FocusSound[]
+
+    completedEducation: Education[]
 
     updatedAt: number
 
@@ -100,6 +103,7 @@ export const userDefaultFields: Pick<
   | 'months'
   | 'vision'
   | 'goals'
+  | 'completedEducation'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -111,6 +115,7 @@ export const userDefaultFields: Pick<
   months: {},
   vision: {},
   goals: {},
+  completedEducation: [],
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }

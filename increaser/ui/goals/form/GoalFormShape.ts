@@ -1,3 +1,6 @@
-import { VisionAttribute } from '@increaser/entities/Vision'
+import { Goal } from '@increaser/entities/Goal'
 
-export type VisionAttributeFormShape = Pick<VisionAttribute, 'name' | 'status'>
+export type VisionAttributeFormShape = Pick<
+  Goal,
+  'name' | 'status' | 'deadlineAt'
+>

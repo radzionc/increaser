@@ -6,10 +6,10 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { NavigationToInternalPage } from './NavigationToInternalPage'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
 import { UserStateOnly } from '../../../user/state/UserStateOnly'
-import { NavigateToPlanDecoration } from '../../../plan/NavigateToPlanDecoration'
 import { FocusNavigationDecoration } from '@increaser/ui/focus/FocusNavigationDecoration'
 import { getColor } from '@lib/ui/theme/getters'
 import { MembershipNavigationDecoration } from '../../../membership/components/MembershipNavigationDecoration'
+import { StartTheDayNavigation } from '../../../plan/StartTheDayNavigation'
 
 const Container = styled.div`
   min-width: 260px;
@@ -34,6 +34,9 @@ export const Sidebar = () => {
       <VStack alignItems="center" fullHeight justifyContent="space-between">
         <VStack fullWidth gap={20}>
           <VStack gap={4} fullWidth>
+            <UserStateOnly>
+              <StartTheDayNavigation />
+            </UserStateOnly>
             <NavigationToInternalPage
               path={AppPath.Home}
               decoration={
@@ -42,28 +45,21 @@ export const Sidebar = () => {
                 </UserStateOnly>
               }
             />
-            <NavigationToInternalPage path={AppPath.Vision} />
-            <NavigationToInternalPage path={AppPath.Projects} />
             <NavigationToInternalPage path={AppPath.TimeTracking} />
             <NavigationToInternalPage path={AppPath.WorkBudget} />
             <NavigationToInternalPage path={AppPath.ProjectsBudget} />
             <NavigationToInternalPage path={AppPath.Habits} />
             <NavigationToInternalPage path={AppPath.Tasks} />
             <NavigationToInternalPage path={AppPath.Sessions} />
-            <NavigationToInternalPage
-              path={AppPath.Plan}
-              decoration={
-                <UserStateOnly>
-                  <NavigateToPlanDecoration />
-                </UserStateOnly>
-              }
-            />
-            <NavigationToInternalPage path={AppPath.Community} />
+            <NavigationToInternalPage path={AppPath.Vision} />
+            <NavigationToInternalPage path={AppPath.Goals} />
+            <NavigationToInternalPage path={AppPath.Projects} />
 
             {isInstallPromptEnabled && <InstallPrompt />}
           </VStack>
         </VStack>
         <Footer gap={4} fullWidth>
+          <NavigationToInternalPage path={AppPath.Community} />
           <NavigationToInternalPage
             path={AppPath.Membership}
             decoration={

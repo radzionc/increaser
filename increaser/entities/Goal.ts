@@ -12,6 +12,7 @@ export type Goal = {
   order: number
   name: string
   status: GoalStatus
+  deadlineAt?: number | null
 }
 
 export type Goals = Record<string, Goal>

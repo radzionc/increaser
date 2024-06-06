@@ -1,15 +1,12 @@
-import { HStack } from '@lib/ui/layout/Stack'
 import { useCurrentVisionAttribute } from './CurrentVisionAttributeProvider'
-import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
-import { getColor } from '@lib/ui/theme/getters'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
-import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
+import { visionItemVerticalPadding } from './config'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+
+import { VisionAttributeItemContent } from './VisionAttributeItemContent'
 
 const Container = styled(Hoverable)`
   ${verticalPadding(visionItemVerticalPadding)};
@@ -17,16 +14,8 @@ const Container = styled(Hoverable)`
   width: 100%;
 `
 
-const Name = styled(Text)`
-  text-align: start;
-  color: ${getColor('contrast')};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: ${toSizeUnit(visionItemContentMinHeight)};
-`
-
 export const VisionAttributeItem = () => {
-  const { name, status, id } = useCurrentVisionAttribute()
+  const { id } = useCurrentVisionAttribute()
 
   const [activeItemId, setActiveItemId] = useActiveItemId()
 
@@ -41,10 +30,7 @@ export const VisionAttributeItem = () => {
       }}
       verticalOffset={0}
     >
-      <HStack alignItems="start" justifyContent="space-between" gap={8}>
-        <Name>{name}</Name>
-        <VisionAttributeStatusTag value={status} />
-      </HStack>
+      <VisionAttributeItemContent />
     </Container>
   )
 }

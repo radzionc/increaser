@@ -8,7 +8,6 @@ data "terraform_remote_state" "tasks_runner" {
   }
 }
 
-// to request and obtain temporary API credentials that allow taking action with the privileges that are granted to the role
 resource "aws_iam_role" "api" {
   name = "tf-${var.name}"
 
@@ -44,6 +43,14 @@ resource "aws_iam_policy" "api" {
       "Resource": "${aws_dynamodb_table.users.arn}"
     },
     {
+      "Sid": "QueryOnUsersEmailIndex",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:Query"
+      ],
+      "Resource": "${aws_dynamodb_table.users.arn}/index/EmailIndex"
+    },
+    {
       "Sid": "AllAPIActionsOnAppSumoCodes",
       "Effect": "Allow",
       "Action": "dynamodb:*",
@@ -62,29 +69,35 @@ resource "aws_iam_policy" "api" {
       "Resource": "${aws_dynamodb_table.scoreboards.arn}"
     },
     {
+      "Sid": "LogsActions",
+      "Effect": "Allow",
       "Action": [
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:*",
-      "Effect": "Allow"
+      "Resource": "arn:aws:logs:*:*:*"
     },
     {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*",
-      "Effect": "Allow"
-    },
-    {
+      "Sid": "SESActions",
+      "Effect": "Allow",
       "Action": [
         "ses:SendEmail"
       ],
-      "Effect": "Allow",
       "Resource": "*"
+    },
+    {
+      "Sid": "S3Actions",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::${var.public_bucket_name}",
+        "arn:aws:s3:::${var.public_bucket_name}/*"
+      ]
     }
   ]
 }

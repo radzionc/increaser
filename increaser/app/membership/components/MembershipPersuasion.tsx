@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Panel } from '@lib/ui/panel/Panel'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { SubscriptionFeatures } from '@increaser/ui/subscription/SubscriptionFeatures'
+import { productName } from '@increaser/config'
 
 const Image = styled.img`
   padding: 0;
@@ -13,7 +14,11 @@ const Image = styled.img`
 export const MembershipPersuasion = () => {
   return (
     <Panel withSections>
-      <SectionTitle>Unlock Your Full Potential with Increaser</SectionTitle>
+      <div>
+        <SectionTitle>
+          Unlock your full potential with {productName}
+        </SectionTitle>
+      </div>
       <SafeImage
         src="/images/morning.webp"
         render={(props) => <Image {...props} />}
