@@ -4,6 +4,7 @@ import { ApiResolver } from '../../resolvers/ApiResolver'
 import { deletePublicBucketFile } from '@increaser/public/deletePublicBucketFile'
 import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 import { movePublicBucketFile } from '@increaser/public/movePublicBucketFile'
+import { getId } from '@increaser/entities-utils/shared/getId'
 
 export const updateVisionAttribute: ApiResolver<
   'updateVisionAttribute'
@@ -25,7 +26,7 @@ export const updateVisionAttribute: ApiResolver<
     }
 
     if (fields.imageId) {
-      const newImageId = getPublicBucketUserFileKey(userId, fields.imageId)
+      const newImageId = getPublicBucketUserFileKey(userId, getId())
       await movePublicBucketFile(fields.imageId, newImageId)
       fields.imageId = newImageId
     }

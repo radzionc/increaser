@@ -4,6 +4,7 @@ import { ApiResolver } from '../../resolvers/ApiResolver'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 import { movePublicBucketFile } from '@increaser/public/movePublicBucketFile'
+import { getId } from '@increaser/entities-utils/shared/getId'
 
 export const createVisionAttribute: ApiResolver<
   'createVisionAttribute'
@@ -11,7 +12,7 @@ export const createVisionAttribute: ApiResolver<
   const userId = assertUserId(context)
 
   if (input.imageId) {
-    const newImageId = getPublicBucketUserFileKey(userId, input.imageId)
+    const newImageId = getPublicBucketUserFileKey(userId, getId())
     await movePublicBucketFile(input.imageId, newImageId)
     input.imageId = newImageId
   }
