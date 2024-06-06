@@ -7,7 +7,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 
 import { BeforeInstallPromptEvent, PWAContext } from '../PWAContext'
 import { InstallInstructions } from './InstallInstructions'
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 
 interface Props {
   children: React.ReactNode

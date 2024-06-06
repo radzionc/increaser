@@ -3,7 +3,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useIsScreenWidthLessThan } from '@lib/ui/hooks/useIsScreenWidthLessThan'
 import { ReactNode } from 'react'
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 interface Props {

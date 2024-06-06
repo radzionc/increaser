@@ -8,10 +8,7 @@ export const getUserInitialFields = ({
   name,
   country,
   timeZone,
-}: Pick<User, 'email' | 'name' | 'country' | 'timeZone'>): Omit<
-  User,
-  'updatedAt'
-> => {
+}: Pick<User, 'email' | 'name' | 'country' | 'timeZone'>): User => {
   const registeredAt = Date.now()
   const freeTrialEndsAt =
     registeredAt + convertDuration(freeTrialDurationInDays, 'd', 'ms')
@@ -24,6 +21,7 @@ export const getUserInitialFields = ({
     country,
     registrationDate: registeredAt,
     freeTrialEnd: freeTrialEndsAt,
+    lastVisitAt: registeredAt,
     timeZone,
   }
 }

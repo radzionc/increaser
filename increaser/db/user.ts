@@ -31,10 +31,7 @@ export const updateUser = async (id: string, fields: Partial<User>) => {
   return updateItem({
     tableName: tableName.users,
     key: { id },
-    fields: {
-      ...fields,
-      updatedAt: Date.now(),
-    },
+    fields,
   })
 }
 
@@ -76,13 +73,10 @@ export const getNumberOfUsers = async () => {
   return shouldBeDefined(tableInfo.Table?.ItemCount)
 }
 
-export const putUser = (user: Omit<User, 'updatedAt'>) => {
+export const putUser = (user: User) => {
   const command = new PutCommand({
     TableName: tableName.users,
-    Item: {
-      ...user,
-      updatedAt: Date.now(),
-    },
+    Item: user,
   })
 
   return dbDocClient.send(command)

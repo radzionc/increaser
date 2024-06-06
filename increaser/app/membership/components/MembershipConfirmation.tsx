@@ -1,4 +1,4 @@
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { Modal } from '@lib/ui/modal'

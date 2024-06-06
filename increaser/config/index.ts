@@ -1,3 +1,5 @@
+import { Days } from '@lib/utils/time/types'
+
 export const productName = 'Increaser'
 export const supportEmail = 'help@increaser.org'
 export const legalEntity = 'Radzion Chachura'
@@ -12,3 +14,6 @@ export const founderEmail = 'radzion@increaser.org'
 export const productXUrl = 'https://twitter.com/increaser_app'
 export const productTelegramChannelUrl = 'https://t.me/increaser_app'
 export const productYouTubeChannelUrl = 'https://www.youtube.com/@increaserapp'
+
+export const deleteInactiveAccountAfter: Days = 90
+export const notifyInactiveAccountAfter: Days = 60

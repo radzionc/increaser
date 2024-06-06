@@ -1,4 +1,4 @@
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 import { lightTheme } from '@lib/ui/theme/lightTheme'
 import {
   Body,

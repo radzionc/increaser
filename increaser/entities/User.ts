@@ -52,7 +52,7 @@ export type User = DayMoments &
 
     completedEducation: Education[]
 
-    updatedAt: number
+    lastVisitAt: number
 
     sumbittedHabitsAt?: number
 
@@ -60,6 +60,8 @@ export type User = DayMoments &
 
     subscription?: Subscription
     lifeTimeDeal?: LifeTimeDeal
+
+    accountDeletionEmailSentAt?: number
 
     vision: Vision
     goals: Goals
@@ -74,7 +76,7 @@ export const userReadonlyFields = [
   'paddle',
   'lastSyncedMonthEndedAt',
   'lastSyncedWeekEndedAt',
-  'updatedAt',
+  'lastVisitAt',
   'subscription',
   'lifeTimeDeal',
 ] as const

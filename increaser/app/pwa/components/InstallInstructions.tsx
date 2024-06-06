@@ -3,7 +3,7 @@ import { usePWA } from '@increaser/app/pwa/PWAContext'
 import { Button } from '@lib/ui/buttons/Button'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 
 export const InstallInstructions = () => {
   const { installPromptEvent } = usePWA()

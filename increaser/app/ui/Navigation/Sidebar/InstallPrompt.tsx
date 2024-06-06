@@ -12,7 +12,7 @@ import { ArrowDownCircleIcon } from '@lib/ui/icons/ArrowDownCircleIcon'
 import { Text } from '@lib/ui/text'
 import { HStack } from '@lib/ui/layout/Stack'
 import { CloseButton } from '@lib/ui/buttons/CloseButton'
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 
 const Wrapper = styled.div`
   width: 100%;
