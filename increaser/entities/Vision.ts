@@ -22,7 +22,6 @@ export type VisionAttribute = {
   name: string
   status: VisionAttributeStatus
   imageId?: string | null
-  imageUrl?: string | null
 }
 
 export type Vision = Record<string, VisionAttribute>
