@@ -8,19 +8,26 @@ type VisionAttributeDescription = Pick<VisionAttribute, 'name' | 'status'> & {
 }
 
 const items: VisionAttributeDescription[] = [
-  // {
-  //   name: 'A strong marriage',
-  //   status: 'maintainance',
-  // },
   {
-    name: 'Nature is within a walking distance from my house',
+    name: 'Nature is just a short walk away from my house',
     status: 'maintainance',
     imageName: 'nature.webp',
   },
-  // {
-  //   name: 'Wake up without an alarm',
-  //   status: 'maintainance',
-  // },
+  {
+    name: 'A strong marriage',
+    status: 'maintainance',
+    imageName: 'marriage.webp',
+  },
+  {
+    name: 'Wake up without an alarm',
+    status: 'maintainance',
+    imageName: 'wakeup.webp',
+  },
+  {
+    name: 'A fulfilling work with a high level of freedom',
+    status: 'inProgress',
+    imageName: 'office.webp',
+  },
   {
     name: 'Live in my own house',
     status: 'inProgress',
@@ -31,14 +38,10 @@ const items: VisionAttributeDescription[] = [
   //   status: 'inProgress',
   // },
   {
-    name: 'A fulfilling work with a high level of freedom',
-    status: 'inProgress',
-    imageName: 'work.webp',
+    name: 'Having a dog',
+    status: 'toDo',
+    imageName: 'dog.webp',
   },
-  // {
-  //   name: 'Having kids',
-  //   status: 'toDo',
-  // },
 ]
 
 export const getDemoVision = (): Vision => {

@@ -20,20 +20,36 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { interactive } from '@lib/ui/css/interactive'
 import { transition } from '@lib/ui/css/transition'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
+import { round } from '@lib/ui/css/round'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 
 const Wrapper = styled.div`
   ${visionImageAspectRatio};
+  width: 100%;
+  overflow: hidden;
   padding: 0;
+  position: relative;
+  ${centerContent};
+`
+
+const PositionRemoveButton = styled.div`
+  position: absolute;
+  top: 8px;
 `
 
 const RemoveButton = styled(UnstyledButton)`
   ${centerContent};
   font-size: 14px;
   font-weight: 500;
+  ${round};
+  height: 40px;
+  ${horizontalPadding(16)};
+  background: ${getColor('foreground')};
   ${transition};
   &:hover {
     color: ${getColor('contrast')};
-    background: ${getColor('mist')};
+    background: ${getHoverVariant('foreground')};
   }
 `
 
@@ -46,6 +62,7 @@ const ImageInput = styled(TakeWholeSpace)`
     color: ${getColor('contrast')};
     background: ${getColor('mist')};
   }
+  border: 2px dashed ${getColor('primary')};
 `
 
 const Image = styled(CoverImage)``
@@ -81,26 +98,19 @@ export const VisionImageInput = ({
 
   return (
     <>
-      {value && (
-        <RemoveButton
-          onClick={() => {
-            reset()
-            onChange(null)
-          }}
-        >
-          <HStack alignItems="center" gap={8}>
-            <IconWrapper>
-              <TrashBinIcon />
-            </IconWrapper>
-            Remove image
-          </HStack>
-        </RemoveButton>
-      )}
       <Wrapper>
         {status === 'pending' ? (
-          <Center>
-            <Spinner />
-          </Center>
+          <VStack alignItems="center" gap={16}>
+            <IconWrapper style={{ fontSize: 40 }}>
+              <Spinner />
+            </IconWrapper>
+            <VStack alignItems="center" gap={8}>
+              <Text>Please wait</Text>
+              <Text size={14} color="supporting">
+                Uploading the image...
+              </Text>
+            </VStack>
+          </VStack>
         ) : value ? (
           <SafeImage
             render={(props) => <Image {...props} />}
@@ -123,6 +133,23 @@ export const VisionImageInput = ({
             </VStack>
           </ImageInput>
         )}
+        {value && (
+          <PositionRemoveButton>
+            <RemoveButton
+              onClick={() => {
+                reset()
+                onChange(null)
+              }}
+            >
+              <HStack alignItems="center" gap={8}>
+                <IconWrapper>
+                  <TrashBinIcon />
+                </IconWrapper>
+                Remove image
+              </HStack>
+            </RemoveButton>
+          </PositionRemoveButton>
+        )}
       </Wrapper>
       {status === 'error' && (
         <VStack>
@@ -133,29 +160,4 @@ export const VisionImageInput = ({
       )}
     </>
   )
-
-  // return (
-  //   <InputContainer>
-  //     <LabelText>Visualize your aspiration</LabelText>
-  //     <HStack gap={8}>
-  //       <div {...getRootProps()} style={{ width: '100%' }}>
-  //         <input {...getInputProps()} />
-  //         <Container>
-  //           {status === 'pending' ? (
-  //             <LoaderContainer>
-  //               <Spinner />
-  //             </LoaderContainer>
-  //           ) : imageId ? (
-  //             <SafeImage
-  //               render={(props) => <Image {...props} />}
-  //               src={getPublicFileUrl(imageId)}
-  //             />
-  //           ) : (
-  //             <PictureIcon />
-  //           )}
-  //         </Container>
-  //       </div>
-  //     </HStack>
-  //   </InputContainer>
-  // )
 }

@@ -1,14 +1,13 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentVisionAttributeProvider } from '@increaser/ui/vision/CurrentVisionAttributeProvider'
 import { order } from '@lib/utils/array/order'
 import styled from 'styled-components'
 import { VisionAttributeItemContent } from '@increaser/ui/vision/VisionAttributeItemContent'
+import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 
-const Container = styled(VStack)`
-  max-width: 480px;
+const Container = styled(UniformColumnGrid)`
+  max-width: 920px;
   width: 100%;
-  gap: 8px;
 `
 
 export const VisionSliceContent = () => {
@@ -16,7 +15,7 @@ export const VisionSliceContent = () => {
   const items = order(Object.values(vision), (item) => item.order, 'asc')
 
   return (
-    <Container>
+    <Container gap={20} minChildrenWidth={320}>
       {items.map((item) => (
         <CurrentVisionAttributeProvider key={item.id} value={item}>
           <VisionAttributeItemContent />
