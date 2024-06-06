@@ -9,6 +9,7 @@ import { FocusOnboardingStep } from './focus/FocusOnboardingStep'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
 import { ProjectsBudgetOnboardingStep } from './projectsBudget/ProjectsBudgetOnboardingStep'
 import { VStack } from '@lib/ui/layout/Stack'
+import { VisionOnboardingStep } from './vision/VisionOnboardingStep'
 
 export const OnboardingStepFormContent = () => {
   const { currentStep } = useOnboarding()
@@ -27,6 +28,7 @@ export const OnboardingStepFormContent = () => {
       dailyHabits={() => <HabitsOnboardingStep />}
       tasks={() => <TasksOnboardingStep />}
       focus={() => <FocusOnboardingStep />}
+      vision={() => <VisionOnboardingStep />}
     />
   )
 }

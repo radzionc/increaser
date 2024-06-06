@@ -16,6 +16,7 @@ const onboardingStepTitle: Record<OnboardingStep, string> = {
   dailyHabits: 'Build a Foundation of Daily Habits for Lasting Well-being',
   tasks: 'Elevate Your Day with Priority Tasks at a Glance',
   focus: 'Boost Your Focus with Targeted Work Sessions',
+  vision: 'Describe Your Vision for a Perfect Life',
 }
 
 export const OnboardingStepEducation = () => {
@@ -124,6 +125,18 @@ export const OnboardingStepEducation = () => {
                   </Text>
                 </VStack>
               )}
+              vision={() => (
+                <>
+                  Here's an improved version of the copy: Define your vision for
+                  a perfect life by adding specific vision attributes like
+                  "Happy marriage," "Fit body," or "Financial independence."
+                  Each attribute can be marked as done, maintenance, in
+                  progress, or to-do. Enhance your motivation and focus by
+                  attaching images to these attributes, making your aspirations
+                  more tangible and guiding you toward achieving your ideal
+                  lifestyle.
+                </>
+              )}
             />
           </Text>
         </VStack>
@@ -143,6 +156,7 @@ export const OnboardingStepEducation = () => {
           )}
           tasks={() => null}
           focus={() => null}
+          vision={() => null}
         />
       </SeparatedByLine>
     </OnboardingSection>

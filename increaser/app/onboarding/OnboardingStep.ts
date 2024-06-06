@@ -1,4 +1,5 @@
 export const onboardingSteps = [
+  'vision',
   'projects',
   'workBudget',
   'projectsBudget',
@@ -17,4 +18,5 @@ export const onboardingStepTargetName: Record<OnboardingStep, string> = {
   dailyHabits: 'Establish daily habits',
   tasks: 'List tasks',
   focus: 'Start focus session',
+  vision: 'Describe your vision',
 }

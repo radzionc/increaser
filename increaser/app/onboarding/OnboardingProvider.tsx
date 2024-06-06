@@ -44,6 +44,7 @@ export const OnboardingProvider = ({
   const isNextStepDisabled = useMemo(
     () =>
       match<OnboardingStep, string | false>(currentStep, {
+        vision: () => false,
         projects: () => false,
         workBudget: () => false,
         projectsBudget: () => false,
