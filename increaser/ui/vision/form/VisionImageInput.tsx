@@ -23,6 +23,7 @@ import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { round } from '@lib/ui/css/round'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
+import { VisionImageInputContent } from './VisionImageInputContent'
 
 const Wrapper = styled.div`
   ${visionImageAspectRatio};
@@ -100,17 +101,11 @@ export const VisionImageInput = ({
     <>
       <Wrapper>
         {status === 'pending' ? (
-          <VStack alignItems="center" gap={16}>
-            <IconWrapper style={{ fontSize: 40 }}>
-              <Spinner />
-            </IconWrapper>
-            <VStack alignItems="center" gap={8}>
-              <Text>Please wait</Text>
-              <Text size={14} color="supporting">
-                Uploading the image...
-              </Text>
-            </VStack>
-          </VStack>
+          <VisionImageInputContent
+            title="Please wait"
+            subTitle="Uploading the image..."
+            icon={<Spinner />}
+          />
         ) : value ? (
           <SafeImage
             render={(props) => <Image {...props} />}
@@ -120,17 +115,11 @@ export const VisionImageInput = ({
         ) : (
           <ImageInput {...getRootProps()}>
             <input {...getInputProps()} />
-            <VStack alignItems="center" gap={16}>
-              <IconWrapper style={{ fontSize: 40 }}>
-                <PictureIcon />
-              </IconWrapper>
-              <VStack alignItems="center" gap={8}>
-                <Text>Add an image to visualize your aspiration</Text>
-                <Text size={14} color="supporting">
-                  Drop it here or click to select
-                </Text>
-              </VStack>
-            </VStack>
+            <VisionImageInputContent
+              title="Add an image to visualize your aspiration"
+              subTitle="Drop it here or click to select"
+              icon={<PictureIcon />}
+            />
           </ImageInput>
         )}
         {value && (
