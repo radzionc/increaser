@@ -18,17 +18,21 @@ export const ProductFeatureDetails = () => {
             {format(createdAt, 'dd MMM yyyy')}
           </LabeledValue>
           <LabeledValue name="Proposed by">
-            <UserProfileQueryDependant
-              id={proposedBy}
-              success={(profile) => {
-                return (
-                  <ScoreboardDisplayName
-                    name={profile?.name || 'Anonymous'}
-                    country={profile?.country}
-                  />
-                )
-              }}
-            />
+            {proposedBy ? (
+              <UserProfileQueryDependant
+                id={proposedBy}
+                success={(profile) => {
+                  return (
+                    <ScoreboardDisplayName
+                      name={profile?.name || 'Anonymous'}
+                      country={profile?.country}
+                    />
+                  )
+                }}
+              />
+            ) : (
+              <ScoreboardDisplayName name="Unknown" />
+            )}
           </LabeledValue>
         </VStack>
         <VoteForFeature />

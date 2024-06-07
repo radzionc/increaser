@@ -29,7 +29,7 @@ type UserInfo = Pick<
 export const syncScoreboards = async () => {
   const users = await totalScan<UserInfo>({
     TableName: tableName.users,
-    FilterExpression: 'size(#sets) > :size AND #updatedAt > :updatedAt',
+    FilterExpression: 'size(#sets) > :size AND #lastVisitAt > :lastVisitAt',
     ExpressionAttributeNames: {
       '#id': 'id',
       '#sets': 'sets',
@@ -37,11 +37,11 @@ export const syncScoreboards = async () => {
       '#timeZone': 'timeZone',
       '#country': 'country',
       '#isAnonymous': 'isAnonymous',
-      '#updatedAt': 'updatedAt',
+      '#lastVisitAt': 'lastVisitAt',
     },
     ExpressionAttributeValues: {
       ':size': 0,
-      ':updatedAt':
+      ':lastVisitAt':
         Date.now() -
         convertDuration(
           Math.max(...Object.values(scoreboardPeriodInDays)),

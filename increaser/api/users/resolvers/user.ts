@@ -10,7 +10,7 @@ export const user: ApiResolver<'user'> = async ({
 }) => {
   const userId = assertUserId(context)
 
-  await updateUser(userId, { timeZone })
+  await updateUser(userId, { timeZone, lastVisitAt: Date.now() })
 
   await organizeSets(userId)
 

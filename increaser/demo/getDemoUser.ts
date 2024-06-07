@@ -21,7 +21,7 @@ export const getDemoUser = (): User => {
     registrationDate: Date.now(),
     finishedOnboardingAt: Date.now(),
     freeTrialEnd: Date.now() + convertDuration(100, 'd', 'ms'),
-    updatedAt: Date.now(),
+    lastVisitAt: Date.now(),
     timeZone: getCurrentTimezoneOffset(),
     habits: getDemoHabits(),
     projects: [otherProject, ...getDemoProjects()],

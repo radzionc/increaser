@@ -1,5 +1,10 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
-import { legalEntity, productName, supportEmail } from '@increaser/config'
+import {
+  deleteInactiveAccountAfter,
+  legalEntity,
+  productName,
+  supportEmail,
+} from '@increaser/config'
 import { LegalPageContent } from '@lib/ui/website/legal/LegalPageContent'
 import { LegalPageSection } from '@lib/ui/website/legal/LegalPageSection'
 
@@ -94,6 +99,14 @@ const TermsOfServicePage = () => (
         LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
         NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
         SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      </LegalPageSection>
+      <LegalPageSection title="Inactive Accounts">
+        Accounts that remain inactive for a period of{' '}
+        {deleteInactiveAccountAfter} days will be automatically deleted.
+        Inactivity is defined as not logging into the account or using any of
+        the {productName} services. If your account is deleted due to
+        inactivity, you may create a new account, but previous data will not be
+        recoverable.
       </LegalPageSection>
       <LegalPageSection title="Privacy">
         Please read our Privacy Policy for how we manage the personal data you

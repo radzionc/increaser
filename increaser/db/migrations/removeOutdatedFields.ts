@@ -1,33 +1,18 @@
-import { totalScan } from '@lib/dynamodb/totalScan'
-import { tableName } from '../tableName'
-import { getPickParams } from '@lib/dynamodb/getPickParams'
 import { updateItem } from '@lib/dynamodb/updateItem'
-
-const field = 'weekTimeAllocation' as const
-
-type OldUser = {
-  id: string
-  [field]: any
-}
-
-const removeOutdatedFields = async () => {
-  const users = await totalScan<OldUser>({
-    TableName: tableName.users,
-    ...getPickParams(['id', field]),
-    FilterExpression: `attribute_exists(${field})`,
-  })
+import { tableName } from '../tableName'
+import { getAllUsers } from '../user'
+;(async () => {
+  const users = await getAllUsers(['id'])
 
   await Promise.all(
-    users.map((user) => {
+    users.map(({ id }) => {
       return updateItem({
         tableName: tableName.users,
-        key: { id: user.id },
+        key: { id: id },
         fields: {
-          [field]: undefined,
+          accountDeletionEmailSentAt: undefined,
         },
       })
     }),
   )
-}
-
-removeOutdatedFields()
+})()

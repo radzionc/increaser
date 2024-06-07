@@ -1,6 +1,6 @@
 import { render } from '@react-email/render'
 import { sendEmail } from './sendEmail'
-import { productName } from '@increaser/entities'
+import { productName } from '@increaser/config'
 import { getEnvVar } from './getEnvVar'
 import LoginLinkEmail, { LoginLinkEmailProps } from '../emails/LoginLinkEmail'
 

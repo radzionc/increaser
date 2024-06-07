@@ -6,7 +6,7 @@ export type ProductFeature = {
   name: string
   description: string
   createdAt: number
-  proposedBy: string
+  proposedBy?: string | null
   upvotedBy: string[]
   isApproved: boolean
   status: ProductFeatureStatus
@@ -21,5 +21,5 @@ export const getProductFeautureDefaultFields = ({
   isApproved: false,
   status: 'idea',
   proposedBy,
-  upvotedBy: [proposedBy],
+  upvotedBy: proposedBy ? [proposedBy] : [],
 })
