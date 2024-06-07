@@ -1,5 +1,4 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
-import { VisionAttributeDescription } from './visionAttributes'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
@@ -18,6 +17,7 @@ import { useCreateVisionAttributeMutation } from '@increaser/ui/vision/api/useCr
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
+import { VisionAttributeIdea } from '@increaser/entities/Vision'
 
 const Indicator = styled.div`
   ${round};
@@ -72,7 +72,7 @@ const Image = styled.img`
 
 export const CuratedVisionAttributeItem = ({
   value: { id, name },
-}: ComponentWithValueProps<VisionAttributeDescription>) => {
+}: ComponentWithValueProps<VisionAttributeIdea>) => {
   const { mutate } = useCreateVisionAttributeMutation()
 
   const { vision } = useAssertUserState()
