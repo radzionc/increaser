@@ -1,33 +1,62 @@
 import { VisionAttribute } from '@increaser/entities/Vision'
 
-export type VisionAttributeDescription = Pick<
-  VisionAttribute,
-  'name' | 'imageId'
->
+export type VisionAttributeDescription = Pick<VisionAttribute, 'id' | 'name'>
 
 export const visionAttributes: VisionAttributeDescription[] = [
   {
-    name: 'Nature is just a short walk away from my house',
-    imageId: 'vision/nature.webp',
+    id: 'marriage',
+    name: 'A strong and loving marriage',
   },
   {
-    name: 'A strong marriage',
-    imageId: 'vision/marriage.webp',
+    id: 'family',
+    name: 'Having a family and raising children',
   },
   {
-    name: 'Wake up without an alarm',
-    imageId: 'vision/wakeup.webp',
+    id: 'financial',
+    name: 'Financial independence and security',
   },
   {
-    name: 'A fulfilling work with a high level of freedom',
-    imageId: 'vision/office.webp',
+    id: 'house',
+    name: 'Living in my own house',
   },
   {
-    name: 'Live in my own house',
-    imageId: 'vision/house.webp',
+    id: 'friendships',
+    name: 'Strong and meaningful friendships',
   },
   {
-    name: 'Having a dog',
-    imageId: 'vision/dog.webp',
+    id: 'nature',
+    name: 'Living close to nature',
+  },
+  {
+    id: 'work',
+    name: 'Fulfilling work with high freedom',
+  },
+  {
+    id: 'fitness',
+    name: 'Maintaining a healthy and fit body',
+  },
+  {
+    id: 'wakeup',
+    name: 'Wake up naturally, without an alarm',
+  },
+  {
+    id: 'travel',
+    name: 'Traveling to new and exciting places',
+  },
+  {
+    id: 'relax',
+    name: 'Relaxing and peaceful environment',
+  },
+  {
+    id: 'meals',
+    name: 'Enjoying delicious and healthy meals',
+  },
+  {
+    id: 'hobbies',
+    name: 'Engaging in creative hobbies',
+  },
+  {
+    id: 'dog',
+    name: 'Having a beloved dog',
   },
 ]

@@ -1,8 +1,7 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { VisionAttributeDescription } from './visionAttributes'
-import { HStack } from '@lib/ui/layout/Stack'
-import styled from 'styled-components'
-import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
+import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { transition } from '@lib/ui/css/transition'
@@ -16,12 +15,13 @@ import { visionImageAspectRatio } from '@increaser/ui/vision/visionImageAspectRa
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { useCreateVisionAttributeMutation } from '@increaser/ui/vision/api/useCreateVisionAttributeMutation'
-import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { CheckIcon } from '@lib/ui/icons/CheckIcon'
+import { interactive } from '@lib/ui/css/interactive'
 
 const Indicator = styled.div`
   ${round};
-  ${sameDimensions(28)};
+  ${sameDimensions(24)};
   ${centerContent};
   color: ${getColor('textSupporting')};
   background: ${getColor('mist')};
@@ -29,69 +29,84 @@ const Indicator = styled.div`
 `
 
 const Header = styled(HStack)`
-  gap: 20px;
-  align-items: center;
-  padding: 20px;
+  gap: 8px;
+  align-items: start;
+  padding: 16px;
   text-align: left;
+  font-size: 14px;
+  line-height: 24px;
 `
 
-const Container = styled(UnstyledButton)`
+const Container = styled(VStack)<{ isInteractive: boolean }>`
   ${borderRadius.m};
   width: 100%;
   border: 2px solid ${getColor('mist')};
   ${transition};
   overflow: hidden;
+  justify-content: space-between;
 
-  &:hover {
-    border-color: ${getColor('primary')};
-  }
+  ${({ isInteractive }) =>
+    isInteractive
+      ? css`
+          ${interactive};
+          &:hover {
+            border-color: ${getColor('primary')};
+          }
 
-  &:hover ${Indicator} {
-    color: ${getColor('primary')};
-  }
+          &:hover ${Indicator} {
+            color: ${getColor('primary')};
+          }
+        `
+      : css`
+          border-color: ${getColor('success')};
+          ${Indicator} {
+            color: ${getColor('success')};
+          }
+        `}
 `
 
 const Image = styled.img`
   ${visionImageAspectRatio};
-  height: 100%;
   object-fit: cover;
 `
 
 export const CuratedVisionAttributeItem = ({
-  value,
+  value: { id, name },
 }: ComponentWithValueProps<VisionAttributeDescription>) => {
   const { mutate } = useCreateVisionAttributeMutation()
 
   const { vision } = useAssertUserState()
 
+  const isAdded = id in vision
+
+  const imageId = `vision/${id}.webp`
+
   return (
     <Container
+      isInteractive={!isAdded}
       onClick={() => {
+        if (isAdded) return
         const orders = Object.values(vision).map((attribute) => attribute.order)
         const order = orders.length ? Math.min(...orders) - 1 : 0
         mutate({
-          id: getId(),
-          name: value.name,
+          id,
+          name: name,
           status: 'inProgress',
-          imageId: value.imageId,
+          imageId,
           order,
         })
       }}
     >
       <Header>
         <Indicator>
-          <IconWrapper>
-            <PlusIcon />
-          </IconWrapper>
+          <IconWrapper>{isAdded ? <CheckIcon /> : <PlusIcon />}</IconWrapper>
         </Indicator>
-        <Text>{value.name}</Text>
+        <Text>{name}</Text>
       </Header>
-      {value.imageId && (
-        <SafeImage
-          src={getPublicFileUrl(value.imageId)}
-          render={(props) => <Image {...props} />}
-        />
-      )}
+      <SafeImage
+        src={getPublicFileUrl(imageId)}
+        render={(props) => <Image {...props} />}
+      />
     </Container>
   )
 }
