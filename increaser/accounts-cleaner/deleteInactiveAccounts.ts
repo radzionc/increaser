@@ -51,7 +51,7 @@ export const deleteInactiveAccounts = async () => {
                 )
           ) {
             console.log(`Deleting user with id: ${id}`)
-            deleteUser(id)
+            await deleteUser(id)
             return
           }
 
