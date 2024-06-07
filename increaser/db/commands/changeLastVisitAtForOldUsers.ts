@@ -1,6 +1,6 @@
+import { notifyInactiveAccountAfter } from '@increaser/config'
 import { getAllUsers, updateUser } from '../user'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { notifyInactiveAccountAboutDeletionDays } from '../../accounts-cleaner/config'
 ;(async () => {
   const users = await getAllUsers([
     'id',
@@ -16,8 +16,7 @@ import { notifyInactiveAccountAboutDeletionDays } from '../../accounts-cleaner/c
 
     if (
       user.freeTrialEnd >
-      Date.now() -
-        convertDuration(notifyInactiveAccountAboutDeletionDays, 'd', 'ms')
+      Date.now() - convertDuration(notifyInactiveAccountAfter, 'd', 'ms')
     ) {
       return false
     }
