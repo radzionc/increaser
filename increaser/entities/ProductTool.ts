@@ -1,4 +1,5 @@
 export const productTools = [
+  'vision',
   'focus',
   'trackTime',
   'tasks',
@@ -6,7 +7,6 @@ export const productTools = [
   'timePlanner',
   'habits',
   'schedule',
-  'vision',
 ] as const
 export type ProductTool = (typeof productTools)[number]
 

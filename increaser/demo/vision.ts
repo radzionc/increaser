@@ -1,7 +1,5 @@
 import { Vision, VisionAttribute } from '@increaser/entities/Vision'
-import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 import { getRecord } from '@lib/utils/record/getRecord'
-import { demoConfig } from './config'
 
 type VisionAttributeDescription = Pick<VisionAttribute, 'name' | 'status'> & {
   imageName: string
@@ -33,10 +31,6 @@ const items: VisionAttributeDescription[] = [
     status: 'inProgress',
     imageName: 'house.webp',
   },
-  // {
-  //   name: 'No worries about money',
-  //   status: 'inProgress',
-  // },
   {
     name: 'Having a dog',
     status: 'toDo',
@@ -50,7 +44,7 @@ export const getDemoVision = (): Vision => {
       ...item,
       id: item.name,
       order,
-      imageId: getPublicBucketUserFileKey(demoConfig.userId, item.imageName),
+      imageId: `vision/${item.imageName}`,
     })),
     (item) => item.id,
   )
