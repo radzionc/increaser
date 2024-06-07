@@ -4,7 +4,7 @@ import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 
 export const CuratedVisionAttributes = () => {
   return (
-    <UniformColumnGrid minChildrenWidth={280} gap={8}>
+    <UniformColumnGrid minChildrenWidth={300} gap={20}>
       {visionAttributeIdeas.map((value) => (
         <CuratedVisionAttributeItem key={value.name} value={value} />
       ))}

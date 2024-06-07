@@ -8,6 +8,11 @@ export const getEditSetPath = (hash: string) => {
   return `${getTimeTrackingPath('track')}?edit=${hash}`
 }
 
+export const visionBasePath = 'vision'
+export const visionViews = ['my', 'ideas'] as const
+export type VisionView = (typeof visionViews)[number]
+export const getVisionPath = (view: VisionView) => `/${visionBasePath}/${view}`
+
 export enum AppPath {
   OAuth = '/oauth',
   Tasks = '/tasks',
@@ -29,7 +34,8 @@ export enum AppPath {
   WorkBudget = '/work-budget',
   ProjectsBudget = '/projects-budget',
   Plan = '/plan',
-  Vision = '/vision',
+  MyVision = `${visionBasePath}/my`,
+  VisionIdeas = `${visionBasePath}/ideas`,
   Goals = '/goals',
   Membership = '/membership',
 }

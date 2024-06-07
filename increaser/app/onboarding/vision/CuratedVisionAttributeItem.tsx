@@ -49,16 +49,21 @@ const Container = styled(VStack)<{ isInteractive: boolean }>`
     isInteractive
       ? css`
           ${interactive};
+
           &:hover {
-            border-color: ${getColor('primary')};
+            border-color: ${getColor('mistExtra')};
+            color: ${getColor('contrast')};
           }
 
           &:hover ${Indicator} {
-            color: ${getColor('primary')};
+            color: ${getColor('success')};
           }
         `
       : css`
+          color: ${getColor('contrast')};
+
           border-color: ${getColor('success')};
+
           ${Indicator} {
             color: ${getColor('success')};
           }
