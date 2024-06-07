@@ -7,6 +7,7 @@ import { CuratedHabits } from '../habits/components/CuratedHabits'
 import { VStack } from '@lib/ui/layout/Stack'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { OnboardingStep } from './OnboardingStep'
+import { CuratedVisionAttributes } from './vision/CuratedVisionAttributes'
 
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
@@ -156,7 +157,14 @@ export const OnboardingStepEducation = () => {
           )}
           tasks={() => null}
           focus={() => null}
-          vision={() => null}
+          vision={() => (
+            <VStack gap={28}>
+              <Text color="shy" weight="bold">
+                Life aspiration ideas
+              </Text>
+              <CuratedVisionAttributes />
+            </VStack>
+          )}
         />
       </SeparatedByLine>
     </OnboardingSection>
