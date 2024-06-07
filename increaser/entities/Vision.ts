@@ -12,7 +12,7 @@ export const visionAttributeStatusNameRecord: Record<
 > = {
   done: 'Done',
   maintainance: 'Maintainance',
-  inProgress: 'In progress',
+  inProgress: 'Working on it',
   toDo: 'To do',
 }
 

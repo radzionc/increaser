@@ -45,7 +45,7 @@ export const FocusLauncherForm = () => {
   const todaySets = useTodaySets()
   const { projectsRecord } = useProjects()
   const { start } = useFocus()
-  const { projectId, taskId, startedAt } = useFocusLauncher()
+  const { projectId, taskId, startedAt, setState } = useFocusLauncher()
 
   const lastInteractionWasAt = useRef<number>()
 
@@ -141,6 +141,12 @@ export const FocusLauncherForm = () => {
                 duration: focusDuration,
                 startedAt: startedAt ?? Date.now(),
               })
+              if (startedAt) {
+                setState((state) => ({
+                  ...state,
+                  startedAt: null,
+                }))
+              }
             }}
             render={({ action }) => (
               <Button
