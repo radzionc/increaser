@@ -3,8 +3,8 @@ import * as visionDb from '@increaser/db/vision'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
-import { movePublicBucketFile } from '@increaser/public/movePublicBucketFile'
 import { getId } from '@increaser/entities-utils/shared/getId'
+import { copyPublicBucketFile } from '@increaser/public/copyPublicBucketFile'
 
 export const createVisionAttribute: ApiResolver<
   'createVisionAttribute'
@@ -13,7 +13,7 @@ export const createVisionAttribute: ApiResolver<
 
   if (input.imageId) {
     const newImageId = getPublicBucketUserFileKey(userId, getId())
-    await movePublicBucketFile(input.imageId, newImageId)
+    await copyPublicBucketFile(input.imageId, newImageId)
     input.imageId = newImageId
   }
 

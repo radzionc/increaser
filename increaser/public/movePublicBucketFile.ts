@@ -1,6 +1,7 @@
-import { CopyObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
+import { DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getS3Client } from './getS3Client'
 import { getPublicBucketName } from './getPublicBucketName'
+import { copyPublicBucketFile } from './copyPublicBucketFile'
 
 export const movePublicBucketFile = async (
   sourceKey: string,
@@ -9,14 +10,7 @@ export const movePublicBucketFile = async (
   const s3Client = getS3Client()
   const bucketName = getPublicBucketName()
 
-  // Copy the object to the new location
-  const copyCommand = new CopyObjectCommand({
-    Bucket: bucketName,
-    CopySource: `${bucketName}/${sourceKey}`,
-    Key: destinationKey,
-  })
-
-  await s3Client.send(copyCommand)
+  copyPublicBucketFile(sourceKey, destinationKey)
 
   // Delete the original object
   const deleteCommand = new DeleteObjectCommand({

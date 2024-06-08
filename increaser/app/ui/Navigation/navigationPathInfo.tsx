@@ -53,7 +53,7 @@ export const navigationPathInfo = {
     name: 'Start the day',
     icon: <CoffeeIcon />,
   },
-  [AppPath.Vision]: {
+  [AppPath.MyVision]: {
     name: 'Vision',
     icon: productToolIconRecord.vision,
   },
