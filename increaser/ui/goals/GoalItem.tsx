@@ -22,7 +22,7 @@ const Name = styled(Text)`
   text-align: start;
   font-weight: 500;
   color: ${getColor('contrast')};
-  font-size: 14px;
+  font-size: 16px;
   line-height: ${toSizeUnit(goalContentMinHeight)};
 `
 

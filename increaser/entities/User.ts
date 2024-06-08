@@ -35,6 +35,8 @@ export type User = DayMoments &
     tasks: Record<string, Task>
     freeTrialEnd: number
 
+    dob?: string | null
+
     isAnonymous: boolean
 
     appSumo?: AppSumo

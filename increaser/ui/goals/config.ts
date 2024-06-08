@@ -1,2 +1,2 @@
 export const goalContentMinHeight = 24
-export const goalVerticalPadding = 8
+export const goalVerticalPadding = 12

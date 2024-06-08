@@ -12,12 +12,13 @@ import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
   const [name, setName] = useState(goalAttribute.name)
   const [status, setStatus] = useState<GoalStatus>(goalAttribute.status)
-  const [deadlineAt, setDeadlineAt] = useState<number | null>(
+  const [deadlineAt, setDeadlineAt] = useState<string | number | null>(
     goalAttribute.deadlineAt ?? null,
   )
 
@@ -42,7 +43,10 @@ export const EditGoalForm = () => {
     if (!name.trim()) {
       return 'Name is required'
     }
-  }, [name])
+    if (!deadlineAt) {
+      return 'Deadline is required'
+    }
+  }, [deadlineAt, name])
 
   const handleSubmit = () => {
     if (isDisabled) {
@@ -57,7 +61,7 @@ export const EditGoalForm = () => {
       fields.status = status
     }
     if (deadlineAt !== goalAttribute.deadlineAt) {
-      fields.deadlineAt = deadlineAt
+      fields.deadlineAt = shouldBePresent(deadlineAt)
     }
 
     updateGoal({
