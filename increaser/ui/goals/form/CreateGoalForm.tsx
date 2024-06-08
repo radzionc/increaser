@@ -11,12 +11,13 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const { vision } = useAssertUserState()
   const [name, setName] = useState('')
   const [status, setStatus] = useState<GoalStatus>('inProgress')
-  const [deadlineAt, setDeadlineAt] = useState<string | null>(null)
+  const [deadlineAt, setDeadlineAt] = useState<string | number | null>(null)
 
   const { mutate } = useCreateGoalMutation()
 
@@ -24,7 +25,11 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
     if (!name.trim()) {
       return 'Name is required'
     }
-  }, [name])
+
+    if (!deadlineAt) {
+      return 'Deadline is required'
+    }
+  }, [deadlineAt, name])
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return
@@ -35,7 +40,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
       id: getId(),
       name,
       status,
-      deadlineAt,
+      deadlineAt: shouldBePresent(deadlineAt),
       order,
     })
     onFinish()

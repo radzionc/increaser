@@ -1,6 +1,5 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import { useCurrentGoal } from './CurrentGoalProvider'
-import { format } from 'date-fns'
 import styled from 'styled-components'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ClockIcon } from '@lib/ui/icons/ClockIcon'
@@ -9,7 +8,9 @@ import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { intervalToDuration, formatDuration, Duration } from 'date-fns'
 import { Text } from '@lib/ui/text'
-import { fromDay, stringToDay } from '@lib/utils/time/Day'
+import { useAssertUserState } from '../user/UserStateContext'
+import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
+import { formatGoalDeadline } from '@increaser/entities-utils/goal/formatGoalDeadline'
 
 const Container = styled(HStack)`
   font-size: 14px;
@@ -19,28 +20,35 @@ const Container = styled(HStack)`
 `
 
 export const GoalDeadline = () => {
-  const { deadlineAt: deadlineAtStr, status } = useCurrentGoal()
+  const { dob } = useAssertUserState()
+  const { deadlineAt, status } = useCurrentGoal()
 
-  if (!deadlineAtStr || status === 'done') return null
-
-  const deadlineAt = fromDay(stringToDay(deadlineAtStr))
+  if (!deadlineAt || status === 'done') return null
 
   return (
     <Container>
       <IconWrapper>
         <ClockIcon />
       </IconWrapper>
-      {format(deadlineAt, 'dd MMM yyyy')}{' '}
+      {formatGoalDeadline(deadlineAt)}{' '}
       <RhytmicRerender
         interval={convertDuration(1, 'min', 'ms')}
         render={() => {
           const now = Date.now()
-          if (now > deadlineAt) {
+          const deadlineTimestamp = getGoalDeadlineTimestamp({
+            value: deadlineAt,
+            dob,
+          })
+          if (now > deadlineTimestamp) {
             return null
           }
-          const duration = intervalToDuration({ start: now, end: deadlineAt })
+          const duration = intervalToDuration({
+            start: now,
+            end: deadlineTimestamp,
+          })
+
           const extraPrecision: (keyof Duration)[] =
-            deadlineAt - now < convertDuration(1, 'd', 'ms')
+            deadlineTimestamp - now < convertDuration(1, 'd', 'ms')
               ? ['hours', 'minutes']
               : []
           const durationStr = formatDuration(duration, {

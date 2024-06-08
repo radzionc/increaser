@@ -1,6 +1,7 @@
 import { haveEqualFields } from '../record/haveEqualFields'
 import { convertDuration } from './convertDuration'
 import { startOfYear } from 'date-fns'
+import { inTimeZone } from './inTimeZone'
 
 export type Day = {
   year: number
@@ -8,13 +9,17 @@ export type Day = {
 }
 
 export const toDay = (timestamp: number): Day => {
-  const yearStartedAt = startOfYear(timestamp).getTime()
+  const date = new Date(timestamp)
+  const dateOffset = date.getTimezoneOffset()
+  const yearStartedAt = inTimeZone(startOfYear(timestamp).getTime(), dateOffset)
   const diff = timestamp - yearStartedAt
 
-  return {
+  const day = {
     year: new Date(timestamp).getFullYear(),
     dayIndex: Math.floor(diff / convertDuration(1, 'd', 'ms')),
   }
+
+  return day
 }
 
 export const dayToString = ({ year, dayIndex }: Day): string =>

@@ -12,7 +12,10 @@ export type Goal = {
   order: number
   name: string
   status: GoalStatus
-  deadlineAt?: string | null
+  deadlineAt: string | number
 }
 
 export type Goals = Record<string, Goal>
+
+export const goalDeadlineTypes = ['age', 'date'] as const
+export type GoalDeadlineType = (typeof goalDeadlineTypes)[number]

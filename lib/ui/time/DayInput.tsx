@@ -26,8 +26,10 @@ const toDayInputShape = (timestamp: number): DayInputShape => {
   }
 }
 
-const fromDayInputShape = ({ day, month, year }: DayInputShape): number =>
-  new Date(year, month, day).getTime()
+const fromDayInputShape = ({ day, month, year }: DayInputShape): number => {
+  console.log('fromDayInputShape', new Date(year, month, day))
+  return new Date(year, month, day).getTime()
+}
 
 const getDaysInMonth = (year: number, month: number): number => {
   return new Date(year, month + 1, 0).getDate()
@@ -94,34 +96,34 @@ export const DayInput = ({ value, onChange, min, max }: DayInputProps) => {
   return (
     <HStack alignItems="center" gap={8}>
       <ExpandableSelector
-        style={{ minWidth: 80 }}
-        value={year}
-        onChange={(newYear) =>
-          onChange(toDay(fromDayInputShape({ day, month, year: newYear })))
+        style={{ minWidth: 68 }}
+        value={day}
+        onChange={(day) =>
+          onChange(toDay(fromDayInputShape({ day, month, year })))
         }
-        options={yearOptions}
-        renderOption={(year) => year.toString()}
-        getOptionKey={(year) => year.toString()}
+        options={dayOptions}
+        renderOption={(day) => day.toString()}
+        getOptionKey={(day) => day.toString()}
       />
       <ExpandableSelector
         style={{ minWidth: 120 }}
         value={month}
-        onChange={(newMonth) =>
-          onChange(toDay(fromDayInputShape({ day, month: newMonth, year })))
+        onChange={(month) =>
+          onChange(toDay(fromDayInputShape({ day, month, year })))
         }
         options={monthOptions}
         renderOption={(month) => monthNames[month]}
         getOptionKey={(month) => month.toString()}
       />
       <ExpandableSelector
-        style={{ minWidth: 68 }}
-        value={day}
-        onChange={(newDay) =>
-          onChange(toDay(fromDayInputShape({ day: newDay, month, year })))
+        style={{ minWidth: 80 }}
+        value={year}
+        onChange={(year) =>
+          onChange(toDay(fromDayInputShape({ day, month, year })))
         }
-        options={dayOptions}
-        renderOption={(day) => day.toString()}
-        getOptionKey={(day) => day.toString()}
+        options={yearOptions}
+        renderOption={(year) => year.toString()}
+        getOptionKey={(year) => year.toString()}
       />
     </HStack>
   )

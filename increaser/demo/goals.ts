@@ -16,7 +16,12 @@ const items: GoalDescription[] = [
 
 export const getDemoGoals = (): Goals => {
   return getRecord(
-    items.map((item, order) => ({ ...item, id: item.name, order })),
+    items.map((item, order) => ({
+      ...item,
+      id: item.name,
+      order,
+      deadlineAt: 30,
+    })),
     (item) => item.id,
   )
 }
