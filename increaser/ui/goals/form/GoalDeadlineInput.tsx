@@ -12,13 +12,16 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { EditDobPrompt } from './EditDobPrompt'
 import { Match } from '@lib/ui/base/Match'
 import { getUserAge } from '@increaser/entities-utils/user/getUserAge'
-import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
 import { DobForm } from './DobForm'
 import { AgeInput } from './AgeInput'
+import { formatGoalTimeLeft } from '@increaser/entities-utils/goal/formatGoalTimeLeft'
+import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
+import { Text } from '@lib/ui/text'
+import { DeadlineInputContainer } from './DeadlineInputContainer'
+import { LabeledValue } from '@lib/ui/text/LabeledValue'
 
 const Container = styled(VStack)`
-  gap: 20px;
+  gap: 40px;
 `
 
 const getMinDeadline = () => Date.now()
@@ -29,7 +32,17 @@ export const GoalDeadlineInput = ({
   onChange,
 }: InputProps<string | number | null>) => {
   const { dob } = useAssertUserState()
-  const [deadlineType, setDeadlineType] = useState<GoalDeadlineType>('age')
+  const [deadlineType, setDeadlineType] = useState<GoalDeadlineType>(() => {
+    if (typeof value === 'string') {
+      return 'date'
+    }
+
+    if (typeof value === 'number') {
+      return 'age'
+    }
+
+    return 'date'
+  })
 
   const [isEditingDob, setIsEditingDob] = useState(false)
 
@@ -58,43 +71,60 @@ export const GoalDeadlineInput = ({
 
   return (
     <Container>
-      <HStack fullWidth gap={20} justifyContent="space-between">
+      <HStack
+        alignItems="center"
+        fullWidth
+        gap={20}
+        justifyContent="space-between"
+      >
+        <Text color="contrast">Select deadline</Text>
         <RadioInput
           minOptionHeight={40}
           options={goalDeadlineTypes}
           value={deadlineType}
           onChange={setDeadlineType}
-          renderOption={(option) => `${capitalizeFirstLetter(option)} deadline`}
+          renderOption={capitalizeFirstLetter}
         />
-        {dob && !isEditingDob && deadlineType === 'age' && (
-          <EditDobPrompt onClick={() => setIsEditingDob(true)} />
-        )}
       </HStack>
-      <Match
-        value={deadlineType}
-        date={() => (
-          <InputContainer style={{ gap: 8 }}>
-            <LabelText>Choose your goal's deadline</LabelText>
-            <DayInput
-              min={toDay(getMinDeadline())}
-              max={toDay(getMaxDeadline())}
-              value={stringToDay(guardedValue as string)}
-              onChange={(value) => onChange(dayToString(value))}
-            />
-          </InputContainer>
-        )}
-        age={() =>
-          !dob || isEditingDob ? (
-            <DobForm
-              onFinish={() => {
-                setIsEditingDob(false)
-              }}
-            />
-          ) : (
-            <AgeInput value={guardedValue as number} onChange={onChange} />
-          )
-        }
-      />
+      <VStack gap={20}>
+        <Match
+          value={deadlineType}
+          date={() => (
+            <DeadlineInputContainer>
+              <DayInput
+                min={toDay(getMinDeadline())}
+                max={toDay(getMaxDeadline())}
+                value={stringToDay(guardedValue as string)}
+                onChange={(value) => onChange(dayToString(value))}
+              />
+            </DeadlineInputContainer>
+          )}
+          age={() =>
+            !dob || isEditingDob ? (
+              <DobForm
+                onFinish={() => {
+                  setIsEditingDob(false)
+                }}
+              />
+            ) : (
+              <HStack fullWidth justifyContent="space-between">
+                <AgeInput value={guardedValue as number} onChange={onChange} />
+                <EditDobPrompt onClick={() => setIsEditingDob(true)} />
+              </HStack>
+            )
+          }
+        />
+        <Text size={14} as="div" color="contrast">
+          {guardedValue && !isEditingDob && (
+            <LabeledValue labelColor="supporting" name="Time Remaining">
+              ~{' '}
+              {formatGoalTimeLeft(
+                getGoalDeadlineTimestamp({ value: guardedValue, dob }),
+              )}
+            </LabeledValue>
+          )}
+        </Text>
+      </VStack>
     </Container>
   )
 }
