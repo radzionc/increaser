@@ -26,10 +26,8 @@ const toDayInputShape = (timestamp: number): DayInputShape => {
   }
 }
 
-const fromDayInputShape = ({ day, month, year }: DayInputShape): number => {
-  console.log('fromDayInputShape', new Date(year, month, day))
-  return new Date(year, month, day).getTime()
-}
+const fromDayInputShape = ({ day, month, year }: DayInputShape): number =>
+  new Date(year, month, day).getTime()
 
 const getDaysInMonth = (year: number, month: number): number => {
   return new Date(year, month + 1, 0).getDate()
