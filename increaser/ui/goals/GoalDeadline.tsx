@@ -9,6 +9,7 @@ import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { intervalToDuration, formatDuration, Duration } from 'date-fns'
 import { Text } from '@lib/ui/text'
+import { fromDay, stringToDay } from '@lib/utils/time/Day'
 
 const Container = styled(HStack)`
   font-size: 14px;
@@ -18,9 +19,11 @@ const Container = styled(HStack)`
 `
 
 export const GoalDeadline = () => {
-  const { deadlineAt, status } = useCurrentGoal()
+  const { deadlineAt: deadlineAtStr, status } = useCurrentGoal()
 
-  if (!deadlineAt || status === 'done') return null
+  if (!deadlineAtStr || status === 'done') return null
+
+  const deadlineAt = fromDay(stringToDay(deadlineAtStr))
 
   return (
     <Container>

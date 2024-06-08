@@ -17,6 +17,15 @@ export const toDay = (timestamp: number): Day => {
   }
 }
 
+export const dayToString = ({ year, dayIndex }: Day): string =>
+  [dayIndex, year].join('-')
+
+export const stringToDay = (str: string): Day => {
+  const [dayIndex, year] = str.split('-').map(Number)
+
+  return { dayIndex, year }
+}
+
 export const fromDay = ({ year, dayIndex }: Day): number => {
   const yearStartedAt = startOfYear(new Date(year, 0, 1)).getTime()
   return yearStartedAt + dayIndex * convertDuration(1, 'd', 'ms')

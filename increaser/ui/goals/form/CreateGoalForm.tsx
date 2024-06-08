@@ -16,7 +16,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const { vision } = useAssertUserState()
   const [name, setName] = useState('')
   const [status, setStatus] = useState<GoalStatus>('inProgress')
-  const [deadlineAt, setDeadlineAt] = useState<number | null>(null)
+  const [deadlineAt, setDeadlineAt] = useState<string | null>(null)
 
   const { mutate } = useCreateGoalMutation()
 

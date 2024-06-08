@@ -17,7 +17,7 @@ export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
   const [name, setName] = useState(goalAttribute.name)
   const [status, setStatus] = useState<GoalStatus>(goalAttribute.status)
-  const [deadlineAt, setDeadlineAt] = useState<number | null>(
+  const [deadlineAt, setDeadlineAt] = useState<string | null>(
     goalAttribute.deadlineAt ?? null,
   )
 
