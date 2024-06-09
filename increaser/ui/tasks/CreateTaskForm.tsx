@@ -7,7 +7,7 @@ import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
 import { TaskNameInput } from './TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from './TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
@@ -61,15 +61,13 @@ export const CreateTaskForm = ({
         handleSubmit()
       })}
     >
-      <VStack>
-        <TaskNameInput
-          placeholder="Task name"
-          autoFocus
-          onChange={setName}
-          value={name}
-          onSubmit={handleSubmit}
-        />
-      </VStack>
+      <TaskNameInput
+        placeholder="Task name"
+        autoFocus
+        onChange={setName}
+        value={name}
+        onSubmit={handleSubmit}
+      />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <TaskProjectSelector value={projectId} onChange={setProjectId} />
         <HStack alignItems="center" gap={8}>

@@ -5,9 +5,11 @@ import { ComponentProps } from 'react'
 import styled from 'styled-components'
 
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(MultilineTextInput)`
   line-height: ${toSizeUnit(checklistItemContentMinHeight)};
+  background: ${getColor('background')};
 `
 
 type TaskNameInputProps = InputProps<string> &
