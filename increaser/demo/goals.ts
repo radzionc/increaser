@@ -1,14 +1,16 @@
 import { Goal, Goals } from '@increaser/entities/Goal'
 import { getRecord } from '@lib/utils/record/getRecord'
 
-type GoalDescription = Pick<Goal, 'name' | 'status'>
+type GoalDescription = Pick<Goal, 'name' | 'status' | 'emoji'>
 
 const items: GoalDescription[] = [
   {
+    emoji: '💰',
     name: 'A 6-figure income',
     status: 'inProgress',
   },
   {
+    emoji: '🏡',
     name: 'A house without a mortgage',
     status: 'inProgress',
   },

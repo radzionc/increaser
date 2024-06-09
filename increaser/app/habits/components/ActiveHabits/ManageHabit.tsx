@@ -68,7 +68,7 @@ export const ManageHabit = ({ onEdit }: ManageHabitProps) => {
             />
           ))
         }}
-        renderOpener={(props) => <OpenMenuButton {...props} />}
+        renderOpener={({ props }) => <OpenMenuButton {...props} />}
       />
     </>
   )
