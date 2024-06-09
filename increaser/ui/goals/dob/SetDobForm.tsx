@@ -3,15 +3,16 @@ import { Button } from '@lib/ui/buttons/Button'
 import styled from 'styled-components'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { DayInput } from '@lib/ui/time/DayInput'
-import { toDay, stringToDay, dayToString, Day } from '@lib/utils/time/Day'
+import { stringToDay, dayToString, Day } from '@lib/utils/time/Day'
 import { FinishableComponentProps } from '@lib/ui/props'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { LabelText } from '@lib/ui/inputs/LabelText'
-import { subYears } from 'date-fns'
-import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
+import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useAssertUserState } from '../../user/UserStateContext'
 import { Panel } from '@lib/ui/panel/Panel'
+import { useDobBoundaries } from './useDobBoundaries'
+import { getDefaultDob } from './getDefaultDob'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -28,11 +29,10 @@ export const SetDobForm = ({ onFinish }: FinishableComponentProps) => {
       return stringToDay(dob)
     }
 
-    return toDay(subYears(Date.now(), 20).getTime())
+    return getDefaultDob()
   })
 
-  const maxDob = useMemo(() => toDay(subYears(Date.now(), 6).getTime()), [])
-  const minDob = useMemo(() => toDay(subYears(Date.now(), 100).getTime()), [])
+  const [min, max] = useDobBoundaries()
 
   return (
     <InputContainer as="div" style={{ gap: 8 }}>
@@ -48,12 +48,7 @@ export const SetDobForm = ({ onFinish }: FinishableComponentProps) => {
             },
           })}
         >
-          <DayInput
-            min={minDob}
-            max={maxDob}
-            value={value}
-            onChange={setValue}
-          />
+          <DayInput min={min} max={max} value={value} onChange={setValue} />
           <Button>Submit</Button>
         </Container>
       </Panel>

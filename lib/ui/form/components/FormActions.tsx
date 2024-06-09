@@ -3,14 +3,14 @@ import { Button } from '../../buttons/Button'
 import { UniformColumnGrid } from '../../layout/UniformColumnGrid'
 
 type FormActionsProps = {
-  isDisabled: boolean | string | undefined
+  isDisabled?: boolean | string
   onCancel: () => void
   onSubmit?: () => void
   submitText?: ReactNode
 }
 
 export const FormActions = ({
-  isDisabled,
+  isDisabled = false,
   onCancel,
   onSubmit,
   submitText = 'Submit',

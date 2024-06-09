@@ -5,7 +5,6 @@ import { getUserAge } from '@increaser/entities-utils/user/getUserAge'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { range } from '@lib/utils/array/range'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { DeadlineInputContainer } from './DeadlineInputContainer'
 
 export const AgeInput = ({ value, onChange }: InputProps<number>) => {
   const { dob } = useAssertUserState()
@@ -19,15 +18,13 @@ export const AgeInput = ({ value, onChange }: InputProps<number>) => {
   }, [userAge])
 
   return (
-    <DeadlineInputContainer>
-      <ExpandableSelector
-        style={{ minWidth: 80 }}
-        options={options}
-        value={value}
-        onChange={onChange}
-        renderOption={(option) => `${option} y.o.`}
-        getOptionKey={(option) => option.toString()}
-      />
-    </DeadlineInputContainer>
+    <ExpandableSelector
+      style={{ minWidth: 80 }}
+      options={options}
+      value={value}
+      onChange={onChange}
+      renderOption={(option) => option}
+      getOptionKey={(option) => option.toString()}
+    />
   )
 }

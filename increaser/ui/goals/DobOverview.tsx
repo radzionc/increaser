@@ -1,6 +1,6 @@
 import { useAssertUserState } from '../user/UserStateContext'
 import { Opener } from '@lib/ui/base/Opener'
-import { SetDobForm } from './SetDobForm'
+import { SetDobForm } from './dob/SetDobForm'
 import { Text } from '@lib/ui/text'
 import { HStack } from '@lib/ui/layout/Stack'
 import { IconButton } from '@lib/ui/buttons/IconButton'

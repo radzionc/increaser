@@ -8,7 +8,7 @@ import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationB
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { Goals } from '@increaser/ui/goals/Goals'
 import { AddGoal } from '@increaser/ui/goals/AddGoal'
-import { ManageDob } from '@increaser/ui/goals/ManageDob'
+import { ManageDob } from '@increaser/ui/goals/dob/ManageDob'
 
 const title = 'Your goals'
 
