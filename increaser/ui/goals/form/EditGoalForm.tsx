@@ -53,6 +53,9 @@ export const EditGoalForm = () => {
     if (value.deadlineAt !== goalAttribute.deadlineAt) {
       fields.deadlineAt = shouldBePresent(value.deadlineAt)
     }
+    if (value.emoji !== goalAttribute.emoji) {
+      fields.emoji = value.emoji
+    }
 
     updateGoal({
       id: goalAttribute.id,
@@ -61,6 +64,7 @@ export const EditGoalForm = () => {
     onFinish()
   }, [
     goalAttribute.deadlineAt,
+    goalAttribute.emoji,
     goalAttribute.id,
     goalAttribute.name,
     goalAttribute.status,
@@ -68,6 +72,7 @@ export const EditGoalForm = () => {
     onFinish,
     updateGoal,
     value.deadlineAt,
+    value.emoji,
     value.name,
     value.status,
   ])
