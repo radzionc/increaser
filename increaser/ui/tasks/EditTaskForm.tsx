@@ -110,14 +110,14 @@ export const EditTaskForm = () => {
         handleSubmit(),
       )}
     >
+      <TaskNameInput
+        placeholder="Task name"
+        autoFocus
+        onChange={setName}
+        value={name}
+        onSubmit={handleSubmit}
+      />
       <VStack gap={28}>
-        <TaskNameInput
-          placeholder="Task name"
-          autoFocus
-          onChange={setName}
-          value={name}
-          onSubmit={handleSubmit}
-        />
         <HStack alignItems="center" gap={8}>
           <TaskProjectSelector value={projectId} onChange={setProjectId} />
           <TaskDeadlineInput

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -6,30 +6,29 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCreateGoalMutation } from '../api/useCreateGoalMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { GoalStatus } from '@increaser/entities/Goal'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { GoalFormShape } from './GoalFormShape'
+import { randomlyPick } from '@lib/utils/array/randomlyPick'
+import { defaultEmojis } from '../../projects/EnhancedProject'
+import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
+import { EmojiInput } from '@increaser/app/ui/EmojiInput'
+import { GoalFormHeader } from './GoalFormHeader'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const { vision } = useAssertUserState()
-  const [name, setName] = useState('')
-  const [status, setStatus] = useState<GoalStatus>('inProgress')
-  const [deadlineAt, setDeadlineAt] = useState<string | number | null>(null)
-
+  const [value, setValue] = useState<GoalFormShape>({
+    name: '',
+    status: 'inProgress',
+    deadlineAt: null,
+    emoji: randomlyPick(defaultEmojis),
+  })
   const { mutate } = useCreateGoalMutation()
 
-  const isDisabled = useMemo(() => {
-    if (!name.trim()) {
-      return 'Name is required'
-    }
-
-    if (!deadlineAt) {
-      return 'Deadline is required'
-    }
-  }, [deadlineAt, name])
+  const isDisabled = useIsGoalFormDisabled(value)
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return
@@ -38,13 +37,12 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
     const order = orders.length ? Math.max(...orders) + 1 : 0
     mutate({
       id: getId(),
-      name,
-      status,
-      deadlineAt: shouldBePresent(deadlineAt),
+      ...value,
+      deadlineAt: shouldBePresent(value.deadlineAt),
       order,
     })
     onFinish()
-  }, [isDisabled, mutate, name, onFinish, status, vision, deadlineAt])
+  }, [isDisabled, mutate, onFinish, value, vision])
 
   return (
     <Panel
@@ -57,15 +55,29 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
         onSubmit,
       })}
     >
-      <GoalNameInput
-        autoFocus
-        onChange={setName}
-        value={name}
-        onSubmit={onSubmit}
+      <GoalFormHeader>
+        <div>
+          <EmojiInput
+            value={value.emoji}
+            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
+          />
+        </div>
+        <GoalNameInput
+          autoFocus
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          value={value.name}
+          onSubmit={onSubmit}
+        />
+      </GoalFormHeader>
+      <GoalDeadlineInput
+        onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
+        value={value.deadlineAt}
       />
-      <GoalDeadlineInput value={deadlineAt} onChange={setDeadlineAt} />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <GoalStatusSelector value={status} onChange={setStatus} />
+        <GoalStatusSelector
+          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
+          value={value.status}
+        />
         <HStack alignItems="center" gap={8}>
           <Button onClick={onFinish} kind="secondary">
             Cancel

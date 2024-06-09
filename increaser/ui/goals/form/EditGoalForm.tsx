@@ -1,11 +1,9 @@
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
-import { useKey } from 'react-use'
+import { useCallback, useEffect, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
-import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { useCurrentGoal } from '../CurrentGoalProvider'
-import { Goal, GoalStatus } from '@increaser/entities/Goal'
+import { Goal } from '@increaser/entities/Goal'
 import { useUpdateGoalMutation } from '../api/useUpdateGoalMutation'
 import { useDeleteGoalMutation } from '../api/useDeleteGoalMutation'
 import { GoalNameInput } from './GoalNameInput'
@@ -13,14 +11,15 @@ import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { GoalFormShape } from './GoalFormShape'
+import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
+import { getFormProps } from '@lib/ui/form/utils/getFormProps'
+import { EmojiInput } from '@increaser/app/ui/EmojiInput'
+import { GoalFormHeader } from './GoalFormHeader'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
-  const [name, setName] = useState(goalAttribute.name)
-  const [status, setStatus] = useState<GoalStatus>(goalAttribute.status)
-  const [deadlineAt, setDeadlineAt] = useState<string | number | null>(
-    goalAttribute.deadlineAt ?? null,
-  )
+  const [value, setValue] = useState<GoalFormShape>(goalAttribute)
 
   const { mutate: updateGoal } = useUpdateGoalMutation()
   const { mutate: deleteGoal } = useDeleteGoalMutation()
@@ -37,31 +36,25 @@ export const EditGoalForm = () => {
     }
   }, [onFinish])
 
-  useKey('Escape', onFinish)
+  const isDisabled = useIsGoalFormDisabled(value)
 
-  const isDisabled = useMemo(() => {
-    if (!name.trim()) {
-      return 'Name is required'
-    }
-    if (!deadlineAt) {
-      return 'Deadline is required'
-    }
-  }, [deadlineAt, name])
-
-  const handleSubmit = () => {
+  const onSubmit = useCallback(() => {
     if (isDisabled) {
       return
     }
 
     const fields: Partial<Omit<Goal, 'id'>> = {}
-    if (name !== goalAttribute.name) {
-      fields.name = name
+    if (value.name !== goalAttribute.name) {
+      fields.name = value.name
     }
-    if (status !== goalAttribute.status) {
-      fields.status = status
+    if (value.status !== goalAttribute.status) {
+      fields.status = value.status
     }
-    if (deadlineAt !== goalAttribute.deadlineAt) {
-      fields.deadlineAt = shouldBePresent(deadlineAt)
+    if (value.deadlineAt !== goalAttribute.deadlineAt) {
+      fields.deadlineAt = shouldBePresent(value.deadlineAt)
+    }
+    if (value.emoji !== goalAttribute.emoji) {
+      fields.emoji = value.emoji
     }
 
     updateGoal({
@@ -69,30 +62,57 @@ export const EditGoalForm = () => {
       fields,
     })
     onFinish()
-  }
+  }, [
+    goalAttribute.deadlineAt,
+    goalAttribute.emoji,
+    goalAttribute.id,
+    goalAttribute.name,
+    goalAttribute.status,
+    isDisabled,
+    onFinish,
+    updateGoal,
+    value.deadlineAt,
+    value.emoji,
+    value.name,
+    value.status,
+  ])
 
   return (
     <Panel
       withSections
       kind="secondary"
       as="form"
+      {...getFormProps({
+        onClose: onFinish,
+        isDisabled,
+        onSubmit,
+      })}
       style={{ width: '100%' }}
-      onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
-        handleSubmit(),
-      )}
     >
-      <VStack gap={28}>
+      <GoalFormHeader>
+        <div>
+          <EmojiInput
+            value={value.emoji}
+            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
+          />
+        </div>
         <GoalNameInput
           autoFocus
-          onChange={setName}
-          value={name}
-          onSubmit={handleSubmit}
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          value={value.name}
+          onSubmit={onSubmit}
         />
-        <VStack alignItems="start">
-          <GoalStatusSelector value={status} onChange={setStatus} />
-        </VStack>
+      </GoalFormHeader>
+      <VStack alignItems="start">
+        <GoalStatusSelector
+          value={value.status}
+          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
+        />
       </VStack>
-      <GoalDeadlineInput value={deadlineAt} onChange={setDeadlineAt} />
+      <GoalDeadlineInput
+        value={value.deadlineAt}
+        onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
+      />
       <HStack
         wrap="wrap"
         justifyContent="space-between"

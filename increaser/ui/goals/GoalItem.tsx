@@ -11,6 +11,7 @@ import { EditGoalForm } from './form/EditGoalForm'
 import { GoalStatusTag } from './GoalStatusTag'
 import { getColor } from '@lib/ui/theme/getters'
 import { GoalDeadline } from './GoalDeadline'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 
 const Container = styled(Hoverable)`
   ${verticalPadding(goalVerticalPadding)};
@@ -27,7 +28,7 @@ const Name = styled(Text)`
 `
 
 export const GoalItem = () => {
-  const { name, status, id } = useCurrentGoal()
+  const { name, status, id, emoji } = useCurrentGoal()
 
   const [activeItemId, setActiveItemId] = useActiveItemId()
 
@@ -44,7 +45,10 @@ export const GoalItem = () => {
     >
       <VStack gap={4}>
         <HStack alignItems="start" justifyContent="space-between" gap={8}>
-          <Name>{name}</Name>
+          <Name>
+            <EmojiTextPrefix emoji={emoji} />
+            {name}
+          </Name>
           <GoalStatusTag value={status} />
         </HStack>
         <GoalDeadline />

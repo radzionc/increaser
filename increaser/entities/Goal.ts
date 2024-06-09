@@ -9,6 +9,7 @@ export const goalStatusNameRecord: Record<GoalStatus, string> = {
 
 export type Goal = {
   id: string
+  emoji: string
   order: number
   name: string
   status: GoalStatus
