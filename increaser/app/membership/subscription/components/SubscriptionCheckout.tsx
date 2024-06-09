@@ -6,8 +6,8 @@ import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { Flow } from '@lib/ui/base/Flow'
 import { QuerySubscriptionId } from '@increaser/paddle-classic-ui/components/QuerySubscriptionId'
-import { analytics } from '../../../analytics'
 import { PaddleIFrameTransition } from '../../components/PaddleIFrameTransition'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 type SubscriptionCheckoutStep =
   | {
@@ -29,6 +29,8 @@ export const SubscriptionCheckout = () => {
 
   const [billingCycle] = useSubscriptionBillingCycle()
   const user = useAssertUserState()
+
+  const analytics = useAnalytics()
 
   return (
     <Flow

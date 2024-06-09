@@ -7,7 +7,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^2.3.8",
     "@floating-ui/dom": "^1.5.3",
     "@floating-ui/react": "^0.26.4",
     "@react-spring/web": "^9.7.3",

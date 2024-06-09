@@ -3,16 +3,18 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { useMemo } from 'react'
 
 import { useAddSetMutation } from '../../sets/hooks/useAddSetMutation'
-import { analytics } from '../../analytics'
 import { areIntersecting } from '@lib/utils/interval/areIntersecting'
 import { useTrackTime } from './state/TrackTimeContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUpdateSetMutation } from '../../sets/hooks/useUpdateSetMutation'
 import { useDeleteSetMutation } from '../../sets/hooks/useDeleteSetMutation'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 export const ConfirmTrackAction = () => {
   const { sets, setState, currentSet: potentialCurrentSet } = useTrackTime()
   const currentSet = shouldBePresent(potentialCurrentSet)
+
+  const analytics = useAnalytics()
 
   const isDisabled = useMemo(() => {
     const hasIntersection = sets.some((set, index) =>

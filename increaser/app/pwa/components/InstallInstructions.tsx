@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { usePWA } from '@increaser/app/pwa/PWAContext'
 import { Button } from '@lib/ui/buttons/Button'
 import { VStack } from '@lib/ui/layout/Stack'
@@ -7,6 +7,8 @@ import { productName } from '@increaser/config'
 
 export const InstallInstructions = () => {
   const { installPromptEvent } = usePWA()
+
+  const analytics = useAnalytics()
 
   if (installPromptEvent) {
     return (

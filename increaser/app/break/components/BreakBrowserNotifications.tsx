@@ -1,10 +1,12 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { useBreak } from '@increaser/app/break/hooks/useBreak'
 import { useCallback } from 'react'
 import { Switch } from '@lib/ui/inputs/Switch'
 
 export const BreakBrowserNotification = () => {
   const { hasBrowserNotification, setHasBrowserNotification } = useBreak()
+
+  const analytics = useAnalytics()
 
   const handleChange = useCallback(() => {
     if (hasBrowserNotification) {
@@ -18,7 +20,7 @@ export const BreakBrowserNotification = () => {
         setHasBrowserNotification(true)
       }
     })
-  }, [hasBrowserNotification, setHasBrowserNotification])
+  }, [hasBrowserNotification, setHasBrowserNotification, analytics])
 
   return (
     <Switch

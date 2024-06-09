@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { getBlocks, getNextFocusDuration } from '@increaser/app/sets/Block'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
@@ -59,6 +59,8 @@ export const FocusProvider = ({ children }: Props) => {
 
   const [currentSet, setCurrentSet] = useState<CurrentSet | undefined>()
 
+  const analytics = useAnalytics()
+
   const start = useCallback(
     ({ projectId, duration, taskId, startedAt }: StartFocusParams) => {
       analytics.trackEvent('Start focus session', {
@@ -73,7 +75,7 @@ export const FocusProvider = ({ children }: Props) => {
         setFocusDuration(duration as FocusDuration)
       }
     },
-    [focusDuration],
+    [focusDuration, analytics],
   )
 
   const updateStartTime = useCallback((startedAt: number) => {
@@ -148,7 +150,7 @@ export const FocusProvider = ({ children }: Props) => {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
       })
     },
-    [addSet, currentSet, tasks, todaySets, updateTaskMutation],
+    [addSet, currentSet, tasks, todaySets, updateTaskMutation, analytics],
   )
 
   const updateTask = useCallback((value: FocusTask | undefined) => {

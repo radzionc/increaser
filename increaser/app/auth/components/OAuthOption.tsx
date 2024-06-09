@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 import { IconCentricButton } from '@lib/ui/buttons/IconCentricButton'
 import { getOAuthUrl } from '@increaser/app/auth/utils/oauth'
@@ -15,6 +15,8 @@ interface OAuthOptionProps {
 
 export const OAuthOption = ({ provider }: OAuthOptionProps) => {
   const providerName = oAuthProviderName[provider]
+
+  const analytics = useAnalytics()
 
   return (
     <ExternalLink
