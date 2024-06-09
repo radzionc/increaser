@@ -1,4 +1,3 @@
-import { analytics } from '@increaser/app/analytics'
 import { useForm } from 'react-hook-form'
 import { Button } from '@lib/ui/buttons/Button'
 import { Form } from '@lib/ui/form/components/Form'
@@ -10,6 +9,7 @@ import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { Field } from '@lib/ui/inputs/Field'
 import { useApiMutation } from '@increaser/api-ui/hooks/useApiMutation'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 interface EmailFormState {
   email: string
@@ -25,6 +25,8 @@ export const EmailAuthForm = () => {
   } = useForm<EmailFormState>({
     mode: 'onSubmit',
   })
+
+  const analytics = useAnalytics()
 
   const { mutate: sendAuthLinkByEmail, isPending } = useApiMutation(
     'sendAuthLinkByEmail',

@@ -10,7 +10,6 @@
     "generateIconMetaTags": "npx tsx icon/commands/generateIconMetaTags"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^2.3.8",
     "next": "^14.0.4",
     "next-sitemap": "^4.2.3",
     "react": "^18.2.0",

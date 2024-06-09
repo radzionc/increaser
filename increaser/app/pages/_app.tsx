@@ -1,8 +1,6 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from '@lib/ui/css/GlobalStyle'
-import { useRouter } from 'next/router'
-import { ReactNode, useEffect, useState } from 'react'
-import { analytics } from '@increaser/app/analytics'
+import { ReactNode, useState } from 'react'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { getQueryClient } from '@increaser/app/query/queryClient'
 import { BreakProvider } from '@increaser/app/break/components/BreakProvider'
@@ -31,6 +29,8 @@ import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
 import { ApiProvider } from '../api/ApiProvider'
 import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMusicProvider'
 import { YouTubeFocusMusicFloatingPlayer } from '../focus/audio/youTube/YouTubeFocusMusicFloatingPlayer'
+import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
+import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -48,54 +48,51 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     'dark',
   )
 
-  const router = useRouter()
-  const { pathname } = router
-  useEffect(() => {
-    analytics.trackEvent('Visit page', { pathname })
-  }, [pathname])
-
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
   const component = getLayout(<Component {...pageProps} />)
 
   return (
-    <ThemeProvider value={theme} onChange={setTheme}>
-      <GlobalStyle fontFamily={openSans.style.fontFamily} />
-      <QueryClientProvider client={queryClient}>
-        <ErrorBoundary fallback={<FullSizeErrorFallback />}>
-          <ApiProvider>
-            <UserStateProvider>
-              <FocusLauncherProvider>
-                <PWAProvider>
-                  <YouTubeFocusMusicProvider>
-                    <ConditionalUserState
-                      present={() => (
-                        <UserManagerProvider>
-                          <ProjectsProvider>
-                            <HabitsProvider>
-                              <FocusProvider>
-                                <ScheduleProvider>
-                                  <BreakProvider>
-                                    <FocusSoundsPlayer />
-                                    <YouTubeFocusMusicFloatingPlayer />
-                                    {component}
-                                  </BreakProvider>
-                                  <MembershipConfirmation />
-                                </ScheduleProvider>
-                              </FocusProvider>
-                            </HabitsProvider>
-                          </ProjectsProvider>
-                        </UserManagerProvider>
-                      )}
-                      missing={() => <>{component}</>}
-                    />
-                  </YouTubeFocusMusicProvider>
-                </PWAProvider>
-              </FocusLauncherProvider>
-            </UserStateProvider>
-          </ApiProvider>
-        </ErrorBoundary>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <AnalyticsProvider>
+      <PageVisitTracker />
+      <ThemeProvider value={theme} onChange={setTheme}>
+        <GlobalStyle fontFamily={openSans.style.fontFamily} />
+        <QueryClientProvider client={queryClient}>
+          <ErrorBoundary fallback={<FullSizeErrorFallback />}>
+            <ApiProvider>
+              <UserStateProvider>
+                <FocusLauncherProvider>
+                  <PWAProvider>
+                    <YouTubeFocusMusicProvider>
+                      <ConditionalUserState
+                        present={() => (
+                          <UserManagerProvider>
+                            <ProjectsProvider>
+                              <HabitsProvider>
+                                <FocusProvider>
+                                  <ScheduleProvider>
+                                    <BreakProvider>
+                                      <FocusSoundsPlayer />
+                                      <YouTubeFocusMusicFloatingPlayer />
+                                      {component}
+                                    </BreakProvider>
+                                    <MembershipConfirmation />
+                                  </ScheduleProvider>
+                                </FocusProvider>
+                              </HabitsProvider>
+                            </ProjectsProvider>
+                          </UserManagerProvider>
+                        )}
+                        missing={() => <>{component}</>}
+                      />
+                    </YouTubeFocusMusicProvider>
+                  </PWAProvider>
+                </FocusLauncherProvider>
+              </UserStateProvider>
+            </ApiProvider>
+          </ErrorBoundary>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </AnalyticsProvider>
   )
 }
 

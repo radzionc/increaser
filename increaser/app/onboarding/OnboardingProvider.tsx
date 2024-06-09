@@ -1,11 +1,11 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
-import { analytics } from '../analytics'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { OnboardingStep, onboardingSteps } from './OnboardingStep'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 type OnboardingState = {
   completedSteps: OnboardingStep[]
@@ -25,6 +25,8 @@ export const OnboardingProvider = ({
 
   const [completedSteps, setCompletedSteps] = useState<OnboardingStep[]>([])
 
+  const analytics = useAnalytics()
+
   const onCurrentStepChange = useCallback(
     (step: OnboardingStep) => {
       setCurrentStep(step)
@@ -36,7 +38,7 @@ export const OnboardingProvider = ({
         setCompletedSteps((prev) => [...prev, previousStep])
       }
     },
-    [completedSteps],
+    [completedSteps, analytics],
   )
 
   const { mutate: updateUser } = useUpdateUserMutation()
@@ -67,7 +69,13 @@ export const OnboardingProvider = ({
 
     analytics.trackEvent('Finished onboarding')
     updateUser({ finishedOnboardingAt: Date.now() })
-  }, [currentStep, finishedOnboardingAt, isNextStepDisabled, updateUser])
+  }, [
+    currentStep,
+    finishedOnboardingAt,
+    isNextStepDisabled,
+    updateUser,
+    analytics,
+  ])
 
   return (
     <OnboardingContext.Provider

@@ -7,7 +7,7 @@ import {
 
 import { Project } from '@increaser/entities/Project'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
-import { analytics } from '../../analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void
@@ -20,6 +20,8 @@ export const useCreateProjectMutation = (
   const { projects } = useAssertUserState()
   const api = useApi()
   const { updateState } = useUserState()
+
+  const analytics = useAnalytics()
 
   return useMutation({
     mutationFn: async (

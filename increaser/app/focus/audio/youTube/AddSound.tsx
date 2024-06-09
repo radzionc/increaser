@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
@@ -44,6 +44,8 @@ export const AddSound = ({ onFinish }: FinishableComponentProps) => {
   })
 
   const [isDisabled] = Object.values(errors)
+
+  const analytics = useAnalytics()
 
   return (
     <>

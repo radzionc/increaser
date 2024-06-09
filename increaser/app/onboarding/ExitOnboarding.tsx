@@ -6,11 +6,11 @@ import { LogOutIcon } from '@lib/ui/icons/LogOutIcon'
 import { Opener } from '@lib/ui/base/Opener'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
-import { analytics } from '../analytics'
 import styled from 'styled-components'
 import { productName } from '@increaser/config'
 import { useRouter } from 'next/router'
 import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 const Content = styled(VStack)`
   gap: 8px;
@@ -20,6 +20,8 @@ const Content = styled(VStack)`
 export const ExitOnboarding = () => {
   const { mutate: updateUser } = useUpdateUserMutation()
   const { push } = useRouter()
+
+  const analytics = useAnalytics()
 
   return (
     <Opener

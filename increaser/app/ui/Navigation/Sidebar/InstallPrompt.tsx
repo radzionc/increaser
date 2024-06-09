@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { getPlatform } from '@increaser/app/pwa/getPlatform'
 import { platformInfo } from '@increaser/app/pwa/platformInfo'
 import { usePWA } from '@increaser/app/pwa/PWAContext'
@@ -38,6 +38,8 @@ export const InstallPrompt = () => {
   const { installPromptEvent, setIsSidebarInstallPromptRejected } = usePWA()
 
   const platform = useMemo(getPlatform, [])
+
+  const analytics = useAnalytics()
 
   return (
     <Wrapper>

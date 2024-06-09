@@ -1,14 +1,16 @@
 import { Button } from '@lib/ui/buttons/Button'
 
-import { analytics } from '../../analytics'
 import { useTrackTime } from './state/TrackTimeContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useDeleteSetMutation } from '../../sets/hooks/useDeleteSetMutation'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 export const DeleteSetAction = () => {
   const { sets, setState, currentSet } = useTrackTime()
 
   const { mutate: deleteSet } = useDeleteSetMutation()
+
+  const analytics = useAnalytics()
 
   return (
     <Button

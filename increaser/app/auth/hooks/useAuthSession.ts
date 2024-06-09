@@ -1,5 +1,5 @@
 import { AuthSession } from '@increaser/entities/AuthSession'
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { useCallback } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import {
@@ -15,6 +15,8 @@ export const useAuthSession = () => {
     null,
   )
 
+  const analytics = useAnalytics()
+
   const onChange = useCallback(
     (session: AuthSession | null) => {
       if (session) {
@@ -29,7 +31,7 @@ export const useAuthSession = () => {
 
       setSession(session)
     },
-    [queryClient, setSession],
+    [queryClient, setSession, analytics],
   )
 
   return [session, onChange] as const

@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { useCallback } from 'react'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { Switch } from '@lib/ui/inputs/Switch'
@@ -6,6 +6,8 @@ import { Switch } from '@lib/ui/inputs/Switch'
 export const FocusBrowserNotification = () => {
   const { hasTimerBrowserNotification, setHasTimerBrowserNotification } =
     useFocus()
+
+  const analytics = useAnalytics()
 
   const handleChange = useCallback(() => {
     if (hasTimerBrowserNotification) {
@@ -19,7 +21,7 @@ export const FocusBrowserNotification = () => {
         setHasTimerBrowserNotification(true)
       }
     })
-  }, [hasTimerBrowserNotification, setHasTimerBrowserNotification])
+  }, [hasTimerBrowserNotification, setHasTimerBrowserNotification, analytics])
 
   return (
     <Switch

@@ -1,4 +1,4 @@
-import { analytics } from '@increaser/app/analytics'
+import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { useCallback, useEffect, useState } from 'react'
 import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
@@ -39,6 +39,8 @@ export const PWAProvider = ({ children }: Props) => {
       )
     }
   }, [])
+
+  const analytics = useAnalytics()
 
   useEffect(() => {
     const handleAppInstalledEvent = () => {

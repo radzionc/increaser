@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { GlobalStyle } from '@lib/ui/css/GlobalStyle'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Open_Sans } from 'next/font/google'
@@ -10,9 +10,9 @@ import {
   PersistentStateKey,
 } from '@increaser/ui/state/persistentState'
 import { Page } from '@lib/next-ui/Page'
-import { useRouter } from 'next/router'
-import { analytics } from '../analytics'
+import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { WebsiteLayout } from '../layout/WebsiteLayout'
+import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -34,18 +34,16 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     'dark',
   )
 
-  const { pathname } = useRouter()
-  useEffect(() => {
-    analytics.trackEvent('Visit page', { pathname })
-  }, [pathname])
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={theme} onChange={setTheme}>
-        <GlobalStyle fontFamily={openSans.style.fontFamily} />
-        <WebsiteLayout>{component}</WebsiteLayout>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <AnalyticsProvider>
+      <PageVisitTracker />
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={theme} onChange={setTheme}>
+          <GlobalStyle fontFamily={openSans.style.fontFamily} />
+          <WebsiteLayout>{component}</WebsiteLayout>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </AnalyticsProvider>
   )
 }
 
