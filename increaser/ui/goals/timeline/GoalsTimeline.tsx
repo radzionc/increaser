@@ -14,7 +14,7 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 const Line = styled.div`
   height: 1px;
   width: 100%;
-  background: ${getColor('textSupporting')};
+  background: ${getColor('mistExtra')};
 `
 
 const LabelsContainer = styled.div`

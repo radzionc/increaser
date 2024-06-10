@@ -16,7 +16,7 @@ const Label = styled(VStack)`
   justify-content: end;
   padding-left: 4px;
   color: ${getColor('textSupporting')};
-  border-left: 1px solid;
+  border-left: 1px solid ${getColor('mistExtra')};
   position: absolute;
   top: 0;
 `
