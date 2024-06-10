@@ -8,6 +8,8 @@ import { SetDobPrompt } from '../dob/SetDobPrompt'
 import { goalsTimelineConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { CurrentAge } from './CurrentAge'
+import { GroupedGoals } from './GroupedGoals'
+import { Spacer } from '@lib/ui/layout/Spacer'
 
 const Line = styled.div`
   height: 1px;
@@ -28,6 +30,8 @@ export const GoalsTimeline = () => {
     return (
       <GoalsTimelineProvider>
         <VStack>
+          <GroupedGoals />
+          <Spacer height={8} />
           <Line />
           <LabelsContainer>
             <TimeLabels />
