@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { Match } from '@lib/ui/base/Match'
-import { getUserAge } from '@increaser/entities-utils/user/getUserAge'
+import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { AgeInput } from './AgeInput'
 import { formatGoalTimeLeft } from '@increaser/entities-utils/goal/formatGoalTimeLeft'
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
@@ -44,15 +44,19 @@ export const GoalDeadlineInput = ({
   })
 
   const guardedValue = useMemo(() => {
+    const now = Date.now()
     if (deadlineType === 'date' && typeof value !== 'string') {
-      return dayToString(toDay(addYears(Date.now(), 1).getTime()))
+      return dayToString(toDay(addYears(now, 1).getTime()))
     }
 
     if (deadlineType === 'age' && typeof value !== 'number') {
       if (!dob) {
         return null
       }
-      const userAge = getUserAge(dob)
+      const userAge = getUserAgeAt({
+        dob,
+        at: now,
+      })
 
       return userAge + 1
     }
