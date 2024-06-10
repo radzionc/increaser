@@ -8,7 +8,7 @@ import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationB
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { Goals } from '@increaser/ui/goals/Goals'
 import { AddGoal } from '@increaser/ui/goals/AddGoal'
-import { ManageDob } from '@increaser/ui/goals/dob/ManageDob'
+import { GoalsTimeline } from '@increaser/ui/goals/timeline/GoalsTimeline'
 
 const title = 'Your goals'
 
@@ -24,8 +24,8 @@ export const GoalsPage = () => {
         <PageTitle documentTitle={`✨ ${title}`} title={title} />
         <UserStateOnly>
           <Container>
-            <VStack gap={20}>
-              <ManageDob />
+            <VStack gap={40}>
+              <GoalsTimeline />
               <ProductEducationBlock value="goals" />
               <VStack>
                 <ActiveItemIdProvider initialValue={null}>

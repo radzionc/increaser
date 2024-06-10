@@ -4,6 +4,7 @@ import { order } from '@lib/utils/array/order'
 import styled from 'styled-components'
 import { GoalItemContent } from '@increaser/ui/goals/GoalItemContent'
 import { VStack } from '@lib/ui/layout/Stack'
+import { GoalsTimeline } from '@increaser/ui/goals/timeline/GoalsTimeline'
 
 const Container = styled(VStack)`
   gap: 40px;
@@ -17,6 +18,7 @@ export const GoalsSliceContent = () => {
 
   return (
     <Container>
+      <GoalsTimeline />
       {items.map((item) => (
         <CurrentGoalProvider key={item.id} value={item}>
           <GoalItemContent />
