@@ -1,8 +1,7 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useEffect, useState } from 'react'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
-import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { OnboardingStep, onboardingSteps } from './OnboardingStep'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
@@ -10,7 +9,6 @@ import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 type OnboardingState = {
   completedSteps: OnboardingStep[]
   currentStep: OnboardingStep
-  isNextStepDisabled: string | false
   setCurrentStep: (step: OnboardingStep) => void
 }
 
@@ -43,25 +41,9 @@ export const OnboardingProvider = ({
 
   const { mutate: updateUser } = useUpdateUserMutation()
 
-  const isNextStepDisabled = useMemo(
-    () =>
-      match<OnboardingStep, string | false>(currentStep, {
-        vision: () => false,
-        projects: () => false,
-        workBudget: () => false,
-        projectsBudget: () => false,
-        schedule: () => false,
-        dailyHabits: () => false,
-        tasks: () => false,
-        focus: () => false,
-      }),
-    [currentStep],
-  )
-
   const { finishedOnboardingAt } = useAssertUserState()
   useEffect(() => {
     if (finishedOnboardingAt) return
-    if (isNextStepDisabled) return
 
     const isLastStep =
       currentStep === onboardingSteps[onboardingSteps.length - 1]
@@ -69,13 +51,7 @@ export const OnboardingProvider = ({
 
     analytics.trackEvent('Finished onboarding')
     updateUser({ finishedOnboardingAt: Date.now() })
-  }, [
-    currentStep,
-    finishedOnboardingAt,
-    isNextStepDisabled,
-    updateUser,
-    analytics,
-  ])
+  }, [currentStep, finishedOnboardingAt, updateUser, analytics])
 
   return (
     <OnboardingContext.Provider
@@ -83,7 +59,6 @@ export const OnboardingProvider = ({
         currentStep,
         setCurrentStep: onCurrentStepChange,
         completedSteps,
-        isNextStepDisabled,
       }}
     >
       {children}

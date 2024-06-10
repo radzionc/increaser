@@ -13,7 +13,7 @@ const Container = styled(HStack)`
 `
 
 export const OnboardingPrimaryNavigation = () => {
-  const { currentStep, setCurrentStep, isNextStepDisabled } = useOnboarding()
+  const { currentStep, setCurrentStep } = useOnboarding()
 
   const { push } = useRouter()
 
@@ -45,7 +45,6 @@ export const OnboardingPrimaryNavigation = () => {
             push(AppPath.Home)
           }
         }}
-        isDisabled={isNextStepDisabled}
         size="l"
       >
         Next
