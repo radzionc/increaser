@@ -1,11 +1,11 @@
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { productName } from '@increaser/config'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { TrackedTimeReportProvider } from '@increaser/ui/timeTracking/report/TrackedTimeReportProvider'
 import { TrackedTimeReport } from '@increaser/ui/timeTracking/report/TrackedTimeReport'
 import { TrackedTimeProvider } from '@increaser/ui/timeTracking/report/TrackedTimeProvider'
 import { VStack } from '@lib/ui/layout/Stack'
+import { getDemoSliceCopy } from './getDemoSliceCopy'
 
 type TimeTrackingSliceProps = {
   titleAs?: React.ElementType
@@ -16,8 +16,7 @@ export const TimeTrackingSlice = ({ titleAs }: TimeTrackingSliceProps) => {
     <WebsiteSliceContent>
       <WebsiteSectionHeader
         titleAs={titleAs}
-        title="Time Well Spent, Goals Well Achieved"
-        subtitle={`With ${productName}, time tracking and management become your superpowers`}
+        {...getDemoSliceCopy('trackTime')}
       />
       <ClientOnly>
         <TrackedTimeProvider>

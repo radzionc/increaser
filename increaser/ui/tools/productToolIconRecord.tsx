@@ -8,6 +8,7 @@ import { LayersIcon } from '@lib/ui/icons/LayersIcon'
 import { TableIcon } from '@lib/ui/icons/TableIcon'
 import { StarIcon } from '@lib/ui/icons/StarIcon'
 import { GridIcon } from '@lib/ui/icons/GridIcon'
+import { TargetIcon } from '@lib/ui/icons/TargetIcon'
 
 export const productToolIconRecord: Record<ProductTool, ReactNode> = {
   trackTime: <TableIcon />,
@@ -18,4 +19,5 @@ export const productToolIconRecord: Record<ProductTool, ReactNode> = {
   focus: <ClockIcon />,
   schedule: <CalendarIcon />,
   vision: <StarIcon />,
+  goals: <TargetIcon />,
 }

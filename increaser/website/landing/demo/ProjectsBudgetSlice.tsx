@@ -7,6 +7,7 @@ import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
 import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
 import { VStack } from '@lib/ui/layout/Stack'
+import { getDemoSliceCopy } from './getDemoSliceCopy'
 
 const Content = styled(VStack)`
   max-width: 400px;
@@ -18,11 +19,7 @@ export const ProjectsBudgetSlice = (
 ) => {
   return (
     <WebsiteSliceContent>
-      <WebsiteSectionHeader
-        title="Balance Your Time, Boost Your Efficiency"
-        subtitle="Ensure balanced attention across all your projects without burning out"
-        {...props}
-      />
+      <WebsiteSectionHeader {...getDemoSliceCopy('timePlanner')} {...props} />
       <ClientOnly>
         <Content>
           <ManageProjectsBudget />

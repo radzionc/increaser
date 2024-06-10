@@ -1,5 +1,9 @@
+import { productName } from '@increaser/config'
+import { makeRecord } from '@lib/utils/record/makeRecord'
+
 export const productTools = [
   'vision',
+  'goals',
   'focus',
   'trackTime',
   'tasks',
@@ -19,6 +23,7 @@ export const productToolPurposeRecord: Record<ProductTool, string> = {
   habits: 'Track daily habits',
   schedule: 'Set a schedule',
   vision: 'Have a vision',
+  goals: 'Set and achieve goals',
 }
 
 export const productToolNameRecord: Record<ProductTool, string> = {
@@ -30,15 +35,34 @@ export const productToolNameRecord: Record<ProductTool, string> = {
   habits: 'Habit tracking',
   schedule: 'Scheduling',
   vision: 'Vision board',
+  goals: 'Goals',
 }
 
-export const productToolColorRecord: Record<ProductTool, number> = {
-  trackTime: 4,
-  tasks: 2,
-  workBudget: 6,
-  timePlanner: 7,
-  habits: 3,
-  focus: 5,
-  schedule: 10,
-  vision: 3,
+export const productToolColorRecord: Record<ProductTool, number> = makeRecord(
+  productTools,
+  (tool, index) => index + 2,
+)
+
+export const productToolTitle: Record<ProductTool, string> = {
+  focus: 'Achieve More with Sharper Focus',
+  habits: 'Build Success with Daily Habits',
+  timePlanner: 'Maximize Efficiency with Balanced Time',
+  schedule: 'Craft Your Perfect Daily Routine',
+  tasks: 'Master Your Tasks and Deadlines',
+  trackTime: 'Transform Time into Achievements',
+  vision: 'Create Your Ideal Future',
+  workBudget: 'Achieve Balance with Smart Work Budgets',
+  goals: 'Realize Your Ambitions with Clear Goals',
+}
+
+export const productToolSubtitle: Record<ProductTool, string> = {
+  focus: `${productName} helps you stay deeply focused to boost your productivity`,
+  habits: `Develop life-changing habits effortlessly with ${productName}'s intuitive tracking`,
+  timePlanner: `Balance your time effectively across all projects with ${productName}`,
+  schedule: `Design a daily schedule that enhances your productivity and well-being`,
+  tasks: `Keep track of your tasks and meet your deadlines with ${productName}`,
+  trackTime: `Utilize ${productName} to turn every minute into meaningful progress`,
+  vision: `Visualize and pursue your perfect life with ${productName}'s Vision Board`,
+  workBudget: `Manage your work hours and achieve a healthy work-life balance with ${productName}`,
+  goals: `Set, track, and accomplish your goals with ${productName} to achieve your dreams`,
 }

@@ -8,15 +8,12 @@ import { DemoScheduleProvider } from '../DemoScheduleProvider'
 import { VStack } from '@lib/ui/layout/Stack'
 import { ScheduleVisualization } from '@increaser/ui/schedule/ScheduleVisualization'
 import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
+import { getDemoSliceCopy } from './getDemoSliceCopy'
 
 export const ScheduleSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   return (
     <WebsiteSliceContent>
-      <WebsiteSectionHeader
-        title="Design Your Ideal Day, Every Day"
-        subtitle={`Tailor your schedule for maximum efficiency and unmatched work-life harmony`}
-        {...props}
-      />
+      <WebsiteSectionHeader {...getDemoSliceCopy('schedule')} {...props} />
       <ClientOnly>
         <DemoScheduleProvider>
           <VStack

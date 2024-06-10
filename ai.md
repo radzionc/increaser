@@ -46,7 +46,7 @@ After the user has signed up in the app, they will appear on the onboarding flow
 
 ### Website
 
-Increaser app is under the [app.increaser.org](http://app.increaser.org/) domain, while the Increaser website is under the [increaser.org](http://increaser.org/) domain. On the website, we are trying to persuade the user to try the app. The “Start now” button on the website leads to [app.increaser.org/sign-up](http://app.increaser.org/sign-up). The website positions Increaser as a productivity toolkit comprised of 8 tools: deep work timer, time tracking, task management, work budgeting, time planning, habit tracking, scheduling, and vision.
+Increaser app is under the [app.increaser.org](http://app.increaser.org/) domain, while the Increaser website is under the [increaser.org](http://increaser.org/) domain. On the website, we are trying to persuade the user to try the app. The “Start now” button on the website leads to [app.increaser.org/sign-up](http://app.increaser.org/sign-up). The website positions Increaser as a productivity toolkit comprised of 9 tools: vision, goals, deep work timer, time tracking, task management, work budgeting, time planning, habit tracking, scheduling.
 
 ### Tech Stack
 

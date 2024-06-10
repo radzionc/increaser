@@ -6,7 +6,6 @@ import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
 import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
 import { CrownIcon } from '@lib/ui/icons/CrownIcon'
-import { TargetIcon } from '@lib/ui/icons/TargetIcon'
 
 export const navigationPathInfo = {
   [AppPath.Home]: {
@@ -59,7 +58,7 @@ export const navigationPathInfo = {
   },
   [AppPath.Goals]: {
     name: 'Goals',
-    icon: <TargetIcon />,
+    icon: productToolIconRecord.goals,
   },
   [AppPath.Membership]: {
     name: 'Membership',

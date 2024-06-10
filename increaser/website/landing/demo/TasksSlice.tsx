@@ -12,6 +12,7 @@ import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { getDemoSliceCopy } from './getDemoSliceCopy'
 
 const Content = styled(VStack)`
   max-width: 460px;
@@ -23,11 +24,7 @@ export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
 
   return (
     <WebsiteSliceContent>
-      <WebsiteSectionHeader
-        title="Stay on Top of Your To-Do List"
-        subtitle="Stay organized and never miss a deadline again by prioritizing your daily tasks"
-        {...props}
-      />
+      <WebsiteSectionHeader {...getDemoSliceCopy('tasks')} {...props} />
       <ClientOnly>
         <Content>
           <ActiveItemIdProvider initialValue={null}>

@@ -11,17 +11,24 @@ import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
 import { otherProject } from '@increaser/entities/Project'
 import { getDemoVision } from './vision'
 import { getDemoGoals } from './goals'
+import { dayToString, toDay } from '@lib/utils/time/Day'
 
 export const getDemoUser = (): User => {
+  const now = Date.now()
+
+  const dobTimestamp = now - convertDuration(52 * 26 + 8, 'w', 'ms')
+  const dob = dayToString(toDay(dobTimestamp))
+
   const user = {
     ...userDefaultFields,
     id: demoConfig.userId,
     email: demoConfig.userEmail,
+    dob,
     name: 'John',
-    registrationDate: Date.now(),
-    finishedOnboardingAt: Date.now(),
-    freeTrialEnd: Date.now() + convertDuration(100, 'd', 'ms'),
-    lastVisitAt: Date.now(),
+    registrationDate: now,
+    finishedOnboardingAt: now,
+    freeTrialEnd: now + convertDuration(100, 'd', 'ms'),
+    lastVisitAt: now,
     timeZone: getCurrentTimezoneOffset(),
     habits: getDemoHabits(),
     projects: [otherProject, ...getDemoProjects()],

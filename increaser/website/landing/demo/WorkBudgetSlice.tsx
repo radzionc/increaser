@@ -11,6 +11,7 @@ import { WorkBudgetDaysReport } from '@increaser/ui/workBudget/WorkBudgetDaysRep
 import { WorkBudgetWeeksReport } from '@increaser/ui/workBudget/WorkBudgetWeeksReport'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { Panel } from '@lib/ui/panel/Panel'
+import { getDemoSliceCopy } from './getDemoSliceCopy'
 
 const Content = styled(UniformColumnGrid)`
   max-width: 860px;
@@ -20,11 +21,7 @@ const Content = styled(UniformColumnGrid)`
 export const WorkBudgetSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   return (
     <WebsiteSliceContent>
-      <WebsiteSectionHeader
-        title="Your Path to Better Work-Life Balance"
-        subtitle={`Optimize your work hours and enjoy more free time every day`}
-        {...props}
-      />
+      <WebsiteSectionHeader {...getDemoSliceCopy('workBudget')} {...props} />
       <ClientOnly>
         <Content minChildrenWidth={320} gap={40}>
           <ManageWorkBudget />

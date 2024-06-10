@@ -4,15 +4,15 @@ import {
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
-import { VisionSliceContent } from './VisionSliceContent'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { GoalsSliceContent } from './GoalsSliceContent'
 
-export const VisionSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
+export const GoalsSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   return (
     <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('vision')} {...props} />
+      <WebsiteSectionHeader {...getDemoSliceCopy('goals')} {...props} />
       <ClientOnly>
-        <VisionSliceContent />
+        <GoalsSliceContent />
       </ClientOnly>
     </WebsiteSliceContent>
   )

@@ -22,13 +22,13 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
   ),
   tasks: (
     <>
-      Stay organized and on top of your to-do list with our comprehensive{' '}
+      Stay organized and conquer your to-do list with our comprehensive{' '}
       <b>Task Management</b> system.
     </>
   ),
   workBudget: (
     <>
-      Set and manage your work hours efficiently with our <b>Work Budgeting</b>{' '}
+      Set and manage your work hours effectively with our <b>Work Budgeting</b>{' '}
       feature to maintain a balanced schedule.
     </>
   ),
@@ -40,7 +40,7 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
   ),
   habits: (
     <>
-      Build and maintain positive habits with ease using our insightful{' '}
+      Build and maintain positive habits effortlessly using our insightful{' '}
       <b>Habit Tracking</b> feature.
     </>
   ),
@@ -52,8 +52,14 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
   ),
   vision: (
     <>
-      Create your perfect life vision and track your progress with our{' '}
-      <b>Vision</b> tool.
+      Create and pursue your ideal life vision with our inspiring <b>Vision</b>{' '}
+      tool.
+    </>
+  ),
+  goals: (
+    <>
+      Set clear goals and track your progress towards achieving your dreams with
+      our <b>Goals</b> tool.
     </>
   ),
 }
