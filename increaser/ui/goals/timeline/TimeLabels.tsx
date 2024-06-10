@@ -4,9 +4,6 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { goalsTimelineConfig } from './config'
 import { useMemo } from 'react'
 import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
-import { addYears } from 'date-fns'
-import { range } from '@lib/utils/array/range'
-import { fromDay, stringToDay } from '@lib/utils/time/Day'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { toPercents } from '@lib/utils/toPercents'
 import { Text } from '@lib/ui/text'
@@ -24,37 +21,17 @@ const Label = styled(VStack)`
   top: 0;
 `
 
-const maxLabelsCount = 10
-
 export const TimeLabels = () => {
-  const { interval, dob } = useGoalsTimeline()
+  const { interval, dob, timeLabels } = useGoalsTimeline()
 
-  const intervalDuration = getIntervalDuration(interval)
-
-  const timestamps = useMemo(() => {
-    const [startAge, endAge] = [interval.start, interval.end].map((at) =>
-      getUserAgeAt({ dob, at }),
-    )
-
-    const count = endAge - startAge + 1
-
-    const dobDate = fromDay(stringToDay(dob))
-
-    const ageTimestamps = range(count).map((index) =>
-      addYears(dobDate, startAge + index).getTime(),
-    )
-
-    if (ageTimestamps.length > maxLabelsCount) {
-      const step = Math.ceil(ageTimestamps.length / maxLabelsCount)
-      return ageTimestamps.filter((_, index) => index % step === 0)
-    }
-
-    return ageTimestamps
-  }, [dob, interval.end, interval.start])
+  const intervalDuration = useMemo(
+    () => getIntervalDuration(interval),
+    [interval],
+  )
 
   return (
     <>
-      {timestamps.map((timestamp) => {
+      {timeLabels.map((timestamp) => {
         return (
           <Label
             style={{

@@ -7,8 +7,10 @@ import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoal
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { addYears } from 'date-fns'
-import { Interval } from '@lib/utils/interval/Interval'
 import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
+import { range } from '@lib/utils/array/range'
+
+const maxLabelsCount = 10
 
 export const GoalsTimelineProvider = ({
   children,
@@ -16,48 +18,68 @@ export const GoalsTimelineProvider = ({
   const { goals, dob: potentialDob } = useAssertUserState()
   const dob = shouldBePresent(potentialDob)
 
-  const interval: Interval = useMemo(() => {
+  const [start, minEnd] = useMemo(() => {
     const dobDate = fromDay(stringToDay(dob))
 
     const userAge = getUserAgeAt({
       dob,
       at: Date.now(),
     })
-    const lastBirthday = addYears(dobDate, userAge).getTime()
+    const start = addYears(dobDate, userAge).getTime()
 
-    const minEnd = addYears(dobDate, userAge + 5).getTime()
-
-    const end = isRecordEmpty(goals)
-      ? minEnd
-      : Math.max(
-          minEnd,
-          addYears(
-            dobDate,
-            getUserAgeAt({
-              dob,
-              at: Math.max(
-                ...Object.values(goals).map((goal) =>
-                  getGoalDeadlineTimestamp({
-                    value: goal.deadlineAt,
-                    dob,
-                  }),
-                ),
+    let end = addYears(dobDate, userAge + 3).getTime()
+    if (!isRecordEmpty(goals)) {
+      end = Math.max(
+        end,
+        addYears(
+          dobDate,
+          getUserAgeAt({
+            dob,
+            at: Math.max(
+              ...Object.values(goals).map((goal) =>
+                getGoalDeadlineTimestamp({
+                  value: goal.deadlineAt,
+                  dob,
+                }),
               ),
-            }) + 1,
-          ).getTime(),
-        )
-
-    return {
-      start: lastBirthday,
-      end,
+            ),
+          }) + 1,
+        ).getTime(),
+      )
     }
+
+    return [start, end]
   }, [dob, goals])
+
+  const [step, count] = useMemo(() => {
+    const startAge = getUserAgeAt({ dob, at: start })
+    const endAge = getUserAgeAt({ dob, at: minEnd })
+
+    const initialStepCount = endAge - startAge + 1
+
+    const step = Math.ceil(initialStepCount / maxLabelsCount)
+
+    return [step, Math.ceil(initialStepCount / step)]
+  }, [dob, minEnd, start])
+
+  const interval = useMemo(
+    () => ({
+      start,
+      end: addYears(start, step * count).getTime(),
+    }),
+    [count, start, step],
+  )
+
+  const timeLabels = useMemo(() => {
+    return range(count).map((i) => addYears(start, i * step).getTime())
+  }, [count, start, step])
 
   return (
     <GoalsTimelinContext.Provider
       value={{
         dob,
         interval,
+        timeLabels,
       }}
     >
       {children}
