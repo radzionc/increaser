@@ -24,7 +24,7 @@ export const GoalDeadline = () => {
   const { dob } = useAssertUserState()
   const { deadlineAt, status } = useCurrentGoal()
 
-  if (!deadlineAt || status === 'done') return null
+  if (status === 'done') return null
 
   return (
     <Container>

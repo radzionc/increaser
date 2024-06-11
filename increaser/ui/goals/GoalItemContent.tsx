@@ -8,6 +8,7 @@ import { GoalStatusTag } from './GoalStatusTag'
 import { getColor } from '@lib/ui/theme/getters'
 import { GoalDeadline } from './GoalDeadline'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
+import { GoalPlan } from './GoalPlan'
 
 const Name = styled(Text)`
   text-align: start;
@@ -18,7 +19,7 @@ const Name = styled(Text)`
 `
 
 export const GoalItemContent = () => {
-  const { name, status, emoji } = useCurrentGoal()
+  const { name, status, emoji, plan } = useCurrentGoal()
 
   return (
     <VStack gap={4}>
@@ -30,6 +31,7 @@ export const GoalItemContent = () => {
         <GoalStatusTag value={status} />
       </HStack>
       <GoalDeadline />
+      {plan && <GoalPlan />}
     </VStack>
   )
 }

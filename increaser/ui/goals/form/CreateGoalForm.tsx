@@ -17,6 +17,7 @@ import { defaultEmojis } from '../../projects/EnhancedProject'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
+import { GoalPlanInput } from './GoalPlanInput'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const { vision } = useAssertUserState()
@@ -25,6 +26,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
     status: 'inProgress',
     deadlineAt: null,
     emoji: randomlyPick(defaultEmojis),
+    plan: '',
   })
   const { mutate } = useCreateGoalMutation()
 
@@ -72,6 +74,10 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
       <GoalDeadlineInput
         onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
         value={value.deadlineAt}
+      />
+      <GoalPlanInput
+        onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
+        value={value.plan}
       />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <GoalStatusSelector

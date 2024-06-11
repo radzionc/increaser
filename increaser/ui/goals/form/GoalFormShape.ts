@@ -5,4 +5,5 @@ export type GoalFormShape = {
   status: GoalStatus
   emoji: string
   deadlineAt: string | number | null
+  plan: string
 }
