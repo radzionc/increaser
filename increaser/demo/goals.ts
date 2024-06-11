@@ -8,6 +8,13 @@ type GoalDescription = Pick<
 
 const items: GoalDescription[] = [
   {
+    emoji: '🏢',
+    name: 'Own a mortgage-free apartment',
+    status: 'done',
+    deadlineAt: 25,
+    plan: 'I will be working as a remote software developer, making at least $60k per year, saving $40k each year.',
+  },
+  {
     emoji: '💪',
     name: 'Perform 20 pull-ups in a single set',
     status: 'inProgress',

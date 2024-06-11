@@ -9,6 +9,8 @@ import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { addYears } from 'date-fns'
 import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 import { range } from '@lib/utils/array/range'
+import { order } from '@lib/utils/array/order'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 const maxLabelsCount = 10
 
@@ -25,24 +27,38 @@ export const GoalsTimelineProvider = ({
       dob,
       at: Date.now(),
     })
-    const start = addYears(dobDate, userAge).getTime()
+    let start = addYears(dobDate, userAge).getTime()
 
     let end = addYears(dobDate, userAge + 3).getTime()
     if (!isRecordEmpty(goals)) {
+      const orderedDeadlines = order(
+        Object.values(goals).map((goal) =>
+          getGoalDeadlineTimestamp({
+            value: goal.deadlineAt,
+            dob,
+          }),
+        ),
+        (v) => v,
+        'asc',
+      )
+      start = Math.min(
+        start,
+        addYears(
+          dobDate,
+          getUserAgeAt({
+            dob,
+            at: orderedDeadlines[0],
+          }) - 1,
+        ).getTime(),
+      )
+
       end = Math.max(
         end,
         addYears(
           dobDate,
           getUserAgeAt({
             dob,
-            at: Math.max(
-              ...Object.values(goals).map((goal) =>
-                getGoalDeadlineTimestamp({
-                  value: goal.deadlineAt,
-                  dob,
-                }),
-              ),
-            ),
+            at: getLastItem(orderedDeadlines),
           }) + 1,
         ).getTime(),
       )

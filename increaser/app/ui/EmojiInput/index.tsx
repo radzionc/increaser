@@ -32,6 +32,7 @@ const Container = styled.div`
   ${borderRadius.s};
   overflow: hidden;
   border: 2px solid ${getColor('primary')};
+  background: ${getColor('background')};
 `
 
 export const EmojiInput = ({ value, onChange }: InputProps<string>) => {
