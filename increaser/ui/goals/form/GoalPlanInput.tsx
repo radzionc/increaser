@@ -1,8 +1,8 @@
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { InputProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { ComponentProps, useLayoutEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { toSizeUnit } from '../css/toSizeUnit'
 
 const Container = styled.textarea`
   border: none;
@@ -10,7 +10,9 @@ const Container = styled.textarea`
   overflow: hidden;
   resize: none;
 
-  background: transparent;
+  line-height: 1.5;
+
+  background: ${getColor('background')};
   color: ${getColor('text')};
 
   &::placeholder {
@@ -18,31 +20,32 @@ const Container = styled.textarea`
   }
 `
 
-type MultilineTextInputProps = InputProps<string> &
+type GoalPlanInputProps = InputProps<string> &
   Omit<ComponentProps<typeof Container>, 'value' | 'onChange'>
 
-export const MultilineTextInput = ({
+export const GoalPlanInput = ({
   value,
   onChange,
   ...rest
-}: MultilineTextInputProps) => {
+}: GoalPlanInputProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {
     const element = textareaRef.current
     if (element) {
-      element.style.height = 'auto'
-      element.style.height = toSizeUnit(element.scrollHeight)
+      element.style.minHeight = 'auto'
+      element.style.minHeight = toSizeUnit(element.scrollHeight)
     }
   }, [value])
 
   return (
     <Container
+      placeholder="How are you going to achieve this goal? What's your plan?"
       autoComplete="off"
       ref={textareaRef}
       value={value}
       onChange={(event) => onChange(event.target.value)}
-      rows={1}
+      rows={3}
       {...rest}
     />
   )

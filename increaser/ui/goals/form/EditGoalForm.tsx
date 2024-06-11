@@ -16,10 +16,17 @@ import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
+import { GoalPlanInput } from './GoalPlanInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
-  const [value, setValue] = useState<GoalFormShape>(goalAttribute)
+  const [value, setValue] = useState<GoalFormShape>({
+    name: goalAttribute.name,
+    status: goalAttribute.status,
+    emoji: goalAttribute.emoji,
+    deadlineAt: goalAttribute.deadlineAt,
+    plan: goalAttribute.plan ?? '',
+  })
 
   const { mutate: updateGoal } = useUpdateGoalMutation()
   const { mutate: deleteGoal } = useDeleteGoalMutation()
@@ -56,26 +63,16 @@ export const EditGoalForm = () => {
     if (value.emoji !== goalAttribute.emoji) {
       fields.emoji = value.emoji
     }
+    if (value.plan !== goalAttribute.plan) {
+      fields.plan = value.plan
+    }
 
     updateGoal({
       id: goalAttribute.id,
       fields,
     })
     onFinish()
-  }, [
-    goalAttribute.deadlineAt,
-    goalAttribute.emoji,
-    goalAttribute.id,
-    goalAttribute.name,
-    goalAttribute.status,
-    isDisabled,
-    onFinish,
-    updateGoal,
-    value.deadlineAt,
-    value.emoji,
-    value.name,
-    value.status,
-  ])
+  }, [goalAttribute, isDisabled, onFinish, updateGoal, value])
 
   return (
     <Panel
@@ -112,6 +109,10 @@ export const EditGoalForm = () => {
       <GoalDeadlineInput
         value={value.deadlineAt}
         onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
+      />
+      <GoalPlanInput
+        onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
+        value={value.plan}
       />
       <HStack
         wrap="wrap"
