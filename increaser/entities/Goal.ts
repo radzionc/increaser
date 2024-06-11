@@ -7,6 +7,11 @@ export const goalStatusNameRecord: Record<GoalStatus, string> = {
   toDo: 'To do',
 }
 
+export type GoalTarget = {
+  current: number
+  value: number
+}
+
 export type Goal = {
   id: string
   emoji: string
@@ -15,6 +20,7 @@ export type Goal = {
   status: GoalStatus
   deadlineAt: string | number
   plan?: string | null
+  target?: GoalTarget | null
 }
 
 export type Goals = Record<string, Goal>

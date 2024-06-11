@@ -1,4 +1,4 @@
-import { GoalStatus } from '@increaser/entities/Goal'
+import { GoalStatus, GoalTarget } from '@increaser/entities/Goal'
 
 export type GoalFormShape = {
   name: string
@@ -6,4 +6,5 @@ export type GoalFormShape = {
   emoji: string
   deadlineAt: string | number | null
   plan: string
+  target: GoalTarget | null
 }

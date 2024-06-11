@@ -19,7 +19,7 @@ const Name = styled(Text)`
 `
 
 export const GoalItemContent = () => {
-  const { name, status, emoji, plan } = useCurrentGoal()
+  const { name, emoji, plan } = useCurrentGoal()
 
   return (
     <VStack gap={4}>
@@ -28,7 +28,7 @@ export const GoalItemContent = () => {
           <EmojiTextPrefix emoji={emoji} />
           {name}
         </Name>
-        <GoalStatusTag value={status} />
+        <GoalStatusTag />
       </HStack>
       <GoalDeadline />
       {plan && <GoalPlan />}
