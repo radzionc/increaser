@@ -17,6 +17,7 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
+import { GoalTargetInput } from './GoalTargetInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -26,6 +27,7 @@ export const EditGoalForm = () => {
     emoji: goalAttribute.emoji,
     deadlineAt: goalAttribute.deadlineAt,
     plan: goalAttribute.plan ?? '',
+    target: goalAttribute.target ?? null,
   })
 
   const { mutate: updateGoal } = useUpdateGoalMutation()
@@ -65,6 +67,9 @@ export const EditGoalForm = () => {
     }
     if (value.plan !== goalAttribute.plan) {
       fields.plan = value.plan
+    }
+    if (value.target !== goalAttribute.target) {
+      fields.target = value.target
     }
 
     updateGoal({
@@ -109,6 +114,10 @@ export const EditGoalForm = () => {
       <GoalDeadlineInput
         value={value.deadlineAt}
         onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
+      />
+      <GoalTargetInput
+        value={value.target}
+        onChange={(target) => setValue((prev) => ({ ...prev, target }))}
       />
       <GoalPlanInput
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}

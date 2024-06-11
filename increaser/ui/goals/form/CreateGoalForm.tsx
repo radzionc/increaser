@@ -18,6 +18,7 @@ import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
+import { GoalTargetInput } from './GoalTargetInput'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const { vision } = useAssertUserState()
@@ -26,6 +27,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
     status: 'inProgress',
     deadlineAt: null,
     emoji: randomlyPick(defaultEmojis),
+    target: null,
     plan: '',
   })
   const { mutate } = useCreateGoalMutation()
@@ -74,6 +76,10 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
       <GoalDeadlineInput
         onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
         value={value.deadlineAt}
+      />
+      <GoalTargetInput
+        onChange={(target) => setValue((prev) => ({ ...prev, target }))}
+        value={value.target}
       />
       <GoalPlanInput
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
