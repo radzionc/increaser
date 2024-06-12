@@ -42,7 +42,9 @@ export const FocusSoundsPlayer = () => {
           }
 
           const howl = shouldBePresent(audioRecord[id])
-          howl.play()
+          if (!howl.playing()) {
+            howl.play()
+          }
           howl.volume(volume)
         }, undefined),
       )
@@ -56,10 +58,6 @@ export const FocusSoundsPlayer = () => {
         }, undefined),
       )
     } else {
-      stop()
-    }
-
-    return () => {
       stop()
     }
   }, [currentSet, focusAudioMode, isFocusAudioEnabled, preference, stop])
