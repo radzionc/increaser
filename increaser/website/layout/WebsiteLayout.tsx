@@ -17,7 +17,7 @@ import {
 } from '@increaser/config'
 import { InteractiveText } from '@lib/ui/text/InteractiveText'
 import { AppLink } from '../navigation/AppLink'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { WebsitePath } from '@increaser/ui/navigation/WebsitePath'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
@@ -68,12 +68,12 @@ export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
           <HStack alignItems="center" gap={20}>
             <ProductFeaturesNavigation />
             <HStack alignItems="center" gap={8}>
-              <AppLink to={AppPath.SignIn}>
+              <AppLink to={getAppPath('signIn')}>
                 <Button kind="ghost" as="div">
                   Sign in
                 </Button>
               </AppLink>
-              <AppLink to={AppPath.SignUp}>
+              <AppLink to={getAppPath('signUp')}>
                 <Button kind="reversed" as="div">
                   Sign up
                 </Button>
@@ -85,10 +85,10 @@ export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
       renderOverlayItems={({ onClose }) => (
         <SeparatedByLine>
           <VStack>
-            <AppLink onClick={onClose} to={AppPath.SignUp}>
+            <AppLink onClick={onClose} to={getAppPath('signUp')}>
               <OverlayNavigationItem as="div">Sign up</OverlayNavigationItem>
             </AppLink>
-            <AppLink onClick={onClose} to={AppPath.SignIn}>
+            <AppLink onClick={onClose} to={getAppPath('signIn')}>
               <OverlayNavigationItem as="div">Sign in</OverlayNavigationItem>
             </AppLink>
           </VStack>
@@ -119,7 +119,7 @@ export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
             <Text>
               © {new Date().getFullYear()} {legalEntity}
             </Text>
-            <AppLink to={AppPath.Home}>
+            <AppLink to={getAppPath('focus')}>
               <InteractiveText>App</InteractiveText>
             </AppLink>
             <Link href={WebsitePath.PrivacyPolicy}>

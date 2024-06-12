@@ -4,7 +4,7 @@ import {
   PersistentStateKey,
   managePersistentState,
 } from '@increaser/ui/state/persistentState'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 const persistentPath = managePersistentState<string>(
   PersistentStateKey.PathAttemptedWhileUnauthenticated,
@@ -15,12 +15,12 @@ export const useAuthRedirect = () => {
 
   const toAuthenticationPage = useCallback(() => {
     persistentPath.set(pathname)
-    replace(AppPath.SignIn)
+    replace(getAppPath('signIn'))
   }, [pathname, replace])
 
   const toAuthenticatedPage = useCallback(() => {
     persistentPath.get()
-    const destination = persistentPath.get() ?? AppPath.Home
+    const destination = persistentPath.get() ?? getAppPath('focus')
     replace(destination)
     persistentPath.set(undefined)
   }, [replace])

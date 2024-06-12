@@ -9,7 +9,7 @@ import { WebsitePath } from '@increaser/ui/navigation/WebsitePath'
 import { ProductLogo } from '@increaser/ui/ProductLogo'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import Link from 'next/link'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { Button } from '@lib/ui/buttons/Button'
 import { OverlayNavigationItem } from '@lib/ui/website/navigation/OverlayNavigationItem'
 import { borderRadius } from '@lib/ui/css/borderRadius'
@@ -56,12 +56,12 @@ export const AuthPageLayout = ({ children }: ComponentWithChildrenProps) => {
           <>
             <div />
             <HStack alignItems="center" gap={8}>
-              <Link href={AppPath.SignIn}>
+              <Link href={getAppPath('signIn')}>
                 <Button kind="ghost" as="div">
                   Sign in
                 </Button>
               </Link>
-              <Link href={AppPath.SignUp}>
+              <Link href={getAppPath('signUp')}>
                 <Button kind="reversed" as="div">
                   Sign up
                 </Button>
@@ -71,10 +71,10 @@ export const AuthPageLayout = ({ children }: ComponentWithChildrenProps) => {
         )}
         renderOverlayItems={({ onClose }) => (
           <>
-            <Link onClick={onClose} href={AppPath.SignUp}>
+            <Link onClick={onClose} href={getAppPath('signUp')}>
               <OverlayNavigationItem as="div">Sign up</OverlayNavigationItem>
             </Link>
-            <Link onClick={onClose} href={AppPath.SignIn}>
+            <Link onClick={onClose} href={getAppPath('signIn')}>
               <OverlayNavigationItem as="div">Sign in</OverlayNavigationItem>
             </Link>
           </>

@@ -5,7 +5,7 @@ import { pluralize } from '@lib/utils/pluralize'
 import { PanelPrompt } from '@lib/ui/panel/PanelPrompt'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import Link from 'next/link'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
@@ -33,7 +33,7 @@ export const ManageTimePrompt = () => {
         You have allocated {pluralize(-freeHours, 'hour')} more than your
         current work budget allows. Please adjust the budget for the projects
         listed below or{' '}
-        <BudgetLink href={AppPath.WorkBudget}>
+        <BudgetLink href={getAppPath('workBudget')}>
           expand your overall work budget
         </BudgetLink>{' '}
         to accommodate your plans.

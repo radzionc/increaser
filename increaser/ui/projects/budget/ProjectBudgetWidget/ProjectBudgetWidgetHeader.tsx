@@ -3,7 +3,7 @@ import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import Link from 'next/link'
 import { ProjectGoalShyIndicator } from '../ProjectGoalShyIndicator'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
@@ -28,7 +28,7 @@ export const ProjectBudgetWidgetHeader = () => {
           {name}
         </Text>
       </HStack>
-      <Link href={AppPath.ProjectsBudget}>
+      <Link href={getAppPath('timePlanning')}>
         <HStackSeparatedBy separator="/">
           <Text weight="semibold" color="contrast">
             {doneMinutesThisWeek > 0

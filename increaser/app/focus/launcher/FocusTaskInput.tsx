@@ -8,7 +8,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { order } from '@lib/utils/array/order'
 import Link from 'next/link'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { Button } from '@lib/ui/buttons/Button'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 
@@ -46,7 +46,7 @@ export const FocusTaskInput = () => {
     return (
       <ActionPrompt
         action={
-          <Link style={{ alignSelf: 'end' }} href={AppPath.Tasks}>
+          <Link style={{ alignSelf: 'end' }} href={getAppPath('tasks')}>
             <Button as="div">Manage tasks</Button>
           </Link>
         }

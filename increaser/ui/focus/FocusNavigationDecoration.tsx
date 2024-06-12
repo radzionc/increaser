@@ -1,10 +1,9 @@
-import { useRouter } from 'next/router'
-import { AppPath } from '../navigation/AppPath'
 import { useFocus } from './FocusContext'
 import { FocusPassedTime } from './FocusPassedTime'
 import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useProjects } from '../projects/ProjectsProvider'
+import { useCurrentPage } from '@increaser/app/navigation/hooks/useCurrentPage'
 
 const Container = styled.div`
   position: absolute;
@@ -15,13 +14,13 @@ const Container = styled.div`
 `
 
 export const FocusNavigationDecoration = () => {
-  const { pathname } = useRouter()
+  const page = useCurrentPage()
 
   const { currentSet } = useFocus()
 
   const { projectsRecord } = useProjects()
 
-  const isActive = pathname === AppPath.Home
+  const isActive = page === 'focus'
 
   if (isActive || !currentSet) return null
 

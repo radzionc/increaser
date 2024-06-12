@@ -3,14 +3,14 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { MinimizeIcon } from '@lib/ui/icons/MinimizeIcon'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 import Link from 'next/link'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 export const ShrinkFocusView = () => {
   return (
     <Tooltip
       content={<Text nowrap>Exit full screen</Text>}
       renderOpener={(props) => (
-        <Link href={AppPath.Home} {...props}>
+        <Link href={getAppPath('focus')} {...props}>
           <IconButton
             as="div"
             kind="secondary"

@@ -9,7 +9,7 @@ import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUse
 import styled from 'styled-components'
 import { productName } from '@increaser/config'
 import { useRouter } from 'next/router'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 const Content = styled(VStack)`
@@ -44,7 +44,7 @@ export const ExitOnboarding = () => {
           onConfirm={() => {
             analytics.trackEvent('Exited onboarding')
             updateUser({ finishedOnboardingAt: Date.now() })
-            push(AppPath.Home)
+            push(getAppPath('focus'))
           }}
         >
           <Content>

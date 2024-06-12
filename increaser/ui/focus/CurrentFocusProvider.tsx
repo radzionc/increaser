@@ -10,7 +10,7 @@ import { pluralize } from '@lib/utils/pluralize'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { playSound } from '@lib/ui/notifications/utils/playSound'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { CurrentSet, useFocus } from './FocusContext'
 import { useProject } from '../projects/hooks/useProject'
 
@@ -163,7 +163,7 @@ export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
 
   useEffect(() => {
     if (!currentSet) {
-      router.replace(AppPath.Home)
+      router.replace(getAppPath('focus'))
     }
   }, [currentSet, router])
 

@@ -6,9 +6,10 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { SidebarOpener } from './SidebarOpener'
-import { useRouter } from 'next/router'
 import { CompleteMist } from '@lib/ui/modal/CompleteMist'
 import { Spacer } from '@lib/ui/layout/Spacer'
+import { useCurrentPage } from '../../../navigation/hooks/useCurrentPage'
+import { AppNavigationPage } from '@increaser/ui/navigation/app'
 
 const Container = styled.div`
   width: 100%;
@@ -24,11 +25,10 @@ const Cover = styled(CompleteMist)`
 `
 
 export const Topbar = () => {
-  const { pathname } = useRouter()
+  const page = useCurrentPage()
   const [isSidebarOpen, { toggle: toggleSidebar }] = useBoolean(false)
 
-  const path = pathname as keyof typeof navigationPathInfo
-  const info = navigationPathInfo[path]
+  const info = navigationPathInfo[page as AppNavigationPage]
 
   if (!info) return null
 
@@ -41,7 +41,7 @@ export const Topbar = () => {
       )}
       <Container>
         <SidebarOpener onOpenSidebarRequest={toggleSidebar} />
-        <Text as="div" size={18}>
+        <Text size={14} weight="semibold" as="div">
           <HStack alignItems="center" gap={8}>
             {info.icon}
             <div>{info.name}</div>
