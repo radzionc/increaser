@@ -15,6 +15,13 @@ const items: GoalDescription[] = [
     plan: 'I will be working as a remote software developer, making at least $60k per year, saving $40k each year.',
   },
   {
+    emoji: '🎥',
+    name: 'Have 1,000 subscribers on YouTube',
+    status: 'done',
+    deadlineAt: 26,
+    plan: 'I will post a new video every week.',
+  },
+  {
     emoji: '💪',
     name: 'Perform 20 pull-ups in a single set',
     status: 'inProgress',

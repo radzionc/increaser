@@ -1,24 +1,22 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
 import { GoalItem } from './GoalItem'
 import { CurrentGoalProvider } from './CurrentGoalProvider'
 import { DnDList } from '../../../lib/dnd/DnDList'
 import { useUpdateGoalMutation } from './api/useUpdateGoalMutation'
-import { order } from '@lib/utils/array/order'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { goalContentMinHeight, goalVerticalPadding } from './config'
+import { useActiveGoals } from './hooks/useActiveGoals'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(goalContentMinHeight + goalVerticalPadding * 2)};
 `
 
 export const Goals = () => {
-  const { goals } = useAssertUserState()
-  const items = order(Object.values(goals), (item) => item.order, 'asc')
+  const items = useActiveGoals()
 
   const [activeItemId] = useActiveItemId()
 

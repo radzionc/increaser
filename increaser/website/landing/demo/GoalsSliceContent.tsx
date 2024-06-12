@@ -1,10 +1,9 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CurrentGoalProvider } from '@increaser/ui/goals/CurrentGoalProvider'
-import { order } from '@lib/utils/array/order'
 import styled from 'styled-components'
 import { GoalItemContent } from '@increaser/ui/goals/GoalItemContent'
 import { VStack } from '@lib/ui/layout/Stack'
 import { GoalsTimeline } from '@increaser/ui/goals/timeline/GoalsTimeline'
+import { useActiveGoals } from '@increaser/ui/goals/hooks/useActiveGoals'
 
 const Container = styled(VStack)`
   gap: 40px;
@@ -13,8 +12,7 @@ const Container = styled(VStack)`
 `
 
 export const GoalsSliceContent = () => {
-  const { goals } = useAssertUserState()
-  const items = order(Object.values(goals), (item) => item.order, 'asc')
+  const items = useActiveGoals()
 
   return (
     <Container>
