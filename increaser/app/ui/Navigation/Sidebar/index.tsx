@@ -3,13 +3,12 @@ import styled from 'styled-components'
 import { InstallPrompt } from '@increaser/app/ui/Navigation/Sidebar/InstallPrompt'
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { NavigationToInternalPage } from './NavigationToInternalPage'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
-import { UserStateOnly } from '../../../user/state/UserStateOnly'
-import { FocusNavigationDecoration } from '@increaser/ui/focus/FocusNavigationDecoration'
 import { getColor } from '@lib/ui/theme/getters'
-import { MembershipNavigationDecoration } from '../../../membership/components/MembershipNavigationDecoration'
-import { StartTheDayNavigation } from '../../../plan/StartTheDayNavigation'
+import { SidebarNavigationItem } from '../../../navigation/SidebarNavigationItem'
+import {
+  primaryAppNavigationPages,
+  secondaryAppNavigationPages,
+} from '@increaser/ui/navigation/app'
 
 const Container = styled.div`
   min-width: 260px;
@@ -34,41 +33,16 @@ export const Sidebar = () => {
       <VStack alignItems="center" fullHeight justifyContent="space-between">
         <VStack fullWidth gap={20}>
           <VStack gap={4} fullWidth>
-            <UserStateOnly>
-              <StartTheDayNavigation />
-            </UserStateOnly>
-            <NavigationToInternalPage
-              path={AppPath.Home}
-              decoration={
-                <UserStateOnly>
-                  <FocusNavigationDecoration />
-                </UserStateOnly>
-              }
-            />
-            <NavigationToInternalPage path={AppPath.TimeTracking} />
-            <NavigationToInternalPage path={AppPath.WorkBudget} />
-            <NavigationToInternalPage path={AppPath.ProjectsBudget} />
-            <NavigationToInternalPage path={AppPath.Habits} />
-            <NavigationToInternalPage path={AppPath.Tasks} />
-            <NavigationToInternalPage path={AppPath.Sessions} />
-            <NavigationToInternalPage path={AppPath.MyVision} />
-            <NavigationToInternalPage path={AppPath.Goals} />
-            <NavigationToInternalPage path={AppPath.Projects} />
-
+            {primaryAppNavigationPages.map((page) => (
+              <SidebarNavigationItem key={page} value={page} />
+            ))}
             {isInstallPromptEnabled && <InstallPrompt />}
           </VStack>
         </VStack>
         <Footer gap={4} fullWidth>
-          <NavigationToInternalPage path={AppPath.Community} />
-          <NavigationToInternalPage
-            path={AppPath.Membership}
-            decoration={
-              <UserStateOnly>
-                <MembershipNavigationDecoration />
-              </UserStateOnly>
-            }
-          />
-          <NavigationToInternalPage path={AppPath.Account} />
+          {secondaryAppNavigationPages.map((page) => (
+            <SidebarNavigationItem key={page} value={page} />
+          ))}
         </Footer>
       </VStack>
     </Container>

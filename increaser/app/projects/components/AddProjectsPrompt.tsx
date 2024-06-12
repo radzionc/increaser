@@ -1,4 +1,4 @@
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { Button } from '@lib/ui/buttons/Button'
 import Link from 'next/link'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
@@ -10,7 +10,7 @@ export const AddProjectsPrompt = () => {
   return (
     <ActionPrompt
       action={
-        <Link href={AppPath.Projects}>
+        <Link href={getAppPath('projects')}>
           <Button as="div">Add projects</Button>
         </Link>
       }

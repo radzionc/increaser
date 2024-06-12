@@ -1,4 +1,4 @@
-import { getTimeTrackingPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { PageTitleNavigation } from '@lib/ui/navigation/PageTitleNavigation'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useRouter } from 'next/router'
@@ -20,7 +20,7 @@ export const TimeTrackingViewSelector = () => {
     <PageTitleNavigation
       value={view}
       options={timeTrackingViews}
-      onChange={(view) => push(getTimeTrackingPath(view))}
+      onChange={(view) => push(getAppPath('timeTracking', view))}
       getOptionName={(option) => timeTrackingViewName[option]}
     />
   )

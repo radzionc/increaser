@@ -8,7 +8,8 @@ import Link from 'next/link'
 import { ClientOnly } from '@increaser/app/ui/ClientOnly'
 import { WEBSITE_URL } from '@increaser/app/product'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
+
 export const Placeholder = styled.div`
   flex-shrink: 0;
   height: 80px;
@@ -54,7 +55,7 @@ export const Topbar = () => {
                 </ExternalLink>
               )}
               <div ref={setElement}>
-                <Link href={AppPath.SignUp}>
+                <Link href={getAppPath('signUp')}>
                   <Button as="div" kind="reversed">
                     Sign up
                   </Button>
@@ -64,7 +65,7 @@ export const Topbar = () => {
             <Placeholder>
               {size && (
                 <SignInContainer rightSiblingWidth={size.width}>
-                  <Link href={AppPath.SignIn}>
+                  <Link href={getAppPath('signIn')}>
                     <Button as="div" kind="ghost">
                       Sign in
                     </Button>

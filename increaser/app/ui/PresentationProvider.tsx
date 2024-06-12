@@ -3,7 +3,7 @@ import { createContext, useCallback } from 'react'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 export interface PresentationState {
   onInteraction: (func: () => void) => void
@@ -24,7 +24,7 @@ export const PresentationProvider = ({ children }: Props) => {
       if (authSession) {
         func()
       } else {
-        push(AppPath.SignUp)
+        push(getAppPath('signUp'))
       }
     },
     [authSession, push],

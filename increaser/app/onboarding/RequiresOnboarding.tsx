@@ -1,4 +1,4 @@
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { useRouter } from 'next/router'
@@ -12,7 +12,7 @@ export const RequiresOnboarding = ({
 
   useEffect(() => {
     if (!finishedOnboardingAt) {
-      push(AppPath.Onboarding)
+      push(getAppPath('onboarding'))
     }
   }, [finishedOnboardingAt, push])
 

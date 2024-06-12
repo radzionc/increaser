@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useOnboarding } from './OnboardingProvider'
 import { Button } from '@lib/ui/buttons/Button'
 import { useRouter } from 'next/router'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { onboardingSteps } from './OnboardingStep'
 
 const Container = styled(HStack)`
@@ -42,7 +42,7 @@ export const OnboardingPrimaryNavigation = () => {
           if (nextStep) {
             setCurrentStep(nextStep)
           } else {
-            push(AppPath.Home)
+            push(getAppPath('focus'))
           }
         }}
         size="l"

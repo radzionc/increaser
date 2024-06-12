@@ -8,7 +8,7 @@ import { validateEmail } from '@lib/utils/validation/validateEmail'
 import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { Field } from '@lib/ui/inputs/Field'
 import { useApiMutation } from '@increaser/api-ui/hooks/useApiMutation'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 interface EmailFormState {
@@ -40,7 +40,11 @@ export const EmailAuthForm = () => {
 
         sendAuthLinkByEmail(data, {
           onSuccess: () => {
-            push(addQueryParams(AppPath.EmailConfirm, { email: data.email }))
+            push(
+              addQueryParams(getAppPath('emailConfirm'), {
+                email: data.email,
+              }),
+            )
           },
         })
       })}

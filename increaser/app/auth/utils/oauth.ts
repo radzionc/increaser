@@ -2,7 +2,7 @@ import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import { match } from '@lib/utils/match'
 import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { OAuthProvider } from '@increaser/entities/OAuthProvider'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 const oauthBaseUrlRecord: Record<OAuthProvider, string> = {
   google: 'https://accounts.google.com/o/oauth2/v2/auth',
@@ -21,7 +21,7 @@ const oauthClientIdRecord: Record<OAuthProvider, string> = {
 }
 
 export const getOAuthRedirectUri = (provider: OAuthProvider) =>
-  `${process.env.NEXT_PUBLIC_BASE_URL}${AppPath.OAuth}/${provider}`
+  `${process.env.NEXT_PUBLIC_BASE_URL}${getAppPath('oauth')}/${provider}`
 
 export const getOAuthUrl = (provider: OAuthProvider) => {
   const baseUrl = oauthBaseUrlRecord[provider]

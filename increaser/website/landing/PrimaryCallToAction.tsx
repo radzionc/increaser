@@ -1,4 +1,4 @@
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { AppLink } from '../navigation/AppLink'
 import { Button, ButtonProps } from '@lib/ui/buttons/Button'
 
@@ -10,7 +10,7 @@ export const PrimaryCallToAction = ({
   kind = 'primary',
   ...rest
 }: PrimaryCallToActionProps) => (
-  <AppLink to={AppPath.SignUp}>
+  <AppLink to={getAppPath('signUp')}>
     <Button as="div" kind={kind} size={size} {...rest}>
       {children}
     </Button>

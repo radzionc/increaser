@@ -5,8 +5,9 @@ import { useCurrentWeekSets } from '../sets/hooks/useCurrentWeekSets'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 import { Button } from '@lib/ui/buttons/Button'
 import Link from 'next/link'
-import { getEditSetPath } from '../navigation/AppPath'
+import { getAppPath } from '../navigation/app'
 import { getSetHash } from '@increaser/app/sets/helpers/getSetHash'
+import { addQueryParams } from '@lib/utils/query/addQueryParams'
 
 export const EditAutoStoppedSetPrompt = () => {
   const sets = useCurrentWeekSets()
@@ -28,7 +29,11 @@ export const EditAutoStoppedSetPrompt = () => {
     return (
       <ActionPrompt
         action={
-          <Link href={getEditSetPath(getSetHash(setToEdit))}>
+          <Link
+            href={addQueryParams(getAppPath('time-tracking', 'track'), {
+              edit: getSetHash(setToEdit),
+            })}
+          >
             <Button as="div">Edit</Button>
           </Link>
         }

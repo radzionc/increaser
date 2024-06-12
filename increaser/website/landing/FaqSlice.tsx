@@ -6,7 +6,7 @@ import { TextButton } from '@lib/ui/buttons/TextButton'
 import { FaqItem } from '@lib/ui/website/faq/FaqItem'
 import { FaqContainer } from '@lib/ui/website/faq/FaqContainer'
 import { AppLink } from '../navigation/AppLink'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 export const FaqSlice = () => {
   return (
@@ -23,7 +23,7 @@ export const FaqSlice = () => {
             {productName} is available as a Progressive Web App (PWA), allowing
             you to 'install' it directly on your device for an app-like
             experience. To do this, simply navigate to{' '}
-            <AppLink to={AppPath.Home}>
+            <AppLink to={getAppPath('focus')}>
               <TextButton>{productName}</TextButton>
             </AppLink>{' '}
             on your mobile browser, and select 'Add to Home Screen' from your

@@ -1,6 +1,6 @@
 import { useIsLikeMember } from '@increaser/app/membership/hooks/useIsLikeMember'
 import { useRouter } from 'next/router'
-import { AppPath } from '@increaser/ui/navigation/AppPath'
+import { getAppPath } from '@increaser/ui/navigation/app'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
 type Action = () => void
@@ -29,7 +29,7 @@ export const MemberOnlyAction = ({ action, render }: MemberOnlyActionProps) => {
     <>
       {render({
         action: () => {
-          push(AppPath.Membership)
+          push(getAppPath('membership'))
           analytics.trackEvent('Action requires membership')
         },
       })}

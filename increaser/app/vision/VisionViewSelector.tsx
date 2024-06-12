@@ -1,27 +1,26 @@
 import {
-  VisionView,
-  getVisionPath,
-  visionViews,
-} from '@increaser/ui/navigation/AppPath'
+  AppPageVisionView,
+  appPageViews,
+  getAppPath,
+} from '@increaser/ui/navigation/app'
 import { PageTitleNavigation } from '@lib/ui/navigation/PageTitleNavigation'
-import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useRouter } from 'next/router'
+import { useCurrentPageView } from '../navigation/hooks/useCurrentPageView'
 
-const visionViewName: Record<VisionView, string> = {
+const visionViewName: Record<AppPageVisionView, string> = {
   my: 'My Vision',
   ideas: 'Vision Ideas',
 }
 
 export const VisionViewSelector = () => {
-  const { pathname, push } = useRouter()
-
-  const view = getLastItem(pathname.split('/')) as VisionView
+  const view = useCurrentPageView('vision')
+  const { push } = useRouter()
 
   return (
     <PageTitleNavigation
       value={view}
-      options={visionViews}
-      onChange={(view) => push(getVisionPath(view))}
+      options={appPageViews.vision}
+      onChange={(view) => push(getAppPath('vision', view))}
       getOptionName={(option) => visionViewName[option]}
     />
   )
