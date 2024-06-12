@@ -19,7 +19,7 @@ export const FocusSoundsPlayer = () => {
   const stop = useCallback(() => {
     Object.values(audioRecordRef.current).forEach((howl) =>
       attempt(() => {
-        howl.stop()
+        howl.pause()
       }, undefined),
     )
   }, [])
@@ -53,7 +53,7 @@ export const FocusSoundsPlayer = () => {
         attempt(() => {
           const id = sound as FocusSound
           if (!preference[id]) {
-            howl.stop()
+            howl.pause()
           }
         }, undefined),
       )
@@ -61,6 +61,10 @@ export const FocusSoundsPlayer = () => {
       stop()
     }
   }, [currentSet, focusAudioMode, isFocusAudioEnabled, preference, stop])
+
+  useEffect(() => {
+    return stop
+  }, [stop])
 
   return null
 }
