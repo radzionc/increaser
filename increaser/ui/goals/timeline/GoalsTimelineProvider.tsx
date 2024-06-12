@@ -7,17 +7,19 @@ import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoal
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { addYears } from 'date-fns'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 import { range } from '@lib/utils/array/range'
 import { order } from '@lib/utils/array/order'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useActiveGoals } from '../hooks/useActiveGoals'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 const maxLabelsCount = 10
 
 export const GoalsTimelineProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { goals, dob: potentialDob } = useAssertUserState()
+  const goals = useActiveGoals()
+  const { dob: potentialDob } = useAssertUserState()
   const dob = shouldBePresent(potentialDob)
 
   const [start, minEnd] = useMemo(() => {
@@ -30,9 +32,9 @@ export const GoalsTimelineProvider = ({
     let start = addYears(dobDate, userAge).getTime()
 
     let end = addYears(dobDate, userAge + 3).getTime()
-    if (!isRecordEmpty(goals)) {
+    if (!isEmpty(goals)) {
       const orderedDeadlines = order(
-        Object.values(goals).map((goal) =>
+        goals.map((goal) =>
           getGoalDeadlineTimestamp({
             value: goal.deadlineAt,
             dob,

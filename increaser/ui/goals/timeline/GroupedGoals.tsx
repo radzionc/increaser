@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { useAssertUserState } from '../../user/UserStateContext'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
 import { useGoalsTimeline } from './state/GoalsTimelineContext'
@@ -15,6 +14,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { getGoalStatusColor } from '../getGoalStatusColor'
+import { useActiveGoals } from '../hooks/useActiveGoals'
 
 const Container = styled(VStack)`
   position: relative;
@@ -42,7 +42,7 @@ const Indicator = styled.div`
 `
 
 export const GroupedGoals = () => {
-  const { goals } = useAssertUserState()
+  const items = useActiveGoals()
   const { dob, interval } = useGoalsTimeline()
 
   const intervalDuration = getIntervalDuration(interval)
@@ -50,13 +50,13 @@ export const GroupedGoals = () => {
   const theme = useTheme()
 
   const groupedGoals = useMemo(() => {
-    return groupItems(Object.values(goals), ({ deadlineAt }) =>
+    return groupItems(items, ({ deadlineAt }) =>
       getGoalDeadlineTimestamp({
         value: deadlineAt,
         dob,
       }),
     )
-  }, [dob, goals])
+  }, [dob, items])
 
   const maxGroupSize = Math.max(
     ...Object.values(groupedGoals).map((group) => group.length),
