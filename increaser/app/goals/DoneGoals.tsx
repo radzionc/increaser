@@ -6,6 +6,8 @@ import { order } from '@lib/utils/array/order'
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
 import { CurrentGoalProvider } from '@increaser/ui/goals/CurrentGoalProvider'
 import { GoalItem } from '@increaser/ui/goals/GoalItem'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 
 export const DoneGoals = () => {
   const { goals, dob } = useAssertUserState()
@@ -16,6 +18,12 @@ export const DoneGoals = () => {
       'desc',
     )
   }, [dob, goals])
+
+  if (isEmpty(items)) {
+    return (
+      <ShyInfoBlock>There are no completed goals yet. Keep going!</ShyInfoBlock>
+    )
+  }
 
   return (
     <VStack>
