@@ -13,6 +13,12 @@ export const visionViews = ['my', 'ideas'] as const
 export type VisionView = (typeof visionViews)[number]
 export const getVisionPath = (view: VisionView) => `/${visionBasePath}/${view}`
 
+export const goalsBasePath = 'goals'
+export const goalsViews = ['active', 'done'] as const
+export type GoalsView = (typeof goalsViews)[number]
+export const getGoalsPath = (view: GoalsView) =>
+  `/${goalsBasePath}/${view}` as const
+
 export enum AppPath {
   OAuth = '/oauth',
   Tasks = '/tasks',
@@ -34,8 +40,8 @@ export enum AppPath {
   WorkBudget = '/work-budget',
   ProjectsBudget = '/projects-budget',
   Plan = '/plan',
-  MyVision = `${visionBasePath}/my`,
-  VisionIdeas = `${visionBasePath}/ideas`,
-  Goals = '/goals',
+  MyVision = `/${visionBasePath}/my`,
+  VisionIdeas = `/${visionBasePath}/ideas`,
+  Goals = `/${goalsBasePath}/active`,
   Membership = '/membership',
 }
