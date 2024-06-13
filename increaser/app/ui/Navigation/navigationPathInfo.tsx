@@ -1,5 +1,5 @@
 import { ListIcon } from '@lib/ui/icons/ListIcon'
-import { SettingsIcon } from '@lib/ui/icons/SettingsIcon'
+import { UserIcon } from '@lib/ui/icons/UserIcon'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
 import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
@@ -47,8 +47,8 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       icon: <ListIcon />,
     },
     account: {
-      name: 'Settings',
-      icon: <SettingsIcon />,
+      name: 'Account',
+      icon: <UserIcon />,
     },
     community: {
       name: 'Community',

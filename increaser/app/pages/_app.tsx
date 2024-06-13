@@ -16,11 +16,6 @@ import { UserStateProvider } from '@increaser/app/user/components/UserStateProvi
 import { Open_Sans } from 'next/font/google'
 import { Page } from '@lib/next-ui/Page'
 import { MembershipConfirmation } from '@increaser/app/membership/components/MembershipConfirmation'
-import {
-  PersistentStateKey,
-  usePersistentState,
-} from '@increaser/ui/state/persistentState'
-import { ThemePreference } from '@lib/ui/theme/ThemePreference'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
@@ -43,10 +38,6 @@ type MyAppProps = AppProps & {
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   const [queryClient] = useState(getQueryClient)
-  const [theme, setTheme] = usePersistentState<ThemePreference>(
-    PersistentStateKey.ThemePreference,
-    'dark',
-  )
 
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
   const component = getLayout(<Component {...pageProps} />)
@@ -54,7 +45,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   return (
     <AnalyticsProvider>
       <PageVisitTracker />
-      <ThemeProvider value={theme} onChange={setTheme}>
+      <ThemeProvider>
         <GlobalStyle fontFamily={openSans.style.fontFamily} />
         <QueryClientProvider client={queryClient}>
           <ErrorBoundary fallback={<FullSizeErrorFallback />}>
