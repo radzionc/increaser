@@ -34,6 +34,8 @@ export enum PersistentStateKey {
   IsFocusAudioEnabled = 'isFocusAudioEnabled',
   FocusSoundsPreference = 'focusSoundsPreference',
   YouTubeFocusPreference = 'youTubeFocusPreference',
+  CurrentSet = 'currentSet',
+  FocusLauncher = 'focusLauncher',
 }
 
 export const persistentStorage =

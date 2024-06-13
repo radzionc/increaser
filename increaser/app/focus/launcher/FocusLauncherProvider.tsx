@@ -1,18 +1,24 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { useState } from 'react'
 import {
   FocusLauncherMutableState,
   FocusLauncherContext,
 } from './state/FocusLauncherContext'
+import {
+  PersistentStateKey,
+  usePersistentState,
+} from '@increaser/ui/state/persistentState'
 
 export const FocusLauncherProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const [state, setState] = useState<FocusLauncherMutableState>({
-    projectId: null,
-    taskId: null,
-    startedAt: null,
-  })
+  const [state, setState] = usePersistentState<FocusLauncherMutableState>(
+    PersistentStateKey.FocusLauncher,
+    {
+      projectId: null,
+      taskId: null,
+      startedAt: null,
+    },
+  )
 
   return (
     <FocusLauncherContext.Provider value={{ ...state, setState }}>

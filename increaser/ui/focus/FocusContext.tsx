@@ -30,7 +30,7 @@ export interface FocusState {
   stop: (params?: StopFocusParams) => void
   cancel: () => void
 
-  currentSet: CurrentSet | undefined
+  currentSet: CurrentSet | null
   updateStartTime: (value: number) => void
   updateProject: (value: string) => void
   updateTask: (value: FocusTask | undefined) => void

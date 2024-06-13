@@ -57,7 +57,10 @@ export const FocusProvider = ({ children }: Props) => {
     }
   }, [hasTimerBrowserNotification, permission, setHasTimerBrowserNotification])
 
-  const [currentSet, setCurrentSet] = useState<CurrentSet | undefined>()
+  const [currentSet, setCurrentSet] = usePersistentState<CurrentSet | null>(
+    PersistentStateKey.CurrentSet,
+    null,
+  )
 
   const analytics = useAnalytics()
 
@@ -75,23 +78,29 @@ export const FocusProvider = ({ children }: Props) => {
         setFocusDuration(duration as FocusDuration)
       }
     },
-    [focusDuration, analytics],
+    [analytics, focusDuration, setCurrentSet],
   )
 
-  const updateStartTime = useCallback((startedAt: number) => {
-    setCurrentSet((set) => (set ? { ...set, startedAt } : set))
-  }, [])
+  const updateStartTime = useCallback(
+    (startedAt: number) => {
+      setCurrentSet((set) => (set ? { ...set, startedAt } : set))
+    },
+    [setCurrentSet],
+  )
 
-  const updateProject = useCallback((projectId: string) => {
-    setCurrentSet((set) => (set ? { ...set, projectId } : set))
-  }, [])
+  const updateProject = useCallback(
+    (projectId: string) => {
+      setCurrentSet((set) => (set ? { ...set, projectId } : set))
+    },
+    [setCurrentSet],
+  )
 
   const { mutate: addSet } = useAddSetMutation()
   const { mutate: updateTaskMutation } = useUpdateTaskMutation()
 
   const cancel = useCallback(() => {
-    setCurrentSet(undefined)
-  }, [])
+    setCurrentSet(null)
+  }, [setCurrentSet])
 
   const { tasks } = useAssertUserState()
 
@@ -114,7 +123,7 @@ export const FocusProvider = ({ children }: Props) => {
         },
       })
     }
-  }, [currentSet, tasks, updateTaskMutation])
+  }, [currentSet, setCurrentSet, tasks, updateTaskMutation])
 
   const stop = useCallback(
     (params: StopFocusParams = {}) => {
@@ -128,7 +137,7 @@ export const FocusProvider = ({ children }: Props) => {
       }
       const { task } = currentSet
 
-      setCurrentSet(undefined)
+      setCurrentSet(null)
 
       const blocks = getBlocks([...todaySets, set])
 
@@ -150,12 +159,23 @@ export const FocusProvider = ({ children }: Props) => {
         duration: Math.round(getSetDuration(set) / MS_IN_MIN),
       })
     },
-    [addSet, currentSet, tasks, todaySets, updateTaskMutation, analytics],
+    [
+      currentSet,
+      setCurrentSet,
+      todaySets,
+      addSet,
+      tasks,
+      analytics,
+      updateTaskMutation,
+    ],
   )
 
-  const updateTask = useCallback((value: FocusTask | undefined) => {
-    setCurrentSet((set) => (set ? { ...set, task: value } : set))
-  }, [])
+  const updateTask = useCallback(
+    (value: FocusTask | undefined) => {
+      setCurrentSet((set) => (set ? { ...set, task: value } : set))
+    },
+    [setCurrentSet],
+  )
 
   useEffect(() => {
     if (!currentSet) return
@@ -166,7 +186,7 @@ export const FocusProvider = ({ children }: Props) => {
     if (tasks[task.id].projectId !== currentSet.projectId) {
       setCurrentSet(omit(currentSet, 'task'))
     }
-  }, [currentSet, tasks])
+  }, [currentSet, setCurrentSet, tasks])
 
   return (
     <FocusContext.Provider
