@@ -27,6 +27,10 @@ const Cotainer = styled(UnstyledButton)<{ value: boolean }>`
     true: 'primary',
     false: 'text',
   })};
+  border-color: ${matchColor('value', {
+    true: 'primary',
+    false: 'mistExtra',
+  })};
   ${transition};
   &:hover {
     background: ${getColor('mist')};
