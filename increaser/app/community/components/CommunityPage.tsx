@@ -6,7 +6,6 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { ClientOnly } from '@increaser/app/ui/ClientOnly'
 import { ManageProfile } from './ManageProfile'
 import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
-import { RequiresOnboarding } from '../../onboarding/RequiresOnboarding'
 import { ProductFeaturesBoard } from '../../productFeatures/components/ProductFeaturesBoard'
 import { FounderContacts } from './FounderContacts'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
@@ -19,19 +18,17 @@ export const CommunityPage: Page = () => {
         <PageTitle documentTitle={`👋 Community`} title="Community" />
       </ClientOnly>
       <UserStateOnly>
-        <RequiresOnboarding>
-          <UniformColumnGrid minChildrenWidth={320} gap={40}>
-            <VStack style={{ width: 'fit-content' }} gap={40}>
-              <ManageProfile />
-              <Scoreboard />
-              <FounderContacts />
-            </VStack>
-            <VStack gap={20}>
-              <SubscribeForUpdatesPrompt />
-              <ProductFeaturesBoard />
-            </VStack>
-          </UniformColumnGrid>
-        </RequiresOnboarding>
+        <UniformColumnGrid minChildrenWidth={320} gap={40}>
+          <VStack style={{ width: 'fit-content' }} gap={40}>
+            <ManageProfile />
+            <Scoreboard />
+            <FounderContacts />
+          </VStack>
+          <VStack gap={20}>
+            <SubscribeForUpdatesPrompt />
+            <ProductFeaturesBoard />
+          </VStack>
+        </UniformColumnGrid>
       </UserStateOnly>
     </FixedWidthContent>
   )

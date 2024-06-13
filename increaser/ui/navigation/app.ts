@@ -61,9 +61,11 @@ export const appPageViews = {
   timeTracking: ['report', 'track'],
   vision: ['my', 'ideas'],
   goals: ['active', 'done'],
+  habits: ['my', 'ideas'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
+export type AppPageHabitsView = (typeof appPageViews)['habits'][number]
 
 type AppPageViews = typeof appPageViews
 export type AppPageWithView = keyof AppPageViews

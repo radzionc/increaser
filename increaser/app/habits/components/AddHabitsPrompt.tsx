@@ -7,7 +7,7 @@ export const AddHabitsPrompt = () => {
   return (
     <ActionPrompt
       action={
-        <Link href={getAppPath('habits')}>
+        <Link href={getAppPath('habits', 'my')}>
           <Button as="div">Add habits</Button>
         </Link>
       }

@@ -48,7 +48,7 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
         justifyContent="space-between"
       >
         <VStack gap={4}>
-          <Text weight="bold">
+          <Text color="contrast" weight="semibold">
             <EmojiTextPrefix emoji={emoji} />
             {name}
           </Text>
@@ -80,7 +80,7 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
         )}
       </HStack>
 
-      <Text size={14} color="supporting">
+      <Text height="large" size={14} color="supporting">
         {description}
       </Text>
     </Container>

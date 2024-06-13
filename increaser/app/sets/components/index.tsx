@@ -8,7 +8,6 @@ import { SetsExplorer } from './SetsExplorer'
 import { ScheduleReview } from './ScheduleReview'
 import { Page } from '@lib/next-ui/Page'
 import { ScheduleVisualization } from '@increaser/ui/schedule/ScheduleVisualization'
-import { RequiresOnboarding } from '../../onboarding/RequiresOnboarding'
 
 const title = 'Schedule'
 
@@ -18,16 +17,14 @@ export const SessionsPage: Page = () => {
       <PageTitle documentTitle={`☕️ ${title}`} title={title} />
       <VStack gap={80}>
         <UserStateOnly>
-          <RequiresOnboarding>
-            <HStack gap={40} fullWidth wrap="wrap">
-              <VStack style={{ flex: 1 }} gap={40}>
-                <ScheduleVisualization />
-                <ManageSchedule />
-              </VStack>
-              <ScheduleReview />
-            </HStack>
-            <SetsExplorer />
-          </RequiresOnboarding>
+          <HStack gap={40} fullWidth wrap="wrap">
+            <VStack style={{ flex: 1 }} gap={40}>
+              <ScheduleVisualization />
+              <ManageSchedule />
+            </VStack>
+            <ScheduleReview />
+          </HStack>
+          <SetsExplorer />
         </UserStateOnly>
       </VStack>
     </FixedWidthContent>
