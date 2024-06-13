@@ -19,7 +19,7 @@ export const FocusNotifications = () => {
           <FocusSoundNotifications />
         </VStack>
       )}
-      renderOpener={(props) => (
+      renderOpener={({ props }) => (
         <div {...props}>
           <Button kind="ghostSecondary" size="xs">
             <HStack alignItems="center" gap={4}>

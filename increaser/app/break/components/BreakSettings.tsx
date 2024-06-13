@@ -16,7 +16,7 @@ export const BreakSettings = () => {
           <ManageBreakNotifications />
         </VStack>
       )}
-      renderOpener={(props) => (
+      renderOpener={({ props }) => (
         <IconButton
           title="Break settings"
           kind="secondary"
