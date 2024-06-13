@@ -36,6 +36,7 @@ export enum PersistentStateKey {
   YouTubeFocusPreference = 'youTubeFocusPreference',
   CurrentSet = 'currentSet',
   FocusLauncher = 'focusLauncher',
+  MyVisionView = 'myVisionView',
 }
 
 export const persistentStorage =
