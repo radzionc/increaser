@@ -5,4 +5,5 @@ export const tableName = {
   appSumoCodes: `${prefix}app_sumo_codes`,
   scoreboards: `${prefix}scoreboards`,
   features: `${prefix}features`,
+  emails: `${prefix}emails`,
 }

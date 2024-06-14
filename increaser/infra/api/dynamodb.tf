@@ -52,3 +52,15 @@ resource "aws_dynamodb_table" "appSumoCodes" {
     type = "S"
   }
 }
+
+resource "aws_dynamodb_table" "emails" {
+  name         = "${var.table_prefix}emails"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "id"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+}
+

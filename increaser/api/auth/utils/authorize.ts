@@ -4,6 +4,7 @@ import { getAuthSession } from './getAuthSession'
 import { getUserInitialFields } from '@increaser/entities-utils/user/getUserInitialFields'
 import { AuthSession } from '@increaser/entities/AuthSession'
 import { CountryCode } from '@lib/countries'
+import { putEmail } from '@increaser/db/email'
 
 interface AuthorizeParams extends AuthenticationResult {
   timeZone: number
@@ -32,6 +33,7 @@ export const authorize = async ({
   })
 
   await putUser(newUser)
+  await putEmail({ id: email })
 
   const session = await getAuthSession(newUser.id)
 

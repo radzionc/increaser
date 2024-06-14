@@ -28,7 +28,7 @@ resource "aws_lambda_function" "service" {
       APP_URL : var.app_url,
       EMAIL_DOMAIN : var.email_domain,
       SES_AWS_REGION : var.ses_aws_region,
-      PUBLIC_BUCKET_NAME: var.public_bucket_name
+      PUBLIC_BUCKET_NAME: var.public_bucket_name,
       PUBLIC_BUCKET_REGION: var.public_bucket_region
     }
   }
@@ -67,6 +67,15 @@ resource "aws_iam_policy" "service_permissions" {
         Effect = "Allow",
         Resource = "*"
       },
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Effect = "Allow",
+        Resource = "*"
+      }
     ]
   })
 }
@@ -75,7 +84,6 @@ resource "aws_iam_role_policy_attachment" "service_role_attachment" {
   policy_arn = aws_iam_policy.service_permissions.arn
   role       = aws_iam_role.service_role.name
 }
-
 
 resource "aws_cloudwatch_event_rule" "cron" {
   name = "tf-${var.name}"
@@ -95,3 +103,9 @@ resource "aws_lambda_permission" "cron_cloudwatch" {
   principal = "events.amazonaws.com"
   source_arn = "${aws_cloudwatch_event_rule.cron.arn}"
 }
+
+resource "aws_cloudwatch_log_group" "lambda_log_group" {
+  name              = "/aws/lambda/tf-${var.name}"
+  retention_in_days = 14
+}
+
