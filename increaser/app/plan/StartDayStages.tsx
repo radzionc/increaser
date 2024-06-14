@@ -1,7 +1,6 @@
 import { Match } from '@lib/ui/base/Match'
 import { startDayNames, startDayStages } from './StartDayStage'
 import { useStartDayCompletion } from './useStartDayCompletion'
-import { OverdueTasksReview } from './tasks/OverdueTasksReview'
 import { TodayTasksReview } from './tasks/TodayTasksReview'
 import { HabitsReview } from './habits/HabitsReview'
 import { PlanSection } from './PlanSection'
@@ -20,7 +19,6 @@ export const StartDayStages = () => {
         >
           <Match
             value={stage}
-            overdueTasks={() => <OverdueTasksReview />}
             todayTasks={() => <TodayTasksReview />}
             yesterdayHabits={() => <HabitsReview />}
           />

@@ -9,7 +9,6 @@ export const useStartDayCompletion = () => {
 
   return {
     yesterdayHabits: !haveToSubmitYesterdayHabits,
-    overdueTasks: !hasOverdueTasks,
-    todayTasks: todayTasks.length > 0,
+    todayTasks: !hasOverdueTasks && todayTasks.length > 0,
   }
 }
