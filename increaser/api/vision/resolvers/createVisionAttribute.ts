@@ -2,9 +2,7 @@ import { assertUserId } from '../../auth/assertUserId'
 import * as visionDb from '@increaser/db/vision'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 import { VisionAttribute } from '@increaser/entities/Vision'
-import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
-import { getId } from '@increaser/entities-utils/shared/getId'
-import { copyPublicBucketFile } from '@increaser/public/copyPublicBucketFile'
+import { copyToUserFolder } from '@increaser/public/copyToUserFolder'
 
 export const createVisionAttribute: ApiResolver<
   'createVisionAttribute'
@@ -12,9 +10,10 @@ export const createVisionAttribute: ApiResolver<
   const userId = assertUserId(context)
 
   if (input.imageId) {
-    const newImageId = getPublicBucketUserFileKey(userId, getId())
-    await copyPublicBucketFile(input.imageId, newImageId)
-    input.imageId = newImageId
+    input.imageId = await copyToUserFolder({
+      srcFileId: input.imageId,
+      userId,
+    })
   }
 
   await visionDb.putVisionAttribute(userId, {
