@@ -37,6 +37,7 @@ export enum PersistentStateKey {
   CurrentSet = 'currentSet',
   FocusLauncher = 'focusLauncher',
   MyVisionView = 'myVisionView',
+  MyHabitsView = 'myHabitsView',
 }
 
 export const persistentStorage =

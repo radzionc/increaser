@@ -11,6 +11,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VisionAttributeNameInput } from './VisionAttributeNameInput'
 import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
 import { VisionImageInput } from './VisionImageInput'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -31,14 +32,14 @@ export const CreateVisionAttributeForm = ({
   const onSubmit = useCallback(() => {
     if (isDisabled) return
 
-    const orders = Object.values(vision).map((attribute) => attribute.order)
-    const order = orders.length ? Math.max(...orders) + 1 : 0
     mutate({
       id: getId(),
       name,
       status,
       imageId,
-      order,
+      order: getLastItemOrder(
+        Object.values(vision).map((attribute) => attribute.order),
+      ),
     })
     onFinish()
   }, [imageId, isDisabled, mutate, name, onFinish, status, vision])

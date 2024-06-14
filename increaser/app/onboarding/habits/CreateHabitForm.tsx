@@ -14,6 +14,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { defaultEmojis } from '@increaser/ui/projects/EnhancedProject'
 import { useCallback, useState } from 'react'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type HabitFormShape = Pick<Habit, 'name' | 'emoji' | 'color'>
 
@@ -45,7 +46,11 @@ export const CreateHabitForm = () => {
           as="form"
           onSubmit={preventDefault(() => {
             if (!isValid) return
-            createHabit(value)
+
+            createHabit({
+              ...value,
+              order: getLastItemOrder(habits.map(({ order }) => order)),
+            })
             setValue(getInitialValue())
           })}
         >
