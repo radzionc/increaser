@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://increaser.org
+Host: https://app.increaser.org
 
 # Sitemaps
-Sitemap: https://increaser.org/sitemap.xml
+Sitemap: https://app.increaser.org/sitemap.xml
