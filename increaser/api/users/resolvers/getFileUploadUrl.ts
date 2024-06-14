@@ -20,6 +20,7 @@ export const getFileUploadUrl: ApiResolver<'getFileUploadUrl'> = async ({
     Bucket: getPublicBucketName(),
     Key: key,
     ContentType: contentType,
+    CacheControl: 'max-age=31536000, public',
   })
 
   const url = await getSignedUrl(s3Client, command, { expiresIn: 300 })

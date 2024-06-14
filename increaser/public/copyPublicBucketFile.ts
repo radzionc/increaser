@@ -14,6 +14,7 @@ export const copyPublicBucketFile = async (
     Bucket: bucketName,
     CopySource: `${bucketName}/${sourceKey}`,
     Key: destinationKey,
+    MetadataDirective: 'COPY',
   })
 
   await s3Client.send(copyCommand)
