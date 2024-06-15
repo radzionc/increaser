@@ -11,9 +11,10 @@ import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { useHasHabits } from '../hooks/useHasHabits'
 import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
-import { ListIcon } from '@lib/ui/icons/ListIcon'
+import { EditIcon } from '@lib/ui/icons/EditIcon'
+import { TableIcon } from '@lib/ui/icons/TableIcon'
 
-export const myHabitsViews = ['track', 'manage'] as const
+export const myHabitsViews = ['track', 'report', 'manage'] as const
 export type MyHabitsView = (typeof myHabitsViews)[number]
 
 export const useMyHabitsView = () => {
@@ -39,7 +40,8 @@ export const useMyHabitsView = () => {
 
 const myHabitsViewIcon: Record<MyHabitsView, React.ReactNode> = {
   track: <CheckSquareIcon />,
-  manage: <ListIcon />,
+  manage: <EditIcon />,
+  report: <TableIcon />,
 }
 
 export const MyHabitsViewSelector = () => {

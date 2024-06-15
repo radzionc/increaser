@@ -1,7 +1,5 @@
 import { useHabitTrackingDaysCount } from '@increaser/ui/habits/hooks/useHabitTrackingDaysCount'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { VStack } from '@lib/ui/layout/Stack'
-import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { HabitsReportContent } from './HabitsReportContent'
 
 export const HabitsReport = () => {
@@ -15,10 +13,5 @@ export const HabitsReport = () => {
     )
   }
 
-  return (
-    <VStack gap={20}>
-      <SectionTitle>Last {daysNumber} days report</SectionTitle>
-      <HabitsReportContent />
-    </VStack>
-  )
+  return <HabitsReportContent />
 }
