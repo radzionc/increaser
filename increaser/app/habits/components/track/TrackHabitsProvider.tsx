@@ -8,29 +8,22 @@ import { HabitDay, TrackHabitsContext } from './state/TrackHabitsContext'
 import { makeRecord } from '@lib/utils/record/makeRecord'
 import { findBy } from '@lib/utils/array/findBy'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useHabitTrackingDaysCount } from '@increaser/ui/habits/hooks/useHabitTrackingDaysCount'
+import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
 
 export const TrackHabitsProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const firstDayStartedAt = useStartOfDay()
 
-  const habits = useOrderedHabits()
-  const habitIds = useMemo(() => habits.map((habit) => habit.id), [habits])
+  const daysCount = useHabitTrackingDaysCount()
 
-  const lastDayStartedAt = useMemo(() => {
-    const firstHabitStartedAt = Math.min(
-      ...habits.map((habit) => habit.startedAt),
-    )
-    return startOfDay(convertDuration(firstHabitStartedAt, 's', 'ms')).getTime()
-  }, [habits])
+  const habits = useOrderedHabits()
 
   const days: HabitDay[] = useMemo(() => {
-    const daysNumber =
-      convertDuration(firstDayStartedAt - lastDayStartedAt, 'ms', 'd') + 1
-
-    return range(daysNumber).map((index) => {
+    const habitIds = habits.map(({ id }) => id)
+    return range(daysCount).map((index) => {
       const startedAt = firstDayStartedAt - convertDuration(index, 'd', 'ms')
 
       const completion = makeRecord(habitIds, (id) => {
@@ -48,7 +41,7 @@ export const TrackHabitsProvider = ({
 
       return { startedAt, completion }
     })
-  }, [firstDayStartedAt, habitIds, habits, lastDayStartedAt])
+  }, [daysCount, firstDayStartedAt, habits])
 
   return (
     <TrackHabitsContext.Provider value={{ days }}>

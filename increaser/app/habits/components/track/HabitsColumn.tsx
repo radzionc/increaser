@@ -15,6 +15,8 @@ import { getColor } from '@lib/ui/theme/getters'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Text } from '@lib/ui/text'
 import { horizontalMargin } from '@lib/ui/css/horizontalMargin'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const Container = styled(VStack)`
   align-items: center;
@@ -34,6 +36,12 @@ const Content = styled(TrackHabitsColumn)<ComponentWithActiveState>`
     `}
 `
 
+const Label = styled.div`
+  height: ${toSizeUnit(trackHabitsConfig.labelHeight)};
+  font-size: 12px;
+  ${centerContent};
+`
+
 export const HabitsColumn = ({
   value: { startedAt, completion },
 }: ComponentWithValueProps<HabitDay>) => {
@@ -43,13 +51,13 @@ export const HabitsColumn = ({
 
   return (
     <Container>
-      <Spacer height={trackHabitsConfig.labelHeight}>
+      <Label>
         {isToday && (
           <Text size={12} weight="semibold" color="contrast">
             Today
           </Text>
         )}
-      </Spacer>
+      </Label>
       <Content isActive={isToday}>
         {habits.map(({ id, color }) => {
           const isCompleted = completion[id]
