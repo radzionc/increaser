@@ -9,6 +9,8 @@ export type HabitDay = {
 
 export type TrackHabitsState = {
   days: HabitDay[]
+  activeDayStartedAt: number
+  setActiveDayStartedAt: (startedAt: number) => void
 }
 
 export const TrackHabitsContext = createContext<TrackHabitsState | undefined>(

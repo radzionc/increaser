@@ -2,12 +2,8 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { useTrackHabits } from './state/TrackHabitsContext'
 import { HabitsColumn } from './HabitsColumn'
 import styled from 'styled-components'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { trackHabitsConfig } from './config'
 
-const Container = styled(HStack)`
-  gap: ${toSizeUnit(trackHabitsConfig.itemGap)};
-`
+const Container = styled(HStack)``
 
 export const HabitColumns = () => {
   const { days } = useTrackHabits()

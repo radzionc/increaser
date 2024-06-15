@@ -1,5 +1,5 @@
 export const trackHabitsConfig = {
-  itemHeight: 32,
+  itemHeight: 36,
   labelHeight: 32,
   itemGap: 4,
 }

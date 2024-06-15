@@ -3,7 +3,7 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { startOfDay } from 'date-fns'
-import { useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { HabitDay, TrackHabitsContext } from './state/TrackHabitsContext'
 import { makeRecord } from '@lib/utils/record/makeRecord'
 import { findBy } from '@lib/utils/array/findBy'
@@ -11,6 +11,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { useHabitTrackingDaysCount } from '@increaser/ui/habits/hooks/useHabitTrackingDaysCount'
 import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
+import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
 export const TrackHabitsProvider = ({
   children,
@@ -43,8 +44,24 @@ export const TrackHabitsProvider = ({
     })
   }, [daysCount, firstDayStartedAt, habits])
 
+  const [activeDayStartedAt, setActiveDayStartedAt] = useStateCorrector(
+    useState(firstDayStartedAt),
+    useCallback(
+      (value) => {
+        if (days.some(({ startedAt }) => startedAt === value)) {
+          return value
+        }
+
+        return firstDayStartedAt
+      },
+      [days, firstDayStartedAt],
+    ),
+  )
+
   return (
-    <TrackHabitsContext.Provider value={{ days }}>
+    <TrackHabitsContext.Provider
+      value={{ days, activeDayStartedAt, setActiveDayStartedAt }}
+    >
       {children}
     </TrackHabitsContext.Provider>
   )
