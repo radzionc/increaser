@@ -13,6 +13,8 @@ import { useHabitTrackingDaysCount } from '@increaser/ui/habits/hooks/useHabitTr
 import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
+const daysToDisplay = 30
+
 export const TrackHabitsProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
@@ -24,24 +26,26 @@ export const TrackHabitsProvider = ({
 
   const days: HabitDay[] = useMemo(() => {
     const habitIds = habits.map(({ id }) => id)
-    return range(daysCount).map((index) => {
-      const startedAt = firstDayStartedAt - convertDuration(index, 'd', 'ms')
+    return range(daysCount)
+      .slice(0, daysToDisplay)
+      .map((index) => {
+        const startedAt = firstDayStartedAt - convertDuration(index, 'd', 'ms')
 
-      const completion = makeRecord(habitIds, (id) => {
-        const habit = shouldBePresent(findBy(habits, 'id', id))
-        const habitStartedAt = startOfDay(
-          convertDuration(habit.startedAt, 's', 'ms'),
-        ).getTime()
-        if (startedAt < habitStartedAt) {
-          return null
-        }
+        const completion = makeRecord(habitIds, (id) => {
+          const habit = shouldBePresent(findBy(habits, 'id', id))
+          const habitStartedAt = startOfDay(
+            convertDuration(habit.startedAt, 's', 'ms'),
+          ).getTime()
+          if (startedAt < habitStartedAt) {
+            return null
+          }
 
-        const habitDate = toHabitDate(new Date(startedAt))
-        return habit.successes.includes(habitDate)
+          const habitDate = toHabitDate(new Date(startedAt))
+          return habit.successes.includes(habitDate)
+        })
+
+        return { startedAt, completion }
       })
-
-      return { startedAt, completion }
-    })
   }, [daysCount, firstDayStartedAt, habits])
 
   const [activeDayStartedAt, setActiveDayStartedAt] = useStateCorrector(

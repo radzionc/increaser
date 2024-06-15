@@ -25,7 +25,7 @@ export const HabitsTableContainer = ({
             </Text>
           ))}
         </TrackHabitsColumn>
-        <Spacer height={trackHabitsConfig.labelHeight} />
+        <Spacer height={20} />
       </VStack>
       <ScrollableFlexboxFiller>{children}</ScrollableFlexboxFiller>
     </HStack>
