@@ -7,6 +7,7 @@ export type Task = {
   deadlineAt: number
   order: number
   spentTime?: number
+  content?: string
 }
 
 export const deadlineTypes = [

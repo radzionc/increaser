@@ -1,17 +1,20 @@
-import { FormEvent, useMemo, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useKey } from 'react-use'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
-import { TaskNameInput } from './TaskNameInput'
+import { TaskNameInput } from '../TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
-import { TaskProjectSelector } from './TaskProjectSelector'
+import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { otherProject } from '@increaser/entities/Project'
+import { TaskFormShape } from './TaskFormShape'
+import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
+import { TaskContentInput } from './TaskContentInput'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -23,33 +26,30 @@ export const CreateTaskForm = ({
   deadlineType,
   order,
 }: CreateTaskFormProps) => {
-  const [name, setName] = useState('')
-  const [projectId, setProjectId] = useState<string>(otherProject.id)
-
+  const [value, setValue] = useState<TaskFormShape>({
+    name: '',
+    projectId: otherProject.id,
+    content: undefined,
+  })
   const { mutate } = useCreateTaskMutation()
 
   useKey('Escape', onFinish)
 
-  const isDisabled = useMemo(() => {
-    if (!name.trim()) {
-      return 'Name is required'
-    }
-  }, [name])
+  const isDisabled = useIsTaskFormDisabled(value)
 
   const handleSubmit = () => {
     if (isDisabled) return
 
     const startedAt = Date.now()
     const task: Task = {
-      name,
       id: getId(),
+      ...value,
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
       order,
-      projectId,
     }
     mutate(task)
-    setName('')
+    onFinish()
   }
 
   return (
@@ -64,12 +64,19 @@ export const CreateTaskForm = ({
       <TaskNameInput
         placeholder="Task name"
         autoFocus
-        onChange={setName}
-        value={name}
+        value={value.name}
+        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
         onSubmit={handleSubmit}
       />
+      <TaskContentInput
+        value={value.content}
+        onChange={(content) => setValue((prev) => ({ ...prev, content }))}
+      />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <TaskProjectSelector value={projectId} onChange={setProjectId} />
+        <TaskProjectSelector
+          value={value.projectId}
+          onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
+        />
         <HStack alignItems="center" gap={8}>
           <Button onClick={onFinish} kind="secondary">
             Cancel

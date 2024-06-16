@@ -1,6 +1,6 @@
 import { DeadlineType } from '@increaser/entities/Task'
 import { AddTaskButton } from './AddTaskButton'
-import { CreateTaskForm } from './CreateTaskForm'
+import { CreateTaskForm } from './form/CreateTaskForm'
 import { useState } from 'react'
 
 type CreateTaskProps = {

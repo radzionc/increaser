@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@aws-sdk/lib-dynamodb": "^3.478.0",
-    "@sentry/serverless": "^7.61.1"
+    "@sentry/serverless": "^7.109.0"
   },
   "scripts": {
     "transpile": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",

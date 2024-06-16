@@ -1,7 +1,7 @@
 import { useCurrentTask } from './CurrentTaskProvider'
 import styled from 'styled-components'
 import { TaskItemFrame } from './TaskItemFrame'
-import { EditTaskForm } from './EditTaskForm'
+import { EditTaskForm } from './form/EditTaskForm'
 import { TaskPrimaryContent } from './TaskPrimaryContent'
 import { TaskCheckBox } from './TaskCheckBox'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'

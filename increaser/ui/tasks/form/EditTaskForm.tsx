@@ -1,28 +1,33 @@
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
 import { useKey } from 'react-use'
 import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { TaskNameInput } from './TaskNameInput'
+import { TaskNameInput } from '../TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { TaskProjectSelector } from './TaskProjectSelector'
+import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
-import { useCurrentTask } from './CurrentTaskProvider'
+import { useCurrentTask } from '../CurrentTaskProvider'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { TaskDeadlineInput } from './TaskDeadlineInput'
+import { TaskDeadlineInput } from '../TaskDeadlineInput'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
-import { useDeleteTaskMutation } from './api/useDeleteTaskMutation'
+import { useDeleteTaskMutation } from '../api/useDeleteTaskMutation'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
+import { TaskFormShape } from './TaskFormShape'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
   const task = useCurrentTask()
-  const [name, setName] = useState(task.name)
-  const [projectId, setProjectId] = useState<string>(task.projectId)
+  const [value, setValue] = useState<TaskFormShape>({
+    name: task.name,
+    projectId: task.projectId,
+    content: task.content,
+  })
   const currentDeadlineStatus = getDeadlineStatus({
     now: Date.now(),
     deadlineAt: task.deadlineAt,
@@ -48,11 +53,7 @@ export const EditTaskForm = () => {
 
   useKey('Escape', onFinish)
 
-  const isDisabled = useMemo(() => {
-    if (!name.trim()) {
-      return 'Name is required'
-    }
-  }, [name])
+  const isDisabled = useIsTaskFormDisabled(value)
 
   const handleSubmit = () => {
     if (isDisabled) {
@@ -60,11 +61,14 @@ export const EditTaskForm = () => {
     }
 
     const fields: Partial<Omit<Task, 'id'>> = {}
-    if (name !== task.name) {
-      fields.name = name
+    if (value.name !== task.name) {
+      fields.name = value.name
     }
-    if (projectId !== task.projectId) {
-      fields.projectId = projectId
+    if (value.projectId !== task.projectId) {
+      fields.projectId = value.projectId
+    }
+    if (value.content !== task.content) {
+      fields.content = value.content
     }
 
     if (
@@ -113,13 +117,18 @@ export const EditTaskForm = () => {
       <TaskNameInput
         placeholder="Task name"
         autoFocus
-        onChange={setName}
-        value={name}
+        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+        value={value.name}
         onSubmit={handleSubmit}
       />
       <VStack gap={28}>
         <HStack alignItems="center" gap={8}>
-          <TaskProjectSelector value={projectId} onChange={setProjectId} />
+          <TaskProjectSelector
+            value={value.projectId}
+            onChange={(projectId) =>
+              setValue((prev) => ({ ...prev, projectId }))
+            }
+          />
           <TaskDeadlineInput
             value={deadlineStatus}
             onChange={setDeadlineStatus}
