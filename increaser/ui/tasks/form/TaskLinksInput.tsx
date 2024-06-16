@@ -6,15 +6,13 @@ import { textInputHeight } from '@lib/ui/css/textInput'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-import { TextInput } from '@lib/ui/inputs/TextInput'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
-import { attempt } from '@lib/utils/attempt'
-import { extractRootDomain } from '@lib/utils/url/extractRootDomain'
 import styled from 'styled-components'
+import { TaskLinkInput } from './TaskLinkInput'
 
 const DeleteButton = styled(IconButton)`
   ${sameDimensions(textInputHeight)};
@@ -30,33 +28,10 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
         <VStack gap={8}>
           {value.map((item, index) => (
             <HStack gap={8}>
-              <TextInput
-                style={{ minWidth: 240 }}
-                placeholder="https://example.com"
-                value={item.url}
-                onValueChange={(url) =>
-                  onChange(
-                    updateAtIndex(value, index, (oldValue) => ({
-                      ...oldValue,
-                      url,
-                      name:
-                        oldValue.name ||
-                        attempt(() => extractRootDomain(url), ''),
-                    })),
-                  )
-                }
-              />
-              <TextInput
-                style={{ minWidth: 40 }}
-                placeholder="Example"
-                value={item.name}
-                onValueChange={(name) =>
-                  onChange(
-                    updateAtIndex(value, index, (oldValue) => ({
-                      ...oldValue,
-                      name,
-                    })),
-                  )
+              <TaskLinkInput
+                value={item}
+                onChange={(item) =>
+                  onChange(updateAtIndex(value, index, () => item))
                 }
               />
               <DeleteButton

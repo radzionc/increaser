@@ -2,23 +2,22 @@ import { css } from 'styled-components'
 import { getColor } from '../theme/getters'
 import { transition } from '../css/transition'
 import { toSizeUnit } from './toSizeUnit'
+import { borderRadius } from './borderRadius'
 
 export const textInputPadding = 12
 export const textInputHeight = 52
-export const textInputBorderRadius = 8
+export const textInputBorderRadius = borderRadius.s
 
 export const textInputFrame = css`
   height: ${toSizeUnit(textInputHeight)};
   width: 100%;
   padding: ${toSizeUnit(textInputPadding)};
-  border-radius: ${toSizeUnit(textInputBorderRadius)};
+  ${textInputBorderRadius};
 `
 
 export const textInput = css`
   ${textInputFrame};
   ${transition};
-
-  outline: none;
 
   background: ${getColor('foreground')};
   color: ${getColor('text')};
@@ -36,6 +35,7 @@ export const textInput = css`
 
   &:focus,
   &:active {
-    border-color: ${getColor('mist')};
+    border-color: ${getColor('mistExtra')};
+    border-color: ${getColor('mistExtra')};
   }
 `
