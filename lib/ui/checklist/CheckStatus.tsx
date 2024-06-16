@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import { centerContent } from '../css/centerContent'
 import { getColor, matchColor } from '../theme/getters'
-import { transition } from '../css/transition'
 import { CheckIcon } from '../icons/CheckIcon'
 import { ComponentWithChildrenProps, UIComponentProps } from '../props'
 import React from 'react'
@@ -28,7 +27,6 @@ const Container = styled.div<{ isChecked: boolean; isInteractive?: boolean }>`
     true: 'background',
     false: 'transparent',
   })};
-  ${transition}
   ${({ isChecked }) =>
     isChecked &&
     css`

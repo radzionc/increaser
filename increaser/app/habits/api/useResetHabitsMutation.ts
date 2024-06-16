@@ -8,27 +8,31 @@ import { recordMap } from '@lib/utils/record/recordMap'
 
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 
-export const useResetAllHabitsMutation = () => {
+export const useResetHabitsMutation = () => {
   const { updateState } = useUserState()
   const { habits } = useAssertUserState()
   const api = useApi()
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (ids: string[]) => {
       const fields = {
         startedAt: Math.round(Date.now() / MS_IN_SEC),
         successes: [],
       }
 
       updateState({
-        habits: recordMap(habits, (habit) => ({
-          ...habit,
-          ...fields,
-        })),
+        habits: recordMap(habits, (habit) =>
+          ids.includes(habit.id)
+            ? {
+                ...habit,
+                ...fields,
+              }
+            : habit,
+        ),
       })
 
       const response = await Promise.all(
-        Object.keys(habits).map((id) => {
+        ids.map((id) => {
           return api.call('updateHabit', {
             id,
             fields,
