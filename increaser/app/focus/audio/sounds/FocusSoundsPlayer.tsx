@@ -7,6 +7,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
 import { Howl } from 'howler'
 import { FocusSound } from '../focusSounds'
+import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 
 export const FocusSoundsPlayer = () => {
   const { currentSet } = useFocus()
@@ -35,7 +36,7 @@ export const FocusSoundsPlayer = () => {
           const id = sound as FocusSound
           if (!audioRecord[id]) {
             audioRecord[id] = new Howl({
-              src: [`audio/focus/${id}.mp3`],
+              src: getPublicFileUrl(`sounds/${id}.mp3`),
               loop: true,
               volume: volume,
             })

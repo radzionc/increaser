@@ -19,9 +19,10 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
-  const { vision } = useAssertUserState()
+  const { goals } = useAssertUserState()
   const [value, setValue] = useState<GoalFormShape>({
     name: '',
     status: 'inProgress',
@@ -37,16 +38,14 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const onSubmit = useCallback(() => {
     if (isDisabled) return
 
-    const orders = Object.values(vision).map((attribute) => attribute.order)
-    const order = orders.length ? Math.max(...orders) + 1 : 0
     mutate({
       id: getId(),
       ...value,
       deadlineAt: shouldBePresent(value.deadlineAt),
-      order,
+      order: getLastItemOrder(Object.values(goals).map(({ order }) => order)),
     })
     onFinish()
-  }, [isDisabled, mutate, onFinish, value, vision])
+  }, [goals, isDisabled, mutate, onFinish, value])
 
   return (
     <Panel

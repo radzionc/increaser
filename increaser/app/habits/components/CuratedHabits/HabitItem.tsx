@@ -12,6 +12,7 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { ComponentWithValueProps } from '@lib/ui/props'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 const Added = styled.div`
   background: transparent;
@@ -70,7 +71,12 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
         ) : (
           <Button
             onClick={() => {
-              createHabit({ name, emoji, color: defaultColorOption })
+              createHabit({
+                name,
+                emoji,
+                color: defaultColorOption,
+                order: getLastItemOrder(habits.map(({ order }) => order)),
+              })
             }}
             isRounded
             kind="secondary"

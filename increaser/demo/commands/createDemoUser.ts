@@ -2,10 +2,8 @@ import { getUser, putUser } from '@increaser/db/user'
 import { demoConfig } from '../config'
 import { getDemoUser } from '../getDemoUser'
 import { deleteUser } from '@increaser/data-services/users/deleteUser'
-import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
-import { getId } from '@increaser/entities-utils/shared/getId'
-import { copyPublicBucketFile } from '@increaser/public/copyPublicBucketFile'
 import { getRecord } from '@lib/utils/record/getRecord'
+import { copyToUserFolder } from '@increaser/public/copyToUserFolder'
 
 export const createDemoUser = async () => {
   if (await getUser(demoConfig.userId, ['id'])) {
@@ -17,8 +15,10 @@ export const createDemoUser = async () => {
     Object.values(user.vision).map(async (va) => {
       if (!va.imageId) return va
 
-      const imageId = getPublicBucketUserFileKey(user.id, getId())
-      await copyPublicBucketFile(va.imageId, imageId)
+      const imageId = await copyToUserFolder({
+        srcFileId: va.imageId,
+        userId: demoConfig.userId,
+      })
 
       return {
         ...va,

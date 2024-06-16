@@ -3,8 +3,7 @@ import * as visionDb from '@increaser/db/vision'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 import { deletePublicBucketFile } from '@increaser/public/deletePublicBucketFile'
 import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
-import { getId } from '@increaser/entities-utils/shared/getId'
-import { copyPublicBucketFile } from '@increaser/public/copyPublicBucketFile'
+import { copyToUserFolder } from '@increaser/public/copyToUserFolder'
 
 export const updateVisionAttribute: ApiResolver<
   'updateVisionAttribute'
@@ -26,9 +25,10 @@ export const updateVisionAttribute: ApiResolver<
     }
 
     if (fields.imageId) {
-      const newImageId = getPublicBucketUserFileKey(userId, getId())
-      await copyPublicBucketFile(fields.imageId, newImageId)
-      fields.imageId = newImageId
+      fields.imageId = await copyToUserFolder({
+        srcFileId: fields.imageId,
+        userId,
+      })
     }
   }
 

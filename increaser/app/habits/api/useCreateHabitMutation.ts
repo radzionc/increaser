@@ -7,7 +7,6 @@ import {
 import { MS_IN_SEC } from '@lib/utils/time'
 import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const useCreateHabitMutation = () => {
   const { habits } = useAssertUserState()
@@ -19,9 +18,10 @@ export const useCreateHabitMutation = () => {
       name,
       color,
       emoji,
+      order,
     }: Pick<
       ApiInterface['createHabit']['input'],
-      'name' | 'color' | 'emoji'
+      'name' | 'color' | 'emoji' | 'order'
     >) => {
       const input = {
         id: getId(),
@@ -29,7 +29,7 @@ export const useCreateHabitMutation = () => {
         color,
         emoji,
         name,
-        order: getLastItemOrder(Object.values(habits).map((h) => h.order)),
+        order,
       }
 
       const habit = {
