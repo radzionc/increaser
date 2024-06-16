@@ -1,5 +1,7 @@
+import { TaskLink } from '@increaser/entities/Task'
+
 export type TaskFormShape = {
   name: string
   projectId: string
-  content: string | undefined
+  links: TaskLink[]
 }

@@ -1,3 +1,8 @@
+export type TaskLink = {
+  url: string
+  name: string
+}
+
 export type Task = {
   startedAt: number
   id: string
@@ -7,7 +12,7 @@ export type Task = {
   deadlineAt: number
   order: number
   spentTime?: number
-  content?: string
+  links?: TaskLink[]
 }
 
 export const deadlineTypes = [

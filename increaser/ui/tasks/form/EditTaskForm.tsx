@@ -19,6 +19,8 @@ import { useDeleteTaskMutation } from '../api/useDeleteTaskMutation'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
+import { TasksLinksInput } from './TaskLinksInput'
+import { fixLinks } from './fixLinks'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
@@ -26,7 +28,7 @@ export const EditTaskForm = () => {
   const [value, setValue] = useState<TaskFormShape>({
     name: task.name,
     projectId: task.projectId,
-    content: task.content,
+    links: task.links ?? [],
   })
   const currentDeadlineStatus = getDeadlineStatus({
     now: Date.now(),
@@ -67,8 +69,9 @@ export const EditTaskForm = () => {
     if (value.projectId !== task.projectId) {
       fields.projectId = value.projectId
     }
-    if (value.content !== task.content) {
-      fields.content = value.content
+    const newLinks = fixLinks(value.links)
+    if (newLinks !== task.links) {
+      fields.links = newLinks
     }
 
     if (
@@ -120,6 +123,10 @@ export const EditTaskForm = () => {
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
         value={value.name}
         onSubmit={handleSubmit}
+      />
+      <TasksLinksInput
+        value={value.links}
+        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <VStack gap={28}>
         <HStack alignItems="center" gap={8}>

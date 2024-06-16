@@ -14,7 +14,8 @@ import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
-import { TaskContentInput } from './TaskContentInput'
+import { TasksLinksInput } from './TaskLinksInput'
+import { fixLinks } from './fixLinks'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -29,7 +30,7 @@ export const CreateTaskForm = ({
   const [value, setValue] = useState<TaskFormShape>({
     name: '',
     projectId: otherProject.id,
-    content: undefined,
+    links: [],
   })
   const { mutate } = useCreateTaskMutation()
 
@@ -44,6 +45,7 @@ export const CreateTaskForm = ({
     const task: Task = {
       id: getId(),
       ...value,
+      links: fixLinks(value.links),
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
       order,
@@ -68,9 +70,9 @@ export const CreateTaskForm = ({
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
         onSubmit={handleSubmit}
       />
-      <TaskContentInput
-        value={value.content}
-        onChange={(content) => setValue((prev) => ({ ...prev, content }))}
+      <TasksLinksInput
+        value={value.links}
+        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <TaskProjectSelector
