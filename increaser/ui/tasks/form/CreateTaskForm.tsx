@@ -14,7 +14,7 @@ import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
-import { TasksLinksInput } from './TaskLinksInput'
+import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 
 type CreateTaskFormProps = FinishableComponentProps & {
@@ -70,7 +70,7 @@ export const CreateTaskForm = ({
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
         onSubmit={handleSubmit}
       />
-      <TasksLinksInput
+      <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />

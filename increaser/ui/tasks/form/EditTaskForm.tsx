@@ -19,7 +19,7 @@ import { useDeleteTaskMutation } from '../api/useDeleteTaskMutation'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
-import { TasksLinksInput } from './TaskLinksInput'
+import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 
 export const EditTaskForm = () => {
@@ -124,7 +124,7 @@ export const EditTaskForm = () => {
         value={value.name}
         onSubmit={handleSubmit}
       />
-      <TasksLinksInput
+      <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />

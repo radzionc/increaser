@@ -11,10 +11,13 @@ import { SelectFocusTask } from './SelectFocusTask'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { focusSetWidgetConfig } from './config'
+import { TaskLinks } from '@increaser/ui/tasks/TaskLinks'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
 
 const Content = styled(TaskTextContainer)`
   ${cropText};
@@ -30,9 +33,13 @@ const Wrapper = styled.div`
 const Container = styled(HStack)`
   width: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   gap: 4px;
   ${cropText};
+`
+
+const CloseButton = styled(IconButton)`
+  ${sameDimensions(checklistItemContentMinHeight)};
 `
 
 export const CurrentFocusTask = () => {
@@ -52,12 +59,15 @@ export const CurrentFocusTask = () => {
         <Container>
           <TaskItemFrame>
             <TaskCheckBox />
-            <Content>
-              <CurrentFocusTaskTrackedTime />
-              {task.name}
-            </Content>
+            <VStack gap={8}>
+              <Content>
+                <CurrentFocusTaskTrackedTime />
+                {task.name}
+              </Content>
+              <TaskLinks />
+            </VStack>
           </TaskItemFrame>
-          <IconButton
+          <CloseButton
             title="Remove task"
             kind="secondary"
             icon={<CloseIcon />}

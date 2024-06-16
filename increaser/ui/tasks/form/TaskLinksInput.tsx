@@ -10,10 +10,7 @@ import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { attempt } from '@lib/utils/attempt'
 import { extractRootDomain } from '@lib/utils/url/extractRootDomain'
 
-export const TasksLinksInput = ({
-  value,
-  onChange,
-}: InputProps<TaskLink[]>) => {
+export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
   return (
     <FieldArrayFrame
       onAppend={() => onChange([...value, { url: '', name: '' }])}
