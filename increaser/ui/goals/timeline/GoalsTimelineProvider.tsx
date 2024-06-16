@@ -34,9 +34,9 @@ export const GoalsTimelineProvider = ({
     let end = addYears(dobDate, userAge + 3).getTime()
     if (!isEmpty(goals)) {
       const orderedDeadlines = order(
-        goals.map((goal) =>
+        goals.map(({ deadlineAt }) =>
           getGoalDeadlineTimestamp({
-            value: goal.deadlineAt,
+            deadlineAt,
             dob,
           }),
         ),

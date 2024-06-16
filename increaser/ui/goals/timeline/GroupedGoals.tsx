@@ -52,7 +52,7 @@ export const GroupedGoals = () => {
   const groupedGoals = useMemo(() => {
     return groupItems(items, ({ deadlineAt }) =>
       getGoalDeadlineTimestamp({
-        value: deadlineAt,
+        deadlineAt,
         dob,
       }),
     )

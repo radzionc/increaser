@@ -6,7 +6,6 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCreateGoalMutation } from '../api/useCreateGoalMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
@@ -19,10 +18,8 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
-  const { goals } = useAssertUserState()
   const [value, setValue] = useState<GoalFormShape>({
     name: '',
     status: 'inProgress',
@@ -42,10 +39,9 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
       id: getId(),
       ...value,
       deadlineAt: shouldBePresent(value.deadlineAt),
-      order: getLastItemOrder(Object.values(goals).map(({ order }) => order)),
     })
     onFinish()
-  }, [goals, isDisabled, mutate, onFinish, value])
+  }, [isDisabled, mutate, onFinish, value])
 
   return (
     <Panel

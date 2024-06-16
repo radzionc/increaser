@@ -108,7 +108,7 @@ export const GoalDeadlineInput = ({
         <Text size={14} as="div" color="contrast">
           ~{' '}
           {formatGoalTimeLeft(
-            getGoalDeadlineTimestamp({ value: guardedValue, dob }),
+            getGoalDeadlineTimestamp({ deadlineAt: guardedValue, dob }),
           )}
         </Text>
       )}

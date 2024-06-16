@@ -9,10 +9,7 @@ export const createGoal: ApiResolver<'createGoal'> = async ({
 }): Promise<Goal> => {
   const userId = assertUserId(context)
 
-  await goalsDb.putGoal(userId, {
-    ...input,
-    order: input.order ?? 0,
-  })
+  await goalsDb.putGoal(userId, input)
 
   return input
 }

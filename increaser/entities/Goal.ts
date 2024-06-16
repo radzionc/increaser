@@ -15,7 +15,6 @@ export type GoalTarget = {
 export type Goal = {
   id: string
   emoji: string
-  order: number
   name: string
   status: GoalStatus
   deadlineAt: string | number
