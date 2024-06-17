@@ -17,7 +17,10 @@ import { getColor } from '@lib/ui/theme/getters'
 import { focusSetWidgetConfig } from './config'
 import { TaskLinks } from '@increaser/ui/tasks/TaskLinks'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
+import {
+  checklistItemContentMinHeight,
+  checklistItemVerticalPadding,
+} from '@lib/ui/checklist/ChecklistItemFrame'
 
 const Content = styled(TaskTextContainer)`
   ${cropText};
@@ -39,7 +42,9 @@ const Container = styled(HStack)`
 `
 
 const CloseButton = styled(IconButton)`
-  ${sameDimensions(checklistItemContentMinHeight)};
+  ${sameDimensions(
+    checklistItemContentMinHeight + checklistItemVerticalPadding * 2,
+  )};
 `
 
 export const CurrentFocusTask = () => {
