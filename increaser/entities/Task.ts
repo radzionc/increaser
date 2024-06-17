@@ -13,6 +13,7 @@ export type Task = {
   order: number
   spentTime?: number
   links?: TaskLink[]
+  factoryId?: string
 }
 
 export const deadlineTypes = [
@@ -31,4 +32,14 @@ export const deadlineName: Record<DeadlineStatus, string> = {
   tomorrow: 'Tomorrow',
   thisWeek: 'This week',
   nextWeek: 'Next week',
+}
+
+export const taskCadence = ['workday', 'day', 'week'] as const
+export type TaskCadence = (typeof taskCadence)[number]
+
+export type TaskFactory = {
+  id: string
+  task: Pick<Task, 'name' | 'projectId' | 'links'>
+  cadence: TaskCadence
+  lastOutputAt: number
 }

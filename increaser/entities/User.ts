@@ -6,7 +6,7 @@ import { Project, otherProject } from './Project'
 import { Subscription } from './Subscription'
 import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
-import { Task } from './Task'
+import { Task, TaskFactory } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
 import { TrackedTime } from './TrackedTime'
 import { Vision } from './Vision'
@@ -33,6 +33,7 @@ export type User = DayMoments &
     projects: Project[]
     habits: Record<string, Habit>
     tasks: Record<string, Task>
+    taskFactories: Record<string, TaskFactory>
     freeTrialEnd: number
 
     dob?: string | null
@@ -108,6 +109,7 @@ export const userDefaultFields: Pick<
   | 'vision'
   | 'goals'
   | 'completedEducation'
+  | 'taskFactories'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -120,6 +122,7 @@ export const userDefaultFields: Pick<
   vision: {},
   goals: {},
   completedEducation: [],
+  taskFactories: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }
