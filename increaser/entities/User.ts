@@ -6,12 +6,13 @@ import { Project, otherProject } from './Project'
 import { Subscription } from './Subscription'
 import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
-import { Task, TaskFactory } from './Task'
+import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
 import { TrackedTime } from './TrackedTime'
 import { Vision } from './Vision'
 import { Goals } from './Goal'
 import { Education } from './Education'
+import { TaskFactory } from './TaskFactory'
 
 export type Set = Interval & {
   projectId: string

@@ -1,7 +1,7 @@
 import { getUser, updateUser } from '@increaser/db/user'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { getCadencePeriodStart } from '@increaser/entities-utils/task/getCadencePeriodStart'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
+import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
 import { DeadlineType } from '@increaser/entities/Task'
 import { match } from '@lib/utils/match'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'

@@ -11,6 +11,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
     'tasks',
     'weeks',
     'months',
+    'taskFactories',
   ])
 
   const projectIds = new Set(oldUser.projects.map(({ id }) => id))
@@ -23,6 +24,15 @@ export const syncProjectsDependantFields = async (userId: string) => {
     projectIds.has(task.projectId)
       ? task
       : { ...task, projectId: otherProject.id },
+  )
+
+  const taskFactories = recordMap(oldUser.taskFactories, (taskFactory) =>
+    projectIds.has(taskFactory.task.projectId)
+      ? taskFactory
+      : {
+          ...taskFactory,
+          task: { ...taskFactory.task, projectId: otherProject.id },
+        },
   )
 
   const { weeks, months } = recordMap(
@@ -44,5 +54,6 @@ export const syncProjectsDependantFields = async (userId: string) => {
     tasks,
     weeks,
     months,
+    taskFactories,
   })
 }

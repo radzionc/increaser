@@ -1,4 +1,4 @@
-import { TaskCadence } from '@increaser/entities/Task'
+import { TaskCadence } from '@increaser/entities/TaskFactory'
 import { match } from '@lib/utils/match'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
