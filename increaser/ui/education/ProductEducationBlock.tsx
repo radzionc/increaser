@@ -33,6 +33,15 @@ const content: Record<Education, ReactNode> = {
       choices based on what truly matters.
     </>
   ),
+  recurringTasks: (
+    <>
+      Recurring tasks automate repetitive actions, ensuring essential tasks are
+      never missed and helping you stay on track with your goals. By setting
+      tasks to recur on a schedule, you save time and mental effort, allowing
+      you to focus on more critical work. This feature fosters good habits and
+      boosts productivity, making it easier to achieve your goals.
+    </>
+  ),
 }
 
 export const ProductEducationBlock = ({
