@@ -22,17 +22,14 @@ import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
 import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
-import {
-  RenderSelectFocusView,
-  SelectFocusViewSelector,
-  useSelectFocusView,
-} from './SelectFocusView'
 import { FocusTaskInput } from './FocusTaskInput'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { FocusStartTime } from './startTime/FocusStartTime'
+import { FocusViewSelector } from './FocusViewSelector'
+import { Match } from '@lib/ui/base/Match'
 
 const Container = styled(Panel)`
   position: relative;
@@ -45,11 +42,10 @@ export const FocusLauncherForm = () => {
   const todaySets = useTodaySets()
   const { projectsRecord } = useProjects()
   const { start } = useFocus()
-  const { projectId, taskId, startedAt, setState } = useFocusLauncher()
+  const { projectId, taskId, startedAt, setState, focusEntity } =
+    useFocusLauncher()
 
   const lastInteractionWasAt = useRef<number>()
-
-  const { view } = useSelectFocusView()
 
   const [focusDuration, setFocusDuration] = useState<FocusDuration>(
     suggestFocusDuration({
@@ -102,14 +98,15 @@ export const FocusLauncherForm = () => {
         gap={8}
       >
         <SectionTitle>Start a focus session</SectionTitle>
-        <SelectFocusViewSelector />
+        <FocusViewSelector />
       </HStack>
       <Container withSections kind="secondary">
         <InputContainer style={{ gap: 12 }} as="div">
-          <LabelText>Select a {view}</LabelText>
-          <RenderSelectFocusView
-            projects={() => <FocusProjectInput />}
-            tasks={() => <FocusTaskInput />}
+          <LabelText>Select a {focusEntity}</LabelText>
+          <Match
+            value={focusEntity}
+            project={() => <FocusProjectInput />}
+            task={() => <FocusTaskInput />}
           />
         </InputContainer>
         {project && (
@@ -137,7 +134,7 @@ export const FocusLauncherForm = () => {
             action={() => {
               start({
                 projectId: shouldBePresent(projectId),
-                taskId: view === 'tasks' && taskId ? taskId : undefined,
+                taskId: focusEntity === 'task' && taskId ? taskId : undefined,
                 duration: focusDuration,
                 startedAt: startedAt ?? Date.now(),
               })

@@ -17,6 +17,7 @@ export const FocusLauncherProvider = ({
       projectId: null,
       taskId: null,
       startedAt: null,
+      focusEntity: 'project',
     },
   )
 

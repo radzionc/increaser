@@ -168,6 +168,7 @@ export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
       ...state,
       taskId,
       projectId,
+      focusEntity: taskId ? 'task' : 'project',
     }))
   }, [projectId, setState, taskId])
 
