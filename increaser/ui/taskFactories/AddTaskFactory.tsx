@@ -1,17 +1,17 @@
 import { Opener } from '@lib/ui/base/Opener'
-import { CreateVisionAttributeForm } from './form/CreateVisionAttributeForm'
 import { ListAddButton } from '@lib/ui/list/ListAddButton'
+import { CreateTaskFactoryForm } from './form/CreateTaskFactoryForm'
 
-export const AddVisionAttribute = () => {
+export const AddTaskFactory = () => {
   return (
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
         isOpen ? null : (
-          <ListAddButton onClick={onOpen} text="Add life aspiration" />
+          <ListAddButton onClick={onOpen} text="Add recurring task" />
         )
       }
       renderContent={({ onClose }) => (
-        <CreateVisionAttributeForm onFinish={onClose} />
+        <CreateTaskFactoryForm onFinish={onClose} />
       )}
     />
   )

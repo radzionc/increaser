@@ -69,7 +69,7 @@ export const CurrentFocusTask = () => {
                 <CurrentFocusTaskTrackedTime />
                 {task.name}
               </Content>
-              <TaskLinks />
+              {task.links && <TaskLinks value={task.links} />}
             </VStack>
           </TaskItemFrame>
           <CloseButton

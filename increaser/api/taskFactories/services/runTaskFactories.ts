@@ -2,10 +2,11 @@ import { getUser, updateUser } from '@increaser/db/user'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
-import { DeadlineType } from '@increaser/entities/Task'
+import { DeadlineType, Task } from '@increaser/entities/Task'
 import { match } from '@lib/utils/match'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { getRecord } from '@lib/utils/record/getRecord'
+import { recordMap } from '@lib/utils/record/recordMap'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 
 export const runTaskFactories = async (userId: string) => {
@@ -15,7 +16,8 @@ export const runTaskFactories = async (userId: string) => {
     'tasks',
   ])
 
-  const newTasks = Object.values(tasks)
+  const oldTasks = Object.values(tasks)
+  const generatedTasks: Task[] = []
 
   Object.values(taskFactories).forEach(
     ({ task, cadence, lastOutputAt, id }) => {
@@ -23,7 +25,7 @@ export const runTaskFactories = async (userId: string) => {
         getCadencePeriodStart({ cadence, timeZone }),
         timeZone,
       )
-      if (lastOutputAt >= cadencePeriodStart) return
+      if (lastOutputAt && lastOutputAt >= cadencePeriodStart) return
 
       const now = Date.now()
       const deadlineType: DeadlineType = match(cadence, {
@@ -36,13 +38,15 @@ export const runTaskFactories = async (userId: string) => {
         timeZone,
       )
 
+      const newTasks = [...oldTasks, ...generatedTasks]
+
       const orders = newTasks
         .filter((task) => task.deadlineAt === deadlineAt)
         .map((task) => task.order)
 
       const order = getLastItemOrder(orders)
 
-      newTasks.push({
+      generatedTasks.push({
         startedAt: now,
         id: getId(),
         name: task.name,
@@ -55,9 +59,23 @@ export const runTaskFactories = async (userId: string) => {
     },
   )
 
-  if (newTasks.length !== Object.values(tasks).length) {
+  if (generatedTasks.length > 0) {
+    const newTasks = [...oldTasks, ...generatedTasks]
+
+    const newTaskFactories = recordMap(taskFactories, (taskFactory) => {
+      if (generatedTasks.some((task) => task.factoryId === taskFactory.id)) {
+        return {
+          ...taskFactory,
+          lastOutputAt: Date.now(),
+        }
+      }
+
+      return taskFactory
+    })
+
     await updateUser(userId, {
       tasks: getRecord(newTasks, (task) => task.id),
+      taskFactories: newTaskFactories,
     })
   }
 }

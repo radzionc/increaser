@@ -7,5 +7,17 @@ export type TaskFactory = {
   id: string
   task: Pick<Task, 'name' | 'projectId' | 'links'>
   cadence: TaskCadence
-  lastOutputAt: number
+  lastOutputAt?: number
+}
+
+export const taskCadenceName: Record<TaskCadence, string> = {
+  workday: 'Every workday',
+  day: 'Every day',
+  week: 'Every week',
+}
+
+export const taskCadenceShortName: Record<TaskCadence, string> = {
+  workday: 'mon-fri',
+  day: 'daily',
+  week: 'weekly',
 }

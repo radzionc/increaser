@@ -1,39 +1,6 @@
 import { ClickableComponentProps } from '@lib/ui/props'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { Text } from '@lib/ui/text'
-import { Hoverable } from '@lib/ui/base/Hoverable'
-import styled from 'styled-components'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { getColor } from '@lib/ui/theme/getters'
-import { transition } from '@lib/ui/css/transition'
-import { TaskItemFrame } from './TaskItemFrame'
+import { ListAddButton } from '@lib/ui/list/ListAddButton'
 
-const IconContainer = styled.div`
-  width: 100%;
-  aspect-ratio: 1/1;
-  ${centerContent};
-  color: ${getColor('primary')};
-`
-
-const Container = styled(Hoverable)`
-  color: ${getColor('textShy')};
-  ${transition};
-  &:hover {
-    color: ${getColor('primary')};
-  }
-`
-
-export const AddTaskButton = ({ onClick }: ClickableComponentProps) => {
-  return (
-    <Container verticalOffset={0} onClick={onClick}>
-      <TaskItemFrame style={{ alignItems: 'center' }}>
-        <IconContainer>
-          <PlusIcon />
-        </IconContainer>
-        <Text size={14} weight="regular">
-          Add task
-        </Text>
-      </TaskItemFrame>
-    </Container>
-  )
-}
+export const AddTaskButton = ({ onClick }: ClickableComponentProps) => (
+  <ListAddButton onClick={onClick} text="Add task" />
+)

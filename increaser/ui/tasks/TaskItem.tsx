@@ -73,7 +73,7 @@ export const TaskItem = () => {
           actionPlacerStyles={{ left: 0, top: checklistItemVerticalPadding }}
         />
       )}
-      action={<TaskLinks />}
+      action={task.links && <TaskLinks value={task.links} />}
       actionPlacerStyles={{
         left: checklistItemContentMinHeight + checklistItemGap,
         bottom: checklistItemVerticalPadding,
