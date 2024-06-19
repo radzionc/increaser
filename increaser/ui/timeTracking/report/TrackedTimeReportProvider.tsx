@@ -65,7 +65,7 @@ export const TrackedTimeReportProvider = ({
       : order(items, (v) => v, 'asc')[0]
   }, [currentPeriodStartedAt, projects, timeGrouping])
 
-  const projectsTimeSeries = useMemo(() => {
+  const dataPointsCount = useMemo(() => {
     const totalDataPointsAvailable =
       match(timeGrouping, {
         day: () =>
@@ -76,11 +76,12 @@ export const TrackedTimeReportProvider = ({
           differenceInMonths(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
       }) + 1
 
-    const dataPointsCount =
-      timeFrame === null
-        ? totalDataPointsAvailable
-        : Math.min(totalDataPointsAvailable, timeFrame)
+    return timeFrame === null
+      ? totalDataPointsAvailable
+      : Math.min(totalDataPointsAvailable, timeFrame)
+  }, [firstTimeGroupStartedAt, lastTimeGroupStartedAt, timeFrame, timeGrouping])
 
+  const projectsTimeSeries = useMemo(() => {
     return recordMap(projects, ({ days, weeks, months }) =>
       range(dataPointsCount)
         .map((index) => {
@@ -102,13 +103,7 @@ export const TrackedTimeReportProvider = ({
         })
         .reverse(),
     )
-  }, [
-    firstTimeGroupStartedAt,
-    lastTimeGroupStartedAt,
-    projects,
-    timeFrame,
-    timeGrouping,
-  ])
+  }, [dataPointsCount, lastTimeGroupStartedAt, projects, timeGrouping])
 
   useEffect(() => {
     if (!timeFrames[timeGrouping].includes(timeFrame)) {
@@ -134,8 +129,8 @@ export const TrackedTimeReportProvider = ({
         ...state,
         setState,
         projectsTimeSeries,
-        firstTimeGroupStartedAt,
         lastTimeGroupStartedAt,
+        dataPointsCount,
       }}
     >
       {children}

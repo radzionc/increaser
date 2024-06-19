@@ -3,7 +3,7 @@ import { Text } from '@lib/ui/text'
 import { useTheme } from 'styled-components'
 import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { useCallback, useMemo, useState } from 'react'
-import { addMonths, format } from 'date-fns'
+import { format } from 'date-fns'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
@@ -21,12 +21,17 @@ import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
 import { range } from '@lib/utils/array/range'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
+import { subtractPeriod } from '../utils/subtractPeriod'
 
 const yLabelsCount = 4
 
 export const ProjectsTimeSeriesChart = () => {
-  const { firstTimeGroupStartedAt, timeGrouping, activeProjectId } =
-    useTrackedTimeReport()
+  const {
+    lastTimeGroupStartedAt,
+    timeGrouping,
+    activeProjectId,
+    dataPointsCount,
+  } = useTrackedTimeReport()
 
   const { projects } = useTrackedTime()
 
@@ -43,12 +48,13 @@ export const ProjectsTimeSeriesChart = () => {
     ? projects[activeProjectId].hslaColor
     : colors.transparent
 
-  const getDataPointStartedAt = (index: number) =>
-    match(timeGrouping, {
-      day: () => firstTimeGroupStartedAt + convertDuration(index, 'd', 'ms'),
-      week: () => firstTimeGroupStartedAt + convertDuration(index, 'w', 'ms'),
-      month: () => addMonths(firstTimeGroupStartedAt, index).getTime(),
+  const getDataPointStartedAt = (index: number) => {
+    return subtractPeriod({
+      value: lastTimeGroupStartedAt,
+      period: timeGrouping,
+      amount: dataPointsCount - index - 1,
     })
+  }
 
   const selectedDataPointStartedAt = getDataPointStartedAt(selectedDataPoint)
 
