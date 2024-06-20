@@ -32,6 +32,7 @@ export const runTaskFactories = async (userId: string) => {
         week: () => 'thisWeek',
         day: () => 'today',
         workday: () => 'today',
+        month: () => 'thisMonth',
       })
       const deadlineAt = inTimeZone(
         getDeadlineAt({ deadlineType, now }),

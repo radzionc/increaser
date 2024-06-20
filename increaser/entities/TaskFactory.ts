@@ -1,6 +1,6 @@
 import { Task } from './Task'
 
-export const taskCadence = ['workday', 'day', 'week'] as const
+export const taskCadence = ['workday', 'day', 'week', 'month'] as const
 export type TaskCadence = (typeof taskCadence)[number]
 
 export type TaskFactory = {
@@ -14,10 +14,12 @@ export const taskCadenceName: Record<TaskCadence, string> = {
   workday: 'Every workday',
   day: 'Every day',
   week: 'Every week',
+  month: 'Every month',
 }
 
 export const taskCadenceShortName: Record<TaskCadence, string> = {
   workday: 'mon-fri',
   day: 'daily',
   week: 'weekly',
+  month: 'monthly',
 }

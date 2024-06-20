@@ -2,12 +2,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import {
-  DeadlineStatus,
-  Task,
-  deadlineName,
-  deadlineStatuses,
-} from '@increaser/entities/Task'
+import { DeadlineStatus, Task, deadlineName } from '@increaser/entities/Task'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
@@ -31,10 +26,12 @@ export const TasksToDo = () => {
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const [activeTaskId] = useActiveItemId()
 
+  const deadlineTypes = useMemo(() => getDeadlineTypes(now), [now])
+
   const groups = useMemo(() => {
     return {
       ...recordMap(
-        getRecord(getDeadlineTypes(now), (key) => key),
+        getRecord(deadlineTypes, (key) => key),
         () => [] as Task[],
       ),
       ...groupItems(
@@ -46,7 +43,7 @@ export const TasksToDo = () => {
           }),
       ),
     }
-  }, [now, tasks])
+  }, [deadlineTypes, now, tasks])
 
   const { mutate: updateTask } = useUpdateTaskMutation()
 
@@ -78,7 +75,9 @@ export const TasksToDo = () => {
   return (
     <DnDGroups
       groups={groups}
-      getGroupOrder={(status) => deadlineStatuses.indexOf(status)}
+      getGroupOrder={(status) =>
+        status === 'overdue' ? 0 : deadlineTypes.indexOf(status) + 1
+      }
       getItemId={(task) => task.id}
       getItemOrder={(task) => task.order}
       onChange={onChange}

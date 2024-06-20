@@ -21,6 +21,7 @@ export const deadlineTypes = [
   'tomorrow',
   'thisWeek',
   'nextWeek',
+  'thisMonth',
 ] as const
 export type DeadlineType = (typeof deadlineTypes)[number]
 export const deadlineStatuses = ['overdue', ...deadlineTypes] as const
@@ -32,4 +33,5 @@ export const deadlineName: Record<DeadlineStatus, string> = {
   tomorrow: 'Tomorrow',
   thisWeek: 'This week',
   nextWeek: 'Next week',
+  thisMonth: 'This month',
 }
