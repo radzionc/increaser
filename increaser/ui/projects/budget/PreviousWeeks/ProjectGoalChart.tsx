@@ -10,8 +10,7 @@ import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
 import { Text } from '@lib/ui/text'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { format } from 'date-fns'
-import { fromWeek } from '@lib/utils/time/Week'
+import { formatWeek, fromWeek } from '@lib/utils/time/Week'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
@@ -83,14 +82,7 @@ export const ProjectGoalChart = ({
                         />
                       </Text>
                       <Text color="supporting" size={14} weight="semibold">
-                        {`${format(
-                          selectedDataPointStartedAt,
-                          'd MMM',
-                        )} - ${format(
-                          selectedDataPointStartedAt +
-                            convertDuration(1, 'w', 'ms'),
-                          'd MMM',
-                        )}`}
+                        {formatWeek(selectedDataPointStartedAt)}
                       </Text>
                     </VStack>
                   </LineChartItemInfo>

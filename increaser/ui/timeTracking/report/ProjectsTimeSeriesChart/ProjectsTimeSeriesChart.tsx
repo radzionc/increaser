@@ -22,6 +22,7 @@ import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
 import { range } from '@lib/utils/array/range'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { subtractPeriod } from '../utils/subtractPeriod'
+import { formatWeek } from '@lib/utils/time/Week'
 
 const yLabelsCount = 4
 
@@ -120,15 +121,7 @@ export const ProjectsTimeSeriesChart = () => {
                               selectedDataPointStartedAt,
                               'EEE d, MMM yyyy',
                             ),
-                          week: () =>
-                            `${format(
-                              selectedDataPointStartedAt,
-                              'd MMM',
-                            )} - ${format(
-                              selectedDataPointStartedAt +
-                                convertDuration(1, 'w', 'ms'),
-                              'd MMM',
-                            )}`,
+                          week: () => formatWeek(selectedDataPointStartedAt),
                           month: () =>
                             format(selectedDataPointStartedAt, 'MMMM yyyy'),
                         })}

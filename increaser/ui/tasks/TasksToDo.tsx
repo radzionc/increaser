@@ -2,9 +2,8 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { DeadlineStatus, Task, deadlineName } from '@increaser/entities/Task'
+import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
@@ -20,6 +19,7 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { TasksGroupHeader } from './TasksGroupHeader'
 
 export const TasksToDo = () => {
   const { tasks } = useAssertUserState()
@@ -83,13 +83,7 @@ export const TasksToDo = () => {
       onChange={onChange}
       renderGroup={({ content, groupId, containerProps }) => (
         <VStack gap={4} key={groupId}>
-          <Text
-            weight="semibold"
-            size={12}
-            color={groupId === 'overdue' ? 'idle' : 'supporting'}
-          >
-            {deadlineName[groupId].toUpperCase()}
-          </Text>
+          <TasksGroupHeader value={groupId} />
           <VStack {...containerProps}>
             {content}
             {groupId !== 'overdue' && (
