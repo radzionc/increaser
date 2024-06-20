@@ -7,18 +7,12 @@ import { TaskCheckBox } from './TaskCheckBox'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { interactive } from '@lib/ui/css/interactive'
-import {
-  checklistItemContentMinHeight,
-  checklistItemGap,
-  checklistItemVerticalPadding,
-} from '@lib/ui/checklist/ChecklistItemFrame'
+import { checklistItemVerticalPadding } from '@lib/ui/checklist/ChecklistItemFrame'
 import { getColor } from '@lib/ui/theme/getters'
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskLinks } from './TaskLinks'
-import { VStack } from '@lib/ui/layout/Stack'
 
 const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;
@@ -49,35 +43,21 @@ export const TaskItem = () => {
 
   return (
     <Container
-      render={({ actionSize: linksSize }) => (
-        <Container
-          render={({ actionSize: checkboxSize }) => (
-            <>
-              <Content
-                onClick={() => {
-                  setActiveTaskId(task.id)
-                }}
-              >
-                <Spacer {...checkboxSize} />
-                <VStack gap={4}>
-                  <TaskPrimaryContent />
-                  {task.links && task.links.length > 0 && (
-                    <Spacer {...linksSize} />
-                  )}
-                </VStack>
-                <Outline />
-              </Content>
-            </>
-          )}
-          action={<TaskCheckBox />}
-          actionPlacerStyles={{ left: 0, top: checklistItemVerticalPadding }}
-        />
+      render={({ actionSize: checkboxSize }) => (
+        <>
+          <Content
+            onClick={() => {
+              setActiveTaskId(task.id)
+            }}
+          >
+            <Spacer {...checkboxSize} />
+            <TaskPrimaryContent />
+            <Outline />
+          </Content>
+        </>
       )}
-      action={task.links && <TaskLinks value={task.links} />}
-      actionPlacerStyles={{
-        left: checklistItemContentMinHeight + checklistItemGap,
-        bottom: checklistItemVerticalPadding,
-      }}
+      action={<TaskCheckBox />}
+      actionPlacerStyles={{ left: 0, top: checklistItemVerticalPadding }}
     />
   )
 }
