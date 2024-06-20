@@ -6,7 +6,6 @@ import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
 import { CurrentFocusTaskTrackedTime } from '@increaser/app/focus/components/CurrentFocusTaskTrackedTime'
 import styled from 'styled-components'
-import { cropText } from '@lib/ui/css/cropText'
 import { SelectFocusTask } from './SelectFocusTask'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
@@ -23,7 +22,6 @@ import {
 } from '@lib/ui/checklist/ChecklistItemFrame'
 
 const Content = styled(TaskTextContainer)`
-  ${cropText};
   font-size: 14px;
 `
 
@@ -38,7 +36,6 @@ const Container = styled(HStack)`
   justify-content: space-between;
   align-items: start;
   gap: 4px;
-  ${cropText};
 `
 
 const CloseButton = styled(IconButton)`
