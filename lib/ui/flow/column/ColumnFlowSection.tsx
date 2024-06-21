@@ -16,7 +16,7 @@ import { Text } from '@lib/ui/text'
 import { getColor, matchColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 
-type PlanSectionProps = ComponentWithChildrenProps &
+type ColumnFlowSectionProps = ComponentWithChildrenProps &
   TitledComponentProps & {
     isCompleted: boolean
     index: number
@@ -83,12 +83,12 @@ const Header = styled(HStack)`
   }
 `
 
-export const PlanSection = ({
+export const ColumnFlowSection = ({
   children,
   title,
   isCompleted,
   index,
-}: PlanSectionProps) => {
+}: ColumnFlowSectionProps) => {
   const [isExpanded, { toggle }] = useBoolean(true)
 
   return (

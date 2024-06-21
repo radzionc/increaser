@@ -1,4 +1,4 @@
-import { StartTheDayNavigation } from '../plan/StartTheDayNavigation'
+import { StartTheDayNavigation } from '../plan/day/PlanTodayNavigation'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { NavigationToInternalPage } from '../ui/Navigation/Sidebar/NavigationToInternalPage'

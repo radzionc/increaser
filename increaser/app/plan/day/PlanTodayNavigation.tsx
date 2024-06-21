@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import { NavigationItem } from '../ui/Navigation/Sidebar/NavigationItem'
-import { navigationPathInfo } from '../ui/Navigation/navigationPathInfo'
-import { useIsStartDaySetupCompleted } from './useIsStartDaySetupCompleted'
+import { NavigationItem } from '../../ui/Navigation/Sidebar/NavigationItem'
+import { navigationPathInfo } from '../../ui/Navigation/navigationPathInfo'
 import { AnimatedCoffeeIcon } from './AnimatedCoffeeIcon'
-import { useCurrentPage } from '../navigation/hooks/useCurrentPage'
+import { useCurrentPage } from '../../navigation/hooks/useCurrentPage'
 import { getAppPath } from '@increaser/ui/navigation/app'
+import { useIsTodayPlanned } from './hooks/useIsTodayPlanned'
 
 export const StartTheDayNavigation = () => {
-  const isCompleted = useIsStartDaySetupCompleted()
+  const isCompleted = useIsTodayPlanned()
 
   const page = useCurrentPage()
   const { name } = navigationPathInfo.plan
