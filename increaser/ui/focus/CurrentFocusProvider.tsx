@@ -3,16 +3,16 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { MS_IN_MIN } from '@lib/utils/time'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { useRouter } from 'next/router'
 import { range } from '@lib/utils/array/range'
 import { showNotification } from '@lib/ui/notifications/utils'
 import { pluralize } from '@lib/utils/pluralize'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { playSound } from '@lib/ui/notifications/utils/playSound'
-import { getAppPath } from '@increaser/ui/navigation/app'
 import { CurrentSet, useFocus } from './FocusContext'
 import { useProject } from '../projects/hooks/useProject'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useFocusLauncher } from '@increaser/app/focus/launcher/state/FocusLauncherContext'
 
 interface CurrentFocusState extends CurrentSet {}
 
@@ -157,15 +157,20 @@ export const CurrentFocusProvider = ({
 }
 
 export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
-  const { currentSet } = useFocus()
+  const { currentSet: potentialCurrentSet } = useFocus()
+  const currentSet = shouldBePresent(potentialCurrentSet)
 
-  const router = useRouter()
-
+  const { setState } = useFocusLauncher()
+  const taskId = currentSet.task?.id || null
+  const projectId = currentSet.projectId
   useEffect(() => {
-    if (!currentSet) {
-      router.replace(getAppPath('focus'))
-    }
-  }, [currentSet, router])
+    setState((state) => ({
+      ...state,
+      taskId,
+      projectId,
+      focusEntity: taskId ? 'task' : 'project',
+    }))
+  }, [projectId, setState, taskId])
 
   if (!currentSet) {
     return null

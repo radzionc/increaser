@@ -14,7 +14,7 @@ export type TrackedTimeReportPreferences = {
 type TrackedTimeReportProviderState = TrackedTimeReportPreferences & {
   setState: Dispatch<SetStateAction<TrackedTimeReportPreferences>>
   projectsTimeSeries: ProjectsTimeSeries
-  firstTimeGroupStartedAt: number
+  dataPointsCount: number
   lastTimeGroupStartedAt: number
 }
 

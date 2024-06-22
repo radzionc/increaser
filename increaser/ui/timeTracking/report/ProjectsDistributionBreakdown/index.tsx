@@ -19,8 +19,7 @@ import { BreakdownValue } from './BreakdownValue'
 
 export const ProjectsDistributionBreakdown = () => {
   const { projects } = useTrackedTime()
-  const { projectsTimeSeries, activeProjectId, setState } =
-    useTrackedTimeReport()
+  const { dataPointsCount, activeProjectId, setState } = useTrackedTimeReport()
 
   const { colors } = useTheme()
 
@@ -94,13 +93,9 @@ export const ProjectsDistributionBreakdown = () => {
               })}
             />
             <BreakdownValue
-              value={formatDuration(
-                total / Object.values(projectsTimeSeries)[0].length,
-                's',
-                {
-                  maxUnit: 'h',
-                },
-              )}
+              value={formatDuration(total / dataPointsCount, 's', {
+                maxUnit: 'h',
+              })}
             />
             <BreakdownValue value="100%" />
           </BreakdownRowContent>

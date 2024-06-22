@@ -5,7 +5,6 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
 
 const Container = styled(VStack)`
-  gap: 40px;
   max-width: 560px;
 `
 

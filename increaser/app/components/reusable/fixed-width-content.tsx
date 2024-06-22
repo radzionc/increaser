@@ -1,30 +1,13 @@
-import React from 'react'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { ComponentWithChildrenProps, UIComponentProps } from '@lib/ui/props'
 
-const Container = styled.div<{ width: number | string }>`
-  max-width: ${({ width }) => toSizeUnit(width)};
-  width: ${({ width }) => toSizeUnit(width)};
+const defaultWidth = 940
+
+export const FixedWidthContent = styled.div<{ width?: number | string }>`
+  max-width: ${({ width = defaultWidth }) => toSizeUnit(width)};
+  width: ${({ width = defaultWidth }) => toSizeUnit(width)};
   height: 100%;
   @media (max-width: 1250px) {
     width: 100%;
   }
 `
-
-type FixedWidthContentProps = UIComponentProps &
-  ComponentWithChildrenProps & {
-    width?: number | string
-  }
-
-export const FixedWidthContent = ({
-  children,
-  width = 930,
-  ...rest
-}: FixedWidthContentProps) => {
-  return (
-    <Container width={width} {...rest}>
-      {children}
-    </Container>
-  )
-}

@@ -12,6 +12,7 @@ import { TrackedTime } from './TrackedTime'
 import { Vision } from './Vision'
 import { Goals } from './Goal'
 import { Education } from './Education'
+import { TaskFactory } from './TaskFactory'
 
 export type Set = Interval & {
   projectId: string
@@ -33,6 +34,7 @@ export type User = DayMoments &
     projects: Project[]
     habits: Record<string, Habit>
     tasks: Record<string, Task>
+    taskFactories: Record<string, TaskFactory>
     freeTrialEnd: number
 
     dob?: string | null
@@ -57,6 +59,8 @@ export type User = DayMoments &
     lastVisitAt: number
 
     sumbittedHabitsAt?: number
+    reviewedGoalsAt?: number
+    organizedTasksAt?: number
 
     finishedOnboardingAt?: number
 
@@ -108,6 +112,7 @@ export const userDefaultFields: Pick<
   | 'vision'
   | 'goals'
   | 'completedEducation'
+  | 'taskFactories'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -120,6 +125,7 @@ export const userDefaultFields: Pick<
   vision: {},
   goals: {},
   completedEducation: [],
+  taskFactories: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }

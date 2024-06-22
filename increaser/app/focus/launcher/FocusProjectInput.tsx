@@ -65,7 +65,11 @@ export const FocusProjectInput = () => {
   useEffect(() => {
     const project = options.find((option) => option.id === projectId)
     if (!project && options.length) {
-      setState((state) => ({ ...state, projectId: options[0].id }))
+      setState((state) => ({
+        ...state,
+        projectId: options[0].id,
+        taskId: null,
+      }))
     }
   }, [options, projectId, setState])
 
@@ -97,7 +101,11 @@ export const FocusProjectInput = () => {
                 value={id}
                 groupName="project"
                 onSelect={() =>
-                  setState((state) => ({ ...state, projectId: id }))
+                  setState((state) => ({
+                    ...state,
+                    projectId: id,
+                    taskId: null,
+                  }))
                 }
               />
             </Option>

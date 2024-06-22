@@ -1,13 +1,11 @@
 import { useTrackedTimeReport } from './state/TrackedTimeReportContext'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 
 export const RequiresProjects = ({ children }: ComponentWithChildrenProps) => {
-  const { projectsTimeSeries } = useTrackedTimeReport()
+  const { dataPointsCount } = useTrackedTimeReport()
 
-  const hasData = !isEmpty(getRecordKeys(projectsTimeSeries))
+  const hasData = dataPointsCount > 0
 
   if (hasData) {
     return <>{children}</>

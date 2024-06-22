@@ -1,8 +1,5 @@
-import {
-  DeadlineStatus,
-  deadlineName,
-  deadlineTypes,
-} from '@increaser/entities/Task'
+import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
+import { DeadlineStatus, deadlineName } from '@increaser/entities/Task'
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -10,6 +7,7 @@ import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
 import { matchColor } from '@lib/ui/theme/getters'
+import { useMemo } from 'react'
 import styled from 'styled-components'
 
 const Icon = styled(IconWrapper)<{ isOverdue: boolean }>`
@@ -23,6 +21,8 @@ export const TaskDeadlineInput = ({
   value,
   onChange,
 }: InputProps<DeadlineStatus>) => {
+  const options = useMemo(() => getDeadlineTypes(Date.now()), [])
+
   return (
     <ExpandableSelector
       style={{ width: 142 }}
@@ -36,7 +36,7 @@ export const TaskDeadlineInput = ({
       }
       value={value}
       onChange={onChange}
-      options={deadlineTypes}
+      options={options}
       getOptionKey={(option) => option}
       renderOption={(option) => (
         <Text key={option}>{deadlineName[option]}</Text>

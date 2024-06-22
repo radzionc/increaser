@@ -9,7 +9,6 @@ import styled from 'styled-components'
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 
 const Container = styled(VStack)`
-  gap: 20px;
   max-width: 560px;
 `
 

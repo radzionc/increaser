@@ -15,6 +15,7 @@ import { ProductFeatureResponse } from './ProductFeatureResponse'
 import { Interval } from '@lib/utils/interval/Interval'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { Goal } from '@increaser/entities/Goal'
+import { TaskFactory } from '@increaser/entities/TaskFactory'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -94,6 +95,16 @@ export interface ApiInterface {
     Task
   >
   deleteTask: ApiMethod<{ id: string }, undefined>
+
+  createTaskFactory: ApiMethod<TaskFactory, TaskFactory>
+  updateTaskFactory: ApiMethod<
+    {
+      id: string
+      fields: Partial<Omit<TaskFactory, 'id'>>
+    },
+    TaskFactory
+  >
+  deleteTaskFactory: ApiMethod<{ id: string }, undefined>
 
   createHabit: ApiMethod<Omit<Habit, 'successes'>, Habit>
   updateHabit: ApiMethod<

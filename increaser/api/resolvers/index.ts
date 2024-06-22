@@ -32,6 +32,9 @@ import { createGoal } from '../goals/resolvers/createGoal'
 import { deleteGoal } from '../goals/resolvers/deleteGoal'
 import { updateGoal } from '../goals/resolvers/updateGoal'
 import { getFileUploadUrl } from '../users/resolvers/getFileUploadUrl'
+import { createTaskFactory } from '../taskFactories/resolvers/createTaskFactory'
+import { deleteTaskFactory } from '../taskFactories/resolvers/deleteTaskFactory'
+import { updateTaskFactory } from '../taskFactories/resolvers/updateTaskFactory'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -67,4 +70,7 @@ export const implementation: ApiImplementation = {
   updateGoal,
   deleteGoal,
   getFileUploadUrl,
+  createTaskFactory,
+  updateTaskFactory,
+  deleteTaskFactory,
 }

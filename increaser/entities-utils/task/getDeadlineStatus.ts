@@ -1,7 +1,7 @@
 import { DeadlineStatus } from '@increaser/entities/Task'
-import { convertDuration } from '@lib/utils/time/convertDuration'
-import { getWeekday } from '@lib/utils/time/getWeekday'
-import { endOfDay } from 'date-fns'
+
+import { getCurrentDeadlines } from './getCurrentDeadlines'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 type GetDeadlineStatusInput = {
   now: number
@@ -14,21 +14,12 @@ export const getDeadlineStatus = ({
 }: GetDeadlineStatusInput): DeadlineStatus => {
   if (deadlineAt < now) return 'overdue'
 
-  const todayEndsAt = endOfDay(now).getTime()
-  if (deadlineAt <= todayEndsAt) return 'today'
+  const currentDeadlines = getCurrentDeadlines({ now })
+  for (const [endsAt, deadlineType] of Object.entries(currentDeadlines)) {
+    if (deadlineAt <= Number(endsAt)) {
+      return deadlineType
+    }
+  }
 
-  const tomorrowEndsAt = todayEndsAt + convertDuration(1, 'd', 'ms')
-  if (deadlineAt <= tomorrowEndsAt) return 'tomorrow'
-
-  const weekdayIndex = getWeekday(new Date(now))
-  const thisWeekEndsAt =
-    todayEndsAt +
-    convertDuration(
-      convertDuration(1, 'w', 'd') - (weekdayIndex + 1),
-      'd',
-      'ms',
-    )
-  if (deadlineAt <= thisWeekEndsAt) return 'thisWeek'
-
-  return 'nextWeek'
+  return getLastItem(Object.values(currentDeadlines))
 }
