@@ -3,7 +3,7 @@ import { PlanDayStep } from '../PlanDayStep'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 
 type PlanDayState = {
-  currentStep: PlanDayStep | null
+  currentStep: PlanDayStep
   setCurrentStep: (step: PlanDayStep | null) => void
   currentStepError?: string
 }

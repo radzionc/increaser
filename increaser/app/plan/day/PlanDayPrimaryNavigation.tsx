@@ -75,7 +75,7 @@ export const PlanDayPrimaryNavigation = () => {
         }}
         size="l"
       >
-        Next
+        {currentStep === getLastItem(planDaySteps) ? 'Finish' : 'Next'}
       </Button>
     </Container>
   )

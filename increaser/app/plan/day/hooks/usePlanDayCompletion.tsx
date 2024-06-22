@@ -10,7 +10,7 @@ export const usePlanDayCompletion = (): Record<PlanDayStep, boolean> => {
 
   return {
     habits: !haveToSubmitYesterdayHabits,
-    goals: !reviewedGoalsAt || reviewedGoalsAt < todayStartedAt,
-    tasks: !organizedTasksAt || organizedTasksAt < todayStartedAt,
+    goals: reviewedGoalsAt ? reviewedGoalsAt >= todayStartedAt : false,
+    tasks: organizedTasksAt ? organizedTasksAt >= todayStartedAt : false,
   }
 }

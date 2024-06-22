@@ -1,5 +1,5 @@
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { useYesterdayHabits } from '../../habits/hooks/useYesterdayHabits'
+import { useYesterdayHabits } from '../../../habits/hooks/useYesterdayHabits'
 import { MS_IN_DAY } from '@lib/utils/time'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { isEmpty } from '@lib/utils/array/isEmpty'
