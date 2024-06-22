@@ -4,8 +4,8 @@ import { Text } from '@lib/ui/text'
 import { without } from '@lib/utils/array/without'
 import { OnboardingSection } from './OnboardingSection'
 import { onboardingStepTargetName, onboardingSteps } from './OnboardingStep'
-import { OnboardingProgressItem } from '@lib/ui/onboarding/OnboardingProgressItem'
 import { ExitOnboarding } from './ExitOnboarding'
+import { FlowNavigationItem } from '@lib/ui/flow/FlowNavigationItem'
 
 export const OnboardingOverview = () => {
   const { currentStep, setCurrentStep, completedSteps } = useOnboarding()
@@ -31,7 +31,7 @@ export const OnboardingOverview = () => {
               without(onboardingSteps, ...completedSteps)[0] === step
 
             return (
-              <OnboardingProgressItem
+              <FlowNavigationItem
                 key={step}
                 isCurrent={isCurrent}
                 isCompleted={isCompleted}

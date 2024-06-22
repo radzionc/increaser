@@ -47,7 +47,7 @@ const CheckContainer = styled.div<{ isCompleted: boolean }>`
   font-size: 14px;
 `
 
-type PlanDayProgressItemProps = {
+type FlowNavigationItemProps = {
   isCurrent: boolean
   isCompleted: boolean
   isEnabled: boolean
@@ -55,13 +55,13 @@ type PlanDayProgressItemProps = {
   name: string
 }
 
-export const PlanDayProgressItem = ({
+export const FlowNavigationItem = ({
   isCurrent,
   isCompleted,
   isEnabled,
   onClick,
   name,
-}: PlanDayProgressItemProps) => {
+}: FlowNavigationItemProps) => {
   return (
     <Container
       isCurrent={isCurrent}

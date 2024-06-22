@@ -2,7 +2,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { usePlanDay } from './state/PlanDayContext'
 import { usePlanDayCompletion } from './hooks/usePlanDayCompletion'
 import { planDayStepName, planDaySteps } from './PlanDayStep'
-import { PlanDayProgressItem } from './PlanDayProgressItem'
+import { FlowNavigationItem } from '@lib/ui/flow/FlowNavigationItem'
 
 export const PlanDayOverview = () => {
   const { currentStep, setCurrentStep } = usePlanDay()
@@ -15,7 +15,7 @@ export const PlanDayOverview = () => {
         const isCurrent = currentStep === step
 
         return (
-          <PlanDayProgressItem
+          <FlowNavigationItem
             key={step}
             isCurrent={isCurrent}
             isCompleted={isCompleted}
