@@ -2,8 +2,7 @@ import { getUser, updateUser } from '@increaser/db/user'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
-import { DeadlineType, Task } from '@increaser/entities/Task'
-import { match } from '@lib/utils/match'
+import { Task } from '@increaser/entities/Task'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
@@ -28,16 +27,10 @@ export const runTaskFactories = async (userId: string) => {
       if (lastOutputAt && lastOutputAt >= cadencePeriodStart) return
 
       const now = Date.now()
-      const deadlineType: DeadlineType = match(cadence, {
-        week: () => 'thisWeek',
-        day: () => 'today',
-        workday: () => 'today',
-        month: () => 'thisMonth',
+      const deadlineAt = getDeadlineAt({
+        now,
+        deadlineType: 'today',
       })
-      const deadlineAt = inTimeZone(
-        getDeadlineAt({ deadlineType, now }),
-        timeZone,
-      )
 
       const newTasks = [...oldTasks, ...generatedTasks]
 
