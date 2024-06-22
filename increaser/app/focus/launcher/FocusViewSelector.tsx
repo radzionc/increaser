@@ -6,7 +6,7 @@ import {
   useFocusLauncher,
 } from './state/FocusLauncherContext'
 
-const taskViewName: Record<FocusEntity, string> = {
+const focusEntityViewName: Record<FocusEntity, string> = {
   project: 'Projects',
   task: 'Tasks',
 }
@@ -21,7 +21,7 @@ export const FocusViewSelector = () => {
       onChange={(focusEntity) =>
         setState((state) => ({ ...state, focusEntity }))
       }
-      renderOption={(option) => taskViewName[option]}
+      renderOption={(option) => focusEntityViewName[option]}
       minOptionHeight={40}
     />
   )
