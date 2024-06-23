@@ -5,6 +5,20 @@ import { AnimatedCoffeeIcon } from './AnimatedCoffeeIcon'
 import { useCurrentPage } from '../../navigation/hooks/useCurrentPage'
 import { getAppPath } from '@increaser/ui/navigation/app'
 import { useIsTodayPlanned } from './hooks/useIsTodayPlanned'
+import styled from 'styled-components'
+import { getColor } from '@lib/ui/theme/getters'
+import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+
+const Container = styled(NavigationItem)`
+  color: ${getColor('success')};
+`
+
+const Outline = styled.div`
+  ${absoluteOutline(1, 1)};
+  border: 1px dashed ${getColor('success')};
+  ${borderRadius.s};
+`
 
 export const StartTheDayNavigation = () => {
   const isCompleted = useIsTodayPlanned()
@@ -20,10 +34,11 @@ export const StartTheDayNavigation = () => {
 
   return (
     <Link href={getAppPath('plan')}>
-      <NavigationItem
+      <Container
         icon={<AnimatedCoffeeIcon />}
         name={name}
         isActive={isActive}
+        decoration={<Outline />}
       />
     </Link>
   )

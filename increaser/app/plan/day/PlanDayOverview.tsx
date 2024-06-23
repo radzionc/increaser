@@ -17,7 +17,7 @@ export const PlanDayOverview = () => {
         return (
           <FlowNavigationItem
             key={step}
-            isCurrent={isCurrent}
+            isActive={isCurrent}
             isCompleted={isCompleted}
             isEnabled={true}
             onClick={() => setCurrentStep(step)}

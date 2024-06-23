@@ -1,13 +1,12 @@
 import styled, { css } from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import { transition } from '@lib/ui/css/transition'
 import { interactive } from '@lib/ui/css/interactive'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { ComponentWithActiveState, UIComponentProps } from '@lib/ui/props'
 
-export type NavigationItemProps = {
+export type NavigationItemProps = UIComponentProps & {
   icon: React.ReactNode
   name: React.ReactNode
   isActive?: boolean
@@ -55,15 +54,14 @@ export const NavigationItem = ({
   name,
   isActive = false,
   decoration = null,
+  ...rest
 }: NavigationItemProps) => {
   return (
-    <Container isActive={isActive}>
-      <Text as="div">
-        <HStack gap={8}>
-          <IconWrapper>{icon}</IconWrapper>
-          <div>{name}</div>
-        </HStack>
-      </Text>
+    <Container isActive={isActive} {...rest}>
+      <HStack gap={8}>
+        <IconWrapper>{icon}</IconWrapper>
+        <div>{name}</div>
+      </HStack>
       {decoration}
     </Container>
   )

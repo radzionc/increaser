@@ -8,6 +8,8 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { PlanDayPrimaryNavigation } from './PlanDayPrimaryNavigation'
 import { PlanDayStepTitle } from './PlanDayStepTitle'
 import { PlanDayStepContent } from './PlanDayStepContent'
+import { Spacer } from '@lib/ui/layout/Spacer'
+import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 
 const Wrapper = styled(HStack)`
   flex: 1;
@@ -26,10 +28,12 @@ const Container = styled(VStack)`
   }
 `
 
-const Content = styled(VStack)`
+const Content = styled(ScrollableFlexboxFiller)`
   flex: 1;
-  overflow-y: auto;
   gap: 28px;
+  > * {
+    ${horizontalPadding(planDayConfig.sectionGap)};
+  }
 `
 
 export const PlanDayContent = () => (
@@ -40,6 +44,7 @@ export const PlanDayContent = () => (
       <Content>
         <PlanDayStepContent />
       </Content>
+      <Spacer height={20} />
       <PlanDayPrimaryNavigation />
     </Container>
   </Wrapper>

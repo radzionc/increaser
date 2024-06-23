@@ -55,7 +55,7 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       icon: <GlobeIcon />,
     },
     plan: {
-      name: 'Start the day',
+      name: 'Start your day',
       icon: <CoffeeIcon />,
     },
     vision: {

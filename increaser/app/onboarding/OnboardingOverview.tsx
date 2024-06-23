@@ -33,7 +33,7 @@ export const OnboardingOverview = () => {
             return (
               <FlowNavigationItem
                 key={step}
-                isCurrent={isCurrent}
+                isActive={isCurrent}
                 isCompleted={isCompleted}
                 isEnabled={isEnabled}
                 onClick={() => setCurrentStep(step)}

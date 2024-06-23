@@ -1,4 +1,3 @@
-import { getColor } from '@lib/ui/theme/getters'
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
@@ -23,7 +22,6 @@ const VaporLine = styled.line<{ delay: number }>`
 `
 
 const Container = styled.svg`
-  color: ${getColor('idle')};
   overflow: visible;
 `
 
