@@ -3,6 +3,11 @@ export type TaskLink = {
   name: string
 }
 
+export type TaskChecklistItem = {
+  name: string
+  completed: boolean
+}
+
 export type Task = {
   startedAt: number
   id: string
@@ -13,6 +18,7 @@ export type Task = {
   order: number
   spentTime?: number
   links?: TaskLink[]
+  cheklist?: TaskChecklistItem[]
   factoryId?: string
 }
 
