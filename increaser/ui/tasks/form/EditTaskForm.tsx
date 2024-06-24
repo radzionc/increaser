@@ -21,6 +21,8 @@ import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
 import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
+import { fixChecklist } from './checklist/fixChecklist'
+import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 
 export const EditTaskForm = () => {
   const { tasks } = useAssertUserState()
@@ -29,6 +31,7 @@ export const EditTaskForm = () => {
     name: task.name,
     projectId: task.projectId,
     links: task.links ?? [],
+    checklist: task.checklist ?? [],
   })
   const currentDeadlineStatus = getDeadlineStatus({
     now: Date.now(),
@@ -72,6 +75,11 @@ export const EditTaskForm = () => {
     const newLinks = fixLinks(value.links)
     if (newLinks !== task.links) {
       fields.links = newLinks
+    }
+
+    const newChecklist = fixChecklist(value.checklist)
+    if (newChecklist !== task.checklist) {
+      fields.checklist = newChecklist
     }
 
     if (
@@ -127,6 +135,10 @@ export const EditTaskForm = () => {
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
+      />
+      <TaskChecklistInput
+        value={value.checklist}
+        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <VStack gap={28}>
         <HStack alignItems="center" gap={8}>

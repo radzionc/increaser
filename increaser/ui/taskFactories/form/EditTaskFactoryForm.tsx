@@ -15,6 +15,8 @@ import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
+import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
+import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -23,6 +25,7 @@ export const EditTaskFactoryForm = () => {
     projectId: taskFactory.task.projectId,
     links: taskFactory.task.links ?? [],
     cadence: taskFactory.cadence,
+    checklist: taskFactory.task.checklist ?? [],
   })
   const { mutate: updateTaskFactory } = useUpdateTaskFactoryMutation()
   const { mutate: deleteTaskFactory } = useDeleteTaskFactoryMutation()
@@ -51,6 +54,7 @@ export const EditTaskFactoryForm = () => {
         name: value.name,
         projectId: value.projectId,
         links: fixLinks(value.links),
+        checklist: fixChecklist(value.checklist),
       },
       cadence: value.cadence,
     }
@@ -84,6 +88,10 @@ export const EditTaskFactoryForm = () => {
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
+      />
+      <TaskChecklistInput
+        value={value.checklist}
+        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
         <TaskProjectSelector

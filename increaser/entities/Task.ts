@@ -1,6 +1,14 @@
+import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+
 export type TaskLink = {
   url: string
   name: string
+}
+
+export type TaskChecklistItem = EntityWithId & {
+  name: string
+  completed: boolean
+  order: number
 }
 
 export type Task = {
@@ -13,6 +21,7 @@ export type Task = {
   order: number
   spentTime?: number
   links?: TaskLink[]
+  checklist?: TaskChecklistItem[]
   factoryId?: string
 }
 

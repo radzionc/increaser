@@ -1,10 +1,7 @@
 import { TaskLink } from '@increaser/entities/Task'
-import { Button } from '@lib/ui/buttons/Button'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { textInputHeight } from '@lib/ui/css/textInput'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
@@ -13,6 +10,7 @@ import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import styled from 'styled-components'
 import { TaskLinkInput } from './TaskLinkInput'
+import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 
 const DeleteButton = styled(IconButton)`
   ${sameDimensions(textInputHeight)};
@@ -46,19 +44,11 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
         </VStack>
       )}
 
-      <Button
+      <FieldArrayAddButton
         onClick={() => onChange([...value, { url: '', name: '' }])}
-        style={{ alignSelf: 'start' }}
-        kind="secondary"
-        type="button"
       >
-        <HStack alignItems="center" gap={8}>
-          <IconWrapper>
-            <PlusIcon />
-          </IconWrapper>
-          Add link
-        </HStack>
-      </Button>
+        Add a link
+      </FieldArrayAddButton>
     </VStack>
   )
 }
