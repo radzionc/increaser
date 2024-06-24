@@ -1,4 +1,4 @@
-import { TaskLink } from '@increaser/entities/Task'
+import { TaskChecklistItem, TaskLink } from '@increaser/entities/Task'
 import { TaskCadence } from '@increaser/entities/TaskFactory'
 
 export type TaskFactoryFormShape = {
@@ -6,4 +6,5 @@ export type TaskFactoryFormShape = {
   projectId: string
   links: TaskLink[]
   cadence: TaskCadence
+  checklist: TaskChecklistItem[]
 }

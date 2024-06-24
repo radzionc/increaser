@@ -15,6 +15,7 @@ import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { useCreateTaskFactoryMutation } from '../api/useCreateTaskFactoryMutation'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskCadenceInput } from './TaskCadenceInput'
+import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 
 type CreateTaskFormProps = FinishableComponentProps
 
@@ -24,6 +25,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     projectId: otherProject.id,
     links: [],
     cadence: 'week',
+    checklist: [],
   })
   const { mutate } = useCreateTaskFactoryMutation()
 
@@ -66,6 +68,10 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
+      />
+      <TaskChecklistInput
+        value={value.checklist}
+        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
         <TaskProjectSelector
