@@ -14,5 +14,6 @@ export const ChecklistItemFrame = styled.div`
   justify-items: start;
   gap: ${toSizeUnit(checklistItemGap)};
   font-weight: 500;
+  font-size: 14px;
   ${verticalPadding(checklistItemVerticalPadding)};
 `

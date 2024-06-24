@@ -7,12 +7,10 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useCallback } from 'react'
 import { Text } from '@lib/ui/text'
-import { Button } from '@lib/ui/buttons/Button'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled from 'styled-components'
 import { order } from '@lib/utils/array/order'
+import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 
 export type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -87,19 +85,7 @@ export const TaskChecklistInput = ({
           }}
         />
       )}
-      <Button
-        onClick={onAdd}
-        style={{ alignSelf: 'start' }}
-        kind="secondary"
-        type="button"
-      >
-        <HStack alignItems="center" gap={8}>
-          <IconWrapper>
-            <PlusIcon />
-          </IconWrapper>
-          Add an item
-        </HStack>
-      </Button>
+      <FieldArrayAddButton onClick={onAdd}>Add an item</FieldArrayAddButton>
     </VStack>
   )
 }
