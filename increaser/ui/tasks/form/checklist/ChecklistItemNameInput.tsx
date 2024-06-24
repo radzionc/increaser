@@ -30,7 +30,7 @@ export const ChecklistItemNameInput = ({
       onChange={onChange}
       placeholder="Add an item"
       autoComplete="off"
-      autoFocus
+      autoFocus={!value}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
           event.preventDefault()
