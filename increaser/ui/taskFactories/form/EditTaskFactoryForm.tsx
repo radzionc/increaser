@@ -1,8 +1,7 @@
-import { FormEvent, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
-import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
@@ -15,6 +14,7 @@ import { useDeleteTaskFactoryMutation } from '../api/useDeleteTaskFactoryMutatio
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskCadenceInput } from './TaskCadenceInput'
+import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -41,7 +41,7 @@ export const EditTaskFactoryForm = () => {
 
   const isDisabled = useIsTaskFormDisabled(value)
 
-  const handleSubmit = () => {
+  const onSubmit = () => {
     if (isDisabled) {
       return
     }
@@ -68,16 +68,18 @@ export const EditTaskFactoryForm = () => {
       kind="secondary"
       as="form"
       style={{ width: '100%' }}
-      onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
-        handleSubmit(),
-      )}
+      {...getFormProps({
+        onClose: onFinish,
+        isDisabled,
+        onSubmit,
+      })}
     >
       <TaskNameInput
         placeholder="Task name"
         autoFocus
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
         value={value.name}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       />
       <TaskLinksInput
         value={value.links}
