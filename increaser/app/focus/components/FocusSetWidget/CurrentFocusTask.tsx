@@ -20,15 +20,18 @@ import {
   checklistItemContentMinHeight,
   checklistItemVerticalPadding,
 } from '@lib/ui/checklist/ChecklistItemFrame'
+import { CurrentChecklist } from './CurrentChecklist'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
 const Content = styled(TaskTextContainer)`
   font-size: 14px;
 `
 
-const Wrapper = styled.div`
+const Wrapper = styled(SeparatedByLine)`
   width: 100%;
   background: ${getColor('background')};
   padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
+  gap: 20px;
 `
 
 const Container = styled(HStack)`
@@ -76,6 +79,7 @@ export const CurrentFocusTask = () => {
             onClick={() => updateTask(undefined)}
           />
         </Container>
+        {task.checklist && task.checklist.length > 0 && <CurrentChecklist />}
       </Wrapper>
     </CurrentTaskProvider>
   )

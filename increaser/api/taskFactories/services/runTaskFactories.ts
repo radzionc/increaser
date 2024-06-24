@@ -43,12 +43,10 @@ export const runTaskFactories = async (userId: string) => {
       generatedTasks.push({
         startedAt: now,
         id: getId(),
-        name: task.name,
-        projectId: task.projectId,
         deadlineAt,
         order,
-        links: task.links,
         factoryId: id,
+        ...task,
       })
     },
   )
