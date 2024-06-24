@@ -16,6 +16,7 @@ import { useCreateTaskFactoryMutation } from '../api/useCreateTaskFactoryMutatio
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
+import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 
 type CreateTaskFormProps = FinishableComponentProps
 
@@ -40,6 +41,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         name: value.name,
         projectId: value.projectId,
         links: fixLinks(value.links),
+        checklist: fixChecklist(value.checklist),
       },
       cadence: value.cadence,
     }

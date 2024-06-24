@@ -56,7 +56,7 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
           <IconWrapper>
             <PlusIcon />
           </IconWrapper>
-          Add link
+          Add a link
         </HStack>
       </Button>
     </VStack>

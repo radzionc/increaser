@@ -17,6 +17,7 @@ import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
+import { fixChecklist } from './checklist/fixChecklist'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -48,6 +49,7 @@ export const CreateTaskForm = ({
       id: getId(),
       ...value,
       links: fixLinks(value.links),
+      checklist: fixChecklist(value.checklist),
       startedAt,
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
       order,

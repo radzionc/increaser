@@ -41,7 +41,7 @@ export const Hoverable = ({
   ...rest
 }: HoverableProps) => {
   return (
-    <Container {...rest}>
+    <Container type="button" {...rest}>
       <Highlight
         verticalOffset={verticalOffset}
         horizontalOffset={horizontalOffset}

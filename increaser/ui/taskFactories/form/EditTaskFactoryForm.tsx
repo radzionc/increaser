@@ -16,6 +16,7 @@ import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
+import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -53,7 +54,7 @@ export const EditTaskFactoryForm = () => {
         name: value.name,
         projectId: value.projectId,
         links: fixLinks(value.links),
-        checklist: value.checklist,
+        checklist: fixChecklist(value.checklist),
       },
       cadence: value.cadence,
     }
