@@ -18,7 +18,7 @@ export type Task = {
   order: number
   spentTime?: number
   links?: TaskLink[]
-  cheklist?: TaskChecklistItem[]
+  checklist?: TaskChecklistItem[]
   factoryId?: string
 }
 

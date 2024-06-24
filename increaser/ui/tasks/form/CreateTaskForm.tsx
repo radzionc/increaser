@@ -16,6 +16,7 @@ import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
+import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 
 type CreateTaskFormProps = FinishableComponentProps & {
   deadlineType: DeadlineType
@@ -31,6 +32,7 @@ export const CreateTaskForm = ({
     name: '',
     projectId: otherProject.id,
     links: [],
+    checklist: [],
   })
   const { mutate } = useCreateTaskMutation()
 
@@ -73,6 +75,10 @@ export const CreateTaskForm = ({
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
+      />
+      <TaskChecklistInput
+        value={value.checklist}
+        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <TaskProjectSelector

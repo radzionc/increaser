@@ -29,6 +29,7 @@ export const EditTaskForm = () => {
     name: task.name,
     projectId: task.projectId,
     links: task.links ?? [],
+    checklist: task.checklist ?? [],
   })
   const currentDeadlineStatus = getDeadlineStatus({
     now: Date.now(),
@@ -72,6 +73,10 @@ export const EditTaskForm = () => {
     const newLinks = fixLinks(value.links)
     if (newLinks !== task.links) {
       fields.links = newLinks
+    }
+
+    if (value.checklist !== task.checklist) {
+      fields.checklist = value.checklist
     }
 
     if (
