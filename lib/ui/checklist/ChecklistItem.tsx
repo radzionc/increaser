@@ -23,6 +23,7 @@ interface ChecklistItemProps extends InvisibleHTMLCheckboxProps {
 const Content = styled(Text)<{ isChecked: boolean }>`
   max-width: 100%;
   position: relative;
+  font-size: 14px;
   color: ${matchColor('isChecked', {
     true: 'textSupporting',
     false: 'text',
@@ -33,7 +34,7 @@ const Line = styled.span<{ isChecked: boolean }>`
   position: absolute;
   ${transition};
   left: 0;
-  border-top: 2px solid;
+  border-top: 1px solid;
   bottom: 8px;
   width: ${({ isChecked }) => (isChecked ? '100%' : '0%')};
 `
