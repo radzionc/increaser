@@ -27,10 +27,13 @@ export const runTaskFactories = async (userId: string) => {
       if (lastOutputAt && lastOutputAt >= cadencePeriodStart) return
 
       const now = Date.now()
-      const deadlineAt = getDeadlineAt({
-        now,
-        deadlineType: 'today',
-      })
+      const deadlineAt = inTimeZone(
+        getDeadlineAt({
+          now,
+          deadlineType: 'today',
+        }),
+        timeZone,
+      )
 
       const newTasks = [...oldTasks, ...generatedTasks]
 

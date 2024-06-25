@@ -1,4 +1,4 @@
-import { Task } from '@increaser/entities/Task'
+import { Task, TaskChecklistItem } from '@increaser/entities/Task'
 import { getRecord } from '@lib/utils/record/getRecord'
 import { endOfDay } from 'date-fns'
 import { DemoProject } from './projects'
@@ -11,6 +11,7 @@ type TaskDescription = {
   isCompleted: boolean
   isOverdue?: boolean
   minutes?: number
+  checklist?: TaskChecklistItem[]
 }
 
 // const tasks: TaskDescription[] = [
@@ -91,6 +92,32 @@ const tasks: TaskDescription[] = [
     name: 'Pay taxes',
     projectId: DemoProject.Planning,
     isCompleted: false,
+    checklist: [
+      {
+        id: 'review',
+        name: 'Review income and expenses',
+        completed: false,
+        order: 4,
+      },
+      {
+        id: 'calculate',
+        name: 'Calculate the due amount',
+        completed: false,
+        order: 3,
+      },
+      {
+        id: 'submit',
+        name: 'Submit the tax form',
+        completed: false,
+        order: 2,
+      },
+      {
+        id: 'pay',
+        name: 'Send money to the treasury',
+        completed: false,
+        order: 1,
+      },
+    ],
   },
 ]
 
@@ -99,7 +126,10 @@ export const getDemoTasks = (): Record<string, Task> => {
 
   return getRecord(
     tasks.map(
-      ({ projectId, name, isCompleted, minutes, isOverdue }, order) => ({
+      (
+        { projectId, name, isCompleted, minutes, isOverdue, checklist },
+        order,
+      ) => ({
         id: getId(),
         name,
         projectId,
@@ -110,6 +140,7 @@ export const getDemoTasks = (): Record<string, Task> => {
           ? startedAt - convertDuration(1, 'd', 'ms')
           : endOfDay(startedAt).getTime(),
         order,
+        checklist,
       }),
     ),
     (task) => task.id,
