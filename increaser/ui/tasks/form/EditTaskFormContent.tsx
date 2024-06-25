@@ -21,14 +21,7 @@ import { fixLinks } from './fixLinks'
 import { fixChecklist } from './checklist/fixChecklist'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
-import styled from 'styled-components'
 import { Panel } from '@lib/ui/panel/Panel'
-
-const Container = styled(Panel)`
-  padding: 0;
-  border-radius: 0;
-  border: none;
-`
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -113,7 +106,7 @@ export const EditTaskFormContent = ({
   }
 
   return (
-    <Container
+    <Panel
       as="form"
       onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
         handleSubmit(),
@@ -176,6 +169,6 @@ export const EditTaskFormContent = ({
           <Button isDisabled={isDisabled}>Save</Button>
         </HStack>
       </HStack>
-    </Container>
+    </Panel>
   )
 }

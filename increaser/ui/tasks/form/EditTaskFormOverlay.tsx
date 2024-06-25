@@ -17,6 +17,12 @@ const Container = styled(ModalContainer)`
   border: 2px solid ${getColor('mist')};
 `
 
+const Content = styled(EditTaskFormContent)`
+  padding: 0;
+  border-radius: 0;
+  border: none;
+`
+
 export const EditTaskFormOverlay = ({ onFinish }: FinishableComponentProps) => {
   const isFullScreen = useIsScreenWidthLessThan(
     prefferedWidth + modalConfig.minHorizontalFreeSpaceForMist,
@@ -31,7 +37,7 @@ export const EditTaskFormOverlay = ({ onFinish }: FinishableComponentProps) => {
             placement="top"
             width={isFullScreen ? undefined : prefferedWidth}
           >
-            <EditTaskFormContent onFinish={onFinish} />
+            <Content onFinish={onFinish} />
           </Container>
         </FocusTrap>
       </CompleteMist>
