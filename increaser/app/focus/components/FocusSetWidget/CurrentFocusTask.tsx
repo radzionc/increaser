@@ -7,7 +7,6 @@ import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
 import { CurrentFocusTaskTrackedTime } from '@increaser/app/focus/components/CurrentFocusTaskTrackedTime'
 import styled from 'styled-components'
 import { SelectFocusTask } from './SelectFocusTask'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
@@ -15,13 +14,10 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { focusSetWidgetConfig } from './config'
 import { TaskLinks } from '@increaser/ui/tasks/TaskLinks'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import {
-  checklistItemContentMinHeight,
-  checklistItemVerticalPadding,
-} from '@lib/ui/checklist/ChecklistItemFrame'
 import { CurrentChecklist } from './CurrentChecklist'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
+import { FocusIconButton } from './FocusIconButton'
+import { EditFocusTask } from './EditFocusTask'
 
 const Content = styled(TaskTextContainer)`
   font-size: 14px;
@@ -39,12 +35,6 @@ const Container = styled(HStack)`
   justify-content: space-between;
   align-items: start;
   gap: 4px;
-`
-
-const CloseButton = styled(IconButton)`
-  ${sameDimensions(
-    checklistItemContentMinHeight + checklistItemVerticalPadding * 2,
-  )};
 `
 
 export const CurrentFocusTask = () => {
@@ -72,12 +62,15 @@ export const CurrentFocusTask = () => {
               {task.links && <TaskLinks value={task.links} />}
             </VStack>
           </TaskItemFrame>
-          <CloseButton
-            title="Remove task"
-            kind="secondary"
-            icon={<CloseIcon />}
-            onClick={() => updateTask(undefined)}
-          />
+          <HStack>
+            <FocusIconButton
+              title="Remove task"
+              kind="secondary"
+              icon={<CloseIcon />}
+              onClick={() => updateTask(undefined)}
+            />
+            <EditFocusTask />
+          </HStack>
         </Container>
         {task.checklist && task.checklist.length > 0 && <CurrentChecklist />}
       </Wrapper>
