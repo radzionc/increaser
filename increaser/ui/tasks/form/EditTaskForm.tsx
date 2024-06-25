@@ -173,10 +173,10 @@ export const EditTaskForm = () => {
           Delete
         </Button>
         <HStack alignItems="center" gap={8}>
-          <Button isDisabled={isDisabled} onClick={onFinish} kind="secondary">
+          <Button onClick={onFinish} kind="secondary">
             Cancel
           </Button>
-          <Button>Save</Button>
+          <Button isDisabled={isDisabled}>Save</Button>
         </HStack>
       </HStack>
     </Panel>

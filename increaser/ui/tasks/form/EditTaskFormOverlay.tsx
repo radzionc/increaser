@@ -30,11 +30,20 @@ import { useKey } from 'react-use'
 import styled from 'styled-components'
 import { ModalContainer } from '@lib/ui/modal/ModalContainer'
 import { stopPropagation } from '@lib/ui/utils/stopPropagation'
+import { Panel } from '@lib/ui/panel/Panel'
+import { getColor } from '@lib/ui/theme/getters'
 
 const prefferedWidth = 560
 
 const Container = styled(ModalContainer)`
   overflow: hidden;
+  border: 2px solid ${getColor('mist')};
+`
+
+const Content = styled(Panel)`
+  padding: 0;
+  border-radius: 0;
+  border: none;
 `
 
 export const EditTaskFormOverlay = ({ onFinish }: FinishableComponentProps) => {
@@ -132,66 +141,64 @@ export const EditTaskFormOverlay = ({ onFinish }: FinishableComponentProps) => {
               handleSubmit(),
             )}
           >
-            <TaskNameInput
-              placeholder="Task name"
-              autoFocus
-              onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-              value={value.name}
-              onSubmit={handleSubmit}
-            />
-            <TaskLinksInput
-              value={value.links}
-              onChange={(links) => setValue((prev) => ({ ...prev, links }))}
-            />
-            <TaskChecklistInput
-              value={value.checklist}
-              onChange={(checklist) =>
-                setValue((prev) => ({ ...prev, checklist }))
-              }
-            />
-            <VStack gap={28}>
-              <HStack alignItems="center" gap={8}>
-                <TaskProjectSelector
-                  value={value.projectId}
-                  onChange={(projectId) =>
-                    setValue((prev) => ({ ...prev, projectId }))
-                  }
-                />
-                <TaskDeadlineInput
-                  value={deadlineStatus}
-                  onChange={setDeadlineStatus}
-                />
-              </HStack>
-            </VStack>
+            <Content withSections kind="secondary">
+              <TaskNameInput
+                placeholder="Task name"
+                autoFocus
+                onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+                value={value.name}
+                onSubmit={handleSubmit}
+              />
+              <TaskLinksInput
+                value={value.links}
+                onChange={(links) => setValue((prev) => ({ ...prev, links }))}
+              />
+              <TaskChecklistInput
+                value={value.checklist}
+                onChange={(checklist) =>
+                  setValue((prev) => ({ ...prev, checklist }))
+                }
+              />
+              <VStack gap={28}>
+                <HStack alignItems="center" gap={8}>
+                  <TaskProjectSelector
+                    value={value.projectId}
+                    onChange={(projectId) =>
+                      setValue((prev) => ({ ...prev, projectId }))
+                    }
+                  />
+                  <TaskDeadlineInput
+                    value={deadlineStatus}
+                    onChange={setDeadlineStatus}
+                  />
+                </HStack>
+              </VStack>
 
-            <HStack
-              wrap="wrap"
-              justifyContent="space-between"
-              fullWidth
-              alignItems="center"
-              gap={20}
-            >
-              <Button
-                kind="alert"
-                type="button"
-                onClick={() => {
-                  deleteTask({ id: task.id })
-                  onFinish()
-                }}
+              <HStack
+                wrap="wrap"
+                justifyContent="space-between"
+                fullWidth
+                alignItems="center"
+                gap={20}
               >
-                Delete
-              </Button>
-              <HStack alignItems="center" gap={8}>
                 <Button
-                  isDisabled={isDisabled}
-                  onClick={onFinish}
-                  kind="secondary"
+                  kind="alert"
+                  type="button"
+                  onClick={() => {
+                    deleteTask({ id: task.id })
+                    onFinish()
+                  }}
                 >
-                  Cancel
+                  Delete
                 </Button>
-                <Button>Save</Button>
+                <HStack alignItems="center" gap={8}>
+                  <Button onClick={onFinish} kind="secondary">
+                    Cancel
+                  </Button>
+                  <Button isDisabled={isDisabled}>Save</Button>
+                </HStack>
               </HStack>
-            </HStack>
+            </Content>
           </Container>
         </FocusTrap>
       </CompleteMist>

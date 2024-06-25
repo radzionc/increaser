@@ -15,6 +15,7 @@ export type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
 
 const Container = styled(ChecklistItemFrame)`
   background: ${getColor('background')};
+  align-items: start;
 `
 
 export const TaskChecklistItemInput = ({
