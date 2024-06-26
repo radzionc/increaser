@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { TaskNameInput } from '../TaskNameInput'
@@ -12,7 +12,6 @@ import { groupItems } from '@lib/utils/array/groupItems'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
-import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { useDeleteTaskMutation } from '../api/useDeleteTaskMutation'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
@@ -22,6 +21,7 @@ import { fixChecklist } from './checklist/fixChecklist'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
 import { Panel } from '@lib/ui/panel/Panel'
+import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -50,7 +50,7 @@ export const EditTaskFormContent = ({
 
   const isDisabled = useIsTaskFormDisabled(value)
 
-  const handleSubmit = () => {
+  const onSubmit = () => {
     if (isDisabled) {
       return
     }
@@ -108,9 +108,11 @@ export const EditTaskFormContent = ({
   return (
     <Panel
       as="form"
-      onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() =>
-        handleSubmit(),
-      )}
+      {...getFormProps({
+        onClose: onFinish,
+        isDisabled,
+        onSubmit,
+      })}
       withSections
       kind="secondary"
       {...rest}
@@ -120,7 +122,7 @@ export const EditTaskFormContent = ({
         autoFocus
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
         value={value.name}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       />
       <TaskLinksInput
         value={value.links}

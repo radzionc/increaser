@@ -15,6 +15,11 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { HStack } from '@lib/ui/layout/Stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { focusSetWidgetConfig } from './config'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { PlusIcon } from '@lib/ui/icons/PlusIcon'
+import { useState } from 'react'
+import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type FocusTaskSelectorProps = {
   options: Task[]
@@ -39,6 +44,7 @@ const Container = styled(HStack)<ComponentWithActiveState>`
   align-items: center;
   justify-content: space-between;
   ${transition};
+  font-weight: 500;
   background: ${getColor('background')};
   padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
 
@@ -62,6 +68,8 @@ export const FocusTaskSelector = ({ options }: FocusTaskSelectorProps) => {
   } = useFloatingOptions({
     selectedIndex: null,
   })
+
+  const [isCreateTaskOverlayOpen, setIsCreateTaskOverlayOpen] = useState(false)
 
   return (
     <>
@@ -89,8 +97,33 @@ export const FocusTaskSelector = ({ options }: FocusTaskSelectorProps) => {
                 <OptionContent key={option.id}>{option.name}</OptionContent>
               </OptionItem>
             ))}
+            <OptionItem
+              isActive={activeIndex === options.length}
+              {...getOptionProps({
+                index: options.length,
+                onSelect: () => {
+                  setIsCreateTaskOverlayOpen(true)
+                  setIsOpen(false)
+                },
+              })}
+            >
+              <OptionContent key="add">
+                <HStack gap={8} alignItems="center">
+                  <IconWrapper>
+                    <PlusIcon />
+                  </IconWrapper>
+                  Add a task
+                </HStack>
+              </OptionContent>
+            </OptionItem>
           </FloatingOptionsContainer>
         </FloatingFocusManager>
+      )}
+      {isCreateTaskOverlayOpen && (
+        <CreateFocusTaskOverlay
+          order={getLastItemOrder(options.map((option) => option.order))}
+          onFinish={() => setIsCreateTaskOverlayOpen(false)}
+        />
       )}
     </>
   )
