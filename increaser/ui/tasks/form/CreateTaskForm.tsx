@@ -1,6 +1,5 @@
-import { FormEvent, useState } from 'react'
-import { useKey } from 'react-use'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { useState } from 'react'
+import { UIComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
@@ -10,7 +9,6 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
-import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
@@ -18,30 +16,34 @@ import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { fixChecklist } from './checklist/fixChecklist'
+import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 
-type CreateTaskFormProps = FinishableComponentProps & {
+type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType
   order: number
+  defaultValue?: Partial<TaskFormShape>
+  onFinish: (task?: Task) => void
 }
 
 export const CreateTaskForm = ({
   onFinish,
   deadlineType,
   order,
+  defaultValue,
+  ...rest
 }: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFormShape>({
     name: '',
     projectId: otherProject.id,
     links: [],
     checklist: [],
+    ...defaultValue,
   })
-  const { mutate } = useCreateTaskMutation()
-
-  useKey('Escape', onFinish)
+  const { mutate, isPending } = useCreateTaskMutation()
 
   const isDisabled = useIsTaskFormDisabled(value)
 
-  const handleSubmit = () => {
+  const onSubmit = () => {
     if (isDisabled) return
 
     const startedAt = Date.now()
@@ -54,8 +56,7 @@ export const CreateTaskForm = ({
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
       order,
     }
-    mutate(task)
-    onFinish()
+    mutate(task, { onSuccess: () => onFinish(task) })
   }
 
   return (
@@ -63,16 +64,19 @@ export const CreateTaskForm = ({
       withSections
       kind="secondary"
       as="form"
-      onSubmit={preventDefault<FormEvent<HTMLFormElement>>(() => {
-        handleSubmit()
+      {...getFormProps({
+        onClose: onFinish,
+        isDisabled,
+        onSubmit,
       })}
+      {...rest}
     >
       <TaskNameInput
         placeholder="Task name"
         autoFocus
         value={value.name}
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       />
       <TaskLinksInput
         value={value.links}
@@ -88,10 +92,12 @@ export const CreateTaskForm = ({
           onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
         />
         <HStack alignItems="center" gap={8}>
-          <Button onClick={onFinish} kind="secondary">
+          <Button onClick={() => onFinish()} kind="secondary">
             Cancel
           </Button>
-          <Button isDisabled={isDisabled}>Add task</Button>
+          <Button isLoading={isPending} isDisabled={isDisabled}>
+            Add task
+          </Button>
         </HStack>
       </HStack>
     </Panel>

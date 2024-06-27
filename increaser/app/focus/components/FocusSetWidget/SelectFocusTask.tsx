@@ -4,6 +4,7 @@ import { order } from '@lib/utils/array/order'
 import { useMemo } from 'react'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusTaskSelector } from './FocusTaskSelector'
+import { CreateFocusTaskPrompt } from './CreateFocusTaskPrompt'
 
 export const SelectFocusTask = () => {
   const { projectId } = useCurrentFocus()
@@ -24,7 +25,7 @@ export const SelectFocusTask = () => {
   }, [projectId, tasks])
 
   if (!options.length) {
-    return null
+    return <CreateFocusTaskPrompt />
   }
 
   return <FocusTaskSelector options={options} />
