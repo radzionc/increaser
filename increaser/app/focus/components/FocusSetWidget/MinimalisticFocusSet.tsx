@@ -75,7 +75,6 @@ export const MinimalisticFocusSet = () => {
 
   return (
     <Wrapper $color={color}>
-      <CurrentFocusTask />
       <Container
         style={{
           color: color.toCssValue(),
@@ -111,6 +110,7 @@ export const MinimalisticFocusSet = () => {
           </HStack>
         </Content>
       </Container>
+      <CurrentFocusTask />
     </Wrapper>
   )
 }
