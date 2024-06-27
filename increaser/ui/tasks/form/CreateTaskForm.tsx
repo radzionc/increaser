@@ -92,7 +92,7 @@ export const CreateTaskForm = ({
           onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
         />
         <HStack alignItems="center" gap={8}>
-          <Button onClick={() => onFinish()} kind="secondary">
+          <Button type="button" onClick={() => onFinish()} kind="secondary">
             Cancel
           </Button>
           <Button isLoading={isPending} isDisabled={isDisabled}>

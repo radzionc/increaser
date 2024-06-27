@@ -17,12 +17,10 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { focusSetWidgetConfig } from './config'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { useState } from 'react'
-import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type FocusTaskSelectorProps = {
   options: Task[]
+  onAdd: () => void
 }
 
 const ToggleIconContainer = styled(CollapsableStateIndicator)`
@@ -55,7 +53,10 @@ const Container = styled(HStack)<ComponentWithActiveState>`
   ${({ isActive }) => isActive && activeContainer}
 `
 
-export const FocusTaskSelector = ({ options }: FocusTaskSelectorProps) => {
+export const FocusTaskSelector = ({
+  options,
+  onAdd,
+}: FocusTaskSelectorProps) => {
   const { updateTask } = useFocus()
   const {
     getReferenceProps,
@@ -68,8 +69,6 @@ export const FocusTaskSelector = ({ options }: FocusTaskSelectorProps) => {
   } = useFloatingOptions({
     selectedIndex: null,
   })
-
-  const [isCreateTaskOverlayOpen, setIsCreateTaskOverlayOpen] = useState(false)
 
   return (
     <>
@@ -102,8 +101,7 @@ export const FocusTaskSelector = ({ options }: FocusTaskSelectorProps) => {
               {...getOptionProps({
                 index: options.length,
                 onSelect: () => {
-                  setIsCreateTaskOverlayOpen(true)
-                  setIsOpen(false)
+                  onAdd()
                 },
               })}
             >
@@ -118,12 +116,6 @@ export const FocusTaskSelector = ({ options }: FocusTaskSelectorProps) => {
             </OptionItem>
           </FloatingOptionsContainer>
         </FloatingFocusManager>
-      )}
-      {isCreateTaskOverlayOpen && (
-        <CreateFocusTaskOverlay
-          order={getLastItemOrder(options.map((option) => option.order))}
-          onFinish={() => setIsCreateTaskOverlayOpen(false)}
-        />
       )}
     </>
   )

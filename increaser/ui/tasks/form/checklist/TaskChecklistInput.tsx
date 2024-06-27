@@ -34,7 +34,7 @@ export const TaskChecklistInput = ({
       },
     ])
   }, [onChange, value])
-  console.log(order(value, (item) => item.order, 'asc'))
+
   return (
     <VStack gap={16}>
       <Text size={14} weight="semibold">

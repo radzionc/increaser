@@ -9,9 +9,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { focusSetWidgetConfig } from './config'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { Opener } from '@lib/ui/base/Opener'
-import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
-import { defaultOrder } from '@lib/utils/order/getLastItemOrder'
+import { ClickableComponentProps } from '@lib/ui/props'
 
 const IconContainer = styled(IconWrapper)`
   font-size: 16px;
@@ -34,20 +32,11 @@ const Container = styled(HStack)`
   }
 `
 
-export const CreateFocusTaskPrompt = () => {
-  return (
-    <Opener
-      renderOpener={({ onOpen }) => (
-        <Container onClick={onOpen}>
-          <IconContainer>
-            <PlusIcon />
-          </IconContainer>
-          <OptionContent>Add a task</OptionContent>
-        </Container>
-      )}
-      renderContent={({ onClose }) => (
-        <CreateFocusTaskOverlay order={defaultOrder} onFinish={onClose} />
-      )}
-    />
-  )
-}
+export const CreateFocusTaskPrompt = ({ onClick }: ClickableComponentProps) => (
+  <Container onClick={onClick}>
+    <IconContainer>
+      <PlusIcon />
+    </IconContainer>
+    <OptionContent>Add a task</OptionContent>
+  </Container>
+)

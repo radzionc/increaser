@@ -1,10 +1,12 @@
 import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { order } from '@lib/utils/array/order'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusTaskSelector } from './FocusTaskSelector'
 import { CreateFocusTaskPrompt } from './CreateFocusTaskPrompt'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
 
 export const SelectFocusTask = () => {
   const { projectId } = useCurrentFocus()
@@ -24,9 +26,25 @@ export const SelectFocusTask = () => {
     )
   }, [projectId, tasks])
 
-  if (!options.length) {
-    return <CreateFocusTaskPrompt />
+  const [isCreatingTask, setIsCreatingTask] = useState(false)
+
+  if (isCreatingTask) {
+    return (
+      <CreateFocusTaskOverlay
+        order={getLastItemOrder(options.map((option) => option.order))}
+        onFinish={() => setIsCreatingTask(false)}
+      />
+    )
   }
 
-  return <FocusTaskSelector options={options} />
+  if (!options.length) {
+    return <CreateFocusTaskPrompt onClick={() => setIsCreatingTask(true)} />
+  }
+
+  return (
+    <FocusTaskSelector
+      onAdd={() => setIsCreatingTask(true)}
+      options={options}
+    />
+  )
 }
