@@ -82,6 +82,7 @@ export const FocusTaskSelector = ({
             {options.map((option, index) => (
               <OptionItem
                 isActive={activeIndex === index}
+                key={option.id}
                 {...getOptionProps({
                   index,
                   onSelect: () => {

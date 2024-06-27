@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UIComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
@@ -17,6 +17,7 @@ import { fixLinks } from './fixLinks'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { fixChecklist } from './checklist/fixChecklist'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
+import { useAssertUserState } from '../../user/UserStateContext'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType
@@ -39,7 +40,16 @@ export const CreateTaskForm = ({
     checklist: [],
     ...defaultValue,
   })
-  const { mutate, isPending } = useCreateTaskMutation()
+  const { tasks } = useAssertUserState()
+  const { mutate, isPending, variables } = useCreateTaskMutation()
+  useEffect(() => {
+    if (!variables) return
+
+    const task = tasks[variables.id]
+    if (task) {
+      onFinish(task)
+    }
+  }, [onFinish, tasks, variables])
 
   const isDisabled = useIsTaskFormDisabled(value)
 
@@ -56,7 +66,7 @@ export const CreateTaskForm = ({
       deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
       order,
     }
-    mutate(task, { onSuccess: () => onFinish(task) })
+    mutate(task)
   }
 
   return (
