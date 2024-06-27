@@ -9,10 +9,10 @@ export const MyVisionBoard = () => {
   const items = order(Object.values(vision), (item) => item.order, 'asc')
 
   return (
-    <UniformColumnGrid minChildrenWidth={300} gap={20}>
+    <UniformColumnGrid minChildrenWidth={304} gap={20}>
       {items.map((item) => (
         <CurrentVisionAttributeProvider key={item.id} value={item}>
-          <VisionAttributeItemContent />
+          <VisionAttributeItemContent statusKind="shy" />
         </CurrentVisionAttributeProvider>
       ))}
     </UniformColumnGrid>
