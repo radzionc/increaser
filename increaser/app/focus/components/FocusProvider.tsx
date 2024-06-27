@@ -26,6 +26,7 @@ import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMuta
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
+import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
 interface Props {
   children: ReactNode
@@ -51,15 +52,56 @@ export const FocusProvider = ({ children }: Props) => {
 
   const { permission } = useBrowserNotifications()
 
+  const { tasks, projects } = useAssertUserState()
+
   useEffect(() => {
     if (permission && permission !== 'granted' && hasTimerBrowserNotification) {
       setHasTimerBrowserNotification(false)
     }
   }, [hasTimerBrowserNotification, permission, setHasTimerBrowserNotification])
 
-  const [currentSet, setCurrentSet] = usePersistentState<CurrentSet | null>(
-    PersistentStateKey.CurrentSet,
-    null,
+  const [currentSet, setCurrentSet] = useStateCorrector(
+    usePersistentState<CurrentSet | null>(PersistentStateKey.CurrentSet, null),
+    useCallback(
+      (value) => {
+        if (!value) {
+          return value
+        }
+
+        const correctProjectId = (projectId: string) =>
+          projects.some((project) => project.id === projectId)
+            ? projectId
+            : projects[0].id
+
+        const { task, projectId } = value
+        if (task) {
+          const stateTask = tasks[task.id]
+          if (!stateTask) {
+            return {
+              ...value,
+              task: undefined,
+              projectId: correctProjectId(projectId),
+            }
+          }
+          if (stateTask.projectId !== projectId) {
+            return {
+              ...value,
+              projectId: stateTask.projectId,
+            }
+          }
+        }
+
+        if (!projects.find((project) => project.id === projectId)) {
+          return {
+            ...value,
+            projectId: projects[0].id,
+          }
+        }
+
+        return value
+      },
+      [projects, tasks],
+    ),
   )
 
   const analytics = useAnalytics()
@@ -102,8 +144,6 @@ export const FocusProvider = ({ children }: Props) => {
     setCurrentSet(null)
   }, [setCurrentSet])
 
-  const { tasks } = useAssertUserState()
-
   useEffect(() => {
     if (!currentSet || !currentSet.task) return
 
@@ -111,7 +151,7 @@ export const FocusProvider = ({ children }: Props) => {
 
     const task = tasks[id]
 
-    if (!task || task.completedAt) {
+    if (task.completedAt) {
       setCurrentSet(omit(currentSet, 'task'))
     }
 
@@ -176,17 +216,6 @@ export const FocusProvider = ({ children }: Props) => {
     },
     [setCurrentSet],
   )
-
-  useEffect(() => {
-    if (!currentSet) return
-
-    const { task } = currentSet
-    if (!task) return
-
-    if (tasks[task.id].projectId !== currentSet.projectId) {
-      setCurrentSet(omit(currentSet, 'task'))
-    }
-  }, [currentSet, setCurrentSet, tasks])
 
   return (
     <FocusContext.Provider
