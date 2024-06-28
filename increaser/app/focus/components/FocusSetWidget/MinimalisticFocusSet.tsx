@@ -16,6 +16,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { CurrentFocusTask } from './CurrentFocusTask'
 import { focusSetWidgetConfig } from './config'
+import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 
 const Wrapper = styled(VStack)<{ $color: HSLA }>`
   width: 100%;
@@ -110,6 +111,7 @@ export const MinimalisticFocusSet = () => {
           </HStack>
         </Content>
       </Container>
+      <FocusAudioWidget />
       <CurrentFocusTask />
     </Wrapper>
   )

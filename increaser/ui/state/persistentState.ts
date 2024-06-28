@@ -38,6 +38,7 @@ export enum PersistentStateKey {
   FocusLauncher = 'focusLauncher2',
   MyVisionView = 'myVisionView',
   MyHabitsView = 'myHabitsView',
+  AreFocusSoundsCollapsed = 'areFocusSoundsCollapsed',
 }
 
 export const persistentStorage =
