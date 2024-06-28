@@ -39,6 +39,7 @@ export const FocusAutoStop = () => {
     const end = Math.min(
       setDayEndsAt,
       startedAt + convertDuration(focusDuration, 'min', 'ms'),
+      Date.now(),
     )
 
     stop({
