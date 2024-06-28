@@ -59,7 +59,9 @@ export const CurrentFocusTask = () => {
                 <CurrentFocusTaskTrackedTime />
                 {task.name}
               </Content>
-              {task.links && <TaskLinks value={task.links} />}
+              {task.links && task.links.length > 0 && (
+                <TaskLinks value={task.links} />
+              )}
             </VStack>
           </TaskItemFrame>
           <HStack>
