@@ -3,6 +3,8 @@ import { useCurrentFocus } from './CurrentFocusProvider'
 import { endOfDay } from 'date-fns'
 import { useFocus } from './FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { shouldSetAutoStop } from './utils/shouldSetAutoStop'
+import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 
 export const FocusAutoStop = () => {
   const { startedAt } = useCurrentFocus()
@@ -47,31 +49,21 @@ export const FocusAutoStop = () => {
     })
   }, [focusDuration, setDayEndsAt, startedAt, stop])
 
+  const now = useRhythmicRerender()
   useEffect(() => {
-    const now = Date.now()
-
-    if (now > setDayEndsAt) {
+    if (
+      shouldSetAutoStop({
+        setDayEndsAt,
+        startedAt,
+        stoppedBeingVisibleAt,
+        startedBeingVisibleAt,
+        now: Date.now(),
+      })
+    ) {
       autoStop()
-      return
-    }
-
-    const duration = now - startedAt
-    if (duration > convertDuration(4, 'h', 'ms')) {
-      autoStop()
-      return
-    }
-
-    if (stoppedBeingVisibleAt && startedBeingVisibleAt) {
-      const staleDuration = startedBeingVisibleAt - stoppedBeingVisibleAt
-      if (
-        staleDuration > convertDuration(1, 'h', 'ms') &&
-        duration > convertDuration(2, 'h', 'ms')
-      ) {
-        autoStop()
-        return
-      }
     }
   }, [
+    now,
     autoStop,
     setDayEndsAt,
     startedAt,
