@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { EnhancedProject } from '../EnhancedProject'
 import { HStack } from '@lib/ui/layout/Stack'
 import { cropText } from '@lib/ui/css/cropText'
 import { Text } from '@lib/ui/text'
@@ -7,9 +6,10 @@ import { Text } from '@lib/ui/text'
 import { textInputPadding } from '@lib/ui/css/textInput'
 import { ProjectIdentifier } from './ProjectIdentifier'
 import { ReactNode } from 'react'
+import { Project } from '@increaser/entities/Project'
 
 interface ProjectOptionProps {
-  value: EnhancedProject
+  value: Project
   primaryStatistic?: ReactNode
 }
 

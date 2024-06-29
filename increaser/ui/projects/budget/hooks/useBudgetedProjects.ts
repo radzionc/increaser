@@ -1,9 +1,9 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { order } from '@lib/utils/array/order'
 import { useMemo } from 'react'
+import { useActiveProjects } from '../../hooks/useActiveProjects'
 
 export const useBudgetedProjects = () => {
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
 
   return useMemo(
     () =>

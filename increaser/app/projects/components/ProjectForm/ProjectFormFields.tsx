@@ -1,13 +1,13 @@
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { TextInput } from '@lib/ui/inputs/TextInput'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { HStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
 import { ProjectFields } from './ProjectFields'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 type ProjectFormFieldsProps = InputProps<ProjectFields>
 
@@ -15,7 +15,7 @@ export const ProjectFormFields = ({
   value,
   onChange,
 }: ProjectFormFieldsProps) => {
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
 
   const { usedColors } = usePaletteColorOptions(activeProjects)
 

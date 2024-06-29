@@ -14,10 +14,10 @@ import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
-import { defaultEmojis } from '@increaser/ui/projects/EnhancedProject'
 import { useCreateHabitMutation } from '../../../api/useCreateHabitMutation'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
+import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 
 export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
   const { habits } = useHabits()

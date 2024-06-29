@@ -6,8 +6,6 @@ import {
 import { WEEKDAYS } from '@lib/utils/time'
 import { ProjectTotal } from '@increaser/app/projects/components/ProjectTotal'
 import { ProjectsAllocationLine } from '@increaser/app/projects/components/ProjectsAllocationLine'
-import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
-import { getProjectName } from '@increaser/app/projects/utils/getProjectName'
 import { useDayOverview } from './DayOverviewProvider'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -15,9 +13,9 @@ import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
 import { getWeekday } from '@lib/utils/time/getWeekday'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const AmountOverview = () => {
   const { sets, dayStartedAt } = useDayOverview()
@@ -28,7 +26,7 @@ export const AmountOverview = () => {
   const currentDayBudget = daysBudget[weekday]
   const projectsTotal = getProjectsTotalRecord(sets)
 
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
   const theme = useTheme()
 
   return (
@@ -50,7 +48,7 @@ export const AmountOverview = () => {
           </HStackSeparatedBy>
         </HStack>
         <ProjectsAllocationLine
-          projectsRecord={projectsRecord}
+          projectsRecord={projects}
           sets={sets}
           allocatedMinutes={convertDuration(currentDayBudget, 'h', 'min')}
         />
@@ -62,8 +60,8 @@ export const AmountOverview = () => {
           .map(([projectId]) => (
             <ProjectTotal
               key={projectId}
-              name={getProjectName(projectsRecord, projectId)}
-              color={getProjectColor(projectsRecord, theme, projectId)}
+              name={projects[projectId].name}
+              color={theme.colors.getLabelColor(projects[projectId].color)}
               value={projectsTotal[projectId]}
             />
           ))}

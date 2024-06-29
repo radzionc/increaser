@@ -12,12 +12,12 @@ import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { GoalFormShape } from './GoalFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
-import { defaultEmojis } from '../../projects/EnhancedProject'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
+import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({

@@ -1,5 +1,4 @@
 import { ProjectStatus } from '@increaser/entities/Project'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { useMemo } from 'react'
 import { ExpandableSection } from '@lib/ui/layout/ExpandableSection'
@@ -12,16 +11,17 @@ import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectPro
 import { ProjectItem } from './ProjectItem'
 import { CreateProjectPrompt } from './CreateProjectPrompt'
 import { ExpandableSectionListTitle } from '@lib/ui/layout/ExpandableSectionListTitle'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const ProjectsGroup = ({
   value,
 }: ComponentWithValueProps<ProjectStatus>) => {
-  const { projects } = useProjects()
+  const { projects } = useAssertUserState()
 
   const theme = useTheme()
 
   const items = useMemo(() => {
-    return projects.filter((p) => p.status === value)
+    return Object.values(projects).filter((p) => p.status === value)
   }, [projects, value])
 
   if (items.length === 0 && value !== 'active') {

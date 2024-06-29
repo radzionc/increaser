@@ -6,11 +6,14 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Field } from '@lib/ui/inputs/Field'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { ProjectGoal, ProjectWorkingDays } from '@increaser/entities/Project'
+import {
+  Project,
+  ProjectGoal,
+  ProjectWorkingDays,
+} from '@increaser/entities/Project'
 import { Text } from '@lib/ui/text'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { FinishableComponentProps } from '@lib/ui/props'
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { useFreeHours } from './hooks/useFreeHours'
 import { Panel } from '@lib/ui/panel/Panel'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
@@ -25,7 +28,7 @@ type WeeklyGoalShape = {
 }
 
 type ManageProjectBudgetOverlayProps = FinishableComponentProps & {
-  project: EnhancedProject
+  project: Project
 }
 
 export const ManageProjectBudget = ({

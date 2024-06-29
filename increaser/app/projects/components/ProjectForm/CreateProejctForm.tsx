@@ -1,5 +1,4 @@
 import { useCreateProjectMutation } from '@increaser/app/projects/api/useCreateProjectMutation'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -12,9 +11,10 @@ import { ProjectFields } from './ProjectFields'
 import { getProjectDefaultFields } from './getProjectDefaultFields'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
 import { FormActions } from '@lib/ui/form/components/FormActions'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
 
   const { mutate: createProject } = useCreateProjectMutation()
 

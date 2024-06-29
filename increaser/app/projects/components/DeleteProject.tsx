@@ -11,7 +11,7 @@ import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdatePr
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { otherProjectId } from '@increaser/entities/Project'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -20,7 +20,7 @@ export const DeleteProject = () => {
 
   const { mutate: updateProject } = useUpdateProjectMutation()
 
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
   if (!couldProjectBeDeleted(id)) {
     return null
@@ -55,7 +55,7 @@ export const DeleteProject = () => {
               </Text>{' '}
               ? All associated data will be reassigned to the{' '}
               <Text as="span" color="contrast">
-                {projectsRecord[otherProjectId].name}
+                {projects[otherProjectId].name}
               </Text>{' '}
               project.
             </Text>

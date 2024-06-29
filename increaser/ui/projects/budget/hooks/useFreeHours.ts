@@ -1,10 +1,10 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useWorkBudgetTotal } from '@increaser/ui/workBudget/hooks/useWorkBudgetTotal'
 import { sum } from '@lib/utils/array/sum'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useActiveProjects } from '../../hooks/useActiveProjects'
 
 export const useFreeHours = () => {
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
 
   const workBudgetTotal = useWorkBudgetTotal()
 

@@ -1,7 +1,7 @@
-import { useProjects } from '../ProjectsProvider'
+import { useAssertUserState } from '../../user/UserStateContext'
 
 export const useProject = (id: string | null) => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
-  return id ? projectsRecord[id] || null : null
+  return id ? projects[id] || null : null
 }

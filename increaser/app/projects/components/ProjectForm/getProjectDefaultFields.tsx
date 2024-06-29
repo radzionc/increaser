@@ -1,14 +1,12 @@
-import {
-  EnhancedProject,
-  defaultEmojis,
-} from '@increaser/ui/projects/EnhancedProject'
 import { ProjectFields } from './ProjectFields'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
+import { Project } from '@increaser/entities/Project'
+import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 
 type GetProjectDefaultFieldsInput = {
-  projects: EnhancedProject[]
+  projects: Project[]
 }
 
 export const getProjectDefaultFields = ({

@@ -11,7 +11,6 @@ import { toWeek } from '@lib/utils/time/Week'
 import { areSameWeek } from '@lib/utils/time/Week'
 import { toMonth } from '@lib/utils/time/Month'
 import { areSameMonth } from '@lib/utils/time/Month'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useTrackedTimePreference } from '@increaser/ui/timeTracking/report/state/useTrackedTimePreference'
 import {
   TimeTrackingProjectData,
@@ -21,12 +20,12 @@ import { hideProjectNames } from '@increaser/ui/timeTracking/report/utils/hidePr
 import { mergeTrackedDataPoint } from '@increaser/ui/timeTracking/report/utils/mergeTrackedDataPoint'
 import { trackedTimeToProjectWeeks } from '@increaser/entities-utils/project/trackedTimeToProjectWeeks'
 import { trackedTimeToProjectMonths } from '@increaser/entities-utils/project/trackedTimeToProjectMonths'
+import { useTheme } from 'styled-components'
 
 export const TrackedTimeProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { projects: allProjects } = useProjects()
-  const { sets, weeks, months } = useAssertUserState()
+  const { sets, weeks, months, projects: allProjects } = useAssertUserState()
 
   const weekStartedAt = useStartOfWeek()
   const monthStartedAt = useStartOfMonth()
@@ -34,15 +33,20 @@ export const TrackedTimeProvider = ({
   const [state, setState] = useTrackedTimePreference()
   const { shouldHideProjectNames } = state
 
+  const {
+    colors: { getLabelColor },
+  } = useTheme()
+
   const projects = useMemo(() => {
     const result: Record<string, TimeTrackingProjectData> = {}
 
     const weeksRecord = trackedTimeToProjectWeeks({ trackedTime: weeks })
     const monthsRecord = trackedTimeToProjectMonths({ trackedTime: months })
 
-    allProjects.forEach((project) => {
+    Object.values(allProjects).forEach((project) => {
       result[project.id] = {
-        ...pick(project, ['id', 'hslaColor', 'name']),
+        ...pick(project, ['id', 'name']),
+        hslaColor: getLabelColor(project.color),
         days: [],
         weeks: weeksRecord[project.id] ?? [],
         months: monthsRecord[project.id] ?? [],

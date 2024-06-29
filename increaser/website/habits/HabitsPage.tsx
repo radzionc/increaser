@@ -1,6 +1,5 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
-import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
@@ -31,11 +30,9 @@ export const HabitsPage = () => (
     />
     <DemoUserStateProvider>
       <MockApiProvider>
-        <ProjectsProvider>
-          <PrimaryWebsiteSlice>
-            <HabitsSlice titleAs="h1" />
-          </PrimaryWebsiteSlice>
-        </ProjectsProvider>
+        <PrimaryWebsiteSlice>
+          <HabitsSlice titleAs="h1" />
+        </PrimaryWebsiteSlice>
       </MockApiProvider>
     </DemoUserStateProvider>
     {videoSlices.map((slice, index) => (

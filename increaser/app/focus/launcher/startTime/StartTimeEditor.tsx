@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useEvent } from 'react-use'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
 import { msToPx, pxToMs } from '../../../timeTracking/track/config'
@@ -22,6 +21,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -31,7 +31,7 @@ const TimeValue = styled(HStackSeparatedBy)`
 `
 
 export const StartTimeEditor = () => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
   const [isActive, setIsActive] = useState(false)
 
   const { colors } = useTheme()
@@ -79,14 +79,14 @@ export const StartTimeEditor = () => {
   const valueInPx = msToPx(value - interval.start)
   const intervalDurationInPx = msToPx(valueDuration)
 
-  const color = projectId ? projectsRecord[projectId].hslaColor : colors.primary
+  const theme = useTheme()
 
   const minDiff = Math.round(convertDuration(now - value, 'ms', 'min'))
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
       <CurrentIntervalRect
-        $color={color}
+        $color={theme.colors.primary}
         ref={intervalElement}
         style={{
           top: valueInPx,

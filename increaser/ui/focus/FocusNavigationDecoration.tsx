@@ -1,9 +1,9 @@
 import { useFocus } from './FocusContext'
 import { FocusPassedTime } from './FocusPassedTime'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { useProjects } from '../projects/ProjectsProvider'
 import { useCurrentPage } from '@increaser/app/navigation/hooks/useCurrentPage'
+import { useAssertUserState } from '../user/UserStateContext'
 
 const Container = styled.div`
   position: absolute;
@@ -18,16 +18,20 @@ export const FocusNavigationDecoration = () => {
 
   const { currentSet } = useFocus()
 
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
   const isActive = page === 'focus'
+
+  const theme = useTheme()
 
   if (isActive || !currentSet) return null
 
   return (
     <Container
       style={{
-        color: projectsRecord[currentSet.projectId].hslaColor.toCssValue(),
+        color: theme.colors
+          .getLabelColor(projects[currentSet.projectId].color)
+          .toCssValue(),
       }}
     >
       <FocusPassedTime />

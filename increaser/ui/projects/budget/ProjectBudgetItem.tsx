@@ -1,4 +1,3 @@
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
@@ -16,9 +15,10 @@ import { Opener } from '@lib/ui/base/Opener'
 import { ManageProjectBudget } from './ManageProjectBudget'
 import { interactive } from '@lib/ui/css/interactive'
 import { cropText } from '@lib/ui/css/cropText'
+import { Project } from '@increaser/entities/Project'
 
 type WeeklyGoalItemProps = {
-  value: EnhancedProject
+  value: Project
 }
 
 const Container = styled(Panel)`

@@ -3,10 +3,11 @@ import { Button } from '@lib/ui/buttons/Button'
 import Link from 'next/link'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 import { otherProjectId } from '@increaser/entities/Project'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 export const AddProjectsPrompt = () => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
+
   return (
     <ActionPrompt
       action={
@@ -17,7 +18,7 @@ export const AddProjectsPrompt = () => {
     >
       To make the most of your focus session and track your progress accurately,
       consider adding a project. Otherwise, your work will be categorized as '
-      {projectsRecord[otherProjectId].name}'.
+      {projects[otherProjectId].name}'.
     </ActionPrompt>
   )
 }

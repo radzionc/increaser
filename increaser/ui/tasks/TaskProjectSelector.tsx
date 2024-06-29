@@ -1,13 +1,15 @@
 import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
-import { useProjects } from '../projects/ProjectsProvider'
+import { useAssertUserState } from '../user/UserStateContext'
+import { useActiveProjects } from '../projects/hooks/useActiveProjects'
 
 export const TaskProjectSelector = ({
   value,
   onChange,
 }: InputProps<string>) => {
-  const { activeProjects, projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
+  const activeProjects = useActiveProjects()
 
   return (
     <ExpandableSelector
@@ -19,8 +21,8 @@ export const TaskProjectSelector = ({
       returnFocus
       renderOption={(option) => (
         <>
-          <Text color="contrast">{projectsRecord[option].emoji}</Text>
-          <Text>{option ? projectsRecord[option].name : 'No project'}</Text>
+          <Text color="contrast">{projects[option].emoji}</Text>
+          <Text>{option ? projects[option].name : 'No project'}</Text>
         </>
       )}
     />

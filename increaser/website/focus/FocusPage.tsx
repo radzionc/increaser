@@ -1,6 +1,5 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
-import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
@@ -39,11 +38,9 @@ export const FocusPage = () => (
     />
     <DemoUserStateProvider>
       <MockApiProvider>
-        <ProjectsProvider>
-          <PrimaryWebsiteSlice>
-            <FocusSlice titleAs="h1" />
-          </PrimaryWebsiteSlice>
-        </ProjectsProvider>
+        <PrimaryWebsiteSlice>
+          <FocusSlice titleAs="h1" />
+        </PrimaryWebsiteSlice>
       </MockApiProvider>
     </DemoUserStateProvider>
     {videoSlices.map((slice, index) => (

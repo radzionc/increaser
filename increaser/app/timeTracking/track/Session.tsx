@@ -1,12 +1,11 @@
 import { transition } from '@lib/ui/css/transition'
 import { ComponentWithValueProps, UIComponentProps } from '@lib/ui/props'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import styled, { css, useTheme } from 'styled-components'
 import { Set } from '@increaser/entities/User'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { LinesFiller } from '@lib/ui/visual/LinesFiller'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 const Container = styled.div<{ isInteractive: boolean; $color: HSLA }>`
   position: absolute;
@@ -41,11 +40,11 @@ type SessionProps = ComponentWithValueProps<Set> &
   }
 
 export const Session = ({ value, index, onSelect, ...rest }: SessionProps) => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
   const theme = useTheme()
 
-  const color = getProjectColor(projectsRecord, theme, value.projectId)
+  const color = theme.colors.getLabelColor(projects[value.projectId].color)
 
   return (
     <Container

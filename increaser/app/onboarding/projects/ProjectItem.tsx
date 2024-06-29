@@ -1,13 +1,13 @@
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { IncludedItem } from '@lib/ui/inputs/IncludedItem'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { useDeleteProjectMutation } from '../../projects/api/userDeleteProjectMutation'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import styled from 'styled-components'
+import { Project } from '@increaser/entities/Project'
 
 type ProjectItemProps = {
-  value: EnhancedProject
+  value: Project
 }
 
 const Content = styled(HStack)`

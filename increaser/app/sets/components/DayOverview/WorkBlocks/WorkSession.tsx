@@ -3,9 +3,8 @@ import { transition } from '@lib/ui/css/transition'
 import { UIComponentProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import styled, { useTheme } from 'styled-components'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 interface WorkSessionProps extends UIComponentProps {
   set: Set
@@ -32,12 +31,12 @@ export const WorkSession = ({
   showIdentifier = true,
   ...rest
 }: WorkSessionProps) => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
   const { currentSet } = useFocus()
 
   const theme = useTheme()
 
-  const color = getProjectColor(projectsRecord, theme, set.projectId)
+  const color = theme.colors.getLabelColor(projects[set.projectId].color)
 
   return (
     <Container {...rest}>

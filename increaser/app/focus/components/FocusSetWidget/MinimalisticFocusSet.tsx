@@ -6,7 +6,6 @@ import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { transition } from '@lib/ui/css/transition'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { toPercents } from '@lib/utils/toPercents'
@@ -65,16 +64,10 @@ export const Filler = styled.div`
 export const MinimalisticFocusSet = () => {
   const { cancel, stop, focusDuration } = useFocus()
   const currentSet = useCurrentFocus()
-  const { projectsRecord } = useProjects()
-  const color = projectsRecord[currentSet.projectId].hslaColor
 
   return (
     <Wrapper>
-      <Container
-        style={{
-          color: color.toCssValue(),
-        }}
-      >
+      <Container>
         <RhytmicRerender
           render={() => (
             <Filler

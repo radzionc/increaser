@@ -1,13 +1,15 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
 import { useTrackTime } from './state/TrackTimeContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 export const ProjectSelector = () => {
   const { currentSet, setState } = useTrackTime()
   const { projectId } = shouldBePresent(currentSet)
-  const { activeProjects, projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
+  const activeProjects = useActiveProjects()
 
   return (
     <ExpandableSelector

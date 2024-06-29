@@ -17,7 +17,6 @@ import { Open_Sans } from 'next/font/google'
 import { Page } from '@lib/next-ui/Page'
 import { MembershipConfirmation } from '@increaser/app/membership/components/MembershipConfirmation'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
-import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
 import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
 import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
@@ -57,20 +56,18 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                       present={() => (
                         <FocusLauncherProvider>
                           <UserManagerProvider>
-                            <ProjectsProvider>
-                              <HabitsProvider>
-                                <FocusProvider>
-                                  <ScheduleProvider>
-                                    <BreakProvider>
-                                      <FocusSoundsPlayer />
-                                      <YouTubeFocusMusicFloatingPlayer />
-                                      {component}
-                                    </BreakProvider>
-                                    <MembershipConfirmation />
-                                  </ScheduleProvider>
-                                </FocusProvider>
-                              </HabitsProvider>
-                            </ProjectsProvider>
+                            <HabitsProvider>
+                              <FocusProvider>
+                                <ScheduleProvider>
+                                  <BreakProvider>
+                                    <FocusSoundsPlayer />
+                                    <YouTubeFocusMusicFloatingPlayer />
+                                    {component}
+                                  </BreakProvider>
+                                  <MembershipConfirmation />
+                                </ScheduleProvider>
+                              </FocusProvider>
+                            </HabitsProvider>
                           </UserManagerProvider>
                         </FocusLauncherProvider>
                       )}

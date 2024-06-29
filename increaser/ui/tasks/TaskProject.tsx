@@ -1,11 +1,11 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { ComponentWithValueProps } from '@lib/ui/props'
+import { useAssertUserState } from '../user/UserStateContext'
 
 export const TaskProject = ({ value }: ComponentWithValueProps<string>) => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
-  const { emoji } = projectsRecord[value]
+  const { emoji } = projects[value]
 
   return <EmojiTextPrefix emoji={emoji} />
 }

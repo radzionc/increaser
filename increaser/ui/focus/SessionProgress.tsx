@@ -4,7 +4,8 @@ import { MS_IN_MIN } from '@lib/utils/time'
 import { FillingBlock } from './FillingBlock'
 import { useFocus } from './FocusContext'
 import { useCurrentFocus } from './CurrentFocusProvider'
-import { useProjects } from '../projects/ProjectsProvider'
+import { useAssertUserState } from '../user/UserStateContext'
+import { useTheme } from 'styled-components'
 
 export const SessionProgress = () => {
   const now = useRhythmicRerender()
@@ -12,8 +13,9 @@ export const SessionProgress = () => {
   const { focusDuration } = useFocus()
   const { startedAt, projectId } = useCurrentFocus()
 
-  const { projectsRecord } = useProjects()
-  const color = projectsRecord[projectId].hslaColor
+  const { projects } = useAssertUserState()
+  const theme = useTheme()
+  const color = theme.colors.getLabelColor(projects[projectId].color)
 
   const msPassed = now - startedAt
 

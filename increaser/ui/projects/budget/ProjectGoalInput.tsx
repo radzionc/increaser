@@ -1,5 +1,6 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import {
+  Project,
   ProjectGoal,
   goalOptionName,
   projectGoals,
@@ -9,11 +10,10 @@ import { pluralize } from '@lib/utils/pluralize'
 import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { InputProps } from '@lib/ui/props'
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { Switch } from '@lib/ui/inputs/Switch'
 
 type ProjectGoalInputProps = InputProps<ProjectGoal | null> & {
-  project: EnhancedProject
+  project: Project
   hours: number
 }
 

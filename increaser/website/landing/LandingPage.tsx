@@ -7,7 +7,6 @@ import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { ScoreboardSlice } from './ScoreboardSlice'
 import { DemoUserStateProvider } from './demo/DemoUserStateProvider'
-import { ProjectsProvider } from '@increaser/ui/projects/ProjectsProvider'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { productTools } from '@increaser/entities/ProductTool'
@@ -22,11 +21,9 @@ export const LandingPage = () => (
     <PrimarySlice />
     <DemoUserStateProvider>
       <MockApiProvider>
-        <ProjectsProvider>
-          {productTools.map((tool) => (
-            <ProductToolSlice key={tool} value={tool} />
-          ))}
-        </ProjectsProvider>
+        {productTools.map((tool) => (
+          <ProductToolSlice key={tool} value={tool} />
+        ))}
       </MockApiProvider>
     </DemoUserStateProvider>
     <TestimonialsSlice />
