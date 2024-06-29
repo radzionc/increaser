@@ -148,15 +148,12 @@ export const FocusLauncherForm = () => {
             render={({ action }) => (
               <Button
                 isDisabled={isDisabled}
-                kind="reversed"
+                kind="primary"
                 size="l"
                 onClick={action}
               >
                 <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                  <FocusDurationText
-                    emoji={project?.emoji}
-                    value={focusDuration}
-                  />
+                  <FocusDurationText value={focusDuration} />
                 </Text>
               </Button>
             )}

@@ -5,7 +5,7 @@ export const focusEntities = ['project', 'task'] as const
 export type FocusEntity = (typeof focusEntities)[number]
 
 export type FocusLauncherMutableState = {
-  projectId: string | null
+  projectId: string
   taskId: string | null
   startedAt: number | null
   focusEntity: FocusEntity

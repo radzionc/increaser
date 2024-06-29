@@ -51,11 +51,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           <ErrorBoundary fallback={<FullSizeErrorFallback />}>
             <ApiProvider>
               <UserStateProvider>
-                <FocusLauncherProvider>
-                  <PWAProvider>
-                    <YouTubeFocusMusicProvider>
-                      <ConditionalUserState
-                        present={() => (
+                <PWAProvider>
+                  <YouTubeFocusMusicProvider>
+                    <ConditionalUserState
+                      present={() => (
+                        <FocusLauncherProvider>
                           <UserManagerProvider>
                             <ProjectsProvider>
                               <HabitsProvider>
@@ -72,12 +72,12 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                               </HabitsProvider>
                             </ProjectsProvider>
                           </UserManagerProvider>
-                        )}
-                        missing={() => <>{component}</>}
-                      />
-                    </YouTubeFocusMusicProvider>
-                  </PWAProvider>
-                </FocusLauncherProvider>
+                        </FocusLauncherProvider>
+                      )}
+                      missing={() => <>{component}</>}
+                    />
+                  </YouTubeFocusMusicProvider>
+                </PWAProvider>
               </UserStateProvider>
             </ApiProvider>
           </ErrorBoundary>

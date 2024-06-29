@@ -51,7 +51,7 @@ const InteractiveArea = styled.div<{ $color: HSLA; isSelected: boolean }>`
   color: transparent;
   &:hover {
     --color: ${({ theme, isSelected, $color }) =>
-      (isSelected ? $color : theme.colors.contrast).toCssValue()};
+      (isSelected ? $color : theme.colors.primary).toCssValue()};
     color: var(--color);
   }
 `
@@ -81,7 +81,7 @@ export const FocusDurationInput = ({
   onChange,
 }: FocusDurationInputProps) => {
   const { colors } = useTheme()
-  const color = colors.contrast
+  const color = colors.primary
 
   const max = maxFocusDuration / 5
   const steps = range(max)
