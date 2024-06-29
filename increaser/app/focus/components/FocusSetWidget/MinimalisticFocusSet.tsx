@@ -8,7 +8,6 @@ import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { transition } from '@lib/ui/css/transition'
-import { HSLA } from '@lib/ui/colors/HSLA'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { toPercents } from '@lib/utils/toPercents'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -53,14 +52,14 @@ export const getFireplaceKeyframes = () => keyframes`
   }
 `
 
-export const Filler = styled.div<{ $color: HSLA }>`
+export const Filler = styled.div`
   height: 4px;
   bottom: 0;
   position: absolute;
 
   ${transition};
 
-  background: ${({ $color }) => $color.toCssValue()};
+  background: ${getColor('primary')};
 `
 
 export const MinimalisticFocusSet = () => {
@@ -79,7 +78,6 @@ export const MinimalisticFocusSet = () => {
         <RhytmicRerender
           render={() => (
             <Filler
-              $color={color}
               style={{
                 width: toPercents(
                   Math.min(
@@ -100,7 +98,7 @@ export const MinimalisticFocusSet = () => {
             <Button size="l" kind="outlined" onClick={cancel}>
               Cancel
             </Button>
-            <Button size="l" kind="reversed" onClick={stop}>
+            <Button size="l" kind="primary" onClick={stop}>
               Finish
             </Button>
           </HStack>
