@@ -4,25 +4,28 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { HabitNameInput } from './HabitNameInput'
-import { HabitFormShape } from './HabitFormShape'
+import { ProjectNameInput } from './ProjectNameInput'
+import { ProjectFormShape } from './ProjectFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
-import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
+import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { HabitFormHeader } from './HabitFormHeader'
+import { ProjectFormHeader } from './ProjectFormHeader'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
-import { useHabits } from '@increaser/ui/habits/HabitsContext'
-import { useCreateHabitMutation } from '../../../api/useCreateHabitMutation'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
+import { useAssertUserState } from '../../user/UserStateContext'
+import { useCreateProjectMutation } from '../api/useCreateProjectMutation'
+import { useActiveProjects } from '../hooks/useActiveProjects'
+import { getId } from '@increaser/entities-utils/shared/getId'
 
-export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
-  const { habits } = useHabits()
-  const usedColors = habits.map(({ color }) => color)
-  const [value, setValue] = useState<HabitFormShape>({
+export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
+  const { projects } = useAssertUserState()
+  const activeProjects = useActiveProjects()
+  const usedColors = Object.values(projects).map(({ color }) => color)
+  const [value, setValue] = useState<ProjectFormShape>({
     name: '',
     emoji: randomlyPick(defaultEmojis),
     color: randomlyPickOption({
@@ -30,19 +33,23 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
       used: usedColors,
     }),
   })
-  const { mutate } = useCreateHabitMutation()
+  const { mutate } = useCreateProjectMutation()
 
-  const isDisabled = useIsHabitFormDisabled(value)
+  const isDisabled = useIsProjectFormDisabled(value)
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return
 
     mutate({
       ...value,
-      order: getLastItemOrder(habits.map(({ order }) => order)),
+      id: getId(),
+      status: 'active',
+      order: getLastItemOrder(activeProjects.map(({ order }) => order)),
+      workingDays: 'everyday',
+      allocatedMinutesPerWeek: 0,
     })
     onFinish()
-  }, [habits, isDisabled, mutate, onFinish, value])
+  }, [projects, isDisabled, mutate, onFinish, value])
 
   return (
     <Panel
@@ -55,7 +62,7 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
         onSubmit,
       })}
     >
-      <HabitFormHeader>
+      <ProjectFormHeader>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -69,13 +76,13 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <HabitNameInput
+        <ProjectNameInput
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}
           onSubmit={onSubmit}
         />
-      </HabitFormHeader>
+      </ProjectFormHeader>
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <div />
         <HStack alignItems="center" gap={8}>

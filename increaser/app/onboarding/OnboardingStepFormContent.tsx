@@ -1,7 +1,6 @@
 import { useOnboarding } from './OnboardingProvider'
 
 import { Match } from '@lib/ui/base/Match'
-import { ProjectsOnboardingStep } from './projects/ProjectsOnboardingStep'
 import { ScheduleOnboardingStep } from './ScheduleOnboardingStep'
 import { TasksOnboardingStep } from './TasksOnboardingStep'
 import { HabitsOnboardingStep } from './habits/HabitsOnboardingStep'
@@ -11,6 +10,7 @@ import { ProjectsBudgetOnboardingStep } from './projectsBudget/ProjectsBudgetOnb
 import { VStack } from '@lib/ui/layout/Stack'
 import { VisionOnboardingStep } from './vision/VisionOnboardingStep'
 import { GoalsOnboardingStep } from './goals/GoalsOnboardingStep'
+import { ManageProjects } from '@increaser/ui/projects/ManageProjects'
 
 export const OnboardingStepFormContent = () => {
   const { currentStep } = useOnboarding()
@@ -18,7 +18,7 @@ export const OnboardingStepFormContent = () => {
   return (
     <Match
       value={currentStep}
-      projects={() => <ProjectsOnboardingStep />}
+      projects={() => <ManageProjects />}
       workBudget={() => (
         <VStack style={{ maxWidth: 440 }}>
           <ManageWorkBudget />

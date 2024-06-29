@@ -2,8 +2,8 @@ import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
 import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
 
-export const projectsStatuses = ['active', 'inactive', 'archived'] as const
-export type ProjectStatus = (typeof projectsStatuses)[number]
+export const projectStatuses = ['active', 'inactive', 'archived'] as const
+export type ProjectStatus = (typeof projectStatuses)[number]
 
 export const projectGoals = ['doMore', 'doLess'] as const
 export type ProjectGoal = (typeof projectGoals)[number]

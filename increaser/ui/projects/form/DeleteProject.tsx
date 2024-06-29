@@ -1,6 +1,4 @@
-import { useDeleteProjectMutation } from '@increaser/app/projects/api/userDeleteProjectMutation'
 import { TextButton } from '@lib/ui/buttons/TextButton'
-import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { Opener } from '@lib/ui/base/Opener'
 import { VStack } from '@lib/ui/layout/Stack'
@@ -8,10 +6,12 @@ import { Text } from '@lib/ui/text'
 
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { otherProjectId } from '@increaser/entities/Project'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { Button } from '@lib/ui/buttons/Button'
+import { useDeleteProjectMutation } from '../api/userDeleteProjectMutation'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -29,13 +29,9 @@ export const DeleteProject = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <IconButton
-          size="l"
-          kind="alert"
-          icon={<TrashBinIcon />}
-          title="Delete project"
-          onClick={onOpen}
-        />
+        <Button kind="alert" type="button" onClick={onOpen}>
+          Delete
+        </Button>
       )}
       renderContent={({ onClose }) => (
         <ConfirmationModal
@@ -67,7 +63,14 @@ export const DeleteProject = () => {
                   onClick={() => {
                     updateProject({
                       id,
-                      fields: { status: 'archived' },
+                      fields: {
+                        status: 'archived',
+                        order: getLastItemOrder(
+                          Object.values(projects).map(
+                            (project) => project.order,
+                          ),
+                        ),
+                      },
                     })
                     onClose()
                   }}

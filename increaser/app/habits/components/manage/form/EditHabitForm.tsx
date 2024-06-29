@@ -118,7 +118,12 @@ export const EditHabitForm = () => {
           Delete
         </Button>
         <HStack alignItems="center" gap={8}>
-          <Button isDisabled={isDisabled} onClick={onFinish} kind="secondary">
+          <Button
+            type="button"
+            isDisabled={isDisabled}
+            onClick={onFinish}
+            kind="secondary"
+          >
             Cancel
           </Button>
           <Button>Save</Button>

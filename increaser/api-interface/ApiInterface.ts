@@ -60,25 +60,11 @@ export interface ApiInterface {
 
   sendAuthLinkByEmail: ApiMethod<{ email: string }, undefined>
 
-  createProject: ApiMethod<
-    Omit<Project, 'total' | 'status' | 'weeks' | 'months'>,
-    Project
-  >
+  createProject: ApiMethod<Project, Project>
   updateProject: ApiMethod<
     {
       id: string
-      fields: Partial<
-        Pick<
-          Project,
-          | 'name'
-          | 'color'
-          | 'status'
-          | 'emoji'
-          | 'allocatedMinutesPerWeek'
-          | 'goal'
-          | 'workingDays'
-        >
-      >
+      fields: Partial<Omit<Project, 'id'>>
     },
     Project
   >
