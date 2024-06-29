@@ -18,6 +18,7 @@ import { ProjectStatusInput } from './ProjectStatusInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DeleteProject } from './DeleteProject'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
+import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -130,7 +131,7 @@ export const EditProjectForm = () => {
         alignItems="center"
         gap={20}
       >
-        <DeleteProject />
+        {couldProjectBeDeleted(project.id) ? <DeleteProject /> : <div />}
         <HStack alignItems="center" gap={8}>
           <Button isDisabled={isDisabled} onClick={onFinish} kind="secondary">
             Cancel

@@ -14,12 +14,13 @@ import {
 } from '@increaser/entities/Project'
 import { makeRecord } from '@lib/utils/record/makeRecord'
 import { useCallback, useMemo } from 'react'
-import { ProjectsGroup } from './ProjectsGroup'
 import { ProjectItem } from './ProjectItem'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { projectsConfig } from './config'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
+import { ProjectsGroupHeader } from './ProjectsGroupHeader'
+import { CreateProjectPrompt } from './CreateProjectPrompt'
 
 const Container = styled(VStack)`
   max-width: 520px;
@@ -70,10 +71,13 @@ export const ProjectsGroups = () => {
       getItemOrder={(project) => project.order}
       onChange={onChange}
       renderGroup={({ content, groupId, containerProps }) => (
-        <VStack {...containerProps} gap={4} key={groupId}>
-          <ProjectsGroup value={groupId} count={groups[groupId].length}>
-            {content}
-          </ProjectsGroup>
+        <VStack {...containerProps} key={groupId}>
+          <ProjectsGroupHeader
+            count={groups[groupId].length}
+            status={groupId}
+          />
+          {content}
+          {groupId === 'active' && <CreateProjectPrompt />}
         </VStack>
       )}
       renderItem={({
