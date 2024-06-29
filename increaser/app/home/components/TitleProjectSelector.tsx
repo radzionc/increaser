@@ -9,6 +9,7 @@ import { OptionContent } from '@lib/ui/select/OptionContent'
 import { OptionOutline } from '@lib/ui/select/OptionOutline'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { Text } from '@lib/ui/text'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 
 export const TitleProjectSelector = () => {
   const { projectId } = useCurrentFocus()
@@ -32,31 +33,35 @@ export const TitleProjectSelector = () => {
   return (
     <>
       <ClickableTitlePart {...getReferenceProps()} isActive={isOpen} as="span">
+        <EmojiTextPrefix emoji={projectsRecord[projectId].emoji} />
         {projectsRecord[projectId].name}
       </ClickableTitlePart>
       {isOpen && (
         <FloatingFocusManager context={context} modal>
           <FloatingOptionsContainer {...getFloatingProps()}>
-            {options.map((option, index) => (
-              <OptionItem
-                isActive={activeIndex === index}
-                {...getOptionProps({
-                  index,
-                  onSelect: () => {
-                    updateProject(option)
-                    setIsOpen(false)
-                  },
-                })}
-              >
-                <OptionContent key={option}>
-                  <>
-                    <Text color="contrast">{projectsRecord[option].emoji}</Text>
-                    <Text>{projectsRecord[option].name}</Text>
-                  </>
-                </OptionContent>
-                {option === projectId && <OptionOutline />}
-              </OptionItem>
-            ))}
+            {options.map((option, index) => {
+              const { emoji, name } = projectsRecord[option]
+              return (
+                <OptionItem
+                  isActive={activeIndex === index}
+                  {...getOptionProps({
+                    index,
+                    onSelect: () => {
+                      updateProject(option)
+                      setIsOpen(false)
+                    },
+                  })}
+                >
+                  <OptionContent key={option}>
+                    <>
+                      <Text color="contrast">{emoji}</Text>
+                      <Text>{name}</Text>
+                    </>
+                  </OptionContent>
+                  {option === projectId && <OptionOutline />}
+                </OptionItem>
+              )
+            })}
           </FloatingOptionsContainer>
         </FloatingFocusManager>
       )}

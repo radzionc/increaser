@@ -18,13 +18,13 @@ import { CurrentFocusTask } from './CurrentFocusTask'
 import { focusSetWidgetConfig } from './config'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 
-const Wrapper = styled(VStack)<{ $color: HSLA }>`
+const Wrapper = styled(VStack)`
   width: 100%;
   ${borderRadius.m};
-  border: 2px solid ${({ $color }) => $color.toCssValue()};
+  border: 2px solid ${getColor('mist')};
   overflow: hidden;
   gap: 2px;
-  background: ${({ $color }) => $color.toCssValue()};
+  background: ${getColor('mist')};
 `
 
 const Container = styled(HStack)`
@@ -54,18 +54,13 @@ export const getFireplaceKeyframes = () => keyframes`
 `
 
 export const Filler = styled.div<{ $color: HSLA }>`
-  height: 100%;
+  height: 4px;
+  bottom: 0;
   position: absolute;
 
   ${transition};
 
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    ${({ $color }) => $color.getVariant({ a: () => 0.4 }).toCssValue()} 100%
-  );
-
-  animation: ${getFireplaceKeyframes()} 6s ease-in-out infinite;
+  background: ${({ $color }) => $color.toCssValue()};
 `
 
 export const MinimalisticFocusSet = () => {
@@ -75,7 +70,7 @@ export const MinimalisticFocusSet = () => {
   const color = projectsRecord[currentSet.projectId].hslaColor
 
   return (
-    <Wrapper $color={color}>
+    <Wrapper>
       <Container
         style={{
           color: color.toCssValue(),

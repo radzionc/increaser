@@ -84,6 +84,16 @@ export const FocusProvider = ({ children }: Props) => {
             }
           }
           if (stateTask.projectId !== projectId) {
+            const doesProjectExist = projects.some(
+              (project) => project.id === projectId,
+            )
+            if (doesProjectExist) {
+              return {
+                ...value,
+                projectId,
+                task: undefined,
+              }
+            }
             return {
               ...value,
               projectId: stateTask.projectId,
