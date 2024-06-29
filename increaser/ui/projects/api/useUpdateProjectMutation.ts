@@ -19,14 +19,13 @@ export const useUpdateProjectMutation = () => {
       fields,
     }: ApiInterface['updateProject']['input']) => {
       updateState({
-        projects: projects.map((project) => {
-          if (project.id !== id) return project
-
-          return {
-            ...project,
+        projects: {
+          ...projects,
+          [id]: {
+            ...projects[id],
             ...fields,
-          }
-        }),
+          },
+        },
       })
 
       const project = await api.call('updateProject', {

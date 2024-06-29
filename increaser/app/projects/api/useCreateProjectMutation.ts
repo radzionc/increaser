@@ -8,6 +8,7 @@ import {
 import { Project } from '@increaser/entities/Project'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 interface UseCreateProjectMutationParams {
   onSuccess?: (project: Project) => void
@@ -33,6 +34,9 @@ export const useCreateProjectMutation = (
       const input = {
         ...projectParams,
         id: getId(),
+        order: getLastItemOrder(
+          Object.values(projects).map((project) => project.order),
+        ),
       }
 
       const project: Project = {
@@ -42,7 +46,12 @@ export const useCreateProjectMutation = (
 
       analytics.trackEvent('Create project', { name: project.name })
 
-      updateState({ projects: [...projects, project] })
+      updateState({
+        projects: {
+          ...projects,
+          [project.id]: project,
+        },
+      })
       params?.onOptimisticUpdate?.(project)
 
       return api.call('createProject', input)

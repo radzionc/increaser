@@ -6,7 +6,7 @@ import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { EditProjectForm } from './ProjectForm/EditProjectForm'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
@@ -32,7 +32,9 @@ const Content = styled(HStack)`
 `
 
 export const ProjectItem = () => {
-  const { name, emoji, hslaColor, id } = useCurrentProject()
+  const { name, emoji, color, id } = useCurrentProject()
+
+  const { colors } = useTheme()
 
   return (
     <Opener
@@ -51,7 +53,10 @@ export const ProjectItem = () => {
                 <Content alignItems="center" gap={8}>
                   <IdentifierContainer>{emoji}</IdentifierContainer>
                   <IdentifierContainer>
-                    <Circle size={14} background={hslaColor} />
+                    <Circle
+                      size={14}
+                      background={colors.getLabelColor(color)}
+                    />
                   </IdentifierContainer>
 
                   <Text color="contrast" cropped weight="semibold">

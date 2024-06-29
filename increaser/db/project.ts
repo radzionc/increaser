@@ -1,33 +1,38 @@
+import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb'
 import { Project } from '@increaser/entities/Project'
-import { getUser, getUserItemParams, updateUser } from './user'
-import { UpdateCommand } from '@aws-sdk/lib-dynamodb'
-import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
+import { getUserItemParams } from './user'
 import { dbDocClient } from '@lib/dynamodb/client'
-
-export const deleteProject = async (userId: string, projectId: string) => {
-  const user = await getUser(userId, ['projects'])
-  if (!user) {
-    throw new Error(`User with id ${userId} does not exist`)
-  }
-
-  const projects = user.projects.filter(({ id }) => id !== projectId)
-
-  await updateUser(userId, { projects })
-}
 
 export const putProject = async (userId: string, project: Project) => {
   const command = new UpdateCommand({
     ...getUserItemParams(userId),
-    UpdateExpression: `set #listName = list_append(#listName, :mergeList)`,
+    UpdateExpression: `set projects.#id = :project`,
     ExpressionAttributeValues: {
-      ':mergeList': [project],
+      ':project': project,
     },
     ExpressionAttributeNames: {
-      '#listName': 'projects',
+      '#id': project.id,
     },
   })
 
   return dbDocClient.send(command)
+}
+
+export const getProject = async (userId: string, projectId: string) => {
+  const command = new GetCommand({
+    ...getUserItemParams(userId),
+    ProjectionExpression: 'projects.#id',
+    ExpressionAttributeNames: {
+      '#id': projectId,
+    },
+  })
+  const { Item } = await dbDocClient.send(command)
+
+  if (!Item) {
+    throw new Error(`No user with id=${userId}`)
+  }
+
+  return Item.projects[projectId] as Project
 }
 
 export const updateProject = async (
@@ -35,23 +40,25 @@ export const updateProject = async (
   projectId: string,
   fields: Partial<Omit<Project, 'id'>>,
 ) => {
-  const user = await getUser(userId, ['projects'])
-  if (!user) {
-    throw new Error(`User with id ${userId} does not exist`)
+  const project = await getProject(userId, projectId)
+
+  const newProject = {
+    ...project,
+    ...fields,
   }
 
-  const projects = user.projects.map((project) => {
-    if (project.id === projectId) {
-      return {
-        ...project,
-        ...fields,
-      }
-    }
+  await putProject(userId, newProject)
 
-    return project
+  return newProject
+}
+
+export const deleteProject = async (userId: string, projectId: string) => {
+  const comand = new UpdateCommand({
+    ...getUserItemParams(userId),
+    UpdateExpression: 'REMOVE projects.#id',
+    ExpressionAttributeNames: {
+      '#id': projectId,
+    },
   })
-
-  await updateUser(userId, { projects })
-
-  return shouldBeDefined(projects.find(({ id }) => id === projectId))
+  return dbDocClient.send(comand)
 }

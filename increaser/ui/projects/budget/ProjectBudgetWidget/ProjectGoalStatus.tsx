@@ -4,14 +4,33 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { SummaryFrame, SummaryFrameDuration } from './SummaryFrame'
 import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useMemo } from 'react'
+import { useCurrentWeekSets } from '../../../sets/hooks/useCurrentWeekSets'
 
 export const ProjectBudgetSummary = () => {
-  const { goal, doneMinutesThisWeek, allocatedMinutesPerWeek } =
-    useCurrentProject()
+  const { goal, id, allocatedMinutesPerWeek } = useCurrentProject()
 
   const target = useCurrentDayTarget()
 
   const hasReachedFinalDay = useHasReachedFinalWorkday()
+
+  const currentWeekSets = useCurrentWeekSets()
+
+  const doneMinutesThisWeek = useMemo(
+    () =>
+      Math.round(
+        convertDuration(
+          getSetsDuration(
+            currentWeekSets.filter(({ projectId }) => projectId === id),
+          ),
+          'ms',
+          'min',
+        ),
+      ),
+    [],
+  )
 
   return (
     <Match

@@ -28,10 +28,8 @@ export const ProjectSelector = () => {
       getOptionKey={(option) => option}
       renderOption={(option) => (
         <>
-          {option && (
-            <Text color="contrast">{projectsRecord[option].emoji}</Text>
-          )}
-          <Text>{option ? projectsRecord[option].name : 'All projects'}</Text>
+          {option && <Text color="contrast">{projects[option].emoji}</Text>}
+          <Text>{option ? projects[option].name : 'All projects'}</Text>
         </>
       )}
     />

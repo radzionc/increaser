@@ -27,6 +27,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 interface Props {
   children: ReactNode
@@ -53,6 +54,7 @@ export const FocusProvider = ({ children }: Props) => {
   const { permission } = useBrowserNotifications()
 
   const { tasks, projects } = useAssertUserState()
+  const activeProjects = useActiveProjects()
 
   useEffect(() => {
     if (permission && permission !== 'granted' && hasTimerBrowserNotification) {
@@ -69,9 +71,7 @@ export const FocusProvider = ({ children }: Props) => {
         }
 
         const correctProjectId = (projectId: string) =>
-          projects.some((project) => project.id === projectId)
-            ? projectId
-            : projects[0].id
+          projectId in projects ? projectId : activeProjects[0].id
 
         const { task, projectId } = value
         if (task) {
@@ -84,10 +84,7 @@ export const FocusProvider = ({ children }: Props) => {
             }
           }
           if (stateTask.projectId !== projectId) {
-            const doesProjectExist = projects.some(
-              (project) => project.id === projectId,
-            )
-            if (doesProjectExist) {
+            if (projectId in projects) {
               return {
                 ...value,
                 projectId,
@@ -101,10 +98,10 @@ export const FocusProvider = ({ children }: Props) => {
           }
         }
 
-        if (!projects.find((project) => project.id === projectId)) {
+        if (!(projectId in projects)) {
           return {
             ...value,
-            projectId: projects[0].id,
+            projectId: activeProjects[0].id,
           }
         }
 

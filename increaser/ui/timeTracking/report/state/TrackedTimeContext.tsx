@@ -5,13 +5,14 @@ import {
   ProjectMonth,
   ProjectWeek,
 } from '@increaser/entities/timeTracking'
+import { HSLA } from '@lib/ui/colors/HSLA'
 
 export type TrackedTimePreference = {
   shouldHideProjectNames: boolean
 }
 
 export type TimeTrackingProjectData = {
-  hslaColor: string
+  hslaColor: HSLA
   name: string
   id: string
   weeks: ProjectWeek[]

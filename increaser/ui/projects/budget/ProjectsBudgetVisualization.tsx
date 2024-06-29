@@ -14,9 +14,9 @@ export const ProjectsBudgetVisualization = () => {
 
   const items = useMemo(() => {
     const result = projects
-      .map(({ hslaColor, allocatedMinutesPerWeek }) => {
+      .map(({ color, allocatedMinutesPerWeek }) => {
         const hours = allocatedMinutesPerWeek / MIN_IN_HOUR
-        return range(hours).map(() => hslaColor)
+        return range(hours).map(() => colors.getLabelColor(color))
       })
       .flat()
     if (result.length < workBudgetTotal) {

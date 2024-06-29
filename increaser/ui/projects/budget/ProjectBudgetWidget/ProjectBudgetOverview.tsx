@@ -9,6 +9,9 @@ import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
 import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 import { match } from '@lib/utils/match'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
+import { useCurrentWeekSets } from '../../../sets/hooks/useCurrentWeekSets'
 
 const Container = styled.div`
   position: relative;
@@ -36,8 +39,23 @@ const Offset = styled.div`
 `
 
 export const ProjectBudgetOverview = () => {
-  const { goal, allocatedMinutesPerWeek, doneMinutesThisWeek } =
-    useCurrentProject()
+  const { goal, allocatedMinutesPerWeek, id } = useCurrentProject()
+
+  const currentWeekSets = useCurrentWeekSets()
+
+  const doneMinutesThisWeek = useMemo(
+    () =>
+      Math.round(
+        convertDuration(
+          getSetsDuration(
+            currentWeekSets.filter((set) => set.projectId === id),
+          ),
+          'ms',
+          'min',
+        ),
+      ),
+    [],
+  )
 
   const { colors } = useTheme()
 

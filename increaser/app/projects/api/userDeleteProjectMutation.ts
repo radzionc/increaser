@@ -4,6 +4,7 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
+import { omit } from '@lib/utils/record/omit'
 
 interface DeleteProjectMutationInput {
   id: string
@@ -22,9 +23,7 @@ export const useDeleteProjectMutation = (
 
   return useMutation({
     mutationFn: async ({ id }: DeleteProjectMutationInput) => {
-      updateState({
-        projects: projects.filter((project) => project.id !== id),
-      })
+      updateState(omit(projects, id))
 
       await api.call('deleteProject', {
         id,
