@@ -45,6 +45,7 @@ const Container = styled(UnstyledButton)<ContainerProps>`
 
   white-space: nowrap;
   font-weight: 500;
+  flex-shrink: 0;
 
   border-radius: ${({ isRounded }) => toSizeUnit(isRounded ? 100 : 8)};
 

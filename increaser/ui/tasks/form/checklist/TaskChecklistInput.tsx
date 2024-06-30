@@ -6,11 +6,11 @@ import { TaskChecklistItemInput } from './TaskChecklistItemInput'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useCallback } from 'react'
-import { Text } from '@lib/ui/text'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled from 'styled-components'
 import { order } from '@lib/utils/array/order'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
+import { TaskFieldArrayContainer } from '../TaskFieldArrayContainer'
 
 export type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -18,7 +18,6 @@ const DraggableItemContainer = styled(HStack)`
   width: 100%;
   gap: 8px;
 `
-
 export const TaskChecklistInput = ({
   value,
   onChange,
@@ -36,10 +35,7 @@ export const TaskChecklistInput = ({
   }, [onChange, value])
 
   return (
-    <VStack gap={16}>
-      <Text size={14} weight="semibold">
-        Checklist
-      </Text>
+    <TaskFieldArrayContainer title="Checklist">
       {value.length > 0 && (
         <DnDList
           items={order(value, (item) => item.order, 'asc')}
@@ -86,6 +82,6 @@ export const TaskChecklistInput = ({
         />
       )}
       <FieldArrayAddButton onClick={onAdd}>Add an item</FieldArrayAddButton>
-    </VStack>
+    </TaskFieldArrayContainer>
   )
 }

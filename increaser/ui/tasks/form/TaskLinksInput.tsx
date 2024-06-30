@@ -5,12 +5,12 @@ import { textInputHeight } from '@lib/ui/css/textInput'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
-import { Text } from '@lib/ui/text'
 import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import styled from 'styled-components'
 import { TaskLinkInput } from './TaskLinkInput'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
+import { TaskFieldArrayContainer } from './TaskFieldArrayContainer'
 
 const DeleteButton = styled(IconButton)`
   ${sameDimensions(textInputHeight)};
@@ -18,10 +18,7 @@ const DeleteButton = styled(IconButton)`
 
 export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
   return (
-    <VStack gap={16}>
-      <Text size={14} weight="semibold">
-        Links
-      </Text>
+    <TaskFieldArrayContainer title="Links">
       {value.length > 0 && (
         <VStack gap={8}>
           {value.map((item, index) => (
@@ -49,6 +46,6 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
       >
         Add a link
       </FieldArrayAddButton>
-    </VStack>
+    </TaskFieldArrayContainer>
   )
 }
