@@ -1,5 +1,3 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
-import { getProjectColor } from '@increaser/ui/projects/utils/getProjectColor'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { Set } from '@increaser/entities/User'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -13,6 +11,7 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { ArrowLeftIcon } from '@lib/ui/icons/ArrowLeftIcon'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 interface Props {
   sets: Set[]
@@ -38,7 +37,7 @@ export const MinimalisticTimeline = ({ sets }: Props) => {
   const duration = finishedAt - startedAt
 
   const theme = useTheme()
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
   return (
     <VStack gap={4}>
@@ -50,7 +49,7 @@ export const MinimalisticTimeline = ({ sets }: Props) => {
               left: toPercents((set.start - startedAt) / duration),
               width: toPercents(getSetDuration(set) / duration),
             }}
-            $color={getProjectColor(projectsRecord, theme, set.projectId)}
+            $color={theme.colors.getLabelColor(projects[set.projectId].color)}
           />
         ))}
       </Container>

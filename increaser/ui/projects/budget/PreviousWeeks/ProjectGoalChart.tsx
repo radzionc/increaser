@@ -16,7 +16,7 @@ import { LineChart } from '@lib/ui/charts/LineChart'
 import { LineChartPositionTracker } from '@lib/ui/charts/LineChart/LineChartPositionTracker'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { toPercents } from '@lib/utils/toPercents'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 
@@ -37,7 +37,7 @@ const Line = styled.div`
 export const ProjectGoalChart = ({
   value,
 }: ComponentWithValueProps<ProjectWeek[]>) => {
-  const { allocatedMinutesPerWeek, hslaColor } = useCurrentProject()
+  const { allocatedMinutesPerWeek, color } = useCurrentProject()
   const targets = [convertDuration(allocatedMinutesPerWeek, 'min', 's')]
   const normalized = normalizeDataArrays({
     done: value.map((week) => week.seconds),
@@ -51,6 +51,8 @@ export const ProjectGoalChart = ({
     useState<boolean>(false)
 
   const selectedDataPointStartedAt = fromWeek(value[selectedDataPoint])
+
+  const { colors } = useTheme()
 
   return (
     <ElementSizeAware
@@ -121,11 +123,11 @@ export const ProjectGoalChart = ({
                         size.width - lineChartConfig.expectedYAxisLabelWidth
                       }
                       height={lineChartConfig.chartHeight}
-                      color={hslaColor}
+                      color={colors.getLabelColor(color)}
                     />
                     <LineChartPositionTracker
                       data={normalized.done}
-                      color={hslaColor}
+                      color={colors.getLabelColor(color)}
                       onChange={(index) => {
                         if (index === null) {
                           setIsSelectedDataPointVisible(false)

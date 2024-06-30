@@ -81,7 +81,6 @@ export const FocusDurationInput = ({
   onChange,
 }: FocusDurationInputProps) => {
   const { colors } = useTheme()
-  const color = colors.contrast
 
   const max = maxFocusDuration / 5
   const steps = range(max)
@@ -105,7 +104,7 @@ export const FocusDurationInput = ({
         return (
           <InteractiveArea
             isSelected={step === value}
-            $color={duration <= value ? color : colors.textShy}
+            $color={duration <= value ? colors.contrast : colors.textShy}
             onClick={() => onChange(duration)}
             key={index}
           >
@@ -117,7 +116,11 @@ export const FocusDurationInput = ({
             >
               <DurationTextWr>
                 <DurationText
-                  style={{ color: isSelected ? color.toCssValue() : undefined }}
+                  style={{
+                    color: isSelected
+                      ? colors.contrast.toCssValue()
+                      : undefined,
+                  }}
                   weight={isSelected ? 'bold' : 'regular'}
                   size={14}
                 >

@@ -7,8 +7,9 @@ import { TimeInput } from '@lib/ui/timeline/TimeInput'
 import { MS_IN_HOUR } from '@lib/utils/time'
 import { startOfHour } from 'date-fns'
 import { Modal } from '@lib/ui/modal'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useAssertUserState } from '../user/UserStateContext'
+import { useTheme } from 'styled-components'
 
 interface Props extends ClosableComponentProps {
   onSubmit: (value: number) => void
@@ -18,11 +19,13 @@ export const UpdateSetStartTimeOverlay = ({ onClose, onSubmit }: Props) => {
   const now = useRhythmicRerender(10000)
   const startOfDay = useStartOfDay()
 
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
 
   const { startedAt, projectId } = useCurrentFocus()
 
   const [value, setValue] = useState(startedAt)
+
+  const { colors } = useTheme()
 
   const timelineStartsAt = Math.max(
     startOfDay,
@@ -44,7 +47,7 @@ export const UpdateSetStartTimeOverlay = ({ onClose, onSubmit }: Props) => {
         intialValue={startedAt}
         timelineStartsAt={timelineStartsAt}
         timelineEndsAt={now}
-        color={projectsRecord[projectId].hslaColor}
+        color={colors.getLabelColor(projects[projectId].color)}
         value={value}
         onChange={setValue}
       />

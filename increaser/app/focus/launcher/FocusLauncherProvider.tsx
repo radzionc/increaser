@@ -7,14 +7,16 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
+import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 
 export const FocusLauncherProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
+  const activeProjects = useActiveProjects()
   const [state, setState] = usePersistentState<FocusLauncherMutableState>(
     PersistentStateKey.FocusLauncher,
     {
-      projectId: null,
+      projectId: activeProjects[0].id,
       taskId: null,
       startedAt: null,
       focusEntity: 'project',

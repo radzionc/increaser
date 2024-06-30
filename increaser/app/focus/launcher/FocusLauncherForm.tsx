@@ -16,7 +16,6 @@ import { FocusProjectInput } from './FocusProjectInput'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnlyAction'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
@@ -38,9 +37,8 @@ const Container = styled(Panel)`
 
 export const FocusLauncherForm = () => {
   const todayStartedAt = useStartOfDay()
-  const { finishWorkAt } = useAssertUserState()
+  const { finishWorkAt, projects } = useAssertUserState()
   const todaySets = useTodaySets()
-  const { projectsRecord } = useProjects()
   const { start } = useFocus()
   const { projectId, taskId, startedAt, setState, focusEntity } =
     useFocusLauncher()
@@ -80,7 +78,7 @@ export const FocusLauncherForm = () => {
     return () => clearInterval(interval)
   }, [updateSuggestions])
 
-  const project = projectId ? projectsRecord[projectId] : null
+  const project = projectId ? projects[projectId] : null
 
   const isDisabled = useMemo(() => {
     if (!project) {
@@ -153,10 +151,7 @@ export const FocusLauncherForm = () => {
                 onClick={action}
               >
                 <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                  <FocusDurationText
-                    emoji={project?.emoji}
-                    value={focusDuration}
-                  />
+                  <FocusDurationText value={focusDuration} />
                 </Text>
               </Button>
             )}

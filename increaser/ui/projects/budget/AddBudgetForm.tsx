@@ -1,4 +1,3 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { Panel } from '@lib/ui/panel/Panel'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { Button } from '@lib/ui/buttons/Button'
@@ -18,6 +17,8 @@ import { useFreeHours } from './hooks/useFreeHours'
 import { BudgetHoursInput } from './BudgetHoursInput'
 import { WorkdingDaysInput } from '@increaser/ui/projects/budget/WorkingDaysInput'
 import { ProjectGoalInput } from './ProjectGoalInput'
+import { useActiveProjects } from '../hooks/useActiveProjects'
+import { useAssertUserState } from '../../user/UserStateContext'
 
 type WeeklyGoalShape = {
   projectId: string | null
@@ -27,7 +28,8 @@ type WeeklyGoalShape = {
 }
 
 export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
-  const { activeProjects, projectsRecord } = useProjects()
+  const activeProjects = useActiveProjects()
+  const { projects } = useAssertUserState()
 
   const options = useMemo(
     () => activeProjects.filter((p) => !p.allocatedMinutesPerWeek),
@@ -87,7 +89,7 @@ export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
             <ProjectInput
               label="Project"
               options={options}
-              value={value.projectId ? projectsRecord[value.projectId] : null}
+              value={value.projectId ? projects[value.projectId] : null}
               onChange={(project) =>
                 setValue((prev) => ({
                   ...prev,
@@ -118,7 +120,7 @@ export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
           <ProjectGoalInput
             value={value.goal}
             onChange={(goal) => setValue((prev) => ({ ...prev, goal }))}
-            project={projectsRecord[value.projectId]}
+            project={projects[value.projectId]}
             hours={value.hours}
           />
         )}

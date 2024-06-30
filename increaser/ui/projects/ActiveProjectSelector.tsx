@@ -1,12 +1,14 @@
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
 import { InputProps, UIComponentProps } from '@lib/ui/props'
+import { useAssertUserState } from '../user/UserStateContext'
+import { useActiveProjects } from './hooks/useActiveProjects'
 
 export const ActiveProjectSelector = (
   props: InputProps<string> & UIComponentProps,
 ) => {
-  const { activeProjects, projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
+  const activeProjects = useActiveProjects()
 
   return (
     <ExpandableSelector
@@ -15,8 +17,8 @@ export const ActiveProjectSelector = (
       getOptionKey={(option) => option}
       renderOption={(option) => (
         <>
-          <Text color="contrast">{projectsRecord[option].emoji}</Text>
-          <Text>{projectsRecord[option].name}</Text>
+          <Text color="contrast">{projects[option].emoji}</Text>
+          <Text>{projects[option].name}</Text>
         </>
       )}
     />

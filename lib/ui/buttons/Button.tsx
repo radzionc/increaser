@@ -81,7 +81,10 @@ const Container = styled(UnstyledButton)<ContainerProps>`
     match(kind, {
       primary: () => css`
         background: ${getColor('primary')};
-        color: ${getColor('white')};
+        color: ${({ theme: { colors } }) =>
+          colors.primary
+            .getHighestContrast(colors.background, colors.contrast)
+            .toCssValue()};
       `,
       secondary: () => css`
         background: ${getColor('mist')};

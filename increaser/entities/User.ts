@@ -31,7 +31,7 @@ export type User = DayMoments &
     name?: string
     sets: Set[]
     registrationDate: number
-    projects: Project[]
+    projects: Record<string, Project>
     habits: Record<string, Habit>
     tasks: Record<string, Task>
     taskFactories: Record<string, TaskFactory>
@@ -117,7 +117,9 @@ export const userDefaultFields: Pick<
   focusSounds: defaultFocusSounds,
   sets: [],
   tasks: {},
-  projects: [otherProject],
+  projects: {
+    [otherProject.id]: otherProject,
+  },
   habits: {},
   isAnonymous: true,
   weeks: {},

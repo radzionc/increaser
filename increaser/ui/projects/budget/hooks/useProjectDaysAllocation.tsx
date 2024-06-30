@@ -2,13 +2,13 @@ import { useMemo } from 'react'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { range } from '@lib/utils/array/range'
 import { sum } from '@lib/utils/array/sum'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWorkBudgetTotal'
+import { useActiveProjects } from '../../hooks/useActiveProjects'
 
 export const useProjectDaysAllocation = () => {
-  const { activeProjects } = useProjects()
+  const activeProjects = useActiveProjects()
 
   const { workingDays } = useCurrentProject()
 

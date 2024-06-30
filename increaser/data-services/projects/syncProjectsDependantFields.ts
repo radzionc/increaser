@@ -14,7 +14,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
     'taskFactories',
   ])
 
-  const projectIds = new Set(oldUser.projects.map(({ id }) => id))
+  const projectIds = new Set(Object.keys(oldUser.projects))
   const sets = oldUser.sets.map((set) =>
     projectIds.has(set.projectId)
       ? set

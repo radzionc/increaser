@@ -9,7 +9,11 @@ import { centerContent } from '../../css/centerContent'
 import { interactive } from '../../css/interactive'
 import { toSizeUnit } from '../../css/toSizeUnit'
 import { getColor, matchColor } from '../../theme/getters'
-import { UIComponentProps, InputProps } from '../../props'
+import {
+  UIComponentProps,
+  InputProps,
+  ComponentWithActiveState,
+} from '../../props'
 import { match } from '@lib/utils/match'
 
 type SwitchSize = 'm' | 's'
@@ -25,7 +29,7 @@ const spacing = 2
 const getControlSize = (size: SwitchSize) => switchHeight[size] - spacing * 2
 const getSwitchWidth = (size: SwitchSize) => switchHeight[size] * 1.58
 
-const Control = styled.div<{ size: SwitchSize }>`
+const Control = styled.div<ComponentWithActiveState & { size: SwitchSize }>`
   ${({ size }) => sameDimensions(getControlSize(size))};
 
   ${round};
@@ -33,7 +37,13 @@ const Control = styled.div<{ size: SwitchSize }>`
 
   ${centerContent};
   color: ${getColor('background')};
-  background: ${getColor('text')};
+
+  background: ${({ isActive, theme: { colors } }) =>
+    isActive
+      ? colors.primary
+          .getHighestContrast(colors.background, colors.contrast)
+          .toCssValue()
+      : colors.text.toCssValue()};
   font-size: 14px;
 `
 
@@ -86,6 +96,7 @@ export const Switch = ({
     >
       <Container size={size} isActive={value}>
         <Control
+          isActive={value}
           size={size}
           style={{
             marginLeft: value

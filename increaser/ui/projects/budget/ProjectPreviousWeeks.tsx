@@ -6,7 +6,7 @@ import { useCurrentProjectPrevWeeks } from '@increaser/ui/projects/hooks/useCurr
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { previousWeeksConfig } from './PreviousWeeks/previousWeeksConfig'
 import { Circle } from '@lib/ui/layout/Circle'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { round } from '@lib/ui/css/round'
 import { getColor } from '@lib/ui/theme/getters'
 
@@ -17,8 +17,9 @@ const Pill = styled.div`
 `
 
 export const ProjectPreviousWeeks = () => {
-  const { name, hslaColor } = useCurrentProject()
+  const { name, color } = useCurrentProject()
   const weeks = useCurrentProjectPrevWeeks(previousWeeksConfig.weeks)
+  const { colors } = useTheme()
 
   return (
     <VStack gap={12}>
@@ -30,7 +31,7 @@ export const ProjectPreviousWeeks = () => {
       <HStack alignItems="center" justifyContent="center" fullWidth gap={6}>
         <Pill>
           <HStack alignItems="center" fullWidth gap={8}>
-            <Circle size={8} background={hslaColor} />
+            <Circle size={8} background={colors.getLabelColor(color)} />
             <Text size={14} weight="semibold">
               {name}
             </Text>

@@ -1,4 +1,3 @@
-import { EnhancedProject } from '@increaser/ui/projects/EnhancedProject'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { Dispatch, SetStateAction, createContext } from 'react'
 import {
@@ -6,15 +5,16 @@ import {
   ProjectMonth,
   ProjectWeek,
 } from '@increaser/entities/timeTracking'
+import { HSLA } from '@lib/ui/colors/HSLA'
 
 export type TrackedTimePreference = {
   shouldHideProjectNames: boolean
 }
 
-export type TimeTrackingProjectData = Pick<
-  EnhancedProject,
-  'hslaColor' | 'name' | 'id'
-> & {
+export type TimeTrackingProjectData = {
+  hslaColor: HSLA
+  name: string
+  id: string
   weeks: ProjectWeek[]
   months: ProjectMonth[]
   days: ProjectDay[]

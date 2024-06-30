@@ -10,26 +10,35 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { fromDay, stringToDay } from '@lib/utils/time/Day'
 import { formatDuration, intervalToDuration } from 'date-fns'
 import { interactive } from '@lib/ui/css/interactive'
-import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { transition } from '@lib/ui/css/transition'
 import { Opener } from '@lib/ui/base/Opener'
 import { SetDobOverlay } from '../dob/SetDobOverlay'
 
 const Container = styled(VStack)`
-  font-size: 12px;
-  font-weight: 500;
   height: ${toSizeUnit(goalsTimelineConfig.labelsHeight)};
   justify-content: end;
-  padding-left: 4px;
   color: ${getColor('primary')};
   border-left: 1px solid;
   position: absolute;
   top: 0;
   ${interactive};
   ${transition};
+`
 
+const Content = styled.div`
+  border-radius: 0 4px 4px 0;
+  padding: 4px 8px;
+  font-weight: 500;
+  font-size: 12px;
+
+  border: 1px solid ${getColor('primary')};
+  border-left: 0;
+  color: ${({ theme }) =>
+    theme.colors.primary
+      .getHighestContrast(theme.colors.background, theme.colors.contrast)
+      .toCssValue()};
   &:hover {
-    color: ${getHoverVariant('primary')};
+    background: ${getColor('foreground')};
   }
 `
 
@@ -55,9 +64,11 @@ export const CurrentAge = () => {
             left: toPercents((now - interval.start) / intervalDuration),
           }}
         >
-          {formatDuration(duration, {
-            format: ['years', 'months', 'days'],
-          })}{' '}
+          <Content>
+            {formatDuration(duration, {
+              format: ['years', 'months', 'days'],
+            })}
+          </Content>
         </Container>
       )}
       renderContent={({ onClose }) => <SetDobOverlay onFinish={onClose} />}

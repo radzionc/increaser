@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { transition } from '@lib/ui/css/transition'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { HSLA } from '@lib/ui/colors/HSLA'
@@ -8,8 +8,8 @@ import { MS_IN_HOUR } from '@lib/utils/time'
 import { useState } from 'react'
 import { EditEndTimeOverlay } from './EditEndTimeOverlay'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 const Container = styled(UnstyledButton)<{ $color: HSLA }>`
   font-size: 18px;
@@ -35,8 +35,11 @@ interface FinishSessionProps {
 export const FinishSession = ({ style }: FinishSessionProps) => {
   const { stop } = useFocus()
   const { projectId, startedAt } = useCurrentFocus()
-  const { projectsRecord } = useProjects()
-  const project = projectsRecord[projectId]
+  const { projects } = useAssertUserState()
+  const project = projects[projectId]
+  const {
+    colors: { getLabelColor },
+  } = useTheme()
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -56,7 +59,11 @@ export const FinishSession = ({ style }: FinishSessionProps) => {
 
   return (
     <>
-      <Container $color={project.hslaColor} style={style} onClick={handleStop}>
+      <Container
+        $color={getLabelColor(project.color)}
+        style={style}
+        onClick={handleStop}
+      >
         Finish
       </Container>
       {isEditing && <EditEndTimeOverlay />}

@@ -9,15 +9,16 @@ import { msToPx, pxToMs } from './config'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { MoveIcon } from '@lib/ui/icons/MoveIcon'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
-import { useProjects } from '@increaser/ui/projects/ProjectsProvider'
 import { InteractiveBoundaryArea } from '@lib/ui/timeline/InteractiveBoundaryArea'
 import { FloatingIntervalDuration } from '@lib/ui/timeline/FloatingIntervalDuration'
 import { InteractiveDragArea } from '@lib/ui/timeline/InteractiveDragArea'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useTheme } from 'styled-components'
 
 export const SetEditor = () => {
-  const { projectsRecord } = useProjects()
+  const { projects } = useAssertUserState()
   const { currentSet, dayInterval, setState } = useTrackTime()
   const value = shouldBePresent(currentSet)
   const [activeControl, setActiveControl] =
@@ -98,10 +99,12 @@ export const SetEditor = () => {
   const intervalEndInPx = msToPx(value.end - dayInterval.start)
   const intervalDurationInPx = msToPx(valueDuration)
 
+  const { colors } = useTheme()
+
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
       <CurrentIntervalRect
-        $color={projectsRecord[value.projectId].hslaColor}
+        $color={colors.getLabelColor(projects[value.projectId].color)}
         ref={intervalElement}
         style={{
           top: intervalStartInPx,

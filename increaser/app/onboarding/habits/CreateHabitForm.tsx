@@ -12,9 +12,9 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { Button } from '@lib/ui/buttons/Button'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
-import { defaultEmojis } from '@increaser/ui/projects/EnhancedProject'
 import { useCallback, useState } from 'react'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 
 type HabitFormShape = Pick<Habit, 'name' | 'emoji' | 'color'>
 

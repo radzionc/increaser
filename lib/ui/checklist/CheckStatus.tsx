@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { centerContent } from '../css/centerContent'
-import { getColor, matchColor } from '../theme/getters'
+import { getColor } from '../theme/getters'
 import { CheckIcon } from '../icons/CheckIcon'
 import { ComponentWithChildrenProps, UIComponentProps } from '../props'
 import React from 'react'
@@ -23,10 +23,14 @@ const Container = styled.div<{ isChecked: boolean; isInteractive?: boolean }>`
 
   border-radius: 4px;
   border: 1px solid ${getColor('textSupporting')};
-  color: ${matchColor('isChecked', {
-    true: 'background',
-    false: 'transparent',
-  })};
+
+  color: ${({ isChecked, theme: { colors } }) =>
+    isChecked
+      ? colors.primary
+          .getHighestContrast(colors.background, colors.contrast)
+          .toCssValue()
+      : colors.transparent.toCssValue()};
+
   ${({ isChecked }) =>
     isChecked &&
     css`
@@ -42,11 +46,12 @@ const Container = styled.div<{ isChecked: boolean; isInteractive?: boolean }>`
         background: ${isChecked ? getColor('primary') : getColor('mist')};
       }
 
-      &:hover ${IconContainer} {
-        color: ${isChecked
-          ? getColor('background')
-          : getColor('textSupporting')};
-      }
+      ${!isChecked &&
+      css`
+        &:hover ${IconContainer} {
+          color: ${getColor('textSupporting')};
+        }
+      `}
     `};
 `
 

@@ -1,5 +1,9 @@
-export const projectsStatuses = ['active', 'inactive', 'archived'] as const
-export type ProjectStatus = (typeof projectsStatuses)[number]
+import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
+import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
+
+export const projectStatuses = ['active', 'inactive', 'archived'] as const
+export type ProjectStatus = (typeof projectStatuses)[number]
 
 export const projectGoals = ['doMore', 'doLess'] as const
 export type ProjectGoal = (typeof projectGoals)[number]
@@ -7,16 +11,16 @@ export type ProjectGoal = (typeof projectGoals)[number]
 export const projectWorkingDays = ['everyday', 'workdays'] as const
 export type ProjectWorkingDays = (typeof projectWorkingDays)[number]
 
-export interface Project {
-  id: string
-  name: string
-  color: number
-  emoji: string
-  status: ProjectStatus
-  allocatedMinutesPerWeek: number
-  goal?: ProjectGoal | null
-  workingDays: ProjectWorkingDays
-}
+export type Project = EntityWithId &
+  EntityWithEmoji &
+  EntityWithOrder & {
+    name: string
+    color: number
+    status: ProjectStatus
+    allocatedMinutesPerWeek: number
+    goal?: ProjectGoal | null
+    workingDays: ProjectWorkingDays
+  }
 
 export const projectDefaultFields: Pick<
   Project,
@@ -46,5 +50,6 @@ export const otherProject: Project = {
   emoji: '❔',
   status: 'active',
   allocatedMinutesPerWeek: 0,
+  order: 0,
   workingDays: 'everyday',
 }

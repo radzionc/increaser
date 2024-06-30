@@ -1,4 +1,5 @@
-import { Project } from '@increaser/entities/Project'
+import { Project, otherProject } from '@increaser/entities/Project'
+import { getRecord } from '@lib/utils/record/getRecord'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export enum DemoProject {
@@ -47,23 +48,22 @@ const projectsDescription: ProjectDescription[] = [
   },
 ]
 
-const toProject = ({
-  id,
-  color,
-  emoji,
-  allocatedMinutesPerWeek,
-  goal,
-}: ProjectDescription): Project => {
-  return {
-    id,
-    name: id,
-    color,
-    emoji,
-    allocatedMinutesPerWeek,
-    status: 'active',
-    workingDays: 'everyday',
-    goal,
-  }
+export const getDemoProjects = () => {
+  const projects = projectsDescription.map(
+    ({ id, color, emoji, allocatedMinutesPerWeek, goal }, index) => {
+      const project: Project = {
+        id,
+        name: id,
+        color,
+        emoji,
+        allocatedMinutesPerWeek,
+        status: 'active',
+        workingDays: 'everyday',
+        goal,
+        order: projectsDescription.length - index,
+      }
+      return project
+    },
+  )
+  return getRecord([otherProject, ...projects], (project) => project.id)
 }
-
-export const getDemoProjects = () => projectsDescription.map(toProject)

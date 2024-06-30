@@ -2,12 +2,12 @@ import {
   FixedOptionsInput,
   FixedOptionsInputWrapperProps,
 } from '@lib/ui/inputs/dropdown/FixedOptionsInput'
-import { EnhancedProject } from '../EnhancedProject'
 import { IdentifierPlaceholder } from '@lib/ui/inputs/dropdown/FixedOptionsInput/IdentifierPlaceholder'
 import { ProjectOption } from './ProjectOption'
 import { ProjectIdentifier } from './ProjectIdentifier'
+import { Project } from '@increaser/entities/Project'
 
-type ProjectInputProps = FixedOptionsInputWrapperProps<EnhancedProject>
+type ProjectInputProps = FixedOptionsInputWrapperProps<Project>
 
 export function ProjectInput({
   value,
