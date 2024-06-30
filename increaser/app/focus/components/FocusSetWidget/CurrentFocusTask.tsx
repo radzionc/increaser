@@ -65,13 +65,13 @@ export const CurrentFocusTask = () => {
             </VStack>
           </TaskItemFrame>
           <HStack>
+            <EditFocusTask />
             <FocusIconButton
-              title="Remove task"
+              title="Stop task"
               kind="secondary"
               icon={<CloseIcon />}
               onClick={() => updateTask(undefined)}
             />
-            <EditFocusTask />
           </HStack>
         </Container>
         {task.checklist && task.checklist.length > 0 && (
