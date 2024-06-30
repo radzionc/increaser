@@ -31,7 +31,7 @@ export const FocusOptionContainer = styled.div<{
       ? css`
           background: ${getColor('background')};
           color: ${getColor('text')};
-          border-color: ${getColor('primary')};
+          border-color: ${getColor('contrast')};
         `
       : css`
           &:hover {

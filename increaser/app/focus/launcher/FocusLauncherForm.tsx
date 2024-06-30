@@ -146,7 +146,7 @@ export const FocusLauncherForm = () => {
             render={({ action }) => (
               <Button
                 isDisabled={isDisabled}
-                kind="primary"
+                kind="reversed"
                 size="l"
                 onClick={action}
               >

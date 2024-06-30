@@ -34,8 +34,6 @@ export const StartTimeEditor = () => {
   const { projects } = useAssertUserState()
   const [isActive, setIsActive] = useState(false)
 
-  const { colors } = useTheme()
-
   const todaySets = useTodaySets()
 
   const { startedAt, setState, projectId } = useFocusLauncher()
@@ -86,7 +84,7 @@ export const StartTimeEditor = () => {
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
       <CurrentIntervalRect
-        $color={theme.colors.primary}
+        $color={theme.colors.getLabelColor(projects[projectId].color)}
         ref={intervalElement}
         style={{
           top: valueInPx,

@@ -7,7 +7,6 @@ import { HomePageContent } from './HomePageContent'
 import { Page } from '@lib/next-ui/Page'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { productName } from '@increaser/config'
-import { FocusProjectThemeProvider } from '../../focus/components/FocusProjectThemeProvider'
 
 export const HomePage: Page = () => {
   return (
@@ -15,9 +14,7 @@ export const HomePage: Page = () => {
       <PageMetaTags title={`🏠 Overview | ${productName}`} />
       <UserStateOnly>
         <ErrorBoundary fallback={<ErrorFallbackCard />}>
-          <FocusProjectThemeProvider>
-            <HomePageContent />
-          </FocusProjectThemeProvider>
+          <HomePageContent />
         </ErrorBoundary>
       </UserStateOnly>
     </FixedWidthContent>

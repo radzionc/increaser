@@ -6,7 +6,6 @@ import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { transition } from '@lib/ui/css/transition'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { toPercents } from '@lib/utils/toPercents'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -51,44 +50,48 @@ export const getFireplaceKeyframes = () => keyframes`
   }
 `
 
-export const Filler = styled.div`
-  height: 4px;
-  bottom: 0;
+const FillerContainer = styled.div`
+  height: 2px;
+  width: 100%;
+  bottom: -2px;
   position: absolute;
+`
 
-  ${transition};
-
+export const Filler = styled.div`
+  height: 100%;
   background: ${getColor('primary')};
 `
 
 export const MinimalisticFocusSet = () => {
   const { cancel, stop, focusDuration } = useFocus()
-  const currentSet = useCurrentFocus()
+  const { startedAt } = useCurrentFocus()
 
   return (
     <Wrapper>
       <Container>
-        <RhytmicRerender
-          render={() => (
-            <Filler
-              style={{
-                width: toPercents(
-                  Math.min(
-                    (Date.now() - currentSet.startedAt) /
-                      convertDuration(focusDuration, 'min', 'ms'),
-                    1,
+        <FillerContainer>
+          <RhytmicRerender
+            render={() => (
+              <Filler
+                style={{
+                  width: toPercents(
+                    Math.min(
+                      (Date.now() - startedAt) /
+                        convertDuration(focusDuration, 'min', 'ms'),
+                      1,
+                    ),
                   ),
-                ),
-              }}
-            />
-          )}
-        />
+                }}
+              />
+            )}
+          />
+        </FillerContainer>
         <Content>
           <Text as="div" weight="bold" size={36} height="small">
             <FocusPassedTime />
           </Text>
           <HStack gap={8}>
-            <Button size="l" kind="outlined" onClick={cancel}>
+            <Button size="l" type="button" kind="outlined" onClick={cancel}>
               Cancel
             </Button>
             <Button size="l" kind="primary" onClick={stop}>
