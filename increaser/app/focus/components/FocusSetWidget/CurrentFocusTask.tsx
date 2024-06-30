@@ -15,15 +15,15 @@ import { getColor } from '@lib/ui/theme/getters'
 import { focusSetWidgetConfig } from './config'
 import { TaskLinks } from '@increaser/ui/tasks/TaskLinks'
 import { CurrentChecklist } from './CurrentChecklist'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { FocusIconButton } from './FocusIconButton'
 import { EditFocusTask } from './EditFocusTask'
+import { Text } from '@lib/ui/text'
 
 const Content = styled(TaskTextContainer)`
   font-size: 14px;
 `
 
-const Wrapper = styled(SeparatedByLine)`
+const Wrapper = styled(VStack)`
   width: 100%;
   background: ${getColor('background')};
   padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
@@ -74,7 +74,14 @@ export const CurrentFocusTask = () => {
             <EditFocusTask />
           </HStack>
         </Container>
-        {task.checklist && task.checklist.length > 0 && <CurrentChecklist />}
+        {task.checklist && task.checklist.length > 0 && (
+          <VStack gap={4}>
+            <Text color="supporting" weight="semibold" size={12}>
+              Checklist
+            </Text>
+            <CurrentChecklist />
+          </VStack>
+        )}
       </Wrapper>
     </CurrentTaskProvider>
   )

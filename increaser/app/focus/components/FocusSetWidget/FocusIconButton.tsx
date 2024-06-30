@@ -6,8 +6,9 @@ import {
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import styled from 'styled-components'
 
+export const focusIconSize =
+  checklistItemContentMinHeight + checklistItemVerticalPadding * 2
+
 export const FocusIconButton = styled(IconButton)`
-  ${sameDimensions(
-    checklistItemContentMinHeight + checklistItemVerticalPadding * 2,
-  )};
+  ${sameDimensions(focusIconSize)};
 `
