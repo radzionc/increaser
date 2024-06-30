@@ -1,4 +1,4 @@
-import { degreesInCircle } from '@lib/utils/degreesToRadians' // Should be 360
+import { degreesInCircle } from '@lib/utils/degreesToRadians'
 import { enforceRange } from '@lib/utils/enforceRange'
 
 export const hslaKeys = ['h', 's', 'l', 'a'] as const
