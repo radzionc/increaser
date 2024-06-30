@@ -107,7 +107,7 @@ export const FocusProvider = ({ children }: Props) => {
 
         return value
       },
-      [projects, tasks],
+      [activeProjects, projects, tasks],
     ),
   )
 
@@ -195,7 +195,7 @@ export const FocusProvider = ({ children }: Props) => {
         updateTaskMutation({
           id: task.id,
           fields: {
-            spentTime: (spentTime || 0) + (Date.now() - task.startedAt),
+            spentTime: (spentTime || 0) + (set.end - task.startedAt),
           },
         })
       }
