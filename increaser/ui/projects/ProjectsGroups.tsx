@@ -19,13 +19,8 @@ import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { projectsConfig } from './config'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
-import { ProjectsGroupHeader } from './ProjectsGroupHeader'
 import { CreateProjectPrompt } from './CreateProjectPrompt'
-
-const Container = styled(VStack)`
-  max-width: 520px;
-  width: 100%;
-`
+import { ProjectsGroup } from './ProjectsGroup'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -60,7 +55,7 @@ export const ProjectsGroups = () => {
         fields,
       })
     },
-    [updateProject],
+    [projects, updateProject],
   )
 
   return (
@@ -72,12 +67,10 @@ export const ProjectsGroups = () => {
       onChange={onChange}
       renderGroup={({ content, groupId, containerProps }) => (
         <VStack {...containerProps} key={groupId}>
-          <ProjectsGroupHeader
-            count={groups[groupId].length}
-            status={groupId}
-          />
-          {content}
-          {groupId === 'active' && <CreateProjectPrompt />}
+          <ProjectsGroup count={groups[groupId].length} value={groupId}>
+            {content}
+            {groupId === 'active' && <CreateProjectPrompt />}
+          </ProjectsGroup>
         </VStack>
       )}
       renderItem={({
