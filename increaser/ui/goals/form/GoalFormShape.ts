@@ -7,4 +7,5 @@ export type GoalFormShape = {
   deadlineAt: string | number | null
   plan: string
   target: GoalTarget | null
+  taskFactories: string[]
 }

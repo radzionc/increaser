@@ -18,6 +18,7 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
+import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -28,6 +29,7 @@ export const EditGoalForm = () => {
     deadlineAt: goalAttribute.deadlineAt,
     plan: goalAttribute.plan ?? '',
     target: goalAttribute.target ?? null,
+    taskFactories: goalAttribute.taskFactories ?? [],
   })
 
   const { mutate: updateGoal } = useUpdateGoalMutation()
@@ -70,6 +72,9 @@ export const EditGoalForm = () => {
     }
     if (value.target !== goalAttribute.target) {
       fields.target = value.target
+    }
+    if (value.taskFactories !== goalAttribute.taskFactories) {
+      fields.taskFactories = value.taskFactories
     }
 
     updateGoal({
@@ -122,6 +127,12 @@ export const EditGoalForm = () => {
       <GoalPlanInput
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
         value={value.plan}
+      />
+      <GoalTaskFactoriesInput
+        onChange={(taskFactories) =>
+          setValue((prev) => ({ ...prev, taskFactories }))
+        }
+        value={value.taskFactories}
       />
       <HStack
         wrap="wrap"
