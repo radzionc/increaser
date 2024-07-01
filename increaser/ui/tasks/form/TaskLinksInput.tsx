@@ -10,7 +10,7 @@ import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import styled from 'styled-components'
 import { TaskLinkInput } from './TaskLinkInput'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
-import { TaskFieldArrayContainer } from './TaskFieldArrayContainer'
+import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 
 const DeleteButton = styled(IconButton)`
   ${sameDimensions(textInputHeight)};
@@ -18,7 +18,7 @@ const DeleteButton = styled(IconButton)`
 
 export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
   return (
-    <TaskFieldArrayContainer title="Links">
+    <FieldArrayContainer title="Links">
       {value.length > 0 && (
         <VStack gap={8}>
           {value.map((item, index) => (
@@ -46,6 +46,6 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
       >
         Add a link
       </FieldArrayAddButton>
-    </TaskFieldArrayContainer>
+    </FieldArrayContainer>
   )
 }

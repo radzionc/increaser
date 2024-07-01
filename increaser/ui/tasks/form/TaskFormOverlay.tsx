@@ -12,19 +12,31 @@ import { ModalContainer } from '@lib/ui/modal/ModalContainer'
 import { stopPropagation } from '@lib/ui/utils/stopPropagation'
 import { getColor } from '@lib/ui/theme/getters'
 
-const prefferedWidth = 560
-
 const Container = styled(ModalContainer)`
   overflow: hidden;
   border: 2px solid ${getColor('mist')};
+
+  > * {
+    &:first-child {
+      padding: 0;
+      border-radius: 0;
+      border: none;
+    }
+  }
 `
+
+type TaskFormOverlayProps = FinishableComponentProps &
+  ComponentWithChildrenProps & {
+    width?: number
+  }
 
 export const TaskFormOverlay = ({
   onFinish,
   children,
-}: FinishableComponentProps & ComponentWithChildrenProps) => {
+  width = 560,
+}: TaskFormOverlayProps) => {
   const isFullScreen = useIsScreenWidthLessThan(
-    prefferedWidth + modalConfig.minHorizontalFreeSpaceForMist,
+    width + modalConfig.minHorizontalFreeSpaceForMist,
   )
 
   return (
@@ -34,7 +46,7 @@ export const TaskFormOverlay = ({
           <Container
             onClick={stopPropagation()}
             placement="top"
-            width={isFullScreen ? undefined : prefferedWidth}
+            width={isFullScreen ? undefined : width}
           >
             {children}
           </Container>
