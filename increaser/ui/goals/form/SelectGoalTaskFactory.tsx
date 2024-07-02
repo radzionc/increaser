@@ -11,7 +11,7 @@ export const SelectGoalTaskFactory = ({
   onFinish,
   options,
 }: SelectGoalTaskFactoryProps) => {
-  const { goals } = useAssertUserState()
+  const { taskFactories } = useAssertUserState()
   return (
     <ExpandableSelector
       value={null}
@@ -22,7 +22,7 @@ export const SelectGoalTaskFactory = ({
       getOptionKey={(option) => option}
       renderOption={(option) => (
         <>
-          <Text>{goals[option].name}</Text>
+          <Text>{taskFactories[option].task.name}</Text>
         </>
       )}
     />

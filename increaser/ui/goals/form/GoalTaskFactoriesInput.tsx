@@ -1,7 +1,7 @@
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { InputProps } from '@lib/ui/props'
 import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'
@@ -25,23 +25,27 @@ export const GoalTaskFactoriesInput = ({
 
   return (
     <FieldArrayContainer title="Recurring tasks">
-      <ActiveItemIdProvider initialValue={null}>
-        {taskFactories
-          .filter(({ id }) => value.includes(id))
-          .map((item, index) => {
-            return (
-              <CurrentTaskFactoryProvider key={item.id} value={item}>
-                <HStack alignItems="center" fullWidth gap={8}>
-                  <TaskFactoryItem />
-                  <RemoveGoalTaskFactory
-                    onClick={() => onChange(removeAtIndex(value, index))}
-                  />
-                </HStack>
-              </CurrentTaskFactoryProvider>
-            )
-          })}
-        <EditTaskFactoryOverlay />
-      </ActiveItemIdProvider>
+      {value.length > 0 && (
+        <VStack>
+          <ActiveItemIdProvider initialValue={null}>
+            {taskFactories
+              .filter(({ id }) => value.includes(id))
+              .map((item, index) => {
+                return (
+                  <CurrentTaskFactoryProvider key={item.id} value={item}>
+                    <HStack alignItems="center" fullWidth gap={8}>
+                      <TaskFactoryItem />
+                      <RemoveGoalTaskFactory
+                        onClick={() => onChange(removeAtIndex(value, index))}
+                      />
+                    </HStack>
+                  </CurrentTaskFactoryProvider>
+                )
+              })}
+            <EditTaskFactoryOverlay />
+          </ActiveItemIdProvider>
+        </VStack>
+      )}
       <HStack gap={8}>
         <AddGoalTaskFactory onFinish={(id) => onChange([...value, id])} />
         {options.length > 0 && (

@@ -14,6 +14,7 @@ const Container = styled(IconButton)`
 export const RemoveGoalTaskFactory = ({ onClick }: ClickableComponentProps) => {
   return (
     <Container
+      kind="secondary"
       icon={<CloseIcon />}
       onClick={onClick}
       title="Disconnect task from this goal"
