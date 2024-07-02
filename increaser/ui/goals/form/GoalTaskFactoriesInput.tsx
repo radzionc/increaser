@@ -43,21 +43,11 @@ export const GoalTaskFactoriesInput = ({
         <EditTaskFactoryOverlay />
       </ActiveItemIdProvider>
       <HStack gap={8}>
-        <AddGoalTaskFactory
-          onFinish={(id) => {
-            if (id) {
-              onChange([...value, id])
-            }
-          }}
-        />
+        <AddGoalTaskFactory onFinish={(id) => onChange([...value, id])} />
         {options.length > 0 && (
           <SelectGoalTaskFactory
             options={options}
-            onFinish={(id) => {
-              if (id) {
-                onChange([id])
-              }
-            }}
+            onFinish={(id) => onChange([...value, id])}
           />
         )}
       </HStack>

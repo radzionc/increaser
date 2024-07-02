@@ -3,7 +3,7 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { Text } from '@lib/ui/text'
 
 type SelectGoalTaskFactoryProps = {
-  onFinish: (id?: string) => void
+  onFinish: (id: string) => void
   options: string[]
 }
 

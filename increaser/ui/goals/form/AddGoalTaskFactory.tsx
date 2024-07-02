@@ -4,7 +4,7 @@ import { TaskFormOverlay } from '../../tasks/form/TaskFormOverlay'
 import { CreateTaskFactoryForm } from '../../taskFactories/form/CreateTaskFactoryForm'
 
 type AddGoalTaskFactoryProps = {
-  onFinish: (id?: string) => void
+  onFinish: (id: string) => void
 }
 
 export const AddGoalTaskFactory = ({ onFinish }: AddGoalTaskFactoryProps) => {
@@ -15,7 +15,14 @@ export const AddGoalTaskFactory = ({ onFinish }: AddGoalTaskFactoryProps) => {
       )}
       renderContent={({ onClose }) => (
         <TaskFormOverlay onFinish={onClose}>
-          <CreateTaskFactoryForm onFinish={onFinish} />
+          <CreateTaskFactoryForm
+            onFinish={(id) => {
+              onClose()
+              if (id) {
+                onFinish(id)
+              }
+            }}
+          />
         </TaskFormOverlay>
       )}
     />
