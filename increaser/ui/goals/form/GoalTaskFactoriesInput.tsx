@@ -10,12 +10,19 @@ import { RemoveGoalTaskFactory } from './RemoveGoalTaskFactory'
 import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { SelectGoalTaskFactory } from './SelectGoalTaskFactory'
+import { useMemo } from 'react'
 
 export const GoalTaskFactoriesInput = ({
   value,
   onChange,
 }: InputProps<string[]>) => {
   const taskFactories = useTaskFactories()
+  const options = useMemo(() => {
+    return taskFactories
+      .filter(({ id }) => !value.includes(id))
+      .map(({ id }) => id)
+  }, [taskFactories, value])
+
   return (
     <FieldArrayContainer title="Recurring tasks">
       <ActiveItemIdProvider initialValue={null}>
@@ -43,13 +50,16 @@ export const GoalTaskFactoriesInput = ({
             }
           }}
         />
-        <SelectGoalTaskFactory
-          onFinish={(id) => {
-            if (id) {
-              onChange([id])
-            }
-          }}
-        />
+        {options.length > 0 && (
+          <SelectGoalTaskFactory
+            options={options}
+            onFinish={(id) => {
+              if (id) {
+                onChange([id])
+              }
+            }}
+          />
+        )}
       </HStack>
     </FieldArrayContainer>
   )

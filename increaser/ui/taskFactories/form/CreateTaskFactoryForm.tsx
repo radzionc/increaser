@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -18,7 +17,9 @@ import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 
-type CreateTaskFormProps = FinishableComponentProps
+type CreateTaskFormProps = {
+  onFinish: (id?: string) => void
+}
 
 export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFactoryFormShape>({
@@ -46,7 +47,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       cadence: value.cadence,
     }
     mutate(taskFactory)
-    onFinish()
+    onFinish(taskFactory.id)
   }, [isDisabled, mutate, onFinish, value])
 
   return (
@@ -55,7 +56,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       kind="secondary"
       as="form"
       {...getFormProps({
-        onClose: onFinish,
+        onClose: () => onFinish(),
         isDisabled,
         onSubmit,
       })}
@@ -86,7 +87,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         />
       </HStack>
       <HStack justifyContent="end" gap={8}>
-        <Button type="button" onClick={onFinish} kind="secondary">
+        <Button type="button" onClick={() => onFinish()} kind="secondary">
           Cancel
         </Button>
         <Button isDisabled={isDisabled}>Add task</Button>

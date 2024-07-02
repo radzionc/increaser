@@ -25,13 +25,9 @@ export type ClickableComponentProps = {
   onClick: () => void
 }
 
-export type FinishableComponentProps<T = void> = T extends void
-  ? {
-      onFinish: () => void
-    }
-  : {
-      onFinish: (result: T) => void
-    }
+export type FinishableComponentProps = {
+  onFinish: () => void
+}
 
 export interface InputProps<T> {
   value: T
