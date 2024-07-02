@@ -19,7 +19,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     id: 'jobs',
     task: {
       name: 'Apply for better jobs',
-      projectId: DemoProject.Content,
+      projectId: DemoProject.Job,
       links: [],
       checklist: [],
     },
@@ -29,7 +29,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     id: 'invest',
     task: {
       name: 'Invest my income in ETFs',
-      projectId: DemoProject.Content,
+      projectId: DemoProject.Planning,
       links: [],
       checklist: [],
     },
