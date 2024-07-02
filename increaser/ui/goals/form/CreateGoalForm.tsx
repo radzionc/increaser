@@ -18,6 +18,7 @@ import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
+import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({
@@ -27,6 +28,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
     emoji: randomlyPick(defaultEmojis),
     target: null,
     plan: '',
+    taskFactories: [],
   })
   const { mutate } = useCreateGoalMutation()
 
@@ -79,6 +81,12 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
       <GoalPlanInput
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
         value={value.plan}
+      />
+      <GoalTaskFactoriesInput
+        onChange={(taskFactories) =>
+          setValue((prev) => ({ ...prev, taskFactories }))
+        }
+        value={value.taskFactories}
       />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <GoalStatusSelector

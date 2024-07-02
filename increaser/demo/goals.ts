@@ -3,7 +3,13 @@ import { getRecord } from '@lib/utils/record/getRecord'
 
 type GoalDescription = Pick<
   Goal,
-  'name' | 'status' | 'emoji' | 'deadlineAt' | 'plan' | 'target'
+  | 'name'
+  | 'status'
+  | 'emoji'
+  | 'deadlineAt'
+  | 'plan'
+  | 'target'
+  | 'taskFactories'
 >
 
 const items: GoalDescription[] = [
@@ -20,6 +26,7 @@ const items: GoalDescription[] = [
     status: 'done',
     deadlineAt: 26,
     plan: 'I will post a new video every week.',
+    taskFactories: ['upload-video'],
   },
   {
     emoji: '💪',
@@ -37,7 +44,8 @@ const items: GoalDescription[] = [
       current: 220,
     },
     deadlineAt: 29,
-    plan: 'I will be working as a remote software developer, making at least $150k per year, saving $100k each year.',
+    plan: 'I will be working as a remote software developer, making at least $150k per year, saving $100k each year. I will work on side projects to be a better builder and have more income streams and career opportunities. I will invest in ETFs.',
+    taskFactories: ['upload-video', 'jobs', 'invest'],
   },
   {
     emoji: '🏝️',

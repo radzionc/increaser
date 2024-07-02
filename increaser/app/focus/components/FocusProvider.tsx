@@ -22,6 +22,7 @@ import {
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
+import { FocusLauncherSynchronizer } from '@increaser/ui/focus/FocusLauncherSynchronizer'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
@@ -246,6 +247,7 @@ export const FocusProvider = ({ children }: Props) => {
         <CurrentFocusGuard>
           {children}
           <FocusAutoStop />
+          <FocusLauncherSynchronizer />
         </CurrentFocusGuard>
       ) : (
         <>{children}</>

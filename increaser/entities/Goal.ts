@@ -20,6 +20,7 @@ export type Goal = {
   deadlineAt: string | number
   plan?: string | null
   target?: GoalTarget | null
+  taskFactories?: string[]
 }
 
 export type Goals = Record<string, Goal>

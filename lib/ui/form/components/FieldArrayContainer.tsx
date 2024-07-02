@@ -8,7 +8,7 @@ const Container = styled(VStack)`
   overflow-y: auto;
 `
 
-export const TaskFieldArrayContainer = ({
+export const FieldArrayContainer = ({
   title,
   children,
 }: ComponentWithChildrenProps & TitledComponentProps) => (

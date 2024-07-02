@@ -24,6 +24,7 @@ const Outline = styled(TakeWholeSpace)`
 
 const Content = styled(VStack)`
   position: relative;
+  width: 100%;
   ${interactive};
   ${verticalPadding(taskFactoryConfig.verticalPadding)};
 

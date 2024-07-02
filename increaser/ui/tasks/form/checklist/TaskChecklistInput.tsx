@@ -10,7 +10,7 @@ import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled from 'styled-components'
 import { order } from '@lib/utils/array/order'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
-import { TaskFieldArrayContainer } from '../TaskFieldArrayContainer'
+import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 
 export type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -35,7 +35,7 @@ export const TaskChecklistInput = ({
   }, [onChange, value])
 
   return (
-    <TaskFieldArrayContainer title="Checklist">
+    <FieldArrayContainer title="Checklist">
       {value.length > 0 && (
         <DnDList
           items={order(value, (item) => item.order, 'asc')}
@@ -82,6 +82,6 @@ export const TaskChecklistInput = ({
         />
       )}
       <FieldArrayAddButton onClick={onAdd}>Add an item</FieldArrayAddButton>
-    </TaskFieldArrayContainer>
+    </FieldArrayContainer>
   )
 }
