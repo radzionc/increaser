@@ -1,9 +1,5 @@
-import { HStack } from '@lib/ui/layout/Stack'
 import { useCurrentGoal } from './CurrentGoalProvider'
-import styled from 'styled-components'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ClockIcon } from '@lib/ui/icons/ClockIcon'
-import { getColor } from '@lib/ui/theme/getters'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '../user/UserStateContext'
@@ -12,13 +8,7 @@ import { formatGoalDeadline } from '@increaser/entities-utils/goal/formatGoalDea
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { formatGoalTimeLeft } from '@increaser/entities-utils/goal/formatGoalTimeLeft'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-
-const Container = styled(HStack)`
-  font-size: 14px;
-  align-items: center;
-  gap: 8px;
-  color: ${getColor('textSupporting')};
-`
+import { GoalSection } from './GoalSection'
 
 export const GoalDeadline = () => {
   const { dob } = useAssertUserState()
@@ -31,16 +21,13 @@ export const GoalDeadline = () => {
   })
 
   return (
-    <Container>
-      <IconWrapper>
-        <ClockIcon />
-      </IconWrapper>
+    <GoalSection icon={<ClockIcon />}>
       <HStackSeparatedBy gap={8} separator={'~'}>
         <Text>{formatGoalDeadline(deadlineAt)}</Text>
         {deadlineTimestamp > now && (
           <Text>{formatGoalTimeLeft(deadlineTimestamp)}</Text>
         )}
       </HStackSeparatedBy>
-    </Container>
+    </GoalSection>
   )
 }
