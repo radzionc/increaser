@@ -7,10 +7,10 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'
 import { EditTaskFactoryOverlay } from './EditTaskFactoryOverlay'
 import { RemoveGoalTaskFactory } from './RemoveGoalTaskFactory'
-import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { SelectGoalTaskFactory } from './SelectGoalTaskFactory'
 import { useMemo } from 'react'
+import { without } from '@lib/utils/array/without'
 
 export const GoalTaskFactoriesInput = ({
   value,
@@ -30,13 +30,13 @@ export const GoalTaskFactoriesInput = ({
           <ActiveItemIdProvider initialValue={null}>
             {taskFactories
               .filter(({ id }) => value.includes(id))
-              .map((item, index) => {
+              .map((item) => {
                 return (
                   <CurrentTaskFactoryProvider key={item.id} value={item}>
                     <HStack alignItems="center" fullWidth gap={8}>
                       <TaskFactoryItem />
                       <RemoveGoalTaskFactory
-                        onClick={() => onChange(removeAtIndex(value, index))}
+                        onClick={() => onChange(without(value, item.id))}
                       />
                     </HStack>
                   </CurrentTaskFactoryProvider>
