@@ -44,7 +44,8 @@ const items: GoalDescription[] = [
       current: 220,
     },
     deadlineAt: 29,
-    plan: 'I will be working as a remote software developer, making at least $150k per year, saving $100k each year.',
+    plan: 'I will be working as a remote software developer, making at least $150k per year, saving $100k each year. I will work on side projects to be a better builder and have more income streams and career opportunities. I will invest in ETFs.',
+    taskFactories: ['upload-video', 'jobs', 'invest'],
   },
   {
     emoji: '🏝️',

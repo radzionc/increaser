@@ -12,7 +12,6 @@ import { playSound } from '@lib/ui/notifications/utils/playSound'
 import { CurrentSet, useFocus } from './FocusContext'
 import { useProject } from '../projects/hooks/useProject'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useFocusLauncher } from '@increaser/app/focus/launcher/state/FocusLauncherContext'
 
 interface CurrentFocusState extends CurrentSet {}
 
@@ -159,18 +158,6 @@ export const CurrentFocusProvider = ({
 export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
   const { currentSet: potentialCurrentSet } = useFocus()
   const currentSet = shouldBePresent(potentialCurrentSet)
-
-  const { setState } = useFocusLauncher()
-  const taskId = currentSet.task?.id || null
-  const projectId = currentSet.projectId
-  useEffect(() => {
-    setState((state) => ({
-      ...state,
-      taskId,
-      projectId,
-      focusEntity: taskId ? 'task' : 'project',
-    }))
-  }, [projectId, setState, taskId])
 
   if (!currentSet) {
     return null
