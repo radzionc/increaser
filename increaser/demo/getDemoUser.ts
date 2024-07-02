@@ -11,6 +11,7 @@ import { organizeWeeks } from '@increaser/data-services/sets/organizeWeeks'
 import { getDemoVision } from './vision'
 import { getDemoGoals } from './goals'
 import { dayToString, toDay } from '@lib/utils/time/Day'
+import { demoTaskFactories } from './taskFactories'
 
 export const getDemoUser = (): User => {
   const now = Date.now()
@@ -35,6 +36,7 @@ export const getDemoUser = (): User => {
     tasks: getDemoTasks(),
     vision: getDemoVision(),
     goals: getDemoGoals(),
+    taskFactories: demoTaskFactories,
   }
 
   const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
