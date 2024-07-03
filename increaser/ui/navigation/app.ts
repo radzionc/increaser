@@ -58,7 +58,6 @@ export const appPagePath: Record<AppPage, string> = {
 }
 
 export const appPageViews = {
-  tasks: ['todo', 'done', 'recurring'],
   timeTracking: ['report', 'track'],
   vision: ['my', 'ideas'],
   goals: ['active', 'done'],
@@ -67,7 +66,6 @@ export const appPageViews = {
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
 export type AppPageHabitsView = (typeof appPageViews)['habits'][number]
-export type AppPageTasksView = (typeof appPageViews)['tasks'][number]
 
 type AppPageViews = typeof appPageViews
 export type AppPageWithView = keyof AppPageViews

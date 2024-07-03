@@ -4,6 +4,7 @@ import { CurrentTaskProvider } from './CurrentTaskProvider'
 import { TaskItem } from './TaskItem'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { isEmpty } from '@lib/utils/array/isEmpty'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 
 export const TasksDone = () => {
   const { tasks } = useAssertUserState()
@@ -12,7 +13,7 @@ export const TasksDone = () => {
     (task) => !!task.completedAt,
   )
   return (
-    <VStack gap={20}>
+    <ActiveItemIdProvider initialValue={null}>
       <ShyInfoBlock>
         {isEmpty(completedTasks)
           ? `Tasks you've completed will be shown here. Keep up the good work!`
@@ -25,6 +26,6 @@ export const TasksDone = () => {
           </CurrentTaskProvider>
         ))}
       </VStack>
-    </VStack>
+    </ActiveItemIdProvider>
   )
 }

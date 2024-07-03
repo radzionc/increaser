@@ -46,7 +46,7 @@ export const FocusTaskInput = () => {
     return (
       <ActionPrompt
         action={
-          <Link style={{ alignSelf: 'end' }} href={getAppPath('tasks', 'todo')}>
+          <Link style={{ alignSelf: 'end' }} href={getAppPath('tasks')}>
             <Button as="div">Manage tasks</Button>
           </Link>
         }
