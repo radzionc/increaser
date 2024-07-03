@@ -1,5 +1,5 @@
 import { useCurrentTask } from './CurrentTaskProvider'
-import { DeadlineType } from '@increaser/entities/Task'
+import { DeadlineStatus, DeadlineType } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
@@ -10,7 +10,7 @@ import { groupItems } from '@lib/utils/array/groupItems'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type RenderParams = {
-  value: DeadlineType | null
+  value: Omit<DeadlineStatus, 'overdue'> | null
   onChange: (value: DeadlineType) => void
   options: readonly DeadlineType[]
 }

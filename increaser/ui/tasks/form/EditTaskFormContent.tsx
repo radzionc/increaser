@@ -78,10 +78,13 @@ export const EditTaskFormContent = ({
     ) {
       const now = Date.now()
 
-      const deadlineAt = getDeadlineAt({
-        now,
-        deadlineType: deadlineStatus,
-      })
+      const deadlineAt =
+        deadlineStatus === 'none'
+          ? null
+          : getDeadlineAt({
+              now,
+              deadlineType: deadlineStatus,
+            })
 
       const groupedTasks = groupItems(
         Object.values(tasks).filter((task) => !task.completedAt),

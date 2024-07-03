@@ -20,7 +20,7 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
 
 type CreateTaskFormProps = UIComponentProps & {
-  deadlineType: DeadlineType
+  deadlineType: DeadlineType | null
   order: number
   defaultValue?: Partial<TaskFormShape>
   onFinish: (task?: Task) => void
@@ -63,7 +63,9 @@ export const CreateTaskForm = ({
       links: fixLinks(value.links),
       checklist: fixChecklist(value.checklist),
       startedAt,
-      deadlineAt: getDeadlineAt({ now: startedAt, deadlineType }),
+      deadlineAt: deadlineType
+        ? getDeadlineAt({ now: startedAt, deadlineType })
+        : null,
       order,
     }
     mutate(task)

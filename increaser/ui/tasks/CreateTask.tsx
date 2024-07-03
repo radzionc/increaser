@@ -4,7 +4,7 @@ import { CreateTaskForm } from './form/CreateTaskForm'
 import { useState } from 'react'
 
 type CreateTaskProps = {
-  deadlineType: DeadlineType
+  deadlineType: DeadlineType | null
   order: number
 }
 

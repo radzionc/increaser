@@ -7,7 +7,7 @@ import {
 } from '@increaser/ui/tasks/TasksView'
 import { TasksDone } from '@increaser/ui/tasks/TasksDone'
 import { TasksRecurringView } from '@increaser/ui/tasks/TasksRecurringView'
-import { TasksBacklog } from '@increaser/ui/tasks/TasksBacklog'
+import { TasksBacklogView } from '@increaser/ui/tasks/TasksBacklogView'
 import { TasksToDoView } from './TasksToDoView'
 
 const TasksContainer = styled(VStack)`
@@ -25,7 +25,7 @@ export const TasksView = () => {
           recurring={() => <TasksRecurringView />}
           done={() => <TasksDone />}
           todo={() => <TasksToDoView />}
-          backlog={() => <TasksBacklog />}
+          backlog={() => <TasksBacklogView />}
         />
       </TasksViewProvider>
     </TasksContainer>
