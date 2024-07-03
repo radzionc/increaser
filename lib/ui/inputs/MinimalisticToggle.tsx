@@ -25,6 +25,8 @@ const Container = styled.label`
   ${verticalPadding(4)}
   ${interactive};
   position: relative;
+  font-size: 14px;
+  font-weight: 500;
   &:hover {
     color: ${getColor('contrast')};
   }

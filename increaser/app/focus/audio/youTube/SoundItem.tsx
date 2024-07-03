@@ -1,6 +1,5 @@
 import styled, { useTheme } from 'styled-components'
 import { IconButton } from '@lib/ui/buttons/IconButton'
-import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { Center } from '@lib/ui/layout/Center'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { PauseIcon } from '@lib/ui/icons/PauseIcon'
@@ -18,53 +17,21 @@ import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { EditSoundForm } from './musicForm/EditSoundForm'
-
-const PlayIndicator = styled.div<{ isActive: boolean }>`
-  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  position: absolute;
-
-  font-size: 20px;
-  display: flex;
-  color: ${({ theme }) => theme.colors.text.toCssValue()};
-`
-
-const SoundNumber = styled(Text)``
+import {
+  PlayIndicator,
+  SoundItemContainer,
+  SoundNumber,
+} from './SoundItemContainer'
+import { focusSetWidgetConfig } from '../../components/FocusSetWidget/config'
 
 const Identifier = styled.div`
   width: 100%;
   height: 100%;
   ${centerContent};
   position: relative;
-`
-
-const Container = styled(UnstyledButton)`
-  font-size: 14px;
-  font-weight: 500;
-  padding: 4px ${toSizeUnit(panelDefaultPadding)};
-  width: 100%;
-  display: grid;
-  grid-template-columns: minmax(24px, auto) 1fr auto;
-  align-items: center;
-  gap: 8px;
-  justify-items: start;
-  color: ${({ theme }) => theme.colors.textSupporting.toCssValue()};
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.mist.toCssValue()};
-    color: ${({ theme }) => theme.colors.text.toCssValue()};
-  }
-
-  &:hover ${PlayIndicator} {
-    opacity: 1;
-  }
-  &:hover ${SoundNumber} {
-    opacity: 0;
-  }
 `
 
 interface SoundItemProps extends FocusSound {
@@ -94,7 +61,7 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
         isOpen ? null : (
           <OnHoverAction
             style={{ width: '100%' }}
-            actionPlacerStyles={{ right: panelDefaultPadding }}
+            actionPlacerStyles={{ right: focusSetWidgetConfig.padding }}
             action={
               <HStack alignItems="center" gap={2}>
                 <IconButton
@@ -136,7 +103,7 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
               </HStack>
             }
             render={({ actionSize }) => (
-              <Container
+              <SoundItemContainer
                 onClick={() => {
                   if (isActive) {
                     setState((state) => ({
@@ -168,10 +135,11 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
                 {actionSize && (
                   <UniformColumnGrid style={actionSize} gap={0}>
                     <div />
+                    <div />
                     <Center>{favourite && star}</Center>
                   </UniformColumnGrid>
                 )}
-              </Container>
+              </SoundItemContainer>
             )}
           />
         )

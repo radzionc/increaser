@@ -1,5 +1,6 @@
 import {
   focusAduioModeName,
+  FocusAudioMode,
   focusAudioModes,
   useFocusAudioMode,
 } from './state/useFocusAudioMode'
@@ -13,10 +14,8 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Switch } from '@lib/ui/inputs/Switch'
-import { RadioInput } from '@lib/ui/inputs/RadioInput'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
-import { Line } from '@lib/ui/layout/Line'
 import {
   PersistentStateKey,
   usePersistentState,
@@ -24,10 +23,13 @@ import {
 import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { focusSetWidgetConfig } from '../components/FocusSetWidget/config'
+import { TabNavigation } from '@lib/ui/navigation/TabNavigation'
+import { YouTubeViewSelector } from './youTube/YouTubeViewSelector'
 
 const Container = styled(VStack)`
   padding: 0;
   background: ${getColor('background')};
+  gap: 16px;
   > * {
     ${horizontalPadding(focusSetWidgetConfig.padding)}
   }
@@ -83,13 +85,21 @@ export const FocusAudioWidget = () => {
       </Header>
       {isExpanded && isEnabled && (
         <Content>
-          <Line />
-          <RadioInput
-            value={mode}
-            onChange={setMode}
-            options={focusAudioModes}
-            renderOption={(option) => focusAduioModeName[option]}
-          />
+          <HStack
+            fullWidth
+            alignItems="center"
+            wrap="wrap"
+            gap={20}
+            justifyContent="space-between"
+          >
+            <TabNavigation<FocusAudioMode>
+              views={focusAudioModes}
+              getViewName={(option) => focusAduioModeName[option]}
+              activeView={mode}
+              onSelect={setMode}
+            />
+            {mode === 'youtube' && <YouTubeViewSelector />}
+          </HStack>
           <Match
             value={mode}
             youtube={() => <YouTubeFocusWidget />}
