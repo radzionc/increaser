@@ -1,3 +1,3 @@
-import { TasksView } from '../tasks/TasksView'
+import { Tasks } from '@increaser/ui/tasks/Tasks'
 
-export const TasksOnboardingStep = () => <TasksView />
+export const TasksOnboardingStep = () => <Tasks />

@@ -1,12 +1,12 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
-import { TasksView } from '../../../tasks/TasksView'
+import { Tasks } from '@increaser/ui/tasks/Tasks'
 
 export const TodayTasksReview = () => {
   return (
     <VStack gap={20}>
       <ProductEducationBlock value="todayTasks" />
-      <TasksView />
+      <Tasks />
     </VStack>
   )
 }

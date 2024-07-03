@@ -16,7 +16,7 @@ const TasksContainer = styled(VStack)`
   gap: 40px;
 `
 
-export const TasksView = () => {
+export const Tasks = () => {
   return (
     <TasksContainer>
       <TasksViewProvider>
