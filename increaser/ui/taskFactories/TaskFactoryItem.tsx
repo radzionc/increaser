@@ -10,11 +10,10 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { useCurrentTaskFactory } from './CurrentTaskFactoryProvider'
 import { EditTaskFactoryForm } from './form/EditTaskFactoryForm'
-import { TaskTextContainer } from '../tasks/TaskTextContainer'
-import { TaskProject } from '../tasks/TaskProject'
 import { TaskCadence } from './TaskCadence'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { taskFactoryConfig } from './config'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
+import { Text } from '@lib/ui/text'
+import { useAssertUserState } from '../user/UserStateContext'
 
 const Outline = styled(TakeWholeSpace)`
   ${absoluteOutline(8, 0)};
@@ -26,7 +25,6 @@ const Content = styled(VStack)`
   position: relative;
   width: 100%;
   ${interactive};
-  ${verticalPadding(taskFactoryConfig.verticalPadding)};
 
   &:hover ${Outline} {
     background: ${getColor('mist')};
@@ -35,6 +33,8 @@ const Content = styled(VStack)`
 
 export const TaskFactoryItem = () => {
   const { id, task } = useCurrentTaskFactory()
+
+  const { projects } = useAssertUserState()
 
   const [activeItemId, setActiveItemId] = useActiveItemId()
 
@@ -54,10 +54,12 @@ export const TaskFactoryItem = () => {
         justifyContent="spac-between"
         gap={20}
       >
-        <TaskTextContainer>
-          <TaskProject value={task.projectId} />
+        <PrefixedItemFrame>
+          <Text size={16} color="contrast">
+            {projects[task.projectId].emoji}
+          </Text>
           {task.name}
-        </TaskTextContainer>
+        </PrefixedItemFrame>
         <TaskCadence />
       </HStack>
       <Outline />

@@ -13,7 +13,7 @@ import { TasksToDoView } from './TasksToDoView'
 const TasksContainer = styled(VStack)`
   max-width: 560px;
   width: 100%;
-  gap: 40px;
+  gap: 32px;
 `
 
 export const Tasks = () => {

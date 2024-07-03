@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { getColor } from '@lib/ui/theme/getters'
 import { ReactNode } from 'react'
-import { ChecklistItemFrame } from '../checklist/ChecklistItemFrame'
+import { PrefixedItemFrame } from './PrefixedItemFrame'
 
 const IconContainer = styled.div`
   width: 100%;
@@ -28,14 +28,14 @@ type ListAddButton = ClickableComponentProps & {
 export const ListAddButton = ({ onClick, text }: ListAddButton) => {
   return (
     <Container verticalOffset={0} onClick={onClick}>
-      <ChecklistItemFrame style={{ alignItems: 'center' }}>
+      <PrefixedItemFrame style={{ alignItems: 'center' }}>
         <IconContainer>
           <PlusIcon />
         </IconContainer>
         <Text size={14} weight="regular">
           {text}
         </Text>
-      </ChecklistItemFrame>
+      </PrefixedItemFrame>
     </Container>
   )
 }
