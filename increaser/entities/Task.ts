@@ -17,12 +17,20 @@ export type Task = {
   name: string
   completedAt?: number | null
   projectId: string
-  deadlineAt: number
+  deadlineAt: number | null
   order: number
   spentTime?: number
   links?: TaskLink[]
   checklist?: TaskChecklistItem[]
   factoryId?: string
+}
+
+export type ScheduledTask = Omit<Task, 'deadlineAt'> & {
+  deadlineAt: number
+}
+
+export type UnscheduledTask = Omit<Task, 'deadlineAt'> & {
+  deadlineAt: null
 }
 
 export const deadlineTypes = [
@@ -33,10 +41,11 @@ export const deadlineTypes = [
   'thisMonth',
 ] as const
 export type DeadlineType = (typeof deadlineTypes)[number]
-export const deadlineStatuses = ['overdue', ...deadlineTypes] as const
+export const deadlineStatuses = ['none', 'overdue', ...deadlineTypes] as const
 export type DeadlineStatus = (typeof deadlineStatuses)[number]
 
 export const deadlineName: Record<DeadlineStatus, string> = {
+  none: 'No deadline',
   overdue: 'Overdue',
   today: 'Today',
   tomorrow: 'Tomorrow',

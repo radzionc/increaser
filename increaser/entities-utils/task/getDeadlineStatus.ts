@@ -5,13 +5,14 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 
 type GetDeadlineStatusInput = {
   now: number
-  deadlineAt: number
+  deadlineAt: number | null
 }
 
 export const getDeadlineStatus = ({
   deadlineAt,
   now,
 }: GetDeadlineStatusInput): DeadlineStatus => {
+  if (!deadlineAt) return 'none'
   if (deadlineAt < now) return 'overdue'
 
   const currentDeadlines = getCurrentDeadlines({ now })

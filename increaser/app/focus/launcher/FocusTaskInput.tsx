@@ -1,33 +1,17 @@
-import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
-import { order } from '@lib/utils/array/order'
 import Link from 'next/link'
 import { getAppPath } from '@increaser/ui/navigation/app'
 import { Button } from '@lib/ui/buttons/Button'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
+import { useTodayIncompleteTasks } from '@increaser/ui/tasks/hooks/useTodayIncompleteTasks'
 
 export const FocusTaskInput = () => {
-  const { tasks } = useAssertUserState()
-  const options = useMemo(() => {
-    return order(
-      Object.values(tasks).filter(
-        (task) =>
-          task.projectId &&
-          !task.completedAt &&
-          ['overdue', 'today'].includes(
-            getDeadlineStatus({ ...task, now: Date.now() }),
-          ),
-      ),
-      (task) => task.order,
-      'asc',
-    )
-  }, [tasks])
+  const options = useTodayIncompleteTasks()
 
   const { taskId, setState } = useFocusLauncher()
 
@@ -46,7 +30,7 @@ export const FocusTaskInput = () => {
     return (
       <ActionPrompt
         action={
-          <Link style={{ alignSelf: 'end' }} href={getAppPath('tasks', 'todo')}>
+          <Link style={{ alignSelf: 'end' }} href={getAppPath('tasks')}>
             <Button as="div">Manage tasks</Button>
           </Link>
         }

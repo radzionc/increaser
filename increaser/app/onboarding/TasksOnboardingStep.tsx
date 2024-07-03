@@ -1,11 +1,3 @@
-import { TasksToDo } from '@increaser/ui/tasks/TasksToDo'
-import { TasksContainer } from '@increaser/ui/tasks/TasksContainer'
-import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { Tasks } from '@increaser/ui/tasks/Tasks'
 
-export const TasksOnboardingStep = () => (
-  <TasksContainer>
-    <ActiveItemIdProvider initialValue={null}>
-      <TasksToDo />
-    </ActiveItemIdProvider>
-  </TasksContainer>
-)
+export const TasksOnboardingStep = () => <Tasks />

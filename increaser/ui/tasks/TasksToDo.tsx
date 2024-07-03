@@ -1,4 +1,3 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -20,9 +19,12 @@ import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TasksGroupHeader } from './TasksGroupHeader'
+import { useScheduledTasks } from './hooks/useScheduledTasks'
+import { useAssertUserState } from '../user/UserStateContext'
 
 export const TasksToDo = () => {
-  const { tasks } = useAssertUserState()
+  const { tasks: tasksRecord } = useAssertUserState()
+  const tasks = useScheduledTasks()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const [activeTaskId] = useActiveItemId()
 
@@ -53,12 +55,15 @@ export const TasksToDo = () => {
         order,
       }
       if (groupId !== 'overdue') {
-        fields.deadlineAt = getDeadlineAt({
-          deadlineType: groupId,
-          now,
-        })
+        fields.deadlineAt =
+          groupId === 'none'
+            ? null
+            : getDeadlineAt({
+                deadlineType: groupId,
+                now,
+              })
       } else if (
-        getDeadlineStatus({ deadlineAt: tasks[id].deadlineAt, now }) !==
+        getDeadlineStatus({ deadlineAt: tasksRecord[id].deadlineAt, now }) !==
         'overdue'
       ) {
         return
@@ -69,14 +74,16 @@ export const TasksToDo = () => {
         fields,
       })
     },
-    [now, tasks, updateTask],
+    [now, tasksRecord, updateTask],
   )
 
   return (
     <DnDGroups
       groups={groups}
       getGroupOrder={(status) =>
-        status === 'overdue' ? 0 : deadlineTypes.indexOf(status) + 1
+        status === 'overdue' || status === 'none'
+          ? 0
+          : deadlineTypes.indexOf(status) + 1
       }
       getItemId={(task) => task.id}
       getItemOrder={(task) => task.order}
@@ -91,7 +98,7 @@ export const TasksToDo = () => {
                 order={getLastItemOrder(
                   groups[groupId].map((task) => task.order),
                 )}
-                deadlineType={groupId}
+                deadlineType={groupId === 'none' ? null : groupId}
               />
             )}
           </VStack>

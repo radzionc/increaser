@@ -21,11 +21,11 @@ export const TaskDeadlineInput = ({
   value,
   onChange,
 }: InputProps<DeadlineStatus>) => {
-  const options = useMemo(() => getDeadlineTypes(Date.now()), [])
+  const deadlineTypes = useMemo(() => getDeadlineTypes(Date.now()), [])
 
   return (
     <ExpandableSelector
-      style={{ width: 142 }}
+      style={{ width: 160 }}
       openerContent={
         <HStack alignItems="center" gap={8}>
           <Icon isOverdue={value === 'overdue'} style={{ fontSize: 14 }}>
@@ -36,7 +36,7 @@ export const TaskDeadlineInput = ({
       }
       value={value}
       onChange={onChange}
-      options={options}
+      options={['none', ...deadlineTypes]}
       getOptionKey={(option) => option}
       renderOption={(option) => (
         <Text key={option}>{deadlineName[option]}</Text>

@@ -33,6 +33,7 @@ export const TasksGroupHeader = ({
         <Text>
           <Match
             value={value}
+            none={() => null}
             today={() => formatDay(now)}
             tomorrow={() => formatDay(now + convertDuration(1, 'd', 'ms'))}
             thisWeek={() => formatWeek(now)}
