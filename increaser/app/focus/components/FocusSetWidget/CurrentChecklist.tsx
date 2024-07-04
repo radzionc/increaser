@@ -18,8 +18,9 @@ export const CurrentChecklist = () => {
 
   return (
     <VStack>
-      {items.map(({ completed, name }) => (
+      {items.map(({ completed, name, id }) => (
         <ChecklistItem
+          key={id}
           shouldCrossOut
           name={name}
           value={completed}
