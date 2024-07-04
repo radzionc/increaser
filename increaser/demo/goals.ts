@@ -1,5 +1,5 @@
 import { Goal, Goals } from '@increaser/entities/Goal'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 
 type GoalDescription = Pick<
   Goal,
@@ -59,7 +59,7 @@ const items: GoalDescription[] = [
 ]
 
 export const getDemoGoals = (): Goals => {
-  return getRecord(
+  return toRecord(
     items.map((item, order) => ({
       ...item,
       id: item.name,

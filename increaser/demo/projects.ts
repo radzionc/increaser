@@ -1,5 +1,5 @@
 import { Project, otherProject } from '@increaser/entities/Project'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export enum DemoProject {
@@ -65,5 +65,5 @@ export const getDemoProjects = () => {
       return project
     },
   )
-  return getRecord([otherProject, ...projects], (project) => project.id)
+  return toRecord([otherProject, ...projects], (project) => project.id)
 }
