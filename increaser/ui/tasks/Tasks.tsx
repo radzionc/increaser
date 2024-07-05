@@ -6,9 +6,9 @@ import {
   TasksViewSelector,
 } from '@increaser/ui/tasks/TasksView'
 import { TasksDone } from '@increaser/ui/tasks/TasksDone'
-import { TasksRecurringView } from '@increaser/ui/tasks/TasksRecurringView'
 import { TasksBacklogView } from '@increaser/ui/tasks/TasksBacklogView'
 import { TasksToDoView } from './TasksToDoView'
+import { ManageTaskFactories } from '../taskFactories/ManageTaskFactories'
 
 const TasksContainer = styled(VStack)`
   max-width: 560px;
@@ -22,7 +22,7 @@ export const Tasks = () => {
       <TasksViewProvider>
         <TasksViewSelector />
         <RenderTasksView
-          recurring={() => <TasksRecurringView />}
+          recurring={() => <ManageTaskFactories />}
           done={() => <TasksDone />}
           todo={() => <TasksToDoView />}
           backlog={() => <TasksBacklogView />}

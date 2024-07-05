@@ -4,13 +4,13 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { round } from '@lib/ui/css/round'
 import { getColor } from '@lib/ui/theme/getters'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { taskFactoryConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { taskCadenceShortName } from '@increaser/entities/TaskFactory'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
 import { Text } from '@lib/ui/text'
+import { tightListConfig } from '@lib/ui/list/tightListConfig'
 
 const Container = styled(HStack)`
   align-items: center;
@@ -18,7 +18,7 @@ const Container = styled(HStack)`
   ${round};
   background: ${getColor('foreground')};
   ${centerContent};
-  height: ${toSizeUnit(taskFactoryConfig.contentMinHeight)};
+  height: ${toSizeUnit(tightListConfig.lineHeight)};
   font-weight: 500;
   font-size: 14px;
   ${horizontalPadding(12)};
