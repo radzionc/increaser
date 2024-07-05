@@ -3,11 +3,11 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { ClickableComponentProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
-import { tightListConfig } from '@lib/ui/list/tightListConfig'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(IconButton)`
   ${sameDimensions(
-    tightListConfig.verticalPadding * 2 + tightListConfig.lineHeight,
+    tightListItemConfig.verticalPadding * 2 + tightListItemConfig.lineHeight,
   )}
 `
 

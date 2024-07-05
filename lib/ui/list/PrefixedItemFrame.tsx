@@ -4,15 +4,13 @@ import { verticalPadding } from '../css/verticalPadding'
 import { centerContent } from '../css/centerContent'
 import { ComponentWithChildrenProps, UIComponentProps } from '../props'
 import { ReactNode } from 'react'
-import { tightListConfig } from './tightListConfig'
+import { tightListItemConfig } from './tightListItemConfig'
 
 type ContainerProps = {
   lineHeight: number
   gap: number
   verticalPadding: number
 }
-
-const defaultGap = 12
 
 export const Container = styled.div<ContainerProps>`
   display: grid;
@@ -40,10 +38,10 @@ type PrefixedItemFrameProps = Partial<ContainerProps> &
   }
 
 export const PrefixedItemFrame = ({
-  prefixWidth = tightListConfig.lineHeight,
-  lineHeight = tightListConfig.lineHeight,
-  gap = defaultGap,
-  verticalPadding = tightListConfig.verticalPadding,
+  prefixWidth = tightListItemConfig.lineHeight,
+  lineHeight = tightListItemConfig.lineHeight,
+  gap = tightListItemConfig.gap,
+  verticalPadding = tightListItemConfig.verticalPadding,
   children,
   prefix,
   className,

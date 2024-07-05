@@ -10,7 +10,7 @@ import { taskCadenceShortName } from '@increaser/entities/TaskFactory'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
 import { Text } from '@lib/ui/text'
-import { tightListConfig } from '@lib/ui/list/tightListConfig'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(HStack)`
   align-items: center;
@@ -18,7 +18,7 @@ const Container = styled(HStack)`
   ${round};
   background: ${getColor('foreground')};
   ${centerContent};
-  height: ${toSizeUnit(tightListConfig.lineHeight)};
+  height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   font-weight: 500;
   font-size: 14px;
   ${horizontalPadding(12)};

@@ -7,12 +7,12 @@ import { TaskCheckBox } from './TaskCheckBox'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { interactive } from '@lib/ui/css/interactive'
-import { checklistItemVerticalPadding } from '@lib/ui/checklist/ChecklistItemFrame'
 import { getColor } from '@lib/ui/theme/getters'
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;
@@ -57,7 +57,7 @@ export const TaskItem = () => {
         </>
       )}
       action={<TaskCheckBox />}
-      actionPlacerStyles={{ left: 0, top: checklistItemVerticalPadding }}
+      actionPlacerStyles={{ left: 0, top: tightListItemConfig.verticalPadding }}
     />
   )
 }

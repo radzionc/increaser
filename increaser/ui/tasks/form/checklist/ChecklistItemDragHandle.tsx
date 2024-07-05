@@ -1,11 +1,8 @@
-import {
-  checklistItemContentMinHeight,
-  checklistItemVerticalPadding,
-} from '@lib/ui/checklist/ChecklistItemFrame'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { forwardRef } from 'react'
@@ -14,12 +11,12 @@ import styled, { css } from 'styled-components'
 const dragHandleWidth = 20
 
 const Wrapper = styled.div`
-  padding-top: ${toSizeUnit(checklistItemVerticalPadding)};
+  padding-top: ${toSizeUnit(tightListItemConfig.verticalPadding)};
 `
 
 const Container = styled.div<ComponentWithActiveState>`
   width: ${toSizeUnit(dragHandleWidth)};
-  height: ${toSizeUnit(checklistItemContentMinHeight)};
+  height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   ${borderRadius.xs};
   border: 1px solid ${getColor('mist')};
   background: ${getColor('foreground')};

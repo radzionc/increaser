@@ -5,12 +5,12 @@ import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(CheckStatus)`
   ${interactive};
   position: relative;
-  ${sameDimensions(checklistItemContentMinHeight)};
+  ${sameDimensions(tightListItemConfig.lineHeight)};
 `
 
 export const TaskCheckBox = () => {
