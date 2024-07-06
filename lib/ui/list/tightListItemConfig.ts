@@ -3,3 +3,6 @@ export const tightListItemConfig = {
   verticalPadding: 8,
   gap: 12,
 }
+
+export const tightListItemMinHeight =
+  tightListItemConfig.lineHeight + tightListItemConfig.verticalPadding * 2

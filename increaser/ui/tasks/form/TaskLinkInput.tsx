@@ -1,11 +1,10 @@
 import { TaskLink } from '@increaser/entities/Task'
-import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import {
-  textInputBorderRadius,
-  textInputHeight,
-  textInputPadding,
-} from '@lib/ui/css/textInput'
+import { textInput } from '@lib/ui/css/textInput'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import {
+  tightListItemConfig,
+  tightListItemMinHeight,
+} from '@lib/ui/list/tightListItemConfig'
 import { InputProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { attempt } from '@lib/utils/attempt'
@@ -15,44 +14,34 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2px;
-  ${textInputBorderRadius};
-  height: ${toSizeUnit(textInputHeight)};
+  gap: ${toSizeUnit(tightListItemConfig.gap)};
   overflow: hidden;
-
-  outline: 1px solid transparent;
-  border: 1px solid ${getColor('mist')};
-
-  &:hover {
-    outline-color: ${getColor('mist')};
-  }
-
-  &:focus-within {
-    border-color: ${getColor('mistExtra')};
-    border-color: ${getColor('mistExtra')};
-  }
+  height: ${toSizeUnit(tightListItemMinHeight)};
+  font-size: 14px;
 `
 
-const Input = styled.input`
-  ${takeWholeSpace};
-  padding: ${toSizeUnit(textInputPadding)};
-  font-size: 14px;
-
+const LinkInput = styled.input`
+  height: 100%;
   outline: none;
   border: none;
 
-  background: ${getColor('foreground')};
-  color: ${getColor('text')};
+  background: transparent;
+  color: ${getColor('textSupporting')};
 
   &::placeholder {
     color: ${getColor('textShy')};
   }
 `
 
+const NameInput = styled.input`
+  ${textInput};
+  height: 100%;
+`
+
 export const TaskLinkInput = ({ value, onChange }: InputProps<TaskLink>) => {
   return (
     <Container>
-      <Input
+      <LinkInput
         autoFocus
         style={{ minWidth: 240 }}
         placeholder="https://example.com"
@@ -65,7 +54,7 @@ export const TaskLinkInput = ({ value, onChange }: InputProps<TaskLink>) => {
           })
         }
       />
-      <Input
+      <NameInput
         style={{ minWidth: 40 }}
         placeholder="Name"
         value={value.name}

@@ -3,10 +3,10 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { cropText } from '@lib/ui/css/cropText'
 import { Text } from '@lib/ui/text'
 
-import { textInputPadding } from '@lib/ui/css/textInput'
 import { ProjectIdentifier } from './ProjectIdentifier'
 import { ReactNode } from 'react'
 import { Project } from '@increaser/entities/Project'
+import { textInputHorizontalPadding } from '@lib/ui/css/textInput'
 
 interface ProjectOptionProps {
   value: Project
@@ -31,7 +31,7 @@ export const ProjectOption = ({
         minHeight: 36,
       }}
     >
-      <OptionContent alignItems="center" gap={textInputPadding}>
+      <OptionContent alignItems="center" gap={textInputHorizontalPadding}>
         <ProjectIdentifier>{value.emoji}</ProjectIdentifier>
         <Text cropped size={14} weight="semibold">
           {value.name}

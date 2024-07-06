@@ -17,7 +17,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { focusSetWidgetConfig } from './config'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { focusIconSize } from './FocusIconButton'
+import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 
 type FocusTaskSelectorProps = {
   options: Task[]
@@ -27,7 +27,7 @@ type FocusTaskSelectorProps = {
 const ToggleIconContainer = styled(CollapsableStateIndicator)`
   font-size: 16px;
 
-  width: ${toSizeUnit(focusIconSize)};
+  width: ${toSizeUnit(tightListItemMinHeight)};
 
   ${transition};
   color: ${getColor('textSupporting')};
