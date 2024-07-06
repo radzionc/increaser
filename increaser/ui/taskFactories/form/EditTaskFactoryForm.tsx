@@ -39,10 +39,6 @@ export const EditTaskFactoryForm = () => {
   const isDisabled = useIsTaskFormDisabled(value)
 
   const onSubmit = () => {
-    if (isDisabled) {
-      return
-    }
-
     const fields: Partial<Omit<TaskFactory, 'id'>> = {
       task: {
         name: value.name,

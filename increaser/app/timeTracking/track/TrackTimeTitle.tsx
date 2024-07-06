@@ -13,7 +13,7 @@ export const TrackTimeTitle = () => {
       return 'Edit session'
     }
 
-    return 'Add session'
+    return 'Add a session'
   }, [currentSet])
 
   return <SectionTitle>{title}</SectionTitle>

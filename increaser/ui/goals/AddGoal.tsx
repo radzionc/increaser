@@ -6,7 +6,7 @@ export const AddGoal = () => {
   return (
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : <ListAddButton onClick={onOpen} text="Add goal" />
+        isOpen ? null : <ListAddButton onClick={onOpen} text="Add a goal" />
       }
       renderContent={({ onClose }) => <CreateGoalForm onFinish={onClose} />}
     />

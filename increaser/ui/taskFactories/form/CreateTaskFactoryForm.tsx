@@ -90,7 +90,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         <Button type="button" onClick={() => onFinish()} kind="secondary">
           Cancel
         </Button>
-        <Button isDisabled={isDisabled}>Add task</Button>
+        <Button isDisabled={isDisabled}>Submit</Button>
       </HStack>
     </Panel>
   )

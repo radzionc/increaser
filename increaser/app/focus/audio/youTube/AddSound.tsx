@@ -65,7 +65,7 @@ export const AddSound = ({ onFinish }: FinishableComponentProps) => {
                 ...focusSounds,
               ],
             })
-            analytics.trackEvent('Add sound', value)
+            analytics.trackEvent('Add a sound', value)
             onFinish()
           },
         })}
