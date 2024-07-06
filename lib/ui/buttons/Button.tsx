@@ -54,7 +54,7 @@ const Container = styled(UnstyledButton)<ContainerProps>`
       xs: () => css`
         ${horizontalPadding(8)}
         height: 28px;
-        font-size: 14px;
+        font-size: 12px;
       `,
       s: () => css`
         ${horizontalPadding(16)}
