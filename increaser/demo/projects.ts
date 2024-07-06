@@ -7,6 +7,7 @@ export enum DemoProject {
   Business = 'Business',
   Content = 'Content creation',
   Planning = 'Planning',
+  Finances = 'Finances',
 }
 
 type ProjectDescription = Pick<
@@ -44,6 +45,13 @@ const projectsDescription: ProjectDescription[] = [
     color: 5,
     emoji: '📅',
     allocatedMinutesPerWeek: convertDuration(3, 'h', 'min'),
+    workingDays: 'everyday',
+  },
+  {
+    id: DemoProject.Finances,
+    color: 0,
+    emoji: '💰',
+    allocatedMinutesPerWeek: 0,
     workingDays: 'everyday',
   },
 ]

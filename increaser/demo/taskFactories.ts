@@ -1,6 +1,5 @@
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { DemoProject } from './projects'
-import { otherProjectId } from '@increaser/entities/Project'
 
 export type DemoTaskFactoryId = 'upload-video' | 'taxes' | 'jobs' | 'invest'
 
@@ -59,7 +58,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     id: 'invest',
     task: {
       name: 'Invest my income in ETFs',
-      projectId: DemoProject.Planning,
+      projectId: DemoProject.Finances,
       links: [],
       checklist: [],
     },
@@ -69,9 +68,34 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     id: 'taxes',
     task: {
       name: 'Pay taxes',
-      projectId: otherProjectId,
+      projectId: DemoProject.Finances,
       links: [],
-      checklist: [],
+      checklist: [
+        {
+          id: 'review',
+          name: 'Review income and expenses',
+          completed: false,
+          order: 1,
+        },
+        {
+          id: 'calculate',
+          name: 'Calculate the due amount',
+          completed: false,
+          order: 2,
+        },
+        {
+          id: 'submit',
+          name: 'Submit the tax form',
+          completed: false,
+          order: 3,
+        },
+        {
+          id: 'pay',
+          name: 'Send money to the treasury',
+          completed: false,
+          order: 4,
+        },
+      ],
     },
     cadence: 'month',
   },

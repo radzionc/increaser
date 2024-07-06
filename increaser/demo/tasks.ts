@@ -88,37 +88,6 @@ const tasks: TaskDescription[] = [
     projectId: DemoProject.Content,
     isCompleted: false,
   },
-  {
-    name: 'Pay taxes',
-    projectId: DemoProject.Planning,
-    isCompleted: false,
-    checklist: [
-      {
-        id: 'review',
-        name: 'Review income and expenses',
-        completed: false,
-        order: 1,
-      },
-      {
-        id: 'calculate',
-        name: 'Calculate the due amount',
-        completed: false,
-        order: 2,
-      },
-      {
-        id: 'submit',
-        name: 'Submit the tax form',
-        completed: false,
-        order: 3,
-      },
-      {
-        id: 'pay',
-        name: 'Send money to the treasury',
-        completed: false,
-        order: 4,
-      },
-    ],
-  },
 ]
 
 export const getDemoTasks = (): Record<string, Task> => {
