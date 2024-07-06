@@ -10,8 +10,38 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     task: {
       name: 'Release a YouTube video',
       projectId: DemoProject.Content,
-      links: [],
-      checklist: [],
+      links: [
+        {
+          url: 'https://youtu.be/PXad8WzI0L0',
+          name: 'video',
+        },
+      ],
+      checklist: [
+        {
+          id: '1',
+          name: 'Choose a title',
+          completed: false,
+          order: 3,
+        },
+        {
+          id: '1',
+          name: 'Write a description',
+          completed: false,
+          order: 2,
+        },
+        {
+          id: '1',
+          name: 'Make a thumbnail',
+          completed: false,
+          order: 2,
+        },
+        {
+          id: '1',
+          name: 'Promote on social media',
+          completed: false,
+          order: 2,
+        },
+      ],
     },
     cadence: 'week',
   },
