@@ -13,7 +13,6 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { InputProps } from '@lib/ui/props'
-import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
 import { attempt } from '@lib/utils/attempt'
 import { extractRootDomain } from '@lib/utils/url/extractRootDomain'
@@ -30,7 +29,7 @@ const Container = styled.div`
   overflow: hidden;
 
   outline: 1px solid transparent;
-  border: 1px solid ${getColor('mist')};
+  border: 1px solid transparent;
 
   &:hover {
     outline-color: ${getColor('mist')};
@@ -52,10 +51,9 @@ const LinkPlaceholder = styled.div`
 const Link = styled(ExternalLink)`
   ${sameDimensions(tightListItemMinHeight)};
   ${centerContent};
-  background: ${getColor('foreground')};
   color: ${getColor('text')};
   &:hover {
-    background: ${getHoverVariant('foreground')};
+    background: ${getColor('foreground')};
     color: ${getColor('contrast')};
   }
 `
@@ -68,7 +66,8 @@ const Input = styled.input`
   outline: none;
   border: none;
 
-  background: ${getColor('foreground')};
+  /* background: ${getColor('foreground')}; */
+  background: transparent;
   color: ${getColor('text')};
 
   &::placeholder {

@@ -20,7 +20,7 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
   return (
     <FieldArrayContainer title="Links">
       {value.length > 0 && (
-        <VStack gap={8}>
+        <VStack>
           {value.map((item, index) => (
             <HStack alignItems="center" gap={4}>
               <TaskLinkInput
