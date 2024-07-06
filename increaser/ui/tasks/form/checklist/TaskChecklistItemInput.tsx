@@ -36,6 +36,7 @@ export const TaskChecklistItemInput = ({
           value={value.name}
           onChange={(name) => onChange({ ...value, name })}
           onSubmit={onSubmit}
+          onRemove={onRemove}
         />
       </Container>
       <ChecklistRemoveButton onClick={onRemove} />

@@ -16,12 +16,14 @@ const Container = styled(MultilineTextInput)`
 type ChecklistItemNameInputProps = InputProps<string> &
   Omit<ComponentProps<typeof Container>, 'value' | 'onChange'> & {
     onSubmit?: () => void
+    onRemove?: () => void
   }
 
 export const ChecklistItemNameInput = ({
   value,
   onChange,
   onSubmit,
+  onRemove,
   ...rest
 }: ChecklistItemNameInputProps) => {
   return (
@@ -35,6 +37,8 @@ export const ChecklistItemNameInput = ({
         if (event.key === 'Enter') {
           event.preventDefault()
           onSubmit?.()
+        } else if (event.key === 'Backspace' && !value) {
+          onRemove?.()
         }
       }}
       {...rest}

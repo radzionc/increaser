@@ -5,7 +5,6 @@ import { InputProps } from '@lib/ui/props'
 import { TaskChecklistItemInput } from './TaskChecklistItemInput'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { useCallback } from 'react'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled from 'styled-components'
 import { order } from '@lib/utils/array/order'
@@ -18,22 +17,18 @@ const DraggableItemContainer = styled(HStack)`
   width: 100%;
   gap: 8px;
 `
+
+const getDefaultFields = () => ({
+  name: '',
+  completed: false,
+  order: 0,
+  id: getId(),
+})
+
 export const TaskChecklistInput = ({
   value,
   onChange,
 }: TaskChecklistInputProps) => {
-  const onAdd = useCallback(() => {
-    onChange([
-      ...value,
-      {
-        id: getId(),
-        name: '',
-        completed: false,
-        order: getLastItemOrder(value.map((value) => value.order)),
-      },
-    ])
-  }, [onChange, value])
-
   return (
     <FieldArrayContainer title="Checklist">
       {value.length > 0 && (
@@ -66,7 +61,23 @@ export const TaskChecklistInput = ({
                   onRemove={() => {
                     onChange(value.filter((v) => v.id !== item.id))
                   }}
-                  onSubmit={onAdd}
+                  onSubmit={() => {
+                    const index = value.findIndex((v) => v.id === item.id)
+                    const order =
+                      index === value.length - 1
+                        ? getLastItemOrder(value.map((v) => v.order))
+                        : (value[index + 1].order + item.order) / 2
+                    const newItem = {
+                      ...getDefaultFields(),
+                      order,
+                    }
+
+                    onChange([
+                      ...value.slice(0, index + 1),
+                      newItem,
+                      ...value.slice(index + 1),
+                    ])
+                  }}
                   value={item}
                   onChange={(updatedItem) => {
                     onChange(
@@ -81,7 +92,19 @@ export const TaskChecklistInput = ({
           }}
         />
       )}
-      <FieldArrayAddButton onClick={onAdd}>Add an item</FieldArrayAddButton>
+      <FieldArrayAddButton
+        onClick={() => {
+          onChange([
+            ...value,
+            {
+              ...getDefaultFields(),
+              order: getLastItemOrder(value.map((value) => value.order)),
+            },
+          ])
+        }}
+      >
+        Add an item
+      </FieldArrayAddButton>
     </FieldArrayContainer>
   )
 }
