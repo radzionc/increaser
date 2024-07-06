@@ -108,7 +108,7 @@ export const CreateTaskForm = ({
             Cancel
           </Button>
           <Button isLoading={isPending} isDisabled={isDisabled}>
-            Add task
+            Submit
           </Button>
         </HStack>
       </HStack>

@@ -1,10 +1,10 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { ComponentWithChildrenProps, TitledComponentProps } from '@lib/ui/props'
-import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
+import { FieldArrayTitle } from './FieldArrayTitle'
 
 const Container = styled(VStack)`
-  gap: 16px;
+  gap: 8px;
   overflow-y: auto;
 `
 
@@ -12,10 +12,8 @@ export const FieldArrayContainer = ({
   title,
   children,
 }: ComponentWithChildrenProps & TitledComponentProps) => (
-  <Container gap={16}>
-    <Text size={14} weight="semibold">
-      {title}
-    </Text>
+  <Container>
+    <FieldArrayTitle>{title}</FieldArrayTitle>
     {children}
   </Container>
 )

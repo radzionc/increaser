@@ -1,5 +1,5 @@
 import { Task, TaskChecklistItem } from '@increaser/entities/Task'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 import { endOfDay } from 'date-fns'
 import { DemoProject } from './projects'
 import { getId } from '@increaser/entities-utils/shared/getId'
@@ -124,7 +124,7 @@ const tasks: TaskDescription[] = [
 export const getDemoTasks = (): Record<string, Task> => {
   const startedAt = Date.now()
 
-  return getRecord(
+  return toRecord(
     tasks.map(
       (
         { projectId, name, isCompleted, minutes, isOverdue, checklist },

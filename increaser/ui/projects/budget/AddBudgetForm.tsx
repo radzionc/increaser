@@ -59,7 +59,7 @@ export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
 
   return (
     <InputContainer style={{ gap: 8 }} as="div">
-      <LabelText>Add project budget</LabelText>
+      <LabelText>Add a project budget</LabelText>
       <Panel
         as="form"
         onSubmit={preventDefault(() => {

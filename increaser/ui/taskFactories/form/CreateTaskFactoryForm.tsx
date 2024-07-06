@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
@@ -16,6 +15,7 @@ import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
+import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -34,8 +34,6 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
   const isDisabled = useIsTaskFactoryFormDisabled(value)
 
   const onSubmit = useCallback(() => {
-    if (isDisabled) return
-
     const taskFactory: TaskFactory = {
       id: getId(),
       task: {
@@ -48,7 +46,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     }
     mutate(taskFactory)
     onFinish(taskFactory.id)
-  }, [isDisabled, mutate, onFinish, value])
+  }, [mutate, onFinish, value])
 
   return (
     <Panel
@@ -86,12 +84,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
         />
       </HStack>
-      <HStack justifyContent="end" gap={8}>
-        <Button type="button" onClick={() => onFinish()} kind="secondary">
-          Cancel
-        </Button>
-        <Button isDisabled={isDisabled}>Add task</Button>
-      </HStack>
+      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
     </Panel>
   )
 }

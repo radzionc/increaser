@@ -16,6 +16,7 @@ export type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
 const Container = styled(ChecklistItemFrame)`
   background: ${getColor('background')};
   align-items: start;
+  flex: 1;
 `
 
 export const TaskChecklistItemInput = ({
@@ -25,19 +26,20 @@ export const TaskChecklistItemInput = ({
   onSubmit,
 }: TaskChecklistItemInputProps) => {
   return (
-    <Container>
-      <ChecklistCheckbox
-        value={value.completed}
-        onChange={() => onChange({ ...value, completed: !value.completed })}
-      />
-      <HStack fullWidth gap={8}>
+    <HStack fullWidth>
+      <Container>
+        <ChecklistCheckbox
+          value={value.completed}
+          onChange={() => onChange({ ...value, completed: !value.completed })}
+        />
         <ChecklistItemNameInput
           value={value.name}
           onChange={(name) => onChange({ ...value, name })}
           onSubmit={onSubmit}
+          onRemove={onRemove}
         />
-        <ChecklistRemoveButton onClick={onRemove} />
-      </HStack>
-    </Container>
+      </Container>
+      <ChecklistRemoveButton onClick={onRemove} />
+    </HStack>
   )
 }

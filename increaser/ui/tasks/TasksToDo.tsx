@@ -10,7 +10,7 @@ import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineSta
 import { useCallback, useMemo } from 'react'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
@@ -33,7 +33,7 @@ export const TasksToDo = () => {
   const groups = useMemo(() => {
     return {
       ...recordMap(
-        getRecord(deadlineTypes, (key) => key),
+        toRecord(deadlineTypes, (key) => key),
         () => [] as Task[],
       ),
       ...groupItems(

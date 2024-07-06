@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useCallback, useMemo, useState } from 'react'
 import { useKey } from 'react-use'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
@@ -32,12 +32,6 @@ export const EditVisionAttributeForm = () => {
   const onFinish = useCallback(() => {
     setActiveItemId(null)
   }, [setActiveItemId])
-
-  useEffect(() => {
-    return () => {
-      onFinish()
-    }
-  }, [onFinish])
 
   useKey('Escape', onFinish)
 

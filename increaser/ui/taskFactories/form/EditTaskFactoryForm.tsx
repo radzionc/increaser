@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
@@ -17,6 +16,7 @@ import { TaskCadenceInput } from './TaskCadenceInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
+import { EditDeleteFormFooter as EditDeleteFormFooterProps } from '@lib/ui/form/components/EditDeleteFormFooter'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -36,19 +36,9 @@ export const EditTaskFactoryForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  useEffect(() => {
-    return () => {
-      onFinish()
-    }
-  }, [onFinish])
-
   const isDisabled = useIsTaskFormDisabled(value)
 
   const onSubmit = () => {
-    if (isDisabled) {
-      return
-    }
-
     const fields: Partial<Omit<TaskFactory, 'id'>> = {
       task: {
         name: value.name,
@@ -103,36 +93,14 @@ export const EditTaskFactoryForm = () => {
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
         />
       </HStack>
-
-      <HStack
-        wrap="wrap"
-        justifyContent="space-between"
-        fullWidth
-        alignItems="center"
-        gap={20}
-      >
-        <Button
-          kind="alert"
-          type="button"
-          onClick={() => {
-            deleteTaskFactory({ id: taskFactory.id })
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
-        <HStack alignItems="center" gap={8}>
-          <Button
-            type="button"
-            isDisabled={isDisabled}
-            onClick={onFinish}
-            kind="secondary"
-          >
-            Cancel
-          </Button>
-          <Button>Save</Button>
-        </HStack>
-      </HStack>
+      <EditDeleteFormFooterProps
+        onDelete={() => {
+          deleteTaskFactory({ id: taskFactory.id })
+          onFinish()
+        }}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
     </Panel>
   )
 }

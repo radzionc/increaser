@@ -1,7 +1,6 @@
 import { TaskLink } from '@increaser/entities/Task'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { textInputHeight } from '@lib/ui/css/textInput'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
@@ -11,18 +10,19 @@ import styled from 'styled-components'
 import { TaskLinkInput } from './TaskLinkInput'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
+import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 
 const DeleteButton = styled(IconButton)`
-  ${sameDimensions(textInputHeight)};
+  ${sameDimensions(tightListItemMinHeight)};
 `
 
 export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
   return (
     <FieldArrayContainer title="Links">
       {value.length > 0 && (
-        <VStack gap={8}>
+        <VStack>
           {value.map((item, index) => (
-            <HStack gap={8}>
+            <HStack alignItems="center" gap={4}>
               <TaskLinkInput
                 value={item}
                 onChange={(item) =>
@@ -30,7 +30,7 @@ export const TaskLinksInput = ({ value, onChange }: InputProps<TaskLink[]>) => {
                 }
               />
               <DeleteButton
-                kind="alert"
+                kind="alertSecondary"
                 type="button"
                 title="Delete"
                 icon={<TrashBinIcon />}

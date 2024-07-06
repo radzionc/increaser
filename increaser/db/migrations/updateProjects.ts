@@ -2,7 +2,7 @@ import { updateItem } from '@lib/dynamodb/updateItem'
 import { tableName } from '../tableName'
 import { getAllUsers, updateUser } from '../user'
 import { Project } from '@increaser/entities/Project'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 
 type OldUser = {
   id: string
@@ -18,7 +18,7 @@ const migrate = async () => {
         return
       }
       return updateUser(id, {
-        projects: getRecord(
+        projects: toRecord(
           projects.map((project, order) => ({
             ...project,
             order,

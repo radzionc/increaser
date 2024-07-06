@@ -7,16 +7,16 @@ import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInterac
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
 import { HStack } from '@lib/ui/layout/Stack'
 import {
   FocusOptionContainer,
   focusOptionPadding,
 } from './FocusOptionContainer'
 import { cropText } from '@lib/ui/css/cropText'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const CheckBoxContainer = styled.div`
-  ${sameDimensions(checklistItemContentMinHeight)};
+  ${sameDimensions(tightListItemConfig.lineHeight)};
 `
 
 const Content = styled(HStack)`

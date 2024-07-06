@@ -1,7 +1,7 @@
 import { TextButton } from '@lib/ui/buttons/TextButton'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { textInput, textInputPadding } from '@lib/ui/css/textInput'
+import { textInput, textInputHorizontalPadding } from '@lib/ui/css/textInput'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
@@ -35,7 +35,7 @@ const IconWrapper = styled(FixedOptionsInputIdentifierWrapper)`
 const Input = styled.input`
   ${textInput};
   padding-left: ${toSizeUnit(
-    dropdownInputConfig.identifierSize + textInputPadding * 2,
+    dropdownInputConfig.identifierSize + textInputHorizontalPadding * 2,
   )};
 `
 

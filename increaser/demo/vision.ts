@@ -3,7 +3,7 @@ import {
   VisionAttribute,
   visionAttributeIdeas,
 } from '@increaser/entities/Vision'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 
 export const getDemoVision = (): Vision => {
   const items: VisionAttribute[] = visionAttributeIdeas
@@ -16,5 +16,5 @@ export const getDemoVision = (): Vision => {
       order,
     }))
 
-  return getRecord(items, (item) => item.id)
+  return toRecord(items, (item) => item.id)
 }

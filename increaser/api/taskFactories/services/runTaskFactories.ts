@@ -4,7 +4,7 @@ import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
 import { Task } from '@increaser/entities/Task'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { getRecord } from '@lib/utils/record/getRecord'
+import { toRecord } from '@lib/utils/record/toRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 
@@ -21,7 +21,7 @@ export const runTaskFactories = async (userId: string) => {
   Object.values(taskFactories).forEach(
     ({ task, cadence, lastOutputAt, id }) => {
       const cadencePeriodStart = inTimeZone(
-        getCadencePeriodStart({ cadence, timeZone }),
+        getCadencePeriodStart(cadence),
         timeZone,
       )
       if (lastOutputAt && lastOutputAt >= cadencePeriodStart) return
@@ -55,7 +55,10 @@ export const runTaskFactories = async (userId: string) => {
   )
 
   if (generatedTasks.length > 0) {
-    const newTasks = [...oldTasks, ...generatedTasks]
+    const newTasks = toRecord(
+      [...oldTasks, ...generatedTasks],
+      (task) => task.id,
+    )
 
     const newTaskFactories = recordMap(taskFactories, (taskFactory) => {
       if (generatedTasks.some((task) => task.factoryId === taskFactory.id)) {
@@ -69,7 +72,7 @@ export const runTaskFactories = async (userId: string) => {
     })
 
     await updateUser(userId, {
-      tasks: getRecord(newTasks, (task) => task.id),
+      tasks: newTasks,
       taskFactories: newTaskFactories,
     })
   }

@@ -7,7 +7,7 @@ export const AddTaskFactory = () => {
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
         isOpen ? null : (
-          <ListAddButton onClick={onOpen} text="Add recurring task" />
+          <ListAddButton onClick={onOpen} text="Add a recurring task" />
         )
       }
       renderContent={({ onClose }) => (

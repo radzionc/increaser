@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
@@ -43,12 +43,6 @@ export const EditProjectForm = () => {
   const onFinish = useCallback(() => {
     setActiveItemId(null)
   }, [setActiveItemId])
-
-  useEffect(() => {
-    return () => {
-      onFinish()
-    }
-  }, [onFinish])
 
   const isDisabled = useIsProjectFormDisabled(value)
 

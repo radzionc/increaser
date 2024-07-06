@@ -3,13 +3,13 @@ import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
 import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
 import { interactive } from '@lib/ui/css/interactive'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { checklistItemContentMinHeight } from '@lib/ui/checklist/ChecklistItemFrame'
 import { InputProps } from '@lib/ui/props'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(CheckStatus)`
   ${interactive};
   position: relative;
-  ${sameDimensions(checklistItemContentMinHeight)};
+  ${sameDimensions(tightListItemConfig.lineHeight)};
 `
 
 export const ChecklistCheckbox = ({ value, onChange }: InputProps<boolean>) => {

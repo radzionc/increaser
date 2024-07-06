@@ -3,21 +3,23 @@ import { getColor } from '../theme/getters'
 import { transition } from '../css/transition'
 import { toSizeUnit } from './toSizeUnit'
 import { borderRadius } from './borderRadius'
+import { horizontalPadding } from './horizontalPadding'
 
-export const textInputPadding = 12
+export const textInputHorizontalPadding = 12
 export const textInputHeight = 52
 export const textInputBorderRadius = borderRadius.s
 
 export const textInputFrame = css`
   height: ${toSizeUnit(textInputHeight)};
   width: 100%;
-  padding: ${toSizeUnit(textInputPadding)};
+  ${horizontalPadding(textInputHorizontalPadding)};
   ${textInputBorderRadius};
 `
 
 export const textInput = css`
   ${textInputFrame};
   ${transition};
+  font-size: 14px;
 
   background: ${getColor('foreground')};
   color: ${getColor('text')};

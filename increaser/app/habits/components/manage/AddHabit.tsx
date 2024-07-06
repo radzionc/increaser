@@ -6,7 +6,7 @@ export const AddHabit = () => {
   return (
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : <ListAddButton onClick={onOpen} text="Add habit" />
+        isOpen ? null : <ListAddButton onClick={onOpen} text="Add a habit" />
       }
       renderContent={({ onClose }) => <CreateHabitForm onFinish={onClose} />}
     />

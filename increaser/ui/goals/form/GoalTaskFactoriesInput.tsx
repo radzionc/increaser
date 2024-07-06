@@ -11,6 +11,18 @@ import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { SelectGoalTaskFactory } from './SelectGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
+import styled from 'styled-components'
+
+const Content = styled(HStack)`
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  > * {
+    &:first-child {
+      flex: 1;
+    }
+  }
+`
 
 export const GoalTaskFactoriesInput = ({
   value,
@@ -33,12 +45,12 @@ export const GoalTaskFactoriesInput = ({
               .map((item) => {
                 return (
                   <CurrentTaskFactoryProvider key={item.id} value={item}>
-                    <HStack alignItems="center" fullWidth gap={8}>
+                    <Content>
                       <TaskFactoryItem />
                       <RemoveGoalTaskFactory
                         onClick={() => onChange(without(value, item.id))}
                       />
-                    </HStack>
+                    </Content>
                   </CurrentTaskFactoryProvider>
                 )
               })}
