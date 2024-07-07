@@ -14,6 +14,8 @@ type NotifyAboutAccountDeletionParams = {
 export const notifyAboutAccountDeletion = async ({
   email,
 }: NotifyAboutAccountDeletionParams) => {
+  console.log(`Notifying user about account deletion: ${email}`)
+
   const appUrl = getEnvVar('APP_URL')
 
   const body = `

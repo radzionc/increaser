@@ -7,8 +7,11 @@ import { getPublicBucketUserFolder } from '@increaser/public/getPublickBucketUse
 
 export const deleteUser = async (id: string) => {
   console.log(`Deleting user with id: ${id}`)
+
   await userDb.deleteUser(id)
+
   await deletePublicBucketFolder(getPublicBucketUserFolder(id))
+
   const features = await getAllFeatures(['id', 'proposedBy'])
   const featuresToUpdate = features.filter(
     (feature) => feature.proposedBy === id,
@@ -20,6 +23,7 @@ export const deleteUser = async (id: string) => {
       }),
     ),
   )
+
   const scoreboards = await Promise.all(
     scoreboardPeriods.map((period) => getScoreboard(period)),
   )

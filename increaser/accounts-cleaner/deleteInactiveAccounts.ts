@@ -41,26 +41,22 @@ export const deleteInactiveAccounts = async () => {
 
           if (
             accountDeletionEmailSentAt &&
-            lastVisitAt < accountDeletionEmailSentAt &&
-            accountDeletionEmailSentAt <
-              now -
-                convertDuration(
-                  deleteInactiveAccountAfter - notifyInactiveAccountAfter,
-                  'd',
-                  'ms',
-                )
+            lastVisitAt < accountDeletionEmailSentAt
           ) {
-            console.log(`Deleting user with id: ${id}`)
-            await deleteUser(id)
-            return
-          }
-
-          if (
-            !accountDeletionEmailSentAt &&
+            const shouldBeDeletedAt =
+              accountDeletionEmailSentAt +
+              convertDuration(
+                deleteInactiveAccountAfter - notifyInactiveAccountAfter,
+                'd',
+                'ms',
+              )
+            if (shouldBeDeletedAt < now) {
+              await deleteUser(id)
+            }
+          } else if (
             convertDuration(now - lastVisitAt, 'ms', 'd') >
-              notifyInactiveAccountAfter
+            notifyInactiveAccountAfter
           ) {
-            console.log(`Notifying user about account deletion: ${email}`)
             await notifyAboutAccountDeletion({ email })
             await updateUser(id, {
               lastVisitAt,

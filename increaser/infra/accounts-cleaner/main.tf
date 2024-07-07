@@ -63,9 +63,9 @@ resource "aws_iam_policy" "service_permissions" {
         Resource = "*"
       },
       {
-        Action = "dynamodb:*",
         Effect = "Allow",
-        Resource = "*"
+        Action = "dynamodb:*",
+        Resource = "${var.users_table_arn}"
       },
       {
         Action = [
