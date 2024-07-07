@@ -16,7 +16,7 @@ import { TaskCadenceInput } from './TaskCadenceInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
-import { EditDeleteFormFooter as EditDeleteFormFooterProps } from '@lib/ui/form/components/EditDeleteFormFooter'
+import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -93,7 +93,7 @@ export const EditTaskFactoryForm = () => {
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
         />
       </HStack>
-      <EditDeleteFormFooterProps
+      <EditDeleteFormFooter
         onDelete={() => {
           deleteTaskFactory({ id: taskFactory.id })
           onFinish()
