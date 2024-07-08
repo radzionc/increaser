@@ -59,7 +59,6 @@ export const deleteInactiveAccounts = async () => {
           ) {
             await notifyAboutAccountDeletion({ email })
             await updateUser(id, {
-              lastVisitAt,
               accountDeletionEmailSentAt: now,
             })
           }
