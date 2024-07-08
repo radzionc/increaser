@@ -13,6 +13,8 @@ export TF_VAR_domain=
 export TF_VAR_hosted_zone_id=
 export TF_VAR_certificate_arn=
 export TF_VAR_users_table_arn=
+export TF_VAR_features_table_arn=
+export TF_VAR_scoreboards_table_arn=
 export TF_VAR_ses_aws_region=
 
 export TF_VAR_remote_state_bucket=

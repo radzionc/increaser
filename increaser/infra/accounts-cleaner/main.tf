@@ -58,16 +58,46 @@ resource "aws_iam_policy" "service_permissions" {
     Version = "2012-10-17",
     Statement = [
       {
-        Action = "s3:*",
-        Effect = "Allow",
-        Resource = "*"
-      },
-      {
+        Sid = "AllowDynamoDBActionsUsersTable",
         Effect = "Allow",
         Action = "dynamodb:*",
         Resource = "${var.users_table_arn}"
       },
       {
+        Sid = "AllowDynamoDBActionsFeaturesTable",
+        Effect = "Allow",
+        Action = "dynamodb:*",
+        Resource = "${var.features_table_arn}"
+      },
+      {
+        Sid = "AllowDynamoDBActionsScoreboardsTable",
+        Effect = "Allow",
+        Action = "dynamodb:*",
+        Resource = "${var.scoreboards_table_arn}"
+      },
+      {
+        Sid = "AllowSpecificS3ActionsOnPublicBucket",
+        Effect = "Allow",
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:DeleteObject"
+        ],
+        Resource = [
+          "arn:aws:s3:::${var.public_bucket_name}",
+          "arn:aws:s3:::${var.public_bucket_name}/*"
+        ]
+      },
+      {
+        Sid = "AllowSendEmailSES",
+        Effect = "Allow",
+        Action = [
+          "ses:SendEmail"
+        ],
+        Resource = "*"
+      },
+      {
+        Sid = "AllowCloudWatchLogs",
         Action = [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
@@ -79,6 +109,7 @@ resource "aws_iam_policy" "service_permissions" {
     ]
   })
 }
+
 
 resource "aws_iam_role_policy_attachment" "service_role_attachment" {
   policy_arn = aws_iam_policy.service_permissions.arn

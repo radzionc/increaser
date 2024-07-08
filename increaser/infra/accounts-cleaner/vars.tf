@@ -14,3 +14,7 @@ variable "public_bucket_name" {}
 variable "public_bucket_region" {}
 
 variable "users_table_arn" {}
+
+variable "features_table_arn" {}
+
+variable "scoreboards_table_arn" {}
