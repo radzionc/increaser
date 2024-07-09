@@ -29,7 +29,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     cadence: 'week',
     checklist: [],
   })
-  const { mutate } = useCreateTaskFactoryMutation()
+  const { mutate, isPending } = useCreateTaskFactoryMutation()
 
   const isDisabled = useIsTaskFactoryFormDisabled(value)
 
@@ -44,8 +44,9 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       },
       cadence: value.cadence,
     }
-    mutate(taskFactory)
-    onFinish(taskFactory.id)
+    mutate(taskFactory, {
+      onSuccess: () => onFinish(taskFactory.id),
+    })
   }, [mutate, onFinish, value])
 
   return (
@@ -84,7 +85,11 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
         />
       </HStack>
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <CreateFormFooter
+        isPending={isPending}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
     </Panel>
   )
 }
