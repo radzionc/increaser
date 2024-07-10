@@ -22,7 +22,6 @@ const Wrapper = styled(HStack)`
 
 const Container = styled(VStack)`
   flex: 1;
-  max-width: 600px;
   > * {
     ${horizontalPadding(planDayConfig.sectionGap)};
   }
