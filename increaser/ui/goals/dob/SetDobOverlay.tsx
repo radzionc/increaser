@@ -1,4 +1,4 @@
-import { DayInput } from '@lib/ui/time/DayInput'
+import { DayInput } from '@lib/ui/time/day/DayInput'
 import { stringToDay, dayToString, Day } from '@lib/utils/time/Day'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { useState } from 'react'
