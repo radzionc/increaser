@@ -14,6 +14,9 @@ export const GoalTaskFactories = () => {
   return (
     <VStack>
       {shouldBePresent(taskFactories).map((id) => {
+        if (!taskFactoriesRecord[id]) {
+          return null
+        }
         const { task, cadence } = taskFactoriesRecord[id]
 
         const text = `${task.name}, ${taskCadenceName[cadence].toLowerCase()}.`
