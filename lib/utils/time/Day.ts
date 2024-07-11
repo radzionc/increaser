@@ -14,7 +14,6 @@ export const toDay = (timestamp: number): Day => {
   const yearStartedAt = inTimeZone(startOfYear(timestamp).getTime(), dateOffset)
   const diff = timestamp - yearStartedAt
   const diffInDays = diff / convertDuration(1, 'd', 'ms')
-  console.log('diffInDays:', diffInDays)
 
   const day = {
     year: new Date(timestamp).getFullYear(),
