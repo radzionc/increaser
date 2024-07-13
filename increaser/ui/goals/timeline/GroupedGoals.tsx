@@ -2,43 +2,20 @@ import { useMemo } from 'react'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
 import { useGoalsTimeline } from './state/GoalsTimelineContext'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { goalsTimelineConfig } from './config'
 import { PositionAbsolutelyCenterVertically } from '@lib/ui/layout/PositionAbsolutelyCenterVertically'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { toPercents } from '@lib/utils/toPercents'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import { VStack } from '@lib/ui/layout/Stack'
-import { round } from '@lib/ui/css/round'
-import { getColor } from '@lib/ui/theme/getters'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { getGoalStatusColor } from '../getGoalStatusColor'
 import { useActiveGoals } from '../hooks/useActiveGoals'
+import { CurrentGoalProvider } from '../CurrentGoalProvider'
+import { TimelineGoalItem } from './TimelineGoalItem'
 
 const Container = styled(VStack)`
   position: relative;
   width: 100%;
-`
-
-const Goal = styled.div`
-  border: 2px solid ${getColor('mistExtra')};
-  ${round}
-  color: ${getColor('contrast')};
-  background: ${getColor('background')};
-
-  ${centerContent};
-  ${sameDimensions(goalsTimelineConfig.goalHeight)};
-  position: relative;
-  font-size: 20px;
-`
-
-const Indicator = styled.div`
-  position: absolute;
-  ${sameDimensions(8)};
-  ${round};
-  right: 0;
-  bottom: 0;
 `
 
 export const GroupedGoals = () => {
@@ -46,8 +23,6 @@ export const GroupedGoals = () => {
   const { dob, interval } = useGoalsTimeline()
 
   const intervalDuration = getIntervalDuration(interval)
-
-  const theme = useTheme()
 
   const groupedGoals = useMemo(() => {
     return groupItems(items, ({ deadlineAt }) =>
@@ -86,17 +61,9 @@ export const GroupedGoals = () => {
               gap={goalsTimelineConfig.goalsGap}
             >
               {goals.map((goal, index) => (
-                <Goal key={index}>
-                  {goal.emoji}
-                  <Indicator
-                    style={{
-                      background: getGoalStatusColor(
-                        goal.status,
-                        theme,
-                      ).toCssValue(),
-                    }}
-                  />
-                </Goal>
+                <CurrentGoalProvider value={goal} key={index}>
+                  <TimelineGoalItem />
+                </CurrentGoalProvider>
               ))}
             </VStack>
           </PositionAbsolutelyCenterVertically>

@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { goalVerticalPadding } from './config'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentGoal } from './CurrentGoalProvider'
 import { EditGoalForm } from './form/EditGoalForm'
 import { GoalItemContent } from './GoalItemContent'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(Hoverable)`
-  ${verticalPadding(goalVerticalPadding)};
+  ${verticalPadding(tightListItemConfig.verticalPadding)};
   text-align: start;
   width: 100%;
 `

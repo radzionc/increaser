@@ -6,14 +6,14 @@ import { getGoalStatusColor } from './getGoalStatusColor'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { goalContentMinHeight } from './config'
 import { goalStatusNameRecord } from '@increaser/entities/Goal'
 import { useCurrentGoal } from './CurrentGoalProvider'
 import { useMemo } from 'react'
 import { toPercents } from '@lib/utils/toPercents'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled.div<{ $color: HSLA }>`
-  height: ${toSizeUnit(goalContentMinHeight)};
+  height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   ${borderRadius.s};
   font-size: 14px;
   flex-shrink: 0;

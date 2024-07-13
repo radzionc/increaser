@@ -4,11 +4,11 @@ import styled from 'styled-components'
 
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { goalContentMinHeight } from '../config'
 import { getColor } from '@lib/ui/theme/getters'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(MultilineTextInput)`
-  line-height: ${toSizeUnit(goalContentMinHeight)};
+  line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   background: ${getColor('background')};
   width: 100%;
 `

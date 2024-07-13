@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
+import { VStack } from '@lib/ui/layout/Stack'
 import { useCurrentGoal } from '../CurrentGoalProvider'
 import { Goal } from '@increaser/entities/Goal'
 import { useUpdateGoalMutation } from '../api/useUpdateGoalMutation'
@@ -19,14 +18,15 @@ import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
+import { pick } from '@lib/utils/record/pick'
+import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
+import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
+import { omit } from '@lib/utils/record/omit'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
   const [value, setValue] = useState<GoalFormShape>({
-    name: goalAttribute.name,
-    status: goalAttribute.status,
-    emoji: goalAttribute.emoji,
-    deadlineAt: goalAttribute.deadlineAt,
+    ...pick(goalAttribute, ['name', 'status', 'emoji', 'deadlineAt']),
     plan: goalAttribute.plan ?? '',
     target: goalAttribute.target ?? null,
     taskFactories: goalAttribute.taskFactories ?? [],
@@ -48,28 +48,13 @@ export const EditGoalForm = () => {
       return
     }
 
-    const fields: Partial<Omit<Goal, 'id'>> = {}
-    if (value.name !== goalAttribute.name) {
-      fields.name = value.name
-    }
-    if (value.status !== goalAttribute.status) {
-      fields.status = value.status
-    }
-    if (value.deadlineAt !== goalAttribute.deadlineAt) {
-      fields.deadlineAt = shouldBePresent(value.deadlineAt)
-    }
-    if (value.emoji !== goalAttribute.emoji) {
-      fields.emoji = value.emoji
-    }
-    if (value.plan !== goalAttribute.plan) {
-      fields.plan = value.plan
-    }
-    if (value.target !== goalAttribute.target) {
-      fields.target = value.target
-    }
-    if (value.taskFactories !== goalAttribute.taskFactories) {
-      fields.taskFactories = value.taskFactories
-    }
+    const fields: Partial<Omit<Goal, 'id'>> = getUpdatedValues(
+      omit(goalAttribute, 'id'),
+      {
+        ...value,
+        deadlineAt: shouldBePresent(value.deadlineAt),
+      },
+    )
 
     updateGoal({
       id: goalAttribute.id,
@@ -128,30 +113,14 @@ export const EditGoalForm = () => {
         }
         value={value.taskFactories}
       />
-      <HStack
-        wrap="wrap"
-        justifyContent="space-between"
-        fullWidth
-        alignItems="center"
-        gap={20}
-      >
-        <Button
-          kind="alert"
-          type="button"
-          onClick={() => {
-            deleteGoal({ id: goalAttribute.id })
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
-        <HStack alignItems="center" gap={8}>
-          <Button isDisabled={isDisabled} onClick={onFinish} kind="secondary">
-            Cancel
-          </Button>
-          <Button>Save</Button>
-        </HStack>
-      </HStack>
+      <EditDeleteFormFooter
+        onDelete={() => {
+          deleteGoal({ id: goalAttribute.id })
+          onFinish()
+        }}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
     </Panel>
   )
 }

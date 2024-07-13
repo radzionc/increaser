@@ -6,8 +6,6 @@ import { GoalSection } from './GoalSection'
 export const GoalPlan = () => {
   const { plan } = useCurrentGoal()
 
-  if (!plan) return null
-
   return (
     <GoalSection icon={<MapIcon />}>
       <Text>{plan}</Text>
