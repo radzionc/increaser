@@ -4,6 +4,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 const defaultWidth = 940
 
 export const FixedWidthContent = styled.div<{ width?: number | string }>`
+  position: relative;
   max-width: ${({ width = defaultWidth }) => toSizeUnit(width)};
   width: ${({ width = defaultWidth }) => toSizeUnit(width)};
   height: 100%;

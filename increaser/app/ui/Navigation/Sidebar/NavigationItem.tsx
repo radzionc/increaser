@@ -1,10 +1,6 @@
-import styled, { css } from 'styled-components'
-import { HStack } from '@lib/ui/layout/Stack'
-import { getColor } from '@lib/ui/theme/getters'
-import { transition } from '@lib/ui/css/transition'
-import { interactive } from '@lib/ui/css/interactive'
-import { borderRadius } from '@lib/ui/css/borderRadius'
-import { ComponentWithActiveState, UIComponentProps } from '@lib/ui/props'
+import { UIComponentProps } from '@lib/ui/props'
+import { NavigationItemContainer } from './NavigationItemContainer'
+import { NavigationItemContentFrame } from './NavigationItemContentFrame'
 
 export type NavigationItemProps = UIComponentProps & {
   icon: React.ReactNode
@@ -12,42 +8,6 @@ export type NavigationItemProps = UIComponentProps & {
   isActive?: boolean
   decoration?: React.ReactNode
 }
-
-export const Container = styled.div<ComponentWithActiveState>`
-  padding: 0 12px;
-  height: 44px;
-  ${interactive};
-  display: flex;
-  align-items: center;
-  width: 100%;
-  ${transition};
-  ${borderRadius.s};
-  font-weight: 500;
-  color: ${getColor('textSupporting')};
-  position: relative;
-
-  &:hover {
-    background: ${getColor('mist')};
-  }
-
-  &:active {
-    background: ${getColor('mistExtra')};
-  }
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      background: ${getColor('mist')};
-      color: ${getColor('contrast')};
-    `}
-`
-
-export const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 28px;
-`
 
 export const NavigationItem = ({
   icon,
@@ -57,12 +17,12 @@ export const NavigationItem = ({
   ...rest
 }: NavigationItemProps) => {
   return (
-    <Container isActive={isActive} {...rest}>
-      <HStack gap={8}>
-        <IconWrapper>{icon}</IconWrapper>
-        <div>{name}</div>
-      </HStack>
+    <NavigationItemContainer isActive={isActive} {...rest}>
+      <NavigationItemContentFrame>
+        {icon}
+        {name}
+      </NavigationItemContentFrame>
       {decoration}
-    </Container>
+    </NavigationItemContainer>
   )
 }

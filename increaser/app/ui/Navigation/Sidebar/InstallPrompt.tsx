@@ -4,15 +4,11 @@ import { platformInfo } from '@increaser/app/pwa/platformInfo'
 import { usePWA } from '@increaser/app/pwa/PWAContext'
 import { useMemo } from 'react'
 import styled from 'styled-components'
-import {
-  IconWrapper,
-  Container as NavigationContainer,
-} from '@increaser/app/ui/Navigation/Sidebar/NavigationItem'
 import { ArrowDownCircleIcon } from '@lib/ui/icons/ArrowDownCircleIcon'
-import { Text } from '@lib/ui/text'
-import { HStack } from '@lib/ui/layout/Stack'
 import { CloseButton } from '@lib/ui/buttons/CloseButton'
 import { productName } from '@increaser/config'
+import { NavigationItemContainer } from './NavigationItemContainer'
+import { NavigationItemContentFrame } from './NavigationItemContentFrame'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,7 +17,7 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-const Container = styled(NavigationContainer)`
+const Container = styled(NavigationItemContainer)`
   background: ${({ theme }) => theme.colors.mist.toCssValue()};
   &:hover {
     background: ${({ theme }) =>
@@ -50,24 +46,12 @@ export const InstallPrompt = () => {
           analytics.trackEvent('Attempt Install')
         }}
       >
-        <Text size={18} as="div">
-          <HStack gap={8}>
-            <>
-              <IconWrapper>
-                {platform ? (
-                  platformInfo[platform].icon
-                ) : (
-                  <ArrowDownCircleIcon />
-                )}
-              </IconWrapper>
-              <div>
-                {platform
-                  ? `Install on ${platformInfo[platform].name}`
-                  : `Install ${productName}`}
-              </div>
-            </>
-          </HStack>
-        </Text>
+        <NavigationItemContentFrame>
+          {platform ? platformInfo[platform].icon : <ArrowDownCircleIcon />}
+          {platform
+            ? `Install on ${platformInfo[platform].name}`
+            : `Install ${productName}`}
+        </NavigationItemContentFrame>
       </Container>
       <FloatingCloseButton>
         <CloseButton onClick={() => setIsSidebarInstallPromptRejected(true)} />

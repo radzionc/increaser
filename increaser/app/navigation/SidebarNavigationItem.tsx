@@ -1,4 +1,4 @@
-import { StartTheDayNavigation } from '../plan/day/PlanTodayNavigation'
+import { PlanDayPrompt } from '../plan/day/PlanDayPrompt'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { NavigationToInternalPage } from '../ui/Navigation/Sidebar/NavigationToInternalPage'
@@ -15,7 +15,7 @@ export const SidebarNavigationItem = ({
       value={value}
       plan={() => (
         <UserStateOnly>
-          <StartTheDayNavigation />
+          <PlanDayPrompt />
         </UserStateOnly>
       )}
       focus={() => (

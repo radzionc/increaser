@@ -1,7 +1,7 @@
-import { PlanDayStep, planDaySteps } from '../PlanDayStep'
+import { AppPagePlanView, appPageViews } from '@increaser/ui/navigation/app'
 
 export const getCurrentPlanDayStep = (
-  completion: Record<PlanDayStep, boolean>,
-): PlanDayStep | null => {
-  return planDaySteps.find((step) => !completion[step]) || null
+  completion: Record<AppPagePlanView, boolean>,
+): AppPagePlanView | null => {
+  return appPageViews.plan.find((step) => !completion[step]) || null
 }

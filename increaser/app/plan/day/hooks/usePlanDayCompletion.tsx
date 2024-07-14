@@ -1,9 +1,9 @@
 import { useHaveToSubmitYesterdayHabits } from '../../../habits/hooks/useHaveToSubmitYesterdayHabits'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { PlanDayStep } from '../PlanDayStep'
+import { AppPagePlanView } from '@increaser/ui/navigation/app'
 
-export const usePlanDayCompletion = (): Record<PlanDayStep, boolean> => {
+export const usePlanDayCompletion = (): Record<AppPagePlanView, boolean> => {
   const todayStartedAt = useStartOfDay()
   const haveToSubmitYesterdayHabits = useHaveToSubmitYesterdayHabits()
   const { reviewedGoalsAt, organizedTasksAt, reviewedVisionAt } =

@@ -7,20 +7,19 @@ import { getAppPath } from '@increaser/ui/navigation/app'
 import { useIsTodayPlanned } from './hooks/useIsTodayPlanned'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
-import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
-import { borderRadius } from '@lib/ui/css/borderRadius'
+import { getCurrentPlanDayStep } from './utils/getCurrentPlanDayStep'
+import { usePlanDayCompletion } from './hooks/usePlanDayCompletion'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { PlanDayActiveNavigation } from './PlanDayActiveNavigation'
+import { PlanDayPromptOutline } from './PlanDayPromptOutline'
 
 const Container = styled(NavigationItem)`
   color: ${getColor('success')};
 `
 
-const Outline = styled.div`
-  ${absoluteOutline(1, 1)};
-  border: 1px dashed ${getColor('success')};
-  ${borderRadius.s};
-`
+export const PlanDayPrompt = () => {
+  const completion = usePlanDayCompletion()
 
-export const StartTheDayNavigation = () => {
   const isCompleted = useIsTodayPlanned()
 
   const page = useCurrentPage()
@@ -32,13 +31,22 @@ export const StartTheDayNavigation = () => {
     return null
   }
 
+  if (isActive) {
+    return <PlanDayActiveNavigation />
+  }
+
   return (
-    <Link href={getAppPath('plan')}>
+    <Link
+      href={getAppPath(
+        'plan',
+        shouldBePresent(getCurrentPlanDayStep(completion)),
+      )}
+    >
       <Container
         icon={<AnimatedCoffeeIcon />}
         name={name}
         isActive={isActive}
-        decoration={<Outline />}
+        decoration={<PlanDayPromptOutline />}
       />
     </Link>
   )

@@ -1,14 +1,13 @@
-export const planDaySteps = ['vision', 'goals', 'habits', 'tasks'] as const
-export type PlanDayStep = (typeof planDaySteps)[number]
+import { AppPagePlanView } from '@increaser/ui/navigation/app'
 
-export const planDayStepTarget: Record<PlanDayStep, string> = {
+export const planDayViewTarget: Record<AppPagePlanView, string> = {
   vision: 'Visualize your ideal future',
   habits: 'Review your habits',
   goals: 'Revisit your goals',
   tasks: 'Clear overdue tasks and plan today’s priorities',
 }
 
-export const planDayStepName: Record<PlanDayStep, string> = {
+export const planDayViewName: Record<AppPagePlanView, string> = {
   vision: 'Vision',
   habits: 'Habits',
   goals: 'Goals',
