@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
@@ -6,43 +6,45 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCreateVisionAttributeMutation } from '../api/useCreateVisionAttributeMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { VisionAttributeStatus } from '@increaser/entities/Vision'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VisionAttributeNameInput } from './VisionAttributeNameInput'
 import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
 import { VisionImageInput } from './VisionImageInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { randomlyPick } from '@lib/utils/array/randomlyPick'
+import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
+import { VisionAttributeFormShape } from './VisionAttributeFormShape'
+import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
+import { EmojiInput } from '@increaser/app/ui/EmojiInput'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
 }: FinishableComponentProps) => {
   const { vision } = useAssertUserState()
-  const [name, setName] = useState('')
-  const [status, setStatus] = useState<VisionAttributeStatus>('inProgress')
-  const [imageId, setImageId] = useState<string | null>(null)
+  const [value, setValue] = useState<VisionAttributeFormShape>({
+    name: '',
+    status: 'inProgress',
+    imageId: null,
+    emoji: randomlyPick(defaultEmojis),
+  })
 
   const { mutate } = useCreateVisionAttributeMutation()
 
-  const isDisabled = useMemo(() => {
-    if (!name.trim()) {
-      return 'Name is required'
-    }
-  }, [name])
+  const isDisabled = useIsVisionAttributeFormDisabled(value)
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return
 
     mutate({
       id: getId(),
-      name,
-      status,
-      imageId,
+      ...value,
       order: getLastItemOrder(
         Object.values(vision).map((attribute) => attribute.order),
       ),
     })
     onFinish()
-  }, [imageId, isDisabled, mutate, name, onFinish, status, vision])
+  }, [isDisabled, mutate, onFinish, value, vision])
 
   return (
     <Panel
@@ -55,15 +57,29 @@ export const CreateVisionAttributeForm = ({
         onSubmit,
       })}
     >
-      <VisionAttributeNameInput
-        autoFocus
-        onChange={setName}
-        value={name}
-        onSubmit={onSubmit}
+      <EmojiTextInputFrame>
+        <div>
+          <EmojiInput
+            value={value.emoji}
+            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
+          />
+        </div>
+        <VisionAttributeNameInput
+          autoFocus
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          value={value.name}
+          onSubmit={onSubmit}
+        />
+      </EmojiTextInputFrame>
+      <VisionImageInput
+        onChange={(imageId) => setValue((prev) => ({ ...prev, imageId }))}
+        value={value.imageId ?? null}
       />
-      <VisionImageInput value={imageId ?? null} onChange={setImageId} />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <VisionAttributeStatusSelector value={status} onChange={setStatus} />
+        <VisionAttributeStatusSelector
+          value={value.status}
+          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
+        />
         <HStack alignItems="center" gap={8}>
           <Button onClick={onFinish} kind="secondary">
             Cancel

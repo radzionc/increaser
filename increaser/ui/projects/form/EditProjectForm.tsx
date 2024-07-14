@@ -8,7 +8,6 @@ import { ProjectFormShape } from './ProjectFormShape'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { ProjectFormHeader } from './ProjectFormHeader'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
@@ -19,6 +18,7 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DeleteProject } from './DeleteProject'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -75,7 +75,21 @@ export const EditProjectForm = () => {
       fields,
     })
     onFinish()
-  }, [project, isDisabled, onFinish, updateProject, value])
+  }, [
+    isDisabled,
+    value.name,
+    value.color,
+    value.emoji,
+    value.status,
+    project.name,
+    project.color,
+    project.emoji,
+    project.status,
+    project.id,
+    updateProject,
+    onFinish,
+    projects,
+  ])
 
   return (
     <Panel
@@ -89,7 +103,7 @@ export const EditProjectForm = () => {
       })}
       style={{ width: '100%' }}
     >
-      <ProjectFormHeader>
+      <EmojiTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -109,7 +123,7 @@ export const EditProjectForm = () => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </ProjectFormHeader>
+      </EmojiTextInputFrame>
       {couldProjectStatusBeChanged(project.id) && (
         <VStack alignItems="start">
           <ProjectStatusInput

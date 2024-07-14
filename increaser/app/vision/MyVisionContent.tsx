@@ -18,7 +18,7 @@ export const MyVisionContent = () => {
   return (
     <Match
       value={view}
-      edit={() => (
+      manage={() => (
         <Container>
           <ActiveItemIdProvider initialValue={null}>
             <ProductEducationBlock value="vision" />

@@ -76,7 +76,7 @@ const Image = styled.img`
 `
 
 export const CuratedVisionAttributeItem = ({
-  value: { id, name },
+  value: { id, name, emoji },
 }: ComponentWithValueProps<VisionAttributeIdea>) => {
   const { mutate } = useCreateVisionAttributeMutation()
 
@@ -99,6 +99,7 @@ export const CuratedVisionAttributeItem = ({
           status: 'inProgress',
           imageId,
           order,
+          emoji,
         })
       }}
     >

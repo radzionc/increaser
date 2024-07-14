@@ -9,7 +9,6 @@ import { ProjectFormShape } from './ProjectFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { ProjectFormHeader } from './ProjectFormHeader'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
@@ -20,6 +19,7 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { useCreateProjectMutation } from '../api/useCreateProjectMutation'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { projects } = useAssertUserState()
@@ -49,7 +49,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
       allocatedMinutesPerWeek: 0,
     })
     onFinish()
-  }, [projects, isDisabled, mutate, onFinish, value])
+  }, [isDisabled, mutate, value, activeProjects, onFinish])
 
   return (
     <Panel
@@ -62,7 +62,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
         onSubmit,
       })}
     >
-      <ProjectFormHeader>
+      <EmojiTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -82,7 +82,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </ProjectFormHeader>
+      </EmojiTextInputFrame>
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <div />
         <HStack alignItems="center" gap={8}>

@@ -14,11 +14,11 @@ import { GoalFormShape } from './GoalFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({
@@ -56,7 +56,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
         onSubmit,
       })}
     >
-      <GoalFormHeader>
+      <EmojiTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -69,7 +69,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </GoalFormHeader>
+      </EmojiTextInputFrame>
       <GoalDeadlineInput
         onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
         value={value.deadlineAt}

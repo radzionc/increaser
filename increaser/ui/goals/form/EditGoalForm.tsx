@@ -14,7 +14,6 @@ import { GoalFormShape } from './GoalFormShape'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { GoalFormHeader } from './GoalFormHeader'
 import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
@@ -22,6 +21,7 @@ import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -75,7 +75,7 @@ export const EditGoalForm = () => {
       })}
       style={{ width: '100%' }}
     >
-      <GoalFormHeader>
+      <EmojiTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -88,7 +88,7 @@ export const EditGoalForm = () => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </GoalFormHeader>
+      </EmojiTextInputFrame>
       <VStack alignItems="start">
         <GoalStatusSelector
           value={value.status}

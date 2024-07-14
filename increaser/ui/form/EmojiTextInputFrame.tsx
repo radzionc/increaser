@@ -4,7 +4,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
-export const GoalFormHeader = styled(HStack)`
+export const EmojiTextInputFrame = styled(HStack)`
   padding: 0;
 
   width: 100%;
