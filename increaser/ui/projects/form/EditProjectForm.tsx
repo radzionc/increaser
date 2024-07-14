@@ -18,7 +18,7 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DeleteProject } from './DeleteProject'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -103,7 +103,7 @@ export const EditProjectForm = () => {
       })}
       style={{ width: '100%' }}
     >
-      <EmojiTextInputFrame>
+      <EmojiColorTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -123,7 +123,7 @@ export const EditProjectForm = () => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </EmojiTextInputFrame>
+      </EmojiColorTextInputFrame>
       {couldProjectStatusBeChanged(project.id) && (
         <VStack alignItems="start">
           <ProjectStatusInput

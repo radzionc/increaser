@@ -19,7 +19,7 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { useCreateProjectMutation } from '../api/useCreateProjectMutation'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { projects } = useAssertUserState()
@@ -62,7 +62,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
         onSubmit,
       })}
     >
-      <EmojiTextInputFrame>
+      <EmojiColorTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -82,7 +82,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </EmojiTextInputFrame>
+      </EmojiColorTextInputFrame>
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <div />
         <HStack alignItems="center" gap={8}>

@@ -1,14 +1,12 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { order } from '@lib/utils/array/order'
 import styled from 'styled-components'
-import { visionImageAspectRatio } from '@increaser/ui/vision/visionImageAspectRatio'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 
 const Image = styled.img`
-  /* ${visionImageAspectRatio}; */
   width: 100%;
   object-fit: cover;
   ${borderRadius.m};
@@ -32,7 +30,6 @@ export const MyVisionBoard = () => {
   )
 
   return (
-    // <UniformColumnGrid minChildrenWidth={280} gap={2}>
     <Container>
       {items.map(({ imageId }) => (
         <SafeImage
@@ -42,6 +39,5 @@ export const MyVisionBoard = () => {
         />
       ))}
     </Container>
-    // </UniformColumnGrid>
   )
 }
