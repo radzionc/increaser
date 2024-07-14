@@ -23,7 +23,7 @@
   "scripts": {
     "postinstall": "husky install",
     "format": "eslint --fix && prettier --write",
-    "typecheck": "yarn workspaces foreach --all run typecheck",
+    "typecheck": "tsc --noEmit",
     "sync-packages": "syncpack fix-mismatches",
     "knip": "knip"
   }

@@ -117,7 +117,6 @@ export const CuratedVisionAttributeItem = ({
           createVisionAttribute({
             id,
             name: name,
-            status: 'inProgress',
             imageId,
             order: getLastItemOrder(orders),
             emoji,

@@ -1,12 +1,10 @@
 import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
-import { VStack } from '@lib/ui/layout/Stack'
 import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { useUpdateVisionAttributeMutation } from '../api/useUpdateVisionAttributeMutation'
 import { useDeleteVisionAttributeMutation } from '../api/useDeleteVisionAttributeMutation'
 import { VisionAttributeNameInput } from './VisionAttributeNameInput'
-import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { VisionImageInput } from './VisionImageInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
@@ -20,12 +18,7 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
-  const initialValue = pick(visionAttribute, [
-    'name',
-    'status',
-    'emoji',
-    'imageId',
-  ])
+  const initialValue = pick(visionAttribute, ['name', 'emoji', 'imageId'])
   const [value, setValue] = useState<VisionAttributeFormShape>(initialValue)
 
   const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
@@ -89,12 +82,6 @@ export const EditVisionAttributeForm = () => {
           onSubmit={onSubmit}
         />
       </EmojiTextInputFrame>
-      <VStack alignItems="start">
-        <VisionAttributeStatusSelector
-          value={value.status}
-          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
-        />
-      </VStack>
       <VisionImageInput
         value={value.imageId ?? null}
         onChange={(imageId) => setValue((prev) => ({ ...prev, imageId }))}

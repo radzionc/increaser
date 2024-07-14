@@ -8,7 +8,6 @@ import { useCreateVisionAttributeMutation } from '../api/useCreateVisionAttribut
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VisionAttributeNameInput } from './VisionAttributeNameInput'
-import { VisionAttributeStatusSelector } from './VisionAttributeStatusSelector'
 import { VisionImageInput } from './VisionImageInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
@@ -24,7 +23,6 @@ export const CreateVisionAttributeForm = ({
   const { vision } = useAssertUserState()
   const [value, setValue] = useState<VisionAttributeFormShape>({
     name: '',
-    status: 'inProgress',
     imageId: null,
     emoji: randomlyPick(defaultEmojis),
   })
@@ -76,10 +74,6 @@ export const CreateVisionAttributeForm = ({
         value={value.imageId ?? null}
       />
       <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <VisionAttributeStatusSelector
-          value={value.status}
-          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
-        />
         <HStack alignItems="center" gap={8}>
           <Button onClick={onFinish} kind="secondary">
             Cancel

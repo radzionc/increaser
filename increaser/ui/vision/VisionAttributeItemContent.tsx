@@ -6,8 +6,6 @@ import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
 import { Center } from '@lib/ui/layout/Center'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { useCurrentVisionAttribute } from './CurrentVisionAttributeProvider'
-import { HStack } from '@lib/ui/layout/Stack'
-import { VisionAttributeStatusTag } from './VisionAttributeStatusTag'
 
 const Name = styled(Text)`
   text-align: start;
@@ -16,22 +14,14 @@ const Name = styled(Text)`
 `
 
 export const VisionAttributeItemContent = () => {
-  const { name, emoji, status } = useCurrentVisionAttribute()
+  const { name, emoji } = useCurrentVisionAttribute()
 
   return (
     <ChecklistItemFrame>
       <Center>
         <Text color="contrast">{emoji}</Text>
       </Center>
-      <HStack
-        fullWidth
-        gap={8}
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Name>{name}</Name>
-        <VisionAttributeStatusTag value={status} />
-      </HStack>
+      <Name>{name}</Name>
     </ChecklistItemFrame>
   )
 }
