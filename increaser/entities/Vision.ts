@@ -97,7 +97,7 @@ export const visionAttributeIdeas: VisionAttributeIdea[] = [
   },
   {
     id: 'dog',
-    name: 'Having a beloved dog',
+    name: 'Having a dog',
     emoji: '🐶',
   },
 ]

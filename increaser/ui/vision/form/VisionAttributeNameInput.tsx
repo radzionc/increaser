@@ -10,6 +10,7 @@ import { getColor } from '@lib/ui/theme/getters'
 const Container = styled(MultilineTextInput)`
   line-height: ${toSizeUnit(visionItemContentMinHeight)};
   background: ${getColor('background')};
+  width: 100%;
 `
 
 type VisionAttributeNameInputProps = InputProps<string> &

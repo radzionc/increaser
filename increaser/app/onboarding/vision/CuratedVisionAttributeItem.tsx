@@ -18,6 +18,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
 import { VisionAttributeIdea } from '@increaser/entities/Vision'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 const Indicator = styled.div`
   ${round};
@@ -92,13 +93,12 @@ export const CuratedVisionAttributeItem = ({
       onClick={() => {
         if (isAdded) return
         const orders = Object.values(vision).map((attribute) => attribute.order)
-        const order = orders.length ? Math.min(...orders) - 1 : 0
         mutate({
           id,
           name: name,
           status: 'inProgress',
           imageId,
-          order,
+          order: getLastItemOrder(orders),
           emoji,
         })
       }}
