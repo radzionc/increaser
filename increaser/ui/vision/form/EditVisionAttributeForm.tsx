@@ -15,15 +15,18 @@ import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { pick } from '@lib/utils/record/pick'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
-  const [value, setValue] = useState<VisionAttributeFormShape>({
-    ...pick(visionAttribute, ['name', 'status', 'emoji', 'imageId']),
-  })
+  const initialValue = pick(visionAttribute, [
+    'name',
+    'status',
+    'emoji',
+    'imageId',
+  ])
+  const [value, setValue] = useState<VisionAttributeFormShape>(initialValue)
 
   const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
   const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
@@ -42,7 +45,7 @@ export const EditVisionAttributeForm = () => {
     }
 
     const fields: Partial<Omit<VisionAttribute, 'id'>> = getUpdatedValues(
-      omit(visionAttribute, 'id'),
+      initialValue,
       value,
     )
 
@@ -51,7 +54,14 @@ export const EditVisionAttributeForm = () => {
       fields,
     })
     onFinish()
-  }, [isDisabled, onFinish, updateVisionAttribute, value, visionAttribute])
+  }, [
+    initialValue,
+    isDisabled,
+    onFinish,
+    updateVisionAttribute,
+    value,
+    visionAttribute.id,
+  ])
 
   return (
     <Panel

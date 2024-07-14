@@ -1,9 +1,11 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import {
+  ComponentWithActiveState,
+  ComponentWithValueProps,
+} from '@lib/ui/props'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
-import { transition } from '@lib/ui/css/transition'
 import { round } from '@lib/ui/css/round'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { centerContent } from '@lib/ui/css/centerContent'
@@ -19,6 +21,8 @@ import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
 import { VisionAttributeIdea } from '@increaser/entities/Vision'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { useDeleteVisionAttributeMutation } from '@increaser/ui/vision/api/useDeleteVisionAttributeMutation'
+import { transition } from '@lib/ui/css/transition'
 
 const Indicator = styled.div`
   ${round};
@@ -38,18 +42,39 @@ const Header = styled(HStack)`
   line-height: 24px;
 `
 
-const Container = styled(VStack)<{ isInteractive: boolean }>`
+const Container = styled(VStack)<ComponentWithActiveState>`
   ${borderRadius.m};
   width: 100%;
+  font-weight: 500;
   border: 2px solid ${getColor('mist')};
-  ${transition};
   overflow: hidden;
   justify-content: space-between;
+  ${interactive};
+  ${transition};
 
-  ${({ isInteractive }) =>
-    isInteractive
+  ${({ isActive }) =>
+    isActive
       ? css`
-          ${interactive};
+          color: ${getColor('contrast')};
+
+          border-color: ${getColor('contrast')};
+
+          ${Indicator} {
+            color: ${getColor('success')};
+          }
+        `
+      : css`
+          img {
+            ${transition};
+            filter: grayscale(100%);
+          }
+          background: ${getColor('foreground')};
+
+          &:hover {
+            img {
+              filter: none;
+            }
+          }
 
           &:hover {
             border-color: ${getColor('mistExtra')};
@@ -57,15 +82,6 @@ const Container = styled(VStack)<{ isInteractive: boolean }>`
           }
 
           &:hover ${Indicator} {
-            color: ${getColor('success')};
-          }
-        `
-      : css`
-          color: ${getColor('contrast')};
-
-          border-color: ${getColor('success')};
-
-          ${Indicator} {
             color: ${getColor('success')};
           }
         `}
@@ -79,7 +95,8 @@ const Image = styled.img`
 export const CuratedVisionAttributeItem = ({
   value: { id, name, emoji },
 }: ComponentWithValueProps<VisionAttributeIdea>) => {
-  const { mutate } = useCreateVisionAttributeMutation()
+  const { mutate: createVisionAttribute } = useCreateVisionAttributeMutation()
+  const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
 
   const { vision } = useAssertUserState()
 
@@ -89,18 +106,23 @@ export const CuratedVisionAttributeItem = ({
 
   return (
     <Container
-      isInteractive={!isAdded}
+      isActive={isAdded}
       onClick={() => {
-        if (isAdded) return
-        const orders = Object.values(vision).map((attribute) => attribute.order)
-        mutate({
-          id,
-          name: name,
-          status: 'inProgress',
-          imageId,
-          order: getLastItemOrder(orders),
-          emoji,
-        })
+        if (isAdded) {
+          deleteVisionAttribute({ id })
+        } else {
+          const orders = Object.values(vision).map(
+            (attribute) => attribute.order,
+          )
+          createVisionAttribute({
+            id,
+            name: name,
+            status: 'inProgress',
+            imageId,
+            order: getLastItemOrder(orders),
+            emoji,
+          })
+        }
       }}
     >
       <Header>
