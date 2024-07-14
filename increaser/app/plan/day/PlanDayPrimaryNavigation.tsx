@@ -61,6 +61,7 @@ export const PlanDayPrimaryNavigation = () => {
               habits: () => ({ sumbittedHabitsAt: now }),
               goals: () => ({ reviewedGoalsAt: now }),
               tasks: () => ({ organizedTasksAt: now }),
+              vision: () => ({ reviewedVisionAt: now }),
             },
           )
 

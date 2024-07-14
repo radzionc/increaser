@@ -3,6 +3,7 @@ import { Match } from '@lib/ui/base/Match'
 import { GoalsReview } from './goals/GoalsReview'
 import { Tasks } from '@increaser/ui/tasks/Tasks'
 import { MyHabits } from '../../habits/components/MyHabits'
+import { MyVision } from '../../vision/MyVision'
 
 export const PlanDayStepContent = () => {
   const { currentStep } = usePlanDay()
@@ -14,6 +15,7 @@ export const PlanDayStepContent = () => {
   return (
     <Match
       value={currentStep}
+      vision={() => <MyVision />}
       habits={() => <MyHabits />}
       goals={() => <GoalsReview />}
       tasks={() => <Tasks />}
