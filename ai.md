@@ -18,7 +18,7 @@ On the side of the "Home" page, there is a timeline featuring icons with daily e
 
 When the user starts a focus session, the content of the "Home" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task. If the user forgets to stop the session, it will be stopped automatically, and the user will be prompted to edit that session.
 
-Also, while in the focus session, users can choose to play focus sounds imported from YouTube or arrange their own ambient noise by mixing different individual sounds like rain, coffee shop, or birds singing, and adjusting their volume.
+Also, while in the focus session, users can choose to play focus sounds imported from YouTube or arrange their own ambient noise by mixing different individual sounds like rain, a coffee shop, or birds singing, and adjusting their volume. The YouTube player will be positioned in the corner of the screen, and the user can change the corner, turn off the music, or pause it from that widget.
 
 The “Vision” page allows users to describe what their perfect life looks like. It acts as a list of “vision attributes,” where each attribute serves as a description of a perfect life, e.g., “Happy marriage,” “Fit body,” “Financial independence,” etc. There are two views of the page: "board" and "manage." On the board, users can see all the vision attribute images, while on the "manage" vision they can create, update, and delete their vision attributes. Users can upload an image for the vision attribute and add an emoji to it.d
 
