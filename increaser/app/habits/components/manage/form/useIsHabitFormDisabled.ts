@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { HabitFormShape } from '../../HabitForm/HabitFormShape'
+import { HabitFormShape } from './HabitFormShape'
 
 export const useIsHabitFormDisabled = ({ name }: HabitFormShape) => {
   return useMemo(() => {

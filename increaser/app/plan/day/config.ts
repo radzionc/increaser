@@ -1,3 +1,1 @@
-export const planDayConfig = {
-  sectionGap: 40,
-}
+export const planDayConfig = {}

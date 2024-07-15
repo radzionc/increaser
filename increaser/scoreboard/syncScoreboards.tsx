@@ -67,7 +67,7 @@ export const syncScoreboards = async () => {
         const totalInMinutes = Math.round(total / MS_IN_MIN)
 
         const dailyAvgInMinutes = Math.round(totalInMinutes / days)
-        if (dailyAvgInMinutes < convertDuration(3, 'h', 'min')) return
+        if (dailyAvgInMinutes < convertDuration(4, 'h', 'min')) return
 
         const blocks = getBlocks(scoreboardSets)
 

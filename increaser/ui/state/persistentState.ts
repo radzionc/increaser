@@ -36,7 +36,7 @@ export enum PersistentStateKey {
   YouTubeFocusPreference = 'youTubeFocusPreference',
   CurrentSet = 'currentSet',
   FocusLauncher = 'focusLauncher2',
-  MyVisionView = 'myVisionView',
+  MyVisionView = 'myVisionView2',
   MyHabitsView = 'myHabitsView',
   AreFocusSoundsCollapsed = 'areFocusSoundsCollapsed',
 }

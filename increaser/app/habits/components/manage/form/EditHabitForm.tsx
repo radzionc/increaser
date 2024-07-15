@@ -8,7 +8,7 @@ import { HabitFormShape } from './HabitFormShape'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { HabitFormHeader } from './HabitFormHeader'
+import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useDeleteHabitMutation } from '../../../api/useDeleteHabitMutation'
@@ -73,7 +73,7 @@ export const EditHabitForm = () => {
       })}
       style={{ width: '100%' }}
     >
-      <HabitFormHeader>
+      <EmojiColorTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -93,7 +93,7 @@ export const EditHabitForm = () => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </HabitFormHeader>
+      </EmojiColorTextInputFrame>
       <HStack
         wrap="wrap"
         justifyContent="space-between"

@@ -5,7 +5,6 @@ import {
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { useCallback, useId } from 'react'
 import { useHasVision } from '@increaser/ui/vision/hooks/useHasVision'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigationItem'
 import { HStack } from '@lib/ui/layout/Stack'
 import { GridIcon } from '@lib/ui/icons/GridIcon'
@@ -14,7 +13,7 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 
-export const myVisionViews = ['board', 'edit'] as const
+export const myVisionViews = ['board', 'manage'] as const
 export type MyVisionView = (typeof myVisionViews)[number]
 
 export const useMyVisionView = () => {
@@ -23,12 +22,12 @@ export const useMyVisionView = () => {
   return useStateCorrector(
     usePersistentState<MyVisionView>(
       PersistentStateKey.MyVisionView,
-      hasVision ? 'board' : 'edit',
+      hasVision ? 'board' : 'manage',
     ),
     useCallback(
       (state) => {
         if (!hasVision) {
-          return 'edit'
+          return 'manage'
         }
 
         return state
@@ -40,7 +39,7 @@ export const useMyVisionView = () => {
 
 const myVisionViewIcon: Record<MyVisionView, React.ReactNode> = {
   board: <GridIcon />,
-  edit: <EditIcon />,
+  manage: <EditIcon />,
 }
 
 export const MyVisionViewSelector = () => {
@@ -54,7 +53,7 @@ export const MyVisionViewSelector = () => {
   }
 
   return (
-    <UniformColumnGrid maxChildrenWidth={100} gap={4}>
+    <HStack gap={4}>
       {myVisionViews.map((value) => (
         <TabNavigationItem
           isSelected={value === view}
@@ -69,6 +68,6 @@ export const MyVisionViewSelector = () => {
           </HStack>
         </TabNavigationItem>
       ))}
-    </UniformColumnGrid>
+    </HStack>
   )
 }

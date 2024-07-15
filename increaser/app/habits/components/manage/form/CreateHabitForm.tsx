@@ -9,7 +9,6 @@ import { HabitFormShape } from './HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { HabitFormHeader } from './HabitFormHeader'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
@@ -18,6 +17,7 @@ import { useCreateHabitMutation } from '../../../api/useCreateHabitMutation'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
+import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 
 export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
   const { habits } = useHabits()
@@ -55,7 +55,7 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
         onSubmit,
       })}
     >
-      <HabitFormHeader>
+      <EmojiColorTextInputFrame>
         <div>
           <EmojiInput
             value={value.emoji}
@@ -75,7 +75,7 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
           value={value.name}
           onSubmit={onSubmit}
         />
-      </HabitFormHeader>
+      </EmojiColorTextInputFrame>
       <HStack justifyContent="space-between" fullWidth alignItems="center">
         <div />
         <HStack alignItems="center" gap={8}>
