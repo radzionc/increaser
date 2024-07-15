@@ -39,6 +39,7 @@ export enum PersistentStateKey {
   MyVisionView = 'myVisionView2',
   MyHabitsView = 'myHabitsView',
   AreFocusSoundsCollapsed = 'areFocusSoundsCollapsed',
+  YouTubePlayerPosition = 'youTubePlayerPosition',
 }
 
 export const persistentStorage =

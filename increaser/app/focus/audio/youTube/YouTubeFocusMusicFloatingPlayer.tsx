@@ -12,11 +12,16 @@ import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
 import { ManageCurrentYouTubeMusic } from './ManageCurrentYouTubeMusic'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
+import { match } from '@lib/utils/match'
+import { CSSProperties } from 'react'
+import { ManageYouTubePlayerPosition } from './ManageYouTubePlayerPosition'
+import { useYouTubePlayerPosition } from './state/useYouTubePlayerPosition'
+import { RectangleCorner } from '@lib/ui/entities/RectangleCorner'
+
+const offset = 20
 
 const Wrapper = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
   width: 320px;
   z-index: 1;
   ${borderRadius.m};
@@ -39,6 +44,7 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
   const [{ url }] = useYouTubeFocusPreference()
   const [, setIsEnabled] = useIsFocusAudioEnabled()
   const { isPlaying } = useYouTubeFocusMusic()
+  const [position] = useYouTubePlayerPosition()
 
   const isActive =
     currentSet && focusAudioMode === 'youtube' && isFocusAudioEnabled && url
@@ -48,15 +54,25 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper
+      style={match<RectangleCorner, CSSProperties>(position, {
+        'bottom-left': () => ({ bottom: offset, left: offset }),
+        'bottom-right': () => ({ bottom: offset, right: offset }),
+        'top-left': () => ({ top: offset, left: offset }),
+        'top-right': () => ({ top: offset, right: offset }),
+      })}
+    >
       <Header>
         <ManageCurrentYouTubeMusic />
-        <IconButton
-          kind="secondary"
-          title="Turn off music"
-          onClick={() => setIsEnabled(false)}
-          icon={<CloseIcon />}
-        />
+        <HStack>
+          <ManageYouTubePlayerPosition />
+          <IconButton
+            kind="secondary"
+            title="Turn off music"
+            onClick={() => setIsEnabled(false)}
+            icon={<CloseIcon />}
+          />
+        </HStack>
       </Header>
       {isPlaying && <YouTubeFocusMusicPlayer />}
     </Wrapper>
