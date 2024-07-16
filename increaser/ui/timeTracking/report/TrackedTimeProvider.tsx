@@ -99,6 +99,7 @@ export const TrackedTimeProvider = ({
     return shouldHideProjectNames ? hideProjectNames(result) : result
   }, [
     allProjects,
+    getLabelColor,
     monthStartedAt,
     months,
     sets,
