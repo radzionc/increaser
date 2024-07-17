@@ -4,14 +4,14 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
-import { SetsExplorer } from './SetsExplorer'
-import { ScheduleReview } from './ScheduleReview'
 import { Page } from '@lib/next-ui/Page'
 import { ScheduleVisualization } from '@increaser/ui/schedule/ScheduleVisualization'
+import { ScheduleReview } from '../sets/components/ScheduleReview'
+import { WorkTimeReport } from './WorkTimeReport/WorkTimeReport'
 
 const title = 'Schedule'
 
-export const SessionsPage: Page = () => {
+export const SchedulePage: Page = () => {
   return (
     <FixedWidthContent>
       <PageTitle documentTitle={`☕️ ${title}`} title={title} />
@@ -24,7 +24,8 @@ export const SessionsPage: Page = () => {
             </VStack>
             <ScheduleReview />
           </HStack>
-          <SetsExplorer />
+          <WorkTimeReport />
+          <div />
         </UserStateOnly>
       </VStack>
     </FixedWidthContent>

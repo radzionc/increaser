@@ -175,7 +175,7 @@ export const ProjectsTimeSeriesChart = () => {
                 <HStack>
                   <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
                   <ChartXAxis
-                    data={normalized.totals}
+                    dataSize={normalized.totals.length}
                     expectedLabelWidth={lineChartConfig.expectedLabelWidth}
                     labelsMinDistance={lineChartConfig.labelsMinDistance}
                     containerWidth={

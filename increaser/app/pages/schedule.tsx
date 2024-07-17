@@ -1,4 +1,4 @@
 import { makeAppPage } from '@increaser/app/layout/makeAppPage'
-import { SessionsPage } from '@increaser/app/sets/components'
+import { SchedulePage } from '../schedule/SchedulePage'
 
-export default makeAppPage(SessionsPage)
+export default makeAppPage(SchedulePage)

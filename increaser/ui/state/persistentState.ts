@@ -40,6 +40,7 @@ export enum PersistentStateKey {
   MyHabitsView = 'myHabitsView',
   AreFocusSoundsCollapsed = 'areFocusSoundsCollapsed',
   YouTubePlayerPosition = 'youTubePlayerPosition',
+  WorkTimeReportPreferences = 'workTimeReportPreferences',
 }
 
 export const persistentStorage =
