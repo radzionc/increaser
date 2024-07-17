@@ -2,13 +2,17 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { WorkTimeReportGuard } from './WorkTimeReportGuard'
 import { WorkTimeReportHeader } from './WorkTimeReportHeader'
 import { WorkTimeChart } from './WorkTimeChart'
+import { WorkTimeStats } from './WorkTimeStats'
 
 export const WorkTimeReport = () => {
   return (
-    <VStack>
+    <VStack gap={8}>
       <WorkTimeReportHeader />
       <WorkTimeReportGuard>
-        <WorkTimeChart />
+        <VStack gap={20}>
+          <WorkTimeStats />
+          <WorkTimeChart />
+        </VStack>
       </WorkTimeReportGuard>
     </VStack>
   )

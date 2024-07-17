@@ -133,11 +133,23 @@ export const WorkTimeChart = () => {
                   >
                     <VStack>
                       <Text color="contrast" weight="semibold">
-                        {selectedDay
-                          ? `${formatDailyEventTime(
-                              selectedDay.start,
-                            )} - ${formatDailyEventTime(selectedDay.end)}`
-                          : '-'}
+                        {selectedDay ? (
+                          <>
+                            {formatDailyEventTime(selectedDay.start)} -{' '}
+                            <Text
+                              as="span"
+                              color={
+                                selectedDay.end > finishWorkAt
+                                  ? 'idle'
+                                  : undefined
+                              }
+                            >
+                              {formatDailyEventTime(selectedDay.end)}
+                            </Text>
+                          </>
+                        ) : (
+                          '-'
+                        )}
                       </Text>
                       <Text color="supporting" size={14} weight="semibold">
                         {format(selectedDataPointStartedAt, 'EEE d, MMM yyyy')}
