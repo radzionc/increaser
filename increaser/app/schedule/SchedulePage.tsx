@@ -25,6 +25,7 @@ export const SchedulePage: Page = () => {
             <ScheduleReview />
           </HStack>
           <WorkTimeReport />
+          <div />
         </UserStateOnly>
       </VStack>
     </FixedWidthContent>

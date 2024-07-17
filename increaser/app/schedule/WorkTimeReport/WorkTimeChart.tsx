@@ -5,25 +5,28 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
 import { Text } from '@lib/ui/text'
-import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { toPercents } from '@lib/utils/toPercents'
 import styled from 'styled-components'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
-import { getColor } from '@lib/ui/theme/getters'
+import { getColor, matchColor } from '@lib/ui/theme/getters'
 import { format } from 'date-fns'
 import { useWorkTimeReportStartedAt } from './hooks/useWorkTimeReportStartedAt'
 import { useWorkTimeReportDays } from './hooks/useWorkTimeReportDays'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
-import { getClosestItemIndex } from '@lib/utils/math/getClosestItemIndex'
+import { getSegmentIndex } from '@lib/utils/math/getSegmentIndex'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { round } from '@lib/ui/css/round'
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { ComponentWithActiveState } from '@lib/ui/props'
+import { WorkTimeChartYLabels } from './WorkTimeChartYLabels'
+import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 
 export const chartConfig = {
-  chartHeight: 320,
+  chartHeight: 360,
   expectedYAxisLabelWidth: 32,
   expectedLabelWidth: 58,
   expectedLabelHeight: 18,
@@ -38,15 +41,25 @@ const Content = styled.div`
 `
 
 const ItemContainer = styled.div`
-  height: 100%;
+  ${takeWholeSpace};
+  ${centerContent};
   position: relative;
 `
 
-const Item = styled.div`
+const Item = styled.div<ComponentWithActiveState>`
   position: absolute;
-  width: 4px;
-  ${round};
-  background: ${getColor('primary')};
+  width: calc(100% - 4px);
+  ${borderRadius.s};
+  background: ${matchColor('isActive', {
+    true: 'primary',
+    false: 'mistExtra',
+  })};
+`
+
+const Line = styled.div`
+  border-bottom: 1px solid ${getColor('textShy')};
+  width: 100%;
+  pointer-events: none;
 `
 
 export const WorkTimeChart = () => {
@@ -55,10 +68,39 @@ export const WorkTimeChart = () => {
   const workDays = useMemo(() => days.filter((day) => day !== null), [days])
   const { startWorkAt, finishWorkAt } = useAssertUserState()
 
-  const boundaries = [startWorkAt, finishWorkAt]
+  const boundaries = useMemo(() => {
+    return [
+      Math.min(
+        convertDuration(
+          Math.floor(
+            Math.min(...workDays.map(({ start }) => start)) /
+              convertDuration(1, 'h', 'min'),
+          ),
+          'h',
+          'min',
+        ),
+        startWorkAt,
+      ),
+      Math.max(
+        convertDuration(
+          Math.ceil(
+            Math.max(...workDays.map(({ end }) => end)) /
+              convertDuration(1, 'h', 'min'),
+          ),
+          'h',
+          'min',
+        ),
+        finishWorkAt,
+      ),
+    ]
+  }, [workDays, startWorkAt, finishWorkAt])
+
+  const dayMoments = [startWorkAt, finishWorkAt]
+
   const normalized = normalizeDataArrays({
     days: workDays.flatMap(({ start, end }) => [start, end]),
     boundaries,
+    dayMoments,
   })
 
   const defaultDataPoint = days.length - 1
@@ -103,16 +145,13 @@ export const WorkTimeChart = () => {
                     </VStack>
                   </LineChartItemInfo>
                 </HStack>
-                <HStack>
-                  <ChartYAxis
-                    expectedLabelWidth={chartConfig.expectedYAxisLabelWidth}
-                    renderLabel={(index) => (
-                      <Text key={index} size={12} color="supporting">
-                        {formatDailyEventTime(boundaries[index])}
-                      </Text>
-                    )}
-                    data={normalized.boundaries}
-                  />
+                <HStack gap={20}>
+                  <VStack style={{ flex: 1 }}>
+                    <WorkTimeChartYLabels
+                      start={boundaries[0]}
+                      end={boundaries[1]}
+                    />
+                  </VStack>
                   <VStack
                     style={{
                       position: 'relative',
@@ -120,6 +159,15 @@ export const WorkTimeChart = () => {
                     }}
                     fullWidth
                   >
+                    {normalized.dayMoments.map((moment) => (
+                      <PositionAbsolutelyCenterHorizontally
+                        top={toPercents(1 - moment)}
+                        fullWidth
+                        key={moment}
+                      >
+                        <Line />
+                      </PositionAbsolutelyCenterHorizontally>
+                    ))}
                     <Content>
                       {days.map((day, index) => {
                         if (!day) return null
@@ -128,13 +176,17 @@ export const WorkTimeChart = () => {
                         const start = normalized.days[workDayIndex * 2]
                         const end = normalized.days[workDayIndex * 2 + 1]
                         const height = toPercents(end - start)
-                        const top = toPercents(start)
+                        const bottom = toPercents(start)
 
                         return (
                           <ItemContainer key={index}>
                             <Item
+                              isActive={
+                                index === selectedDataPoint &&
+                                isSelectedDataPointVisible
+                              }
                               style={{
-                                top,
+                                bottom,
                                 height,
                               }}
                             />
@@ -147,7 +199,7 @@ export const WorkTimeChart = () => {
                       onChange={({ position }) => {
                         if (position) {
                           setSelectedDataPoint(
-                            getClosestItemIndex(days.length, position.x),
+                            getSegmentIndex(days.length, position.x),
                           )
                         }
                         setIsSelectedDataPointVisible(!!position)
