@@ -141,7 +141,7 @@ export const SetsChart = () => {
                   />
                 </VStack>
                 <ChartXAxis
-                  data={data}
+                  dataSize={data.length}
                   expectedLabelWidth={chartConfig.expectedLabelWidth}
                   labelsMinDistance={chartConfig.labelsMinDistance}
                   containerWidth={size.width}

@@ -7,7 +7,7 @@ import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
 import { Page } from '@lib/next-ui/Page'
 import { ScheduleVisualization } from '@increaser/ui/schedule/ScheduleVisualization'
 import { ScheduleReview } from '../sets/components/ScheduleReview'
-import { WorkTimeChart } from './WorkTimeChart/WorkTimeChart'
+import { WorkTimeReport } from './WorkTimeReport/WorkTimeReport'
 
 const title = 'Schedule'
 
@@ -24,7 +24,7 @@ export const SchedulePage: Page = () => {
             </VStack>
             <ScheduleReview />
           </HStack>
-          <WorkTimeChart />
+          <WorkTimeReport />
         </UserStateOnly>
       </VStack>
     </FixedWidthContent>

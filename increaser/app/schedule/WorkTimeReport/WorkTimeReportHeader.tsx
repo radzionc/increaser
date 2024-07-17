@@ -1,13 +1,13 @@
 import { HStack } from '@lib/ui/layout/Stack'
-import { useWorkTimeChartDaysCount } from './useWorkTimeChartDaysCount'
 import { pluralize } from '@lib/utils/pluralize'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
-import { useWorkTimeChartPreferences } from './state/useWorkTimeChartPreferences'
+import { useWorkTimeReportDaysCount } from './hooks/useWorkTimeReportDaysCount'
+import { useWorkTimeReportPreferences } from './state/useWorkTimeReportPreferences'
 
-export const WorkTimeChartHeader = () => {
-  const daysCount = useWorkTimeChartDaysCount()
-  const [{ includeToday }, setPreferences] = useWorkTimeChartPreferences()
+export const WorkTimeReportHeader = () => {
+  const daysCount = useWorkTimeReportDaysCount()
+  const [{ includeToday }, setPreferences] = useWorkTimeReportPreferences()
 
   return (
     <HStack

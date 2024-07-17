@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
-import { useWorkTimeChartPreferences } from './state/useWorkTimeChartPreferences'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
+import { useWorkTimeReportPreferences } from './state/useWorkTimeReportPreferences'
 
-export const WorkTimeChartGuard = ({
+export const WorkTimeReportGuard = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const [{ includeToday }] = useWorkTimeChartPreferences()
+  const [{ includeToday }] = useWorkTimeReportPreferences()
   const { sets } = useAssertUserState()
   const todayStartedAt = useStartOfDay()
 

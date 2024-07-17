@@ -1,10 +1,10 @@
-import { useWorkTimeChartPreferences } from './state/useWorkTimeChartPreferences'
 import { useMemo } from 'react'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useWorkTimeReportPreferences } from '../state/useWorkTimeReportPreferences'
 
-export const useWorkTimeChartLastDayStartedAt = () => {
-  const [{ includeToday }] = useWorkTimeChartPreferences()
+export const useWorkTimeReportLastDayStartedAt = () => {
+  const [{ includeToday }] = useWorkTimeReportPreferences()
   const todayStartedAt = useStartOfDay()
 
   return useMemo(() => {

@@ -3,12 +3,12 @@ import { useMemo } from 'react'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { startOfDay } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { workTimeChartConfig } from './workTimeChartConfig'
-import { useWorkTimeChartLastDayStartedAt } from './useWorkTimeChartLastDayStartedAt'
+import { useWorkTimeReportLastDayStartedAt } from './useWorkTimeReportLastDayStartedAt'
+import { workTimeChartConfig } from '../config'
 
-export const useWorkTimeChartStartedAt = () => {
+export const useWorkTimeReportStartedAt = () => {
   const { sets } = useAssertUserState()
-  const lastDayStartedAt = useWorkTimeChartLastDayStartedAt()
+  const lastDayStartedAt = useWorkTimeReportLastDayStartedAt()
 
   return useMemo(() => {
     const firstSetStartedAt = shouldBePresent(sets[0]).start
