@@ -12,6 +12,7 @@ import { Interval } from '@lib/utils/interval/Interval'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { pluralize } from '@lib/utils/pluralize'
 import { toPercents } from '@lib/utils/toPercents'
+import { withoutNulls } from '@lib/utils/array/withoutNulls'
 
 const getFormattedAvgWorkdayStart = (days: Interval[]) => {
   const average = getAverage(days.map(({ start }) => start))
@@ -31,7 +32,7 @@ export type WorkTimeStat = (typeof workTimeStats)[number]
 export const WorkTimeStats = () => {
   const days = useWorkTimeReportDays()
   const { finishWorkAt } = useAssertUserState()
-  const workDays = useMemo(() => days.filter((day) => day !== null), [days])
+  const workDays = useMemo(() => withoutNulls(days), [days])
 
   return (
     <VStack gap={16}>
