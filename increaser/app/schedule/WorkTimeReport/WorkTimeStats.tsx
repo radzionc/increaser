@@ -66,6 +66,7 @@ export const WorkTimeStats = () => {
                       count > 0
                         ? `${pluralize(count, 'time')} (${toPercents(
                             count / workDays.length,
+                            'round',
                           )})`
                         : undefined
                     }

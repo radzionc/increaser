@@ -28,7 +28,7 @@ import { withoutNulls } from '@lib/utils/array/withoutNulls'
 
 export const chartConfig = {
   chartHeight: 360,
-  expectedYAxisLabelWidth: 32,
+  expectedYAxisLabelWidth: 48,
   expectedLabelWidth: 58,
   expectedLabelHeight: 18,
   labelsMinDistance: 20,
@@ -63,6 +63,10 @@ const Line = styled.div`
   pointer-events: none;
 `
 
+const Row = styled(HStack)`
+  gap: 20px;
+`
+
 export const WorkTimeChart = () => {
   const reportStartedAt = useWorkTimeReportStartedAt()
   const days = useWorkTimeReportDays()
@@ -72,26 +76,24 @@ export const WorkTimeChart = () => {
   const boundaries = useMemo(() => {
     return [
       Math.min(
-        convertDuration(
-          Math.floor(
-            Math.min(...workDays.map(({ start }) => start)) /
-              convertDuration(1, 'h', 'min'),
-          ),
-          'h',
-          'min',
+        ...[Math.min(...workDays.map(({ start }) => start)), startWorkAt].map(
+          (value) =>
+            convertDuration(
+              Math.floor(value / convertDuration(1, 'h', 'min')),
+              'h',
+              'min',
+            ),
         ),
-        startWorkAt,
       ),
       Math.max(
-        convertDuration(
-          Math.ceil(
-            Math.max(...workDays.map(({ end }) => end)) /
-              convertDuration(1, 'h', 'min'),
-          ),
-          'h',
-          'min',
+        ...[Math.min(...workDays.map(({ end }) => end)), finishWorkAt].map(
+          (value) =>
+            convertDuration(
+              Math.ceil(value / convertDuration(1, 'h', 'min')),
+              'h',
+              'min',
+            ),
         ),
-        finishWorkAt,
       ),
     ]
   }, [workDays, startWorkAt, finishWorkAt])
@@ -122,7 +124,7 @@ export const WorkTimeChart = () => {
           <VStack fullWidth gap={20} ref={setElement}>
             {size && (
               <>
-                <HStack>
+                <Row>
                   <Spacer width={chartConfig.expectedYAxisLabelWidth} />
                   <LineChartItemInfo
                     itemIndex={selectedDataPoint}
@@ -157,8 +159,8 @@ export const WorkTimeChart = () => {
                       </Text>
                     </VStack>
                   </LineChartItemInfo>
-                </HStack>
-                <HStack gap={20}>
+                </Row>
+                <Row>
                   <VStack style={{ flex: 1 }}>
                     <WorkTimeChartYLabels
                       start={boundaries[0]}
@@ -222,8 +224,8 @@ export const WorkTimeChart = () => {
                       )}
                     />
                   </VStack>
-                </HStack>
-                <HStack>
+                </Row>
+                <Row>
                   <Spacer width={chartConfig.expectedYAxisLabelWidth} />
                   <ChartXAxis
                     dataSize={days.length}
@@ -244,7 +246,7 @@ export const WorkTimeChart = () => {
                       )
                     }}
                   />
-                </HStack>
+                </Row>
               </>
             )}
           </VStack>
