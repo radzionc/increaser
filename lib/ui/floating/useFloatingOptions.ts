@@ -7,7 +7,7 @@ import {
   useDismiss,
   flip,
 } from '@floating-ui/react'
-import { autoUpdate, offset, size } from '@floating-ui/dom'
+import { autoUpdate, offset, size, Strategy } from '@floating-ui/dom'
 
 import { useRef, useState } from 'react'
 import { toSizeUnit } from '../css/toSizeUnit'
@@ -15,6 +15,7 @@ import { toSizeUnit } from '../css/toSizeUnit'
 interface FloatingOptionsParams {
   selectedIndex: number | null
   floatingOptionsWidthSameAsOpener?: boolean
+  strategy?: Strategy
 }
 
 interface GetOptionsPropsParams {
@@ -25,6 +26,7 @@ interface GetOptionsPropsParams {
 export const useFloatingOptions = ({
   selectedIndex,
   floatingOptionsWidthSameAsOpener = true,
+  strategy,
 }: FloatingOptionsParams) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -32,6 +34,7 @@ export const useFloatingOptions = ({
     placement: 'bottom-end',
     open: isOpen,
     onOpenChange: setIsOpen,
+    strategy,
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(4),

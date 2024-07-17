@@ -71,6 +71,7 @@ export const ManageYouTubePlayerPosition = () => {
   } = useFloatingOptions({
     selectedIndex: null,
     floatingOptionsWidthSameAsOpener: false,
+    strategy: 'fixed',
   })
 
   const options: RectangleCorner[] = [
