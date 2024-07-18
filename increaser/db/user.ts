@@ -82,7 +82,7 @@ export const putUser = (user: User) => {
   return dbDocClient.send(command)
 }
 
-export const getAllUsers = async <T extends (keyof User)[]>(attributes: T) => {
+export const getAllUsers = async <T extends (keyof User)[]>(attributes?: T) => {
   return totalScan<Pick<User, T[number]>>({
     TableName: tableName.users,
     ...getPickParams(attributes),
