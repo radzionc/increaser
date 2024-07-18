@@ -38,10 +38,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <DocumentMetaTags
-            image="images/increaser.png"
-            twitterId="@radzionc"
-          />
+          <DocumentMetaTags image="images/banner.png" twitterId="@radzionc" />
           <IconMetaTags />
         </Head>
         <body>
