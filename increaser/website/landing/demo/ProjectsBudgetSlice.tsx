@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
 import { VStack } from '@lib/ui/layout/Stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 const Content = styled(VStack)`
   max-width: 400px;
@@ -17,14 +18,17 @@ const Content = styled(VStack)`
 export const ProjectsBudgetSlice = (
   props: Partial<WebsiteSectionHeaderProps>,
 ) => {
+  const id = 'timePlanner'
   return (
-    <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('timePlanner')} {...props} />
-      <ClientOnly>
-        <Content>
-          <ManageProjectsBudget />
-        </Content>
-      </ClientOnly>
-    </WebsiteSliceContent>
+    <WebsiteSlice>
+      <WebsiteSliceContent>
+        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <ClientOnly>
+          <Content>
+            <ManageProjectsBudget />
+          </Content>
+        </ClientOnly>
+      </WebsiteSliceContent>
+    </WebsiteSlice>
   )
 }

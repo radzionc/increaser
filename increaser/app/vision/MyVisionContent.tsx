@@ -4,7 +4,7 @@ import { VisionAttributes } from '@increaser/ui/vision/VisionAttributes'
 import { AddVisionAttribute } from '@increaser/ui/vision/AddVisionAttribute'
 import { useMyVisionView } from './MyVisionView'
 import { Match } from '@lib/ui/base/Match'
-import { MyVisionBoard } from './MyVisionBoard'
+import { MyVisionBoard } from '@increaser/ui/vision/MyVisionBoard'
 import styled from 'styled-components'
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 

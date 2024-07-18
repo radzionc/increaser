@@ -7,6 +7,7 @@ import { VisionBoardItem } from './VisionBoardItem'
 export const Container = styled.div`
   column-gap: 8px;
   column-width: 280px;
+  width: 100%;
 
   > * {
     margin-bottom: 8px;

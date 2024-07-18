@@ -11,6 +11,7 @@ import { DemoFocusProvider } from './DemoFocusProvider'
 import { Text } from '@lib/ui/text'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 const BlockWrapper = styled.div`
   height: 540px;
@@ -25,25 +26,28 @@ const BlockWrapper = styled.div`
 `
 
 export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
+  const id = 'focus'
   return (
-    <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('focus')} {...props} />
-      <ClientOnly>
-        <DemoFocusProvider>
-          <BlockWrapper>
-            <SessionProgress />
-            <Text
-              style={{ position: 'absolute' }}
-              as="div"
-              weight="bold"
-              size={64}
-              height="small"
-            >
-              <FocusPassedTime />
-            </Text>
-          </BlockWrapper>
-        </DemoFocusProvider>
-      </ClientOnly>
-    </WebsiteSliceContent>
+    <WebsiteSlice id={id}>
+      <WebsiteSliceContent>
+        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <ClientOnly>
+          <DemoFocusProvider>
+            <BlockWrapper>
+              <SessionProgress />
+              <Text
+                style={{ position: 'absolute' }}
+                as="div"
+                weight="bold"
+                size={64}
+                height="small"
+              >
+                <FocusPassedTime />
+              </Text>
+            </BlockWrapper>
+          </DemoFocusProvider>
+        </ClientOnly>
+      </WebsiteSliceContent>
+    </WebsiteSlice>
   )
 }

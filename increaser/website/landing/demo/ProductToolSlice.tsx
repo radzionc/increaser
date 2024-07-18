@@ -8,25 +8,22 @@ import { ProjectsBudgetSlice } from './ProjectsBudgetSlice'
 import { FocusSlice } from './FocusSlice'
 import { HabitsSlice } from './HabitsSlice'
 import { ScheduleSlice } from './ScheduleSlice'
-import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { VisionSlice } from './VisionSlice'
 import { GoalsSlice } from './GoalsSlice'
 
 export const ProductToolSlice = ({
   value,
 }: ComponentWithValueProps<ProductTool>) => (
-  <WebsiteSlice id={value}>
-    <Match
-      value={value}
-      tasks={() => <TasksSlice />}
-      trackTime={() => <TimeTrackingSlice />}
-      workBudget={() => <WorkBudgetSlice />}
-      timePlanner={() => <ProjectsBudgetSlice />}
-      focus={() => <FocusSlice />}
-      habits={() => <HabitsSlice />}
-      schedule={() => <ScheduleSlice />}
-      vision={() => <VisionSlice />}
-      goals={() => <GoalsSlice />}
-    />
-  </WebsiteSlice>
+  <Match
+    value={value}
+    tasks={() => <TasksSlice />}
+    trackTime={() => <TimeTrackingSlice />}
+    workBudget={() => <WorkBudgetSlice />}
+    timePlanner={() => <ProjectsBudgetSlice />}
+    focus={() => <FocusSlice />}
+    habits={() => <HabitsSlice />}
+    schedule={() => <ScheduleSlice />}
+    vision={() => <VisionSlice />}
+    goals={() => <GoalsSlice />}
+  />
 )

@@ -13,6 +13,7 @@ import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 const Content = styled(VStack)`
   max-width: 460px;
@@ -22,23 +23,27 @@ const Content = styled(VStack)`
 export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   const { tasks } = useAssertUserState()
 
+  const id = 'tasks'
+
   return (
-    <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('tasks')} {...props} />
-      <ClientOnly>
-        <Content>
-          <ActiveItemIdProvider initialValue={null}>
-            {Object.values(tasks).map((task) => (
-              <CurrentTaskProvider key={task.id} value={task}>
-                <TaskItemFrame>
-                  <TaskCheckBox />
-                  <TaskPrimaryContent />
-                </TaskItemFrame>
-              </CurrentTaskProvider>
-            ))}
-          </ActiveItemIdProvider>
-        </Content>
-      </ClientOnly>
-    </WebsiteSliceContent>
+    <WebsiteSlice id={id}>
+      <WebsiteSliceContent>
+        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <ClientOnly>
+          <Content>
+            <ActiveItemIdProvider initialValue={null}>
+              {Object.values(tasks).map((task) => (
+                <CurrentTaskProvider key={task.id} value={task}>
+                  <TaskItemFrame>
+                    <TaskCheckBox />
+                    <TaskPrimaryContent />
+                  </TaskItemFrame>
+                </CurrentTaskProvider>
+              ))}
+            </ActiveItemIdProvider>
+          </Content>
+        </ClientOnly>
+      </WebsiteSliceContent>
+    </WebsiteSlice>
   )
 }

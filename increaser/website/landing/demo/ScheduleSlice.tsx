@@ -9,22 +9,26 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { ScheduleVisualization } from '@increaser/ui/schedule/ScheduleVisualization'
 import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 export const ScheduleSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
+  const id = 'schedule'
   return (
-    <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('schedule')} {...props} />
-      <ClientOnly>
-        <DemoScheduleProvider>
-          <VStack
-            style={{ minWidth: 320, maxWidth: 580, width: '100%' }}
-            gap={40}
-          >
-            <ScheduleVisualization />
-            <ManageSchedule />
-          </VStack>
-        </DemoScheduleProvider>
-      </ClientOnly>
-    </WebsiteSliceContent>
+    <WebsiteSlice>
+      <WebsiteSliceContent>
+        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <ClientOnly>
+          <DemoScheduleProvider>
+            <VStack
+              style={{ minWidth: 320, maxWidth: 580, width: '100%' }}
+              gap={40}
+            >
+              <ScheduleVisualization />
+              <ManageSchedule />
+            </VStack>
+          </DemoScheduleProvider>
+        </ClientOnly>
+      </WebsiteSliceContent>
+    </WebsiteSlice>
   )
 }
