@@ -17,6 +17,7 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -68,13 +69,24 @@ export const EditTaskFactoryForm = () => {
         onSubmit,
       })}
     >
-      <TaskNameInput
-        placeholder="Task name"
-        autoFocus
-        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        value={value.name}
-        onSubmit={onSubmit}
-      />
+      <EmojiTextInputFrame>
+        <div>
+          <TaskProjectSelector
+            value={value.projectId}
+            onChange={(projectId) =>
+              setValue((prev) => ({ ...prev, projectId }))
+            }
+          />
+        </div>
+
+        <TaskNameInput
+          autoFocus
+          placeholder="Task name"
+          value={value.name}
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          onSubmit={onSubmit}
+        />
+      </EmojiTextInputFrame>
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
@@ -84,10 +96,6 @@ export const EditTaskFactoryForm = () => {
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
-        <TaskProjectSelector
-          value={value.projectId}
-          onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
-        />
         <TaskCadenceInput
           value={value.cadence}
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}

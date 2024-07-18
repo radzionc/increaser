@@ -28,6 +28,7 @@ export const AgeInput = ({ value, onChange }: InputProps<number>) => {
       onChange={onChange}
       renderOption={(option) => option}
       getOptionKey={(option) => option.toString()}
+      getOptionName={(option) => option.toString()}
     />
   )
 }

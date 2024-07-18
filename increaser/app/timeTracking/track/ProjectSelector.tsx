@@ -26,6 +26,7 @@ export const ProjectSelector = () => {
       }
       options={activeProjects.map((project) => project.id)}
       getOptionKey={(option) => option}
+      getOptionName={(option) => projects[option].name}
       renderOption={(option) => (
         <>
           {option && <Text color="contrast">{projects[option].emoji}</Text>}

@@ -21,6 +21,7 @@ export const ProjectStatusInput = ({
       options={projectStatuses}
       getOptionKey={(option) => option}
       style={{ minWidth: 140 }}
+      getOptionName={(option) => capitalizeFirstLetter(option)}
       returnFocus
       renderOption={(option) => (
         <HStack alignItems="center" gap={8}>

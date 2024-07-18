@@ -30,6 +30,7 @@ export const TitleProjectSelector = () => {
   } = useFloatingOptions({
     floatingOptionsWidthSameAsOpener: false,
     selectedIndex: options.indexOf(projectId),
+    options: activeProjects.map((project) => project.name),
   })
 
   return (

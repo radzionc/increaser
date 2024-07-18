@@ -1,6 +1,9 @@
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { focusDurations } from '@increaser/entities/FocusDuration'
+import {
+  FocusDuration,
+  focusDurations,
+} from '@increaser/entities/FocusDuration'
 import { HStack } from '@lib/ui/layout/Stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ClockIcon } from '@lib/ui/icons/ClockIcon'
@@ -12,6 +15,9 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 const IconContainer = styled(IconWrapper)`
   color: ${getColor('textShy')};
 `
+
+const getOptionName = (duration: FocusDuration) =>
+  formatDuration(duration, 'min', { maxUnit: 'min' })
 
 export const FocusGoal = () => {
   const { focusDuration, setFocusDuration } = useFocus()
@@ -29,9 +35,8 @@ export const FocusGoal = () => {
         </HStack>
       }
       getOptionKey={(duration) => duration.toString()}
-      renderOption={(duration) =>
-        formatDuration(duration, 'min', { maxUnit: 'min' })
-      }
+      getOptionName={getOptionName}
+      renderOption={getOptionName}
       onChange={setFocusDuration}
       value={focusDuration}
       options={focusDurations}

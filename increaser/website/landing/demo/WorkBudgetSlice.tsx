@@ -12,6 +12,7 @@ import { WorkBudgetWeeksReport } from '@increaser/ui/workBudget/WorkBudgetWeeksR
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 const Content = styled(UniformColumnGrid)`
   max-width: 860px;
@@ -19,20 +20,23 @@ const Content = styled(UniformColumnGrid)`
 `
 
 export const WorkBudgetSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
+  const id = 'workBudget'
   return (
-    <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('workBudget')} {...props} />
-      <ClientOnly>
-        <Content minChildrenWidth={320} gap={40}>
-          <ManageWorkBudget />
-          <Panel kind="secondary">
-            <SeparatedByLine gap={24}>
-              <WorkBudgetDaysReport />
-              <WorkBudgetWeeksReport />
-            </SeparatedByLine>
-          </Panel>
-        </Content>
-      </ClientOnly>
-    </WebsiteSliceContent>
+    <WebsiteSlice>
+      <WebsiteSliceContent>
+        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <ClientOnly>
+          <Content minChildrenWidth={320} gap={40}>
+            <ManageWorkBudget />
+            <Panel kind="secondary">
+              <SeparatedByLine gap={24}>
+                <WorkBudgetDaysReport />
+                <WorkBudgetWeeksReport />
+              </SeparatedByLine>
+            </Panel>
+          </Content>
+        </ClientOnly>
+      </WebsiteSliceContent>
+    </WebsiteSlice>
   )
 }

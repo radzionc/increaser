@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -16,6 +16,7 @@ import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -49,6 +50,8 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     })
   }, [mutate, onFinish, value])
 
+  const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
+
   return (
     <Panel
       withSections
@@ -60,13 +63,26 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         onSubmit,
       })}
     >
-      <TaskNameInput
-        placeholder="Task name"
-        autoFocus
-        value={value.name}
-        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        onSubmit={onSubmit}
-      />
+      <EmojiTextInputFrame>
+        <div>
+          <TaskProjectSelector
+            autoFocus
+            value={value.projectId}
+            onChange={(projectId) => {
+              setValue((prev) => ({ ...prev, projectId }))
+              nameInputRef.current?.focus()
+            }}
+          />
+        </div>
+
+        <TaskNameInput
+          placeholder="Task name"
+          value={value.name}
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          onSubmit={onSubmit}
+          ref={nameInputRef}
+        />
+      </EmojiTextInputFrame>
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
@@ -76,10 +92,6 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
-        <TaskProjectSelector
-          value={value.projectId}
-          onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
-        />
         <TaskCadenceInput
           value={value.cadence}
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}

@@ -8,18 +8,22 @@ import { DemoHabitsProvider } from './DemoHabitsProvider'
 import { Panel } from '@lib/ui/panel/Panel'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
+import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 
 export const HabitsSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
+  const id = 'habits'
   return (
-    <WebsiteSliceContent>
-      <WebsiteSectionHeader {...getDemoSliceCopy('habits')} {...props} />
-      <ClientOnly>
-        <DemoHabitsProvider>
-          <Panel kind="secondary">
-            <CheckTodayHabits />
-          </Panel>
-        </DemoHabitsProvider>
-      </ClientOnly>
-    </WebsiteSliceContent>
+    <WebsiteSlice>
+      <WebsiteSliceContent>
+        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <ClientOnly>
+          <DemoHabitsProvider>
+            <Panel kind="secondary">
+              <CheckTodayHabits />
+            </Panel>
+          </DemoHabitsProvider>
+        </ClientOnly>
+      </WebsiteSliceContent>
+    </WebsiteSlice>
   )
 }

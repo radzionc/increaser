@@ -29,6 +29,7 @@ export const TaskCadenceInput = ({
       onChange={onChange}
       options={taskCadence}
       getOptionKey={(option) => option}
+      getOptionName={(option) => taskCadenceName[option]}
       renderOption={(option) => (
         <Text key={option}>{taskCadenceName[option]}</Text>
       )}

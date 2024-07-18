@@ -38,6 +38,7 @@ export const TaskDeadlineInput = ({
       onChange={onChange}
       options={['none', ...deadlineTypes]}
       getOptionKey={(option) => option}
+      getOptionName={(option) => deadlineName[option]}
       renderOption={(option) => (
         <Text key={option}>{deadlineName[option]}</Text>
       )}
