@@ -22,6 +22,7 @@ import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -120,13 +121,24 @@ export const EditTaskFormContent = ({
       kind="secondary"
       {...rest}
     >
-      <TaskNameInput
-        placeholder="Task name"
-        autoFocus
-        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        value={value.name}
-        onSubmit={onSubmit}
-      />
+      <EmojiTextInputFrame>
+        <div>
+          <TaskProjectSelector
+            value={value.projectId}
+            onChange={(projectId) =>
+              setValue((prev) => ({ ...prev, projectId }))
+            }
+          />
+        </div>
+
+        <TaskNameInput
+          autoFocus
+          placeholder="Task name"
+          value={value.name}
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          onSubmit={onSubmit}
+        />
+      </EmojiTextInputFrame>
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
@@ -135,19 +147,11 @@ export const EditTaskFormContent = ({
         value={value.checklist}
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
-      <VStack gap={28}>
-        <HStack alignItems="center" gap={8}>
-          <TaskProjectSelector
-            value={value.projectId}
-            onChange={(projectId) =>
-              setValue((prev) => ({ ...prev, projectId }))
-            }
-          />
-          <TaskDeadlineInput
-            value={deadlineStatus}
-            onChange={setDeadlineStatus}
-          />
-        </HStack>
+      <VStack>
+        <TaskDeadlineInput
+          value={deadlineStatus}
+          onChange={setDeadlineStatus}
+        />
       </VStack>
 
       <HStack

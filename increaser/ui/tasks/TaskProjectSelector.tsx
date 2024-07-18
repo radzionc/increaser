@@ -9,11 +9,13 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { OptionOutline } from '@lib/ui/select/OptionOutline'
 import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
+import { useEffect } from 'react'
 
 export const TaskProjectSelector = ({
   value,
   onChange,
-}: InputProps<string>) => {
+  autoFocus = false,
+}: InputProps<string> & { autoFocus?: boolean }) => {
   const activeProjects = useActiveProjects()
   const { projects } = useAssertUserState()
   const options = activeProjects.map((project) => project.id)
@@ -31,6 +33,12 @@ export const TaskProjectSelector = ({
     selectedIndex: options.indexOf(value),
     placement: 'bottom-start',
   })
+
+  useEffect(() => {
+    if (autoFocus) {
+      setIsOpen(true)
+    }
+  }, [autoFocus, setIsOpen])
 
   return (
     <>

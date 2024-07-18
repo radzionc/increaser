@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { UIComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
@@ -71,6 +71,8 @@ export const CreateTaskForm = ({
     mutate(task)
   }
 
+  const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
+
   return (
     <Panel
       withSections
@@ -86,19 +88,21 @@ export const CreateTaskForm = ({
       <EmojiTextInputFrame>
         <div>
           <TaskProjectSelector
+            autoFocus
             value={value.projectId}
-            onChange={(projectId) =>
+            onChange={(projectId) => {
               setValue((prev) => ({ ...prev, projectId }))
-            }
+              nameInputRef.current?.focus()
+            }}
           />
         </div>
 
         <TaskNameInput
           placeholder="Task name"
-          autoFocus
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           onSubmit={onSubmit}
+          ref={nameInputRef}
         />
       </EmojiTextInputFrame>
       <TaskLinksInput
