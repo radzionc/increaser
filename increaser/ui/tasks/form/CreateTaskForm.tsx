@@ -6,9 +6,7 @@ import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
 import { TaskNameInput } from '../TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
-import { HStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
-import { Button } from '@lib/ui/buttons/Button'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
@@ -18,6 +16,8 @@ import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { fixChecklist } from './checklist/fixChecklist'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType | null
@@ -83,13 +83,24 @@ export const CreateTaskForm = ({
       })}
       {...rest}
     >
-      <TaskNameInput
-        placeholder="Task name"
-        autoFocus
-        value={value.name}
-        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        onSubmit={onSubmit}
-      />
+      <EmojiTextInputFrame>
+        <div>
+          <TaskProjectSelector
+            value={value.projectId}
+            onChange={(projectId) =>
+              setValue((prev) => ({ ...prev, projectId }))
+            }
+          />
+        </div>
+
+        <TaskNameInput
+          placeholder="Task name"
+          autoFocus
+          value={value.name}
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+          onSubmit={onSubmit}
+        />
+      </EmojiTextInputFrame>
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
@@ -98,20 +109,11 @@ export const CreateTaskForm = ({
         value={value.checklist}
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
-      <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <TaskProjectSelector
-          value={value.projectId}
-          onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
-        />
-        <HStack alignItems="center" gap={8}>
-          <Button type="button" onClick={() => onFinish()} kind="secondary">
-            Cancel
-          </Button>
-          <Button isLoading={isPending} isDisabled={isDisabled}>
-            Submit
-          </Button>
-        </HStack>
-      </HStack>
+      <CreateFormFooter
+        isPending={isPending}
+        isDisabled={isDisabled}
+        onCancel={onFinish}
+      />
     </Panel>
   )
 }
