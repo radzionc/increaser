@@ -17,6 +17,7 @@ interface FloatingOptionsParams {
   floatingOptionsWidthSameAsOpener?: boolean
   strategy?: Strategy
   placement?: Placement
+  optionsContainerMaxHeight?: number
 }
 
 interface GetOptionsPropsParams {
@@ -29,6 +30,7 @@ export const useFloatingOptions = ({
   floatingOptionsWidthSameAsOpener = true,
   strategy,
   placement = 'bottom-end',
+  optionsContainerMaxHeight = 320,
 }: FloatingOptionsParams) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -44,7 +46,11 @@ export const useFloatingOptions = ({
       size({
         apply({ elements, availableHeight, rects }) {
           Object.assign(elements.floating.style, {
-            maxHeight: `${toSizeUnit(Math.min(availableHeight, 320))}`,
+            maxHeight: toSizeUnit(
+              optionsContainerMaxHeight
+                ? Math.min(availableHeight, optionsContainerMaxHeight)
+                : availableHeight,
+            ),
             width: floatingOptionsWidthSameAsOpener
               ? toSizeUnit(rects.reference.width)
               : undefined,

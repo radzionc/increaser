@@ -1,10 +1,10 @@
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
+import { withoutNullOrUndefined } from '@lib/utils/array/withoutNullOrUndefined'
 
 export default function mergeRefs<T>(
-  ...refs: (React.Ref<T> | undefined)[]
+  ...refs: (React.Ref<T> | undefined | null)[]
 ): React.Ref<T> | React.RefCallback<T> {
-  const definedRefs = withoutUndefined(refs)
+  const definedRefs = withoutNullOrUndefined(refs)
   if (isEmpty(definedRefs)) {
     return null
   }

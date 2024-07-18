@@ -24,7 +24,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { ComponentWithActiveState } from '@lib/ui/props'
 import { WorkTimeChartYLabels } from './WorkTimeChartYLabels'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
-import { withoutNulls } from '@lib/utils/array/withoutNulls'
+import { withoutNull } from '@lib/utils/array/withoutNull'
 
 export const chartConfig = {
   chartHeight: 360,
@@ -70,7 +70,7 @@ const Row = styled(HStack)`
 export const WorkTimeChart = () => {
   const reportStartedAt = useWorkTimeReportStartedAt()
   const days = useWorkTimeReportDays()
-  const workDays = useMemo(() => withoutNulls(days), [days])
+  const workDays = useMemo(() => withoutNull(days), [days])
   const { startWorkAt, finishWorkAt } = useAssertUserState()
 
   const boundaries = useMemo(() => {
