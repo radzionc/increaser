@@ -5,19 +5,21 @@ import {
   useRole,
   useClick,
   useDismiss,
+  useTypeahead,
   flip,
 } from '@floating-ui/react'
 import { autoUpdate, offset, Placement, size, Strategy } from '@floating-ui/dom'
-
 import { useRef, useState } from 'react'
 import { toSizeUnit } from '../css/toSizeUnit'
+import { useValueRef } from '../hooks/useValueRef'
 
-interface FloatingOptionsParams {
+type FloatingOptionsParams = {
   selectedIndex: number | null
   floatingOptionsWidthSameAsOpener?: boolean
   strategy?: Strategy
   placement?: Placement
   optionsContainerMaxHeight?: number
+  options?: string[]
 }
 
 interface GetOptionsPropsParams {
@@ -31,6 +33,7 @@ export const useFloatingOptions = ({
   strategy,
   placement = 'bottom-end',
   optionsContainerMaxHeight = 320,
+  options,
 }: FloatingOptionsParams) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -63,6 +66,8 @@ export const useFloatingOptions = ({
   const optionsRef = useRef<Array<HTMLElement | null>>([])
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
+  const optionStringsRef = useValueRef(options || [])
+
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
     [
       useClick(context, { event: 'mousedown' }),
@@ -74,6 +79,12 @@ export const useFloatingOptions = ({
         selectedIndex,
         onNavigate: setActiveIndex,
         loop: true,
+      }),
+      useTypeahead(context, {
+        listRef: optionStringsRef,
+        activeIndex,
+        enabled: !!options,
+        onMatch: setActiveIndex,
       }),
     ],
   )

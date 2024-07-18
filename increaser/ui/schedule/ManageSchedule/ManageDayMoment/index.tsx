@@ -85,6 +85,7 @@ export const ManageDayMoment = ({
     activeIndex,
   } = useFloatingOptions({
     selectedIndex: options.indexOf(value),
+    options: options.map((option) => option.toString()),
   })
 
   const theme = useTheme()

@@ -22,6 +22,7 @@ export const TitleFocusDurationSelector = () => {
   } = useFloatingOptions({
     floatingOptionsWidthSameAsOpener: false,
     selectedIndex: focusDurations.indexOf(focusDuration),
+    options: focusDurations.map((option) => option.toString()),
   })
 
   return (

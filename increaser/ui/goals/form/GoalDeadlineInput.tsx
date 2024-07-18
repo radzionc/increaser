@@ -82,6 +82,7 @@ export const GoalDeadlineInput = ({
             onChange={setDeadlineType}
             renderOption={capitalizeFirstLetter}
             getOptionKey={(option) => option}
+            getOptionName={(option) => option}
           />
           <Match
             value={deadlineType}

@@ -32,6 +32,7 @@ export const TaskProjectSelector = ({
     floatingOptionsWidthSameAsOpener: false,
     selectedIndex: options.indexOf(value),
     placement: 'bottom-start',
+    options: activeProjects.map((project) => project.name),
   })
 
   useEffect(() => {

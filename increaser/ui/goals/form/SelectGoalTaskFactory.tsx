@@ -28,6 +28,7 @@ export const SelectGoalTaskFactory = ({
       onChange={onFinish}
       options={options}
       getOptionKey={(option) => option}
+      getOptionName={(option) => taskFactories[option].task.name}
       renderOption={(option) => (
         <>
           <Text>{taskFactories[option].task.name}</Text>

@@ -15,6 +15,7 @@ export const TimeGroupingSelector = () => {
       options={timeGroupings}
       getOptionKey={formatTimeGrouping}
       renderOption={(option) => <Text>{formatTimeGrouping(option)}</Text>}
+      getOptionName={formatTimeGrouping}
     />
   )
 }

@@ -23,6 +23,7 @@ export const GoalStatusSelector = ({
       onChange={onChange}
       options={goalStatuses}
       getOptionKey={(option) => option}
+      getOptionName={(option) => goalStatusNameRecord[option]}
       style={{ minWidth: 140 }}
       returnFocus
       renderOption={(option) => (

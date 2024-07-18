@@ -74,6 +74,7 @@ export const ProductFeaturesNavigation = () => {
   } = useFloatingOptions({
     floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
+    options: productTools.map((tool) => productToolNameRecord[tool]),
   })
 
   const { push } = useRouter()

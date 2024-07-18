@@ -5,7 +5,7 @@ import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { range } from '@lib/utils/array/range'
 import { WEEKDAYS } from '@lib/utils/time'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useTrackTime } from './state/TrackTimeContext'
 
 export const WeekdaySelector = () => {
@@ -33,6 +33,20 @@ export const WeekdaySelector = () => {
     weekStartedAt,
   ])
 
+  const getOptionName = useCallback(
+    (option: number) => {
+      if (option === currentWeekday) {
+        return 'Today'
+      }
+      if (option === currentWeekday - 1) {
+        return 'Yesterday'
+      }
+
+      return WEEKDAYS[option]
+    },
+    [currentWeekday],
+  )
+
   return (
     <ExpandableSelector
       style={{ width: 142 }}
@@ -41,16 +55,8 @@ export const WeekdaySelector = () => {
       onChange={(weekday) => setState((state) => ({ ...state, weekday }))}
       options={options.toReversed()}
       getOptionKey={(option) => option.toString()}
-      renderOption={(option) => {
-        if (option === currentWeekday) {
-          return 'Today'
-        }
-        if (option === currentWeekday - 1) {
-          return 'Yesterday'
-        }
-
-        return WEEKDAYS[option]
-      }}
+      getOptionName={getOptionName}
+      renderOption={getOptionName}
     />
   )
 }

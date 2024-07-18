@@ -72,6 +72,7 @@ export const FocusTaskSelector = ({
     context,
   } = useFloatingOptions({
     selectedIndex: null,
+    options: options.map((option) => option.name),
   })
 
   return (
