@@ -51,6 +51,7 @@ export type User = DayMoments &
 
     weeks: TrackedTime
     months: TrackedTime
+    years: TrackedTime
 
     focusSounds: FocusSound[]
 
@@ -110,6 +111,7 @@ export const userDefaultFields: Pick<
   | 'weekendHours'
   | 'weeks'
   | 'months'
+  | 'years'
   | 'vision'
   | 'goals'
   | 'completedEducation'
@@ -125,6 +127,7 @@ export const userDefaultFields: Pick<
   isAnonymous: true,
   weeks: {},
   months: {},
+  years: {},
   vision: {},
   goals: {},
   completedEducation: [],
