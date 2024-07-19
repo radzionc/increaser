@@ -1,12 +1,13 @@
 import { TrackedTimeReportHeader } from './TrackedTimeReportHeader'
 import { TrackedTimeReportContent } from './TrackedTimeReportContent'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
+import { VStack } from '@lib/ui/layout/Stack'
 
 export const TrackedTimeReport = () => {
   return (
-    <SeparatedByLine fullWidth gap={16}>
+    <VStack fullWidth gap={40}>
       <TrackedTimeReportHeader />
       <TrackedTimeReportContent />
-    </SeparatedByLine>
+      <div />
+    </VStack>
   )
 }

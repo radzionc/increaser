@@ -2,9 +2,7 @@ import styled from 'styled-components'
 import { ElementSizeAware } from '../base/ElementSizeAware'
 import { defaultTransition } from '../css/transition'
 import { ComponentWithChildrenProps } from '../props'
-import { match } from '@lib/utils/match'
-
-type JustifyPoints = 'space-between' | 'space-around'
+import { JustifyPoints, positionDataPoint } from './utils/positionDataPoints'
 
 type ChartItemInfoProps = ComponentWithChildrenProps & {
   containerWidth: number
@@ -43,11 +41,11 @@ export const ChartItemInfo = ({
               }
             }
 
-            const center = match(justifyPoints, {
-              'space-between': () =>
-                itemIndex * (containerWidth / (dataPointsNumber - 1)),
-              'space-around': () =>
-                (containerWidth / dataPointsNumber / 2) * (2 * itemIndex + 1),
+            const center = positionDataPoint({
+              justifyPoints,
+              dataSize: dataPointsNumber,
+              containerWidth,
+              index: itemIndex,
             })
             const contentHalfWidth = size.width / 2
             if (center < contentHalfWidth) {

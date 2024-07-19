@@ -1,7 +1,6 @@
 export const trackedTimeChartConfig = {
-  chartHeight: 320,
-  expectedYAxisLabelWidth: 48,
-  expectedLabelWidth: 58,
-  expectedLabelHeight: 18,
-  labelsMinDistance: 20,
+  chartHeight: 280,
+  expectedYLabelWidth: 48,
+  expectedXLabelWidth: 58,
+  expectedXLabelHeight: 18,
 }

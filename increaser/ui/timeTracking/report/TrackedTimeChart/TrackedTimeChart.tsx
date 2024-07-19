@@ -6,7 +6,6 @@ import { useMemo, useState } from 'react'
 import { format } from 'date-fns'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 import { match } from '@lib/utils/match'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
@@ -27,6 +26,7 @@ import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { toPercents } from '@lib/utils/toPercents'
 import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
+import { TrackedTimeChartXLabels } from './TrackedTimeChartXLabels'
 
 const Content = styled.div`
   ${takeWholeSpace};
@@ -96,15 +96,12 @@ export const TrackedTimeChart = () => {
             {size && (
               <>
                 <HStack>
-                  <Spacer
-                    width={trackedTimeChartConfig.expectedYAxisLabelWidth}
-                  />
+                  <Spacer width={trackedTimeChartConfig.expectedYLabelWidth} />
                   <ChartItemInfo
                     itemIndex={selectedDataPoint}
                     isVisible={isSelectedDataPointVisible}
                     containerWidth={
-                      size.width -
-                      trackedTimeChartConfig.expectedYAxisLabelWidth
+                      size.width - trackedTimeChartConfig.expectedYLabelWidth
                     }
                     dataPointsNumber={data.length}
                     justifyPoints="space-around"
@@ -139,7 +136,7 @@ export const TrackedTimeChart = () => {
                 <HStack>
                   <ChartYAxis
                     expectedLabelWidth={
-                      trackedTimeChartConfig.expectedYAxisLabelWidth
+                      trackedTimeChartConfig.expectedYLabelWidth
                     }
                     renderLabel={(index) => {
                       const hours = convertDuration(yLabels[index], 's', 'h')
@@ -164,8 +161,8 @@ export const TrackedTimeChart = () => {
                   >
                     <ChartHorizontalGridLines data={normalized.yLabels} />
                     <Content>
-                      {data.map((day, index) => {
-                        const height = toPercents(normalized.data[index])
+                      {normalized.data.map((value, index) => {
+                        const height = toPercents(value)
                         const isActive =
                           index === selectedDataPoint &&
                           isSelectedDataPointVisible
@@ -199,31 +196,11 @@ export const TrackedTimeChart = () => {
                 </HStack>
 
                 <HStack>
-                  <Spacer
-                    width={trackedTimeChartConfig.expectedYAxisLabelWidth}
-                  />
-                  <ChartXAxis
-                    dataSize={normalized.data.length}
-                    expectedLabelWidth={
-                      trackedTimeChartConfig.expectedLabelWidth
-                    }
-                    labelsMinDistance={trackedTimeChartConfig.labelsMinDistance}
+                  <Spacer width={trackedTimeChartConfig.expectedYLabelWidth} />
+                  <TrackedTimeChartXLabels
                     containerWidth={
-                      size.width -
-                      trackedTimeChartConfig.expectedYAxisLabelWidth
+                      size.width - trackedTimeChartConfig.expectedYLabelWidth
                     }
-                    expectedLabelHeight={
-                      trackedTimeChartConfig.expectedLabelHeight
-                    }
-                    renderLabel={(index) => {
-                      const startedAt = getDataPointStartedAt(index)
-
-                      return (
-                        <Text size={12} color="supporting" nowrap>
-                          {format(startedAt, 'd MMM')}
-                        </Text>
-                      )
-                    }}
                   />
                 </HStack>
               </>
