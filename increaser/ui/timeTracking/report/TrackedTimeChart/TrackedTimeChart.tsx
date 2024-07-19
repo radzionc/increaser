@@ -41,7 +41,7 @@ const Item = styled.div`
   ${borderRadius.s};
 `
 
-export const ProjectsTimeSeriesChart = () => {
+export const TrackedTimeChart = () => {
   const {
     lastTimeGroupStartedAt,
     timeGrouping,
