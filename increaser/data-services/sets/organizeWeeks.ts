@@ -1,10 +1,17 @@
-import { User } from '@increaser/entities/User'
+import { maxWeeks, User } from '@increaser/entities/User'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
 import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 import { trackTime } from './trackTime'
-import { toWeek, weekToString } from '@lib/utils/time/Week'
+import {
+  fromWeek,
+  stringToWeek,
+  toWeek,
+  weekToString,
+} from '@lib/utils/time/Week'
+import { subWeeks } from 'date-fns'
+import { recordFilter } from '@lib/utils/record/recordFilter'
 
 type UserFields = Pick<
   User,
@@ -33,13 +40,25 @@ export const organizeWeeks = ({
     return {}
   }
 
+  const newWeeks = trackTime({
+    sets: unsyncedSets,
+    trackedTime: weeks,
+    getPeriodKey: (timestamp) => weekToString(toWeek(timestamp)),
+    targetTimeZoneOffset: timeZone,
+  })
+
+  const omitWeeksAfter = inTimeZone(
+    subWeeks(weekStartedAt, maxWeeks).getTime(),
+    timeZone,
+  )
+  const filteredWeeks = recordFilter(newWeeks, ({ key }) => {
+    const month = stringToWeek(key)
+    const monthStartedAt = inTimeZone(fromWeek(month), timeZone)
+    return monthStartedAt >= omitWeeksAfter
+  })
+
   return {
-    weeks: trackTime({
-      sets: unsyncedSets,
-      trackedTime: weeks,
-      getPeriodKey: (timestamp) => weekToString(toWeek(timestamp)),
-      targetTimeZoneOffset: timeZone,
-    }),
+    weeks: filteredWeeks,
     lastSyncedWeekEndedAt: weekStartedAt,
   }
 }

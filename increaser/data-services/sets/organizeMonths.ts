@@ -1,12 +1,19 @@
 import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
 import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
-import { User } from '@increaser/entities/User'
+import { maxMonths, User } from '@increaser/entities/User'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getMonthStartedAt } from '@lib/utils/time/getMonthStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { trackTime } from './trackTime'
-import { monthToString, toMonth } from '@lib/utils/time/Month'
+import {
+  fromMonth,
+  monthToString,
+  stringToMonth,
+  toMonth,
+} from '@lib/utils/time/Month'
+import { recordFilter } from '@lib/utils/record/recordFilter'
+import { subMonths } from 'date-fns'
 
 type UserFields = Pick<
   User,
@@ -43,13 +50,25 @@ export const organizeMonths = ({
       'ms',
     )
 
+  const newMonths = trackTime({
+    sets: unsyncedSets,
+    trackedTime: months,
+    getPeriodKey: (timestamp) => monthToString(toMonth(timestamp)),
+    targetTimeZoneOffset: timeZone,
+  })
+
+  const omitMonthsAfter = inTimeZone(
+    subMonths(monthStartedAt, maxMonths).getTime(),
+    timeZone,
+  )
+  const filteredMonths = recordFilter(newMonths, ({ key }) => {
+    const month = stringToMonth(key)
+    const monthStartedAt = inTimeZone(fromMonth(month), timeZone)
+    return monthStartedAt >= omitMonthsAfter
+  })
+
   return {
-    months: trackTime({
-      sets: unsyncedSets,
-      trackedTime: months,
-      getPeriodKey: (timestamp) => monthToString(toMonth(timestamp)),
-      targetTimeZoneOffset: timeZone,
-    }),
+    months: filteredMonths,
     sets: getSetsStartedAfter(sets, keepSetsStartedAfter),
     lastSyncedMonthEndedAt: monthStartedAt,
   }

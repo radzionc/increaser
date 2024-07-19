@@ -23,6 +23,9 @@ interface AppSumo {
   code: string
 }
 
+export const maxWeeks = 24
+export const maxMonths = 24
+
 export type User = DayMoments &
   WorkBudget & {
     id: string
