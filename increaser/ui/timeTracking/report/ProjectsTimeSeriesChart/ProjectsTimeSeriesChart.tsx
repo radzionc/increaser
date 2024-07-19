@@ -19,12 +19,10 @@ import { lineChartConfig } from './lineChartConfig'
 import { ProjectsLineCharts } from './ProjectsLineCharts'
 import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
-import { range } from '@lib/utils/array/range'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { subtractPeriod } from '../utils/subtractPeriod'
 import { formatWeek } from '@lib/utils/time/Week'
-
-const yLabelsCount = 4
+import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 
 export const ProjectsTimeSeriesChart = () => {
   const {
@@ -60,13 +58,12 @@ export const ProjectsTimeSeriesChart = () => {
   const selectedDataPointStartedAt = getDataPointStartedAt(selectedDataPoint)
 
   const yLabels = useMemo(() => {
-    const minValue = Math.floor(convertDuration(Math.min(...totals), 's', 'h'))
-    const maxValue = Math.ceil(convertDuration(Math.max(...totals), 's', 'h'))
-    const distance = (maxValue - minValue) / (yLabelsCount - 1)
+    const hourLabels = generateYLabels({
+      maxValue: convertDuration(Math.max(...totals), 's', 'h'),
+      stepSizes: [0.25, 0.5, 1, 2, 4, 10, 20, 50, 100, 200, 500, 1000],
+    })
 
-    return range(yLabelsCount)
-      .map((index) => minValue + index * distance)
-      .map((value) => convertDuration(value, 'h', 's'))
+    return hourLabels.map((value) => convertDuration(value, 'h', 's'))
   }, [totals])
 
   const normalize = useCallback(
@@ -134,10 +131,13 @@ export const ProjectsTimeSeriesChart = () => {
                     expectedLabelWidth={lineChartConfig.expectedYAxisLabelWidth}
                     renderLabel={(index) => {
                       const hours = convertDuration(yLabels[index], 's', 'h')
-                      const str = hours % 1 === 0 ? hours : hours.toFixed(1)
+
+                      const str = formatDuration(hours, 'h', {
+                        maxUnit: 'h',
+                      })
                       return (
                         <Text key={index} size={12} color="supporting">
-                          {str}h
+                          <EmphasizeNumbers value={str} />
                         </Text>
                       )
                     }}
