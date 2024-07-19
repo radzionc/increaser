@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 
-export const timeGroupings = ['day', 'week', 'month'] as const
+export const timeGroupings = ['day', 'week', 'month', 'year'] as const
 export type TimeGrouping = (typeof timeGroupings)[number]
 
 export const formatTimeGrouping = (grouping: TimeGrouping) =>
@@ -12,4 +12,5 @@ export const timeFrames: Record<TimeGrouping, TimeFrame[]> = {
   day: [7, 14, 30],
   week: [4, 8, 12, null],
   month: [4, 8, 12, null],
+  year: [5, 10, null],
 }

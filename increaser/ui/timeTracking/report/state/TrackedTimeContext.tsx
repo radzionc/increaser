@@ -4,6 +4,7 @@ import {
   ProjectDay,
   ProjectMonth,
   ProjectWeek,
+  ProjectYear,
 } from '@increaser/entities/timeTracking'
 import { HSLA } from '@lib/ui/colors/HSLA'
 
@@ -17,6 +18,7 @@ export type TimeTrackingProjectData = {
   id: string
   weeks: ProjectWeek[]
   months: ProjectMonth[]
+  years: ProjectYear[]
   days: ProjectDay[]
 }
 

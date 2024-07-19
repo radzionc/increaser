@@ -8,6 +8,7 @@ import {
   differenceInDays,
   differenceInMonths,
   differenceInWeeks,
+  differenceInYears,
 } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { match } from '@lib/utils/match'
@@ -57,6 +58,7 @@ export const TrackedTimeReportProvider = ({
         day: () => project.days.map(fromDay),
         week: () => project.weeks.map(fromWeek),
         month: () => project.months.map(fromMonth),
+        year: () => project.years.map(({ year }) => year),
       }),
     )
 
@@ -74,6 +76,8 @@ export const TrackedTimeReportProvider = ({
           differenceInWeeks(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
         month: () =>
           differenceInMonths(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        year: () =>
+          differenceInYears(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
       }) + 1
 
     return timeFrame === null
@@ -82,7 +86,7 @@ export const TrackedTimeReportProvider = ({
   }, [firstTimeGroupStartedAt, lastTimeGroupStartedAt, timeFrame, timeGrouping])
 
   const projectsTimeSeries = useMemo(() => {
-    return recordMap(projects, ({ days, weeks, months }) =>
+    return recordMap(projects, ({ days, weeks, months, years }) =>
       range(dataPointsCount)
         .map((index) => {
           const startedAt = subtractPeriod({
@@ -98,6 +102,10 @@ export const TrackedTimeReportProvider = ({
                 weeks.find((week) => areSameWeek(week, toWeek(startedAt))),
               month: () =>
                 months.find((month) => areSameMonth(month, toMonth(startedAt))),
+              year: () =>
+                years.find(
+                  ({ year }) => year === new Date(startedAt).getFullYear(),
+                ),
             })?.seconds || 0
           )
         })

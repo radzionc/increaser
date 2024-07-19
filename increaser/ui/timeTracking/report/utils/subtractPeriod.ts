@@ -1,6 +1,6 @@
 import { match } from '@lib/utils/match'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { subMonths } from 'date-fns'
+import { subMonths, subYears } from 'date-fns'
 import { TimeGrouping } from '../TimeGrouping'
 
 type SubtractPeriodInpu = {
@@ -18,5 +18,6 @@ export const subtractPeriod = ({
     day: () => value - convertDuration(amount, 'd', 'ms'),
     week: () => value - convertDuration(amount, 'w', 'ms'),
     month: () => subMonths(value, amount).getTime(),
+    year: () => subYears(value, amount).getTime(),
   })
 }

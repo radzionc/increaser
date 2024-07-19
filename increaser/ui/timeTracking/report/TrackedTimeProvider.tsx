@@ -21,14 +21,23 @@ import { mergeTrackedDataPoint } from '@increaser/ui/timeTracking/report/utils/m
 import { trackedTimeToProjectWeeks } from '@increaser/entities-utils/project/trackedTimeToProjectWeeks'
 import { trackedTimeToProjectMonths } from '@increaser/entities-utils/project/trackedTimeToProjectMonths'
 import { useTheme } from 'styled-components'
+import { trackedTimeToProjectYears } from '@increaser/entities-utils/project/trackedTimeToProjectYears'
+import { startOfYear } from 'date-fns'
 
 export const TrackedTimeProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { sets, weeks, months, projects: allProjects } = useAssertUserState()
+  const {
+    sets,
+    weeks,
+    months,
+    years,
+    projects: allProjects,
+  } = useAssertUserState()
 
   const weekStartedAt = useStartOfWeek()
   const monthStartedAt = useStartOfMonth()
+  const yearStartedAt = startOfYear(new Date()).getTime()
 
   const [state, setState] = useTrackedTimePreference()
   const { shouldHideProjectNames } = state
@@ -42,6 +51,7 @@ export const TrackedTimeProvider = ({
 
     const weeksRecord = trackedTimeToProjectWeeks({ trackedTime: weeks })
     const monthsRecord = trackedTimeToProjectMonths({ trackedTime: months })
+    const yearsRecord = trackedTimeToProjectYears({ trackedTime: years })
 
     Object.values(allProjects).forEach((project) => {
       result[project.id] = {
@@ -50,6 +60,7 @@ export const TrackedTimeProvider = ({
         days: [],
         weeks: weeksRecord[project.id] ?? [],
         months: monthsRecord[project.id] ?? [],
+        years: yearsRecord[project.id] ?? [],
       }
     })
 
@@ -94,6 +105,25 @@ export const TrackedTimeProvider = ({
           areSameGroup: areSameMonth,
         })
       }
+
+      if (set.start > yearStartedAt) {
+        const year = new Date(set.start).getFullYear()
+        const yearString = year.toString()
+
+        project.years = mergeTrackedDataPoint({
+          groups: project.years,
+          dataPoint: {
+            year,
+            seconds,
+          },
+          areSameGroup: (a, b) => a.year === b.year,
+        })
+
+        project.years = project.years.map((year) => ({
+          ...year,
+          year: Number(yearString),
+        }))
+      }
     })
 
     return shouldHideProjectNames ? hideProjectNames(result) : result
@@ -106,6 +136,8 @@ export const TrackedTimeProvider = ({
     shouldHideProjectNames,
     weekStartedAt,
     weeks,
+    yearStartedAt,
+    years,
   ])
 
   return (

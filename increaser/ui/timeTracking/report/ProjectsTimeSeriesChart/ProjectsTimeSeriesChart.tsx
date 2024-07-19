@@ -121,6 +121,10 @@ export const ProjectsTimeSeriesChart = () => {
                           week: () => formatWeek(selectedDataPointStartedAt),
                           month: () =>
                             format(selectedDataPointStartedAt, 'MMMM yyyy'),
+                          year: () =>
+                            new Date(selectedDataPointStartedAt)
+                              .getFullYear()
+                              .toString(),
                         })}
                       </Text>
                     </VStack>

@@ -6,8 +6,12 @@ export type EntityWithSeconds = {
   seconds: number
 }
 
+export type ProjectDay = Day & EntityWithSeconds
+
 export type ProjectWeek = Week & EntityWithSeconds
 
 export type ProjectMonth = Month & EntityWithSeconds
 
-export type ProjectDay = Day & EntityWithSeconds
+export type ProjectYear = EntityWithSeconds & {
+  year: number
+}
