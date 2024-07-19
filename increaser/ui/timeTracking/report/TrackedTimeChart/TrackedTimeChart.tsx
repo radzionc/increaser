@@ -106,7 +106,7 @@ export const TrackedTimeChart = () => {
                     dataPointsNumber={data.length}
                     justifyPoints="space-around"
                   >
-                    <VStack>
+                    <VStack alignItems="center">
                       <Text color="contrast" weight="semibold">
                         <EmphasizeNumbers
                           value={formatDuration(data[selectedDataPoint], 's', {
