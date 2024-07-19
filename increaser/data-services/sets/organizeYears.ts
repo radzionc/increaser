@@ -2,6 +2,7 @@ import { User } from '@increaser/entities/User'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { recordFilter } from '@lib/utils/record/recordFilter'
 import { stringToMonth } from '@lib/utils/time/Month'
+import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 type UserFields = Pick<User, 'months' | 'timeZone' | 'years' | 'lastSyncedYear'>
 
@@ -31,7 +32,7 @@ export const organizeYears = ({
     return year > lastSyncedYear
   })
 
-  if (!unsyncedMonths.length) {
+  if (isRecordEmpty(unsyncedMonths)) {
     return {}
   }
 

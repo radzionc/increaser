@@ -27,6 +27,7 @@ import { subtractPeriod } from '@increaser/ui/timeTracking/report/utils/subtract
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useTrackedTimeReportPreferences } from './state/useTrackedTimeReportPreferences'
 import { isMoreThanZero } from '@lib/utils/isMoreThanZero'
+import { fromYear } from '@lib/utils/time/Year'
 
 export const TrackedTimeReportProvider = ({
   children,
@@ -58,7 +59,7 @@ export const TrackedTimeReportProvider = ({
         day: () => project.days.map(fromDay),
         week: () => project.weeks.map(fromWeek),
         month: () => project.months.map(fromMonth),
-        year: () => project.years.map(({ year }) => year),
+        year: () => project.years.map(fromYear),
       }),
     )
 
@@ -79,7 +80,6 @@ export const TrackedTimeReportProvider = ({
         year: () =>
           differenceInYears(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
       }) + 1
-
     return timeFrame === null
       ? totalDataPointsAvailable
       : Math.min(totalDataPointsAvailable, timeFrame)
