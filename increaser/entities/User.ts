@@ -48,6 +48,7 @@ export type User = DayMoments &
 
     lastSyncedMonthEndedAt?: number
     lastSyncedWeekEndedAt?: number
+    lastSyncedYear?: number
 
     weeks: TrackedTime
     months: TrackedTime
