@@ -1,13 +1,17 @@
 import styled from 'styled-components'
-import { ElementSizeAware } from '../../base/ElementSizeAware'
-import { defaultTransition } from '../../css/transition'
-import { ComponentWithChildrenProps } from '../../props'
+import { ElementSizeAware } from '../base/ElementSizeAware'
+import { defaultTransition } from '../css/transition'
+import { ComponentWithChildrenProps } from '../props'
+import { match } from '@lib/utils/match'
 
-type LineChartItemInfoProps = ComponentWithChildrenProps & {
+type JustifyPoints = 'space-between' | 'space-around'
+
+type ChartItemInfoProps = ComponentWithChildrenProps & {
   containerWidth: number
   isVisible: boolean
   itemIndex: number
   dataPointsNumber: number
+  justifyPoints?: JustifyPoints
 }
 
 const Container = styled.div`
@@ -20,13 +24,14 @@ const Content = styled.div`
   transition: ${defaultTransition} opacity;
 `
 
-export const LineChartItemInfo = ({
+export const ChartItemInfo = ({
   dataPointsNumber,
   itemIndex,
   children,
   containerWidth,
   isVisible,
-}: LineChartItemInfoProps) => {
+  justifyPoints = 'space-between',
+}: ChartItemInfoProps) => {
   return (
     <Container>
       <ElementSizeAware
@@ -38,7 +43,12 @@ export const LineChartItemInfo = ({
               }
             }
 
-            const center = itemIndex * (containerWidth / (dataPointsNumber - 1))
+            const center = match(justifyPoints, {
+              'space-between': () =>
+                itemIndex * (containerWidth / (dataPointsNumber - 1)),
+              'space-around': () =>
+                (containerWidth / dataPointsNumber / 2) * (2 * itemIndex + 1),
+            })
             const contentHalfWidth = size.width / 2
             if (center < contentHalfWidth) {
               return { marginLeft: 0 }

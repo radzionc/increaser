@@ -1,5 +1,5 @@
-export const lineChartConfig = {
-  chartHeight: 180,
+export const trackedTimeChartConfig = {
+  chartHeight: 320,
   expectedYAxisLabelWidth: 48,
   expectedLabelWidth: 58,
   expectedLabelHeight: 18,

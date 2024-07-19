@@ -17,6 +17,7 @@ export const TrackedTimeReport = () => {
         )}
         less={() => <TrackedTimeReportContent />}
       />
+      <div />
     </VStack>
   )
 }
