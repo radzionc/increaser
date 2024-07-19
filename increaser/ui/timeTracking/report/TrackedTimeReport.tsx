@@ -1,22 +1,13 @@
-import { VStack } from '@lib/ui/layout/Stack'
-import { Panel } from '@lib/ui/panel/Panel'
 import { TrackedTimeReportHeader } from './TrackedTimeReportHeader'
-import { BasedOnScreenWidth } from '@lib/ui/layout/BasedOnScreenWidth'
 import { TrackedTimeReportContent } from './TrackedTimeReportContent'
+import { VStack } from '@lib/ui/layout/Stack'
 
 export const TrackedTimeReport = () => {
   return (
-    <VStack fullWidth gap={16}>
+    <VStack fullWidth gap={40}>
       <TrackedTimeReportHeader />
-      <BasedOnScreenWidth
-        value={600}
-        more={() => (
-          <Panel kind="secondary">
-            <TrackedTimeReportContent />
-          </Panel>
-        )}
-        less={() => <TrackedTimeReportContent />}
-      />
+      <TrackedTimeReportContent />
+      <div />
     </VStack>
   )
 }

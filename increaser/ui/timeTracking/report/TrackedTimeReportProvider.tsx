@@ -8,6 +8,7 @@ import {
   differenceInDays,
   differenceInMonths,
   differenceInWeeks,
+  differenceInYears,
 } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { match } from '@lib/utils/match'
@@ -26,6 +27,7 @@ import { subtractPeriod } from '@increaser/ui/timeTracking/report/utils/subtract
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useTrackedTimeReportPreferences } from './state/useTrackedTimeReportPreferences'
 import { isMoreThanZero } from '@lib/utils/isMoreThanZero'
+import { fromYear } from '@lib/utils/time/Year'
 
 export const TrackedTimeReportProvider = ({
   children,
@@ -57,6 +59,7 @@ export const TrackedTimeReportProvider = ({
         day: () => project.days.map(fromDay),
         week: () => project.weeks.map(fromWeek),
         month: () => project.months.map(fromMonth),
+        year: () => project.years.map(fromYear),
       }),
     )
 
@@ -74,15 +77,16 @@ export const TrackedTimeReportProvider = ({
           differenceInWeeks(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
         month: () =>
           differenceInMonths(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        year: () =>
+          differenceInYears(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
       }) + 1
-
     return timeFrame === null
       ? totalDataPointsAvailable
       : Math.min(totalDataPointsAvailable, timeFrame)
   }, [firstTimeGroupStartedAt, lastTimeGroupStartedAt, timeFrame, timeGrouping])
 
   const projectsTimeSeries = useMemo(() => {
-    return recordMap(projects, ({ days, weeks, months }) =>
+    return recordMap(projects, ({ days, weeks, months, years }) =>
       range(dataPointsCount)
         .map((index) => {
           const startedAt = subtractPeriod({
@@ -98,6 +102,10 @@ export const TrackedTimeReportProvider = ({
                 weeks.find((week) => areSameWeek(week, toWeek(startedAt))),
               month: () =>
                 months.find((month) => areSameMonth(month, toMonth(startedAt))),
+              year: () =>
+                years.find(
+                  ({ year }) => year === new Date(startedAt).getFullYear(),
+                ),
             })?.seconds || 0
           )
         })

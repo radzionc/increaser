@@ -11,6 +11,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
     'tasks',
     'weeks',
     'months',
+    'years',
     'taskFactories',
   ])
 
@@ -35,8 +36,8 @@ export const syncProjectsDependantFields = async (userId: string) => {
         },
   )
 
-  const { weeks, months } = recordMap(
-    pick(oldUser, ['weeks', 'months']),
+  const { weeks, months, years } = recordMap(
+    pick(oldUser, ['weeks', 'months', 'years']),
     (trackedTime) =>
       recordMap(trackedTime, (timeRecord) => {
         const result: TimeRecord = {}
@@ -54,6 +55,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
     tasks,
     weeks,
     months,
+    years,
     taskFactories,
   })
 }

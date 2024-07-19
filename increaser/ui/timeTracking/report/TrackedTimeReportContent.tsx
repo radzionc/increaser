@@ -2,9 +2,8 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { ProjectsDistributionChart } from './ProjectsDistributionChart'
 import { ProjectsDistributionBreakdown } from './ProjectsDistributionBreakdown'
 import { RequiresTrackedTime } from './RequiresTrackedTime'
-import { RequiresTwoDataPoints } from './RequiresTwoDataPoints'
 import { RequiresProjects } from './RequiresProjects'
-import { ProjectsTimeSeriesChart } from './ProjectsTimeSeriesChart/ProjectsTimeSeriesChart'
+import { TrackedTimeChart } from './TrackedTimeChart/TrackedTimeChart'
 
 export const TrackedTimeReportContent = () => (
   <VStack gap={20}>
@@ -26,9 +25,7 @@ export const TrackedTimeReportContent = () => (
             <ProjectsDistributionChart />
           </VStack>
         </HStack>
-        <RequiresTwoDataPoints>
-          <ProjectsTimeSeriesChart />
-        </RequiresTwoDataPoints>
+        <TrackedTimeChart />
       </RequiresTrackedTime>
     </RequiresProjects>
   </VStack>

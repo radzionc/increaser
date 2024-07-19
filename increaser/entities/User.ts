@@ -23,6 +23,9 @@ interface AppSumo {
   code: string
 }
 
+export const maxWeeks = 24
+export const maxMonths = 24
+
 export type User = DayMoments &
   WorkBudget & {
     id: string
@@ -48,9 +51,11 @@ export type User = DayMoments &
 
     lastSyncedMonthEndedAt?: number
     lastSyncedWeekEndedAt?: number
+    lastSyncedYear?: number
 
     weeks: TrackedTime
     months: TrackedTime
+    years: TrackedTime
 
     focusSounds: FocusSound[]
 
@@ -110,6 +115,7 @@ export const userDefaultFields: Pick<
   | 'weekendHours'
   | 'weeks'
   | 'months'
+  | 'years'
   | 'vision'
   | 'goals'
   | 'completedEducation'
@@ -125,6 +131,7 @@ export const userDefaultFields: Pick<
   isAnonymous: true,
   weeks: {},
   months: {},
+  years: {},
   vision: {},
   goals: {},
   completedEducation: [],

@@ -6,7 +6,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
-import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
+import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { Text } from '@lib/ui/text'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -63,7 +63,7 @@ export const ProjectGoalChart = ({
               <>
                 <HStack>
                   <Spacer width={lineChartConfig.expectedYAxisLabelWidth} />
-                  <LineChartItemInfo
+                  <ChartItemInfo
                     itemIndex={selectedDataPoint}
                     isVisible={isSelectedDataPointVisible}
                     containerWidth={
@@ -87,7 +87,7 @@ export const ProjectGoalChart = ({
                         {formatWeek(selectedDataPointStartedAt)}
                       </Text>
                     </VStack>
-                  </LineChartItemInfo>
+                  </ChartItemInfo>
                 </HStack>
                 <HStack>
                   <ChartYAxis

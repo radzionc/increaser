@@ -9,7 +9,7 @@ import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useStartOfMonth } from '@lib/ui/hooks/useStartOfMonth'
 import { toWeek } from '@lib/utils/time/Week'
 import { areSameWeek } from '@lib/utils/time/Week'
-import { toMonth } from '@lib/utils/time/Month'
+import { stringToMonth, toMonth } from '@lib/utils/time/Month'
 import { areSameMonth } from '@lib/utils/time/Month'
 import { useTrackedTimePreference } from '@increaser/ui/timeTracking/report/state/useTrackedTimePreference'
 import {
@@ -21,14 +21,23 @@ import { mergeTrackedDataPoint } from '@increaser/ui/timeTracking/report/utils/m
 import { trackedTimeToProjectWeeks } from '@increaser/entities-utils/project/trackedTimeToProjectWeeks'
 import { trackedTimeToProjectMonths } from '@increaser/entities-utils/project/trackedTimeToProjectMonths'
 import { useTheme } from 'styled-components'
+import { trackedTimeToProjectYears } from '@increaser/entities-utils/project/trackedTimeToProjectYears'
+import { areSameYear } from '@lib/utils/time/Year'
 
 export const TrackedTimeProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { sets, weeks, months, projects: allProjects } = useAssertUserState()
+  const {
+    sets,
+    weeks,
+    months,
+    years,
+    projects: allProjects,
+  } = useAssertUserState()
 
   const weekStartedAt = useStartOfWeek()
   const monthStartedAt = useStartOfMonth()
+  const currentYear = new Date().getFullYear()
 
   const [state, setState] = useTrackedTimePreference()
   const { shouldHideProjectNames } = state
@@ -42,6 +51,7 @@ export const TrackedTimeProvider = ({
 
     const weeksRecord = trackedTimeToProjectWeeks({ trackedTime: weeks })
     const monthsRecord = trackedTimeToProjectMonths({ trackedTime: months })
+    const yearsRecord = trackedTimeToProjectYears({ trackedTime: years })
 
     Object.values(allProjects).forEach((project) => {
       result[project.id] = {
@@ -50,6 +60,7 @@ export const TrackedTimeProvider = ({
         days: [],
         weeks: weeksRecord[project.id] ?? [],
         months: monthsRecord[project.id] ?? [],
+        years: yearsRecord[project.id] ?? [],
       }
     })
 
@@ -93,12 +104,41 @@ export const TrackedTimeProvider = ({
           },
           areSameGroup: areSameMonth,
         })
+        project.years = mergeTrackedDataPoint({
+          groups: project.years,
+          dataPoint: {
+            year: month.year,
+            seconds,
+          },
+          areSameGroup: areSameYear,
+        })
+      }
+    })
+
+    Object.entries(months).forEach(([monthKey, timeRecord]) => {
+      const { year } = stringToMonth(monthKey)
+      if (year === currentYear) {
+        Object.entries(timeRecord).forEach(([projectId, seconds]) => {
+          const project = result[projectId]
+
+          if (!project) return
+
+          project.years = mergeTrackedDataPoint({
+            groups: project.years,
+            dataPoint: {
+              year,
+              seconds,
+            },
+            areSameGroup: areSameYear,
+          })
+        })
       }
     })
 
     return shouldHideProjectNames ? hideProjectNames(result) : result
   }, [
     allProjects,
+    currentYear,
     getLabelColor,
     monthStartedAt,
     months,
@@ -106,6 +146,7 @@ export const TrackedTimeProvider = ({
     shouldHideProjectNames,
     weekStartedAt,
     weeks,
+    years,
   ])
 
   return (

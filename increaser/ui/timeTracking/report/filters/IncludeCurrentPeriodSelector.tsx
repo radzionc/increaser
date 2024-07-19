@@ -14,6 +14,7 @@ const currentPeriodName: Record<TimeGrouping, string> = {
   day: 'today',
   week: 'this week',
   month: 'this month',
+  year: 'this year',
 }
 
 const Container = styled(SelectContainer)`

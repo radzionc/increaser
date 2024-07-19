@@ -37,7 +37,6 @@ export const TaskChecklistInput = ({
           getItemId={(item) => item.id}
           getItemOrder={(item) => item.order}
           onChange={(id, { order }) => {
-            console.log(id, order)
             onChange(
               value.map((item) => (item.id === id ? { ...item, order } : item)),
             )

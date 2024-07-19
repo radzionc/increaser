@@ -3,6 +3,7 @@ import { organizeWeeks } from './organizeWeeks'
 import { User } from '@increaser/entities/User'
 import { organizeMonths } from './organizeMonths'
 import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
+import { organizeYears } from './organizeYears'
 
 export const organizeSets = async (userId: string) => {
   const user = await getUser(userId, [
@@ -11,11 +12,17 @@ export const organizeSets = async (userId: string) => {
     'projects',
     'weeks',
     'months',
+    'years',
     'lastSyncedWeekEndedAt',
     'lastSyncedMonthEndedAt',
+    'lastSyncedYear',
   ])
 
-  const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
+  const fields: Partial<User> = [
+    organizeWeeks,
+    organizeMonths,
+    organizeYears,
+  ].reduce(
     (acc, organize) => ({ ...acc, ...organize({ ...user, ...acc }) }),
     {},
   )

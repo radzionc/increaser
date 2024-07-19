@@ -1,4 +1,4 @@
-import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
+import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { TimeStatistic } from './TimeStatistic'
 import { useCurrentWeekVsBudgetColors } from './useCurrentWeekVsBudgetColors'
 import styled from 'styled-components'
@@ -28,7 +28,7 @@ export const SelectedDayInfo = ({
 
   return (
     <>
-      <LineChartItemInfo
+      <ChartItemInfo
         itemIndex={index}
         isVisible={true}
         containerWidth={width}
@@ -42,7 +42,7 @@ export const SelectedDayInfo = ({
             color={colors.budget}
           />
         </Container>
-      </LineChartItemInfo>
+      </ChartItemInfo>
     </>
   )
 }

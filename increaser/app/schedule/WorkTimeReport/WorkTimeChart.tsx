@@ -3,7 +3,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
-import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
+import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { Text } from '@lib/ui/text'
 import { toPercents } from '@lib/utils/toPercents'
 import styled from 'styled-components'
@@ -126,13 +126,14 @@ export const WorkTimeChart = () => {
               <>
                 <Row>
                   <Spacer width={chartConfig.expectedYAxisLabelWidth} />
-                  <LineChartItemInfo
+                  <ChartItemInfo
                     itemIndex={selectedDataPoint}
                     isVisible={isSelectedDataPointVisible}
                     containerWidth={
                       size.width - chartConfig.expectedYAxisLabelWidth
                     }
                     dataPointsNumber={days.length}
+                    justifyPoints="space-around"
                   >
                     <VStack>
                       <Text color="contrast" weight="semibold">
@@ -158,7 +159,7 @@ export const WorkTimeChart = () => {
                         {format(selectedDataPointStartedAt, 'EEE d, MMM yyyy')}
                       </Text>
                     </VStack>
-                  </LineChartItemInfo>
+                  </ChartItemInfo>
                 </Row>
                 <Row>
                   <VStack style={{ flex: 1 }}>

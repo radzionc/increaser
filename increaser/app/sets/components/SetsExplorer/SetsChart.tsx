@@ -8,7 +8,7 @@ import { normalize } from '@lib/utils/math/normalize'
 import { getBlocks } from '@increaser/entities-utils/block'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { dataVerticalPadding } from '@lib/ui/charts/utils/dataVerticalPadding'
-import { LineChartItemInfo } from '@lib/ui/charts/LineChart/LineChartItemInfo'
+import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { Match } from '@lib/ui/base/Match'
@@ -81,7 +81,7 @@ export const SetsChart = () => {
           <VStack fullWidth gap={4} ref={setElement}>
             {size && (
               <>
-                <LineChartItemInfo
+                <ChartItemInfo
                   itemIndex={selectedDay}
                   isVisible={isSelectedDayVisible}
                   containerWidth={size.width}
@@ -119,7 +119,7 @@ export const SetsChart = () => {
                       {format(day.startedAt, 'EEE d, MMM yyyy')}
                     </Text>
                   </VStack>
-                </LineChartItemInfo>
+                </ChartItemInfo>
                 <VStack style={{ position: 'relative' }}>
                   <LineChart
                     width={size.width}

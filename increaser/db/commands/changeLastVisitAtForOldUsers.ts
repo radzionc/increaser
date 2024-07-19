@@ -28,8 +28,6 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
     return true
   })
 
-  console.log('inactive users: ', inactiveUsers.length)
-
   await Promise.all(
     inactiveUsers.map(({ id, freeTrialEnd }) => {
       updateUser(id, {

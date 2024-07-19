@@ -26,7 +26,7 @@ On the "Goals" page, users can set specific goals that will bring them closer to
 
 On the "Projects" page, users can see all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and a status, which can be "active," "inactive," or "archived." There is one project which can’t be deleted—“Other.” When the user deletes a project, all the data associated with the deleted project will be reassigned to the “Other” project. User can reorder projects by dragging them.
 
-On the "Time Tracking" page, the user can see an overview of how much time they have spent on each project. They can organize data in the report by days, weeks, or months, crop the data, e.g., show only the last 7 days, and they can toggle if they want to see the current period in the report, e.g., the current week. The user can highlight a specific project and also see the total time spent on all projects.
+On the "Time Tracking" page, the user can see an overview of how much time they have spent on each project. They can organize data in the report by days, weeks, months, or years, crop the data, e.g., show only the last 7 days, and they can toggle if they want to see the current period in the report, e.g., the current week. The user can highlight a specific project and also see the total time spent on all projects.
 
 While the user will primarily track their work by through focus sessions, they can also track time by manually adding a focus session under the “Track” tab on the “Time Tracking” page. They can add, edit or delete a session on any day of the current week except for the days of the current week that belong to the previous month.
 
