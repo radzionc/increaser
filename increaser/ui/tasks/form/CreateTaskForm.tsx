@@ -18,6 +18,7 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { TaskDescriptionInput } from './TaskDescriptionInput'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType | null
@@ -38,6 +39,7 @@ export const CreateTaskForm = ({
     projectId: otherProject.id,
     links: [],
     checklist: [],
+    description: '',
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
@@ -105,6 +107,12 @@ export const CreateTaskForm = ({
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
+      <TaskDescriptionInput
+        value={value.description}
+        onChange={(description) =>
+          setValue((prev) => ({ ...prev, description }))
+        }
+      />
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}

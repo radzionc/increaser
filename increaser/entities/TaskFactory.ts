@@ -5,7 +5,7 @@ export type TaskCadence = (typeof taskCadence)[number]
 
 export type TaskFactory = {
   id: string
-  task: Pick<Task, 'name' | 'projectId' | 'links' | 'checklist'>
+  task: Pick<Task, 'name' | 'description' | 'projectId' | 'links' | 'checklist'>
   cadence: TaskCadence
   lastOutputAt?: number
 }

@@ -17,6 +17,7 @@ import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -29,6 +30,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     links: [],
     cadence: 'week',
     checklist: [],
+    description: '',
   })
   const { mutate, isPending } = useCreateTaskFactoryMutation()
 
@@ -83,6 +85,12 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
+      <TaskDescriptionInput
+        value={value.description}
+        onChange={(description) =>
+          setValue((prev) => ({ ...prev, description }))
+        }
+      />
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}

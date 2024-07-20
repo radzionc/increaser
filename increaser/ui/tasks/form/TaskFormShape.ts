@@ -5,4 +5,5 @@ export type TaskFormShape = {
   projectId: string
   links: TaskLink[]
   checklist: TaskChecklistItem[]
+  description: string
 }

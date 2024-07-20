@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { getColor } from '../theme/getters'
 
 const Container = styled(MultilineTextInput)`
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
@@ -13,7 +12,6 @@ const Container = styled(MultilineTextInput)`
   width: 100%;
   font-size: 16px;
   font-weight: 500;
-  color: ${getColor('contrast')};
 `
 
 type EmbeddedTitleInputProps = InputProps<string> &

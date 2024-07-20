@@ -23,6 +23,7 @@ export type Task = {
   links?: TaskLink[]
   checklist?: TaskChecklistItem[]
   factoryId?: string
+  description?: string
 }
 
 export type ScheduledTask = Omit<Task, 'deadlineAt'> & {
