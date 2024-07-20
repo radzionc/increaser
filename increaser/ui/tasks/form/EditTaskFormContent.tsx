@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { TaskNameInput } from '../TaskNameInput'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
@@ -23,6 +22,8 @@ import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { TaskDescriptionInput } from './TaskDescriptionInput'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -37,6 +38,7 @@ export const EditTaskFormContent = ({
     projectId: task.projectId,
     links: task.links ?? [],
     checklist: task.checklist ?? [],
+    description: task.description ?? '',
   })
   const currentDeadlineStatus = getDeadlineStatus({
     now: Date.now(),
@@ -102,6 +104,10 @@ export const EditTaskFormContent = ({
       )
     }
 
+    if (value.description !== task.description) {
+      fields.description = value.description
+    }
+
     updateTask({
       id: task.id,
       fields,
@@ -131,7 +137,7 @@ export const EditTaskFormContent = ({
           />
         </div>
 
-        <TaskNameInput
+        <EmbeddedTitleInput
           autoFocus
           placeholder="Task name"
           value={value.name}
@@ -139,6 +145,12 @@ export const EditTaskFormContent = ({
           onSubmit={onSubmit}
         />
       </EmojiTextInputFrame>
+      <TaskDescriptionInput
+        value={value.description}
+        onChange={(description) =>
+          setValue((prev) => ({ ...prev, description }))
+        }
+      />
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}

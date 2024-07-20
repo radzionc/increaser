@@ -4,7 +4,6 @@ import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { useUpdateVisionAttributeMutation } from '../api/useUpdateVisionAttributeMutation'
 import { useDeleteVisionAttributeMutation } from '../api/useDeleteVisionAttributeMutation'
-import { VisionAttributeNameInput } from './VisionAttributeNameInput'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { VisionImageInput } from './VisionImageInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
@@ -15,6 +14,7 @@ import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisa
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -75,7 +75,8 @@ export const EditVisionAttributeForm = () => {
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <VisionAttributeNameInput
+        <EmbeddedTitleInput
+          placeholder="Describe your life aspiration"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

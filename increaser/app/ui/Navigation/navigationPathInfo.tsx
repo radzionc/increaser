@@ -6,6 +6,7 @@ import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
 import { CrownIcon } from '@lib/ui/icons/CrownIcon'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
+import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
 
 type NavigationPathInfo = {
   name: string
@@ -69,5 +70,9 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     membership: {
       name: 'Membership',
       icon: <CrownIcon />,
+    },
+    notes: {
+      name: 'Ideas',
+      icon: <LightBulbIcon />,
     },
   } as const

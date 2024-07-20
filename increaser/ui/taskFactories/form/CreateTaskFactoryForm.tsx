@@ -3,7 +3,6 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { otherProject } from '@increaser/entities/Project'
-import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
@@ -17,6 +16,8 @@ import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInpu
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -29,6 +30,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     links: [],
     cadence: 'week',
     checklist: [],
+    description: '',
   })
   const { mutate, isPending } = useCreateTaskFactoryMutation()
 
@@ -75,7 +77,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           />
         </div>
 
-        <TaskNameInput
+        <EmbeddedTitleInput
           placeholder="Task name"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
@@ -83,6 +85,12 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
+      <TaskDescriptionInput
+        value={value.description}
+        onChange={(description) =>
+          setValue((prev) => ({ ...prev, description }))
+        }
+      />
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}

@@ -7,7 +7,6 @@ import { Button } from '@lib/ui/buttons/Button'
 import { useCreateVisionAttributeMutation } from '../api/useCreateVisionAttributeMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { VisionAttributeNameInput } from './VisionAttributeNameInput'
 import { VisionImageInput } from './VisionImageInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
@@ -16,6 +15,7 @@ import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -62,7 +62,7 @@ export const CreateVisionAttributeForm = ({
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <VisionAttributeNameInput
+        <EmbeddedTitleInput
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

@@ -4,7 +4,6 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
-import { TaskNameInput } from '../TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { otherProject } from '@increaser/entities/Project'
@@ -18,18 +17,23 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { TaskDescriptionInput } from './TaskDescriptionInput'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType | null
-  order: number
+  order?: number
   defaultValue?: Partial<TaskFormShape>
-  onFinish: (task?: Task) => void
+  onFinish?: (task?: Task) => void
+  onMutationFinish?: (task: Task) => void
 }
 
 export const CreateTaskForm = ({
   onFinish,
+  onMutationFinish,
   deadlineType,
-  order,
+  order: optionalOrder,
   defaultValue,
   ...rest
 }: CreateTaskFormProps) => {
@@ -38,6 +42,7 @@ export const CreateTaskForm = ({
     projectId: otherProject.id,
     links: [],
     checklist: [],
+    description: '',
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
@@ -47,7 +52,7 @@ export const CreateTaskForm = ({
 
     const task = tasks[variables.id]
     if (task) {
-      onFinish(task)
+      onFinish?.(task)
     }
   }, [onFinish, tasks, variables])
 
@@ -55,6 +60,10 @@ export const CreateTaskForm = ({
 
   const onSubmit = () => {
     if (isDisabled) return
+    const order =
+      optionalOrder === undefined
+        ? getLastItemOrder(Object.values(tasks).map((task) => task.order))
+        : optionalOrder
 
     const startedAt = Date.now()
     const task: Task = {
@@ -68,7 +77,11 @@ export const CreateTaskForm = ({
         : null,
       order,
     }
-    mutate(task)
+    mutate(task, {
+      onSuccess: () => {
+        onMutationFinish?.(task)
+      },
+    })
   }
 
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
@@ -88,7 +101,7 @@ export const CreateTaskForm = ({
       <EmojiTextInputFrame>
         <div>
           <TaskProjectSelector
-            autoFocus
+            autoFocus={!defaultValue?.projectId}
             value={value.projectId}
             onChange={(projectId) => {
               setValue((prev) => ({ ...prev, projectId }))
@@ -97,7 +110,7 @@ export const CreateTaskForm = ({
           />
         </div>
 
-        <TaskNameInput
+        <EmbeddedTitleInput
           placeholder="Task name"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
@@ -105,6 +118,12 @@ export const CreateTaskForm = ({
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
+      <TaskDescriptionInput
+        value={value.description}
+        onChange={(description) =>
+          setValue((prev) => ({ ...prev, description }))
+        }
+      />
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}
@@ -116,7 +135,9 @@ export const CreateTaskForm = ({
       <CreateFormFooter
         isPending={isPending}
         isDisabled={isDisabled}
-        onCancel={onFinish}
+        onCancel={() => {
+          onFinish?.()
+        }}
       />
     </Panel>
   )

@@ -6,7 +6,6 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCreateGoalMutation } from '../api/useCreateGoalMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -14,11 +13,12 @@ import { GoalFormShape } from './GoalFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({
@@ -63,7 +63,8 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <GoalNameInput
+        <EmbeddedTitleInput
+          placeholder="Describe your goal"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}
@@ -78,7 +79,9 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
         onChange={(target) => setValue((prev) => ({ ...prev, target }))}
         value={value.target}
       />
-      <GoalPlanInput
+      <EmbeddedDescriptionInput
+        label="Your plan"
+        placeholder="How are you going to achieve this goal? What's your plan?"
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
         value={value.plan}
       />

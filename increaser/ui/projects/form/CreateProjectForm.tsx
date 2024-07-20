@@ -4,7 +4,6 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { ProjectNameInput } from './ProjectNameInput'
 import { ProjectFormShape } from './ProjectFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
@@ -20,6 +19,7 @@ import { useCreateProjectMutation } from '../api/useCreateProjectMutation'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { projects } = useAssertUserState()
@@ -76,7 +76,8 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <ProjectNameInput
+        <EmbeddedTitleInput
+          placeholder="Project name"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

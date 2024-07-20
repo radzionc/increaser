@@ -4,7 +4,6 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { HabitNameInput } from './HabitNameInput'
 import { HabitFormShape } from './HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
@@ -18,6 +17,7 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
   const { habits } = useHabits()
@@ -69,11 +69,12 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <HabitNameInput
+        <EmbeddedTitleInput
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}
           onSubmit={onSubmit}
+          placeholder="Habit name"
         />
       </EmojiColorTextInputFrame>
       <HStack justifyContent="space-between" fullWidth alignItems="center">

@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { useIsTaskFormDisabled } from '../../tasks/form/useIsTaskFormDisabled'
@@ -18,6 +17,8 @@ import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInpu
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -27,6 +28,7 @@ export const EditTaskFactoryForm = () => {
     links: taskFactory.task.links ?? [],
     cadence: taskFactory.cadence,
     checklist: taskFactory.task.checklist ?? [],
+    description: taskFactory.task.description ?? '',
   })
   const { mutate: updateTaskFactory } = useUpdateTaskFactoryMutation()
   const { mutate: deleteTaskFactory } = useDeleteTaskFactoryMutation()
@@ -46,6 +48,7 @@ export const EditTaskFactoryForm = () => {
         projectId: value.projectId,
         links: fixLinks(value.links),
         checklist: fixChecklist(value.checklist),
+        description: value.description,
       },
       cadence: value.cadence,
     }
@@ -79,7 +82,7 @@ export const EditTaskFactoryForm = () => {
           />
         </div>
 
-        <TaskNameInput
+        <EmbeddedTitleInput
           autoFocus
           placeholder="Task name"
           value={value.name}
@@ -87,6 +90,12 @@ export const EditTaskFactoryForm = () => {
           onSubmit={onSubmit}
         />
       </EmojiTextInputFrame>
+      <TaskDescriptionInput
+        value={value.description}
+        onChange={(description) =>
+          setValue((prev) => ({ ...prev, description }))
+        }
+      />
       <TaskLinksInput
         value={value.links}
         onChange={(links) => setValue((prev) => ({ ...prev, links }))}

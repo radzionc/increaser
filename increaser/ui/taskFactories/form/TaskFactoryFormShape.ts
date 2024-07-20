@@ -7,4 +7,5 @@ export type TaskFactoryFormShape = {
   links: TaskLink[]
   cadence: TaskCadence
   checklist: TaskChecklistItem[]
+  description: string
 }

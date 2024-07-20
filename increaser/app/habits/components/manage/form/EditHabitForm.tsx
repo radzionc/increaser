@@ -3,7 +3,6 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { Habit } from '@increaser/entities/Habit'
-import { HabitNameInput } from './HabitNameInput'
 import { HabitFormShape } from './HabitFormShape'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
@@ -15,6 +14,7 @@ import { useDeleteHabitMutation } from '../../../api/useDeleteHabitMutation'
 import { useUpdateHabitMutation } from '../../../api/useUpdateHabitMutation'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()
@@ -87,11 +87,12 @@ export const EditHabitForm = () => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <HabitNameInput
+        <EmbeddedTitleInput
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}
           onSubmit={onSubmit}
+          placeholder="Habit name"
         />
       </EmojiColorTextInputFrame>
       <HStack
