@@ -14,7 +14,7 @@ import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisa
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -75,7 +75,7 @@ export const EditVisionAttributeForm = () => {
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <PanelTitleInput
+        <EmbeddedTitleInput
           placeholder="Describe your life aspiration"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

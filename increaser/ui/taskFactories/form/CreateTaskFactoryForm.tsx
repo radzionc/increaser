@@ -16,7 +16,7 @@ import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInpu
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -75,7 +75,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           />
         </div>
 
-        <PanelTitleInput
+        <EmbeddedTitleInput
           placeholder="Task name"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

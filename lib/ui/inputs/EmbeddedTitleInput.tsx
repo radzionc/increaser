@@ -16,24 +16,31 @@ const Container = styled(MultilineTextInput)`
   color: ${getColor('contrast')};
 `
 
-type PanelTitleInputProps = InputProps<string> &
+type EmbeddedTitleInputProps = InputProps<string> &
   Omit<ComponentProps<typeof Container>, 'value' | 'onChange'> & {
+    lineBreakEnabled?: boolean
     onSubmit?: () => void
   }
 
-export const PanelTitleInput = forwardRef<
+export const EmbeddedTitleInput = forwardRef<
   HTMLTextAreaElement,
-  PanelTitleInputProps
->(({ value, onChange, onSubmit, ...rest }, ref) => {
+  EmbeddedTitleInputProps
+>(({ value, onChange, onSubmit, lineBreakEnabled, ...rest }, ref) => {
   return (
     <Container
       value={value}
       onChange={onChange}
       autoComplete="off"
       onKeyDown={(event) => {
-        if (event.key === 'Enter') {
+        if (event.key !== 'Enter') return
+
+        if (!event.shiftKey) {
           event.preventDefault()
           onSubmit?.()
+        }
+
+        if (!lineBreakEnabled) {
+          event.preventDefault()
         }
       }}
       ref={ref}

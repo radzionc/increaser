@@ -17,7 +17,7 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType | null
@@ -97,7 +97,7 @@ export const CreateTaskForm = ({
           />
         </div>
 
-        <PanelTitleInput
+        <EmbeddedTitleInput
           placeholder="Task name"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

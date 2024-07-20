@@ -22,7 +22,7 @@ import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -131,7 +131,7 @@ export const EditTaskFormContent = ({
           />
         </div>
 
-        <PanelTitleInput
+        <EmbeddedTitleInput
           autoFocus
           placeholder="Task name"
           value={value.name}

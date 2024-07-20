@@ -17,7 +17,7 @@ import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInpu
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -79,7 +79,7 @@ export const EditTaskFactoryForm = () => {
           />
         </div>
 
-        <PanelTitleInput
+        <EmbeddedTitleInput
           autoFocus
           placeholder="Task name"
           value={value.name}

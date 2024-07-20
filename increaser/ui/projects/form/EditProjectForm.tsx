@@ -18,7 +18,7 @@ import { DeleteProject } from './DeleteProject'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -117,7 +117,7 @@ export const EditProjectForm = () => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <PanelTitleInput
+        <EmbeddedTitleInput
           placeholder="Project name"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

@@ -15,7 +15,7 @@ import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -62,7 +62,7 @@ export const CreateVisionAttributeForm = ({
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <PanelTitleInput
+        <EmbeddedTitleInput
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

@@ -1,21 +1,22 @@
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { FormSectionShyTitle } from '@lib/ui/form/components/FormSectionShyTitle'
 import { VStack } from '@lib/ui/layout/Stack'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import { InputProps } from '@lib/ui/props'
 import { ComponentProps, ReactNode, useLayoutEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { MultilineTextInput } from './MultilineTextInput'
 import { tightListItemConfig } from '../list/tightListItemConfig'
 
+const padding = 20
+
 const Wrapper = styled(VStack)`
   padding: 0;
   position: relative;
   > * {
-    padding: ${toSizeUnit(panelDefaultPadding)};
+    padding: ${toSizeUnit(padding)};
 
     &:last-child {
-      padding-top: ${toSizeUnit(panelDefaultPadding + 24)};
+      padding-top: ${toSizeUnit(padding + 24)};
     }
   }
 `
@@ -31,17 +32,17 @@ const Container = styled(MultilineTextInput)`
   width: 100%;
 `
 
-type PanelDescriptionInputProps = InputProps<string> &
+type EmbeddedDescriptionInputProps = InputProps<string> &
   Omit<ComponentProps<typeof Container>, 'value' | 'onChange'> & {
     label: ReactNode
   }
 
-export const PanelDescriptionInput = ({
+export const EmbeddedDescriptionInput = ({
   value,
   onChange,
   label,
   ...rest
-}: PanelDescriptionInputProps) => {
+}: EmbeddedDescriptionInputProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {

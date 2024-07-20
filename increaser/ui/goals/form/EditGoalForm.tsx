@@ -20,8 +20,8 @@ import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFoot
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
-import { PanelDescriptionInput } from '@lib/ui/inputs/PanelDescriptionInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -82,7 +82,7 @@ export const EditGoalForm = () => {
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <PanelTitleInput
+        <EmbeddedTitleInput
           placeholder="Describe your goal"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
@@ -104,7 +104,7 @@ export const EditGoalForm = () => {
         value={value.target}
         onChange={(target) => setValue((prev) => ({ ...prev, target }))}
       />
-      <PanelDescriptionInput
+      <EmbeddedDescriptionInput
         label="Your plan"
         placeholder="How are you going to achieve this goal? What's your plan?"
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}

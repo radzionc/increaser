@@ -14,7 +14,7 @@ import { useDeleteHabitMutation } from '../../../api/useDeleteHabitMutation'
 import { useUpdateHabitMutation } from '../../../api/useUpdateHabitMutation'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()
@@ -87,7 +87,7 @@ export const EditHabitForm = () => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <PanelTitleInput
+        <EmbeddedTitleInput
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

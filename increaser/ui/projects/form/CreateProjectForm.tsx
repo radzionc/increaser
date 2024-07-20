@@ -19,7 +19,7 @@ import { useCreateProjectMutation } from '../api/useCreateProjectMutation'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
-import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { projects } = useAssertUserState()
@@ -76,7 +76,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
             onChange={(color) => setValue((prev) => ({ ...prev, color }))}
           />
         </div>
-        <PanelTitleInput
+        <EmbeddedTitleInput
           placeholder="Project name"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
