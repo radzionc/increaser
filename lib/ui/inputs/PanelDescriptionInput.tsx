@@ -3,9 +3,10 @@ import { FormSectionShyTitle } from '@lib/ui/form/components/FormSectionShyTitle
 import { VStack } from '@lib/ui/layout/Stack'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import { InputProps } from '@lib/ui/props'
-import { getColor } from '@lib/ui/theme/getters'
 import { ComponentProps, ReactNode, useLayoutEffect, useRef } from 'react'
 import styled from 'styled-components'
+import { MultilineTextInput } from './MultilineTextInput'
+import { tightListItemConfig } from '../list/tightListItemConfig'
 
 const Wrapper = styled(VStack)`
   padding: 0;
@@ -24,20 +25,10 @@ const PositionLabel = styled.div`
   pointer-events: none;
 `
 
-const Container = styled.textarea`
-  border: none;
-  outline: none;
-  overflow: hidden;
-  resize: none;
-
-  line-height: 1.5;
-
-  background: ${getColor('background')};
-  color: ${getColor('text')};
-
-  &::placeholder {
-    color: ${getColor('textShy')};
-  }
+const Container = styled(MultilineTextInput)`
+  line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
+  background: transparent;
+  width: 100%;
 `
 
 type PanelDescriptionInputProps = InputProps<string> &
@@ -70,7 +61,7 @@ export const PanelDescriptionInput = ({
         autoComplete="off"
         ref={textareaRef}
         value={value}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={onChange}
         {...rest}
       />
     </Wrapper>

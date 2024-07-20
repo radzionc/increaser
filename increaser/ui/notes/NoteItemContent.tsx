@@ -7,7 +7,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { useAssertUserState } from '../user/UserStateContext'
-import { NoteDescription } from './NoatDescription'
+import { NoteDescription } from './NoteDescription'
 
 const Name = styled(Text)`
   text-align: start;

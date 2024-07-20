@@ -13,12 +13,12 @@ import { GoalFormShape } from './GoalFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { PanelDescriptionInput } from '@lib/ui/inputs/PanelDescriptionInput'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({
@@ -79,7 +79,9 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
         onChange={(target) => setValue((prev) => ({ ...prev, target }))}
         value={value.target}
       />
-      <GoalPlanInput
+      <PanelDescriptionInput
+        label="Your plan"
+        placeholder="How are you going to achieve this goal? What's your plan?"
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
         value={value.plan}
       />

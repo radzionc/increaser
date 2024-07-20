@@ -14,8 +14,8 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
-import { NoteDescriptionInput } from './NoteDescriptionInput'
 import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { PanelDescriptionInput } from '@lib/ui/inputs/PanelDescriptionInput'
 
 export const EditNoteForm = () => {
   const note = useCurrentNote()
@@ -84,7 +84,9 @@ export const EditNoteForm = () => {
         />
       </EmojiTextInputFrame>
 
-      <NoteDescriptionInput
+      <PanelDescriptionInput
+        label="Description"
+        placeholder="Describe your idea"
         onChange={(description) =>
           setValue((prev) => ({ ...prev, description }))
         }

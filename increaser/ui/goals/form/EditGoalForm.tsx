@@ -13,7 +13,6 @@ import { GoalFormShape } from './GoalFormShape'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { GoalPlanInput } from './GoalPlanInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { pick } from '@lib/utils/record/pick'
@@ -22,6 +21,7 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
+import { PanelDescriptionInput } from '@lib/ui/inputs/PanelDescriptionInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -104,7 +104,9 @@ export const EditGoalForm = () => {
         value={value.target}
         onChange={(target) => setValue((prev) => ({ ...prev, target }))}
       />
-      <GoalPlanInput
+      <PanelDescriptionInput
+        label="Your plan"
+        placeholder="How are you going to achieve this goal? What's your plan?"
         onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
         value={value.plan}
       />

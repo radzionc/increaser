@@ -5,7 +5,7 @@ export const NoteDescription = () => {
   const { description } = useCurrentNote()
 
   return (
-    <Text size={14} color="supporting">
+    <Text size={14} color="supporting" style={{ whiteSpace: 'pre-line' }}>
       {description}
     </Text>
   )
