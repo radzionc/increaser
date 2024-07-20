@@ -49,6 +49,7 @@ export const SidebarNavigationItem = ({
         />
       )}
       account={() => <NavigationToInternalPage value="account" />}
+      notes={() => <NavigationToInternalPage value="notes" />}
     />
   )
 }
