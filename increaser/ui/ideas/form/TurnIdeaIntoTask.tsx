@@ -42,8 +42,10 @@ export const TurnIdeaIntoTask = ({
       renderContent={({ onClose }) => (
         <TaskFormOverlay onFinish={onClose}>
           <CreateTaskForm
-            defaultValue={value}
-            deadlineType="today"
+            defaultValue={{
+              ...value,
+              deadlineType: 'today',
+            }}
             onFinish={(task) => {
               if (!task) {
                 onClose()

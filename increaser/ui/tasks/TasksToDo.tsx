@@ -14,7 +14,6 @@ import { toRecord } from '@lib/utils/record/toRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -94,12 +93,7 @@ export const TasksToDo = () => {
           <VStack {...containerProps}>
             {content}
             {groupId !== 'overdue' && (
-              <CreateTask
-                order={getLastItemOrder(
-                  groups[groupId].map((task) => task.order),
-                )}
-                deadlineType={groupId === 'none' ? null : groupId}
-              />
+              <CreateTask deadlineType={groupId === 'none' ? null : groupId} />
             )}
           </VStack>
         </VStack>

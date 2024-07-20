@@ -4,13 +4,10 @@ import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { TaskFormOverlay } from '@increaser/ui/tasks/form/TaskFormOverlay'
 import { FinishableComponentProps } from '@lib/ui/props'
 
-type CreateFocusTaskOverlayProps = FinishableComponentProps & {
-  order: number
-}
+type CreateFocusTaskOverlayProps = FinishableComponentProps & {}
 
 export const CreateFocusTaskOverlay = ({
   onFinish,
-  order,
 }: CreateFocusTaskOverlayProps) => {
   const { projectId } = useCurrentFocus()
   const { updateTask } = useFocus()
@@ -20,9 +17,8 @@ export const CreateFocusTaskOverlay = ({
       <CreateTaskForm
         defaultValue={{
           projectId,
+          deadlineType: 'today',
         }}
-        deadlineType="today"
-        order={order}
         onFinish={(task) => {
           if (task) {
             updateTask({

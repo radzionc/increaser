@@ -5,15 +5,13 @@ import { useState } from 'react'
 
 type CreateTaskProps = {
   deadlineType: DeadlineType | null
-  order: number
 }
 
-export const CreateTask = ({ deadlineType, order }: CreateTaskProps) => {
+export const CreateTask = ({ deadlineType }: CreateTaskProps) => {
   const [isActive, setIsActive] = useState(false)
   return isActive ? (
     <CreateTaskForm
-      deadlineType={deadlineType}
-      order={order}
+      defaultValue={{ deadlineType }}
       onFinish={() => setIsActive(false)}
     />
   ) : (

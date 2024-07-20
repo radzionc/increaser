@@ -20,11 +20,15 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from './TaskDescriptionInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { HStack } from '@lib/ui/layout/Stack'
+import { TaskDeadlineInput } from '../TaskDeadlineInput'
+
+type CreateTaskFormShape = TaskFormShape & {
+  deadlineType: DeadlineType | null
+}
 
 type CreateTaskFormProps = UIComponentProps & {
-  deadlineType: DeadlineType | null
-  order?: number
-  defaultValue?: Partial<TaskFormShape>
+  defaultValue?: Partial<CreateTaskFormShape>
   onFinish?: (task?: Task) => void
   onMutationFinish?: (task: Task) => void
 }
@@ -32,17 +36,16 @@ type CreateTaskFormProps = UIComponentProps & {
 export const CreateTaskForm = ({
   onFinish,
   onMutationFinish,
-  deadlineType,
-  order: optionalOrder,
   defaultValue,
   ...rest
 }: CreateTaskFormProps) => {
-  const [value, setValue] = useState<TaskFormShape>({
+  const [value, setValue] = useState<CreateTaskFormShape>({
     name: '',
     projectId: otherProject.id,
     links: [],
     checklist: [],
     description: '',
+    deadlineType: 'today',
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
@@ -60,10 +63,17 @@ export const CreateTaskForm = ({
 
   const onSubmit = () => {
     if (isDisabled) return
-    const order =
-      optionalOrder === undefined
-        ? getLastItemOrder(Object.values(tasks).map((task) => task.order))
-        : optionalOrder
+
+    const deadlineAt = value.deadlineType
+      ? getDeadlineAt({
+          deadlineType: value.deadlineType,
+          now: Date.now(),
+        })
+      : null
+    const orders = Object.values(tasks)
+      .filter((task) => task.deadlineAt === deadlineAt)
+      .map((task) => task.order)
+    const order = getLastItemOrder(orders)
 
     const startedAt = Date.now()
     const task: Task = {
@@ -72,9 +82,7 @@ export const CreateTaskForm = ({
       links: fixLinks(value.links),
       checklist: fixChecklist(value.checklist),
       startedAt,
-      deadlineAt: deadlineType
-        ? getDeadlineAt({ now: startedAt, deadlineType })
-        : null,
+      deadlineAt,
       order,
     }
     mutate(task, {
@@ -132,13 +140,33 @@ export const CreateTaskForm = ({
         value={value.checklist}
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
-      <CreateFormFooter
-        isPending={isPending}
-        isDisabled={isDisabled}
-        onCancel={() => {
-          onFinish?.()
-        }}
-      />
+      <HStack
+        wrap="wrap"
+        fullWidth
+        alignItems="center"
+        gap={20}
+        justifyContent="space-between"
+      >
+        <TaskDeadlineInput
+          value={value.deadlineType ?? 'none'}
+          onChange={(deadlineType) =>
+            setValue((prev) => ({
+              ...prev,
+              deadlineType:
+                deadlineType === 'none' || deadlineType === 'overdue'
+                  ? null
+                  : deadlineType,
+            }))
+          }
+        />
+        <CreateFormFooter
+          isPending={isPending}
+          isDisabled={isDisabled}
+          onCancel={() => {
+            onFinish?.()
+          }}
+        />
+      </HStack>
     </Panel>
   )
 }

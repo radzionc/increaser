@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusTaskSelector } from './FocusTaskSelector'
 import { CreateFocusTaskPrompt } from './CreateFocusTaskPrompt'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
 import { useTodayIncompleteTasks } from '@increaser/ui/tasks/hooks/useTodayIncompleteTasks'
 
@@ -17,12 +16,7 @@ export const SelectFocusTask = () => {
   const [isCreatingTask, setIsCreatingTask] = useState(false)
 
   if (isCreatingTask) {
-    return (
-      <CreateFocusTaskOverlay
-        order={getLastItemOrder(options.map((option) => option.order))}
-        onFinish={() => setIsCreatingTask(false)}
-      />
-    )
+    return <CreateFocusTaskOverlay onFinish={() => setIsCreatingTask(false)} />
   }
 
   if (!options.length) {
