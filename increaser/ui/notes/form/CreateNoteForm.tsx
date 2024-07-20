@@ -11,7 +11,7 @@ import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { otherProjectId } from '@increaser/entities/Project'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { TaskNameInput } from '../../tasks/TaskNameInput'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 export const CreateNoteForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<NoteFormShape>({
@@ -58,7 +58,7 @@ export const CreateNoteForm = ({ onFinish }: FinishableComponentProps) => {
             }}
           />
         </div>
-        <TaskNameInput
+        <PanelTitleInput
           placeholder="Your idea"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

@@ -15,7 +15,7 @@ import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { NoteDescriptionInput } from './NoteDescriptionInput'
-import { TaskNameInput } from '../../tasks/TaskNameInput'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 export const EditNoteForm = () => {
   const note = useCurrentNote()
@@ -76,7 +76,7 @@ export const EditNoteForm = () => {
           />
         </div>
 
-        <TaskNameInput
+        <PanelTitleInput
           placeholder="Your idea"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

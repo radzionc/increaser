@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { useIsTaskFormDisabled } from '../../tasks/form/useIsTaskFormDisabled'
@@ -18,6 +17,7 @@ import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInpu
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -79,7 +79,7 @@ export const EditTaskFactoryForm = () => {
           />
         </div>
 
-        <TaskNameInput
+        <PanelTitleInput
           autoFocus
           placeholder="Task name"
           value={value.name}

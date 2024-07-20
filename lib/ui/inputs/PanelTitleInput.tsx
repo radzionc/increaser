@@ -4,23 +4,26 @@ import { ComponentProps, forwardRef } from 'react'
 import styled from 'styled-components'
 
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
-import { getColor } from '@lib/ui/theme/getters'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { getColor } from '../theme/getters'
 
 const Container = styled(MultilineTextInput)`
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
-  background: ${getColor('background')};
+  background: transparent;
   width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${getColor('contrast')};
 `
 
-type TaskNameInputProps = InputProps<string> &
+type PanelTitleInputProps = InputProps<string> &
   Omit<ComponentProps<typeof Container>, 'value' | 'onChange'> & {
     onSubmit?: () => void
   }
 
-export const TaskNameInput = forwardRef<
+export const PanelTitleInput = forwardRef<
   HTMLTextAreaElement,
-  TaskNameInputProps
+  PanelTitleInputProps
 >(({ value, onChange, onSubmit, ...rest }, ref) => {
   return (
     <Container

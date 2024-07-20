@@ -4,5 +4,9 @@ import { Text } from '@lib/ui/text'
 export const NoteDescription = () => {
   const { description } = useCurrentNote()
 
-  return <Text>{description}</Text>
+  return (
+    <Text size={14} color="supporting">
+      {description}
+    </Text>
+  )
 }

@@ -4,7 +4,6 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { DeadlineType, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
-import { TaskNameInput } from '../TaskNameInput'
 import { Panel } from '@lib/ui/panel/Panel'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { otherProject } from '@increaser/entities/Project'
@@ -18,6 +17,7 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType | null
@@ -97,7 +97,7 @@ export const CreateTaskForm = ({
           />
         </div>
 
-        <TaskNameInput
+        <PanelTitleInput
           placeholder="Task name"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

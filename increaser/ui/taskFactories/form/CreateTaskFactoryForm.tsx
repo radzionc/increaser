@@ -3,7 +3,6 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { otherProject } from '@increaser/entities/Project'
-import { TaskNameInput } from '../../tasks/TaskNameInput'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
@@ -17,6 +16,7 @@ import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInpu
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -75,7 +75,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           />
         </div>
 
-        <TaskNameInput
+        <PanelTitleInput
           placeholder="Task name"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}

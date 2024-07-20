@@ -5,7 +5,6 @@ import { useCurrentGoal } from '../CurrentGoalProvider'
 import { Goal } from '@increaser/entities/Goal'
 import { useUpdateGoalMutation } from '../api/useUpdateGoalMutation'
 import { useDeleteGoalMutation } from '../api/useDeleteGoalMutation'
-import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
@@ -22,6 +21,7 @@ import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFoot
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -82,7 +82,8 @@ export const EditGoalForm = () => {
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <GoalNameInput
+        <PanelTitleInput
+          placeholder="Describe your goal"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

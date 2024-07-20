@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { DeadlineStatus, Task } from '@increaser/entities/Task'
 import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { TaskNameInput } from '../TaskNameInput'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
@@ -23,6 +22,7 @@ import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
 import { Panel } from '@lib/ui/panel/Panel'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -131,7 +131,7 @@ export const EditTaskFormContent = ({
           />
         </div>
 
-        <TaskNameInput
+        <PanelTitleInput
           autoFocus
           placeholder="Task name"
           value={value.name}

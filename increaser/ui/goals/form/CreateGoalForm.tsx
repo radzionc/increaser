@@ -6,7 +6,6 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCreateGoalMutation } from '../api/useCreateGoalMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { GoalNameInput } from './GoalNameInput'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -19,6 +18,7 @@ import { GoalTargetInput } from './GoalTargetInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
+import { PanelTitleInput } from '@lib/ui/inputs/PanelTitleInput'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({
@@ -63,7 +63,8 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
             onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
           />
         </div>
-        <GoalNameInput
+        <PanelTitleInput
+          placeholder="Describe your goal"
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}

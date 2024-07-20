@@ -22,7 +22,7 @@ export const NoteItemContent = () => {
   const { projects } = useAssertUserState()
 
   return (
-    <VStack gap={8}>
+    <VStack>
       <PrefixedItemFrame
         prefix={<Text color="contrast">{projects[projectId].emoji}</Text>}
       >
