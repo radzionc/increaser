@@ -19,18 +19,21 @@ import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from './TaskDescriptionInput'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type CreateTaskFormProps = UIComponentProps & {
   deadlineType: DeadlineType | null
-  order: number
+  order?: number
   defaultValue?: Partial<TaskFormShape>
-  onFinish: (task?: Task) => void
+  onFinish?: (task?: Task) => void
+  onMutationFinish?: (task: Task) => void
 }
 
 export const CreateTaskForm = ({
   onFinish,
+  onMutationFinish,
   deadlineType,
-  order,
+  order: optionalOrder,
   defaultValue,
   ...rest
 }: CreateTaskFormProps) => {
@@ -49,7 +52,7 @@ export const CreateTaskForm = ({
 
     const task = tasks[variables.id]
     if (task) {
-      onFinish(task)
+      onFinish?.(task)
     }
   }, [onFinish, tasks, variables])
 
@@ -57,6 +60,10 @@ export const CreateTaskForm = ({
 
   const onSubmit = () => {
     if (isDisabled) return
+    const order =
+      optionalOrder === undefined
+        ? getLastItemOrder(Object.values(tasks).map((task) => task.order))
+        : optionalOrder
 
     const startedAt = Date.now()
     const task: Task = {
@@ -70,7 +77,11 @@ export const CreateTaskForm = ({
         : null,
       order,
     }
-    mutate(task)
+    mutate(task, {
+      onSuccess: () => {
+        onMutationFinish?.(task)
+      },
+    })
   }
 
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
@@ -90,7 +101,7 @@ export const CreateTaskForm = ({
       <EmojiTextInputFrame>
         <div>
           <TaskProjectSelector
-            autoFocus
+            autoFocus={!defaultValue?.projectId}
             value={value.projectId}
             onChange={(projectId) => {
               setValue((prev) => ({ ...prev, projectId }))
@@ -124,7 +135,9 @@ export const CreateTaskForm = ({
       <CreateFormFooter
         isPending={isPending}
         isDisabled={isDisabled}
-        onCancel={onFinish}
+        onCancel={() => {
+          onFinish?.()
+        }}
       />
     </Panel>
   )

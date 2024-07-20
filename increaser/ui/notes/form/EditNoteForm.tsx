@@ -16,6 +16,7 @@ import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
+import { TurnNoteIntoTask } from './TurnNoteIntoTask'
 
 export const EditNoteForm = () => {
   const note = useCurrentNote()
@@ -92,6 +93,7 @@ export const EditNoteForm = () => {
         }
         value={value.description}
       />
+      <TurnNoteIntoTask value={value} />
       <EditDeleteFormFooter
         onDelete={() => {
           deleteNote({ id: note.id })
