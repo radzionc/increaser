@@ -10,7 +10,7 @@ export const primaryAppNavigationPages = [
   'vision',
   'goals',
   'projects',
-  'notes',
+  'ideas',
 ] as const
 
 export const secondaryAppNavigationPages = [
@@ -56,7 +56,7 @@ export const appPagePath: Record<AppPage, string> = {
   signUp: 'sign-up',
   emailConfirm: 'email-confirm',
   onboarding: 'onboarding',
-  notes: 'notes',
+  ideas: 'ideas',
 }
 
 export const appPageViews = {

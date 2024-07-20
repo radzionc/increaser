@@ -9,7 +9,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
     'projects',
     'sets',
     'tasks',
-    'notes',
+    'ideas',
     'weeks',
     'months',
     'years',
@@ -28,10 +28,10 @@ export const syncProjectsDependantFields = async (userId: string) => {
       : { ...task, projectId: otherProject.id },
   )
 
-  const notes = recordMap(oldUser.notes, (note) =>
-    projectIds.has(note.projectId)
-      ? note
-      : { ...note, projectId: otherProject.id },
+  const ideas = recordMap(oldUser.ideas, (idea) =>
+    projectIds.has(idea.projectId)
+      ? idea
+      : { ...idea, projectId: otherProject.id },
   )
 
   const taskFactories = recordMap(oldUser.taskFactories, (taskFactory) =>
@@ -60,7 +60,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
   await updateUser(userId, {
     sets,
     tasks,
-    notes,
+    ideas,
     weeks,
     months,
     years,

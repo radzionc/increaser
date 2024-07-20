@@ -2,10 +2,10 @@ import { useCallback, useRef, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
-import { useCreateNoteMutation } from '../api/useCreateNoteMutation'
+import { useCreateIdeaMutation } from '../api/useCreateIdeaMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { NoteFormShape } from './NoteFormShape'
-import { useIsNoteFormDisabled } from './useIsNoteFormDisabled'
+import { IdeaFormShape } from './IdeaFormShape'
+import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { otherProjectId } from '@increaser/entities/Project'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
@@ -13,15 +13,15 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 
-export const CreateNoteForm = ({ onFinish }: FinishableComponentProps) => {
-  const [value, setValue] = useState<NoteFormShape>({
+export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
+  const [value, setValue] = useState<IdeaFormShape>({
     name: '',
     description: '',
     projectId: otherProjectId,
   })
-  const { mutate } = useCreateNoteMutation()
+  const { mutate } = useCreateIdeaMutation()
 
-  const isDisabled = useIsNoteFormDisabled(value)
+  const isDisabled = useIsIdeaFormDisabled(value)
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return

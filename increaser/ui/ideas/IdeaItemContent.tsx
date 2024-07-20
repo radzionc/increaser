@@ -2,12 +2,12 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { useCurrentNote } from './CurrentNoteProvider'
+import { useCurrentIdea } from './CurrentIdeaProvider'
 import { getColor } from '@lib/ui/theme/getters'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { useAssertUserState } from '../user/UserStateContext'
-import { NoteDescription } from './NoteDescription'
+import { IdeaDescription } from './IdeaDescription'
 
 const Name = styled(Text)`
   text-align: start;
@@ -17,8 +17,8 @@ const Name = styled(Text)`
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
 `
 
-export const NoteItemContent = () => {
-  const { description, name, projectId } = useCurrentNote()
+export const IdeaItemContent = () => {
+  const { description, name, projectId } = useCurrentIdea()
   const { projects } = useAssertUserState()
 
   return (
@@ -28,7 +28,7 @@ export const NoteItemContent = () => {
       >
         <Name>{name}</Name>
       </PrefixedItemFrame>
-      {description && <NoteDescription />}
+      {description && <IdeaDescription />}
     </VStack>
   )
 }

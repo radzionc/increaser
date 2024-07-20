@@ -1,10 +1,10 @@
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
 
-export type Note = EntityWithId & {
+export type Idea = EntityWithId & {
   updatedAt: number
   name: string
   description: string
   projectId: string
 }
 
-export type Notes = Record<string, Note>
+export type Ideas = Record<string, Idea>

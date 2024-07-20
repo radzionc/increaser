@@ -8,10 +8,10 @@ import styled from 'styled-components'
 import { TaskFormOverlay } from '../../tasks/form/TaskFormOverlay'
 import { CreateTaskForm } from '../../tasks/form/CreateTaskForm'
 import { ComponentWithValueProps } from '@lib/ui/props'
-import { NoteFormShape } from './NoteFormShape'
-import { useDeleteNoteMutation } from '../api/useDeleteNoteMutation'
+import { IdeaFormShape } from './IdeaFormShape'
+import { useDeleteIdeaMutation } from '../api/useDeleteIdeaMutation'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { useCurrentNote } from '../CurrentNoteProvider'
+import { useCurrentIdea } from '../CurrentIdeaProvider'
 
 const Container = styled.div`
   ${interactive};
@@ -23,12 +23,12 @@ const Container = styled.div`
   }
 `
 
-export const TurnNoteIntoTask = ({
+export const TurnIdeaIntoTask = ({
   value,
-}: ComponentWithValueProps<NoteFormShape>) => {
-  const { mutate: deleteNote } = useDeleteNoteMutation()
+}: ComponentWithValueProps<IdeaFormShape>) => {
+  const { mutate: deleteIdea } = useDeleteIdeaMutation()
   const [, setActiveItemId] = useActiveItemId()
-  const { id } = useCurrentNote()
+  const { id } = useCurrentIdea()
 
   return (
     <Opener
@@ -51,7 +51,7 @@ export const TurnNoteIntoTask = ({
             }}
             onMutationFinish={() => {
               onClose()
-              deleteNote({ id })
+              deleteIdea({ id })
               setActiveItemId(null)
             }}
           />

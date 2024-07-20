@@ -71,7 +71,7 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       name: 'Membership',
       icon: <CrownIcon />,
     },
-    notes: {
+    ideas: {
       name: 'Ideas',
       icon: <LightBulbIcon />,
     },

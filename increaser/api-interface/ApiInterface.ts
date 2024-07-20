@@ -16,7 +16,7 @@ import { Interval } from '@lib/utils/interval/Interval'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { Goal } from '@increaser/entities/Goal'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { Note } from '@increaser/entities/Note'
+import { Idea } from '@increaser/entities/Idea'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -142,15 +142,15 @@ export interface ApiInterface {
   >
   deleteGoal: ApiMethod<{ id: string }, undefined>
 
-  createNote: ApiMethod<Note, Note>
-  updateNote: ApiMethod<
+  createIdea: ApiMethod<Idea, Idea>
+  updateIdea: ApiMethod<
     {
       id: string
-      fields: Partial<Omit<Note, 'id'>>
+      fields: Partial<Omit<Idea, 'id'>>
     },
-    Note
+    Idea
   >
-  deleteNote: ApiMethod<{ id: string }, undefined>
+  deleteIdea: ApiMethod<{ id: string }, undefined>
 
   getFileUploadUrl: ApiMethod<
     { contentType: string },

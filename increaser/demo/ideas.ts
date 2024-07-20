@@ -1,8 +1,8 @@
-import { Note, Notes } from '@increaser/entities/Note'
+import { Idea, Ideas } from '@increaser/entities/Idea'
 import { toRecord } from '@lib/utils/record/toRecord'
 import { DemoProject } from './projects'
 
-const items: Omit<Note, 'id' | 'updatedAt'>[] = [
+const items: Omit<Idea, 'id' | 'updatedAt'>[] = [
   {
     name: 'Improve Website SEO',
     description:
@@ -29,7 +29,7 @@ const items: Omit<Note, 'id' | 'updatedAt'>[] = [
   },
 ]
 
-export const getDemoNotes = (): Notes => {
+export const getDemoIdeas = (): Ideas => {
   return toRecord(
     items.map((item, order) => ({
       ...item,

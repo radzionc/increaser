@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { NoteFormShape } from './NoteFormShape'
+import { IdeaFormShape } from './IdeaFormShape'
 
-export const useIsNoteFormDisabled = ({ name }: NoteFormShape) => {
+export const useIsIdeaFormDisabled = ({ name }: IdeaFormShape) => {
   return useMemo(() => {
     if (!name.trim()) {
       return 'Name is required'

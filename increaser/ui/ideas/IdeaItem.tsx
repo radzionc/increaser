@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { useCurrentNote } from './CurrentNoteProvider'
-import { EditNoteForm } from './form/EditNoteForm'
-import { NoteItemContent } from './NoteItemContent'
+import { useCurrentIdea } from './CurrentIdeaProvider'
+import { EditIdeaForm } from './form/EditIdeaForm'
+import { IdeaItemContent } from './IdeaItemContent'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Container = styled(Hoverable)`
@@ -13,13 +13,13 @@ const Container = styled(Hoverable)`
   width: 100%;
 `
 
-export const NoteItem = () => {
-  const { id } = useCurrentNote()
+export const IdeaItem = () => {
+  const { id } = useCurrentIdea()
 
   const [activeItemId, setActiveItemId] = useActiveItemId()
 
   if (activeItemId === id) {
-    return <EditNoteForm />
+    return <EditIdeaForm />
   }
 
   return (
@@ -29,7 +29,7 @@ export const NoteItem = () => {
       }}
       verticalOffset={0}
     >
-      <NoteItemContent />
+      <IdeaItemContent />
     </Container>
   )
 }

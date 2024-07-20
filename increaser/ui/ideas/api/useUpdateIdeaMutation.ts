@@ -7,20 +7,20 @@ import {
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
 
-export const useUpdateNoteMutation = () => {
+export const useUpdateIdeaMutation = () => {
   const api = useApi()
   const { updateState } = useUserState()
-  const { notes } = useAssertUserState()
+  const { ideas } = useAssertUserState()
 
   return useMutation({
-    mutationFn: async (input: ApiInterface['updateNote']['input']) => {
+    mutationFn: async (input: ApiInterface['updateIdea']['input']) => {
       updateState({
-        notes: recordMap(notes, (value) =>
+        ideas: recordMap(ideas, (value) =>
           value.id === input.id ? { ...value, ...input.fields } : value,
         ),
       })
 
-      return api.call('updateNote', input)
+      return api.call('updateIdea', input)
     },
   })
 }

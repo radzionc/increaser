@@ -8,7 +8,7 @@ import { User } from '@increaser/entities/User'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 
-const userStateQueryKey = ['userState3']
+const userStateQueryKey = ['userState4']
 
 export const UserStateProvider = ({ children }: ComponentWithChildrenProps) => {
   const [authSession] = useAuthSession()

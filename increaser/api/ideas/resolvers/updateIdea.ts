@@ -1,8 +1,8 @@
 import { assertUserId } from '../../auth/assertUserId'
-import * as notesDb from '@increaser/db/note'
+import * as ideasDb from '@increaser/db/idea'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 
-export const updateNote: ApiResolver<'updateNote'> = async ({
+export const updateIdea: ApiResolver<'updateIdea'> = async ({
   input,
   context,
 }) => {
@@ -10,7 +10,7 @@ export const updateNote: ApiResolver<'updateNote'> = async ({
 
   const { id, fields } = input
 
-  const value = notesDb.updateNote(userId, id, fields)
+  const value = ideasDb.updateIdea(userId, id, fields)
 
   return value
 }

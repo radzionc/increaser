@@ -35,9 +35,9 @@ import { getFileUploadUrl } from '../users/resolvers/getFileUploadUrl'
 import { createTaskFactory } from '../taskFactories/resolvers/createTaskFactory'
 import { deleteTaskFactory } from '../taskFactories/resolvers/deleteTaskFactory'
 import { updateTaskFactory } from '../taskFactories/resolvers/updateTaskFactory'
-import { createNote } from '../notes/resolvers/createNote'
-import { deleteNote } from '../notes/resolvers/deleteNote'
-import { updateNote } from '../notes/resolvers/updateNote'
+import { createIdea } from '../ideas/resolvers/createIdea'
+import { deleteIdea } from '../ideas/resolvers/deleteIdea'
+import { updateIdea } from '../ideas/resolvers/updateIdea'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -76,7 +76,7 @@ export const implementation: ApiImplementation = {
   createTaskFactory,
   updateTaskFactory,
   deleteTaskFactory,
-  createNote,
-  updateNote,
-  deleteNote,
+  createIdea,
+  updateIdea,
+  deleteIdea,
 }

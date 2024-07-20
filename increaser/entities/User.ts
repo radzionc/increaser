@@ -13,7 +13,7 @@ import { Vision } from './Vision'
 import { Goals } from './Goal'
 import { Education } from './Education'
 import { TaskFactory } from './TaskFactory'
-import { Notes } from './Note'
+import { Ideas } from './Idea'
 
 export type Set = Interval & {
   projectId: string
@@ -78,7 +78,7 @@ export type User = DayMoments &
 
     vision: Vision
     goals: Goals
-    notes: Notes
+    ideas: Ideas
   }
 
 export const userReadonlyFields = [
@@ -120,7 +120,7 @@ export const userDefaultFields: Pick<
   | 'years'
   | 'vision'
   | 'goals'
-  | 'notes'
+  | 'ideas'
   | 'completedEducation'
   | 'taskFactories'
 > = {
@@ -137,7 +137,7 @@ export const userDefaultFields: Pick<
   years: {},
   vision: {},
   goals: {},
-  notes: {},
+  ideas: {},
   completedEducation: [],
   taskFactories: {},
   ...defaultWorkBudget,

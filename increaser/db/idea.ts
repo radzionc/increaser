@@ -1,12 +1,12 @@
 import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb'
 import { getUserItemParams } from './user'
 import { dbDocClient } from '@lib/dynamodb/client'
-import { Note } from '@increaser/entities/Note'
+import { Idea } from '@increaser/entities/Idea'
 
-export const putNote = async (userId: string, value: Note) => {
+export const putIdea = async (userId: string, value: Idea) => {
   const command = new UpdateCommand({
     ...getUserItemParams(userId),
-    UpdateExpression: `set notes.#id = :value`,
+    UpdateExpression: `set ideas.#id = :value`,
     ExpressionAttributeValues: {
       ':value': value,
     },
@@ -18,10 +18,10 @@ export const putNote = async (userId: string, value: Note) => {
   return dbDocClient.send(command)
 }
 
-export const getNote = async (userId: string, id: string) => {
+export const getIdea = async (userId: string, id: string) => {
   const command = new GetCommand({
     ...getUserItemParams(userId),
-    ProjectionExpression: 'notes.#id',
+    ProjectionExpression: 'ideas.#id',
     ExpressionAttributeNames: {
       '#id': id,
     },
@@ -32,30 +32,30 @@ export const getNote = async (userId: string, id: string) => {
     throw new Error(`No user with id=${userId}`)
   }
 
-  return Item.notes[id] as Note
+  return Item.ideas[id] as Idea
 }
 
-export const updateNote = async (
+export const updateIdea = async (
   userId: string,
   id: string,
-  fields: Partial<Omit<Note, 'id'>>,
+  fields: Partial<Omit<Idea, 'id'>>,
 ) => {
-  const value = await getNote(userId, id)
+  const value = await getIdea(userId, id)
 
   const newValue = {
     ...value,
     ...fields,
   }
 
-  await putNote(userId, newValue)
+  await putIdea(userId, newValue)
 
   return newValue
 }
 
-export const deleteNote = async (userId: string, id: string) => {
+export const deleteIdea = async (userId: string, id: string) => {
   const comand = new UpdateCommand({
     ...getUserItemParams(userId),
-    UpdateExpression: 'REMOVE notes.#id',
+    UpdateExpression: 'REMOVE ideas.#id',
     ExpressionAttributeNames: {
       '#id': id,
     },

@@ -7,20 +7,20 @@ import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 
-export const useCreateNoteMutation = () => {
-  const { notes } = useAssertUserState()
+export const useCreateIdeaMutation = () => {
+  const { ideas } = useAssertUserState()
   const { updateState } = useUserState()
   const api = useApi()
 
   const analytics = useAnalytics()
 
   return useMutation({
-    mutationFn: async (value: ApiInterface['createNote']['input']) => {
-      updateState({ notes: { ...notes, [value.id]: value } })
+    mutationFn: async (value: ApiInterface['createIdea']['input']) => {
+      updateState({ ideas: { ...ideas, [value.id]: value } })
 
-      analytics.trackEvent('Create note', { name: value.name })
+      analytics.trackEvent('Create idea', { name: value.name })
 
-      await api.call('createNote', value)
+      await api.call('createIdea', value)
     },
   })
 }

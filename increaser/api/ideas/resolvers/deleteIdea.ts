@@ -1,12 +1,12 @@
 import { assertUserId } from '../../auth/assertUserId'
-import * as notesDb from '@increaser/db/note'
+import * as ideasDb from '@increaser/db/idea'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 
-export const deleteNote: ApiResolver<'deleteNote'> = async ({
+export const deleteIdea: ApiResolver<'deleteIdea'> = async ({
   input: { id },
   context,
 }) => {
   const userId = assertUserId(context)
 
-  await notesDb.deleteNote(userId, id)
+  await ideasDb.deleteIdea(userId, id)
 }
