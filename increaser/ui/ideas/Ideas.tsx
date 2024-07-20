@@ -15,6 +15,7 @@ export const Ideas = () => {
 
   return (
     <Container>
+      <AddIdea />
       <ActiveItemIdProvider initialValue={null}>
         {items.map((item) => (
           <CurrentIdeaProvider key={item.id} value={item}>
@@ -22,7 +23,6 @@ export const Ideas = () => {
           </CurrentIdeaProvider>
         ))}
       </ActiveItemIdProvider>
-      <AddIdea />
     </Container>
   )
 }
