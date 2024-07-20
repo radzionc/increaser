@@ -12,6 +12,7 @@ import { getDemoVision } from './vision'
 import { getDemoGoals } from './goals'
 import { dayToString, toDay } from '@lib/utils/time/Day'
 import { demoTaskFactories } from './taskFactories'
+import { getDemoNotes } from './notes'
 
 export const getDemoUser = (): User => {
   const now = Date.now()
@@ -36,6 +37,7 @@ export const getDemoUser = (): User => {
     tasks: getDemoTasks(),
     vision: getDemoVision(),
     goals: getDemoGoals(),
+    notes: getDemoNotes(),
     taskFactories: demoTaskFactories,
   }
 
