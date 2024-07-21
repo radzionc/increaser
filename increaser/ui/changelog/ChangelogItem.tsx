@@ -9,6 +9,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { getPublicFileUrl } from '../storage/getPublicFileUrl'
+import { IntersectionAware } from '@lib/ui/base/IntersectionAware'
 
 const Container = styled(VStack)`
   gap: 16px;
@@ -42,16 +43,24 @@ export const ChangelogItem = ({
       </VStack>
       <Text height="large">{value.description}</Text>
       <ClientOnly>
-        <VideoWrapper>
-          <TakeWholeSpace>
-            <Video as="video" autoPlay muted loop>
-              <source
-                src={getPublicFileUrl(`updates/${value.videoId}.mp4`)}
-                type="video/mp4"
-              />
-            </Video>
-          </TakeWholeSpace>
-        </VideoWrapper>
+        <IntersectionAware<HTMLDivElement>
+          render={({ ref, wasIntersected }) => {
+            return (
+              <VideoWrapper ref={ref}>
+                {wasIntersected && (
+                  <TakeWholeSpace>
+                    <Video as="video" autoPlay muted loop>
+                      <source
+                        src={getPublicFileUrl(`updates/${value.videoId}.mp4`)}
+                        type="video/mp4"
+                      />
+                    </Video>
+                  </TakeWholeSpace>
+                )}
+              </VideoWrapper>
+            )
+          }}
+        />
       </ClientOnly>
     </Container>
   )
