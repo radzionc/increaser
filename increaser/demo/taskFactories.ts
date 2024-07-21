@@ -8,6 +8,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     id: 'upload-video',
     task: {
       name: 'Release a YouTube video',
+      description: '',
       projectId: DemoProject.Content,
       links: [
         {
@@ -47,6 +48,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
   jobs: {
     id: 'jobs',
     task: {
+      description: '',
       name: 'Apply for better jobs',
       projectId: DemoProject.Job,
       links: [],
@@ -57,6 +59,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
   invest: {
     id: 'invest',
     task: {
+      description: '',
       name: 'Invest my income in ETFs',
       projectId: DemoProject.Finances,
       links: [],
@@ -67,6 +70,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
   taxes: {
     id: 'taxes',
     task: {
+      description: '',
       name: 'Pay taxes',
       projectId: DemoProject.Finances,
       links: [],

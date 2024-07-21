@@ -14,6 +14,7 @@ export const syncProjectsDependantFields = async (userId: string) => {
     'months',
     'years',
     'taskFactories',
+    'taskTemplates',
   ])
 
   const projectIds = new Set(Object.keys(oldUser.projects))
@@ -43,6 +44,15 @@ export const syncProjectsDependantFields = async (userId: string) => {
         },
   )
 
+  const taskTemplates = recordMap(oldUser.taskTemplates, (taskTemplate) =>
+    projectIds.has(taskTemplate.projectId)
+      ? taskTemplate
+      : {
+          ...taskTemplate,
+          projectId: otherProject.id,
+        },
+  )
+
   const { weeks, months, years } = recordMap(
     pick(oldUser, ['weeks', 'months', 'years']),
     (trackedTime) =>
@@ -65,5 +75,6 @@ export const syncProjectsDependantFields = async (userId: string) => {
     months,
     years,
     taskFactories,
+    taskTemplates,
   })
 }

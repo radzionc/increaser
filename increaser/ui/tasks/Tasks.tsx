@@ -9,6 +9,7 @@ import { TasksDone } from '@increaser/ui/tasks/TasksDone'
 import { TasksBacklogView } from '@increaser/ui/tasks/TasksBacklogView'
 import { TasksToDoView } from './TasksToDoView'
 import { ManageTaskFactories } from '../taskFactories/ManageTaskFactories'
+import { TaskTemplates } from '../taskTemplates/TaskTemplates'
 
 const TasksContainer = styled(VStack)`
   max-width: 560px;
@@ -26,6 +27,7 @@ export const Tasks = () => {
           done={() => <TasksDone />}
           todo={() => <TasksToDoView />}
           backlog={() => <TasksBacklogView />}
+          templates={() => <TaskTemplates />}
         />
       </TasksViewProvider>
     </TasksContainer>

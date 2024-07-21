@@ -38,6 +38,9 @@ import { updateTaskFactory } from '../taskFactories/resolvers/updateTaskFactory'
 import { createIdea } from '../ideas/resolvers/createIdea'
 import { deleteIdea } from '../ideas/resolvers/deleteIdea'
 import { updateIdea } from '../ideas/resolvers/updateIdea'
+import { createTaskTemplate } from '../taskTemplates/resolvers/createTaskTemplate'
+import { deleteTaskTemplate } from '../taskTemplates/resolvers/deleteTaskTemplate'
+import { updateTaskTemplate } from '../taskTemplates/resolvers/updateTaskTemplate'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -76,6 +79,9 @@ export const implementation: ApiImplementation = {
   createTaskFactory,
   updateTaskFactory,
   deleteTaskFactory,
+  createTaskTemplate,
+  updateTaskTemplate,
+  deleteTaskTemplate,
   createIdea,
   updateIdea,
   deleteIdea,

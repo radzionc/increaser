@@ -1,3 +1,4 @@
+import { BookIcon } from '@lib/ui/icons/BookIcon'
 import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ListIcon } from '@lib/ui/icons/ListIcon'
@@ -10,7 +11,13 @@ import { getViewSetup } from '@lib/ui/view/getViewSetup'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { ReactNode, useId } from 'react'
 
-export const tasksView = ['todo', 'backlog', 'done', 'recurring'] as const
+export const tasksView = [
+  'todo',
+  'backlog',
+  'done',
+  'recurring',
+  'templates',
+] as const
 export type TasksView = (typeof tasksView)[number]
 
 export const tasksViewName: Record<TasksView, string> = {
@@ -18,6 +25,7 @@ export const tasksViewName: Record<TasksView, string> = {
   done: 'Done',
   recurring: 'Recurring',
   backlog: 'Backlog',
+  templates: 'Templates',
 }
 
 export const tasksViewIcon: Record<TasksView, ReactNode> = {
@@ -25,6 +33,7 @@ export const tasksViewIcon: Record<TasksView, ReactNode> = {
   done: <CheckSquareIcon />,
   recurring: <RefreshIcon />,
   backlog: <ListIcon />,
+  templates: <BookIcon />,
 }
 
 export const {

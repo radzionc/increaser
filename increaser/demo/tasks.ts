@@ -109,7 +109,9 @@ export const getDemoTasks = (): Record<string, Task> => {
           ? startedAt - convertDuration(1, 'd', 'ms')
           : endOfDay(startedAt).getTime(),
         order,
-        checklist,
+        checklist: checklist || [],
+        links: [],
+        description: '',
       }),
     ),
     (task) => task.id,

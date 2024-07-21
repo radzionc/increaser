@@ -17,6 +17,7 @@ import { VisionAttribute } from '@increaser/entities/Vision'
 import { Goal } from '@increaser/entities/Goal'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { Idea } from '@increaser/entities/Idea'
+import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -92,6 +93,16 @@ export interface ApiInterface {
     TaskFactory
   >
   deleteTaskFactory: ApiMethod<{ id: string }, undefined>
+
+  createTaskTemplate: ApiMethod<TaskTemplate, TaskTemplate>
+  updateTaskTemplate: ApiMethod<
+    {
+      id: string
+      fields: Partial<Omit<TaskTemplate, 'id'>>
+    },
+    TaskTemplate
+  >
+  deleteTaskTemplate: ApiMethod<{ id: string }, undefined>
 
   createHabit: ApiMethod<Omit<Habit, 'successes'>, Habit>
   updateHabit: ApiMethod<
