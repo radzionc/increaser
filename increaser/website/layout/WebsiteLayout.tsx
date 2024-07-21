@@ -122,8 +122,11 @@ export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
             <AppLink to={getAppPath('focus')}>
               <InteractiveText>App</InteractiveText>
             </AppLink>
-            <Link href={WebsitePath.PrivacyPolicy}>
-              <InteractiveText>Privacy</InteractiveText>
+            <AppLink to={getAppPath('focus')}>
+              <InteractiveText>App</InteractiveText>
+            </AppLink>
+            <Link href={WebsitePath.Changelog}>
+              <InteractiveText>What’s new</InteractiveText>
             </Link>
             <Link href={WebsitePath.TermsOfService}>
               <InteractiveText>Terms</InteractiveText>

@@ -13,6 +13,7 @@ import { getDemoGoals } from './goals'
 import { dayToString, toDay } from '@lib/utils/time/Day'
 import { demoTaskFactories } from './taskFactories'
 import { getDemoIdeas } from './ideas'
+import { demoTaskTemplates } from './taskTemplates'
 
 export const getDemoUser = (): User => {
   const now = Date.now()
@@ -40,6 +41,7 @@ export const getDemoUser = (): User => {
     ideas: getDemoIdeas(),
     notes: getDemoIdeas(),
     taskFactories: demoTaskFactories,
+    taskTemplates: demoTaskTemplates,
   }
 
   const fields: Partial<User> = [organizeWeeks, organizeMonths].reduce(
