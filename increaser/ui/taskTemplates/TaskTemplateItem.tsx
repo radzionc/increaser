@@ -3,7 +3,7 @@ import { EditTaskTemplateForm } from './form/EditTaskTemplateForm'
 
 import { TaskTemplateItemContent } from './TaskTemplateItemContent'
 import { Hoverable } from '@lib/ui/base/Hoverable'
-import { useCurrentTaskTemplate } from './CurrentTaskFactoryProvider'
+import { useCurrentTaskTemplate } from './CurrentTaskTemplateProvider'
 
 export const TaskTemplateItem = () => {
   const { id } = useCurrentTaskTemplate()

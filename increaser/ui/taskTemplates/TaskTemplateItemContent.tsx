@@ -1,7 +1,7 @@
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { Text } from '@lib/ui/text'
 import { ProjectEmoji } from '../projects/ProjectEmoji'
-import { useCurrentTaskTemplate } from './CurrentTaskFactoryProvider'
+import { useCurrentTaskTemplate } from './CurrentTaskTemplateProvider'
 
 export const TaskTemplateItemContent = () => {
   const { projectId, name } = useCurrentTaskTemplate()

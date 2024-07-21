@@ -2,7 +2,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { TaskTemplateItem } from './TaskTemplateItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddTaskTemplate } from './AddTaskTemplate'
-import { CurrentTaskTemplateProvider } from './CurrentTaskFactoryProvider'
+import { CurrentTaskTemplateProvider } from './CurrentTaskTemplateProvider'
 import { useTaskTemplates } from './hooks/useTaskTemplates'
 
 export const TaskTemplates = () => {

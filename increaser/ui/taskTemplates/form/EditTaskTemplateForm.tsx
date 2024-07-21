@@ -15,7 +15,7 @@ import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFoot
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
-import { useCurrentTaskTemplate } from '../CurrentTaskFactoryProvider'
+import { useCurrentTaskTemplate } from '../CurrentTaskTemplateProvider'
 import { omit } from '@lib/utils/record/omit'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 
