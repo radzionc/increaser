@@ -66,6 +66,8 @@ export type User = DayMoments &
 
     lastVisitAt: number
 
+    viewedNewFeaturesAt?: number
+
     reviewedVisionAt?: number
     sumbittedHabitsAt?: number
     reviewedGoalsAt?: number

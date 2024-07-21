@@ -6,10 +6,7 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { ClientOnly } from '@increaser/app/ui/ClientOnly'
 import { ManageProfile } from './ManageProfile'
 import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
-import { ProductFeaturesBoard } from '../../productFeatures/components/ProductFeaturesBoard'
-import { FounderContacts } from './FounderContacts'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
-import { SubscribeForUpdatesPrompt } from './SubscribeForUpdatesPrompt'
 
 export const CommunityPage: Page = () => {
   return (
@@ -19,14 +16,11 @@ export const CommunityPage: Page = () => {
       </ClientOnly>
       <UserStateOnly>
         <UniformColumnGrid minChildrenWidth={320} gap={40}>
-          <VStack style={{ width: 'fit-content' }} gap={40}>
-            <ManageProfile />
+          <VStack gap={40}>
             <Scoreboard />
-            <FounderContacts />
           </VStack>
           <VStack gap={20}>
-            <SubscribeForUpdatesPrompt />
-            <ProductFeaturesBoard />
+            <ManageProfile />
           </VStack>
         </UniformColumnGrid>
       </UserStateOnly>
