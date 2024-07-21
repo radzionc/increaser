@@ -22,6 +22,7 @@ import { TaskDescriptionInput } from './TaskDescriptionInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { HStack } from '@lib/ui/layout/Stack'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
+import { ExportFromTemplate } from './ExportFromTemplate'
 
 type CreateTaskFormShape = TaskFormShape & {
   deadlineType: DeadlineType | null
@@ -126,6 +127,16 @@ export const CreateTaskForm = ({
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
+      <ExportFromTemplate
+        projectId={value.projectId}
+        onFinish={(template) => {
+          setValue((prev) => ({
+            ...prev,
+            ...template,
+            name: prev.name || template.name,
+          }))
+        }}
+      />
       <TaskDescriptionInput
         value={value.description}
         onChange={(description) =>

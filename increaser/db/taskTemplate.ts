@@ -9,7 +9,7 @@ export const putTaskTemplate = async (
 ) => {
   const command = new UpdateCommand({
     ...getUserItemParams(userId),
-    UpdateExpression: `set taskFactories.#id = :taskTemplate`,
+    UpdateExpression: `set taskTemplates.#id = :taskTemplate`,
     ExpressionAttributeValues: {
       ':taskTemplate': taskTemplate,
     },
@@ -27,7 +27,7 @@ export const getTaskTemplate = async (
 ) => {
   const command = new GetCommand({
     ...getUserItemParams(userId),
-    ProjectionExpression: 'taskFactories.#id',
+    ProjectionExpression: 'taskTemplates.#id',
     ExpressionAttributeNames: {
       '#id': taskTemplateId,
     },
@@ -38,7 +38,7 @@ export const getTaskTemplate = async (
     throw new Error(`No user with id=${userId}`)
   }
 
-  return Item.taskFactories[taskTemplateId] as TaskTemplate
+  return Item.taskTemplates[taskTemplateId] as TaskTemplate
 }
 
 export const updateTaskTemplate = async (
@@ -64,7 +64,7 @@ export const deleteTaskTemplate = async (
 ) => {
   const comand = new UpdateCommand({
     ...getUserItemParams(userId),
-    UpdateExpression: 'REMOVE taskFactories.#id',
+    UpdateExpression: 'REMOVE taskTemplates.#id',
     ExpressionAttributeNames: {
       '#id': taskTemplateId,
     },

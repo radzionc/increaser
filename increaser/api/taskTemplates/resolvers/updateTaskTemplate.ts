@@ -1,5 +1,5 @@
 import { assertUserId } from '../../auth/assertUserId'
-import * as taskFactoriesDB from '@increaser/db/taskTemplate'
+import * as taskTemplatesDB from '@increaser/db/taskTemplate'
 import { ApiResolver } from '../../resolvers/ApiResolver'
 
 export const updateTaskTemplate: ApiResolver<'updateTaskTemplate'> = async ({
@@ -10,7 +10,7 @@ export const updateTaskTemplate: ApiResolver<'updateTaskTemplate'> = async ({
 
   const { id, fields } = input
 
-  const taskTemplate = taskFactoriesDB.updateTaskTemplate(userId, id, fields)
+  const taskTemplate = taskTemplatesDB.updateTaskTemplate(userId, id, fields)
 
   return taskTemplate
 }
