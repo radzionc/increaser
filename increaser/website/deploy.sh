@@ -39,5 +39,7 @@ find $OUT_DIR -type f -name "*.html" | while read -r html_file; do
   process_html_file "$html_file"
 done
 
+wait # Wait for all background jobs to complete
+
 aws configure set preview.cloudfront true
 aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
