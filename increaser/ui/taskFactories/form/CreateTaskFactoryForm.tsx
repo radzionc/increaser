@@ -18,6 +18,7 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
+import { ExportFromTemplate } from '../../tasks/form/ExportFromTemplate'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -84,6 +85,16 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
+      <ExportFromTemplate
+        projectId={value.projectId}
+        onFinish={(template) => {
+          setValue((prev) => ({
+            ...prev,
+            ...template,
+            name: prev.name || template.name,
+          }))
+        }}
+      />
       <TaskDescriptionInput
         value={value.description}
         onChange={(description) =>
