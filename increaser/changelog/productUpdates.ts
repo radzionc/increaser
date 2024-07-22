@@ -1,5 +1,7 @@
 import { ProductUpdate } from './ProductUpdate'
 
+export const lastAnnouncementWasAt: number | undefined = undefined
+
 export const productUpdates: ProductUpdate[] = [
   {
     releasedAt: 1721622940797,

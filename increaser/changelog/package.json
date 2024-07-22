@@ -4,5 +4,8 @@
   "private": true,
   "scripts": {
     "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "clipboardy": "^4.0.0"
   }
 }
