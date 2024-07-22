@@ -30,27 +30,28 @@ export const runTaskFactories = async (userId: string) => {
       if (lastOutputAt && lastOutputAt >= cadencePeriodStart) return
 
       const now = Date.now()
-      const deadlineAt = inTimeZone(
-        match(cadence, {
-          workday: () => endOfDay(now).getTime(),
-          day: () => endOfDay(now).getTime(),
-          week: () =>
-            getWeekEndedAt(now) -
-            convertDuration(6 - (deadlineIndex ?? 0), 'd', 'ms'),
-          month: () => {
-            const daysInMonth = getDaysInMonth(now)
-            return (
-              endOfMonth(now).getTime() -
-              convertDuration(
-                daysInMonth - 1 - Math.min(deadlineIndex ?? 0, daysInMonth - 1),
-                'd',
-                'ms',
-              )
+      const unadjustedDeadlineAt = match(cadence, {
+        workday: () => endOfDay(now).getTime(),
+        day: () => endOfDay(now).getTime(),
+        week: () =>
+          getWeekEndedAt(now) -
+          convertDuration(6 - (deadlineIndex ?? 0), 'd', 'ms'),
+        month: () => {
+          const daysInMonth = getDaysInMonth(now)
+          return (
+            endOfMonth(now).getTime() -
+            convertDuration(
+              daysInMonth - 1 - Math.min(deadlineIndex ?? 0, daysInMonth - 1),
+              'd',
+              'ms',
             )
-          },
-        }),
-        timeZone,
-      )
+          )
+        },
+      })
+
+      if (unadjustedDeadlineAt < now) return
+
+      const deadlineAt = inTimeZone(unadjustedDeadlineAt, timeZone)
 
       const newTasks = [...oldTasks, ...generatedTasks]
 
