@@ -17,18 +17,17 @@ const Container = styled(VStack)`
 
 const VideoWrapper = styled.div`
   width: 100%;
-  max-width: 1000px;
   height: auto;
   ${borderRadius.m}
   overflow: hidden;
-  border: 2px solid ${getColor('primary')};
+  border: 2px solid ${getColor('mistExtra')};
   aspect-ratio: 1592 / 1080;
   overflow: hidden;
 `
 
 const Video = styled(TakeWholeSpace)``
 
-export const ChangelogItem = ({
+export const ProductUpdateItem = ({
   value,
 }: ComponentWithValueProps<ProductUpdate>) => {
   return (

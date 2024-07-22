@@ -3,10 +3,10 @@ import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { productUpdates } from '@increaser/changelog/productUpdates'
 import { order } from '@lib/utils/array/order'
 import { VStack } from '@lib/ui/layout/Stack'
-import { ChangelogItem } from '@increaser/ui/changelog/ChangelogItem'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import styled from 'styled-components'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
+import { ProductUpdateItem } from '@increaser/ui/changelog/ProductUpdateItem'
 
 export const Container = styled(WebsiteSlice)`
   ${centeredContentColumn({
@@ -26,7 +26,7 @@ export const Changelog = () => {
         />
         <VStack gap={40}>
           {items.map((value, index) => (
-            <ChangelogItem key={index} value={value} />
+            <ProductUpdateItem key={index} value={value} />
           ))}
         </VStack>
       </WebsiteSliceContent>
