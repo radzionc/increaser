@@ -7,6 +7,7 @@ import {
 import { ProposeFeaturePrompt } from './ProposeFeaturePrompt'
 import { ProductFeatureList } from './ProductFeatureList'
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { FounderContacts } from '../../community/components/FounderContacts'
 
 export const ProductFeaturesBoard = () => {
   return (
@@ -19,6 +20,8 @@ export const ProductFeaturesBoard = () => {
             idea={() => <ProposeFeaturePrompt />}
             done={() => null}
           />
+          <FounderContacts />
+
           <ProductFeatureList />
         </UniformColumnGrid>
       </VStack>

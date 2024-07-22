@@ -5,6 +5,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { order } from '@lib/utils/array/order'
 import { useEffect } from 'react'
 import styled from 'styled-components'
+import { SubscribeForUpdatesPrompt } from '../community/components/SubscribeForUpdatesPrompt'
 
 const Container = styled(VStack)`
   gap: 40px;
@@ -22,6 +23,7 @@ export const ProductUpdates = () => {
 
   return (
     <Container>
+      <SubscribeForUpdatesPrompt />
       {items.map((value, index) => (
         <ProductUpdateItem key={index} value={value} />
       ))}
