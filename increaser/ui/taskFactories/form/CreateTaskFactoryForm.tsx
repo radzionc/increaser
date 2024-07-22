@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -19,21 +19,34 @@ import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 import { ExportFromTemplate } from '../../tasks/form/ExportFromTemplate'
+import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
+import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
+import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
 }
+
+const defaultCadence = 'week'
 
 export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFactoryFormShape>({
     name: '',
     projectId: otherProject.id,
     links: [],
-    cadence: 'week',
+    cadence: defaultCadence,
     checklist: [],
     description: '',
+    deadlineIndex: cadenceDefaultDeadlineIndex[defaultCadence],
   })
   const { mutate, isPending } = useCreateTaskFactoryMutation()
+
+  useEffect(() => {
+    setValue((prev) => ({
+      ...prev,
+      deadlineIndex: cadenceDefaultDeadlineIndex[prev.cadence],
+    }))
+  }, [value.cadence])
 
   const isDisabled = useIsTaskFactoryFormDisabled(value)
 
@@ -45,6 +58,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         links: fixLinks(value.links),
         checklist: fixChecklist(value.checklist),
       },
+      deadlineIndex: value.deadlineIndex,
       cadence: value.cadence,
     }
     mutate(taskFactory, {
@@ -114,6 +128,15 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
           value={value.cadence}
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
         />
+        {doesCadenceSupportDeadlineIndex(value.cadence) && (
+          <TaskDeadlineIndexInput
+            value={value.deadlineIndex}
+            cadence={value.cadence}
+            onChange={(deadlineIndex) =>
+              setValue((prev) => ({ ...prev, deadlineIndex }))
+            }
+          />
+        )}
       </HStack>
       <CreateFormFooter
         isPending={isPending}
