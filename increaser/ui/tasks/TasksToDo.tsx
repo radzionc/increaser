@@ -13,8 +13,9 @@ import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TasksGroupHeader } from './TasksGroupHeader'
 import { useScheduledTasksToDo } from './hooks/useScheduledTasksToDo'
-import { endOfDay, endOfWeek, endOfMonth } from 'date-fns'
+import { endOfDay, endOfMonth } from 'date-fns'
 import { range } from '@lib/utils/array/range'
+import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 
 export const TasksToDo = () => {
   const tasks = useScheduledTasksToDo()
@@ -25,7 +26,7 @@ export const TasksToDo = () => {
     const tomorrowEndsAt =
       endOfDay(now).getTime() + convertDuration(1, 'd', 'ms')
     const maxTaskDeadlineAt = Math.max(...tasks.map((task) => task.deadlineAt))
-    const thisWeekEndsAt = endOfWeek(now).getTime()
+    const thisWeekEndsAt = getWeekEndedAt(now)
     const thisMonthEndsAt = endOfMonth(now).getTime()
 
     return endOfDay(
