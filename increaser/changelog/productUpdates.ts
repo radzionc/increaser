@@ -2,6 +2,13 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1721622940797,
+    name: 'Product Updates',
+    description:
+      'Stay updated with the latest features and improvements directly within the app.',
+    videoId: 'changelog',
+  },
+  {
     releasedAt: 1721550970258,
     name: 'Task templates',
     description:

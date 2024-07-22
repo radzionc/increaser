@@ -44,7 +44,9 @@ On the "Schedule" page, the user can set the time when they want to start and fi
 
 On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button.
 
-Finally, the "Community" page features a leaderboard of the most productive users over the past seven days, based on total daily work hours. Users are anonymous by default but can choose to display their name and country on the leaderboard. It also includes the founder's contacts and a board where the user can suggest new features and vote for existing ones.
+The "Features" page has two sections: "What's New" and "Request Features". In the first section, the user can see the latest product updates, which consist of a name, description, and a video clip. In the second section, the user can see the list of requested features and upvote them. The user can also submit a new feature request.
+
+Finally, the "Community" page features a leaderboard of the most productive users over the past seven days, based on total daily work hours. Users are anonymous by default but can choose to display their name and country on the leaderboard.
 
 After the user has signed up in the app, they will appear on the onboarding flow, which is a dedicated page consisting of 7 steps: "Add Projects," "Define Work Budget," "Set Project Budgets," "Arrange Schedule," "Establish Daily Habits," "List Tasks," "Start Focus Session." Each step is connected to a core Increaser functionality. Each step consists of an interactive part on the left that includes the necessary steps to set up the current feature, and on the right side, there is an educational block consisting of a video and text explaining why the current feature is beneficial.
 
