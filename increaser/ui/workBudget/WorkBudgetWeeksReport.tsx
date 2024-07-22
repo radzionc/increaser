@@ -37,20 +37,22 @@ export const WorkBudgetWeeksReport = () => {
     if (!allWeeks.length) return lastWeekStartedAt
 
     return Math.max(
-      lastWeekStartedAt - convertDuration(maxWeeks, 'w', 'ms'),
+      lastWeekStartedAt - convertDuration(maxWeeks - 1, 'w', 'ms'),
       order(allWeeks, (v) => v, 'asc')[0],
     )
   }, [lastWeekStartedAt, weeks])
 
   const weeksNumber =
     Math.round(lastWeekStartedAt - firstWeekStartedAt) /
-    convertDuration(1, 'w', 'ms')
+      convertDuration(1, 'w', 'ms') +
+    1
 
   const totals = useMemo(() => {
     return range(weeksNumber).map((index) => {
       const weekStartedAt =
         firstWeekStartedAt + convertDuration(index, 'w', 'ms')
       const weekString = weekToString(toWeek(weekStartedAt))
+      console.log(weekString)
       const timeRecord = weeks[weekString] || {}
       return sum(Object.values(timeRecord))
     })
