@@ -1,10 +1,12 @@
-import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { useMemo } from 'react'
 import { order } from '@lib/utils/array/order'
+import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const useTodayTasks = () => {
   const { tasks } = useAssertUserState()
+  const todayStartedAt = useStartOfDay()
 
   return useMemo(
     () =>
@@ -12,11 +14,12 @@ export const useTodayTasks = () => {
         Object.values(tasks).filter(
           ({ deadlineAt }) =>
             deadlineAt &&
-            getDeadlineStatus({ deadlineAt, now: Date.now() }) === 'today',
+            deadlineAt >= todayStartedAt &&
+            deadlineAt < todayStartedAt + convertDuration(1, 'd', 'ms'),
         ),
         (task) => task.order,
         'asc',
       ),
-    [tasks],
+    [tasks, todayStartedAt],
   )
 }

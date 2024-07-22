@@ -1,12 +1,12 @@
 import { getUser, updateUser } from '@increaser/db/user'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
 import { Task } from '@increaser/entities/Task'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { toRecord } from '@lib/utils/record/toRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
+import { endOfDay } from 'date-fns'
 
 export const runTaskFactories = async (userId: string) => {
   const { taskFactories, timeZone, tasks } = await getUser(userId, [
@@ -27,13 +27,7 @@ export const runTaskFactories = async (userId: string) => {
       if (lastOutputAt && lastOutputAt >= cadencePeriodStart) return
 
       const now = Date.now()
-      const deadlineAt = inTimeZone(
-        getDeadlineAt({
-          now,
-          deadlineType: 'today',
-        }),
-        timeZone,
-      )
+      const deadlineAt = inTimeZone(endOfDay(now).getTime(), timeZone)
 
       const newTasks = [...oldTasks, ...generatedTasks]
 

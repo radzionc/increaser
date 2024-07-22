@@ -1,13 +1,10 @@
 import { useState } from 'react'
-import { DeadlineStatus, Task } from '@increaser/entities/Task'
-import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
+import { Task } from '@increaser/entities/Task'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
-import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
-import { groupItems } from '@lib/utils/array/groupItems'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
@@ -24,6 +21,8 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from './TaskDescriptionInput'
+import { pick } from '@lib/utils/record/pick'
+import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -33,20 +32,15 @@ export const EditTaskFormContent = ({
 }: EditTaskFormContentProps) => {
   const { tasks } = useAssertUserState()
   const task = useCurrentTask()
-  const [value, setValue] = useState<TaskFormShape>({
-    name: task.name,
-    projectId: task.projectId,
-    links: task.links ?? [],
-    checklist: task.checklist ?? [],
-    description: task.description ?? '',
-  })
-  const currentDeadlineStatus = getDeadlineStatus({
-    now: Date.now(),
-    deadlineAt: task.deadlineAt,
-  })
-  const [deadlineStatus, setDeadlineStatus] = useState<DeadlineStatus>(
-    currentDeadlineStatus,
-  )
+  const initialValue = pick(task, [
+    'name',
+    'projectId',
+    'links',
+    'checklist',
+    'description',
+    'deadlineAt',
+  ])
+  const [value, setValue] = useState<TaskFormShape>(initialValue)
 
   const { mutate: updateTask } = useUpdateTaskMutation()
   const { mutate: deleteTask } = useDeleteTaskMutation()
@@ -58,59 +52,22 @@ export const EditTaskFormContent = ({
       return
     }
 
-    const fields: Partial<Omit<Task, 'id'>> = {}
-    if (value.name !== task.name) {
-      fields.name = value.name
-    }
-    if (value.projectId !== task.projectId) {
-      fields.projectId = value.projectId
-    }
-    const newLinks = fixLinks(value.links)
-    if (newLinks !== task.links) {
-      fields.links = newLinks
-    }
-
-    const newChecklist = fixChecklist(value.checklist)
-    if (newChecklist !== task.checklist) {
-      fields.checklist = newChecklist
-    }
-
-    if (
-      deadlineStatus !== currentDeadlineStatus &&
-      deadlineStatus !== 'overdue'
-    ) {
-      const now = Date.now()
-
-      const deadlineAt =
-        deadlineStatus === 'none'
-          ? null
-          : getDeadlineAt({
-              now,
-              deadlineType: deadlineStatus,
-            })
-
-      const groupedTasks = groupItems(
-        Object.values(tasks).filter((task) => !task.completedAt),
-        (task) =>
-          getDeadlineStatus({
-            deadlineAt: task.deadlineAt,
-            now,
-          }),
-      )
-
-      fields.deadlineAt = deadlineAt
-      fields.order = getLastItemOrder(
-        (groupedTasks[deadlineStatus] ?? []).map((task) => task.order),
-      )
-    }
-
-    if (value.description !== task.description) {
-      fields.description = value.description
+    const newFields: Partial<Omit<Task, 'id'>> = getUpdatedValues(
+      initialValue,
+      {
+        ...value,
+        links: fixLinks(value.links),
+        checklist: fixChecklist(value.checklist),
+      },
+    )
+    if (newFields.deadlineAt !== task.deadlineAt) {
+      const orders = Object.values(tasks).map((task) => task.order)
+      newFields.order = getLastItemOrder(orders)
     }
 
     updateTask({
       id: task.id,
-      fields,
+      fields: newFields,
     })
     onFinish()
   }
@@ -161,8 +118,10 @@ export const EditTaskFormContent = ({
       />
       <VStack>
         <TaskDeadlineInput
-          value={deadlineStatus}
-          onChange={setDeadlineStatus}
+          value={value.deadlineAt}
+          onChange={(deadlineAt) =>
+            setValue((prev) => ({ ...prev, deadlineAt }))
+          }
         />
       </VStack>
 

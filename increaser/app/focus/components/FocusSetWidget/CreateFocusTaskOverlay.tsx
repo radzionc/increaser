@@ -17,7 +17,6 @@ export const CreateFocusTaskOverlay = ({
       <CreateTaskForm
         defaultValue={{
           projectId,
-          deadlineType: 'today',
         }}
         onFinish={(task) => {
           if (task) {

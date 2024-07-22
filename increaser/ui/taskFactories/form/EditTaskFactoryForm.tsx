@@ -4,7 +4,6 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
-import { useIsTaskFormDisabled } from '../../tasks/form/useIsTaskFormDisabled'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
 import { useUpdateTaskFactoryMutation } from '../api/useUpdateTaskFactoryMutation'
@@ -19,6 +18,7 @@ import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFoot
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
+import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -39,7 +39,7 @@ export const EditTaskFactoryForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsTaskFormDisabled(value)
+  const isDisabled = useIsTaskFactoryFormDisabled(value)
 
   const onSubmit = () => {
     const fields: Partial<Omit<TaskFactory, 'id'>> = {

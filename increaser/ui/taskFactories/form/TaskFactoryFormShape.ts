@@ -1,11 +1,6 @@
-import { TaskChecklistItem, TaskLink } from '@increaser/entities/Task'
 import { TaskCadence } from '@increaser/entities/TaskFactory'
+import { TaskFormShape } from '../../tasks/form/TaskFormShape'
 
-export type TaskFactoryFormShape = {
-  name: string
-  projectId: string
-  links: TaskLink[]
+export type TaskFactoryFormShape = Omit<TaskFormShape, 'deadlineAt'> & {
   cadence: TaskCadence
-  checklist: TaskChecklistItem[]
-  description: string
 }

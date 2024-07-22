@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { UIComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { DeadlineType, Task } from '@increaser/entities/Task'
-import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
+import { Task } from '@increaser/entities/Task'
 import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
 import { Panel } from '@lib/ui/panel/Panel'
 import { TaskProjectSelector } from '../TaskProjectSelector'
@@ -23,13 +22,10 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { HStack } from '@lib/ui/layout/Stack'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
 import { ExportFromTemplate } from './ExportFromTemplate'
-
-type CreateTaskFormShape = TaskFormShape & {
-  deadlineType: DeadlineType | null
-}
+import { endOfDay } from 'date-fns'
 
 type CreateTaskFormProps = UIComponentProps & {
-  defaultValue?: Partial<CreateTaskFormShape>
+  defaultValue?: Partial<TaskFormShape>
   onFinish?: (task?: Task) => void
   onMutationFinish?: (task: Task) => void
 }
@@ -40,13 +36,13 @@ export const CreateTaskForm = ({
   defaultValue,
   ...rest
 }: CreateTaskFormProps) => {
-  const [value, setValue] = useState<CreateTaskFormShape>({
+  const [value, setValue] = useState<TaskFormShape>({
     name: '',
     projectId: otherProject.id,
     links: [],
     checklist: [],
     description: '',
-    deadlineType: 'today',
+    deadlineAt: endOfDay(Date.now()).getTime(),
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
@@ -65,14 +61,8 @@ export const CreateTaskForm = ({
   const onSubmit = () => {
     if (isDisabled) return
 
-    const deadlineAt = value.deadlineType
-      ? getDeadlineAt({
-          deadlineType: value.deadlineType,
-          now: Date.now(),
-        })
-      : null
     const orders = Object.values(tasks)
-      .filter((task) => task.deadlineAt === deadlineAt)
+      .filter((task) => task.deadlineAt === value.deadlineAt)
       .map((task) => task.order)
     const order = getLastItemOrder(orders)
 
@@ -83,7 +73,6 @@ export const CreateTaskForm = ({
       links: fixLinks(value.links),
       checklist: fixChecklist(value.checklist),
       startedAt,
-      deadlineAt,
       order,
     }
     mutate(task, {
@@ -159,14 +148,11 @@ export const CreateTaskForm = ({
         justifyContent="space-between"
       >
         <TaskDeadlineInput
-          value={value.deadlineType ?? 'none'}
-          onChange={(deadlineType) =>
+          value={value.deadlineAt}
+          onChange={(deadlineAt) =>
             setValue((prev) => ({
               ...prev,
-              deadlineType:
-                deadlineType === 'none' || deadlineType === 'overdue'
-                  ? null
-                  : deadlineType,
+              deadlineAt,
             }))
           }
         />

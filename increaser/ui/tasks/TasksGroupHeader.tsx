@@ -1,4 +1,3 @@
-import { DeadlineStatus, deadlineName } from '@increaser/entities/Task'
 import {
   HStackSeparatedBy,
   dotSeparator,
@@ -6,13 +5,10 @@ import {
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
-import { format } from 'date-fns'
-import { Match } from '@lib/ui/base/Match'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getColor } from '@lib/ui/theme/getters'
-import { formatWeek } from '@lib/utils/time/Week'
-import { formatDay } from '@lib/utils/time/Day'
+import { formatTaskDeadline } from '@increaser/entities-utils/task/formatTaskDeadline'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -22,26 +18,18 @@ const Container = styled(HStackSeparatedBy)`
 
 export const TasksGroupHeader = ({
   value,
-}: ComponentWithValueProps<DeadlineStatus>) => {
+}: ComponentWithValueProps<number>) => {
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+  const isOverdue = value < now
+
   return (
     <Container separator={dotSeparator}>
-      <Text color={value === 'overdue' ? 'idle' : undefined}>
-        {deadlineName[value]}
+      <Text color={isOverdue ? 'idle' : undefined}>
+        {formatTaskDeadline({
+          deadlineAt: value,
+          now,
+        })}
       </Text>
-      {value !== 'overdue' && (
-        <Text>
-          <Match
-            value={value}
-            none={() => null}
-            today={() => formatDay(now)}
-            tomorrow={() => formatDay(now + convertDuration(1, 'd', 'ms'))}
-            thisWeek={() => formatWeek(now)}
-            nextWeek={() => formatWeek(now + convertDuration(1, 'w', 'ms'))}
-            thisMonth={() => format(now, 'MMMM')}
-          />
-        </Text>
-      )}
     </Container>
   )
 }
