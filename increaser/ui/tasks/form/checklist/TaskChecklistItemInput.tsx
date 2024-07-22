@@ -7,10 +7,11 @@ import { ChecklistRemoveButton } from './ChecklistRemoveButton'
 import { ChecklistItemNameInput } from './ChecklistItemNameInput'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
+import { CursorPosition } from '@lib/ui/entities/CursorPosition'
 
 export type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
   onRemove: () => void
-  onSubmit?: () => void
+  onSubmit?: (position: CursorPosition) => void
 }
 
 const Container = styled(ChecklistItemFrame)`

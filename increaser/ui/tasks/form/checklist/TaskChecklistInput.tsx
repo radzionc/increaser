@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { order } from '@lib/utils/array/order'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
+import { match } from '@lib/utils/match'
 
 export type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -29,11 +30,13 @@ export const TaskChecklistInput = ({
   value,
   onChange,
 }: TaskChecklistInputProps) => {
+  const items = order(value, (item) => item.order, 'asc')
+
   return (
     <FieldArrayContainer title="Checklist">
       {value.length > 0 && (
         <DnDList
-          items={order(value, (item) => item.order, 'asc')}
+          items={items}
           getItemId={(item) => item.id}
           getItemOrder={(item) => item.order}
           onChange={(id, { order }) => {
@@ -60,21 +63,27 @@ export const TaskChecklistInput = ({
                   onRemove={() => {
                     onChange(value.filter((v) => v.id !== item.id))
                   }}
-                  onSubmit={() => {
-                    const index = value.findIndex((v) => v.id === item.id)
-                    const order =
-                      index === value.length - 1
-                        ? getLastItemOrder(value.map((v) => v.order))
-                        : (value[index + 1].order + item.order) / 2
-                    const newItem = {
-                      ...getDefaultFields(),
-                      order,
-                    }
+                  onSubmit={(cursorPosition) => {
+                    if (cursorPosition === 'middle') return
 
+                    const itemIndex = items.findIndex((i) => i.id === item.id)
+
+                    const order = match(cursorPosition, {
+                      start: () =>
+                        itemIndex === 0
+                          ? item.order - 1
+                          : (items[itemIndex - 1].order + item.order) / 2,
+                      end: () =>
+                        itemIndex === items.length - 1
+                          ? item.order + 1
+                          : (items[itemIndex + 1].order + item.order) / 2,
+                    })
                     onChange([
-                      ...value.slice(0, index + 1),
-                      newItem,
-                      ...value.slice(index + 1),
+                      ...value,
+                      {
+                        ...getDefaultFields(),
+                        order,
+                      },
                     ])
                   }}
                   value={item}
