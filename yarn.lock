@@ -3403,6 +3403,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/changelog@workspace:increaser/changelog":
+  version: 0.0.0-use.local
+  resolution: "@increaser/changelog@workspace:increaser/changelog"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/config@workspace:increaser/config":
   version: 0.0.0-use.local
   resolution: "@increaser/config@workspace:increaser/config"

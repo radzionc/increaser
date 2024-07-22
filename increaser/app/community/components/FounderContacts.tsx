@@ -26,7 +26,7 @@ import { SocialLink } from '@lib/ui/buttons/SocialLink'
 const Avatar = styled(CoverImage)`
   ${round};
   ${sameDimensions(40)}
-  border: 1px solid ${getColor('success')};
+  border: 1px solid ${getColor('primary')};
 `
 
 export const FounderContacts = () => {
@@ -40,7 +40,7 @@ export const FounderContacts = () => {
           />
           <VStack>
             <Text color="contrast" weight="semibold">
-              Radzion Chachura
+              Radzion
             </Text>
             <Text size={14} color="supporting">
               {productName} Founder
@@ -48,9 +48,9 @@ export const FounderContacts = () => {
           </VStack>
         </HStack>
         <Text height="large" color="contrast">
-          👋 Hey there! Feel free to ask me anything about {productName}. Have a
-          great idea for a new feature? Share it in the "Product Features"
-          section for others to vote on!
+          👋 Hi there! Have any questions about {productName}? Feel free to ask!
+          If you have a great idea for a new feature, share it here so others
+          can vote on it!
         </Text>
         <HStack alignItems="center" wrap="wrap" justifyContent="space-between">
           <ExternalLink to={`mailto:${founderEmail}`}>

@@ -15,6 +15,7 @@ export const primaryAppNavigationPages = [
 
 export const secondaryAppNavigationPages = [
   'community',
+  'features',
   'membership',
   'account',
 ] as const
@@ -57,6 +58,7 @@ export const appPagePath: Record<AppPage, string> = {
   emailConfirm: 'email-confirm',
   onboarding: 'onboarding',
   ideas: 'ideas',
+  features: 'features',
 }
 
 export const appPageViews = {
@@ -65,11 +67,13 @@ export const appPageViews = {
   goals: ['active', 'done'],
   habits: ['my', 'ideas'],
   plan: ['vision', 'goals', 'habits', 'tasks'],
+  features: ['updates', 'requests'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
 export type AppPageHabitsView = (typeof appPageViews)['habits'][number]
 export type AppPagePlanView = (typeof appPageViews)['plan'][number]
+export type AppPageFeaturesView = (typeof appPageViews)['features'][number]
 
 type AppPageViews = typeof appPageViews
 export type AppPageWithView = keyof AppPageViews

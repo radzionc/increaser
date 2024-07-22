@@ -1,6 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Panel } from '@lib/ui/panel/Panel'
-import styled from 'styled-components'
+import { VStack } from '@lib/ui/layout/Stack'
 import {
   ProductFeaturesViewProvider,
   ProductFeaturesViewSelector,
@@ -8,38 +6,25 @@ import {
 } from './ProductFeaturesView'
 import { ProposeFeaturePrompt } from './ProposeFeaturePrompt'
 import { ProductFeatureList } from './ProductFeatureList'
-import { SectionTitle } from '@lib/ui/text/SectionTitle'
-
-const Container = styled(Panel)`
-  min-width: 320px;
-  flex: 1;
-`
+import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { FounderContacts } from '../../community/components/FounderContacts'
 
 export const ProductFeaturesBoard = () => {
   return (
     <ProductFeaturesViewProvider>
-      <Container>
-        <VStack gap={20}>
-          <HStack
-            alignItems="center"
-            gap={20}
-            justifyContent="space-between"
-            wrap="wrap"
-            fullWidth
-          >
-            <SectionTitle>Product features</SectionTitle>
-            <ProductFeaturesViewSelector />
-          </HStack>
+      <VStack gap={20}>
+        <ProductFeaturesViewSelector />
 
+        <UniformColumnGrid minChildrenWidth={320} gap={20}>
           <RenderProductFeaturesView
             idea={() => <ProposeFeaturePrompt />}
             done={() => null}
           />
-          <VStack gap={8}>
-            <ProductFeatureList />
-          </VStack>
-        </VStack>
-      </Container>
+          <FounderContacts />
+
+          <ProductFeatureList />
+        </UniformColumnGrid>
+      </VStack>
     </ProductFeaturesViewProvider>
   )
 }

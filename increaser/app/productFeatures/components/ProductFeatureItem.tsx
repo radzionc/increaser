@@ -22,6 +22,7 @@ const Description = styled(Text)`
 const Container = styled(Panel)`
   ${interactive};
   ${transition};
+  height: 100%;
   &:hover {
     background: ${getColor('foreground')};
   }
@@ -35,7 +36,7 @@ export const ProductFeatureItem = () => {
       render={({ actionSize }) => (
         <Opener
           renderOpener={({ onOpen }) => (
-            <Container onClick={onOpen} kind="secondary">
+            <Container onClick={onOpen}>
               <VStack gap={8}>
                 <HStack
                   justifyContent="space-between"
