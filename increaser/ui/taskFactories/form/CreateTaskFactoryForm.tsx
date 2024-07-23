@@ -22,6 +22,7 @@ import { ExportFromTemplate } from '../../tasks/form/ExportFromTemplate'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
 import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
+import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 
 type CreateTaskFormProps = {
   onFinish: (id?: string) => void
@@ -123,20 +124,26 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
         value={value.checklist}
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
-      <HStack alignItems="center" gap={8}>
-        <TaskCadenceInput
-          value={value.cadence}
-          onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
-        />
-        {doesCadenceSupportDeadlineIndex(value.cadence) && (
-          <TaskDeadlineIndexInput
-            value={value.deadlineIndex}
-            cadence={value.cadence}
-            onChange={(deadlineIndex) =>
-              setValue((prev) => ({ ...prev, deadlineIndex }))
-            }
+      <HStack alignItems="center" gap={20} wrap="wrap">
+        <HStack gap={8}>
+          <TaskCadenceInput
+            value={value.cadence}
+            onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
           />
-        )}
+          {doesCadenceSupportDeadlineIndex(value.cadence) && (
+            <TaskDeadlineIndexInput
+              value={value.deadlineIndex}
+              cadence={value.cadence}
+              onChange={(deadlineIndex) =>
+                setValue((prev) => ({ ...prev, deadlineIndex }))
+              }
+            />
+          )}
+        </HStack>
+        <FirstTaskDeadlineForecast
+          cadence={value.cadence}
+          deadlineIndex={value.deadlineIndex}
+        />
       </HStack>
       <CreateFormFooter
         isPending={isPending}
