@@ -3,7 +3,7 @@ import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import styled from 'styled-components'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
-import { ProductUpdates } from '@increaser/ui/changelog/ProductUpdates'
+import { ProductUpdatesList } from '@increaser/ui/changelog/ProductUpdatesList'
 
 export const Container = styled(WebsiteSlice)`
   ${centeredContentColumn({
@@ -19,7 +19,7 @@ export const Changelog = () => {
           title="What's New"
           // subtitle="Discover the latest updates, new features, and improvements to enhance your productivity experience."
         />
-        <ProductUpdates />
+        <ProductUpdatesList />
       </WebsiteSliceContent>
     </Container>
   )
