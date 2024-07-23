@@ -1,14 +1,12 @@
 import { productUpdates } from '@increaser/changelog/productUpdates'
 import { ProductUpdateItem } from '@increaser/ui/changelog/ProductUpdateItem'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
-import { VStack } from '@lib/ui/layout/Stack'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { order } from '@lib/utils/array/order'
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import { SubscribeForUpdatesPrompt } from '../community/components/SubscribeForUpdatesPrompt'
 
-const Container = styled(VStack)`
-  gap: 40px;
+const Container = styled(SeparatedByLine)`
   max-width: 640px;
 `
 
@@ -22,8 +20,7 @@ export const ProductUpdates = () => {
   }, [mutate])
 
   return (
-    <Container>
-      <SubscribeForUpdatesPrompt />
+    <Container gap={40}>
       {items.map((value, index) => (
         <ProductUpdateItem key={index} value={value} />
       ))}

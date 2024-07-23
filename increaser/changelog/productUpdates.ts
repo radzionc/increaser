@@ -27,6 +27,9 @@ export const productUpdates: ProductUpdate[] = [
       },
     ],
     videoId: 'deadline-index',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/boost-your-productivity-with-increasers-latest-updates--O2U5JBce2cxp-dBecRY',
+    telegram: 'https://t.me/increaser_chat/55',
   },
   {
     releasedAt: 1721622940797,
