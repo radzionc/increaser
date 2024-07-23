@@ -30,6 +30,11 @@ export const productUpdates: ProductUpdate[] = [
     indieHackers:
       'https://www.indiehackers.com/product/increaser/boost-your-productivity-with-increasers-latest-updates--O2U5JBce2cxp-dBecRY',
     telegram: 'https://t.me/increaser_chat/55',
+    x: 'https://x.com/increaser_app/status/1815712691018678598',
+    linkedIn:
+      'https://www.linkedin.com/posts/increaser_exciting-product-updates-for-increaser-activity-7221478883081003012-nj4w?utm_source=share&utm_medium=member_desktop',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1ea5svh/exciting_new_updates_to_increaser/',
   },
   {
     releasedAt: 1721622940797,
