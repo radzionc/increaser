@@ -4,6 +4,31 @@ export const lastAnnouncementWasAt: number | undefined = undefined
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1721711243227,
+    name: 'Enhanced Task Scheduling',
+    description:
+      'Our latest updates bring more control and clarity to your task management.',
+    items: [
+      {
+        description:
+          'Set specific workdays for weekly recurring tasks, allowing for better planning and organization.',
+      },
+      {
+        description:
+          'Set specific days for monthly recurring tasks, ensuring tasks are scheduled exactly when needed.',
+      },
+      {
+        description:
+          "Tasks with deadlines are now grouped by days in the 'To-Do' tab for a clearer, more organized view.",
+      },
+      {
+        description:
+          "Preview future recurring tasks in the 'To-Do' tab to always know what's ahead.",
+      },
+    ],
+    videoId: 'deadline-index',
+  },
+  {
     releasedAt: 1721622940797,
     name: 'Product Updates',
     description:

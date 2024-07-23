@@ -10,6 +10,13 @@ import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { getPublicFileUrl } from '../storage/getPublicFileUrl'
 import { IntersectionAware } from '@lib/ui/base/IntersectionAware'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { round } from '@lib/ui/css/round'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { transition } from '@lib/ui/css/transition'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 
 const Container = styled(VStack)`
   gap: 16px;
@@ -23,6 +30,15 @@ const VideoWrapper = styled.div`
   border: 2px solid ${getColor('mistExtra')};
   aspect-ratio: 1592 / 1080;
   overflow: hidden;
+`
+
+const Indicator = styled(IconWrapper)`
+  ${round};
+  ${sameDimensions(24)};
+  ${centerContent};
+  color: ${getColor('success')};
+  background: ${getColor('mist')};
+  ${transition};
 `
 
 const Video = styled(TakeWholeSpace)``
@@ -39,8 +55,11 @@ export const ProductUpdateItem = ({
         <Text size={20} weight="semibold" color="contrast">
           {value.name}
         </Text>
+        <Text color="supporting" height="large">
+          {value.description}
+        </Text>
       </VStack>
-      <Text height="large">{value.description}</Text>
+
       <ClientOnly>
         <IntersectionAware<HTMLDivElement>
           render={({ ref, wasIntersected }) => {
@@ -61,6 +80,24 @@ export const ProductUpdateItem = ({
           }}
         />
       </ClientOnly>
+      {value.items && (
+        <VStack>
+          {value.items.map(({ description }) => {
+            return (
+              <PrefixedItemFrame
+                key={description}
+                prefix={
+                  <Indicator>
+                    <PlusIcon />
+                  </Indicator>
+                }
+              >
+                <Text>{description}</Text>
+              </PrefixedItemFrame>
+            )
+          })}
+        </VStack>
+      )}
     </Container>
   )
 }
