@@ -8,7 +8,8 @@ import styled from 'styled-components'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getColor } from '@lib/ui/theme/getters'
-import { formatTaskDeadline } from '@increaser/entities-utils/task/formatTaskDeadline'
+import { useMemo } from 'react'
+import { format, isToday, isTomorrow } from 'date-fns'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -22,14 +23,30 @@ export const TasksGroupHeader = ({
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const isOverdue = value < now
 
+  const deadline = useMemo(() => {
+    if (isOverdue) {
+      return ['Overdue']
+    }
+
+    const result = [format(value, 'd MMM')]
+    if (isToday(value)) {
+      result.push('Today')
+    } else if (isTomorrow(value)) {
+      result.push('Tomorrow')
+    }
+
+    result.push(format(value, 'EEEE'))
+
+    return result
+  }, [isOverdue, value])
+
   return (
     <Container separator={dotSeparator}>
-      <Text color={isOverdue ? 'idle' : undefined}>
-        {formatTaskDeadline({
-          deadlineAt: value,
-          now,
-        })}
-      </Text>
+      {deadline.map((text, index) => (
+        <Text as="span" key={index}>
+          {text}
+        </Text>
+      ))}
     </Container>
   )
 }
