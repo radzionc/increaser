@@ -1,37 +1,26 @@
 import { productUpdates } from '../productUpdates'
-import { pick } from '@lib/utils/record/pick'
 import clipboardy from 'clipboardy'
 
 const announce = () => {
-  // const newUpdates = productUpdates.filter(({ releasedAt }) =>
-  //   lastAnnouncementWasAt ? releasedAt > lastAnnouncementWasAt : true,
-  // )
-
-  // const prompt = [
-  //   'Every week I announce new features and improvement that have been added to the app.',
-  //   'I do it on Telegram, X, and LinkedIn.',
-  //   'Every update has a corresponding video clip that showcases the new feature (without sound).',
-  //   'On X, it should be a thread if there are more than one update.',
-  //   'On Telegram, it should be a similar format to X, but with a separate message for each update, as Telegram does not support threads.',
-  //   'On LinkedIn, it should be a post which will highlight the most important update, and since LinkedIn does not support threads or multiple videos in a single post, other features should be added as comments.',
-  //   'Return the each message/comment/post in a separate markdown snippet. Use plain text without bullet points or numbered lists as those platforms do not support makdown syntax.',
-  //   'Below is the list of updates that need to be announced: ',
-  //   ...newUpdates.map((update) =>
-  //     JSON.stringify(pick(update, ['name', 'description'])),
-  //   ),
-  // ].join('\n')
-
+  const { items, description } = productUpdates[0]
   const prompt = [
-    'I announce new features and improvement that have been added to the app.',
-    'I do it on Telegram, X, and LinkedIn.',
-    'Every update has a corresponding video clip that showcases the new feature (without sound).',
-    'On X, it should be a tweet of 280 characters max.',
-    'On Telegram, it should be a single message.',
-    'On LinkedIn, it should be a single post.',
-    'Return the each message/tweet/post in a separate markdown snippet. Use plain text without bullet points or numbered lists as those platforms do not support makdown syntax.',
-    'You can use emojis or plain text lists to make the message more engaging.',
-    'Below is the update that need to be announced: ',
-    JSON.stringify(pick(productUpdates[0], ['name', 'description'])),
+    'You will write an announcement for new product updates.',
+    'I will post it on Telegram channel, X, LinkedIn, Indie Hackers, and Reddit.',
+    'Every announcement should be a plain text as those platforms do not support markdown.',
+    'You can use emojis, or make plain text lists to make the announcement more readable.',
+    'Keep the copy short, but make sure the user will understand each update and its value.',
+    'Make each announcement feel native to the platform.',
+    'Titles should represent an essence of the updates.',
+    'Announcement on X should be a tweet with 280 characters max. Return as a markdown snippet.',
+    'Announcement on Reddit should be a Reddit post. Return title and content separately as markdown snippets.',
+    `Announcement on Indie Hackers should be an Indie Hackers post. Return title and content separately as markdown snippets. Include Increaser's url (https://increaser.org) in the content.`,
+    'Announcement on LinkedIn should be a LinkedIn post. Return as a markdown snippet.',
+    'Announcement on Telegram should be a message. Return as a markdown snippet.',
+    'Updates are ordered by their priority.',
+    'Product updates:',
+    (items ?? [{ description }])
+      .map(({ description }) => `  - ${description}`)
+      .join('\n'),
   ].join('\n')
 
   console.log(prompt)

@@ -24,7 +24,6 @@ const getPrompt = (items: string[]) => {
     'The name should capture the essence of the update.',
     'The description should summarize the updates.',
     'Each item should correspond to a product update.',
-    // 'You can use emojis in the items if you think it makes it more engaging.',
     'Product updates:',
     items.map((item) => `  - ${item}`).join('\n'),
   ].join('\n')

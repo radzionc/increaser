@@ -1,5 +1,8 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
-import { ProductUpdate } from '../../changelog/ProductUpdate'
+import {
+  ProductUpdate,
+  productUpdateSocials,
+} from '../../changelog/ProductUpdate'
 import { VStack } from '@lib/ui/layout/Stack'
 import { format } from 'date-fns'
 import { Text } from '@lib/ui/text'
@@ -17,6 +20,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { transition } from '@lib/ui/css/transition'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
+import { ProductUpdateSocialsPrompt } from './ProductUpdateSocialsPrompt'
 
 const Container = styled(VStack)`
   gap: 16px;
@@ -46,6 +50,8 @@ const Video = styled(TakeWholeSpace)``
 export const ProductUpdateItem = ({
   value,
 }: ComponentWithValueProps<ProductUpdate>) => {
+  const hasSocials = productUpdateSocials.some((social) => !!value[social])
+
   return (
     <Container>
       <VStack gap={4}>
@@ -59,7 +65,6 @@ export const ProductUpdateItem = ({
           {value.description}
         </Text>
       </VStack>
-
       <ClientOnly>
         <IntersectionAware<HTMLDivElement>
           render={({ ref, wasIntersected }) => {
@@ -80,6 +85,7 @@ export const ProductUpdateItem = ({
           }}
         />
       </ClientOnly>
+      {hasSocials && <ProductUpdateSocialsPrompt value={value} />}
       {value.items && (
         <VStack>
           {value.items.map(({ description }) => {
