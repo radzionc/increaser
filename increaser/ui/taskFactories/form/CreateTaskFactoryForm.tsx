@@ -25,12 +25,16 @@ import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskF
 import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 
 type CreateTaskFormProps = {
-  onFinish: (id?: string) => void
+  onFinish?: (id?: string) => void
+  onMutationFinish?: (id?: string) => void
 }
 
 const defaultCadence = 'week'
 
-export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
+export const CreateTaskFactoryForm = ({
+  onFinish,
+  onMutationFinish,
+}: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFactoryFormShape>({
     name: '',
     projectId: otherProject.id,
@@ -62,10 +66,11 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       deadlineIndex: value.deadlineIndex,
       cadence: value.cadence,
     }
+    onFinish?.(taskFactory.id)
     mutate(taskFactory, {
-      onSuccess: () => onFinish(taskFactory.id),
+      onSuccess: () => onMutationFinish?.(taskFactory.id),
     })
-  }, [mutate, onFinish, value])
+  }, [mutate, onFinish, onMutationFinish, value])
 
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -75,7 +80,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       kind="secondary"
       as="form"
       {...getFormProps({
-        onClose: () => onFinish(),
+        onClose: () => onFinish?.(),
         isDisabled,
         onSubmit,
       })}
@@ -147,7 +152,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       </HStack>
       <CreateFormFooter
         isPending={isPending}
-        onCancel={onFinish}
+        onCancel={() => onFinish?.()}
         isDisabled={isDisabled}
       />
     </Panel>

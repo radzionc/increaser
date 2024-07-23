@@ -16,7 +16,13 @@ export const getRecurringTaskDeadline = ({
   at,
 }: Input) =>
   match(cadence, {
-    workday: () => endOfDay(at).getTime(),
+    workday: () => {
+      const dayEndedAt = endOfDay(at).getTime()
+      const lastWorkdayEndedAt =
+        getWeekEndedAt(at) - convertDuration(2, 'd', 'ms')
+
+      return Math.min(dayEndedAt, lastWorkdayEndedAt)
+    },
     day: () => endOfDay(at).getTime(),
     week: () =>
       getWeekEndedAt(at) - convertDuration(6 - (deadlineIndex ?? 0), 'd', 'ms'),
