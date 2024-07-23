@@ -16,6 +16,7 @@ import { useScheduledTasksToDo } from './hooks/useScheduledTasksToDo'
 import { endOfDay, endOfMonth } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { RecurringTasksForecast } from './RecurringTasksForecast'
 
 export const TasksToDo = () => {
   const tasks = useScheduledTasksToDo()
@@ -90,6 +91,7 @@ export const TasksToDo = () => {
       renderGroup={({ content, groupId, containerProps }) => (
         <VStack gap={4} key={groupId}>
           <TasksGroupHeader value={Number(groupId)} />
+          <RecurringTasksForecast dayEndsAt={Number(groupId)} />
           <VStack {...containerProps}>
             {content}
             {groupId !== 'overdue' && (

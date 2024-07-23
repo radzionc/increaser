@@ -1,17 +1,6 @@
 import { useCurrentTask } from './CurrentTaskProvider'
-import styled from 'styled-components'
-import { CheckStatus } from '@lib/ui/checklist/CheckStatus'
-import { InvisibleHTMLCheckbox } from '@lib/ui/inputs/InvisibleHTMLCheckbox'
-import { interactive } from '@lib/ui/css/interactive'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-
-const Container = styled(CheckStatus)`
-  ${interactive};
-  position: relative;
-  ${sameDimensions(tightListItemConfig.lineHeight)};
-`
+import { TaskCompletionInput } from './TaskCompletionInput'
 
 export const TaskCheckBox = () => {
   const task = useCurrentTask()
@@ -22,18 +11,16 @@ export const TaskCheckBox = () => {
   const value = !!completedAt
 
   return (
-    <Container isInteractive forwardedAs="label" value={value}>
-      <InvisibleHTMLCheckbox
-        value={value}
-        onChange={() => {
-          updateTask({
-            id: task.id,
-            fields: {
-              completedAt: task.completedAt ? null : Date.now(),
-            },
-          })
-        }}
-      />
-    </Container>
+    <TaskCompletionInput
+      value={value}
+      onChange={() => {
+        updateTask({
+          id: task.id,
+          fields: {
+            completedAt: task.completedAt ? null : Date.now(),
+          },
+        })
+      }}
+    />
   )
 }

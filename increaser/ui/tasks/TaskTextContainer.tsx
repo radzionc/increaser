@@ -7,4 +7,5 @@ export const TaskTextContainer = styled(Text)`
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   word-break: break-word;
   width: 100%;
+  text-align: start;
 `
