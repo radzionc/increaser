@@ -1,5 +1,4 @@
-import { endOfDay, format } from 'date-fns'
-import { convertDuration } from '@lib/utils/time/convertDuration'
+import { formatDay } from '@lib/utils/time/Day'
 
 type Input = {
   deadlineAt: number | null
@@ -15,15 +14,5 @@ export const formatTaskDeadline = ({ deadlineAt, now }: Input) => {
     return 'Overdue'
   }
 
-  const endOfToday = endOfDay(now).getTime()
-  if (deadlineAt <= endOfToday) {
-    return 'Today'
-  }
-
-  const endOfTomorrow = endOfToday + convertDuration(1, 'd', 'ms')
-  if (deadlineAt <= endOfTomorrow) {
-    return 'Tomorrow'
-  }
-
-  return format(deadlineAt, 'EEE, MMM d yyyy')
+  return formatDay(deadlineAt)
 }
