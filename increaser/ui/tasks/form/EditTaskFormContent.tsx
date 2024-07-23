@@ -60,7 +60,7 @@ export const EditTaskFormContent = ({
         checklist: fixChecklist(value.checklist),
       },
     )
-    if (newFields.deadlineAt !== task.deadlineAt) {
+    if (value.deadlineAt !== task.deadlineAt) {
       const orders = Object.values(tasks).map((task) => task.order)
       newFields.order = getLastItemOrder(orders)
     }
