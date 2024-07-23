@@ -6,10 +6,21 @@ import { getColor } from '@lib/ui/theme/getters'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { useAssertUserState } from '../user/UserStateContext'
 import { IdeaDescription } from './IdeaDescription'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 const Name = styled(Text)`
   text-align: start;
   color: ${getColor('contrast')};
+`
+
+const Header = styled(PrefixedItemFrame)`
+  ${verticalPadding(0)};
+  gap: 4px;
+`
+
+const Container = styled(VStack)`
+  ${verticalPadding(tightListItemConfig.verticalPadding)};
 `
 
 export const IdeaItemContent = () => {
@@ -17,13 +28,13 @@ export const IdeaItemContent = () => {
   const { projects } = useAssertUserState()
 
   return (
-    <VStack>
-      <PrefixedItemFrame
+    <Container>
+      <Header
         prefix={<Text color="contrast">{projects[projectId].emoji}</Text>}
       >
         <Name>{name}</Name>
-      </PrefixedItemFrame>
+      </Header>
       {description && <IdeaDescription />}
-    </VStack>
+    </Container>
   )
 }
