@@ -4,7 +4,6 @@ import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 
 import { useOverdueTasks } from '@increaser/ui/tasks/hooks/useOverdueTasks'
-import { deadlineName } from '@increaser/entities/Task'
 
 export const OverdueTasks = () => {
   const tasks = useOverdueTasks()
@@ -12,7 +11,7 @@ export const OverdueTasks = () => {
   return (
     <VStack gap={4}>
       <Text weight="semibold" size={12} color={'idle'}>
-        {deadlineName.overdue.toUpperCase()}
+        OVERDUE
       </Text>
       <VStack>
         {tasks.map((task) => {

@@ -30,8 +30,6 @@ export const createDemoUser = async () => {
 
   user.vision = toRecord(visionAttributes, (va) => va.id)
 
-  user.registrationDate = 1721550970250
-
   await putUser(user)
 }
 

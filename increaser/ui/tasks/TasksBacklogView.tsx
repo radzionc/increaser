@@ -8,7 +8,7 @@ export const TasksBacklogView = () => {
     <ActiveItemIdProvider initialValue={null}>
       <VStack>
         <TasksBacklog />
-        <CreateTask deadlineType={null} />
+        <CreateTask deadlineAt={null} />
       </VStack>
     </ActiveItemIdProvider>
   )

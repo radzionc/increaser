@@ -59,6 +59,7 @@ export const TaskProjectSelector = ({
               const { emoji, name } = projects[option]
               return (
                 <OptionItem
+                  key={option}
                   isActive={activeIndex === index}
                   {...getOptionProps({
                     index,

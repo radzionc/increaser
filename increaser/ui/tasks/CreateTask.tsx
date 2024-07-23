@@ -1,17 +1,16 @@
-import { DeadlineType } from '@increaser/entities/Task'
 import { AddTaskButton } from './AddTaskButton'
 import { CreateTaskForm } from './form/CreateTaskForm'
 import { useState } from 'react'
 
 type CreateTaskProps = {
-  deadlineType: DeadlineType | null
+  deadlineAt: number | null
 }
 
-export const CreateTask = ({ deadlineType }: CreateTaskProps) => {
+export const CreateTask = ({ deadlineAt }: CreateTaskProps) => {
   const [isActive, setIsActive] = useState(false)
   return isActive ? (
     <CreateTaskForm
-      defaultValue={{ deadlineType }}
+      defaultValue={{ deadlineAt }}
       onFinish={() => setIsActive(false)}
     />
   ) : (

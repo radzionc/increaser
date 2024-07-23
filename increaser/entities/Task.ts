@@ -33,24 +33,3 @@ export type ScheduledTask = Omit<Task, 'deadlineAt'> & {
 export type UnscheduledTask = Omit<Task, 'deadlineAt'> & {
   deadlineAt: null
 }
-
-export const deadlineTypes = [
-  'today',
-  'tomorrow',
-  'thisWeek',
-  'nextWeek',
-  'thisMonth',
-] as const
-export type DeadlineType = (typeof deadlineTypes)[number]
-export const deadlineStatuses = ['none', 'overdue', ...deadlineTypes] as const
-export type DeadlineStatus = (typeof deadlineStatuses)[number]
-
-export const deadlineName: Record<DeadlineStatus, string> = {
-  none: 'No deadline',
-  overdue: 'Overdue',
-  today: 'Today',
-  tomorrow: 'Tomorrow',
-  thisWeek: 'This week',
-  nextWeek: 'Next week',
-  thisMonth: 'This month',
-}

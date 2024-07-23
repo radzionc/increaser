@@ -1,4 +1,3 @@
-import { DeadlineStatus, deadlineName } from '@increaser/entities/Task'
 import {
   HStackSeparatedBy,
   dotSeparator,
@@ -6,13 +5,11 @@ import {
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
-import { format } from 'date-fns'
-import { Match } from '@lib/ui/base/Match'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getColor } from '@lib/ui/theme/getters'
-import { formatWeek } from '@lib/utils/time/Week'
-import { formatDay } from '@lib/utils/time/Day'
+import { useMemo } from 'react'
+import { format, isToday, isTomorrow } from 'date-fns'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -22,26 +19,34 @@ const Container = styled(HStackSeparatedBy)`
 
 export const TasksGroupHeader = ({
   value,
-}: ComponentWithValueProps<DeadlineStatus>) => {
+}: ComponentWithValueProps<number>) => {
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+  const isOverdue = value < now
+
+  const deadline = useMemo(() => {
+    if (isOverdue) {
+      return ['Overdue']
+    }
+
+    const result = [format(value, 'd MMM')]
+    if (isToday(value)) {
+      result.push('Today')
+    } else if (isTomorrow(value)) {
+      result.push('Tomorrow')
+    }
+
+    result.push(format(value, 'EEEE'))
+
+    return result
+  }, [isOverdue, value])
+
   return (
     <Container separator={dotSeparator}>
-      <Text color={value === 'overdue' ? 'idle' : undefined}>
-        {deadlineName[value]}
-      </Text>
-      {value !== 'overdue' && (
-        <Text>
-          <Match
-            value={value}
-            none={() => null}
-            today={() => formatDay(now)}
-            tomorrow={() => formatDay(now + convertDuration(1, 'd', 'ms'))}
-            thisWeek={() => formatWeek(now)}
-            nextWeek={() => formatWeek(now + convertDuration(1, 'w', 'ms'))}
-            thisMonth={() => format(now, 'MMMM')}
-          />
+      {deadline.map((text, index) => (
+        <Text as="span" key={index}>
+          {text}
         </Text>
-      )}
+      ))}
     </Container>
   )
 }

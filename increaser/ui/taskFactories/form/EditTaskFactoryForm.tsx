@@ -1,10 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
-import { useIsTaskFormDisabled } from '../../tasks/form/useIsTaskFormDisabled'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
 import { useUpdateTaskFactoryMutation } from '../api/useUpdateTaskFactoryMutation'
@@ -19,6 +18,10 @@ import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFoot
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
+import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
+import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
+import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
+import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -29,9 +32,17 @@ export const EditTaskFactoryForm = () => {
     cadence: taskFactory.cadence,
     checklist: taskFactory.task.checklist ?? [],
     description: taskFactory.task.description ?? '',
+    deadlineIndex: taskFactory.deadlineIndex ?? null,
   })
   const { mutate: updateTaskFactory } = useUpdateTaskFactoryMutation()
   const { mutate: deleteTaskFactory } = useDeleteTaskFactoryMutation()
+
+  useEffect(() => {
+    setValue((prev) => ({
+      ...prev,
+      deadlineIndex: cadenceDefaultDeadlineIndex[prev.cadence],
+    }))
+  }, [value.cadence])
 
   const [, setActiveItemId] = useActiveItemId()
 
@@ -39,7 +50,7 @@ export const EditTaskFactoryForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsTaskFormDisabled(value)
+  const isDisabled = useIsTaskFactoryFormDisabled(value)
 
   const onSubmit = () => {
     const fields: Partial<Omit<TaskFactory, 'id'>> = {
@@ -51,6 +62,7 @@ export const EditTaskFactoryForm = () => {
         description: value.description,
       },
       cadence: value.cadence,
+      deadlineIndex: value.deadlineIndex,
     }
 
     updateTaskFactory({
@@ -109,6 +121,15 @@ export const EditTaskFactoryForm = () => {
           value={value.cadence}
           onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
         />
+        {doesCadenceSupportDeadlineIndex(value.cadence) && (
+          <TaskDeadlineIndexInput
+            value={value.deadlineIndex}
+            cadence={value.cadence}
+            onChange={(deadlineIndex) =>
+              setValue((prev) => ({ ...prev, deadlineIndex }))
+            }
+          />
+        )}
       </HStack>
       <EditDeleteFormFooter
         onDelete={() => {

@@ -17,6 +17,12 @@ export const AddGoalTaskFactory = ({ onFinish }: AddGoalTaskFactoryProps) => {
         <TaskFormOverlay onFinish={onClose}>
           <CreateTaskFactoryForm
             onFinish={(id) => {
+              // wait for mutation to finish
+              if (id) return
+
+              onClose()
+            }}
+            onMutationFinish={(id) => {
               onClose()
               if (id) {
                 onFinish(id)

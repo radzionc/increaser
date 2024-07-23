@@ -4,18 +4,22 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { startOfDay, startOfMonth } from 'date-fns'
 
-export const getCadencePeriodStart = (cadence: TaskCadence) => {
-  const now = Date.now()
+type Input = {
+  cadence: TaskCadence
+  at: number
+}
+
+export const getCadencePeriodStart = ({ cadence, at }: Input) => {
   return match(cadence, {
-    week: () => getWeekStartedAt(now),
-    day: () => startOfDay(now).getTime(),
+    week: () => getWeekStartedAt(at),
+    day: () => startOfDay(at).getTime(),
     workday: () => {
-      const dayStartedAt = startOfDay(now).getTime()
+      const dayStartedAt = startOfDay(at).getTime()
       const lastWorkdayStartedAt =
-        getWeekStartedAt(now) + convertDuration(4, 'd', 'ms')
+        getWeekStartedAt(at) + convertDuration(4, 'd', 'ms')
 
       return Math.min(dayStartedAt, lastWorkdayStartedAt)
     },
-    month: () => startOfMonth(now).getTime(),
+    month: () => startOfMonth(at).getTime(),
   })
 }

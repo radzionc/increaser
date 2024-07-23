@@ -7,6 +7,11 @@ export type TaskFactory = {
   id: string
   task: Pick<Task, 'name' | 'description' | 'projectId' | 'links' | 'checklist'>
   cadence: TaskCadence
+  // day cadence: none
+  // workday cadence: none
+  // week cadence: 0-6
+  // month cadence: 0-30
+  deadlineIndex?: number | null
   lastOutputAt?: number
 }
 

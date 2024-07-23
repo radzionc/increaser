@@ -1,9 +1,6 @@
-import { TaskChecklistItem, TaskLink } from '@increaser/entities/Task'
+import { Task } from '@increaser/entities/Task'
 
-export type TaskFormShape = {
-  name: string
-  projectId: string
-  links: TaskLink[]
-  checklist: TaskChecklistItem[]
-  description: string
-}
+export type TaskFormShape = Pick<
+  Task,
+  'name' | 'projectId' | 'links' | 'checklist' | 'description' | 'deadlineAt'
+>

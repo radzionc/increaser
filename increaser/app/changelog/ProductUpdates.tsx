@@ -9,7 +9,7 @@ import { SubscribeForUpdatesPrompt } from '../community/components/SubscribeForU
 
 const Container = styled(VStack)`
   gap: 40px;
-  max-width: 620px;
+  max-width: 640px;
 `
 
 export const ProductUpdates = () => {

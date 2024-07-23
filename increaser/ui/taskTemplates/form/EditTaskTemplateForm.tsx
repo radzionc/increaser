@@ -3,7 +3,6 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
-import { useIsTaskFormDisabled } from '../../tasks/form/useIsTaskFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useUpdateTaskTemplateMutation } from '../api/useUpdateTaskTemplateMutation'
 import { useDeleteTaskTemplateMutation } from '../api/useDeleteTaskTemplateMutation'
@@ -18,6 +17,7 @@ import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 import { useCurrentTaskTemplate } from '../CurrentTaskTemplateProvider'
 import { omit } from '@lib/utils/record/omit'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
+import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -32,7 +32,7 @@ export const EditTaskTemplateForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsTaskFormDisabled(value)
+  const isDisabled = useIsTaskTemplateFormDisabled(value)
 
   const onSubmit = () => {
     const newValue = {

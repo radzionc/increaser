@@ -2,6 +2,17 @@
 export const IconMetaTags = () => (
   <>
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/icon/manifest-icon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="512x512"
+      href="images/icon/manifest-icon-512.png"
+    />
+
     <link rel="apple-touch-icon" href="images/icon/apple-icon-180.png" />
     <link
       rel="apple-touch-startup-image"

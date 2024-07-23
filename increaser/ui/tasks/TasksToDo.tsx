@@ -1,99 +1,101 @@
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { groupItems } from '@lib/utils/array/groupItems'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { DeadlineStatus, Task } from '@increaser/entities/Task'
+import { Task } from '@increaser/entities/Task'
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
-import { getDeadlineTypes } from '@increaser/entities-utils/task/getDeadlineTypes'
-import { getDeadlineStatus } from '@increaser/entities-utils/task/getDeadlineStatus'
 import { useCallback, useMemo } from 'react'
 import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
-import { getDeadlineAt } from '@increaser/entities-utils/task/getDeadlineAt'
-import { toRecord } from '@lib/utils/record/toRecord'
-import { recordMap } from '@lib/utils/record/recordMap'
 import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TasksGroupHeader } from './TasksGroupHeader'
-import { useScheduledTasks } from './hooks/useScheduledTasks'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useScheduledTasksToDo } from './hooks/useScheduledTasksToDo'
+import { endOfDay, endOfMonth } from 'date-fns'
+import { range } from '@lib/utils/array/range'
+import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { RecurringTasksForecast } from './RecurringTasksForecast'
 
 export const TasksToDo = () => {
-  const { tasks: tasksRecord } = useAssertUserState()
-  const tasks = useScheduledTasks()
+  const tasks = useScheduledTasksToDo()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const [activeTaskId] = useActiveItemId()
 
-  const deadlineTypes = useMemo(() => getDeadlineTypes(now), [now])
+  const lastDayEndsAt = useMemo(() => {
+    const tomorrowEndsAt =
+      endOfDay(now).getTime() + convertDuration(1, 'd', 'ms')
+    const maxTaskDeadlineAt = Math.max(...tasks.map((task) => task.deadlineAt))
+    const thisWeekEndsAt = getWeekEndedAt(now)
+    const thisMonthEndsAt = endOfMonth(now).getTime()
+
+    return endOfDay(
+      Math.max(
+        tomorrowEndsAt,
+        maxTaskDeadlineAt,
+        thisWeekEndsAt,
+        thisMonthEndsAt,
+      ),
+    ).getTime()
+  }, [now, tasks])
 
   const groups = useMemo(() => {
-    return {
-      ...recordMap(
-        toRecord(deadlineTypes, (key) => key),
-        () => [] as Task[],
-      ),
-      ...groupItems(
-        Object.values(tasks).filter((task) => !task.completedAt),
-        (task) =>
-          getDeadlineStatus({
-            deadlineAt: task.deadlineAt,
-            now,
-          }),
-      ),
-    }
-  }, [deadlineTypes, now, tasks])
+    const todayEndsAt = endOfDay(now).getTime()
+    const daysCount =
+      Math.round(convertDuration(lastDayEndsAt - todayEndsAt, 'ms', 'd')) + 1
+
+    const result: Record<string, Task[]> = {}
+
+    range(daysCount).forEach((index) => {
+      const dayEndsAt = todayEndsAt + convertDuration(index, 'd', 'ms')
+      const key = dayEndsAt.toString()
+      result[key] = []
+    })
+
+    tasks.forEach((task) => {
+      const key = (
+        task.deadlineAt < now
+          ? todayEndsAt - convertDuration(1, 'd', 'ms')
+          : task.deadlineAt
+      ).toString()
+      result[key] = result[key] || []
+      result[key].push(task)
+    })
+
+    return result
+  }, [lastDayEndsAt, now, tasks])
 
   const { mutate: updateTask } = useUpdateTaskMutation()
 
   const onChange = useCallback(
-    (id: string, { order, groupId }: ItemChangeParams<DeadlineStatus>) => {
-      const fields: Partial<Omit<Task, 'id'>> = {
-        order,
-      }
-      if (groupId !== 'overdue') {
-        fields.deadlineAt =
-          groupId === 'none'
-            ? null
-            : getDeadlineAt({
-                deadlineType: groupId,
-                now,
-              })
-      } else if (
-        getDeadlineStatus({ deadlineAt: tasksRecord[id].deadlineAt, now }) !==
-        'overdue'
-      ) {
-        return
-      }
-
+    (id: string, { order, groupId }: ItemChangeParams<string>) => {
       updateTask({
         id,
-        fields,
+        fields: {
+          order,
+          deadlineAt: Number(groupId),
+        },
       })
     },
-    [now, tasksRecord, updateTask],
+    [updateTask],
   )
 
   return (
     <DnDGroups
       groups={groups}
-      getGroupOrder={(status) =>
-        status === 'overdue' || status === 'none'
-          ? 0
-          : deadlineTypes.indexOf(status) + 1
-      }
+      getGroupOrder={(groupId) => Number(groupId)}
       getItemId={(task) => task.id}
       getItemOrder={(task) => task.order}
       onChange={onChange}
       renderGroup={({ content, groupId, containerProps }) => (
         <VStack gap={4} key={groupId}>
-          <TasksGroupHeader value={groupId} />
+          <TasksGroupHeader value={Number(groupId)} />
+          <RecurringTasksForecast dayEndsAt={Number(groupId)} />
           <VStack {...containerProps}>
             {content}
             {groupId !== 'overdue' && (
-              <CreateTask deadlineType={groupId === 'none' ? null : groupId} />
+              <CreateTask deadlineAt={Number(groupId)} />
             )}
           </VStack>
         </VStack>
