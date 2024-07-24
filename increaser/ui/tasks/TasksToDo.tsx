@@ -89,10 +89,10 @@ export const TasksToDo = () => {
       getItemOrder={(task) => task.order}
       onChange={onChange}
       renderGroup={({ content, groupId, containerProps }) => (
-        <VStack gap={4} key={groupId}>
+        <VStack {...containerProps} gap={4} key={groupId}>
           <TasksGroupHeader value={Number(groupId)} />
           <RecurringTasksForecast dayEndsAt={Number(groupId)} />
-          <VStack {...containerProps}>
+          <VStack>
             {content}
             {groupId !== 'overdue' && (
               <CreateTask deadlineAt={Number(groupId)} />
