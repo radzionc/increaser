@@ -96,7 +96,7 @@ export const EditIdeaForm = () => {
       <TurnIdeaIntoTask value={value} />
       <EditDeleteFormFooter
         onDelete={() => {
-          deleteIdea({ id: idea.id })
+          deleteIdea(idea.id)
           onFinish()
         }}
         onCancel={onFinish}

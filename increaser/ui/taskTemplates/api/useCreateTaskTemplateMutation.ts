@@ -3,8 +3,8 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
+import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 
 export const useCreateTaskTemplateMutation = () => {
   const { taskTemplates } = useAssertUserState()
@@ -12,10 +12,13 @@ export const useCreateTaskTemplateMutation = () => {
   const api = useApi()
 
   return useMutation({
-    mutationFn: async (input: ApiInterface['createTaskTemplate']['input']) => {
-      updateState({ taskTemplates: { ...taskTemplates, [input.id]: input } })
+    mutationFn: async (value: TaskTemplate) => {
+      updateState({ taskTemplates: { ...taskTemplates, [value.id]: value } })
 
-      await api.call('createTaskTemplate', input)
+      await api.call('createUserEntity', {
+        entity: 'taskTemplate',
+        value,
+      })
     },
   })
 }

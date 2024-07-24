@@ -16,9 +16,7 @@ export const DeleteTask = () => {
       title="Delete task"
       icon={<TrashBinIcon />}
       onClick={() => {
-        deleteTask({
-          id,
-        })
+        deleteTask(id)
       }}
     />
   )

@@ -1,4 +1,3 @@
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useMutation } from '@tanstack/react-query'
@@ -6,6 +5,7 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
+import { UpdateUserEntityParams } from '@increaser/api-ui/UpdateUserEntityParams'
 
 export const useUpdateTaskMutation = () => {
   const api = useApi()
@@ -13,14 +13,18 @@ export const useUpdateTaskMutation = () => {
   const { tasks } = useAssertUserState()
 
   return useMutation({
-    mutationFn: async (input: ApiInterface['updateTask']['input']) => {
+    mutationFn: async ({ id, fields }: UpdateUserEntityParams<'task'>) => {
       updateState({
         tasks: recordMap(tasks, (task) =>
-          task.id === input.id ? { ...task, ...input.fields } : task,
+          task.id === id ? { ...task, ...fields } : task,
         ),
       })
 
-      return api.call('updateTask', input)
+      return api.call('updateUserEntity', {
+        id,
+        fields,
+        entity: 'task',
+      })
     },
   })
 }

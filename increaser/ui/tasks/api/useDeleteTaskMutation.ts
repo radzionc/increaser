@@ -6,22 +6,21 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 
-interface DeleteTaskParams {
-  id: string
-}
-
 export const useDeleteTaskMutation = () => {
   const { tasks } = useAssertUserState()
   const { updateState } = useUserState()
   const api = useApi()
 
   return useMutation({
-    mutationFn: async (input: DeleteTaskParams) => {
+    mutationFn: async (id: string) => {
       updateState({
-        tasks: omit(tasks, input.id),
+        tasks: omit(tasks, id),
       })
 
-      await api.call('deleteTask', input)
+      await api.call('deleteUserEntity', {
+        id,
+        entity: 'task',
+      })
     },
   })
 }
