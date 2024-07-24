@@ -33,8 +33,9 @@ export const useResetHabitsMutation = () => {
 
       const response = await Promise.all(
         ids.map((id) => {
-          return api.call('updateHabit', {
+          return api.call('updateUserEntity', {
             id,
+            entity: 'habit',
             fields,
           })
         }),

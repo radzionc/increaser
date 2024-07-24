@@ -1,4 +1,3 @@
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useMutation } from '@tanstack/react-query'
@@ -6,6 +5,7 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
+import { UpdateUserEntityParams } from '@increaser/api-ui/UpdateUserEntityParams'
 
 export const useUpdateVisionAttributeMutation = () => {
   const api = useApi()
@@ -13,16 +13,21 @@ export const useUpdateVisionAttributeMutation = () => {
   const { vision } = useAssertUserState()
 
   return useMutation({
-    mutationFn: async (
-      input: ApiInterface['updateVisionAttribute']['input'],
-    ) => {
+    mutationFn: async ({
+      id,
+      fields,
+    }: UpdateUserEntityParams<'visionAttribute'>) => {
       updateState({
         vision: recordMap(vision, (value) =>
-          value.id === input.id ? { ...value, ...input.fields } : value,
+          value.id === id ? { ...value, ...fields } : value,
         ),
       })
 
-      return api.call('updateVisionAttribute', input)
+      return api.call('updateUserEntity', {
+        id,
+        entity: 'visionAttribute',
+        fields,
+      })
     },
   })
 }

@@ -99,7 +99,7 @@ export const CuratedVisionAttributeItem = ({
       isActive={isAdded}
       onClick={() => {
         if (isAdded) {
-          deleteVisionAttribute({ id })
+          deleteVisionAttribute(id)
         } else {
           const orders = Object.values(vision).map(
             (attribute) => attribute.order,

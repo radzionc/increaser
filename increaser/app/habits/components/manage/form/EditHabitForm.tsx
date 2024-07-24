@@ -106,7 +106,7 @@ export const EditHabitForm = () => {
           kind="alert"
           type="button"
           onClick={() => {
-            deleteHabit({ id: habit.id })
+            deleteHabit(habit.id)
             onFinish()
           }}
         >

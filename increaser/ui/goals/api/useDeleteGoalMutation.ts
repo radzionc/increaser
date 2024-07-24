@@ -6,22 +6,21 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 
-interface DeleteGoalParams {
-  id: string
-}
-
 export const useDeleteGoalMutation = () => {
   const { goals } = useAssertUserState()
   const { updateState } = useUserState()
   const api = useApi()
 
   return useMutation({
-    mutationFn: async (input: DeleteGoalParams) => {
+    mutationFn: async (id: string) => {
       updateState({
-        goals: omit(goals, input.id),
+        goals: omit(goals, id),
       })
 
-      await api.call('deleteGoal', input)
+      await api.call('deleteUserEntity', {
+        id,
+        entity: 'goal',
+      })
     },
   })
 }

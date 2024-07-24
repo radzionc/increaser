@@ -39,8 +39,9 @@ export const useTrackHabitMutation = () => {
         analytics.trackEvent('Track habit', { name: habits[input.id].name })
       }
 
-      await api.call('updateHabit', {
+      await api.call('updateUserEntity', {
         id: input.id,
+        entity: 'habit',
         fields: {
           successes: newHabits[input.id].successes,
         },
