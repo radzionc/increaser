@@ -48,12 +48,12 @@ export const visionAttributeIdeas: VisionAttributeIdea[] = [
   },
   {
     id: 'fitness',
-    name: 'Maintaining a healthy and fit body',
+    name: 'A healthy and fit body',
     emoji: '🏋️‍♀️',
   },
   {
     id: 'wakeup',
-    name: 'Wake up naturally, without an alarm',
+    name: 'Wake up without an alarm',
     emoji: '🌅',
   },
   {
@@ -63,7 +63,7 @@ export const visionAttributeIdeas: VisionAttributeIdea[] = [
   },
   {
     id: 'relax',
-    name: 'Relaxing and peaceful environment',
+    name: 'Living in a peaceful environment',
     emoji: '🧘‍♂️',
   },
   {

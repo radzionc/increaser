@@ -1,13 +1,13 @@
 import { visionAttributeIdeas } from '@increaser/entities/Vision'
 import { CuratedVisionAttributeItem } from './CuratedVisionAttributeItem'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { VisionBoardContainer } from '@increaser/ui/vision/VisionBoardContainer'
 
 export const CuratedVisionAttributes = () => {
   return (
-    <UniformColumnGrid minChildrenWidth={304} gap={20}>
+    <VisionBoardContainer>
       {visionAttributeIdeas.map((value) => (
         <CuratedVisionAttributeItem key={value.name} value={value} />
       ))}
-    </UniformColumnGrid>
+    </VisionBoardContainer>
   )
 }

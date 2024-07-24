@@ -1,18 +1,8 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { order } from '@lib/utils/array/order'
-import styled from 'styled-components'
 import { CurrentVisionAttributeProvider } from '@increaser/ui/vision/CurrentVisionAttributeProvider'
 import { VisionBoardItem } from './VisionBoardItem'
-
-export const Container = styled.div`
-  column-gap: 8px;
-  column-width: 280px;
-  width: 100%;
-
-  > * {
-    margin-bottom: 8px;
-  }
-`
+import { VisionBoardContainer } from './VisionBoardContainer'
 
 export const MyVisionBoard = () => {
   const { vision } = useAssertUserState()
@@ -23,12 +13,12 @@ export const MyVisionBoard = () => {
   )
 
   return (
-    <Container>
+    <VisionBoardContainer>
       {items.map((value) => (
         <CurrentVisionAttributeProvider key={value.id} value={value}>
           <VisionBoardItem />
         </CurrentVisionAttributeProvider>
       ))}
-    </Container>
+    </VisionBoardContainer>
   )
 }
