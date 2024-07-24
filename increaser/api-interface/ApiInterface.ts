@@ -7,7 +7,12 @@ import {
 } from '@increaser/entities/PerformanceScoreboard'
 import { Project } from '@increaser/entities/Project'
 import { Subscription } from '@increaser/entities/Subscription'
-import { Set, User, UserEditableFields } from '@increaser/entities/User'
+import {
+  Set,
+  User,
+  UserEditableFields,
+  UserEntity,
+} from '@increaser/entities/User'
 import { ApiMethod } from './ApiMethod'
 import { Task } from '@increaser/entities/Task'
 import { ProductFeature } from '@increaser/entities/ProductFeature'
@@ -118,7 +123,6 @@ export interface ApiInterface {
     Habit
   >
   deleteHabit: ApiMethod<{ id: string }, undefined>
-  trackHabit: ApiMethod<{ id: string; date: string; value: boolean }, undefined>
 
   addSet: ApiMethod<Set, undefined>
   updateSet: ApiMethod<{ old: Interval; new: Set }, undefined>
@@ -162,6 +166,29 @@ export interface ApiInterface {
     Idea
   >
   deleteIdea: ApiMethod<{ id: string }, undefined>
+
+  createUserEntity: ApiMethod<
+    {
+      value: any
+      entity: UserEntity
+    },
+    any
+  >
+  updateUserEntity: ApiMethod<
+    {
+      entity: UserEntity
+      fields: any
+      id: string
+    },
+    any
+  >
+  deleteUserEntity: ApiMethod<
+    {
+      entity: UserEntity
+      id: string
+    },
+    any
+  >
 
   getFileUploadUrl: ApiMethod<
     { contentType: string },

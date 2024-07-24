@@ -1,5 +1,6 @@
-export type VisionAttribute = {
-  id: string
+import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+
+export type VisionAttribute = EntityWithId & {
   order: number
   name: string
   imageId?: string | null

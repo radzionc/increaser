@@ -17,7 +17,6 @@ import { deleteHabit } from '../habits/resolvers/deleteHabit'
 import { createTask } from '../tasks/resolvers/createTask'
 import { updateTask } from '../tasks/resolvers/updateTask'
 import { deleteTask } from '../tasks/resolvers/deleteTask'
-import { trackHabit } from '../habits/resolvers/trackHabit'
 import { addSet } from '../sets/resolvers/addSet'
 import { proposeFeature } from '../features/resolvers/proposeFeature'
 import { features } from '../features/resolvers/features'
@@ -41,6 +40,9 @@ import { updateIdea } from '../ideas/resolvers/updateIdea'
 import { createTaskTemplate } from '../taskTemplates/resolvers/createTaskTemplate'
 import { deleteTaskTemplate } from '../taskTemplates/resolvers/deleteTaskTemplate'
 import { updateTaskTemplate } from '../taskTemplates/resolvers/updateTaskTemplate'
+import { createUserEntity } from '../userEntities/resolvers/createUserEntity'
+import { deleteUserEntity } from '../userEntities/resolvers/deleteUserEntity'
+import { updateUserEntity } from '../userEntities/resolvers/updateUserEntity'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -58,7 +60,6 @@ export const implementation: ApiImplementation = {
   createHabit,
   updateHabit,
   deleteHabit,
-  trackHabit,
   addSet,
   createTask,
   updateTask,
@@ -85,4 +86,7 @@ export const implementation: ApiImplementation = {
   createIdea,
   updateIdea,
   deleteIdea,
+  createUserEntity,
+  updateUserEntity,
+  deleteUserEntity,
 }

@@ -6,7 +6,7 @@ import {
 
 import { Project } from '@increaser/entities/Project'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
+import { UpdateUserEntityParams } from '@increaser/api-ui/UpdateUserEntityParams'
 
 export const useUpdateProjectMutation = () => {
   const { projects } = useAssertUserState()
@@ -14,10 +14,7 @@ export const useUpdateProjectMutation = () => {
   const api = useApi()
 
   return useMutation({
-    mutationFn: async ({
-      id,
-      fields,
-    }: ApiInterface['updateProject']['input']) => {
+    mutationFn: async ({ id, fields }: UpdateUserEntityParams<'project'>) => {
       updateState({
         projects: {
           ...projects,
@@ -28,8 +25,9 @@ export const useUpdateProjectMutation = () => {
         },
       })
 
-      const project = await api.call('updateProject', {
+      const project = await api.call('updateUserEntity', {
         id,
+        entity: 'project',
         fields,
       })
 

@@ -11,9 +11,8 @@ export type TaskChecklistItem = EntityWithId & {
   order: number
 }
 
-export type Task = {
+export type Task = EntityWithId & {
   startedAt: number
-  id: string
   name: string
   completedAt?: number | null
   projectId: string

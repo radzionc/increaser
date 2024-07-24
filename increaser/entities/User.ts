@@ -8,13 +8,13 @@ import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
-import { TrackedTime } from './TrackedTime'
-import { Vision } from './Vision'
-import { Goals } from './Goal'
+import { TimeRecord } from './TrackedTime'
+import { VisionAttribute } from './Vision'
+import { Goal } from './Goal'
 import { Education } from './Education'
 import { TaskFactory } from './TaskFactory'
-import { Ideas } from './Idea'
-import { TaskTemplates } from './TaskTemplate'
+import { Idea } from './Idea'
+import { TaskTemplate } from './TaskTemplate'
 
 export type Set = Interval & {
   projectId: string
@@ -28,19 +28,66 @@ interface AppSumo {
 export const maxWeeks = 24
 export const maxMonths = 24
 
+export type UserEntityType = {
+  project: Project
+  habit: Habit
+  task: Task
+  taskFactory: TaskFactory
+  taskTemplate: TaskTemplate
+  week: TimeRecord
+  month: TimeRecord
+  year: TimeRecord
+  visionAttribute: VisionAttribute
+  goal: Goal
+  idea: Idea
+}
+
+export type UserEntity = keyof UserEntityType
+
+export type UserEntityRecord<T extends UserEntity> = Record<
+  string,
+  UserEntityType[T]
+>
+
+export type UserEntityRecords = {
+  projects: UserEntityRecord<'project'>
+  habits: UserEntityRecord<'habit'>
+  tasks: UserEntityRecord<'task'>
+  taskFactories: UserEntityRecord<'taskFactory'>
+  taskTemplates: UserEntityRecord<'taskTemplate'>
+  weeks: UserEntityRecord<'week'>
+  months: UserEntityRecord<'month'>
+  years: UserEntityRecord<'year'>
+  vision: UserEntityRecord<'visionAttribute'>
+  goals: UserEntityRecord<'goal'>
+  ideas: UserEntityRecord<'idea'>
+}
+
+export const userEntityRecordName: {
+  [K in UserEntity]: keyof UserEntityRecords
+} = {
+  project: 'projects',
+  habit: 'habits',
+  task: 'tasks',
+  taskFactory: 'taskFactories',
+  taskTemplate: 'taskTemplates',
+  week: 'weeks',
+  month: 'months',
+  year: 'years',
+  visionAttribute: 'vision',
+  goal: 'goals',
+  idea: 'ideas',
+} as const
+
 export type User = DayMoments &
-  WorkBudget & {
+  WorkBudget &
+  UserEntityRecords & {
     id: string
     email: string
     country?: CountryCode
     name?: string
     sets: Set[]
     registrationDate: number
-    projects: Record<string, Project>
-    habits: Record<string, Habit>
-    tasks: Record<string, Task>
-    taskFactories: Record<string, TaskFactory>
-    taskTemplates: TaskTemplates
     freeTrialEnd: number
 
     dob?: string | null
@@ -55,10 +102,6 @@ export type User = DayMoments &
     lastSyncedMonthEndedAt?: number
     lastSyncedWeekEndedAt?: number
     lastSyncedYear?: number
-
-    weeks: TrackedTime
-    months: TrackedTime
-    years: TrackedTime
 
     focusSounds: FocusSound[]
 
@@ -79,10 +122,6 @@ export type User = DayMoments &
     lifeTimeDeal?: LifeTimeDeal
 
     accountDeletionEmailSentAt?: number
-
-    vision: Vision
-    goals: Goals
-    ideas: Ideas
   }
 
 export const userReadonlyFields = [

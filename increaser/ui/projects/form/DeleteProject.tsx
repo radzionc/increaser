@@ -40,7 +40,7 @@ export const DeleteProject = () => {
           confirmActionText="Delete"
           width={480}
           onConfirm={() => {
-            deleteProject({ id })
+            deleteProject(id)
           }}
         >
           <VStack gap={12}>
