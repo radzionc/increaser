@@ -136,7 +136,7 @@ export const EditTaskFormContent = ({
           kind="alert"
           type="button"
           onClick={() => {
-            deleteTask({ id: task.id })
+            deleteTask(task.id)
             onFinish()
           }}
         >

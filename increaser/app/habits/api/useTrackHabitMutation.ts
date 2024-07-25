@@ -6,7 +6,8 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
+
+export type TrackHabitInput = { id: string; date: string; value: boolean }
 
 export const useTrackHabitMutation = () => {
   const { habits } = useAssertUserState()
@@ -16,30 +17,35 @@ export const useTrackHabitMutation = () => {
   const analytics = useAnalytics()
 
   return useMutation({
-    mutationFn: async (
-      input: ApiInterface['trackHabit']['input'],
-    ): Promise<void> => {
-      updateState({
-        habits: recordMap(habits, (habit) => {
-          if (habit.id === input.id) {
-            const { successes } = habit
-            return {
-              ...habit,
-              successes: input.value
-                ? [...successes, input.date]
-                : successes.filter((d) => d !== input.date),
-            }
+    mutationFn: async (input: TrackHabitInput): Promise<void> => {
+      const newHabits = recordMap(habits, (habit) => {
+        if (habit.id === input.id) {
+          const { successes } = habit
+          return {
+            ...habit,
+            successes: input.value
+              ? [...successes, input.date]
+              : successes.filter((d) => d !== input.date),
           }
+        }
 
-          return habit
-        }),
+        return habit
+      })
+      updateState({
+        habits: newHabits,
       })
 
       if (input.value) {
         analytics.trackEvent('Track habit', { name: habits[input.id].name })
       }
 
-      await api.call('trackHabit', input)
+      await api.call('updateUserEntity', {
+        id: input.id,
+        entity: 'habit',
+        fields: {
+          successes: newHabits[input.id].successes,
+        },
+      })
     },
   })
 }

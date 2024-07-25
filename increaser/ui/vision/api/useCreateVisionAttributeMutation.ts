@@ -3,9 +3,9 @@ import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
+import { VisionAttribute } from '@increaser/entities/Vision'
 
 export const useCreateVisionAttributeMutation = () => {
   const { vision } = useAssertUserState()
@@ -15,16 +15,17 @@ export const useCreateVisionAttributeMutation = () => {
   const analytics = useAnalytics()
 
   return useMutation({
-    mutationFn: async (
-      input: ApiInterface['createVisionAttribute']['input'],
-    ) => {
-      updateState({ vision: { ...vision, [input.id]: input } })
-
-      analytics.trackEvent('Create vision attribute', { name: input.name })
-
-      const value = await api.call('createVisionAttribute', input)
-
+    mutationFn: async (value: VisionAttribute) => {
       updateState({ vision: { ...vision, [value.id]: value } })
+
+      analytics.trackEvent('Create vision attribute', { name: value.name })
+
+      const newValue = await api.call('createUserEntity', {
+        value,
+        entity: 'visionAttribute',
+      })
+
+      updateState({ vision: { ...vision, [newValue.id]: newValue } })
     },
   })
 }

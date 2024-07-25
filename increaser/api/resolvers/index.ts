@@ -7,17 +7,6 @@ import { manageSubscription } from '../membership/subscription/resolvers/manageS
 import { subscription } from '../membership/subscription/resolvers/subscription'
 import { scoreboard } from '../scoreboard/resolvers/scoreboard'
 import { sendAuthLinkByEmail } from '../auth/resolvers/sendAuthLinkByEmail'
-import { createProject } from '../projects/resolvers/createProject'
-import { updateProject } from '../projects/resolvers/updateProject'
-import { deleteProject } from '../projects/resolvers/deleteProject'
-import { redeemAppSumoCode } from '../membership/appSumo/resolvers/redeemAppSumoCode'
-import { createHabit } from '../habits/resolvers/createHabit'
-import { updateHabit } from '../habits/resolvers/updateHabit'
-import { deleteHabit } from '../habits/resolvers/deleteHabit'
-import { createTask } from '../tasks/resolvers/createTask'
-import { updateTask } from '../tasks/resolvers/updateTask'
-import { deleteTask } from '../tasks/resolvers/deleteTask'
-import { trackHabit } from '../habits/resolvers/trackHabit'
 import { addSet } from '../sets/resolvers/addSet'
 import { proposeFeature } from '../features/resolvers/proposeFeature'
 import { features } from '../features/resolvers/features'
@@ -25,22 +14,10 @@ import { voteForFeature } from '../features/resolvers/voteForFeature'
 import { userProfile } from '../users/resolvers/userProfile'
 import { deleteSet } from '../sets/resolvers/deleteSet'
 import { updateSet } from '../sets/resolvers/updateSet'
-import { createVisionAttribute } from '../vision/resolvers/createVisionAttribute'
-import { updateVisionAttribute } from '../vision/resolvers/updateVisionAttribute'
-import { deleteVisionAttribute } from '../vision/resolvers/deleteVisionAttribute'
-import { createGoal } from '../goals/resolvers/createGoal'
-import { deleteGoal } from '../goals/resolvers/deleteGoal'
-import { updateGoal } from '../goals/resolvers/updateGoal'
+import { createUserEntity } from '../userEntities/resolvers/createUserEntity'
+import { deleteUserEntity } from '../userEntities/resolvers/deleteUserEntity'
+import { updateUserEntity } from '../userEntities/resolvers/updateUserEntity'
 import { getFileUploadUrl } from '../users/resolvers/getFileUploadUrl'
-import { createTaskFactory } from '../taskFactories/resolvers/createTaskFactory'
-import { deleteTaskFactory } from '../taskFactories/resolvers/deleteTaskFactory'
-import { updateTaskFactory } from '../taskFactories/resolvers/updateTaskFactory'
-import { createIdea } from '../ideas/resolvers/createIdea'
-import { deleteIdea } from '../ideas/resolvers/deleteIdea'
-import { updateIdea } from '../ideas/resolvers/updateIdea'
-import { createTaskTemplate } from '../taskTemplates/resolvers/createTaskTemplate'
-import { deleteTaskTemplate } from '../taskTemplates/resolvers/deleteTaskTemplate'
-import { updateTaskTemplate } from '../taskTemplates/resolvers/updateTaskTemplate'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -51,38 +28,114 @@ export const implementation: ApiImplementation = {
   manageSubscription,
   subscription,
   scoreboard,
-  createProject,
-  updateProject,
-  deleteProject,
-  redeemAppSumoCode,
-  createHabit,
-  updateHabit,
-  deleteHabit,
-  trackHabit,
   addSet,
-  createTask,
-  updateTask,
-  deleteTask,
   proposeFeature,
   features,
   voteForFeature,
   userProfile,
   deleteSet,
   updateSet,
-  createVisionAttribute,
-  updateVisionAttribute,
-  deleteVisionAttribute,
-  createGoal,
-  updateGoal,
-  deleteGoal,
+  createUserEntity,
+  updateUserEntity,
+  deleteUserEntity,
   getFileUploadUrl,
-  createTaskFactory,
-  updateTaskFactory,
-  deleteTaskFactory,
-  createTaskTemplate,
-  updateTaskTemplate,
-  deleteTaskTemplate,
-  createIdea,
-  updateIdea,
-  deleteIdea,
+
+  // DEPRECATED
+  createProject: ({ input, context }) =>
+    createUserEntity({ input: { entity: 'project', value: input }, context }),
+  updateProject: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'project', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteProject: ({ input, context }) =>
+    deleteUserEntity({ input: { entity: 'project', id: input.id }, context }),
+
+  createHabit: ({ input, context }) =>
+    createUserEntity({ input: { entity: 'habit', value: input }, context }),
+  updateHabit: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'habit', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteHabit: ({ input, context }) =>
+    deleteUserEntity({ input: { entity: 'habit', id: input.id }, context }),
+
+  createTask: ({ input, context }) =>
+    createUserEntity({ input: { entity: 'task', value: input }, context }),
+  updateTask: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'task', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteTask: ({ input, context }) =>
+    deleteUserEntity({ input: { entity: 'task', id: input.id }, context }),
+
+  createVisionAttribute: ({ input, context }) =>
+    createUserEntity({
+      input: { entity: 'visionAttribute', value: input },
+      context,
+    }),
+  updateVisionAttribute: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'visionAttribute', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteVisionAttribute: ({ input, context }) =>
+    deleteUserEntity({
+      input: { entity: 'visionAttribute', id: input.id },
+      context,
+    }),
+
+  createGoal: ({ input, context }) =>
+    createUserEntity({ input: { entity: 'goal', value: input }, context }),
+  updateGoal: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'goal', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteGoal: ({ input, context }) =>
+    deleteUserEntity({ input: { entity: 'goal', id: input.id }, context }),
+
+  createTaskFactory: ({ input, context }) =>
+    createUserEntity({
+      input: { entity: 'taskFactory', value: input },
+      context,
+    }),
+  updateTaskFactory: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'taskFactory', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteTaskFactory: ({ input, context }) =>
+    deleteUserEntity({
+      input: { entity: 'taskFactory', id: input.id },
+      context,
+    }),
+
+  createTaskTemplate: ({ input, context }) =>
+    createUserEntity({
+      input: { entity: 'taskTemplate', value: input },
+      context,
+    }),
+  updateTaskTemplate: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'taskTemplate', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteTaskTemplate: ({ input, context }) =>
+    deleteUserEntity({
+      input: { entity: 'taskTemplate', id: input.id },
+      context,
+    }),
+
+  createIdea: ({ input, context }) =>
+    createUserEntity({ input: { entity: 'idea', value: input }, context }),
+  updateIdea: ({ input, context }) =>
+    updateUserEntity({
+      input: { entity: 'idea', fields: input.fields, id: input.id },
+      context,
+    }),
+  deleteIdea: ({ input, context }) =>
+    deleteUserEntity({ input: { entity: 'idea', id: input.id }, context }),
 }

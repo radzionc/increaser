@@ -34,7 +34,7 @@ export const TurnIdeaIntoTask = ({
             }}
             onMutationFinish={() => {
               onClose()
-              deleteIdea({ id })
+              deleteIdea(id)
               setActiveItemId(null)
             }}
           />

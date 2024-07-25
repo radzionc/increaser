@@ -1,3 +1,5 @@
+import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+
 export const goalStatuses = ['done', 'inProgress', 'toDo'] as const
 export type GoalStatus = (typeof goalStatuses)[number]
 
@@ -12,8 +14,7 @@ export type GoalTarget = {
   value: number
 }
 
-export type Goal = {
-  id: string
+export type Goal = EntityWithId & {
   emoji: string
   name: string
   status: GoalStatus

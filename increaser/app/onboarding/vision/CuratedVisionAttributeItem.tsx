@@ -2,7 +2,7 @@ import {
   ComponentWithActiveState,
   ComponentWithValueProps,
 } from '@lib/ui/props'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/layout/Stack'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
@@ -11,8 +11,6 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { Text } from '@lib/ui/text'
-import { visionImageAspectRatio } from '@increaser/ui/vision/visionImageAspectRatio'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { useCreateVisionAttributeMutation } from '@increaser/ui/vision/api/useCreateVisionAttributeMutation'
@@ -23,6 +21,9 @@ import { VisionAttributeIdea } from '@increaser/entities/Vision'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useDeleteVisionAttributeMutation } from '@increaser/ui/vision/api/useDeleteVisionAttributeMutation'
 import { transition } from '@lib/ui/css/transition'
+import { VisionBoardItemHeader } from '@increaser/ui/vision/VisionBoardItemHeader'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Indicator = styled.div`
   ${round};
@@ -33,24 +34,10 @@ const Indicator = styled.div`
   ${transition};
 `
 
-const Header = styled(HStack)`
-  gap: 8px;
-  align-items: start;
-  padding: 16px;
-  text-align: left;
-  font-size: 14px;
-  line-height: 24px;
-`
-
 const Container = styled(VStack)<ComponentWithActiveState>`
-  ${borderRadius.m};
-  width: 100%;
-  font-weight: 500;
-  border: 2px solid ${getColor('mist')};
   overflow: hidden;
-  justify-content: space-between;
+  ${borderRadius.m};
   ${interactive};
-  ${transition};
 
   ${({ isActive }) =>
     isActive
@@ -87,8 +74,11 @@ const Container = styled(VStack)<ComponentWithActiveState>`
         `}
 `
 
+const Content = styled(PrefixedItemFrame)`
+  ${verticalPadding(0)};
+`
+
 const Image = styled.img`
-  ${visionImageAspectRatio};
   object-fit: cover;
 `
 
@@ -109,7 +99,7 @@ export const CuratedVisionAttributeItem = ({
       isActive={isAdded}
       onClick={() => {
         if (isAdded) {
-          deleteVisionAttribute({ id })
+          deleteVisionAttribute(id)
         } else {
           const orders = Object.values(vision).map(
             (attribute) => attribute.order,
@@ -124,12 +114,19 @@ export const CuratedVisionAttributeItem = ({
         }
       }}
     >
-      <Header>
-        <Indicator>
-          <IconWrapper>{isAdded ? <CheckIcon /> : <PlusIcon />}</IconWrapper>
-        </Indicator>
-        <Text>{name}</Text>
-      </Header>
+      <VisionBoardItemHeader>
+        <Content
+          prefix={
+            <Indicator>
+              <IconWrapper>
+                {isAdded ? <CheckIcon /> : <PlusIcon />}
+              </IconWrapper>
+            </Indicator>
+          }
+        >
+          {name}
+        </Content>
+      </VisionBoardItemHeader>
       <SafeImage
         src={getPublicFileUrl(imageId)}
         render={(props) => <Image {...props} />}

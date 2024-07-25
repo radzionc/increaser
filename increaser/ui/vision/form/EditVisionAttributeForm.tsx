@@ -89,7 +89,7 @@ export const EditVisionAttributeForm = () => {
       />
       <EditDeleteFormFooter
         onDelete={() => {
-          deleteVisionAttribute({ id: visionAttribute.id })
+          deleteVisionAttribute(visionAttribute.id)
           onFinish()
         }}
         onCancel={onFinish}

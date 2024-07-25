@@ -10,7 +10,7 @@ import { order } from '@lib/utils/array/order'
 import { HabitsContext } from '@increaser/ui/habits/HabitsContext'
 import { enhanceHabit } from '@increaser/ui/habits/utils/enhanceHabit'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
+import { TrackHabitInput } from '@increaser/app/habits/api/useTrackHabitMutation'
 
 export const DemoHabitsProvider = ({
   children,
@@ -34,7 +34,7 @@ export const DemoHabitsProvider = ({
   )
 
   const trackHabit = useCallback(
-    async (input: ApiInterface['trackHabit']['input']) => {
+    async (input: TrackHabitInput) => {
       updateState({
         habits: recordMap(habits, (habit) => {
           if (habit.id === input.id) {

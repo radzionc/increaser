@@ -133,7 +133,7 @@ export const EditTaskFactoryForm = () => {
       </HStack>
       <EditDeleteFormFooter
         onDelete={() => {
-          deleteTaskFactory({ id: taskFactory.id })
+          deleteTaskFactory(taskFactory.id)
           onFinish()
         }}
         onCancel={onFinish}

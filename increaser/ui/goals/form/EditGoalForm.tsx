@@ -118,7 +118,7 @@ export const EditGoalForm = () => {
       />
       <EditDeleteFormFooter
         onDelete={() => {
-          deleteGoal({ id: goalAttribute.id })
+          deleteGoal(goalAttribute.id)
           onFinish()
         }}
         onCancel={onFinish}

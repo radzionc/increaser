@@ -22,9 +22,9 @@ const Container = styled(HStack)`
   position: sticky;
   bottom: 0;
   right: 0;
-  width: 100%;
   gap: 16px;
   justify-content: flex-end;
+  align-self: end;
 `
 
 export const PlanDayPrimaryNavigation = () => {

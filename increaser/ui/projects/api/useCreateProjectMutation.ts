@@ -5,7 +5,7 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
+import { Project } from '@increaser/entities/Project'
 
 export const useCreateProjectMutation = () => {
   const { projects } = useAssertUserState()
@@ -15,17 +15,20 @@ export const useCreateProjectMutation = () => {
   const analytics = useAnalytics()
 
   return useMutation({
-    mutationFn: async (input: ApiInterface['createProject']['input']) => {
-      analytics.trackEvent('Create project', { name: input.name })
+    mutationFn: async (value: Project) => {
+      analytics.trackEvent('Create project', { name: value.name })
 
       updateState({
         projects: {
           ...projects,
-          [input.id]: input,
+          [value.id]: value,
         },
       })
 
-      return api.call('createProject', input)
+      return api.call('createUserEntity', {
+        entity: 'project',
+        value,
+      })
     },
   })
 }

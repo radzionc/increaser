@@ -18,6 +18,8 @@ import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { getId } from '@increaser/entities-utils/shared/getId'
+import { MS_IN_SEC } from '@lib/utils/time'
 
 export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
   const { habits } = useHabits()
@@ -40,6 +42,9 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
     mutate({
       ...value,
       order: getLastItemOrder(habits.map(({ order }) => order)),
+      id: getId(),
+      startedAt: Math.round(Date.now() / MS_IN_SEC),
+      successes: [],
     })
     onFinish()
   }, [habits, isDisabled, mutate, onFinish, value])

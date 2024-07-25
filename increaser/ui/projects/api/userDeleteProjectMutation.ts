@@ -6,10 +6,6 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 
-interface DeleteProjectMutationInput {
-  id: string
-}
-
 interface UseDeleteProjectMutationParams {
   onSuccess?: () => void
 }
@@ -22,10 +18,11 @@ export const useDeleteProjectMutation = (
   const api = useApi()
 
   return useMutation({
-    mutationFn: async ({ id }: DeleteProjectMutationInput) => {
+    mutationFn: async (id: string) => {
       updateState(omit(projects, id))
 
-      await api.call('deleteProject', {
+      await api.call('deleteUserEntity', {
+        entity: 'project',
         id,
       })
       pullRemoteState()

@@ -13,6 +13,8 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { MS_IN_SEC } from '@lib/utils/time'
+import { getId } from '@increaser/entities-utils/shared/getId'
 
 const Added = styled.div`
   background: transparent;
@@ -76,6 +78,9 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
                 emoji,
                 color: defaultColorOption,
                 order: getLastItemOrder(habits.map(({ order }) => order)),
+                id: getId(),
+                startedAt: Math.round(Date.now() / MS_IN_SEC),
+                successes: [],
               })
             }}
             isRounded

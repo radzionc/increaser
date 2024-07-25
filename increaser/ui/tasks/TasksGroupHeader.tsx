@@ -43,7 +43,7 @@ export const TasksGroupHeader = ({
   return (
     <Container separator={dotSeparator}>
       {deadline.map((text, index) => (
-        <Text as="span" key={index}>
+        <Text color={isOverdue ? 'idle' : undefined} as="span" key={index}>
           {text}
         </Text>
       ))}

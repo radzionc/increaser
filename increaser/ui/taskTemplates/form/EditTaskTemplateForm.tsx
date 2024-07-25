@@ -95,7 +95,7 @@ export const EditTaskTemplateForm = () => {
       />
       <EditDeleteFormFooter
         onDelete={() => {
-          deleteTaskTemplate({ id: taskTemplate.id })
+          deleteTaskTemplate(taskTemplate.id)
           onFinish()
         }}
         onCancel={onFinish}

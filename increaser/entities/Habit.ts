@@ -1,5 +1,6 @@
-export interface Habit {
-  id: string
+import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+
+export type Habit = EntityWithId & {
   name: string
   emoji: string
   color: number

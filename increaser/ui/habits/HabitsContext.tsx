@@ -1,11 +1,11 @@
 import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { EnhancedHabit } from './EnhancedHabit'
+import { TrackHabitInput } from '@increaser/app/habits/api/useTrackHabitMutation'
 
 interface HabitsState {
   habits: EnhancedHabit[]
-  trackHabit: (input: ApiInterface['trackHabit']['input']) => void
+  trackHabit: (input: TrackHabitInput) => void
 }
 
 export const HabitsContext = createContext<HabitsState | undefined>(undefined)

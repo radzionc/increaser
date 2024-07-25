@@ -6,22 +6,21 @@ import {
 } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 
-interface DeleteVisionAttributeParams {
-  id: string
-}
-
 export const useDeleteVisionAttributeMutation = () => {
   const { vision } = useAssertUserState()
   const { updateState } = useUserState()
   const api = useApi()
 
   return useMutation({
-    mutationFn: async (input: DeleteVisionAttributeParams) => {
+    mutationFn: async (id: string) => {
       updateState({
-        vision: omit(vision, input.id),
+        vision: omit(vision, id),
       })
 
-      await api.call('deleteVisionAttribute', input)
+      await api.call('deleteUserEntity', {
+        id,
+        entity: 'visionAttribute',
+      })
     },
   })
 }

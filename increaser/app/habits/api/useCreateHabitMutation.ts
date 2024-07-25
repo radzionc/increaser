@@ -1,12 +1,10 @@
 import { useMutation } from '@tanstack/react-query'
-import { getId } from '@increaser/entities-utils/shared/getId'
 import {
   useAssertUserState,
   useUserState,
 } from '@increaser/ui/user/UserStateContext'
-import { MS_IN_SEC } from '@lib/utils/time'
-import { ApiInterface } from '@increaser/api-interface/ApiInterface'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
+import { Habit } from '@increaser/entities/Habit'
 
 export const useCreateHabitMutation = () => {
   const { habits } = useAssertUserState()
@@ -14,32 +12,13 @@ export const useCreateHabitMutation = () => {
   const api = useApi()
 
   return useMutation({
-    mutationFn: async ({
-      name,
-      color,
-      emoji,
-      order,
-    }: Pick<
-      ApiInterface['createHabit']['input'],
-      'name' | 'color' | 'emoji' | 'order'
-    >) => {
-      const input = {
-        id: getId(),
-        startedAt: Math.round(Date.now() / MS_IN_SEC),
-        color,
-        emoji,
-        name,
-        order,
-      }
+    mutationFn: async (value: Habit) => {
+      updateState({ habits: { ...habits, [value.id]: value } })
 
-      const habit = {
-        ...input,
-        successes: [],
-      }
-
-      updateState({ habits: { ...habits, [habit.id]: habit } })
-
-      await api.call('createHabit', input)
+      await api.call('createUserEntity', {
+        entity: 'habit',
+        value,
+      })
     },
   })
 }
