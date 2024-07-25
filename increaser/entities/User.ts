@@ -15,6 +15,12 @@ import { Education } from './Education'
 import { TaskFactory } from './TaskFactory'
 import { Idea } from './Idea'
 import { TaskTemplate } from './TaskTemplate'
+import {
+  defaultPrincipleCategories,
+  PrincipleCategory,
+} from './PrincipleCategory'
+import { Principle } from './Principle'
+import { toRecord } from '@lib/utils/record/toRecord'
 
 export type Set = Interval & {
   projectId: string
@@ -40,6 +46,8 @@ export type UserEntityType = {
   visionAttribute: VisionAttribute
   goal: Goal
   idea: Idea
+  principleCategory: PrincipleCategory
+  principle: Principle
 }
 
 export type UserEntity = keyof UserEntityType
@@ -61,6 +69,8 @@ export type UserEntityRecords = {
   vision: UserEntityRecord<'visionAttribute'>
   goals: UserEntityRecord<'goal'>
   ideas: UserEntityRecord<'idea'>
+  principleCategories: UserEntityRecord<'principleCategory'>
+  principles: UserEntityRecord<'principle'>
 }
 
 export const userEntityRecordName: {
@@ -77,6 +87,8 @@ export const userEntityRecordName: {
   visionAttribute: 'vision',
   goal: 'goals',
   idea: 'ideas',
+  principleCategory: 'principleCategories',
+  principle: 'principles',
 } as const
 
 export type User = DayMoments &
@@ -167,6 +179,8 @@ export const userDefaultFields: Pick<
   | 'completedEducation'
   | 'taskFactories'
   | 'taskTemplates'
+  | 'principleCategories'
+  | 'principles'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -185,6 +199,8 @@ export const userDefaultFields: Pick<
   completedEducation: [],
   taskFactories: {},
   taskTemplates: {},
+  principleCategories: toRecord(defaultPrincipleCategories, (p) => p.id),
+  principles: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,
 }

@@ -6,6 +6,9 @@ import { syncProjectsDependantFields } from '@increaser/data-services/projects/s
 import { syncTaskFactoriesDependantFields } from '@increaser/data-services/taskFactories/syncTaskFactoriesDependantFields'
 import { deletePublicBucketFile } from '@increaser/public/deletePublicBucketFile'
 import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
+import { getUser, updateUser } from '@increaser/db/user'
+import { recordMap } from '@lib/utils/record/recordMap'
+import { otherPrincipleCategoryId } from '@increaser/entities/PrincipleCategory'
 
 type UserEntityRemovalHandlerParams<T extends UserEntity> = {
   userId: string
@@ -23,6 +26,17 @@ const handleUserEntityRemoval: Partial<{
     if (imageId) {
       await deletePublicBucketFile(getPublicBucketUserFileKey(userId, imageId))
     }
+  },
+  principleCategory: async ({ userId, value: { id } }) => {
+    const { principles } = await getUser(userId, ['principles'])
+
+    await updateUser(userId, {
+      principles: recordMap(principles, (principle) =>
+        principle.categoryId === id
+          ? { ...principle, categoryId: otherPrincipleCategoryId }
+          : principle,
+      ),
+    })
   },
 }
 
