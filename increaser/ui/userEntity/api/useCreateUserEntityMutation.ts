@@ -10,11 +10,14 @@ import {
   UserEntityType,
 } from '@increaser/entities/User'
 
+const affectOtherEntitiesOnCreate: UserEntity[] = ['taskFactory']
+const processedByApiOnCreate: UserEntity[] = ['visionAttribute']
+
 export const useCreateUserEntityMutation = <T extends UserEntity>(
   entity: T,
 ) => {
   const user = useAssertUserState()
-  const { updateState } = useUserState()
+  const { updateState, pullRemoteState } = useUserState()
   const api = useApi()
 
   return useMutation({
@@ -27,10 +30,23 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
         },
       })
 
-      await api.call('createUserEntity', {
+      const result = await api.call('createUserEntity', {
         entity,
         value,
       })
+
+      if (processedByApiOnCreate.includes(entity)) {
+        updateState({
+          [key]: {
+            ...user[key],
+            [value.id]: result,
+          },
+        })
+      }
+
+      if (affectOtherEntitiesOnCreate.includes(entity)) {
+        pullRemoteState()
+      }
     },
   })
 }

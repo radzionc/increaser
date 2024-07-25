@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { UIComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Task } from '@increaser/entities/Task'
-import { useCreateTaskMutation } from '@increaser/ui/tasks/api/useCreateTaskMutation'
 import { Panel } from '@lib/ui/panel/Panel'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { otherProject } from '@increaser/entities/Project'
@@ -23,6 +22,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
 import { ExportFromTemplate } from './ExportFromTemplate'
 import { endOfDay } from 'date-fns'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 type CreateTaskFormProps = UIComponentProps & {
   defaultValue?: Partial<TaskFormShape>
@@ -46,7 +46,7 @@ export const CreateTaskForm = ({
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
-  const { mutate, isPending, variables } = useCreateTaskMutation()
+  const { mutate, isPending, variables } = useCreateUserEntityMutation('task')
   useEffect(() => {
     if (!variables) return
 

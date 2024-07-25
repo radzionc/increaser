@@ -2,7 +2,6 @@ import { useCallback, useRef, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
-import { useCreateIdeaMutation } from '../api/useCreateIdeaMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
@@ -12,6 +11,7 @@ import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<IdeaFormShape>({
@@ -19,7 +19,7 @@ export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
     description: '',
     projectId: otherProjectId,
   })
-  const { mutate } = useCreateIdeaMutation()
+  const { mutate } = useCreateUserEntityMutation('idea')
 
   const isDisabled = useIsIdeaFormDisabled(value)
 

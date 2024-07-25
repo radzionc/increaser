@@ -12,7 +12,6 @@ import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
-import { useCreateHabitMutation } from '../../../api/useCreateHabitMutation'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
@@ -20,6 +19,7 @@ import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInput
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { MS_IN_SEC } from '@lib/utils/time'
+import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 
 export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
   const { habits } = useHabits()
@@ -32,7 +32,7 @@ export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
       used: usedColors,
     }),
   })
-  const { mutate } = useCreateHabitMutation()
+  const { mutate } = useCreateUserEntityMutation('habit')
 
   const isDisabled = useIsHabitFormDisabled(value)
 

@@ -9,7 +9,6 @@ import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { useCreateTaskFactoryMutation } from '../api/useCreateTaskFactoryMutation'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
@@ -23,6 +22,7 @@ import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFacto
 import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 type CreateTaskFormProps = {
   onFinish?: (id?: string) => void
@@ -44,7 +44,7 @@ export const CreateTaskFactoryForm = ({
     description: '',
     deadlineIndex: cadenceDefaultDeadlineIndex[defaultCadence],
   })
-  const { mutate, isPending } = useCreateTaskFactoryMutation()
+  const { mutate, isPending } = useCreateUserEntityMutation('taskFactory')
 
   useEffect(() => {
     setValue((prev) => ({

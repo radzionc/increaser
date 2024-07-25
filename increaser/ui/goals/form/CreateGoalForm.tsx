@@ -4,7 +4,6 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
-import { useCreateGoalMutation } from '../api/useCreateGoalMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
@@ -19,6 +18,7 @@ import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<GoalFormShape>({
@@ -30,7 +30,7 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
     plan: '',
     taskFactories: [],
   })
-  const { mutate } = useCreateGoalMutation()
+  const { mutate } = useCreateUserEntityMutation('goal')
 
   const isDisabled = useIsGoalFormDisabled(value)
 

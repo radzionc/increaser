@@ -1,4 +1,3 @@
-import { useCreateHabitMutation } from '@increaser/app/habits/api/useCreateHabitMutation'
 import { HabitInfo, habitTagColors } from '@increaser/app/habits/data/habits'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import styled, { useTheme } from 'styled-components'
@@ -15,6 +14,7 @@ import { ComponentWithValueProps } from '@lib/ui/props'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { MS_IN_SEC } from '@lib/utils/time'
 import { getId } from '@increaser/entities-utils/shared/getId'
+import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 
 const Added = styled.div`
   background: transparent;
@@ -39,7 +39,7 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
     colors: { getLabelColor },
   } = useTheme()
 
-  const { mutate: createHabit } = useCreateHabitMutation()
+  const { mutate: createHabit } = useCreateUserEntityMutation('habit')
   const { defaultColorOption } = usePaletteColorOptions(habits)
 
   return (

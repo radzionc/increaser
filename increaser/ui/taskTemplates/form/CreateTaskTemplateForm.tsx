@@ -12,9 +12,9 @@ import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 import { FinishableComponentProps } from '@lib/ui/props'
-import { useCreateTaskTemplateMutation } from '../api/useCreateTaskTemplateMutation'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 export const CreateTaskTemplateForm = ({
   onFinish,
@@ -26,7 +26,7 @@ export const CreateTaskTemplateForm = ({
     checklist: [],
     description: '',
   })
-  const { mutate, isPending } = useCreateTaskTemplateMutation()
+  const { mutate, isPending } = useCreateUserEntityMutation('taskTemplate')
 
   const isDisabled = useIsTaskTemplateFormDisabled(value)
 

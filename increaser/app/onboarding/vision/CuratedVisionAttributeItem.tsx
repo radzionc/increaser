@@ -13,7 +13,6 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 import { SafeImage } from '@lib/ui/images/SafeImage'
-import { useCreateVisionAttributeMutation } from '@increaser/ui/vision/api/useCreateVisionAttributeMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
@@ -24,6 +23,7 @@ import { transition } from '@lib/ui/css/transition'
 import { VisionBoardItemHeader } from '@increaser/ui/vision/VisionBoardItemHeader'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 
 const Indicator = styled.div`
   ${round};
@@ -85,7 +85,8 @@ const Image = styled.img`
 export const CuratedVisionAttributeItem = ({
   value: { id, name, emoji },
 }: ComponentWithValueProps<VisionAttributeIdea>) => {
-  const { mutate: createVisionAttribute } = useCreateVisionAttributeMutation()
+  const { mutate: createVisionAttribute } =
+    useCreateUserEntityMutation('visionAttribute')
   const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
 
   const { vision } = useAssertUserState()

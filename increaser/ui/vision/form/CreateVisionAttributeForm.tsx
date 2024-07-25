@@ -4,7 +4,6 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
-import { useCreateVisionAttributeMutation } from '../api/useCreateVisionAttributeMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VisionImageInput } from './VisionImageInput'
@@ -16,6 +15,7 @@ import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisa
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -27,7 +27,7 @@ export const CreateVisionAttributeForm = ({
     emoji: randomlyPick(defaultEmojis),
   })
 
-  const { mutate } = useCreateVisionAttributeMutation()
+  const { mutate } = useCreateUserEntityMutation('visionAttribute')
 
   const isDisabled = useIsVisionAttributeFormDisabled(value)
 

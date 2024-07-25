@@ -15,11 +15,11 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { useAssertUserState } from '../../user/UserStateContext'
-import { useCreateProjectMutation } from '../api/useCreateProjectMutation'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 
 export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
   const { projects } = useAssertUserState()
@@ -33,7 +33,7 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
       used: usedColors,
     }),
   })
-  const { mutate } = useCreateProjectMutation()
+  const { mutate } = useCreateUserEntityMutation('project')
 
   const isDisabled = useIsProjectFormDisabled(value)
 
