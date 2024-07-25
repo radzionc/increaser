@@ -1,20 +1,29 @@
 import { assertUserId } from '../../auth/assertUserId'
 import * as userEntitiesDb from '@increaser/db/userEntity'
 import { ApiResolver } from '../../resolvers/ApiResolver'
-import { UserEntity } from '@increaser/entities/User'
+import { UserEntity, UserEntityType } from '@increaser/entities/User'
 import { syncProjectsDependantFields } from '@increaser/data-services/projects/syncProjectsDependantFields'
 import { syncTaskFactoriesDependantFields } from '@increaser/data-services/taskFactories/syncTaskFactoriesDependantFields'
+import { deletePublicBucketFile } from '@increaser/public/deletePublicBucketFile'
+import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 
-type UserEntityRemovalHandlerParams = {
+type UserEntityRemovalHandlerParams<T extends UserEntity> = {
   userId: string
-  id: string
+  value: UserEntityType[T]
 }
 
-const handleUserEntityRemoval: Partial<
-  Record<UserEntity, (params: UserEntityRemovalHandlerParams) => Promise<void>>
-> = {
+const handleUserEntityRemoval: Partial<{
+  [K in UserEntity]: (
+    params: UserEntityRemovalHandlerParams<K>,
+  ) => Promise<void>
+}> = {
   project: ({ userId }) => syncProjectsDependantFields(userId),
   taskFactory: ({ userId }) => syncTaskFactoriesDependantFields(userId),
+  visionAttribute: async ({ userId, value: { imageId } }) => {
+    if (imageId) {
+      await deletePublicBucketFile(getPublicBucketUserFileKey(userId, imageId))
+    }
+  },
 }
 
 export const deleteUserEntity: ApiResolver<'deleteUserEntity'> = async ({
@@ -23,6 +32,12 @@ export const deleteUserEntity: ApiResolver<'deleteUserEntity'> = async ({
 }) => {
   const userId = assertUserId(context)
 
+  const value = await userEntitiesDb.getUserEntity({
+    userId,
+    entity,
+    entityId: id,
+  })
+
   await userEntitiesDb.deleteUserEntity({
     userId,
     entity,
@@ -30,5 +45,5 @@ export const deleteUserEntity: ApiResolver<'deleteUserEntity'> = async ({
   })
 
   const handler = handleUserEntityRemoval[entity]
-  await handler?.({ userId, id })
+  await handler?.({ userId, value: value as never })
 }
