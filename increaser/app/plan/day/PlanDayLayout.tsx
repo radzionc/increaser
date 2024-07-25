@@ -11,6 +11,7 @@ import styled from 'styled-components'
 const Container = styled(FixedWidthContent)`
   display: flex;
   flex-direction: column;
+  position: relative;
 `
 
 const Content = styled.div`
