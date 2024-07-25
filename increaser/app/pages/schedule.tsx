@@ -1,4 +1,8 @@
-import { makeAppPage } from '@increaser/app/layout/makeAppPage'
 import { SchedulePage } from '../schedule/SchedulePage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { AppPageLayout } from '../focus/components/AppPageLayout'
 
-export default makeAppPage(SchedulePage)
+export default withLayout({
+  page: SchedulePage,
+  layout: AppPageLayout,
+})

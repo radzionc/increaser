@@ -1,4 +1,8 @@
 import { ProductUpdates } from '@increaser/ui/changelog/ProductUpdates'
-import { makeFeaturesPage } from '../../features/makeFeaturesPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { FeaturesLayout } from '../../features/FeaturesLayout'
 
-export default makeFeaturesPage(() => <ProductUpdates />)
+export default withLayout({
+  page: ProductUpdates,
+  layout: FeaturesLayout,
+})

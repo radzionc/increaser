@@ -8,6 +8,7 @@ import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
 import { GiftIcon } from '@lib/ui/icons/GiftIcon'
+import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
 
 type NavigationPathInfo = {
   name: string
@@ -79,5 +80,9 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     features: {
       name: 'Features',
       icon: <GiftIcon />,
+    },
+    principles: {
+      name: 'Principles',
+      icon: <ScrollIcon />,
     },
   } as const

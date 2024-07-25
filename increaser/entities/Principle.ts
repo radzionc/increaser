@@ -4,4 +4,5 @@ export type Principle = EntityWithId & {
   name: string
   description: string
   categoryId: string
+  updatedAt: number
 }

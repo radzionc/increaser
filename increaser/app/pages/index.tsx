@@ -1,4 +1,8 @@
 import { HomePage } from '@increaser/app/home/components'
-import { makeAppPage } from '@increaser/app/layout/makeAppPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { AppPageLayout } from '../focus/components/AppPageLayout'
 
-export default makeAppPage(HomePage)
+export default withLayout({
+  page: HomePage,
+  layout: AppPageLayout,
+})

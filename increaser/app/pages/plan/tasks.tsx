@@ -1,4 +1,8 @@
 import { Tasks } from '@increaser/ui/tasks/Tasks'
-import { makePlanDayPage } from '../../plan/day/makePlanDayPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { PlanDayLayout } from '../../plan/day/PlanDayLayout'
 
-export default makePlanDayPage(() => <Tasks />)
+export default withLayout({
+  page: Tasks,
+  layout: PlanDayLayout,
+})

@@ -1,4 +1,8 @@
-import { makeGoalsPage } from '../../goals/makeGoalsPage'
 import { DoneGoals } from '../../goals/DoneGoals'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { GoalsLayout } from '../../goals/GoalsLayout'
 
-export default makeGoalsPage(() => <DoneGoals />)
+export default withLayout({
+  page: DoneGoals,
+  layout: GoalsLayout,
+})

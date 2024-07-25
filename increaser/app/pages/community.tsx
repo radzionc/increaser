@@ -1,4 +1,8 @@
 import { CommunityPage } from '@increaser/app/community/components/CommunityPage'
-import { makeAppPage } from '@increaser/app/layout/makeAppPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { AppPageLayout } from '../focus/components/AppPageLayout'
 
-export default makeAppPage(CommunityPage)
+export default withLayout({
+  page: CommunityPage,
+  layout: AppPageLayout,
+})

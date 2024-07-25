@@ -1,4 +1,8 @@
 import { EmailAuthContent } from '@increaser/app/auth/components/EmailAuthContent'
-import { makeAuthPage } from '@increaser/app/layout/makeAuthPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { AuthPageLayout } from '../auth/components/AuthPageLayout'
 
-export default makeAuthPage(EmailAuthContent)
+export default withLayout({
+  page: EmailAuthContent,
+  layout: AuthPageLayout,
+})

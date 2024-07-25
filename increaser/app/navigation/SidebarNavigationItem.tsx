@@ -52,6 +52,7 @@ export const SidebarNavigationItem = ({
       account={() => <NavigationToInternalPage value="account" />}
       ideas={() => <NavigationToInternalPage value="ideas" />}
       features={() => <FeaturesNavigationItem />}
+      principles={() => <NavigationToInternalPage value="principles" />}
     />
   )
 }

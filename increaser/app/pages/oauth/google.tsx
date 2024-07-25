@@ -1,4 +1,8 @@
 import { OAuthContent } from '@increaser/app/auth/components/OAuthContent'
-import { makeAuthPage } from '@increaser/app/layout/makeAuthPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { AuthPageLayout } from '../../auth/components/AuthPageLayout'
 
-export default makeAuthPage(() => <OAuthContent provider={'google'} />)
+export default withLayout({
+  page: () => <OAuthContent provider={'facebook'} />,
+  layout: AuthPageLayout,
+})

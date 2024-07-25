@@ -1,4 +1,8 @@
 import { SignInContent } from '@increaser/app/auth/components/SignInContent'
-import { makeAuthPage } from '@increaser/app/layout/makeAuthPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { AuthPageLayout } from '../auth/components/AuthPageLayout'
 
-export default makeAuthPage(SignInContent)
+export default withLayout({
+  page: SignInContent,
+  layout: AuthPageLayout,
+})

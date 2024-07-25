@@ -1,4 +1,8 @@
 import { CuratedHabits } from '../../habits/components/CuratedHabits'
-import { makeHabitsPage } from '../../habits/makeHabitsPage'
+import { withLayout } from '@lib/next-ui/utils/withLayout'
+import { HabitsLayout } from '../../habits/components/HabitsLayout'
 
-export default makeHabitsPage(() => <CuratedHabits />)
+export default withLayout({
+  page: CuratedHabits,
+  layout: HabitsLayout,
+})
