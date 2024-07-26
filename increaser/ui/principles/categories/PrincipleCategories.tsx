@@ -3,8 +3,9 @@ import { usePrincipleCategories } from './hooks/usePrincipleCategories'
 import { VStack } from '@lib/ui/layout/Stack'
 import { AddPrincipleCategory } from './AddPrincipleCategory'
 import { CurrentPrincipleCategoryProvider } from './CurrentPrincipleCategoryProvider'
+import { PrincipleCategoryItem } from './PrincipleCategoryItem'
 
-export const Categories = () => {
+export const PrincipleCategories = () => {
   const items = usePrincipleCategories()
 
   return (
@@ -13,7 +14,7 @@ export const Categories = () => {
       <ActiveItemIdProvider initialValue={null}>
         {items.map((item) => (
           <CurrentPrincipleCategoryProvider key={item.id} value={item}>
-            {item.name}
+            <PrincipleCategoryItem />
           </CurrentPrincipleCategoryProvider>
         ))}
       </ActiveItemIdProvider>

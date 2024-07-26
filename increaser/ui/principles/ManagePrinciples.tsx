@@ -6,7 +6,7 @@ import {
   RenderPrinciplesView,
 } from './PrinciplesView'
 import { Principles } from './Principles'
-import { Categories } from './categories/Categories'
+import { PrincipleCategories } from './categories/PrincipleCategories'
 
 const Container = styled(VStack)`
   max-width: 560px;
@@ -21,7 +21,7 @@ export const ManagePrinciples = () => {
         <PrinciplesViewSelector />
         <RenderPrinciplesView
           principles={() => <Principles />}
-          categories={() => <Categories />}
+          categories={() => <PrincipleCategories />}
         />
       </PrinciplesViewProvider>
     </Container>

@@ -1,6 +1,9 @@
 import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
-import { PrincipleCategory } from '@increaser/entities/PrincipleCategory'
+import {
+  otherPrincipleCategoryId,
+  PrincipleCategory,
+} from '@increaser/entities/PrincipleCategory'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { pick } from '@lib/utils/record/pick'
@@ -15,6 +18,7 @@ import { useUpdateUserEntityMutation } from '../../../userEntity/api/useUpdateUs
 import { useDeleteUserEntityMutation } from '../../../userEntity/api/useDeleteUserEntityMutation'
 import { PrincipleCategoryFormShape } from './PrincipleCategoryFormShape'
 import { useIsPrincipleCategoryFormDisabled } from './useIsPrincipleCategoryFormDisabled'
+import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 
 export const EditPricnipleCategoryForm = () => {
   const principleCategory = useCurrentPrincipleCategory()
@@ -80,14 +84,18 @@ export const EditPricnipleCategoryForm = () => {
           onSubmit={onSubmit}
         />
       </EmojiTextInputFrame>
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deletePrincipleCategory(principleCategory.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
+      {otherPrincipleCategoryId === principleCategory.id ? (
+        <EditFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      ) : (
+        <EditDeleteFormFooter
+          onDelete={() => {
+            deletePrincipleCategory(principleCategory.id)
+            onFinish()
+          }}
+          onCancel={onFinish}
+          isDisabled={isDisabled}
+        />
+      )}
     </Panel>
   )
 }
