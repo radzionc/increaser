@@ -1,5 +1,3 @@
-import { VStack } from '@lib/ui/layout/Stack'
-import styled from 'styled-components'
 import {
   PrinciplesViewProvider,
   PrinciplesViewSelector,
@@ -7,16 +5,11 @@ import {
 } from './PrinciplesView'
 import { Principles } from './Principles'
 import { PrincipleCategories } from './categories/PrincipleCategories'
-
-const Container = styled(VStack)`
-  max-width: 560px;
-  width: 100%;
-  gap: 32px;
-`
+import { PrinciplesContainer } from './PrinciplesContainer'
 
 export const ManagePrinciples = () => {
   return (
-    <Container>
+    <PrinciplesContainer gap={32}>
       <PrinciplesViewProvider>
         <PrinciplesViewSelector />
         <RenderPrinciplesView
@@ -24,6 +17,6 @@ export const ManagePrinciples = () => {
           categories={() => <PrincipleCategories />}
         />
       </PrinciplesViewProvider>
-    </Container>
+    </PrinciplesContainer>
   )
 }

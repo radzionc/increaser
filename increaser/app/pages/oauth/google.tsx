@@ -3,6 +3,6 @@ import { withLayout } from '@lib/next-ui/utils/withLayout'
 import { AuthPageLayout } from '../../auth/components/AuthPageLayout'
 
 export default withLayout({
-  page: () => <OAuthContent provider={'facebook'} />,
+  page: () => <OAuthContent provider={'google'} />,
   layout: AuthPageLayout,
 })
