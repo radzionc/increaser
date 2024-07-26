@@ -6,10 +6,12 @@ import { parseChangelog } from '../utils/parseChangelog'
 const getPrompt = (items: string[]) => {
   if (items.length === 1) {
     return [
-      'Write name and description for the following product update.',
+      'You will write an announcement for a new product update.',
       'It will be displayed in the "What\'s new" section of the app and website.',
-      'Try to keep the description short, but make sure it makes the update clear and easy to understand.',
+      'Return it as a JavaScript object with the "name" and "description" string properties.',
+      'Keep the copy short, but make sure the user will understand each update and its value.',
       'Description should be a plain text, emojis are allowed if you think it makes it more engaging.',
+      'The name should capture the essence of the update.',
       'Return it as a JavaScript object with the "name" and "description" properties.',
       `Product update: ${items[0]}`,
     ].join('\n')

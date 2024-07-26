@@ -5,6 +5,21 @@ export const lastAnnouncementWasAt: number | undefined = undefined
 export const productUpdates: ProductUpdate[] = [
   {
     releasedAt: 1721711243227,
+    name: 'Introducing Principles 🌟',
+    description:
+      "We're excited to announce the new 'Principles' feature! Now, you can define and manage your core values and beliefs right within Increaser. Add, edit, and categorize your principles to guide your daily decisions and actions. Explore suggested principles to inspire a fulfilling life. Start building a strong foundation for your goals today!",
+    videoId: 'principles',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-feature-in-increaser-principles--O2iqwGLfsbQIYZncOXl',
+    telegram: 'https://t.me/increaser_app/43',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7222571208259567617',
+    x: 'https://x.com/increaser_app/status/1816805951154057678',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1ecmctj/new_increaser_feature_principles/',
+  },
+  {
+    releasedAt: 1721711243227,
     name: 'Enhanced Task Scheduling',
     description:
       'Our latest updates bring more control and clarity to your task management.',

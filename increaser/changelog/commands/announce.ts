@@ -1,8 +1,17 @@
-import { productUpdates } from '../productUpdates'
 import clipboardy from 'clipboardy'
+import fs from 'fs'
+import path from 'path'
+import { parseChangelog } from '../utils/parseChangelog'
 
 const announce = () => {
-  const { items, description } = productUpdates[0]
+  const changelog = fs.readFileSync(
+    path.resolve(__dirname, '../changelog.md'),
+    'utf8',
+  )
+
+  const changelogItems = parseChangelog(changelog)
+  const { items } = changelogItems[0]
+
   const prompt = [
     'You will write an announcement for new product updates.',
     'I will post it on Telegram channel, X, LinkedIn, Indie Hackers, and Reddit.',
@@ -18,9 +27,7 @@ const announce = () => {
     'Announcement on Telegram should be a message. Return as a markdown snippet.',
     'Updates are ordered by their priority.',
     'Product updates:',
-    (items ?? [{ description }])
-      .map(({ description }) => `  - ${description}`)
-      .join('\n'),
+    items.map((item) => `  - ${item}`).join('\n'),
   ].join('\n')
 
   console.log(prompt)
