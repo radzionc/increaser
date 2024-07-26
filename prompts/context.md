@@ -104,6 +104,10 @@ On the "Schedule" page, the user can set the time when they want to start and fi
 
 On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button.
 
+## Principles
+
+The "Principles" page consists of two sub-pages: "My principles" and "Principle ideas." The "My principles" page has two tabs: "Principles" and "Categories". On the principles page user can add, edit, and delete principles which consist of a name, description, and a category. On the categories page, the user can add, edit, and delete categories. The category consists of a name and an emoji, e.g., Health, Relationships, Work. The "Principle ideas" page consists of a list of suggested principles for a fulfilling life, categorized into different categories.
+
 ## Features
 
 The "Features" page has two sections: "What's New" and "Request Features". In the first section, the user can see the latest product updates, which consist of a name, description, and a video clip. In the second section, the user can see the list of requested features and upvote them. The user can also submit a new feature request.
