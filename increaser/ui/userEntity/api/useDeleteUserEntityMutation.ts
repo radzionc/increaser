@@ -7,11 +7,17 @@ import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { UserEntity, userEntityRecordName } from '@increaser/entities/User'
 import { omit } from '@lib/utils/record/omit'
 
+const affectOtherEntitiesOnDelete: UserEntity[] = [
+  'taskFactory',
+  'project',
+  'principleCategory',
+]
+
 export const useDeleteUserEntityMutation = <T extends UserEntity>(
   entity: T,
 ) => {
   const user = useAssertUserState()
-  const { updateState } = useUserState()
+  const { updateState, pullRemoteState } = useUserState()
   const api = useApi()
 
   return useMutation({
@@ -25,6 +31,10 @@ export const useDeleteUserEntityMutation = <T extends UserEntity>(
         entity,
         id,
       })
+
+      if (affectOtherEntitiesOnDelete.includes(entity)) {
+        pullRemoteState()
+      }
     },
   })
 }

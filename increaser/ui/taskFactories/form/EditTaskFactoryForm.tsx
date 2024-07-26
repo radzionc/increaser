@@ -6,8 +6,6 @@ import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
-import { useUpdateTaskFactoryMutation } from '../api/useUpdateTaskFactoryMutation'
-import { useDeleteTaskFactoryMutation } from '../api/useDeleteTaskFactoryMutation'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskCadenceInput } from './TaskCadenceInput'
@@ -22,6 +20,8 @@ import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -34,8 +34,10 @@ export const EditTaskFactoryForm = () => {
     description: taskFactory.task.description ?? '',
     deadlineIndex: taskFactory.deadlineIndex ?? null,
   })
-  const { mutate: updateTaskFactory } = useUpdateTaskFactoryMutation()
-  const { mutate: deleteTaskFactory } = useDeleteTaskFactoryMutation()
+  const { mutate: updateTaskFactory } =
+    useUpdateUserEntityMutation('taskFactory')
+  const { mutate: deleteTaskFactory } =
+    useDeleteUserEntityMutation('taskFactory')
 
   useEffect(() => {
     setValue((prev) => ({

@@ -11,7 +11,6 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useAssertUserState } from '../../user/UserStateContext'
-import { useUpdateProjectMutation } from '../api/useUpdateProjectMutation'
 import { ProjectStatusInput } from './ProjectStatusInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DeleteProject } from './DeleteProject'
@@ -19,6 +18,7 @@ import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/c
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -36,7 +36,7 @@ export const EditProjectForm = () => {
     status: project.status,
   })
 
-  const { mutate: updateProject } = useUpdateProjectMutation()
+  const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   const [, setActiveItemId] = useActiveItemId()
 

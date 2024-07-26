@@ -10,11 +10,11 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { useDeleteHabitMutation } from '../../../api/useDeleteHabitMutation'
-import { useUpdateHabitMutation } from '../../../api/useUpdateHabitMutation'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()
@@ -27,8 +27,8 @@ export const EditHabitForm = () => {
     color: habit.color,
   })
 
-  const { mutate: updateHabit } = useUpdateHabitMutation()
-  const { mutate: deleteHabit } = useDeleteHabitMutation()
+  const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
+  const { mutate: deleteHabit } = useDeleteUserEntityMutation('habit')
 
   const [, setActiveItemId] = useActiveItemId()
 

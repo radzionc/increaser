@@ -1,4 +1,6 @@
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { EntityWithName } from '@lib/utils/entities/EntityWithName'
+import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
 
 export type TaskLink = {
   url: string
@@ -11,19 +13,19 @@ export type TaskChecklistItem = EntityWithId & {
   order: number
 }
 
-export type Task = EntityWithId & {
-  startedAt: number
-  name: string
-  completedAt?: number | null
-  projectId: string
-  deadlineAt: number | null
-  order: number
-  spentTime?: number
-  links: TaskLink[]
-  checklist: TaskChecklistItem[]
-  factoryId?: string
-  description: string
-}
+export type Task = EntityWithId &
+  EntityWithName &
+  EntityWithOrder & {
+    startedAt: number
+    completedAt?: number | null
+    projectId: string
+    deadlineAt: number | null
+    spentTime?: number
+    links: TaskLink[]
+    checklist: TaskChecklistItem[]
+    factoryId?: string
+    description: string
+  }
 
 export type ScheduledTask = Omit<Task, 'deadlineAt'> & {
   deadlineAt: number

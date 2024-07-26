@@ -16,11 +16,13 @@ type Input<T extends UserEntity> = {
   id: string
 }
 
+const affectOtherEntitiesOnUpdate: UserEntity[] = ['taskFactory']
+
 export const useUpdateUserEntityMutation = <T extends UserEntity>(
   entity: T,
 ) => {
   const user = useAssertUserState()
-  const { updateState } = useUserState()
+  const { updateState, pullRemoteState } = useUserState()
   const api = useApi()
 
   return useMutation({
@@ -37,6 +39,10 @@ export const useUpdateUserEntityMutation = <T extends UserEntity>(
         fields,
         id,
       })
+
+      if (affectOtherEntitiesOnUpdate.includes(entity)) {
+        pullRemoteState()
+      }
     },
   })
 }

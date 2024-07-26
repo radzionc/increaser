@@ -5,20 +5,20 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
-import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { otherProjectId } from '@increaser/entities/Project'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { Button } from '@lib/ui/buttons/Button'
-import { useDeleteProjectMutation } from '../api/userDeleteProjectMutation'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
 
-  const { mutate: deleteProject } = useDeleteProjectMutation()
+  const { mutate: deleteProject } = useDeleteUserEntityMutation('project')
 
-  const { mutate: updateProject } = useUpdateProjectMutation()
+  const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   const { projects } = useAssertUserState()
 

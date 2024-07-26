@@ -3,8 +3,6 @@ import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { useCurrentGoal } from '../CurrentGoalProvider'
 import { Goal } from '@increaser/entities/Goal'
-import { useUpdateGoalMutation } from '../api/useUpdateGoalMutation'
-import { useDeleteGoalMutation } from '../api/useDeleteGoalMutation'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
@@ -22,6 +20,8 @@ import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 export const EditGoalForm = () => {
   const goalAttribute = useCurrentGoal()
@@ -32,8 +32,8 @@ export const EditGoalForm = () => {
     taskFactories: goalAttribute.taskFactories ?? [],
   })
 
-  const { mutate: updateGoal } = useUpdateGoalMutation()
-  const { mutate: deleteGoal } = useDeleteGoalMutation()
+  const { mutate: updateGoal } = useUpdateUserEntityMutation('goal')
+  const { mutate: deleteGoal } = useDeleteUserEntityMutation('goal')
 
   const [, setActiveItemId] = useActiveItemId()
 

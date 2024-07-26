@@ -2,7 +2,6 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -21,6 +20,7 @@ import { projectsConfig } from './config'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
 import { CreateProjectPrompt } from './CreateProjectPrompt'
 import { ProjectsGroup } from './ProjectsGroup'
+import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -39,7 +39,7 @@ export const ProjectsGroups = () => {
     }
   }, [projects])
 
-  const { mutate: updateProject } = useUpdateProjectMutation()
+  const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   const onChange = useCallback(
     (id: string, { order, groupId }: ItemChangeParams<ProjectStatus>) => {

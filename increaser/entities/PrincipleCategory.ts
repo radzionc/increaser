@@ -1,9 +1,8 @@
+import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { EntityWithName } from '@lib/utils/entities/EntityWithName'
 
-export type PrincipleCategory = EntityWithId & {
-  name: string
-  emoji: string
-}
+export type PrincipleCategory = EntityWithId & EntityWithName & EntityWithEmoji
 
 export const otherPrincipleCategoryId = 'other'
 

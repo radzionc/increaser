@@ -18,12 +18,12 @@ import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
 import { VisionAttributeIdea } from '@increaser/entities/Vision'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { useDeleteVisionAttributeMutation } from '@increaser/ui/vision/api/useDeleteVisionAttributeMutation'
 import { transition } from '@lib/ui/css/transition'
 import { VisionBoardItemHeader } from '@increaser/ui/vision/VisionBoardItemHeader'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 
 const Indicator = styled.div`
   ${round};
@@ -87,7 +87,8 @@ export const CuratedVisionAttributeItem = ({
 }: ComponentWithValueProps<VisionAttributeIdea>) => {
   const { mutate: createVisionAttribute } =
     useCreateUserEntityMutation('visionAttribute')
-  const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
+  const { mutate: deleteVisionAttribute } =
+    useDeleteUserEntityMutation('visionAttribute')
 
   const { vision } = useAssertUserState()
 

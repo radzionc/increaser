@@ -2,8 +2,6 @@ import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
 import { VisionAttribute } from '@increaser/entities/Vision'
-import { useUpdateVisionAttributeMutation } from '../api/useUpdateVisionAttributeMutation'
-import { useDeleteVisionAttributeMutation } from '../api/useDeleteVisionAttributeMutation'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { VisionImageInput } from './VisionImageInput'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
@@ -15,14 +13,18 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
   const initialValue = pick(visionAttribute, ['name', 'emoji', 'imageId'])
   const [value, setValue] = useState<VisionAttributeFormShape>(initialValue)
 
-  const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
-  const { mutate: deleteVisionAttribute } = useDeleteVisionAttributeMutation()
+  const { mutate: updateVisionAttribute } =
+    useUpdateUserEntityMutation('visionAttribute')
+  const { mutate: deleteVisionAttribute } =
+    useDeleteUserEntityMutation('visionAttribute')
 
   const [, setActiveItemId] = useActiveItemId()
 

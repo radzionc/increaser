@@ -5,7 +5,6 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 import { useCallback, useMemo } from 'react'
-import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
@@ -17,6 +16,7 @@ import { endOfDay, endOfMonth } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { RecurringTasksForecast } from './RecurringTasksForecast'
+import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 
 export const TasksToDo = () => {
   const tasks = useScheduledTasksToDo()
@@ -66,7 +66,7 @@ export const TasksToDo = () => {
     return result
   }, [lastDayEndsAt, now, tasks])
 
-  const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   const onChange = useCallback(
     (id: string, { order, groupId }: ItemChangeParams<string>) => {

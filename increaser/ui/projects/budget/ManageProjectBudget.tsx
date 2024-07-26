@@ -4,7 +4,6 @@ import { useCallback, useMemo, useState } from 'react'
 import { Fields } from '@lib/ui/inputs/Fields'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Field } from '@lib/ui/inputs/Field'
-import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import {
   Project,
@@ -20,6 +19,7 @@ import { preventDefault } from '@lib/ui/utils/preventDefault'
 import { BudgetHoursInput } from './BudgetHoursInput'
 import { WorkdingDaysInput } from '@increaser/ui/projects/budget/WorkingDaysInput'
 import { ProjectGoalInput } from './ProjectGoalInput'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 
 type WeeklyGoalShape = {
   hours: number | null
@@ -50,7 +50,7 @@ export const ManageProjectBudget = ({
     useFreeHours() +
     convertDuration(project.allocatedMinutesPerWeek, 'min', 'h')
 
-  const { mutate: updateProject } = useUpdateProjectMutation()
+  const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   const errorMessage = useMemo(() => {
     if (!value.hours) return 'Please enter a budget'

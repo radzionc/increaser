@@ -1,18 +1,18 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
-import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useBacklog } from './hooks/useBacklog'
 import { DnDList } from '@lib/dnd/DnDList'
+import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 
 export const TasksBacklog = () => {
   const tasks = useBacklog()
   const [activeTaskId] = useActiveItemId()
 
-  const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   return (
     <DnDList

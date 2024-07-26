@@ -1,4 +1,6 @@
+import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { EntityWithName } from '@lib/utils/entities/EntityWithName'
 
 export const goalStatuses = ['done', 'inProgress', 'toDo'] as const
 export type GoalStatus = (typeof goalStatuses)[number]
@@ -14,15 +16,15 @@ export type GoalTarget = {
   value: number
 }
 
-export type Goal = EntityWithId & {
-  emoji: string
-  name: string
-  status: GoalStatus
-  deadlineAt: string | number
-  plan?: string | null
-  target?: GoalTarget | null
-  taskFactories?: string[]
-}
+export type Goal = EntityWithId &
+  EntityWithEmoji &
+  EntityWithName & {
+    status: GoalStatus
+    deadlineAt: string | number
+    plan?: string | null
+    target?: GoalTarget | null
+    taskFactories?: string[]
+  }
 
 export type Goals = Record<string, Goal>
 

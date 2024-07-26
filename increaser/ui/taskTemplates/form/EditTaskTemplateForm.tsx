@@ -4,8 +4,6 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
-import { useUpdateTaskTemplateMutation } from '../api/useUpdateTaskTemplateMutation'
-import { useDeleteTaskTemplateMutation } from '../api/useDeleteTaskTemplateMutation'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
@@ -18,13 +16,17 @@ import { useCurrentTaskTemplate } from '../CurrentTaskTemplateProvider'
 import { omit } from '@lib/utils/record/omit'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
   const initialValue = omit(taskTemplate, 'id')
   const [value, setValue] = useState<TaskTemplateFormShape>(initialValue)
-  const { mutate: updateTaskTemplate } = useUpdateTaskTemplateMutation()
-  const { mutate: deleteTaskTemplate } = useDeleteTaskTemplateMutation()
+  const { mutate: updateTaskTemplate } =
+    useUpdateUserEntityMutation('taskTemplate')
+  const { mutate: deleteTaskTemplate } =
+    useDeleteUserEntityMutation('taskTemplate')
 
   const [, setActiveItemId] = useActiveItemId()
 

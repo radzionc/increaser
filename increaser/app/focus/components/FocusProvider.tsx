@@ -23,12 +23,12 @@ import {
 } from '@increaser/ui/focus/FocusContext'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusLauncherSynchronizer } from '@increaser/ui/focus/FocusLauncherSynchronizer'
-import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { omit } from '@lib/utils/record/omit'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
+import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 
 interface Props {
   children: ReactNode
@@ -146,7 +146,7 @@ export const FocusProvider = ({ children }: Props) => {
   )
 
   const { mutate: addSet } = useAddSetMutation()
-  const { mutate: updateTaskMutation } = useUpdateTaskMutation()
+  const { mutate: updateTaskMutation } = useUpdateUserEntityMutation('task')
 
   const cancel = useCallback(() => {
     setCurrentSet(null)

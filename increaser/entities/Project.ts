@@ -1,5 +1,7 @@
+import { EntityWithColor } from '@lib/utils/entities/EntityWithColor'
 import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { EntityWithName } from '@lib/utils/entities/EntityWithName'
 import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
 
 export const projectStatuses = ['active', 'inactive', 'archived'] as const
@@ -13,9 +15,9 @@ export type ProjectWorkingDays = (typeof projectWorkingDays)[number]
 
 export type Project = EntityWithId &
   EntityWithEmoji &
-  EntityWithOrder & {
-    name: string
-    color: number
+  EntityWithOrder &
+  EntityWithName &
+  EntityWithColor & {
     status: ProjectStatus
     allocatedMinutesPerWeek: number
     goal?: ProjectGoal | null

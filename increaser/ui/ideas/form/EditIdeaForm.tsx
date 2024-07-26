@@ -2,8 +2,6 @@ import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
 import { Idea } from '@increaser/entities/Idea'
-import { useUpdateIdeaMutation } from '../api/useUpdateIdeaMutation'
-import { useDeleteIdeaMutation } from '../api/useDeleteIdeaMutation'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
@@ -17,6 +15,8 @@ import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { TurnIdeaIntoTask } from './TurnIdeaIntoTask'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 export const EditIdeaForm = () => {
   const idea = useCurrentIdea()
@@ -24,8 +24,8 @@ export const EditIdeaForm = () => {
     pick(idea, ['name', 'projectId', 'description']),
   )
 
-  const { mutate: updateIdea } = useUpdateIdeaMutation()
-  const { mutate: deleteIdea } = useDeleteIdeaMutation()
+  const { mutate: updateIdea } = useUpdateUserEntityMutation('idea')
+  const { mutate: deleteIdea } = useDeleteUserEntityMutation('idea')
 
   const [, setActiveItemId] = useActiveItemId()
 

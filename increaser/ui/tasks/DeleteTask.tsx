@@ -2,13 +2,12 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 
 import { useCurrentTask } from './CurrentTaskProvider'
-
-import { useDeleteTaskMutation } from '@increaser/ui/tasks/api/useDeleteTaskMutation'
+import { useDeleteUserEntityMutation } from '../userEntity/api/useDeleteUserEntityMutation'
 
 export const DeleteTask = () => {
   const { id } = useCurrentTask()
 
-  const { mutate: deleteTask } = useDeleteTaskMutation()
+  const { mutate: deleteTask } = useDeleteUserEntityMutation('task')
 
   return (
     <IconButton

@@ -1,12 +1,12 @@
+import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { useCurrentTask } from './CurrentTaskProvider'
-import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { TaskCompletionInput } from './TaskCompletionInput'
 
 export const TaskCheckBox = () => {
   const task = useCurrentTask()
   const { completedAt } = task
 
-  const { mutate: updateTask } = useUpdateTaskMutation()
+  const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   const value = !!completedAt
 

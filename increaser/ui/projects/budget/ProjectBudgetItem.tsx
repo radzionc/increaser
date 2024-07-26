@@ -10,12 +10,12 @@ import { transition } from '@lib/ui/css/transition'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
-import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { Opener } from '@lib/ui/base/Opener'
 import { ManageProjectBudget } from './ManageProjectBudget'
 import { interactive } from '@lib/ui/css/interactive'
 import { cropText } from '@lib/ui/css/cropText'
 import { Project } from '@increaser/entities/Project'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 
 type WeeklyGoalItemProps = {
   value: Project
@@ -41,7 +41,7 @@ const Content = styled(HStack)`
 `
 
 export const ProjectBudgetItem = ({ value }: WeeklyGoalItemProps) => {
-  const { mutate } = useUpdateProjectMutation()
+  const { mutate } = useUpdateUserEntityMutation('project')
 
   return (
     <Opener

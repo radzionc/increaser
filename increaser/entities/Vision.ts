@@ -1,11 +1,14 @@
+import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { EntityWithName } from '@lib/utils/entities/EntityWithName'
+import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
 
-export type VisionAttribute = EntityWithId & {
-  order: number
-  name: string
-  imageId?: string | null
-  emoji: string
-}
+export type VisionAttribute = EntityWithId &
+  EntityWithOrder &
+  EntityWithName &
+  EntityWithEmoji & {
+    imageId?: string | null
+  }
 
 export type Vision = Record<string, VisionAttribute>
 

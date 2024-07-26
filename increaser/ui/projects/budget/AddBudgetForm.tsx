@@ -6,7 +6,6 @@ import { Fields } from '@lib/ui/inputs/Fields'
 import { ProjectInput } from '@increaser/ui/projects/ProjectInput'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Field } from '@lib/ui/inputs/Field'
-import { useUpdateProjectMutation } from '@increaser/ui/projects/api/useUpdateProjectMutation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { ProjectGoal, ProjectWorkingDays } from '@increaser/entities/Project'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
@@ -19,6 +18,7 @@ import { WorkdingDaysInput } from '@increaser/ui/projects/budget/WorkingDaysInpu
 import { ProjectGoalInput } from './ProjectGoalInput'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { useAssertUserState } from '../../user/UserStateContext'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 
 type WeeklyGoalShape = {
   projectId: string | null
@@ -55,7 +55,7 @@ export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
 
   const freeHours = useFreeHours()
 
-  const { mutate: updateProject } = useUpdateProjectMutation()
+  const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   return (
     <InputContainer style={{ gap: 8 }} as="div">

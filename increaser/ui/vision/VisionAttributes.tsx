@@ -3,7 +3,6 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { VisionAttributeItem } from './VisionAttributeItem'
 import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider'
 import { DnDList } from '../../../lib/dnd/DnDList'
-import { useUpdateVisionAttributeMutation } from './api/useUpdateVisionAttributeMutation'
 import { order } from '@lib/utils/array/order'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import styled from 'styled-components'
@@ -11,6 +10,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -24,7 +24,8 @@ export const VisionAttributes = () => {
 
   const [activeItemId] = useActiveItemId()
 
-  const { mutate: updateVisionAttribute } = useUpdateVisionAttributeMutation()
+  const { mutate: updateVisionAttribute } =
+    useUpdateUserEntityMutation('visionAttribute')
 
   return (
     <DnDList

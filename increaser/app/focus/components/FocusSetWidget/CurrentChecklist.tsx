@@ -1,5 +1,5 @@
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
-import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
+import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { ChecklistItem } from '@lib/ui/checklist/ChecklistItem'
 import { VStack } from '@lib/ui/layout/Stack'
 import { order } from '@lib/utils/array/order'
@@ -14,7 +14,7 @@ export const CurrentChecklist = () => {
     'asc',
   )
 
-  const { mutate } = useUpdateTaskMutation()
+  const { mutate } = useUpdateUserEntityMutation('task')
 
   return (
     <VStack>

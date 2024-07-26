@@ -4,11 +4,9 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentTask } from '../CurrentTaskProvider'
-import { useUpdateTaskMutation } from '@increaser/ui/tasks/api/useUpdateTaskMutation'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
-import { useDeleteTaskMutation } from '../api/useDeleteTaskMutation'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
 import { TaskLinksInput } from './TaskLinksInput'
@@ -23,6 +21,8 @@ import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from './TaskDescriptionInput'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
+import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 
 type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
 
@@ -42,8 +42,8 @@ export const EditTaskFormContent = ({
   ])
   const [value, setValue] = useState<TaskFormShape>(initialValue)
 
-  const { mutate: updateTask } = useUpdateTaskMutation()
-  const { mutate: deleteTask } = useDeleteTaskMutation()
+  const { mutate: updateTask } = useUpdateUserEntityMutation('task')
+  const { mutate: deleteTask } = useDeleteUserEntityMutation('task')
 
   const isDisabled = useIsTaskFormDisabled(value)
 
