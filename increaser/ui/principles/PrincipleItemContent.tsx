@@ -2,25 +2,16 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { useCurrentPrinciple } from './CurrentPrincipleProvider'
-import { getColor } from '@lib/ui/theme/getters'
-import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { useAssertUserState } from '../user/UserStateContext'
 import { PrincipleDescription } from './PrincipleDescription'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-
-const Name = styled(Text)`
-  text-align: start;
-  color: ${getColor('contrast')};
-`
-
-const Header = styled(PrefixedItemFrame)`
-  ${verticalPadding(0)};
-  gap: 4px;
-`
+import { PrincipleName } from './PrincipleName'
+import { PrincipleHeader } from './PrincipleHeader'
 
 const Container = styled(VStack)`
   ${verticalPadding(tightListItemConfig.verticalPadding)};
+  gap: 4px;
 `
 
 export const PrincipleItemContent = () => {
@@ -29,14 +20,16 @@ export const PrincipleItemContent = () => {
 
   return (
     <Container>
-      <Header
+      <PrincipleHeader
         prefix={
           <Text color="contrast">{principleCategories[categoryId].emoji}</Text>
         }
       >
-        <Name>{name}</Name>
-      </Header>
-      {description && <PrincipleDescription />}
+        <PrincipleName>{name}</PrincipleName>
+      </PrincipleHeader>
+      {description && (
+        <PrincipleDescription>{description}</PrincipleDescription>
+      )}
     </Container>
   )
 }

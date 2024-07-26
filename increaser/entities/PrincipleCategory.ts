@@ -15,13 +15,13 @@ export const otherPrincipleCategory: PrincipleCategory = {
 export const healthPrincipleCategory: PrincipleCategory = {
   id: 'health',
   name: 'Health',
-  emoji: '🏥',
+  emoji: '💪',
 }
 
-export const relationshipsPrincipleCategory: PrincipleCategory = {
-  id: 'relationships',
-  name: 'Relationships',
-  emoji: '💑',
+export const marriagePrincipleCategory: PrincipleCategory = {
+  id: 'marriage',
+  name: 'Marriage',
+  emoji: '❤️',
 }
 
 export const workPrincipleCategory: PrincipleCategory = {
@@ -33,29 +33,20 @@ export const workPrincipleCategory: PrincipleCategory = {
 export const financePrincipleCategory: PrincipleCategory = {
   id: 'finance',
   name: 'Finance',
-  emoji: '💰',
+  emoji: '💸',
+}
+
+export const mindsetPrincipleCategory: PrincipleCategory = {
+  id: 'mindset',
+  name: 'Mindset',
+  emoji: '💭',
 }
 
 export const defaultPrincipleCategories = [
   otherPrincipleCategory,
-  {
-    id: 'health',
-    name: 'Health',
-    emoji: '💪',
-  },
-  {
-    id: 'relationships',
-    name: 'Relationships',
-    emoji: '❤️',
-  },
-  {
-    id: 'work',
-    name: 'Work',
-    emoji: '💼',
-  },
-  {
-    id: 'finance',
-    name: 'Finance',
-    emoji: '💰',
-  },
+  healthPrincipleCategory,
+  marriagePrincipleCategory,
+  workPrincipleCategory,
+  financePrincipleCategory,
+  mindsetPrincipleCategory,
 ]

@@ -49,8 +49,13 @@ const trackUserEntityCreation: Partial<{
   },
 }
 
+type CreateUserEntityMutationOptions<T extends UserEntity> = {
+  onSuccess?: (value: UserEntityType[T]) => void
+}
+
 export const useCreateUserEntityMutation = <T extends UserEntity>(
   entity: T,
+  options?: CreateUserEntityMutationOptions<T>,
 ) => {
   const user = useAssertUserState()
   const { updateState, pullRemoteState } = useUserState()
@@ -89,6 +94,9 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
       if (affectOtherEntitiesOnCreate.includes(entity)) {
         pullRemoteState()
       }
+
+      return result
     },
+    onSuccess: options?.onSuccess,
   })
 }

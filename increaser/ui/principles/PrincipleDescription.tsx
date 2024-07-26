@@ -1,12 +1,9 @@
-import { useCurrentPrinciple } from './CurrentPrincipleProvider'
+import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
+import { getColor } from '@lib/ui/theme/getters'
 
-export const PrincipleDescription = () => {
-  const { description } = useCurrentPrinciple()
-
-  return (
-    <Text size={14} color="supporting" style={{ whiteSpace: 'pre-line' }}>
-      {description}
-    </Text>
-  )
-}
+export const PrincipleDescription = styled(Text)`
+  font-size: 14px;
+  color: ${getColor('textSupporting')};
+  white-space: pre-line;
+`
