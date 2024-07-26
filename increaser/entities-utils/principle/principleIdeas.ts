@@ -38,8 +38,8 @@ export const workIdeas: PrincipleIdea[] = [
       'Define clear, achievable goals to provide direction and motivation. Break down larger goals into smaller, manageable tasks.',
     source: {
       type: 'book',
-      name: 'SMART Goals Made Simple',
-      author: 'S.J. Scott',
+      name: 'The 4 Disciplines of Execution: Achieving Your Wildly Important Goals',
+      author: 'Chris McChesney, Sean Covey, Jim Huling',
     },
   },
   {
@@ -49,8 +49,8 @@ export const workIdeas: PrincipleIdea[] = [
       'Always seek to improve your skills and processes. Small, incremental improvements can lead to significant gains over time.',
     source: {
       type: 'book',
-      name: 'Kaizen: The Japanese Secret to Lasting Change',
-      author: 'Sarah Harvey',
+      name: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones',
+      author: 'James Clear',
     },
   },
   {
