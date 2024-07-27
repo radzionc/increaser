@@ -1,8 +1,8 @@
 import { withLayout } from '@lib/next-ui/utils/withLayout'
-import { GoalsReview } from '../../plan/day/goals/GoalsReview'
 import { PlanDayLayout } from '../../plan/day/PlanDayLayout'
+import { Goals } from '../../goals/Goals'
 
 export default withLayout({
-  page: GoalsReview,
+  page: Goals,
   layout: PlanDayLayout,
 })

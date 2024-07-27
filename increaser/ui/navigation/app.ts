@@ -66,7 +66,6 @@ export const appPagePath: Record<AppPage, string> = {
 export const appPageViews = {
   timeTracking: ['report', 'track'],
   vision: ['my', 'ideas'],
-  goals: ['active', 'done'],
   habits: ['my', 'ideas'],
   plan: ['goals', 'habits', 'tasks'],
   features: ['updates', 'requests'],
