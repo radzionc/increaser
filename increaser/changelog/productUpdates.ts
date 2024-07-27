@@ -4,7 +4,7 @@ export const lastAnnouncementWasAt: number | undefined = undefined
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 1721711243227,
+    releasedAt: 1721993826695,
     name: 'Introducing Principles 🌟',
     description:
       "We're excited to announce the new 'Principles' feature! Now, you can define and manage your core values and beliefs right within Increaser. Add, edit, and categorize your principles to guide your daily decisions and actions. Explore suggested principles to inspire a fulfilling life. Start building a strong foundation for your goals today!",

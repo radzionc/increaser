@@ -21,7 +21,7 @@ export const GoalTaskFactories = () => {
 
         const text = `${task.name}, ${taskCadenceName[cadence].toLowerCase()}.`
         return (
-          <GoalSection icon={<CheckSquareIcon />}>
+          <GoalSection key={id} icon={<CheckSquareIcon />}>
             <Text>{text}</Text>
           </GoalSection>
         )
