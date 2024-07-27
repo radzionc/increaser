@@ -10,7 +10,6 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { GoalsOnboardingStep } from './goals/GoalsOnboardingStep'
 import { ManageProjects } from '@increaser/ui/projects/ManageProjects'
 import { ManageHabits } from '../habits/components/manage/ManageHabits'
-import { MyVision } from '../vision/MyVision'
 
 export const OnboardingStepFormContent = () => {
   const { currentStep } = useOnboarding()
@@ -29,7 +28,6 @@ export const OnboardingStepFormContent = () => {
       dailyHabits={() => <ManageHabits />}
       tasks={() => <TasksOnboardingStep />}
       focus={() => <FocusOnboardingStep />}
-      vision={() => <MyVision />}
       goals={() => <GoalsOnboardingStep />}
     />
   )

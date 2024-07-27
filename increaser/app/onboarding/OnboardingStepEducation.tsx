@@ -7,7 +7,6 @@ import { CuratedHabits } from '../habits/components/CuratedHabits'
 import { VStack } from '@lib/ui/layout/Stack'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { OnboardingStep } from './OnboardingStep'
-import { CuratedVisionAttributes } from './vision/CuratedVisionAttributes'
 
 const onboardingStepTitle: Record<OnboardingStep, string> = {
   projects: 'Identify Your Key Projects to Track in Increaser',
@@ -17,7 +16,6 @@ const onboardingStepTitle: Record<OnboardingStep, string> = {
   dailyHabits: 'Build a Foundation of Daily Habits for Lasting Well-being',
   tasks: 'Elevate Your Day with Priority Tasks at a Glance',
   focus: 'Boost Your Focus with Targeted Work Sessions',
-  vision: 'Describe Your Vision for a Perfect Life',
   goals: 'Set Your Goals for Success',
 }
 
@@ -123,17 +121,6 @@ export const OnboardingStepEducation = () => {
                   </Text>
                 </VStack>
               )}
-              vision={() => (
-                <>
-                  Define your vision for a perfect life by adding specific
-                  attributes like "Happy marriage," "Fit body," or "Financial
-                  independence." Each attribute can be marked as done,
-                  maintenance, in progress, or to-do. Enhance your motivation
-                  and focus by attaching images to these attributes, making your
-                  aspirations more tangible and guiding you toward achieving
-                  your ideal lifestyle.
-                </>
-              )}
               goals={() => (
                 <>
                   Set your goals to provide clear direction and purpose in your
@@ -164,14 +151,6 @@ export const OnboardingStepEducation = () => {
           )}
           tasks={() => null}
           focus={() => null}
-          vision={() => (
-            <VStack gap={28}>
-              <Text color="shy" weight="bold">
-                Life aspiration ideas
-              </Text>
-              <CuratedVisionAttributes />
-            </VStack>
-          )}
           goals={() => null}
         />
       </SeparatedByLine>
