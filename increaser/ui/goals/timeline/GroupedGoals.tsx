@@ -12,6 +12,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { useActiveGoals } from '../hooks/useActiveGoals'
 import { CurrentGoalProvider } from '../CurrentGoalProvider'
 import { TimelineGoalItem } from './TimelineGoalItem'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 const Container = styled(VStack)`
   position: relative;
@@ -27,7 +28,7 @@ export const GroupedGoals = () => {
   const groupedGoals = useMemo(() => {
     return groupItems(items, ({ deadlineAt }) =>
       getGoalDeadlineTimestamp({
-        deadlineAt,
+        deadlineAt: shouldBePresent(deadlineAt),
         dob,
       }),
     )

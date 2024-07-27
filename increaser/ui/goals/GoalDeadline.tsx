@@ -15,6 +15,9 @@ export const GoalDeadline = () => {
   const { deadlineAt } = useCurrentGoal()
 
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
+
+  if (!deadlineAt) return null
+
   const deadlineTimestamp = getGoalDeadlineTimestamp({
     deadlineAt,
     dob,
