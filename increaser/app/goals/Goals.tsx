@@ -38,18 +38,16 @@ export const Goals = () => {
               </CurrentGoalProvider>
             ))
           ) : (
-            <ShyInfoBlock>
-              <Match
-                value={view}
-                done={() => 'There are no completed goals yet. Keep going!'}
-                active={() =>
-                  'There are no active goals yet. Add your first goal to get started!'
-                }
-                idea={() =>
-                  'There are no ideas yet. Add your first goal to get started'
-                }
-              />
-            </ShyInfoBlock>
+            <Match
+              value={view}
+              done={() => (
+                <ShyInfoBlock>
+                  There are no completed goals yet. Keep going!
+                </ShyInfoBlock>
+              )}
+              active={() => null}
+              idea={() => null}
+            />
           )}
           {view !== 'done' && <AddGoal />}
         </ActiveItemIdProvider>
