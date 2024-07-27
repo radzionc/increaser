@@ -68,7 +68,7 @@ export const appPageViews = {
   vision: ['my', 'ideas'],
   goals: ['active', 'done'],
   habits: ['my', 'ideas'],
-  plan: ['vision', 'goals', 'habits', 'tasks'],
+  plan: ['goals', 'habits', 'tasks'],
   features: ['updates', 'requests'],
   principles: ['my', 'ideas'],
 } as const
