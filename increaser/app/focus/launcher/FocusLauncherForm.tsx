@@ -29,6 +29,7 @@ import { LabelText } from '@lib/ui/inputs/LabelText'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { FocusViewSelector } from './FocusViewSelector'
 import { Match } from '@lib/ui/base/Match'
+import { useProjectDoneMinutesThisWeek } from '@increaser/ui/projects/hooks/useProjectDoneMinutesThisWeek'
 
 const Container = styled(Panel)`
   position: relative;
@@ -78,7 +79,12 @@ export const FocusLauncherForm = () => {
     return () => clearInterval(interval)
   }, [updateSuggestions])
 
-  const project = projectId ? projects[projectId] : null
+  const project = projects[projectId]
+
+  const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(projectId)
+
+  const showBudget =
+    project.allocatedMinutesPerWeek > 0 && doneMinutesThisWeek > 0
 
   const isDisabled = useMemo(() => {
     if (!project) {
@@ -107,7 +113,7 @@ export const FocusLauncherForm = () => {
             task={() => <FocusTaskInput />}
           />
         </InputContainer>
-        {project && (
+        {showBudget && (
           <CurrentProjectProvider value={project}>
             <VStack gap={4}>
               <ProjectBudgetWidget />
