@@ -3,13 +3,14 @@ import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '../user/UserStateContext'
 import { useActiveProjects } from '../projects/hooks/useActiveProjects'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
-import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
-import { OptionOutline } from '@lib/ui/select/OptionOutline'
 import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
 import { useEffect } from 'react'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
+import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 export const TaskProjectSelector = ({
   value,
@@ -54,32 +55,38 @@ export const TaskProjectSelector = ({
       </ExpandableInputOpener>
       {isOpen && (
         <FloatingFocusManager context={context} modal returnFocus>
-          <FloatingOptionsContainer {...getFloatingProps()}>
-            {options.map((option, index) => {
-              const { emoji, name } = projects[option]
-              return (
-                <OptionItem
-                  key={option}
-                  isActive={activeIndex === index}
-                  {...getOptionProps({
-                    index,
-                    onSelect: () => {
-                      onChange(option)
-                      setIsOpen(false)
-                    },
-                  })}
-                >
-                  <OptionContent key={option}>
-                    <>
-                      <Text color="contrast">{emoji}</Text>
-                      <Text>{name}</Text>
-                    </>
-                  </OptionContent>
-                  {option === value && <OptionOutline />}
-                </OptionItem>
-              )
-            })}
-          </FloatingOptionsContainer>
+          <TitledFloatingOptionsContainer
+            title="Select a project"
+            {...getFloatingProps()}
+          >
+            <VStack>
+              {options.map((option, index) => {
+                const { emoji, name } = projects[option]
+                return (
+                  <OptionItem
+                    key={option}
+                    isActive={activeIndex === index}
+                    {...getOptionProps({
+                      index,
+                      onSelect: () => {
+                        onChange(option)
+                        setIsOpen(false)
+                      },
+                    })}
+                  >
+                    <OptionContent key={option}>
+                      <WithSelectionMark isSelected={option === value}>
+                        <HStack alignItems="center" gap={8}>
+                          <Text color="contrast">{emoji}</Text>
+                          <Text>{name}</Text>
+                        </HStack>
+                      </WithSelectionMark>
+                    </OptionContent>
+                  </OptionItem>
+                )
+              })}
+            </VStack>
+          </TitledFloatingOptionsContainer>
         </FloatingFocusManager>
       )}
     </>

@@ -5,8 +5,8 @@ import { OptionItem } from './OptionItem'
 import { ExpandableSelectorToggle } from './ExpandableSelectorToggle'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from './OptionContent'
-import { OptionOutline } from './OptionOutline'
 import { ExpandableSelectorContainer } from './ExpandableSelectorContainer'
+import { WithSelectionMark } from './WithSelectionMark'
 
 export type ExpandableSelectorProp<T> = UIComponentProps & {
   value: T | null
@@ -82,9 +82,10 @@ export function ExpandableSelector<T>({
                 })}
               >
                 <OptionContent>
-                  {(renderOption ?? getOptionName ?? getOptionKey)(option)}
+                  <WithSelectionMark isSelected={value === option}>
+                    {(renderOption ?? getOptionName ?? getOptionKey)(option)}
+                  </WithSelectionMark>
                 </OptionContent>
-                {option === value && <OptionOutline />}
               </OptionItem>
             ))}
           </FloatingOptionsContainer>

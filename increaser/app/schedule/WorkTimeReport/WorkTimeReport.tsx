@@ -7,8 +7,8 @@ import { WorkTimeStats } from './WorkTimeStats'
 export const WorkTimeReport = () => {
   return (
     <VStack gap={8}>
-      <WorkTimeReportHeader />
       <WorkTimeReportGuard>
+        <WorkTimeReportHeader />
         <VStack gap={20}>
           <WorkTimeStats />
           <WorkTimeChart />

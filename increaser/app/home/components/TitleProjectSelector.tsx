@@ -5,12 +5,13 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
-import { OptionOutline } from '@lib/ui/select/OptionOutline'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { HStack } from '@lib/ui/layout/Stack'
+import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 export const TitleProjectSelector = () => {
   const { projectId } = useCurrentFocus()
@@ -56,12 +57,13 @@ export const TitleProjectSelector = () => {
                   })}
                 >
                   <OptionContent key={option}>
-                    <>
-                      <Text color="contrast">{emoji}</Text>
-                      <Text>{name}</Text>
-                    </>
+                    <WithSelectionMark isSelected={option === projectId}>
+                      <HStack alignItems="center" gap={8}>
+                        <Text color="contrast">{emoji}</Text>
+                        <Text>{name}</Text>
+                      </HStack>
+                    </WithSelectionMark>
                   </OptionContent>
-                  {option === projectId && <OptionOutline />}
                 </OptionItem>
               )
             })}
