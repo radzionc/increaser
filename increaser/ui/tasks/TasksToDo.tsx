@@ -27,14 +27,14 @@ export const TasksToDo = () => {
     const tomorrowEndsAt =
       endOfDay(now).getTime() + convertDuration(1, 'd', 'ms')
     const maxTaskDeadlineAt = Math.max(...tasks.map((task) => task.deadlineAt))
-    const thisWeekEndsAt = getWeekEndedAt(now)
+    const nextWeekEndsAt = getWeekEndedAt(now) + convertDuration(1, 'w', 'ms')
     const thisMonthEndsAt = endOfMonth(now).getTime()
 
     return endOfDay(
       Math.max(
         tomorrowEndsAt,
         maxTaskDeadlineAt,
-        thisWeekEndsAt,
+        nextWeekEndsAt,
         thisMonthEndsAt,
       ),
     ).getTime()
