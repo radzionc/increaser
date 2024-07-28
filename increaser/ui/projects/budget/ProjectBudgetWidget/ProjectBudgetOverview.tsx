@@ -54,7 +54,7 @@ export const ProjectBudgetOverview = () => {
           'min',
         ),
       ),
-    [],
+    [currentWeekSets, id],
   )
 
   const { colors } = useTheme()

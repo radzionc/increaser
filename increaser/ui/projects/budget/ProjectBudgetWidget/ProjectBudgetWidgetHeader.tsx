@@ -36,7 +36,7 @@ export const ProjectBudgetWidgetHeader = () => {
           'min',
         ),
       ),
-    [],
+    [currentWeekSets, id],
   )
 
   return (

@@ -19,7 +19,7 @@ import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnl
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
-import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectGoalStatus'
+import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectBudgetSummary'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { FocusTaskInput } from './FocusTaskInput'
 import { useFocusLauncher } from './state/FocusLauncherContext'
@@ -111,11 +111,9 @@ export const FocusLauncherForm = () => {
           <CurrentProjectProvider value={project}>
             <VStack gap={4}>
               <ProjectBudgetWidget />
-              <VStack style={{ minHeight: 20 }}>
-                {project.goal && project.allocatedMinutesPerWeek > 0 && (
-                  <ProjectBudgetSummary />
-                )}
-              </VStack>
+              {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                <ProjectBudgetSummary />
+              )}
             </VStack>
           </CurrentProjectProvider>
         )}
