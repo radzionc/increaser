@@ -21,6 +21,7 @@ const Container = styled(FloatingOptionsContainer)`
 
 const Header = styled(Text)`
   ${horizontalPadding(12)};
+  font-size: 14px;
   color: ${getColor('textSupporting')};
 `
 
