@@ -1,8 +1,8 @@
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskFormOverlay } from '../../tasks/form/TaskFormOverlay'
 import { EditTaskFactoryForm } from '../../taskFactories/form/EditTaskFactoryForm'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 export const EditTaskFactoryOverlay = () => {
   const [activeItemId, setActiveItemId] = useActiveItemId()
@@ -14,9 +14,9 @@ export const EditTaskFactoryOverlay = () => {
 
   return (
     <CurrentTaskFactoryProvider value={taskFactories[activeItemId]}>
-      <TaskFormOverlay onFinish={() => setActiveItemId(null)}>
+      <PanelModal onFinish={() => setActiveItemId(null)}>
         <EditTaskFactoryForm />
-      </TaskFormOverlay>
+      </PanelModal>
     </CurrentTaskFactoryProvider>
   )
 }

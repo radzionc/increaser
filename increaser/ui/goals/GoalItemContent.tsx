@@ -3,13 +3,13 @@ import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { useCurrentGoal } from './CurrentGoalProvider'
-import { GoalStatusTag } from './GoalStatusTag'
 import { getColor } from '@lib/ui/theme/getters'
 import { GoalDeadline } from './GoalDeadline'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { GoalPlan } from './GoalPlan'
 import { GoalTaskFactories } from './GoalTaskFactories'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { GoalProgress } from './GoalProgress'
 
 const Name = styled(Text)`
   text-align: start;
@@ -20,7 +20,7 @@ const Name = styled(Text)`
 `
 
 export const GoalItemContent = () => {
-  const { name, emoji, plan, taskFactories } = useCurrentGoal()
+  const { name, emoji, plan, taskFactories, target } = useCurrentGoal()
 
   const hasTaskFactories = taskFactories && taskFactories.length > 0
 
@@ -31,9 +31,9 @@ export const GoalItemContent = () => {
           <EmojiTextPrefix emoji={emoji} />
           {name}
         </Name>
-        <GoalStatusTag />
       </HStack>
       <GoalDeadline />
+      {target && <GoalProgress />}
       {plan && <GoalPlan />}
       {hasTaskFactories && <GoalTaskFactories />}
     </VStack>

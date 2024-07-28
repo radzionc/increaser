@@ -10,7 +10,8 @@ export const useGoals = () => {
     () =>
       order(
         Object.values(goals),
-        ({ deadlineAt }) => getGoalDeadlineTimestamp({ deadlineAt, dob }),
+        ({ deadlineAt }) =>
+          deadlineAt ? getGoalDeadlineTimestamp({ deadlineAt, dob }) : 0,
         'asc',
       ),
     [goals, dob],

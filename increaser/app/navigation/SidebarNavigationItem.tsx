@@ -1,4 +1,3 @@
-import { PlanDayPrompt } from '../plan/day/PlanDayPrompt'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { NavigationToInternalPage } from '../ui/Navigation/Sidebar/NavigationToInternalPage'
@@ -14,11 +13,6 @@ export const SidebarNavigationItem = ({
   return (
     <Match
       value={value}
-      plan={() => (
-        <UserStateOnly>
-          <PlanDayPrompt />
-        </UserStateOnly>
-      )}
       focus={() => (
         <NavigationToInternalPage
           value="focus"

@@ -21,6 +21,8 @@ export const FocusOptionContainer = styled.div<{
   overflow: hidden;
   text-overflow: ellipsis;
 
+  font-size: 14px;
+
   ${transition}
   color: ${getColor('textSupporting')};
   border: 1px solid ${getColor('background')};

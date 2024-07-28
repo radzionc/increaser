@@ -7,8 +7,8 @@ export type GoalStatus = (typeof goalStatuses)[number]
 
 export const goalStatusNameRecord: Record<GoalStatus, string> = {
   done: 'Done',
-  inProgress: 'In progress',
-  toDo: 'To do',
+  inProgress: 'Active',
+  toDo: 'Idea',
 }
 
 export type GoalTarget = {
@@ -20,7 +20,7 @@ export type Goal = EntityWithId &
   EntityWithEmoji &
   EntityWithName & {
     status: GoalStatus
-    deadlineAt: string | number
+    deadlineAt: string | number | null
     plan?: string | null
     target?: GoalTarget | null
     taskFactories?: string[]
@@ -28,5 +28,10 @@ export type Goal = EntityWithId &
 
 export type Goals = Record<string, Goal>
 
-export const goalDeadlineTypes = ['age', 'date'] as const
+export const goalDeadlineTypes = ['age', 'date', 'none'] as const
 export type GoalDeadlineType = (typeof goalDeadlineTypes)[number]
+export const goalDeadlineName: Record<GoalDeadlineType, string> = {
+  age: 'Age',
+  date: 'Date',
+  none: 'No deadline',
+}

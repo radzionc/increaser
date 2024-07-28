@@ -36,7 +36,7 @@ export const GoalsTimelineProvider = ({
       const orderedDeadlines = order(
         goals.map(({ deadlineAt }) =>
           getGoalDeadlineTimestamp({
-            deadlineAt,
+            deadlineAt: shouldBePresent(deadlineAt),
             dob,
           }),
         ),

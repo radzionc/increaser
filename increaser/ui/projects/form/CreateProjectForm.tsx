@@ -1,8 +1,5 @@
 import { useCallback, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
 import { Panel } from '@lib/ui/panel/Panel'
-import { HStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { ProjectFormShape } from './ProjectFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
@@ -20,8 +17,18 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
+import { Project } from '@increaser/entities/Project'
+import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 
-export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
+type CreateProjectFormProps = {
+  onFinish?: (project?: Project) => void
+  onMutationFinish?: (task: Project) => void
+}
+
+export const CreateProjectForm = ({
+  onFinish,
+  onMutationFinish,
+}: CreateProjectFormProps) => {
   const { projects } = useAssertUserState()
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(projects).map(({ color }) => color)
@@ -33,23 +40,26 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
       used: usedColors,
     }),
   })
-  const { mutate } = useCreateUserEntityMutation('project')
+  const { mutate, isPending } = useCreateUserEntityMutation('project')
 
   const isDisabled = useIsProjectFormDisabled(value)
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return
 
-    mutate({
+    const project: Project = {
       ...value,
       id: getId(),
       status: 'active',
       order: getLastItemOrder(activeProjects.map(({ order }) => order)),
       workingDays: 'everyday',
       allocatedMinutesPerWeek: 0,
+    }
+    onFinish?.(project)
+    mutate(project, {
+      onSuccess: () => onMutationFinish?.(project),
     })
-    onFinish()
-  }, [isDisabled, mutate, value, activeProjects, onFinish])
+  }, [activeProjects, isDisabled, mutate, onFinish, onMutationFinish, value])
 
   return (
     <Panel
@@ -84,15 +94,11 @@ export const CreateProjectForm = ({ onFinish }: FinishableComponentProps) => {
           onSubmit={onSubmit}
         />
       </EmojiColorTextInputFrame>
-      <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <div />
-        <HStack alignItems="center" gap={8}>
-          <Button type="button" onClick={onFinish} kind="secondary">
-            Cancel
-          </Button>
-          <Button isDisabled={isDisabled}>Submit</Button>
-        </HStack>
-      </HStack>
+      <CreateFormFooter
+        isDisabled={isDisabled}
+        isPending={isPending}
+        onCancel={() => onFinish?.()}
+      />
     </Panel>
   )
 }

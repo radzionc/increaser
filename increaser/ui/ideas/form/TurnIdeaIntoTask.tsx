@@ -1,6 +1,5 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
-import { TaskFormOverlay } from '../../tasks/form/TaskFormOverlay'
 import { CreateTaskForm } from '../../tasks/form/CreateTaskForm'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { IdeaFormShape } from './IdeaFormShape'
@@ -8,6 +7,7 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
 import { EmbeddedPrompt } from '@lib/ui/buttons/EmbeddedPrompt'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 export const TurnIdeaIntoTask = ({
   value,
@@ -24,7 +24,7 @@ export const TurnIdeaIntoTask = ({
         </EmbeddedPrompt>
       )}
       renderContent={({ onClose }) => (
-        <TaskFormOverlay onFinish={onClose}>
+        <PanelModal onFinish={onClose}>
           <CreateTaskForm
             defaultValue={value}
             onFinish={(task) => {
@@ -38,7 +38,7 @@ export const TurnIdeaIntoTask = ({
               setActiveItemId(null)
             }}
           />
-        </TaskFormOverlay>
+        </PanelModal>
       )}
     />
   )

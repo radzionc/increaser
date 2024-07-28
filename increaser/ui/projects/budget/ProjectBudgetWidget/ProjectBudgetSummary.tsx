@@ -29,7 +29,7 @@ export const ProjectBudgetSummary = () => {
           'min',
         ),
       ),
-    [],
+    [currentWeekSets, id],
   )
 
   return (

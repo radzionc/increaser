@@ -25,7 +25,6 @@ import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMu
 import { YouTubeFocusMusicFloatingPlayer } from '../focus/audio/youTube/YouTubeFocusMusicFloatingPlayer'
 import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
-import { ManageOnboarding } from '../onboarding/ManageOnboarding'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -56,7 +55,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                     <ConditionalUserState
                       present={() => (
                         <>
-                          <ManageOnboarding />
                           <FocusLauncherProvider>
                             <UserManagerProvider>
                               <HabitsProvider>

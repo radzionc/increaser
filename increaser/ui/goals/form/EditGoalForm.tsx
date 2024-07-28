@@ -1,35 +1,27 @@
 import { useCallback, useState } from 'react'
 import { Panel } from '@lib/ui/panel/Panel'
-import { VStack } from '@lib/ui/layout/Stack'
 import { useCurrentGoal } from '../CurrentGoalProvider'
 import { Goal } from '@increaser/entities/Goal'
-import { GoalStatusSelector } from './GoalStatusSelector'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { GoalDeadlineInput } from './GoalDeadlineInput'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { GoalFormShape } from './GoalFormShape'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
-import { GoalTargetInput } from './GoalTargetInput'
-import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { GoalFormFields } from './GoalFormFields'
 
 export const EditGoalForm = () => {
-  const goalAttribute = useCurrentGoal()
+  const goal = useCurrentGoal()
   const [value, setValue] = useState<GoalFormShape>({
-    ...pick(goalAttribute, ['name', 'status', 'emoji', 'deadlineAt']),
-    plan: goalAttribute.plan ?? '',
-    target: goalAttribute.target ?? null,
-    taskFactories: goalAttribute.taskFactories ?? [],
+    ...pick(goal, ['name', 'status', 'emoji']),
+    plan: goal.plan ?? '',
+    target: goal.target ?? null,
+    taskFactories: goal.taskFactories ?? [],
+    deadlineAt: goal.deadlineAt ?? null,
   })
 
   const { mutate: updateGoal } = useUpdateUserEntityMutation('goal')
@@ -49,19 +41,16 @@ export const EditGoalForm = () => {
     }
 
     const fields: Partial<Omit<Goal, 'id'>> = getUpdatedValues(
-      omit(goalAttribute, 'id'),
-      {
-        ...value,
-        deadlineAt: shouldBePresent(value.deadlineAt),
-      },
+      omit(goal, 'id'),
+      value,
     )
 
     updateGoal({
-      id: goalAttribute.id,
+      id: goal.id,
       fields,
     })
     onFinish()
-  }, [goalAttribute, isDisabled, onFinish, updateGoal, value])
+  }, [goal, isDisabled, onFinish, updateGoal, value])
 
   return (
     <Panel
@@ -75,50 +64,10 @@ export const EditGoalForm = () => {
       })}
       style={{ width: '100%' }}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <EmojiInput
-            value={value.emoji}
-            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
-          />
-        </div>
-        <EmbeddedTitleInput
-          placeholder="Describe your goal"
-          autoFocus
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          value={value.name}
-          onSubmit={onSubmit}
-        />
-      </EmojiTextInputFrame>
-      <VStack alignItems="start">
-        <GoalStatusSelector
-          value={value.status}
-          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
-        />
-      </VStack>
-      <GoalDeadlineInput
-        value={value.deadlineAt}
-        onChange={(deadlineAt) => setValue((prev) => ({ ...prev, deadlineAt }))}
-      />
-      <GoalTargetInput
-        value={value.target}
-        onChange={(target) => setValue((prev) => ({ ...prev, target }))}
-      />
-      <EmbeddedDescriptionInput
-        label="Your plan"
-        placeholder="How are you going to achieve this goal? What's your plan?"
-        onChange={(plan) => setValue((prev) => ({ ...prev, plan }))}
-        value={value.plan}
-      />
-      <GoalTaskFactoriesInput
-        onChange={(taskFactories) =>
-          setValue((prev) => ({ ...prev, taskFactories }))
-        }
-        value={value.taskFactories}
-      />
+      <GoalFormFields value={value} onChange={setValue} onSubmit={onSubmit} />
       <EditDeleteFormFooter
         onDelete={() => {
-          deleteGoal(goalAttribute.id)
+          deleteGoal(goal.id)
           onFinish()
         }}
         onCancel={onFinish}

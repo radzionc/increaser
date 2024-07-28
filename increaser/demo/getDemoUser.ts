@@ -28,7 +28,6 @@ export const getDemoUser = (): User => {
     dob,
     name: 'John',
     registrationDate: now,
-    finishedOnboardingAt: now,
     freeTrialEnd: now + convertDuration(100, 'd', 'ms'),
     lastVisitAt: now,
     timeZone: getCurrentTimezoneOffset(),

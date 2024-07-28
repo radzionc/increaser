@@ -123,15 +123,6 @@ export type User = DayMoments &
 
     viewedNewFeaturesAt?: number
 
-    // not used
-    reviewedVisionAt?: number
-
-    sumbittedHabitsAt?: number
-    reviewedGoalsAt?: number
-    organizedTasksAt?: number
-
-    finishedOnboardingAt?: number
-
     subscription?: Subscription
     lifeTimeDeal?: LifeTimeDeal
 

@@ -1,12 +1,12 @@
 import { visionAttributeIdeas } from '@increaser/entities/Vision'
-import { CuratedVisionAttributeItem } from './CuratedVisionAttributeItem'
+import { VisionIdeaItem } from './VisionIdeaItem'
 import { VisionBoardContainer } from '@increaser/ui/vision/VisionBoardContainer'
 
-export const CuratedVisionAttributes = () => {
+export const VisionIdeas = () => {
   return (
     <VisionBoardContainer>
       {visionAttributeIdeas.map((value) => (
-        <CuratedVisionAttributeItem key={value.name} value={value} />
+        <VisionIdeaItem key={value.name} value={value} />
       ))}
     </VisionBoardContainer>
   )

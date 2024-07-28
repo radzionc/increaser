@@ -2,7 +2,6 @@ import { ListIcon } from '@lib/ui/icons/ListIcon'
 import { UserIcon } from '@lib/ui/icons/UserIcon'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
-import { CoffeeIcon } from '@lib/ui/icons/CoffeeIcon'
 import { CrownIcon } from '@lib/ui/icons/CrownIcon'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
@@ -56,10 +55,6 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     community: {
       name: 'Community',
       icon: <GlobeIcon />,
-    },
-    plan: {
-      name: 'Start your day',
-      icon: <CoffeeIcon />,
     },
     vision: {
       name: 'Vision',

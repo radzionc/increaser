@@ -1,17 +1,19 @@
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
-import { VStack } from '@lib/ui/layout/Stack'
 import { ProjectBudgetWidgetHeader } from './ProjectBudgetWidgetHeader'
 import { ProjectBudgetOverview } from './ProjectBudgetOverview'
+import { VStack } from '@lib/ui/layout/Stack'
 
 export const ProjectBudgetWidget = () => {
   const { allocatedMinutesPerWeek } = useCurrentProject()
 
   return (
-    <VStack gap={4}>
+    <>
       <ProjectBudgetWidgetHeader />
-      <VStack style={{ height: 28 }}>
-        {allocatedMinutesPerWeek > 0 && <ProjectBudgetOverview />}
-      </VStack>
-    </VStack>
+      {allocatedMinutesPerWeek > 0 && (
+        <VStack style={{ height: 28 }}>
+          <ProjectBudgetOverview />
+        </VStack>
+      )}
+    </>
   )
 }
