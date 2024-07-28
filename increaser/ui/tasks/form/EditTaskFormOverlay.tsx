@@ -1,11 +1,11 @@
 import { FinishableComponentProps } from '@lib/ui/props'
 import { EditTaskFormContent } from './EditTaskFormContent'
-import { TaskFormOverlay } from './TaskFormOverlay'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 export const EditTaskFormOverlay = ({ onFinish }: FinishableComponentProps) => {
   return (
-    <TaskFormOverlay onFinish={onFinish}>
+    <PanelModal onFinish={onFinish}>
       <EditTaskFormContent onFinish={onFinish} />
-    </TaskFormOverlay>
+    </PanelModal>
   )
 }

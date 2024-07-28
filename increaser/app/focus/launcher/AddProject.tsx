@@ -4,9 +4,9 @@ import { FocusOptionContainer } from './FocusOptionContainer'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import styled from 'styled-components'
 import { FocusOptionContent } from './FocusOptionContent'
-import { TaskFormOverlay } from '@increaser/ui/tasks/form/TaskFormOverlay'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
 import { useFocusLauncher } from './state/FocusLauncherContext'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 const Container = styled(FocusOptionContainer)``
 
@@ -30,7 +30,7 @@ export const AddProject = () => {
         )
       }
       renderContent={({ onClose }) => (
-        <TaskFormOverlay width={460} onFinish={onClose}>
+        <PanelModal width={460} onFinish={onClose}>
           <CreateProjectForm
             onFinish={(project) => {
               // wait for mutation to finish
@@ -49,7 +49,7 @@ export const AddProject = () => {
               }
             }}
           />
-        </TaskFormOverlay>
+        </PanelModal>
       )}
     />
   )

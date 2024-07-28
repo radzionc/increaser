@@ -25,16 +25,16 @@ const Container = styled(ModalContainer)`
   }
 `
 
-type TaskFormOverlayProps = FinishableComponentProps &
+type PanelModalProps = FinishableComponentProps &
   ComponentWithChildrenProps & {
     width?: number
   }
 
-export const TaskFormOverlay = ({
+export const PanelModal = ({
   onFinish,
   children,
   width = 560,
-}: TaskFormOverlayProps) => {
+}: PanelModalProps) => {
   const isFullScreen = useIsScreenWidthLessThan(
     width + modalConfig.minHorizontalFreeSpaceForMist,
   )
