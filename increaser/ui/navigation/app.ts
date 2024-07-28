@@ -32,7 +32,6 @@ export const appPages = [
   'signIn',
   'signUp',
   'emailConfirm',
-  'onboarding',
 ] as const
 
 export type AppPage = (typeof appPages)[number]
@@ -55,7 +54,6 @@ export const appPagePath: Record<AppPage, string> = {
   signIn: 'sign-in',
   signUp: 'sign-up',
   emailConfirm: 'email-confirm',
-  onboarding: 'onboarding',
   ideas: 'ideas',
   features: 'features',
   principles: 'principles',

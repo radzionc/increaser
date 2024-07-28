@@ -116,10 +116,6 @@ The "Features" page has two sections: "What's New" and "Request Features". In th
 
 Finally, the "Community" page features a leaderboard of the most productive users over the past seven days, based on total daily work hours. Users are anonymous by default but can choose to display their name and country on the leaderboard.
 
-# Onboarding
-
-After the user has signed up in the app, they will appear on the onboarding flow, which is a dedicated page consisting of 7 steps: "Add Projects," "Define Work Budget," "Set Project Budgets," "Arrange Schedule," "Establish Daily Habits," "List Tasks," "Start Focus Session." Each step is connected to a core Increaser functionality. Each step consists of an interactive part on the left that includes the necessary steps to set up the current feature, and on the right side, there is an educational block consisting of a video and text explaining why the current feature is beneficial.
-
 # Website
 
 Increaser app is under the [app.increaser.org](http://app.increaser.org/) domain, while the Increaser website is under the [increaser.org](http://increaser.org/) domain. On the website, we are trying to persuade the user to try the app. The “Start now” button on the website leads to [app.increaser.org/sign-up](http://app.increaser.org/sign-up). The website positions Increaser as a productivity toolkit comprised of 9 tools: vision, goals, deep work timer, time tracking, task management, work budgeting, time planning, habit tracking, scheduling.
