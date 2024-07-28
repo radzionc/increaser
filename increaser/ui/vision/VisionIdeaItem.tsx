@@ -82,7 +82,7 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-export const CuratedVisionAttributeItem = ({
+export const VisionIdeaItem = ({
   value: { id, name, emoji },
 }: ComponentWithValueProps<VisionAttributeIdea>) => {
   const { mutate: createVisionAttribute } =
