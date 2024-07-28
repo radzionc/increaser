@@ -1,7 +1,7 @@
 import { FixedWidthContent } from '../components/reusable/fixed-width-content'
 import { PageTitle } from '../ui/PageTitle'
 import { UserStateOnly } from '../user/state/UserStateOnly'
-import Goals from '../pages/plan/goals'
+import { Goals } from './Goals'
 
 const title = 'Your goals'
 

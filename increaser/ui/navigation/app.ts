@@ -1,5 +1,4 @@
 export const primaryAppNavigationPages = [
-  'plan',
   'focus',
   'timeTracking',
   'workBudget',
@@ -52,7 +51,6 @@ export const appPagePath: Record<AppPage, string> = {
   community: 'community',
   membership: 'membership',
   account: 'account',
-  plan: 'plan',
   oauth: 'oauth',
   signIn: 'sign-in',
   signUp: 'sign-up',
@@ -67,14 +65,12 @@ export const appPageViews = {
   timeTracking: ['report', 'track'],
   vision: ['my', 'ideas'],
   habits: ['my', 'ideas'],
-  plan: ['goals', 'habits', 'tasks'],
   features: ['updates', 'requests'],
   principles: ['my', 'ideas'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
 export type AppPageHabitsView = (typeof appPageViews)['habits'][number]
-export type AppPagePlanView = (typeof appPageViews)['plan'][number]
 export type AppPageFeaturesView = (typeof appPageViews)['features'][number]
 export type AppPagePrinciplesView = (typeof appPageViews)['principles'][number]
 
