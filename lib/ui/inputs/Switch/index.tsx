@@ -15,13 +15,14 @@ import {
   ComponentWithActiveState,
 } from '../../props'
 import { match } from '@lib/utils/match'
+import { ReactNode } from 'react'
 
 type SwitchSize = 'm' | 's'
 
 type SwitchProps = UIComponentProps &
   InputProps<boolean> & {
     size?: SwitchSize
-    label?: string
+    label?: ReactNode
   }
 const switchHeight: Record<SwitchSize, number> = { m: 24, s: 20 }
 const spacing = 2
@@ -91,7 +92,6 @@ export const Switch = ({
       as="label"
       alignItems="center"
       gap={8}
-      id={label}
       {...rest}
     >
       <Container size={size} isActive={value}>
@@ -109,6 +109,7 @@ export const Switch = ({
         <Text
           size={match(size, { m: () => 16, s: () => 14 })}
           weight="semibold"
+          as="div"
         >
           {label}
         </Text>
