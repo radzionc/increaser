@@ -30,6 +30,8 @@ import { FocusStartTime } from './startTime/FocusStartTime'
 import { FocusViewSelector } from './FocusViewSelector'
 import { Match } from '@lib/ui/base/Match'
 import { useProjectDoneMinutesThisWeek } from '@increaser/ui/projects/hooks/useProjectDoneMinutesThisWeek'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { RocketIcon } from '@lib/ui/icons/RocketIcon'
 
 const Container = styled(Panel)`
   position: relative;
@@ -128,7 +130,7 @@ export const FocusLauncherForm = () => {
               </CurrentProjectProvider>
             )}
             <FocusStartTime />
-            <VStack gap={32}>
+            <div>
               <FocusDurationInput
                 value={focusDuration}
                 onChange={(value) => {
@@ -136,6 +138,8 @@ export const FocusLauncherForm = () => {
                   lastInteractionWasAt.current = Date.now()
                 }}
               />
+            </div>
+            <VStack gap={32}>
               <MemberOnlyAction
                 action={() => {
                   start({
@@ -153,15 +157,13 @@ export const FocusLauncherForm = () => {
                   }
                 }}
                 render={({ action }) => (
-                  <Button
-                    isDisabled={isDisabled}
-                    kind="reversed"
-                    size="l"
-                    onClick={action}
-                  >
-                    <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                      <FocusDurationText value={focusDuration} />
-                    </Text>
+                  <Button isDisabled={isDisabled} size="l" onClick={action}>
+                    <HStack alignItems="center" gap={8}>
+                      <IconWrapper>
+                        <RocketIcon />
+                      </IconWrapper>
+                      Start
+                    </HStack>
                   </Button>
                 )}
               />

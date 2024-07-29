@@ -45,6 +45,7 @@ export function ExpandableSelector<T>({
     activeIndex,
     context,
   } = useFloatingOptions({
+    strategy: 'fixed',
     floatingOptionsWidthSameAsOpener,
     selectedIndex: value === null ? null : options.indexOf(value),
     options: options.map(getOptionKey ?? getOptionName),
