@@ -7,13 +7,15 @@ import { TitleProjectSelector } from './TitleProjectSelector'
 import { TitleFocusDurationSelector } from './TitleFocusDurationSelector'
 
 export const FocusTitle = () => {
-  const { startedAt } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
+
+  const { start } = intervals[0]
 
   return (
     <>
       <RhytmicRerender
         render={() => {
-          const duration = Date.now() - startedAt
+          const duration = Date.now() - start
           const title = `${formatDuration(duration, 'ms', {
             kind: 'digitalClock',
             minUnit: 's',

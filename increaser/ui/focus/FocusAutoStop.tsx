@@ -5,10 +5,14 @@ import { useFocus } from './FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { shouldSetAutoStop } from './utils/shouldSetAutoStop'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { getIntervalsGapsDuration } from './utils/getIntervalsGapsDuration'
 
 export const FocusAutoStop = () => {
-  const { startedAt } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
   const { stop, focusDuration } = useFocus()
+
+  const { start } = intervals[0]
 
   const [startedBeingVisibleAt, setStartedBeingVisibleAt] = useState<number>(
     Date.now(),
@@ -17,7 +21,7 @@ export const FocusAutoStop = () => {
     number | null
   >(null)
 
-  const setDayEndsAt = useMemo(() => endOfDay(startedAt).getTime(), [startedAt])
+  const setDayEndsAt = useMemo(() => endOfDay(start).getTime(), [start])
 
   useEffect(() => {
     const handleFocus = () => {
@@ -36,38 +40,41 @@ export const FocusAutoStop = () => {
   }, [])
 
   const autoStop = useCallback(() => {
-    const end = Math.min(
-      setDayEndsAt,
-      startedAt + convertDuration(focusDuration, 'min', 'ms'),
-      Date.now(),
-    )
+    const endOptions = [setDayEndsAt, Date.now()]
+    if (getLastItem(intervals).end === null) {
+      const gapsDuration = getIntervalsGapsDuration(intervals)
+      endOptions.push(
+        start + convertDuration(focusDuration, 'min', 'ms') + gapsDuration,
+      )
+    }
+    const end = Math.min(...endOptions)
 
     stop({
-      setOverride: {
+      lastSetOverride: {
         end,
         isEndEstimated: true,
       },
     })
-  }, [focusDuration, setDayEndsAt, startedAt, stop])
+  }, [focusDuration, intervals, setDayEndsAt, start, stop])
 
   const now = useRhythmicRerender()
   useEffect(() => {
     if (
       shouldSetAutoStop({
         setDayEndsAt,
-        startedAt,
+        startedAt: getLastItem(intervals).start,
         stoppedBeingVisibleAt,
         startedBeingVisibleAt,
-        now: Date.now(),
+        now,
       })
     ) {
       autoStop()
     }
   }, [
-    now,
     autoStop,
+    intervals,
+    now,
     setDayEndsAt,
-    startedAt,
     startedBeingVisibleAt,
     stoppedBeingVisibleAt,
   ])

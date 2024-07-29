@@ -18,6 +18,7 @@ import { CurrentChecklist } from './CurrentChecklist'
 import { FocusIconButton } from './FocusIconButton'
 import { EditFocusTask } from './EditFocusTask'
 import { Text } from '@lib/ui/text'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 const Content = styled(TaskTextContainer)`
   font-size: 14px;
@@ -38,15 +39,17 @@ const Container = styled(HStack)`
 `
 
 export const CurrentFocusTask = () => {
-  const { task: focusTask } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
   const { tasks } = useAssertUserState()
   const { updateTask } = useFocus()
 
-  if (!focusTask) {
+  const { taskId } = getLastItem(intervals)
+
+  const task = taskId ? tasks[taskId] : undefined
+
+  if (!task) {
     return <SelectFocusTask />
   }
-
-  const task = tasks[focusTask.id]
 
   return (
     <CurrentTaskProvider value={task}>
@@ -70,7 +73,7 @@ export const CurrentFocusTask = () => {
               title="Stop task"
               kind="secondary"
               icon={<CloseIcon />}
-              onClick={() => updateTask(undefined)}
+              onClick={() => updateTask(null)}
             />
           </HStack>
         </Container>

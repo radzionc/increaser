@@ -64,7 +64,9 @@ export const Filler = styled.div`
 
 export const MinimalisticFocusSet = () => {
   const { cancel, stop, focusDuration } = useFocus()
-  const { startedAt } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
+
+  const { start } = intervals[0]
 
   return (
     <Wrapper>
@@ -76,7 +78,7 @@ export const MinimalisticFocusSet = () => {
                 style={{
                   width: toPercents(
                     Math.min(
-                      (Date.now() - startedAt) /
+                      (Date.now() - start) /
                         convertDuration(focusDuration, 'min', 'ms'),
                       1,
                     ),

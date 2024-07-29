@@ -1,11 +1,11 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { useCallback } from 'react'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { Switch } from '@lib/ui/inputs/Switch'
+import { useHasTimerBrowserNotification } from '../../hooks/useHasTimerBrowserNotification'
 
 export const FocusBrowserNotification = () => {
-  const { hasTimerBrowserNotification, setHasTimerBrowserNotification } =
-    useFocus()
+  const [hasTimerBrowserNotification, setHasTimerBrowserNotification] =
+    useHasTimerBrowserNotification()
 
   const analytics = useAnalytics()
 

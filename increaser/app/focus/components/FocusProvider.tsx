@@ -1,114 +1,96 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getBlocks, getNextFocusDuration } from '@increaser/app/sets/Block'
-import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
-import { useBrowserNotifications } from '@lib/ui/hooks/useBrowserNotifcations'
 import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import { areNotificationsAllowed } from '@lib/ui/notifications/utils'
 import { useAddSetMutation } from '@increaser/app/sets/hooks/useAddSetMutation'
 import {
   FocusDuration,
   defaultFocusDuration,
 } from '@increaser/entities/FocusDuration'
 import {
-  CurrentSet,
   FocusContext,
-  FocusTask,
+  FocusInterval,
+  FocusSession,
   StartFocusParams,
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusLauncherSynchronizer } from '@increaser/ui/focus/FocusLauncherSynchronizer'
+import { FocusNotificationsManager } from '@increaser/ui/focus/FocusNotificationsManager'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { omit } from '@lib/utils/record/omit'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
-import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
+import { otherProjectId } from '@increaser/entities/Project'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
+import { getTasksTimeSpent } from '@increaser/ui/focus/utils/getTasksTimeSpent'
+import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 
-interface Props {
-  children: ReactNode
-}
-
-export const FocusProvider = ({ children }: Props) => {
+export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
     useState<FocusDuration>(defaultFocusDuration)
 
-  const [hasTimerSoundNotification, setHasTimerSoundNotification] =
-    usePersistentState<boolean>(
-      PersistentStateKey.HasTimerSoundNotification,
-      true,
-    )
-
   const todaySets = useTodaySets()
 
-  const [hasTimerBrowserNotification, setHasTimerBrowserNotification] =
-    usePersistentState<boolean>(
-      PersistentStateKey.HasTimerBrowserNotification,
-      areNotificationsAllowed(),
-    )
-
-  const { permission } = useBrowserNotifications()
-
   const { tasks, projects } = useAssertUserState()
-  const activeProjects = useActiveProjects()
 
-  useEffect(() => {
-    if (permission && permission !== 'granted' && hasTimerBrowserNotification) {
-      setHasTimerBrowserNotification(false)
-    }
-  }, [hasTimerBrowserNotification, permission, setHasTimerBrowserNotification])
-
-  const [currentSet, setCurrentSet] = useStateCorrector(
-    usePersistentState<CurrentSet | null>(PersistentStateKey.CurrentSet, null),
+  const [session, setSession] = useStateCorrector(
+    usePersistentState<FocusSession | null>(
+      PersistentStateKey.FocusSession,
+      null,
+    ),
     useCallback(
       (value) => {
         if (!value) {
           return value
         }
 
-        const correctProjectId = (projectId: string) =>
-          projectId in projects ? projectId : activeProjects[0].id
+        let result = value
 
-        const { task, projectId } = value
-        if (task) {
-          const stateTask = tasks[task.id]
-          if (!stateTask) {
-            return {
-              ...value,
-              task: undefined,
-              projectId: correctProjectId(projectId),
+        result.intervals.forEach((interval, index) => {
+          const updateInterval = (params: Partial<FocusInterval>) => {
+            result = {
+              ...result,
+              intervals: updateAtIndex(result.intervals, index, (interval) => ({
+                ...interval,
+                ...params,
+              })),
             }
           }
-          if (stateTask.projectId !== projectId) {
-            if (projectId in projects) {
-              return {
-                ...value,
-                projectId,
-                task: undefined,
-              }
-            }
-            return {
-              ...value,
-              projectId: stateTask.projectId,
+          if (interval.taskId) {
+            const stateTask = tasks[interval.taskId]
+            if (!stateTask) {
+              updateInterval({
+                taskId: null,
+                projectId:
+                  interval.projectId in projects
+                    ? interval.projectId
+                    : otherProjectId,
+              })
+            } else if (stateTask.projectId !== interval.projectId) {
+              updateInterval({
+                projectId: stateTask.projectId,
+              })
             }
           }
-        }
 
-        if (!(projectId in projects)) {
-          return {
-            ...value,
-            projectId: activeProjects[0].id,
+          if (!(interval.projectId in projects)) {
+            updateInterval({
+              projectId: otherProjectId,
+            })
           }
-        }
+        })
 
-        return value
+        return result
       },
-      [activeProjects, projects, tasks],
+      [projects, tasks],
     ),
   )
 
@@ -119,147 +101,173 @@ export const FocusProvider = ({ children }: Props) => {
       analytics.trackEvent('Start focus session', {
         duration: focusDuration,
       })
-      setCurrentSet({
-        projectId,
-        startedAt,
-        task: taskId ? { id: taskId, startedAt } : undefined,
+      setSession({
+        intervals: [
+          {
+            start: startedAt,
+            taskId,
+            projectId,
+            end: null,
+          },
+        ],
       })
       if (duration) {
         setFocusDuration(duration as FocusDuration)
       }
     },
-    [analytics, focusDuration, setCurrentSet],
+    [analytics, focusDuration, setSession],
   )
 
-  const updateStartTime = useCallback(
-    (startedAt: number) => {
-      setCurrentSet((set) => (set ? { ...set, startedAt } : set))
+  const startNewInterval = useCallback(
+    ({ projectId, taskId }: Pick<FocusInterval, 'projectId' | 'taskId'>) => {
+      const now = Date.now()
+      setSession((session) =>
+        session
+          ? {
+              ...session,
+              intervals: [
+                ...updateAtIndex(
+                  session.intervals,
+                  session.intervals.length - 1,
+                  (interval) => ({
+                    ...interval,
+                    end: now,
+                  }),
+                ),
+                {
+                  start: now,
+                  end: null,
+                  taskId,
+                  projectId,
+                },
+              ],
+            }
+          : session,
+      )
     },
-    [setCurrentSet],
-  )
-
-  const updateProject = useCallback(
-    (projectId: string) => {
-      setCurrentSet((set) => (set ? { ...set, projectId } : set))
-    },
-    [setCurrentSet],
+    [setSession],
   )
 
   const { mutate: addSet } = useAddSetMutation()
   const { mutate: updateTaskMutation } = useUpdateUserEntityMutation('task')
 
   const cancel = useCallback(() => {
-    setCurrentSet(null)
-  }, [setCurrentSet])
+    setSession(null)
+  }, [setSession])
 
   useEffect(() => {
-    if (!currentSet || !currentSet.task) return
+    if (!session) return
 
-    const { id, startedAt } = currentSet.task
+    const taskId = getLastItem(session.intervals)?.taskId
+    if (!taskId) return
 
-    const task = tasks[id]
-
-    if (task.completedAt) {
-      setCurrentSet(omit(currentSet, 'task'))
-    }
+    const task = tasks[taskId]
 
     if (task.completedAt) {
-      updateTaskMutation({
-        id: task.id,
-        fields: {
-          spentTime: (task.spentTime || 0) + (Date.now() - startedAt),
-        },
+      startNewInterval({
+        projectId: task.projectId,
+        taskId: null,
       })
     }
-  }, [currentSet, setCurrentSet, tasks, updateTaskMutation])
+  }, [session, startNewInterval, tasks])
 
   const stop = useCallback(
-    (params: StopFocusParams = {}) => {
-      if (!currentSet) return
+    ({ lastSetOverride }: StopFocusParams = {}) => {
+      if (!session) return
 
-      const set = {
-        start: currentSet.startedAt,
-        end: Date.now(),
-        projectId: currentSet.projectId,
-        ...params?.setOverride,
+      const { intervals } = session
+
+      let sets = focusIntervalsToSets({
+        intervals,
+        now: Date.now(),
+      })
+      if (lastSetOverride) {
+        sets = updateAtIndex(sets, sets.length - 1, (set) => ({
+          ...set,
+          ...lastSetOverride,
+        }))
       }
-      const { task } = currentSet
 
-      setCurrentSet(null)
+      setSession(null)
 
-      const blocks = getBlocks([...todaySets, set])
+      const blocks = getBlocks([...todaySets, ...sets])
 
-      addSet(set)
+      sets.forEach((set) => addSet(set))
 
-      if (task && task.id in tasks) {
-        const { spentTime } = tasks[task.id]
-        updateTaskMutation({
-          id: task.id,
-          fields: {
-            spentTime: (spentTime || 0) + (set.end - task.startedAt),
-          },
-        })
-      }
+      const timeSpentRecord = getTasksTimeSpent(intervals)
+
+      Object.entries(timeSpentRecord).forEach(([taskId, spentTime]) => {
+        const task = tasks[taskId]
+        if (task) {
+          updateTaskMutation({
+            id: taskId,
+            fields: {
+              spentTime: (task.spentTime || 0) + spentTime,
+            },
+          })
+        }
+      })
 
       setFocusDuration(getNextFocusDuration(blocks))
 
       analytics.trackEvent('Finish focus session', {
-        duration: Math.round(getSetDuration(set) / MS_IN_MIN),
+        duration: Math.round(getSetsDuration(sets) / MS_IN_MIN),
       })
     },
     [
-      currentSet,
-      setCurrentSet,
-      todaySets,
       addSet,
-      tasks,
       analytics,
+      session,
+      setSession,
+      tasks,
+      todaySets,
       updateTaskMutation,
     ],
   )
 
-  const updateTask = useCallback(
-    (value: FocusTask | undefined) => {
-      if (currentSet?.task && !value) {
-        const { task } = currentSet
-        const { spentTime } = tasks[task.id]
-
-        updateTaskMutation({
-          id: task.id,
-          fields: {
-            spentTime: (spentTime || 0) + (Date.now() - task.startedAt),
-          },
-        })
-      }
-
-      setCurrentSet((set) => (set ? { ...set, task: value } : set))
+  const updateProject = useCallback(
+    (projectId: string) => {
+      startNewInterval({
+        projectId,
+        taskId: null,
+      })
     },
-    [currentSet, setCurrentSet, tasks, updateTaskMutation],
+    [startNewInterval],
+  )
+
+  const updateTask = useCallback(
+    (taskId: string | null) => {
+      if (!session) return
+
+      startNewInterval({
+        projectId: taskId
+          ? tasks[taskId].projectId
+          : getLastItem(session.intervals).projectId,
+        taskId,
+      })
+    },
+    [session, startNewInterval, tasks],
   )
 
   return (
     <FocusContext.Provider
       value={{
         start,
-        updateStartTime,
         updateProject,
         updateTask,
         stop,
         cancel,
-        currentSet,
+        session,
         focusDuration,
         setFocusDuration,
-        setHasTimerSoundNotification,
-        hasTimerBrowserNotification,
-        setHasTimerBrowserNotification,
-        hasTimerSoundNotification,
       }}
     >
-      {currentSet ? (
+      {session ? (
         <CurrentFocusGuard>
           {children}
           <FocusAutoStop />
           <FocusLauncherSynchronizer />
+          <FocusNotificationsManager />
         </CurrentFocusGuard>
       ) : (
         <>{children}</>

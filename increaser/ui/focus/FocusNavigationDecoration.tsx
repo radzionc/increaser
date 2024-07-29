@@ -4,6 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useCurrentPage } from '@increaser/app/navigation/hooks/useCurrentPage'
 import { useAssertUserState } from '../user/UserStateContext'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 const Container = styled.div`
   position: absolute;
@@ -16,7 +17,7 @@ const Container = styled.div`
 export const FocusNavigationDecoration = () => {
   const page = useCurrentPage()
 
-  const { currentSet } = useFocus()
+  const { session } = useFocus()
 
   const { projects } = useAssertUserState()
 
@@ -24,13 +25,15 @@ export const FocusNavigationDecoration = () => {
 
   const theme = useTheme()
 
-  if (isActive || !currentSet) return null
+  if (isActive || !session) return null
+
+  const { projectId } = getLastItem(session.intervals)
 
   return (
     <Container
       style={{
         color: theme.colors
-          .getLabelColor(projects[currentSet.projectId].color)
+          .getLabelColor(projects[projectId].color)
           .toCssValue(),
       }}
     >

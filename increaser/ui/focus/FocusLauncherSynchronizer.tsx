@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
-import { useFocus } from './FocusContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusLauncher } from '@increaser/app/focus/launcher/state/FocusLauncherContext'
+import { useCurrentFocus } from './CurrentFocusProvider'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 export const FocusLauncherSynchronizer = () => {
-  const { currentSet: potentialCurrentSet } = useFocus()
-  const currentSet = shouldBePresent(potentialCurrentSet)
+  const { intervals } = useCurrentFocus()
+
+  const { taskId, projectId } = shouldBePresent(getLastItem(intervals))
 
   const { setState } = useFocusLauncher()
-  const taskId = currentSet.task?.id || null
-  const projectId = currentSet.projectId
   useEffect(() => {
     setState((state) => ({
       ...state,

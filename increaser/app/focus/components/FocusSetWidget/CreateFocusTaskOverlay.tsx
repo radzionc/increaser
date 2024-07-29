@@ -3,14 +3,17 @@ import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { FinishableComponentProps } from '@lib/ui/props'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 type CreateFocusTaskOverlayProps = FinishableComponentProps & {}
 
 export const CreateFocusTaskOverlay = ({
   onFinish,
 }: CreateFocusTaskOverlayProps) => {
-  const { projectId } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
   const { updateTask } = useFocus()
+
+  const { projectId } = getLastItem(intervals)
 
   return (
     <PanelModal onFinish={onFinish}>
@@ -20,10 +23,7 @@ export const CreateFocusTaskOverlay = ({
         }}
         onFinish={(task) => {
           if (task) {
-            updateTask({
-              id: task.id,
-              startedAt: Date.now(),
-            })
+            updateTask(task.id)
           }
           onFinish()
         }}

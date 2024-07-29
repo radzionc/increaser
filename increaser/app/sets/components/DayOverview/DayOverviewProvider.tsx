@@ -11,6 +11,7 @@ import { getDaySets } from '@increaser/app/sets/helpers/getDaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 
 interface DayOverviewContextState {
   sets: Set[]
@@ -41,22 +42,23 @@ export const DayOverviewProvider = ({
 
   const dayStartedAt = startOfDay(currentDay).getTime()
 
-  const { currentSet } = useFocus()
+  const { session } = useFocus()
 
   const { sets: allSets } = useAssertUserState()
 
   const sets = useMemo(() => {
     const result = getDaySets(allSets, dayStartedAt)
-    if (currentSet && isToday(dayStartedAt)) {
-      result.push({
-        start: currentSet.startedAt,
-        end: currentTime,
-        projectId: currentSet.projectId,
+    if (session && isToday(dayStartedAt)) {
+      const { intervals } = session
+      const sets = focusIntervalsToSets({
+        intervals,
+        now: currentTime,
       })
+      result.push(...sets)
     }
 
     return result
-  }, [allSets, currentSet, currentTime, dayStartedAt])
+  }, [allSets, currentTime, dayStartedAt, session])
 
   const { startWorkAt, finishWorkAt } = useAssertUserState()
 

@@ -32,7 +32,7 @@ export const WorkSession = ({
   ...rest
 }: WorkSessionProps) => {
   const { projects } = useAssertUserState()
-  const { currentSet } = useFocus()
+  const { session } = useFocus()
 
   const theme = useTheme()
 
@@ -40,7 +40,7 @@ export const WorkSession = ({
 
   return (
     <Container {...rest}>
-      {!currentSet && showIdentifier && (
+      {!session && showIdentifier && (
         <Identifier style={{ background: color.toCssValue() }} />
       )}
     </Container>

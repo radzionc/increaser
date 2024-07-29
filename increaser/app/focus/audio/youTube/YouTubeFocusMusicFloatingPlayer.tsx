@@ -38,7 +38,7 @@ const Header = styled(HStack)`
 `
 
 export const YouTubeFocusMusicFloatingPlayer = () => {
-  const { currentSet } = useFocus()
+  const { session } = useFocus()
   const [focusAudioMode] = useFocusAudioMode()
   const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [{ url }] = useYouTubeFocusPreference()
@@ -47,7 +47,7 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
   const [position] = useYouTubePlayerPosition()
 
   const isActive =
-    currentSet && focusAudioMode === 'youtube' && isFocusAudioEnabled && url
+    session && focusAudioMode === 'youtube' && isFocusAudioEnabled && url
 
   if (!isActive) {
     return null
