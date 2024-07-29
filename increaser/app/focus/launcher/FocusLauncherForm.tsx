@@ -92,6 +92,8 @@ export const FocusLauncherForm = () => {
     }
   }, [project])
 
+  const shouldShowFocusSettings = focusEntity !== 'task' || taskId
+
   return (
     <VStack gap={12}>
       <HStack
@@ -113,54 +115,60 @@ export const FocusLauncherForm = () => {
             task={() => <FocusTaskInput />}
           />
         </InputContainer>
-        {showBudget && (
-          <CurrentProjectProvider value={project}>
-            <VStack gap={4}>
-              <ProjectBudgetWidget />
-              {project.goal && project.allocatedMinutesPerWeek > 0 && (
-                <ProjectBudgetSummary />
-              )}
-            </VStack>
-          </CurrentProjectProvider>
-        )}
-        <FocusStartTime />
-        <VStack gap={32}>
-          <FocusDurationInput
-            value={focusDuration}
-            onChange={(value) => {
-              setFocusDuration(value)
-              lastInteractionWasAt.current = Date.now()
-            }}
-          />
-          <MemberOnlyAction
-            action={() => {
-              start({
-                projectId: shouldBePresent(projectId),
-                taskId: focusEntity === 'task' && taskId ? taskId : undefined,
-                duration: focusDuration,
-                startedAt: startedAt ?? Date.now(),
-              })
-              if (startedAt) {
-                setState((state) => ({
-                  ...state,
-                  startedAt: null,
-                }))
-              }
-            }}
-            render={({ action }) => (
-              <Button
-                isDisabled={isDisabled}
-                kind="reversed"
-                size="l"
-                onClick={action}
-              >
-                <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                  <FocusDurationText value={focusDuration} />
-                </Text>
-              </Button>
+        {shouldShowFocusSettings && (
+          <>
+            {showBudget && (
+              <CurrentProjectProvider value={project}>
+                <VStack gap={4}>
+                  <ProjectBudgetWidget />
+                  {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                    <ProjectBudgetSummary />
+                  )}
+                </VStack>
+              </CurrentProjectProvider>
             )}
-          />
-        </VStack>
+            <FocusStartTime />
+            <VStack gap={32}>
+              <FocusDurationInput
+                value={focusDuration}
+                onChange={(value) => {
+                  setFocusDuration(value)
+                  lastInteractionWasAt.current = Date.now()
+                }}
+              />
+              <MemberOnlyAction
+                action={() => {
+                  start({
+                    projectId: shouldBePresent(projectId),
+                    taskId:
+                      focusEntity === 'task' && taskId ? taskId : undefined,
+                    duration: focusDuration,
+                    startedAt: startedAt ?? Date.now(),
+                  })
+                  if (startedAt) {
+                    setState((state) => ({
+                      ...state,
+                      startedAt: null,
+                    }))
+                  }
+                }}
+                render={({ action }) => (
+                  <Button
+                    isDisabled={isDisabled}
+                    kind="reversed"
+                    size="l"
+                    onClick={action}
+                  >
+                    <Text as="div" style={{ wordBreak: 'keep-all' }}>
+                      <FocusDurationText value={focusDuration} />
+                    </Text>
+                  </Button>
+                )}
+              />
+            </VStack>
+          </>
+        )}
+
         <WorkdayFinished />
       </Container>
     </VStack>
