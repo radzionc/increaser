@@ -16,14 +16,14 @@ export const CurrentFocusTaskTrackedTime = () => {
   return (
     <TaskTrackedTimeContainer>
       <RhytmicRerender
-        render={() => {
+        render={(now) => {
           const duration = sum(
             intervals
               .filter((interval) => interval.taskId === taskId)
               .map((interval) =>
                 getIntervalDuration({
                   ...interval,
-                  end: interval.end ?? Date.now(),
+                  end: interval.end ?? now,
                 }),
               ),
           )
