@@ -5,7 +5,6 @@ import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { useTheme } from 'styled-components'
 import { css } from 'styled-components'
-import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { interactive } from '@lib/ui/css/interactive'
 import { TimeOption } from './TimeOption'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
@@ -22,6 +21,7 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
 import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
 import { useSchedule } from '../../ScheduleContext'
+import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 interface ManageDayMomentProps {
   min: number
@@ -53,13 +53,6 @@ const Container = styled.div<{ isActive: boolean }>`
     background: ${getColor('mist')};
     color: ${getColor('contrast')};
   }
-`
-
-const Outline = styled.div`
-  ${absoluteOutline(0, 0)};
-  background: transparent;
-  border-radius: 8px;
-  border: 2px solid ${getColor('primary')};
 `
 
 export const ManageDayMoment = ({
@@ -118,8 +111,9 @@ export const ManageDayMoment = ({
                 },
               })}
             >
-              {formatDailyEventTime(option)}
-              {option === value && <Outline />}
+              <WithSelectionMark isSelected={option === value}>
+                {formatDailyEventTime(option)}
+              </WithSelectionMark>
             </TimeOption>
           ))}
         </FloatingOptionsContainer>

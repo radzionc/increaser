@@ -11,6 +11,8 @@ import { endOfDay } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { formatTaskDeadline } from '@increaser/entities-utils/task/formatTaskDeadline'
+import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 
 const Icon = styled(IconWrapper)<{ isOverdue: boolean }>`
   color: ${matchColor('isOverdue', {
@@ -27,7 +29,13 @@ export const TaskDeadlineInput = ({
 
   const options = useMemo(() => {
     const today = endOfDay(now).getTime()
-    return [null, today, today + convertDuration(1, 'd', 'ms')]
+    const nextMonday = getWeekEndedAt(now) + convertDuration(1, 'd', 'ms')
+    return withoutDuplicates([
+      null,
+      today,
+      today + convertDuration(1, 'd', 'ms'),
+      nextMonday,
+    ])
   }, [now])
 
   const isOverdue = value ? value < now : false

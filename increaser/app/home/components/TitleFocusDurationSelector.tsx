@@ -4,9 +4,9 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
-import { OptionOutline } from '@lib/ui/select/OptionOutline'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { focusDurations } from '@increaser/entities/FocusDuration'
+import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 export const TitleFocusDurationSelector = () => {
   const { focusDuration, setFocusDuration } = useFocus()
@@ -44,8 +44,11 @@ export const TitleFocusDurationSelector = () => {
                   },
                 })}
               >
-                <OptionContent key={option}>{option} min</OptionContent>
-                {option === focusDuration && <OptionOutline />}
+                <OptionContent key={option}>
+                  <WithSelectionMark isSelected={option === focusDuration}>
+                    {option} min
+                  </WithSelectionMark>
+                </OptionContent>
               </OptionItem>
             ))}
           </FloatingOptionsContainer>

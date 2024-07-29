@@ -5,11 +5,12 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
-import { OptionOutline } from '@lib/ui/select/OptionOutline'
 import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
 import { useEffect } from 'react'
 import { usePrincipleCategories } from '../categories/hooks/usePrincipleCategories'
 import { useAssertUserState } from '../../user/UserStateContext'
+import { HStack } from '@lib/ui/layout/Stack'
+import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 export const PrincipleCategorySelector = ({
   value,
@@ -70,12 +71,13 @@ export const PrincipleCategorySelector = ({
                   })}
                 >
                   <OptionContent key={option}>
-                    <>
-                      <Text color="contrast">{emoji}</Text>
-                      <Text>{name}</Text>
-                    </>
+                    <WithSelectionMark isSelected={option === value}>
+                      <HStack alignItems="center" gap={8}>
+                        <Text color="contrast">{emoji}</Text>
+                        <Text>{name}</Text>
+                      </HStack>
+                    </WithSelectionMark>
                   </OptionContent>
-                  {option === value && <OptionOutline />}
                 </OptionItem>
               )
             })}

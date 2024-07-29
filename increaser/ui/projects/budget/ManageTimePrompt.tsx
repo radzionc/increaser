@@ -49,8 +49,7 @@ export const ManageTimePrompt = () => {
             title={`You have ${pluralize(freeHours, 'free hour')}!`}
             onClick={onOpen}
           >
-            Tap here to allocate time for a project with no budget or adjust the
-            budget for the projects listed below.
+            Tap here to allocate time for a project without a budget
           </PanelPrompt>
         )
       }

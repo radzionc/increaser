@@ -29,6 +29,9 @@ import { LabelText } from '@lib/ui/inputs/LabelText'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { FocusViewSelector } from './FocusViewSelector'
 import { Match } from '@lib/ui/base/Match'
+import { useProjectDoneMinutesThisWeek } from '@increaser/ui/projects/hooks/useProjectDoneMinutesThisWeek'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { RocketIcon } from '@lib/ui/icons/RocketIcon'
 
 const Container = styled(Panel)`
   position: relative;
@@ -78,13 +81,20 @@ export const FocusLauncherForm = () => {
     return () => clearInterval(interval)
   }, [updateSuggestions])
 
-  const project = projectId ? projects[projectId] : null
+  const project = projects[projectId]
+
+  const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(projectId)
+
+  const showBudget =
+    project.allocatedMinutesPerWeek > 0 && doneMinutesThisWeek > 0
 
   const isDisabled = useMemo(() => {
     if (!project) {
       return `Select a project to start a focus session`
     }
   }, [project])
+
+  const shouldShowFocusSettings = focusEntity !== 'task' || taskId
 
   return (
     <VStack gap={12}>
@@ -107,54 +117,60 @@ export const FocusLauncherForm = () => {
             task={() => <FocusTaskInput />}
           />
         </InputContainer>
-        {project && (
-          <CurrentProjectProvider value={project}>
-            <VStack gap={4}>
-              <ProjectBudgetWidget />
-              {project.goal && project.allocatedMinutesPerWeek > 0 && (
-                <ProjectBudgetSummary />
-              )}
-            </VStack>
-          </CurrentProjectProvider>
-        )}
-        <FocusStartTime />
-        <VStack gap={32}>
-          <FocusDurationInput
-            value={focusDuration}
-            onChange={(value) => {
-              setFocusDuration(value)
-              lastInteractionWasAt.current = Date.now()
-            }}
-          />
-          <MemberOnlyAction
-            action={() => {
-              start({
-                projectId: shouldBePresent(projectId),
-                taskId: focusEntity === 'task' && taskId ? taskId : undefined,
-                duration: focusDuration,
-                startedAt: startedAt ?? Date.now(),
-              })
-              if (startedAt) {
-                setState((state) => ({
-                  ...state,
-                  startedAt: null,
-                }))
-              }
-            }}
-            render={({ action }) => (
-              <Button
-                isDisabled={isDisabled}
-                kind="reversed"
-                size="l"
-                onClick={action}
-              >
-                <Text as="div" style={{ wordBreak: 'keep-all' }}>
-                  <FocusDurationText value={focusDuration} />
-                </Text>
-              </Button>
+        {shouldShowFocusSettings && (
+          <>
+            {showBudget && (
+              <CurrentProjectProvider value={project}>
+                <VStack gap={4}>
+                  <ProjectBudgetWidget />
+                  {project.goal && project.allocatedMinutesPerWeek > 0 && (
+                    <ProjectBudgetSummary />
+                  )}
+                </VStack>
+              </CurrentProjectProvider>
             )}
-          />
-        </VStack>
+            <FocusStartTime />
+            <div>
+              <FocusDurationInput
+                value={focusDuration}
+                onChange={(value) => {
+                  setFocusDuration(value)
+                  lastInteractionWasAt.current = Date.now()
+                }}
+              />
+            </div>
+            <VStack gap={32}>
+              <MemberOnlyAction
+                action={() => {
+                  start({
+                    projectId: shouldBePresent(projectId),
+                    taskId:
+                      focusEntity === 'task' && taskId ? taskId : undefined,
+                    duration: focusDuration,
+                    startedAt: startedAt ?? Date.now(),
+                  })
+                  if (startedAt) {
+                    setState((state) => ({
+                      ...state,
+                      startedAt: null,
+                    }))
+                  }
+                }}
+                render={({ action }) => (
+                  <Button isDisabled={isDisabled} size="l" onClick={action}>
+                    <HStack alignItems="center" gap={8}>
+                      <IconWrapper>
+                        <RocketIcon />
+                      </IconWrapper>
+                      Start
+                    </HStack>
+                  </Button>
+                )}
+              />
+            </VStack>
+          </>
+        )}
+
         <WorkdayFinished />
       </Container>
     </VStack>

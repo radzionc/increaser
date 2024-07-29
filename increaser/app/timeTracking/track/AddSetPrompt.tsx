@@ -23,7 +23,7 @@ export const AddSetPrompt = () => {
         }))
       }
     >
-      Add Session
+      Add a session
     </Button>
   )
 }

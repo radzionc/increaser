@@ -1,5 +1,6 @@
 import { Switch } from '@lib/ui/inputs/Switch'
 import { useFocusLauncher } from '../state/FocusLauncherContext'
+import { WithHint } from '@lib/ui/tooltips/WithHint'
 
 export const ChangeStartTimeSwitch = () => {
   const { setState, startedAt } = useFocusLauncher()
@@ -14,7 +15,11 @@ export const ChangeStartTimeSwitch = () => {
         }))
       }
       size="s"
-      label="Change session start time"
+      label={
+        <WithHint hint="Adjust the session start time if you forgot to begin the focus session on time. This ensures accurate tracking for your tasks and projects">
+          Change session start time
+        </WithHint>
+      }
     />
   )
 }

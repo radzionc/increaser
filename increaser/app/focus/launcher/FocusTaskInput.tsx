@@ -4,11 +4,8 @@ import { FocusTaskOption } from './FocusTaskOption'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
-import Link from 'next/link'
-import { getAppPath } from '@increaser/ui/navigation/app'
-import { Button } from '@lib/ui/buttons/Button'
-import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 import { useTodayIncompleteTasks } from '@increaser/ui/tasks/hooks/useTodayIncompleteTasks'
+import { AddTask } from './AddTask'
 
 export const FocusTaskInput = () => {
   const options = useTodayIncompleteTasks()
@@ -26,20 +23,6 @@ export const FocusTaskInput = () => {
     }
   }, [options, setState, taskId])
 
-  if (!options.length) {
-    return (
-      <ActionPrompt
-        action={
-          <Link style={{ alignSelf: 'end' }} href={getAppPath('tasks')}>
-            <Button as="div">Manage tasks</Button>
-          </Link>
-        }
-      >
-        You don't have any tasks for today.
-      </ActionPrompt>
-    )
-  }
-
   return (
     <VStack gap={8}>
       {options.map((task) => (
@@ -47,6 +30,7 @@ export const FocusTaskInput = () => {
           <FocusTaskOption />
         </CurrentTaskProvider>
       ))}
+      <AddTask />
     </VStack>
   )
 }

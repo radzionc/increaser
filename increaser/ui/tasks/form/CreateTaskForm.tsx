@@ -84,6 +84,8 @@ export const CreateTaskForm = ({
 
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
+  const hasProjectSelectorAutoFocus = !defaultValue?.projectId
+
   return (
     <Panel
       withSections
@@ -99,7 +101,7 @@ export const CreateTaskForm = ({
       <EmojiTextInputFrame>
         <div>
           <TaskProjectSelector
-            autoFocus={!defaultValue?.projectId}
+            autoFocus={hasProjectSelectorAutoFocus}
             value={value.projectId}
             onChange={(projectId) => {
               setValue((prev) => ({ ...prev, projectId }))
@@ -110,6 +112,7 @@ export const CreateTaskForm = ({
 
         <EmbeddedTitleInput
           placeholder="Task name"
+          autoFocus={!hasProjectSelectorAutoFocus}
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           onSubmit={onSubmit}

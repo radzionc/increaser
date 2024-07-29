@@ -220,9 +220,21 @@ export const FocusProvider = ({ children }: Props) => {
 
   const updateTask = useCallback(
     (value: FocusTask | undefined) => {
+      if (currentSet?.task && !value) {
+        const { task } = currentSet
+        const { spentTime } = tasks[task.id]
+
+        updateTaskMutation({
+          id: task.id,
+          fields: {
+            spentTime: (spentTime || 0) + (Date.now() - task.startedAt),
+          },
+        })
+      }
+
       setCurrentSet((set) => (set ? { ...set, task: value } : set))
     },
-    [setCurrentSet],
+    [currentSet, setCurrentSet, tasks, updateTaskMutation],
   )
 
   return (

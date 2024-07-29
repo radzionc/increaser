@@ -7,10 +7,7 @@ import { getAppPath } from '@increaser/ui/navigation/app'
 import Link from 'next/link'
 import { ProjectGoalShyIndicator } from '../ProjectGoalShyIndicator'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
-import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
-import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useMemo } from 'react'
-import { useCurrentWeekSets } from '../../../sets/hooks/useCurrentWeekSets'
+import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -23,21 +20,7 @@ const Container = styled(HStack)`
 export const ProjectBudgetWidgetHeader = () => {
   const { allocatedMinutesPerWeek, id, goal, name } = useCurrentProject()
 
-  const currentWeekSets = useCurrentWeekSets()
-
-  const doneMinutesThisWeek = useMemo(
-    () =>
-      Math.round(
-        convertDuration(
-          getSetsDuration(
-            currentWeekSets.filter(({ projectId }) => projectId === id),
-          ),
-          'ms',
-          'min',
-        ),
-      ),
-    [currentWeekSets, id],
-  )
+  const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(id)
 
   return (
     <Container>

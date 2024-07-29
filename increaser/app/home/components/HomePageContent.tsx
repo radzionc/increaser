@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { HomePageTitle } from './HomePageTitle'
 import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
 import { EditAutoStoppedSetPrompt } from '@increaser/ui/focus/EditAutoStoppedSetPrompt'
 import { FocusLauncherForm } from '../../focus/launcher/FocusLauncherForm'
+import { FocusTitle } from './FocusTitle'
 
 const Container = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ export const HomePageContent = () => {
 
   const content = (
     <VStack style={{ flex: 1 }}>
-      <HomePageTitle />
+      {currentSet && <FocusTitle />}
       <VStack style={{ flex: 1 }} gap={40}>
         {currentSet ? (
           <FocusSetWidget />

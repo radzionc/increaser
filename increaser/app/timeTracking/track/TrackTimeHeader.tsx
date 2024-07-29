@@ -1,8 +1,8 @@
 import { useTrackTime } from './state/TrackTimeContext'
 import { WeekdaySelector } from './WeekdaySelector'
 import { HStack } from '@lib/ui/layout/Stack'
-import { ProjectSelector } from './ProjectSelector'
 import { TrackTimeTitle } from './TrackTimeTitle'
+import { TrackProjectSelector } from './TrackProjectSelector'
 
 export const TrackTimeHeader = () => {
   const { currentSet } = useTrackTime()
@@ -17,7 +17,7 @@ export const TrackTimeHeader = () => {
     >
       <TrackTimeTitle />
       <HStack alignItems="center" gap={8}>
-        {currentSet && <ProjectSelector />}
+        {currentSet && <TrackProjectSelector />}
         <WeekdaySelector />
       </HStack>
     </HStack>
