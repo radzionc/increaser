@@ -4,13 +4,14 @@ import { focusIntervalsToSets } from './focusIntervalsToSets'
 import { FocusInterval } from '../FocusContext'
 
 export const getIntervalsGapsDuration = (intervals: FocusInterval[]) => {
-  const totalDuration =
-    (getLastItem(intervals).end ?? Date.now()) - intervals[0].start
+  const now = Date.now()
+
+  const totalDuration = (getLastItem(intervals).end ?? now) - intervals[0].start
 
   const workDuration = getSetsDuration(
     focusIntervalsToSets({
       intervals,
-      now: Date.now(),
+      now,
     }),
   )
 
