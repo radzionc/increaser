@@ -1,135 +1,47 @@
-import { range } from '@lib/utils/array/range'
-import styled, { useTheme } from 'styled-components'
-import { transition } from '@lib/ui/css/transition'
-import { HSLA } from '@lib/ui/colors/HSLA'
+import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { round } from '@lib/ui/css/round'
-import {
-  FocusDuration,
-  maxFocusDuration,
-  recommendedFocusDurations,
-} from '@increaser/entities/FocusDuration'
+import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import { FocusDurationInputContent } from './FocusDurationInputContent'
+import { InputProps } from '@lib/ui/props'
 
-interface FocusDurationInputProps {
-  value: FocusDuration
-  onChange: (value: FocusDuration) => void
-  color?: HSLA
-}
-
-const Container = styled.div`
-  width: 100%;
-  height: 44px;
-  position: relative;
-  display: grid;
-
-  > * {
-    &:first-child {
-      padding-left: 2px;
-      justify-content: start;
-    }
-  }
-
-  > * {
-    &:last-child {
-      padding-right: 2px;
-      justify-content: end;
-    }
-  }
+const Wrapper = styled(InputContainer)`
+  padding: 0;
 `
 
-const InteractiveArea = styled.div<{ $color: HSLA; isSelected: boolean }>`
-  width: 100%;
-  height: 100%;
+const Label = styled(LabelText)`
+  padding: ${toSizeUnit(panelDefaultPadding)};
 
-  display: flex;
-  align-items: end;
-  justify-content: center;
-
-  cursor: pointer;
-  --color: ${({ $color }) => $color.toCssValue()};
-  color: transparent;
-  &:hover {
-    --color: ${({ theme, isSelected, $color }) =>
-      (isSelected ? $color : theme.colors.contrast).toCssValue()};
-    color: var(--color);
-  }
-`
-
-const DurationTextWr = styled.div`
-  position: absolute;
-  width: 100%;
-  ${centerContent};
-  overflow: visible;
-  top: -22px;
-`
-
-const DurationText = styled(Text)`
-  white-space: nowrap;
-`
-
-const Option = styled.div`
-  width: 2px;
-  ${round};
-  background: var(--color);
-  ${transition};
-  position: relative;
+  padding-bottom: 0;
 `
 
 export const FocusDurationInput = ({
   value,
   onChange,
-}: FocusDurationInputProps) => {
-  const { colors } = useTheme()
-
-  const max = maxFocusDuration / 5
-  const steps = range(max)
-
-  const recommendedValues = recommendedFocusDurations.map((v) => v / 5)
-
-  const gridTemplateColumns = `1fr repeat(${max - 2}, 2fr) 1fr`
-
+}: InputProps<FocusDuration>) => {
   return (
-    <InputContainer style={{ gap: 12 }} as="div">
-      <LabelText>
-        Focus duration:{' '}
-        <Text as="span" color="contrast" weight="semibold">
-          {value} min
-        </Text>
-      </LabelText>
-      <Container style={{ gridTemplateColumns }}>
-        {steps.map((index) => {
-          const step = index + 1
-
-          const isRecommended = recommendedValues.includes(step)
-
-          const duration = (step * 5) as FocusDuration
-
-          const optionHeight = isRecommended ? 26 : 12
-
-          return (
-            <InteractiveArea
-              isSelected={step === value}
-              $color={duration <= value ? colors.contrast : colors.textShy}
-              onClick={() => onChange(duration)}
-              key={index}
-            >
-              <Option
-                key={index}
-                style={{
-                  height: optionHeight,
-                }}
-              >
-                <DurationTextWr>
-                  <DurationText size={14}>{duration}</DurationText>
-                </DurationTextWr>
-              </Option>
-            </InteractiveArea>
-          )
-        })}
-      </Container>
-    </InputContainer>
+    <ElementSizeAware
+      render={({ size, setElement }) => (
+        <Wrapper ref={setElement} style={{ gap: 12 }} as="div">
+          <Label>
+            Focus duration:{' '}
+            <Text as="span" color="contrast" weight="semibold">
+              {value} min
+            </Text>
+          </Label>
+          {size && (
+            <FocusDurationInputContent
+              value={value}
+              onChange={onChange}
+              width={size.width}
+            />
+          )}
+        </Wrapper>
+      )}
+    />
   )
 }

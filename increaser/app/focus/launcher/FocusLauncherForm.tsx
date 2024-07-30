@@ -128,15 +128,13 @@ export const FocusLauncherForm = () => {
               </CurrentProjectProvider>
             )}
             <FocusStartTime />
-            <div>
-              <FocusDurationInput
-                value={focusDuration}
-                onChange={(value) => {
-                  setFocusDuration(value)
-                  lastInteractionWasAt.current = Date.now()
-                }}
-              />
-            </div>
+            <FocusDurationInput
+              value={focusDuration}
+              onChange={(value) => {
+                setFocusDuration(value)
+                lastInteractionWasAt.current = Date.now()
+              }}
+            />
             <VStack gap={32}>
               <MemberOnlyAction
                 action={() => {
