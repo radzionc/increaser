@@ -12,7 +12,7 @@ export const getTasksTimeSpent = (intervals: FocusInterval[]) => {
       result[taskId] = 0
     }
 
-    result[taskId] += end ? end - start : Date.now() - start
+    result[taskId] += (end ?? Date.now()) - start
   })
 
   return result
