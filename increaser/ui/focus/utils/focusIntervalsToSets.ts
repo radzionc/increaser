@@ -9,25 +9,21 @@ type Input = {
 export const focusIntervalsToSets = ({ intervals, now }: Input) => {
   const result: Set[] = []
 
-  intervals.forEach(({ projectId, start, end }) => {
-    const set = {
-      projectId,
-      start,
-      end: end ?? now,
-    }
+  intervals.forEach(({ projectId, start, end: potentialEnd }) => {
+    const end = potentialEnd ?? now
 
-    const previousSet = result[result.length - 1]
-    if (!previousSet) {
-      result.push(set)
-      return
-    }
+    const existingSet = result.find(
+      (interval) => interval.projectId === projectId && interval.end === start,
+    )
 
-    if (
-      previousSet.projectId === set.projectId &&
-      previousSet.end === set.start
-    ) {
-      previousSet.end = set.end
-      return
+    if (existingSet) {
+      existingSet.end = end
+    } else {
+      result.push({
+        projectId,
+        start,
+        end,
+      })
     }
   })
 
