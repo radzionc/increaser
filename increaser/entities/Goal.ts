@@ -2,7 +2,7 @@ import { EntityWithEmoji } from '@lib/utils/entities/EntityWithEmoji'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
 import { EntityWithName } from '@lib/utils/entities/EntityWithName'
 
-export const goalStatuses = ['done', 'inProgress', 'toDo'] as const
+export const goalStatuses = ['toDo', 'inProgress', 'done'] as const
 export type GoalStatus = (typeof goalStatuses)[number]
 
 export const goalStatusNameRecord: Record<GoalStatus, string> = {
