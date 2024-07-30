@@ -32,6 +32,7 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { getTasksTimeSpent } from '@increaser/ui/focus/utils/getTasksTimeSpent'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
+import { pick } from '@lib/utils/record/pick'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -271,15 +272,25 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   }, [setSession])
 
   const resume = useCallback(() => {
-    if (!session) return
-
-    const { projectId, taskId } = getLastItem(session.intervals)
-
-    startNewInterval({
-      projectId,
-      taskId,
-    })
-  }, [session, startNewInterval])
+    setSession((session) =>
+      session
+        ? {
+            ...session,
+            intervals: [
+              ...session.intervals,
+              {
+                start: Date.now(),
+                end: null,
+                ...pick(getLastItem(session.intervals), [
+                  'projectId',
+                  'taskId',
+                ]),
+              },
+            ],
+          }
+        : session,
+    )
+  }, [setSession])
 
   return (
     <FocusContext.Provider
