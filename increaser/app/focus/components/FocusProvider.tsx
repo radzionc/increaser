@@ -6,7 +6,6 @@ import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import { useAddSetMutation } from '@increaser/app/sets/hooks/useAddSetMutation'
 import {
   FocusDuration,
   defaultFocusDuration,
@@ -33,6 +32,7 @@ import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsTo
 import { getTasksTimeSpent } from '@increaser/ui/focus/utils/getTasksTimeSpent'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { pick } from '@lib/utils/record/pick'
+import { useAddSetsMutation } from '../../sets/hooks/useAddSetsMutation'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -149,7 +149,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
     [setSession],
   )
 
-  const { mutate: addSet } = useAddSetMutation()
+  const { mutate: addSets } = useAddSetsMutation()
   const { mutate: updateTaskMutation } = useUpdateUserEntityMutation('task')
 
   const cancel = useCallback(() => {
@@ -193,7 +193,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
 
       const blocks = getBlocks([...todaySets, ...sets])
 
-      sets.forEach((set) => addSet(set))
+      addSets(sets)
 
       const timeSpentRecord = getTasksTimeSpent(intervals)
 
@@ -216,7 +216,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
       })
     },
     [
-      addSet,
+      addSets,
       analytics,
       session,
       setSession,

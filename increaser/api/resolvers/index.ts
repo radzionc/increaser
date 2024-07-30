@@ -18,6 +18,7 @@ import { createUserEntity } from '../userEntities/resolvers/createUserEntity'
 import { deleteUserEntity } from '../userEntities/resolvers/deleteUserEntity'
 import { updateUserEntity } from '../userEntities/resolvers/updateUserEntity'
 import { getFileUploadUrl } from '../users/resolvers/getFileUploadUrl'
+import { addSets } from '../sets/resolvers/addSets'
 
 export const implementation: ApiImplementation = {
   authSessionWithEmail,
@@ -33,6 +34,7 @@ export const implementation: ApiImplementation = {
   features,
   voteForFeature,
   userProfile,
+  addSets,
   deleteSet,
   updateSet,
   createUserEntity,
