@@ -6,9 +6,12 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { interactive } from '@lib/ui/css/interactive'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
+import { PositionAbsolutelyCenterVertically } from '@lib/ui/layout/PositionAbsolutelyCenterVertically'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import { InputProps } from '@lib/ui/props'
+import { Text } from '@lib/ui/text'
+import { getColor } from '@lib/ui/theme/getters'
 import { useId } from 'react'
 import styled, { useTheme } from 'styled-components'
 
@@ -19,7 +22,8 @@ type FocusDurationInputContentProps = InputProps<FocusDuration> & {
 const labelSize = 16
 const largeItemHeight = 28
 const smallItemHeight = 12
-const height = largeItemHeight + labelSize + panelDefaultPadding
+const labelGap = 4
+const height = largeItemHeight + labelSize + labelGap + panelDefaultPadding
 
 const Wrapper = styled(HStack)`
   width: 100%;
@@ -28,16 +32,37 @@ const Wrapper = styled(HStack)`
   padding: 0;
 `
 
+const Duration = styled(Text)`
+  font-size: 12px;
+  opacity: 0;
+  color: ${getColor('contrast')};
+`
+
 const Item = styled.label`
   height: 100%;
   ${interactive};
   ${centerContent};
   position: relative;
+
+  &:hover ${Duration} {
+    opacity: 1;
+  }
 `
 
-const Content = styled(VStack)`
+const ItemContentWrapper = styled(VStack)`
   position: absolute;
   bottom: ${toSizeUnit(panelDefaultPadding)};
+  height: 100%;
+`
+
+const ItemContent = styled(VStack)`
+  height: 100%;
+  gap: ${toSizeUnit(labelGap)};
+  align-items: center;
+  justify-content: end;
+`
+
+const Indicator = styled.div`
   width: 2px;
 `
 
@@ -83,14 +108,26 @@ export const FocusDurationInputContent = ({
                 onChange(duration)
               }}
             />
-            <Content
+            <ItemContentWrapper
               style={{
-                background: color,
-                height,
                 left: isFirst ? panelDefaultPadding : undefined,
                 right: isLast ? panelDefaultPadding : undefined,
               }}
-            ></Content>
+            >
+              <PositionAbsolutelyCenterVertically fullHeight left={0}>
+                <ItemContent>
+                  <Duration color="supporting" size={12}>
+                    {duration}
+                  </Duration>
+                  <Indicator
+                    style={{
+                      background: color,
+                      height,
+                    }}
+                  />
+                </ItemContent>
+              </PositionAbsolutelyCenterVertically>
+            </ItemContentWrapper>
           </Item>
         )
       })}
