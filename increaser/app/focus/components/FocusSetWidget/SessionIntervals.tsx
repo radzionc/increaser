@@ -67,7 +67,7 @@ export const SessionIntervals = () => {
         const width = toPercents(
           ((interval.end ?? now) - interval.start) / totalDuration,
         )
-        console.log(left, width)
+
         return (
           <Segment
             style={{
