@@ -1,5 +1,7 @@
+1722338935549
 Pause focus session (the most requested feature yet)
 Create a project or a task from the focus launcher
+A more comfortable focus duration selector with a keyboard support for moving between duration options
 1721993826695
 Add Principles feature
 1721711243227

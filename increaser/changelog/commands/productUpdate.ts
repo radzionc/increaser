@@ -20,10 +20,10 @@ const getPrompt = (items: string[]) => {
   return [
     'You will write an announcement for new product updates.',
     'It will be displayed in the "What\'s new" section of the app and website.',
-    'Return it as a JavaScript object with the "name" and "description" string properties and "items" property which is an object with a "description" string property.',
+    'Return it as a JavaScript object with the "name" and "description" string properties and "items" property which is an array of objects with a "description" string property.',
     'Keep the copy short, but make sure the user will understand each update and its value.',
     'Updates are ordered by their priority.',
-    'The name should capture the essence of the update.',
+    'The name should capture the essence of the update and should not be generic.',
     'The description should summarize the updates.',
     'Each item should correspond to a product update.',
     'Product updates:',

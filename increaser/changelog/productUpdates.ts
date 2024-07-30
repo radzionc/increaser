@@ -4,6 +4,34 @@ export const lastAnnouncementWasAt: number | undefined = undefined
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1722338935549,
+    name: 'Enhanced Focus Session Management',
+    description:
+      'Boost your productivity with our latest updates to focus sessions, task management, and project creation.',
+    items: [
+      {
+        description:
+          'Pause Focus Session: Now you can pause your focus sessions, allowing you to take breaks without losing your session progress. This has been our most requested feature!',
+      },
+      {
+        description:
+          'Create from Focus Launcher: You can now create projects or tasks directly from the focus launcher, making it easier to organize your work on the fly.',
+      },
+      {
+        description:
+          'Improved Focus Duration Selector: Enjoy a more comfortable focus duration selector with added keyboard support for seamless navigation between options.',
+      },
+    ],
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/increaser-enhances-focus-sessions-and-task-management--O32PpwoO6UYVfASjlZa',
+    telegram: 'https://t.me/increaser_app/44',
+    linkedIn:
+      'https://www.linkedin.com/posts/increaser_exciting-new-increaser-updates-were-activity-7224017234766045184-Kk4f',
+    x: 'https://x.com/increaser_app/status/1818250633301856744',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1efr77m/exciting_new_increaser_updates_pause_sessions/',
+  },
+  {
     releasedAt: 1721993826695,
     name: 'Introducing Principles 🌟',
     description:
