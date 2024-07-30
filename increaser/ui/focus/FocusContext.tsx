@@ -27,6 +27,10 @@ export type StopFocusParams = {
 
 export interface FocusState {
   start: (params: StartFocusParams) => void
+
+  pause: () => void
+  resume: () => void
+
   stop: (params?: StopFocusParams) => void
   cancel: () => void
 

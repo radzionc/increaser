@@ -28,6 +28,8 @@ export const DemoFocusProvider = ({ children }: Props) => {
     <FocusContext.Provider
       value={{
         start: () => {},
+        pause: () => {},
+        resume: () => {},
         updateProject: () => {},
         updateTask: () => {},
         stop,

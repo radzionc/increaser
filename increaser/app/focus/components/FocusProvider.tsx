@@ -249,10 +249,44 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
     [session, startNewInterval, tasks],
   )
 
+  const pause = useCallback(() => {
+    const now = Date.now()
+    setSession((session) =>
+      session
+        ? {
+            ...session,
+            intervals: [
+              ...updateAtIndex(
+                session.intervals,
+                session.intervals.length - 1,
+                (interval) => ({
+                  ...interval,
+                  end: now,
+                }),
+              ),
+            ],
+          }
+        : session,
+    )
+  }, [setSession])
+
+  const resume = useCallback(() => {
+    if (!session) return
+
+    const { projectId, taskId } = getLastItem(session.intervals)
+
+    startNewInterval({
+      projectId,
+      taskId,
+    })
+  }, [session, startNewInterval])
+
   return (
     <FocusContext.Provider
       value={{
         start,
+        pause,
+        resume,
         updateProject,
         updateTask,
         stop,
