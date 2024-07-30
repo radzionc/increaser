@@ -3,46 +3,43 @@ import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 
-export type FocusTask = {
-  id: string
-  startedAt: number
-}
-
 export interface StartFocusParams {
   projectId: string
-  taskId?: string
+  taskId: string | null
   duration?: number
   startedAt: number
 }
 
-export interface CurrentSet {
+export type FocusInterval = {
   projectId: string
-  startedAt: number
-  task?: FocusTask
+  taskId: string | null
+  start: number
+  end: number | null
 }
 
-export interface StopFocusParams {
-  setOverride?: Partial<Set>
+export type FocusSession = {
+  intervals: FocusInterval[]
+}
+
+export type StopFocusParams = {
+  lastSetOverride?: Partial<Set>
 }
 
 export interface FocusState {
   start: (params: StartFocusParams) => void
+
+  pause: () => void
+  resume: () => void
+
   stop: (params?: StopFocusParams) => void
   cancel: () => void
 
-  currentSet: CurrentSet | null
-  updateStartTime: (value: number) => void
-  updateProject: (value: string) => void
-  updateTask: (value: FocusTask | undefined) => void
+  session: FocusSession | null
+  updateProject: (projectId: string) => void
+  updateTask: (taskId: string | null) => void
 
   setFocusDuration: (duration: FocusDuration) => void
   focusDuration: FocusDuration
-
-  setHasTimerSoundNotification: (value: boolean) => void
-  hasTimerSoundNotification: boolean
-
-  setHasTimerBrowserNotification: (value: boolean) => void
-  hasTimerBrowserNotification: boolean
 }
 
 export const FocusContext = createContext<FocusState | undefined>(undefined)

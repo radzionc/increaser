@@ -41,13 +41,13 @@ const MobileContent = styled(VStack)`
 `
 
 export const HomePageContent = () => {
-  const { currentSet } = useFocus()
+  const { session } = useFocus()
 
   const content = (
     <VStack style={{ flex: 1 }}>
-      {currentSet && <FocusTitle />}
+      {session && <FocusTitle />}
       <VStack style={{ flex: 1 }} gap={40}>
-        {currentSet ? (
+        {session ? (
           <FocusSetWidget />
         ) : (
           <>

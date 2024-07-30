@@ -1,4 +1,3 @@
-import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { MS_IN_MIN } from '@lib/utils/time'
 
 import { FillingBlock } from './FillingBlock'
@@ -6,18 +5,19 @@ import { useFocus } from './FocusContext'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { useAssertUserState } from '../user/UserStateContext'
 import { useTheme } from 'styled-components'
+import { useFocusedDuration } from './hooks/useFocusedDuration'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 export const SessionProgress = () => {
-  const now = useRhythmicRerender()
-
   const { focusDuration } = useFocus()
-  const { startedAt, projectId } = useCurrentFocus()
 
   const { projects } = useAssertUserState()
   const theme = useTheme()
+  const { intervals } = useCurrentFocus()
+  const { projectId } = getLastItem(intervals)
   const color = theme.colors.getLabelColor(projects[projectId].color)
 
-  const msPassed = now - startedAt
+  const msPassed = useFocusedDuration()
 
   return (
     <FillingBlock

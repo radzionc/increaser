@@ -2,7 +2,6 @@ import { Set } from '@increaser/entities/User'
 import { transition } from '@lib/ui/css/transition'
 import { UIComponentProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import styled, { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
@@ -32,7 +31,6 @@ export const WorkSession = ({
   ...rest
 }: WorkSessionProps) => {
   const { projects } = useAssertUserState()
-  const { currentSet } = useFocus()
 
   const theme = useTheme()
 
@@ -40,7 +38,7 @@ export const WorkSession = ({
 
   return (
     <Container {...rest}>
-      {!currentSet && showIdentifier && (
+      {showIdentifier && (
         <Identifier style={{ background: color.toCssValue() }} />
       )}
     </Container>

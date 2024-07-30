@@ -3,20 +3,33 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
 import { TaskTrackedTimeContainer } from '@increaser/ui/tasks/TaskTrackedTimeContainer'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
+import { sum } from '@lib/utils/array/sum'
 
 export const CurrentFocusTaskTrackedTime = () => {
   const { spentTime } = useCurrentTask()
-  const { task } = useCurrentFocus()
-  const { startedAt } = shouldBePresent(task)
+  const { intervals } = useCurrentFocus()
+
+  const taskId = getLastItem(intervals)?.taskId
 
   return (
     <TaskTrackedTimeContainer>
       <RhytmicRerender
-        interval={1000}
-        render={() =>
-          formatDuration((spentTime ?? 0) + (Date.now() - startedAt), 'ms')
-        }
+        render={(now) => {
+          const duration = sum(
+            intervals
+              .filter((interval) => interval.taskId === taskId)
+              .map((interval) =>
+                getIntervalDuration({
+                  ...interval,
+                  end: interval.end ?? now,
+                }),
+              ),
+          )
+
+          return formatDuration((spentTime ?? 0) + duration, 'ms')
+        }}
       />
     </TaskTrackedTimeContainer>
   )

@@ -62,7 +62,7 @@ export const BreakProvider = ({ children }: Props) => {
   const todayStartedAt = useStartOfDay()
   const { finishWorkAt } = useAssertUserState()
   const sets = useTodaySets()
-  const { currentSet } = useFocus()
+  const { session } = useFocus()
 
   const [hasBrowserNotification, setHasBrowserNotification] =
     usePersistentState<boolean>(
@@ -83,10 +83,10 @@ export const BreakProvider = ({ children }: Props) => {
   const lastSetEnd = useLastSetEnd()
 
   useEffect(() => {
-    if (currentSet && breakDuration) {
+    if (session && breakDuration) {
       setBreakDuration(undefined)
     }
-  }, [breakDuration, currentSet])
+  }, [breakDuration, session])
 
   useEffect(() => {
     if (!breakDuration || !lastSetEnd) return

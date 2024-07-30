@@ -1,9 +1,9 @@
 import { AnimatedDuration } from '@lib/ui/time/AnimatedDuration'
 
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useFocusedDuration } from './hooks/useFocusedDuration'
 
 export const FocusPassedTime = () => {
-  const { startedAt } = useCurrentFocus()
+  const duration = useFocusedDuration()
 
-  return <AnimatedDuration getDuration={(now) => now - startedAt} />
+  return <AnimatedDuration getDuration={() => duration} />
 }

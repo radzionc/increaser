@@ -4,11 +4,14 @@ import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ProjectSelector } from '@increaser/ui/projects/ProjectSelector'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 
 export const TitleProjectSelector = () => {
-  const { projectId } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
   const { projects } = useAssertUserState()
   const { updateProject } = useFocus()
+
+  const { projectId } = getLastItem(intervals)
 
   return (
     <>

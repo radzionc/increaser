@@ -1,19 +1,17 @@
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Button } from '@lib/ui/buttons/Button'
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
-import { toPercents } from '@lib/utils/toPercents'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { CurrentFocusTask } from './CurrentFocusTask'
 import { focusSetWidgetConfig } from './config'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
+import { PauseFocusSession } from './PauseFocusSession'
+import { SessionIntervals } from './SessionIntervals'
 
 const Wrapper = styled(VStack)`
   width: 100%;
@@ -36,18 +34,8 @@ const Content = styled(HStack)`
   align-items: center;
   justify-content: space-between;
   padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
-`
-
-export const getFireplaceKeyframes = () => keyframes`
-  0%{
-    opacity: 1.0;
-  }
-  50%{
-    opacity: 0.4;
-  }
-  100%{
-    opacity: 1.0;
-  }
+  flex-wrap: wrap;
+  gap: 20px;
 `
 
 const FillerContainer = styled.div`
@@ -63,33 +51,21 @@ export const Filler = styled.div`
 `
 
 export const MinimalisticFocusSet = () => {
-  const { cancel, stop, focusDuration } = useFocus()
-  const { startedAt } = useCurrentFocus()
+  const { cancel, stop } = useFocus()
 
   return (
     <Wrapper>
       <Container>
         <FillerContainer>
-          <RhytmicRerender
-            render={() => (
-              <Filler
-                style={{
-                  width: toPercents(
-                    Math.min(
-                      (Date.now() - startedAt) /
-                        convertDuration(focusDuration, 'min', 'ms'),
-                      1,
-                    ),
-                  ),
-                }}
-              />
-            )}
-          />
+          <SessionIntervals />
         </FillerContainer>
         <Content>
-          <Text as="div" weight="bold" size={36} height="small">
-            <FocusPassedTime />
-          </Text>
+          <HStack alignItems="center" gap={12}>
+            <PauseFocusSession />
+            <Text as="div" weight="bold" size={36} height="small">
+              <FocusPassedTime />
+            </Text>
+          </HStack>
           <HStack gap={8}>
             <Button size="l" type="button" kind="outlined" onClick={cancel}>
               Cancel

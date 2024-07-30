@@ -6,12 +6,10 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { Button } from '@lib/ui/buttons/Button'
 import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN } from '@lib/utils/time'
 
 import { FocusDurationInput } from '../components/FocusDurationInput'
-import { FocusDurationText } from '../components/FocusDurationText'
 import { FocusProjectInput } from './FocusProjectInput'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
@@ -144,8 +142,7 @@ export const FocusLauncherForm = () => {
                 action={() => {
                   start({
                     projectId: shouldBePresent(projectId),
-                    taskId:
-                      focusEntity === 'task' && taskId ? taskId : undefined,
+                    taskId: focusEntity === 'task' && taskId ? taskId : null,
                     duration: focusDuration,
                     startedAt: startedAt ?? Date.now(),
                   })

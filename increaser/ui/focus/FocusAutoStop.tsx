@@ -1,14 +1,21 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useCurrentFocus } from './CurrentFocusProvider'
 import { endOfDay } from 'date-fns'
 import { useFocus } from './FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { shouldSetAutoStop } from './utils/shouldSetAutoStop'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { getIntervalsGapsDuration } from './utils/getIntervalsGapsDuration'
+import { useIsFocusPaused } from './utils/useIsFocusPaused'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const FocusAutoStop = () => {
-  const { startedAt } = useCurrentFocus()
+  const { intervals } = useCurrentFocus()
   const { stop, focusDuration } = useFocus()
+  const isPaused = useIsFocusPaused()
+
+  const { start } = intervals[0]
 
   const [startedBeingVisibleAt, setStartedBeingVisibleAt] = useState<number>(
     Date.now(),
@@ -17,7 +24,7 @@ export const FocusAutoStop = () => {
     number | null
   >(null)
 
-  const setDayEndsAt = useMemo(() => endOfDay(startedAt).getTime(), [startedAt])
+  const setDayEndsAt = useMemo(() => endOfDay(start).getTime(), [start])
 
   useEffect(() => {
     const handleFocus = () => {
@@ -35,40 +42,47 @@ export const FocusAutoStop = () => {
     }
   }, [])
 
-  const autoStop = useCallback(() => {
-    const end = Math.min(
-      setDayEndsAt,
-      startedAt + convertDuration(focusDuration, 'min', 'ms'),
-      Date.now(),
-    )
-
-    stop({
-      setOverride: {
-        end,
-        isEndEstimated: true,
-      },
-    })
-  }, [focusDuration, setDayEndsAt, startedAt, stop])
-
   const now = useRhythmicRerender()
   useEffect(() => {
-    if (
-      shouldSetAutoStop({
-        setDayEndsAt,
-        startedAt,
-        stoppedBeingVisibleAt,
-        startedBeingVisibleAt,
-        now: Date.now(),
-      })
-    ) {
-      autoStop()
+    if (isPaused) {
+      const pauseDuration = now - shouldBePresent(getLastItem(intervals).end)
+      if (pauseDuration > convertDuration(1, 'h', 'ms')) {
+        stop()
+      }
+    } else {
+      if (
+        shouldSetAutoStop({
+          setDayEndsAt,
+          startedAt: getLastItem(intervals).start,
+          stoppedBeingVisibleAt,
+          startedBeingVisibleAt,
+          now,
+        })
+      ) {
+        const endOptions = [setDayEndsAt, Date.now()]
+        const gapsDuration = getIntervalsGapsDuration(intervals)
+        endOptions.push(
+          start + convertDuration(focusDuration, 'min', 'ms') + gapsDuration,
+        )
+        const end = Math.min(...endOptions)
+
+        stop({
+          lastSetOverride: {
+            end,
+            isEndEstimated: true,
+          },
+        })
+      }
     }
   }, [
+    focusDuration,
+    intervals,
+    isPaused,
     now,
-    autoStop,
     setDayEndsAt,
-    startedAt,
+    start,
     startedBeingVisibleAt,
+    stop,
     stoppedBeingVisibleAt,
   ])
 

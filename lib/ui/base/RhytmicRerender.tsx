@@ -1,13 +1,16 @@
 import { ReactNode } from 'react'
 import { useRhythmicRerender } from '../hooks/useRhythmicRerender'
 
-interface RhytmicRerenderProps {
+interface RhythmicRerenderProps {
   interval?: number
-  render: () => ReactNode
+  render: (now: number) => ReactNode
 }
 
-export const RhytmicRerender = ({ interval, render }: RhytmicRerenderProps) => {
-  useRhythmicRerender(interval)
+export const RhytmicRerender = ({
+  interval,
+  render,
+}: RhythmicRerenderProps) => {
+  const now = useRhythmicRerender(interval)
 
-  return <>{render()}</>
+  return <>{render(now)}</>
 }

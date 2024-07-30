@@ -91,10 +91,7 @@ export const FocusTaskSelector = ({
                 {...getOptionProps({
                   index,
                   onSelect: () => {
-                    updateTask({
-                      id: option.id,
-                      startedAt: Date.now(),
-                    })
+                    updateTask(option.id)
                     setIsOpen(false)
                   },
                 })}
