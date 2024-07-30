@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 import { useCurrentPageView } from '../navigation/hooks/useCurrentPageView'
 
 const featuresViewName: Record<AppPageFeaturesView, string> = {
-  updates: 'What’s new',
-  requests: 'Feature requests',
+  updates: 'What’s New',
+  requests: 'Requests',
 }
 
 export const FeaturesViewSelector = () => {

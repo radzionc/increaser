@@ -6,7 +6,7 @@ import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Tasks } from '@increaser/ui/tasks/Tasks'
 import { Spacer } from '@lib/ui/layout/Spacer'
 
-const title = 'My tasks'
+const title = 'Tasks'
 
 export const TasksPage: Page = () => {
   return (

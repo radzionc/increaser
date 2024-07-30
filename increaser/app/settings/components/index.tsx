@@ -7,7 +7,7 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { PageTitle } from '@increaser/app/ui/PageTitle'
 import { Page } from '@lib/next-ui/Page'
 
-const title = 'Your account'
+const title = 'Account'
 
 export const SettingsPage: Page = () => {
   const { state } = useUserState()

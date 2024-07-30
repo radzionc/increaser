@@ -5,7 +5,7 @@ import { Page } from '@lib/next-ui/Page'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Ideas } from '@increaser/ui/ideas/Ideas'
 
-const title = 'Your ideas'
+const title = 'Ideas'
 
 export const IdeasPage: Page = () => {
   return (

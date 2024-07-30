@@ -3,7 +3,7 @@ import { PageTitle } from '../ui/PageTitle'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Goals } from './Goals'
 
-const title = 'Your goals'
+const title = 'Goals'
 
 export const GoalsPage = () => {
   return (

@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 import { useCurrentPageView } from '../navigation/hooks/useCurrentPageView'
 
 const principlesViewName: Record<AppPagePrinciplesView, string> = {
-  my: 'My principles',
-  ideas: 'Explore principles',
+  my: 'Principles',
+  ideas: 'Explore',
 }
 
 export const PrinciplesViewSelector = () => {
