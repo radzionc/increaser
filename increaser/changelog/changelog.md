@@ -1,3 +1,4 @@
+Pause focus session (the most requested feature yet)
 1721993826695
 Add Principles feature
 1721711243227
