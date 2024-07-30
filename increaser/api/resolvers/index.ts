@@ -17,6 +17,7 @@ import { updateSet } from '../sets/resolvers/updateSet'
 import { createUserEntity } from '../userEntities/resolvers/createUserEntity'
 import { deleteUserEntity } from '../userEntities/resolvers/deleteUserEntity'
 import { updateUserEntity } from '../userEntities/resolvers/updateUserEntity'
+import { updateUserEntities } from '../userEntities/resolvers/updateUserEntities'
 import { getFileUploadUrl } from '../users/resolvers/getFileUploadUrl'
 import { addSets } from '../sets/resolvers/addSets'
 
@@ -39,105 +40,7 @@ export const implementation: ApiImplementation = {
   updateSet,
   createUserEntity,
   updateUserEntity,
+  updateUserEntities,
   deleteUserEntity,
   getFileUploadUrl,
-
-  // DEPRECATED
-  createProject: ({ input, context }) =>
-    createUserEntity({ input: { entity: 'project', value: input }, context }),
-  updateProject: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'project', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteProject: ({ input, context }) =>
-    deleteUserEntity({ input: { entity: 'project', id: input.id }, context }),
-
-  createHabit: ({ input, context }) =>
-    createUserEntity({ input: { entity: 'habit', value: input }, context }),
-  updateHabit: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'habit', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteHabit: ({ input, context }) =>
-    deleteUserEntity({ input: { entity: 'habit', id: input.id }, context }),
-
-  createTask: ({ input, context }) =>
-    createUserEntity({ input: { entity: 'task', value: input }, context }),
-  updateTask: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'task', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteTask: ({ input, context }) =>
-    deleteUserEntity({ input: { entity: 'task', id: input.id }, context }),
-
-  createVisionAttribute: ({ input, context }) =>
-    createUserEntity({
-      input: { entity: 'visionAttribute', value: input },
-      context,
-    }),
-  updateVisionAttribute: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'visionAttribute', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteVisionAttribute: ({ input, context }) =>
-    deleteUserEntity({
-      input: { entity: 'visionAttribute', id: input.id },
-      context,
-    }),
-
-  createGoal: ({ input, context }) =>
-    createUserEntity({ input: { entity: 'goal', value: input }, context }),
-  updateGoal: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'goal', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteGoal: ({ input, context }) =>
-    deleteUserEntity({ input: { entity: 'goal', id: input.id }, context }),
-
-  createTaskFactory: ({ input, context }) =>
-    createUserEntity({
-      input: { entity: 'taskFactory', value: input },
-      context,
-    }),
-  updateTaskFactory: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'taskFactory', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteTaskFactory: ({ input, context }) =>
-    deleteUserEntity({
-      input: { entity: 'taskFactory', id: input.id },
-      context,
-    }),
-
-  createTaskTemplate: ({ input, context }) =>
-    createUserEntity({
-      input: { entity: 'taskTemplate', value: input },
-      context,
-    }),
-  updateTaskTemplate: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'taskTemplate', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteTaskTemplate: ({ input, context }) =>
-    deleteUserEntity({
-      input: { entity: 'taskTemplate', id: input.id },
-      context,
-    }),
-
-  createIdea: ({ input, context }) =>
-    createUserEntity({ input: { entity: 'idea', value: input }, context }),
-  updateIdea: ({ input, context }) =>
-    updateUserEntity({
-      input: { entity: 'idea', fields: input.fields, id: input.id },
-      context,
-    }),
-  deleteIdea: ({ input, context }) =>
-    deleteUserEntity({ input: { entity: 'idea', id: input.id }, context }),
 }

@@ -15,14 +15,6 @@ import { ApiMethod } from './ApiMethod'
 import { ProductFeature } from '@increaser/entities/ProductFeature'
 import { ProductFeatureResponse } from './ProductFeatureResponse'
 import { Interval } from '@lib/utils/interval/Interval'
-import { Habit } from '@increaser/entities/Habit'
-import { Project } from '@increaser/entities/Project'
-import { Task } from '@increaser/entities/Task'
-import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { TaskTemplate } from '@increaser/entities/TaskTemplate'
-import { Goal } from '@increaser/entities/Goal'
-import { Idea } from '@increaser/entities/Idea'
-import { VisionAttribute } from '@increaser/entities/Vision'
 
 export interface ApiInterface {
   authSessionWithEmail: ApiMethod<
@@ -96,6 +88,16 @@ export interface ApiInterface {
     },
     any
   >
+  updateUserEntities: ApiMethod<
+    {
+      entity: UserEntity
+      updates: {
+        fields: any
+        id: string
+      }[]
+    },
+    any
+  >
   deleteUserEntity: ApiMethod<
     {
       entity: UserEntity
@@ -111,92 +113,6 @@ export interface ApiInterface {
       key: string
     }
   >
-
-  // DEPRECATED
-  createProject: ApiMethod<Project, Project>
-  updateProject: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<Project, 'id'>>
-    },
-    Project
-  >
-  deleteProject: ApiMethod<{ id: string }, undefined>
-
-  createTask: ApiMethod<Task, Task>
-  updateTask: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<Task, 'id'>>
-    },
-    Task
-  >
-  deleteTask: ApiMethod<{ id: string }, undefined>
-
-  createTaskFactory: ApiMethod<TaskFactory, TaskFactory>
-  updateTaskFactory: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<TaskFactory, 'id'>>
-    },
-    TaskFactory
-  >
-  deleteTaskFactory: ApiMethod<{ id: string }, undefined>
-
-  createTaskTemplate: ApiMethod<TaskTemplate, TaskTemplate>
-  updateTaskTemplate: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<TaskTemplate, 'id'>>
-    },
-    TaskTemplate
-  >
-  deleteTaskTemplate: ApiMethod<{ id: string }, undefined>
-
-  createHabit: ApiMethod<Omit<Habit, 'successes'>, Habit>
-  updateHabit: ApiMethod<
-    {
-      id: string
-      fields: Partial<
-        Pick<
-          Habit,
-          'name' | 'color' | 'order' | 'emoji' | 'startedAt' | 'successes'
-        >
-      >
-    },
-    Habit
-  >
-  deleteHabit: ApiMethod<{ id: string }, undefined>
-
-  createVisionAttribute: ApiMethod<VisionAttribute, VisionAttribute>
-  updateVisionAttribute: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<VisionAttribute, 'id'>>
-    },
-    VisionAttribute
-  >
-  deleteVisionAttribute: ApiMethod<{ id: string }, undefined>
-
-  createGoal: ApiMethod<Goal, Goal>
-  updateGoal: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<Goal, 'id'>>
-    },
-    Goal
-  >
-  deleteGoal: ApiMethod<{ id: string }, undefined>
-
-  createIdea: ApiMethod<Idea, Idea>
-  updateIdea: ApiMethod<
-    {
-      id: string
-      fields: Partial<Omit<Idea, 'id'>>
-    },
-    Idea
-  >
-  deleteIdea: ApiMethod<{ id: string }, undefined>
 }
 
 export type ApiMethodName = keyof ApiInterface

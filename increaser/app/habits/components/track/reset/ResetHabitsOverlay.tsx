@@ -3,19 +3,20 @@ import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { Modal } from '@lib/ui/modal'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { useState } from 'react'
-import { useResetHabitsMutation } from '../../../api/useResetHabitsMutation'
 import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
 import { ChecklistItem } from '@lib/ui/checklist/ChecklistItem'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { VStack } from '@lib/ui/layout/Stack'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
+import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
+import { MS_IN_SEC } from '@lib/utils/time'
 
 export const ResetHabitsOverlay = ({ onFinish }: FinishableComponentProps) => {
   const habits = useOrderedHabits()
 
   const [selectedHabits, setSelectedHabits] = useState<string[]>([])
 
-  const { mutate } = useResetHabitsMutation()
+  const { mutate: updateHabits } = useUpdateUserEntitiesMutation('habit')
 
   return (
     <Modal
@@ -30,7 +31,15 @@ export const ResetHabitsOverlay = ({ onFinish }: FinishableComponentProps) => {
           </Button>
           <Button
             onClick={() => {
-              mutate(selectedHabits)
+              updateHabits(
+                selectedHabits.map((id) => ({
+                  id,
+                  fields: {
+                    startedAt: Math.round(Date.now() / MS_IN_SEC),
+                    successes: [],
+                  },
+                })),
+              )
               onFinish()
             }}
             size="l"

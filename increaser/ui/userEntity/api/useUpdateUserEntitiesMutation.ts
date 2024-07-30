@@ -10,16 +10,13 @@ import {
   UserEntityType,
 } from '@increaser/entities/User'
 import { recordMap } from '@lib/utils/record/recordMap'
+import {
+  affectOtherEntitiesOnUpdate,
+  UpdateUserEntityInput,
+} from './useUpdateUserEntityMutation'
 import { processedByApi } from './shared'
 
-export type UpdateUserEntityInput<T extends UserEntity> = {
-  fields: Partial<Omit<UserEntityType[T], 'id'>>
-  id: string
-}
-
-export const affectOtherEntitiesOnUpdate: UserEntity[] = ['taskFactory']
-
-export const useUpdateUserEntityMutation = <T extends UserEntity>(
+export const useUpdateUserEntitiesMutation = <T extends UserEntity>(
   entity: T,
 ) => {
   const user = useAssertUserState()
@@ -27,26 +24,30 @@ export const useUpdateUserEntityMutation = <T extends UserEntity>(
   const api = useApi()
 
   return useMutation({
-    mutationFn: async ({ fields, id }: UpdateUserEntityInput<T>) => {
+    mutationFn: async (updates: UpdateUserEntityInput<T>[]) => {
       const key = userEntityRecordName[entity]
       updateState({
-        [key]: recordMap(user[key] as any, (value: any) =>
-          value.id === id ? { ...value, ...fields } : value,
-        ),
+        [key]: recordMap(user[key] as any, (value: any) => {
+          const update = updates.find((update) => update.id === value.id)
+          if (update) {
+            return { ...value, ...update.fields }
+          }
+
+          return value
+        }),
       })
 
-      const result = await api.call('updateUserEntity', {
+      const result: UserEntityType[T][] = await api.call('updateUserEntities', {
         entity,
-        fields,
-        id,
+        updates,
       })
 
       if (processedByApi.includes(entity)) {
         updateState({
-          [key]: {
-            ...user[key],
-            [id]: result,
-          },
+          [key]: recordMap(user[key] as any, (value: any) => {
+            const newValue = result.find((update) => update.id === value.id)
+            return newValue ?? value
+          }),
         })
       }
 

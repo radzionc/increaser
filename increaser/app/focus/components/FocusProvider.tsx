@@ -23,7 +23,7 @@ import { FocusNotificationsManager } from '@increaser/ui/focus/FocusNotification
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
-import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { otherProjectId } from '@increaser/entities/Project'
@@ -33,6 +33,7 @@ import { getTasksTimeSpent } from '@increaser/ui/focus/utils/getTasksTimeSpent'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { pick } from '@lib/utils/record/pick'
 import { useAddSetsMutation } from '../../sets/hooks/useAddSetsMutation'
+import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -150,7 +151,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   )
 
   const { mutate: addSets } = useAddSetsMutation()
-  const { mutate: updateTaskMutation } = useUpdateUserEntityMutation('task')
+  const { mutate: updateTasks } = useUpdateUserEntitiesMutation('task')
 
   const cancel = useCallback(() => {
     setSession(null)
@@ -197,17 +198,22 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
 
       const timeSpentRecord = getTasksTimeSpent(intervals)
 
-      Object.entries(timeSpentRecord).forEach(([taskId, spentTime]) => {
-        const task = tasks[taskId]
-        if (task) {
-          updateTaskMutation({
-            id: taskId,
-            fields: {
-              spentTime: (task.spentTime || 0) + spentTime,
-            },
-          })
-        }
-      })
+      const taskUpdates = withoutUndefined(
+        Object.entries(timeSpentRecord).map(([taskId, spentTime]) => {
+          const task = tasks[taskId]
+          if (task) {
+            return {
+              id: taskId,
+              fields: {
+                spentTime: (task.spentTime || 0) + spentTime,
+              },
+            }
+          }
+        }),
+      )
+      if (taskUpdates.length) {
+        updateTasks(taskUpdates)
+      }
 
       setFocusDuration(getNextFocusDuration(blocks))
 
@@ -215,15 +221,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
         duration: Math.round(getSetsDuration(sets) / MS_IN_MIN),
       })
     },
-    [
-      addSets,
-      analytics,
-      session,
-      setSession,
-      tasks,
-      todaySets,
-      updateTaskMutation,
-    ],
+    [addSets, analytics, session, setSession, tasks, todaySets, updateTasks],
   )
 
   const updateProject = useCallback(

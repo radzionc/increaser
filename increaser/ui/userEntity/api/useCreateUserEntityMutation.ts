@@ -11,9 +11,9 @@ import {
 } from '@increaser/entities/User'
 import { pick } from '@lib/utils/record/pick'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
+import { processedByApi } from './shared'
 
 const affectOtherEntitiesOnCreate: UserEntity[] = ['taskFactory']
-const processedByApiOnCreate: UserEntity[] = ['visionAttribute']
 
 type UserEntityTrackingParams<T extends UserEntity> = {
   getParams: (value: UserEntityType[T]) => Record<string, any>
@@ -77,7 +77,7 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
         value,
       })
 
-      if (processedByApiOnCreate.includes(entity)) {
+      if (processedByApi.includes(entity)) {
         updateState({
           [key]: {
             ...user[key],
