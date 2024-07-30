@@ -5,16 +5,13 @@ import { Text } from '@lib/ui/text'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Button } from '@lib/ui/buttons/Button'
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
-import { toPercents } from '@lib/utils/toPercents'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { CurrentFocusTask } from './CurrentFocusTask'
 import { focusSetWidgetConfig } from './config'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { PauseFocusSession } from './PauseFocusSession'
+import { SessionIntervals } from './SessionIntervals'
 
 const Wrapper = styled(VStack)`
   width: 100%;
@@ -54,30 +51,13 @@ export const Filler = styled.div`
 `
 
 export const MinimalisticFocusSet = () => {
-  const { cancel, stop, focusDuration } = useFocus()
-  const { intervals } = useCurrentFocus()
-
-  const { start } = intervals[0]
+  const { cancel, stop } = useFocus()
 
   return (
     <Wrapper>
       <Container>
         <FillerContainer>
-          <RhytmicRerender
-            render={() => (
-              <Filler
-                style={{
-                  width: toPercents(
-                    Math.min(
-                      (Date.now() - start) /
-                        convertDuration(focusDuration, 'min', 'ms'),
-                      1,
-                    ),
-                  ),
-                }}
-              />
-            )}
-          />
+          <SessionIntervals />
         </FillerContainer>
         <Content>
           <HStack alignItems="center" gap={12}>
