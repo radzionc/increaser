@@ -30,6 +30,7 @@ export const productUpdates: ProductUpdate[] = [
     x: 'https://x.com/increaser_app/status/1818250633301856744',
     reddit:
       'https://www.reddit.com/r/increaser/comments/1efr77m/exciting_new_increaser_updates_pause_sessions/',
+    videoId: 'pause',
   },
   {
     releasedAt: 1721993826695,
