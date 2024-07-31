@@ -1,17 +1,61 @@
-import { FixedWidthContent } from '../components/reusable/fixed-width-content'
-import { PageTitle } from '../ui/PageTitle'
+import { ClientOnly } from '@lib/ui/base/ClientOnly'
+import { PageContainer } from '../ui/page/PageContainer'
+import { PageContent } from '../ui/page/PageContent'
+import { PageTitle } from '../ui/page/PageTitle'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Goals } from './Goals'
+import { GoalStatusFilter } from '@increaser/ui/goals/filter/GoalStatusFilter'
+import styled from 'styled-components'
+import { HStack } from '@lib/ui/layout/Stack'
+import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
+import { productName } from '@increaser/config'
 
 const title = 'Goals'
 
+const contentWidth = 560
+const gap = 28
+const educationMinWidth = 280
+
+const Content = styled(HStack)`
+  width: 100%;
+  gap: ${toSizeUnit(gap)};
+  align-items: start;
+`
+
 export const GoalsPage = () => {
   return (
-    <FixedWidthContent>
-      <PageTitle documentTitle={`⏳ ${title}`} title={title} />
-      <UserStateOnly>
-        <Goals />
-      </UserStateOnly>
-    </FixedWidthContent>
+    <ElementSizeAware
+      render={({ setElement, size }) => (
+        <PageContainer ref={setElement}>
+          <Content>
+            <PageContent style={{ maxWidth: contentWidth }}>
+              <HStack
+                justifyContent="space-between"
+                fullWidth
+                alignItems="center"
+                gap={20}
+                wrap="wrap"
+              >
+                <PageTitle>{title}</PageTitle>
+                <PageMetaTags title={[title, productName].join(' | ')} />
+                <GoalStatusFilter />
+              </HStack>
+
+              <UserStateOnly>
+                <Goals />
+              </UserStateOnly>
+            </PageContent>
+            {size && size.width - contentWidth - gap >= educationMinWidth && (
+              <ClientOnly>
+                <ProductEducationBlock value="goals" />
+              </ClientOnly>
+            )}
+          </Content>
+        </PageContainer>
+      )}
+    />
   )
 }

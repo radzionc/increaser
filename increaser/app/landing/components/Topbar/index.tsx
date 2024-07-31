@@ -5,10 +5,10 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { useIsScreenWidthLessThan } from '@lib/ui/hooks/useIsScreenWidthLessThan'
 import { Text } from '@lib/ui/text'
 import Link from 'next/link'
-import { ClientOnly } from '@increaser/app/ui/ClientOnly'
 import { WEBSITE_URL } from '@increaser/app/product'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import { getAppPath } from '@increaser/ui/navigation/app'
+import { ClientOnly } from '@lib/ui/base/ClientOnly'
 
 export const Placeholder = styled.div`
   flex-shrink: 0;

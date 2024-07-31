@@ -9,7 +9,7 @@ import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { GoalPlan } from './GoalPlan'
 import { GoalTaskFactories } from './GoalTaskFactories'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { GoalProgress } from './GoalProgress'
+import { GoalStatusTag } from './GoalStatusTag'
 
 const Name = styled(Text)`
   text-align: start;
@@ -20,7 +20,7 @@ const Name = styled(Text)`
 `
 
 export const GoalItemContent = () => {
-  const { name, emoji, plan, taskFactories, target } = useCurrentGoal()
+  const { name, emoji, plan, taskFactories } = useCurrentGoal()
 
   const hasTaskFactories = taskFactories && taskFactories.length > 0
 
@@ -31,9 +31,9 @@ export const GoalItemContent = () => {
           <EmojiTextPrefix emoji={emoji} />
           {name}
         </Name>
+        <GoalStatusTag />
       </HStack>
       <GoalDeadline />
-      {target && <GoalProgress />}
       {plan && <GoalPlan />}
       {hasTaskFactories && <GoalTaskFactories />}
     </VStack>

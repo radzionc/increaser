@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { GoalItemContent } from '@increaser/ui/goals/GoalItemContent'
 import { VStack } from '@lib/ui/layout/Stack'
 import { GoalsTimeline } from '@increaser/ui/goals/timeline/GoalsTimeline'
-import { useActiveGoals } from '@increaser/ui/goals/hooks/useActiveGoals'
+import { useFilteredScheduledGoals } from '@increaser/ui/goals/filter/useFilteredScheduledGoals'
 
 const Container = styled(VStack)`
   gap: 40px;
@@ -12,7 +12,7 @@ const Container = styled(VStack)`
 `
 
 export const GoalsSliceContent = () => {
-  const items = useActiveGoals()
+  const items = useFilteredScheduledGoals()
 
   return (
     <Container>

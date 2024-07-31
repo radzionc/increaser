@@ -8,15 +8,15 @@ import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
-import { goalViewStatus, useGoalsView } from '@increaser/app/goals/GoalsView'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { GoalFormFields } from './GoalFormFields'
+import { useGoalStatusFilter } from '../filter/useGoalStatusFilter'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
-  const [view] = useGoalsView()
+  const [statusFilter] = useGoalStatusFilter()
   const [value, setValue] = useState<GoalFormShape>({
     name: '',
-    status: goalViewStatus[view],
+    status: statusFilter || 'inProgress',
     deadlineAt: null,
     emoji: randomlyPick(defaultEmojis),
     target: null,
