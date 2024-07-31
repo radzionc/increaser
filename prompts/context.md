@@ -68,6 +68,8 @@ Also, while in the focus session, users can choose to play focus sounds imported
 
 On the "Goals" page, users can set specific goals that will bring them closer to their perfect vision. Goals have three potential statuses: done, in progress, and to-do. Users should set a deadline for a goal, which could be either a specific date or their age. Users can set an emoji for a goal. Users can write a plan of how they are going to achieve the goal in plain text. Users can track numeric goals; for example, if the goal is to have 1m USD net worth, they can enter their current net worth to see their progress. Since to achieve most goals, users have to do some recurring actions, there is a way to add recurring tasks or connect existing recurring tasks to the current goal. At the top of the Goals page is a timeline with age labels under the line and goals above the line. Users' current age with month and day precision is also displayed on the timeline.
 
+On the side of the goals page, there is an educational section that summarizes wisdom on how to set and achieve goals. The user can collapse this section if they don't want to see it.
+
 ## Projects
 
 On the "Projects" page, users can see all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and a status, which can be "active," "inactive," or "archived." There is one project which can’t be deleted—“Other.” When the user deletes a project, all the data associated with the deleted project will be reassigned to the “Other” project. User can reorder projects by dragging them.
