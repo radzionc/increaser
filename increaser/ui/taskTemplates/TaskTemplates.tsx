@@ -4,9 +4,19 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddTaskTemplate } from './AddTaskTemplate'
 import { CurrentTaskTemplateProvider } from './CurrentTaskTemplateProvider'
 import { useTaskTemplates } from './hooks/useTaskTemplates'
+import { useProjectFilter } from '../projects/filter/useProjectFilter'
+import { useMemo } from 'react'
 
 export const TaskTemplates = () => {
-  const items = useTaskTemplates()
+  const templates = useTaskTemplates()
+
+  const [projectId] = useProjectFilter()
+
+  const items = useMemo(() => {
+    return templates.filter((template) => {
+      return projectId ? template.projectId === projectId : true
+    })
+  }, [projectId, templates])
 
   return (
     <>
