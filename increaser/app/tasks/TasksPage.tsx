@@ -19,7 +19,7 @@ export const TasksPage: Page = () => {
       <PageContent style={{ maxWidth: contentWidth }}>
         <PageHeader>
           <PageTitle>{title}</PageTitle>
-          <PageDocumentTitle emoji="🎯" title={title} />
+          <PageDocumentTitle emoji="✅" title={title} />
           <ClientOnly>
             <UserStateOnly>
               <ProjectFilter />
