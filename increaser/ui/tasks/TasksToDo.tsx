@@ -11,15 +11,15 @@ import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TasksGroupHeader } from './TasksGroupHeader'
-import { useScheduledTasksToDo } from './hooks/useScheduledTasksToDo'
 import { endOfDay, endOfMonth } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { RecurringTasksForecast } from './RecurringTasksForecast'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
+import { useFilteredScheduledTasksToDo } from './useFilteredScheduledTasksToDo'
 
 export const TasksToDo = () => {
-  const tasks = useScheduledTasksToDo()
+  const tasks = useFilteredScheduledTasksToDo()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const [activeTaskId] = useActiveItemId()
 
