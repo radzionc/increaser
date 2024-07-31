@@ -10,8 +10,7 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
-import { productName } from '@increaser/config'
+import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 
 const title = 'Goals'
 
@@ -40,7 +39,7 @@ export const GoalsPage = () => {
                 wrap="wrap"
               >
                 <PageTitle>{title}</PageTitle>
-                <PageMetaTags title={[title, productName].join(' | ')} />
+                <PageDocumentTitle emoji="🎯" title={title} />
                 <GoalStatusFilter />
               </HStack>
 
