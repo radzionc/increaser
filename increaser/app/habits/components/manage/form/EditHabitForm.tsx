@@ -1,11 +1,7 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
-import { HStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
 import { Habit } from '@increaser/entities/Habit'
 import { HabitFormShape } from './HabitFormShape'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
@@ -15,6 +11,8 @@ import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
+import { ListItemForm } from '@increaser/ui/form/ListItemForm'
+import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()
@@ -62,16 +60,10 @@ export const EditHabitForm = () => {
   }, [habit, isDisabled, onFinish, updateHabit, value])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      style={{ width: '100%' }}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiColorTextInputFrame>
         <div>
@@ -95,35 +87,14 @@ export const EditHabitForm = () => {
           placeholder="Habit name"
         />
       </EmojiColorTextInputFrame>
-      <HStack
-        wrap="wrap"
-        justifyContent="space-between"
-        fullWidth
-        alignItems="center"
-        gap={20}
-      >
-        <Button
-          kind="alert"
-          type="button"
-          onClick={() => {
-            deleteHabit(habit.id)
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
-        <HStack alignItems="center" gap={8}>
-          <Button
-            type="button"
-            isDisabled={isDisabled}
-            onClick={onFinish}
-            kind="secondary"
-          >
-            Cancel
-          </Button>
-          <Button>Save</Button>
-        </HStack>
-      </HStack>
-    </Panel>
+      <EditDeleteFormFooter
+        onDelete={() => {
+          deleteHabit(habit.id)
+          onFinish()
+        }}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
+    </ListItemForm>
   )
 }
