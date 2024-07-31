@@ -14,7 +14,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { GoalsEducationItems } from './GoalsEducationItems'
 
 const Container = styled(VStack)<ComponentWithActiveState>`
-  gap: 20px;
+  gap: 40px;
   flex: 1;
   border-left: 1px dashed transparent;
 
