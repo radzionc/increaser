@@ -43,6 +43,7 @@ export enum PersistentStateKey {
   WorkTimeReportPreferences = 'workTimeReportPreferences',
   GoalsStatusFilter = 'goalsStatusFilter',
   IsGoalsEducationOpen = 'isGoalsEducationOpen',
+  ProjectFilter = 'projectFilter',
 }
 
 export const persistentStorage =

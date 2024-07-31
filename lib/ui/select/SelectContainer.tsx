@@ -15,7 +15,7 @@ export const SelectContainer = styled(HStack)`
   ${transition};
 
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   justify-content: space-between;
   min-height: ${toSizeUnit(selectContainerMinHeight)};
 

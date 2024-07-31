@@ -11,6 +11,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { GoalsEducation } from '@increaser/ui/goals/education/GoalsEducation'
+import { PageHeader } from '../ui/page/PageHeader'
 
 const title = 'Goals'
 
@@ -30,19 +31,13 @@ export const GoalsPage = () => {
         <PageContainer ref={setElement}>
           <Content>
             <PageContent style={{ maxWidth: contentWidth }}>
-              <HStack
-                justifyContent="space-between"
-                fullWidth
-                alignItems="center"
-                gap={20}
-                wrap="wrap"
-              >
+              <PageHeader>
                 <PageTitle>{title}</PageTitle>
                 <PageDocumentTitle emoji="🎯" title={title} />
                 <ClientOnly>
                   <GoalStatusFilter />
                 </ClientOnly>
-              </HStack>
+              </PageHeader>
 
               <UserStateOnly>
                 <Goals />
