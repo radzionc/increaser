@@ -7,21 +7,20 @@ import { Goals } from './Goals'
 import { GoalStatusFilter } from '@increaser/ui/goals/filter/GoalStatusFilter'
 import styled from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
-import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
+import { GoalsEducation } from '@increaser/ui/goals/education/GoalsEducation'
 
 const title = 'Goals'
 
 const contentWidth = 560
-const gap = 28
+const gap = 20
 const educationMinWidth = 280
 
 const Content = styled(HStack)`
   width: 100%;
   gap: ${toSizeUnit(gap)};
-  align-items: start;
 `
 
 export const GoalsPage = () => {
@@ -40,7 +39,9 @@ export const GoalsPage = () => {
               >
                 <PageTitle>{title}</PageTitle>
                 <PageDocumentTitle emoji="🎯" title={title} />
-                <GoalStatusFilter />
+                <ClientOnly>
+                  <GoalStatusFilter />
+                </ClientOnly>
               </HStack>
 
               <UserStateOnly>
@@ -49,7 +50,7 @@ export const GoalsPage = () => {
             </PageContent>
             {size && size.width - contentWidth - gap >= educationMinWidth && (
               <ClientOnly>
-                <ProductEducationBlock value="goals" />
+                <GoalsEducation />
               </ClientOnly>
             )}
           </Content>

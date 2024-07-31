@@ -42,6 +42,7 @@ export enum PersistentStateKey {
   YouTubePlayerPosition = 'youTubePlayerPosition',
   WorkTimeReportPreferences = 'workTimeReportPreferences',
   GoalsStatusFilter = 'goalsStatusFilter',
+  IsGoalsEducationOpen = 'isGoalsEducationOpen',
 }
 
 export const persistentStorage =
