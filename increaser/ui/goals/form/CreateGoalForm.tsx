@@ -1,8 +1,6 @@
 import { useCallback, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { Panel } from '@lib/ui/panel/Panel'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { GoalFormShape } from './GoalFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
@@ -11,6 +9,7 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { GoalFormFields } from './GoalFormFields'
 import { useGoalStatusFilter } from '../filter/useGoalStatusFilter'
+import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 
 export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   const [statusFilter] = useGoalStatusFilter()
@@ -38,18 +37,13 @@ export const CreateGoalForm = ({ onFinish }: FinishableComponentProps) => {
   }, [isDisabled, mutate, onFinish, value])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <GoalFormFields value={value} onChange={setValue} onSubmit={onSubmit} />
       <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
-    </Panel>
+    </ListItemForm>
   )
 }
