@@ -9,12 +9,13 @@ import {
 } from '@increaser/ui/navigation/app'
 import { SidebarNavigationItem } from '../SidebarNavigationItem'
 import { InstallPrompt } from './InstallPrompt'
+import { SidebarHeader } from './SidebarHeader'
 
 const Container = styled.div`
   min-width: 260px;
   height: 100%;
   background: ${({ theme }) => theme.colors.foreground.toCssValue()};
-  padding: 40px 8px 20px 8px;
+  padding: 20px 8px;
   overflow: auto;
 `
 
@@ -32,6 +33,7 @@ export const Sidebar = () => {
     <Container>
       <VStack alignItems="center" fullHeight justifyContent="space-between">
         <VStack fullWidth gap={20}>
+          <SidebarHeader />
           <VStack gap={4} fullWidth>
             {primaryAppNavigationPages.map((page) => (
               <SidebarNavigationItem key={page} value={page} />
