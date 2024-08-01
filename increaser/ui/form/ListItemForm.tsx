@@ -23,6 +23,7 @@ export const ListItemForm = ({
           kind="secondary"
           as="form"
           ref={ref}
+          style={{ width: '100%' }}
           {...getFormProps({
             onClose,
             isDisabled,
