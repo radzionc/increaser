@@ -15,6 +15,9 @@ export const useBacklog = (): UnscheduledTask[] => {
       if (projectId && task.projectId !== projectId) {
         return
       }
+      if (task.completedAt) {
+        return
+      }
       if (deadlineAt === null) {
         result.push({
           ...task,
