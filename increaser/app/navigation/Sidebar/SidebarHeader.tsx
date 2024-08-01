@@ -6,6 +6,7 @@ import { NavigationItemContentFrame } from './NavigationItemContentFrame'
 import { ProductIcon } from '@increaser/ui/icon/ProductIcon'
 import { Text } from '@lib/ui/text'
 import { productName } from '@increaser/config'
+import { FeaturesNavigationItem } from '../../features/FeaturesNavigationItem'
 
 const Container = styled(HStack)`
   ${horizontalPadding(navigationConfig.itemHorizontalPadding)};
@@ -29,6 +30,7 @@ export const SidebarHeader = () => {
           {productName.toLowerCase()}
         </Text>
       </Logo>
+      <FeaturesNavigationItem />
     </Container>
   )
 }

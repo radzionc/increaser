@@ -72,8 +72,8 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       name: 'Ideas',
       icon: <LightBulbIcon />,
     },
-    features: {
-      name: 'Features',
+    roadmap: {
+      name: 'Roadmap',
       icon: <GiftIcon />,
     },
     principles: {

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useCurrentPage } from '../navigation/hooks/useCurrentPage'
 import { getAppPath } from '@increaser/ui/navigation/app'
 import { useUserState } from '@increaser/ui/user/UserStateContext'
 import { useMemo } from 'react'
@@ -9,12 +8,14 @@ import { getColor } from '@lib/ui/theme/getters'
 import { round } from '@lib/ui/css/round'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { navigationPathInfo } from '../navigation/navigationPathInfo'
-import { NavigationItem } from '../navigation/Sidebar/NavigationItem'
+import { IconButton } from '@lib/ui/buttons/IconButton'
+import { BellIcon } from '@lib/ui/icons/BellIcon'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 
 const Pill = styled.div`
   position: absolute;
-  right: 8px;
+  right: -12px;
+  top: -10px;
   background: ${getColor('primary')};
   ${round};
   font-weight: 500;
@@ -26,12 +27,16 @@ const Pill = styled.div`
   ${horizontalPadding(4)}
 `
 
+const Wrapper = styled(IconWrapper)`
+  position: relative;
+  overflow: visible;
+`
+
 export const FeaturesNavigationItem = () => {
-  const currentPage = useCurrentPage()
   const { state: user } = useUserState()
   const newFeaturesCount = useMemo(() => {
     if (!user) {
-      return
+      return 0
     }
 
     const viewedNewFeaturesAt =
@@ -42,21 +47,18 @@ export const FeaturesNavigationItem = () => {
     ).length
   }, [user])
 
-  const rootPage = 'features'
-  const { name, icon } = navigationPathInfo[rootPage]
-
-  const isActive = currentPage === rootPage
-
   return (
-    <Link
-      href={getAppPath('features', newFeaturesCount ? 'updates' : 'requests')}
-    >
-      <NavigationItem
-        icon={icon}
-        name={name}
-        isActive={isActive}
-        decoration={
-          newFeaturesCount ? <Pill>{newFeaturesCount}</Pill> : undefined
+    <Link href={getAppPath('updates')}>
+      <IconButton
+        kind="secondary"
+        title="What's new"
+        size="l"
+        as="div"
+        icon={
+          <Wrapper>
+            <BellIcon />
+            {newFeaturesCount > 0 && <Pill>{newFeaturesCount}</Pill>}
+          </Wrapper>
         }
       />
     </Link>
