@@ -6,7 +6,7 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 type ListItemFormProps = ComponentWithChildrenProps & {
   onSubmit: () => void
   isDisabled?: string | boolean
-  onClose: () => void
+  onClose?: () => void
 }
 
 export const ListItemForm = ({
