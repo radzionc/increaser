@@ -1,5 +1,4 @@
 import { ListIcon } from '@lib/ui/icons/ListIcon'
-import { UserIcon } from '@lib/ui/icons/UserIcon'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
 import { CrownIcon } from '@lib/ui/icons/CrownIcon'
@@ -47,10 +46,6 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     projects: {
       name: 'Projects',
       icon: <ListIcon />,
-    },
-    account: {
-      name: 'Account',
-      icon: <UserIcon />,
     },
     community: {
       name: 'Community',

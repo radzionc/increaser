@@ -7,6 +7,8 @@ import { ProductIcon } from '@increaser/ui/icon/ProductIcon'
 import { Text } from '@lib/ui/text'
 import { productName } from '@increaser/config'
 import { FeaturesNavigationItem } from '../../features/FeaturesNavigationItem'
+import { ManageAccount } from '../../user/components/ManageAccount'
+import { UserStateOnly } from '../../user/state/UserStateOnly'
 
 const Container = styled(HStack)`
   ${horizontalPadding(navigationConfig.itemHorizontalPadding)};
@@ -30,7 +32,12 @@ export const SidebarHeader = () => {
           {productName.toLowerCase()}
         </Text>
       </Logo>
-      <FeaturesNavigationItem />
+      <UserStateOnly>
+        <HStack alignItems="center" gap={4}>
+          <ManageAccount />
+          <FeaturesNavigationItem />
+        </HStack>
+      </UserStateOnly>
     </Container>
   )
 }

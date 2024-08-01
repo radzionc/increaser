@@ -17,7 +17,6 @@ export const secondaryAppNavigationPages = [
   'community',
   'roadmap',
   'membership',
-  'account',
 ] as const
 
 const appNavigationPages = [
@@ -50,7 +49,6 @@ export const appPagePath: Record<AppPage, string> = {
   projects: 'projects',
   community: 'community',
   membership: 'membership',
-  account: 'account',
   oauth: 'oauth',
   signIn: 'sign-in',
   signUp: 'sign-up',
