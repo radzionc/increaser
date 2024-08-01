@@ -38,17 +38,17 @@ export const ManageAccount = () => {
   const options = useMemo(
     () => [
       {
-        name: 'Sign out',
-        icon: <LogOutIcon />,
-        onSelect: () => {
-          setAuthSession(null)
-        },
-      },
-      {
         name: 'Public profile',
         icon: <UserPenIcon />,
         onSelect: () => {
           push(getAppPath('profile'))
+        },
+      },
+      {
+        name: 'Sign out',
+        icon: <LogOutIcon />,
+        onSelect: () => {
+          setAuthSession(null)
         },
       },
     ],
