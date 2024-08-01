@@ -96,8 +96,8 @@ export type User = DayMoments &
   UserEntityRecords & {
     id: string
     email: string
-    country?: CountryCode
-    name?: string
+    country?: CountryCode | null
+    name?: string | null
     sets: Set[]
     registrationDate: number
     freeTrialEnd: number

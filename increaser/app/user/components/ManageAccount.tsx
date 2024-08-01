@@ -15,6 +15,9 @@ import { LogOutIcon } from '@lib/ui/icons/LogOutIcon'
 import { useAuthSession } from '../../auth/hooks/useAuthSession'
 import { useMemo } from 'react'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useRouter } from 'next/router'
+import { UserPenIcon } from '@lib/ui/icons/UserPenIcon'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 const Container = styled(IconButton)<ComponentWithActiveState>`
   border: 1px solid transparent;
@@ -30,6 +33,7 @@ const Container = styled(IconButton)<ComponentWithActiveState>`
 export const ManageAccount = () => {
   const [, setAuthSession] = useAuthSession()
   const { email } = useAssertUserState()
+  const { push } = useRouter()
 
   const options = useMemo(
     () => [
@@ -40,8 +44,15 @@ export const ManageAccount = () => {
           setAuthSession(null)
         },
       },
+      {
+        name: 'Public profile',
+        icon: <UserPenIcon />,
+        onSelect: () => {
+          push(getAppPath('profile'))
+        },
+      },
     ],
-    [setAuthSession],
+    [push, setAuthSession],
   )
 
   const {

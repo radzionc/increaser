@@ -32,6 +32,7 @@ export const appPages = [
   'signUp',
   'emailConfirm',
   'updates',
+  'profile',
 ] as const
 
 export type AppPage = (typeof appPages)[number]
@@ -57,6 +58,7 @@ export const appPagePath: Record<AppPage, string> = {
   roadmap: 'roadmap',
   principles: 'principles',
   updates: 'updates',
+  profile: 'profile',
 }
 
 export const appPageViews = {

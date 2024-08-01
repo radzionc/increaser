@@ -118,7 +118,11 @@ The "Features" page has two sections: "What's New" and "Request Features". In th
 
 ## Community
 
-Finally, the "Community" page features a leaderboard of the most productive users over the past seven days, based on total daily work hours. Users are anonymous by default but can choose to display their name and country on the leaderboard.
+Finally, the "Community" page features a leaderboard of the most productive users over the past seven days, based on total daily work hours. Users are anonymous by default.
+
+## Public Profile
+
+On the "Profile" page the user can enable "public profile" and then their name and country will be shown when they request features or when they are on the leaderboard. Only paid users can enable the public profile.
 
 # Website
 
