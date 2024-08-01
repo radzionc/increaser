@@ -1,11 +1,11 @@
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { UserStateOnly } from '../user/state/UserStateOnly'
-import { NavigationToInternalPage } from '../ui/Navigation/Sidebar/NavigationToInternalPage'
 import { FocusNavigationDecoration } from '@increaser/ui/focus/FocusNavigationDecoration'
 import { Match } from '@lib/ui/base/Match'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { MembershipNavigationDecoration } from '../membership/components/MembershipNavigationDecoration'
 import { FeaturesNavigationItem } from '@increaser/app/features/FeaturesNavigationItem'
+import { NavigationToInternalPage } from './Sidebar/NavigationToInternalPage'
 
 export const SidebarNavigationItem = ({
   value,

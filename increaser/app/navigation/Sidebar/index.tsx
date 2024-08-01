@@ -1,14 +1,14 @@
 import { usePWA } from '@increaser/app/pwa/PWAContext'
 import styled from 'styled-components'
-import { InstallPrompt } from '@increaser/app/ui/Navigation/Sidebar/InstallPrompt'
 import { VStack } from '@lib/ui/layout/Stack'
 
 import { getColor } from '@lib/ui/theme/getters'
-import { SidebarNavigationItem } from '../../../navigation/SidebarNavigationItem'
 import {
   primaryAppNavigationPages,
   secondaryAppNavigationPages,
 } from '@increaser/ui/navigation/app'
+import { SidebarNavigationItem } from '../SidebarNavigationItem'
+import { InstallPrompt } from './InstallPrompt'
 
 const Container = styled.div`
   min-width: 260px;

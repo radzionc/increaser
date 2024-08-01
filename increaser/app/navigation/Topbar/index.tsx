@@ -1,15 +1,15 @@
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import styled from 'styled-components'
-import { navigationPathInfo } from '@increaser/app/ui/Navigation/navigationPathInfo'
-import { Sidebar } from '@increaser/app/ui/Navigation/Sidebar'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 
 import { SidebarOpener } from './SidebarOpener'
 import { CompleteMist } from '@lib/ui/modal/CompleteMist'
 import { Spacer } from '@lib/ui/layout/Spacer'
-import { useCurrentPage } from '../../../navigation/hooks/useCurrentPage'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
+import { useCurrentPage } from '../hooks/useCurrentPage'
+import { navigationPathInfo } from '../navigationPathInfo'
+import { Sidebar } from '../Sidebar'
 
 const Container = styled.div`
   width: 100%;

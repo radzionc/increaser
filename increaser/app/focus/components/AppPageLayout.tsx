@@ -1,3 +1,3 @@
-import { Navigation } from '@increaser/app/ui/Navigation'
+import { Navigation } from '../../navigation'
 
 export const AppPageLayout = Navigation

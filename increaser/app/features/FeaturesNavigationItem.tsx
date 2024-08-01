@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import { useCurrentPage } from '../navigation/hooks/useCurrentPage'
-import { navigationPathInfo } from '../ui/Navigation/navigationPathInfo'
-import { NavigationItem } from '../ui/Navigation/Sidebar/NavigationItem'
 import { getAppPath } from '@increaser/ui/navigation/app'
 import { useUserState } from '@increaser/ui/user/UserStateContext'
 import { useMemo } from 'react'
@@ -11,6 +9,8 @@ import { getColor } from '@lib/ui/theme/getters'
 import { round } from '@lib/ui/css/round'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { navigationPathInfo } from '../navigation/navigationPathInfo'
+import { NavigationItem } from '../navigation/Sidebar/NavigationItem'
 
 const Pill = styled.div`
   position: absolute;
