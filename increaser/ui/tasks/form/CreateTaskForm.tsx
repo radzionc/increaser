@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { UIComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Task } from '@increaser/entities/Task'
-import { Panel } from '@lib/ui/panel/Panel'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
@@ -11,7 +9,6 @@ import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { fixChecklist } from './checklist/fixChecklist'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
@@ -23,8 +20,9 @@ import { TaskDeadlineInput } from '../TaskDeadlineInput'
 import { ExportFromTemplate } from './ExportFromTemplate'
 import { endOfDay } from 'date-fns'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
-type CreateTaskFormProps = UIComponentProps & {
+type CreateTaskFormProps = {
   defaultValue?: Partial<TaskFormShape>
   onFinish?: (task?: Task) => void
   onMutationFinish?: (task: Task) => void
@@ -34,7 +32,6 @@ export const CreateTaskForm = ({
   onFinish,
   onMutationFinish,
   defaultValue,
-  ...rest
 }: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFormShape>({
     name: '',
@@ -87,16 +84,10 @@ export const CreateTaskForm = ({
   const hasProjectSelectorAutoFocus = !defaultValue?.projectId
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      {...rest}
+    <ListItemForm
+      onClose={() => onFinish?.()}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -167,6 +158,6 @@ export const CreateTaskForm = ({
           }}
         />
       </HStack>
-    </Panel>
+    </ListItemForm>
   )
 }

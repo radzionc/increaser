@@ -1,10 +1,8 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
 import { Principle } from '@increaser/entities/Principle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -16,6 +14,7 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { useCurrentPrinciple } from '../CurrentPrincipleProvider'
 import { PrincipleCategorySelector } from './PrincipleCategorySelector'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const EditPrincipleForm = () => {
   const principle = useCurrentPrinciple()
@@ -55,16 +54,10 @@ export const EditPrincipleForm = () => {
   }, [isDisabled, principle, onFinish, updatePrinciple, value])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      style={{ width: '100%' }}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -100,6 +93,6 @@ export const EditPrincipleForm = () => {
         onCancel={onFinish}
         isDisabled={isDisabled}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

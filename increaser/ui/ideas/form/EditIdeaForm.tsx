@@ -1,11 +1,9 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
 import { Idea } from '@increaser/entities/Idea'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -17,6 +15,7 @@ import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInpu
 import { TurnIdeaIntoTask } from './TurnIdeaIntoTask'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const EditIdeaForm = () => {
   const idea = useCurrentIdea()
@@ -56,16 +55,10 @@ export const EditIdeaForm = () => {
   }, [isDisabled, idea, onFinish, updateIdea, value])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      style={{ width: '100%' }}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -102,6 +95,6 @@ export const EditIdeaForm = () => {
         onCancel={onFinish}
         isDisabled={isDisabled}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

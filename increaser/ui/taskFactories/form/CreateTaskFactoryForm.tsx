@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { Panel } from '@lib/ui/panel/Panel'
 import { HStack } from '@lib/ui/layout/Stack'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { fixLinks } from '../../tasks/form/fixLinks'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskCadenceInput } from './TaskCadenceInput'
@@ -23,6 +21,7 @@ import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
 type CreateTaskFormProps = {
   onFinish?: (id?: string) => void
@@ -75,15 +74,10 @@ export const CreateTaskFactoryForm = ({
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: () => onFinish?.(),
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={() => onFinish?.()}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -155,6 +149,6 @@ export const CreateTaskFactoryForm = ({
         onCancel={() => onFinish?.()}
         isDisabled={isDisabled}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

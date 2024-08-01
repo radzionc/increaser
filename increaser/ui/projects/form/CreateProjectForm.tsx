@@ -1,6 +1,4 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { ProjectFormShape } from './ProjectFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
@@ -19,6 +17,7 @@ import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { Project } from '@increaser/entities/Project'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { ListItemForm } from '../../form/ListItemForm'
 
 type CreateProjectFormProps = {
   onFinish?: (project?: Project) => void
@@ -62,15 +61,10 @@ export const CreateProjectForm = ({
   }, [activeProjects, isDisabled, mutate, onFinish, onMutationFinish, value])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={() => onFinish?.()}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiColorTextInputFrame>
         <div>
@@ -99,6 +93,6 @@ export const CreateProjectForm = ({
         isPending={isPending}
         onCancel={() => onFinish?.()}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

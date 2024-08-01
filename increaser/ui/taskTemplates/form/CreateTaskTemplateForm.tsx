@@ -1,9 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { Panel } from '@lib/ui/panel/Panel'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
@@ -15,6 +13,7 @@ import { FinishableComponentProps } from '@lib/ui/props'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const CreateTaskTemplateForm = ({
   onFinish,
@@ -42,15 +41,10 @@ export const CreateTaskTemplateForm = ({
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: () => onFinish(),
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -93,6 +87,6 @@ export const CreateTaskTemplateForm = ({
           onFinish()
         }}
       />
-    </Panel>
+    </ListItemForm>
   )
 }
