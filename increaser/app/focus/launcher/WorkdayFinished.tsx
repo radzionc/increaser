@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { UnlockIcon } from '@lib/ui/icons/UnlockIcon'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 
 const Overlay = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -38,26 +39,35 @@ export const WorkdayFinished = () => {
   }
 
   return (
-    <Overlay>
-      <VStack alignItems="center" gap={40}>
-        <VStack gap={16} alignItems="center">
-          <Text color="contrast" weight="bold" size={20}>
-            🎉 Workday Accomplished!
-          </Text>
+    <ElementSizeAware
+      render={({ setElement, size }) => {
+        const isSmall = size && size.height < 320
+        return (
+          <Overlay ref={setElement}>
+            <VStack alignItems="center" gap={isSmall ? 20 : 40}>
+              <VStack gap={16} alignItems="center">
+                <Text color="contrast" weight="bold" size={20}>
+                  🎉 Workday Accomplished!
+                </Text>
 
-          <Text style={{ maxWidth: 320 }} centered height="large">
-            Embrace your evening, recharge, and wake up ready to conquer
-            tomorrow.
-          </Text>
-        </VStack>
+                {!isSmall && (
+                  <Text style={{ maxWidth: 320 }} centered height="large">
+                    Embrace your evening, recharge, and wake up ready to conquer
+                    tomorrow.
+                  </Text>
+                )}
+              </VStack>
 
-        <Button onClick={() => setIsLocked(false)} kind="alert">
-          <HStack alignItems="center" gap={8}>
-            <UnlockIcon />
-            <Text>Continue working</Text>
-          </HStack>
-        </Button>
-      </VStack>
-    </Overlay>
+              <Button onClick={() => setIsLocked(false)} kind="alert">
+                <HStack alignItems="center" gap={8}>
+                  <UnlockIcon />
+                  <Text>Continue working</Text>
+                </HStack>
+              </Button>
+            </VStack>
+          </Overlay>
+        )
+      }}
+    />
   )
 }
