@@ -12,7 +12,7 @@ import { ProfileForm } from './form/ProfileForm'
 
 const title = `Profile`
 
-const maxWidth = 480
+const maxWidth = 440
 
 export const ProfilePage: Page = () => {
   return (
