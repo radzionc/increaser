@@ -34,6 +34,8 @@ import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { pick } from '@lib/utils/record/pick'
 import { useAddSetsMutation } from '../../sets/hooks/useAddSetsMutation'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
+import { Minutes } from '@lib/utils/time/types'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -290,6 +292,38 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
     )
   }, [setSession])
 
+  const reduceLastInterval = useCallback(
+    (duration: Minutes) => {
+      const now = Date.now()
+      setSession((session) =>
+        session
+          ? {
+              ...session,
+              intervals: [
+                ...updateAtIndex(
+                  session.intervals,
+                  session.intervals.length - 1,
+                  (interval) => ({
+                    ...interval,
+                    end: now - convertDuration(duration, 'min', 'ms'),
+                  }),
+                ),
+                {
+                  start: now,
+                  end: null,
+                  ...pick(getLastItem(session.intervals), [
+                    'projectId',
+                    'taskId',
+                  ]),
+                },
+              ],
+            }
+          : session,
+      )
+    },
+    [setSession],
+  )
+
   return (
     <FocusContext.Provider
       value={{
@@ -303,6 +337,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
         session,
         focusDuration,
         setFocusDuration,
+        reduceLastInterval,
       }}
     >
       {session ? (

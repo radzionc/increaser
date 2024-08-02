@@ -32,6 +32,7 @@ export const DemoFocusProvider = ({ children }: Props) => {
         resume: () => {},
         updateProject: () => {},
         updateTask: () => {},
+        reduceLastInterval: () => {},
         stop,
         cancel: () => {},
         session,
