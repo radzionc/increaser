@@ -11,10 +11,13 @@ import {
 } from '@increaser/entities/PerformanceScoreboard'
 import { useApiQuery } from '@increaser/api-ui/hooks/useApiQuery'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
+import { useAssertUserState } from '../user/UserStateContext'
+import { PublicProfilePrompt } from './PublicProfilePrompt'
 
 export const Scoreboard = () => {
   const scoreboardPeriod: ScoreboardPeriod = 'week'
   const query = useApiQuery('scoreboard', { id: scoreboardPeriod })
+  const { isAnonymous } = useAssertUserState()
 
   return (
     <Panel kind="secondary">
@@ -26,6 +29,7 @@ export const Scoreboard = () => {
           query={query}
           success={(value) => (
             <VStack gap={24}>
+              {value.myPosition && isAnonymous && <PublicProfilePrompt />}
               <ScoreboardTable
                 myPosition={value.myPosition}
                 users={value.users}

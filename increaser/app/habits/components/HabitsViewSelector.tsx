@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 import { useCurrentPageView } from '../../navigation/hooks/useCurrentPageView'
 
 const habitsViewName: Record<AppPageHabitsView, string> = {
-  my: 'My habits',
-  ideas: 'Habit ideas',
+  my: 'Habits',
+  ideas: 'Explore',
 }
 
 export const HabitsViewSelector = () => {

@@ -14,7 +14,6 @@ import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
-import { transition } from '@lib/ui/css/transition'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { dayTimeLabelsWidthInPx } from '@increaser/app/sets/components/DayTimeLabels'
 
@@ -29,7 +28,6 @@ const Container = styled.div`
   width: calc(100% - ${leftOffset}px - ${horizontalPaddingInPx}px);
   left: ${leftOffset}px;
   position: absolute;
-  ${transition};
 `
 
 const Content = styled.div`

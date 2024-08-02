@@ -1,10 +1,8 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
 import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { VisionImageInput } from './VisionImageInput'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { pick } from '@lib/utils/record/pick'
@@ -15,6 +13,7 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -59,16 +58,10 @@ export const EditVisionAttributeForm = () => {
   ])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      style={{ width: '100%' }}
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -97,6 +90,6 @@ export const EditVisionAttributeForm = () => {
         onCancel={onFinish}
         isDisabled={isDisabled}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

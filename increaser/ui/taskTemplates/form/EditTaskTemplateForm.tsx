@@ -1,11 +1,9 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { fixLinks } from '../../tasks/form/fixLinks'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
@@ -18,6 +16,7 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -52,16 +51,10 @@ export const EditTaskTemplateForm = () => {
   }
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      style={{ width: '100%' }}
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -103,6 +96,6 @@ export const EditTaskTemplateForm = () => {
         onCancel={onFinish}
         isDisabled={isDisabled}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

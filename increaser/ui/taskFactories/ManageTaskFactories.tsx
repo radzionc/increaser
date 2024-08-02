@@ -5,9 +5,19 @@ import { useTaskFactories } from './hooks/useTaskFactories'
 import { CurrentTaskFactoryProvider } from './CurrentTaskFactoryProvider'
 import { TaskFactoryItem } from './TaskFactoryItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { useProjectFilter } from '../projects/filter/useProjectFilter'
+import { useMemo } from 'react'
 
 export const ManageTaskFactories = () => {
-  const items = useTaskFactories()
+  const taskFactories = useTaskFactories()
+
+  const [projectId] = useProjectFilter()
+
+  const items = useMemo(() => {
+    return taskFactories.filter(({ task }) => {
+      return projectId ? task.projectId === projectId : true
+    })
+  }, [projectId, taskFactories])
 
   return (
     <>

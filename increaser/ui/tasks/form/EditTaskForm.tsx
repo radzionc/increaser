@@ -10,5 +10,5 @@ export const EditTaskForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  return <EditTaskFormContent style={{ width: '100%' }} onFinish={onFinish} />
+  return <EditTaskFormContent onFinish={onFinish} />
 }

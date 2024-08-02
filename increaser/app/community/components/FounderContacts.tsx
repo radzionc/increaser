@@ -63,7 +63,7 @@ export const FounderContacts = () => {
               </HStack>
             </Button>
           </ExternalLink>
-          <HStack gap={16} alignItems="center">
+          <HStack gap={4} alignItems="center">
             <SocialLink to={founderXUrl}>
               <XIcon />
             </SocialLink>

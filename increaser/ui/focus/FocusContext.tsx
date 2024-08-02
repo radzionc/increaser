@@ -2,6 +2,7 @@ import { Set } from '@increaser/entities/User'
 import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
+import { Minutes } from '@lib/utils/time/types'
 
 export interface StartFocusParams {
   projectId: string
@@ -27,6 +28,8 @@ export type StopFocusParams = {
 
 export interface FocusState {
   start: (params: StartFocusParams) => void
+
+  reduceLastInterval: (duration: Minutes) => void
 
   pause: () => void
   resume: () => void

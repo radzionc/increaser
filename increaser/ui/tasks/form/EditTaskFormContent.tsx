@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Task } from '@increaser/entities/Task'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
-import { Button } from '@lib/ui/buttons/Button'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
@@ -13,9 +12,7 @@ import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { fixChecklist } from './checklist/fixChecklist'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
-import { FinishableComponentProps, UIComponentProps } from '@lib/ui/props'
-import { Panel } from '@lib/ui/panel/Panel'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
+import { FinishableComponentProps } from '@lib/ui/props'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { TaskDescriptionInput } from './TaskDescriptionInput'
@@ -23,13 +20,12 @@ import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
+import { ListItemForm } from '../../form/ListItemForm'
 
-type EditTaskFormContentProps = FinishableComponentProps & UIComponentProps
+type EditTaskFormContentProps = FinishableComponentProps
 
-export const EditTaskFormContent = ({
-  onFinish,
-  ...rest
-}: EditTaskFormContentProps) => {
+export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const { tasks } = useAssertUserState()
   const task = useCurrentTask()
   const initialValue = pick(task, [
@@ -73,16 +69,10 @@ export const EditTaskFormContent = ({
   }
 
   return (
-    <Panel
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      withSections
-      kind="secondary"
-      {...rest}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -125,30 +115,14 @@ export const EditTaskFormContent = ({
         />
       </VStack>
 
-      <HStack
-        wrap="wrap"
-        justifyContent="space-between"
-        fullWidth
-        alignItems="center"
-        gap={20}
-      >
-        <Button
-          kind="alert"
-          type="button"
-          onClick={() => {
-            deleteTask(task.id)
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
-        <HStack alignItems="center" gap={8}>
-          <Button type="button" onClick={onFinish} kind="secondary">
-            Cancel
-          </Button>
-          <Button isDisabled={isDisabled}>Save</Button>
-        </HStack>
-      </HStack>
-    </Panel>
+      <EditDeleteFormFooter
+        onDelete={() => {
+          deleteTask(task.id)
+          onFinish()
+        }}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
+    </ListItemForm>
   )
 }

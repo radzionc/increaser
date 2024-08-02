@@ -1,11 +1,9 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
 import { useCurrentGoal } from '../CurrentGoalProvider'
 import { Goal } from '@increaser/entities/Goal'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalFormShape } from './GoalFormShape'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -13,6 +11,7 @@ import { omit } from '@lib/utils/record/omit'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { GoalFormFields } from './GoalFormFields'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const EditGoalForm = () => {
   const goal = useCurrentGoal()
@@ -53,16 +52,10 @@ export const EditGoalForm = () => {
   }, [goal, isDisabled, onFinish, updateGoal, value])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      style={{ width: '100%' }}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <GoalFormFields value={value} onChange={setValue} onSubmit={onSubmit} />
       <EditDeleteFormFooter
@@ -73,6 +66,6 @@ export const EditGoalForm = () => {
         onCancel={onFinish}
         isDisabled={isDisabled}
       />
-    </Panel>
+    </ListItemForm>
   )
 }

@@ -1,11 +1,9 @@
 import { useCallback, useState } from 'react'
-import { Panel } from '@lib/ui/panel/Panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { Project, ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -19,6 +17,7 @@ import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldPr
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -92,16 +91,10 @@ export const EditProjectForm = () => {
   ])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
-      style={{ width: '100%' }}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiColorTextInputFrame>
         <div>
@@ -148,6 +141,6 @@ export const EditProjectForm = () => {
           <Button>Save</Button>
         </HStack>
       </HStack>
-    </Panel>
+    </ListItemForm>
   )
 }

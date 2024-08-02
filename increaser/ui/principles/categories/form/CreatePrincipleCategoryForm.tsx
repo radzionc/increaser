@@ -1,8 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { Panel } from '@lib/ui/panel/Panel'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
@@ -12,6 +10,7 @@ import { useIsPrincipleCategoryFormDisabled } from './useIsPrincipleCategoryForm
 import { PrincipleCategoryFormShape } from './PrincipleCategoryFormShape'
 import { EmojiTextInputFrame } from '../../../form/EmojiTextInputFrame'
 import { EmojiInput } from '@increaser/app/ui/EmojiInput'
+import { ListItemForm } from '../../../form/ListItemForm'
 
 export const CreatePrincipleCategoryForm = ({
   onFinish,
@@ -37,15 +36,10 @@ export const CreatePrincipleCategoryForm = ({
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -63,6 +57,6 @@ export const CreatePrincipleCategoryForm = ({
         />
       </EmojiTextInputFrame>
       <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
-    </Panel>
+    </ListItemForm>
   )
 }

@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 import { useCurrentPageView } from '../navigation/hooks/useCurrentPageView'
 
 const visionViewName: Record<AppPageVisionView, string> = {
-  my: 'My vision',
-  ideas: 'Vision ideas',
+  my: 'Vision',
+  ideas: 'Explore',
 }
 
 export const VisionViewSelector = () => {

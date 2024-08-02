@@ -7,7 +7,7 @@ import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjec
 import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
 import { ProjectsBudgetReport } from '@increaser/ui/projects/budget/ProjectsBudgetReport'
 
-const title = 'Projects budget'
+const title = 'Time Planning'
 
 export const ProjectsBudgetPage: Page = () => {
   return (

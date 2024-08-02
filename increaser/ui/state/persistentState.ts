@@ -41,7 +41,9 @@ export enum PersistentStateKey {
   AreFocusSoundsCollapsed = 'areFocusSoundsCollapsed',
   YouTubePlayerPosition = 'youTubePlayerPosition',
   WorkTimeReportPreferences = 'workTimeReportPreferences',
-  GoalsView = 'goalsView',
+  GoalsStatusFilter = 'goalsStatusFilter',
+  IsGoalsEducationOpen = 'isGoalsEducationOpen',
+  ProjectFilter = 'projectFilter',
 }
 
 export const persistentStorage =

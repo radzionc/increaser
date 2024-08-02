@@ -25,7 +25,7 @@ export const ProductFeatureDetails = () => {
                   return (
                     <ScoreboardDisplayName
                       name={profile?.name || 'Anonymous'}
-                      country={profile?.country}
+                      country={profile?.country ?? undefined}
                     />
                   )
                 }}

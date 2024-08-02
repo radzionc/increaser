@@ -9,10 +9,9 @@ import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { toPercents } from '@lib/utils/toPercents'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import { VStack } from '@lib/ui/layout/Stack'
-import { useActiveGoals } from '../hooks/useActiveGoals'
 import { CurrentGoalProvider } from '../CurrentGoalProvider'
 import { TimelineGoalItem } from './TimelineGoalItem'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useFilteredScheduledGoals } from '../filter/useFilteredScheduledGoals'
 
 const Container = styled(VStack)`
   position: relative;
@@ -20,7 +19,7 @@ const Container = styled(VStack)`
 `
 
 export const GroupedGoals = () => {
-  const items = useActiveGoals()
+  const items = useFilteredScheduledGoals()
   const { dob, interval } = useGoalsTimeline()
 
   const intervalDuration = getIntervalDuration(interval)
@@ -28,7 +27,7 @@ export const GroupedGoals = () => {
   const groupedGoals = useMemo(() => {
     return groupItems(items, ({ deadlineAt }) =>
       getGoalDeadlineTimestamp({
-        deadlineAt: shouldBePresent(deadlineAt),
+        deadlineAt,
         dob,
       }),
     )

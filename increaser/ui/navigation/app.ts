@@ -1,13 +1,13 @@
 export const primaryAppNavigationPages = [
   'focus',
+  'tasks',
+  'goals',
   'timeTracking',
   'workBudget',
   'timePlanning',
   'habits',
-  'tasks',
   'schedule',
   'vision',
-  'goals',
   'projects',
   'ideas',
   'principles',
@@ -15,9 +15,8 @@ export const primaryAppNavigationPages = [
 
 export const secondaryAppNavigationPages = [
   'community',
-  'features',
+  'roadmap',
   'membership',
-  'account',
 ] as const
 
 const appNavigationPages = [
@@ -32,6 +31,8 @@ export const appPages = [
   'signIn',
   'signUp',
   'emailConfirm',
+  'updates',
+  'profile',
 ] as const
 
 export type AppPage = (typeof appPages)[number]
@@ -49,27 +50,26 @@ export const appPagePath: Record<AppPage, string> = {
   projects: 'projects',
   community: 'community',
   membership: 'membership',
-  account: 'account',
   oauth: 'oauth',
   signIn: 'sign-in',
   signUp: 'sign-up',
   emailConfirm: 'email-confirm',
   ideas: 'ideas',
-  features: 'features',
+  roadmap: 'roadmap',
   principles: 'principles',
+  updates: 'updates',
+  profile: 'profile',
 }
 
 export const appPageViews = {
   timeTracking: ['report', 'track'],
   vision: ['my', 'ideas'],
   habits: ['my', 'ideas'],
-  features: ['updates', 'requests'],
   principles: ['my', 'ideas'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
 export type AppPageHabitsView = (typeof appPageViews)['habits'][number]
-export type AppPageFeaturesView = (typeof appPageViews)['features'][number]
 export type AppPagePrinciplesView = (typeof appPageViews)['principles'][number]
 
 type AppPageViews = typeof appPageViews

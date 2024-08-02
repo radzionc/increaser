@@ -10,15 +10,15 @@ import { addYears } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { order } from '@lib/utils/array/order'
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useActiveGoals } from '../hooks/useActiveGoals'
 import { isEmpty } from '@lib/utils/array/isEmpty'
+import { useFilteredScheduledGoals } from '../filter/useFilteredScheduledGoals'
 
 const maxLabelsCount = 10
 
 export const GoalsTimelineProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const goals = useActiveGoals()
+  const goals = useFilteredScheduledGoals()
   const { dob: potentialDob } = useAssertUserState()
   const dob = shouldBePresent(potentialDob)
 

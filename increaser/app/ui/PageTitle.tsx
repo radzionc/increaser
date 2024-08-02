@@ -28,7 +28,7 @@ export const PageTitle = ({
       <HStack fullWidth justifyContent="space-between">
         <>
           <Text
-            weight="semibold"
+            weight="bold"
             style={{ flex: 1 }}
             as="div"
             color="contrast"

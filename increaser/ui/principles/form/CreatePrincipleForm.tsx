@@ -1,8 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { Panel } from '@lib/ui/panel/Panel'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
@@ -12,6 +10,7 @@ import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { PrincipleCategorySelector } from './PrincipleCategorySelector'
+import { ListItemForm } from '../../form/ListItemForm'
 
 export const CreatePrincipleForm = ({ onFinish }: FinishableComponentProps) => {
   const [value, setValue] = useState<PrincipleFormShape>({
@@ -37,15 +36,10 @@ export const CreatePrincipleForm = ({ onFinish }: FinishableComponentProps) => {
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -76,6 +70,6 @@ export const CreatePrincipleForm = ({ onFinish }: FinishableComponentProps) => {
         value={value.description}
       />
       <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
-    </Panel>
+    </ListItemForm>
   )
 }

@@ -1,10 +1,6 @@
 import { useCallback, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { Panel } from '@lib/ui/panel/Panel'
-import { HStack } from '@lib/ui/layout/Stack'
-import { Button } from '@lib/ui/buttons/Button'
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VisionImageInput } from './VisionImageInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
@@ -16,6 +12,8 @@ import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
+import { ListItemForm } from '../../form/ListItemForm'
+import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -45,15 +43,10 @@ export const CreateVisionAttributeForm = ({
   }, [isDisabled, mutate, onFinish, value, vision])
 
   return (
-    <Panel
-      withSections
-      kind="secondary"
-      as="form"
-      {...getFormProps({
-        onClose: onFinish,
-        isDisabled,
-        onSubmit,
-      })}
+    <ListItemForm
+      onClose={onFinish}
+      onSubmit={onSubmit}
+      isDisabled={isDisabled}
     >
       <EmojiTextInputFrame>
         <div>
@@ -73,14 +66,7 @@ export const CreateVisionAttributeForm = ({
         onChange={(imageId) => setValue((prev) => ({ ...prev, imageId }))}
         value={value.imageId ?? null}
       />
-      <HStack justifyContent="space-between" fullWidth alignItems="center">
-        <HStack alignItems="center" gap={8}>
-          <Button onClick={onFinish} kind="secondary">
-            Cancel
-          </Button>
-          <Button isDisabled={isDisabled}>Submit</Button>
-        </HStack>
-      </HStack>
-    </Panel>
+      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+    </ListItemForm>
   )
 }

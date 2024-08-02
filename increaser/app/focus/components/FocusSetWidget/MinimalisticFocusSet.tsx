@@ -12,6 +12,7 @@ import { focusSetWidgetConfig } from './config'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { PauseFocusSession } from './PauseFocusSession'
 import { SessionIntervals } from './SessionIntervals'
+import { CropLastInterval } from './CropLastInterval'
 
 const Wrapper = styled(VStack)`
   width: 100%;
@@ -67,6 +68,7 @@ export const MinimalisticFocusSet = () => {
             </Text>
           </HStack>
           <HStack gap={8}>
+            <CropLastInterval />
             <Button size="l" type="button" kind="outlined" onClick={cancel}>
               Cancel
             </Button>

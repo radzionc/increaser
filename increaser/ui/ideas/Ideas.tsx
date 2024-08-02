@@ -5,6 +5,8 @@ import { IdeaItem } from './IdeaItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddIdea } from './AddIdea'
 import styled from 'styled-components'
+import { useMemo } from 'react'
+import { useProjectFilter } from '../projects/filter/useProjectFilter'
 
 const Container = styled(VStack)`
   max-width: 560px;
@@ -13,11 +15,19 @@ const Container = styled(VStack)`
 export const Ideas = () => {
   const items = useIdeas()
 
+  const [projectId] = useProjectFilter()
+
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => {
+      return projectId ? item.projectId === projectId : true
+    })
+  }, [projectId, items])
+
   return (
     <Container>
       <AddIdea />
       <ActiveItemIdProvider initialValue={null}>
-        {items.map((item) => (
+        {filteredItems.map((item) => (
           <CurrentIdeaProvider key={item.id} value={item}>
             <IdeaItem />
           </CurrentIdeaProvider>
