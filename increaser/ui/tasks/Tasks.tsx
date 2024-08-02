@@ -8,8 +8,8 @@ import {
 import { TasksDone } from '@increaser/ui/tasks/TasksDone'
 import { TasksBacklogView } from '@increaser/ui/tasks/TasksBacklogView'
 import { TasksToDoView } from './TasksToDoView'
-import { TasksFilterProvider } from './filter/TasksFilterProvider'
-import { ManageTasksFilter } from './filter/ManageTasksFilter'
+import { ManageProjectFilter } from '../projects/filter/ManageProjectFilter'
+import { ProjectFilterProvider } from '../projects/filter/ProjectFilterProvider'
 
 const TasksContainer = styled(VStack)`
   max-width: 560px;
@@ -19,7 +19,7 @@ const TasksContainer = styled(VStack)`
 
 export const Tasks = () => {
   return (
-    <TasksFilterProvider initialValue={{ projectId: null }}>
+    <ProjectFilterProvider initialValue={null}>
       <TasksContainer>
         <TasksViewProvider>
           <HStack
@@ -29,7 +29,7 @@ export const Tasks = () => {
             justifyContent="space-between"
           >
             <TasksViewSelector />
-            <ManageTasksFilter />
+            <ManageProjectFilter />
           </HStack>
           <RenderTasksView
             done={() => <TasksDone />}
@@ -38,6 +38,6 @@ export const Tasks = () => {
           />
         </TasksViewProvider>
       </TasksContainer>
-    </TasksFilterProvider>
+    </ProjectFilterProvider>
   )
 }

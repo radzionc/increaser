@@ -4,12 +4,12 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { findBy } from '@lib/utils/array/findBy'
-import { useActiveProjects } from '../../projects/hooks/useActiveProjects'
-import { useTasksFilter } from './TasksFilterProvider'
+import { useActiveProjects } from '../hooks/useActiveProjects'
+import { useProjectFilter } from './ProjectFilterProvider'
 
-export const ManageTasksFilter = () => {
+export const ManageProjectFilter = () => {
   const items = useActiveProjects()
-  const [{ projectId }, setValue] = useTasksFilter()
+  const [projectId, setValue] = useProjectFilter()
 
   const getProjectFilterName = (id: string | null) => {
     if (!id) {
@@ -22,7 +22,7 @@ export const ManageTasksFilter = () => {
   return (
     <ExpandableSelector
       value={projectId}
-      onChange={(projectId) => setValue((prev) => ({ ...prev, projectId }))}
+      onChange={setValue}
       floatingOptionsWidthSameAsOpener={false}
       options={[...items.map((item) => item.id), null]}
       getOptionKey={getProjectFilterName}

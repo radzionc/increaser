@@ -3,27 +3,19 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { getStateProviderSetup } from '@lib/ui/state/getStateProviderSetup'
 import { findBy } from '@lib/utils/array/findBy'
 
-type TasksFilter = {
-  projectId: string | null
-}
-
 export const {
-  useState: useUncheckedTasksFilter,
-  provider: TasksFilterProvider,
-} = getStateProviderSetup<TasksFilter>('TasksFilter')
+  useState: useUncheckedProjectFilter,
+  provider: ProjectFilterProvider,
+} = getStateProviderSetup<string | null>('ProjectFilter')
 
-export const useTasksFilter = () => {
+export const useProjectFilter = () => {
   const activeProjects = useActiveProjects()
 
-  return useStateCorrector(useUncheckedTasksFilter(), (value) => {
-    const { projectId } = value
+  return useStateCorrector(useUncheckedProjectFilter(), (projectId) => {
     if (projectId && !findBy(activeProjects, 'id', projectId)) {
-      return {
-        ...value,
-        projectId: null,
-      }
+      return null
     }
 
-    return value
+    return projectId
   })
 }
