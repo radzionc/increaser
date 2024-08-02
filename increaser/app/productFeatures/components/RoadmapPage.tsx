@@ -17,12 +17,13 @@ import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ProductFeatureList } from './ProductFeatureList'
 import { FeatureForm } from './form/FeatureForm'
 import { FounderContacts } from '../../community/components/FounderContacts'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 
 const title = `Roadmap`
 
 const contentWidth = 520
 const gap = 40
-// const educationMinWidth = 280
+const sideContentMinWidth = 280
 
 const Content = styled(HStack)`
   width: 100%;
@@ -30,39 +31,56 @@ const Content = styled(HStack)`
   align-items: start;
 `
 
-const SideContent = styled(PageContent)`
+const SideContainer = styled(PageContent)`
   position: sticky;
   top: 0;
 `
 
+const SideContent = () => (
+  <VStack gap={24}>
+    <FeatureForm />
+    <FounderContacts />
+  </VStack>
+)
+
 export const RoadmapPage: Page = () => {
   return (
-    <PageContainer>
-      <Content>
-        <PageContent style={{ maxWidth: contentWidth }}>
-          <ProductFeaturesViewProvider>
-            <PageHeader>
-              <PageTitle>{title}</PageTitle>
-              <PageDocumentTitle emoji="🎯" title={title} />
-              <ClientOnly>
-                <ProductFeaturesViewSelector />
-              </ClientOnly>
-            </PageHeader>
-            <UserStateOnly>
-              <VStack>
-                <ProductFeatureList />
-              </VStack>
-            </UserStateOnly>
-          </ProductFeaturesViewProvider>
-        </PageContent>
-        <UserStateOnly>
-          <SideContent>
-            <PageTitle>Request a Feature</PageTitle>
-            <FeatureForm />
-            <FounderContacts />
-          </SideContent>
-        </UserStateOnly>
-      </Content>
-    </PageContainer>
+    <ElementSizeAware
+      render={({ setElement, size }) => {
+        const isSmall =
+          size && size.width - contentWidth - gap < sideContentMinWidth
+        return (
+          <PageContainer ref={setElement}>
+            <Content>
+              <PageContent style={{ maxWidth: contentWidth }}>
+                <ProductFeaturesViewProvider>
+                  <PageHeader>
+                    <PageTitle>{title}</PageTitle>
+                    <PageDocumentTitle emoji="🎯" title={title} />
+                    <ClientOnly>
+                      <ProductFeaturesViewSelector />
+                    </ClientOnly>
+                  </PageHeader>
+                  <UserStateOnly>
+                    <VStack gap={20}>
+                      {isSmall && <SideContent />}
+                      <ProductFeatureList />
+                    </VStack>
+                  </UserStateOnly>
+                </ProductFeaturesViewProvider>
+              </PageContent>
+              {!isSmall && (
+                <UserStateOnly>
+                  <SideContainer>
+                    <PageTitle>Request a Feature</PageTitle>
+                    <SideContent />
+                  </SideContainer>
+                </UserStateOnly>
+              )}
+            </Content>
+          </PageContainer>
+        )
+      }}
+    />
   )
 }

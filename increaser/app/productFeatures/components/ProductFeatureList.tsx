@@ -7,6 +7,7 @@ import { ProductFeatureItem } from './ProductFeatureItem'
 import { useProductFeaturesView } from './ProductFeaturesView'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CurrentProductFeatureProvider } from './CurrentProductFeatureProvider'
+import { VStack } from '@lib/ui/layout/Stack'
 
 export const ProductFeatureList = () => {
   const featuresQuery = useApiQuery('features', undefined)
@@ -14,29 +15,31 @@ export const ProductFeatureList = () => {
   const { id } = useAssertUserState()
 
   return (
-    <QueryDependant
-      query={featuresQuery}
-      {...getQueryDependantDefaultProps('features')}
-      success={(features) => {
-        const [myUnapprovedFeatures, otherFeatures] = splitBy(
-          features.filter((feature) => view === feature.status),
-          (feature) =>
-            feature.proposedBy === id && !feature.isApproved ? 0 : 1,
-        )
+    <VStack>
+      <QueryDependant
+        query={featuresQuery}
+        {...getQueryDependantDefaultProps('features')}
+        success={(features) => {
+          const [myUnapprovedFeatures, otherFeatures] = splitBy(
+            features.filter((feature) => view === feature.status),
+            (feature) =>
+              feature.proposedBy === id && !feature.isApproved ? 0 : 1,
+          )
 
-        return (
-          <>
-            {[
-              ...myUnapprovedFeatures,
-              ...order(otherFeatures, (f) => f.upvotes, 'desc'),
-            ].map((feature) => (
-              <CurrentProductFeatureProvider key={feature.id} value={feature}>
-                <ProductFeatureItem />
-              </CurrentProductFeatureProvider>
-            ))}
-          </>
-        )
-      }}
-    />
+          return (
+            <>
+              {[
+                ...myUnapprovedFeatures,
+                ...order(otherFeatures, (f) => f.upvotes, 'desc'),
+              ].map((feature) => (
+                <CurrentProductFeatureProvider key={feature.id} value={feature}>
+                  <ProductFeatureItem />
+                </CurrentProductFeatureProvider>
+              ))}
+            </>
+          )
+        }}
+      />
+    </VStack>
   )
 }
