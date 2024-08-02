@@ -49,7 +49,7 @@ export const RoadmapPage: Page = () => {
               </ClientOnly>
             </PageHeader>
             <UserStateOnly>
-              <VStack gap={20}>
+              <VStack>
                 <ProductFeatureList />
               </VStack>
             </UserStateOnly>

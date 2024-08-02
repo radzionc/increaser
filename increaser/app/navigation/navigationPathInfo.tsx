@@ -68,7 +68,7 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       icon: <LightBulbIcon />,
     },
     roadmap: {
-      name: 'Roadmap',
+      name: 'Request features',
       icon: <GiftIcon />,
     },
     principles: {
