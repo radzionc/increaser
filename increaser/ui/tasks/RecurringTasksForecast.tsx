@@ -4,7 +4,7 @@ import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/get
 import { getRecurringTaskDeadline } from '@increaser/entities-utils/taskFactory/getRecurringTaskDeadline'
 import { ForecastedRecurringTask } from './ForecastedRecurringTask'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
-import { useProjectFilter } from '../projects/filter/useProjectFilter'
+import { useTasksFilter } from './filter/TasksFilterProvider'
 
 type Props = {
   dayEndsAt: number
@@ -12,7 +12,7 @@ type Props = {
 
 export const RecurringTasksForecast = ({ dayEndsAt }: Props) => {
   const taskFactories = useTaskFactories()
-  const [projectId] = useProjectFilter()
+  const [{ projectId }] = useTasksFilter()
 
   const tasks = useMemo(() => {
     return withoutUndefined(

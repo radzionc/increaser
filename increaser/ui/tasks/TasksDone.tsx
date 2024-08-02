@@ -5,11 +5,11 @@ import { TaskItem } from './TaskItem'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { useProjectFilter } from '../projects/filter/useProjectFilter'
+import { useTasksFilter } from './filter/TasksFilterProvider'
 
 export const TasksDone = () => {
   const { tasks } = useAssertUserState()
-  const [projectId] = useProjectFilter()
+  const [{ projectId }] = useTasksFilter()
 
   const completedTasks = Object.values(tasks).filter((task) => {
     if (projectId && projectId !== task.projectId) {

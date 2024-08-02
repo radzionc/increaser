@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 import {
   RenderTasksView,
@@ -8,8 +8,8 @@ import {
 import { TasksDone } from '@increaser/ui/tasks/TasksDone'
 import { TasksBacklogView } from '@increaser/ui/tasks/TasksBacklogView'
 import { TasksToDoView } from './TasksToDoView'
-import { ManageTaskFactories } from '../taskFactories/ManageTaskFactories'
-import { TaskTemplates } from '../taskTemplates/TaskTemplates'
+import { TasksFilterProvider } from './filter/TasksFilterProvider'
+import { ManageTasksFilter } from './filter/ManageTasksFilter'
 
 const TasksContainer = styled(VStack)`
   max-width: 560px;
@@ -19,17 +19,25 @@ const TasksContainer = styled(VStack)`
 
 export const Tasks = () => {
   return (
-    <TasksContainer>
-      <TasksViewProvider>
-        <TasksViewSelector />
-        <RenderTasksView
-          recurring={() => <ManageTaskFactories />}
-          done={() => <TasksDone />}
-          todo={() => <TasksToDoView />}
-          backlog={() => <TasksBacklogView />}
-          templates={() => <TaskTemplates />}
-        />
-      </TasksViewProvider>
-    </TasksContainer>
+    <TasksFilterProvider initialValue={{ projectId: null }}>
+      <TasksContainer>
+        <TasksViewProvider>
+          <HStack
+            gap={20}
+            fullWidth
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <TasksViewSelector />
+            <ManageTasksFilter />
+          </HStack>
+          <RenderTasksView
+            done={() => <TasksDone />}
+            scheduled={() => <TasksToDoView />}
+            backlog={() => <TasksBacklogView />}
+          />
+        </TasksViewProvider>
+      </TasksContainer>
+    </TasksFilterProvider>
   )
 }

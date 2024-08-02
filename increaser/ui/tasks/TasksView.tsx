@@ -1,9 +1,7 @@
-import { BookIcon } from '@lib/ui/icons/BookIcon'
-import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
+import { CircleCheckIcon } from '@lib/ui/icons/CircleCheckIcon'
+import { CircleDashedIcon } from '@lib/ui/icons/CircleDashedIcon'
+import { CircleIcon } from '@lib/ui/icons/CircleIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { ListIcon } from '@lib/ui/icons/ListIcon'
-import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
-import { SquareIcon } from '@lib/ui/icons/SquareIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigationItem'
 import { Text } from '@lib/ui/text'
@@ -11,29 +9,19 @@ import { getViewSetup } from '@lib/ui/view/getViewSetup'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { ReactNode, useId } from 'react'
 
-export const tasksView = [
-  'todo',
-  'backlog',
-  'done',
-  'recurring',
-  'templates',
-] as const
+export const tasksView = ['backlog', 'scheduled', 'done'] as const
 export type TasksView = (typeof tasksView)[number]
 
 export const tasksViewName: Record<TasksView, string> = {
-  todo: 'To Do',
-  done: 'Done',
-  recurring: 'Recurring',
   backlog: 'Backlog',
-  templates: 'Templates',
+  scheduled: 'Scheduled',
+  done: 'Done',
 }
 
 export const tasksViewIcon: Record<TasksView, ReactNode> = {
-  todo: <SquareIcon />,
-  done: <CheckSquareIcon />,
-  recurring: <RefreshIcon />,
-  backlog: <ListIcon />,
-  templates: <BookIcon />,
+  backlog: <CircleDashedIcon />,
+  scheduled: <CircleIcon />,
+  done: <CircleCheckIcon />,
 }
 
 export const {
@@ -41,7 +29,7 @@ export const {
   useView: useTasksView,
   RenderView: RenderTasksView,
 } = getViewSetup<TasksView>({
-  defaultView: 'todo',
+  defaultView: 'scheduled',
   name: 'tasks',
 })
 

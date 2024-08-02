@@ -2,11 +2,11 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { useMemo } from 'react'
 import { UnscheduledTask } from '@increaser/entities/Task'
 import { order } from '@lib/utils/array/order'
-import { useProjectFilter } from '../../projects/filter/useProjectFilter'
+import { useTasksFilter } from '../filter/TasksFilterProvider'
 
 export const useBacklog = (): UnscheduledTask[] => {
   const { tasks } = useAssertUserState()
-  const [projectId] = useProjectFilter()
+  const [{ projectId }] = useTasksFilter()
 
   return useMemo(() => {
     const result: UnscheduledTask[] = []
