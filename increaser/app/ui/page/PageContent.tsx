@@ -1,7 +1,10 @@
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 
+export const pageContentGap = 40
+
 export const PageContent = styled(VStack)`
-  gap: 40px;
+  gap: ${toSizeUnit(pageContentGap)};
   flex: 1 1 auto;
 `

@@ -8,7 +8,6 @@ import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import styled from 'styled-components'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { FounderContacts } from '../../community/components/FounderContacts'
 import {
   ProductFeaturesViewProvider,
   ProductFeaturesViewSelector,
@@ -17,6 +16,7 @@ import { PageHeader } from '../../ui/page/PageHeader'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ProductFeatureList } from './ProductFeatureList'
 import { FeatureForm } from './form/FeatureForm'
+import { FounderContacts } from '../../community/components/FounderContacts'
 
 const title = `Roadmap`
 
@@ -28,6 +28,11 @@ const Content = styled(HStack)`
   width: 100%;
   gap: ${toSizeUnit(gap)};
   align-items: start;
+`
+
+const SideContent = styled(PageContent)`
+  position: sticky;
+  top: 0;
 `
 
 export const RoadmapPage: Page = () => {
@@ -51,10 +56,11 @@ export const RoadmapPage: Page = () => {
           </ProductFeaturesViewProvider>
         </PageContent>
         <UserStateOnly>
-          <VStack gap={20}>
-            <FounderContacts />
+          <SideContent>
+            <PageTitle>Request a Feature</PageTitle>
             <FeatureForm />
-          </VStack>
+            <FounderContacts />
+          </SideContent>
         </UserStateOnly>
       </Content>
     </PageContainer>

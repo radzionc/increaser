@@ -10,8 +10,6 @@ import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
-import { VStack } from '@lib/ui/layout/Stack'
-import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 const initialValue: FeatureFormShape = {
   name: '',
@@ -55,35 +53,32 @@ export const FeatureForm = () => {
   }
 
   return (
-    <VStack gap={12}>
-      <SectionTitle>Propose a feature</SectionTitle>
-      <ListItemForm onSubmit={onSubmit} isDisabled={isDisabled}>
-        <TitleInput
-          placeholder="Short, descriptive title"
-          autoFocus
-          onChange={(name) =>
-            setValue((prev) => ({
-              ...prev,
-              name,
-            }))
-          }
-          value={value.name}
-          onSubmit={onSubmit}
-        />
-        <EmbeddedDescriptionInput
-          label="Details"
-          placeholder="All the additional details here"
-          onChange={(description) =>
-            setValue((prev) => ({
-              ...prev,
-              description,
-            }))
-          }
-          rows={3}
-          value={value.description}
-        />
-        <CreateFormFooter isDisabled={isDisabled} />
-      </ListItemForm>
-    </VStack>
+    <ListItemForm onSubmit={onSubmit} isDisabled={isDisabled}>
+      <TitleInput
+        placeholder="Feature name"
+        autoFocus
+        onChange={(name) =>
+          setValue((prev) => ({
+            ...prev,
+            name,
+          }))
+        }
+        value={value.name}
+        onSubmit={onSubmit}
+      />
+      <EmbeddedDescriptionInput
+        label="Details"
+        placeholder="All the additional details here..."
+        onChange={(description) =>
+          setValue((prev) => ({
+            ...prev,
+            description,
+          }))
+        }
+        rows={3}
+        value={value.description}
+      />
+      <CreateFormFooter isDisabled={isDisabled} />
+    </ListItemForm>
   )
 }
