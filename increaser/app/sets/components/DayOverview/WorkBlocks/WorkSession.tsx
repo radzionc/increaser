@@ -1,5 +1,4 @@
 import { Set } from '@increaser/entities/User'
-import { transition } from '@lib/ui/css/transition'
 import { UIComponentProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { useTheme } from 'styled-components'
@@ -16,13 +15,11 @@ const Container = styled.div`
   overflow: hidden;
   position: absolute;
   width: 100%;
-  ${transition};
 `
 
 const Identifier = styled.div`
   width: 4px;
   height: 100%;
-  ${transition};
 `
 
 export const WorkSession = ({
