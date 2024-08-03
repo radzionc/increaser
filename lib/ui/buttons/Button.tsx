@@ -74,9 +74,9 @@ const Container = styled(UnstyledButton)<ContainerProps>`
         font-size: 16px;
       `,
       xl: () => css`
-        ${horizontalPadding(40)}
+        ${horizontalPadding(28)}
         height: 56px;
-        font-size: 18px;
+        font-size: 16px;
       `,
     })}
 
