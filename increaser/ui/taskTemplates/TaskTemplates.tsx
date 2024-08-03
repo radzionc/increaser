@@ -9,17 +9,15 @@ export const TaskTemplates = () => {
   const items = useTaskTemplates()
 
   return (
-    <>
-      <VStack>
-        <ActiveItemIdProvider initialValue={null}>
-          {items.map((item) => (
-            <CurrentTaskTemplateProvider key={item.id} value={item}>
-              <TaskTemplateItem />
-            </CurrentTaskTemplateProvider>
-          ))}
-        </ActiveItemIdProvider>
-        <AddTaskTemplate />
-      </VStack>
-    </>
+    <VStack style={{ maxWidth: 560 }}>
+      <ActiveItemIdProvider initialValue={null}>
+        {items.map((item) => (
+          <CurrentTaskTemplateProvider key={item.id} value={item}>
+            <TaskTemplateItem />
+          </CurrentTaskTemplateProvider>
+        ))}
+      </ActiveItemIdProvider>
+      <AddTaskTemplate />
+    </VStack>
   )
 }

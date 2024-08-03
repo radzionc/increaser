@@ -9,13 +9,11 @@ import { TasksViewSelector } from './TasksViewSelector'
 
 const title = 'Tasks'
 
-const contentWidth = 560
-
 export const TasksLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
     <AppPageLayout>
       <PageContainer>
-        <PageContent style={{ maxWidth: contentWidth }}>
+        <PageContent>
           <PageTitle as="div">
             <TasksViewSelector />
           </PageTitle>

@@ -19,25 +19,25 @@ const TasksContainer = styled(VStack)`
 
 export const Tasks = () => {
   return (
-    <ProjectFilterProvider initialValue={null}>
-      <TasksContainer>
-        <TasksViewProvider>
-          <HStack
-            gap={20}
-            fullWidth
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <TasksViewSelector />
-            <ManageProjectFilter />
-          </HStack>
+    <TasksViewProvider>
+      <ProjectFilterProvider initialValue={null}>
+        <HStack
+          gap={20}
+          fullWidth
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <TasksViewSelector />
+          <ManageProjectFilter />
+        </HStack>
+        <TasksContainer>
           <RenderTasksView
             done={() => <TasksDone />}
             scheduled={() => <TasksToDoView />}
             backlog={() => <TasksBacklogView />}
           />
-        </TasksViewProvider>
-      </TasksContainer>
-    </ProjectFilterProvider>
+        </TasksContainer>
+      </ProjectFilterProvider>
+    </TasksViewProvider>
   )
 }

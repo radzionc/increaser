@@ -12,7 +12,7 @@ export const ManageTaskFactories = () => {
   return (
     <>
       <ProductEducationBlock value="recurringTasks" />
-      <VStack>
+      <VStack style={{ maxWidth: 560 }}>
         <ActiveItemIdProvider initialValue={null}>
           {items.map((item) => (
             <CurrentTaskFactoryProvider key={item.id} value={item}>
