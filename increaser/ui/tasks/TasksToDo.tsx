@@ -95,7 +95,11 @@ export const TasksToDo = () => {
           <VStack>
             {content}
             {groupId !== 'overdue' && (
-              <CreateTask deadlineAt={Number(groupId)} />
+              <CreateTask
+                defaultValue={{
+                  deadlineAt: Number(groupId),
+                }}
+              />
             )}
           </VStack>
         </VStack>
