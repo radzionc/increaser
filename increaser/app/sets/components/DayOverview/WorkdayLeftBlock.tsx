@@ -4,6 +4,8 @@ import { getColor } from '@lib/ui/theme/getters'
 import { toPercents } from '@lib/utils/toPercents'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
+import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +16,9 @@ const Container = styled.div`
 
 export const WorkdayLeftBlock = () => {
   const { finishWorkAt } = useAssertUserState()
-  const { startHour, endHour, currentTime, dayStartedAt } = useDayOverview()
+  const [weekday] = useSelectedWeekday()
+  const dayStartedAt = useStartOfWeekday(weekday)
+  const { startHour, endHour, currentTime } = useDayOverview()
   const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
   const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const workdayEndsAt =

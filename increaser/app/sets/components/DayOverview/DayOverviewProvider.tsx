@@ -4,14 +4,14 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { isToday } from 'date-fns'
-import { createContext, useMemo, useState } from 'react'
-import { startOfDay } from 'date-fns'
+import { createContext, useMemo } from 'react'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getDaySets } from '@increaser/app/sets/helpers/getDaySets'
-import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
+import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
+import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 
 interface DayOverviewContextState {
   sets: Set[]
@@ -19,9 +19,6 @@ interface DayOverviewContextState {
 
   startHour: number
   endHour: number
-
-  dayStartedAt: number
-  setCurrentDay: (timestamp: number) => void
 }
 
 const DayOverviewContext = createContext<DayOverviewContextState | undefined>(
@@ -37,10 +34,9 @@ export const DayOverviewProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const currentTime = useRhythmicRerender()
-  const todayStartedAt = useStartOfDay()
-  const [currentDay, setCurrentDay] = useState(todayStartedAt)
+  const [weekday] = useSelectedWeekday()
 
-  const dayStartedAt = startOfDay(currentDay).getTime()
+  const dayStartedAt = useStartOfWeekday(weekday)
 
   const { session } = useFocus()
 
@@ -98,8 +94,6 @@ export const DayOverviewProvider = ({
         currentTime,
         startHour,
         endHour,
-        dayStartedAt,
-        setCurrentDay,
       }}
     >
       {children}

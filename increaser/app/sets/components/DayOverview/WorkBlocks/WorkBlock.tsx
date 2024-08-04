@@ -16,6 +16,8 @@ import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { dayTimeLabelsWidthInPx } from '@increaser/app/sets/components/DayTimeLabels'
+import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
+import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 
 interface WorkBlockProps {
   block: Block
@@ -49,7 +51,9 @@ const Duration = styled(Text)`
 `
 
 export const WorkBlock = ({ block }: WorkBlockProps) => {
-  const { startHour, endHour, dayStartedAt } = useDayOverview()
+  const [weekday] = useSelectedWeekday()
+  const dayStartedAt = useStartOfWeekday(weekday)
+  const { startHour, endHour } = useDayOverview()
   const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
   const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const timespan = timelineEndsAt - timelineStartsAt

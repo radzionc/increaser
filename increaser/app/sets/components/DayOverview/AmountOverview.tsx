@@ -12,15 +12,15 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useTheme } from 'styled-components'
-import { getWeekday } from '@lib/utils/time/getWeekday'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 
 export const AmountOverview = () => {
-  const { sets, dayStartedAt } = useDayOverview()
+  const [weekday] = useSelectedWeekday()
+  const { sets } = useDayOverview()
   const setsTotal = getSetsDuration(sets)
-  const weekday = getWeekday(new Date(dayStartedAt))
 
   const daysBudget = useDaysBudget()
   const currentDayBudget = daysBudget[weekday]

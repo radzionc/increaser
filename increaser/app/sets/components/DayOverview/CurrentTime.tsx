@@ -12,6 +12,8 @@ import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { dayTimeLabelTimeWidthInPx } from '../DayTimeLabels'
+import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
+import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 
 const Line = styled.div`
   width: 100%;
@@ -40,7 +42,9 @@ const Outline = styled.div`
 
 export const CurrentTime = () => {
   const { finishWorkAt } = useAssertUserState()
-  const { currentTime, startHour, endHour, dayStartedAt } = useDayOverview()
+  const [weekday] = useSelectedWeekday()
+  const dayStartedAt = useStartOfWeekday(weekday)
+  const { currentTime, startHour, endHour } = useDayOverview()
 
   const workdayEndsAt =
     dayStartedAt + convertDuration(finishWorkAt, 'min', 'ms')
