@@ -7,9 +7,12 @@ import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
 import { getColor } from '@lib/ui/theme/getters'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { headerHeightInPx } from '../config'
 
 const Container = styled(UniformColumnGrid)`
   ${verticalPadding(0)};
+  height: ${toSizeUnit(headerHeightInPx)};
   /* border-bottom: 2px solid ${getColor('mist')}; */
 `
 
@@ -18,7 +21,7 @@ export const WeekNavigation = () => {
   const [selectedWeekday, setSelectedWeekday] = useSelectedWeekday()
 
   return (
-    <Container rowHeight={32} gap={1} fullWidth>
+    <Container gap={1} fullWidth>
       {WEEKDAYS.map((name, index) => {
         const isActive = selectedWeekday === index
         const isEnabled = index <= currentWeekday
