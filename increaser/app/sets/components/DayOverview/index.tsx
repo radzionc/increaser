@@ -7,27 +7,31 @@ import { WeekNavigation } from './WeekNavigation'
 import { DayOverviewProvider } from './DayOverviewProvider'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { SelectedWeekdayProvider } from '@lib/ui/time/SelectedWeekdayProvider'
+import { AddSetPrompt } from './AddSetPrompt'
+import { ActiveSetProvider } from './ActiveSetProvider'
 
 const Container = styled(Panel)`
   height: 100%;
-  background: transparent;
 `
 
 export const DayOverview = () => {
   const weekday = useWeekday()
   return (
     <SelectedWeekdayProvider initialValue={weekday}>
-      <DayOverviewProvider>
-        <Container
-          padding={horizontalPaddingInPx}
-          withSections
-          kind="secondary"
-        >
-          <WeekNavigation />
-          <AmountOverview />
-          <DayTimeline />
-        </Container>
-      </DayOverviewProvider>
+      <ActiveSetProvider initialValue={null}>
+        <DayOverviewProvider>
+          <Container
+            padding={horizontalPaddingInPx}
+            withSections
+            kind="secondary"
+          >
+            <WeekNavigation />
+            <AmountOverview />
+            <DayTimeline />
+            <AddSetPrompt />
+          </Container>
+        </DayOverviewProvider>
+      </ActiveSetProvider>
     </SelectedWeekdayProvider>
   )
 }

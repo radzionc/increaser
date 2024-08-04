@@ -1,13 +1,8 @@
 import { Set } from '@increaser/entities/User'
-import { UIComponentProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-
-interface WorkSessionProps extends UIComponentProps {
-  set: Set
-  showIdentifier?: boolean
-}
+import { ComponentProps } from 'react'
 
 const Container = styled.div`
   border-radius: 2px;
@@ -16,6 +11,11 @@ const Container = styled.div`
   position: absolute;
   width: 100%;
 `
+
+interface WorkSessionProps extends ComponentProps<typeof Container> {
+  set: Set
+  showIdentifier?: boolean
+}
 
 const Identifier = styled.div`
   width: 4px;

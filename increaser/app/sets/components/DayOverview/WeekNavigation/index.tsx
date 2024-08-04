@@ -10,7 +10,7 @@ import { useWeekday } from '@lib/ui/hooks/useWeekday'
 
 const Container = styled(UniformColumnGrid)`
   ${verticalPadding(0)};
-  border-bottom: 2px solid ${getColor('mist')};
+  /* border-bottom: 2px solid ${getColor('mist')}; */
 `
 
 export const WeekNavigation = () => {

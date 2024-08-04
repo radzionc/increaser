@@ -1,5 +1,5 @@
 import { Block } from '@increaser/entities/Block'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useDayOverview } from '../DayOverviewProvider'
 import {
   getBlockBoundaries,
@@ -18,6 +18,10 @@ import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { dayTimeLabelsWidthInPx } from '@increaser/app/sets/components/DayTimeLabels'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
+import { interactive } from '@lib/ui/css/interactive'
+import { useIsWeekdaySetsEditable } from '../../../hooks/useIsWeekdaySetsEditable'
+import { useActiveSet } from '../ActiveSetProvider'
+import { pick } from '@lib/utils/record/pick'
 
 interface WorkBlockProps {
   block: Block
@@ -42,12 +46,26 @@ const Content = styled.div`
 const Outline = styled.div`
   ${absoluteOutline(2, 0)};
   border-right: 1px dashed;
+  pointer-events: none;
 `
 
 const Duration = styled(Text)`
   position: absolute;
   top: 1px;
   right: 4px;
+  pointer-events: none;
+`
+
+const Session = styled(WorkSession)<{ isInteractive: boolean }>`
+  ${({ isInteractive }) =>
+    isInteractive &&
+    css`
+      ${interactive};
+
+      &:hover {
+        background: ${getColor('mistExtra')};
+      }
+    `}
 `
 
 export const WorkBlock = ({ block }: WorkBlockProps) => {
@@ -61,6 +79,9 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
   const blockDuration = end - start
   const showDuration = blockDuration > convertDuration(25, 'min', 'ms')
 
+  const isEditable = useIsWeekdaySetsEditable(weekday)
+  const [, setActiveSet] = useActiveSet()
+
   return (
     <Container
       style={{
@@ -71,9 +92,17 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
       <Content>
         <Outline />
         {block.sets.map((set, index) => (
-          <WorkSession
+          <Session
+            isInteractive={isEditable}
             key={index}
             set={set}
+            onClick={
+              isEditable
+                ? () => {
+                    setActiveSet(pick(set, ['start', 'end']))
+                  }
+                : undefined
+            }
             style={{
               top: toPercents((set.start - start) / blockDuration),
               height: toPercents(getSetDuration(set) / blockDuration),
