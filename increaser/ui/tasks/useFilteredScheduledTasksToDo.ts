@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { useProjectFilter } from '../projects/filter/useProjectFilter'
 import { useScheduledTasksToDo } from './hooks/useScheduledTasksToDo'
+import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
 
 export const useFilteredScheduledTasksToDo = () => {
   const [projectId] = useProjectFilter()

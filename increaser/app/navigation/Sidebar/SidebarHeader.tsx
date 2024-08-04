@@ -12,6 +12,7 @@ import { UserStateOnly } from '../../user/state/UserStateOnly'
 
 const Container = styled(HStack)`
   ${horizontalPadding(navigationConfig.itemHorizontalPadding)};
+  padding-right: 0;
   width: 100%;
   align-items: center;
   justify-content: space-between;

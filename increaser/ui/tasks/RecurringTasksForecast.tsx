@@ -4,7 +4,7 @@ import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/get
 import { getRecurringTaskDeadline } from '@increaser/entities-utils/taskFactory/getRecurringTaskDeadline'
 import { ForecastedRecurringTask } from './ForecastedRecurringTask'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
-import { useProjectFilter } from '../projects/filter/useProjectFilter'
+import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
 
 type Props = {
   dayEndsAt: number

@@ -5,7 +5,7 @@ import { TaskItem } from './TaskItem'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { useProjectFilter } from '../projects/filter/useProjectFilter'
+import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
 
 export const TasksDone = () => {
   const { tasks } = useAssertUserState()

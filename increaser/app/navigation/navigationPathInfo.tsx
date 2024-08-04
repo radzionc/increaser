@@ -1,7 +1,6 @@
 import { ListIcon } from '@lib/ui/icons/ListIcon'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { productToolNameRecord } from '@increaser/entities/ProductTool'
-import { CrownIcon } from '@lib/ui/icons/CrownIcon'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
@@ -58,10 +57,6 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     goals: {
       name: 'Goals',
       icon: productToolIconRecord.goals,
-    },
-    membership: {
-      name: 'Membership',
-      icon: <CrownIcon />,
     },
     ideas: {
       name: 'Ideas',

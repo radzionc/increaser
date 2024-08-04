@@ -7,7 +7,7 @@ import { OptionContent } from '@lib/ui/select/OptionContent'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { getColor } from '@lib/ui/theme/getters'
 import { UserIcon } from '@lib/ui/icons/UserIcon'
@@ -18,6 +18,12 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useRouter } from 'next/router'
 import { UserPenIcon } from '@lib/ui/icons/UserPenIcon'
 import { getAppPath } from '@increaser/ui/navigation/app'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { round } from '@lib/ui/css/round'
+import { useIsPayingUser } from '../../membership/hooks/useIsPayingUser'
+import { useHasFreeTrial } from '../../membership/hooks/useHasFreeTrial'
+import { CrownIcon } from '@lib/ui/icons/CrownIcon'
+import { Tag } from '@lib/ui/tags/Tag'
 
 const Container = styled(IconButton)<ComponentWithActiveState>`
   border: 1px solid transparent;
@@ -30,13 +36,51 @@ const Container = styled(IconButton)<ComponentWithActiveState>`
     `}
 `
 
+const Indicator = styled.div`
+  position: absolute;
+  right: -2px;
+  top: -4px;
+  ${sameDimensions(8)};
+  ${round};
+`
+
+const Wrapper = styled(IconWrapper)`
+  position: relative;
+  overflow: visible;
+`
+
 export const ManageAccount = () => {
   const [, setAuthSession] = useAuthSession()
   const { email } = useAssertUserState()
   const { push } = useRouter()
 
+  const isPayingUser = useIsPayingUser()
+  const hasFreeTrial = useHasFreeTrial()
+
+  const { colors } = useTheme()
+
   const options = useMemo(
     () => [
+      {
+        name: 'Membership',
+        icon: <CrownIcon />,
+        onSelect: () => {
+          push(getAppPath('membership'))
+        },
+        indicator: (
+          <Tag
+            $color={
+              isPayingUser
+                ? colors.success
+                : hasFreeTrial
+                  ? colors.idle
+                  : colors.alert
+            }
+          >
+            {isPayingUser ? 'active' : hasFreeTrial ? 'free trial' : 'inactive'}
+          </Tag>
+        ),
+      },
       {
         name: 'Public profile',
         icon: <UserPenIcon />,
@@ -52,7 +96,15 @@ export const ManageAccount = () => {
         },
       },
     ],
-    [push, setAuthSession],
+    [
+      colors.alert,
+      colors.idle,
+      colors.success,
+      hasFreeTrial,
+      isPayingUser,
+      push,
+      setAuthSession,
+    ],
   )
 
   const {
@@ -74,9 +126,22 @@ export const ManageAccount = () => {
     <>
       <Container
         title="Your account"
-        icon={<UserIcon />}
+        icon={
+          <Wrapper>
+            {!isPayingUser && (
+              <Indicator
+                style={{
+                  background: (hasFreeTrial
+                    ? colors.idle
+                    : colors.alert
+                  ).toCssValue(),
+                }}
+              />
+            )}
+            <UserIcon />
+          </Wrapper>
+        }
         isActive={isOpen}
-        size="l"
         {...getReferenceProps()}
         kind="secondary"
       />
@@ -85,7 +150,7 @@ export const ManageAccount = () => {
         <FloatingFocusManager context={context} modal returnFocus>
           <TitledFloatingOptionsContainer title={email} {...getFloatingProps()}>
             <VStack>
-              {options.map(({ name, onSelect, icon }, index) => {
+              {options.map(({ name, onSelect, icon, indicator }, index) => {
                 return (
                   <OptionItem
                     key={name}
@@ -102,6 +167,7 @@ export const ManageAccount = () => {
                       <HStack alignItems="center" gap={8}>
                         <IconWrapper>{icon}</IconWrapper>
                         <Text>{name}</Text>
+                        {indicator}
                       </HStack>
                     </OptionContent>
                   </OptionItem>

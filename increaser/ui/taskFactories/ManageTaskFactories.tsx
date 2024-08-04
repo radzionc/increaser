@@ -5,24 +5,14 @@ import { useTaskFactories } from './hooks/useTaskFactories'
 import { CurrentTaskFactoryProvider } from './CurrentTaskFactoryProvider'
 import { TaskFactoryItem } from './TaskFactoryItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { useProjectFilter } from '../projects/filter/useProjectFilter'
-import { useMemo } from 'react'
 
 export const ManageTaskFactories = () => {
-  const taskFactories = useTaskFactories()
-
-  const [projectId] = useProjectFilter()
-
-  const items = useMemo(() => {
-    return taskFactories.filter(({ task }) => {
-      return projectId ? task.projectId === projectId : true
-    })
-  }, [projectId, taskFactories])
+  const items = useTaskFactories()
 
   return (
     <>
       <ProductEducationBlock value="recurringTasks" />
-      <VStack>
+      <VStack style={{ maxWidth: 560 }}>
         <ActiveItemIdProvider initialValue={null}>
           {items.map((item) => (
             <CurrentTaskFactoryProvider key={item.id} value={item}>

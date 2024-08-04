@@ -1,9 +1,9 @@
 import { ProjectBudgetWidget } from './ProjectBudgetWidget'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { VStack } from '@lib/ui/layout/Stack'
-import { GoalsRequired } from './GoalsRequired'
 import { useBudgetedProjects } from './hooks/useBudgetedProjects'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
+import { BudgetRequired } from './BudgetRequired'
 
 export const CurrentWeekProgress = () => {
   const projects = useBudgetedProjects()
@@ -11,7 +11,7 @@ export const CurrentWeekProgress = () => {
   return (
     <VStack gap={20}>
       <SectionTitle>This week</SectionTitle>
-      <GoalsRequired>
+      <BudgetRequired>
         <>
           {projects.map((project) => (
             <CurrentProjectProvider value={project} key={project.id}>
@@ -19,7 +19,7 @@ export const CurrentWeekProgress = () => {
             </CurrentProjectProvider>
           ))}
         </>
-      </GoalsRequired>
+      </BudgetRequired>
     </VStack>
   )
 }

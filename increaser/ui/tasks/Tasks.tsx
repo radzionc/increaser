@@ -3,13 +3,12 @@ import styled from 'styled-components'
 import {
   RenderTasksView,
   TasksViewProvider,
-  TasksViewSelector,
 } from '@increaser/ui/tasks/TasksView'
 import { TasksDone } from '@increaser/ui/tasks/TasksDone'
 import { TasksBacklogView } from '@increaser/ui/tasks/TasksBacklogView'
 import { TasksToDoView } from './TasksToDoView'
-import { ManageTaskFactories } from '../taskFactories/ManageTaskFactories'
-import { TaskTemplates } from '../taskTemplates/TaskTemplates'
+import { ProjectFilterProvider } from '../projects/filter/ProjectFilterProvider'
+import { TasksHeader } from './header/TasksHeader'
 
 const TasksContainer = styled(VStack)`
   max-width: 560px;
@@ -19,17 +18,17 @@ const TasksContainer = styled(VStack)`
 
 export const Tasks = () => {
   return (
-    <TasksContainer>
-      <TasksViewProvider>
-        <TasksViewSelector />
-        <RenderTasksView
-          recurring={() => <ManageTaskFactories />}
-          done={() => <TasksDone />}
-          todo={() => <TasksToDoView />}
-          backlog={() => <TasksBacklogView />}
-          templates={() => <TaskTemplates />}
-        />
-      </TasksViewProvider>
-    </TasksContainer>
+    <TasksViewProvider>
+      <ProjectFilterProvider initialValue={null}>
+        <TasksHeader />
+        <TasksContainer>
+          <RenderTasksView
+            done={() => <TasksDone />}
+            scheduled={() => <TasksToDoView />}
+            backlog={() => <TasksBacklogView />}
+          />
+        </TasksContainer>
+      </ProjectFilterProvider>
+    </TasksViewProvider>
   )
 }
