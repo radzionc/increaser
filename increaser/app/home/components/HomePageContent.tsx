@@ -60,8 +60,6 @@ export const HomePageContent = () => {
     </VStack>
   )
 
-  const overview = <DayOverview />
-
   return (
     <>
       <ElementSizeAware
@@ -73,7 +71,7 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   {content}
-                  {overview}
+                  <DayOverview />
                 </MobileContent>
               ) : (
                 <Container>
@@ -84,7 +82,7 @@ export const HomePageContent = () => {
                   >
                     {content}
                   </VStack>
-                  {overview}
+                  <DayOverview />
                 </Container>
               )}
             </VStack>
