@@ -17,6 +17,7 @@ import { getGapsBetweenIntervals } from '@lib/utils/interval/getGapsBetweenInter
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { order } from '@lib/utils/array/order'
+import { otherProjectId } from '@increaser/entities/Project'
 
 const Container = styled(UnstyledButton)`
   ${verticalPadding(12)};
@@ -79,6 +80,7 @@ export const AddSetPrompt = () => {
         setActiveSet({
           start,
           end,
+          projectId: otherProjectId,
         })
       }}
     >

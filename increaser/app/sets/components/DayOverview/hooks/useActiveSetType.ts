@@ -1,17 +1,11 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useActiveSet } from '../ActiveSetProvider'
-import { areEqualIntervals } from '@lib/utils/interval/areEqualIntervals'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useActiveSet } from '../ActiveSetProvider'
 
-type ActiveSetType = 'new' | 'existing'
+type ActiveSetType = 'new' | 'edit'
 
 export const useActiveSetType = (): ActiveSetType => {
-  const { sets } = useAssertUserState()
   const [activeSet] = useActiveSet()
+  const { initialSet } = shouldBePresent(activeSet)
 
-  const existingSet = sets.find((set) =>
-    areEqualIntervals(shouldBePresent(activeSet), set),
-  )
-
-  return existingSet ? 'existing' : 'new'
+  return initialSet ? 'edit' : 'new'
 }

@@ -52,7 +52,7 @@ export const EditAutoStoppedSetPrompt = () => {
             </Button>
 
             <Link
-              href={addQueryParams(getAppPath('timeTracking', 'track'), {
+              href={addQueryParams(getAppPath('timeTracking'), {
                 edit: getSetHash(setToEdit),
               })}
             >

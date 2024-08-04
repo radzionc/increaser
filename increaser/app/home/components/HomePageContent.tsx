@@ -7,7 +7,6 @@ import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
-import { EditAutoStoppedSetPrompt } from '@increaser/ui/focus/EditAutoStoppedSetPrompt'
 import { FocusLauncherForm } from '../../focus/launcher/FocusLauncherForm'
 import { FocusTitle } from './FocusTitle'
 
@@ -52,7 +51,6 @@ export const HomePageContent = () => {
         ) : (
           <>
             <BreakTimeline />
-            <EditAutoStoppedSetPrompt />
             <FocusLauncherForm />
           </>
         )}

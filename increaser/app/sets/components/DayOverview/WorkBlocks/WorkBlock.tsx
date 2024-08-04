@@ -99,7 +99,10 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
             onClick={
               isEditable
                 ? () => {
-                    setActiveSet(pick(set, ['start', 'end']))
+                    setActiveSet({
+                      ...pick(set, ['start', 'end', 'projectId']),
+                      initialSet: pick(set, ['start', 'end']),
+                    })
                   }
                 : undefined
             }
