@@ -6,15 +6,15 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
 import { horizontalPaddingInPx } from '../config'
 import { WeekdayOption } from './WeekdayOption'
 import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(UniformColumnGrid)`
-  ${verticalPadding(2)}
-  ${horizontalPadding(horizontalPaddingInPx * 0.6)}
+  ${verticalPadding(0)};
+  border-bottom: 2px solid ${getColor('mist')};
 `
 
 export const WeekNavigation = () => {

@@ -14,8 +14,8 @@ export const WeekdayOption = styled.label<WeekdayOptionProps>`
   ${transition}
   font-size: 12px;
   font-weight: 500;
-  border-radius: 4px;
-  border: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
 
   ${({ isEnabled }) =>
     isEnabled
@@ -31,8 +31,8 @@ export const WeekdayOption = styled.label<WeekdayOptionProps>`
   ${({ isActive }) =>
     isActive
       ? css`
-          color: ${getColor('contrast')};
-          background: ${getColor('mist')};
+          color: ${getColor('text')};
+          border-color: ${getColor('text')};
         `
       : css`
           &:hover {
