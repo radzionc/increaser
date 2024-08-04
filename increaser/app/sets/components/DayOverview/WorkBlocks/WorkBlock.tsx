@@ -33,12 +33,13 @@ const Container = styled.div`
 const Content = styled.div`
   position: relative;
   ${takeWholeSpace}
+  color: ${getColor('contrast')};
+  font-weight: 500;
 `
 
 const Outline = styled.div`
-  ${absoluteOutline(2, 2)};
-  border-radius: 4px;
-  border: 1px dashed ${getColor('textSupporting')};
+  ${absoluteOutline(2, 0)};
+  border-right: 1px dashed;
 `
 
 const Duration = styled(Text)`
@@ -76,7 +77,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
           />
         ))}
         {showDuration && (
-          <Duration size={14}>
+          <Duration size={12}>
             {formatDuration(getBlockWorkDuration(block), 'ms')}
           </Duration>
         )}
