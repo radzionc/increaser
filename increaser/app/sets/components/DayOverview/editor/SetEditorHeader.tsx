@@ -1,7 +1,6 @@
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
-import { headerHeightInPx, horizontalPaddingInPx } from '../config'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { useActiveSet } from '../ActiveSetProvider'
 import { Button } from '@lib/ui/buttons/Button'
@@ -9,6 +8,7 @@ import { ArrowLeftIcon } from '@lib/ui/icons/ArrowLeftIcon'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useActiveSetType } from '../hooks/useActiveSetType'
+import { dayOverviewConfig } from '../config'
 
 const buttonMargin = 2
 
@@ -17,13 +17,17 @@ const Container = styled(HStack)`
   gap: 20px;
   width: 100%;
   justify-content: space-between;
-  height: ${toSizeUnit(headerHeightInPx)};
+  height: ${toSizeUnit(dayOverviewConfig.interactiveSectionHeight)};
   padding-right: ${toSizeUnit(buttonMargin)};
 `
 
 const BackButton = styled(Button)`
-  ${horizontalPadding(toSizeUnit(horizontalPaddingInPx - buttonMargin))};
-  height: ${toSizeUnit(headerHeightInPx - buttonMargin * 2)};
+  ${horizontalPadding(
+    toSizeUnit(dayOverviewConfig.horizontalPadding - buttonMargin),
+  )};
+  height: ${toSizeUnit(
+    dayOverviewConfig.interactiveSectionHeight - buttonMargin * 2,
+  )};
 `
 
 export const SetEditorHeader = () => {

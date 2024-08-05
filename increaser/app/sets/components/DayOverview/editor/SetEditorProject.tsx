@@ -6,7 +6,6 @@ import { useActiveSetType } from '../hooks/useActiveSetType'
 import { ProjectSelector } from '@increaser/ui/projects/ProjectSelector'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { headerHeightInPx } from '../config'
 import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
@@ -14,6 +13,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { HStack } from '@lib/ui/layout/Stack'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { usePresentState } from '@lib/ui/state/usePresentState'
+import { dayOverviewConfig } from '../config'
 
 const Toggle = styled(CollapsableStateIndicator)`
   font-size: 16px;
@@ -23,7 +23,7 @@ const Container = styled(UnstyledButton)`
   ${verticalPadding(0)};
   font-size: 14px;
   font-weight: 500;
-  height: ${toSizeUnit(headerHeightInPx)};
+  height: ${toSizeUnit(dayOverviewConfig.interactiveSectionHeight)};
   position: relative;
 
   outline: none;

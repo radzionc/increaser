@@ -5,7 +5,6 @@ import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
-import { msToPx, pxToMs } from '../../../timeTracking/track/config'
 import { useFocusLauncher } from '../state/FocusLauncherContext'
 import styled, { useTheme } from 'styled-components'
 import { BoundaryInteractiveArea } from '@lib/ui/timeline/BoundaryInteractiveArea'
@@ -22,6 +21,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { dayOverviewConfig } from '../../../sets/components/DayOverview/config'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -59,7 +59,9 @@ export const StartTimeEditor = () => {
     const containerRect = containerElement?.current?.getBoundingClientRect()
     if (!containerRect) return
 
-    const timestamp = interval.start + pxToMs(clientY - containerRect.top)
+    const timestamp =
+      interval.start +
+      dayOverviewConfig.editor.pxToMs(clientY - containerRect.top)
 
     const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
 
@@ -74,8 +76,8 @@ export const StartTimeEditor = () => {
   const cursor = isActive ? 'row-resize' : undefined
 
   const valueDuration = getIntervalDuration({ start: value, end: now })
-  const valueInPx = msToPx(value - interval.start)
-  const intervalDurationInPx = msToPx(valueDuration)
+  const valueInPx = dayOverviewConfig.editor.msToPx(value - interval.start)
+  const intervalDurationInPx = dayOverviewConfig.editor.msToPx(valueDuration)
 
   const theme = useTheme()
 

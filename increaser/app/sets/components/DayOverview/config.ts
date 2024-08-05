@@ -1,13 +1,18 @@
 import { MS_IN_HOUR } from '@lib/utils/time'
 
-export const horizontalPaddingInPx = 20
-export const timeLabelGapInPx = 8
-export const botomPlaceholderHeightInPx = 28
-export const topPlaceholderHeightInPx = horizontalPaddingInPx
-export const minimumHourHeightInPx = 40
-export const headerHeightInPx = 40
+const pxInHour = 100
+const pxInMs = pxInHour / MS_IN_HOUR
 
-export const pxInHour = 100
-export const pxInMs = pxInHour / MS_IN_HOUR
-export const msToPx = (ms: number) => ms * pxInMs
-export const pxToMs = (px: number) => px / pxInMs
+export const dayOverviewConfig = {
+  horizontalPadding: 20,
+  timeLabelGap: 8,
+  verticalPlaceholderHeight: 28,
+  minimumHourHeight: 40,
+  interactiveSectionHeight: 40,
+  editor: {
+    pxInHour,
+    pxInMs,
+    msToPx: (ms: number) => ms * pxInMs,
+    pxToMs: (px: number) => px / pxInMs,
+  },
+}

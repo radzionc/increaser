@@ -8,7 +8,6 @@ import {
 import { toPercents } from '@lib/utils/toPercents'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { getColor } from '@lib/ui/theme/getters'
-import { horizontalPaddingInPx, timeLabelGapInPx } from '../config'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -21,18 +20,22 @@ import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { interactive } from '@lib/ui/css/interactive'
 import { useIsWeekdaySetsEditable } from '../../../hooks/useIsWeekdaySetsEditable'
 import { pick } from '@lib/utils/record/pick'
-import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
+import { dayOverviewConfig } from '../config'
 
 interface WorkBlockProps {
   block: Block
 }
 
 const leftOffset =
-  horizontalPaddingInPx + dayTimeLabelsWidthInPx + timeLabelGapInPx * 3
+  dayOverviewConfig.horizontalPadding +
+  dayTimeLabelsWidthInPx +
+  dayOverviewConfig.timeLabelGap * 3
 
 const Container = styled.div`
-  width: calc(100% - ${leftOffset}px - ${horizontalPaddingInPx}px);
+  width: calc(
+    100% - ${leftOffset}px - ${dayOverviewConfig.horizontalPadding}px
+  );
   left: ${leftOffset}px;
   position: absolute;
 `
@@ -81,7 +84,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
   const showDuration = blockDuration > convertDuration(25, 'min', 'ms')
 
   const isEditable = useIsWeekdaySetsEditable(weekday)
-  const [, setActiveSet] = usePresentState(useActiveSet())
+  const [, setActiveSet] = useActiveSet()
 
   return (
     <Container

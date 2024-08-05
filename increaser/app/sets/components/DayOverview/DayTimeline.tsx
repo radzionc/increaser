@@ -5,14 +5,11 @@ import { WorkdayEndStatus } from './WorkdayEndStatus'
 import { CurrentTime } from './CurrentTime'
 import { WorkdayLeftBlock } from './WorkdayLeftBlock'
 import { WorkBlocks } from './WorkBlocks'
-import {
-  botomPlaceholderHeightInPx,
-  minimumHourHeightInPx,
-  topPlaceholderHeightInPx,
-} from './config'
 import { useDayOverview } from './DayOverviewProvider'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
+import { dayOverviewConfig } from './config'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Wrapper = styled.div`
   flex: 1;
@@ -24,8 +21,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   ${takeWholeSpaceAbsolutely}
   overflow: auto;
-  padding-bottom: ${botomPlaceholderHeightInPx}px;
-  padding-top: ${topPlaceholderHeightInPx}px;
+  ${verticalPadding(dayOverviewConfig.verticalPlaceholderHeight)};
 `
 
 const Content = styled.div`
@@ -35,7 +31,7 @@ const Content = styled.div`
 
 export const DayTimeline = () => {
   const { startHour, endHour } = useDayOverview()
-  const minHeight = (endHour - startHour) * minimumHourHeightInPx
+  const minHeight = (endHour - startHour) * dayOverviewConfig.minimumHourHeight
 
   return (
     <Wrapper>

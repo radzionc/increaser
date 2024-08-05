@@ -18,10 +18,12 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { order } from '@lib/utils/array/order'
 import { otherProjectId } from '@increaser/entities/Project'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { dayOverviewConfig } from './config'
 
 const Container = styled(UnstyledButton)`
-  ${verticalPadding(12)};
-
+  ${verticalPadding(0)};
+  height: ${toSizeUnit(dayOverviewConfig.interactiveSectionHeight)};
   ${centerContent};
 
   font-size: 14px;

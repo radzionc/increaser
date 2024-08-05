@@ -7,8 +7,8 @@ import { SetItem } from './SetItem'
 import { getSetHash } from '../../../helpers/getSetHash'
 import { useActiveSet } from '../ActiveSetProvider'
 import { pick } from '@lib/utils/record/pick'
-import { msToPx } from '../config'
 import { usePresentState } from '@lib/ui/state/usePresentState'
+import { dayOverviewConfig } from '../config'
 
 export const Sets = () => {
   const [weekday] = useSelectedWeekday()
@@ -43,8 +43,10 @@ export const Sets = () => {
                   }
             }
             style={{
-              top: msToPx(value.start - weekdayStartedAt),
-              height: msToPx(value.end - value.start),
+              top: dayOverviewConfig.editor.msToPx(
+                value.start - weekdayStartedAt,
+              ),
+              height: dayOverviewConfig.editor.msToPx(value.end - value.start),
             }}
           />
         ),

@@ -5,11 +5,11 @@ import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
 import { ScrollIntoViewOnFirstAppearance } from '@lib/ui/base/ScrollIntoViewOnFirstAppearance'
 import { VStack } from '@lib/ui/layout/Stack'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
-import { msToPx } from '../config'
 import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { Sets } from './Sets'
 import { SetEditor } from './SetEditor'
+import { dayOverviewConfig } from '../config'
 
 const Content = styled(VStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
@@ -27,7 +27,11 @@ export const SetEditorContent = () => {
   return (
     <ScrollableFlexboxFiller>
       <Content>
-        <TimeSpace msToPx={msToPx} startsAt={start} endsAt={end}>
+        <TimeSpace
+          msToPx={dayOverviewConfig.editor.msToPx}
+          startsAt={start}
+          endsAt={end}
+        >
           <Sets />
           <SetEditor />
           <ScrollIntoViewOnFirstAppearance<HTMLDivElement>

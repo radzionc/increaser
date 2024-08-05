@@ -8,11 +8,11 @@ import { getColor } from '@lib/ui/theme/getters'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { headerHeightInPx } from '../config'
+import { dayOverviewConfig } from '../config'
 
 const Container = styled(UniformColumnGrid)`
   ${verticalPadding(0)};
-  height: ${toSizeUnit(headerHeightInPx)};
+  height: ${toSizeUnit(dayOverviewConfig.interactiveSectionHeight)};
   /* border-bottom: 2px solid ${getColor('mist')}; */
 `
 

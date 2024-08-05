@@ -14,11 +14,11 @@ import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useTheme } from 'styled-components'
-import { msToPx, pxToMs } from '../config'
 import { useActiveSet } from '../ActiveSetProvider'
 import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
+import { dayOverviewConfig } from '../config'
 
 export const SetEditor = () => {
   const { projects } = useAssertUserState()
@@ -46,7 +46,9 @@ export const SetEditor = () => {
     const containerRect = containerElement?.current?.getBoundingClientRect()
     if (!containerRect) return
 
-    const timestamp = dayInterval.start + pxToMs(clientY - containerRect.top)
+    const timestamp =
+      dayInterval.start +
+      dayOverviewConfig.editor.pxToMs(clientY - containerRect.top)
 
     const getNewInterval = () => {
       if (activeControl === 'position') {
@@ -96,9 +98,13 @@ export const SetEditor = () => {
   }, [activeControl])
 
   const valueDuration = getIntervalDuration(value)
-  const intervalStartInPx = msToPx(value.start - dayInterval.start)
-  const intervalEndInPx = msToPx(value.end - dayInterval.start)
-  const intervalDurationInPx = msToPx(valueDuration)
+  const intervalStartInPx = dayOverviewConfig.editor.msToPx(
+    value.start - dayInterval.start,
+  )
+  const intervalEndInPx = dayOverviewConfig.editor.msToPx(
+    value.end - dayInterval.start,
+  )
+  const intervalDurationInPx = dayOverviewConfig.editor.msToPx(valueDuration)
 
   const { colors } = useTheme()
 

@@ -3,7 +3,6 @@ import { toPercents } from '@lib/utils/toPercents'
 import { useDayOverview } from './DayOverviewProvider'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
-import { horizontalPaddingInPx } from './config'
 import { formatTime } from '@lib/utils/time/formatTime'
 import { Text } from '@lib/ui/text'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
@@ -14,6 +13,8 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { dayTimeLabelTimeWidthInPx } from '../DayTimeLabels'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { dayOverviewConfig } from './config'
 
 const Line = styled.div`
   width: 100%;
@@ -23,7 +24,7 @@ const Line = styled.div`
 
 const Wrapper = styled.div`
   width: ${dayTimeLabelTimeWidthInPx}px;
-  margin-left: ${horizontalPaddingInPx}px;
+  margin-left: ${toSizeUnit(dayOverviewConfig.horizontalPadding)};
   position: relative;
   ${centerContent}
   height: 20px;
