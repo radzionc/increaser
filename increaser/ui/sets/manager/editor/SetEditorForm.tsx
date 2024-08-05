@@ -10,7 +10,6 @@ import { areIntersecting } from '@lib/utils/interval/areIntersecting'
 import { useActiveSet } from '../ActiveSetProvider'
 import { useActiveSetType } from '../overview/hooks/useActiveSetType'
 import { useAddSetMutation } from '../../api/useAddSetMutation'
-import { useDeleteSetMutation } from '../../api/useDeleteSetMutation'
 import { useUpdateSetMutation } from '../../api/useUpdateSetMutation'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
@@ -40,7 +39,6 @@ export const SetEditorForm = () => {
 
   const { mutate: addSet } = useAddSetMutation()
   const { mutate: updateSet } = useUpdateSetMutation()
-  const { mutate: deleteSet } = useDeleteSetMutation()
 
   const onCancel = useCallback(() => {
     setActiveSet(null)
@@ -91,10 +89,6 @@ export const SetEditorForm = () => {
     }
   }, [onCancel, onSubmit])
 
-  const onDelete = () => {
-    deleteSet(shouldBePresent(initialSet))
-  }
-
   return (
     <>
       <SetEditorHeader />
@@ -107,14 +101,7 @@ export const SetEditorForm = () => {
         alignItems="center"
         gap={20}
       >
-        {initialSet ? (
-          <Button kind="alert" type="button" onClick={onDelete}>
-            Delete
-          </Button>
-        ) : (
-          <div />
-        )}
-        <HStack alignItems="center" gap={8}>
+        <HStack fullWidth justifyContent="end" gap={8}>
           <Button type="button" onClick={onCancel} kind="secondary">
             Cancel
           </Button>

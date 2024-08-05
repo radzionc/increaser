@@ -1,5 +1,5 @@
 import { Block } from '@increaser/entities/Block'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { DayOverviewSet, useDayOverview } from '../DayOverviewProvider'
 import {
   getBlockBoundaries,
@@ -11,15 +11,12 @@ import { getColor } from '@lib/ui/theme/getters'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { WorkSession } from './WorkSession'
 import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
-import { interactive } from '@lib/ui/css/interactive'
-import { pick } from '@lib/utils/record/pick'
-import { useActiveSet } from '../../ActiveSetProvider'
 import { dayOverviewConfig } from '../config'
+import { SetItemOverview } from '../SetItemOverview'
 
 type WorkBlockProps = {
   block: Block<DayOverviewSet>
@@ -58,16 +55,9 @@ const Duration = styled(Text)`
   pointer-events: none;
 `
 
-const Session = styled(WorkSession)<{ isInteractive: boolean }>`
-  ${({ isInteractive }) =>
-    isInteractive &&
-    css`
-      ${interactive};
-
-      &:hover {
-        background: ${getColor('mistExtra')};
-      }
-    `}
+const SetPosition = styled.div`
+  width: 100%;
+  position: absolute;
 `
 
 export const WorkBlock = ({ block }: WorkBlockProps) => {
@@ -81,8 +71,6 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
   const blockDuration = end - start
   const showDuration = blockDuration > convertDuration(25, 'min', 'ms')
 
-  const [, setActiveSet] = useActiveSet()
-
   return (
     <Container
       style={{
@@ -93,25 +81,15 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
       <Content>
         <Outline />
         {block.sets.map((set, index) => (
-          <Session
-            isInteractive={set.isEditable}
+          <SetPosition
             key={index}
-            set={set}
-            onClick={
-              set.isEditable
-                ? () => {
-                    setActiveSet({
-                      ...pick(set, ['start', 'end', 'projectId']),
-                      initialSet: pick(set, ['start', 'end']),
-                    })
-                  }
-                : undefined
-            }
             style={{
               top: toPercents((set.start - start) / blockDuration),
               height: toPercents(getSetDuration(set) / blockDuration),
             }}
-          />
+          >
+            <SetItemOverview value={set} />
+          </SetPosition>
         ))}
         {showDuration && (
           <Duration size={12}>
