@@ -1,26 +1,19 @@
-import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { SetEditorContent } from './SetEditorContent'
 import { SetEditorHeader } from './SetEditorHeader'
 import { SetEditorProject } from './SetEditorProject'
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { areEqualIntervals } from '@lib/utils/interval/areEqualIntervals'
 import { areIntersecting } from '@lib/utils/interval/areIntersecting'
-import { Panel } from '@lib/ui/panel/Panel'
-import styled from 'styled-components'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { useActiveSet } from '../ActiveSetProvider'
 import { useActiveSetType } from '../overview/hooks/useActiveSetType'
 import { useAddSetMutation } from '../../api/useAddSetMutation'
-import { dayOverviewConfig } from '../overview/config'
 import { useDeleteSetMutation } from '../../api/useDeleteSetMutation'
 import { useUpdateSetMutation } from '../../api/useUpdateSetMutation'
-
-const Container = styled(Panel)`
-  height: 100%;
-`
+import { HStack } from '@lib/ui/layout/Stack'
+import { Button } from '@lib/ui/buttons/Button'
 
 export const SetEditorForm = () => {
   const [activeSet, setActiveSet] = usePresentState(useActiveSet())
@@ -49,7 +42,12 @@ export const SetEditorForm = () => {
   const { mutate: updateSet } = useUpdateSetMutation()
   const { mutate: deleteSet } = useDeleteSetMutation()
 
-  const onSubmit = () => {
+  const onCancel = useCallback(() => {
+    setActiveSet(null)
+  }, [setActiveSet])
+
+  const onSubmit = useCallback(() => {
+    if (isDisabled) return
     const set = {
       start,
       end,
@@ -64,35 +62,67 @@ export const SetEditorForm = () => {
       })
     }
 
-    setActiveSet(null)
+    onCancel()
+  }, [
+    addSet,
+    end,
+    initialSet,
+    isDisabled,
+    onCancel,
+    projectId,
+    start,
+    type,
+    updateSet,
+  ])
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        onSubmit()
+      } else if (event.key === 'Escape') {
+        onCancel()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [onCancel, onSubmit])
+
+  const onDelete = () => {
+    deleteSet(shouldBePresent(initialSet))
   }
 
   return (
-    <Container
-      as="form"
-      padding={dayOverviewConfig.horizontalPadding}
-      withSections
-      kind="secondary"
-      {...getFormProps({
-        onClose: () => setActiveSet(null),
-        isDisabled,
-        onSubmit,
-      })}
-    >
+    <>
       <SetEditorHeader />
       <SetEditorProject />
       <SetEditorContent />
-      <EditDeleteFormFooter
-        onDelete={
-          type === 'edit'
-            ? () => {
-                deleteSet(activeSet)
-                setActiveSet(null)
-              }
-            : undefined
-        }
-        isDisabled={isDisabled}
-      />
-    </Container>
+      <HStack
+        wrap="wrap"
+        justifyContent="space-between"
+        fullWidth
+        alignItems="center"
+        gap={20}
+      >
+        {initialSet ? (
+          <Button kind="alert" type="button" onClick={onDelete}>
+            Delete
+          </Button>
+        ) : (
+          <div />
+        )}
+        <HStack alignItems="center" gap={8}>
+          <Button type="button" onClick={onCancel} kind="secondary">
+            Cancel
+          </Button>
+          <Button onClick={onSubmit} isDisabled={isDisabled}>
+            Save
+          </Button>
+        </HStack>
+      </HStack>
+    </>
   )
 }
