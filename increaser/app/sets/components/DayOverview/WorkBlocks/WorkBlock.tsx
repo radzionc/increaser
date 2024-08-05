@@ -20,8 +20,9 @@ import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { interactive } from '@lib/ui/css/interactive'
 import { useIsWeekdaySetsEditable } from '../../../hooks/useIsWeekdaySetsEditable'
-import { useActiveSet } from '../ActiveSetProvider'
 import { pick } from '@lib/utils/record/pick'
+import { usePresentState } from '@lib/ui/state/usePresentState'
+import { useActiveSet } from '../ActiveSetProvider'
 
 interface WorkBlockProps {
   block: Block
@@ -80,7 +81,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
   const showDuration = blockDuration > convertDuration(25, 'min', 'ms')
 
   const isEditable = useIsWeekdaySetsEditable(weekday)
-  const [, setActiveSet] = useActiveSet()
+  const [, setActiveSet] = usePresentState(useActiveSet())
 
   return (
     <Container

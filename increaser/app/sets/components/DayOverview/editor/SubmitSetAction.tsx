@@ -9,11 +9,12 @@ import { useActiveSet } from '../ActiveSetProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { areEqualIntervals } from '@lib/utils/interval/areEqualIntervals'
 import { useActiveSetType } from '../hooks/useActiveSetType'
+import { usePresentState } from '@lib/ui/state/usePresentState'
 
 export const SubmitSetAction = () => {
-  const [activeSet, setActiveSet] = useActiveSet()
+  const [{ start, end, projectId, initialSet }, setActiveSet] =
+    usePresentState(useActiveSet())
   const type = useActiveSetType()
-  const { start, end, projectId, initialSet } = shouldBePresent(activeSet)
   const { sets } = useAssertUserState()
 
   const isDisabled = useMemo(() => {

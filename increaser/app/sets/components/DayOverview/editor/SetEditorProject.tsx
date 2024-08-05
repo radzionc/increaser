@@ -13,6 +13,7 @@ import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndica
 import { getColor } from '@lib/ui/theme/getters'
 import { HStack } from '@lib/ui/layout/Stack'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
+import { usePresentState } from '@lib/ui/state/usePresentState'
 
 const Toggle = styled(CollapsableStateIndicator)`
   font-size: 16px;
@@ -34,11 +35,10 @@ const Container = styled(UnstyledButton)`
 `
 
 export const SetEditorProject = () => {
-  const [activeSet, setActiveSet] = useActiveSet()
+  const [activeSet, setActiveSet] = usePresentState(useActiveSet())
   const { projects } = useAssertUserState()
-  const { projectId } = shouldBePresent(activeSet)
 
-  const { emoji, name } = projects[projectId]
+  const { emoji, name } = projects[activeSet.projectId]
 
   const type = useActiveSetType()
 
@@ -55,7 +55,7 @@ export const SetEditorProject = () => {
           </HStack>
         </Container>
       )}
-      value={projectId}
+      value={activeSet.projectId}
       onChange={(projectId) =>
         setActiveSet((prev) => ({ ...shouldBePresent(prev), projectId }))
       }

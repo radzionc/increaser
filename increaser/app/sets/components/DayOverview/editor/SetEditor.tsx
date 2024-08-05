@@ -15,18 +15,16 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useTheme } from 'styled-components'
 import { msToPx, pxToMs } from '../config'
-import { useAssertActiveSet } from '../hooks/useAssertActiveSet'
 import { useActiveSet } from '../ActiveSetProvider'
 import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
+import { usePresentState } from '@lib/ui/state/usePresentState'
 
 export const SetEditor = () => {
   const { projects } = useAssertUserState()
-  const currentSet = useAssertActiveSet()
-  const [, setActiveSet] = useActiveSet()
+  const [value, setActiveSet] = usePresentState(useActiveSet())
   const [weekday] = useSelectedWeekday()
   const dayInterval = useWeekdayPassedInterval(weekday)
-  const value = shouldBePresent(currentSet)
   const [activeControl, setActiveControl] =
     useState<IntervalEditorControl | null>(null)
 
