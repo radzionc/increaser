@@ -21,36 +21,30 @@ export const Sets = () => {
     const { initialSet } = currentSet
     if (!initialSet) return sets
 
-    return sets.filter((set) => areEqualIntervals(set, initialSet))
+    return sets.filter((set) => !areEqualIntervals(set, initialSet))
   }, [currentSet, sets])
 
   return (
     <>
-      {items.map((value, index) =>
-        currentSet ? null : (
-          <SetItem
-            key={getSetHash(value)}
-            value={value}
-            index={index}
-            onSelect={
-              currentSet
-                ? undefined
-                : () => {
-                    setActiveState({
-                      initialSet: value,
-                      ...pick(value, ['start', 'end', 'projectId']),
-                    })
-                  }
-            }
-            style={{
-              top: dayOverviewConfig.editor.msToPx(
-                value.start - weekdayStartedAt,
-              ),
-              height: dayOverviewConfig.editor.msToPx(value.end - value.start),
-            }}
-          />
-        ),
-      )}
+      {items.map((value, index) => (
+        <SetItem
+          key={getSetHash(value)}
+          value={value}
+          index={index}
+          onSelect={() => {
+            setActiveState({
+              initialSet: value,
+              ...pick(value, ['start', 'end', 'projectId']),
+            })
+          }}
+          style={{
+            top: dayOverviewConfig.editor.msToPx(
+              value.start - weekdayStartedAt,
+            ),
+            height: dayOverviewConfig.editor.msToPx(value.end - value.start),
+          }}
+        />
+      ))}
     </>
   )
 }

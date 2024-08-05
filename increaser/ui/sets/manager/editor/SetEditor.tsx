@@ -40,6 +40,13 @@ export const SetEditor = () => {
     })
   }, [value])
 
+  useEffect(() => {
+    intervalElement.current?.scrollIntoView({
+      block: 'center',
+      inline: 'start',
+    })
+  }, [])
+
   useEvent('pointermove', ({ clientY }) => {
     if (!activeControl) return
 

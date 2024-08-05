@@ -91,7 +91,6 @@ export const SetEditorForm = () => {
               }
             : undefined
         }
-        onCancel={() => setActiveSet(null)}
         isDisabled={isDisabled}
       />
     </Container>

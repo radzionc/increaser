@@ -19,6 +19,7 @@ const Container = styled(VStack)`
   font-size: 14px;
   font-weight: 500;
   color: ${getColor('contrast')};
+  pointer-events: none;
 `
 
 export const FloatingIntervalDuration = ({
