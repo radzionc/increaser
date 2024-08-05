@@ -12,9 +12,14 @@ import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsTo
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { getDaySets } from '@increaser/entities-utils/set/getDaySets'
+import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
+
+export type DayOverviewSet = Set & {
+  isEditable: boolean
+}
 
 interface DayOverviewContextState {
-  sets: Set[]
+  sets: DayOverviewSet[]
   currentTime: number
 
   startHour: number
@@ -38,23 +43,33 @@ export const DayOverviewProvider = ({
 
   const dayStartedAt = useStartOfWeekday(weekday)
 
+  const lastSetsSnapshot = useLastSetsSnapshot()
+
   const { session } = useFocus()
 
   const { sets: allSets } = useAssertUserState()
 
   const sets = useMemo(() => {
-    const result = getDaySets(allSets, dayStartedAt)
+    const result: DayOverviewSet[] = getDaySets(allSets, dayStartedAt).map(
+      (set) => ({
+        ...set,
+        isEditable: set.start > lastSetsSnapshot,
+      }),
+    )
     if (session && isToday(dayStartedAt)) {
       const { intervals } = session
       const sets = focusIntervalsToSets({
         intervals,
         now: currentTime,
-      })
+      }).map((set) => ({
+        ...set,
+        isEditable: false,
+      }))
       result.push(...sets)
     }
 
     return result
-  }, [allSets, currentTime, dayStartedAt, session])
+  }, [allSets, currentTime, dayStartedAt, lastSetsSnapshot, session])
 
   const { startWorkAt, finishWorkAt } = useAssertUserState()
 

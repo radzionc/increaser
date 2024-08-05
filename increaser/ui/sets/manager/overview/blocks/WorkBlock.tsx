@@ -1,6 +1,6 @@
 import { Block } from '@increaser/entities/Block'
 import styled, { css } from 'styled-components'
-import { useDayOverview } from '../DayOverviewProvider'
+import { DayOverviewSet, useDayOverview } from '../DayOverviewProvider'
 import {
   getBlockBoundaries,
   getBlockWorkDuration,
@@ -20,10 +20,9 @@ import { interactive } from '@lib/ui/css/interactive'
 import { pick } from '@lib/utils/record/pick'
 import { useActiveSet } from '../../ActiveSetProvider'
 import { dayOverviewConfig } from '../config'
-import { useIsWeekdaySetsEditable } from '../../../hooks/useIsWeekdaySetsEditable'
 
-interface WorkBlockProps {
-  block: Block
+type WorkBlockProps = {
+  block: Block<DayOverviewSet>
 }
 
 const leftOffset =
@@ -82,7 +81,6 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
   const blockDuration = end - start
   const showDuration = blockDuration > convertDuration(25, 'min', 'ms')
 
-  const isEditable = useIsWeekdaySetsEditable(weekday)
   const [, setActiveSet] = useActiveSet()
 
   return (
@@ -96,11 +94,11 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
         <Outline />
         {block.sets.map((set, index) => (
           <Session
-            isInteractive={isEditable}
+            isInteractive={set.isEditable}
             key={index}
             set={set}
             onClick={
-              isEditable
+              set.isEditable
                 ? () => {
                     setActiveSet({
                       ...pick(set, ['start', 'end', 'projectId']),

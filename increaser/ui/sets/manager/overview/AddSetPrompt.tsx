@@ -19,7 +19,7 @@ import { order } from '@lib/utils/array/order'
 import { otherProjectId } from '@increaser/entities/Project'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { dayOverviewConfig } from './config'
-import { useIsWeekdaySetsEditable } from '../../hooks/useIsWeekdaySetsEditable'
+import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
 
 const Container = styled(UnstyledButton)`
   ${verticalPadding(0)};
@@ -36,14 +36,13 @@ const Container = styled(UnstyledButton)`
 `
 
 export const AddSetPrompt = () => {
-  const [selectedWeekday] = useSelectedWeekday()
-  const isEditable = useIsWeekdaySetsEditable(selectedWeekday)
+  const lastSnapshotAt = useLastSetsSnapshot()
   const [, setActiveSet] = useActiveSet()
   const [weekday] = useSelectedWeekday()
   const sets = useWeekdaySets(weekday)
   const dayStartedAt = useStartOfWeekday(weekday)
 
-  if (!isEditable) return null
+  if (dayStartedAt < lastSnapshotAt) return null
 
   return (
     <Container
