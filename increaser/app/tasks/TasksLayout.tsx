@@ -1,7 +1,8 @@
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
-import { PageTitle } from '../ui/page/PageTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
+
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../focus/components/AppPageLayout'

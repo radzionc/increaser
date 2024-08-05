@@ -1,4 +1,3 @@
-import { getProjectsTotalRecord } from '@increaser/app/projects/helpers/getProjectsTotalRecord'
 import { useMemo } from 'react'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
@@ -10,6 +9,7 @@ import { Text } from '@lib/ui/text'
 import { D_IN_WEEK, MS_IN_DAY, getShortWeekday } from '@lib/utils/time'
 import { Bar, BasicBarChart } from '@increaser/app/ui/BasicBarChart'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
+import { getProjectsTotalRecord } from '@increaser/entities-utils/project/getProjectsTotalRecord'
 
 export const ProjectsCurrentWeek = () => {
   const currentWeekSets = useCurrentWeekSets()

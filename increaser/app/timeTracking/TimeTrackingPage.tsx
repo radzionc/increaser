@@ -1,6 +1,7 @@
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
-import { PageTitle } from '../ui/page/PageTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
+
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { PageHeader } from '../ui/page/PageHeader'

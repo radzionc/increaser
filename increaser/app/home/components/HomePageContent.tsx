@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
 import { FocusLauncherForm } from '../../focus/launcher/FocusLauncherForm'
 import { FocusTitle } from './FocusTitle'
+import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 
 const Container = styled.div`
   display: flex;
@@ -69,7 +69,7 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   {content}
-                  <DayOverview />
+                  <SetsManager />
                 </MobileContent>
               ) : (
                 <Container>
@@ -80,7 +80,7 @@ export const HomePageContent = () => {
                   >
                     {content}
                   </VStack>
-                  <DayOverview />
+                  <SetsManager />
                 </Container>
               )}
             </VStack>

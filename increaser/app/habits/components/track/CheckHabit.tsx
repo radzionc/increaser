@@ -6,8 +6,8 @@ import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css, useTheme } from 'styled-components'
 import { trackHabitsConfig } from './config'
-import { useTrackHabitMutation } from '../../api/useTrackHabitMutation'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
+import { useTrackHabitMutation } from '@increaser/ui/habits/api/useTrackHabitMutation'
 
 type CheckHabitProps = {
   habit: Pick<Habit, 'id' | 'color'>

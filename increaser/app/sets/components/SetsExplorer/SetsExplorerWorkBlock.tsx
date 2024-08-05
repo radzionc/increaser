@@ -10,7 +10,7 @@ import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { transition } from '@lib/ui/css/transition'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { useSetsExplorer } from './SetsExplorerProvider'
-import { WorkSession } from '../DayOverview/WorkBlocks/WorkSession'
+import { WorkSession } from '@increaser/ui/sets/manager/overview/blocks/WorkSession'
 
 interface SetsExplorerWorkBlockProps {
   block: Block

@@ -1,7 +1,8 @@
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
-import { PageTitle } from '../ui/page/PageTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
+
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Goals } from './Goals'
 import { GoalStatusFilter } from '@increaser/ui/goals/filter/GoalStatusFilter'

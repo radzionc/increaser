@@ -21,7 +21,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { dayOverviewConfig } from '../../../sets/components/DayOverview/config'
+import { dayOverviewConfig } from '@increaser/ui/sets/manager/overview/config'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;

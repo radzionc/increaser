@@ -1,6 +1,6 @@
 import { Switch } from '@lib/ui/inputs/Switch'
-import { useHasTimerBrowserNotification } from '../../hooks/useHasTimerBrowserNotification'
-import { useHasTimerSoundNotification } from '../../hooks/useHasTimeSoundNotification'
+import { useHasTimerBrowserNotification } from '@increaser/ui/focus/hooks/useHasTimerBrowserNotification'
+import { useHasTimerSoundNotification } from '@increaser/ui/focus/hooks/useHasTimerSoundNotification'
 
 export const FocusSoundNotification = () => {
   const [hasTimerBrowserNotification, setHasTimerSoundNotification] =

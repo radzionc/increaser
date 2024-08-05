@@ -10,7 +10,7 @@ import { order } from '@lib/utils/array/order'
 import { HabitsContext } from '@increaser/ui/habits/HabitsContext'
 import { enhanceHabit } from '@increaser/ui/habits/utils/enhanceHabit'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { TrackHabitInput } from '@increaser/app/habits/api/useTrackHabitMutation'
+import { TrackHabitInput } from '@increaser/ui/habits/api/useTrackHabitMutation'
 
 export const DemoHabitsProvider = ({
   children,

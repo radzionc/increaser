@@ -10,7 +10,6 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { omit } from '@lib/utils/record/omit'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmojiTextInputFrame } from '../../../form/EmojiTextInputFrame'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { useCurrentPrincipleCategory } from '../CurrentPrincipleCategoryProvider'
 import { useUpdateUserEntityMutation } from '../../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../../userEntity/api/useDeleteUserEntityMutation'
@@ -18,6 +17,7 @@ import { PrincipleCategoryFormShape } from './PrincipleCategoryFormShape'
 import { useIsPrincipleCategoryFormDisabled } from './useIsPrincipleCategoryFormDisabled'
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 import { ListItemForm } from '../../../form/ListItemForm'
+import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
 
 export const EditPricnipleCategoryForm = () => {
   const principleCategory = useCurrentPrincipleCategory()
