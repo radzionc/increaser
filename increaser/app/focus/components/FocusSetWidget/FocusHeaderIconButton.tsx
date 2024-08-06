@@ -8,7 +8,7 @@ export const FocusHeaderIconButton = styled(IconButton)<
   Partial<ComponentWithActiveState>
 >`
   ${sameDimensions(48)};
-  font-size: 24px;
+  font-size: 20px;
   background: transparent;
   border: 1px solid ${getColor('mistExtra')};
   color: ${getColor('contrast')};
