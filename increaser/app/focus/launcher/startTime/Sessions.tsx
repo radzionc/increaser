@@ -20,6 +20,7 @@ export const Sessions = () => {
           key={getSetHash(value)}
           projectId={value.projectId}
           style={{
+            position: 'absolute',
             top: setEditorConfig.msToPx(value.start - interval.start),
             height: setEditorConfig.msToPx(value.end - value.start),
           }}
