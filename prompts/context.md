@@ -80,7 +80,7 @@ On the "Projects" page, users can see all their projects and change their status
 
 On the "Time Tracking" page, the user can see an overview of how much time they have spent on each project. They can organize data in the report by days, weeks, months, or years, crop the data, e.g., show only the last 7 days, and they can toggle if they want to see the current period in the report, e.g., the current week. The user can highlight a specific project and also see the total time spent on all projects.
 
-While the user will primarily track their work by through focus sessions, they can also track time by manually adding a focus session under the “Track” tab on the “Time Tracking” page. They can add, edit or delete a session on any day of the current week except for the days of the current week that belong to the previous month.
+While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
 
 ## Work budget
 
