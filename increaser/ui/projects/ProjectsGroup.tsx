@@ -8,10 +8,10 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { Circle } from '@lib/ui/layout/Circle'
 import styled, { useTheme } from 'styled-components'
-import { getProjectStatusColor } from '@increaser/app/projects/utils/getProjectStatusColor'
 import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
 import { Center } from '@lib/ui/layout/Center'
 import { Text } from '@lib/ui/text'
+import { getProjectStatusColor } from './utils/getProjectStatusColor'
 
 const Frame = styled(ChecklistItemFrame)`
   padding: 0;

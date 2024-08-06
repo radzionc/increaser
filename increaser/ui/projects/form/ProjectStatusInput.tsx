@@ -1,4 +1,3 @@
-import { getProjectStatusColor } from '@increaser/app/projects/utils/getProjectStatusColor'
 import { ProjectStatus, projectStatuses } from '@increaser/entities/Project'
 import { Circle } from '@lib/ui/layout/Circle'
 import { HStack } from '@lib/ui/layout/Stack'
@@ -7,6 +6,7 @@ import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { useTheme } from 'styled-components'
+import { getProjectStatusColor } from '../utils/getProjectStatusColor'
 
 export const ProjectStatusInput = ({
   value,

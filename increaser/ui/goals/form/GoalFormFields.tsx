@@ -2,13 +2,13 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { GoalFormShape } from './GoalFormShape'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { GoalTargetInput } from './GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { InputProps } from '@lib/ui/props'
+import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 
 type GoalFormFieldsProps = InputProps<GoalFormShape> & {
   onSubmit: () => void

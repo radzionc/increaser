@@ -1,7 +1,7 @@
-import { areSameSets } from '@increaser/app/sets/helpers/areSameSets'
 import { Set } from '@increaser/entities/User'
 import { order } from '@lib/utils/array/order'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
+import { areSameSets } from './areSameSets'
 
 type AddSetInput = {
   sets: Set[]

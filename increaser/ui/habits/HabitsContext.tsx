@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { EnhancedHabit } from './EnhancedHabit'
-import { TrackHabitInput } from '@increaser/app/habits/api/useTrackHabitMutation'
+import { TrackHabitInput } from './api/useTrackHabitMutation'
 
 interface HabitsState {
   habits: EnhancedHabit[]

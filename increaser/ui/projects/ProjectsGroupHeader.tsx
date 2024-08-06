@@ -3,9 +3,9 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { Circle } from '@lib/ui/layout/Circle'
 import styled, { useTheme } from 'styled-components'
-import { getProjectStatusColor } from '@increaser/app/projects/utils/getProjectStatusColor'
 import { Text } from '@lib/ui/text'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { getProjectStatusColor } from './utils/getProjectStatusColor'
 
 type ProjectsGroupProps = {
   count: number

@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { ProjectFormShape } from './ProjectFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
@@ -18,6 +17,7 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { Project } from '@increaser/entities/Project'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
+import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 
 type CreateProjectFormProps = {
   onFinish?: (project?: Project) => void

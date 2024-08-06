@@ -1,4 +1,5 @@
-import { PageTitle } from '@increaser/app/ui/page/PageTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
+
 import { Page } from '@lib/next-ui/Page'
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Ideas } from '@increaser/ui/ideas/Ideas'

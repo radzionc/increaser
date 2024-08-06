@@ -4,7 +4,6 @@ import { Button } from '@lib/ui/buttons/Button'
 import { Project, ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'
 import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
@@ -18,6 +17,7 @@ import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus

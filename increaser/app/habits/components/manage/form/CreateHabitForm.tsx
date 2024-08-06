@@ -3,7 +3,6 @@ import { FinishableComponentProps } from '@lib/ui/props'
 import { HabitFormShape } from './HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
@@ -18,6 +17,7 @@ import { MS_IN_SEC } from '@lib/utils/time'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { EmojiInput } from '@increaser/ui/form/emoji-input/EmojiInput'
 
 export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
   const { habits } = useHabits()

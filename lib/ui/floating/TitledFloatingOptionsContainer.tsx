@@ -30,7 +30,10 @@ const Content = styled(VStack)`
   overflow-y: auto;
 `
 
-type TitledFloatingOptionsContainerProps = ComponentProps<typeof Container> &
+type TitledFloatingOptionsContainerProps = Omit<
+  ComponentProps<typeof Container>,
+  'title'
+> &
   TitledComponentProps
 
 export const TitledFloatingOptionsContainer = forwardRef<
@@ -38,7 +41,7 @@ export const TitledFloatingOptionsContainer = forwardRef<
   TitledFloatingOptionsContainerProps
 >(({ title, children, ...rest }, ref) => (
   <Container ref={ref} {...rest}>
-    <Header>{title}</Header>
+    <Header as="div">{title}</Header>
     <Content>{children}</Content>
   </Container>
 ))

@@ -31,7 +31,7 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       icon: productToolIconRecord.tasks,
     },
     timeTracking: {
-      name: 'Time tracking',
+      name: 'Timesheet',
       icon: productToolIconRecord.trackTime,
     },
     workBudget: {

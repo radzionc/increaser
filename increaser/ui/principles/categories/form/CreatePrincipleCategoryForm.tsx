@@ -9,8 +9,8 @@ import { useCreateUserEntityMutation } from '../../../userEntity/api/useCreateUs
 import { useIsPrincipleCategoryFormDisabled } from './useIsPrincipleCategoryFormDisabled'
 import { PrincipleCategoryFormShape } from './PrincipleCategoryFormShape'
 import { EmojiTextInputFrame } from '../../../form/EmojiTextInputFrame'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { ListItemForm } from '../../../form/ListItemForm'
+import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
 
 export const CreatePrincipleCategoryForm = ({
   onFinish,

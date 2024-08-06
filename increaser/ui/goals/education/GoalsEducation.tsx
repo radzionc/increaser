@@ -8,7 +8,8 @@ import {
   usePersistentState,
 } from '../../state/persistentState'
 import { ComponentWithActiveState } from '@lib/ui/props'
-import { PageTitle } from '@increaser/app/ui/page/PageTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
+
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { GoalsEducationItems } from './GoalsEducationItems'

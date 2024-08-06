@@ -9,11 +9,11 @@ import { pick } from '@lib/utils/record/pick'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()

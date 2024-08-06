@@ -5,8 +5,8 @@ import { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { order } from '@lib/utils/array/order'
 import { HabitsContext } from '@increaser/ui/habits/HabitsContext'
-import { useTrackHabitMutation } from '../api/useTrackHabitMutation'
 import { enhanceHabit } from '@increaser/ui/habits/utils/enhanceHabit'
+import { useTrackHabitMutation } from '@increaser/ui/habits/api/useTrackHabitMutation'
 
 export const HabitsProvider = ({ children }: ComponentWithChildrenProps) => {
   const todayStartedAt = useStartOfDay()

@@ -4,7 +4,7 @@ import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
 import { PageContainer } from '../../ui/page/PageContainer'
 import { PageContent } from '../../ui/page/PageContent'
 import { PageDocumentTitle } from '../../ui/page/PageDocumentTitle'
-import { PageTitle } from '@increaser/app/ui/page/PageTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
 
 const title = `Community`
 

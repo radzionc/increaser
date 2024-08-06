@@ -1,0 +1,1 @@
+A user proposed a new feature, improve it's title and description to ensure it's clear and concise so that other users can easily understand it. No need to capitalize the title, only capitalize the first word.

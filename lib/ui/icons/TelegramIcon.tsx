@@ -8,14 +8,14 @@ export const TelegramIcon = () => (
         y2="99.2583404%"
         id="linearGradient-1"
       >
-        <stop stop-color="#2AABEE" offset="0%"></stop>
-        <stop stop-color="#229ED9" offset="100%"></stop>
+        <stop stopColor="#2AABEE" offset="0%"></stop>
+        <stop stopColor="#229ED9" offset="100%"></stop>
       </linearGradient>
     </defs>
     <g
       id="Artboard"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
       fillRule="evenodd"
     >

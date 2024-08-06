@@ -1,9 +1,9 @@
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
-import { Session } from '../../../timeTracking/track/Session'
-import { getSetHash } from '../../../sets/helpers/getSetHash'
-import { msToPx } from '../../../timeTracking/track/config'
+import { getSetHash } from '@increaser/entities-utils/set/getSetHash'
 import { useMemo } from 'react'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
+import { dayOverviewConfig } from '@increaser/ui/sets/manager/overview/config'
+import { SetItem } from '@increaser/ui/sets/manager/editor/SetItem'
 
 export const Sessions = () => {
   const { interval } = useStartTimeEditor()
@@ -16,13 +16,13 @@ export const Sessions = () => {
   return (
     <>
       {sets.map((value, index) => (
-        <Session
+        <SetItem
           key={getSetHash(value)}
           value={value}
           index={index}
           style={{
-            top: msToPx(value.start - interval.start),
-            height: msToPx(value.end - value.start),
+            top: dayOverviewConfig.editor.msToPx(value.start - interval.start),
+            height: dayOverviewConfig.editor.msToPx(value.end - value.start),
           }}
         />
       ))}

@@ -18,7 +18,6 @@ import {
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
 import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
-import { FocusLauncherSynchronizer } from '@increaser/ui/focus/FocusLauncherSynchronizer'
 import { FocusNotificationsManager } from '@increaser/ui/focus/FocusNotificationsManager'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
@@ -32,10 +31,11 @@ import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsTo
 import { getTasksTimeSpent } from '@increaser/ui/focus/utils/getTasksTimeSpent'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { pick } from '@lib/utils/record/pick'
-import { useAddSetsMutation } from '../../sets/hooks/useAddSetsMutation'
+import { useAddSetsMutation } from '@increaser/ui/sets/api/useAddSetsMutation'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 import { Minutes } from '@lib/utils/time/types'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { FocusLauncherSynchronizer } from '../launcher/FocusLauncherSynchronizer'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =

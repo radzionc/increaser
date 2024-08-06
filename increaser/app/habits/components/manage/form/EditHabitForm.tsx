@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { Habit } from '@increaser/entities/Habit'
 import { HabitFormShape } from './HabitFormShape'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -13,6 +12,7 @@ import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpd
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
+import { EmojiInput } from '@increaser/ui/form/emoji-input/EmojiInput'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()

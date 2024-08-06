@@ -8,12 +8,12 @@ import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
-import { EmojiInput } from '@increaser/app/ui/EmojiInput'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 
 export const CreateVisionAttributeForm = ({
   onFinish,

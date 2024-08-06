@@ -3,13 +3,12 @@ import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { DayOverview } from '@increaser/app/sets/components/DayOverview'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
-import { EditAutoStoppedSetPrompt } from '@increaser/ui/focus/EditAutoStoppedSetPrompt'
 import { FocusLauncherForm } from '../../focus/launcher/FocusLauncherForm'
 import { FocusTitle } from './FocusTitle'
+import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 
 const Container = styled.div`
   display: flex;
@@ -52,15 +51,12 @@ export const HomePageContent = () => {
         ) : (
           <>
             <BreakTimeline />
-            <EditAutoStoppedSetPrompt />
             <FocusLauncherForm />
           </>
         )}
       </VStack>
     </VStack>
   )
-
-  const overview = <DayOverview />
 
   return (
     <>
@@ -73,7 +69,7 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   {content}
-                  {overview}
+                  <SetsManager />
                 </MobileContent>
               ) : (
                 <Container>
@@ -84,7 +80,7 @@ export const HomePageContent = () => {
                   >
                     {content}
                   </VStack>
-                  {overview}
+                  <SetsManager />
                 </Container>
               )}
             </VStack>

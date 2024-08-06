@@ -14,8 +14,8 @@ export const getBlockWorkDuration = ({ sets }: Block) => getSetsDuration(sets)
 export const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
   getDistanceBetweenSets(getLastItem(prevBlock.sets), block.sets[0])
 
-export const getBlocks = (sets: Set[]): Block[] => {
-  const blocks: Block[] = []
+export const getBlocks = <T extends Set = Set>(sets: T[]): Block<T>[] => {
+  const blocks: Block<T>[] = []
 
   sets.forEach((set, index) => {
     const prevSet = sets[index - 1]

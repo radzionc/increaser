@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
-import { getDaySets } from '@increaser/app/sets/helpers/getDaySets'
 import { Set } from '@increaser/entities/User'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { range } from '@lib/utils/array/range'
 import { D_IN_WEEK, MS_IN_DAY } from '@lib/utils/time'
 import { useCurrentWeekSets } from '@increaser/ui/sets/hooks/useCurrentWeekSets'
+import { getDaySets } from '@increaser/entities-utils/set/getDaySets'
 
 export interface Day {
   startsAt: number

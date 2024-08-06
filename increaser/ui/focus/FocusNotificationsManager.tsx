@@ -7,10 +7,10 @@ import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { playSound } from '@lib/ui/notifications/utils/playSound'
 import { FocusSession, useFocus } from './FocusContext'
-import { useHasTimerSoundNotification } from '@increaser/app/focus/hooks/useHasTimeSoundNotification'
-import { useHasTimerBrowserNotification } from '@increaser/app/focus/hooks/useHasTimerBrowserNotification'
+import { useHasTimerBrowserNotification } from './hooks/useHasTimerBrowserNotification'
 import { useFocusedDuration } from './hooks/useFocusedDuration'
 import { useIsFocusPaused } from './utils/useIsFocusPaused'
+import { useHasTimerSoundNotification } from './hooks/useHasTimerSoundNotification'
 
 export const CurrentFocusContext = createContext<FocusSession | undefined>(
   undefined,
