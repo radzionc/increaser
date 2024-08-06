@@ -47,6 +47,8 @@ export const Blocks = () => {
         const workDuration = getBlockWorkDuration(block)
         const isSignificant = workDuration > convertDuration(25, 'min', 'ms')
 
+        if (!isSignificant) return null
+
         return (
           <Container
             key={index}
@@ -55,11 +57,9 @@ export const Blocks = () => {
               height: toPercents(duration / timespan),
             }}
           >
-            {isSignificant && (
-              <Text size={12}>
-                {formatDuration(getBlockWorkDuration(block), 'ms')}
-              </Text>
-            )}
+            <Text size={12}>
+              {formatDuration(getBlockWorkDuration(block), 'ms')}
+            </Text>
           </Container>
         )
       })}

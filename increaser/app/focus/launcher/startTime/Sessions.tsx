@@ -2,7 +2,7 @@ import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getSetHash } from '@increaser/entities-utils/set/getSetHash'
 import { useMemo } from 'react'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
-import { SetItem } from '@increaser/ui/sets/manager/editor/SetItem'
+import { SetItem } from '@increaser/ui/sets/manager/SetItem'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 
 export const Sessions = () => {
@@ -15,11 +15,10 @@ export const Sessions = () => {
 
   return (
     <>
-      {sets.map((value, index) => (
+      {sets.map((value) => (
         <SetItem
           key={getSetHash(value)}
-          value={value}
-          index={index}
+          projectId={value.projectId}
           style={{
             top: setEditorConfig.msToPx(value.start - interval.start),
             height: setEditorConfig.msToPx(value.end - value.start),

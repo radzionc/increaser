@@ -9,21 +9,15 @@ import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { dayOverviewConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
-const leftOffset =
-  dayOverviewConfig.horizontalPadding +
-  dayOverviewConfig.dayTimeLabelsWidth +
-  dayOverviewConfig.timeLabelGap +
-  8
-
 const rightOffset = dayOverviewConfig.horizontalPadding
 
-const totalOffset = leftOffset + rightOffset
+const totalOffset = dayOverviewConfig.setLeftOffset + rightOffset
 
 const SetPosition = styled.div`
   width: calc(100% - ${toSizeUnit(totalOffset)});
   position: absolute;
 
-  left: ${toSizeUnit(leftOffset)};
+  left: ${toSizeUnit(dayOverviewConfig.setLeftOffset)};
 `
 
 export const Sets = () => {

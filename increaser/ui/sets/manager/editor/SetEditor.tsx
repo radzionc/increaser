@@ -13,12 +13,17 @@ import { InteractiveDragArea } from '@lib/ui/timeline/InteractiveDragArea'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
 import { setEditorConfig } from './config'
+import { editorSetFrame } from './editorSetFrame'
+
+const CurrentInterval = styled(CurrentIntervalRect)`
+  ${editorSetFrame};
+`
 
 export const SetEditor = () => {
   const { projects } = useAssertUserState()
@@ -114,7 +119,7 @@ export const SetEditor = () => {
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
-      <CurrentIntervalRect
+      <CurrentInterval
         $color={colors.getLabelColor(projects[value.projectId].color)}
         ref={intervalElement}
         style={{
@@ -125,7 +130,7 @@ export const SetEditor = () => {
         <IconWrapper style={{ opacity: activeControl ? 0 : 1 }}>
           <MoveIcon />
         </IconWrapper>
-      </CurrentIntervalRect>
+      </CurrentInterval>
 
       <FloatingIntervalDuration
         style={{
