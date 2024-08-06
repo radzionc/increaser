@@ -1,5 +1,5 @@
 1722919666475
-
+Filter ideas by project
 1722338935549
 Pause focus session (the most requested feature yet)
 Create a project or a task from the focus launcher
