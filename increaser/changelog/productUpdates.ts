@@ -26,6 +26,11 @@ export const productUpdates: ProductUpdate[] = [
     telegram: 'https://t.me/increaser_app/45',
     indieHackers:
       'https://www.indiehackers.com/product/increaser/new-increaser-features-to-boost-your-productivity--O3b8CLcb60au7pXHzI-',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7226590945373261824',
+    x: 'https://x.com/increaser_app/status/1820829571739951136',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1eljbgt/enhance_your_productivity_with_new_increaser/',
   },
   {
     releasedAt: 1722338935549,
