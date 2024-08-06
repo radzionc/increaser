@@ -21,7 +21,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { dayOverviewConfig } from '@increaser/ui/sets/manager/overview/config'
+import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -60,8 +60,7 @@ export const StartTimeEditor = () => {
     if (!containerRect) return
 
     const timestamp =
-      interval.start +
-      dayOverviewConfig.editor.pxToMs(clientY - containerRect.top)
+      interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
     const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
 
@@ -76,8 +75,8 @@ export const StartTimeEditor = () => {
   const cursor = isActive ? 'row-resize' : undefined
 
   const valueDuration = getIntervalDuration({ start: value, end: now })
-  const valueInPx = dayOverviewConfig.editor.msToPx(value - interval.start)
-  const intervalDurationInPx = dayOverviewConfig.editor.msToPx(valueDuration)
+  const valueInPx = setEditorConfig.msToPx(value - interval.start)
+  const intervalDurationInPx = setEditorConfig.msToPx(valueDuration)
 
   const theme = useTheme()
 

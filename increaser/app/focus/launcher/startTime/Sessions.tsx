@@ -2,8 +2,8 @@ import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getSetHash } from '@increaser/entities-utils/set/getSetHash'
 import { useMemo } from 'react'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
-import { dayOverviewConfig } from '@increaser/ui/sets/manager/overview/config'
 import { SetItem } from '@increaser/ui/sets/manager/editor/SetItem'
+import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 
 export const Sessions = () => {
   const { interval } = useStartTimeEditor()
@@ -21,8 +21,8 @@ export const Sessions = () => {
           value={value}
           index={index}
           style={{
-            top: dayOverviewConfig.editor.msToPx(value.start - interval.start),
-            height: dayOverviewConfig.editor.msToPx(value.end - value.start),
+            top: setEditorConfig.msToPx(value.start - interval.start),
+            height: setEditorConfig.msToPx(value.end - value.start),
           }}
         />
       ))}

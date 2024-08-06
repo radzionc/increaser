@@ -18,7 +18,7 @@ import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInt
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
-import { dayOverviewConfig } from '../overview/config'
+import { setEditorConfig } from './config'
 
 export const SetEditor = () => {
   const { projects } = useAssertUserState()
@@ -54,8 +54,7 @@ export const SetEditor = () => {
     if (!containerRect) return
 
     const timestamp =
-      dayInterval.start +
-      dayOverviewConfig.editor.pxToMs(clientY - containerRect.top)
+      dayInterval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
     const getNewInterval = () => {
       if (activeControl === 'position') {
@@ -105,13 +104,11 @@ export const SetEditor = () => {
   }, [activeControl])
 
   const valueDuration = getIntervalDuration(value)
-  const intervalStartInPx = dayOverviewConfig.editor.msToPx(
+  const intervalStartInPx = setEditorConfig.msToPx(
     value.start - dayInterval.start,
   )
-  const intervalEndInPx = dayOverviewConfig.editor.msToPx(
-    value.end - dayInterval.start,
-  )
-  const intervalDurationInPx = dayOverviewConfig.editor.msToPx(valueDuration)
+  const intervalEndInPx = setEditorConfig.msToPx(value.end - dayInterval.start)
+  const intervalDurationInPx = setEditorConfig.msToPx(valueDuration)
 
   const { colors } = useTheme()
 
