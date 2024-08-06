@@ -1,4 +1,5 @@
 1722919666475
+Deduct minutes from the current focus session if got distracted
 Filter tasks and ideas by project
 1722338935549
 Pause focus session (the most requested feature yet)

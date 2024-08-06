@@ -4,10 +4,11 @@ import styled, { useTheme } from 'styled-components'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ComponentProps, forwardRef } from 'react'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
 const Container = styled.div`
-  border-radius: 2px;
-  background: ${getColor('mist')};
+  ${borderRadius.xs};
+  background: ${getColor('foreground')};
   overflow: hidden;
   ${takeWholeSpace};
 `

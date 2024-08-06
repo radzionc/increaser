@@ -34,16 +34,17 @@ const Container = styled(SetItem)<ComponentWithActiveState>`
   ${interactive};
 
   &:hover {
-    background: ${getColor('mistExtra')};
+    background: ${getColor('foregroundExtra')};
   }
 
   height: 100%;
+  outline: none;
 
   ${({ isActive }) =>
     isActive &&
     css`
       border: 1px solid ${getColor('text')};
-      background: ${getColor('mistExtra')};
+      background: ${getColor('foregroundExtra')};
     `}
 `
 
