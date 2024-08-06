@@ -1,6 +1,5 @@
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { IntervalEditorControl } from '@lib/ui/timeline/IntervalEditorControl'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useEvent } from 'react-use'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
@@ -21,6 +20,7 @@ import { useActiveSet } from '../ActiveSetProvider'
 import { setEditorConfig } from './config'
 import { editorSetFrame } from './editorSetFrame'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { useActiveControl } from './ActiveControlProvider'
 
 const borderWidth = 2
 
@@ -34,8 +34,7 @@ export const SetEditor = () => {
   const [value, setActiveSet] = usePresentState(useActiveSet())
   const [weekday] = useSelectedWeekday()
   const dayInterval = useWeekdayPassedInterval(weekday)
-  const [activeControl, setActiveControl] =
-    useState<IntervalEditorControl | null>(null)
+  const [activeControl, setActiveControl] = useActiveControl()
 
   useEvent('pointerup', () => setActiveControl(null))
   useEvent('pointercancel', () => setActiveControl(null))
