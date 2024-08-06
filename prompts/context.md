@@ -106,7 +106,7 @@ On the "Schedule" page, the user can set the time when they want to start and fi
 
 ## Ideas
 
-On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button.
+On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button. The user can filter ideas by project.
 
 ## Principles
 
