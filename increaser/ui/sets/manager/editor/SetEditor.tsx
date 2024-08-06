@@ -20,9 +20,13 @@ import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
 import { setEditorConfig } from './config'
 import { editorSetFrame } from './editorSetFrame'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+
+const borderWidth = 2
 
 const CurrentInterval = styled(CurrentIntervalRect)`
   ${editorSetFrame};
+  border-width: ${toSizeUnit(borderWidth)};
 `
 
 export const SetEditor = () => {
@@ -123,8 +127,8 @@ export const SetEditor = () => {
         $color={colors.getLabelColor(projects[value.projectId].color)}
         ref={intervalElement}
         style={{
-          top: intervalStartInPx,
-          height: intervalDurationInPx,
+          top: intervalStartInPx - borderWidth / 2,
+          height: intervalDurationInPx + borderWidth,
         }}
       >
         <IconWrapper style={{ opacity: activeControl ? 0 : 1 }}>
