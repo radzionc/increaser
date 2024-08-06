@@ -22,11 +22,10 @@ export const SidebarNavigationItem = ({
         />
       )}
       timeTracking={() => <NavigationToInternalPage value="timeTracking" />}
-      workBudget={() => <NavigationToInternalPage value="workBudget" />}
       timePlanning={() => <NavigationToInternalPage value="timePlanning" />}
       habits={() => <NavigationToInternalPage value="habits" />}
       tasks={() => <NavigationToInternalPage value="tasks" />}
-      schedule={() => <NavigationToInternalPage value="schedule" />}
+      preferences={() => <NavigationToInternalPage value="preferences" />}
       vision={() => <NavigationToInternalPage value="vision" />}
       goals={() => <NavigationToInternalPage value="goals" />}
       projects={() => <NavigationToInternalPage value="projects" />}

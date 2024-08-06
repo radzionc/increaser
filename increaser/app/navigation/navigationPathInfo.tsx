@@ -6,6 +6,7 @@ import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
 import { GiftIcon } from '@lib/ui/icons/GiftIcon'
 import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
+import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
 
 type NavigationPathInfo = {
   name: string
@@ -18,10 +19,6 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       name: 'Focus',
       icon: productToolIconRecord.focus,
     },
-    schedule: {
-      name: 'Schedule',
-      icon: productToolIconRecord.schedule,
-    },
     habits: {
       name: 'Habits',
       icon: productToolIconRecord.habits,
@@ -33,10 +30,6 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     timeTracking: {
       name: 'Timesheet',
       icon: productToolIconRecord.trackTime,
-    },
-    workBudget: {
-      name: productToolNameRecord.workBudget,
-      icon: productToolIconRecord.workBudget,
     },
     timePlanning: {
       name: productToolNameRecord.timePlanner,
@@ -69,5 +62,9 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     principles: {
       name: 'Principles',
       icon: <ScrollIcon />,
+    },
+    preferences: {
+      name: 'Preferences',
+      icon: <TogglesIcon />,
     },
   } as const

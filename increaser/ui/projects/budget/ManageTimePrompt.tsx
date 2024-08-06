@@ -33,7 +33,7 @@ export const ManageTimePrompt = () => {
         You have allocated {pluralize(-freeHours, 'hour')} more than your
         current work budget allows. Please adjust the budget for the projects
         listed below or{' '}
-        <BudgetLink href={getAppPath('workBudget')}>
+        <BudgetLink href={getAppPath('preferences', 'work-budget')}>
           expand your overall work budget
         </BudgetLink>{' '}
         to accommodate your plans.
