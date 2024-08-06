@@ -7,7 +7,6 @@ export const getGapsBetweenIntervals = (intervals: Interval[]): Interval[] => {
 
   const sortedIntervals = [...intervals].sort((a, b) => a.start - b.start)
 
-  // Use reduce to find gaps
   const gaps = sortedIntervals.reduce<Interval[]>(
     (acc, current, index, array) => {
       if (index === 0) {
