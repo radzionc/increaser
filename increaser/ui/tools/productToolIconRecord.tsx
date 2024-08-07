@@ -1,23 +1,23 @@
 import { ProductTool } from '@increaser/entities/ProductTool'
 import { ReactNode } from 'react'
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
-import { ZapIcon } from '@lib/ui/icons/ZapIcon'
-import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
-import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { LayersIcon } from '@lib/ui/icons/LayersIcon'
 import { TableIcon } from '@lib/ui/icons/TableIcon'
-import { StarIcon } from '@lib/ui/icons/StarIcon'
+import { SparklesIcon } from '@lib/ui/icons/SparklesIcon'
 import { GridIcon } from '@lib/ui/icons/GridIcon'
-import { TargetIcon } from '@lib/ui/icons/TargetIcon'
+import { GoalIcon } from '@lib/ui/icons/GoalIcon'
+import { SquareCheckIcon } from '@lib/ui/icons/SquareCheckIcon'
+import { TimerIcon } from '@lib/ui/icons/TimerIcon'
+import { SproutIcon } from '@lib/ui/icons/SproutIcon'
 
 export const productToolIconRecord: Record<ProductTool, ReactNode> = {
   trackTime: <TableIcon />,
-  tasks: <CheckSquareIcon />,
+  tasks: <SquareCheckIcon />,
   workBudget: <LayersIcon />,
   timePlanner: <GridIcon />,
-  habits: <ZapIcon />,
-  focus: <ClockIcon />,
+  habits: <SproutIcon />,
+  focus: <TimerIcon />,
   schedule: <CalendarIcon />,
-  vision: <StarIcon />,
-  goals: <TargetIcon />,
+  vision: <SparklesIcon />,
+  goals: <GoalIcon />,
 }

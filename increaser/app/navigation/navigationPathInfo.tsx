@@ -1,6 +1,5 @@
-import { ListIcon } from '@lib/ui/icons/ListIcon'
+import { BoxIcon } from '@lib/ui/icons/BoxIcon'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
-import { productToolNameRecord } from '@increaser/entities/ProductTool'
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
@@ -27,17 +26,9 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
       name: 'Tasks',
       icon: productToolIconRecord.tasks,
     },
-    timeTracking: {
-      name: 'Timesheet',
-      icon: productToolIconRecord.trackTime,
-    },
-    timePlanning: {
-      name: productToolNameRecord.timePlanner,
-      icon: productToolIconRecord.timePlanner,
-    },
     projects: {
       name: 'Projects',
-      icon: <ListIcon />,
+      icon: <BoxIcon />,
     },
     community: {
       name: 'Community',

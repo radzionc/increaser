@@ -30,7 +30,7 @@ export const ProjectBudgetWidgetHeader = () => {
           {name}
         </Text>
       </HStack>
-      <Link href={getAppPath('timePlanning')}>
+      <Link href={getAppPath('projects', 'plan')}>
         <HStackSeparatedBy separator="/">
           <Text weight="semibold" color="contrast">
             {doneMinutesThisWeek > 0
