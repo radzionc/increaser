@@ -13,7 +13,7 @@ import {
   ProductFeaturesViewProvider,
   ProductFeaturesViewSelector,
 } from './ProductFeaturesView'
-import { PageHeader } from '../../ui/page/PageHeader'
+import { Header } from '@lib/ui/layout/Header'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ProductFeatureList } from './ProductFeatureList'
 import { FeatureForm } from './form/FeatureForm'
@@ -55,13 +55,13 @@ export const RoadmapPage: Page = () => {
             <Content>
               <PageContent style={{ maxWidth: contentWidth }}>
                 <ProductFeaturesViewProvider>
-                  <PageHeader>
+                  <Header>
                     <PageTitle>{title}</PageTitle>
                     <PageDocumentTitle emoji="🎯" title={title} />
                     <ClientOnly>
                       <ProductFeaturesViewSelector />
                     </ClientOnly>
-                  </PageHeader>
+                  </Header>
                   <UserStateOnly>
                     <VStack gap={20}>
                       {isSmall && <SideContent />}

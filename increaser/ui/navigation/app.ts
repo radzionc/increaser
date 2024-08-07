@@ -1,8 +1,8 @@
 export const primaryAppNavigationPages = [
   'focus',
   'tasks',
-  'goals',
   'projects',
+  'goals',
   'habits',
   'ideas',
   'principles',

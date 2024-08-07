@@ -1,7 +1,7 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 
-export const PageHeader = styled(HStack)`
+export const Header = styled(HStack)`
   width: 100%;
   gap: 20px;
   justify-content: space-between;
