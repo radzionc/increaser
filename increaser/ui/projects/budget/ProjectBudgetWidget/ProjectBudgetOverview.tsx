@@ -10,6 +10,7 @@ import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 import { match } from '@lib/utils/match'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
 import { LinesFiller } from '@lib/ui/visual/LinesFiller'
+import { usePrevDayTarget } from '../hooks/usePrevDayTarget'
 
 const Container = styled.div`
   position: relative;
@@ -33,6 +34,7 @@ const Offset = styled.div`
   position: absolute;
   top: 0;
   height: 100%;
+  border: 2px solid;
 `
 
 export const ProjectBudgetOverview = () => {
@@ -54,8 +56,10 @@ export const ProjectBudgetOverview = () => {
   }, [allocatedMinutesPerWeek, doneMinutesThisWeek, goal, hasReachedFinalDay])
 
   const target = useCurrentDayTarget()
+  const prevTarget = usePrevDayTarget()
 
   const isUnderTarget = doneMinutesThisWeek < target
+  const isUnderPrevDayTarget = doneMinutesThisWeek < prevTarget
 
   return (
     <Container
@@ -93,9 +97,10 @@ export const ProjectBudgetOverview = () => {
                   ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
                   : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek,
               ),
-              background: (isUnderTarget
+              color: (isUnderTarget
                 ? match(goal, {
-                    doMore: () => colors.alert,
+                    doMore: () =>
+                      isUnderPrevDayTarget ? colors.alert : colors.idle,
                     doLess: () => colors.success,
                   })
                 : match(goal, {
