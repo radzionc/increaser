@@ -1,21 +1,24 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
-import { ComponentProps } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
+import { HStack } from '@lib/ui/layout/Stack'
 
 type SummaryFrameProps = ComponentProps<typeof Text> & {
-  emoji: string
+  icon?: ReactNode
 }
 
 export const SummaryFrame = ({
   children,
-  emoji,
+  icon,
   ...rest
 }: SummaryFrameProps) => (
-  <Text size={14} {...rest}>
-    <EmojiTextPrefix emoji={emoji} /> {children}
-  </Text>
+  <HStack alignItems="center" gap={8}>
+    {icon}
+    <Text size={14} {...rest}>
+      {children}
+    </Text>
+  </HStack>
 )
 
 export const SummaryFrameDuration = ({

@@ -5,6 +5,13 @@ import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { SummaryFrame, SummaryFrameDuration } from './SummaryFrame'
 import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
+import { CheckDoubleIcon } from '@lib/ui/icons/CheckDoubleIcon'
+import { CheckIcon } from '@lib/ui/icons/CheckIcon'
+import { OctagonXIcon } from '@lib/ui/icons/OctagonXIcon'
+import { ThumbsUpIcon } from '@lib/ui/icons/ThumbsUpIcon'
+import { useProjectBudgetOffsetColor } from '../hooks/useProjectBudgetOffsetColor'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { TargetIcon } from '@lib/ui/icons/TargetIcon'
 
 export const ProjectBudgetSummary = () => {
   const { goal, id, allocatedMinutesPerWeek } = useCurrentProject()
@@ -15,13 +22,25 @@ export const ProjectBudgetSummary = () => {
 
   const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(id)
 
+  const color = useProjectBudgetOffsetColor(id)
+
+  const renderIcon = (Icon: React.FC) => (
+    <IconWrapper style={{ color: color.toCssValue() }}>
+      <Icon />
+    </IconWrapper>
+  )
+
   return (
     <Match
       value={shouldBePresent(goal)}
       doMore={() => {
         if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
           return (
-            <SummaryFrame weight="semibold" color="contrast" emoji="🎉">
+            <SummaryFrame
+              weight="semibold"
+              color="contrast"
+              icon={renderIcon(CheckDoubleIcon)}
+            >
               Congrats! Weekly goal reached!
             </SummaryFrame>
           )
@@ -29,7 +48,7 @@ export const ProjectBudgetSummary = () => {
 
         if (doneMinutesThisWeek > allocatedMinutesPerWeek) {
           return (
-            <SummaryFrame emoji="🎉">
+            <SummaryFrame icon={renderIcon(CheckDoubleIcon)}>
               Weekly goal exceeded by{' '}
               <SummaryFrameDuration
                 value={doneMinutesThisWeek - allocatedMinutesPerWeek}
@@ -41,7 +60,7 @@ export const ProjectBudgetSummary = () => {
 
         if (doneMinutesThisWeek < target) {
           return (
-            <SummaryFrame emoji="🎯">
+            <SummaryFrame icon={renderIcon(TargetIcon)}>
               <SummaryFrameDuration value={target - doneMinutesThisWeek} /> left
               to reach today's milestone!
             </SummaryFrame>
@@ -49,7 +68,7 @@ export const ProjectBudgetSummary = () => {
         }
 
         return (
-          <SummaryFrame emoji="💪">
+          <SummaryFrame icon={renderIcon(CheckIcon)}>
             Today's milestone passed!{' '}
             <SummaryFrameDuration
               value={allocatedMinutesPerWeek - doneMinutesThisWeek}
@@ -61,7 +80,7 @@ export const ProjectBudgetSummary = () => {
       doLess={() => {
         if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
           return (
-            <SummaryFrame weight="semibold" color="contrast" emoji="🔖">
+            <SummaryFrame weight="semibold" color="contrast">
               On target! You've stuck precisely to your work limit."
             </SummaryFrame>
           )
@@ -69,7 +88,7 @@ export const ProjectBudgetSummary = () => {
 
         if (doneMinutesThisWeek > allocatedMinutesPerWeek) {
           return (
-            <SummaryFrame emoji="🛑">
+            <SummaryFrame icon={renderIcon(OctagonXIcon)}>
               <SummaryFrameDuration
                 value={doneMinutesThisWeek - allocatedMinutesPerWeek}
               />{' '}
@@ -84,13 +103,13 @@ export const ProjectBudgetSummary = () => {
         ) {
           if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
             return (
-              <SummaryFrame weight="semibold" color="contrast" emoji="👌">
+              <SummaryFrame weight="semibold" color="contrast">
                 Exactly met your week's maximum work limit!
               </SummaryFrame>
             )
           }
           return (
-            <SummaryFrame emoji="👍">
+            <SummaryFrame icon={renderIcon(ThumbsUpIcon)}>
               Under limit by{' '}
               <SummaryFrameDuration
                 value={allocatedMinutesPerWeek - doneMinutesThisWeek}
@@ -103,23 +122,23 @@ export const ProjectBudgetSummary = () => {
         if (doneMinutesThisWeek <= target) {
           if (doneMinutesThisWeek === target) {
             return (
-              <SummaryFrame weight="semibold" color="contrast" emoji="✅">
+              <SummaryFrame weight="semibold" color="contrast">
                 Spot on! Worked just up to today's cap.
               </SummaryFrame>
             )
           }
 
           return (
-            <SummaryFrame emoji="🌿">
+            <SummaryFrame icon={renderIcon(ThumbsUpIcon)}>
               <SummaryFrameDuration value={target - doneMinutesThisWeek} />{' '}
-              under today’s milestone—well done!
+              under today’s limit!
             </SummaryFrame>
           )
         }
 
         if (doneMinutesThisWeek > target) {
           return (
-            <SummaryFrame emoji="🚨">
+            <SummaryFrame icon={renderIcon(OctagonXIcon)}>
               You've gone over today's work limit by{' '}
               <SummaryFrameDuration value={doneMinutesThisWeek - target} />.
               Time to unwind!

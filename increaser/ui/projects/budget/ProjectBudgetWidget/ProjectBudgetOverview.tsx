@@ -4,13 +4,11 @@ import { getColor } from '@lib/ui/theme/getters'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { toPercents } from '@lib/utils/toPercents'
 import { useMemo } from 'react'
-import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
 import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
-import { match } from '@lib/utils/match'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
 import { LinesFiller } from '@lib/ui/visual/LinesFiller'
-import { usePrevDayTarget } from '../hooks/usePrevDayTarget'
+import { ProjectBudgetOffset } from './ProjectBudgetOffset'
 
 const Container = styled.div`
   position: relative;
@@ -30,13 +28,6 @@ const Fill = styled.div`
   color: ${getColor('background')};
 `
 
-const Offset = styled.div`
-  position: absolute;
-  top: 0;
-  height: 100%;
-  border: 2px solid;
-`
-
 export const ProjectBudgetOverview = () => {
   const { goal, allocatedMinutesPerWeek, id } = useCurrentProject()
 
@@ -54,12 +45,6 @@ export const ProjectBudgetOverview = () => {
 
     return hasReachedFinalDay && doneMinutesThisWeek <= allocatedMinutesPerWeek
   }, [allocatedMinutesPerWeek, doneMinutesThisWeek, goal, hasReachedFinalDay])
-
-  const target = useCurrentDayTarget()
-  const prevTarget = usePrevDayTarget()
-
-  const isUnderTarget = doneMinutesThisWeek < target
-  const isUnderPrevDayTarget = doneMinutesThisWeek < prevTarget
 
   return (
     <Container
@@ -84,33 +69,7 @@ export const ProjectBudgetOverview = () => {
         <LinesFiller />
       </Fill>
       {goal && !(hasReachedFinalDay || hasReachedGoal) && (
-        <>
-          <Offset
-            style={{
-              left: toPercents(
-                isUnderTarget
-                  ? doneMinutesThisWeek / allocatedMinutesPerWeek
-                  : target / allocatedMinutesPerWeek,
-              ),
-              width: toPercents(
-                isUnderTarget
-                  ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
-                  : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek,
-              ),
-              color: (isUnderTarget
-                ? match(goal, {
-                    doMore: () =>
-                      isUnderPrevDayTarget ? colors.alert : colors.idle,
-                    doLess: () => colors.success,
-                  })
-                : match(goal, {
-                    doMore: () => colors.success,
-                    doLess: () => colors.alert,
-                  })
-              ).toCssValue(),
-            }}
-          ></Offset>
-        </>
+        <ProjectBudgetOffset />
       )}
       <ProjectBudgetWidgetDays />
     </Container>
