@@ -21,15 +21,17 @@ import { formatWeek } from '@lib/utils/time/Week'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
 import { getSegmentIndex } from '@lib/utils/math/getSegmentIndex'
-import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
+import {
+  takeWholeSpaceAbsolutely,
+  TakeWholeSpaceAbsolutely,
+} from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { toPercents } from '@lib/utils/toPercents'
 import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { TrackedTimeChartXLabels } from './TrackedTimeChartXLabels'
 
 const Content = styled.div`
-  ${takeWholeSpace};
+  ${takeWholeSpaceAbsolutely};
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(8px, 1fr));
 
@@ -171,7 +173,7 @@ export const TrackedTimeChart = () => {
                             style={{
                               background: (isActive
                                 ? color
-                                : colors.mistExtra
+                                : colors.foregroundExtra
                               ).toCssValue(),
                               height,
                             }}

@@ -7,7 +7,6 @@ export const TrackedTimeReport = () => {
     <VStack fullWidth gap={40}>
       <TrackedTimeReportHeader />
       <TrackedTimeReportContent />
-      <div />
     </VStack>
   )
 }
