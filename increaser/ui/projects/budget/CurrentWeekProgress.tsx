@@ -15,7 +15,9 @@ export const CurrentWeekProgress = () => {
         <>
           {projects.map((project) => (
             <CurrentProjectProvider value={project} key={project.id}>
-              <ProjectBudgetWidget />
+              <VStack gap={8}>
+                <ProjectBudgetWidget />
+              </VStack>
             </CurrentProjectProvider>
           ))}
         </>

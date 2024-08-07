@@ -1,5 +1,4 @@
 import styled, { useTheme } from 'styled-components'
-import { transition } from '@lib/ui/css/transition'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
@@ -10,30 +9,30 @@ import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
 import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 import { match } from '@lib/utils/match'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
+import { LinesFiller } from '@lib/ui/visual/LinesFiller'
 
 const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   ${borderRadius.m};
-  ${transition};
   height: 100%;
-  background: ${getColor('foreground')};
-  border: 1px solid ${getColor('mist')};
+  background: ${getColor('background')};
+  border: 1px solid ${getColor('mistExtra')};
   overflow: hidden;
 `
 
 const Fill = styled.div`
   height: 100%;
-  ${transition};
-  background: ${getColor('background')};
+  background: ${getColor('foregroundExtra')};
+  position: relative;
+  color: ${getColor('background')};
 `
 
 const Offset = styled.div`
   position: absolute;
   top: 0;
   height: 100%;
-  ${transition};
 `
 
 export const ProjectBudgetOverview = () => {
@@ -77,7 +76,9 @@ export const ProjectBudgetOverview = () => {
             Math.min(doneMinutesThisWeek / allocatedMinutesPerWeek, 1),
           ),
         }}
-      />
+      >
+        <LinesFiller />
+      </Fill>
       {goal && !(hasReachedFinalDay || hasReachedGoal) && (
         <>
           <Offset
@@ -103,7 +104,7 @@ export const ProjectBudgetOverview = () => {
                   })
               ).toCssValue(),
             }}
-          />
+          ></Offset>
         </>
       )}
       <ProjectBudgetWidgetDays />
