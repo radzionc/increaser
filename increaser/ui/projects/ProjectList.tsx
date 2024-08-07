@@ -1,26 +1,18 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { groupItems } from '@lib/utils/array/groupItems'
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
-import {
-  Project,
-  ProjectStatus,
-  projectStatuses,
-} from '@increaser/entities/Project'
-import { makeRecord } from '@lib/utils/record/makeRecord'
-import { useCallback, useMemo } from 'react'
+
 import { ProjectItem } from './ProjectItem'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { projectsConfig } from './config'
-import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
-import { CreateProjectPrompt } from './CreateProjectPrompt'
-import { ProjectsGroup } from './ProjectsGroup'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
+import { useProjectStatusFilter } from './filter/status/ProjectStatusFilterProvider'
+import { order } from '@lib/utils/array/order'
+import { DnDList } from '@lib/dnd/DnDList'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -28,50 +20,34 @@ const DragHandle = styled(ListItemDragHandle)`
   )};
 `
 
-export const ProjectsGroups = () => {
+export const ProjectList = () => {
   const { projects } = useAssertUserState()
+  const [status] = useProjectStatusFilter()
   const [activeItemId] = useActiveItemId()
 
-  const groups = useMemo(() => {
-    return {
-      ...makeRecord(projectStatuses, () => [] as Project[]),
-      ...groupItems(Object.values(projects), ({ status }) => status),
-    }
-  }, [projects])
+  const items = order(
+    Object.values(projects).filter((project) => project.status === status),
+    (item) => item.order,
+    'asc',
+  )
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
-  const onChange = useCallback(
-    (id: string, { order, groupId }: ItemChangeParams<ProjectStatus>) => {
-      if (!couldProjectStatusBeChanged(id) && groupId !== projects[id].status) {
-        return
-      }
-      const fields: Partial<Omit<Project, 'id'>> = {
-        order,
-        status: groupId,
-      }
-      updateProject({
-        id,
-        fields,
-      })
-    },
-    [projects, updateProject],
-  )
-
   return (
-    <DnDGroups
-      groups={groups}
-      getGroupOrder={(status) => projectStatuses.indexOf(status)}
-      getItemId={(project) => project.id}
-      getItemOrder={(project) => project.order}
-      onChange={onChange}
-      renderGroup={({ content, groupId, containerProps }) => (
-        <VStack {...containerProps} key={groupId}>
-          <ProjectsGroup count={groups[groupId].length} value={groupId}>
-            {content}
-            {groupId === 'active' && <CreateProjectPrompt />}
-          </ProjectsGroup>
-        </VStack>
+    <DnDList
+      items={items}
+      getItemId={(item) => item.id}
+      getItemOrder={(item) => item.order}
+      onChange={(id, { order }) => {
+        updateProject({
+          id,
+          fields: {
+            order,
+          },
+        })
+      }}
+      renderList={({ content, containerProps }) => (
+        <VStack {...containerProps}>{content}</VStack>
       )}
       renderItem={({
         item,
