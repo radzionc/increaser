@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
 import { TrackedTimeNavigation } from './TrackedTimeNavigation'
+import { TrackedTimeStats } from './TrackedTimeStats'
 
 const contentWidth = 520
 const gap = 40
@@ -39,7 +40,10 @@ export const TrackedTimeReport = () => {
             )}
             <PageContent>
               {isSmall && <TrackedTimeNavigation />}
-              <TrackedTimeChart />
+              <VStack gap={20}>
+                <TrackedTimeStats />
+                <TrackedTimeChart />
+              </VStack>
             </PageContent>
           </Container>
         )
