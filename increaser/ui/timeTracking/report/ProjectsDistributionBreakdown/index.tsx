@@ -51,16 +51,12 @@ export const ProjectsDistributionBreakdown = () => {
               </BreakdownRowContent>
               <AllocationLine
                 height={4}
-                segments={items.map(({ id, data }) => {
-                  const seconds = sum(data)
-                  const { color } = projects[id]
-                  return {
-                    color: activeProjectId
-                      ? colors.textShy
-                      : colors.getLabelColor(color),
-                    proportion: seconds / total,
-                  }
-                })}
+                segments={[
+                  {
+                    color: activeProjectId ? colors.textShy : colors.primary,
+                    proportion: 1,
+                  },
+                ]}
               />
             </VStack>
           </InteractiveRow>
@@ -101,9 +97,7 @@ export const ProjectsDistributionBreakdown = () => {
                     height={4}
                     segments={[
                       {
-                        color: isPrimary
-                          ? colors.getLabelColor(color)
-                          : colors.textShy,
+                        color: isPrimary ? color : colors.textShy,
                         proportion: seconds / total,
                       },
                     ]}

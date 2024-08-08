@@ -30,10 +30,6 @@ export const TrackedTimeReportContent = () => {
           size && size.width - contentWidth - gap < navigationWidth
         return (
           <Container ref={setElement}>
-            <PageContent>
-              {isSmall && <ProjectsDistributionBreakdown />}
-              <TrackedTimeChart />
-            </PageContent>
             {!isSmall && (
               <NavigationContainer
                 style={{ maxWidth: navigationWidth, minWidth: navigationWidth }}
@@ -41,6 +37,10 @@ export const TrackedTimeReportContent = () => {
                 <ProjectsDistributionBreakdown />
               </NavigationContainer>
             )}
+            <PageContent>
+              {isSmall && <ProjectsDistributionBreakdown />}
+              <TrackedTimeChart />
+            </PageContent>
           </Container>
         )
       }}

@@ -63,7 +63,7 @@ export const TrackedTimeChart = () => {
 
   const { colors } = useTheme()
   const color = activeProjectId
-    ? projects[activeProjectId].hslaColor
+    ? projects[activeProjectId].color
     : colors.primary
 
   const getDataPointStartedAt = (index: number) => {

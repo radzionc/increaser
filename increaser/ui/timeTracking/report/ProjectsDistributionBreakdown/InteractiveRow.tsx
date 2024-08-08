@@ -16,7 +16,6 @@ export const InteractiveRow = styled.div<{ isActive: boolean }>`
     isActive
       ? css`
           color: ${getColor('contrast')};
-          background: ${getColor('mist')};
         `
       : css`
           color: ${getColor('textSupporting')};

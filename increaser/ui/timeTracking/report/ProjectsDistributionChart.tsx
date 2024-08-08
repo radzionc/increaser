@@ -26,7 +26,7 @@ export const ProjectsDistributionChart = () => {
           const shouldShow = !activeProjectId || activeProjectId === id
           return {
             value: seconds,
-            color: shouldShow ? projects[id].hslaColor : colors.mist,
+            color: shouldShow ? projects[id].color : colors.mist,
             labelColor: shouldShow ? colors.contrast : colors.transparent,
           }
         })}
