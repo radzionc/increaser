@@ -12,6 +12,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const Container = styled(VStack)`
   padding: 0;
+  padding-bottom: ${toSizeUnit(panelDefaultPadding)};
   > * {
     ${horizontalPadding(panelDefaultPadding)};
   }
