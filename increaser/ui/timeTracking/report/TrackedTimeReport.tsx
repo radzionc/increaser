@@ -8,7 +8,7 @@ import { TrackedTimeNavigation } from './TrackedTimeNavigation'
 
 const contentWidth = 520
 const gap = 40
-const navigationWidth = 360
+const navigationWidth = 320
 
 const Container = styled(HStack)`
   width: 100%;
