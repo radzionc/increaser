@@ -1,12 +1,49 @@
-import { TrackedTimeReportHeader } from './TrackedTimeReportHeader'
-import { TrackedTimeReportContent } from './TrackedTimeReportContent'
-import { VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { TrackedTimeChart } from './TrackedTimeChart/TrackedTimeChart'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import styled from 'styled-components'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { PageContent } from '@increaser/app/ui/page/PageContent'
+import { TrackedTimeNavigation } from './TrackedTimeNavigation'
+
+const contentWidth = 520
+const gap = 40
+const navigationWidth = 360
+
+const Container = styled(HStack)`
+  width: 100%;
+  gap: ${toSizeUnit(gap)};
+  align-items: start;
+`
+
+const NavigationContainer = styled(VStack)`
+  position: sticky;
+  top: 0;
+  flex: 1;
+`
 
 export const TrackedTimeReport = () => {
   return (
-    <VStack fullWidth gap={40}>
-      <TrackedTimeReportHeader />
-      <TrackedTimeReportContent />
-    </VStack>
+    <ElementSizeAware
+      render={({ setElement, size }) => {
+        const isSmall =
+          size && size.width - contentWidth - gap < navigationWidth
+        return (
+          <Container ref={setElement}>
+            {!isSmall && (
+              <NavigationContainer
+                style={{ maxWidth: navigationWidth, minWidth: navigationWidth }}
+              >
+                <TrackedTimeNavigation />
+              </NavigationContainer>
+            )}
+            <PageContent>
+              {isSmall && <TrackedTimeNavigation />}
+              <TrackedTimeChart />
+            </PageContent>
+          </Container>
+        )
+      }}
+    />
   )
 }
