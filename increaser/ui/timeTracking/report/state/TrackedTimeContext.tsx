@@ -15,6 +15,8 @@ export type TrackedTimePreference = {
 export type TimeTrackingProjectData = {
   hslaColor: HSLA
   name: string
+  emoji: string
+  color: number
   id: string
   weeks: ProjectWeek[]
   months: ProjectMonth[]

@@ -55,7 +55,7 @@ export const TrackedTimeProvider = ({
 
     Object.values(allProjects).forEach((project) => {
       result[project.id] = {
-        ...pick(project, ['id', 'name']),
+        ...pick(project, ['id', 'name', 'emoji', 'color']),
         hslaColor: getLabelColor(project.color),
         days: [],
         weeks: weeksRecord[project.id] ?? [],

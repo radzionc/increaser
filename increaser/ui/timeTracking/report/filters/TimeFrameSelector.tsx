@@ -11,6 +11,7 @@ export const TimeFrameSelector = () => {
 
   return (
     <ExpandableSelector<TimeFrame>
+      style={{ minWidth: 152 }}
       value={timeFrame}
       onChange={(timeFrame) => setState((state) => ({ ...state, timeFrame }))}
       options={timeFrames[timeGrouping]}

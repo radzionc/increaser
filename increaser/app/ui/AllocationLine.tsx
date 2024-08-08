@@ -1,4 +1,3 @@
-import { transition } from '@lib/ui/css/transition'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import styled from 'styled-components'
@@ -29,7 +28,6 @@ const Container = styled.div<{ height: number; $background?: HSLA }>`
 const Allocation = styled.div<{ $color: HSLA }>`
   height: 100%;
   background: ${({ $color }) => $color.toCssValue()};
-  ${transition};
 `
 
 export const AllocationLine = ({

@@ -4,7 +4,6 @@ import { sum } from '@lib/utils/array/sum'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { VStack } from '@lib/ui/layout/Stack'
 import { toPercents } from '@lib/utils/toPercents'
 import { useTrackedTime } from '../state/TrackedTimeContext'
@@ -13,13 +12,13 @@ import { useCurrentFrameTotalTracked } from '../hooks/useCurrentFrameTotalTracke
 import { BreakdownContainer } from './BreakdownContainer'
 import { InteractiveRow } from './InteractiveRow'
 import { BreakdownRowContent } from './BreakdownRowContent'
-import { ProjectIndicator } from './ProjectIndicator'
-import { BreakdownHeader } from './BreakdownHeader'
 import { BreakdownValue } from './BreakdownValue'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
+import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 
 export const ProjectsDistributionBreakdown = () => {
   const { projects } = useTrackedTime()
-  const { dataPointsCount, activeProjectId, setState } = useTrackedTimeReport()
+  const { activeProjectId, setState } = useTrackedTimeReport()
 
   const { colors } = useTheme()
 
@@ -29,12 +28,49 @@ export const ProjectsDistributionBreakdown = () => {
 
   return (
     <BreakdownContainer>
-      <BreakdownHeader />
-      <SeparatedByLine alignItems="start" fullWidth gap={12}>
+      <VStack fullWidth gap={20}>
+        <div>
+          <InteractiveRow
+            onClick={() =>
+              setState((state) => ({
+                ...state,
+                activeProjectId: null,
+              }))
+            }
+            isActive={!activeProjectId}
+          >
+            <VStack gap={4}>
+              <BreakdownRowContent>
+                <BreakdownValue value="100%" />
+                <Text>All projects</Text>
+                <BreakdownValue
+                  value={formatDuration(total, 's', {
+                    maxUnit: 'h',
+                  })}
+                />
+              </BreakdownRowContent>
+              <AllocationLine
+                height={4}
+                segments={items.map(({ id, data }) => {
+                  const seconds = sum(data)
+                  const { color } = projects[id]
+                  return {
+                    color: activeProjectId
+                      ? colors.textShy
+                      : colors.getLabelColor(color),
+                    proportion: seconds / total,
+                  }
+                })}
+              />
+            </VStack>
+          </InteractiveRow>
+        </div>
         <VStack gap={2}>
           {items.map(({ id, data }) => {
             const seconds = sum(data)
-            const isPrimary = !activeProjectId || activeProjectId === id
+            const isPrimary = activeProjectId === id
+
+            const { emoji, name, color } = projects[id]
             return (
               <InteractiveRow
                 onClick={() =>
@@ -46,61 +82,38 @@ export const ProjectsDistributionBreakdown = () => {
                 key={id}
                 isActive={activeProjectId === id}
               >
-                <BreakdownRowContent>
-                  <ProjectIndicator
-                    style={{
-                      background: (isPrimary
-                        ? projects[id].hslaColor
-                        : colors.mist
-                      ).toCssValue(),
-                    }}
+                <VStack gap={4}>
+                  <BreakdownRowContent>
+                    <BreakdownValue
+                      value={toPercents(seconds / total, 'round')}
+                    />
+                    <Text cropped>
+                      <EmojiTextPrefix emoji={emoji} />
+                      {name}
+                    </Text>
+                    <BreakdownValue
+                      value={formatDuration(seconds, 's', {
+                        maxUnit: 'h',
+                      })}
+                    />
+                  </BreakdownRowContent>
+                  <AllocationLine
+                    height={4}
+                    segments={[
+                      {
+                        color: isPrimary
+                          ? colors.getLabelColor(color)
+                          : colors.textShy,
+                        proportion: seconds / total,
+                      },
+                    ]}
                   />
-                  <Text cropped>{projects[id].name}</Text>
-                  <BreakdownValue
-                    value={formatDuration(seconds, 's', {
-                      maxUnit: 'h',
-                    })}
-                  />
-                  <BreakdownValue
-                    value={formatDuration(seconds / data.length, 's', {
-                      maxUnit: 'h',
-                      kind: 'short',
-                    })}
-                  />
-                  <BreakdownValue
-                    value={toPercents(seconds / total, 'round')}
-                  />
-                </BreakdownRowContent>
+                </VStack>
               </InteractiveRow>
             )
           })}
         </VStack>
-        <InteractiveRow
-          onClick={() =>
-            setState((state) => ({
-              ...state,
-              activeProjectId: null,
-            }))
-          }
-          isActive={!activeProjectId}
-        >
-          <BreakdownRowContent>
-            <div />
-            <Text>All projects</Text>
-            <BreakdownValue
-              value={formatDuration(total, 's', {
-                maxUnit: 'h',
-              })}
-            />
-            <BreakdownValue
-              value={formatDuration(total / dataPointsCount, 's', {
-                maxUnit: 'h',
-              })}
-            />
-            <BreakdownValue value="100%" />
-          </BreakdownRowContent>
-        </InteractiveRow>
-      </SeparatedByLine>
+      </VStack>
     </BreakdownContainer>
   )
 }

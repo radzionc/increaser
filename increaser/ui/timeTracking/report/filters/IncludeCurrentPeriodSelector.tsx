@@ -19,6 +19,7 @@ const currentPeriodName: Record<TimeGrouping, string> = {
 
 const Container = styled(SelectContainer)`
   ${interactive};
+  min-width: 180px;
 
   &:hover {
     background: ${getHoverVariant('foreground')};

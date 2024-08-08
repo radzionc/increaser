@@ -1,32 +1,49 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { ProjectsDistributionChart } from './ProjectsDistributionChart'
 import { ProjectsDistributionBreakdown } from './ProjectsDistributionBreakdown'
-import { RequiresTrackedTime } from './RequiresTrackedTime'
-import { RequiresProjects } from './RequiresProjects'
 import { TrackedTimeChart } from './TrackedTimeChart/TrackedTimeChart'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import styled from 'styled-components'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { PageContent } from '@increaser/app/ui/page/PageContent'
 
-export const TrackedTimeReportContent = () => (
-  <VStack gap={20}>
-    <RequiresProjects>
-      <RequiresTrackedTime>
-        <HStack
-          justifyContent="space-between"
-          gap={40}
-          fullWidth
-          wrap="wrap"
-          alignItems="center"
-        >
-          <ProjectsDistributionBreakdown />
-          <VStack
-            style={{ flex: 1 }}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <ProjectsDistributionChart />
-          </VStack>
-        </HStack>
-        <TrackedTimeChart />
-      </RequiresTrackedTime>
-    </RequiresProjects>
-  </VStack>
-)
+const contentWidth = 560
+const gap = 40
+const navigationWidth = 320
+
+const Container = styled(HStack)`
+  width: 100%;
+  gap: ${toSizeUnit(gap)};
+  align-items: start;
+`
+
+const NavigationContainer = styled(VStack)`
+  position: sticky;
+  top: 0;
+  flex: 1;
+`
+
+export const TrackedTimeReportContent = () => {
+  return (
+    <ElementSizeAware
+      render={({ setElement, size }) => {
+        const isSmall =
+          size && size.width - contentWidth - gap < navigationWidth
+        return (
+          <Container ref={setElement}>
+            <PageContent>
+              {isSmall && <ProjectsDistributionBreakdown />}
+              <TrackedTimeChart />
+            </PageContent>
+            {!isSmall && (
+              <NavigationContainer
+                style={{ maxWidth: navigationWidth, minWidth: navigationWidth }}
+              >
+                <ProjectsDistributionBreakdown />
+              </NavigationContainer>
+            )}
+          </Container>
+        )
+      }}
+    />
+  )
+}

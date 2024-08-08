@@ -1,13 +1,16 @@
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { interactive } from '@lib/ui/css/interactive'
-import { transition } from '@lib/ui/css/transition'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 export const InteractiveRow = styled.div<{ isActive: boolean }>`
-  ${transition}
   ${interactive}
   ${borderRadius.s};
+
+  ${verticalPadding(6)};
+  ${horizontalPadding(8)};
 
   ${({ isActive }) =>
     isActive

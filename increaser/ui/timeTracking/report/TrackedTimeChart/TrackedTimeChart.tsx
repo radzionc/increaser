@@ -165,16 +165,16 @@ export const TrackedTimeChart = () => {
                     <Content>
                       {normalized.data.map((value, index) => {
                         const height = toPercents(value)
-                        const isActive =
-                          index === selectedDataPoint &&
-                          isSelectedDataPointVisible
+
+                        const background = isSelectedDataPointVisible
+                          ? index === selectedDataPoint
+                            ? color
+                            : colors.foregroundExtra
+                          : color
                         return (
                           <Item
                             style={{
-                              background: (isActive
-                                ? color
-                                : colors.foregroundExtra
-                              ).toCssValue(),
+                              background: background.toCssValue(),
                               height,
                             }}
                           />
