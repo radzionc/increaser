@@ -24,6 +24,7 @@ export const ManageProjectsNamesVisibility = () => {
       renderOpener={(props) => (
         <div {...props}>
           <Container
+            kind="secondary"
             title={title}
             onClick={() =>
               setState((state) => ({
