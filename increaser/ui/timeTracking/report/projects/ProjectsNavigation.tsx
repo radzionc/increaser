@@ -7,10 +7,11 @@ import { Header } from '@lib/ui/layout/Header'
 import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
 import { ManageProjectsNamesVisibility } from '../filters/ManageProjectsNamesVisibility'
 import { ProjectsDistributionBreakdown } from '../ProjectsDistributionBreakdown'
+import { useOrderedTimeSeries } from '../hooks/useOrderedTimeSeries'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const Container = styled(VStack)`
-  ${horizontalPadding(0)};
-  gap: 12px;
+  padding: 0;
   > * {
     ${horizontalPadding(panelDefaultPadding)};
   }
@@ -26,27 +27,33 @@ const Content = styled(VStack)`
 
 const Toggle = styled(MinimalisticToggle)`
   flex: 1;
-  height: 40px;
+  padding: ${toSizeUnit(panelDefaultPadding)};
+`
+
+const ProjectsHeader = styled(Header)`
+  padding: 0;
+  padding-right: ${toSizeUnit(panelDefaultPadding)};
 `
 
 export const ProjectsNavigation = () => {
   const { activeProjectId, setState } = useTrackedTimeReport()
+  const items = useOrderedTimeSeries()
 
   return (
     <Container>
-      <Header>
+      <ProjectsHeader>
         <Toggle
           label="View projects total"
           value={!activeProjectId}
           onChange={() =>
             setState((state) => ({
               ...state,
-              activeProjectId: null,
+              activeProjectId: activeProjectId ? null : items[0].id,
             }))
           }
         />
         <ManageProjectsNamesVisibility />
-      </Header>
+      </ProjectsHeader>
       <Content>
         <ProjectsDistributionBreakdown />
       </Content>
