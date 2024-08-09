@@ -5,30 +5,25 @@
   "scripts": {
     "start": "node dist/lambda.js",
     "build": "rm -rf ./dist && node build.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev": "npx tsx ./server.ts"
   },
   "main": "lambda.ts",
   "dependencies": {
-    "@as-integrations/aws-lambda": "^3.1.0",
     "@aws-sdk/client-s3": "^3.590.0",
-    "@aws-sdk/client-sesv2": "^3.427.0",
     "@aws-sdk/s3-request-presigner": "^3.590.0",
-    "@react-email/render": "^0.0.7",
     "@sentry/serverless": "^7.109.0",
     "@vendia/serverless-express": "^4.10.4",
     "cors": "^2.8.5",
-    "date-fns": "^3.0.6",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
-    "node-telegram-bot-api": "^0.64.0",
-    "uuid": "^9.0.1"
+    "node-telegram-bot-api": "^0.64.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^20.14.9",
     "@types/node-telegram-bot-api": "^0",
-    "@types/uuid": "^9.0.2",
     "esbuild": "^0.18.20"
   }
 }
