@@ -1,3 +1,9 @@
 {
-  "ignore": ["lib/**", "increaser/infra/**", "**/scripts/**"]
+  "ignore": [
+    "lib/**",
+    "increaser/infra/**",
+    "**/scripts/**",
+    "**/*.config.js",
+    "increaser/db/migrations/**"
+  ]
 }
