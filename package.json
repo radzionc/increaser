@@ -24,6 +24,7 @@
     "format": "eslint --fix && prettier --write",
     "typecheck": "tsc --noEmit",
     "sync-packages": "syncpack fix-mismatches",
-    "knip": "knip --fix --allow-remove-files"
+    "knip": "knip",
+    "knip-fix": "knip --fix --allow-remove-files"
   }
 }
