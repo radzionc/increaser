@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@aws-sdk/lib-dynamodb": "^3.478.0",
     "@sentry/serverless": "^7.109.0"
   },
   "scripts": {
