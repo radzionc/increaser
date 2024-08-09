@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import {
@@ -22,6 +21,7 @@ const Container = styled.label<ComponentWithActiveState>`
   ${centerContent};
   font-weight: 500;
   font-size: 14px;
+  position: relative;
 
   padding: 0 20px;
   height: 40px;
@@ -53,20 +53,8 @@ export const TabNavigationItem = ({
   style,
   ...rest
 }: TabNavigationItemProps) => {
-  const ref = useRef<HTMLLabelElement>(null)
-  useEffect(() => {
-    if (isSelected) {
-      ref.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-      })
-    }
-  }, [isSelected])
-
   return (
     <Container
-      ref={ref}
       className={className}
       style={style}
       tabIndex={-1}

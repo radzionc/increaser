@@ -18,8 +18,6 @@ const Container = styled(HStack)`
 `
 
 const NavigationContainer = styled(VStack)`
-  position: sticky;
-  top: 0;
   flex: 1;
 `
 
