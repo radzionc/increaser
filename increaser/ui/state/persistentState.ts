@@ -12,8 +12,6 @@ export enum PersistentStateKey {
   HasBreakBrowserNotification = 'breakBrowserNotification',
   HasBreakSoundNotification = 'breakSoundNotification',
   HasBreakAutomaticBreak = 'hasBreakAutomaticBreak',
-  UnsyncedSets = 'unsyncedSets',
-  LastPromptToKeepWorkingWasAt = 'lastPromptToKeepWorkingWasAt',
   FocusSounds = 'focus-sounds-5',
   SidebarInstallPromptWasRejectedAt = 'sidebarInstallPromptWasRejectedAt',
   SelectedSleepAdvice = 'selectedSleepAdvice',
