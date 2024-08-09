@@ -37,6 +37,7 @@ export const formatDuration = (
   const result: string[] = []
   units.forEach((unit, index) => {
     const convertedValue = convertDuration(duration, durationUnit, unit)
+
     const isLastUnit = index === units.length - 1
 
     let wholeValue = isLastUnit
@@ -50,7 +51,7 @@ export const formatDuration = (
       isBeforeLastUnit &&
       Math.round(
         convertDuration(duration, durationUnit, getLastItem(units)),
-      ) === convertDuration(1, getLastItem(units), durationUnit)
+      ) === convertDuration(1, unit, getLastItem(units))
     ) {
       wholeValue += 1
       duration = 0
