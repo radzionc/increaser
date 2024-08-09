@@ -3,10 +3,8 @@ import { Text } from '@lib/ui/text'
 import styled, { useTheme } from 'styled-components'
 import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { useMemo, useState } from 'react'
-import { format } from 'date-fns'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { match } from '@lib/utils/match'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
@@ -16,8 +14,6 @@ import { trackedTimeChartConfig } from './config'
 import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
-import { subtractPeriod } from '../utils/subtractPeriod'
-import { formatWeek } from '@lib/utils/time/Week'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
 import { getSegmentIndex } from '@lib/utils/math/getSegmentIndex'
@@ -27,8 +23,8 @@ import {
 } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { toPercents } from '@lib/utils/toPercents'
-import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { TrackedTimeChartXLabels } from './TrackedTimeChartXLabels'
+import { DataPointInfo } from './DataPointInfo'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -44,37 +40,20 @@ const Item = styled.div`
 `
 
 export const TrackedTimeChart = () => {
-  const {
-    lastTimeGroupStartedAt,
-    timeGrouping,
-    activeProjectId,
-    dataPointsCount,
-  } = useTrackedTimeReport()
+  const { activeProjectId } = useTrackedTimeReport()
 
   const { projects } = useTrackedTime()
 
   const data = useActiveTimeSeries()
 
-  const [selectedDataPoint, setSelectedDataPoint] = useState<number>(
-    data.length - 1,
+  const [selectedDataPoint, setSelectedDataPoint] = useState<number | null>(
+    null,
   )
-  const [isSelectedDataPointVisible, setIsSelectedDataPointVisible] =
-    useState<boolean>(false)
 
   const { colors } = useTheme()
   const color = activeProjectId
     ? projects[activeProjectId].color
     : colors.primary
-
-  const getDataPointStartedAt = (index: number) => {
-    return subtractPeriod({
-      value: lastTimeGroupStartedAt,
-      period: timeGrouping,
-      amount: dataPointsCount - index - 1,
-    })
-  }
-
-  const selectedDataPointStartedAt = getDataPointStartedAt(selectedDataPoint)
 
   const yLabels = useMemo(() => {
     const hourLabels = generateYLabels({
@@ -97,44 +76,6 @@ export const TrackedTimeChart = () => {
           <VStack fullWidth gap={20} ref={setElement}>
             {size && (
               <>
-                <HStack>
-                  <Spacer width={trackedTimeChartConfig.expectedYLabelWidth} />
-                  <ChartItemInfo
-                    itemIndex={selectedDataPoint}
-                    isVisible={isSelectedDataPointVisible}
-                    containerWidth={
-                      size.width - trackedTimeChartConfig.expectedYLabelWidth
-                    }
-                    dataPointsNumber={data.length}
-                    justifyPoints="space-around"
-                  >
-                    <VStack alignItems="center">
-                      <Text color="contrast" weight="semibold">
-                        <EmphasizeNumbers
-                          value={formatDuration(data[selectedDataPoint], 's', {
-                            maxUnit: 'h',
-                          })}
-                        />
-                      </Text>
-                      <Text color="supporting" size={14} weight="semibold">
-                        {match(timeGrouping, {
-                          day: () =>
-                            format(
-                              selectedDataPointStartedAt,
-                              'EEE d, MMM yyyy',
-                            ),
-                          week: () => formatWeek(selectedDataPointStartedAt),
-                          month: () =>
-                            format(selectedDataPointStartedAt, 'MMMM yyyy'),
-                          year: () =>
-                            new Date(selectedDataPointStartedAt)
-                              .getFullYear()
-                              .toString(),
-                        })}
-                      </Text>
-                    </VStack>
-                  </ChartItemInfo>
-                </HStack>
                 <HStack>
                   <ChartYAxis
                     expectedLabelWidth={
@@ -166,11 +107,12 @@ export const TrackedTimeChart = () => {
                       {normalized.data.map((value, index) => {
                         const height = toPercents(value)
 
-                        const background = isSelectedDataPointVisible
-                          ? index === selectedDataPoint
-                            ? color
-                            : colors.foregroundExtra
-                          : color
+                        const background =
+                          selectedDataPoint !== null
+                            ? index === selectedDataPoint
+                              ? color
+                              : colors.foregroundExtra
+                            : color
                         return (
                           <Item
                             style={{
@@ -187,11 +129,21 @@ export const TrackedTimeChart = () => {
                           setSelectedDataPoint(
                             getSegmentIndex(data.length, position.x),
                           )
+                        } else {
+                          setSelectedDataPoint(null)
                         }
-                        setIsSelectedDataPointVisible(!!position)
                       }}
-                      render={({ props }) => (
-                        <TakeWholeSpaceAbsolutely {...props} />
+                      render={({ props, clientPosition }) => (
+                        <>
+                          <TakeWholeSpaceAbsolutely {...props}>
+                            {clientPosition && selectedDataPoint !== null && (
+                              <DataPointInfo
+                                index={selectedDataPoint}
+                                position={clientPosition}
+                              />
+                            )}
+                          </TakeWholeSpaceAbsolutely>
+                        </>
                       )}
                     />
                   </VStack>

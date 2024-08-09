@@ -40,7 +40,7 @@ export const TrackedTimeReport = () => {
             )}
             <PageContent>
               {isSmall && <TrackedTimeNavigation />}
-              <VStack gap={20}>
+              <VStack gap={40}>
                 <TrackedTimeStats />
                 <TrackedTimeChart />
               </VStack>
