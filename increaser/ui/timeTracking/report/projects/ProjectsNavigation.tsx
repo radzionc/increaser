@@ -49,7 +49,7 @@ export const ProjectsNavigation = () => {
           onChange={() =>
             setState((state) => ({
               ...state,
-              activeProjectId: activeProjectId ? null : items[0].id,
+              activeProjectId: activeProjectId ? null : items[0]?.id ?? null,
             }))
           }
         />

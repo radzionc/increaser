@@ -52,7 +52,6 @@ export const WorkBudgetWeeksReport = () => {
       const weekStartedAt =
         firstWeekStartedAt + convertDuration(index, 'w', 'ms')
       const weekString = weekToString(toWeek(weekStartedAt))
-      console.log(weekString)
       const timeRecord = weeks[weekString] || {}
       return sum(Object.values(timeRecord))
     })
