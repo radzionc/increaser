@@ -60,7 +60,7 @@ export const HoverTracker = ({ render, onChange }: HoverTrackerProps) => {
     if (onChange) {
       onChange({ position, clientPosition })
     }
-  }, [onChange, position])
+  }, [onChange, position, clientPosition])
 
   return (
     <>
