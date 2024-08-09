@@ -1,7 +1,7 @@
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { DemoProject } from './projects'
 
-export type DemoTaskFactoryId = 'upload-video' | 'taxes' | 'jobs' | 'invest'
+type DemoTaskFactoryId = 'upload-video' | 'taxes' | 'jobs' | 'invest'
 
 export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
   'upload-video': {

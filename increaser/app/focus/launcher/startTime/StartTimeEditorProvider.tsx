@@ -12,9 +12,9 @@ type StartTimeEditorState = {
   now: number
 }
 
-export const StartTimeEditorContext = createContext<
-  StartTimeEditorState | undefined
->(undefined)
+const StartTimeEditorContext = createContext<StartTimeEditorState | undefined>(
+  undefined,
+)
 
 export const useStartTimeEditor = createContextHook(
   StartTimeEditorContext,

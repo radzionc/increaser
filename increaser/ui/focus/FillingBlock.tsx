@@ -20,7 +20,7 @@ const Container = styled.div<{ $color: HSLA }>`
   border: 2px solid ${({ $color }) => $color.toCssValue()};
 `
 
-export const getFireplaceKeyframes = () => keyframes`
+const getFireplaceKeyframes = () => keyframes`
   0%{
     opacity: 1.0;
   }
@@ -32,7 +32,7 @@ export const getFireplaceKeyframes = () => keyframes`
   }
 `
 
-export const Filler = styled.div<{ $color: HSLA }>`
+const Filler = styled.div<{ $color: HSLA }>`
   width: 100%;
 
   ${transition};

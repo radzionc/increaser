@@ -5,7 +5,7 @@ export interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>
 }
 
-export interface PWAState {
+interface PWAState {
   installPromptEvent: null | BeforeInstallPromptEvent
   setInstallPromptEvent: (event: null | BeforeInstallPromptEvent) => void
 

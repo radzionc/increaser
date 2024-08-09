@@ -8,7 +8,7 @@ interface PaddleSdkSetupParams {
   vendor: number
 }
 
-export interface CheckoutSuccessInfo {
+interface CheckoutSuccessInfo {
   checkout: {
     id: string
   }

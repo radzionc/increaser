@@ -13,8 +13,8 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { Text } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 
-export const myVisionViews = ['board', 'manage'] as const
-export type MyVisionView = (typeof myVisionViews)[number]
+const myVisionViews = ['board', 'manage'] as const
+type MyVisionView = (typeof myVisionViews)[number]
 
 export const useMyVisionView = () => {
   const hasVision = useHasVision()

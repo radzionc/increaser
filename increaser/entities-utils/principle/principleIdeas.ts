@@ -7,9 +7,9 @@ import {
   mindsetPrincipleCategory,
 } from '@increaser/entities/PrincipleCategory'
 
-export const principleSourceTypes = ['book']
-export type PrincipleSourceType = (typeof principleSourceTypes)[number]
-export type PrincipleSource = {
+const principleSourceTypes = ['book']
+type PrincipleSourceType = (typeof principleSourceTypes)[number]
+type PrincipleSource = {
   type: PrincipleSourceType
   name: string
   author: string
@@ -19,7 +19,7 @@ export type PrincipleIdea = Omit<Principle, 'updatedAt'> & {
   source: PrincipleSource
 }
 
-export const workIdeas: PrincipleIdea[] = [
+const workIdeas: PrincipleIdea[] = [
   {
     id: 'highImpactTasks',
     name: 'Focus on high-impact tasks',
@@ -132,7 +132,7 @@ export const workIdeas: PrincipleIdea[] = [
   },
 ].map((idea) => ({ ...idea, categoryId: workPrincipleCategory.id }))
 
-export const marriageIdeas: PrincipleIdea[] = [
+const marriageIdeas: PrincipleIdea[] = [
   {
     id: 'activeListening',
     name: 'Practice active listening',
@@ -246,7 +246,7 @@ export const marriageIdeas: PrincipleIdea[] = [
   },
 ].map((idea) => ({ ...idea, categoryId: marriagePrincipleCategory.id }))
 
-export const healthIdeas: PrincipleIdea[] = [
+const healthIdeas: PrincipleIdea[] = [
   {
     id: 'regularExercise',
     name: 'Exercise regularly',
@@ -359,7 +359,7 @@ export const healthIdeas: PrincipleIdea[] = [
   },
 ].map((idea) => ({ ...idea, categoryId: healthPrincipleCategory.id }))
 
-export const financesIdeas: PrincipleIdea[] = [
+const financesIdeas: PrincipleIdea[] = [
   {
     id: 'payYourselfFirst',
     name: 'Pay yourself first',
@@ -472,7 +472,7 @@ export const financesIdeas: PrincipleIdea[] = [
   },
 ].map((idea) => ({ ...idea, categoryId: financePrincipleCategory.id }))
 
-export const mindsetIdeas: PrincipleIdea[] = [
+const mindsetIdeas: PrincipleIdea[] = [
   {
     id: 'growthMindset',
     name: 'Adopt a growth mindset',

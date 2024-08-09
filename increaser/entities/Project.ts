@@ -24,7 +24,7 @@ export type Project = EntityWithId &
     workingDays: ProjectWorkingDays
   }
 
-export const projectDefaultFields: Pick<
+const projectDefaultFields: Pick<
   Project,
   'status' | 'allocatedMinutesPerWeek' | 'workingDays'
 > = {

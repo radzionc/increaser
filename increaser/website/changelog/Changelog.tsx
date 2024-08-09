@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
 import { ProductUpdatesList } from '@increaser/ui/changelog/ProductUpdatesList'
 
-export const Container = styled(WebsiteSlice)`
+const Container = styled(WebsiteSlice)`
   ${centeredContentColumn({
     contentMaxWidth: 640,
   })}

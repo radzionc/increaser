@@ -18,7 +18,7 @@ const appNavigationPages = [
 ] as const
 export type AppNavigationPage = (typeof appNavigationPages)[number]
 
-export const appPages = [
+const appPages = [
   ...appNavigationPages,
   'oauth',
   'signIn',

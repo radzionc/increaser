@@ -4,7 +4,7 @@ import { createScript, getScriptBySrc, loadScript } from '@lib/ui/dom/script'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import { PaddleSdk } from '../PaddleSdk'
 
-export const paddleQueryKey = ['paddle']
+const paddleQueryKey = ['paddle']
 
 const paddleScriptSource = 'https://cdn.paddle.com/paddle/paddle.js'
 

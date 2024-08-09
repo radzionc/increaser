@@ -14,8 +14,8 @@ import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { TableIcon } from '@lib/ui/icons/TableIcon'
 
-export const myHabitsViews = ['track', 'report', 'manage'] as const
-export type MyHabitsView = (typeof myHabitsViews)[number]
+const myHabitsViews = ['track', 'report', 'manage'] as const
+type MyHabitsView = (typeof myHabitsViews)[number]
 
 export const useMyHabitsView = () => {
   const hasHabits = useHasHabits()

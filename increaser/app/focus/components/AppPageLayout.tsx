@@ -1,6 +1,6 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { Navigation } from '../../navigation'
-import { ErrorBoundary } from '@sentry/nextjs'
+import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from '../../errors/components/ErrorFallbackCard'
 
 export const AppPageLayout = ({ children }: ComponentWithChildrenProps) => {

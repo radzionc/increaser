@@ -9,19 +9,19 @@ import { updateItem } from '@lib/dynamodb/updateItem'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
 import { totalScan } from '@lib/dynamodb/totalScan'
 
-export const getEmailItemParams = (id: string) => ({
+const getEmailItemParams = (id: string) => ({
   TableName: tableName.emails,
   Key: {
     id,
   },
 })
 
-export const getEmail = makeGetItem<string, Email>({
+const getEmail = makeGetItem<string, Email>({
   tableName: tableName.emails,
   getKey: (id: string) => ({ id }),
 })
 
-export const updateEmail = async (id: string, fields: Partial<Email>) => {
+const updateEmail = async (id: string, fields: Partial<Email>) => {
   return updateItem({
     tableName: tableName.emails,
     key: { id },
@@ -29,13 +29,13 @@ export const updateEmail = async (id: string, fields: Partial<Email>) => {
   })
 }
 
-export const deleteEmail = (id: string) => {
+const deleteEmail = (id: string) => {
   const command = new DeleteCommand(getEmailItemParams(id))
 
   return dbDocClient.send(command)
 }
 
-export const getNumberOfEmails = async () => {
+const getNumberOfEmails = async () => {
   const command = new DescribeTableCommand({
     TableName: tableName.emails,
   })
@@ -54,9 +54,7 @@ export const putEmail = (email: Email) => {
   return dbDocClient.send(command)
 }
 
-export const getAllEmails = async <T extends (keyof Email)[]>(
-  attributes: T,
-) => {
+const getAllEmails = async <T extends (keyof Email)[]>(attributes: T) => {
   return totalScan<Pick<Email, T[number]>>({
     TableName: tableName.emails,
     ...getPickParams(attributes),

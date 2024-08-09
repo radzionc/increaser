@@ -1,4 +1,4 @@
-export type ProductUpdateItem = {
+type ProductUpdateItem = {
   description: string
 }
 
@@ -9,7 +9,7 @@ export const productUpdateSocials = [
   'indieHackers',
   'reddit',
 ] as const
-export type ProductUpdateSocial = (typeof productUpdateSocials)[number]
+type ProductUpdateSocial = (typeof productUpdateSocials)[number]
 
 export type ProductUpdateSocials = Partial<Record<ProductUpdateSocial, string>>
 

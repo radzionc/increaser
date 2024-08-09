@@ -6,11 +6,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "react-beautiful-dnd": "^13.1.1",
     "react-dropzone": "^14.2.3",
     "styled-components": "^6.1.6"
   },
-  "devDependencies": {
-    "@types/react-beautiful-dnd": "^13.1.8"
-  }
+  "devDependencies": {}
 }

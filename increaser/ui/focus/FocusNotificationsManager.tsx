@@ -12,9 +12,7 @@ import { useFocusedDuration } from './hooks/useFocusedDuration'
 import { useIsFocusPaused } from './utils/useIsFocusPaused'
 import { useHasTimerSoundNotification } from './hooks/useHasTimerSoundNotification'
 
-export const CurrentFocusContext = createContext<FocusSession | undefined>(
-  undefined,
-)
+const CurrentFocusContext = createContext<FocusSession | undefined>(undefined)
 
 // const remindAboutEyesEvery = 20
 const remindMinBeforeWorkDayEnds = 5

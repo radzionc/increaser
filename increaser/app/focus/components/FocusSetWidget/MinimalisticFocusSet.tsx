@@ -46,7 +46,7 @@ const FillerContainer = styled.div`
   position: absolute;
 `
 
-export const Filler = styled.div`
+const Filler = styled.div`
   height: 100%;
   background: ${getColor('primary')};
 `

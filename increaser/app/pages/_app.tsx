@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from '@lib/ui/css/GlobalStyle'
 import { ReactNode, useState } from 'react'
-import { ErrorBoundary } from '@sentry/nextjs'
+import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
 import { getQueryClient } from '@increaser/app/query/queryClient'
 import { BreakProvider } from '@increaser/app/break/components/BreakProvider'
 import { FullSizeErrorFallback } from '@increaser/app/errors/components/FullSizeErrorFallback'

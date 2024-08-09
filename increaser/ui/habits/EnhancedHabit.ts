@@ -8,4 +8,4 @@ export interface EnhancedHabit extends Habit {
   streak: number
 }
 
-export const defaultHabitEmojis = ['💪', '🍏', '🏋️‍♀️', '🧘‍♀️', '🏄🏾‍♂️', '🎸']
+const defaultHabitEmojis = ['💪', '🍏', '🏋️‍♀️', '🧘‍♀️', '🏄🏾‍♂️', '🎸']

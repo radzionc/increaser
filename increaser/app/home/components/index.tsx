@@ -1,4 +1,4 @@
-import { ErrorBoundary } from '@sentry/nextjs'
+import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
 import { FixedWidthContent } from '@increaser/app/components/reusable/fixed-width-content'
 import { ErrorFallbackCard } from '@increaser/app/errors/components/ErrorFallbackCard'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'

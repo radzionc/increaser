@@ -15,8 +15,8 @@ import { UIComponentProps } from '@lib/ui/props'
 import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
 import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
 
-export const dayTimeLabelsWidthInPx = 48
-export const dayTimeLabelTimeWidthInPx = 32
+const dayTimeLabelsWidthInPx = 48
+const dayTimeLabelTimeWidthInPx = 32
 
 const Container = styled.div`
   position: relative;

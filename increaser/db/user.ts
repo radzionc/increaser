@@ -63,7 +63,7 @@ export const deleteUser = (id: string) => {
   return dbDocClient.send(command)
 }
 
-export const getNumberOfUsers = async () => {
+const getNumberOfUsers = async () => {
   const command = new DescribeTableCommand({
     TableName: tableName.users,
   })

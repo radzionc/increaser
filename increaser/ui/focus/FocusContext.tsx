@@ -26,7 +26,7 @@ export type StopFocusParams = {
   lastSetOverride?: Partial<Set>
 }
 
-export interface FocusState {
+interface FocusState {
   start: (params: StartFocusParams) => void
 
   reduceLastInterval: (duration: Minutes) => void

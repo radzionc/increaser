@@ -6,7 +6,7 @@ export type HabitDay = {
   completion: Record<string, null | boolean>
 }
 
-export type TrackHabitsState = {
+type TrackHabitsState = {
   days: HabitDay[]
   activeDayStartedAt: number
   setActiveDayStartedAt: (startedAt: number) => void

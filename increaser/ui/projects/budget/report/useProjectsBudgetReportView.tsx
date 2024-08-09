@@ -6,8 +6,7 @@ import {
 import { previousWeeksConfig } from '../PreviousWeeks/previousWeeksConfig'
 
 export const projectsBudgetReportViews = ['thisWeek', 'previousWeeks'] as const
-export type ProjectsBudgetReportView =
-  (typeof projectsBudgetReportViews)[number]
+type ProjectsBudgetReportView = (typeof projectsBudgetReportViews)[number]
 
 export const projectsBudgetReportViewName: Record<
   ProjectsBudgetReportView,

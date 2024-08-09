@@ -13,6 +13,6 @@ export type Habit = EntityWithId &
     successes: string[]
   }
 
-export const habitDefaultFields = {
+const habitDefaultFields = {
   successes: [],
 }

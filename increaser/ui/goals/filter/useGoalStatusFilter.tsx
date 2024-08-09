@@ -4,7 +4,7 @@ import {
   usePersistentState,
 } from '../../state/persistentState'
 
-export type GoalStatusFilterType = GoalStatus | null
+type GoalStatusFilterType = GoalStatus | null
 
 export const getGoalStatusFilterName = (status: GoalStatusFilterType) => {
   if (!status) {

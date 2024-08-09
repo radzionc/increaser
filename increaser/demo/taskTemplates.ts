@@ -1,7 +1,7 @@
 import { DemoProject } from '@increaser/demo/projects'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 
-export type DemoTaskTemplateId =
+type DemoTaskTemplateId =
   | 'weekly-report'
   | 'new-blog-post'
   | 'client-meeting'

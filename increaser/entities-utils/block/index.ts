@@ -5,13 +5,13 @@ import { MS_IN_MIN } from '@lib/utils/time'
 import { Block } from '@increaser/entities/Block'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 
-export const blockDistanceInMinutes = 15
+const blockDistanceInMinutes = 15
 
-export const targetBlockInMin = 90
+const targetBlockInMin = 90
 
 export const getBlockWorkDuration = ({ sets }: Block) => getSetsDuration(sets)
 
-export const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
+const getDistanceBetweenBlocks = (prevBlock: Block, block: Block) =>
   getDistanceBetweenSets(getLastItem(prevBlock.sets), block.sets[0])
 
 export const getBlocks = <T extends Set = Set>(sets: T[]): Block<T>[] => {
@@ -42,7 +42,7 @@ export const getBlockBoundaries = (block: Block) => ({
   end: getLastItem(block.sets).end,
 })
 
-export const getBlockDuration = (block: Block) => {
+const getBlockDuration = (block: Block) => {
   const { start, end } = getBlockBoundaries(block)
   return end - start
 }

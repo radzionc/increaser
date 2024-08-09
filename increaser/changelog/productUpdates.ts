@@ -1,6 +1,6 @@
 import { ProductUpdate } from './ProductUpdate'
 
-export const lastAnnouncementWasAt: number | undefined = undefined
+const lastAnnouncementWasAt: number | undefined = undefined
 
 export const productUpdates: ProductUpdate[] = [
   {

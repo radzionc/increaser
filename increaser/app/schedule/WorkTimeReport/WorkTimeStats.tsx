@@ -27,7 +27,7 @@ const getFormattedAvgWorkdayEnd = (days: Interval[]) => {
 }
 
 const workTimeStats = ['startedWorkAt', 'finishedWorkAt', 'workedLate'] as const
-export type WorkTimeStat = (typeof workTimeStats)[number]
+type WorkTimeStat = (typeof workTimeStats)[number]
 
 export const WorkTimeStats = () => {
   const days = useWorkTimeReportDays()

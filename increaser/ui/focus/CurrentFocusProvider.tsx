@@ -4,9 +4,7 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 import { FocusSession, useFocus } from './FocusContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
-export const CurrentFocusContext = createContext<FocusSession | undefined>(
-  undefined,
-)
+const CurrentFocusContext = createContext<FocusSession | undefined>(undefined)
 
 export const CurrentFocusGuard = ({ children }: ComponentWithChildrenProps) => {
   const { session: potentialCurrentSet } = useFocus()

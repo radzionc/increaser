@@ -87,10 +87,7 @@ interface ShouldBeNewBlockParams {
   timestamp: number
 }
 
-export const shouldBeNewBlock = ({
-  sets,
-  timestamp,
-}: ShouldBeNewBlockParams) => {
+const shouldBeNewBlock = ({ sets, timestamp }: ShouldBeNewBlockParams) => {
   if (!sets.length) return true
 
   const durationSinceLastSet = timestamp - getLastItem(sets).end
@@ -98,7 +95,7 @@ export const shouldBeNewBlock = ({
   return durationSinceLastSet > blockDistanceInMinutes * MS_IN_MIN
 }
 
-export const getBlockColor = (
+const getBlockColor = (
   duration: number,
   { colors }: DefaultTheme,
   mediumColor?: HSLA,

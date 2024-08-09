@@ -26,7 +26,7 @@ import { WorkTimeChartYLabels } from './WorkTimeChartYLabels'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { withoutNull } from '@lib/utils/array/withoutNull'
 
-export const chartConfig = {
+const chartConfig = {
   chartHeight: 360,
   expectedYAxisLabelWidth: 48,
   expectedLabelWidth: 58,

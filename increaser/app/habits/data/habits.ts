@@ -1,4 +1,4 @@
-export const habitTags = [
+const habitTags = [
   'health',
   'sleep',
   'productivity',
@@ -6,7 +6,7 @@ export const habitTags = [
   'mind',
   'marriage',
 ] as const
-export type HabitTag = (typeof habitTags)[number]
+type HabitTag = (typeof habitTags)[number]
 
 export const habitTagColors = {
   health: 4,
@@ -24,7 +24,7 @@ export interface HabitInfo {
   tags: HabitTag[]
 }
 
-export type HabitId =
+type HabitId =
   | 'sunlight'
   | 'morningFast'
   | 'limitCoffee'

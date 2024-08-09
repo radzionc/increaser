@@ -48,12 +48,9 @@ export type UserEntityType = {
 
 export type UserEntity = keyof UserEntityType
 
-export type UserEntityRecord<T extends UserEntity> = Record<
-  string,
-  UserEntityType[T]
->
+type UserEntityRecord<T extends UserEntity> = Record<string, UserEntityType[T]>
 
-export type UserEntityRecords = {
+type UserEntityRecords = {
   projects: UserEntityRecord<'project'>
   habits: UserEntityRecord<'habit'>
   tasks: UserEntityRecord<'task'>
@@ -136,7 +133,7 @@ export const userReadonlyFields = [
   'lifeTimeDeal',
 ] as const
 
-export type UserReadonlyFields = (typeof userReadonlyFields)[number]
+type UserReadonlyFields = (typeof userReadonlyFields)[number]
 
 export type UserEditableFields = Exclude<keyof User, UserReadonlyFields>
 

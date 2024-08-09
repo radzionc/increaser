@@ -4,7 +4,7 @@ import { isProduction } from '@increaser/app/shared'
 export const setUserIdForErrorMonitoring = (userId: string) => {
   if (!isProduction) return
 
-  Sentry.configureScope((scope) => {
+  Sentry.withScope((scope) => {
     scope.setUser({ id: userId })
   })
 }

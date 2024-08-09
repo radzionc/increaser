@@ -12,7 +12,7 @@ import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { match } from '@lib/utils/match'
 
-export type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
+type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
 const DraggableItemContainer = styled(HStack)`
   width: 100%;

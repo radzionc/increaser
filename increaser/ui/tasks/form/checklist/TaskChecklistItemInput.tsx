@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { CursorPosition } from '@lib/ui/entities/CursorPosition'
 
-export type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
+type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
   onRemove: () => void
   onSubmit?: (position: CursorPosition) => void
 }

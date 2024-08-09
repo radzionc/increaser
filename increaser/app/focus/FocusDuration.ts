@@ -13,13 +13,6 @@ import {
 } from '@increaser/entities/FocusDuration'
 import { Set } from '@increaser/entities/User'
 
-export const increaseFocusDuration = (lastSetDuration: number) => {
-  return (
-    focusDurations.find((option) => option > lastSetDuration) ??
-    getLastItem(focusDurations)
-  )
-}
-
 interface SuggestFocusDurationParams {
   todayStartedAt: number
   finishWorkAt: number

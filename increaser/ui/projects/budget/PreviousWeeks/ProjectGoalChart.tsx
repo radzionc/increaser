@@ -20,7 +20,7 @@ import styled, { useTheme } from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 
-export const lineChartConfig = {
+const lineChartConfig = {
   chartHeight: 80,
   expectedYAxisLabelWidth: 32,
   expectedLabelWidth: 58,

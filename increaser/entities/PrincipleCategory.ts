@@ -6,7 +6,7 @@ export type PrincipleCategory = EntityWithId & EntityWithName & EntityWithEmoji
 
 export const otherPrincipleCategoryId = 'other'
 
-export const otherPrincipleCategory: PrincipleCategory = {
+const otherPrincipleCategory: PrincipleCategory = {
   id: otherPrincipleCategoryId,
   name: 'Other',
   emoji: '❔',

@@ -19,7 +19,7 @@ export interface LoginLinkEmailProps {
   email: string
 }
 
-export const LoginLinkEmail = ({
+const LoginLinkEmail = ({
   loginUrl,
   email = 'john@gmail.com',
 }: LoginLinkEmailProps) => (

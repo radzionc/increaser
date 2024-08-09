@@ -27,7 +27,7 @@ const getPaddleProductPrice = async (
   return { currency, amount }
 }
 
-export const subscriptionPricesQueryKey = ['subscriptionPrices']
+const subscriptionPricesQueryKey = ['subscriptionPrices']
 
 export type SubscriptionPrices = Record<
   SubscriptionBillingCycle,
