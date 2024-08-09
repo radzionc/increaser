@@ -35,7 +35,7 @@ export const TrackedTimeChartXLabels = ({ containerWidth }: Props) => {
           <Text nowrap color="supporting" size={12} key={index}>
             <Match
               value={timeGrouping}
-              week={() => `#${getWeekIndex(value)}`}
+              week={() => `#${getWeekIndex(value) + 1}`}
               month={() => format(value, 'MMM yyyy')}
               year={() => format(value, 'yyyy')}
               day={() => format(value, 'dd MMM')}

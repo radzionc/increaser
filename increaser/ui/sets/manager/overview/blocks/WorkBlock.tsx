@@ -69,7 +69,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
   const timespan = timelineEndsAt - timelineStartsAt
   const { start, end } = getBlockBoundaries(block)
   const blockDuration = end - start
-  const showDuration = blockDuration > convertDuration(25, 'min', 'ms')
+  const isSignificant = blockDuration > convertDuration(25, 'min', 'ms')
 
   return (
     <Container
@@ -79,7 +79,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
       }}
     >
       <Content>
-        <Outline />
+        {isSignificant && <Outline />}
         {block.sets.map((set, index) => (
           <SetPosition
             key={index}
@@ -91,7 +91,7 @@ export const WorkBlock = ({ block }: WorkBlockProps) => {
             <SetItemOverview value={set} />
           </SetPosition>
         ))}
-        {showDuration && (
+        {isSignificant && (
           <Duration size={12}>
             {formatDuration(getBlockWorkDuration(block), 'ms')}
           </Duration>

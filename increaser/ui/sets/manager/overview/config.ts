@@ -1,19 +1,13 @@
-import { MS_IN_HOUR } from '@lib/utils/time'
-
-const pxInHour = 100
-const pxInMs = pxInHour / MS_IN_HOUR
+const horizontalPadding = 20
+const dayTimeLabelsWidth = 48
+const timeLabelGap = 8
 
 export const dayOverviewConfig = {
-  horizontalPadding: 20,
-  timeLabelGap: 8,
+  horizontalPadding,
+  timeLabelGap,
   verticalPlaceholderHeight: 28,
   minimumHourHeight: 40,
   interactiveSectionHeight: 40,
-  dayTimeLabelsWidth: 48,
-  editor: {
-    pxInHour,
-    pxInMs,
-    msToPx: (ms: number) => ms * pxInMs,
-    pxToMs: (px: number) => px / pxInMs,
-  },
+  dayTimeLabelsWidth,
+  setLeftOffset: horizontalPadding + dayTimeLabelsWidth + timeLabelGap * 2,
 }

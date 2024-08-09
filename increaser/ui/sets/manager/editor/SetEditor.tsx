@@ -1,6 +1,5 @@
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { IntervalEditorControl } from '@lib/ui/timeline/IntervalEditorControl'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useEvent } from 'react-use'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
@@ -13,20 +12,29 @@ import { InteractiveDragArea } from '@lib/ui/timeline/InteractiveDragArea'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
-import { dayOverviewConfig } from '../overview/config'
+import { setEditorConfig } from './config'
+import { editorSetFrame } from './editorSetFrame'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { useActiveControl } from './ActiveControlProvider'
+
+const borderWidth = 2
+
+const CurrentInterval = styled(CurrentIntervalRect)`
+  ${editorSetFrame};
+  border-width: ${toSizeUnit(borderWidth)};
+`
 
 export const SetEditor = () => {
   const { projects } = useAssertUserState()
   const [value, setActiveSet] = usePresentState(useActiveSet())
   const [weekday] = useSelectedWeekday()
   const dayInterval = useWeekdayPassedInterval(weekday)
-  const [activeControl, setActiveControl] =
-    useState<IntervalEditorControl | null>(null)
+  const [activeControl, setActiveControl] = useActiveControl()
 
   useEvent('pointerup', () => setActiveControl(null))
   useEvent('pointercancel', () => setActiveControl(null))
@@ -54,8 +62,7 @@ export const SetEditor = () => {
     if (!containerRect) return
 
     const timestamp =
-      dayInterval.start +
-      dayOverviewConfig.editor.pxToMs(clientY - containerRect.top)
+      dayInterval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
     const getNewInterval = () => {
       if (activeControl === 'position') {
@@ -105,30 +112,28 @@ export const SetEditor = () => {
   }, [activeControl])
 
   const valueDuration = getIntervalDuration(value)
-  const intervalStartInPx = dayOverviewConfig.editor.msToPx(
+  const intervalStartInPx = setEditorConfig.msToPx(
     value.start - dayInterval.start,
   )
-  const intervalEndInPx = dayOverviewConfig.editor.msToPx(
-    value.end - dayInterval.start,
-  )
-  const intervalDurationInPx = dayOverviewConfig.editor.msToPx(valueDuration)
+  const intervalEndInPx = setEditorConfig.msToPx(value.end - dayInterval.start)
+  const intervalDurationInPx = setEditorConfig.msToPx(valueDuration)
 
   const { colors } = useTheme()
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
-      <CurrentIntervalRect
+      <CurrentInterval
         $color={colors.getLabelColor(projects[value.projectId].color)}
         ref={intervalElement}
         style={{
-          top: intervalStartInPx,
-          height: intervalDurationInPx,
+          top: intervalStartInPx - borderWidth / 2,
+          height: intervalDurationInPx + borderWidth,
         }}
       >
         <IconWrapper style={{ opacity: activeControl ? 0 : 1 }}>
           <MoveIcon />
         </IconWrapper>
-      </CurrentIntervalRect>
+      </CurrentInterval>
 
       <FloatingIntervalDuration
         style={{

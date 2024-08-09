@@ -60,6 +60,8 @@ On the side of the "Home" page, there is a timeline featuring icons with daily e
 
 The user can pause a session. If the session has been paused, after the user has finished the session, it will be split into multiple sessions to avoid tracking the periods when the user was not working.
 
+If the user gets distracted and wants to account for that time, they can deduct the time from the session. It would act the same way as if the user paused the session for a specific period and then resumed it.
+
 When the user starts a focus session, the content of the "Home" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task. If the user forgets to stop the session, it will be stopped automatically, and the user will be prompted to edit that session.
 
 Also, while in the focus session, users can choose to play focus sounds imported from YouTube or arrange their own ambient noise by mixing different individual sounds like rain, a coffee shop, or birds singing, and adjusting their volume. The YouTube player will be positioned in the corner of the screen, and the user can change the corner, turn off the music, or pause it from that widget.
@@ -78,7 +80,7 @@ On the "Projects" page, users can see all their projects and change their status
 
 On the "Time Tracking" page, the user can see an overview of how much time they have spent on each project. They can organize data in the report by days, weeks, months, or years, crop the data, e.g., show only the last 7 days, and they can toggle if they want to see the current period in the report, e.g., the current week. The user can highlight a specific project and also see the total time spent on all projects.
 
-While the user will primarily track their work by through focus sessions, they can also track time by manually adding a focus session under the “Track” tab on the “Time Tracking” page. They can add, edit or delete a session on any day of the current week except for the days of the current week that belong to the previous month.
+While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
 
 ## Work budget
 
@@ -94,7 +96,7 @@ The "Habits" page has two top-level sections: "My habits" and "Habit ideas." "My
 
 ## Tasks
 
-The "Tasks" page has five sections: "To Do," "Backlog," "Done," "Recurring," and "Templates." In the "To Do" section, users can add, edit, and delete their tasks. Tasks in the "To Do" section are grouped by day, and the user can drag and drop a task between days. Completed tasks will automatically move to the "Done" section. Completed tasks are automatically deleted at the beginning of the next week. A user can assign a task to a project. In the "Backlog" section are tasks without a deadline. A user can add links to the task to easily access all the necessary external resources during a focus session. A user can add a checklist/subtasks to a task and then complete those sub-items during a focus session on that task. A user can write a description for a task. In the "Recurring" section, users can set up rules for the automatic creation of recurring tasks. The cadence could be daily, every workday, every week, or every month. For weekly and monthly tasks, the user can select a "deadline index" which for a week would be a weekday and for the month the day of the month. For example, if the "deadline index" for a weekly task is 4, the task will be created every Friday. When the user adds a rule in that section, a new entity called "TaskFactory" is created. Editing or deleting a task created by a TaskFactory won't affect the TaskFactory. In the "Templates" section, users can create, edit, and delete task templates. A task template contains the same fields as a task, so when the user creates a task or a TaskFactory, if there are templates for a selected project, they will see an option to use a template, and if they select a template, the task form will be pre-filled with the template data. Tasks are created at the start of the period, but to make it clear for the user, we show "forecasted" recurring tasks on the "To Do" page. Those tasks are not created yet, and the user can only see them without the ability to edit or delete them.
+The "Tasks" page has three subpages: "Tasks", "Automation", and "Templates". The "Tasks" subpage consists of three tabs: backlog, scheduled, and done. Users can filter tasks by project. In the backlog section are tasks without a deadline. In the scheduled section, tasks are grouped by day, and the user can drag and drop a task between days. Completed tasks will automatically move to the "Done" section. Completed tasks are automatically deleted at the beginning of the next week. A user can assign a task to a project. A user can add links to the task to easily access all the necessary external resources during a focus session. A user can add a checklist/subtasks to a task and then complete those sub-items during a focus session on that task. A user can write a description for a task. In the "Automation" subpage, users can set up rules for the automatic creation of recurring tasks. The cadence could be daily, every workday, every week, or every month. For weekly and monthly tasks, the user can select a "deadline index," which for a week would be a weekday and for the month the day of the month. For example, if the "deadline index" for a weekly task is 4, the task will be created every Friday. When the user adds a rule in that section, a new entity called "TaskFactory" is created. Editing or deleting a task created by a TaskFactory won't affect the TaskFactory. In the "Templates" subpage, users can create, edit, and delete task templates. A task template contains the same fields as a task, so when the user creates a task or a TaskFactory, if there are templates for a selected project, they will see an option to use a template, and if they select a template, the task form will be pre-filled with the template data. Tasks are created at the start of the period, but to make it clear for the user, we show "forecasted" recurring tasks on the "scheduled" tab. Those tasks are not created yet, and the user can only see them without the ability to edit or delete them.
 
 ## Start the day with Increaser
 
@@ -106,7 +108,7 @@ On the "Schedule" page, the user can set the time when they want to start and fi
 
 ## Ideas
 
-On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button.
+On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button. The user can filter ideas by project.
 
 ## Principles
 

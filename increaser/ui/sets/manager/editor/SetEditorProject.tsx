@@ -1,38 +1,14 @@
-import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import styled from 'styled-components'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { ProjectSelector } from '@increaser/ui/projects/ProjectSelector'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
-import { getColor } from '@lib/ui/theme/getters'
-import { HStack } from '@lib/ui/layout/Stack'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
-import { dayOverviewConfig } from '../overview/config'
 import { useActiveSetType } from '../overview/hooks/useActiveSetType'
-
-const Toggle = styled(CollapsableStateIndicator)`
-  font-size: 16px;
-`
-
-const Container = styled(UnstyledButton)`
-  ${verticalPadding(0)};
-  font-size: 14px;
-  font-weight: 500;
-  height: ${toSizeUnit(dayOverviewConfig.interactiveSectionHeight)};
-  position: relative;
-
-  outline: none;
-
-  &:hover {
-    color: ${getColor('contrast')};
-    background: ${getColor('foreground')};
-  }
-`
+import { ExpandableSelectorContainer } from '@lib/ui/select/ExpandableSelectorContainer'
+import { ExpandableSelectorToggle } from '@lib/ui/select/ExpandableSelectorToggle'
+import { OptionContent } from '@lib/ui/select/OptionContent'
 
 export const SetEditorProject = () => {
   const [activeSet, setActiveSet] = usePresentState(useActiveSet())
@@ -46,14 +22,14 @@ export const SetEditorProject = () => {
     <ProjectSelector
       floatingOptionsWidthSameAsOpener={true}
       renderOpener={(props) => (
-        <Container type="button" {...props}>
-          <HStack fullWidth alignItems="center" justifyContent="space-between">
+        <ExpandableSelectorContainer style={{ maxWidth: 160 }} {...props}>
+          <OptionContent>
             <Text>
               <EmojiTextPrefix emoji={emoji} /> {name}
             </Text>
-            <Toggle isOpen={props.isActive} />
-          </HStack>
-        </Container>
+          </OptionContent>
+          <ExpandableSelectorToggle isOpen={props.isActive} />
+        </ExpandableSelectorContainer>
       )}
       value={activeSet.projectId}
       onChange={(projectId) =>

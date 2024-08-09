@@ -12,7 +12,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { GoalsEducation } from '@increaser/ui/goals/education/GoalsEducation'
-import { PageHeader } from '../ui/page/PageHeader'
+import { Header } from '@lib/ui/layout/Header'
 
 const title = 'Goals'
 
@@ -32,13 +32,13 @@ export const GoalsPage = () => {
         <PageContainer ref={setElement}>
           <Content>
             <PageContent style={{ maxWidth: contentWidth }}>
-              <PageHeader>
+              <Header>
                 <PageTitle>{title}</PageTitle>
                 <PageDocumentTitle emoji="🎯" title={title} />
                 <ClientOnly>
                   <GoalStatusFilter />
                 </ClientOnly>
-              </PageHeader>
+              </Header>
 
               <UserStateOnly>
                 <Goals />

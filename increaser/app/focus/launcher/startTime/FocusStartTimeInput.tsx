@@ -4,7 +4,7 @@ import { Sessions } from './Sessions'
 import styled from 'styled-components'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
 import { StartTimeEditor } from './StartTimeEditor'
-import { dayOverviewConfig } from '@increaser/ui/sets/manager/overview/config'
+import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 
 const Content = styled(VStack)`
   overflow: hidden;
@@ -18,7 +18,7 @@ export const FocusStartTimeInput = () => {
       <TimeSpace
         startsAt={interval.start}
         endsAt={interval.end}
-        msToPx={dayOverviewConfig.editor.msToPx}
+        msToPx={setEditorConfig.msToPx}
       >
         <Sessions />
         <StartTimeEditor />

@@ -8,6 +8,10 @@ import Link from 'next/link'
 import { ProjectGoalShyIndicator } from '../ProjectGoalShyIndicator'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
+import { toPercents } from '@lib/utils/toPercents'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { getColor } from '@lib/ui/theme/getters'
+import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -15,6 +19,17 @@ const Container = styled(HStack)`
   justify-content: space-between;
   gap: 20px;
   font-size: 14px;
+  font-weight: 500;
+`
+
+const Pill = styled.span`
+  ${borderRadius.s};
+  display: inline-block;
+  background: ${getColor('foreground')};
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${getColor('textSupporting')};
 `
 
 export const ProjectBudgetWidgetHeader = () => {
@@ -30,23 +45,33 @@ export const ProjectBudgetWidgetHeader = () => {
           {name}
         </Text>
       </HStack>
-      <Link href={getAppPath('timePlanning')}>
-        <HStackSeparatedBy separator="/">
-          <Text weight="semibold" color="contrast">
-            {doneMinutesThisWeek > 0
-              ? formatDuration(doneMinutesThisWeek, 'min', {
-                  maxUnit: 'h',
-                })
-              : '-'}
-          </Text>
-          {allocatedMinutesPerWeek > 0 && (
-            <Text color="supporting" weight="semibold">
-              {formatDuration(allocatedMinutesPerWeek, 'min', {
-                maxUnit: 'h',
-              })}
+      <Link href={getAppPath('projects', 'plan')}>
+        <HStack gap={8}>
+          <HStackSeparatedBy separator="/">
+            <Text weight="semibold" color="contrast">
+              {doneMinutesThisWeek > 0
+                ? formatDuration(doneMinutesThisWeek, 'min', {
+                    maxUnit: 'h',
+                  })
+                : '-'}
             </Text>
-          )}
-        </HStackSeparatedBy>
+            {allocatedMinutesPerWeek > 0 && (
+              <Text color="supporting" weight="semibold">
+                {formatDuration(allocatedMinutesPerWeek, 'min', {
+                  maxUnit: 'h',
+                })}
+              </Text>
+            )}
+          </HStackSeparatedBy>
+          <Pill>
+            <EmphasizeNumbers
+              value={toPercents(
+                doneMinutesThisWeek / allocatedMinutesPerWeek,
+                'round',
+              )}
+            />
+          </Pill>
+        </HStack>
       </Link>
     </Container>
   )

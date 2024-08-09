@@ -62,7 +62,6 @@ export const TrackedTimeReportProvider = ({
         year: () => project.years.map(fromYear),
       }),
     )
-
     return isEmpty(items)
       ? currentPeriodStartedAt
       : order(items, (v) => v, 'asc')[0]

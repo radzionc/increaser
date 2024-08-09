@@ -4,6 +4,35 @@ export const lastAnnouncementWasAt: number | undefined = undefined
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1722919666475,
+    videoId: 'sets',
+    name: 'Enhanced Focus and Project Management',
+    description:
+      'Boost your productivity with new features for better focus session control and improved project management.',
+    items: [
+      {
+        description:
+          'Manage your focus sessions seamlessly: add, edit, and delete sessions directly from the focus page timeline.',
+      },
+      {
+        description:
+          'Stay accurate: deduct minutes from your current focus session if you get distracted.',
+      },
+      {
+        description:
+          'Streamline your workflow: filter tasks and ideas by project for better organization.',
+      },
+    ],
+    telegram: 'https://t.me/increaser_app/45',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-increaser-features-to-boost-your-productivity--O3b8CLcb60au7pXHzI-',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7226590945373261824',
+    x: 'https://x.com/increaser_app/status/1820829571739951136',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1eljbgt/enhance_your_productivity_with_new_increaser/',
+  },
+  {
     releasedAt: 1722338935549,
     name: 'Enhanced Focus Session Management',
     description:

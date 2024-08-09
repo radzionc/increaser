@@ -27,11 +27,11 @@ export const FloatingIntervalDuration = ({
   ...rest
 }: FloatingIntervalDurationProps) => (
   <Container as="div" {...rest}>
-    <HStackSeparatedBy separator={dotSeparator}>
-      <Text>
+    <HStackSeparatedBy wrap="nowrap" separator={dotSeparator}>
+      <Text nowrap>
         {formatTime(value.start)} - {formatTime(value.end)}
       </Text>
-      <Text>
+      <Text nowrap>
         {formatDuration(getIntervalDuration(value), 'ms', { kind: 'long' })}
       </Text>
     </HStackSeparatedBy>

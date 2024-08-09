@@ -2,13 +2,13 @@ import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 import { navigationConfig } from './config'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { NavigationItemContentFrame } from './NavigationItemContentFrame'
 import { ProductIcon } from '@increaser/ui/icon/ProductIcon'
 import { Text } from '@lib/ui/text'
 import { productName } from '@increaser/config'
 import { FeaturesNavigationItem } from '../../features/FeaturesNavigationItem'
 import { ManageAccount } from '../../user/components/ManageAccount'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
 const Container = styled(HStack)`
   ${horizontalPadding(navigationConfig.itemHorizontalPadding)};
@@ -22,16 +22,28 @@ const Container = styled(HStack)`
   }
 `
 
-const Logo = styled(NavigationItemContentFrame)``
+const Logo = styled(HStack)`
+  align-items: center;
+  gap: 12px;
+
+  font-weight: 500;
+  font-size: 14px;
+
+  ${borderRadius.s};
+  padding-left: 4px;
+  height: 32px;
+
+  svg {
+    font-size: 16px;
+  }
+`
 
 export const SidebarHeader = () => {
   return (
     <Container>
       <Logo>
         <ProductIcon />
-        <Text color="contrast" weight="bold">
-          {productName.toLowerCase()}
-        </Text>
+        <Text weight="bold">{productName.toLowerCase()}</Text>
       </Logo>
       <UserStateOnly>
         <HStack alignItems="center" gap={4}>

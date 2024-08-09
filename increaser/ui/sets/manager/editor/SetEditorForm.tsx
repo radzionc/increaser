@@ -1,6 +1,5 @@
 import { SetEditorContent } from './SetEditorContent'
 import { SetEditorHeader } from './SetEditorHeader'
-import { SetEditorProject } from './SetEditorProject'
 import { useCallback, useEffect, useMemo } from 'react'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -13,6 +12,15 @@ import { useAddSetMutation } from '../../api/useAddSetMutation'
 import { useUpdateSetMutation } from '../../api/useUpdateSetMutation'
 import { HStack } from '@lib/ui/layout/Stack'
 import { Button } from '@lib/ui/buttons/Button'
+import styled from 'styled-components'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { setEditorConfig } from './config'
+
+const Footer = styled(HStack)`
+  ${verticalPadding(setEditorConfig.rightPadding)};
+  padding-right: ${toSizeUnit(setEditorConfig.rightPadding)};
+`
 
 export const SetEditorForm = () => {
   const [activeSet, setActiveSet] = usePresentState(useActiveSet())
@@ -92,9 +100,8 @@ export const SetEditorForm = () => {
   return (
     <>
       <SetEditorHeader />
-      <SetEditorProject />
       <SetEditorContent />
-      <HStack
+      <Footer
         wrap="wrap"
         justifyContent="space-between"
         fullWidth
@@ -109,7 +116,7 @@ export const SetEditorForm = () => {
             Save
           </Button>
         </HStack>
-      </HStack>
+      </Footer>
     </>
   )
 }

@@ -4,12 +4,13 @@ import { TimelineMarks } from './TimelineMarks'
 import { WorkdayEndStatus } from './WorkdayEndStatus'
 import { CurrentTime } from './CurrentTime'
 import { WorkdayLeftBlock } from './WorkdayLeftBlock'
-import { WorkBlocks } from './blocks'
 import { useDayOverview } from './DayOverviewProvider'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { dayOverviewConfig } from './config'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { Sets } from './Sets'
+import { Blocks } from './Blocks'
 
 const Wrapper = styled.div`
   flex: 1;
@@ -41,7 +42,8 @@ export const DayTimeline = () => {
           <TimelineMarks />
           <CurrentTime />
           <WorkdayEndStatus />
-          <WorkBlocks />
+          <Sets />
+          <Blocks />
         </Content>
       </Container>
     </Wrapper>

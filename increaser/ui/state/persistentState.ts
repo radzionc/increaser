@@ -44,6 +44,7 @@ export enum PersistentStateKey {
   GoalsStatusFilter = 'goalsStatusFilter',
   IsGoalsEducationOpen = 'isGoalsEducationOpen',
   ProjectFilter = 'projectFilter',
+  ProjectsBudgetReportView = 'projectsBudgetReportView2',
 }
 
 export const persistentStorage =

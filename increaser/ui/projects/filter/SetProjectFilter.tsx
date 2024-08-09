@@ -55,7 +55,7 @@ export const SetProjectFilter = () => {
       {isOpen && (
         <FloatingFocusManager context={context} modal returnFocus>
           <TitledFloatingOptionsContainer
-            title="Filter by a project"
+            title="Filter by project"
             {...getFloatingProps()}
           >
             <VStack>

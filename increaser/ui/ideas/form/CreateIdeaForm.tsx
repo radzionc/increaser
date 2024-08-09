@@ -12,11 +12,19 @@ import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInpu
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 
-export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
+type CreateIdeaFormProps = FinishableComponentProps & {
+  initialValue?: Partial<IdeaFormShape>
+}
+
+export const CreateIdeaForm = ({
+  onFinish,
+  initialValue,
+}: CreateIdeaFormProps) => {
   const [value, setValue] = useState<IdeaFormShape>({
     name: '',
     description: '',
     projectId: otherProjectId,
+    ...initialValue,
   })
   const { mutate } = useCreateUserEntityMutation('idea')
 
@@ -35,6 +43,8 @@ export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
 
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
+  const shouldFocusProjectInput = !initialValue?.projectId
+
   return (
     <ListItemForm
       onClose={onFinish}
@@ -44,7 +54,7 @@ export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
       <EmojiTextInputFrame>
         <div>
           <TaskProjectSelector
-            autoFocus
+            autoFocus={shouldFocusProjectInput}
             value={value.projectId}
             onChange={(projectId) => {
               setValue((prev) => ({ ...prev, projectId }))
@@ -54,6 +64,7 @@ export const CreateIdeaForm = ({ onFinish }: FinishableComponentProps) => {
         </div>
         <EmbeddedTitleInput
           placeholder="Your idea"
+          autoFocus={!shouldFocusProjectInput}
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           onSubmit={onSubmit}

@@ -8,7 +8,8 @@ import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInt
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { Sets } from './Sets'
 import { SetEditor } from './SetEditor'
-import { dayOverviewConfig } from '../overview/config'
+import { setEditorConfig } from './config'
+import { ActiveControlProvider } from './ActiveControlProvider'
 
 const Content = styled(VStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
@@ -21,12 +22,14 @@ export const SetEditorContent = () => {
     <ScrollableFlexboxFiller>
       <Content>
         <TimeSpace
-          msToPx={dayOverviewConfig.editor.msToPx}
+          msToPx={setEditorConfig.msToPx}
           startsAt={start}
           endsAt={end}
         >
-          <Sets />
-          <SetEditor />
+          <ActiveControlProvider initialValue={null}>
+            <Sets />
+            <SetEditor />
+          </ActiveControlProvider>
         </TimeSpace>
       </Content>
     </ScrollableFlexboxFiller>

@@ -1,3 +1,7 @@
+1722919666475
+Add, edit and delete sessions right from the focus page timeline
+Deduct minutes from the current focus session if got distracted
+Filter tasks and ideas by project
 1722338935549
 Pause focus session (the most requested feature yet)
 Create a project or a task from the focus launcher

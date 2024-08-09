@@ -7,7 +7,8 @@ import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
-import { PageHeader } from '../ui/page/PageHeader'
+import { Header } from '@lib/ui/layout/Header'
+
 import { ManageProjectFilter } from '@increaser/ui/projects/filter/ManageProjectFilter'
 import { ProjectFilterProvider } from '@increaser/ui/projects/filter/ProjectFilterProvider'
 
@@ -19,7 +20,7 @@ export const IdeasPage: Page = () => {
     <PageContainer>
       <PageContent style={{ maxWidth: contentWidth }}>
         <ProjectFilterProvider initialValue={null}>
-          <PageHeader>
+          <Header>
             <PageTitle>{title}</PageTitle>
             <PageDocumentTitle emoji="💡" title={title} />
             <ClientOnly>
@@ -27,7 +28,7 @@ export const IdeasPage: Page = () => {
                 <ManageProjectFilter />
               </UserStateOnly>
             </ClientOnly>
-          </PageHeader>
+          </Header>
           <UserStateOnly>
             <Ideas />
           </UserStateOnly>

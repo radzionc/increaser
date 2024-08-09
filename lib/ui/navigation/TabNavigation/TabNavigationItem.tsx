@@ -1,7 +1,5 @@
-import { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
-import { transition } from '../../css/transition'
 import {
   InvisibleHTMLRadio,
   InvisibleHTMLRadioProps,
@@ -23,23 +21,23 @@ const Container = styled.label<ComponentWithActiveState>`
   ${centerContent};
   font-weight: 500;
   font-size: 14px;
+  position: relative;
 
   padding: 0 20px;
   height: 40px;
 
-  ${transition}
-
   border: 1px solid ${getColor('mistExtra')};
+  color: ${getColor('textSupporting')};
 
   ${({ isActive }) =>
     isActive
       ? css`
-          background: ${getColor('mist')};
           color: ${getColor('contrast')};
+          background: ${getColor('mist')};
         `
       : css`
           &:hover {
-            color: ${getColor('contrast')};
+            background: ${getColor('mist')};
           }
         `};
 `
@@ -55,20 +53,8 @@ export const TabNavigationItem = ({
   style,
   ...rest
 }: TabNavigationItemProps) => {
-  const ref = useRef<HTMLLabelElement>(null)
-  useEffect(() => {
-    if (isSelected) {
-      ref.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-      })
-    }
-  }, [isSelected])
-
   return (
     <Container
-      ref={ref}
       className={className}
       style={style}
       tabIndex={-1}

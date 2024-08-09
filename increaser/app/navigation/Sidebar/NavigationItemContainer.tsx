@@ -18,7 +18,7 @@ export const NavigationItemContainer = styled.div<ComponentWithActiveState>`
   width: 100%;
   ${transition};
   ${borderRadius.s};
-  color: ${getColor('textSupporting')};
+  color: ${getColor('text')};
   position: relative;
 
   &:hover {
@@ -30,9 +30,16 @@ export const NavigationItemContainer = styled.div<ComponentWithActiveState>`
   }
 
   ${({ isActive }) =>
-    isActive &&
-    css`
-      background: ${getColor('mist')};
-      color: ${getColor('contrast')};
-    `}
+    isActive
+      ? css`
+          color: ${({ theme }) =>
+            theme.colors.primary
+              .getVariant({ l: () => 76, s: () => 100 })
+              .toCssValue()};
+        `
+      : css`
+          svg {
+            color: ${getColor('textSupporting')};
+          }
+        `}
 `

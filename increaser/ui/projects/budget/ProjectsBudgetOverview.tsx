@@ -7,6 +7,8 @@ import { Text } from '@lib/ui/text'
 import { useWorkBudgetTotal } from '@increaser/ui/workBudget/hooks/useWorkBudgetTotal'
 import { useFreeHours } from './hooks/useFreeHours'
 import { useProjectsBudgetedHours } from './hooks/useProjectsBudgetedHours'
+import Link from 'next/link'
+import { getAppPath } from '../../navigation/app'
 
 const Container = styled(VStack)`
   gap: 8px;
@@ -47,13 +49,15 @@ export const ProjectsBudgetOverview = () => {
             </LabeledValue>
           )}
         </HStack>
-        <LabeledValue labelColor="supporting" name="Work budget">
-          <Text color="contrast">
-            {formatDuration(workBudetTotal, 'h', {
-              maxUnit: 'h',
-            })}
-          </Text>
-        </LabeledValue>
+        <Link href={getAppPath('preferences', 'work-budget')}>
+          <LabeledValue labelColor="supporting" name="Work budget">
+            <Text color="contrast">
+              {formatDuration(workBudetTotal, 'h', {
+                maxUnit: 'h',
+              })}
+            </Text>
+          </LabeledValue>
+        </Link>
       </HStack>
       <ProjectsBudgetVisualization />
     </Container>
