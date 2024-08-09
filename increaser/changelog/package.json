@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "npx tsx ./scripts/prepare.ts",
+    "announce": "npx tsx ./scripts/announce.ts"
   },
   "devDependencies": {
     "clipboardy": "^4.0.0"
