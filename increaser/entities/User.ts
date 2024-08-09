@@ -27,10 +27,6 @@ export type Set = Interval & {
   isEndEstimated?: boolean | null
 }
 
-interface AppSumo {
-  code: string
-}
-
 export const maxWeeks = 24
 export const maxMonths = 24
 
@@ -106,8 +102,6 @@ export type User = DayMoments &
 
     isAnonymous: boolean
 
-    appSumo?: AppSumo
-
     ignoreEmails?: boolean
     timeZone: number
 
@@ -134,7 +128,6 @@ export const userReadonlyFields = [
   'email',
   'registrationDate',
   'freeTrialEnd',
-  'appSumo',
   'paddle',
   'lastSyncedMonthEndedAt',
   'lastSyncedWeekEndedAt',

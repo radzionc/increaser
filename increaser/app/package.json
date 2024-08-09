@@ -8,7 +8,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "generateIconMetaTags": "npx tsx icon/commands/generateIconMetaTags",
+    "generateIconMetaTags": "npx tsx icon/scripts/generateIconMetaTags",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

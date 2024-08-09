@@ -48,12 +48,6 @@ resource "aws_iam_policy" "api" {
         Resource = "${aws_dynamodb_table.users.arn}/index/EmailIndex"
       },
       {
-        Sid = "AllAPIActionsOnAppSumoCodes",
-        Effect = "Allow",
-        Action = "dynamodb:*",
-        Resource = "${aws_dynamodb_table.appSumoCodes.arn}"
-      },
-      {
         Sid = "AllAPIActionsOnFeatures",
         Effect = "Allow",
         Action = "dynamodb:*",
