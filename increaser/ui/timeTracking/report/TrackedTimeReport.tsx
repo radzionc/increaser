@@ -6,6 +6,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
 import { TrackedTimeNavigation } from './TrackedTimeNavigation'
 import { TrackedTimeStats } from './TrackedTimeStats'
+import { ActiveItemIndexProvider } from '@lib/ui/list/ActiveItemIndexProvider'
 
 const contentWidth = 520
 const gap = 40
@@ -40,7 +41,9 @@ export const TrackedTimeReport = () => {
               {isSmall && <TrackedTimeNavigation />}
               <VStack gap={40}>
                 <TrackedTimeStats />
-                <TrackedTimeChart />
+                <ActiveItemIndexProvider initialValue={null}>
+                  <TrackedTimeChart />
+                </ActiveItemIndexProvider>
               </VStack>
             </PageContent>
           </Container>

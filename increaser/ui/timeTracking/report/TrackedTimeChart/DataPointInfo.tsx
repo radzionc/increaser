@@ -22,10 +22,11 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Center } from '@lib/ui/layout/Center'
 import { DataPointBreakdown } from './breakdown/DataPointBreakdown'
+import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
+import { usePresentState } from '@lib/ui/state/usePresentState'
 
 type DataPointInfoProps = {
   position: Point
-  index: number
 }
 
 const Reference = styled.div`
@@ -50,7 +51,8 @@ const Container = styled(VStack)`
   }
 `
 
-export const DataPointInfo = ({ position, index }: DataPointInfoProps) => {
+export const DataPointInfo = ({ position }: DataPointInfoProps) => {
+  const [index] = usePresentState(useActiveItemIndex())
   const { timeGrouping, activeProjectId } = useTrackedTimeReport()
 
   const {
@@ -111,7 +113,7 @@ export const DataPointInfo = ({ position, index }: DataPointInfoProps) => {
             )}
           </Text>
         </Center>
-        {!activeProjectId && <DataPointBreakdown index={index} />}
+        {!activeProjectId && <DataPointBreakdown />}
       </Container>
     </>
   )

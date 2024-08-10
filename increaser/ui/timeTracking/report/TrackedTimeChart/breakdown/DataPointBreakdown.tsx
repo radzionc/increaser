@@ -1,5 +1,4 @@
 import { VStack } from '@lib/ui/layout/Stack'
-import { ComponentWithIndexProps } from '@lib/ui/props'
 import { Entry } from '@lib/utils/entities/Entry'
 import { useMemo } from 'react'
 import { useTrackedTimeReport } from '../../state/TrackedTimeReportContext'
@@ -12,6 +11,8 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { sum } from '@lib/utils/array/sum'
 import { toPercents } from '@lib/utils/toPercents'
+import { usePresentState } from '@lib/ui/state/usePresentState'
+import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 
 const ProjectRow = styled.div`
   width: 100%;
@@ -32,7 +33,8 @@ const ProjectRow = styled.div`
   }
 `
 
-export const DataPointBreakdown = ({ index }: ComponentWithIndexProps) => {
+export const DataPointBreakdown = () => {
+  const [index] = usePresentState(useActiveItemIndex())
   const { projects } = useTrackedTime()
   const { projectsTimeSeries } = useTrackedTimeReport()
 

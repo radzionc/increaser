@@ -1,8 +1,7 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
-import styled, { useTheme } from 'styled-components'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
-import { useMemo, useState } from 'react'
+import styled from 'styled-components'
+import { useMemo } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -11,7 +10,6 @@ import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { trackedTimeChartConfig } from './config'
-import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useActiveTimeSeries } from '../hooks/useActiveTimeSeries'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
@@ -21,10 +19,11 @@ import {
   takeWholeSpaceAbsolutely,
   TakeWholeSpaceAbsolutely,
 } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-import { borderRadius } from '@lib/ui/css/borderRadius'
 import { toPercents } from '@lib/utils/toPercents'
 import { TrackedTimeChartXLabels } from './TrackedTimeChartXLabels'
 import { DataPointInfo } from './DataPointInfo'
+import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
+import { BarChartItem } from './BarChartItem'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -34,26 +33,10 @@ const Content = styled.div`
   align-items: end;
 `
 
-const Item = styled.div`
-  width: calc(100% - 4px);
-  ${borderRadius.s};
-`
-
 export const TrackedTimeChart = () => {
-  const { activeProjectId } = useTrackedTimeReport()
-
-  const { projects } = useTrackedTime()
-
   const data = useActiveTimeSeries()
 
-  const [selectedDataPoint, setSelectedDataPoint] = useState<number | null>(
-    null,
-  )
-
-  const { colors } = useTheme()
-  const color = activeProjectId
-    ? projects[activeProjectId].color
-    : colors.primary
+  const [activeIndex, setActiveIndex] = useActiveItemIndex()
 
   const yLabels = useMemo(() => {
     const hourLabels = generateYLabels({
@@ -107,16 +90,11 @@ export const TrackedTimeChart = () => {
                       {normalized.data.map((value, index) => {
                         const height = toPercents(value)
 
-                        const background =
-                          selectedDataPoint !== null
-                            ? index === selectedDataPoint
-                              ? color
-                              : colors.foregroundExtra
-                            : color
                         return (
-                          <Item
+                          <BarChartItem
+                            key={index}
+                            index={index}
                             style={{
-                              background: background.toCssValue(),
                               height,
                             }}
                           />
@@ -126,21 +104,18 @@ export const TrackedTimeChart = () => {
                     <HoverTracker
                       onChange={({ position }) => {
                         if (position) {
-                          setSelectedDataPoint(
+                          setActiveIndex(
                             getSegmentIndex(data.length, position.x),
                           )
                         } else {
-                          setSelectedDataPoint(null)
+                          setActiveIndex(null)
                         }
                       }}
                       render={({ props, clientPosition }) => (
                         <>
                           <TakeWholeSpaceAbsolutely {...props}>
-                            {clientPosition && selectedDataPoint !== null && (
-                              <DataPointInfo
-                                index={selectedDataPoint}
-                                position={clientPosition}
-                              />
+                            {clientPosition && activeIndex !== null && (
+                              <DataPointInfo position={clientPosition} />
                             )}
                           </TakeWholeSpaceAbsolutely>
                         </>
