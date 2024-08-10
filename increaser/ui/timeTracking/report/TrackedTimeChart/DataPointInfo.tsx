@@ -61,7 +61,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
     update,
   } = useFloating({
     open: true,
-    placement: 'bottom',
+    placement: 'right',
     middleware: [offset(16), flip(), shift()],
     whileElementsMounted: autoUpdate,
   })
