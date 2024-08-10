@@ -2,7 +2,6 @@ import React from 'react'
 import { sum } from '@lib/utils/array/sum'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { VStack } from '@lib/ui/layout/Stack'
 import { toPercents } from '@lib/utils/toPercents'
 import { useTrackedTime } from '../state/TrackedTimeContext'
@@ -13,10 +12,11 @@ import { BreakdownRowContent } from './BreakdownRowContent'
 import { BreakdownValue } from './BreakdownValue'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
 
 export const ProjectsDistributionBreakdown = () => {
   const { projects } = useTrackedTime()
-  const { activeProjectId, setState } = useTrackedTimeReport()
+  const [{ activeProjectId }, setState] = useTrackedTimeReportPreferences()
 
   const { colors } = useTheme()
 

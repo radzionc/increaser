@@ -1,31 +1,34 @@
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { trackedTimeChartConfig } from './config'
 import { Match } from '@lib/ui/base/Match'
 import { subtractPeriod } from '../utils/subtractPeriod'
 import { Text } from '@lib/ui/text'
 import { getWeekIndex } from '@lib/utils/time/getWeekIndex'
 import { format } from 'date-fns'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
+import { useLastDataPointStartedAt } from '../hooks/useLastDataPointStartedAt'
+import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 
 type Props = {
   containerWidth: number
 }
 
 export const TrackedTimeChartXLabels = ({ containerWidth }: Props) => {
-  const { lastTimeGroupStartedAt, timeGrouping, dataPointsCount } =
-    useTrackedTimeReport()
+  const dataSize = useCurrentDataSize()
+  const [{ timeGrouping }] = useTrackedTimeReportPreferences()
+  const lastDataPointStartedAt = useLastDataPointStartedAt()
 
   const getDataPointStartedAt = (index: number) => {
     return subtractPeriod({
-      value: lastTimeGroupStartedAt,
+      value: lastDataPointStartedAt,
       period: timeGrouping,
-      amount: dataPointsCount - index - 1,
+      amount: dataSize - index - 1,
     })
   }
 
   return (
     <ChartXAxis
-      dataSize={dataPointsCount}
+      dataSize={dataSize}
       containerWidth={containerWidth}
       expectedLabelHeight={trackedTimeChartConfig.expectedXLabelHeight}
       expectedLabelWidth={trackedTimeChartConfig.expectedXLabelWidth}

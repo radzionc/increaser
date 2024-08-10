@@ -1,4 +1,4 @@
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
 import { TimeGrouping } from '../TimeGrouping'
 
 import { Switch } from '@lib/ui/inputs/Switch'
@@ -11,8 +11,8 @@ const currentPeriodName: Record<TimeGrouping, string> = {
 }
 
 export const IncludeCurrentPeriodSelector = () => {
-  const { includeCurrentPeriod, setState, timeGrouping } =
-    useTrackedTimeReport()
+  const [{ includeCurrentPeriod, timeGrouping }, setState] =
+    useTrackedTimeReportPreferences()
 
   return (
     <Switch

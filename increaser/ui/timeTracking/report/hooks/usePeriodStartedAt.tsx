@@ -1,16 +1,19 @@
 import { useMemo } from 'react'
 import { subtractPeriod } from '../utils/subtractPeriod'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
+import { useLastDataPointStartedAt } from './useLastDataPointStartedAt'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
+import { useCurrentDataSize } from './useCurrentDataSize'
 
 export const usePeriodStartedAt = (index: number) => {
-  const { lastTimeGroupStartedAt, timeGrouping, dataPointsCount } =
-    useTrackedTimeReport()
+  const lastDataPointStartedAt = useLastDataPointStartedAt()
+  const [{ timeGrouping }] = useTrackedTimeReportPreferences()
+  const dataSize = useCurrentDataSize()
 
   return useMemo(() => {
     return subtractPeriod({
-      value: lastTimeGroupStartedAt,
+      value: lastDataPointStartedAt,
       period: timeGrouping,
-      amount: dataPointsCount - index - 1,
+      amount: dataSize - index - 1,
     })
-  }, [dataPointsCount, index, lastTimeGroupStartedAt, timeGrouping])
+  }, [dataSize, index, lastDataPointStartedAt, timeGrouping])
 }

@@ -16,7 +16,7 @@ export enum PersistentStateKey {
   PathAttemptedWhileUnauthenticated = 'pathAttemptedWhileUnauthenticated',
   ReactQueryState = 'reactQueryState',
   TrackedTimeReportPreferences = 'trackedTimeReportPreferences2',
-  TrackedTimePreference = 'trackedTimePreference2',
+  TrackedTimePreference = 'trackedTimePreference3',
   FocusAudioMode = 'focusAudioMode2',
   IsFocusAudioEnabled = 'isFocusAudioEnabled',
   FocusSoundsPreference = 'focusSoundsPreference',
@@ -31,6 +31,7 @@ export enum PersistentStateKey {
   GoalsStatusFilter = 'goalsStatusFilter',
   IsGoalsEducationOpen = 'isGoalsEducationOpen',
   ProjectsBudgetReportView = 'projectsBudgetReportView2',
+  TrackedTimeReportDataSize = 'trackedTimeReportDataSize',
 }
 
 const persistentStorage =

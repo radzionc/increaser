@@ -2,40 +2,40 @@ import {
   usePersistentState,
   PersistentStateKey,
 } from '@increaser/ui/state/persistentState'
-import { timeFrames } from '@increaser/ui/timeTracking/report/TimeGrouping'
 import { useTrackedTime } from '@increaser/ui/timeTracking/report/state/TrackedTimeContext'
-import { useEffect } from 'react'
-import { TrackedTimeReportPreferences } from '@increaser/ui/timeTracking/report/state/TrackedTimeReportContext'
+import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
+import { TimeGrouping } from '../TimeGrouping'
 
 const defaultTimeGrouping = 'week'
 
+type TrackedTimeReportPreferences = {
+  activeProjectId: string | null
+  timeGrouping: TimeGrouping
+  includeCurrentPeriod: boolean
+}
+
 export const useTrackedTimeReportPreferences = () => {
-  const [state, setState] = usePersistentState<TrackedTimeReportPreferences>(
-    PersistentStateKey.TrackedTimeReportPreferences,
-    {
-      activeProjectId: null,
-      timeGrouping: defaultTimeGrouping,
-      includeCurrentPeriod: false,
-      timeFrame: timeFrames[defaultTimeGrouping][0],
+  const { projects } = useTrackedTime()
+  return useStateCorrector(
+    usePersistentState<TrackedTimeReportPreferences>(
+      PersistentStateKey.TrackedTimeReportPreferences,
+      {
+        activeProjectId: null,
+        timeGrouping: defaultTimeGrouping,
+        includeCurrentPeriod: false,
+      },
+    ),
+    (state) => {
+      const hasWrongActiveProjectId =
+        state.activeProjectId !== null && !projects[state.activeProjectId]
+
+      if (hasWrongActiveProjectId) {
+        return {
+          ...state,
+          activeProjectId: null,
+        }
+      }
+      return state
     },
   )
-
-  const { projects } = useTrackedTime()
-
-  const hasWrongActiveProjectId =
-    state.activeProjectId !== null && !projects[state.activeProjectId]
-
-  useEffect(() => {
-    if (hasWrongActiveProjectId) {
-      setState((state) => ({ ...state, activeProjectId: null }))
-    }
-  }, [hasWrongActiveProjectId, setState])
-
-  return [
-    {
-      ...state,
-      activeProjectId: hasWrongActiveProjectId ? null : state.activeProjectId,
-    },
-    setState,
-  ] as const
 }

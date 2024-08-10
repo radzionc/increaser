@@ -23,6 +23,9 @@ import { trackedTimeToProjectMonths } from '@increaser/entities-utils/project/tr
 import { useTheme } from 'styled-components'
 import { trackedTimeToProjectYears } from '@increaser/entities-utils/project/trackedTimeToProjectYears'
 import { areSameYear } from '@lib/utils/time/Year'
+import { subDays, startOfDay } from 'date-fns'
+
+const daysMax = 30
 
 export const TrackedTimeProvider = ({
   children,
@@ -64,6 +67,8 @@ export const TrackedTimeProvider = ({
       }
     })
 
+    const firstDayStartedAt = startOfDay(subDays(Date.now(), daysMax)).getTime()
+
     sets.forEach((set) => {
       const project = result[set.projectId]
 
@@ -73,14 +78,16 @@ export const TrackedTimeProvider = ({
 
       const day = toDay(set.start)
 
-      project.days = mergeTrackedDataPoint({
-        groups: project.days,
-        dataPoint: {
-          ...day,
-          seconds,
-        },
-        areSameGroup: areSameDay,
-      })
+      if (set.start > firstDayStartedAt) {
+        project.days = mergeTrackedDataPoint({
+          groups: project.days,
+          dataPoint: {
+            ...day,
+            seconds,
+          },
+          areSameGroup: areSameDay,
+        })
+      }
 
       if (set.start > weekStartedAt) {
         const week = toWeek(set.start)

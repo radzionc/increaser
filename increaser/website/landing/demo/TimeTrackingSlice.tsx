@@ -1,7 +1,6 @@
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
-import { TrackedTimeReportProvider } from '@increaser/ui/timeTracking/report/TrackedTimeReportProvider'
 import { TrackedTimeReport } from '@increaser/ui/timeTracking/report/TrackedTimeReport'
 import { TrackedTimeProvider } from '@increaser/ui/timeTracking/report/TrackedTimeProvider'
 import { VStack } from '@lib/ui/layout/Stack'
@@ -21,11 +20,9 @@ export const TimeTrackingSlice = ({ titleAs }: TimeTrackingSliceProps) => {
         <WebsiteSectionHeader titleAs={titleAs} {...getDemoSliceCopy(id)} />
         <ClientOnly>
           <TrackedTimeProvider>
-            <TrackedTimeReportProvider>
-              <VStack style={{ maxWidth: 920, width: '100%' }}>
-                <TrackedTimeReport />
-              </VStack>
-            </TrackedTimeReportProvider>
+            <VStack style={{ maxWidth: 920, width: '100%' }}>
+              <TrackedTimeReport />
+            </VStack>
           </TrackedTimeProvider>
         </ClientOnly>
       </WebsiteSliceContent>

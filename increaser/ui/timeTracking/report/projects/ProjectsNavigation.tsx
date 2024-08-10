@@ -2,13 +2,13 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { VStack } from '@lib/ui/layout/Stack'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import styled from 'styled-components'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { Header } from '@lib/ui/layout/Header'
 import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
 import { ManageProjectsNamesVisibility } from '../filters/ManageProjectsNamesVisibility'
 import { ProjectsDistributionBreakdown } from '../ProjectsDistributionBreakdown'
 import { useOrderedTimeSeries } from '../hooks/useOrderedTimeSeries'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
 
 const Container = styled(VStack)`
   padding: 0;
@@ -37,7 +37,7 @@ const ProjectsHeader = styled(Header)`
 `
 
 export const ProjectsNavigation = () => {
-  const { activeProjectId, setState } = useTrackedTimeReport()
+  const [{ activeProjectId }, setState] = useTrackedTimeReportPreferences()
   const items = useOrderedTimeSeries()
 
   return (

@@ -11,7 +11,6 @@ import { useEffect, useMemo } from 'react'
 import { usePeriodStartedAt } from '../hooks/usePeriodStartedAt'
 import { format } from 'date-fns'
 import { match } from '@lib/utils/match'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { formatWeek } from '@lib/utils/time/Week'
 import { Text } from '@lib/ui/text'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
@@ -24,6 +23,7 @@ import { Center } from '@lib/ui/layout/Center'
 import { DataPointBreakdown } from './breakdown/DataPointBreakdown'
 import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
 
 type DataPointInfoProps = {
   position: Point
@@ -53,7 +53,7 @@ const Container = styled(VStack)`
 
 export const DataPointInfo = ({ position }: DataPointInfoProps) => {
   const [index] = usePresentState(useActiveItemIndex())
-  const { timeGrouping, activeProjectId } = useTrackedTimeReport()
+  const [{ timeGrouping, activeProjectId }] = useTrackedTimeReportPreferences()
 
   const {
     refs: { setReference, setFloating },

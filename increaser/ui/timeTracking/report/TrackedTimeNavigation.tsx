@@ -1,13 +1,15 @@
 import { Panel } from '@lib/ui/panel/Panel'
 import { IncludeCurrentPeriodSelector } from './filters/IncludeCurrentPeriodSelector'
-import { TimeFrameManager } from './TimeFrameManager'
 import { ProjectsNavigation } from './projects/ProjectsNavigation'
+import { TimeGroupSelector } from './TimeGoupSelector'
+import { DataSizeSelector } from './DataSizeSelector'
 
 export const TrackedTimeNavigation = () => {
   return (
     <Panel withSections kind="secondary">
-      <TimeFrameManager />
+      <TimeGroupSelector />
       <IncludeCurrentPeriodSelector />
+      <DataSizeSelector />
       <ProjectsNavigation />
     </Panel>
   )

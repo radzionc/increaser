@@ -1,10 +1,11 @@
 import { order } from '@lib/utils/array/order'
 import { Entry } from '@lib/utils/entities/Entry'
 import { useMemo } from 'react'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
+import { useProjectsTimeSeries } from './useProjectsTimeSeries'
 
 export const useDataPointBreakdown = (index: number) => {
-  const { projectsTimeSeries } = useTrackedTimeReport()
+  const projectsTimeSeries = useProjectsTimeSeries()
+
   return useMemo(() => {
     const result: Entry<string, number>[] = []
 

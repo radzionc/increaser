@@ -1,10 +1,10 @@
 import { order } from '@lib/utils/array/order'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
 import { sum } from '@lib/utils/array/sum'
 import { useMemo } from 'react'
+import { useProjectsTimeSeries } from './useProjectsTimeSeries'
 
 export const useOrderedTimeSeries = () => {
-  const { projectsTimeSeries } = useTrackedTimeReport()
+  const projectsTimeSeries = useProjectsTimeSeries()
 
   return useMemo(
     () =>

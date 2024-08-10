@@ -1,9 +1,12 @@
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { useMemo } from 'react'
-import { useTrackedTimeReport } from '../state/TrackedTimeReportContext'
+import { useTrackedTimeReportPreferences } from '../state/useTrackedTimeReportPreferences'
+import { useProjectsTimeSeries } from './useProjectsTimeSeries'
 
 export const useActiveTimeSeries = () => {
-  const { projectsTimeSeries, activeProjectId } = useTrackedTimeReport()
+  const [{ activeProjectId }] = useTrackedTimeReportPreferences()
+
+  const projectsTimeSeries = useProjectsTimeSeries()
 
   return useMemo(() => {
     if (activeProjectId) {
