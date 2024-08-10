@@ -26,7 +26,7 @@ export const BarChartItem = ({
     : colors.primary
 
   const background = (
-    index !== null
+    activeIndex !== null
       ? index === activeIndex
         ? color
         : colors.foregroundExtra
