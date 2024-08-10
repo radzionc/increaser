@@ -1,9 +1,6 @@
 import {
-  MouseEvent,
-  MouseEventHandler,
+  PointerEventHandler,
   ReactNode,
-  TouchEvent,
-  TouchEventHandler,
   useCallback,
   useMemo,
   useState,
@@ -14,8 +11,7 @@ import { useBoundingBox } from '../hooks/useBoundingBox'
 import { enforceRange } from '@lib/utils/enforceRange'
 
 interface ContainerProps {
-  onMouseDown: MouseEventHandler<HTMLElement>
-  onTouchStart: TouchEventHandler<HTMLElement>
+  onPointerDown: PointerEventHandler<HTMLElement>
   ref: (node: HTMLElement | null) => void
 }
 
@@ -53,15 +49,8 @@ export const PressTracker = ({ render, onChange }: PressTrackerProps) => {
     }
   }, [box, clientPosition])
 
-  const handleMouse = useCallback((event: MouseEvent) => {
+  const handleMove: PointerEventHandler<HTMLElement> = useCallback((event) => {
     setClientPosition({ x: event.clientX, y: event.clientY })
-  }, [])
-
-  const handleTouch = useCallback((event: TouchEvent) => {
-    const touch = event.touches[0]
-    if (touch) {
-      setClientPosition({ x: touch.clientX, y: touch.clientY })
-    }
   }, [])
 
   useIsomorphicLayoutEffect(() => {
@@ -74,18 +63,15 @@ export const PressTracker = ({ render, onChange }: PressTrackerProps) => {
     setClientPosition(null)
   }, [])
 
-  useEvent('mouseup', position ? clearPosition : undefined)
-  useEvent('touchend', position ? clearPosition : undefined)
-  useEvent('mousemove', position ? handleMouse : undefined)
-  useEvent('touchmove', position ? handleTouch : undefined)
+  useEvent('pointerup', position ? clearPosition : undefined)
+  useEvent('pointermove', position ? handleMove : undefined)
 
   return (
     <>
       {render({
         props: {
           ref: setContainer,
-          onMouseDown: handleMouse,
-          onTouchStart: handleTouch,
+          onPointerDown: handleMove,
         },
         position,
         clientPosition,
