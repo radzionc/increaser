@@ -21,6 +21,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Center } from '@lib/ui/layout/Center'
+import { DataPointBreakdown } from './breakdown/DataPointBreakdown'
 
 type DataPointInfoProps = {
   position: Point
@@ -50,7 +51,7 @@ const Container = styled(VStack)`
 `
 
 export const DataPointInfo = ({ position, index }: DataPointInfoProps) => {
-  const { timeGrouping } = useTrackedTimeReport()
+  const { timeGrouping, activeProjectId } = useTrackedTimeReport()
 
   const {
     refs: { setReference, setFloating },
@@ -110,6 +111,7 @@ export const DataPointInfo = ({ position, index }: DataPointInfoProps) => {
             )}
           </Text>
         </Center>
+        {!activeProjectId && <DataPointBreakdown index={index} />}
       </Container>
     </>
   )
