@@ -15,8 +15,6 @@ export enum PersistentStateKey {
   FocusSoundsView = 'focusSoundsView',
   PathAttemptedWhileUnauthenticated = 'pathAttemptedWhileUnauthenticated',
   ReactQueryState = 'reactQueryState',
-  TrackedTimeReportPreferences = 'trackedTimeReportPreferences2',
-  TrackedTimePreference = 'trackedTimePreference3',
   FocusAudioMode = 'focusAudioMode2',
   IsFocusAudioEnabled = 'isFocusAudioEnabled',
   FocusSoundsPreference = 'focusSoundsPreference',
