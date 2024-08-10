@@ -32,6 +32,10 @@ export enum PersistentStateKey {
   IsGoalsEducationOpen = 'isGoalsEducationOpen',
   ProjectsBudgetReportView = 'projectsBudgetReportView2',
   TrackedTimeReportDataSize = 'trackedTimeReportDataSize',
+  IsCurrentPeriodIncluded = 'isCurrentPeriodIncluded',
+  TimeGrouping = 'timeGrouping',
+  ActiveProject = 'activeProject',
+  ShouldHideProjectNames = 'shouldHideProjectNames',
 }
 
 const persistentStorage =
