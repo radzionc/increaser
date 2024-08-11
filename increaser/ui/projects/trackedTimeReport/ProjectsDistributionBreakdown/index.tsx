@@ -1,10 +1,8 @@
 import React from 'react'
-import { sum } from '@lib/utils/array/sum'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { VStack } from '@lib/ui/layout/Stack'
 import { toPercents } from '@lib/utils/toPercents'
-import { useOrderedTimeSeries } from '../hooks/useOrderedTimeSeries'
 import { useCurrentFrameTotalTracked } from '../hooks/useCurrentFrameTotalTracked'
 import { InteractiveRow } from './InteractiveRow'
 import { BreakdownRowContent } from './BreakdownRowContent'
@@ -13,6 +11,7 @@ import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useActiveProject } from '../activeProject/useActiveProject'
 import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
+import { useOrderedProjects } from '../projects/useOrderedProjects'
 
 export const ProjectsDistributionBreakdown = () => {
   const projects = useTrackedProjects()
@@ -20,22 +19,21 @@ export const ProjectsDistributionBreakdown = () => {
 
   const { colors } = useTheme()
 
-  const items = useOrderedTimeSeries()
+  const items = useOrderedProjects()
 
   const total = useCurrentFrameTotalTracked()
 
   return (
     <>
-      {items.map(({ id, data }) => {
-        const seconds = sum(data)
-        const isPrimary = activeProject === id
+      {items.map(({ key, value }) => {
+        const isPrimary = activeProject === key
 
-        const { emoji, name, color } = projects[id]
+        const { emoji, name, color } = projects[key]
         return (
           <InteractiveRow
-            onClick={() => setActiveProject(id)}
-            key={id}
-            isActive={activeProject === id}
+            onClick={() => setActiveProject(key)}
+            key={key}
+            isActive={activeProject === key}
           >
             <VStack gap={4}>
               <BreakdownRowContent>
@@ -46,11 +44,11 @@ export const ProjectsDistributionBreakdown = () => {
                   segments={[
                     {
                       color: isPrimary ? color : colors.textShy,
-                      proportion: seconds / total,
+                      proportion: value / total,
                     },
                   ]}
                 />
-                <BreakdownValue value={toPercents(seconds / total, 'round')} />
+                <BreakdownValue value={toPercents(value / total, 'round')} />
               </BreakdownRowContent>
             </VStack>
           </InteractiveRow>

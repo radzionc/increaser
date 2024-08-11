@@ -5,10 +5,10 @@ import styled from 'styled-components'
 import { Header } from '@lib/ui/layout/Header'
 import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'
 import { ProjectsDistributionBreakdown } from '../ProjectsDistributionBreakdown'
-import { useOrderedTimeSeries } from '../hooks/useOrderedTimeSeries'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { useActiveProject } from '../activeProject/useActiveProject'
 import { HideProjectNamesSelector } from '../hideProjectNames/HideProjectNamesSelector'
+import { useOrderedProjects } from './useOrderedProjects'
 
 const Container = styled(VStack)`
   padding: 0;
@@ -38,7 +38,7 @@ const ProjectsHeader = styled(Header)`
 
 export const ProjectsNavigation = () => {
   const [activeProject, setActiveProject] = useActiveProject()
-  const items = useOrderedTimeSeries()
+  const items = useOrderedProjects()
 
   return (
     <Container>
@@ -47,7 +47,7 @@ export const ProjectsNavigation = () => {
           label="View projects total"
           value={!activeProject}
           onChange={() =>
-            setActiveProject(activeProject ? null : items[0]?.id ?? null)
+            setActiveProject(activeProject ? null : items[0]?.key ?? null)
           }
         />
         <HideProjectNamesSelector />

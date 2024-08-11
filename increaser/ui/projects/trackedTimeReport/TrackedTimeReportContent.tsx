@@ -1,5 +1,5 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { TrackedTimeChart } from './TrackedTimeChart/TrackedTimeChart'
+import { TrackedTimeChart } from './chart/TrackedTimeChart'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'

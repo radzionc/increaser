@@ -1,6 +1,6 @@
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { useMemo } from 'react'
-import { useProjectsTimeSeries } from './useProjectsTimeSeries'
+import { useProjectsTimeSeries } from '../projects/useProjectsTimeSeries'
 import { useActiveProject } from '../activeProject/useActiveProject'
 
 export const useActiveTimeSeries = () => {

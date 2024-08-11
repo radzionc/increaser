@@ -1,7 +1,7 @@
 import { order } from '@lib/utils/array/order'
 import { Entry } from '@lib/utils/entities/Entry'
 import { useMemo } from 'react'
-import { useProjectsTimeSeries } from './useProjectsTimeSeries'
+import { useProjectsTimeSeries } from '../projects/useProjectsTimeSeries'
 
 export const useDataPointBreakdown = (index: number) => {
   const projectsTimeSeries = useProjectsTimeSeries()

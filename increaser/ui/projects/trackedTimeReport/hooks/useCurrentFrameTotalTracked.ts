@@ -1,8 +1,8 @@
 import { sum } from '@lib/utils/array/sum'
-import { useOrderedTimeSeries } from './useOrderedTimeSeries'
+import { useOrderedProjects } from '../projects/useOrderedProjects'
 
 export const useCurrentFrameTotalTracked = () => {
-  const timeseries = useOrderedTimeSeries()
+  const entries = useOrderedProjects()
 
-  return sum(timeseries.flatMap(({ data }) => data))
+  return sum(entries.map(({ value }) => value))
 }
