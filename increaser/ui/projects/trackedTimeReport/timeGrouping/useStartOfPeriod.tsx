@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { subtractPeriod } from '../utils/subtractPeriod'
-import { useLastDataPointStartedAt } from '../hooks/useLastDataPointStartedAt'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { useTimeGrouping } from './useTimeGrouping'
+import { useStartOfLastTimeGroup } from './useStartOfLastTimeGroup'
 
 export const useStartOfPeriod = (index: number) => {
-  const lastDataPointStartedAt = useLastDataPointStartedAt()
+  const lastDataPointStartedAt = useStartOfLastTimeGroup()
   const [timeGrouping] = useTimeGrouping()
   const dataSize = useCurrentDataSize()
 

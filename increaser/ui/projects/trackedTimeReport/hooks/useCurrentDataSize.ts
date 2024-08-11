@@ -1,8 +1,8 @@
 import { useDataSize } from '../dataSize/useDataSize'
-import { useTrackedTimeMaxDataSize } from './useTrackedTimeMaxDataSize'
+import { useMaxDataSize } from '../dataSize/useMaxDataSize'
 
 export const useCurrentDataSize = () => {
-  const maxSize = useTrackedTimeMaxDataSize()
+  const maxSize = useMaxDataSize()
   const [dataSize] = useDataSize()
 
   return dataSize === null ? maxSize : dataSize

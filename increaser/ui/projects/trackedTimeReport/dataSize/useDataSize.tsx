@@ -2,11 +2,11 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
-import { useTrackedTimeMaxDataSize } from '../hooks/useTrackedTimeMaxDataSize'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
+import { useMaxDataSize } from './useMaxDataSize'
 
 export const useDataSize = () => {
-  const maxDataSize = useTrackedTimeMaxDataSize()
+  const maxDataSize = useMaxDataSize()
 
   return useStateCorrector(
     usePersistentState<number | null>(

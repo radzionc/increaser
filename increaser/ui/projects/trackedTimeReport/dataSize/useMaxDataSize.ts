@@ -1,9 +1,5 @@
 import { useMemo } from 'react'
-import { useCurrentPeriodStartedAt } from './useCurrentPeriodStartedAt'
-import { subtractPeriod } from '../utils/subtractPeriod'
 import { match } from '@lib/utils/match'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { order } from '@lib/utils/array/order'
 import { fromDay } from '@lib/utils/time/Day'
 import { fromMonth } from '@lib/utils/time/Month'
 import { fromWeek } from '@lib/utils/time/Week'
@@ -14,42 +10,29 @@ import {
   differenceInWeeks,
   differenceInYears,
 } from 'date-fns'
-import { useIsCurrentPeriodIncluded } from '../currentPeriod/useIsCurrentPeriodIncluded'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
+import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
+import { useStartOfLastTimeGroup } from '../timeGrouping/useStartOfLastTimeGroup'
 
-export const useTrackedTimeMaxDataSize = () => {
-  const [includeCurrentPeriod] = useIsCurrentPeriodIncluded()
+export const useMaxDataSize = () => {
   const [timeGrouping] = useTimeGrouping()
   const projects = useTrackedProjects()
-  const currentPeriodStartedAt = useCurrentPeriodStartedAt(timeGrouping)
+  const currentPeriodStartedAt = useStartOfCurrentTimeGroup()
 
-  const previousPeriodStartedAt = useMemo(
-    () =>
-      subtractPeriod({
-        value: currentPeriodStartedAt,
-        period: timeGrouping,
-        amount: 1,
-      }),
-    [timeGrouping, currentPeriodStartedAt],
-  )
-
-  const lastTimeGroupStartedAt = includeCurrentPeriod
-    ? currentPeriodStartedAt
-    : previousPeriodStartedAt
+  const lastTimeGroupStartedAt = useStartOfLastTimeGroup()
 
   const firstTimeGroupStartedAt = useMemo(() => {
     const items = Object.values(projects).flatMap((project) =>
       match(timeGrouping, {
-        day: () => project.days.map(fromDay),
-        week: () => project.weeks.map(fromWeek),
-        month: () => project.months.map(fromMonth),
-        year: () => project.years.map(fromYear),
+        day: () => project.days.slice(0, 1).map(fromDay),
+        week: () => project.weeks.slice(0, 1).map(fromWeek),
+        month: () => project.months.slice(0, 1).map(fromMonth),
+        year: () => project.years.slice(0, 1).map(fromYear),
       }),
     )
-    return isEmpty(items)
-      ? currentPeriodStartedAt
-      : order(items, (v) => v, 'asc')[0]
+
+    return Math.min(currentPeriodStartedAt, ...items)
   }, [currentPeriodStartedAt, projects, timeGrouping])
 
   return (

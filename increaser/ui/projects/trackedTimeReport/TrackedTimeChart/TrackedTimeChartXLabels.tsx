@@ -5,9 +5,9 @@ import { subtractPeriod } from '../utils/subtractPeriod'
 import { Text } from '@lib/ui/text'
 import { getWeekIndex } from '@lib/utils/time/getWeekIndex'
 import { format } from 'date-fns'
-import { useLastDataPointStartedAt } from '../hooks/useLastDataPointStartedAt'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
+import { useStartOfLastTimeGroup } from '../timeGrouping/useStartOfLastTimeGroup'
 
 type Props = {
   containerWidth: number
@@ -16,7 +16,7 @@ type Props = {
 export const TrackedTimeChartXLabels = ({ containerWidth }: Props) => {
   const dataSize = useCurrentDataSize()
   const [timeGrouping] = useTimeGrouping()
-  const lastDataPointStartedAt = useLastDataPointStartedAt()
+  const lastDataPointStartedAt = useStartOfLastTimeGroup()
 
   const getDataPointStartedAt = (index: number) => {
     return subtractPeriod({

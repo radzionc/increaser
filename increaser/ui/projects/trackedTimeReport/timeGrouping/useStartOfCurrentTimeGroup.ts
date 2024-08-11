@@ -1,10 +1,12 @@
 import { useMemo } from 'react'
-import { TimeGrouping } from '../timeGrouping/TimeGrouping'
 import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { startOfDay, startOfMonth, startOfYear } from 'date-fns'
 import { match } from '@lib/utils/match'
+import { useTimeGrouping } from './useTimeGrouping'
 
-export const useCurrentPeriodStartedAt = (group: TimeGrouping) => {
+export const useStartOfCurrentTimeGroup = () => {
+  const [group] = useTimeGrouping()
+
   return useMemo(() => {
     const now = new Date()
 

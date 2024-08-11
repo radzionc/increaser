@@ -9,13 +9,13 @@ import { getSegmentIndex } from '@lib/utils/math/getSegmentIndex'
 import { InvisibleHTMLSlider } from '@lib/ui/inputs/Slider/InvisibleHtmlSlider'
 import { range } from '@lib/utils/array/range'
 import { interactive } from '@lib/ui/css/interactive'
-import { useTrackedTimeMaxDataSize } from '../hooks/useTrackedTimeMaxDataSize'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { useDataSize } from './useDataSize'
 import { selectorOption } from './selectorOption'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
 import { MergeRefs } from '@lib/ui/base/MergeRefs'
 import { DataSizeOptionTooltip } from './DataSizeOptionTooltip'
+import { useMaxDataSize } from './useMaxDataSize'
 
 const Container = styled(HStack)<ComponentWithActiveState>`
   ${takeWholeSpace};
@@ -45,7 +45,7 @@ const Item = styled.div<ComponentWithActiveState>`
 `
 
 export const DataSizeSlider = () => {
-  const max = useTrackedTimeMaxDataSize()
+  const max = useMaxDataSize()
   const value = useCurrentDataSize()
   const [dataSize, setValue] = useDataSize()
 

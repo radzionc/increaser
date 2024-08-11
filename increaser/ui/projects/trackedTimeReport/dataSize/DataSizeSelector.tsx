@@ -1,4 +1,3 @@
-import { useTrackedTimeMaxDataSize } from '../hooks/useTrackedTimeMaxDataSize'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
@@ -8,6 +7,7 @@ import { DataSizeSlider } from './DataSizeSlider'
 import { MaxDataSizeSelector } from './MaxDataSizeSelector'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { inputContainer } from '@lib/ui/css/inputContainer'
+import { useMaxDataSize } from './useMaxDataSize'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -22,7 +22,7 @@ const Container = styled(VStack)`
 `
 
 export const DataSizeSelector = () => {
-  const max = useTrackedTimeMaxDataSize()
+  const max = useMaxDataSize()
 
   const dataSize = useCurrentDataSize()
   const [timeGrouping] = useTimeGrouping()
