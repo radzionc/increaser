@@ -40,7 +40,7 @@ export const WorkdayEndStatus = () => {
   return (
     <Container>
       {currentTime < workdayEndsAt && (
-        <Text color="contrast" weight="semibold" size={14}>
+        <Text color="contrast" weight="500" size={14}>
           <Text as="span" color="supporting">
             workday ends in
           </Text>{' '}

@@ -80,7 +80,7 @@ export const ManageProjectBudget = ({
       kind="secondary"
     >
       <VStack gap={20}>
-        <Text weight="semibold" color="contrast">
+        <Text weight="500" color="contrast">
           {project.emoji} {project.name}
         </Text>
         <Fields>

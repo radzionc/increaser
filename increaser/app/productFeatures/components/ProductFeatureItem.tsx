@@ -44,11 +44,7 @@ export const ProductFeatureItem = () => {
                 >
                   <Spacer {...actionSize} />
                   <Content>
-                    <Text
-                      color="contrast"
-                      weight="semibold"
-                      style={{ flex: 1 }}
-                    >
+                    <Text color="contrast" weight="500" style={{ flex: 1 }}>
                       {name}
                     </Text>
                     <Text color="supporting" size={14}>

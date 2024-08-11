@@ -36,7 +36,7 @@ export const FreeTrialStatus = () => {
           <ShyInfoBlock>
             <Text as="span">
               Your {freeTrialDays}-day free trial will end in{' '}
-              <Text color="contrast" as="span" weight="semibold">
+              <Text color="contrast" as="span" weight="500">
                 {formatDuration(freeTrialEnd - now, 'ms', {
                   minUnit: 'h',
                   kind: 'long',

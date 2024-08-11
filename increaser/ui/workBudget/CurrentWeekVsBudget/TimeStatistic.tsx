@@ -18,7 +18,7 @@ export const TimeStatistic = ({ value, name, color }: TimeStatisticProps) => {
         <Circle size={6} background={color} />
         <Text color="supporting">{name}:</Text>
       </HStack>
-      <Text weight="semibold" color="contrast">
+      <Text weight="500" color="contrast">
         {value ? (
           <EmphasizeNumbers
             value={formatDuration(value, 'min', {

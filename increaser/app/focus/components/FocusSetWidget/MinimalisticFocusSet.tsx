@@ -63,7 +63,7 @@ export const MinimalisticFocusSet = () => {
         <Content>
           <HStack alignItems="center" gap={12}>
             <PauseFocusSession />
-            <Text as="div" weight="bold" size={36} height="small">
+            <Text as="div" weight="600" size={36} height="small">
               <FocusPassedTime />
             </Text>
           </HStack>

@@ -15,7 +15,7 @@ export const ScheduleReview = () => {
 
   return (
     <VStack style={{ maxWidth: 320, minWidth: 240 }} gap={16}>
-      <Text weight="bold">Healthy schedule</Text>
+      <Text weight="600">Healthy schedule</Text>
       <VStack gap={12}>
         <ScheduleCheckItem
           value={

@@ -19,7 +19,7 @@ export const HabitsTableContainer = ({
         <Spacer height={trackHabitsConfig.labelHeight} />
         <TrackHabitsColumn>
           {habits.map(({ emoji, name }) => (
-            <Text size={14} weight="semibold" color="contrast">
+            <Text size={14} weight="500" color="contrast">
               <EmojiTextPrefix size={16} emoji={emoji} />
               {name}
             </Text>

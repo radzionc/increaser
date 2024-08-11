@@ -24,7 +24,7 @@ export const SummaryFrame = ({
 export const SummaryFrameDuration = ({
   value,
 }: ComponentWithValueProps<number>) => (
-  <Text as="span" weight="bold" color="contrast">
+  <Text as="span" weight="600" color="contrast">
     {formatDuration(value, 'min', {
       maxUnit: 'h',
       kind: 'long',

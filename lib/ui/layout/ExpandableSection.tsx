@@ -59,7 +59,7 @@ export const ExpandableSection = ({
   return (
     <Container>
       <Header onClick={toggle}>
-        <Text as="div" weight="semibold" color="contrast">
+        <Text as="div" weight="500" color="contrast">
           {title}
         </Text>
         <Icon isOpen={isExpanded}>

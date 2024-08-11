@@ -19,7 +19,7 @@ export const ManageSubscription = () => {
     return (
       <Text>
         Your subscription ends on{' '}
-        <Text as="span" weight="bold">
+        <Text as="span" weight="600">
           {format(subscription.endsAt, subscriptionDateFormat)}
         </Text>
       </Text>

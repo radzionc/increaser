@@ -136,7 +136,7 @@ export const WorkTimeChart = () => {
                     justifyPoints="space-around"
                   >
                     <VStack>
-                      <Text color="contrast" weight="semibold">
+                      <Text color="contrast" weight="500">
                         {selectedDay ? (
                           <>
                             {formatDailyEventTime(selectedDay.start)} -{' '}
@@ -155,7 +155,7 @@ export const WorkTimeChart = () => {
                           '-'
                         )}
                       </Text>
-                      <Text color="supporting" size={14} weight="semibold">
+                      <Text color="supporting" size={14} weight="500">
                         {format(selectedDataPointStartedAt, 'EEE d, MMM yyyy')}
                       </Text>
                     </VStack>

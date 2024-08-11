@@ -58,7 +58,7 @@ export const ProductUpdateItem = ({
         <Text size={14} color="supporting">
           {format(value.releasedAt, 'MMMM d, yyyy')}
         </Text>
-        <Text size={20} weight="semibold" color="contrast">
+        <Text size={20} weight="500" color="contrast">
           {value.name}
         </Text>
         <Text color="supporting" height="large">

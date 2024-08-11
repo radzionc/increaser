@@ -69,7 +69,7 @@ export const ScoreboardTable = ({ users, myPosition }: ScoreboardProps) => {
             <Row style={rowStyle} key={index}>
               {myPosition === index && <Outline />}
               <Identity>
-                <Text weight="semibold">{index + 1}.</Text>
+                <Text weight="500">{index + 1}.</Text>
                 <ScoreboardDisplayName
                   name={profile?.name || 'Anonymous'}
                   country={profile?.country as CountryCode}
@@ -77,12 +77,12 @@ export const ScoreboardTable = ({ users, myPosition }: ScoreboardProps) => {
               </Identity>
 
               {!shouldHideAvgBlock && (
-                <Text color="supporting" weight="semibold">
+                <Text color="supporting" weight="500">
                   {formatDuration(avgBlockInMinutes, 'min')}
                 </Text>
               )}
 
-              <Text weight="semibold" style={{ textAlign: 'end' }}>
+              <Text weight="500" style={{ textAlign: 'end' }}>
                 {formatDuration(dailyAvgInMinutes, 'min')}
               </Text>
             </Row>

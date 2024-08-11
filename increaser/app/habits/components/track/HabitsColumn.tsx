@@ -45,7 +45,7 @@ export const HabitsColumn = ({
       <Label>
         {isActive && (
           <CenterAbsolutely>
-            <Text nowrap size={12} weight="semibold" color="contrast">
+            <Text nowrap size={12} weight="500" color="contrast">
               {defaultACtiveDayStartedAt === startedAt
                 ? 'Today'
                 : format(startedAt, 'MMM d')}

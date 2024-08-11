@@ -72,7 +72,7 @@ export const WorkBudgetWeeksReport = () => {
 
   return (
     <VStack gap={20}>
-      <Text color="contrast" weight="semibold">
+      <Text color="contrast" weight="500">
         Last {weeksNumber} weeks report
       </Text>
       <UniformColumnGrid gap={20}>

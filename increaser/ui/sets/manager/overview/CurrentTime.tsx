@@ -72,7 +72,7 @@ export const CurrentTime = () => {
       <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
         <Wrapper>
           <Outline />
-          <Time size={14} weight="bold">
+          <Time size={14} weight="600">
             {formatTime(currentTime)}
           </Time>
         </Wrapper>

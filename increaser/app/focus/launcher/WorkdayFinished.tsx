@@ -46,7 +46,7 @@ export const WorkdayFinished = () => {
           <Overlay ref={setElement}>
             <VStack alignItems="center" gap={isSmall ? 20 : 40}>
               <VStack gap={16} alignItems="center">
-                <Text color="contrast" weight="bold" size={20}>
+                <Text color="contrast" weight="600" size={20}>
                   🎉 Workday Accomplished!
                 </Text>
 

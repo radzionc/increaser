@@ -41,7 +41,7 @@ export const Topbar = () => {
       )}
       <Container>
         <SidebarOpener onOpenSidebarRequest={toggleSidebar} />
-        <Text size={14} weight="semibold" as="div">
+        <Text size={14} weight="500" as="div">
           <HStack alignItems="center" gap={8}>
             {info.icon}
             <div>{info.name}</div>

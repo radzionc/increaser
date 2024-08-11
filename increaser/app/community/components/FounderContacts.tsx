@@ -39,7 +39,7 @@ export const FounderContacts = () => {
             render={(props) => <Avatar {...props} />}
           />
           <VStack>
-            <Text color="contrast" weight="semibold">
+            <Text color="contrast" weight="500">
               Radzion
             </Text>
             <Text size={14} color="supporting">

@@ -142,7 +142,7 @@ export const VisionImageInput = ({
       </Wrapper>
       {status === 'error' && (
         <VStack>
-          <Text size={14} weight="semibold" color="alert">
+          <Text size={14} weight="500" color="alert">
             Failed to upload the image.
           </Text>
         </VStack>
