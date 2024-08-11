@@ -12,15 +12,17 @@ import { interactive } from '@lib/ui/css/interactive'
 import { useTrackedTimeMaxDataSize } from '../hooks/useTrackedTimeMaxDataSize'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { useDataSize } from './useDataSize'
+import { selectorOption } from './selectorOption'
+import { HoverTracker } from '@lib/ui/base/HoverTracker'
+import { MergeRefs } from '@lib/ui/base/MergeRefs'
+import { DataSizeOptionTooltip } from './DataSizeOptionTooltip'
 
 const Container = styled(HStack)<ComponentWithActiveState>`
   ${takeWholeSpace};
-  ${borderRadius.s};
   overflow: hidden;
   position: relative;
   padding: 2px;
-  border: 2px solid
-    ${matchColor('isActive', { true: 'primary', false: 'mistExtra' })};
+  ${selectorOption}
 `
 
 const Content = styled(HStack)`
@@ -58,23 +60,44 @@ export const DataSizeSlider = () => {
         min={1}
         max={max}
       />
-      <PressTracker
-        onChange={({ position }) => {
-          if (position) {
-            const newValue = getSegmentIndex(max, position.x) + 1
-            if (newValue !== dataSize) {
-              setValue(newValue)
-            }
-          }
-        }}
-        render={({ props }) => (
-          <Content {...props}>
-            {range(max).map((index) => {
-              const isActive = index < value
+      <HoverTracker
+        render={({
+          props: { ref: hoverRef, ...hoverProps },
+          position,
+          clientPosition,
+        }) => (
+          <PressTracker
+            onChange={({ position }) => {
+              if (position) {
+                const newValue = getSegmentIndex(max, position.x) + 1
+                if (newValue !== dataSize) {
+                  setValue(newValue)
+                }
+              }
+            }}
+            render={({ props: { ref: pressRef, ...pressProps } }) => (
+              <>
+                <MergeRefs<HTMLDivElement>
+                  refs={[hoverRef, pressRef]}
+                  render={(ref) => (
+                    <Content ref={ref} {...pressProps} {...hoverProps}>
+                      {range(max).map((index) => {
+                        const isActive = index < value
 
-              return <Item key={index} isActive={isActive} />
-            })}
-          </Content>
+                        return <Item key={index} isActive={isActive} />
+                      })}
+                    </Content>
+                  )}
+                />
+                {clientPosition && position && (
+                  <DataSizeOptionTooltip
+                    index={getSegmentIndex(max, position.x) + 1}
+                    position={clientPosition}
+                  />
+                )}
+              </>
+            )}
+          />
         )}
       />
     </Container>

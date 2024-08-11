@@ -23,8 +23,8 @@ export const TimeGroupingSelector = () => {
           <Option
             isSelected={value === option}
             onSelect={() => setValue(option)}
-            value={value}
-            key={value}
+            value={option}
+            key={option}
             groupName="timeGroup"
           >
             {formatTimeGrouping(option)}

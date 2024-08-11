@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
-import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useDataSize } from './useDataSize'
+import { selectorOption } from './selectorOption'
 
 const Button = styled(UnstyledButton)<ComponentWithActiveState>`
   height: 100%;
@@ -13,14 +13,11 @@ const Button = styled(UnstyledButton)<ComponentWithActiveState>`
   ${horizontalPadding(8)};
   color: ${getColor('text')};
 
-  ${borderRadius.s};
-
-  border: 2px solid ${getColor('mistExtra')};
+  ${selectorOption};
 
   ${({ isActive }) =>
     isActive
       ? css`
-          border-color: ${getColor('primary')};
           color: ${getColor('contrast')};
         `
       : css`

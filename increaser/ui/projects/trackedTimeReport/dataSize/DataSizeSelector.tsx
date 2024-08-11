@@ -7,6 +7,7 @@ import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { DataSizeSlider } from './DataSizeSlider'
 import { MaxDataSizeSelector } from './MaxDataSizeSelector'
 import { LabelText } from '@lib/ui/inputs/LabelText'
+import { inputContainer } from '@lib/ui/css/inputContainer'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -16,8 +17,8 @@ const Content = styled(HStack)`
 `
 
 const Container = styled(VStack)`
+  ${inputContainer};
   justify-content: center;
-  gap: 8px;
 `
 
 export const DataSizeSelector = () => {
