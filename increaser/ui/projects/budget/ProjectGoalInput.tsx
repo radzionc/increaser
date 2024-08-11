@@ -40,7 +40,7 @@ export const ProjectGoalInput = ({
             onChange={(goal) => onChange(goal)}
           />
           <Text color="regular" size={14}>
-            <Text as="span" weight="bold" color="contrast">
+            <Text as="span" weight="600" color="contrast">
               {capitalizeFirstLetter(goalOptionName[value])}
             </Text>{' '}
             {pluralize(hours, 'hour')} of {project.name} per week

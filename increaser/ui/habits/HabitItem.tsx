@@ -53,7 +53,7 @@ export const HabitItem = ({ habit, date, warning, showStreak }: Props) => {
                 <Text color="supporting" size={14}>
                   streak
                 </Text>
-                <Text weight="bold" size={14} color="success">
+                <Text weight="600" size={14} color="success">
                   {habit.streak}
                 </Text>
               </HStack>

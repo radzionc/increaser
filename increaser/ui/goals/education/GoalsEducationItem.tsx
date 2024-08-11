@@ -21,7 +21,7 @@ export const GoalsEducationItem = ({
         </Text>
         {title}
       </SectionTitle>
-      <Text height="large" size={14} weight="semibold" color="supporting">
+      <Text height="large" size={14} weight="500" color="supporting">
         {children}
       </Text>
     </VStack>

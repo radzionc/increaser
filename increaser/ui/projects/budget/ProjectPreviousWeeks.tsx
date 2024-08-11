@@ -32,7 +32,7 @@ export const ProjectPreviousWeeks = () => {
         <Pill>
           <HStack alignItems="center" fullWidth gap={8}>
             <Circle size={8} background={colors.getLabelColor(color)} />
-            <Text size={14} weight="semibold">
+            <Text size={14} weight="500">
               {name}
             </Text>
           </HStack>

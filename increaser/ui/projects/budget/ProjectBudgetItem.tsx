@@ -58,12 +58,12 @@ export const ProjectBudgetItem = ({ value }: WeeklyGoalItemProps) => {
               <Content alignItems="center" gap={8}>
                 {<ProjectGoalShyIndicator value={value.goal ?? null} />}
 
-                <Text color="contrast" cropped weight="semibold">
+                <Text color="contrast" cropped weight="500">
                   {value.name}
                 </Text>
               </Content>
               <HStack alignItems="center" gap={4}>
-                <Text nowrap weight="bold" color="contrast">
+                <Text nowrap weight="600" color="contrast">
                   {formatDuration(value.allocatedMinutesPerWeek, 'min', {
                     kind: 'long',
                     minUnit: 'h',

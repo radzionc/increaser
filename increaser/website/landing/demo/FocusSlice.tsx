@@ -38,7 +38,7 @@ export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
               <Text
                 style={{ position: 'absolute' }}
                 as="div"
-                weight="bold"
+                weight="600"
                 size={64}
                 height="small"
               >

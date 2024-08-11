@@ -1,12 +1,12 @@
 import { useTrackedTimeMaxDataSize } from '../hooks/useTrackedTimeMaxDataSize'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
-import { ShySection } from '@lib/ui/layout/ShySection'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { pluralize } from '@lib/utils/pluralize'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { DataSizeSlider } from './DataSizeSlider'
 import { MaxDataSizeSelector } from './MaxDataSizeSelector'
+import { LabelText } from '@lib/ui/inputs/LabelText'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -17,6 +17,7 @@ const Content = styled(HStack)`
 
 const Container = styled(VStack)`
   justify-content: center;
+  gap: 8px;
 `
 
 export const DataSizeSelector = () => {
@@ -29,12 +30,13 @@ export const DataSizeSelector = () => {
 
   return (
     <Container>
-      <ShySection title={`Interval: ${pluralize(dataSize, timeGrouping)}`}>
-        <Content>
-          <DataSizeSlider />
-          <MaxDataSizeSelector />
-        </Content>
-      </ShySection>
+      <LabelText color="supporting">
+        Interval: {pluralize(dataSize, timeGrouping)}
+      </LabelText>
+      <Content>
+        <DataSizeSlider />
+        <MaxDataSizeSelector />
+      </Content>
     </Container>
   )
 }

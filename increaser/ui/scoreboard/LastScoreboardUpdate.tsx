@@ -12,7 +12,7 @@ export const LastScoreboardUpdate = ({ value }: LastScoreboardUpdateProps) => {
   const duration = now - value
 
   return (
-    <Text color="supporting" as="span" size={14} weight="regular">
+    <Text color="supporting" as="span" size={14} weight="400">
       Updated{' '}
       {duration < MS_IN_MIN
         ? 'just now'

@@ -51,7 +51,7 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
         justifyContent="space-between"
       >
         <VStack gap={4}>
-          <Text color="contrast" weight="semibold">
+          <Text color="contrast" weight="500">
             <EmojiTextPrefix emoji={emoji} />
             {name}
           </Text>

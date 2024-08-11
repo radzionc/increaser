@@ -55,7 +55,7 @@ export const PrincipleIdeaItem = ({
           gap={8}
         >
           <HStack wrap="wrap" alignItems="center" gap={8}>
-            <Text color="contrast" weight="semibold">
+            <Text color="contrast" weight="500">
               {name}
             </Text>
             <Tag>
@@ -72,7 +72,7 @@ export const PrincipleIdeaItem = ({
         </Text>
       </GoalSection>
       {description && (
-        <Text size={14} color="regular" weight="semibold">
+        <Text size={14} color="regular" weight="500">
           {description}
         </Text>
       )}

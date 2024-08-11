@@ -15,7 +15,7 @@ export const ProductLogo = () => (
     <IconWrapper style={{ fontSize: `1.2em` }}>
       <ProductIcon />
     </IconWrapper>
-    <Text color="contrast" weight="bold">
+    <Text color="contrast" weight="600">
       {productName.toLowerCase()}
     </Text>
   </Container>

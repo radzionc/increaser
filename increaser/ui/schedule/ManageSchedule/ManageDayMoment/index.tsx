@@ -91,11 +91,11 @@ export const ManageDayMoment = ({
           <IconWrapper style={{ color: color.toCssValue() }}>
             {dayMomentIcon[dayMoment]}
           </IconWrapper>
-          <Text weight="semibold" as="div">
+          <Text weight="500" as="div">
             {dayMomentShortName[dayMoment]}
           </Text>
         </HStack>
-        <Text weight="bold">{formatDailyEventTime(value)}</Text>
+        <Text weight="600">{formatDailyEventTime(value)}</Text>
       </Container>
       {isOpen && (
         <FloatingOptionsContainer {...getFloatingProps()}>

@@ -72,7 +72,7 @@ export const ProjectGoalChart = ({
                     dataPointsNumber={value.length}
                   >
                     <VStack>
-                      <Text color="contrast" weight="semibold">
+                      <Text color="contrast" weight="500">
                         <EmphasizeNumbers
                           value={formatDuration(
                             value[selectedDataPoint].seconds,
@@ -83,7 +83,7 @@ export const ProjectGoalChart = ({
                           )}
                         />
                       </Text>
-                      <Text color="supporting" size={14} weight="semibold">
+                      <Text color="supporting" size={14} weight="500">
                         {formatWeek(selectedDataPointStartedAt)}
                       </Text>
                     </VStack>

@@ -1,10 +1,10 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
 import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigationItem'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { ShySection } from '@lib/ui/layout/ShySection'
 import { useTimeGrouping } from './useTimeGrouping'
 import { formatTimeGrouping, timeGroupings } from './TimeGrouping'
+import { LabelText } from '@lib/ui/inputs/LabelText'
 
 const Option = styled(TabNavigationItem)`
   height: 36px;
@@ -16,7 +16,8 @@ export const TimeGroupingSelector = () => {
   const [value, setValue] = useTimeGrouping()
 
   return (
-    <ShySection title="Group by">
+    <VStack gap={8}>
+      <LabelText>Group by</LabelText>
       <HStack gap={4}>
         {timeGroupings.map((option) => (
           <Option
@@ -30,6 +31,6 @@ export const TimeGroupingSelector = () => {
           </Option>
         ))}
       </HStack>
-    </ShySection>
+    </VStack>
   )
 }

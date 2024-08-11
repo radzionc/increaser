@@ -24,7 +24,7 @@ export const InstallInstructions = () => {
   }
 
   return (
-    <Text as="div" size={18} weight="semibold">
+    <Text as="div" size={18} weight="500">
       <VStack gap={8}>
         <Text>1. Open the "Options" menu</Text>
         <Text>2. Press "Add to Home Screen"</Text>

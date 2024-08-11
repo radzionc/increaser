@@ -16,10 +16,10 @@ export const BreakCountdown = () => {
     <HStackSeparatedBy
       separator={<Text color="shy">{breakDuration ? '/' : ''}</Text>}
     >
-      <Text as="div" weight="bold" size={40} height="small">
+      <Text as="div" weight="600" size={40} height="small">
         <AnimatedDuration getDuration={() => Date.now() - lastSetEnd} />
       </Text>
-      <Text color={breakDuration ? 'supporting' : 'shy'} weight="bold">
+      <Text color={breakDuration ? 'supporting' : 'shy'} weight="600">
         {breakDuration
           ? breakDuration === 'long'
             ? 'long break'

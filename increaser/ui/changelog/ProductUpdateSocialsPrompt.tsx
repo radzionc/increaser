@@ -18,7 +18,7 @@ export const ProductUpdateSocialsPrompt = ({
 }: ComponentWithValueProps<ProductUpdateSocials>) => {
   return (
     <HStack alignItems="center" gap={8}>
-      <Text color="shy" weight="bold">
+      <Text color="shy" weight="600">
         Discuss on
       </Text>
       <HStack alignItems="center">

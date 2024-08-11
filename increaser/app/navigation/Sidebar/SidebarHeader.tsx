@@ -43,7 +43,7 @@ export const SidebarHeader = () => {
     <Container>
       <Logo>
         <ProductIcon />
-        <Text weight="bold">{productName.toLowerCase()}</Text>
+        <Text weight="600">{productName.toLowerCase()}</Text>
       </Logo>
       <UserStateOnly>
         <HStack alignItems="center" gap={4}>

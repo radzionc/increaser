@@ -29,7 +29,7 @@ export const FocusDurationInput = ({
         <Wrapper ref={setElement} style={{ gap: 12 }} as="div">
           <Label>
             Focus duration:{' '}
-            <Text as="span" color="contrast" weight="semibold">
+            <Text as="span" color="contrast" weight="500">
               {value} min
             </Text>
           </Label>

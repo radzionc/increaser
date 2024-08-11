@@ -14,7 +14,7 @@ export const ScoreboardDisplayName = ({
   return (
     <>
       <ScoreboardCountryFlag code={country} />
-      <Text cropped weight="semibold" color={name ? 'regular' : 'shy'}>
+      <Text cropped weight="500" color={name ? 'regular' : 'shy'}>
         {name || 'Anonymous'}
       </Text>
     </>

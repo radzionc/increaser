@@ -33,7 +33,7 @@ export const ProjectOption = ({
     >
       <OptionContent alignItems="center" gap={textInputHorizontalPadding}>
         <ProjectIdentifier>{value.emoji}</ProjectIdentifier>
-        <Text cropped size={14} weight="semibold">
+        <Text cropped size={14} weight="500">
           {value.name}
         </Text>
       </OptionContent>

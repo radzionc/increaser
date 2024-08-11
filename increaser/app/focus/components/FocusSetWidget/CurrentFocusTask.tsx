@@ -79,7 +79,7 @@ export const CurrentFocusTask = () => {
         </Container>
         {task.checklist && task.checklist.length > 0 && (
           <VStack gap={4}>
-            <Text color="supporting" weight="semibold" size={12}>
+            <Text color="supporting" weight="500" size={12}>
               Checklist
             </Text>
             <CurrentChecklist />

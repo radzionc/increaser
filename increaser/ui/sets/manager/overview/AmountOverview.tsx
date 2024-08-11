@@ -33,16 +33,16 @@ export const AmountOverview = () => {
     <VStack fullWidth gap={8}>
       <VStack gap={4}>
         <HStack alignItems="center" justifyContent="space-between">
-          <Text weight="semibold" color="supporting" size={14}>
+          <Text weight="500" color="supporting" size={14}>
             {WEEKDAYS[weekday]}
           </Text>
           <HStackSeparatedBy
             separator={<Text color="shy">{slashSeparator}</Text>}
           >
-            <Text size={14} weight="semibold">
+            <Text size={14} weight="500">
               {formatDuration(setsTotal, 'ms')}
             </Text>
-            <Text size={14} weight="semibold" color="shy">
+            <Text size={14} weight="500" color="shy">
               {formatDuration(currentDayBudget, 'h')}
             </Text>
           </HStackSeparatedBy>

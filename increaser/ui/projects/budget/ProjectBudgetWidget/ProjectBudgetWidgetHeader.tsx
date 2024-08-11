@@ -41,14 +41,14 @@ export const ProjectBudgetWidgetHeader = () => {
     <Container>
       <HStack alignItems="center" gap={4}>
         <ProjectGoalShyIndicator value={goal ?? null} />
-        <Text weight="semibold" color="contrast">
+        <Text weight="500" color="contrast">
           {name}
         </Text>
       </HStack>
       <Link href={getAppPath('projects', 'plan')}>
         <HStack gap={8}>
           <HStackSeparatedBy separator="/">
-            <Text weight="semibold" color="contrast">
+            <Text weight="500" color="contrast">
               {doneMinutesThisWeek > 0
                 ? formatDuration(doneMinutesThisWeek, 'min', {
                     maxUnit: 'h',
@@ -56,7 +56,7 @@ export const ProjectBudgetWidgetHeader = () => {
                 : '-'}
             </Text>
             {allocatedMinutesPerWeek > 0 && (
-              <Text color="supporting" weight="semibold">
+              <Text color="supporting" weight="500">
                 {formatDuration(allocatedMinutesPerWeek, 'min', {
                   maxUnit: 'h',
                 })}

@@ -37,7 +37,7 @@ export const ProjectBudgetSummary = () => {
         if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
           return (
             <SummaryFrame
-              weight="semibold"
+              weight="500"
               color="contrast"
               icon={renderIcon(CheckDoubleIcon)}
             >
@@ -80,7 +80,7 @@ export const ProjectBudgetSummary = () => {
       doLess={() => {
         if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
           return (
-            <SummaryFrame weight="semibold" color="contrast">
+            <SummaryFrame weight="500" color="contrast">
               On target! You've stuck precisely to your work limit."
             </SummaryFrame>
           )
@@ -103,7 +103,7 @@ export const ProjectBudgetSummary = () => {
         ) {
           if (doneMinutesThisWeek === allocatedMinutesPerWeek) {
             return (
-              <SummaryFrame weight="semibold" color="contrast">
+              <SummaryFrame weight="500" color="contrast">
                 Exactly met your week's maximum work limit!
               </SummaryFrame>
             )
@@ -122,7 +122,7 @@ export const ProjectBudgetSummary = () => {
         if (doneMinutesThisWeek <= target) {
           if (doneMinutesThisWeek === target) {
             return (
-              <SummaryFrame weight="semibold" color="contrast">
+              <SummaryFrame weight="500" color="contrast">
                 Spot on! Worked just up to today's cap.
               </SummaryFrame>
             )
