@@ -6,7 +6,7 @@ import { PageTitle } from '@lib/ui/text/PageTitle'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../focus/components/AppPageLayout'
-import { TasksViewSelector } from './TasksViewSelector'
+import { PageViewNavigation } from '../navigation/page/PageViewNavigation'
 
 const title = 'Tasks'
 
@@ -16,7 +16,7 @@ export const TasksLayout = ({ children }: ComponentWithChildrenProps) => {
       <PageContainer>
         <PageContent>
           <PageTitle as="div">
-            <TasksViewSelector />
+            <PageViewNavigation />
           </PageTitle>
           <PageDocumentTitle emoji="✅" title={title} />
           <UserStateOnly>{children}</UserStateOnly>

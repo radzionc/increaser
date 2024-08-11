@@ -69,7 +69,7 @@ export type AppPagePreferencesView =
   (typeof appPageViews)['preferences'][number]
 export type AppPageProjectsView = (typeof appPageViews)['projects'][number]
 
-type AppPageViews = typeof appPageViews
+export type AppPageViews = typeof appPageViews
 export type AppPageWithView = keyof AppPageViews
 
 export function getAppPath<P extends AppPageWithView>(
@@ -94,3 +94,34 @@ export const getPageDefaultPath = (page: AppPage): string =>
         appPageViews[page as AppPageWithView][0],
       )
     : getAppPath(page as Exclude<AppPage, AppPageWithView>)
+
+export const appPageViewName: {
+  [K in AppPageWithView]: Record<AppPageViews[K][number], string>
+} = {
+  vision: {
+    my: 'Vision',
+    ideas: 'Explore',
+  },
+  habits: {
+    my: 'Habits',
+    ideas: 'Explore',
+  },
+  principles: {
+    my: 'Principles',
+    ideas: 'Explore',
+  },
+  tasks: {
+    tasks: 'Tasks',
+    automation: 'Automation',
+    templates: 'Templates',
+  },
+  preferences: {
+    schedule: 'Schedule',
+    'work-budget': 'Work Budget',
+  },
+  projects: {
+    projects: 'Projects',
+    plan: 'Plan',
+    report: 'Report',
+  },
+}

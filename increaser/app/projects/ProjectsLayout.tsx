@@ -6,7 +6,7 @@ import { PageTitle } from '@lib/ui/text/PageTitle'
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../focus/components/AppPageLayout'
-import { ProjectsViewSelector } from './ProjectsViewSelector'
+import { PageViewNavigation } from '../navigation/page/PageViewNavigation'
 
 const title = 'Projects'
 
@@ -16,7 +16,7 @@ export const ProjectsLayout = ({ children }: ComponentWithChildrenProps) => {
       <PageContainer>
         <PageContent>
           <PageTitle as="div">
-            <ProjectsViewSelector />
+            <PageViewNavigation />
           </PageTitle>
           <PageDocumentTitle emoji="📦" title={title} />
           <UserStateOnly>{children}</UserStateOnly>

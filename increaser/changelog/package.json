@@ -5,7 +5,8 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "prepare": "npx tsx ./scripts/prepare.ts",
-    "announce": "npx tsx ./scripts/announce.ts"
+    "announce": "npx tsx ./scripts/announce.ts",
+    "new": "npx tsx ./scripts/new.ts"
   },
   "devDependencies": {
     "clipboardy": "^4.0.0"
