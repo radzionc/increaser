@@ -3,10 +3,10 @@ import {
   PersistentStateKey,
 } from '@increaser/ui/state/persistentState'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
-import { useTrackedTime } from '../state/TrackedTimeContext'
+import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 
 export const useActiveProject = () => {
-  const { projects } = useTrackedTime()
+  const projects = useTrackedProjects()
 
   return useStateCorrector(
     usePersistentState<string | null>(PersistentStateKey.ActiveProject, null),

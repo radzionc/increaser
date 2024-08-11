@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { useCurrentPeriodStartedAt } from './useCurrentPeriodStartedAt'
 import { subtractPeriod } from '../utils/subtractPeriod'
 import { match } from '@lib/utils/match'
-import { useTrackedTime } from '../state/TrackedTimeContext'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
 import { fromDay } from '@lib/utils/time/Day'
@@ -17,11 +16,12 @@ import {
 } from 'date-fns'
 import { useIsCurrentPeriodIncluded } from '../currentPeriod/useIsCurrentPeriodIncluded'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
+import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 
 export const useTrackedTimeMaxDataSize = () => {
   const [includeCurrentPeriod] = useIsCurrentPeriodIncluded()
   const [timeGrouping] = useTimeGrouping()
-  const { projects } = useTrackedTime()
+  const projects = useTrackedProjects()
   const currentPeriodStartedAt = useCurrentPeriodStartedAt(timeGrouping)
 
   const previousPeriodStartedAt = useMemo(

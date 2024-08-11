@@ -11,13 +11,13 @@ import { EntityWithSeconds } from '@increaser/entities/timeTracking'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { useLastDataPointStartedAt } from './useLastDataPointStartedAt'
 import { useCurrentDataSize } from './useCurrentDataSize'
-import { useTrackedTime } from '../state/TrackedTimeContext'
 import { TimeGrouping } from '../timeGrouping/TimeGrouping'
 import { subtractPeriod } from '../utils/subtractPeriod'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
+import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 
 export const useProjectsTimeSeries = () => {
-  const { projects } = useTrackedTime()
+  const projects = useTrackedProjects()
 
   const dataSize = useCurrentDataSize()
 

@@ -2,8 +2,8 @@ import { ComponentWithIndexProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { useDataPointBreakdown } from '../hooks/useDataPointBreakdown'
-import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useBarChartFillColor } from './hooks/useBarChartFillColor'
+import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 
 const Container = styled.div`
   ${takeWholeSpace};
@@ -15,7 +15,7 @@ export const BarChartItemBreakdownFill = ({
   index,
 }: ComponentWithIndexProps) => {
   const items = useDataPointBreakdown(index)
-  const { projects } = useTrackedTime()
+  const projects = useTrackedProjects()
   const getColor = useBarChartFillColor(index)
 
   return (

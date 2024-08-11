@@ -1,6 +1,5 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
-import { useTrackedTime } from '../../state/TrackedTimeContext'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
@@ -11,6 +10,7 @@ import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { useDataPointBreakdown } from '../../hooks/useDataPointBreakdown'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { useTrackedProjects } from '../../projects/TrackedProjectsProvider'
 
 const ProjectRow = styled.div`
   width: 100%;
@@ -38,7 +38,7 @@ const Indicator = styled.div`
 
 export const DataPointBreakdown = () => {
   const [index] = usePresentState(useActiveItemIndex())
-  const { projects } = useTrackedTime()
+  const projects = useTrackedProjects()
 
   const items = useDataPointBreakdown(index)
 

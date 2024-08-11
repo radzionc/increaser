@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { VStack } from '@lib/ui/layout/Stack'
 import { toPercents } from '@lib/utils/toPercents'
-import { useTrackedTime } from '../state/TrackedTimeContext'
 import { useOrderedTimeSeries } from '../hooks/useOrderedTimeSeries'
 import { useCurrentFrameTotalTracked } from '../hooks/useCurrentFrameTotalTracked'
 import { InteractiveRow } from './InteractiveRow'
@@ -13,9 +12,10 @@ import { BreakdownValue } from './BreakdownValue'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useActiveProject } from '../activeProject/useActiveProject'
+import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 
 export const ProjectsDistributionBreakdown = () => {
-  const { projects } = useTrackedTime()
+  const projects = useTrackedProjects()
   const [activeProject, setActiveProject] = useActiveProject()
 
   const { colors } = useTheme()

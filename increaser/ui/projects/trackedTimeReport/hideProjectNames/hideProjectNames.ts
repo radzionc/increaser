@@ -1,11 +1,9 @@
 import { order } from '@lib/utils/array/order'
-import { TimeTrackingProjectData } from '../state/TrackedTimeContext'
 import { sum } from '@lib/utils/array/sum'
 import { recordMap } from '@lib/utils/record/recordMap'
+import { TrackedProjects } from '../projects/TrackedProjectsProvider'
 
-export const hideProjectNames = (
-  projects: Record<string, TimeTrackingProjectData>,
-) => {
+export const hideProjectNames = (projects: TrackedProjects) => {
   const orderedProjects = order(
     Object.values(projects),
     (p) => sum(p.months.map((m) => m.seconds)),

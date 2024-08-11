@@ -1,10 +1,10 @@
-import { TrackedTimeProvider } from './TrackedTimeProvider'
+import { TrackedProjectsProvider } from './projects/TrackedProjectsProvider'
 import { TrackedTimeReportContent } from './TrackedTimeReportContent'
 
 export const TrackedTimeReport = () => {
   return (
-    <TrackedTimeProvider>
+    <TrackedProjectsProvider>
       <TrackedTimeReportContent />
-    </TrackedTimeProvider>
+    </TrackedProjectsProvider>
   )
 }
