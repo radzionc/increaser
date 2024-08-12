@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Task } from '@increaser/entities/Task'
-import { VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -114,23 +114,25 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <VStack>
-        <TaskViewInput
-          value={value.completedAt ? 'done' : value.status}
-          onChange={(status) =>
-            setValue((prev) => {
-              if (status === 'done') {
-                return { ...prev, completedAt: Date.now() }
-              }
-              return { ...prev, status, completedAt: null }
-            })
-          }
-        />
-        <TaskDeadlineInput
-          value={value.deadlineAt}
-          onChange={(deadlineAt) =>
-            setValue((prev) => ({ ...prev, deadlineAt }))
-          }
-        />
+        <HStack alignItems="center" gap={8}>
+          <TaskViewInput
+            value={value.completedAt ? 'done' : value.status}
+            onChange={(status) =>
+              setValue((prev) => {
+                if (status === 'done') {
+                  return { ...prev, completedAt: Date.now() }
+                }
+                return { ...prev, status, completedAt: null }
+              })
+            }
+          />
+          <TaskDeadlineInput
+            value={value.deadlineAt}
+            onChange={(deadlineAt) =>
+              setValue((prev) => ({ ...prev, deadlineAt }))
+            }
+          />
+        </HStack>
       </VStack>
 
       <EditDeleteFormFooter
