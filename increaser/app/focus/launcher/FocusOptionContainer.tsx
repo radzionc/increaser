@@ -20,6 +20,7 @@ export const FocusOptionContainer = styled.div<{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex-shrink: 0;
 
   font-size: 14px;
 

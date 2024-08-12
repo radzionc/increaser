@@ -22,8 +22,6 @@ import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { FocusTaskInput } from './FocusTaskInput'
 import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { FocusViewSelector } from './FocusViewSelector'
 import { Match } from '@lib/ui/base/Match'
@@ -107,14 +105,11 @@ export const FocusLauncherForm = () => {
         <FocusViewSelector />
       </HStack>
       <Container withSections kind="secondary">
-        <InputContainer style={{ gap: 12 }} as="div">
-          <LabelText>Select a {focusEntity}</LabelText>
-          <Match
-            value={focusEntity}
-            project={() => <FocusProjectInput />}
-            task={() => <FocusTaskInput />}
-          />
-        </InputContainer>
+        <Match
+          value={focusEntity}
+          project={() => <FocusProjectInput />}
+          task={() => <FocusTaskInput />}
+        />
         {shouldShowFocusSettings && (
           <>
             {showBudget && (

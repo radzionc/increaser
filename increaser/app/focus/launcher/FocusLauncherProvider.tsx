@@ -8,14 +8,14 @@ import {
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
-import { useTodayIncompleteTasks } from '@increaser/ui/tasks/hooks/useTodayIncompleteTasks'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
+import { useFocusTaskGroups } from '../tasks/useFocusTaskGroups'
 
 export const FocusLauncherProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const activeProjects = useActiveProjects()
-  const tasks = useTodayIncompleteTasks()
+  const groups = useFocusTaskGroups()
 
   const [state, setState] = useStateCorrector(
     usePersistentState<FocusLauncherMutableState>(
@@ -35,6 +35,8 @@ export const FocusLauncherProvider = ({
           taskId: null,
         }
       }
+
+      const tasks = groups.flatMap(({ tasks }) => tasks)
 
       if (state.taskId && !tasks.find((task) => task.id === state.taskId)) {
         return {

@@ -29,12 +29,12 @@ export const AddTask = () => {
             type="button"
             selected={false}
           >
-            <Content prefix={<PlusIcon />}>Add a task for today</Content>
+            <Content prefix={<PlusIcon />}>Add a task</Content>
           </Container>
         )
       }
       renderContent={({ onClose }) => (
-        <PanelModal width={460} onFinish={onClose}>
+        <PanelModal width={560} onFinish={onClose}>
           <CreateTaskForm
             defaultValue={{
               deadlineAt: endOfDay(Date.now()).getTime(),
