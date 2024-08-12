@@ -22,11 +22,7 @@ const featureFormValidator: Validators<FeatureFormShape> = {
       return 'Name is required'
     }
   },
-  description: (description) => {
-    if (!description) {
-      return 'Description is required'
-    }
-  },
+  description: () => {},
 }
 
 const TitleInput = styled(EmbeddedTitleInput)`
