@@ -1,5 +1,8 @@
 1723362485159
-
+View the breakdown of how much time you spent on each project on the hovered day, week, or month of the year on the tracked time report.
+Instead of fixed options for the tracked time report you can now select the custom duration.
+Improved sidebar navigation with memory of the last visited view within a page.
+Improved this week's hours goals widget for better understanding of the progress.
 1722919666475
 Add, edit and delete sessions right from the focus page timeline
 Deduct minutes from the current focus session if got distracted

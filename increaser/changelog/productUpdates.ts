@@ -1,8 +1,40 @@
 import { ProductUpdate } from './ProductUpdate'
 
-const lastAnnouncementWasAt: number | undefined = undefined
-
 export const productUpdates: ProductUpdate[] = [
+  {
+    releasedAt: 1723362485159,
+    videoId: 'projects',
+    name: 'Enhanced Time Tracking & Navigation',
+    description:
+      'Boost your productivity with our latest updates, making time tracking and navigation smoother and more insightful.',
+    items: [
+      {
+        description:
+          'Hover over any day, week, or month in the tracked time report to see a detailed breakdown of time spent on each project.',
+      },
+      {
+        description:
+          'Select custom time periods in the tracked time report for a more tailored view of your work history.',
+      },
+      {
+        description:
+          'Enjoy improved sidebar navigation with memory of your last visited view, ensuring you can pick up right where you left off.',
+      },
+      {
+        description:
+          "We've refined the 'This Week's Hours' goals widget to give you a clearer understanding of your progress towards your goals.",
+      },
+    ],
+
+    telegram: 'https://t.me/increaser_app/46',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-increaser-updates-time-tracking-navigation-just-got-better--O4-mlgBbuPp5IR4cz2l',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7228401875094540289',
+    x: 'https://x.com/increaser_app/status/1822635415955771496',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1eplnbk/increaser_update_enhanced_time_tracking_navigation/',
+  },
   {
     releasedAt: 1722919666475,
     videoId: 'sets',
