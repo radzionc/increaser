@@ -1,16 +1,20 @@
 import { useMemo } from 'react'
-import { useScheduledTasksToDo } from './hooks/useScheduledTasksToDo'
 import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
+import { useAssertUserState } from '../user/UserStateContext'
 
-export const useFilteredScheduledTasksToDo = () => {
+export const useTasksToDo = () => {
   const [projectId] = useProjectFilter()
-  const items = useScheduledTasksToDo()
+  const { tasks } = useAssertUserState()
 
   return useMemo(() => {
+    const items = Object.values(tasks).filter(
+      (task) => !task.completedAt && task.status === 'todo',
+    )
+
     if (!projectId) {
       return items
     }
 
     return items.filter((item) => item.projectId === projectId)
-  }, [items, projectId])
+  }, [projectId, tasks])
 }

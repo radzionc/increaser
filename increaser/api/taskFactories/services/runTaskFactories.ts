@@ -54,6 +54,7 @@ export const runTaskFactories = async (userId: string) => {
         deadlineAt,
         order,
         factoryId: id,
+        status: 'todo',
         ...task,
       })
     },

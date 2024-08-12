@@ -8,6 +8,7 @@ import { useFocusLauncher } from './state/FocusLauncherContext'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { endOfDay } from 'date-fns'
 
 const Container = styled(FocusOptionContainer)``
 
@@ -35,6 +36,9 @@ export const AddTask = () => {
       renderContent={({ onClose }) => (
         <PanelModal width={460} onFinish={onClose}>
           <CreateTaskForm
+            defaultValue={{
+              deadlineAt: endOfDay(Date.now()).getTime(),
+            }}
             onFinish={(task) => {
               // wait for mutation to finish
               if (task) return

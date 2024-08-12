@@ -24,7 +24,7 @@ export const Tasks = () => {
         <TasksContainer>
           <RenderTasksView
             done={() => <TasksDone />}
-            scheduled={() => <TasksToDoView />}
+            todo={() => <TasksToDoView />}
             backlog={() => <TasksBacklogView />}
           />
         </TasksContainer>

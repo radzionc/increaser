@@ -9,18 +9,12 @@ import { getViewSetup } from '@lib/ui/view/getViewSetup'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { ReactNode, useId } from 'react'
 
-const tasksView = ['backlog', 'scheduled', 'done'] as const
-type TasksView = (typeof tasksView)[number]
+export const tasksView = ['backlog', 'todo', 'done'] as const
+export type TasksView = (typeof tasksView)[number]
 
-const tasksViewName: Record<TasksView, string> = {
-  backlog: 'Backlog',
-  scheduled: 'Scheduled',
-  done: 'Done',
-}
-
-const tasksViewIcon: Record<TasksView, ReactNode> = {
+export const tasksViewIcon: Record<TasksView, ReactNode> = {
   backlog: <CircleDashedIcon />,
-  scheduled: <CircleIcon />,
+  todo: <CircleIcon />,
   done: <CircleCheckIcon />,
 }
 
@@ -29,7 +23,7 @@ export const {
   useView: useTasksView,
   RenderView: RenderTasksView,
 } = getViewSetup<TasksView>({
-  defaultView: 'scheduled',
+  defaultView: 'todo',
   name: 'tasks',
 })
 

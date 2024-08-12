@@ -16,27 +16,30 @@ import { range } from '@lib/utils/array/range'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { RecurringTasksForecast } from './RecurringTasksForecast'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
-import { useFilteredScheduledTasksToDo } from './useFilteredScheduledTasksToDo'
+import { useTasksToDo } from './useTasksToDo'
+import { withoutNull } from '@lib/utils/array/withoutNull'
+import {
+  getGroupId,
+  SpecialTodoTaskGroup,
+  specialTodoTaskGroups,
+  TodoTaskGroupId,
+} from './TodoTaskGroupId'
+import { without } from '@lib/utils/array/without'
 
 export const TasksToDo = () => {
-  const tasks = useFilteredScheduledTasksToDo()
+  const tasks = useTasksToDo()
   const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const [activeTaskId] = useActiveItemId()
 
   const lastDayEndsAt = useMemo(() => {
     const tomorrowEndsAt =
       endOfDay(now).getTime() + convertDuration(1, 'd', 'ms')
-    const maxTaskDeadlineAt = Math.max(...tasks.map((task) => task.deadlineAt))
+    const deadlines = withoutNull(tasks.map((task) => task.deadlineAt))
     const nextWeekEndsAt = getWeekEndedAt(now) + convertDuration(1, 'w', 'ms')
     const thisMonthEndsAt = endOfMonth(now).getTime()
 
     return endOfDay(
-      Math.max(
-        tomorrowEndsAt,
-        maxTaskDeadlineAt,
-        nextWeekEndsAt,
-        thisMonthEndsAt,
-      ),
+      Math.max(...deadlines, tomorrowEndsAt, nextWeekEndsAt, thisMonthEndsAt),
     ).getTime()
   }, [now, tasks])
 
@@ -45,7 +48,7 @@ export const TasksToDo = () => {
     const daysCount =
       Math.round(convertDuration(lastDayEndsAt - todayEndsAt, 'ms', 'd')) + 1
 
-    const result: Record<string, Task[]> = {}
+    const result: Record<TodoTaskGroupId, Task[]> = {}
 
     range(daysCount).forEach((index) => {
       const dayEndsAt = todayEndsAt + convertDuration(index, 'd', 'ms')
@@ -54,11 +57,7 @@ export const TasksToDo = () => {
     })
 
     tasks.forEach((task) => {
-      const key = (
-        task.deadlineAt < now
-          ? todayEndsAt - convertDuration(1, 'd', 'ms')
-          : task.deadlineAt
-      ).toString()
+      const key = getGroupId(task)
       result[key] = result[key] || []
       result[key].push(task)
     })
@@ -84,20 +83,38 @@ export const TasksToDo = () => {
   return (
     <DnDGroups
       groups={groups}
-      getGroupOrder={(groupId) => Number(groupId)}
+      getGroupOrder={(groupId) => {
+        if (specialTodoTaskGroups.includes(groupId as SpecialTodoTaskGroup)) {
+          const offset = -(
+            specialTodoTaskGroups.indexOf(groupId as SpecialTodoTaskGroup) + 1
+          )
+          const minDeadline = Math.min(
+            ...without(Object.keys(groups), ...specialTodoTaskGroups).map(
+              (group) => Number(group),
+            ),
+            0,
+          )
+          return minDeadline + offset
+        }
+
+        return Number(groupId)
+      }}
       getItemId={(task) => task.id}
       getItemOrder={(task) => task.order}
       onChange={onChange}
       renderGroup={({ content, groupId, containerProps }) => (
         <VStack {...containerProps} gap={4} key={groupId}>
-          <TasksGroupHeader value={Number(groupId)} />
-          <RecurringTasksForecast dayEndsAt={Number(groupId)} />
+          <TasksGroupHeader value={groupId} />
+          {!specialTodoTaskGroups.includes(groupId as SpecialTodoTaskGroup) && (
+            <RecurringTasksForecast dayEndsAt={Number(groupId)} />
+          )}
+
           <VStack>
             {content}
             {groupId !== 'overdue' && (
               <CreateTask
                 defaultValue={{
-                  deadlineAt: Number(groupId),
+                  deadlineAt: groupId === 'todo' ? null : Number(groupId),
                 }}
               />
             )}

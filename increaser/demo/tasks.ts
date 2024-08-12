@@ -103,6 +103,7 @@ export const getDemoTasks = (): Record<string, Task> => {
         name,
         projectId,
         startedAt,
+        status: 'todo',
         spentTime: minutes ? convertDuration(minutes, 'min', 'ms') : undefined,
         completedAt: isCompleted ? Date.now() : null,
         deadlineAt: isOverdue

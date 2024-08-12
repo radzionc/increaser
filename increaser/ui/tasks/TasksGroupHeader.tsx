@@ -5,11 +5,10 @@ import {
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
-import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getColor } from '@lib/ui/theme/getters'
 import { useMemo } from 'react'
 import { format, isToday, isTomorrow } from 'date-fns'
+import { TodoTaskGroupId } from './TodoTaskGroupId'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -19,31 +18,36 @@ const Container = styled(HStackSeparatedBy)`
 
 export const TasksGroupHeader = ({
   value,
-}: ComponentWithValueProps<number>) => {
-  const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
-  const isOverdue = value < now
-
+}: ComponentWithValueProps<TodoTaskGroupId>) => {
   const deadline = useMemo(() => {
-    if (isOverdue) {
+    if (value === 'todo') {
+      return ['No deadline']
+    }
+    if (value === 'overdue') {
       return ['Overdue']
     }
 
-    const result = [format(value, 'd MMM')]
-    if (isToday(value)) {
+    const timestamp = Number(value)
+    const result = [format(timestamp, 'd MMM')]
+    if (isToday(timestamp)) {
       result.push('Today')
-    } else if (isTomorrow(value)) {
+    } else if (isTomorrow(timestamp)) {
       result.push('Tomorrow')
     }
 
-    result.push(format(value, 'EEEE'))
+    result.push(format(timestamp, 'EEEE'))
 
     return result
-  }, [isOverdue, value])
+  }, [value])
 
   return (
     <Container separator={dotSeparator}>
       {deadline.map((text, index) => (
-        <Text color={isOverdue ? 'idle' : undefined} as="span" key={index}>
+        <Text
+          color={value === 'overdue' ? 'idle' : undefined}
+          as="span"
+          key={index}
+        >
           {text}
         </Text>
       ))}

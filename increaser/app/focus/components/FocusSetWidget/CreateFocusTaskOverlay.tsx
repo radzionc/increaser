@@ -4,6 +4,7 @@ import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { endOfDay } from 'date-fns'
 
 type CreateFocusTaskOverlayProps = FinishableComponentProps & {}
 
@@ -20,6 +21,7 @@ export const CreateFocusTaskOverlay = ({
       <CreateTaskForm
         defaultValue={{
           projectId,
+          deadlineAt: endOfDay(Date.now()).getTime(),
         }}
         onFinish={(task) => {
           if (task) {

@@ -9,7 +9,6 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { useTasksView } from '../TasksView'
-import { endOfDay } from 'date-fns'
 
 export const AddTask = () => {
   const [projectId] = useProjectFilter()
@@ -17,7 +16,7 @@ export const AddTask = () => {
 
   const defaultValue = useMemo(() => {
     const result: Partial<TaskFormShape> = {
-      deadlineAt: view === 'scheduled' ? endOfDay(Date.now()).getTime() : null,
+      status: view === 'backlog' ? 'backlog' : 'todo',
     }
 
     if (projectId) {
