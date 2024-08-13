@@ -18,9 +18,9 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { HStack } from '@lib/ui/layout/Stack'
 import { TaskDeadlineInput } from '../TaskDeadlineInput'
 import { ExportFromTemplate } from './ExportFromTemplate'
-import { endOfDay } from 'date-fns'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { TaskStatusInput } from './TaskStatusInput'
 
 type CreateTaskFormProps = {
   defaultValue?: Partial<TaskFormShape>
@@ -39,7 +39,8 @@ export const CreateTaskForm = ({
     links: [],
     checklist: [],
     description: '',
-    deadlineAt: endOfDay(Date.now()).getTime(),
+    deadlineAt: null,
+    status: 'todo',
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
@@ -141,15 +142,26 @@ export const CreateTaskForm = ({
         gap={20}
         justifyContent="space-between"
       >
-        <TaskDeadlineInput
-          value={value.deadlineAt}
-          onChange={(deadlineAt) =>
-            setValue((prev) => ({
-              ...prev,
-              deadlineAt,
-            }))
-          }
-        />
+        <HStack gap={8}>
+          <TaskStatusInput
+            value={value.status}
+            onChange={(status) =>
+              setValue((prev) => ({
+                ...prev,
+                status,
+              }))
+            }
+          />
+          <TaskDeadlineInput
+            value={value.deadlineAt}
+            onChange={(deadlineAt) =>
+              setValue((prev) => ({
+                ...prev,
+                deadlineAt,
+              }))
+            }
+          />
+        </HStack>
         <CreateFormFooter
           isPending={isPending}
           isDisabled={isDisabled}

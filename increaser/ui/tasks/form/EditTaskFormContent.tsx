@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Task } from '@increaser/entities/Task'
-import { VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -22,6 +22,7 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
+import { TaskStatusInput } from './TaskStatusInput'
 
 type EditTaskFormContentProps = FinishableComponentProps
 
@@ -35,6 +36,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
     'checklist',
     'description',
     'deadlineAt',
+    'status',
   ])
   const [value, setValue] = useState<TaskFormShape>(initialValue)
 
@@ -107,12 +109,18 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <VStack>
-        <TaskDeadlineInput
-          value={value.deadlineAt}
-          onChange={(deadlineAt) =>
-            setValue((prev) => ({ ...prev, deadlineAt }))
-          }
-        />
+        <HStack alignItems="center" gap={8}>
+          <TaskStatusInput
+            value={value.status}
+            onChange={(status) => setValue((prev) => ({ ...prev, status }))}
+          />
+          <TaskDeadlineInput
+            value={value.deadlineAt}
+            onChange={(deadlineAt) =>
+              setValue((prev) => ({ ...prev, deadlineAt }))
+            }
+          />
+        </HStack>
       </VStack>
 
       <EditDeleteFormFooter

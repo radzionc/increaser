@@ -3,16 +3,19 @@ import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { FocusTaskSelector } from './FocusTaskSelector'
 import { CreateFocusTaskPrompt } from './CreateFocusTaskPrompt'
 import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
-import { useTodayIncompleteTasks } from '@increaser/ui/tasks/hooks/useTodayIncompleteTasks'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useFocusTaskGroups } from '../../tasks/useFocusTaskGroups'
 
 export const SelectFocusTask = () => {
   const { intervals } = useCurrentFocus()
   const { projectId } = getLastItem(intervals)
-  const todayTasks = useTodayIncompleteTasks()
+  const groups = useFocusTaskGroups()
   const options = useMemo(
-    () => todayTasks.filter((task) => task.projectId === projectId),
-    [projectId, todayTasks],
+    () =>
+      groups
+        .flatMap(({ tasks }) => tasks)
+        .filter((task) => task.projectId === projectId),
+    [groups, projectId],
   )
 
   const [isCreatingTask, setIsCreatingTask] = useState(false)

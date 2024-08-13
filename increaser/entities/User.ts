@@ -113,6 +113,7 @@ export type User = DayMoments &
     lastVisitAt: number
 
     viewedNewFeaturesAt?: number
+    completedTasksDeletedAt?: number
 
     subscription?: Subscription
     lifeTimeDeal?: LifeTimeDeal

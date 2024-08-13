@@ -15,7 +15,7 @@ export const TasksDone = () => {
     if (projectId && projectId !== task.projectId) {
       return false
     }
-    return !!task.completedAt
+    return task.status === 'done'
   })
 
   return (

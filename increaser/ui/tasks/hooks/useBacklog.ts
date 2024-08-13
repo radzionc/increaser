@@ -1,28 +1,22 @@
 import { useAssertUserState } from '../../user/UserStateContext'
 import { useMemo } from 'react'
-import { UnscheduledTask } from '@increaser/entities/Task'
 import { order } from '@lib/utils/array/order'
 import { useProjectFilter } from '../../projects/filter/ProjectFilterProvider'
+import { Task } from '@increaser/entities/Task'
 
-export const useBacklog = (): UnscheduledTask[] => {
+export const useBacklog = () => {
   const { tasks } = useAssertUserState()
   const [projectId] = useProjectFilter()
 
   return useMemo(() => {
-    const result: UnscheduledTask[] = []
+    const result: Task[] = []
     Object.values(tasks).forEach((task) => {
-      const { deadlineAt } = task
       if (projectId && task.projectId !== projectId) {
         return
       }
-      if (task.completedAt) {
-        return
-      }
-      if (deadlineAt === null) {
-        result.push({
-          ...task,
-          deadlineAt,
-        })
+
+      if (task.status === 'backlog') {
+        result.push(task)
       }
     })
 

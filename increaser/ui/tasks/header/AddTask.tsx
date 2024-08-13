@@ -8,23 +8,22 @@ import { TaskFormShape } from '../form/TaskFormShape'
 import { HStack } from '@lib/ui/layout/Stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { useTasksView } from '../TasksView'
-import { endOfDay } from 'date-fns'
+import { useTaskStatusFilter } from '../status/TaskStatusFilter'
 
 export const AddTask = () => {
   const [projectId] = useProjectFilter()
-  const { view } = useTasksView()
+  const [status] = useTaskStatusFilter()
 
   const defaultValue = useMemo(() => {
     const result: Partial<TaskFormShape> = {
-      deadlineAt: view === 'scheduled' ? endOfDay(Date.now()).getTime() : null,
+      status,
     }
 
     if (projectId) {
       result.projectId = projectId
     }
     return result
-  }, [projectId, view])
+  }, [projectId, status])
 
   return (
     <Opener

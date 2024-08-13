@@ -3,21 +3,18 @@ import { useCurrentTask } from './CurrentTaskProvider'
 import { TaskCompletionInput } from './TaskCompletionInput'
 
 export const TaskCheckBox = () => {
-  const task = useCurrentTask()
-  const { completedAt } = task
+  const { status, id } = useCurrentTask()
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
-  const value = !!completedAt
-
   return (
     <TaskCompletionInput
-      value={value}
-      onChange={() => {
+      value={status === 'done'}
+      onChange={(value) => {
         updateTask({
-          id: task.id,
+          id: id,
           fields: {
-            completedAt: task.completedAt ? null : Date.now(),
+            status: value ? 'done' : 'todo',
           },
         })
       }}

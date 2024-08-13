@@ -4,7 +4,7 @@ export type ProductFeatureStatus = (typeof productFeatureStatuses)[number]
 export type ProductFeature = {
   id: string
   name: string
-  description: string
+  description?: string | null
   createdAt: number
   proposedBy?: string | null
   upvotedBy: string[]

@@ -10,6 +10,7 @@ export const TasksBacklogView = () => {
         <TasksBacklog />
         <CreateTask
           defaultValue={{
+            status: 'backlog',
             deadlineAt: null,
           }}
         />

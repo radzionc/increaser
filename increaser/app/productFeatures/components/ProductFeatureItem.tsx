@@ -1,7 +1,6 @@
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import { Text } from '@lib/ui/text'
-import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import styled from 'styled-components'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
 import { Spacer } from '@lib/ui/layout/Spacer'
@@ -13,6 +12,7 @@ import { useCurrentProductFeature } from './CurrentProductFeatureProvider'
 import { ProductFeatureDetails } from './ProductFeatureDetails'
 import { VoteForFeature } from './VoteForFeature'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 
 const Container = styled.div`
   ${verticalPadding(panelDefaultPadding)};
@@ -47,17 +47,20 @@ export const ProductFeatureItem = () => {
                     <Text color="contrast" weight="500" style={{ flex: 1 }}>
                       {name}
                     </Text>
-                    <Text color="supporting" size={14}>
-                      {description}
-                    </Text>
+                    {description && (
+                      <Text color="supporting" size={14}>
+                        {description}
+                      </Text>
+                    )}
+                    {!isApproved && (
+                      <Text color="supporting">
+                        <EmojiTextPrefix emoji="🙌" />
+                        Thank you! Your feature is awaiting approval and will be
+                        open for voting soon.
+                      </Text>
+                    )}
                   </Content>
                 </HStack>
-                {!isApproved && (
-                  <ShyInfoBlock>
-                    Thank you! Your feature is awaiting approval and will be
-                    open for voting soon.
-                  </ShyInfoBlock>
-                )}
               </VStack>
             </Container>
           )}

@@ -5,11 +5,20 @@ import {
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
-import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { getColor } from '@lib/ui/theme/getters'
 import { useMemo } from 'react'
 import { format, isToday, isTomorrow } from 'date-fns'
+import {
+  SpecialTodoTaskGroup,
+  specialTodoTaskGroupName,
+  specialTodoTaskGroups,
+  TodoTaskGroupId,
+} from './TodoTaskGroupId'
+import { useTaskTimeGrouping } from './timeGrouping/useTaskTimeGrouping'
+import { match } from '@lib/utils/match'
+import { isThisWeek } from '@lib/utils/time/isThisWeek'
+import { isNextWeek } from '@lib/utils/time/isNextWeek'
+import { formatWeek } from '@lib/utils/time/Week'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -19,31 +28,53 @@ const Container = styled(HStackSeparatedBy)`
 
 export const TasksGroupHeader = ({
   value,
-}: ComponentWithValueProps<number>) => {
-  const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
-  const isOverdue = value < now
+}: ComponentWithValueProps<TodoTaskGroupId>) => {
+  const [timeGrouping] = useTaskTimeGrouping()
 
   const deadline = useMemo(() => {
-    if (isOverdue) {
-      return ['Overdue']
+    if (specialTodoTaskGroups.includes(value as SpecialTodoTaskGroup)) {
+      return [specialTodoTaskGroupName[value as SpecialTodoTaskGroup]]
     }
 
-    const result = [format(value, 'd MMM')]
-    if (isToday(value)) {
-      result.push('Today')
-    } else if (isTomorrow(value)) {
-      result.push('Tomorrow')
-    }
+    const timestamp = Number(value)
 
-    result.push(format(value, 'EEEE'))
+    return match(timeGrouping, {
+      day: () => {
+        const result = [format(timestamp, 'd MMM')]
+        if (isToday(timestamp)) {
+          result.push('Today')
+        } else if (isTomorrow(timestamp)) {
+          result.push('Tomorrow')
+        }
 
-    return result
-  }, [isOverdue, value])
+        result.push(format(timestamp, 'EEEE'))
+
+        return result
+      },
+      week: () => {
+        const result: string[] = []
+
+        if (isThisWeek(timestamp)) {
+          result.push('This week')
+        } else if (isNextWeek(timestamp)) {
+          result.push('Next week')
+        }
+
+        result.push(formatWeek(timestamp))
+
+        return result
+      },
+    })
+  }, [timeGrouping, value])
 
   return (
     <Container separator={dotSeparator}>
       {deadline.map((text, index) => (
-        <Text color={isOverdue ? 'idle' : undefined} as="span" key={index}>
+        <Text
+          color={value === 'overdue' ? 'idle' : undefined}
+          as="span"
+          key={index}
+        >
           {text}
         </Text>
       ))}
