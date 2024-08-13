@@ -1,11 +1,14 @@
 import { HStack } from '@lib/ui/layout/Stack'
-import { TasksViewSelector, useTasksView } from '@increaser/ui/tasks/TasksView'
 import { ManageProjectFilter } from '../../projects/filter/ManageProjectFilter'
 import { AddTask } from './AddTask'
 import { TaskTimeGroupingSelector } from '../timeGrouping/TaskTimeGroupingSelector'
+import {
+  TaskStatusFilter,
+  useTaskStatusFilter,
+} from '../status/TaskStatusFilter'
 
 export const TasksHeader = () => {
-  const { view } = useTasksView()
+  const [status] = useTaskStatusFilter()
 
   return (
     <HStack
@@ -15,9 +18,9 @@ export const TasksHeader = () => {
       justifyContent="space-between"
       wrap="wrap"
     >
-      <TasksViewSelector />
+      <TaskStatusFilter />
       <HStack alignItems="center" gap={8}>
-        {view === 'todo' && <TaskTimeGroupingSelector />}
+        {status === 'todo' && <TaskTimeGroupingSelector />}
         <ManageProjectFilter />
         <AddTask />
       </HStack>

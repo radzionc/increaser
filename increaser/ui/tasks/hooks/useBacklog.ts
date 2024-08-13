@@ -15,10 +15,6 @@ export const useBacklog = () => {
         return
       }
 
-      if (task.completedAt) {
-        return
-      }
-
       if (task.status === 'backlog') {
         result.push(task)
       }

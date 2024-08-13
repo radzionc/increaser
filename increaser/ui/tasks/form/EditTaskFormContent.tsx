@@ -22,13 +22,9 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
-import { TaskViewInput } from './TaskViewInput'
+import { TaskStatusInput } from './TaskStatusInput'
 
 type EditTaskFormContentProps = FinishableComponentProps
-
-type EditTaskFormShape = TaskFormShape & {
-  completedAt?: number | null
-}
 
 export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const { tasks } = useAssertUserState()
@@ -41,9 +37,8 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
     'description',
     'deadlineAt',
     'status',
-    'completedAt',
   ])
-  const [value, setValue] = useState<EditTaskFormShape>(initialValue)
+  const [value, setValue] = useState<TaskFormShape>(initialValue)
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
   const { mutate: deleteTask } = useDeleteUserEntityMutation('task')
@@ -115,16 +110,9 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
       />
       <VStack>
         <HStack alignItems="center" gap={8}>
-          <TaskViewInput
-            value={value.completedAt ? 'done' : value.status}
-            onChange={(status) =>
-              setValue((prev) => {
-                if (status === 'done') {
-                  return { ...prev, completedAt: Date.now() }
-                }
-                return { ...prev, status, completedAt: null }
-              })
-            }
+          <TaskStatusInput
+            value={value.status}
+            onChange={(status) => setValue((prev) => ({ ...prev, status }))}
           />
           <TaskDeadlineInput
             value={value.deadlineAt}

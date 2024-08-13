@@ -7,9 +7,7 @@ export const useTasksToDo = () => {
   const { tasks } = useAssertUserState()
 
   return useMemo(() => {
-    const items = Object.values(tasks).filter(
-      (task) => !task.completedAt && task.status === 'todo',
-    )
+    const items = Object.values(tasks).filter((task) => task.status === 'todo')
 
     if (!projectId) {
       return items

@@ -5,24 +5,33 @@ import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 
 export const organizeTasks = async (userId: string) => {
-  const { tasks: oldTasks, timeZone } = await getUser(userId, [
+  const {
+    tasks: oldTasks,
+    timeZone,
+    completedTasksDeletedAt,
+    registrationDate,
+  } = await getUser(userId, [
     'tasks',
     'timeZone',
+    'completedTasksDeletedAt',
+    'registrationDate',
   ])
 
-  const weekStartedAt = inTimeZone(getWeekStartedAt(Date.now()), timeZone)
+  const now = Date.now()
+  const shouldDeleteCompletedTasks =
+    (completedTasksDeletedAt ?? registrationDate) <
+    inTimeZone(getWeekStartedAt(now), timeZone)
 
-  const tasks = recordFilter(oldTasks, ({ value }) => {
-    if (!value.completedAt) return true
+  if (!shouldDeleteCompletedTasks) {
+    return
+  }
 
-    return value.completedAt >= weekStartedAt
-  })
+  const tasks = recordFilter(oldTasks, ({ value }) => value.status !== 'done')
 
   if (getRecordSize(tasks) !== getRecordSize(oldTasks)) {
     await updateUser(userId, {
       tasks,
+      completedTasksDeletedAt: now,
     })
   }
-
-  return tasks
 }

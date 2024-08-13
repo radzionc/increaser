@@ -167,7 +167,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
 
     const task = tasks[taskId]
 
-    if (task.completedAt) {
+    if (task.status === 'done') {
       startNewInterval({
         projectId: task.projectId,
         taskId: null,

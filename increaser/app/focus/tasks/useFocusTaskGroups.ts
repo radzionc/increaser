@@ -27,7 +27,7 @@ export const useFocusTaskGroups = () => {
     const todayEndsAt = endOfDay(now).getTime()
 
     Object.values(tasks).forEach((task) => {
-      if (task.completedAt || task.status !== 'todo') {
+      if (task.status !== 'todo') {
         return
       }
 
