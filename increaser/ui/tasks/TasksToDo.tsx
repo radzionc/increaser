@@ -48,7 +48,9 @@ export const TasksToDo = () => {
     const daysCount =
       Math.round(convertDuration(lastDayEndsAt - todayEndsAt, 'ms', 'd')) + 1
 
-    const result: Record<TodoTaskGroupId, Task[]> = {}
+    const result: Record<TodoTaskGroupId, Task[]> = {
+      todo: [],
+    }
 
     range(daysCount).forEach((index) => {
       const dayEndsAt = todayEndsAt + convertDuration(index, 'd', 'ms')

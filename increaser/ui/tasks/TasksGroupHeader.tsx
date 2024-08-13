@@ -8,7 +8,12 @@ import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { useMemo } from 'react'
 import { format, isToday, isTomorrow } from 'date-fns'
-import { TodoTaskGroupId } from './TodoTaskGroupId'
+import {
+  SpecialTodoTaskGroup,
+  specialTodoTaskGroupName,
+  specialTodoTaskGroups,
+  TodoTaskGroupId,
+} from './TodoTaskGroupId'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -20,11 +25,8 @@ export const TasksGroupHeader = ({
   value,
 }: ComponentWithValueProps<TodoTaskGroupId>) => {
   const deadline = useMemo(() => {
-    if (value === 'todo') {
-      return ['No deadline']
-    }
-    if (value === 'overdue') {
-      return ['Overdue']
+    if (specialTodoTaskGroups.includes(value as SpecialTodoTaskGroup)) {
+      return [specialTodoTaskGroupName[value as SpecialTodoTaskGroup]]
     }
 
     const timestamp = Number(value)

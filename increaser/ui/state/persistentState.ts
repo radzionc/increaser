@@ -35,6 +35,7 @@ export enum PersistentStateKey {
   ActiveProject = 'activeProject',
   ShouldHideProjectNames = 'shouldHideProjectNames',
   LastPageView = 'lastPageView',
+  TaskTimeGrouping = 'taskTimeGrouping',
 }
 
 const persistentStorage =
