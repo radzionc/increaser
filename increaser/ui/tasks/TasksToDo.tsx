@@ -8,10 +8,9 @@ import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TasksGroupHeader } from './TasksGroupHeader'
-import { RecurringTasksForecast } from './RecurringTasksForecast'
+import { RecurringTasksForecast } from './forecast/RecurringTasksForecast'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import {
-  getGroupId,
   SpecialTodoTaskGroup,
   specialTodoTaskGroups,
   TodoTaskGroupId,
@@ -78,7 +77,7 @@ export const TasksToDo = () => {
         <VStack {...containerProps} gap={4} key={groupId}>
           <TasksGroupHeader value={groupId} />
           {!specialTodoTaskGroups.includes(groupId as SpecialTodoTaskGroup) && (
-            <RecurringTasksForecast dayEndsAt={Number(groupId)} />
+            <RecurringTasksForecast value={Number(groupId)} />
           )}
 
           <VStack>
