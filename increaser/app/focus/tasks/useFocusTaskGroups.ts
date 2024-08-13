@@ -5,7 +5,8 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { toEntries } from '@lib/utils/record/toEntries'
-import { endOfDay, endOfWeek, format } from 'date-fns'
+import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { endOfDay, format } from 'date-fns'
 import { useMemo } from 'react'
 
 export type TaskGroup = {
@@ -22,7 +23,7 @@ export const useFocusTaskGroups = () => {
     const unscheduledTasks: Task[] = []
 
     const now = Date.now()
-    const weekEndsAt = endOfWeek(now).getTime()
+    const weekEndsAt = getWeekEndedAt(now)
     const todayEndsAt = endOfDay(now).getTime()
 
     Object.values(tasks).forEach((task) => {

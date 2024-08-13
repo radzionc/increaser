@@ -1,4 +1,7 @@
-import { Task } from '@increaser/entities/Task'
+import { TaskTimeGrouping } from './timeGrouping/TaskTimeGrouping'
+import { match } from '@lib/utils/match'
+import { endOfDay } from 'date-fns'
+import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 
 export const specialTodoTaskGroups = ['overdue', 'todo'] as const
 export type SpecialTodoTaskGroup = (typeof specialTodoTaskGroups)[number]
@@ -10,10 +13,23 @@ export const specialTodoTaskGroupName: Record<SpecialTodoTaskGroup, string> = {
 
 export type TodoTaskGroupId = string | SpecialTodoTaskGroup
 
-export const getGroupId = (task: Task): TodoTaskGroupId => {
-  if (task.deadlineAt === null) {
+type GetGroupIdInput = {
+  deadlineAt: number | null
+  timeGroup: TaskTimeGrouping
+}
+
+export const getGroupId = ({
+  deadlineAt,
+  timeGroup,
+}: GetGroupIdInput): TodoTaskGroupId => {
+  if (deadlineAt === null) {
     return 'todo'
   }
 
-  return task.deadlineAt < Date.now() ? 'overdue' : task.deadlineAt.toString()
+  return deadlineAt < Date.now()
+    ? 'overdue'
+    : match(timeGroup, {
+        day: () => endOfDay(deadlineAt).getTime(),
+        week: () => getWeekEndedAt(deadlineAt),
+      }).toString()
 }

@@ -1,23 +1,15 @@
-import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { convertDuration } from '@lib/utils/time/convertDuration'
-import { Task } from '@increaser/entities/Task'
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { TaskDragHandle } from './TaskDragHandle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TasksGroupHeader } from './TasksGroupHeader'
-import { endOfDay, endOfMonth } from 'date-fns'
-import { range } from '@lib/utils/array/range'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { RecurringTasksForecast } from './RecurringTasksForecast'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
-import { useTasksToDo } from './useTasksToDo'
-import { withoutNull } from '@lib/utils/array/withoutNull'
 import {
   getGroupId,
   SpecialTodoTaskGroup,
@@ -25,57 +17,35 @@ import {
   TodoTaskGroupId,
 } from './TodoTaskGroupId'
 import { without } from '@lib/utils/array/without'
+import { useGroupedTasksToDo } from './timeGrouping/useGroupedTasksToDo'
+import { endOfDay, subDays } from 'date-fns'
+
+const getDeadline = (groupId: TodoTaskGroupId) => {
+  if (groupId === 'overdue') {
+    return endOfDay(subDays(Date.now(), 1)).getTime()
+  }
+
+  if (groupId === 'todo') {
+    return null
+  }
+
+  return Number(groupId)
+}
 
 export const TasksToDo = () => {
-  const tasks = useTasksToDo()
-  const now = useRhythmicRerender(convertDuration(1, 'min', 'ms'))
   const [activeTaskId] = useActiveItemId()
 
-  const lastDayEndsAt = useMemo(() => {
-    const tomorrowEndsAt =
-      endOfDay(now).getTime() + convertDuration(1, 'd', 'ms')
-    const deadlines = withoutNull(tasks.map((task) => task.deadlineAt))
-    const nextWeekEndsAt = getWeekEndedAt(now) + convertDuration(1, 'w', 'ms')
-    const thisMonthEndsAt = endOfMonth(now).getTime()
-
-    return endOfDay(
-      Math.max(...deadlines, tomorrowEndsAt, nextWeekEndsAt, thisMonthEndsAt),
-    ).getTime()
-  }, [now, tasks])
-
-  const groups = useMemo(() => {
-    const todayEndsAt = endOfDay(now).getTime()
-    const daysCount =
-      Math.round(convertDuration(lastDayEndsAt - todayEndsAt, 'ms', 'd')) + 1
-
-    const result: Record<TodoTaskGroupId, Task[]> = {
-      todo: [],
-    }
-
-    range(daysCount).forEach((index) => {
-      const dayEndsAt = todayEndsAt + convertDuration(index, 'd', 'ms')
-      const key = dayEndsAt.toString()
-      result[key] = []
-    })
-
-    tasks.forEach((task) => {
-      const key = getGroupId(task)
-      result[key] = result[key] || []
-      result[key].push(task)
-    })
-
-    return result
-  }, [lastDayEndsAt, now, tasks])
+  const groups = useGroupedTasksToDo()
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   const onChange = useCallback(
-    (id: string, { order, groupId }: ItemChangeParams<string>) => {
+    (id: string, { order, groupId }: ItemChangeParams<TodoTaskGroupId>) => {
       updateTask({
         id,
         fields: {
           order,
-          deadlineAt: Number(groupId),
+          deadlineAt: getDeadline(groupId),
         },
       })
     },
