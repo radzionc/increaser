@@ -24,7 +24,7 @@ type RenderItemParams<I> = {
   isDraggingEnabled: boolean
 }
 
-export type DnDListProps<I> = {
+export type DnDListDeprecatedProps<I> = {
   items: I[]
   getItemOrder: (item: I) => number
   getItemId: (item: I) => string
@@ -33,14 +33,14 @@ export type DnDListProps<I> = {
   renderItem: (params: RenderItemParams<I>) => ReactNode
 }
 
-export function DnDList<I>({
+export function DnDListDeprecated<I>({
   items,
   getItemOrder,
   getItemId,
   onChange,
   renderItem,
   renderList,
-}: DnDListProps<I>) {
+}: DnDListDeprecatedProps<I>) {
   const droppableId = useId()
   const [currentItemId, setCurrentItemId] = useState<string | null>(null)
 

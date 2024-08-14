@@ -2,7 +2,6 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 import { useCallback } from 'react'
-import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -15,6 +14,7 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { TasksGroupHeader } from './TasksGroupHeader'
 import { RecurringTasksForecast } from '../forecast/RecurringTasksForecast'
 import { TaskDragHandle } from '../TaskDragHandle'
+import { DnDGroupsDeprecated, ItemChangeParams } from '@lib/dnd/DnDGroups'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {
@@ -48,7 +48,7 @@ export const ScheduledTasks = () => {
   )
 
   return (
-    <DnDGroups
+    <DnDGroupsDeprecated
       groups={groups}
       getGroupOrder={(groupId) => {
         if (groupId === 'overdue') {

@@ -1,5 +1,4 @@
 import { TaskChecklistItem } from '@increaser/entities/Task'
-import { DnDList } from '@lib/dnd/DnDList'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { InputProps } from '@lib/ui/props'
 import { TaskChecklistItemInput } from './TaskChecklistItemInput'
@@ -11,6 +10,7 @@ import { order } from '@lib/utils/array/order'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { match } from '@lib/utils/match'
+import { DnDListDeprecated } from '@lib/dnd/DnDList'
 
 type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -35,7 +35,7 @@ export const TaskChecklistInput = ({
   return (
     <FieldArrayContainer title="Checklist">
       {value.length > 0 && (
-        <DnDList
+        <DnDListDeprecated
           items={items}
           getItemId={(item) => item.id}
           getItemOrder={(item) => item.order}

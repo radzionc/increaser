@@ -6,7 +6,6 @@ import {
 import { useGroupedByStatusTasks } from '../status/useGroupedByStatusTasks'
 import { TaskBoardContainer } from './TaskBoardContainer'
 import { useCallback } from 'react'
-import { DnDGroups, ItemChangeParams } from '@lib/dnd/DnDGroups'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { TaskColumnContainer } from './column/TaskColumnContainer'
 import { ColumnContent, ColumnHeader } from './column/ColumnHeader'
@@ -17,6 +16,7 @@ import { AddTask } from './column/AddTask'
 import { CurrentTaskProvider } from '../CurrentTaskProvider'
 import { TaskItem } from './item/TaskItem'
 import styled from 'styled-components'
+import { DnDGroupsDeprecated, ItemChangeParams } from '@lib/dnd/DnDGroups'
 
 const TaskItemContainer = styled.div`
   &:not(:last-child) {
@@ -44,7 +44,7 @@ export const TaskBoard = () => {
 
   return (
     <TaskBoardContainer>
-      <DnDGroups
+      <DnDGroupsDeprecated
         groups={tasks}
         getGroupOrder={(status) => taskStatuses.indexOf(status)}
         getItemId={(task) => task.id}

@@ -12,7 +12,7 @@ import { projectsConfig } from './config'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { useProjectStatusFilter } from './filter/status/ProjectStatusFilterProvider'
 import { order } from '@lib/utils/array/order'
-import { DnDList } from '@lib/dnd/DnDList'
+import { DnDListDeprecated } from '@lib/dnd/DnDList'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -34,7 +34,7 @@ export const ProjectList = () => {
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   return (
-    <DnDList
+    <DnDListDeprecated
       items={items}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}

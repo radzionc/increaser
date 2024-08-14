@@ -29,7 +29,7 @@ type RenderItemParams<I> = {
   isDraggingEnabled: boolean
 }
 
-export type DnDGroupsProps<K extends string, I> = {
+export type DnDGroupsDeprecatedProps<K extends string, I> = {
   groups: Record<K, I[]>
   getGroupOrder: (group: K) => number
   getItemOrder: (item: I) => number
@@ -39,7 +39,7 @@ export type DnDGroupsProps<K extends string, I> = {
   renderItem: (params: RenderItemParams<I>) => ReactNode
 }
 
-export function DnDGroups<K extends string, I>({
+export function DnDGroupsDeprecated<K extends string, I>({
   groups,
   getItemOrder,
   getItemId,
@@ -47,7 +47,7 @@ export function DnDGroups<K extends string, I>({
   renderGroup,
   renderItem,
   getGroupOrder,
-}: DnDGroupsProps<K, I>) {
+}: DnDGroupsDeprecatedProps<K, I>) {
   const [currentItemId, setCurrentItemId] = useState<string | null>(null)
 
   const handleDragEnd: OnDragEndResponder = useCallback(

@@ -6,11 +6,11 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { habitContentMinHeight, habitVerticalPadding } from './config'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { DnDList } from '@lib/dnd/DnDList'
 import { CurrentHabitProvider } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { HabitItem } from './HabitItem'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import { DnDListDeprecated } from '@lib/dnd/DnDList'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(habitContentMinHeight + habitVerticalPadding * 2)};
@@ -25,7 +25,7 @@ export const Habits = () => {
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
 
   return (
-    <DnDList
+    <DnDListDeprecated
       items={items}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}

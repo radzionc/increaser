@@ -2,7 +2,6 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
 import { VisionAttributeItem } from './VisionAttributeItem'
 import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider'
-import { DnDList } from '../../../lib/dnd/DnDList'
 import { order } from '@lib/utils/array/order'
 import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
 import styled from 'styled-components'
@@ -11,6 +10,7 @@ import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
+import { DnDListDeprecated } from '@lib/dnd/DnDList'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(
@@ -28,7 +28,7 @@ export const VisionAttributes = () => {
     useUpdateUserEntityMutation('visionAttribute')
 
   return (
-    <DnDList
+    <DnDListDeprecated
       items={items}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
