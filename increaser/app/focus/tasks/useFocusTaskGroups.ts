@@ -1,5 +1,4 @@
 import { Task } from '@increaser/entities/Task'
-import { specialTodoTaskGroupName } from '@increaser/ui/tasks/TodoTaskGroupId'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
@@ -27,7 +26,10 @@ export const useFocusTaskGroups = () => {
     const todayEndsAt = endOfDay(now).getTime()
 
     Object.values(tasks).forEach((task) => {
-      if (task.status !== 'todo') {
+      if (
+        task.status === 'done' ||
+        (task.status === 'backlog' && !task.deadlineAt)
+      ) {
         return
       }
 
@@ -50,7 +52,7 @@ export const useFocusTaskGroups = () => {
     const result: TaskGroup[] = []
     if (!isEmpty(overdueTasks)) {
       result.push({
-        name: specialTodoTaskGroupName.overdue,
+        name: 'Overdue',
         tasks: sortEntitiesWithOrder(overdueTasks),
       })
     }
@@ -69,7 +71,7 @@ export const useFocusTaskGroups = () => {
 
     if (!isEmpty(unscheduledTasks)) {
       result.push({
-        name: specialTodoTaskGroupName.todo,
+        name: 'Todo',
         tasks: sortEntitiesWithOrder(unscheduledTasks),
       })
     }

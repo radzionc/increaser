@@ -2,7 +2,8 @@ import { Match } from '@lib/ui/base/Match'
 import { useTaskStatusFilter } from './status/TaskStatusFilter'
 import { TasksBacklogView } from './TasksBacklogView'
 import { TasksDone } from './TasksDone'
-import { TasksToDoView } from './TasksToDoView'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { ScheduledTasks } from './scheduled/ScheduledTasks'
 
 export const TasksContent = () => {
   const [status] = useTaskStatusFilter()
@@ -11,7 +12,11 @@ export const TasksContent = () => {
     <Match
       value={status}
       done={() => <TasksDone />}
-      todo={() => <TasksToDoView />}
+      todo={() => (
+        <ActiveItemIdProvider initialValue={null}>
+          <ScheduledTasks />
+        </ActiveItemIdProvider>
+      )}
       backlog={() => <TasksBacklogView />}
     />
   )

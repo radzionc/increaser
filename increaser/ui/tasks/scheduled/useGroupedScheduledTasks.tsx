@@ -1,6 +1,4 @@
 import { useMemo } from 'react'
-import { useTasksToDo } from '../useTasksToDo'
-import { withoutNull } from '@lib/utils/array/withoutNull'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import {
   addWeeks,
@@ -12,22 +10,32 @@ import {
 } from 'date-fns'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { match } from '@lib/utils/match'
-import { useTaskTimeGrouping } from './useTaskTimeGrouping'
-import { getGroupId, TodoTaskGroupId } from '../TodoTaskGroupId'
-import { Task } from '@increaser/entities/Task'
+import { ScheduledTask, Task } from '@increaser/entities/Task'
 import { range } from '@lib/utils/array/range'
+import { useAssertUserState } from '../../user/UserStateContext'
+import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
+import { getGroupId, ScheduledTaskGroupId } from './ScheduledTaskGroupId'
 
-export const useGroupedTasksToDo = (): Record<TodoTaskGroupId, Task[]> => {
+export const useGroupedScheduledTasks = (): Record<
+  ScheduledTaskGroupId,
+  Task[]
+> => {
   const [timeGrouping] = useTaskTimeGrouping()
 
-  const tasks = useTasksToDo()
+  const { tasks } = useAssertUserState()
+
+  const items = useMemo(() => {
+    return Object.values(tasks).filter(
+      (task) => task.deadlineAt && task.status !== 'done',
+    ) as ScheduledTask[]
+  }, [tasks])
 
   const lastGroupEndsAt = useMemo(() => {
     const now = Date.now()
     const nextWeekEndsAt = getWeekEndedAt(addWeeks(now, 1).getTime())
     const options = [nextWeekEndsAt]
 
-    const deadlines = withoutNull(tasks.map((task) => task.deadlineAt))
+    const deadlines = items.map((task) => task.deadlineAt)
     if (!isEmpty(deadlines)) {
       const maxDeadline = Math.max(...deadlines)
 
@@ -44,7 +52,7 @@ export const useGroupedTasksToDo = (): Record<TodoTaskGroupId, Task[]> => {
     }
 
     return Math.max(...options)
-  }, [tasks, timeGrouping])
+  }, [items, timeGrouping])
 
   return useMemo(() => {
     const now = Date.now()
@@ -58,9 +66,7 @@ export const useGroupedTasksToDo = (): Record<TodoTaskGroupId, Task[]> => {
         week: () => differenceInWeeks(lastGroupEndsAt, thisGroupEndsAt),
       }) + 1
 
-    const result: Record<TodoTaskGroupId, Task[]> = {
-      todo: [],
-    }
+    const result: Record<ScheduledTaskGroupId, Task[]> = {}
 
     range(groupsCount).forEach((index) => {
       const groupEndsAt = match(timeGrouping, {
@@ -72,7 +78,7 @@ export const useGroupedTasksToDo = (): Record<TodoTaskGroupId, Task[]> => {
       result[key] = []
     })
 
-    tasks.forEach((task) => {
+    items.forEach((task) => {
       const key = getGroupId({
         deadlineAt: task.deadlineAt,
         timeGroup: timeGrouping,
@@ -82,5 +88,5 @@ export const useGroupedTasksToDo = (): Record<TodoTaskGroupId, Task[]> => {
     })
 
     return result
-  }, [lastGroupEndsAt, tasks, timeGrouping])
+  }, [items, lastGroupEndsAt, timeGrouping])
 }
