@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -5,6 +6,8 @@ import { taskBoardConfig } from '../config'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { interactive } from '@lib/ui/css/interactive'
 import { TaskPrimaryContent } from '../../TaskPrimaryContent'
+import { Opener } from '@lib/ui/base/Opener'
+import { EditTaskFormOverlay } from '../../form/EditTaskFormOverlay'
 
 const Container = styled.div`
   background: ${getColor('foreground')};
@@ -19,10 +22,13 @@ const Container = styled.div`
   }
 `
 
-export const TaskItem = () => {
-  return (
-    <Container>
-      <TaskPrimaryContent />
-    </Container>
-  )
-}
+export const TaskItem = () => (
+  <Opener
+    renderOpener={({ onOpen }) => (
+      <Container onClick={onOpen}>
+        <TaskPrimaryContent />
+      </Container>
+    )}
+    renderContent={({ onClose }) => <EditTaskFormOverlay onFinish={onClose} />}
+  />
+)
