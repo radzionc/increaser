@@ -16,6 +16,12 @@ export type TaskChecklistItem = EntityWithId & {
 export const taskStatuses = ['backlog', 'todo', 'done'] as const
 export type TaskStatus = (typeof taskStatuses)[number]
 
+export const taskStatusName: Record<TaskStatus, string> = {
+  backlog: 'Backlog',
+  todo: 'Todo',
+  done: 'Done',
+}
+
 export type Task = EntityWithId &
   EntityWithName &
   EntityWithOrder & {

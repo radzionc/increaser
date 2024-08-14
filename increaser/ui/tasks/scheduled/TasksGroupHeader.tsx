@@ -8,17 +8,12 @@ import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { useMemo } from 'react'
 import { format, isToday, isTomorrow } from 'date-fns'
-import {
-  SpecialTodoTaskGroup,
-  specialTodoTaskGroupName,
-  specialTodoTaskGroups,
-  TodoTaskGroupId,
-} from './TodoTaskGroupId'
-import { useTaskTimeGrouping } from './timeGrouping/useTaskTimeGrouping'
+import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
 import { match } from '@lib/utils/match'
 import { isThisWeek } from '@lib/utils/time/isThisWeek'
 import { isNextWeek } from '@lib/utils/time/isNextWeek'
 import { formatWeek } from '@lib/utils/time/Week'
+import { ScheduledTaskGroupId } from './ScheduledTaskGroupId'
 
 const Container = styled(HStackSeparatedBy)`
   font-size: 14px;
@@ -28,12 +23,12 @@ const Container = styled(HStackSeparatedBy)`
 
 export const TasksGroupHeader = ({
   value,
-}: ComponentWithValueProps<TodoTaskGroupId>) => {
+}: ComponentWithValueProps<ScheduledTaskGroupId>) => {
   const [timeGrouping] = useTaskTimeGrouping()
 
   const deadline = useMemo(() => {
-    if (specialTodoTaskGroups.includes(value as SpecialTodoTaskGroup)) {
-      return [specialTodoTaskGroupName[value as SpecialTodoTaskGroup]]
+    if (value === 'overdue') {
+      return ['Overdue']
     }
 
     const timestamp = Number(value)
