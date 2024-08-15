@@ -10,7 +10,7 @@ import { order } from '@lib/utils/array/order'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { match } from '@lib/utils/match'
-import { DnDListDeprecated } from '@lib/dnd/DnDList'
+import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
 
 type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 

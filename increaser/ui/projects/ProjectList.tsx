@@ -12,7 +12,7 @@ import { projectsConfig } from './config'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { useProjectStatusFilter } from './filter/status/ProjectStatusFilterProvider'
 import { order } from '@lib/utils/array/order'
-import { DnDListDeprecated } from '@lib/dnd/DnDList'
+import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(

@@ -10,7 +10,7 @@ import { CurrentHabitProvider } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { HabitItem } from './HabitItem'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
-import { DnDListDeprecated } from '@lib/dnd/DnDList'
+import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(habitContentMinHeight + habitVerticalPadding * 2)};

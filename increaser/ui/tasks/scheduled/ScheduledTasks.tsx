@@ -14,7 +14,10 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { TasksGroupHeader } from './TasksGroupHeader'
 import { RecurringTasksForecast } from '../forecast/RecurringTasksForecast'
 import { TaskDragHandle } from '../TaskDragHandle'
-import { DnDGroupsDeprecated, ItemChangeParams } from '@lib/dnd/DnDGroups'
+import {
+  DnDGroupsDeprecated,
+  ItemChangeParams,
+} from '@lib/dnd/DnDGroupsDeprecated'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {

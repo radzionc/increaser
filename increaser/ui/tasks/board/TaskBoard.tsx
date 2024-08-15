@@ -16,7 +16,10 @@ import { AddTask } from './column/AddTask'
 import { CurrentTaskProvider } from '../CurrentTaskProvider'
 import { TaskItem } from './item/TaskItem'
 import styled from 'styled-components'
-import { DnDGroupsDeprecated, ItemChangeParams } from '@lib/dnd/DnDGroups'
+import {
+  DnDGroupsDeprecated,
+  ItemChangeParams,
+} from '@lib/dnd/DnDGroupsDeprecated'
 
 const TaskItemContainer = styled.div`
   &:not(:last-child) {

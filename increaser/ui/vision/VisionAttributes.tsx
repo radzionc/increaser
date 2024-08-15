@@ -10,7 +10,7 @@ import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
 import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
-import { DnDListDeprecated } from '@lib/dnd/DnDList'
+import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
 
 const DragHandle = styled(ListItemDragHandle)`
   height: ${toSizeUnit(

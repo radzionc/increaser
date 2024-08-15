@@ -1,11 +1,23 @@
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { ReactNode, useCallback, useId, useState } from 'react'
 import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  OnDragEndResponder,
-} from 'react-beautiful-dnd'
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  UniqueIdentifier,
+  DragEndEvent,
+} from '@dnd-kit/core'
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 
 export type ItemChangeParams = {
   order: number
@@ -24,96 +36,129 @@ type RenderItemParams<I> = {
   isDraggingEnabled: boolean
 }
 
-export type DnDListDeprecatedProps<I> = {
+export type DnDListProps<I, ID extends UniqueIdentifier> = {
   items: I[]
   getItemOrder: (item: I) => number
-  getItemId: (item: I) => string
-  onChange: (itemId: string, params: ItemChangeParams) => void
+  getItemId: (item: I) => ID
+  onChange: (itemId: ID, params: ItemChangeParams) => void
   renderList: (params: RenderListParams) => ReactNode
   renderItem: (params: RenderItemParams<I>) => ReactNode
 }
 
-export function DnDListDeprecated<I>({
+export function DnDList<I, ID extends UniqueIdentifier>({
   items,
   getItemOrder,
   getItemId,
   onChange,
   renderItem,
   renderList,
-}: DnDListDeprecatedProps<I>) {
+}: DnDListProps<I, ID>) {
   const droppableId = useId()
-  const [currentItemId, setCurrentItemId] = useState<string | null>(null)
+  const [activeId, setActiveId] = useState<ID | null>(null)
 
-  const handleDragEnd: OnDragEndResponder = useCallback(
-    ({ destination, source, draggableId }) => {
-      setCurrentItemId(null)
-      if (!destination) {
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  )
+
+  const handleDragEnd = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      setActiveId(null)
+      if (!over || active.id === over.id) {
         return
       }
 
-      if (destination.index === source.index) {
-        return
-      }
+      const oldIndex = items.findIndex((item) => getItemId(item) === active.id)
+      const newIndex = items.findIndex((item) => getItemId(item) === over.id)
 
-      onChange(draggableId, {
-        order: getNewOrder({
-          orders: items.map(getItemOrder),
-          sourceIndex: source.index,
-          destinationIndex: destination.index,
-        }),
+      const newOrder = getNewOrder({
+        orders: items.map(getItemOrder),
+        sourceIndex: oldIndex,
+        destinationIndex: newIndex,
       })
+
+      onChange(active.id as ID, { order: newOrder })
     },
     [getItemOrder, items, onChange],
   )
 
   return (
-    <DragDropContext
-      onDragStart={({ draggableId }) => setCurrentItemId(draggableId)}
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragStart={({ active }) => setActiveId(active.id as ID)}
       onDragEnd={handleDragEnd}
+      modifiers={[restrictToVerticalAxis]}
     >
-      <Droppable droppableId={droppableId}>
-        {(provided) => {
-          return (
+      <SortableContext
+        items={items.map(getItemId)}
+        strategy={verticalListSortingStrategy}
+      >
+        {renderList({
+          containerProps: {
+            'data-droppable-id': droppableId,
+          },
+          content: (
             <>
-              {renderList({
-                containerProps: {
-                  ...provided.droppableProps,
-                  ref: provided.innerRef,
-                },
-                content: (
-                  <>
-                    {items.map((item, index) => {
-                      const key = getItemId(item)
-                      return (
-                        <Draggable key={key} index={index} draggableId={key}>
-                          {(
-                            { dragHandleProps, draggableProps, innerRef },
-                            { isDragging },
-                          ) => (
-                            <>
-                              {renderItem({
-                                item,
-                                draggableProps: {
-                                  ...draggableProps,
-                                  ref: innerRef,
-                                },
-                                dragHandleProps,
-                                isDraggingEnabled: isDragging || !currentItemId,
-                                isDragging,
-                              })}
-                            </>
-                          )}
-                        </Draggable>
-                      )
-                    })}
-                    {provided.placeholder}
-                  </>
-                ),
+              {items.map((item, index) => {
+                const key = getItemId(item)
+                return (
+                  <SortableItem
+                    key={key}
+                    id={key}
+                    index={index}
+                    item={item}
+                    renderItem={renderItem}
+                    isDragging={activeId === key}
+                  />
+                )
               })}
             </>
-          )
-        }}
-      </Droppable>
-    </DragDropContext>
+          ),
+        })}
+      </SortableContext>
+    </DndContext>
+  )
+}
+
+type SortableItemProps<I, ID extends UniqueIdentifier> = {
+  id: ID
+  index: number
+  item: I
+  renderItem: (params: RenderItemParams<I>) => ReactNode
+  isDragging: boolean
+}
+
+function SortableItem<I, ID extends UniqueIdentifier>({
+  id,
+  item,
+  renderItem,
+  isDragging,
+}: SortableItemProps<I, ID>) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
+
+  return (
+    <>
+      {renderItem({
+        item,
+        draggableProps: {
+          ...attributes,
+          ...listeners,
+          ref: setNodeRef,
+          style,
+        },
+        dragHandleProps: listeners,
+        isDraggingEnabled: !isDragging,
+        isDragging,
+      })}
+    </>
   )
 }
