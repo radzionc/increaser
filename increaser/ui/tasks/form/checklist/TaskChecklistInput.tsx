@@ -5,18 +5,26 @@ import { TaskChecklistItemInput } from './TaskChecklistItemInput'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { order } from '@lib/utils/array/order'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { match } from '@lib/utils/match'
-import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
+import { DnDList } from '@lib/dnd/DnDList'
+import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 
 type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
-const DraggableItemContainer = styled(HStack)`
+const DraggableItemContainer = styled(HStack)<{
+  isDragging?: boolean
+}>`
   width: 100%;
   gap: 8px;
+  ${({ isDragging }) =>
+    isDragging &&
+    css`
+      opacity: 0.4;
+    `}
 `
 
 const getDefaultFields = () => ({
@@ -35,7 +43,7 @@ export const TaskChecklistInput = ({
   return (
     <FieldArrayContainer title="Checklist">
       {value.length > 0 && (
-        <DnDListDeprecated
+        <DnDList
           items={items}
           getItemId={(item) => item.id}
           getItemOrder={(item) => item.order}
@@ -54,7 +62,10 @@ export const TaskChecklistInput = ({
             isDragging,
           }) => {
             return (
-              <DraggableItemContainer {...draggableProps}>
+              <DraggableItemContainer
+                isDragging={isDragging}
+                {...draggableProps}
+              >
                 <ChecklistItemDragHandle
                   isActive={isDragging ?? false}
                   {...dragHandleProps}
@@ -98,6 +109,19 @@ export const TaskChecklistInput = ({
               </DraggableItemContainer>
             )
           }}
+          renderDragOverlay={({ item }) => (
+            <TightListItemDragOverlay>
+              <DraggableItemContainer>
+                <ChecklistItemDragHandle isActive={true} />
+                <TaskChecklistItemInput
+                  onRemove={() => {}}
+                  onSubmit={() => {}}
+                  value={item}
+                  onChange={() => {}}
+                />
+              </DraggableItemContainer>
+            </TightListItemDragOverlay>
+          )}
         />
       )}
       <FieldArrayAddButton
