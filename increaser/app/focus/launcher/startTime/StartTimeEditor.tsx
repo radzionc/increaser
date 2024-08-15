@@ -5,7 +5,6 @@ import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { useStartTimeEditor } from './StartTimeEditorProvider'
-import { useFocusLauncher } from '../state/FocusLauncherContext'
 import styled, { useTheme } from 'styled-components'
 import { BoundaryInteractiveArea } from '@lib/ui/timeline/BoundaryInteractiveArea'
 import { Text } from '@lib/ui/text'
@@ -22,6 +21,7 @@ import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
+import { useFocusLauncher } from '../state/useFocusLauncher'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -36,7 +36,7 @@ export const StartTimeEditor = () => {
 
   const todaySets = useTodaySets()
 
-  const { startedAt, setState, projectId } = useFocusLauncher()
+  const [{ startedAt, projectId }, setState] = useFocusLauncher()
   const value = shouldBePresent(startedAt)
 
   const { interval, now } = useStartTimeEditor()

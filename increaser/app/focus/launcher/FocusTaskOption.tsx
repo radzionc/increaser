@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskPrimaryContent } from '@increaser/ui/tasks/TaskPrimaryContent'
@@ -14,6 +13,7 @@ import {
 } from './FocusOptionContainer'
 import { cropText } from '@lib/ui/css/cropText'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { useFocusLauncher } from './state/useFocusLauncher'
 
 const CheckBoxContainer = styled.div`
   ${sameDimensions(tightListItemConfig.lineHeight)};
@@ -28,7 +28,7 @@ const Content = styled(HStack)`
 
 export const FocusTaskOption = () => {
   const { id, projectId } = useCurrentTask()
-  const { taskId, setState } = useFocusLauncher()
+  const [{ taskId }, setState] = useFocusLauncher()
 
   const isSelected = taskId === id
 

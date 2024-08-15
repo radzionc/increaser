@@ -1,9 +1,9 @@
 import { Switch } from '@lib/ui/inputs/Switch'
-import { useFocusLauncher } from '../state/FocusLauncherContext'
 import { WithHint } from '@lib/ui/tooltips/WithHint'
+import { useFocusLauncher } from '../state/useFocusLauncher'
 
 export const ChangeStartTimeSwitch = () => {
-  const { setState, startedAt } = useFocusLauncher()
+  const [{ startedAt }, setState] = useFocusLauncher()
 
   return (
     <Switch

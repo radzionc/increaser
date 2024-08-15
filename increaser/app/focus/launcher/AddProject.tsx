@@ -5,13 +5,13 @@ import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import styled from 'styled-components'
 import { FocusOptionContent } from './FocusOptionContent'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
-import { useFocusLauncher } from './state/FocusLauncherContext'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { useFocusLauncher } from './state/useFocusLauncher'
 
 const Container = styled(FocusOptionContainer)``
 
 export const AddProject = () => {
-  const { setState } = useFocusLauncher()
+  const [, setState] = useFocusLauncher()
 
   return (
     <Opener

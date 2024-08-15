@@ -18,7 +18,6 @@ import { Page } from '@lib/next-ui/Page'
 import { MembershipConfirmation } from '@increaser/app/membership/components/MembershipConfirmation'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
-import { FocusLauncherProvider } from '../focus/launcher/FocusLauncherProvider'
 import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
 import { ApiProvider } from '../api/ApiProvider'
 import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMusicProvider'
@@ -55,22 +54,20 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                     <ConditionalUserState
                       present={() => (
                         <>
-                          <FocusLauncherProvider>
-                            <UserManagerProvider>
-                              <HabitsProvider>
-                                <FocusProvider>
-                                  <ScheduleProvider>
-                                    <BreakProvider>
-                                      <FocusSoundsPlayer />
-                                      <YouTubeFocusMusicFloatingPlayer />
-                                      {component}
-                                    </BreakProvider>
-                                    <MembershipConfirmation />
-                                  </ScheduleProvider>
-                                </FocusProvider>
-                              </HabitsProvider>
-                            </UserManagerProvider>
-                          </FocusLauncherProvider>
+                          <UserManagerProvider>
+                            <HabitsProvider>
+                              <FocusProvider>
+                                <ScheduleProvider>
+                                  <BreakProvider>
+                                    <FocusSoundsPlayer />
+                                    <YouTubeFocusMusicFloatingPlayer />
+                                    {component}
+                                  </BreakProvider>
+                                  <MembershipConfirmation />
+                                </ScheduleProvider>
+                              </FocusProvider>
+                            </HabitsProvider>
+                          </UserManagerProvider>
                         </>
                       )}
                       missing={() => <>{component}</>}

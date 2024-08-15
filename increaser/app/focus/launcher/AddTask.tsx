@@ -4,11 +4,11 @@ import { FocusOptionContainer } from './FocusOptionContainer'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import styled from 'styled-components'
 import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
-import { useFocusLauncher } from './state/FocusLauncherContext'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { endOfDay } from 'date-fns'
+import { useFocusLauncher } from './state/useFocusLauncher'
 
 const Container = styled(FocusOptionContainer)``
 
@@ -17,7 +17,7 @@ const Content = styled(PrefixedItemFrame)`
 `
 
 export const AddTask = () => {
-  const { setState } = useFocusLauncher()
+  const [, setState] = useFocusLauncher()
 
   return (
     <Opener

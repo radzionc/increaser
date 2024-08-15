@@ -20,7 +20,6 @@ import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudget
 import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectBudgetSummary'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { FocusTaskInput } from './FocusTaskInput'
-import { useFocusLauncher } from './state/FocusLauncherContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { FocusViewSelector } from './FocusViewSelector'
@@ -28,6 +27,7 @@ import { Match } from '@lib/ui/base/Match'
 import { useProjectDoneMinutesThisWeek } from '@increaser/ui/projects/hooks/useProjectDoneMinutesThisWeek'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RocketIcon } from '@lib/ui/icons/RocketIcon'
+import { useFocusLauncher } from './state/useFocusLauncher'
 
 const Container = styled(Panel)`
   position: relative;
@@ -39,7 +39,7 @@ export const FocusLauncherForm = () => {
   const { finishWorkAt, projects } = useAssertUserState()
   const todaySets = useTodaySets()
   const { start } = useFocus()
-  const { projectId, taskId, startedAt, setState, focusEntity } =
+  const [{ projectId, taskId, startedAt, focusEntity }, setState] =
     useFocusLauncher()
 
   const lastInteractionWasAt = useRef<number>()

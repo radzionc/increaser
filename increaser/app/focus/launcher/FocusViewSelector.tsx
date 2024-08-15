@@ -1,10 +1,9 @@
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
-
 import {
-  FocusEntity,
   focusEntities,
+  FocusEntity,
   useFocusLauncher,
-} from './state/FocusLauncherContext'
+} from './state/useFocusLauncher'
 
 const focusEntityViewName: Record<FocusEntity, string> = {
   project: 'Projects',
@@ -12,7 +11,7 @@ const focusEntityViewName: Record<FocusEntity, string> = {
 }
 
 export const FocusViewSelector = () => {
-  const { focusEntity, setState } = useFocusLauncher()
+  const [{ focusEntity }, setState] = useFocusLauncher()
 
   return (
     <RadioInput

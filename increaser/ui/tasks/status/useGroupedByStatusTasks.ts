@@ -1,15 +1,20 @@
 import { useMemo } from 'react'
 import { groupItems } from '@lib/utils/array/groupItems'
-import { Task, TaskStatus } from '@increaser/entities/Task'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { Task, TaskStatus, taskStatuses } from '@increaser/entities/Task'
+import { useTasks } from '../hooks/useTasks'
+import { useFilterByProject } from '../../projects/filter/useFilterByProject'
+import { makeRecord } from '@lib/utils/record/makeRecord'
 
 export const useGroupedByStatusTasks = () => {
-  const { tasks } = useAssertUserState()
+  const tasks = useFilterByProject(useTasks(), (task) => task.projectId)
 
   return useMemo(() => {
-    return groupItems<Task, TaskStatus>(
-      Object.values(tasks),
-      (task) => task.status,
-    )
+    return {
+      ...makeRecord(taskStatuses, () => []),
+      ...groupItems<Task, TaskStatus>(
+        Object.values(tasks),
+        (task) => task.status,
+      ),
+    }
   }, [tasks])
 }
