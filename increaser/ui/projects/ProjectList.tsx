@@ -1,6 +1,5 @@
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import styled from 'styled-components'
 
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { DnDList } from '@lib/dnd/DnDList'
@@ -13,8 +12,7 @@ import { Wrap } from '@lib/ui/base/Wrap'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { useEffect, useState } from 'react'
 import { useFilteredByStatusProjects } from './hooks/useFilteredByStatusProjects'
-
-const ItemContainer = styled.div<{ isDragging: boolean }>``
+import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
 
 export const ProjectList = () => {
   const projects = useFilteredByStatusProjects()
@@ -57,19 +55,19 @@ export const ProjectList = () => {
       renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
         return (
           <Wrap
-            render={(children) =>
-              activeItemId === null ? (
-                <ItemContainer
-                  isDragging={isDragging}
-                  key={item.id}
-                  {...draggableProps}
-                  {...dragHandleProps}
-                >
-                  {children}
-                </ItemContainer>
-              ) : (
-                children
-              )
+            wrap={
+              activeItemId === null
+                ? (children) => (
+                    <DraggableTightListItemContainer
+                      isDragging={isDragging}
+                      key={item.id}
+                      {...draggableProps}
+                      {...dragHandleProps}
+                    >
+                      {children}
+                    </DraggableTightListItemContainer>
+                  )
+                : undefined
             }
             key={item.id}
           >

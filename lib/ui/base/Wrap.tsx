@@ -2,9 +2,9 @@ import { ReactNode } from 'react'
 import { ComponentWithChildrenProps } from '../props'
 
 type WrapProps = ComponentWithChildrenProps & {
-  render: (children: ReactNode) => ReactNode
+  wrap?: (children: ReactNode) => ReactNode
 }
 
-export const Wrap = ({ children, render }: WrapProps) => {
-  return render(children)
+export const Wrap = ({ children, wrap }: WrapProps) => {
+  return wrap ? wrap(children) : children
 }

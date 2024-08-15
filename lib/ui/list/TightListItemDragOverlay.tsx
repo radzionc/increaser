@@ -18,7 +18,7 @@ const Highlight = styled.div`
 
   background: ${getColor('background')};
   z-index: -1;
-  ${borderRadius.m};
+  ${borderRadius.s};
   border: 1px solid ${getColor('mistExtra')};
 `
 

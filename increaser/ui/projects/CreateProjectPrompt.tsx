@@ -10,9 +10,9 @@ export const CreateProjectPrompt = () => {
 
   return (
     <Opener
-      renderOpener={({ onOpen }) => (
-        <ListAddButton onClick={onOpen} text="Add a project" />
-      )}
+      renderOpener={({ onOpen, isOpen }) =>
+        isOpen ? null : <ListAddButton onClick={onOpen} text="Add a project" />
+      }
       renderContent={({ onClose }) => <CreateProjectForm onFinish={onClose} />}
     />
   )

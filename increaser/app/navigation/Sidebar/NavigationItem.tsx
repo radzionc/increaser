@@ -1,13 +1,13 @@
-import { UIComponentProps } from '@lib/ui/props'
 import { NavigationItemContainer } from './NavigationItemContainer'
 import { NavigationItemContentFrame } from './NavigationItemContentFrame'
+import { ComponentProps } from 'react'
 
-export type NavigationItemProps = UIComponentProps & {
+export type NavigationItemProps = {
   icon: React.ReactNode
   name: React.ReactNode
   isActive?: boolean
   decoration?: React.ReactNode
-}
+} & ComponentProps<typeof NavigationItemContainer>
 
 export const NavigationItem = ({
   icon,
