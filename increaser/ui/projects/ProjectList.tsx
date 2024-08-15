@@ -1,28 +1,25 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
 
-import { ProjectItem } from './ProjectItem'
-import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { projectsConfig } from './config'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { useProjectStatusFilter } from './filter/status/ProjectStatusFilterProvider'
 import { order } from '@lib/utils/array/order'
-import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
+import { DnDList } from '@lib/dnd/DnDList'
+import { ProjectItemContent } from './ProjectItemContent'
+import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import React from 'react'
+import { EditProjectForm } from './form/EditProjectForm'
+import { ProjectItem } from './ProjectItem'
 
-const DragHandle = styled(ListItemDragHandle)`
-  height: ${toSizeUnit(
-    projectsConfig.contentMinHeight + projectsConfig.verticalPadding * 2,
-  )};
-`
+const ItemContainer = styled.div<{ isDragging: boolean }>``
 
 export const ProjectList = () => {
   const { projects } = useAssertUserState()
   const [status] = useProjectStatusFilter()
+
   const [activeItemId] = useActiveItemId()
 
   const items = order(
@@ -33,8 +30,11 @@ export const ProjectList = () => {
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
+  if (activeItemId) {
+  }
+
   return (
-    <DnDListDeprecated
+    <DnDList
       items={items}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
@@ -49,30 +49,33 @@ export const ProjectList = () => {
       renderList={({ content, containerProps }) => (
         <VStack {...containerProps}>{content}</VStack>
       )}
-      renderItem={({
-        item,
-        draggableProps,
-        dragHandleProps,
-        isDragging,
-        isDraggingEnabled,
-      }) => {
-        const isEnabled = isDraggingEnabled && !activeItemId
-
-        return (
-          <DraggableItemContainer
-            isActive={isDragging ?? false}
-            {...draggableProps}
-          >
-            <DragHandle
-              isEnabled={isEnabled}
-              isActive={isDragging ?? false}
-              {...dragHandleProps}
-            />
-            <CurrentProjectProvider value={item} key={item.id}>
-              <ProjectItem />
-            </CurrentProjectProvider>
-          </DraggableItemContainer>
+      renderDragOverlay={({ item }) => (
+        <TightListItemDragOverlay>
+          <CurrentProjectProvider value={item}>
+            <ProjectItemContent />
+          </CurrentProjectProvider>
+        </TightListItemDragOverlay>
+      )}
+      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+        const content = (
+          <CurrentProjectProvider value={item}>
+            {activeItemId === item.id ? <EditProjectForm /> : <ProjectItem />}
+          </CurrentProjectProvider>
         )
+        if (activeItemId === null) {
+          return (
+            <ItemContainer
+              isDragging={!!isDragging}
+              key={item.id}
+              {...draggableProps}
+              {...dragHandleProps}
+            >
+              {content}
+            </ItemContainer>
+          )
+        }
+
+        return <React.Fragment key={item.id}>{content}</React.Fragment>
       }}
     />
   )

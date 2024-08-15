@@ -9,6 +9,7 @@ import {
   useSensors,
   UniqueIdentifier,
   DragEndEvent,
+  DragOverlay,
 } from '@dnd-kit/core'
 import {
   SortableContext,
@@ -17,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export type ItemChangeParams = {
   order: number
@@ -32,8 +33,11 @@ type RenderItemParams<I> = {
   item: I
   draggableProps?: Record<string, any>
   dragHandleProps?: Record<string, any> | null
-  isDragging?: boolean
-  isDraggingEnabled: boolean
+  isDragging: boolean
+}
+
+type RenderDragOverlayParams<I> = {
+  item: I
 }
 
 export type DnDListProps<I, ID extends UniqueIdentifier> = {
@@ -43,6 +47,7 @@ export type DnDListProps<I, ID extends UniqueIdentifier> = {
   onChange: (itemId: ID, params: ItemChangeParams) => void
   renderList: (params: RenderListParams) => ReactNode
   renderItem: (params: RenderItemParams<I>) => ReactNode
+  renderDragOverlay?: (item: RenderDragOverlayParams<I>) => ReactNode
 }
 
 export function DnDList<I, ID extends UniqueIdentifier>({
@@ -52,12 +57,19 @@ export function DnDList<I, ID extends UniqueIdentifier>({
   onChange,
   renderItem,
   renderList,
+  renderDragOverlay,
 }: DnDListProps<I, ID>) {
   const droppableId = useId()
   const [activeId, setActiveId] = useState<ID | null>(null)
 
+  const pointerSensor = useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 0.01,
+    },
+  })
+
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    pointerSensor,
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
@@ -90,7 +102,6 @@ export function DnDList<I, ID extends UniqueIdentifier>({
       collisionDetection={closestCenter}
       onDragStart={({ active }) => setActiveId(active.id as ID)}
       onDragEnd={handleDragEnd}
-      modifiers={[restrictToVerticalAxis]}
     >
       <SortableContext
         items={items.map(getItemId)}
@@ -104,6 +115,7 @@ export function DnDList<I, ID extends UniqueIdentifier>({
             <>
               {items.map((item, index) => {
                 const key = getItemId(item)
+                const isDragging = activeId === key
                 return (
                   <SortableItem
                     key={key}
@@ -111,13 +123,24 @@ export function DnDList<I, ID extends UniqueIdentifier>({
                     index={index}
                     item={item}
                     renderItem={renderItem}
-                    isDragging={activeId === key}
+                    isDragging={isDragging}
                   />
                 )
               })}
             </>
           ),
         })}
+        {renderDragOverlay && (
+          <DragOverlay>
+            {activeId
+              ? renderDragOverlay({
+                  item: shouldBePresent(
+                    items.find((item) => getItemId(item) === activeId),
+                  ),
+                })
+              : null}
+          </DragOverlay>
+        )}
       </SortableContext>
     </DndContext>
   )
@@ -156,8 +179,7 @@ function SortableItem<I, ID extends UniqueIdentifier>({
           style,
         },
         dragHandleProps: listeners,
-        isDraggingEnabled: !isDragging,
-        isDragging,
+        isDragging: isDragging,
       })}
     </>
   )
