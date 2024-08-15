@@ -165,7 +165,7 @@ function SortableItem<I, ID extends UniqueIdentifier>({
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: transition,
   }
 
   return (

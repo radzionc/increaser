@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { useProjectStatusFilter } from './filter/status/ProjectStatusFilterProvider'
-import { order } from '@lib/utils/array/order'
 import { DnDList } from '@lib/dnd/DnDList'
 import { ProjectItemContent } from './ProjectItemContent'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
@@ -13,6 +12,7 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { EditProjectForm } from './form/EditProjectForm'
 import { ProjectItem } from './ProjectItem'
 import { Wrap } from '@lib/ui/base/Wrap'
+import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 
 const ItemContainer = styled.div<{ isDragging: boolean }>``
 
@@ -22,16 +22,11 @@ export const ProjectList = () => {
 
   const [activeItemId] = useActiveItemId()
 
-  const items = order(
+  const items = sortEntitiesWithOrder(
     Object.values(projects).filter((project) => project.status === status),
-    (item) => item.order,
-    'asc',
   )
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
-
-  if (activeItemId) {
-  }
 
   return (
     <DnDList
@@ -62,7 +57,7 @@ export const ProjectList = () => {
             render={(children) =>
               activeItemId === null ? (
                 <ItemContainer
-                  isDragging={!!isDragging}
+                  isDragging={isDragging}
                   key={item.id}
                   {...draggableProps}
                   {...dragHandleProps}
