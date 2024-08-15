@@ -1,26 +1,25 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
-import { VisionAttributeItem } from './VisionAttributeItem'
-import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider'
-import { order } from '@lib/utils/array/order'
-import { ListItemDragHandle } from '@lib/ui/dnd/ListItemDragHandle'
-import styled from 'styled-components'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { visionItemContentMinHeight, visionItemVerticalPadding } from './config'
-import { DraggableItemContainer } from '@lib/ui/dnd/DraggableItemContainer'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
-import { DnDListDeprecated } from '@lib/dnd/DnDListDeprecated'
-
-const DragHandle = styled(ListItemDragHandle)`
-  height: ${toSizeUnit(
-    visionItemContentMinHeight + visionItemVerticalPadding * 2,
-  )};
-`
+import { VisionAttributeItem } from './VisionAttributeItem'
+import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import { useEffect, useState } from 'react'
+import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { DnDList } from '@lib/dnd/DnDList'
+import { Wrap } from '@lib/ui/base/Wrap'
+import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
+import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
+import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
+import { VisionAttributeItemContent } from './VisionAttributeItemContent'
+import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider'
+import { useVisionAttributes } from './hooks/useVisionAttributes'
 
 export const VisionAttributes = () => {
-  const { vision } = useAssertUserState()
-  const items = order(Object.values(vision), (item) => item.order, 'asc')
+  const visionAttributes = useVisionAttributes()
+
+  const [items, setItems] = useState(visionAttributes)
+  useEffect(() => {
+    setItems(visionAttributes)
+  }, [visionAttributes])
 
   const [activeItemId] = useActiveItemId()
 
@@ -28,8 +27,8 @@ export const VisionAttributes = () => {
     useUpdateUserEntityMutation('visionAttribute')
 
   return (
-    <DnDListDeprecated
-      items={items}
+    <DnDList
+      items={sortEntitiesWithOrder(items)}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
       onChange={(id, { order }) => {
@@ -39,33 +38,47 @@ export const VisionAttributes = () => {
             order,
           },
         })
+        setItems((prev) =>
+          prev.map((item) => (item.id === id ? { ...item, order } : item)),
+        )
       }}
       renderList={({ content, containerProps }) => (
         <VStack {...containerProps}>{content}</VStack>
       )}
-      renderItem={({
-        item,
-        draggableProps,
-        dragHandleProps,
-        isDragging,
-        isDraggingEnabled,
-      }) => {
-        const isEnabled = isDraggingEnabled && !activeItemId
-
+      renderDragOverlay={({ item }) => (
+        <TightListItemDragOverlay>
+          <CurrentVisionAttributeProvider value={item}>
+            <VisionAttributeItemContent />
+          </CurrentVisionAttributeProvider>
+        </TightListItemDragOverlay>
+      )}
+      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
         return (
-          <DraggableItemContainer
-            isActive={isDragging ?? false}
-            {...draggableProps}
+          <Wrap
+            wrap={
+              activeItemId === null
+                ? (children) => (
+                    <DraggableTightListItemContainer
+                      isDragging={isDragging}
+                      key={item.id}
+                      {...draggableProps}
+                      {...dragHandleProps}
+                    >
+                      {children}
+                    </DraggableTightListItemContainer>
+                  )
+                : undefined
+            }
+            key={item.id}
           >
-            <DragHandle
-              isEnabled={isEnabled}
-              isActive={isDragging ?? false}
-              {...dragHandleProps}
-            />
-            <CurrentVisionAttributeProvider key={item.id} value={item}>
-              <VisionAttributeItem />
+            <CurrentVisionAttributeProvider value={item}>
+              {activeItemId === item.id ? (
+                <EditVisionAttributeForm />
+              ) : (
+                <VisionAttributeItem />
+              )}
             </CurrentVisionAttributeProvider>
-          </DraggableItemContainer>
+          </Wrap>
         )
       }}
     />
