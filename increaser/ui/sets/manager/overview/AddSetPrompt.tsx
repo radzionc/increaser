@@ -9,7 +9,6 @@ import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { useActiveSet } from '../ActiveSetProvider'
 import { useWeekdaySets } from '@increaser/ui/sets/hooks/useWeekdaySets'
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Interval } from '@lib/utils/interval/Interval'
 import { getGapsBetweenIntervals } from '@lib/utils/interval/getGapsBetweenIntervals'
@@ -20,6 +19,7 @@ import { otherProjectId } from '@increaser/entities/Project'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { dayOverviewConfig } from './config'
 import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
+import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 
 const Container = styled(UnstyledButton)`
   ${verticalPadding(0)};
@@ -40,26 +40,24 @@ export const AddSetPrompt = () => {
   const [, setActiveSet] = useActiveSet()
   const [weekday] = useSelectedWeekday()
   const sets = useWeekdaySets(weekday)
-  const dayStartedAt = useStartOfWeekday(weekday)
+  const dayInterval = useWeekdayPassedInterval(weekday)
 
-  if (dayStartedAt < lastSnapshotAt) return null
+  if (dayInterval.start < lastSnapshotAt) return null
 
   return (
     <Container
       onClick={() => {
-        const now = Date.now()
-
         const gaps: Interval[] = [
           {
-            start: dayStartedAt,
-            end: isEmpty(sets) ? now : sets[0].start,
+            start: dayInterval.start,
+            end: isEmpty(sets) ? dayInterval.end : sets[0].start,
           },
           ...getGapsBetweenIntervals(sets),
         ]
         if (!isEmpty(sets)) {
           gaps.push({
             start: getLastItem(sets).end,
-            end: now,
+            end: dayInterval.end,
           })
         }
 
