@@ -1,10 +1,8 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { VStack } from '@lib/ui/layout/Stack'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import styled from 'styled-components'
 
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
-import { useProjectStatusFilter } from './filter/status/ProjectStatusFilterProvider'
 import { DnDList } from '@lib/dnd/DnDList'
 import { ProjectItemContent } from './ProjectItemContent'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
@@ -13,24 +11,26 @@ import { EditProjectForm } from './form/EditProjectForm'
 import { ProjectItem } from './ProjectItem'
 import { Wrap } from '@lib/ui/base/Wrap'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { useEffect, useState } from 'react'
+import { useFilteredByStatusProjects } from './hooks/useFilteredByStatusProjects'
 
 const ItemContainer = styled.div<{ isDragging: boolean }>``
 
 export const ProjectList = () => {
-  const { projects } = useAssertUserState()
-  const [status] = useProjectStatusFilter()
+  const projects = useFilteredByStatusProjects()
 
   const [activeItemId] = useActiveItemId()
 
-  const items = sortEntitiesWithOrder(
-    Object.values(projects).filter((project) => project.status === status),
-  )
+  const [items, setItems] = useState(projects)
+  useEffect(() => {
+    setItems(projects)
+  }, [projects])
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   return (
     <DnDList
-      items={items}
+      items={sortEntitiesWithOrder(items)}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
       onChange={(id, { order }) => {
@@ -40,6 +40,9 @@ export const ProjectList = () => {
             order,
           },
         })
+        setItems((prev) =>
+          prev.map((item) => (item.id === id ? { ...item, order } : item)),
+        )
       }}
       renderList={({ content, containerProps }) => (
         <VStack {...containerProps}>{content}</VStack>

@@ -8,7 +8,6 @@ import { getColor } from '../theme/getters'
 const Container = styled.div`
   position: relative;
   cursor: grabbing;
-  transform: rotate(2deg);
   user-select: none;
 `
 
