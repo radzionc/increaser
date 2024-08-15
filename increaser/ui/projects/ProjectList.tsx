@@ -10,9 +10,9 @@ import { DnDList } from '@lib/dnd/DnDList'
 import { ProjectItemContent } from './ProjectItemContent'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import React from 'react'
 import { EditProjectForm } from './form/EditProjectForm'
 import { ProjectItem } from './ProjectItem'
+import { Wrap } from '@lib/ui/base/Wrap'
 
 const ItemContainer = styled.div<{ isDragging: boolean }>``
 
@@ -57,25 +57,29 @@ export const ProjectList = () => {
         </TightListItemDragOverlay>
       )}
       renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
-        const content = (
-          <CurrentProjectProvider value={item}>
-            {activeItemId === item.id ? <EditProjectForm /> : <ProjectItem />}
-          </CurrentProjectProvider>
+        return (
+          <Wrap
+            render={(children) =>
+              activeItemId === null ? (
+                <ItemContainer
+                  isDragging={!!isDragging}
+                  key={item.id}
+                  {...draggableProps}
+                  {...dragHandleProps}
+                >
+                  {children}
+                </ItemContainer>
+              ) : (
+                children
+              )
+            }
+            key={item.id}
+          >
+            <CurrentProjectProvider value={item}>
+              {activeItemId === item.id ? <EditProjectForm /> : <ProjectItem />}
+            </CurrentProjectProvider>
+          </Wrap>
         )
-        if (activeItemId === null) {
-          return (
-            <ItemContainer
-              isDragging={!!isDragging}
-              key={item.id}
-              {...draggableProps}
-              {...dragHandleProps}
-            >
-              {content}
-            </ItemContainer>
-          )
-        }
-
-        return <React.Fragment key={item.id}>{content}</React.Fragment>
       }}
     />
   )
