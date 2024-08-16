@@ -84,6 +84,11 @@ export function DnDGroups<
 
   const sensors = useSensors(pointerSensor)
 
+  const getOrderedItems = useCallback(
+    (groupId: GroupId) => order(groups[groupId], getItemOrder, 'asc'),
+    [groups, getItemOrder],
+  )
+
   const getItemGroupId = useCallback(
     (itemId: ItemId) => {
       const entry = toEntries(groups).find(({ value }) =>
@@ -97,9 +102,10 @@ export function DnDGroups<
   const getItemIndex = useCallback(
     (itemId: ItemId) => {
       const groupId = getItemGroupId(itemId)
-      const items = order(groups[groupId], getItemOrder, 'asc')
 
-      return items.findIndex((item) => getItemId(item) === itemId)
+      return getOrderedItems(groupId).findIndex(
+        (item) => getItemId(item) === itemId,
+      )
     },
     [groups, getItemGroupId, getItemId],
   )
@@ -122,11 +128,9 @@ export function DnDGroups<
         return
       }
 
-      const items = order(groups[sourceGroupId] || [], getItemOrder, 'asc')
-
       onChange(active.id as ItemId, {
         order: getNewOrder({
-          orders: items.map(getItemOrder),
+          orders: getOrderedItems(sourceGroupId).map(getItemOrder),
           sourceIndex: isSameGroup ? sourceIndex : null,
           destinationIndex: destinationIndex,
         }),
@@ -146,13 +150,11 @@ export function DnDGroups<
       onDragEnd={handleDragEnd}
     >
       {groupKeys.map((groupId) => {
-        const items = order(groups[groupId], getItemOrder, 'asc')
-
         return (
           <DroppableGroup
             key={groupId}
             groupId={groupId}
-            items={items}
+            items={getOrderedItems(groupId)}
             activeItemId={activeItemId}
             renderGroup={renderGroup}
             renderItem={renderItem}
