@@ -1,11 +1,11 @@
 import {
+  Task,
   TaskStatus,
   taskStatuses,
   taskStatusName,
 } from '@increaser/entities/Task'
-import { useGroupedByStatusTasks } from '../status/useGroupedByStatusTasks'
 import { TaskBoardContainer } from './TaskBoardContainer'
-import { useCallback } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { TaskColumnContainer } from './column/TaskColumnContainer'
 import { ColumnContent, ColumnHeader } from './column/ColumnHeader'
@@ -16,10 +16,13 @@ import { AddTask } from './column/AddTask'
 import { CurrentTaskProvider } from '../CurrentTaskProvider'
 import { TaskItem } from './item/TaskItem'
 import styled, { css } from 'styled-components'
-import { ItemChangeParams } from '@lib/dnd/DnDGroupsDeprecated'
 import { DnDGroups } from '@lib/dnd/DnDGroups'
 import { match } from '@lib/utils/match'
 import { getColor } from '@lib/ui/theme/getters'
+import { useFilterByProject } from '../../projects/filter/useFilterByProject'
+import { useTasks } from '../hooks/useTasks'
+import { groupItems } from '@lib/utils/array/groupItems'
+import { makeRecord } from '@lib/utils/record/makeRecord'
 
 type DraggableItemStatus = 'idle' | 'overlay' | 'shadow'
 const DraggableTaskItem = styled(TaskItem)<{ status: DraggableItemStatus }>`
@@ -39,32 +42,49 @@ const DraggableTaskItem = styled(TaskItem)<{ status: DraggableItemStatus }>`
     })}
 `
 
+const getTaskProjectId = (task: Task) => task.projectId
+
 export const TaskBoard = () => {
-  const tasks = useGroupedByStatusTasks()
+  const tasks = useFilterByProject(useTasks(), getTaskProjectId)
+
+  const [items, setItems] = useState(tasks)
+  useEffect(() => {
+    setItems(tasks)
+  }, [tasks])
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
-  const onChange = useCallback(
-    (id: string, { order, groupId }: ItemChangeParams<TaskStatus>) => {
-      updateTask({
-        id,
-        fields: {
-          order,
-          status: groupId,
-        },
-      })
-    },
-    [updateTask],
-  )
+  const groups = useMemo(() => {
+    return {
+      ...makeRecord(taskStatuses, () => []),
+      ...groupItems<Task, TaskStatus>(
+        Object.values(items),
+        (task) => task.status,
+      ),
+    }
+  }, [items])
 
   return (
     <TaskBoardContainer>
       <DnDGroups
-        groups={tasks}
+        groups={groups}
         getGroupOrder={(status) => taskStatuses.indexOf(status)}
         getItemId={(task) => task.id}
         getItemOrder={(task) => task.order}
-        onChange={onChange}
+        onChange={(id, { order, groupId }) => {
+          updateTask({
+            id,
+            fields: {
+              order,
+              status: groupId,
+            },
+          })
+          setItems((prev) =>
+            prev.map((item) =>
+              item.id === id ? { ...item, order, status: groupId } : item,
+            ),
+          )
+        }}
         renderGroup={({
           content,
           groupId: status,
