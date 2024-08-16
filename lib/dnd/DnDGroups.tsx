@@ -97,7 +97,9 @@ export function DnDGroups<
   const getItemIndex = useCallback(
     (itemId: ItemId) => {
       const groupId = getItemGroupId(itemId)
-      return groups[groupId].findIndex((item) => getItemId(item) === itemId)
+      const items = order(groups[groupId], getItemOrder, 'asc')
+
+      return items.findIndex((item) => getItemId(item) === itemId)
     },
     [groups, getItemGroupId, getItemId],
   )
@@ -144,7 +146,7 @@ export function DnDGroups<
       onDragEnd={handleDragEnd}
     >
       {groupKeys.map((groupId) => {
-        const items = order(groups[groupId] || [], getItemOrder, 'asc')
+        const items = order(groups[groupId], getItemOrder, 'asc')
 
         return (
           <DroppableGroup
