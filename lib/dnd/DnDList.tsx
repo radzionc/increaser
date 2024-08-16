@@ -104,14 +104,11 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
             <>
               {items.map((item) => {
                 const key = getItemId(item)
-                const isDragging = activeItemId === key
                 return (
                   <DnDItem
                     key={key}
                     id={key}
-                    render={(params) =>
-                      renderItem({ item, ...params, isDragging })
-                    }
+                    render={(params) => renderItem({ item, ...params })}
                   />
                 )
               })}

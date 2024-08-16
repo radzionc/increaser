@@ -9,14 +9,16 @@ import {
   UniqueIdentifier,
   DragEndEvent,
   DragOverlay,
-  useDroppable,
 } from '@dnd-kit/core'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { order } from '@lib/utils/array/order'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { toEntries } from '@lib/utils/record/toEntries'
-import { DnDItem } from './DnDItem'
+import { DnDItem } from '../DnDItem'
+import { DnDGroup } from './DnDGroup'
+import { getDndGroupsItemDestination } from './getDnDGroupsItemDestination'
+import { getDndGroupsItemSource } from './getDnDGroupsItemSource'
+import { areEqualDnDGroupsItemLocations } from './DnDGroupsItemLocation'
 
 export type ItemChangeParams<GroupId extends string> = {
   order: number
@@ -113,31 +115,31 @@ export function DnDGroups<
         return
       }
 
-      const sourceGroupId = getItemGroupId(active.id as ItemId)
-      const sourceIndex = getItemIndex(active.id as ItemId)
-      const destinationGroupId = getItemGroupId(over.id as ItemId)
-      const destinationIndex = getItemIndex(over.id as ItemId)
+      console.log({ active, over })
 
-      console.log({
-        sourceGroupId,
-        sourceIndex,
-        destinationGroupId,
-        destinationIndex,
+      const source = getDndGroupsItemSource<GroupId, ItemId>({
+        item: active,
+        getItemIndex,
       })
 
-      const isSameGroup = sourceGroupId === destinationGroupId
+      const destination = getDndGroupsItemDestination<GroupId, ItemId>({
+        item: over,
+        getItemIndex,
+      })
 
-      if (isSameGroup && destinationIndex === sourceIndex) {
+      if (areEqualDnDGroupsItemLocations(source, destination)) {
         return
       }
 
+      const isSameGroup = source.groupId === destination.groupId
+
       onChange(active.id as ItemId, {
         order: getNewOrder({
-          orders: getOrderedItems(sourceGroupId).map(getItemOrder),
-          sourceIndex: isSameGroup ? sourceIndex : null,
-          destinationIndex: destinationIndex,
+          orders: getOrderedItems(source.groupId).map(getItemOrder),
+          sourceIndex: isSameGroup ? source.index : null,
+          destinationIndex: destination.index,
         }),
-        groupId: destinationGroupId,
+        groupId: destination.groupId,
       })
     },
     [getItemOrder, groups, onChange],
@@ -153,15 +155,32 @@ export function DnDGroups<
       onDragEnd={handleDragEnd}
     >
       {groupKeys.map((groupId) => {
+        const items = getOrderedItems(groupId)
         return (
-          <DroppableGroup
+          <DnDGroup
             key={groupId}
-            groupId={groupId}
-            items={getOrderedItems(groupId)}
-            activeItemId={activeItemId}
-            renderGroup={renderGroup}
-            renderItem={renderItem}
-            getItemId={getItemId}
+            id={groupId}
+            itemIds={items.map(getItemId)}
+            render={(params) =>
+              renderGroup({
+                groupId,
+                ...params,
+                content: (
+                  <>
+                    {items.map((item) => {
+                      const key = getItemId(item)
+                      return (
+                        <DnDItem
+                          key={key}
+                          id={key}
+                          render={(params) => renderItem({ item, ...params })}
+                        />
+                      )
+                    })}
+                  </>
+                ),
+              })
+            }
           />
         )
       })}
@@ -178,69 +197,5 @@ export function DnDGroups<
         </DragOverlay>
       )}
     </DndContext>
-  )
-}
-
-type DroppableGroupProps<
-  GroupId extends string,
-  ItemId extends UniqueIdentifier,
-  Item,
-> = {
-  groupId: GroupId
-  items: Item[]
-  activeItemId: ItemId | null
-  renderGroup: (params: RenderGroupParams<GroupId>) => ReactNode
-  renderItem: (params: RenderItemParams<Item>) => ReactNode
-  getItemId: (item: Item) => ItemId
-}
-
-function DroppableGroup<
-  GroupId extends string,
-  ItemId extends UniqueIdentifier,
-  Item,
->({
-  groupId,
-  items,
-  activeItemId,
-  renderGroup,
-  renderItem,
-  getItemId,
-}: DroppableGroupProps<GroupId, ItemId, Item>) {
-  const { setNodeRef, isOver } = useDroppable({
-    id: groupId,
-  })
-
-  return (
-    <SortableContext
-      id={groupId.toString()}
-      items={items.map(getItemId)}
-      strategy={verticalListSortingStrategy}
-    >
-      {renderGroup({
-        groupId,
-        isDraggingOver: isOver,
-        containerProps: {
-          'data-droppable-id': groupId,
-          ref: setNodeRef,
-        },
-        content: (
-          <>
-            {items.map((item) => {
-              const key = getItemId(item)
-              const isDragging = activeItemId === key
-              return (
-                <DnDItem
-                  key={key}
-                  id={key}
-                  render={(params) =>
-                    renderItem({ item, ...params, isDragging })
-                  }
-                />
-              )
-            })}
-          </>
-        ),
-      })}
-    </SortableContext>
   )
 }

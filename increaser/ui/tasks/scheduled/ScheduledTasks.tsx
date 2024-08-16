@@ -17,7 +17,7 @@ import { TaskDragHandle } from '../TaskDragHandle'
 import {
   DnDGroupsDeprecated,
   ItemChangeParams,
-} from '@lib/dnd/DnDGroupsDeprecated'
+} from '@lib/dnd/groups/DnDGroupsDeprecated'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {
