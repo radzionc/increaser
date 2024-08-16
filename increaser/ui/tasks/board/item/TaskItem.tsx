@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentProps, forwardRef } from 'react'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -22,13 +22,19 @@ const Container = styled.div`
   }
 `
 
-export const TaskItem = () => (
-  <Opener
-    renderOpener={({ onOpen }) => (
-      <Container onClick={onOpen}>
-        <TaskPrimaryContent />
-      </Container>
-    )}
-    renderContent={({ onClose }) => <EditTaskFormOverlay onFinish={onClose} />}
-  />
+type TaskItemProps = ComponentProps<typeof Container>
+
+export const TaskItem = forwardRef<HTMLDivElement, TaskItemProps>(
+  (props, ref) => (
+    <Opener
+      renderOpener={({ onOpen }) => (
+        <Container {...props} onClick={onOpen} ref={ref}>
+          <TaskPrimaryContent />
+        </Container>
+      )}
+      renderContent={({ onClose }) => (
+        <EditTaskFormOverlay onFinish={onClose} />
+      )}
+    />
+  ),
 )

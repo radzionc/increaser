@@ -15,16 +15,28 @@ import { ColumnFooter } from './column/ColumnFooter'
 import { AddTask } from './column/AddTask'
 import { CurrentTaskProvider } from '../CurrentTaskProvider'
 import { TaskItem } from './item/TaskItem'
-import styled from 'styled-components'
-import {
-  DnDGroupsDeprecated,
-  ItemChangeParams,
-} from '@lib/dnd/DnDGroupsDeprecated'
+import styled, { css } from 'styled-components'
+import { ItemChangeParams } from '@lib/dnd/DnDGroupsDeprecated'
+import { DnDGroups } from '@lib/dnd/DnDGroups'
+import { match } from '@lib/utils/match'
+import { getColor } from '@lib/ui/theme/getters'
 
-const TaskItemContainer = styled.div`
-  &:not(:last-child) {
-    margin-bottom: 8px;
-  }
+type DraggableItemStatus = 'idle' | 'overlay' | 'shadow'
+const DraggableTaskItem = styled(TaskItem)<{ status: DraggableItemStatus }>`
+  ${({ status }) =>
+    match(status, {
+      idle: () => css``,
+      overlay: () => css`
+        cursor: grabbing;
+        border-color: ${getColor('mistExtra')};
+        &:hover {
+          border-color: ${getColor('mistExtra')};
+        }
+      `,
+      shadow: () => css`
+        opacity: 0.4;
+      `,
+    })}
 `
 
 export const TaskBoard = () => {
@@ -47,7 +59,7 @@ export const TaskBoard = () => {
 
   return (
     <TaskBoardContainer>
-      <DnDGroupsDeprecated
+      <DnDGroups
         groups={tasks}
         getGroupOrder={(status) => taskStatuses.indexOf(status)}
         getItemId={(task) => task.id}
@@ -74,19 +86,22 @@ export const TaskBoard = () => {
             </ColumnFooter>
           </TaskColumnContainer>
         )}
-        renderItem={({ item, draggableProps, dragHandleProps }) => {
+        renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
           return (
-            <TaskItemContainer
-              key={item.id}
-              {...draggableProps}
-              {...dragHandleProps}
-            >
-              <CurrentTaskProvider value={item}>
-                <TaskItem />
-              </CurrentTaskProvider>
-            </TaskItemContainer>
+            <CurrentTaskProvider key={item.id} value={item}>
+              <DraggableTaskItem
+                status={isDragging ? 'shadow' : 'idle'}
+                {...draggableProps}
+                {...dragHandleProps}
+              />
+            </CurrentTaskProvider>
           )
         }}
+        renderDragOverlay={({ item }) => (
+          <CurrentTaskProvider value={item}>
+            <DraggableTaskItem status="overlay" />
+          </CurrentTaskProvider>
+        )}
       />
     </TaskBoardContainer>
   )

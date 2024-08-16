@@ -45,7 +45,7 @@ export type DnDListProps<I, ID extends UniqueIdentifier> = {
   onChange: (itemId: ID, params: ItemChangeParams) => void
   renderList: (params: RenderListParams) => ReactNode
   renderItem: (params: RenderItemParams<I>) => ReactNode
-  renderDragOverlay?: (item: RenderDragOverlayParams<I>) => ReactNode
+  renderDragOverlay?: (params: RenderDragOverlayParams<I>) => ReactNode
 }
 
 export function DnDList<I, ID extends UniqueIdentifier>({

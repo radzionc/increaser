@@ -8,7 +8,5 @@ export const TaskColumnContent = styled(VStack)`
   flex: 1;
   ${horizontalPadding(taskBoardConfig.columnHorizontalPadding)};
 
-  & > *:not(:last-child) {
-    margin-bottom: 8px;
-  }
+  gap: 8px;
 `
