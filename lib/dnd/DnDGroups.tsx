@@ -11,16 +11,12 @@ import {
   DragOverlay,
   useDroppable,
 } from '@dnd-kit/core'
-import {
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { order } from '@lib/utils/array/order'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { toEntries } from '@lib/utils/record/toEntries'
+import { DnDItem } from './DnDItem'
 
 export type ItemChangeParams<GroupId extends string> = {
   order: number
@@ -121,6 +117,13 @@ export function DnDGroups<
       const sourceIndex = getItemIndex(active.id as ItemId)
       const destinationGroupId = getItemGroupId(over.id as ItemId)
       const destinationIndex = getItemIndex(over.id as ItemId)
+
+      console.log({
+        sourceGroupId,
+        sourceIndex,
+        destinationGroupId,
+        destinationIndex,
+      })
 
       const isSameGroup = sourceGroupId === destinationGroupId
 
@@ -226,12 +229,12 @@ function DroppableGroup<
               const key = getItemId(item)
               const isDragging = activeItemId === key
               return (
-                <SortableItem
+                <DnDItem
                   key={key}
                   id={key}
-                  item={item}
-                  renderItem={renderItem}
-                  isDragging={isDragging}
+                  render={(params) =>
+                    renderItem({ item, ...params, isDragging })
+                  }
                 />
               )
             })}
@@ -239,44 +242,5 @@ function DroppableGroup<
         ),
       })}
     </SortableContext>
-  )
-}
-
-type SortableItemProps<I extends UniqueIdentifier, T> = {
-  id: I
-  item: T
-  renderItem: (params: RenderItemParams<T>) => ReactNode
-  isDragging: boolean
-}
-
-function SortableItem<I extends UniqueIdentifier, T>({
-  id,
-  item,
-  renderItem,
-  isDragging,
-}: SortableItemProps<I, T>) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id })
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition: transition,
-  }
-
-  return (
-    <>
-      {renderItem({
-        item,
-        draggableProps: {
-          ...attributes,
-          ref: setNodeRef,
-          style,
-        },
-        dragHandleProps: {
-          ...listeners,
-        },
-        isDragging: isDragging,
-      })}
-    </>
   )
 }
