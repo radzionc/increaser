@@ -1,14 +1,18 @@
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import { ReactNode, useCallback, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import {
   DndContext,
-  closestCenter,
   PointerSensor,
   useSensor,
   useSensors,
   UniqueIdentifier,
   DragEndEvent,
   DragOverlay,
+  CollisionDetection,
+  pointerWithin,
+  rectIntersection,
+  getFirstCollision,
+  MeasuringStrategy,
 } from '@dnd-kit/core'
 import { order } from '@lib/utils/array/order'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
@@ -74,6 +78,15 @@ export function DnDGroups<
 }: DnDGroupsProps<GroupId, ItemId, Item>) {
   const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
 
+  const lastOverId = useRef<UniqueIdentifier | null>(null)
+  const recentlyMovedToNewContainer = useRef(false)
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      recentlyMovedToNewContainer.current = false
+    })
+  }, [groups])
+
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
       distance: 0.01,
@@ -115,8 +128,6 @@ export function DnDGroups<
         return
       }
 
-      console.log({ active, over })
-
       const source = getDndGroupsItemSource<GroupId, ItemId>({
         item: active,
         getItemIndex,
@@ -133,6 +144,10 @@ export function DnDGroups<
 
       const isSameGroup = source.groupId === destination.groupId
 
+      if (!isSameGroup) {
+        recentlyMovedToNewContainer.current = true
+      }
+
       onChange(active.id as ItemId, {
         order: getNewOrder({
           orders: getOrderedItems(source.groupId).map(getItemOrder),
@@ -147,12 +162,42 @@ export function DnDGroups<
 
   const groupKeys = order(getRecordKeys(groups), getGroupOrder, 'asc')
 
+  const collisionDetectionStrategy: CollisionDetection = useCallback(
+    (args) => {
+      const pointerIntersections = pointerWithin(args)
+      const intersections =
+        pointerIntersections.length > 0
+          ? pointerIntersections
+          : rectIntersection(args)
+
+      const overId = getFirstCollision(intersections, 'id')
+
+      if (overId !== null) {
+        lastOverId.current = overId
+
+        return [{ id: overId }]
+      }
+
+      if (recentlyMovedToNewContainer.current) {
+        lastOverId.current = activeItemId
+      }
+
+      return lastOverId.current ? [{ id: lastOverId.current }] : []
+    },
+    [activeItemId, getOrderedItems],
+  )
+
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCenter}
       onDragStart={({ active }) => setActiveItemId(active.id as ItemId)}
       onDragEnd={handleDragEnd}
+      collisionDetection={collisionDetectionStrategy}
+      measuring={{
+        droppable: {
+          strategy: MeasuringStrategy.Always,
+        },
+      }}
     >
       {groupKeys.map((groupId) => {
         const items = getOrderedItems(groupId)
