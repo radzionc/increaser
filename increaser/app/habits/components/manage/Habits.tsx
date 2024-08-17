@@ -4,8 +4,6 @@ import { CurrentHabitProvider } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { HabitItem } from './HabitItem'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
-import { useEffect, useState } from 'react'
-import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { DnDList } from '@lib/dnd/DnDList'
 import { Wrap } from '@lib/ui/base/Wrap'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
@@ -16,31 +14,26 @@ import { HabitItemContent } from './HabitItemContent'
 export const Habits = () => {
   const { habits } = useHabits()
 
-  const [items, setItems] = useState(habits)
-  useEffect(() => {
-    setItems(habits)
-  }, [habits])
-
   const [activeItemId] = useActiveItemId()
 
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
 
   return (
     <DnDList
-      items={sortEntitiesWithOrder(items)}
+      items={habits}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
-      onChange={(id, { order }) => {
+      onChange={({ id, order }) => {
         updateHabit({
           id,
           fields: {
             order,
           },
         })
-        setItems((prev) =>
-          prev.map((item) => (item.id === id ? { ...item, order } : item)),
-        )
       }}
+      simulateChange={(items, { id, order }) =>
+        items.map((item) => (item.id === id ? { ...item, order } : item))
+      }
       renderList={({ content, containerProps }) => (
         <VStack {...containerProps}>{content}</VStack>
       )}

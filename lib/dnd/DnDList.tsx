@@ -1,5 +1,12 @@
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import { ReactNode, useCallback, useId, useState } from 'react'
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+} from 'react'
 import {
   DndContext,
   closestCenter,
@@ -13,8 +20,10 @@ import {
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { DnDItem } from './DnDItem'
+import { order } from '@lib/utils/array/order'
 
-export type ItemChangeParams = {
+export type ItemChangeParams<ItemId extends UniqueIdentifier> = {
+  id: ItemId
   order: number
 }
 
@@ -38,21 +47,33 @@ export type DnDListProps<ItemId extends UniqueIdentifier, Item> = {
   items: Item[]
   getItemOrder: (item: Item) => number
   getItemId: (item: Item) => ItemId
-  onChange: (itemId: ItemId, params: ItemChangeParams) => void
+  onChange: (params: ItemChangeParams<ItemId>) => void
+  simulateChange: (items: Item[], params: ItemChangeParams<ItemId>) => Item[]
   renderList: (params: RenderListParams) => ReactNode
   renderItem: (params: RenderItemParams<Item>) => ReactNode
   renderDragOverlay?: (params: RenderDragOverlayParams<Item>) => ReactNode
 }
 
 export function DnDList<ItemId extends UniqueIdentifier, Item>({
-  items,
+  items: finalItems,
   getItemOrder,
   getItemId,
   onChange,
+  simulateChange,
   renderItem,
   renderList,
   renderDragOverlay,
 }: DnDListProps<ItemId, Item>) {
+  const [items, setItems] = useState(finalItems)
+  useEffect(() => {
+    setItems(finalItems)
+  }, [finalItems])
+
+  const orderedItems = useMemo(
+    () => order(items, getItemOrder, 'asc'),
+    [getItemOrder, items],
+  )
+
   const droppableId = useId()
   const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
 
@@ -71,18 +92,24 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
         return
       }
 
-      const oldIndex = items.findIndex((item) => getItemId(item) === active.id)
-      const newIndex = items.findIndex((item) => getItemId(item) === over.id)
+      const oldIndex = orderedItems.findIndex(
+        (item) => getItemId(item) === active.id,
+      )
+      const newIndex = orderedItems.findIndex(
+        (item) => getItemId(item) === over.id,
+      )
 
       const newOrder = getNewOrder({
-        orders: items.map(getItemOrder),
+        orders: orderedItems.map(getItemOrder),
         sourceIndex: oldIndex,
         destinationIndex: newIndex,
       })
 
-      onChange(active.id as ItemId, { order: newOrder })
+      const changeParams = { id: active.id as ItemId, order: newOrder }
+      setItems(simulateChange(items, changeParams))
+      onChange(changeParams)
     },
-    [getItemId, getItemOrder, items, onChange],
+    [getItemId, getItemOrder, items, onChange, orderedItems, simulateChange],
   )
 
   return (
@@ -91,9 +118,13 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
       collisionDetection={closestCenter}
       onDragStart={({ active }) => setActiveItemId(active.id as ItemId)}
       onDragEnd={handleDragEnd}
+      onDragCancel={() => {
+        setActiveItemId(null)
+        setItems(finalItems)
+      }}
     >
       <SortableContext
-        items={items.map(getItemId)}
+        items={orderedItems.map(getItemId)}
         strategy={verticalListSortingStrategy}
       >
         {renderList({
@@ -102,7 +133,7 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
           },
           content: (
             <>
-              {items.map((item) => {
+              {orderedItems.map((item) => {
                 const key = getItemId(item)
                 return (
                   <DnDItem

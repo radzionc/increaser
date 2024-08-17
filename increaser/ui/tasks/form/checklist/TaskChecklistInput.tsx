@@ -47,11 +47,14 @@ export const TaskChecklistInput = ({
           items={items}
           getItemId={(item) => item.id}
           getItemOrder={(item) => item.order}
-          onChange={(id, { order }) => {
+          onChange={({ id, order }) => {
             onChange(
               value.map((item) => (item.id === id ? { ...item, order } : item)),
             )
           }}
+          simulateChange={(items, { id, order }) =>
+            items.map((item) => (item.id === id ? { ...item, order } : item))
+          }
           renderList={({ content, containerProps }) => (
             <VStack {...containerProps}>{content}</VStack>
           )}

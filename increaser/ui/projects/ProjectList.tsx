@@ -9,8 +9,6 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { EditProjectForm } from './form/EditProjectForm'
 import { ProjectItem } from './ProjectItem'
 import { Wrap } from '@lib/ui/base/Wrap'
-import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
-import { useEffect, useState } from 'react'
 import { useFilteredByStatusProjects } from './hooks/useFilteredByStatusProjects'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
 
@@ -19,29 +17,24 @@ export const ProjectList = () => {
 
   const [activeItemId] = useActiveItemId()
 
-  const [items, setItems] = useState(projects)
-  useEffect(() => {
-    setItems(projects)
-  }, [projects])
-
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   return (
     <DnDList
-      items={sortEntitiesWithOrder(items)}
+      items={projects}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
-      onChange={(id, { order }) => {
+      onChange={({ id, order }) => {
         updateProject({
           id,
           fields: {
             order,
           },
         })
-        setItems((prev) =>
-          prev.map((item) => (item.id === id ? { ...item, order } : item)),
-        )
       }}
+      simulateChange={(items, { id, order }) =>
+        items.map((item) => (item.id === id ? { ...item, order } : item))
+      }
       renderList={({ content, containerProps }) => (
         <VStack {...containerProps}>{content}</VStack>
       )}

@@ -2,8 +2,6 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { VisionAttributeItem } from './VisionAttributeItem'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
-import { useEffect, useState } from 'react'
-import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { DnDList } from '@lib/dnd/DnDList'
 import { Wrap } from '@lib/ui/base/Wrap'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
@@ -16,11 +14,6 @@ import { useVisionAttributes } from './hooks/useVisionAttributes'
 export const VisionAttributes = () => {
   const visionAttributes = useVisionAttributes()
 
-  const [items, setItems] = useState(visionAttributes)
-  useEffect(() => {
-    setItems(visionAttributes)
-  }, [visionAttributes])
-
   const [activeItemId] = useActiveItemId()
 
   const { mutate: updateVisionAttribute } =
@@ -28,20 +21,20 @@ export const VisionAttributes = () => {
 
   return (
     <DnDList
-      items={sortEntitiesWithOrder(items)}
+      items={visionAttributes}
       getItemId={(item) => item.id}
       getItemOrder={(item) => item.order}
-      onChange={(id, { order }) => {
+      onChange={({ id, order }) => {
         updateVisionAttribute({
           id,
           fields: {
             order,
           },
         })
-        setItems((prev) =>
-          prev.map((item) => (item.id === id ? { ...item, order } : item)),
-        )
       }}
+      simulateChange={(items, { id, order }) =>
+        items.map((item) => (item.id === id ? { ...item, order } : item))
+      }
       renderList={({ content, containerProps }) => (
         <VStack {...containerProps}>{content}</VStack>
       )}
