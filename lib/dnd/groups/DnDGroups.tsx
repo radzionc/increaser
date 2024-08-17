@@ -1,12 +1,5 @@
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import {
   DndContext,
   PointerSensor,
@@ -15,11 +8,8 @@ import {
   UniqueIdentifier,
   DragEndEvent,
   DragOverlay,
-  CollisionDetection,
-  pointerWithin,
-  rectIntersection,
-  getFirstCollision,
   MeasuringStrategy,
+  closestCorners,
 } from '@dnd-kit/core'
 import { order } from '@lib/utils/array/order'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
@@ -102,15 +92,6 @@ export function DnDGroups<
   const groups = useMemo(() => toGroups(items), [toGroups, items])
 
   const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
-
-  const lastOverId = useRef<UniqueIdentifier | null>(null)
-  const recentlyMovedToNewContainer = useRef(false)
-
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      recentlyMovedToNewContainer.current = false
-    })
-  }, [groups])
 
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -212,8 +193,6 @@ export function DnDGroups<
         return
       }
 
-      recentlyMovedToNewContainer.current = true
-
       const changeParams = {
         id: active.id as ItemId,
         order: getNewOrder({
@@ -230,31 +209,6 @@ export function DnDGroups<
 
   const groupKeys = order(getRecordKeys(groups), getGroupOrder, 'asc')
 
-  const collisionDetectionStrategy: CollisionDetection = useCallback(
-    (args) => {
-      const pointerIntersections = pointerWithin(args)
-      const intersections =
-        pointerIntersections.length > 0
-          ? pointerIntersections
-          : rectIntersection(args)
-
-      const overId = getFirstCollision(intersections, 'id')
-
-      if (overId !== null) {
-        lastOverId.current = overId
-
-        return [{ id: overId }]
-      }
-
-      if (recentlyMovedToNewContainer.current) {
-        lastOverId.current = activeItemId
-      }
-
-      return lastOverId.current ? [{ id: lastOverId.current }] : []
-    },
-    [activeItemId],
-  )
-
   return (
     <DndContext
       sensors={sensors}
@@ -265,7 +219,7 @@ export function DnDGroups<
         setActiveItemId(null)
         setItems(finalItems)
       }}
-      collisionDetection={collisionDetectionStrategy}
+      collisionDetection={closestCorners}
       measuring={{
         droppable: {
           strategy: MeasuringStrategy.Always,
