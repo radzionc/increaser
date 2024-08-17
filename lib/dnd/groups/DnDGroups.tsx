@@ -230,23 +230,30 @@ export function DnDGroups<
 
   const groupKeys = order(getRecordKeys(groups), getGroupOrder, 'asc')
 
-  const collisionDetectionStrategy: CollisionDetection = useCallback((args) => {
-    const pointerIntersections = pointerWithin(args)
-    const intersections =
-      pointerIntersections.length > 0
-        ? pointerIntersections
-        : rectIntersection(args)
+  const collisionDetectionStrategy: CollisionDetection = useCallback(
+    (args) => {
+      const pointerIntersections = pointerWithin(args)
+      const intersections =
+        pointerIntersections.length > 0
+          ? pointerIntersections
+          : rectIntersection(args)
 
-    const overId = getFirstCollision(intersections, 'id')
+      const overId = getFirstCollision(intersections, 'id')
 
-    if (overId !== null) {
-      lastOverId.current = overId
+      if (overId !== null) {
+        lastOverId.current = overId
 
-      return [{ id: overId }]
-    }
+        return [{ id: overId }]
+      }
 
-    return lastOverId.current ? [{ id: lastOverId.current }] : []
-  }, [])
+      if (recentlyMovedToNewContainer.current) {
+        lastOverId.current = activeItemId
+      }
+
+      return lastOverId.current ? [{ id: lastOverId.current }] : []
+    },
+    [activeItemId],
+  )
 
   return (
     <DndContext

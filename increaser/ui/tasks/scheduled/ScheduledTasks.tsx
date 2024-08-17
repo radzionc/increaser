@@ -98,7 +98,6 @@ export const ScheduledTasks = () => {
                   ? (children) => (
                       <DraggableTightListItemContainer
                         isDragging={isDragging}
-                        key={item.id}
                         {...draggableProps}
                         {...dragHandleProps}
                       >
