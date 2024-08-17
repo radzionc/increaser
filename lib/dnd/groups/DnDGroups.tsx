@@ -300,9 +300,7 @@ export function DnDGroups<
         <DragOverlay>
           {renderDragOverlay({
             item: shouldBePresent(
-              groupKeys
-                .flatMap((groupId) => groups[groupId])
-                .find((item) => getItemId(item) === activeItemId),
+              items.find((item) => getItemId(item) === activeItemId),
             ),
           })}
         </DragOverlay>

@@ -15,6 +15,7 @@ import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightList
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { useUncompleteScheduledTasks } from './useUncompleteScheduledTasks'
 import { useGroupScheduledTasks } from './useGroupScheduledTasks'
+import styled from 'styled-components'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {
@@ -23,6 +24,13 @@ const getDeadline = (groupId: ScheduledTaskGroupId) => {
 
   return Number(groupId)
 }
+
+const GroupContainer = styled(VStack)`
+  gap: 4px;
+  &:not(:last-child) {
+    padding-bottom: 32px;
+  }
+`
 
 export const ScheduledTasks = () => {
   const tasks = useUncompleteScheduledTasks()
@@ -34,85 +42,87 @@ export const ScheduledTasks = () => {
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   return (
-    <DnDGroups
-      items={tasks}
-      toGroups={toGroups}
-      getGroupOrder={(groupId) => {
-        if (groupId === 'overdue') {
-          return -1
-        }
+    <VStack>
+      <DnDGroups
+        items={tasks}
+        toGroups={toGroups}
+        getGroupOrder={(groupId) => {
+          if (groupId === 'overdue') {
+            return -1
+          }
 
-        return Number(groupId)
-      }}
-      getItemId={(task) => task.id}
-      getItemOrder={(task) => task.order}
-      onChange={({ id, order, groupId }) => {
-        updateTask({
-          id,
-          fields: {
-            order,
-            deadlineAt: getDeadline(groupId),
-          },
-        })
-      }}
-      simulateChange={(items, { id, order, groupId }) => {
-        return items.map((item) =>
-          item.id === id
-            ? { ...item, order, deadlineAt: getDeadline(groupId) }
-            : item,
-        )
-      }}
-      renderGroup={({ content, groupId, containerProps }) => (
-        <VStack {...containerProps} gap={4} key={groupId}>
-          <TasksGroupHeader value={groupId} />
-          {groupId !== 'overdue' && (
-            <RecurringTasksForecast value={Number(groupId)} />
-          )}
-
-          <VStack>
-            {content}
+          return Number(groupId)
+        }}
+        getItemId={(task) => task.id}
+        getItemOrder={(task) => task.order}
+        onChange={({ id, order, groupId }) => {
+          updateTask({
+            id,
+            fields: {
+              order,
+              deadlineAt: getDeadline(groupId),
+            },
+          })
+        }}
+        simulateChange={(items, { id, order, groupId }) => {
+          return items.map((item) =>
+            item.id === id
+              ? { ...item, order, deadlineAt: getDeadline(groupId) }
+              : item,
+          )
+        }}
+        renderGroup={({ content, groupId, containerProps }) => (
+          <GroupContainer {...containerProps} key={groupId}>
+            <TasksGroupHeader value={groupId} />
             {groupId !== 'overdue' && (
-              <CreateTask
-                defaultValue={{
-                  deadlineAt: groupId === 'todo' ? null : Number(groupId),
-                }}
-              />
+              <RecurringTasksForecast value={Number(groupId)} />
             )}
-          </VStack>
-        </VStack>
-      )}
-      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
-        return (
-          <Wrap
-            wrap={
-              activeItemId === null
-                ? (children) => (
-                    <DraggableTightListItemContainer
-                      isDragging={isDragging}
-                      key={item.id}
-                      {...draggableProps}
-                      {...dragHandleProps}
-                    >
-                      {children}
-                    </DraggableTightListItemContainer>
-                  )
-                : undefined
-            }
-            key={item.id}
-          >
+
+            <VStack>
+              {content}
+              {groupId !== 'overdue' && (
+                <CreateTask
+                  defaultValue={{
+                    deadlineAt: groupId === 'todo' ? null : Number(groupId),
+                  }}
+                />
+              )}
+            </VStack>
+          </GroupContainer>
+        )}
+        renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+          return (
+            <Wrap
+              wrap={
+                activeItemId === null
+                  ? (children) => (
+                      <DraggableTightListItemContainer
+                        isDragging={isDragging}
+                        key={item.id}
+                        {...draggableProps}
+                        {...dragHandleProps}
+                      >
+                        {children}
+                      </DraggableTightListItemContainer>
+                    )
+                  : undefined
+              }
+              key={item.id}
+            >
+              <CurrentTaskProvider value={item} key={item.id}>
+                <TaskItem />
+              </CurrentTaskProvider>
+            </Wrap>
+          )
+        }}
+        renderDragOverlay={({ item }) => (
+          <TightListItemDragOverlay>
             <CurrentTaskProvider value={item} key={item.id}>
               <TaskItem />
             </CurrentTaskProvider>
-          </Wrap>
-        )
-      }}
-      renderDragOverlay={({ item }) => (
-        <TightListItemDragOverlay>
-          <CurrentTaskProvider value={item} key={item.id}>
-            <TaskItem />
-          </CurrentTaskProvider>
-        </TightListItemDragOverlay>
-      )}
-    />
+          </TightListItemDragOverlay>
+        )}
+      />
+    </VStack>
   )
 }
