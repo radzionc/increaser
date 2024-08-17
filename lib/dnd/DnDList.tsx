@@ -82,7 +82,7 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
 
       onChange(active.id as ItemId, { order: newOrder })
     },
-    [getItemOrder, items, onChange],
+    [getItemId, getItemOrder, items, onChange],
   )
 
   return (

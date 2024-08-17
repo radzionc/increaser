@@ -5,7 +5,7 @@ import {
   taskStatusName,
 } from '@increaser/entities/Task'
 import { TaskBoardContainer } from './TaskBoardContainer'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback } from 'react'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { TaskColumnContainer } from './column/TaskColumnContainer'
 import { ColumnContent, ColumnHeader } from './column/ColumnHeader'
@@ -47,14 +47,9 @@ const getTaskProjectId = (task: Task) => task.projectId
 export const TaskBoard = () => {
   const tasks = useFilterByProject(useTasks(), getTaskProjectId)
 
-  const [items, setItems] = useState(tasks)
-  useEffect(() => {
-    setItems(tasks)
-  }, [tasks])
-
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
-  const groups = useMemo(() => {
+  const toGroups = useCallback((items: Task[]) => {
     return {
       ...makeRecord(taskStatuses, () => []),
       ...groupItems<Task, TaskStatus>(
@@ -62,16 +57,17 @@ export const TaskBoard = () => {
         (task) => task.status,
       ),
     }
-  }, [items])
+  }, [])
 
   return (
     <TaskBoardContainer>
       <DnDGroups
-        groups={groups}
+        items={tasks}
+        toGroups={toGroups}
         getGroupOrder={(status) => taskStatuses.indexOf(status)}
         getItemId={(task) => task.id}
         getItemOrder={(task) => task.order}
-        onChange={(id, { order, groupId }) => {
+        onChange={({ id, order, groupId }) => {
           updateTask({
             id,
             fields: {
@@ -79,10 +75,10 @@ export const TaskBoard = () => {
               status: groupId,
             },
           })
-          setItems((prev) =>
-            prev.map((item) =>
-              item.id === id ? { ...item, order, status: groupId } : item,
-            ),
+        }}
+        simulateChange={(items, { id, order, groupId }) => {
+          return items.map((item) =>
+            item.id === id ? { ...item, order, status: groupId } : item,
           )
         }}
         renderGroup={({

@@ -1,5 +1,12 @@
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {
   DndContext,
   PointerSensor,
@@ -24,7 +31,11 @@ import { getDndGroupsItemDestination } from './getDnDGroupsItemDestination'
 import { getDndGroupsItemSource } from './getDnDGroupsItemSource'
 import { areEqualDnDGroupsItemLocations } from './DnDGroupsItemLocation'
 
-export type ItemChangeParams<GroupId extends string> = {
+export type ItemChangeParams<
+  GroupId extends string,
+  ItemId extends UniqueIdentifier,
+> = {
+  id: ItemId
   order: number
   groupId: GroupId
 }
@@ -52,11 +63,16 @@ export type DnDGroupsProps<
   ItemId extends UniqueIdentifier,
   Item,
 > = {
-  groups: Record<GroupId, Item[]>
+  items: Item[]
+  toGroups: (items: Item[]) => Record<GroupId, Item[]>
+  simulateChange: (
+    items: Item[],
+    params: ItemChangeParams<GroupId, ItemId>,
+  ) => Item[]
   getGroupOrder: (groupId: GroupId) => number
   getItemOrder: (item: Item) => number
   getItemId: (item: Item) => ItemId
-  onChange: (itemId: ItemId, params: ItemChangeParams<GroupId>) => void
+  onChange: (params: ItemChangeParams<GroupId, ItemId>) => void
   renderGroup: (params: RenderGroupParams<GroupId>) => ReactNode
   renderItem: (params: RenderItemParams<Item>) => ReactNode
   renderDragOverlay?: (params: RenderDragOverlayParams<Item>) => ReactNode
@@ -67,19 +83,23 @@ export function DnDGroups<
   ItemId extends UniqueIdentifier,
   Item,
 >({
-  groups: finalGroups,
+  items: finalItems,
+  toGroups,
   getItemOrder,
   getItemId,
+  simulateChange,
   onChange,
   renderGroup,
   renderItem,
   renderDragOverlay,
   getGroupOrder,
 }: DnDGroupsProps<GroupId, ItemId, Item>) {
-  const [groups, setGroups] = useState(finalGroups)
+  const [items, setItems] = useState(finalItems)
   useEffect(() => {
-    setGroups(finalGroups)
-  }, [finalGroups])
+    setItems(finalItems)
+  }, [finalItems])
+
+  const groups = useMemo(() => toGroups(items), [toGroups, items])
 
   const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
 
@@ -123,7 +143,7 @@ export function DnDGroups<
         (item) => getItemId(item) === itemId,
       )
     },
-    [groups, getItemGroupId, getItemId],
+    [getItemGroupId, getItemId, getOrderedItems],
   )
 
   const handleDragEnd = useCallback(
@@ -149,16 +169,27 @@ export function DnDGroups<
 
       const isSameGroup = source.groupId === destination.groupId
 
-      onChange(active.id as ItemId, {
+      const changeParams = {
+        id: active.id as ItemId,
         order: getNewOrder({
           orders: getOrderedItems(source.groupId).map(getItemOrder),
           sourceIndex: isSameGroup ? source.index : null,
           destinationIndex: destination.index,
         }),
         groupId: destination.groupId,
-      })
+      }
+
+      setItems(simulateChange(items, changeParams))
+      onChange(changeParams)
     },
-    [getItemOrder, groups, onChange],
+    [
+      getItemIndex,
+      getItemOrder,
+      getOrderedItems,
+      items,
+      onChange,
+      simulateChange,
+    ],
   )
 
   const handleDragOver = useCallback(
@@ -183,40 +214,39 @@ export function DnDGroups<
 
       recentlyMovedToNewContainer.current = true
 
-      onChange(active.id as ItemId, {
+      const changeParams = {
+        id: active.id as ItemId,
         order: getNewOrder({
           orders: getOrderedItems(source.groupId).map(getItemOrder),
           sourceIndex: null,
           destinationIndex: destination.index,
         }),
         groupId: destination.groupId,
-      })
+      }
+      setItems(simulateChange(items, changeParams))
     },
-    [getItemOrder, groups, onChange],
+    [getItemIndex, getItemOrder, getOrderedItems, items, simulateChange],
   )
 
   const groupKeys = order(getRecordKeys(groups), getGroupOrder, 'asc')
 
-  const collisionDetectionStrategy: CollisionDetection = useCallback(
-    (args) => {
-      const pointerIntersections = pointerWithin(args)
-      const intersections =
-        pointerIntersections.length > 0
-          ? pointerIntersections
-          : rectIntersection(args)
+  const collisionDetectionStrategy: CollisionDetection = useCallback((args) => {
+    const pointerIntersections = pointerWithin(args)
+    const intersections =
+      pointerIntersections.length > 0
+        ? pointerIntersections
+        : rectIntersection(args)
 
-      const overId = getFirstCollision(intersections, 'id')
+    const overId = getFirstCollision(intersections, 'id')
 
-      if (overId !== null) {
-        lastOverId.current = overId
+    if (overId !== null) {
+      lastOverId.current = overId
 
-        return [{ id: overId }]
-      }
+      return [{ id: overId }]
+    }
 
-      return lastOverId.current ? [{ id: lastOverId.current }] : []
-    },
-    [activeItemId, getOrderedItems],
-  )
+    return lastOverId.current ? [{ id: lastOverId.current }] : []
+  }, [])
 
   return (
     <DndContext
@@ -226,7 +256,7 @@ export function DnDGroups<
       onDragOver={handleDragOver}
       onDragCancel={() => {
         setActiveItemId(null)
-        setGroups(finalGroups)
+        setItems(finalItems)
       }}
       collisionDetection={collisionDetectionStrategy}
       measuring={{

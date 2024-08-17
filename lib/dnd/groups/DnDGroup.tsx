@@ -36,7 +36,7 @@ export function DnDGroup<
     }
 
     return false
-  }, [over])
+  }, [id, over])
 
   return (
     <SortableContext
