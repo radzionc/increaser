@@ -9,7 +9,6 @@ import {
   DragEndEvent,
   DragOverlay,
   MeasuringStrategy,
-  closestCorners,
 } from '@dnd-kit/core'
 import { order } from '@lib/utils/array/order'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
@@ -19,7 +18,10 @@ import { DnDItem } from '../DnDItem'
 import { DnDGroup } from './DnDGroup'
 import { getDndGroupsItemDestination } from './getDnDGroupsItemDestination'
 import { getDndGroupsItemSource } from './getDnDGroupsItemSource'
-import { areEqualDnDGroupsItemLocations } from './DnDGroupsItemLocation'
+import {
+  areEqualDnDGroupsItemLocations,
+  DnDGroupsItemLocation,
+} from './DnDGroupsItemLocation'
 
 export type ItemChangeParams<
   GroupId extends string,
@@ -68,6 +70,11 @@ export type DnDGroupsProps<
   renderDragOverlay?: (params: RenderDragOverlayParams<Item>) => ReactNode
 }
 
+type ActiveItem<GroupId extends string> = {
+  id: string
+  source: DnDGroupsItemLocation<GroupId>
+}
+
 export function DnDGroups<
   GroupId extends string,
   ItemId extends UniqueIdentifier,
@@ -91,7 +98,7 @@ export function DnDGroups<
 
   const groups = useMemo(() => toGroups(items), [toGroups, items])
 
-  const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
+  const [activeItem, setActiveItem] = useState<ActiveItem<GroupId> | null>(null)
 
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -107,30 +114,45 @@ export function DnDGroups<
   )
 
   const getItemGroupId = useCallback(
-    (itemId: ItemId) => {
+    (groups: Record<GroupId, Item[]>, itemId: ItemId) => {
       const entry = toEntries(groups).find(({ value }) =>
         value.some((item) => getItemId(item) === itemId),
       )
       return shouldBePresent(entry).key
     },
-    [groups, getItemId],
+    [getItemId],
   )
 
   const getItemIndex = useCallback(
     (itemId: ItemId) => {
-      const groupId = getItemGroupId(itemId)
+      const groupId = getItemGroupId(groups, itemId)
 
       return getOrderedItems(groupId).findIndex(
         (item) => getItemId(item) === itemId,
       )
     },
-    [getItemGroupId, getItemId, getOrderedItems],
+    [getItemGroupId, getItemId, getOrderedItems, groups],
   )
 
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
-      setActiveItemId(null)
+      if (!activeItem) {
+        return
+      }
+      const { source: intitalSource } = activeItem
+
+      setActiveItem(null)
+
       if (!over) {
+        return
+      }
+
+      const destination = getDndGroupsItemDestination<GroupId, ItemId>({
+        item: over,
+        getItemIndex,
+      })
+
+      if (areEqualDnDGroupsItemLocations(intitalSource, destination)) {
         return
       }
 
@@ -139,18 +161,9 @@ export function DnDGroups<
         getItemIndex,
       })
 
-      const destination = getDndGroupsItemDestination<GroupId, ItemId>({
-        item: over,
-        getItemIndex,
-      })
-
-      if (areEqualDnDGroupsItemLocations(source, destination)) {
-        return
-      }
-
       const isSameGroup = source.groupId === destination.groupId
 
-      const changeParams = {
+      const newItems = simulateChange(items, {
         id: active.id as ItemId,
         order: getNewOrder({
           orders: getOrderedItems(source.groupId).map(getItemOrder),
@@ -158,18 +171,35 @@ export function DnDGroups<
           destinationIndex: destination.index,
         }),
         groupId: destination.groupId,
-      }
+      })
 
-      setItems(simulateChange(items, changeParams))
-      onChange(changeParams)
+      setItems(newItems)
+
+      const groups = toGroups(newItems)
+      const groupId = getItemGroupId(groups, active.id as ItemId)
+      const order = getItemOrder(
+        shouldBePresent(
+          groups[groupId].find((item) => getItemId(item) === active.id),
+        ),
+      )
+
+      onChange({
+        id: active.id as ItemId,
+        order,
+        groupId,
+      })
     },
     [
+      activeItem,
+      getItemGroupId,
+      getItemId,
       getItemIndex,
       getItemOrder,
       getOrderedItems,
       items,
       onChange,
       simulateChange,
+      toGroups,
     ],
   )
 
@@ -212,14 +242,22 @@ export function DnDGroups<
   return (
     <DndContext
       sensors={sensors}
-      onDragStart={({ active }) => setActiveItemId(active.id as ItemId)}
+      onDragStart={({ active }) => {
+        setActiveItem({
+          id: active.id as string,
+          source: getDndGroupsItemSource<GroupId, ItemId>({
+            item: active,
+            getItemIndex,
+          }),
+        })
+      }}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
       onDragCancel={() => {
-        setActiveItemId(null)
+        setActiveItem(null)
         setItems(finalItems)
       }}
-      collisionDetection={closestCorners}
+      // collisionDetection={closestCorners}
       measuring={{
         droppable: {
           strategy: MeasuringStrategy.Always,
@@ -257,11 +295,11 @@ export function DnDGroups<
         )
       })}
 
-      {renderDragOverlay && activeItemId && (
+      {renderDragOverlay && activeItem && (
         <DragOverlay>
           {renderDragOverlay({
             item: shouldBePresent(
-              items.find((item) => getItemId(item) === activeItemId),
+              items.find((item) => getItemId(item) === activeItem.id),
             ),
           })}
         </DragOverlay>
