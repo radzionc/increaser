@@ -67,7 +67,7 @@ export function DnDGroups<
   ItemId extends UniqueIdentifier,
   Item,
 >({
-  groups,
+  groups: finalGroups,
   getItemOrder,
   getItemId,
   onChange,
@@ -76,6 +76,11 @@ export function DnDGroups<
   renderDragOverlay,
   getGroupOrder,
 }: DnDGroupsProps<GroupId, ItemId, Item>) {
+  const [groups, setGroups] = useState(finalGroups)
+  useEffect(() => {
+    setGroups(finalGroups)
+  }, [finalGroups])
+
   const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
 
   const lastOverId = useRef<UniqueIdentifier | null>(null)
@@ -124,7 +129,7 @@ export function DnDGroups<
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
       setActiveItemId(null)
-      if (!over || active.id === over.id) {
+      if (!over) {
         return
       }
 
@@ -144,14 +149,44 @@ export function DnDGroups<
 
       const isSameGroup = source.groupId === destination.groupId
 
-      if (!isSameGroup) {
-        recentlyMovedToNewContainer.current = true
-      }
-
       onChange(active.id as ItemId, {
         order: getNewOrder({
           orders: getOrderedItems(source.groupId).map(getItemOrder),
           sourceIndex: isSameGroup ? source.index : null,
+          destinationIndex: destination.index,
+        }),
+        groupId: destination.groupId,
+      })
+    },
+    [getItemOrder, groups, onChange],
+  )
+
+  const handleDragOver = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      if (!over) {
+        return
+      }
+
+      const source = getDndGroupsItemSource<GroupId, ItemId>({
+        item: active,
+        getItemIndex,
+      })
+
+      const destination = getDndGroupsItemDestination<GroupId, ItemId>({
+        item: over,
+        getItemIndex,
+      })
+
+      if (source.groupId === destination.groupId) {
+        return
+      }
+
+      recentlyMovedToNewContainer.current = true
+
+      onChange(active.id as ItemId, {
+        order: getNewOrder({
+          orders: getOrderedItems(source.groupId).map(getItemOrder),
+          sourceIndex: null,
           destinationIndex: destination.index,
         }),
         groupId: destination.groupId,
@@ -178,10 +213,6 @@ export function DnDGroups<
         return [{ id: overId }]
       }
 
-      if (recentlyMovedToNewContainer.current) {
-        lastOverId.current = activeItemId
-      }
-
       return lastOverId.current ? [{ id: lastOverId.current }] : []
     },
     [activeItemId, getOrderedItems],
@@ -192,6 +223,11 @@ export function DnDGroups<
       sensors={sensors}
       onDragStart={({ active }) => setActiveItemId(active.id as ItemId)}
       onDragEnd={handleDragEnd}
+      onDragOver={handleDragOver}
+      onDragCancel={() => {
+        setActiveItemId(null)
+        setGroups(finalGroups)
+      }}
       collisionDetection={collisionDetectionStrategy}
       measuring={{
         droppable: {
