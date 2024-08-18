@@ -16,6 +16,10 @@ import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { useUncompleteScheduledTasks } from './useUncompleteScheduledTasks'
 import { useGroupScheduledTasks } from './useGroupScheduledTasks'
 import styled from 'styled-components'
+import { useEffect, useState } from 'react'
+import { EditTaskForm } from '../form/EditTaskForm'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { getNewOrder } from '@lib/utils/order/getNewOrder'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {
@@ -41,37 +45,53 @@ export const ScheduledTasks = () => {
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
+  const [groups, setGroups] = useState(() => toGroups(tasks))
+  useEffect(() => {
+    setGroups(toGroups(tasks))
+  }, [tasks, toGroups])
+
   return (
     <VStack>
       <DnDGroups
-        items={tasks}
-        toGroups={toGroups}
-        getGroupOrder={(groupId) => {
-          if (groupId === 'overdue') {
-            return -1
-          }
-
-          return Number(groupId)
-        }}
+        groups={groups}
         getItemId={(task) => task.id}
-        getItemOrder={(task) => task.order}
-        onChange={({ id, order, groupId }) => {
+        onChange={(id, { index, groupId }) => {
+          const group = shouldBePresent(
+            groups.find((group) => group.key === groupId),
+          )
+
+          const initialGroup = shouldBePresent(
+            groups.find((group) => group.value.some((task) => task.id === id)),
+          )
+
+          const order = getNewOrder({
+            orders: group.value.map((task) => task.order),
+            sourceIndex:
+              initialGroup.key === group.key
+                ? group.value.findIndex((task) => task.id === id)
+                : null,
+            destinationIndex: index,
+          })
+
+          const deadlineAt = getDeadline(groupId)
+
           updateTask({
             id,
             fields: {
               order,
-              deadlineAt: getDeadline(groupId),
+              deadlineAt,
             },
           })
-        }}
-        simulateChange={(items, { id, order, groupId }) => {
-          return items.map((item) =>
-            item.id === id
-              ? { ...item, order, deadlineAt: getDeadline(groupId) }
-              : item,
+
+          setGroups(
+            toGroups(
+              tasks.map((task) =>
+                task.id === id ? { ...task, order, deadlineAt } : task,
+              ),
+            ),
           )
         }}
-        renderGroup={({ content, groupId, containerProps }) => (
+        renderGroup={({ groupId, props: { children, ...containerProps } }) => (
           <GroupContainer {...containerProps} key={groupId}>
             <TasksGroupHeader value={groupId} />
             {groupId !== 'overdue' && (
@@ -79,7 +99,7 @@ export const ScheduledTasks = () => {
             )}
 
             <VStack>
-              {content}
+              {children}
               {groupId !== 'overdue' && (
                 <CreateTask
                   defaultValue={{
@@ -90,37 +110,41 @@ export const ScheduledTasks = () => {
             </VStack>
           </GroupContainer>
         )}
-        renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+        renderItem={({ item, draggableProps, dragHandleProps, status }) => {
+          const isEditing = activeItemId === item.id
+
           return (
-            <Wrap
-              wrap={
-                activeItemId === null
-                  ? (children) => (
-                      <DraggableTightListItemContainer
-                        isDragging={isDragging}
-                        {...draggableProps}
-                        {...dragHandleProps}
-                      >
-                        {children}
-                      </DraggableTightListItemContainer>
-                    )
-                  : undefined
-              }
-              key={item.id}
-            >
-              <CurrentTaskProvider value={item} key={item.id}>
-                <TaskItem />
-              </CurrentTaskProvider>
-            </Wrap>
+            <CurrentTaskProvider value={item} key={item.id}>
+              {isEditing ? (
+                <EditTaskForm />
+              ) : (
+                <Wrap
+                  wrap={
+                    activeItemId === null
+                      ? (children) =>
+                          status === 'overlay' ? (
+                            <TightListItemDragOverlay>
+                              {children}
+                            </TightListItemDragOverlay>
+                          ) : (
+                            <DraggableTightListItemContainer
+                              isDragging={status === 'placeholder'}
+                              {...draggableProps}
+                              {...dragHandleProps}
+                            >
+                              {children}
+                            </DraggableTightListItemContainer>
+                          )
+                      : undefined
+                  }
+                  key={item.id}
+                >
+                  <TaskItem />
+                </Wrap>
+              )}
+            </CurrentTaskProvider>
           )
         }}
-        renderDragOverlay={({ item }) => (
-          <TightListItemDragOverlay>
-            <CurrentTaskProvider value={item} key={item.id}>
-              <TaskItem />
-            </CurrentTaskProvider>
-          </TightListItemDragOverlay>
-        )}
       />
     </VStack>
   )

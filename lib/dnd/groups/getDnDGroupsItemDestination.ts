@@ -1,26 +1,21 @@
-import { Over, UniqueIdentifier } from '@dnd-kit/core'
+import { Over } from '@dnd-kit/core'
 import { DnDGroupsItemLocation } from './DnDGroupsItemLocation'
+import { SortableData } from '@dnd-kit/sortable'
 
-type Input<ItemId extends UniqueIdentifier> = {
+type Input = {
   item: Over
-  getItemIndex: (itemId: ItemId) => number
 }
 
-export const getDndGroupsItemDestination = <
-  GroupId extends string,
-  ItemId extends UniqueIdentifier,
->({
+export const getDndGroupsItemDestination = <GroupId extends string>({
   item,
-  getItemIndex,
-}: Input<ItemId>): DnDGroupsItemLocation<GroupId> => {
+}: Input): DnDGroupsItemLocation<GroupId> => {
   const destinationItem = item.data.current
 
   if (destinationItem) {
-    const groupId = destinationItem.sortable.containerId as GroupId
-    const index = getItemIndex(item.id as ItemId)
+    const { containerId, index } = (destinationItem as SortableData).sortable
 
     return {
-      groupId,
+      groupId: containerId as GroupId,
       index,
     }
   }

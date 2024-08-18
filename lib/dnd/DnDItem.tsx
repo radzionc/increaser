@@ -6,7 +6,6 @@ import { CSS } from '@dnd-kit/utilities'
 type RenderParams = {
   draggableProps: Record<string, any>
   dragHandleProps: Record<string, any>
-  isDragging: boolean
 }
 
 type DnDItemProps<ItemId extends UniqueIdentifier> = {
@@ -18,14 +17,8 @@ export function DnDItem<ItemId extends UniqueIdentifier>({
   id,
   render,
 }: DnDItemProps<ItemId>) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id })
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id })
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -41,6 +34,5 @@ export function DnDItem<ItemId extends UniqueIdentifier>({
     dragHandleProps: {
       ...listeners,
     },
-    isDragging,
   })
 }

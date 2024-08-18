@@ -14,12 +14,13 @@ import { ScheduledTask } from '@increaser/entities/Task'
 import { range } from '@lib/utils/array/range'
 import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
 import { getGroupId, ScheduledTaskGroupId } from './ScheduledTaskGroupId'
+import { Entry } from '@lib/utils/entities/Entry'
 
 export const useGroupScheduledTasks = () => {
   const [timeGrouping] = useTaskTimeGrouping()
 
   return useCallback(
-    (items: ScheduledTask[]): Record<ScheduledTaskGroupId, ScheduledTask[]> => {
+    (items: ScheduledTask[]) => {
       const now = Date.now()
       const nextWeekEndsAt = getWeekEndedAt(addWeeks(now, 1).getTime())
       const options = [nextWeekEndsAt]
@@ -52,7 +53,7 @@ export const useGroupScheduledTasks = () => {
           week: () => differenceInWeeks(lastGroupEndsAt, thisGroupEndsAt),
         }) + 1
 
-      const result: Record<ScheduledTaskGroupId, ScheduledTask[]> = {}
+      let result: Entry<ScheduledTaskGroupId, ScheduledTask[]>[] = []
 
       range(groupsCount).forEach((index) => {
         const groupEndsAt = match(timeGrouping, {
@@ -61,7 +62,10 @@ export const useGroupScheduledTasks = () => {
         })
 
         const key = groupEndsAt.toString()
-        result[key] = []
+        result.push({
+          key,
+          value: [],
+        })
       })
 
       items.forEach((task) => {
@@ -69,8 +73,25 @@ export const useGroupScheduledTasks = () => {
           deadlineAt: task.deadlineAt,
           timeGroup: timeGrouping,
         })
-        result[key] = result[key] || []
-        result[key].push(task)
+        if (key === 'overdue' && result[0].key !== 'overdue') {
+          result = [
+            {
+              key: 'overdue',
+              value: [],
+            },
+            ...result,
+          ]
+        }
+        result = result.map((group) => {
+          if (group.key === key) {
+            return {
+              key,
+              value: [...group.value, task],
+            }
+          }
+
+          return group
+        })
       })
 
       return result

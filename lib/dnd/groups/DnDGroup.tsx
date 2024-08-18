@@ -3,7 +3,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { ReactNode, useMemo } from 'react'
 
 type RenderParams = {
-  containerProps: Record<string, any>
+  props: Record<string, any>
   isDraggingOver: boolean
 }
 
@@ -46,7 +46,7 @@ export function DnDGroup<
     >
       {render({
         isDraggingOver,
-        containerProps: {
+        props: {
           'data-droppable-id': id,
           ref: setNodeRef,
         },

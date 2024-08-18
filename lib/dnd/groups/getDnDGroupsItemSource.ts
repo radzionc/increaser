@@ -1,26 +1,21 @@
-import { Active, UniqueIdentifier } from '@dnd-kit/core'
+import { Active } from '@dnd-kit/core'
 import { DnDGroupsItemLocation } from './DnDGroupsItemLocation'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { SortableData } from '@dnd-kit/sortable'
 
-type Input<ItemId extends UniqueIdentifier> = {
+type Input = {
   item: Active
-  getItemIndex: (itemId: ItemId) => number
 }
 
-export const getDndGroupsItemSource = <
-  GroupId extends string,
-  ItemId extends UniqueIdentifier,
->({
+export const getDndGroupsItemSource = <GroupId extends string>({
   item,
-  getItemIndex,
-}: Input<ItemId>): DnDGroupsItemLocation<GroupId> => {
-  const groupId = shouldBePresent(item.data.current).sortable
-    .containerId as GroupId
-
-  const index = getItemIndex(item.id as ItemId)
+}: Input): DnDGroupsItemLocation<GroupId> => {
+  const { containerId, index } = (
+    shouldBePresent(item.data.current) as SortableData
+  ).sortable
 
   return {
-    groupId,
+    groupId: containerId as GroupId,
     index,
   }
 }

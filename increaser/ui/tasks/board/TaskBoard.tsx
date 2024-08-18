@@ -5,7 +5,7 @@ import {
   taskStatusName,
 } from '@increaser/entities/Task'
 import { TaskBoardContainer } from './TaskBoardContainer'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { TaskColumnContainer } from './column/TaskColumnContainer'
 import { ColumnContent, ColumnHeader } from './column/ColumnHeader'
@@ -23,9 +23,14 @@ import { useFilterByProject } from '../../projects/filter/useFilterByProject'
 import { useTasks } from '../hooks/useTasks'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { makeRecord } from '@lib/utils/record/makeRecord'
+import { DnDItemStatus } from '@lib/dnd/DnDItemStatus'
+import { recordMap } from '@lib/utils/record/recordMap'
+import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { toEntries } from '@lib/utils/record/toEntries'
+import { getNewOrder } from '@lib/utils/order/getNewOrder'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
-type DraggableItemStatus = 'idle' | 'overlay' | 'shadow'
-const DraggableTaskItem = styled(TaskItem)<{ status: DraggableItemStatus }>`
+const DraggableTaskItem = styled(TaskItem)<{ status: DnDItemStatus }>`
   ${({ status }) =>
     match(status, {
       idle: () => css``,
@@ -36,7 +41,7 @@ const DraggableTaskItem = styled(TaskItem)<{ status: DraggableItemStatus }>`
           border-color: ${getColor('mistExtra')};
         }
       `,
-      shadow: () => css`
+      placeholder: () => css`
         opacity: 0.4;
       `,
     })}
@@ -50,24 +55,46 @@ export const TaskBoard = () => {
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   const toGroups = useCallback((items: Task[]) => {
-    return {
+    return toEntries<TaskStatus, Task[]>({
       ...makeRecord(taskStatuses, () => []),
-      ...groupItems<Task, TaskStatus>(
-        Object.values(items),
-        (task) => task.status,
+      ...recordMap(
+        groupItems<Task, TaskStatus>(
+          Object.values(items),
+          (task) => task.status,
+        ),
+        sortEntitiesWithOrder,
       ),
-    }
+    })
   }, [])
+
+  const [groups, setGroups] = useState(() => toGroups(tasks))
+  useEffect(() => {
+    setGroups(toGroups(tasks))
+  }, [tasks, toGroups])
 
   return (
     <TaskBoardContainer>
       <DnDGroups
-        items={tasks}
-        toGroups={toGroups}
-        getGroupOrder={(status) => taskStatuses.indexOf(status)}
+        groups={groups}
         getItemId={(task) => task.id}
-        getItemOrder={(task) => task.order}
-        onChange={({ id, order, groupId }) => {
+        onChange={(id, { index, groupId }) => {
+          const group = shouldBePresent(
+            groups.find((group) => group.key === groupId),
+          )
+
+          const initialGroup = shouldBePresent(
+            groups.find((group) => group.value.some((task) => task.id === id)),
+          )
+
+          const order = getNewOrder({
+            orders: group.value.map((task) => task.order),
+            sourceIndex:
+              initialGroup.key === group.key
+                ? group.value.findIndex((task) => task.id === id)
+                : null,
+            destinationIndex: index,
+          })
+
           updateTask({
             id,
             fields: {
@@ -75,16 +102,18 @@ export const TaskBoard = () => {
               status: groupId,
             },
           })
-        }}
-        simulateChange={(items, { id, order, groupId }) => {
-          return items.map((item) =>
-            item.id === id ? { ...item, order, status: groupId } : item,
+
+          setGroups(
+            toGroups(
+              tasks.map((task) =>
+                task.id === id ? { ...task, order, status: groupId } : task,
+              ),
+            ),
           )
         }}
         renderGroup={({
-          content,
+          props: { children, ...containerProps },
           groupId: status,
-          containerProps,
           isDraggingOver,
         }) => (
           <TaskColumnContainer
@@ -96,28 +125,23 @@ export const TaskBoard = () => {
                 <Text weight="600">{taskStatusName[status]}</Text>
               </ColumnContent>
             </ColumnHeader>
-            <TaskColumnContent>{content}</TaskColumnContent>
+            <TaskColumnContent>{children}</TaskColumnContent>
             <ColumnFooter>
               <AddTask status={status} />
             </ColumnFooter>
           </TaskColumnContainer>
         )}
-        renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+        renderItem={({ item, draggableProps, dragHandleProps, status }) => {
           return (
             <CurrentTaskProvider key={item.id} value={item}>
               <DraggableTaskItem
-                status={isDragging ? 'shadow' : 'idle'}
+                status={status}
                 {...draggableProps}
                 {...dragHandleProps}
               />
             </CurrentTaskProvider>
           )
         }}
-        renderDragOverlay={({ item }) => (
-          <CurrentTaskProvider value={item}>
-            <DraggableTaskItem status="overlay" />
-          </CurrentTaskProvider>
-        )}
       />
     </TaskBoardContainer>
   )

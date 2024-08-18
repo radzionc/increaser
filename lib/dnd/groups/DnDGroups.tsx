@@ -1,5 +1,5 @@
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import {
   DndContext,
   PointerSensor,
@@ -10,10 +10,7 @@ import {
   DragOverlay,
   MeasuringStrategy,
 } from '@dnd-kit/core'
-import { order } from '@lib/utils/array/order'
-import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { toEntries } from '@lib/utils/record/toEntries'
 import { DnDItem } from '../DnDItem'
 import { DnDGroup } from './DnDGroup'
 import { getDndGroupsItemDestination } from './getDnDGroupsItemDestination'
@@ -22,32 +19,24 @@ import {
   areEqualDnDGroupsItemLocations,
   DnDGroupsItemLocation,
 } from './DnDGroupsItemLocation'
+import { Entry } from '@lib/utils/entities/Entry'
+import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { DnDItemStatus } from '../DnDItemStatus'
+import { order } from '@lib/utils/array/order'
 
-export type ItemChangeParams<
-  GroupId extends string,
-  ItemId extends UniqueIdentifier,
-> = {
-  id: ItemId
-  order: number
-  groupId: GroupId
-}
+type RenderGroupProps = Record<string, any> & ComponentWithChildrenProps
 
 type RenderGroupParams<GroupId extends string> = {
   groupId: GroupId
-  content: ReactNode
-  containerProps?: Record<string, any>
+  props: RenderGroupProps
   isDraggingOver: boolean
 }
 
 type RenderItemParams<Item> = {
   item: Item
-  draggableProps: Record<string, any>
-  dragHandleProps: Record<string, any>
-  isDragging: boolean
-}
-
-type RenderDragOverlayParams<Item> = {
-  item: Item
+  draggableProps?: Record<string, any>
+  dragHandleProps?: Record<string, any>
+  status: DnDItemStatus
 }
 
 export type DnDGroupsProps<
@@ -55,24 +44,21 @@ export type DnDGroupsProps<
   ItemId extends UniqueIdentifier,
   Item,
 > = {
-  items: Item[]
-  toGroups: (items: Item[]) => Record<GroupId, Item[]>
-  simulateChange: (
-    items: Item[],
-    params: ItemChangeParams<GroupId, ItemId>,
-  ) => Item[]
-  getGroupOrder: (groupId: GroupId) => number
-  getItemOrder: (item: Item) => number
+  groups: Entry<GroupId, Item[]>[]
   getItemId: (item: Item) => ItemId
-  onChange: (params: ItemChangeParams<GroupId, ItemId>) => void
+  onChange: (itemId: ItemId, params: DnDGroupsItemLocation<GroupId>) => void
   renderGroup: (params: RenderGroupParams<GroupId>) => ReactNode
   renderItem: (params: RenderItemParams<Item>) => ReactNode
-  renderDragOverlay?: (params: RenderDragOverlayParams<Item>) => ReactNode
 }
 
-type ActiveItem<GroupId extends string> = {
-  id: string
-  source: DnDGroupsItemLocation<GroupId>
+type ActiveDrag<
+  GroupId extends string,
+  ItemId extends UniqueIdentifier,
+  Item,
+> = {
+  id: ItemId
+  initialLocation: DnDGroupsItemLocation<GroupId>
+  groups: Entry<GroupId, Item[]>[]
 }
 
 export function DnDGroups<
@@ -80,25 +66,17 @@ export function DnDGroups<
   ItemId extends UniqueIdentifier,
   Item,
 >({
-  items: finalItems,
-  toGroups,
-  getItemOrder,
+  groups,
   getItemId,
-  simulateChange,
   onChange,
   renderGroup,
   renderItem,
-  renderDragOverlay,
-  getGroupOrder,
 }: DnDGroupsProps<GroupId, ItemId, Item>) {
-  const [items, setItems] = useState(finalItems)
-  useEffect(() => {
-    setItems(finalItems)
-  }, [finalItems])
-
-  const groups = useMemo(() => toGroups(items), [toGroups, items])
-
-  const [activeItem, setActiveItem] = useState<ActiveItem<GroupId> | null>(null)
+  const [activeDrag, setActiveDrag] = useState<ActiveDrag<
+    GroupId,
+    ItemId,
+    Item
+  > | null>(null)
 
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -108,99 +86,41 @@ export function DnDGroups<
 
   const sensors = useSensors(pointerSensor)
 
-  const getOrderedItems = useCallback(
-    (groupId: GroupId) => order(groups[groupId], getItemOrder, 'asc'),
-    [groups, getItemOrder],
-  )
-
-  const getItemGroupId = useCallback(
-    (groups: Record<GroupId, Item[]>, itemId: ItemId) => {
-      const entry = toEntries(groups).find(({ value }) =>
-        value.some((item) => getItemId(item) === itemId),
-      )
-      return shouldBePresent(entry).key
-    },
-    [getItemId],
-  )
-
-  const getItemIndex = useCallback(
-    (itemId: ItemId) => {
-      const groupId = getItemGroupId(groups, itemId)
-
-      return getOrderedItems(groupId).findIndex(
-        (item) => getItemId(item) === itemId,
+  const getItem = useCallback(
+    (id: ItemId) => {
+      return shouldBePresent(
+        groups
+          .flatMap(({ value }) => value)
+          .find((item) => getItemId(item) === id),
       )
     },
-    [getItemGroupId, getItemId, getOrderedItems, groups],
+    [getItemId, groups],
   )
 
   const handleDragEnd = useCallback(
-    ({ active, over }: DragEndEvent) => {
-      if (!activeItem) {
+    ({ over }: DragEndEvent) => {
+      if (!activeDrag) {
         return
       }
-      const { source: intitalSource } = activeItem
+      const { id, initialLocation } = activeDrag
 
-      setActiveItem(null)
+      setActiveDrag(null)
 
       if (!over) {
         return
       }
 
-      const destination = getDndGroupsItemDestination<GroupId, ItemId>({
+      const destination = getDndGroupsItemDestination<GroupId>({
         item: over,
-        getItemIndex,
       })
 
-      if (areEqualDnDGroupsItemLocations(intitalSource, destination)) {
+      if (areEqualDnDGroupsItemLocations(initialLocation, destination)) {
         return
       }
 
-      const source = getDndGroupsItemSource<GroupId, ItemId>({
-        item: active,
-        getItemIndex,
-      })
-
-      const isSameGroup = source.groupId === destination.groupId
-
-      const newItems = simulateChange(items, {
-        id: active.id as ItemId,
-        order: getNewOrder({
-          orders: getOrderedItems(source.groupId).map(getItemOrder),
-          sourceIndex: isSameGroup ? source.index : null,
-          destinationIndex: destination.index,
-        }),
-        groupId: destination.groupId,
-      })
-
-      setItems(newItems)
-
-      const groups = toGroups(newItems)
-      const groupId = getItemGroupId(groups, active.id as ItemId)
-      const order = getItemOrder(
-        shouldBePresent(
-          groups[groupId].find((item) => getItemId(item) === active.id),
-        ),
-      )
-
-      onChange({
-        id: active.id as ItemId,
-        order,
-        groupId,
-      })
+      onChange(id, destination)
     },
-    [
-      activeItem,
-      getItemGroupId,
-      getItemId,
-      getItemIndex,
-      getItemOrder,
-      getOrderedItems,
-      items,
-      onChange,
-      simulateChange,
-      toGroups,
-    ],
+    [activeDrag, onChange],
   )
 
   const handleDragOver = useCallback(
@@ -209,101 +129,140 @@ export function DnDGroups<
         return
       }
 
-      const source = getDndGroupsItemSource<GroupId, ItemId>({
+      const source = getDndGroupsItemSource<GroupId>({
         item: active,
-        getItemIndex,
       })
 
-      const destination = getDndGroupsItemDestination<GroupId, ItemId>({
+      const destination = getDndGroupsItemDestination<GroupId>({
         item: over,
-        getItemIndex,
       })
 
       if (source.groupId === destination.groupId) {
         return
       }
 
-      const changeParams = {
-        id: active.id as ItemId,
-        order: getNewOrder({
-          orders: getOrderedItems(source.groupId).map(getItemOrder),
-          sourceIndex: null,
-          destinationIndex: destination.index,
-        }),
-        groupId: destination.groupId,
-      }
-      setItems(simulateChange(items, changeParams))
-    },
-    [getItemIndex, getItemOrder, getOrderedItems, items, simulateChange],
-  )
+      setActiveDrag((prev) => {
+        const { groups, ...rest } = shouldBePresent(prev)
+        const { id } = rest
+        const newGroups = groups.map((group) => {
+          const { key, value } = group
 
-  const groupKeys = order(getRecordKeys(groups), getGroupOrder, 'asc')
+          if (key === source.groupId) {
+            return {
+              key,
+              value: value.filter((item) => getItemId(item) !== active.id),
+            }
+          }
+
+          if (key === destination.groupId) {
+            const itemOrderPairs = value.map(
+              (item, index) => [item, index] as const,
+            )
+
+            itemOrderPairs.push([
+              getItem(id),
+              getNewOrder({
+                orders: itemOrderPairs.map(([, order]) => order),
+                destinationIndex: destination.index,
+                sourceIndex: null,
+              }),
+            ])
+
+            return {
+              key,
+              value: order(itemOrderPairs, ([, order]) => order, 'asc').map(
+                ([item]) => item,
+              ),
+            }
+          }
+
+          return group
+        })
+
+        return {
+          ...rest,
+          groups: newGroups,
+        }
+      })
+    },
+    [getItem, getItemId],
+  )
 
   return (
     <DndContext
       sensors={sensors}
       onDragStart={({ active }) => {
-        setActiveItem({
-          id: active.id as string,
-          source: getDndGroupsItemSource<GroupId, ItemId>({
+        setActiveDrag({
+          id: active.id as ItemId,
+          groups,
+          initialLocation: getDndGroupsItemSource<GroupId>({
             item: active,
-            getItemIndex,
           }),
         })
       }}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
       onDragCancel={() => {
-        setActiveItem(null)
-        setItems(finalItems)
+        setActiveDrag(null)
       }}
-      // collisionDetection={closestCorners}
       measuring={{
         droppable: {
           strategy: MeasuringStrategy.Always,
         },
       }}
     >
-      {groupKeys.map((groupId) => {
-        const items = getOrderedItems(groupId)
-        return (
-          <DnDGroup
-            key={groupId}
-            id={groupId}
-            itemIds={items.map(getItemId)}
-            render={(params) =>
-              renderGroup({
-                groupId,
-                ...params,
-                content: (
-                  <>
-                    {items.map((item) => {
-                      const key = getItemId(item)
-                      return (
-                        <DnDItem
-                          key={key}
-                          id={key}
-                          render={(params) => renderItem({ item, ...params })}
-                        />
-                      )
-                    })}
-                  </>
-                ),
-              })
-            }
-          />
-        )
-      })}
-
-      {renderDragOverlay && activeItem && (
-        <DragOverlay>
-          {renderDragOverlay({
-            item: shouldBePresent(
-              items.find((item) => getItemId(item) === activeItem.id),
-            ),
-          })}
-        </DragOverlay>
+      {(activeDrag ? activeDrag.groups : groups).map(
+        ({ key: groupId, value: items }) => {
+          return (
+            <DnDGroup
+              key={groupId}
+              id={groupId}
+              itemIds={items.map(getItemId)}
+              render={({ props, isDraggingOver }) =>
+                renderGroup({
+                  groupId,
+                  isDraggingOver,
+                  props: {
+                    ...props,
+                    children: (
+                      <>
+                        {items.map((item) => {
+                          const key = getItemId(item)
+                          return (
+                            <DnDItem
+                              key={key}
+                              id={key}
+                              render={(params) =>
+                                renderItem({
+                                  item,
+                                  ...params,
+                                  status:
+                                    activeDrag?.id === key
+                                      ? 'placeholder'
+                                      : 'idle',
+                                })
+                              }
+                            />
+                          )
+                        })}
+                      </>
+                    ),
+                  },
+                })
+              }
+            />
+          )
+        },
       )}
+
+      <DragOverlay>
+        {activeDrag
+          ? renderItem({
+              item: getItem(activeDrag.id),
+              status: 'overlay',
+            })
+          : null}
+      </DragOverlay>
     </DndContext>
   )
 }
