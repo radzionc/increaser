@@ -1,4 +1,4 @@
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import styled from 'styled-components'
 import { ToolkitItem } from './ToolkitItem'
 import { productTools } from '@increaser/entities/ProductTool'

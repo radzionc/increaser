@@ -12,7 +12,7 @@ import { toPercents } from '@lib/utils/toPercents'
 import { Center } from '../../layout/Center'
 import { range } from '@lib/utils/array/range'
 import { HSLA } from '../../colors/HSLA'
-import { UniformColumnGrid } from '../../layout/UniformColumnGrid'
+import { UniformColumnGrid } from '../../css/uniformColumnGrid'
 
 type SegmentedSliderProps = InputProps<number> & {
   max: number

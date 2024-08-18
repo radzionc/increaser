@@ -11,7 +11,7 @@ import {
   ProjectWorkingDays,
 } from '@increaser/entities/Project'
 import { Text } from '@lib/ui/text'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { useFreeHours } from './hooks/useFreeHours'
 import { Panel } from '@lib/ui/panel/Panel'

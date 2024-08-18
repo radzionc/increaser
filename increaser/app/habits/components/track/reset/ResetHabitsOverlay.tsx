@@ -1,5 +1,5 @@
 import { Button } from '@lib/ui/buttons/Button'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { Modal } from '@lib/ui/modal'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { useState } from 'react'

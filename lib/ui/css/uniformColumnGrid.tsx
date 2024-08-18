@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { toSizeUnit } from '../css/toSizeUnit'
 
-interface UniformColumnGridProps {
+export type UniformColumnGridParams = {
   gap: number
   minChildrenWidth?: number
   maxChildrenWidth?: number
@@ -26,7 +26,7 @@ const getColumnWidth = ({
   maxColumns,
   gap,
   childrenWidth,
-}: UniformColumnGridProps) => {
+}: UniformColumnGridParams) => {
   if (childrenWidth !== undefined) {
     return toSizeUnit(childrenWidth)
   }
@@ -41,18 +41,20 @@ const getColumnWidth = ({
   )`
 }
 
-export const UniformColumnGrid = styled.div<UniformColumnGridProps>`
+export const uniformColumnGrid = (params: UniformColumnGridParams) => css`
   display: grid;
-  grid-template-columns: repeat(auto-fit, ${getColumnWidth});
-  gap: ${({ gap }) => toSizeUnit(gap)};
-  ${({ rowHeight }) =>
-    rowHeight &&
-    css`
-      grid-auto-rows: ${toSizeUnit(rowHeight)};
-    `}
-  ${({ fullWidth }) =>
-    fullWidth &&
-    css`
-      width: 100%;
-    `}
+  grid-template-columns: repeat(auto-fit, ${getColumnWidth(params)});
+  gap: ${toSizeUnit(params.gap)};
+  ${params.rowHeight &&
+  css`
+    grid-auto-rows: ${toSizeUnit(params.rowHeight)};
+  `}
+  ${params.fullWidth &&
+  css`
+    width: 100%;
+  `}
+`
+
+export const UniformColumnGrid = styled.div<UniformColumnGridParams>`
+  ${uniformColumnGrid}
 `

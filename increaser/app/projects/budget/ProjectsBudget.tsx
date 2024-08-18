@@ -1,5 +1,5 @@
 import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { ProjectsBudgetReport } from '@increaser/ui/projects/budget/ProjectsBudgetReport'
 import React from 'react'
 

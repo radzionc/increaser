@@ -2,7 +2,7 @@ import { FixedWidthContent } from '../../components/reusable/fixed-width-content
 import { PageTitle } from '../../ui/PageTitle'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
 import { MembershipOverview } from './MembershipOverview'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { MembershipPersuasion } from './MembershipPersuasion'
 
 const title = 'Membership'

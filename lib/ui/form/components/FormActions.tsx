@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Button } from '../../buttons/Button'
-import { UniformColumnGrid } from '../../layout/UniformColumnGrid'
+import { UniformColumnGrid } from '../../css/uniformColumnGrid'
 
 type FormActionsProps = {
   isDisabled?: boolean | string
