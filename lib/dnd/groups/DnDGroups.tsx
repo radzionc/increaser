@@ -9,6 +9,7 @@ import {
   DragEndEvent,
   DragOverlay,
   MeasuringStrategy,
+  closestCorners,
 } from '@dnd-kit/core'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { DnDItem } from '../DnDItem'
@@ -210,6 +211,7 @@ export function DnDGroups<
           strategy: MeasuringStrategy.Always,
         },
       }}
+      collisionDetection={closestCorners}
     >
       {(activeDrag ? activeDrag.groups : groups).map(
         ({ key: groupId, value: items }) => {

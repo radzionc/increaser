@@ -46,8 +46,10 @@ export const TaskColumnContainer = forwardRef<
   TaskColumnContainerProps
 >(({ children, isDraggingOver, ...props }, ref) => {
   return (
-    <Wrapper ref={ref} {...props}>
-      <Container isActive={!!isDraggingOver}>{children}</Container>
+    <Wrapper>
+      <Container {...props} ref={ref} isActive={!!isDraggingOver}>
+        {children}
+      </Container>
     </Wrapper>
   )
 })
