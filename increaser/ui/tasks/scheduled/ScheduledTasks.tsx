@@ -31,9 +31,6 @@ const getDeadline = (groupId: ScheduledTaskGroupId) => {
 
 const GroupContainer = styled(VStack)`
   gap: 4px;
-  &:not(:last-child) {
-    padding-bottom: 32px;
-  }
 `
 
 export const ScheduledTasks = () => {
@@ -51,7 +48,7 @@ export const ScheduledTasks = () => {
   }, [tasks, toGroups])
 
   return (
-    <VStack>
+    <VStack gap={32}>
       <DnDGroups
         groups={groups}
         getItemId={(task) => task.id}
@@ -92,13 +89,13 @@ export const ScheduledTasks = () => {
           )
         }}
         renderGroup={({ groupId, props: { children, ...containerProps } }) => (
-          <GroupContainer {...containerProps} key={groupId}>
+          <GroupContainer {...containerProps}>
             <TasksGroupHeader value={groupId} />
             {groupId !== 'overdue' && (
               <RecurringTasksForecast value={Number(groupId)} />
             )}
 
-            <VStack>
+            <VStack key={groupId}>
               {children}
               {groupId !== 'overdue' && (
                 <CreateTask
