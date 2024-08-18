@@ -4,18 +4,19 @@
 INCREASER_LIB=~/increaser/increaser/lib
 RADZIONKIT_LIB=~/radzionkit/lib
 
-# Perform a dry-run to identify extra directories in radzionkit that are not in increaser
-EXTRA_DIRS=$(rsync -avn --delete "$INCREASER_LIB/" "$RADZIONKIT_LIB/" | grep 'deleting' | awk '{print $2}')
-
-# Sync the increaser's lib with radzionkit's lib, ensuring all files in increaser are present in radzionkit
-rsync -av "$INCREASER_LIB/" "$RADZIONKIT_LIB/"
-
-# Restore extra directories that should not be deleted
-for DIR in $EXTRA_DIRS; do
-  if [[ -d "$RADZIONKIT_LIB/$DIR" ]]; then
-    mkdir -p "$RADZIONKIT_LIB/$DIR"
+# Find all root-level directories in radzionkit's lib that are not in increaser's lib
+EXCLUDE_DIRS=()
+for dir in "$RADZIONKIT_LIB"/*; do
+  if [[ -d "$dir" ]]; then
+    basename=$(basename "$dir")
+    if [[ ! -d "$INCREASER_LIB/$basename" ]]; then
+      EXCLUDE_DIRS+=("--exclude=$basename/")
+    fi
   fi
 done
 
+# Sync with deletion, but exclude root-level directories in radzionkit's lib that do not exist in increaser's lib
+rsync -av --delete "${EXCLUDE_DIRS[@]}" "$INCREASER_LIB/" "$RADZIONKIT_LIB/"
+
 # Print a completion message
-echo "Sync complete: $RADZIONKIT_LIB has been updated with packages from $INCREASER_LIB"
+echo "Sync complete: $RADZIONKIT_LIB has been synchronized with $INCREASER_LIB, with extra root directories preserved."

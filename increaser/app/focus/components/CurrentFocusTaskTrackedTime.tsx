@@ -1,6 +1,6 @@
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
+import { RhythmicRerender } from '@lib/ui/base/RhythmicRerender'
 import { TaskTrackedTimeContainer } from '@increaser/ui/tasks/TaskTrackedTimeContainer'
 import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -15,7 +15,7 @@ export const CurrentFocusTaskTrackedTime = () => {
 
   return (
     <TaskTrackedTimeContainer>
-      <RhytmicRerender
+      <RhythmicRerender
         render={(now) => {
           const duration = sum(
             intervals
