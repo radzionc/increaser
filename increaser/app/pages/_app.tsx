@@ -24,6 +24,7 @@ import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMu
 import { YouTubeFocusMusicFloatingPlayer } from '../focus/audio/youTube/YouTubeFocusMusicFloatingPlayer'
 import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
+import { darkTheme } from '@lib/ui/theme/darkTheme'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -43,7 +44,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   return (
     <AnalyticsProvider>
       <PageVisitTracker />
-      <ThemeProvider>
+      <ThemeProvider theme={darkTheme}>
         <GlobalStyle fontFamily={openSans.style.fontFamily} />
         <QueryClientProvider client={queryClient}>
           <ErrorBoundary fallback={<FullSizeErrorFallback />}>
