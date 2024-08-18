@@ -7,12 +7,21 @@ import { Wrap } from '@lib/ui/base/Wrap'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { EditVisionAttributeForm } from './form/EditVisionAttributeForm'
-import { VisionAttributeItemContent } from './VisionAttributeItemContent'
 import { CurrentVisionAttributeProvider } from './CurrentVisionAttributeProvider'
 import { useVisionAttributes } from './hooks/useVisionAttributes'
+import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { getNewOrder } from '@lib/utils/order/getNewOrder'
+import { useState, useEffect } from 'react'
 
 export const VisionAttributes = () => {
   const visionAttributes = useVisionAttributes()
+
+  const [items, setItems] = useState(() =>
+    sortEntitiesWithOrder(visionAttributes),
+  )
+  useEffect(() => {
+    setItems(sortEntitiesWithOrder(visionAttributes))
+  }, [visionAttributes])
 
   const [activeItemId] = useActiveItemId()
 
@@ -21,57 +30,60 @@ export const VisionAttributes = () => {
 
   return (
     <DnDList
-      items={visionAttributes}
+      items={items}
       getItemId={(item) => item.id}
-      getItemOrder={(item) => item.order}
-      onChange={({ id, order }) => {
+      onChange={(id, { index }) => {
+        const order = getNewOrder({
+          orders: items.map((item) => item.order),
+          sourceIndex: items.findIndex((item) => item.id === id),
+          destinationIndex: index,
+        })
+
         updateVisionAttribute({
           id,
           fields: {
             order,
           },
         })
+
+        setItems((prev) =>
+          sortEntitiesWithOrder(
+            prev.map((item) => (item.id === id ? { ...item, order } : item)),
+          ),
+        )
       }}
-      simulateChange={(items, { id, order }) =>
-        items.map((item) => (item.id === id ? { ...item, order } : item))
-      }
-      renderList={({ content, containerProps }) => (
-        <VStack {...containerProps}>{content}</VStack>
-      )}
-      renderDragOverlay={({ item }) => (
-        <TightListItemDragOverlay>
-          <CurrentVisionAttributeProvider value={item}>
-            <VisionAttributeItemContent />
-          </CurrentVisionAttributeProvider>
-        </TightListItemDragOverlay>
-      )}
-      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+      renderList={({ props }) => <VStack {...props} />}
+      renderItem={({ item, draggableProps, dragHandleProps, status }) => {
+        const isEditing = activeItemId === item.id
         return (
-          <Wrap
-            wrap={
-              activeItemId === null
-                ? (children) => (
-                    <DraggableTightListItemContainer
-                      isDragging={isDragging}
-                      key={item.id}
-                      {...draggableProps}
-                      {...dragHandleProps}
-                    >
-                      {children}
-                    </DraggableTightListItemContainer>
-                  )
-                : undefined
-            }
-            key={item.id}
-          >
-            <CurrentVisionAttributeProvider value={item}>
-              {activeItemId === item.id ? (
-                <EditVisionAttributeForm />
-              ) : (
+          <CurrentVisionAttributeProvider key={item.id} value={item}>
+            {isEditing ? (
+              <EditVisionAttributeForm />
+            ) : (
+              <Wrap
+                wrap={
+                  activeItemId === null
+                    ? (children) =>
+                        status === 'overlay' ? (
+                          <TightListItemDragOverlay>
+                            {children}
+                          </TightListItemDragOverlay>
+                        ) : (
+                          <DraggableTightListItemContainer
+                            isDragging={status === 'placeholder'}
+                            {...draggableProps}
+                            {...dragHandleProps}
+                          >
+                            {children}
+                          </DraggableTightListItemContainer>
+                        )
+                    : undefined
+                }
+              >
                 <VisionAttributeItem />
-              )}
-            </CurrentVisionAttributeProvider>
-          </Wrap>
+              </Wrap>
+            )}
+          </CurrentVisionAttributeProvider>
         )
       }}
     />

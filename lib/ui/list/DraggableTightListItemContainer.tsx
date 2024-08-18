@@ -19,7 +19,6 @@ const Highlight = styled.div`
 
   background: ${getColor('mist')};
   z-index: -1;
-  ${borderRadius.s};
 `
 
 const Content = styled.div`

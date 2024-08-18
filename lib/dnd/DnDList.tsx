@@ -1,12 +1,4 @@
-import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useState,
-} from 'react'
+import { ReactNode, useCallback, useId, useState } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -20,60 +12,41 @@ import {
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { DnDItem } from './DnDItem'
-import { order } from '@lib/utils/array/order'
+import { DnDItemStatus } from './DnDItemStatus'
+import { ComponentWithChildrenProps } from '@lib/ui/props'
 
-export type ItemChangeParams<ItemId extends UniqueIdentifier> = {
-  id: ItemId
-  order: number
+export type ItemChangeParams = {
+  index: number
 }
 
+type RednerListProps = Record<string, any> & ComponentWithChildrenProps
+
 type RenderListParams = {
-  content: ReactNode
-  containerProps?: Record<string, any>
+  props: RednerListProps
 }
 
 type RenderItemParams<Item> = {
   item: Item
-  draggableProps: Record<string, any>
-  dragHandleProps: Record<string, any>
-  isDragging: boolean
-}
-
-type RenderDragOverlayParams<Item> = {
-  item: Item
+  draggableProps?: Record<string, any>
+  dragHandleProps?: Record<string, any>
+  status: DnDItemStatus
 }
 
 export type DnDListProps<ItemId extends UniqueIdentifier, Item> = {
   items: Item[]
-  getItemOrder: (item: Item) => number
   getItemId: (item: Item) => ItemId
-  onChange: (params: ItemChangeParams<ItemId>) => void
-  simulateChange: (items: Item[], params: ItemChangeParams<ItemId>) => Item[]
+  onChange: (itemId: ItemId, params: ItemChangeParams) => void
   renderList: (params: RenderListParams) => ReactNode
   renderItem: (params: RenderItemParams<Item>) => ReactNode
-  renderDragOverlay?: (params: RenderDragOverlayParams<Item>) => ReactNode
 }
 
 export function DnDList<ItemId extends UniqueIdentifier, Item>({
-  items: finalItems,
-  getItemOrder,
+  items,
   getItemId,
   onChange,
-  simulateChange,
   renderItem,
   renderList,
-  renderDragOverlay,
 }: DnDListProps<ItemId, Item>) {
-  const [items, setItems] = useState(finalItems)
-  useEffect(() => {
-    setItems(finalItems)
-  }, [finalItems])
-
-  const orderedItems = useMemo(
-    () => order(items, getItemOrder, 'asc'),
-    [getItemOrder, items],
-  )
-
   const droppableId = useId()
   const [activeItemId, setActiveItemId] = useState<ItemId | null>(null)
 
@@ -87,29 +60,19 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
 
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
+      const itemId = shouldBePresent(activeItemId)
+
       setActiveItemId(null)
+
       if (!over || active.id === over.id) {
         return
       }
 
-      const oldIndex = orderedItems.findIndex(
-        (item) => getItemId(item) === active.id,
-      )
-      const newIndex = orderedItems.findIndex(
-        (item) => getItemId(item) === over.id,
-      )
+      const index = items.findIndex((item) => getItemId(item) === over.id)
 
-      const newOrder = getNewOrder({
-        orders: orderedItems.map(getItemOrder),
-        sourceIndex: oldIndex,
-        destinationIndex: newIndex,
-      })
-
-      const changeParams = { id: active.id as ItemId, order: newOrder }
-      setItems(simulateChange(items, changeParams))
-      onChange(changeParams)
+      onChange(itemId, { index })
     },
-    [getItemId, getItemOrder, items, onChange, orderedItems, simulateChange],
+    [activeItemId, getItemId, items, onChange],
   )
 
   return (
@@ -120,43 +83,48 @@ export function DnDList<ItemId extends UniqueIdentifier, Item>({
       onDragEnd={handleDragEnd}
       onDragCancel={() => {
         setActiveItemId(null)
-        setItems(finalItems)
       }}
     >
       <SortableContext
-        items={orderedItems.map(getItemId)}
+        items={items.map(getItemId)}
         strategy={verticalListSortingStrategy}
       >
         {renderList({
-          containerProps: {
+          props: {
             'data-droppable-id': droppableId,
+            children: (
+              <>
+                {items.map((item) => {
+                  const key = getItemId(item)
+                  return (
+                    <DnDItem
+                      key={key}
+                      id={key}
+                      render={(params) =>
+                        renderItem({
+                          item,
+                          ...params,
+
+                          status: activeItemId === key ? 'placeholder' : 'idle',
+                        })
+                      }
+                    />
+                  )
+                })}
+              </>
+            ),
           },
-          content: (
-            <>
-              {orderedItems.map((item) => {
-                const key = getItemId(item)
-                return (
-                  <DnDItem
-                    key={key}
-                    id={key}
-                    render={(params) => renderItem({ item, ...params })}
-                  />
-                )
-              })}
-            </>
-          ),
         })}
-        {renderDragOverlay && (
-          <DragOverlay>
-            {activeItemId
-              ? renderDragOverlay({
-                  item: shouldBePresent(
-                    items.find((item) => getItemId(item) === activeItemId),
-                  ),
-                })
-              : null}
-          </DragOverlay>
-        )}
+        <DragOverlay>
+          {activeItemId
+            ? renderItem({
+                item: shouldBePresent(
+                  items.find((item) => getItemId(item) === activeItemId),
+                ),
+                status: 'overlay',
+              })
+            : null}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   )

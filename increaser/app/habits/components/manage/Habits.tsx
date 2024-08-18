@@ -9,10 +9,17 @@ import { Wrap } from '@lib/ui/base/Wrap'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { EditHabitForm } from './form/EditHabitForm'
-import { HabitItemContent } from './HabitItemContent'
+import { useEffect, useState } from 'react'
+import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { getNewOrder } from '@lib/utils/order/getNewOrder'
 
 export const Habits = () => {
   const { habits } = useHabits()
+
+  const [items, setItems] = useState(() => sortEntitiesWithOrder(habits))
+  useEffect(() => {
+    setItems(sortEntitiesWithOrder(habits))
+  }, [habits])
 
   const [activeItemId] = useActiveItemId()
 
@@ -20,53 +27,60 @@ export const Habits = () => {
 
   return (
     <DnDList
-      items={habits}
+      items={items}
       getItemId={(item) => item.id}
-      getItemOrder={(item) => item.order}
-      onChange={({ id, order }) => {
+      onChange={(id, { index }) => {
+        const order = getNewOrder({
+          orders: items.map((item) => item.order),
+          sourceIndex: items.findIndex((item) => item.id === id),
+          destinationIndex: index,
+        })
+
         updateHabit({
           id,
           fields: {
             order,
           },
         })
+
+        setItems((prev) =>
+          sortEntitiesWithOrder(
+            prev.map((item) => (item.id === id ? { ...item, order } : item)),
+          ),
+        )
       }}
-      simulateChange={(items, { id, order }) =>
-        items.map((item) => (item.id === id ? { ...item, order } : item))
-      }
-      renderList={({ content, containerProps }) => (
-        <VStack {...containerProps}>{content}</VStack>
-      )}
-      renderDragOverlay={({ item }) => (
-        <TightListItemDragOverlay>
-          <CurrentHabitProvider value={item}>
-            <HabitItemContent />
-          </CurrentHabitProvider>
-        </TightListItemDragOverlay>
-      )}
-      renderItem={({ item, draggableProps, dragHandleProps, isDragging }) => {
+      renderList={({ props }) => <VStack {...props} />}
+      renderItem={({ item, draggableProps, dragHandleProps, status }) => {
+        const isEditing = activeItemId === item.id
         return (
-          <Wrap
-            wrap={
-              activeItemId === null
-                ? (children) => (
-                    <DraggableTightListItemContainer
-                      isDragging={isDragging}
-                      key={item.id}
-                      {...draggableProps}
-                      {...dragHandleProps}
-                    >
-                      {children}
-                    </DraggableTightListItemContainer>
-                  )
-                : undefined
-            }
-            key={item.id}
-          >
-            <CurrentHabitProvider value={item}>
-              {activeItemId === item.id ? <EditHabitForm /> : <HabitItem />}
-            </CurrentHabitProvider>
-          </Wrap>
+          <CurrentHabitProvider key={item.id} value={item}>
+            {isEditing ? (
+              <EditHabitForm />
+            ) : (
+              <Wrap
+                wrap={
+                  activeItemId === null
+                    ? (children) =>
+                        status === 'overlay' ? (
+                          <TightListItemDragOverlay>
+                            {children}
+                          </TightListItemDragOverlay>
+                        ) : (
+                          <DraggableTightListItemContainer
+                            isDragging={status === 'placeholder'}
+                            {...draggableProps}
+                            {...dragHandleProps}
+                          >
+                            {children}
+                          </DraggableTightListItemContainer>
+                        )
+                    : undefined
+                }
+              >
+                <HabitItem />
+              </Wrap>
+            )}
+          </CurrentHabitProvider>
         )
       }}
     />
