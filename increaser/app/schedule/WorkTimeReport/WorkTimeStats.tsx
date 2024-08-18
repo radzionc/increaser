@@ -1,6 +1,6 @@
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { useMemo } from 'react'
 import { getAverage } from '@lib/utils/math/getAverage'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'

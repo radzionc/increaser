@@ -4,7 +4,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { freeTrialDays, productName } from '@increaser/config'
 import { useIsPayingUser } from '../../hooks/useIsPayingUser'
-import { RhytmicRerender } from '@lib/ui/base/RhytmicRerender'
+import { RhythmicRerender } from '@lib/ui/base/RhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 
@@ -18,7 +18,7 @@ export const FreeTrialStatus = () => {
   }
 
   return (
-    <RhytmicRerender
+    <RhythmicRerender
       interval={convertDuration(1, 'min', 'ms')}
       render={() => {
         const now = Date.now()

@@ -6,7 +6,7 @@ interface RhythmicRerenderProps {
   render: (now: number) => ReactNode
 }
 
-export const RhytmicRerender = ({
+export const RhythmicRerender = ({
   interval,
   render,
 }: RhythmicRerenderProps) => {

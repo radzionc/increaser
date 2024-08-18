@@ -1,5 +1,5 @@
 import { Statistic } from '@lib/ui/layout/Statistic'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { Panel } from '@lib/ui/panel/Panel'
 import { pluralize } from '@lib/utils/pluralize'
 import { isEmpty } from '@lib/utils/array/isEmpty'

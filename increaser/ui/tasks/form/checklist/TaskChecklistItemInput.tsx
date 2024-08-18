@@ -6,7 +6,6 @@ import { HStack } from '@lib/ui/layout/Stack'
 import { ChecklistRemoveButton } from './ChecklistRemoveButton'
 import { ChecklistItemNameInput } from './ChecklistItemNameInput'
 import styled from 'styled-components'
-import { getColor } from '@lib/ui/theme/getters'
 import { CursorPosition } from '@lib/ui/entities/CursorPosition'
 
 type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
@@ -15,7 +14,6 @@ type TaskChecklistItemInputProps = InputProps<TaskChecklistItem> & {
 }
 
 const Container = styled(ChecklistItemFrame)`
-  background: ${getColor('background')};
   align-items: start;
   flex: 1;
 `

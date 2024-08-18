@@ -5,7 +5,7 @@ import {
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import styled from 'styled-components'
 import { WorkBudgetDaysReport } from '@increaser/ui/workBudget/WorkBudgetDaysReport'
 import { WorkBudgetWeeksReport } from '@increaser/ui/workBudget/WorkBudgetWeeksReport'

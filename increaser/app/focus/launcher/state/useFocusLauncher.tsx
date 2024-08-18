@@ -61,6 +61,12 @@ export const useFocusLauncher = () => {
               taskId: task.id,
             }
           }
+
+          return {
+            ...state,
+            projectId: activeProjects[0].id,
+            taskId: null,
+          }
         }
 
         const hasWrongTask = !findBy(tasks, 'id', state.taskId)
@@ -73,6 +79,12 @@ export const useFocusLauncher = () => {
               projectId: task.projectId,
               taskId: task.id,
             }
+          }
+
+          return {
+            ...state,
+            projectId: activeProjects[0].id,
+            taskId: null,
           }
         }
       }

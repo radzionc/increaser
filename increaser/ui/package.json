@@ -6,8 +6,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.2.1",
+    "@emoji-mart/react": "^1.1.1",
+    "emoji-mart": "^5.6.0",
     "react-dropzone": "^14.2.3",
     "styled-components": "^6.1.6"
-  },
-  "devDependencies": {}
+  }
 }

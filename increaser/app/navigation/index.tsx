@@ -21,7 +21,7 @@ const contentCSS = css`
   width: 100%;
 `
 
-const ScreenWidthTopbarContent = styled.div`
+const ScreenWidthTopbarContent = styled(VStack)`
   ${contentCSS}
   padding: 0 20px;
 `

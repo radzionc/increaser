@@ -1,5 +1,4 @@
 import { NavigationItem, NavigationItemProps } from './NavigationItem'
-import Link from 'next/link'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import {
   AppNavigationPage,
@@ -12,6 +11,7 @@ import { navigationPathInfo } from '../navigationPathInfo'
 import { useCurrentPage } from '../hooks/useCurrentPage'
 import { useLastPageView } from '../hooks/useLastPageView'
 import { useMemo } from 'react'
+import { useRouter } from 'next/router'
 
 type NavigationToInternalPageProps =
   ComponentWithValueProps<AppNavigationPage> &
@@ -24,6 +24,8 @@ export const NavigationToInternalPage = ({
   const currentPage = useCurrentPage()
 
   const [lastPageView] = useLastPageView()
+
+  const { push } = useRouter()
 
   const { name, icon } = navigationPathInfo[value]
 
@@ -43,8 +45,14 @@ export const NavigationToInternalPage = ({
   }, [lastPageView, value])
 
   return (
-    <Link href={href}>
-      <NavigationItem {...rest} icon={icon} name={name} isActive={isActive} />
-    </Link>
+    <NavigationItem
+      onClick={() => {
+        push(href)
+      }}
+      {...rest}
+      icon={icon}
+      name={name}
+      isActive={isActive}
+    />
   )
 }

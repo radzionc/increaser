@@ -5,7 +5,7 @@ import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useMemo } from 'react'
 
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 
 import { useTheme } from 'styled-components'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'

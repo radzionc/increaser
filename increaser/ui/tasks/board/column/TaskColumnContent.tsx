@@ -5,10 +5,8 @@ import { taskBoardConfig } from '../config'
 
 export const TaskColumnContent = styled(VStack)`
   overflow-y: auto;
-  flex: 1;
+  flex: 1 1 auto;
   ${horizontalPadding(taskBoardConfig.columnHorizontalPadding)};
 
-  & > *:not(:last-child) {
-    margin-bottom: 8px;
-  }
+  gap: 8px;
 `

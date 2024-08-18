@@ -25,10 +25,12 @@ const Container = styled.div<ComponentWithActiveState>`
   ${({ isActive }) =>
     isActive
       ? css`
+          cursor: grabbing;
           border-color: ${getColor('primary')};
           color: ${getColor('contrast')};
         `
       : css`
+          cursor: grab;
           &:hover {
             border-color: ${getColor('mistExtra')};
             color: ${getColor('contrast')};

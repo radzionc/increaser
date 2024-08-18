@@ -1,5 +1,5 @@
 import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
-import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { VStack } from '@lib/ui/layout/Stack'
 import { AddProjectsPrompt } from '../../projects/components/AddProjectsPrompt'
 import { FocusOptionContainer } from './FocusOptionContainer'

@@ -1,8 +1,8 @@
 import { StyleSheetManager } from 'styled-components'
 import isPropValid from '@emotion/is-prop-valid'
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components'
+import { DefaultTheme } from 'styled-components'
 
-import { darkTheme } from './darkTheme'
 import { ComponentWithChildrenProps } from '../props'
 
 const shouldForwardProp = (propName: string, target: any) => {
@@ -12,10 +12,14 @@ const shouldForwardProp = (propName: string, target: any) => {
   return true
 }
 
-export const ThemeProvider = ({ children }: ComponentWithChildrenProps) => {
+type ThemeProviderProps = ComponentWithChildrenProps & {
+  theme: DefaultTheme
+}
+
+export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-      <StyledComponentsThemeProvider theme={darkTheme}>
+      <StyledComponentsThemeProvider theme={theme}>
         {children}
       </StyledComponentsThemeProvider>
     </StyleSheetManager>

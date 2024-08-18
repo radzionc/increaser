@@ -1,7 +1,7 @@
 import { WEEKDAYS } from '@lib/utils/time'
 import styled from 'styled-components'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { UniformColumnGrid } from '@lib/ui/Layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { WeekdayOption } from './WeekdayOption'
 import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
 import { getColor } from '@lib/ui/theme/getters'

@@ -9,6 +9,7 @@ import { Page } from '@lib/next-ui/Page'
 import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { WebsiteLayout } from '../layout/WebsiteLayout'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
+import { darkTheme } from '@lib/ui/theme/darkTheme'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -29,7 +30,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <AnalyticsProvider>
       <PageVisitTracker />
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
+        <ThemeProvider theme={darkTheme}>
           <GlobalStyle fontFamily={openSans.style.fontFamily} />
           <WebsiteLayout>{component}</WebsiteLayout>
         </ThemeProvider>

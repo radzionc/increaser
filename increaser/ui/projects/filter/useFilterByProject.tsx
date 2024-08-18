@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useProjectFilter } from './ProjectFilterProvider'
 
 export function useFilterByProject<T>(
@@ -6,9 +7,11 @@ export function useFilterByProject<T>(
 ) {
   const [projectId] = useProjectFilter()
 
-  if (!projectId) {
-    return items
-  }
+  return useMemo(() => {
+    if (!projectId) {
+      return items
+    }
 
-  return items.filter((item) => getProjectId(item) === projectId)
+    return items.filter((item) => getProjectId(item) === projectId)
+  }, [getProjectId, items, projectId])
 }

@@ -10,6 +10,7 @@ import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationB
 
 const Container = styled(VStack)`
   max-width: 560px;
+  gap: 32px;
 `
 
 export const MyVisionContent = () => {
@@ -22,8 +23,10 @@ export const MyVisionContent = () => {
         <Container>
           <ActiveItemIdProvider initialValue={null}>
             <ProductEducationBlock value="vision" />
-            <VisionAttributes />
-            <AddVisionAttribute />
+            <VStack>
+              <VisionAttributes />
+              <AddVisionAttribute />
+            </VStack>
           </ActiveItemIdProvider>
         </Container>
       )}

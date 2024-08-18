@@ -1,6 +1,6 @@
 import { Page } from '@lib/next-ui/Page'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
-import { UniformColumnGrid } from '@lib/ui/layout/UniformColumnGrid'
+import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { WorkBudgetReport } from '@increaser/ui/workBudget/WorkBudgetReport'
 
 export const WorkBudget: Page = () => {
