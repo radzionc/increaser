@@ -29,6 +29,7 @@ import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { toEntries } from '@lib/utils/record/toEntries'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { DoneTasksInfo } from './DoneTasksInfo'
 
 const DraggableTaskItem = styled(TaskItem)<{ status: DnDItemStatus }>`
   ${({ status }) =>
@@ -125,7 +126,10 @@ export const TaskBoard = () => {
                 <Text weight="600">{taskStatusName[status]}</Text>
               </ColumnContent>
             </ColumnHeader>
-            <TaskColumnContent>{children}</TaskColumnContent>
+            <TaskColumnContent>
+              {status === 'done' && <DoneTasksInfo />}
+              {children}
+            </TaskColumnContent>
             <ColumnFooter>
               <AddTask status={status} />
             </ColumnFooter>
