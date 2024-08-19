@@ -11,16 +11,18 @@ export const ManageTaskFactories = () => {
 
   return (
     <>
-      <ProductEducationBlock value="recurringTasks" />
-      <VStack style={{ maxWidth: 560 }}>
-        <ActiveItemIdProvider initialValue={null}>
-          {items.map((item) => (
-            <CurrentTaskFactoryProvider key={item.id} value={item}>
-              <TaskFactoryItem />
-            </CurrentTaskFactoryProvider>
-          ))}
-        </ActiveItemIdProvider>
-        <AddTaskFactory />
+      <VStack gap={32} style={{ maxWidth: 560 }}>
+        <ProductEducationBlock value="recurringTasks" />
+        <VStack>
+          <ActiveItemIdProvider initialValue={null}>
+            {items.map((item) => (
+              <CurrentTaskFactoryProvider key={item.id} value={item}>
+                <TaskFactoryItem />
+              </CurrentTaskFactoryProvider>
+            ))}
+          </ActiveItemIdProvider>
+          <AddTaskFactory />
+        </VStack>
       </VStack>
     </>
   )
