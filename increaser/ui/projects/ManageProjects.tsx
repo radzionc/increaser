@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import { ProjectList } from './ProjectList'
 import { ProjectStatusFilterProvider } from './filter/status/ProjectStatusFilterProvider'
 import { CreateProjectPrompt } from './CreateProjectPrompt'
-import { ProjectsHeader } from './ProjectsHeader'
+import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
+import { ProjectStatusFilter } from './filter/status/ProjectStatusFilter'
 
 const Container = styled(VStack)`
   max-width: 520px;
@@ -15,16 +16,18 @@ const Container = styled(VStack)`
 
 export const ManageProjects = () => {
   return (
-    <Container>
-      <ProjectStatusFilterProvider initialValue="active">
-        <ProjectsHeader />
+    <ProjectStatusFilterProvider initialValue="active">
+      <PageHeaderControlsArea>
+        <ProjectStatusFilter />
+      </PageHeaderControlsArea>
+      <Container>
         <ActiveItemIdProvider initialValue={null}>
           <VStack>
             <ProjectList />
             <CreateProjectPrompt />
           </VStack>
         </ActiveItemIdProvider>
-      </ProjectStatusFilterProvider>
-    </Container>
+      </Container>
+    </ProjectStatusFilterProvider>
   )
 }

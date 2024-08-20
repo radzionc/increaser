@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 import { useIsScreenWidthLessThan } from '@lib/ui/hooks/useIsScreenWidthLessThan'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Sidebar } from './Sidebar'
+import { sidebarConfig } from './Sidebar/config'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 interface Props {
   children: React.ReactNode
@@ -28,8 +30,7 @@ const ScreenWidthTopbarContent = styled(VStack)`
 
 const ScreenWidthSidebarContent = styled(VStack)`
   ${contentCSS}
-  padding: 40px 4% 20px 4%;
-  /* max-height: calc(100% - 20px); */
+  padding: ${toSizeUnit(sidebarConfig.verticalPadding)} 4%;
 `
 
 export const Navigation = ({ children }: Props) => {

@@ -10,13 +10,17 @@ import {
 import { SidebarNavigationItem } from '../SidebarNavigationItem'
 import { InstallPrompt } from './InstallPrompt'
 import { SidebarHeader } from './SidebarHeader'
+import { sidebarConfig } from './config'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Container = styled.div`
   min-width: 260px;
   height: 100%;
   background: ${({ theme }) => theme.colors.foreground.toCssValue()};
-  padding: 20px 8px;
+  padding: 8px;
+  padding-top: 0;
   overflow: auto;
+  ${verticalPadding(sidebarConfig.verticalPadding)};
 `
 
 const Footer = styled(VStack)`
@@ -32,7 +36,7 @@ export const Sidebar = () => {
   return (
     <Container>
       <VStack alignItems="center" fullHeight justifyContent="space-between">
-        <VStack fullWidth gap={20}>
+        <VStack fullWidth gap={sidebarConfig.gap}>
           <SidebarHeader />
           <VStack gap={4} fullWidth>
             {primaryAppNavigationPages.map((page) => (

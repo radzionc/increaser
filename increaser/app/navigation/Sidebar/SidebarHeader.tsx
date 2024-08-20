@@ -1,6 +1,5 @@
 import { HStack } from '@lib/ui/layout/Stack'
 import styled from 'styled-components'
-import { navigationConfig } from './config'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { ProductIcon } from '@increaser/ui/icon/ProductIcon'
 import { Text } from '@lib/ui/text'
@@ -9,14 +8,18 @@ import { FeaturesNavigationItem } from '../../features/FeaturesNavigationItem'
 import { ManageAccount } from '../../user/components/ManageAccount'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { sidebarConfig } from './config'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(HStack)`
-  ${horizontalPadding(navigationConfig.itemHorizontalPadding)};
+  ${horizontalPadding(sidebarConfig.item.horizontalPadding)};
   padding-right: 0;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  height: ${toSizeUnit(sidebarConfig.headerHeight)};
   svg {
     font-size: 20px;
   }
@@ -27,14 +30,16 @@ const Logo = styled(HStack)`
   gap: 12px;
 
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
+
+  color: ${getColor('contrast')};
 
   ${borderRadius.s};
   padding-left: 4px;
   height: 32px;
 
   svg {
-    font-size: 16px;
+    font-size: 20px;
   }
 `
 

@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { navigationConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { sidebarConfig } from './config'
 
 export const NavigationItemContentFrame = styled.div`
   display: grid;
   grid-template-columns: 24px 1fr;
-  line-height: ${toSizeUnit(navigationConfig.itemLineHeight)};
+  line-height: ${toSizeUnit(sidebarConfig.item.lineHeight)};
   gap: 12px;
   font-weight: 600;
   font-size: 14px;
