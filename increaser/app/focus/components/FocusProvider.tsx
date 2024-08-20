@@ -36,6 +36,7 @@ import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 import { Minutes } from '@lib/utils/time/types'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { FocusLauncherSynchronizer } from '../launcher/FocusLauncherSynchronizer'
+import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -154,6 +155,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
 
   const { mutate: addSets } = useAddSetsMutation()
   const { mutate: updateTasks } = useUpdateUserEntitiesMutation('task')
+  const { mutate: updateTaskMutation } = useUpdateUserEntityMutation('task')
 
   const cancel = useCallback(() => {
     setSession(null)
@@ -323,6 +325,25 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
     },
     [setSession],
   )
+
+  useEffect(() => {
+    if (!session) return
+
+    const { taskId } = getLastItem(session.intervals)
+    if (!taskId) return
+
+    const task = tasks[taskId]
+    if (!task) return
+
+    if (task.status !== 'inProgress') return
+
+    updateTaskMutation({
+      id: taskId,
+      fields: {
+        status: 'inProgress',
+      },
+    })
+  }, [session, tasks, updateTaskMutation])
 
   return (
     <FocusContext.Provider
