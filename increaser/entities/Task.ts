@@ -13,12 +13,13 @@ export type TaskChecklistItem = EntityWithId & {
   order: number
 }
 
-export const taskStatuses = ['backlog', 'todo', 'done'] as const
+export const taskStatuses = ['backlog', 'todo', 'inProgress', 'done'] as const
 export type TaskStatus = (typeof taskStatuses)[number]
 
 export const taskStatusName: Record<TaskStatus, string> = {
   backlog: 'Backlog',
   todo: 'Todo',
+  inProgress: 'In progress',
   done: 'Done',
 }
 

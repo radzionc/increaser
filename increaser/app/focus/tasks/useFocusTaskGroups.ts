@@ -1,12 +1,11 @@
-import { Task } from '@increaser/entities/Task'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { Task, taskStatusName } from '@increaser/entities/Task'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
-import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { toEntries } from '@lib/utils/record/toEntries'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { endOfDay, format } from 'date-fns'
 import { useMemo } from 'react'
+import { useUncompleteTasks } from '@increaser/ui/tasks/useUncompleteTasks'
 
 export type TaskGroup = {
   name: string
@@ -14,38 +13,34 @@ export type TaskGroup = {
 }
 
 export const useFocusTaskGroups = () => {
-  const { tasks } = useAssertUserState()
+  const tasks = useUncompleteTasks()
 
   return useMemo(() => {
     const overdueTasks: Task[] = []
     const thisWeekTasks: Record<number, Task[]> = {}
-    const unscheduledTasks: Task[] = []
+    const inProgressTasks: Task[] = []
+    const todoTasks: Task[] = []
 
     const now = Date.now()
     const weekEndsAt = getWeekEndedAt(now)
     const todayEndsAt = endOfDay(now).getTime()
 
-    Object.values(tasks).forEach((task) => {
-      if (
-        task.status === 'done' ||
-        (task.status === 'backlog' && !task.deadlineAt)
-      ) {
-        return
-      }
-
-      if (task.deadlineAt) {
-        if (task.deadlineAt > weekEndsAt) {
-          return
-        }
-
+    tasks.forEach((task) => {
+      if (task.deadlineAt && task.deadlineAt <= weekEndsAt) {
         if (task.deadlineAt < now) {
           overdueTasks.push(task)
         } else {
           const key = endOfDay(task.deadlineAt).getTime()
           thisWeekTasks[key] = [...(thisWeekTasks[key] || []), task]
         }
-      } else {
-        unscheduledTasks.push(task)
+
+        return
+      }
+
+      if (task.status === 'inProgress') {
+        inProgressTasks.push(task)
+      } else if (task.status === 'todo') {
+        todoTasks.push(task)
       }
     })
 
@@ -53,7 +48,7 @@ export const useFocusTaskGroups = () => {
     if (!isEmpty(overdueTasks)) {
       result.push({
         name: 'Overdue',
-        tasks: sortEntitiesWithOrder(overdueTasks),
+        tasks: overdueTasks,
       })
     }
 
@@ -65,14 +60,21 @@ export const useFocusTaskGroups = () => {
             ? 'For today'
             : `By ${format(timestamp, 'EEEE')}`
 
-        result.push({ name, tasks: sortEntitiesWithOrder(value) })
+        result.push({ name, tasks: value })
       },
     )
 
-    if (!isEmpty(unscheduledTasks)) {
+    if (!isEmpty(inProgressTasks)) {
       result.push({
-        name: 'Todo',
-        tasks: sortEntitiesWithOrder(unscheduledTasks),
+        name: taskStatusName.inProgress,
+        tasks: inProgressTasks,
+      })
+    }
+
+    if (!isEmpty(todoTasks)) {
+      result.push({
+        name: taskStatusName.todo,
+        tasks: todoTasks,
       })
     }
 

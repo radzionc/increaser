@@ -14,7 +14,7 @@ const title = 'Tasks'
 export const TasksLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
     <AppPageLayout>
-      <PageContainer style={{ flex: 1 }}>
+      <PageContainer style={{ flex: 1, maxWidth: 1200 }}>
         <PageContent>
           <TaskStatusFilterProvider initialValue="todo">
             <ProjectFilterProvider initialValue={null}>
