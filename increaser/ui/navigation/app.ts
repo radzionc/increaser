@@ -31,6 +31,48 @@ const appPages = [
 
 export type AppPage = (typeof appPages)[number]
 
+export const appPageName: Record<AppPage, string> = {
+  focus: 'Focus',
+  habits: 'Habits',
+  tasks: 'Tasks',
+  vision: 'Vision',
+  goals: 'Goals',
+  projects: 'Projects',
+  community: 'Community',
+  membership: 'Membership',
+  oauth: 'OAuth',
+  signIn: 'Sign In',
+  signUp: 'Sign Up',
+  emailConfirm: 'Email Confirm',
+  ideas: 'Ideas',
+  roadmap: 'Roadmap',
+  principles: 'Principles',
+  updates: `What's New`,
+  profile: 'Public Profile',
+  preferences: 'Preferences',
+}
+
+export const appPageEmoji: Record<AppPage, string> = {
+  focus: '🔍',
+  habits: '🧘',
+  tasks: '📝',
+  vision: '🔮',
+  goals: '🎯',
+  projects: '🚀',
+  community: '👥',
+  membership: '🎓',
+  oauth: '🔒',
+  signIn: '🔑',
+  signUp: '🔑',
+  emailConfirm: '📧',
+  ideas: '💡',
+  roadmap: '🗺️',
+  principles: '📜',
+  updates: '📰',
+  profile: '👤',
+  preferences: '⚙️',
+}
+
 export const appPagePath: Record<AppPage, string> = {
   focus: '',
   habits: 'habits',

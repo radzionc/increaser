@@ -4,7 +4,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { sidebarConfig } from '../../../navigation/Sidebar/config'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { ReactNode } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 import { HStack } from '@lib/ui/layout/Stack'
 import { useSetPageHeaderControlsArea } from './PageHeaderControlsAreaProvider'
 
@@ -15,13 +15,17 @@ const Container = styled(Header)`
 
 type PageHeaderProps = ComponentWithChildrenProps & {
   controls?: ReactNode
-}
+} & ComponentProps<typeof Container>
 
-export const PageHeader = ({ children, controls }: PageHeaderProps) => {
+export const PageHeader = ({
+  children,
+  controls,
+  ...rest
+}: PageHeaderProps) => {
   const setControlsArea = useSetPageHeaderControlsArea()
 
   return (
-    <Container>
+    <Container {...rest}>
       {children}
       <HStack gap={8} alignItems="center">
         <HStack ref={setControlsArea} gap={8} alignItems="center" />

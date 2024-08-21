@@ -1,7 +1,6 @@
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
-import { PageTitle } from '@lib/ui/text/PageTitle'
 
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Goals } from './Goals'
@@ -10,11 +9,9 @@ import styled from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { GoalsEducation } from '@increaser/ui/goals/education/GoalsEducation'
-import { Header } from '@lib/ui/layout/Header'
-
-const title = 'Goals'
+import { PageHeader } from '../ui/page/header/PageHeader'
+import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'
 
 const contentWidth = 560
 const gap = 20
@@ -32,13 +29,15 @@ export const GoalsPage = () => {
         <PageContainer ref={setElement}>
           <Content>
             <PageContent style={{ maxWidth: contentWidth }}>
-              <Header>
-                <PageTitle>{title}</PageTitle>
-                <PageDocumentTitle emoji="🎯" title={title} />
-                <ClientOnly>
-                  <GoalStatusFilter />
-                </ClientOnly>
-              </Header>
+              <PageHeader
+                controls={
+                  <ClientOnly>
+                    <GoalStatusFilter />
+                  </ClientOnly>
+                }
+              >
+                <PagePrimaryNavigation />
+              </PageHeader>
 
               <UserStateOnly>
                 <Goals />

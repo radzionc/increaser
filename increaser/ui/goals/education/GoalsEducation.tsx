@@ -1,4 +1,3 @@
-import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
 import { VStack } from '@lib/ui/layout/Stack'
 import { getColor } from '@lib/ui/theme/getters'
@@ -8,11 +7,13 @@ import {
   usePersistentState,
 } from '../../state/persistentState'
 import { ComponentWithActiveState } from '@lib/ui/props'
-import { PageTitle } from '@lib/ui/text/PageTitle'
 
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { GoalsEducationItems } from './GoalsEducationItems'
+import { SectionTitle } from '@lib/ui/text/SectionTitle'
+import { PageHeader } from '@increaser/app/ui/page/header/PageHeader'
+import { interactive } from '@lib/ui/css/interactive'
 
 const Container = styled(VStack)<ComponentWithActiveState>`
   gap: 40px;
@@ -36,14 +37,9 @@ const Toggle = styled(CollapsableStateIndicator)`
   color: ${getColor('textSupporting')};
 `
 
-const Header = styled(UnstyledButton)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 40px;
-  align-items: center;
-  justify-content: space-between;
+const Header = styled(PageHeader)`
+  ${interactive};
+  border: none;
 
   &:hover ${Toggle} {
     color: ${getColor('contrast')};
@@ -58,9 +54,11 @@ export const GoalsEducation = () => {
   )
   return (
     <Container isActive={isGoalsEducationOpen}>
-      <Header onClick={() => setIsGoalsEducationOpen(!isGoalsEducationOpen)}>
-        <PageTitle>Wisdom</PageTitle>
-        <Toggle isOpen={isGoalsEducationOpen} />
+      <Header
+        onClick={() => setIsGoalsEducationOpen(!isGoalsEducationOpen)}
+        controls={<Toggle isOpen={isGoalsEducationOpen} />}
+      >
+        <SectionTitle>Wisdom</SectionTitle>
       </Header>
       {isGoalsEducationOpen && <GoalsEducationItems />}
     </Container>
