@@ -6,6 +6,7 @@ import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWorkBudgetTotal'
 import { useActiveProjects } from '../../hooks/useActiveProjects'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const useProjectDaysAllocation = () => {
   const activeProjects = useActiveProjects()
@@ -28,8 +29,9 @@ export const useProjectDaysAllocation = () => {
       (workdayHours * workdaysNumber) / workBudgetTotal
     const plannedWeekendsShare = 1 - plannedWorkdaysShare
 
-    const totalBudget = sum(
-      activeProjects.map((project) => project.allocatedMinutesPerWeek),
+    const totalBudget = Math.max(
+      sum(activeProjects.map((project) => project.allocatedMinutesPerWeek)),
+      convertDuration(workBudgetTotal, 'h', 'min'),
     )
     const workdaysProjectsBudget = sum(
       activeProjects
