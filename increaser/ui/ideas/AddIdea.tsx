@@ -12,7 +12,7 @@ export const AddIdea = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Button onClick={onOpen}>
+        <Button size="s" onClick={onOpen}>
           <HStack gap={8} alignItems="center">
             <PlusIcon />
             Add an idea
