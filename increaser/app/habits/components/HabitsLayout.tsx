@@ -1,17 +1,22 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../../focus/components/AppPageLayout'
-import { PageTitle } from '../../ui/PageTitle'
 import { UserStateOnly } from '../../user/state/UserStateOnly'
-import { FixedWidthContent } from '../../components/reusable/fixed-width-content'
-import { PageViewNavigation } from '../../navigation/page/PageViewNavigation'
+import { PageHeader } from '../../ui/page/header/PageHeader'
+import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
+import { PageContainer } from '../../ui/page/PageContainer'
+import { PageContent } from '../../ui/page/PageContent'
 
 export const HabitsLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
     <AppPageLayout>
-      <FixedWidthContent>
-        <PageTitle documentTitle={`🧘‍♀️ Habits`} title={<PageViewNavigation />} />
-        <UserStateOnly>{children}</UserStateOnly>
-      </FixedWidthContent>
+      <PageContainer>
+        <PageContent>
+          <PageHeader>
+            <PagePrimaryNavigation />
+          </PageHeader>
+          <UserStateOnly>{children}</UserStateOnly>
+        </PageContent>
+      </PageContainer>
     </AppPageLayout>
   )
 }
