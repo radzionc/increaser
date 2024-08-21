@@ -20,7 +20,7 @@ export const Scoreboard = () => {
   const { isAnonymous } = useAssertUserState()
 
   return (
-    <Panel kind="secondary">
+    <Panel style={{ maxWidth: 480 }} kind="secondary">
       <VStack gap={24}>
         <SectionTitle>
           Last {scoreboardPeriodInDays[scoreboardPeriod]} days top performers
