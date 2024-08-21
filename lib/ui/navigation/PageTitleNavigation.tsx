@@ -8,7 +8,7 @@ import { absoluteOutline } from '../css/absoluteOutline'
 import { HStack } from '../layout/Stack'
 
 const Underline = styled.div`
-  ${absoluteOutline(0, 2)};
+  ${absoluteOutline(0, 0)};
   border-bottom: 2px solid transparent;
 `
 
