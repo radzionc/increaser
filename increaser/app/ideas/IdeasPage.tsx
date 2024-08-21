@@ -9,6 +9,7 @@ import { ManageProjectFilter } from '@increaser/ui/projects/filter/ManageProject
 import { ProjectFilterProvider } from '@increaser/ui/projects/filter/ProjectFilterProvider'
 import { PageHeader } from '../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'
+import { AddIdea } from '@increaser/ui/ideas/AddIdea'
 
 export const IdeasPage: Page = () => {
   return (
@@ -20,6 +21,7 @@ export const IdeasPage: Page = () => {
               <ClientOnly>
                 <UserStateOnly>
                   <ManageProjectFilter />
+                  <AddIdea />
                 </UserStateOnly>
               </ClientOnly>
             }

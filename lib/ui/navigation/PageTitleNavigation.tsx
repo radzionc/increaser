@@ -1,15 +1,19 @@
 import styled, { css } from 'styled-components'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { ComponentWithActiveState, InputProps } from '../props'
-import { HStack } from '../layout/Stack'
 import { centerContent } from '../css/centerContent'
 import { horizontalPadding } from '../css/horizontalPadding'
 import { getColor } from '../theme/getters'
 import { absoluteOutline } from '../css/absoluteOutline'
+import { HStack } from '../layout/Stack'
 
 const Underline = styled.div`
   ${absoluteOutline(0, 2)};
   border-bottom: 2px solid transparent;
+`
+
+const Container = styled(HStack)`
+  height: 100%;
 `
 
 const Option = styled(UnstyledButton)<ComponentWithActiveState>`
@@ -19,8 +23,7 @@ const Option = styled(UnstyledButton)<ComponentWithActiveState>`
   height: 100%;
   ${horizontalPadding(12)};
   ${centerContent};
-  align-items: end;
-  padding-bottom: 12px;
+  min-width: 80px;
   ${({ isActive }) =>
     isActive
       ? css`
@@ -49,13 +52,13 @@ export function PageTitleNavigation<T extends string>({
   onChange,
 }: PageTitleNavigationProps<T>) {
   return (
-    <HStack fullHeight>
+    <Container>
       {options.map((v) => (
         <Option onClick={() => onChange(v)} isActive={v === value} key={v}>
           {getOptionName(v)}
           <Underline />
         </Option>
       ))}
-    </HStack>
+    </Container>
   )
 }
