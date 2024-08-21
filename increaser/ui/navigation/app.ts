@@ -101,6 +101,7 @@ export const appPageViews = {
   tasks: ['tasks', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
   projects: ['projects', 'plan', 'report'],
+  goals: ['goals', 'wisdom'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
@@ -165,5 +166,9 @@ export const appPageViewName: {
     projects: 'Projects',
     plan: 'Plan',
     report: 'Report',
+  },
+  goals: {
+    goals: 'Goals',
+    wisdom: 'Wisdom',
   },
 }

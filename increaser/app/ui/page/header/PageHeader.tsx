@@ -20,6 +20,7 @@ const Container = styled(Header)`
   height: ${toSizeUnit(sidebarConfig.headerHeight)};
 
   ${hideScrollbars};
+  padding-right: 1px;
 
   overflow-x: auto;
   flex-wrap: nowrap;
