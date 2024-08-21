@@ -2,9 +2,6 @@ import { Page } from '@lib/next-ui/Page'
 
 import { PageContainer } from '@increaser/app/ui/page/PageContainer'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
-import { PageTitle } from '@lib/ui/text/PageTitle'
-
-import { PageDocumentTitle } from '@increaser/app/ui/page/PageDocumentTitle'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import styled from 'styled-components'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
@@ -13,14 +10,14 @@ import {
   ProductFeaturesViewProvider,
   ProductFeaturesViewSelector,
 } from './ProductFeaturesView'
-import { Header } from '@lib/ui/layout/Header'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ProductFeatureList } from './ProductFeatureList'
 import { FeatureForm } from './form/FeatureForm'
 import { FounderContacts } from '../../community/components/FounderContacts'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-
-const title = `Roadmap`
+import { PageHeader } from '../../ui/page/header/PageHeader'
+import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
+import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 const contentWidth = 520
 const gap = 40
@@ -55,13 +52,16 @@ export const RoadmapPage: Page = () => {
             <Content>
               <PageContent style={{ maxWidth: contentWidth }}>
                 <ProductFeaturesViewProvider>
-                  <Header>
-                    <PageTitle>{title}</PageTitle>
-                    <PageDocumentTitle emoji="🎯" title={title} />
-                    <ClientOnly>
-                      <ProductFeaturesViewSelector />
-                    </ClientOnly>
-                  </Header>
+                  <PageHeader
+                    controls={
+                      <ClientOnly>
+                        <ProductFeaturesViewSelector />
+                      </ClientOnly>
+                    }
+                  >
+                    <PagePrimaryNavigation />
+                  </PageHeader>
+
                   <UserStateOnly>
                     <VStack gap={20}>
                       {isSmall && <SideContent />}
@@ -73,7 +73,9 @@ export const RoadmapPage: Page = () => {
               {!isSmall && (
                 <UserStateOnly>
                   <SideContainer>
-                    <PageTitle>Request a Feature</PageTitle>
+                    <PageHeader>
+                      <SectionTitle>Request a Feature</SectionTitle>
+                    </PageHeader>
                     <SideContent />
                   </SideContainer>
                 </UserStateOnly>
