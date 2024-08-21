@@ -1,24 +1,20 @@
 import { UserStateOnly } from '../user/state/UserStateOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
-import { PageTitle } from '@lib/ui/text/PageTitle'
 
-import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../focus/components/AppPageLayout'
-import { PageViewNavigation } from '../navigation/page/PageViewNavigation'
-
-const title = 'Preferences'
+import { PageHeader } from '../ui/page/header/PageHeader'
+import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'
 
 export const PreferencesLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
     <AppPageLayout>
       <PageContainer>
         <PageContent>
-          <PageTitle as="div">
-            <PageViewNavigation />
-          </PageTitle>
-          <PageDocumentTitle emoji="☎️" title={title} />
+          <PageHeader>
+            <PagePrimaryNavigation />
+          </PageHeader>
           <UserStateOnly>{children}</UserStateOnly>
         </PageContent>
       </PageContainer>
