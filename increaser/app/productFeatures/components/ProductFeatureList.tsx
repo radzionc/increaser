@@ -4,14 +4,17 @@ import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDepen
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { ProductFeatureItem } from './ProductFeatureItem'
-import { useProductFeaturesView } from './ProductFeaturesView'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CurrentProductFeatureProvider } from './CurrentProductFeatureProvider'
 import { VStack } from '@lib/ui/layout/Stack'
+import { ProductFeatureStatus } from '@increaser/entities/ProductFeature'
 
-export const ProductFeatureList = () => {
+type ProductFeatureListProps = {
+  status: ProductFeatureStatus
+}
+
+export const ProductFeatureList = ({ status }: ProductFeatureListProps) => {
   const featuresQuery = useApiQuery('features', undefined)
-  const { view } = useProductFeaturesView()
   const { id } = useAssertUserState()
 
   return (
@@ -21,7 +24,7 @@ export const ProductFeatureList = () => {
         {...getQueryDependantDefaultProps('features')}
         success={(features) => {
           const [myUnapprovedFeatures, otherFeatures] = splitBy(
-            features.filter((feature) => view === feature.status),
+            features.filter((feature) => status === feature.status),
             (feature) =>
               feature.proposedBy === id && !feature.isApproved ? 0 : 1,
           )
