@@ -27,18 +27,22 @@ export const Scoreboard = () => {
         </SectionTitle>
         <QueryDependant
           query={query}
-          success={(value) => (
-            <VStack gap={24}>
-              {value.myPosition && isAnonymous && <PublicProfilePrompt />}
-              <ScoreboardTable
-                myPosition={value.myPosition}
-                users={value.users}
-              />
-              <HStack fullWidth justifyContent="end">
-                <LastScoreboardUpdate value={value.syncedAt} />
-              </HStack>
-            </VStack>
-          )}
+          success={(value) => {
+            const shouldShowPrompt =
+              value.myPosition !== undefined && isAnonymous
+            return (
+              <VStack gap={24}>
+                {shouldShowPrompt && <PublicProfilePrompt />}
+                <ScoreboardTable
+                  myPosition={value.myPosition}
+                  users={value.users}
+                />
+                <HStack fullWidth justifyContent="end">
+                  <LastScoreboardUpdate value={value.syncedAt} />
+                </HStack>
+              </VStack>
+            )
+          }}
           error={() => <Text>Something went wrong</Text>}
           pending={() => <Spinner />}
         />
