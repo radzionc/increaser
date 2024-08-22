@@ -18,7 +18,7 @@ const appNavigationPages = [
 ] as const
 export type AppNavigationPage = (typeof appNavigationPages)[number]
 
-const appPages = [
+export const appPages = [
   ...appNavigationPages,
   'oauth',
   'signIn',
@@ -95,7 +95,7 @@ export const appPagePath: Record<AppPage, string> = {
 }
 
 export const appPageViews = {
-  vision: ['my', 'ideas'],
+  vision: ['manage', 'board', 'ideas'],
   habits: ['my', 'ideas'],
   principles: ['my', 'ideas'],
   tasks: ['tasks', 'upcoming', 'automation', 'templates'],
@@ -142,7 +142,8 @@ export const appPageViewName: {
   [K in AppPageWithView]: Record<AppPageViews[K][number], string>
 } = {
   vision: {
-    my: 'Vision',
+    manage: 'Manage',
+    board: 'Board',
     ideas: 'Explore',
   },
   habits: {
