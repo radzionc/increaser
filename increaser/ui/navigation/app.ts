@@ -98,7 +98,7 @@ export const appPageViews = {
   vision: ['my', 'ideas'],
   habits: ['my', 'ideas'],
   principles: ['my', 'ideas'],
-  tasks: ['tasks', 'automation', 'templates'],
+  tasks: ['tasks', 'upcoming', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
   projects: ['projects', 'plan', 'report'],
   goals: ['goals', 'wisdom'],
@@ -155,6 +155,7 @@ export const appPageViewName: {
   },
   tasks: {
     tasks: 'Tasks',
+    upcoming: 'Upcoming',
     automation: 'Automation',
     templates: 'Templates',
   },
