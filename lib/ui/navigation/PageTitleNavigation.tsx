@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { ComponentWithActiveState, InputProps } from '../props'
-import { centerContent } from '../css/centerContent'
 import { horizontalPadding } from '../css/horizontalPadding'
 import { getColor } from '../theme/getters'
 import { absoluteOutline } from '../css/absoluteOutline'
 import { HStack } from '../layout/Stack'
+import { pageTitle } from '../text/PageTitle'
 
 const Underline = styled.div`
   ${absoluteOutline(0, 0)};
@@ -18,11 +18,9 @@ const Container = styled(HStack)`
 
 const Option = styled(UnstyledButton)<ComponentWithActiveState>`
   position: relative;
-  font-size: 14px;
-  font-weight: 600;
+  ${pageTitle};
   height: 100%;
   ${horizontalPadding(12)};
-  ${centerContent};
   min-width: 80px;
   ${({ isActive }) =>
     isActive

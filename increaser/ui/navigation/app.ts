@@ -97,7 +97,7 @@ export const appPagePath: Record<AppPage, string> = {
 export const appPageViews = {
   vision: ['manage', 'board', 'ideas'],
   habits: ['my', 'ideas'],
-  principles: ['my', 'ideas'],
+  principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'upcoming', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
   projects: ['projects', 'plan', 'report'],
@@ -152,6 +152,7 @@ export const appPageViewName: {
   },
   principles: {
     my: 'Principles',
+    categories: 'Categories',
     ideas: 'Explore',
   },
   tasks: {

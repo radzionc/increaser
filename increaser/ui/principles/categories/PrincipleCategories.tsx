@@ -10,7 +10,6 @@ export const PrincipleCategories = () => {
 
   return (
     <VStack>
-      <AddPrincipleCategory />
       <ActiveItemIdProvider initialValue={null}>
         {items.map((item) => (
           <CurrentPrincipleCategoryProvider key={item.id} value={item}>
@@ -18,6 +17,7 @@ export const PrincipleCategories = () => {
           </CurrentPrincipleCategoryProvider>
         ))}
       </ActiveItemIdProvider>
+      <AddPrincipleCategory />
     </VStack>
   )
 }

@@ -54,6 +54,7 @@ export const ProjectSelector = ({
     floatingOptionsWidthSameAsOpener,
     selectedIndex: options.indexOf(value),
     placement: 'bottom-start',
+    strategy: 'fixed',
     options: options.map((option) =>
       option === addProjectKey ? addProjectText : projects[option]?.name,
     ),

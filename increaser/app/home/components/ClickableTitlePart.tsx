@@ -11,7 +11,7 @@ const ToggleIconContainer = styled(CollapsableStateIndicator)`
   ${transition};
   color: ${getColor('textShy')};
   vertical-align: middle;
-  font-size: 24px;
+  font-size: 16px;
   margin-left: 4px;
 `
 

@@ -9,6 +9,7 @@ import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWi
 import { FocusLauncherForm } from '../../focus/launcher/FocusLauncherForm'
 import { FocusTitle } from './FocusTitle'
 import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
+import { PageContent } from '../../ui/page/PageContent'
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ export const HomePageContent = () => {
   const { session } = useFocus()
 
   const content = (
-    <VStack style={{ flex: 1 }}>
+    <PageContent>
       {session && <FocusTitle />}
       <VStack style={{ flex: 1 }} gap={40}>
         {session ? (
@@ -55,7 +56,7 @@ export const HomePageContent = () => {
           </>
         )}
       </VStack>
-    </VStack>
+    </PageContent>
   )
 
   return (

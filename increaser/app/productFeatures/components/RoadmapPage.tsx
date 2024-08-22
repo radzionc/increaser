@@ -17,7 +17,7 @@ import { FounderContacts } from '../../community/components/FounderContacts'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
-import { SectionTitle } from '@lib/ui/text/SectionTitle'
+import { PageTitle } from '@lib/ui/text/PageTitle'
 
 const contentWidth = 520
 const gap = 40
@@ -74,7 +74,7 @@ export const RoadmapPage: Page = () => {
                 <UserStateOnly>
                   <SideContainer>
                     <PageHeader>
-                      <SectionTitle>Request a Feature</SectionTitle>
+                      <PageTitle>Request a Feature</PageTitle>
                     </PageHeader>
                     <SideContent />
                   </SideContainer>

@@ -5,9 +5,19 @@ import {
   AppPageWithView,
 } from '@increaser/ui/navigation/app'
 import { useCurrentPage } from '../hooks/useCurrentPage'
-import { PageTitleNavigation } from '@lib/ui/navigation/PageTitleNavigation'
 import { PageViewNavigation } from './PageViewNavigation'
 import { PageDocumentTitle } from '../../ui/page/PageDocumentTitle'
+import styled from 'styled-components'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { getColor } from '@lib/ui/theme/getters'
+
+const Title = styled.h1`
+  font-size: 14px;
+  font-weight: 600;
+  height: 100%;
+  ${centerContent};
+  color: ${getColor('contrast')};
+`
 
 export const PagePrimaryNavigation = () => {
   const rootPage = useCurrentPage() as AppPageWithView
@@ -24,12 +34,7 @@ export const PagePrimaryNavigation = () => {
       {rootPage in appPageViews ? (
         <PageViewNavigation />
       ) : (
-        <PageTitleNavigation
-          value={rootPage}
-          options={[rootPage]}
-          onChange={() => {}}
-          getOptionName={(option) => appPageName[option]}
-        />
+        <Title>{appPageName[rootPage]}</Title>
       )}
     </>
   )
