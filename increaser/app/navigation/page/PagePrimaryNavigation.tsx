@@ -7,17 +7,7 @@ import {
 import { useCurrentPage } from '../hooks/useCurrentPage'
 import { PageViewNavigation } from './PageViewNavigation'
 import { PageDocumentTitle } from '../../ui/page/PageDocumentTitle'
-import styled from 'styled-components'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { getColor } from '@lib/ui/theme/getters'
-
-const Title = styled.h1`
-  font-size: 14px;
-  font-weight: 600;
-  height: 100%;
-  ${centerContent};
-  color: ${getColor('contrast')};
-`
+import { PageTitle } from '@lib/ui/text/PageTitle'
 
 export const PagePrimaryNavigation = () => {
   const rootPage = useCurrentPage() as AppPageWithView
@@ -34,7 +24,7 @@ export const PagePrimaryNavigation = () => {
       {rootPage in appPageViews ? (
         <PageViewNavigation />
       ) : (
-        <Title>{appPageName[rootPage]}</Title>
+        <PageTitle>{appPageName[rootPage]}</PageTitle>
       )}
     </>
   )

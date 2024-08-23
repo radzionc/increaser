@@ -5,9 +5,14 @@ import { horizontalPadding } from '../css/horizontalPadding'
 import { getColor } from '../theme/getters'
 import { absoluteOutline } from '../css/absoluteOutline'
 import { HStack } from '../layout/Stack'
-import { pageTitle } from '../text/PageTitle'
+import { centerContent } from '../css/centerContent'
 
 const Underline = styled.div`
+  ${absoluteOutline(0, 0)};
+  border-bottom: 2px solid ${getColor('mist')};
+`
+
+const ItemUnderline = styled.div`
   ${absoluteOutline(0, 0)};
   border-bottom: 2px solid transparent;
 `
@@ -18,14 +23,16 @@ const Container = styled(HStack)`
 
 const Option = styled(UnstyledButton)<ComponentWithActiveState>`
   position: relative;
-  ${pageTitle};
+  font-size: 14px;
+  font-weight: 600;
   height: 100%;
+  ${centerContent};
   ${horizontalPadding(12)};
   min-width: 80px;
   ${({ isActive }) =>
     isActive
       ? css`
-          ${Underline} {
+          ${ItemUnderline} {
             border-color: ${getColor('contrast')};
           }
           color: ${getColor('contrast')};
@@ -50,13 +57,16 @@ export function PageTitleNavigation<T extends string>({
   onChange,
 }: PageTitleNavigationProps<T>) {
   return (
-    <Container>
-      {options.map((v) => (
-        <Option onClick={() => onChange(v)} isActive={v === value} key={v}>
-          {getOptionName(v)}
-          <Underline />
-        </Option>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {options.map((v) => (
+          <Option onClick={() => onChange(v)} isActive={v === value} key={v}>
+            {getOptionName(v)}
+            <ItemUnderline />
+          </Option>
+        ))}
+      </Container>
+      <Underline />
+    </>
   )
 }
