@@ -5,6 +5,9 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { Sidebar } from './Sidebar'
 import { sidebarConfig } from './Sidebar/config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { topbarConfig } from './Topbar/config'
+import { SidebarHeader } from './Sidebar/SidebarHeader'
 
 interface Props {
   children: React.ReactNode
@@ -25,7 +28,7 @@ const contentCSS = css`
 
 const ScreenWidthTopbarContent = styled(VStack)`
   ${contentCSS}
-  padding: 0 20px;
+  ${horizontalPadding(topbarConfig.horizontalPadding)};
 `
 
 const ScreenWidthSidebarContent = styled(VStack)`
@@ -47,7 +50,7 @@ export const Navigation = ({ children }: Props) => {
 
   return (
     <ScreenWidthSidebar fullHeight alignItems="start">
-      <Sidebar />
+      <Sidebar header={<SidebarHeader />} />
       <ScreenWidthSidebarContent alignItems="center">
         <>{children}</>
       </ScreenWidthSidebarContent>

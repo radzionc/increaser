@@ -8,9 +8,9 @@ import { getColor } from '@lib/ui/theme/getters'
 import { round } from '@lib/ui/css/round'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { BellIcon } from '@lib/ui/icons/BellIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { HeaderActionButton } from '../navigation/HeaderActionButton'
 
 const Pill = styled.div`
   position: absolute;
@@ -49,18 +49,12 @@ export const FeaturesNavigationItem = () => {
 
   return (
     <Link href={getAppPath('updates')}>
-      <IconButton
-        kind="secondary"
-        title="What's new"
-        size="l"
-        as="div"
-        icon={
-          <Wrapper>
-            <BellIcon />
-            {newFeaturesCount > 0 && <Pill>{newFeaturesCount}</Pill>}
-          </Wrapper>
-        }
-      />
+      <HeaderActionButton>
+        <Wrapper>
+          <BellIcon />
+          {newFeaturesCount > 0 && <Pill>{newFeaturesCount}</Pill>}
+        </Wrapper>
+      </HeaderActionButton>
     </Link>
   )
 }

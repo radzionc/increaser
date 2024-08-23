@@ -8,7 +8,6 @@ import { HStack, VStack } from '@lib/ui/layout/Stack'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import styled, { css, useTheme } from 'styled-components'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { getColor } from '@lib/ui/theme/getters'
 import { UserIcon } from '@lib/ui/icons/UserIcon'
 import { LogOutIcon } from '@lib/ui/icons/LogOutIcon'
@@ -24,9 +23,9 @@ import { useIsPayingUser } from '../../membership/hooks/useIsPayingUser'
 import { useHasFreeTrial } from '../../membership/hooks/useHasFreeTrial'
 import { CrownIcon } from '@lib/ui/icons/CrownIcon'
 import { Tag } from '@lib/ui/tags/Tag'
+import { HeaderActionButton } from '../../navigation/HeaderActionButton'
 
-const Container = styled(IconButton)<ComponentWithActiveState>`
-  border: 1px solid transparent;
+const Container = styled(HeaderActionButton)<ComponentWithActiveState>`
   ${({ isActive }) =>
     isActive &&
     css`
@@ -124,27 +123,21 @@ export const ManageAccount = () => {
 
   return (
     <>
-      <Container
-        title="Your account"
-        icon={
-          <Wrapper>
-            {!isPayingUser && (
-              <Indicator
-                style={{
-                  background: (hasFreeTrial
-                    ? colors.idle
-                    : colors.alert
-                  ).toCssValue(),
-                }}
-              />
-            )}
-            <UserIcon />
-          </Wrapper>
-        }
-        isActive={isOpen}
-        {...getReferenceProps()}
-        kind="secondary"
-      />
+      <Container isActive={isOpen} {...getReferenceProps()}>
+        <Wrapper>
+          {!isPayingUser && (
+            <Indicator
+              style={{
+                background: (hasFreeTrial
+                  ? colors.idle
+                  : colors.alert
+                ).toCssValue(),
+              }}
+            />
+          )}
+          <UserIcon />
+        </Wrapper>
+      </Container>
 
       {isOpen && (
         <FloatingFocusManager context={context} modal returnFocus>

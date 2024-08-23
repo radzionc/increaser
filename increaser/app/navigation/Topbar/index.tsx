@@ -1,36 +1,55 @@
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import styled from 'styled-components'
-import { HStack } from '@lib/ui/layout/Stack'
-import { Text } from '@lib/ui/text'
 
-import { SidebarOpener } from './SidebarOpener'
 import { CompleteMist } from '@lib/ui/modal/CompleteMist'
-import { Spacer } from '@lib/ui/layout/Spacer'
-import { AppNavigationPage } from '@increaser/ui/navigation/app'
-import { useCurrentPage } from '../hooks/useCurrentPage'
-import { navigationPathInfo } from '../navigationPathInfo'
 import { Sidebar } from '../Sidebar'
+import { topbarConfig } from './config'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { MenuIcon } from '@lib/ui/icons/MenuIcon'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { interactive } from '@lib/ui/css/interactive'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { getColor } from '@lib/ui/theme/getters'
+import { ProductLogo } from '../ProductLogo'
+import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
+import { HeaderActions } from '../HeaderActions'
+
+const ToggleButton = styled.div`
+  ${interactive};
+  ${centerContent};
+  color: ${getColor('contrast')};
+  height: 100%;
+  font-size: 20px;
+  ${horizontalPadding(topbarConfig.horizontalPadding)};
+`
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
-  padding: 12px 20px;
-  display: grid;
-  grid-template-columns: 28px 1fr 28px;
+  padding-right: ${toSizeUnit(topbarConfig.horizontalPadding)};
+  height: 60px;
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: space-between;
+  background: ${getColor('foreground')};
 `
 
 const Cover = styled(CompleteMist)`
   justify-content: flex-start;
 `
 
+const Logo = styled(ProductLogo)`
+  font-size: 14px;
+  gap: 6px;
+  color: ${getColor('textSupporting')};
+
+  svg {
+    font-size: 1em;
+  }
+`
+
 export const Topbar = () => {
-  const page = useCurrentPage()
   const [isSidebarOpen, { toggle: toggleSidebar }] = useBoolean(false)
-
-  const info = navigationPathInfo[page as AppNavigationPage]
-
-  if (!info) return null
 
   return (
     <>
@@ -40,15 +59,14 @@ export const Topbar = () => {
         </Cover>
       )}
       <Container>
-        <SidebarOpener onOpenSidebarRequest={toggleSidebar} />
-        <Text size={14} weight="500" as="div">
-          <HStack alignItems="center" gap={8}>
-            {info.icon}
-            <div>{info.name}</div>
-          </HStack>
-        </Text>
+        <ToggleButton onClick={toggleSidebar}>
+          <MenuIcon />
+        </ToggleButton>
+        <CenterAbsolutely style={{ pointerEvents: 'none' }}>
+          <Logo />
+        </CenterAbsolutely>
+        <HeaderActions />
       </Container>
-      <Spacer height={20} />
     </>
   )
 }
