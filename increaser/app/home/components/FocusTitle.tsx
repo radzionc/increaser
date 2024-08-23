@@ -33,7 +33,7 @@ export const FocusTitle = () => {
       />
       <PageHeader>
         <PageTitle as="div">
-          <HStack gap={8}>
+          <HStack wrap="wrap" gap={8}>
             <TitleProjectSelector /> <TitleFocusDurationSelector /> session
           </HStack>
         </PageTitle>

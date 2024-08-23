@@ -36,6 +36,7 @@ export const TitleFocusDurationSelector = () => {
           <FloatingOptionsContainer {...getFloatingProps()}>
             {focusDurations.map((option, index) => (
               <OptionItem
+                key={index}
                 isActive={activeIndex === index}
                 {...getOptionProps({
                   index,
