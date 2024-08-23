@@ -13,6 +13,7 @@ import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigati
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../../focus/components/AppPageLayout'
+import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 
 const contentWidth = 520
 const gap = 40
@@ -62,9 +63,11 @@ export const RoadmapPageLayout = ({ children }: ComponentWithChildrenProps) => {
                 </PageContent>
                 {!isSmall && (
                   <UserStateOnly>
-                    <SideContainer>
+                    <SideContainer style={{ gap: 0 }}>
                       <PageHeader>
-                        <PageTitle>Request a Feature</PageTitle>
+                        <PageTitle style={{ paddingLeft: panelDefaultPadding }}>
+                          Request a Feature
+                        </PageTitle>
                       </PageHeader>
                       <SideContent />
                     </SideContainer>
