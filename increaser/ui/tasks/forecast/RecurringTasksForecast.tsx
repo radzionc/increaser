@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { ForecastedRecurringTask } from './ForecastedRecurringTask'
-import { useProjectFilter } from '../../projects/filter/ProjectFilterProvider'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
@@ -10,6 +9,7 @@ import { match } from '@lib/utils/match'
 import { getForecastedTasks } from './getForecastedTasks'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { range } from '@lib/utils/array/range'
+import { useFilterByProject } from '../../projects/filter/useFilterByProject'
 
 type Item = {
   task: TaskFactory['task'] & {
@@ -18,11 +18,15 @@ type Item = {
   count?: number
 }
 
+const getTaskFactoryProjectId = ({ task }: TaskFactory) => task.projectId
+
 export const RecurringTasksForecast = ({
   value,
 }: ComponentWithValueProps<number>) => {
-  const taskFactories = useTaskFactories()
-  const [projectId] = useProjectFilter()
+  const taskFactories = useFilterByProject(
+    useTaskFactories(),
+    getTaskFactoryProjectId,
+  )
 
   const [timeGrouping] = useTaskTimeGrouping()
 
@@ -62,12 +66,8 @@ export const RecurringTasksForecast = ({
       }
     })
 
-    if (projectId) {
-      return result.filter(({ task }) => task.projectId === projectId)
-    }
-
     return result
-  }, [projectId, taskFactories, timeGrouping, value])
+  }, [taskFactories, timeGrouping, value])
 
   return (
     <>

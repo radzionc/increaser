@@ -38,6 +38,7 @@ export const SetProjectFilter = () => {
   } = useFloatingOptions({
     floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
+    strategy: 'fixed',
     placement: 'bottom-start',
     options: items.map(({ name }) => name),
   })
