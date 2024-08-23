@@ -1,10 +1,16 @@
 import { Page } from '@lib/next-ui/Page'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
-import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
 import { PageContainer } from '../../ui/page/PageContainer'
 import { PageContent } from '../../ui/page/PageContent'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
 import { PageHeader } from '../../ui/page/header/PageHeader'
+import { ScoreboardContent } from '@increaser/ui/scoreboard/ScoreboardContent'
+import styled from 'styled-components'
+
+const Content = styled.div`
+  width: 100%;
+  max-width: 400px;
+`
 
 export const CommunityPage: Page = () => {
   return (
@@ -14,7 +20,9 @@ export const CommunityPage: Page = () => {
           <PagePrimaryNavigation />
         </PageHeader>
         <UserStateOnly>
-          <Scoreboard />
+          <Content>
+            <ScoreboardContent />
+          </Content>
         </UserStateOnly>
       </PageContent>
     </PageContainer>

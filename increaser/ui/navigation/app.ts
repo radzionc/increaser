@@ -1,3 +1,5 @@
+import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
+
 export const primaryAppNavigationPages = [
   'focus',
   'tasks',
@@ -38,7 +40,7 @@ export const appPageName: Record<AppPage, string> = {
   vision: 'Vision',
   goals: 'Goals',
   projects: 'Projects',
-  community: 'Community',
+  community: `Last ${scoreboardPeriodInDays.week} days top performers`,
   membership: 'Membership',
   oauth: 'OAuth',
   signIn: 'Sign In',
