@@ -29,9 +29,11 @@ export const productUpdates: ProductUpdate[] = [
     telegram: 'https://t.me/increaser_app/47',
     indieHackers:
       'https://www.indiehackers.com/product/increaser/increaser-just-got-better-kanban-board-task-auto-updates-weekly-groups-and-more--O52SoO9vm9sz248Tj-F',
-    linkedIn: '',
-    x: '',
-    reddit: '',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7233113063300726785',
+    x: 'https://x.com/increaser_app/status/1827347948205650332',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1f06952/new_features_kanban_board_task_autoupdates_weekly/',
   },
   {
     releasedAt: 1723362485159,
