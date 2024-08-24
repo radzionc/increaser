@@ -1,24 +1,17 @@
-import { HStack } from '@lib/ui/layout/Stack'
-import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigationItem'
 import { useTaskTimeGrouping } from './useTaskTimeGrouping'
-import { formatTaskTimeGrouping, taskTimeGroupings } from './TaskTimeGrouping'
+import { taskTimeGroupings } from './TaskTimeGrouping'
+import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
+import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadionInput'
 
 export const TaskTimeGroupingSelector = () => {
   const [value, setValue] = useTaskTimeGrouping()
 
   return (
-    <HStack gap={4}>
-      {taskTimeGroupings.map((option) => (
-        <TabNavigationItem
-          isSelected={value === option}
-          onSelect={() => setValue(option)}
-          value={option}
-          key={option}
-          groupName="timeGroup"
-        >
-          {formatTaskTimeGrouping(option)}
-        </TabNavigationItem>
-      ))}
-    </HStack>
+    <GroupedRadioInput
+      options={taskTimeGroupings}
+      renderOption={(option) => `${capitalizeFirstLetter(option)}s`}
+      value={value}
+      onChange={(goal) => setValue(goal)}
+    />
   )
 }

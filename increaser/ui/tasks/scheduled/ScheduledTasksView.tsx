@@ -18,9 +18,9 @@ export const ScheduledTasksView = () => {
     <ProjectFilterProvider initialValue={null}>
       <Container>
         <PageHeaderControlsArea>
+          <TaskTimeGroupingSelector />
           <ManageProjectFilter />
         </PageHeaderControlsArea>
-        <TaskTimeGroupingSelector />
         <ActiveItemIdProvider initialValue={null}>
           <ScheduledTasks />
         </ActiveItemIdProvider>
