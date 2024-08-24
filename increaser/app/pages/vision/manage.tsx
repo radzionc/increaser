@@ -1,8 +1,8 @@
 import { withLayout } from '@lib/next-ui/utils/withLayout'
-import { MyVision } from '../../vision/MyVision'
 import { VisionLayout } from '../../vision/VisionLayout'
+import { ManageVision } from '@increaser/ui/vision/ManageVision'
 
 export default withLayout({
-  page: MyVision,
+  page: ManageVision,
   layout: VisionLayout,
 })

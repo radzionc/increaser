@@ -1,3 +1,5 @@
+import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
+
 export const primaryAppNavigationPages = [
   'focus',
   'tasks',
@@ -18,7 +20,7 @@ const appNavigationPages = [
 ] as const
 export type AppNavigationPage = (typeof appNavigationPages)[number]
 
-const appPages = [
+export const appPages = [
   ...appNavigationPages,
   'oauth',
   'signIn',
@@ -30,6 +32,48 @@ const appPages = [
 ] as const
 
 export type AppPage = (typeof appPages)[number]
+
+export const appPageName: Record<AppPage, string> = {
+  focus: 'Focus',
+  habits: 'Habits',
+  tasks: 'Tasks',
+  vision: 'Vision',
+  goals: 'Goals',
+  projects: 'Projects',
+  community: `Last ${scoreboardPeriodInDays.week} days top performers`,
+  membership: 'Membership',
+  oauth: 'OAuth',
+  signIn: 'Sign In',
+  signUp: 'Sign Up',
+  emailConfirm: 'Email Confirm',
+  ideas: 'Ideas',
+  roadmap: 'Roadmap',
+  principles: 'Principles',
+  updates: `What's New`,
+  profile: 'Public Profile',
+  preferences: 'Preferences',
+}
+
+export const appPageEmoji: Record<AppPage, string> = {
+  focus: '🔍',
+  habits: '🧘',
+  tasks: '📝',
+  vision: '🔮',
+  goals: '🎯',
+  projects: '🚀',
+  community: '👥',
+  membership: '🎓',
+  oauth: '🔒',
+  signIn: '🔑',
+  signUp: '🔑',
+  emailConfirm: '📧',
+  ideas: '💡',
+  roadmap: '🗺️',
+  principles: '📜',
+  updates: '📰',
+  profile: '👤',
+  preferences: '⚙️',
+}
 
 export const appPagePath: Record<AppPage, string> = {
   focus: '',
@@ -53,12 +97,14 @@ export const appPagePath: Record<AppPage, string> = {
 }
 
 export const appPageViews = {
-  vision: ['my', 'ideas'],
-  habits: ['my', 'ideas'],
-  principles: ['my', 'ideas'],
-  tasks: ['tasks', 'automation', 'templates'],
+  vision: ['manage', 'board', 'ideas'],
+  habits: ['habits', 'track', 'stats', 'ideas'],
+  principles: ['my', 'categories', 'ideas'],
+  tasks: ['tasks', 'upcoming', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
   projects: ['projects', 'plan', 'report'],
+  goals: ['goals', 'wisdom'],
+  roadmap: ['ideas', 'done'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
@@ -99,19 +145,24 @@ export const appPageViewName: {
   [K in AppPageWithView]: Record<AppPageViews[K][number], string>
 } = {
   vision: {
-    my: 'Vision',
+    manage: 'Manage',
+    board: 'Board',
     ideas: 'Explore',
   },
   habits: {
-    my: 'Habits',
+    habits: 'Habits',
+    track: 'Track',
+    stats: 'Stats',
     ideas: 'Explore',
   },
   principles: {
     my: 'Principles',
+    categories: 'Categories',
     ideas: 'Explore',
   },
   tasks: {
     tasks: 'Tasks',
+    upcoming: 'Upcoming',
     automation: 'Automation',
     templates: 'Templates',
   },
@@ -123,5 +174,13 @@ export const appPageViewName: {
     projects: 'Projects',
     plan: 'Plan',
     report: 'Report',
+  },
+  goals: {
+    goals: 'Goals',
+    wisdom: 'Wisdom',
+  },
+  roadmap: {
+    ideas: 'Ideas',
+    done: 'Done',
   },
 }

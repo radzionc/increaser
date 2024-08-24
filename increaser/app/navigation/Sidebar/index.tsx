@@ -9,14 +9,17 @@ import {
 } from '@increaser/ui/navigation/app'
 import { SidebarNavigationItem } from '../SidebarNavigationItem'
 import { InstallPrompt } from './InstallPrompt'
-import { SidebarHeader } from './SidebarHeader'
+import { sidebarConfig } from './config'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Container = styled.div`
   min-width: 260px;
   height: 100%;
   background: ${({ theme }) => theme.colors.foreground.toCssValue()};
-  padding: 20px 8px;
+  padding: 8px;
+  padding-top: 0;
   overflow: auto;
+  ${verticalPadding(sidebarConfig.verticalPadding)};
 `
 
 const Footer = styled(VStack)`
@@ -24,7 +27,11 @@ const Footer = styled(VStack)`
   border-top: 1px solid ${getColor('mist')};
 `
 
-export const Sidebar = () => {
+type SidebarProps = {
+  header?: React.ReactNode
+}
+
+export const Sidebar = ({ header }: SidebarProps) => {
   const { installPromptEvent, isSidebarInstallPromptRejected } = usePWA()
   const isInstallPromptEnabled =
     installPromptEvent && !isSidebarInstallPromptRejected
@@ -32,8 +39,8 @@ export const Sidebar = () => {
   return (
     <Container>
       <VStack alignItems="center" fullHeight justifyContent="space-between">
-        <VStack fullWidth gap={20}>
-          <SidebarHeader />
+        <VStack fullWidth gap={sidebarConfig.gap}>
+          {header}
           <VStack gap={4} fullWidth>
             {primaryAppNavigationPages.map((page) => (
               <SidebarNavigationItem key={page} value={page} />

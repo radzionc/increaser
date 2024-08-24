@@ -3,6 +3,7 @@ import { GoalsEducationItem } from './GoalsEducationItem'
 import { LinkText } from '@lib/ui/text/LinkText'
 import Link from 'next/link'
 import { getAppPath } from '../../navigation/app'
+import styled from 'styled-components'
 
 const items = [
   {
@@ -54,14 +55,20 @@ const items = [
   },
 ]
 
+const Container = styled(VStack)`
+  gap: 20px;
+  width: 100%;
+  max-width: 560px;
+`
+
 export const GoalsEducationItems = () => {
   return (
-    <VStack gap={20}>
+    <Container>
       {items.map((item, index) => (
         <GoalsEducationItem key={index} index={index} title={item.title}>
           {item.description}
         </GoalsEducationItem>
       ))}
-    </VStack>
+    </Container>
   )
 }

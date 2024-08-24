@@ -5,12 +5,12 @@ import { transition } from '@lib/ui/css/transition'
 import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
-import { navigationConfig } from './config'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { sidebarConfig } from './config'
 
 export const NavigationItemContainer = styled.div<ComponentWithActiveState>`
-  ${horizontalPadding(navigationConfig.itemHorizontalPadding)};
-  ${verticalPadding(navigationConfig.itemVerticalPadding)};
+  ${horizontalPadding(sidebarConfig.item.horizontalPadding)};
+  ${verticalPadding(sidebarConfig.item.verticalPadding)};
 
   ${interactive};
   display: flex;

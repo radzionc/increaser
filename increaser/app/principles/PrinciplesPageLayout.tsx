@@ -1,22 +1,27 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { FixedWidthContent } from '../components/reusable/fixed-width-content'
 import { AppPageLayout } from '../focus/components/AppPageLayout'
-import { PageTitle } from '../ui/PageTitle'
 import { UserStateOnly } from '../user/state/UserStateOnly'
-import { PrinciplesViewSelector } from './PrinciplesViewSelector'
+import { PageContainer } from '../ui/page/PageContainer'
+import { PageHeader } from '../ui/page/header/PageHeader'
+import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'
+import { PageContent } from '../ui/page/PageContent'
+import { PageHeaderControlsAreaProvider } from '../ui/page/header/PageHeaderControlsAreaProvider'
 
 export const PrinciplesPageLayout = ({
   children,
 }: ComponentWithChildrenProps) => {
   return (
     <AppPageLayout>
-      <FixedWidthContent>
-        <PageTitle
-          documentTitle={`📜 Principles`}
-          title={<PrinciplesViewSelector />}
-        />
-        <UserStateOnly>{children}</UserStateOnly>
-      </FixedWidthContent>
+      <PageContainer>
+        <PageContent>
+          <PageHeaderControlsAreaProvider>
+            <PageHeader>
+              <PagePrimaryNavigation />
+            </PageHeader>
+            <UserStateOnly>{children}</UserStateOnly>
+          </PageHeaderControlsAreaProvider>
+        </PageContent>
+      </PageContainer>
     </AppPageLayout>
   )
 }

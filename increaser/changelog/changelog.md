@@ -1,3 +1,5 @@
+1724477563708
+New page headers take less space, giving more room for the content
 1723362485159
 View the breakdown of how much time you spent on each project on the hovered day, week, or month of the year on the tracked time report.
 Instead of fixed options for the tracked time report you can now select the custom duration.

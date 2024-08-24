@@ -1,16 +1,15 @@
-import { Match } from '@lib/ui/base/Match'
-import { useTasksView } from './view/useTasksView'
 import { TaskBoard } from './board/TaskBoard'
-import { ScheduledTasksView } from './scheduled/ScheduledTasksView'
+import { ProjectFilterProvider } from '../projects/filter/ProjectFilterProvider'
+import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
+import { ManageProjectFilter } from '../projects/filter/ManageProjectFilter'
 
 export const Tasks = () => {
-  const [view] = useTasksView()
-
   return (
-    <Match
-      value={view}
-      board={() => <TaskBoard />}
-      upcoming={() => <ScheduledTasksView />}
-    />
+    <ProjectFilterProvider initialValue={null}>
+      <PageHeaderControlsArea>
+        <ManageProjectFilter />
+      </PageHeaderControlsArea>
+      <TaskBoard />
+    </ProjectFilterProvider>
   )
 }

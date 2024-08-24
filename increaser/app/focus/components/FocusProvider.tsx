@@ -335,7 +335,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
     const task = tasks[taskId]
     if (!task) return
 
-    if (task.status !== 'inProgress') return
+    if (task.status === 'inProgress' || task.status === 'done') return
 
     updateTaskMutation({
       id: taskId,

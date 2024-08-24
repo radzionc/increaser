@@ -1,5 +1,10 @@
-export const navigationConfig = {
-  itemLineHeight: 24,
-  itemHorizontalPadding: 12,
-  itemVerticalPadding: 10,
+export const sidebarConfig = {
+  item: {
+    lineHeight: 24,
+    horizontalPadding: 12,
+    verticalPadding: 10,
+  },
+  headerHeight: 56,
+  verticalPadding: 12,
+  gap: 24,
 }

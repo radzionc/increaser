@@ -1,23 +1,28 @@
 import { Page } from '@lib/next-ui/Page'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
-import { Scoreboard } from '@increaser/ui/scoreboard/Scoreboard'
 import { PageContainer } from '../../ui/page/PageContainer'
 import { PageContent } from '../../ui/page/PageContent'
-import { PageDocumentTitle } from '../../ui/page/PageDocumentTitle'
-import { PageTitle } from '@lib/ui/text/PageTitle'
+import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
+import { PageHeader } from '../../ui/page/header/PageHeader'
+import { ScoreboardContent } from '@increaser/ui/scoreboard/ScoreboardContent'
+import styled from 'styled-components'
 
-const title = `Community`
-
-const maxWidth = 440
+const Content = styled.div`
+  width: 100%;
+  max-width: 400px;
+`
 
 export const CommunityPage: Page = () => {
   return (
     <PageContainer>
-      <PageContent style={{ maxWidth }}>
-        <PageTitle>{title}</PageTitle>
-        <PageDocumentTitle emoji="👋" title={title} />
+      <PageContent>
+        <PageHeader>
+          <PagePrimaryNavigation />
+        </PageHeader>
         <UserStateOnly>
-          <Scoreboard />
+          <Content>
+            <ScoreboardContent />
+          </Content>
         </UserStateOnly>
       </PageContent>
     </PageContainer>

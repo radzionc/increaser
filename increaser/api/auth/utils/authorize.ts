@@ -5,7 +5,7 @@ import { getUserInitialFields } from '@increaser/entities-utils/user/getUserInit
 import { AuthSession } from '@increaser/entities/AuthSession'
 import { CountryCode } from '@lib/countries'
 import { putEmail } from '@increaser/db/email'
-import { asyncAttempt } from '@lib/utils/asyncAttempt'
+import { asyncAttempt } from '@lib/utils/promise/asyncAttempt'
 
 interface AuthorizeParams extends AuthenticationResult {
   timeZone: number

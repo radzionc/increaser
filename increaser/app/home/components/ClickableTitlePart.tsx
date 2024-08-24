@@ -11,7 +11,7 @@ const ToggleIconContainer = styled(CollapsableStateIndicator)`
   ${transition};
   color: ${getColor('textShy')};
   vertical-align: middle;
-  font-size: 24px;
+  font-size: 1em;
   margin-left: 4px;
 `
 
@@ -41,7 +41,7 @@ export const ClickableTitlePart = forwardRef<
   ComponentProps<typeof Container>
 >(({ children, ...rest }, ref) => {
   return (
-    <Container as="span" {...rest} ref={ref}>
+    <Container nowrap as="span" {...rest} ref={ref}>
       {children}
       <ToggleIconContainer isOpen={rest.isActive} />
     </Container>
