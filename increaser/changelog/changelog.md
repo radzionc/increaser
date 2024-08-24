@@ -1,5 +1,6 @@
 1724477563708
 Kanban board for tasks to easily access all your tasks in one place and drag and drop them between columns.
+An option to group scheduled tasks by weeks.
 Task statuses: backlog, todo, in progress, done. When you start working on a task, it's status automatically changes to "in progress".
 New page headers take less space, giving more room for the content
 1723362485159
