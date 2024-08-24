@@ -2,12 +2,12 @@ import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
-import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import {
   FeatureVideoSlice,
   FeatureVideoSliceProps,
 } from '@lib/ui/website/FeatureVideoSlice'
 import { TasksSlice } from '../landing/demo/TasksSlice'
+import { VStack } from '@lib/ui/layout/Stack'
 
 const videoSlices: FeatureVideoSliceProps[] = [
   {
@@ -30,9 +30,9 @@ export const TasksPage = () => (
     />
     <DemoUserStateProvider>
       <MockApiProvider>
-        <PrimaryWebsiteSlice>
+        <VStack>
           <TasksSlice titleAs="h1" />
-        </PrimaryWebsiteSlice>
+        </VStack>
       </MockApiProvider>
     </DemoUserStateProvider>
     {videoSlices.map((slice, index) => (
