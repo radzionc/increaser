@@ -11,6 +11,7 @@ export const HeaderActionButton = styled(UnstyledButton)`
   ${borderRadius.s};
   ${centerContent};
   font-size: 16px;
+  outline: none;
   &:hover {
     background: ${getColor('mist')};
   }

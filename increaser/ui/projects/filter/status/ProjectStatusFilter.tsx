@@ -18,6 +18,7 @@ export const ProjectStatusFilter = () => {
       value={value}
       onChange={setValue}
       options={projectStatuses}
+      floatingOptionsWidthSameAsOpener={false}
       getOptionKey={(option) => capitalizeFirstLetter(option)}
       renderOption={(option) => (
         <HStack alignItems="center" gap={8}>
