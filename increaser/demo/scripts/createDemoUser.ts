@@ -4,7 +4,7 @@ import { getDemoUser } from '../getDemoUser'
 import { deleteUser } from '@increaser/data-services/users/deleteUser'
 import { toRecord } from '@lib/utils/record/toRecord'
 import { copyToUserFolder } from '@increaser/public/copyToUserFolder'
-import { asyncAttempt } from '@lib/utils/asyncAttempt'
+import { asyncAttempt } from '@lib/utils/promise/asyncAttempt'
 
 export const createDemoUser = async () => {
   if (await asyncAttempt(() => getUser(demoConfig.userId, ['id']), undefined)) {

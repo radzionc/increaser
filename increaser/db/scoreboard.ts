@@ -4,7 +4,7 @@ import { makeGetItem } from '@lib/dynamodb/makeGetItem'
 import { updateItem } from '@lib/dynamodb/updateItem'
 import { PutCommand } from '@aws-sdk/lib-dynamodb'
 import { dbDocClient } from '@lib/dynamodb/client'
-import { asyncAttempt } from '@lib/utils/asyncAttempt'
+import { asyncAttempt } from '@lib/utils/promise/asyncAttempt'
 
 export const getScoreboard = makeGetItem<string, PerformanceScoreboard>({
   tableName: tableName.scoreboards,
