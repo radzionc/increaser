@@ -6,17 +6,22 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ComponentProps, ReactNode } from 'react'
 import { HStack } from '@lib/ui/layout/Stack'
 import { useSetPageHeaderControlsArea } from './PageHeaderControlsAreaProvider'
-import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 
 const Container = styled(Header)`
   position: relative;
-  height: ${toSizeUnit(sidebarConfig.headerHeight)};
+  gap: 0px;
 
-  ${hideScrollbars};
-  padding-right: 1px;
+  > * {
+    height: ${toSizeUnit(sidebarConfig.headerHeight)};
+  }
+`
 
-  overflow-x: auto;
-  flex-wrap: nowrap;
+const Controls = styled(HStack)`
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: flex-end;
 `
 
 type PageHeaderProps = ComponentWithChildrenProps & {
@@ -33,10 +38,7 @@ export const PageHeader = ({
   return (
     <Container {...rest}>
       {children}
-      <HStack gap={8} alignItems="center">
-        <HStack ref={setControlsArea} gap={8} alignItems="center" />
-        {controls}
-      </HStack>
+      <Controls ref={setControlsArea}>{controls}</Controls>
     </Container>
   )
 }

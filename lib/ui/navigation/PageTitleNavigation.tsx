@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { ComponentWithActiveState, InputProps } from '../props'
@@ -6,6 +7,7 @@ import { getColor } from '../theme/getters'
 import { absoluteOutline } from '../css/absoluteOutline'
 import { HStack } from '../layout/Stack'
 import { centerContent } from '../css/centerContent'
+import { hideScrollbars } from '../css/hideScrollbars'
 
 const Underline = styled.div`
   ${absoluteOutline(0, 0)};
@@ -19,9 +21,13 @@ const ItemUnderline = styled.div`
 
 const Container = styled(HStack)`
   height: 100%;
+  overflow-x: auto;
+  max-width: 100%;
+  ${hideScrollbars};
 `
 
 const Option = styled(UnstyledButton)<ComponentWithActiveState>`
+  flex-shrink: 0;
   position: relative;
   font-size: 14px;
   font-weight: 600;
@@ -56,11 +62,29 @@ export function PageTitleNavigation<T extends string>({
   options,
   onChange,
 }: PageTitleNavigationProps<T>) {
+  const optionRefs = useRef<Map<T, HTMLButtonElement | null>>(new Map())
+
+  useEffect(() => {
+    const activeElement = optionRefs.current.get(value)
+    if (activeElement) {
+      activeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      })
+    }
+  }, [value])
+
   return (
     <>
       <Container>
         {options.map((v) => (
-          <Option onClick={() => onChange(v)} isActive={v === value} key={v}>
+          <Option
+            onClick={() => onChange(v)}
+            isActive={v === value}
+            key={v}
+            ref={(el) => optionRefs.current.set(v, el)}
+          >
             {getOptionName(v)}
             <ItemUnderline />
           </Option>
