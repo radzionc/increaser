@@ -2,6 +2,38 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1724477563708,
+    videoId: 'kanban',
+    name: 'Streamlined Task Management & Enhanced Layout',
+    description:
+      'We’ve added a powerful Kanban board, introduced new task statuses, and made it easier to organize your scheduled tasks by weeks. Plus, enjoy more space with our updated page headers.',
+    items: [
+      {
+        description:
+          'Kanban Board: Manage all your tasks in one place with drag-and-drop columns.',
+      },
+      {
+        description:
+          "Task Statuses: Tasks now automatically move to 'in progress' when you start working on them, keeping your workflow up to date.",
+      },
+      {
+        description:
+          'Group Scheduled Tasks: Now you can group your tasks by weeks for better planning.',
+      },
+      {
+        description:
+          'Compact Headers: Enjoy more content space with our new, slimmed-down page headers.',
+      },
+    ],
+
+    telegram: 'https://t.me/increaser_app/47',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/increaser-just-got-better-kanban-board-task-auto-updates-weekly-groups-and-more--O52SoO9vm9sz248Tj-F',
+    linkedIn: '',
+    x: '',
+    reddit: '',
+  },
+  {
     releasedAt: 1723362485159,
     videoId: 'projects',
     name: 'Enhanced Time Tracking & Navigation',
