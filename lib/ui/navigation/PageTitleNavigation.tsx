@@ -14,6 +14,7 @@ const Underline = styled.div`
   width: 100%;
   left: 0;
   top: 0;
+  pointer-events: none;
   border-bottom: 2px solid ${getColor('mist')};
 `
 

@@ -7,6 +7,7 @@ export type VisionAttribute = EntityWithId &
   EntityWithOrder &
   EntityWithName &
   EntityWithEmoji & {
+    description?: string | null
     imageId?: string | null
   }
 

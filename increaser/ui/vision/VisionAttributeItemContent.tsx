@@ -2,10 +2,11 @@ import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
-import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
-import { Center } from '@lib/ui/layout/Center'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { useCurrentVisionAttribute } from './CurrentVisionAttributeProvider'
+import { VStack } from '@lib/ui/layout/Stack'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Name = styled(Text)`
   text-align: start;
@@ -13,15 +14,28 @@ const Name = styled(Text)`
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
 `
 
+const Header = styled(PrefixedItemFrame)`
+  ${verticalPadding(0)};
+  gap: 4px;
+`
+
+const Container = styled(VStack)`
+  ${verticalPadding(tightListItemConfig.verticalPadding)};
+`
+
 export const VisionAttributeItemContent = () => {
-  const { name, emoji } = useCurrentVisionAttribute()
+  const { name, emoji, description } = useCurrentVisionAttribute()
 
   return (
-    <ChecklistItemFrame>
-      <Center>
-        <Text color="contrast">{emoji}</Text>
-      </Center>
-      <Name>{name}</Name>
-    </ChecklistItemFrame>
+    <Container>
+      <Header prefix={<Text color="contrast">{emoji}</Text>}>
+        <Name>{name}</Name>
+      </Header>
+      {description && (
+        <Text size={14} color="supporting" style={{ whiteSpace: 'pre-line' }}>
+          {description}
+        </Text>
+      )}
+    </Container>
   )
 }

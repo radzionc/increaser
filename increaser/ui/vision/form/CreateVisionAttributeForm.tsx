@@ -2,18 +2,15 @@ import { useCallback, useState } from 'react'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { VisionImageInput } from './VisionImageInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { EmojiInput } from '../../form/emoji-input/EmojiInput'
+import { VisionAttributeFormFields } from './VisionAttributeFormFields'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
@@ -23,6 +20,7 @@ export const CreateVisionAttributeForm = ({
     name: '',
     imageId: null,
     emoji: randomlyPick(defaultEmojis),
+    description: null,
   })
 
   const { mutate } = useCreateUserEntityMutation('visionAttribute')
@@ -48,23 +46,10 @@ export const CreateVisionAttributeForm = ({
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <EmojiInput
-            value={value.emoji}
-            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
-          />
-        </div>
-        <EmbeddedTitleInput
-          autoFocus
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          value={value.name}
-          onSubmit={onSubmit}
-        />
-      </EmojiTextInputFrame>
-      <VisionImageInput
-        onChange={(imageId) => setValue((prev) => ({ ...prev, imageId }))}
-        value={value.imageId ?? null}
+      <VisionAttributeFormFields
+        value={value}
+        onChange={setValue}
+        onSubmit={onSubmit}
       />
       <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
     </ListItemForm>

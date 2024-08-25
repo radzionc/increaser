@@ -145,7 +145,7 @@ export const appPageViewName: {
   [K in AppPageWithView]: Record<AppPageViews[K][number], string>
 } = {
   vision: {
-    manage: 'Manage',
+    manage: 'Vision',
     board: 'Board',
     ideas: 'Explore',
   },
