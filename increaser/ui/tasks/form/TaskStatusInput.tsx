@@ -16,11 +16,12 @@ type TaskStatusInputProps = InputProps<TaskStatus>
 export const TaskStatusInput = ({ value, onChange }: TaskStatusInputProps) => {
   return (
     <ExpandableSelector
-      style={{ width: 142 }}
       value={value}
       onChange={onChange}
       options={taskStatuses}
       getOptionKey={capitalizeFirstLetter}
+      floatingOptionsWidthSameAsOpener={false}
+      showToggle={false}
       renderOption={(option) => (
         <HStack alignItems="center" gap={8}>
           <IconWrapper>{taskStatusIcon[option]}</IconWrapper>

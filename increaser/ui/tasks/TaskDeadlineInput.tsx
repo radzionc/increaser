@@ -42,17 +42,20 @@ export const TaskDeadlineInput = ({
 
   return (
     <ExpandableSelector
-      style={{ width: 160 }}
+      floatingOptionsWidthSameAsOpener={false}
+      showToggle={false}
       openerContent={
         <HStack alignItems="center" gap={8}>
           <Icon isOverdue={isOverdue} style={{ fontSize: 14 }}>
             <CalendarIcon />
           </Icon>
           <Text>
-            {formatTaskDeadline({
-              deadlineAt: value,
-              now,
-            })}
+            {value
+              ? formatTaskDeadline({
+                  deadlineAt: value,
+                  now,
+                })
+              : 'Set a deadline'}
           </Text>
         </HStack>
       }
