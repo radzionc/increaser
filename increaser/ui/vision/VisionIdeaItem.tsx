@@ -83,7 +83,7 @@ const Image = styled.img`
 `
 
 export const VisionIdeaItem = ({
-  value: { id, name, emoji },
+  value: { id, name, emoji, description },
 }: ComponentWithValueProps<VisionAttributeIdea>) => {
   const { mutate: createVisionAttribute } =
     useCreateUserEntityMutation('visionAttribute')
@@ -110,6 +110,7 @@ export const VisionIdeaItem = ({
             id,
             name: name,
             imageId,
+            description,
             order: getLastItemOrder(orders),
             emoji,
           })
