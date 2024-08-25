@@ -34,19 +34,22 @@ Each tool has a dedicated page within the app and a corresponding section on the
 
 ## Vision
 
-The Vision Board allows users to define what their perfect life looks like. It consists of a list of "vision attributes," each serving as a description of a perfect life.
+The Vision users to define what their perfect life looks like. It consists of a list of "vision attributes," each serving as a description of a perfect life.
+
+The vision page in the app has three Subpages: "Vision", "Board", and "Explore".
+
+On the "Vision" subpage, users can see all vision attributes in a list, create new attributes, and edit or delete existing ones.
 
 A vision attribute has:
 
 - A name: e.g., "Happy marriage"
 - An image: uploaded by the user
 - An emoji: to represent the attribute
+- A description: e.g., "I have a loving partner who supports me in everything I do."
 
-The vision page in the app has two subpages: "My vision" and "Vision ideas."
+The "Board" subpage displays all vision attributes as a gallery of images.
 
-The "My vision" page consists of two tabs: "Board" and "Manage." The "Board" tab displays all vision attributes organized in a grid, while the "Manage" tab allows users to create, update, and delete vision attributes.
-
-The "Vision ideas" page contains a list of suggested vision attributes to give users ideas for their vision board and help them define their perfect life.
+The "Explore" subpage contains a list of suggested vision attributes to give users ideas for their vision board and help them define their perfect life. The user can add a suggested vision attribute to their vision board.
 
 ## Deep work timer
 

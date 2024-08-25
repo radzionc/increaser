@@ -1,17 +1,25 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { CreateVisionAttributeForm } from './form/CreateVisionAttributeForm'
-import { ListAddButton } from '@lib/ui/list/ListAddButton'
+import { Button } from '@lib/ui/buttons/Button'
+import { HStack } from '@lib/ui/layout/Stack'
+import { PlusIcon } from '@lib/ui/icons/PlusIcon'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 export const AddVisionAttribute = () => {
   return (
     <Opener
-      renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : (
-          <ListAddButton onClick={onOpen} text="Add life aspiration" />
-        )
-      }
+      renderOpener={({ onOpen }) => (
+        <Button size="s" onClick={onOpen}>
+          <HStack gap={8} alignItems="center">
+            <PlusIcon />
+            Add an aspiration
+          </HStack>
+        </Button>
+      )}
       renderContent={({ onClose }) => (
-        <CreateVisionAttributeForm onFinish={onClose} />
+        <PanelModal onFinish={onClose}>
+          <CreateVisionAttributeForm onFinish={onClose} />
+        </PanelModal>
       )}
     />
   )

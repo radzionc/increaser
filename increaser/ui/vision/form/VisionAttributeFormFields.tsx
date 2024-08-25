@@ -27,6 +27,7 @@ export const VisionAttributeFormFields = ({
         </div>
         <EmbeddedTitleInput
           autoFocus
+          placeholder="What is your aspiration?"
           onChange={(name) => onChange({ ...value, name })}
           value={value.name}
           onSubmit={onSubmit}

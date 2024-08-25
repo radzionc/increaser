@@ -1,3 +1,5 @@
+1724562351708
+Add description to a life aspiration to make it more specific and clear
 1724477563708
 Kanban board for tasks to easily access all your tasks in one place and drag and drop them between columns.
 An option to group scheduled tasks by weeks.
