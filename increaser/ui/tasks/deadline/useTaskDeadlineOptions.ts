@@ -8,7 +8,7 @@ import { order } from '@lib/utils/array/order'
 import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 
-type TaskDeadlineOption = number | null | 'custom'
+export type TaskDeadlineOption = number | null | 'custom'
 
 export const useTaskDeadlineOptions = (
   currentValue: number | null,
