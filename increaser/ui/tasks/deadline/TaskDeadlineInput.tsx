@@ -12,7 +12,7 @@ import {
   TaskDeadlineOption,
   useTaskDeadlineOptions,
 } from './useTaskDeadlineOptions'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { match } from '@lib/utils/match'
 import { ExpandableSelectorContainer } from '@lib/ui/select/ExpandableSelectorContainer'
@@ -22,6 +22,7 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 import { Match } from '@lib/ui/base/Match'
+import { CustomTaskDeadlineInput } from './CustomTaskDeadlineInput'
 
 const Icon = styled(IconWrapper)<{ isOverdue: boolean }>`
   color: ${matchColor('isOverdue', {
@@ -64,12 +65,19 @@ export const TaskDeadlineInput = ({
       options: () => (value === null ? null : options.indexOf(value)),
       custom: () => null,
     }),
+    optionsContainerMaxHeight: 600,
     placement: 'bottom-start',
     options: match(view, {
       options: () => options.map(getOptionKey),
       custom: () => [],
     }),
   })
+
+  useEffect(() => {
+    if (!isOpen) {
+      setView('options')
+    }
+  }, [isOpen])
 
   return (
     <>
@@ -123,7 +131,16 @@ export const TaskDeadlineInput = ({
                   ))}
                 </>
               )}
-              custom={() => <p>calendar input will be here!</p>}
+              custom={() => (
+                <CustomTaskDeadlineInput
+                  onFinish={(value) => {
+                    if (value) {
+                      onChange(value)
+                    }
+                    setIsOpen(false)
+                  }}
+                />
+              )}
             />
           </FloatingOptionsContainer>
         </FloatingFocusManager>
