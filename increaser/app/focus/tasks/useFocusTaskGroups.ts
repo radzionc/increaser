@@ -2,10 +2,10 @@ import { Task, taskStatusName } from '@increaser/entities/Task'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { order } from '@lib/utils/array/order'
 import { toEntries } from '@lib/utils/record/toEntries'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { endOfDay, format } from 'date-fns'
 import { useMemo } from 'react'
 import { useUncompleteTasks } from '@increaser/ui/tasks/useUncompleteTasks'
+import { endOfISOWeek } from 'date-fns'
 
 export type TaskGroup = {
   name: string
@@ -22,7 +22,7 @@ export const useFocusTaskGroups = () => {
     const todoTasks: Task[] = []
 
     const now = Date.now()
-    const weekEndsAt = getWeekEndedAt(now)
+    const weekEndsAt = endOfISOWeek(now).getTime()
     const todayEndsAt = endOfDay(now).getTime()
 
     tasks.forEach((task) => {

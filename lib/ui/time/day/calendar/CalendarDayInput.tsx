@@ -19,8 +19,7 @@ import { isInInterval } from '@lib/utils/interval/isInInterval'
 import { WeekdayLabels } from './WeekdayLabels'
 import { CalendarFrame } from './CalendarFrame'
 import { SeparatedByLine } from '../../../layout/SeparatedByLine'
-import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { startOfISOWeek, endOfISOWeek } from 'date-fns'
 import { addDays } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { range } from '@lib/utils/array/range'
@@ -44,8 +43,8 @@ export const CalendarDayInput = ({
   const monthInterval = useMemo(() => getMonthInterval(month), [month])
 
   const days = useMemo(() => {
-    const firstDayStartedAt = getWeekStartedAt(monthInterval.start)
-    const lastDayStartedAt = getWeekEndedAt(monthInterval.end)
+    const firstDayStartedAt = startOfISOWeek(monthInterval.start).getTime()
+    const lastDayStartedAt = endOfISOWeek(monthInterval.end).getTime()
     const daysCount = Math.round(
       convertDuration(lastDayStartedAt - firstDayStartedAt, 'ms', 'd'),
     )

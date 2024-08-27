@@ -1,7 +1,7 @@
 import { TaskCadence } from '@increaser/entities/TaskFactory'
 import { match } from '@lib/utils/match'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
+import { startOfISOWeek } from 'date-fns'
 import { startOfDay, startOfMonth } from 'date-fns'
 
 type Input = {
@@ -11,12 +11,12 @@ type Input = {
 
 export const getCadencePeriodStart = ({ cadence, at }: Input) => {
   return match(cadence, {
-    week: () => getWeekStartedAt(at),
+    week: () => startOfISOWeek(at).getTime(),
     day: () => startOfDay(at).getTime(),
     workday: () => {
       const dayStartedAt = startOfDay(at).getTime()
       const lastWorkdayStartedAt =
-        getWeekStartedAt(at) + convertDuration(4, 'd', 'ms')
+        startOfISOWeek(at).getTime() + convertDuration(4, 'd', 'ms')
 
       return Math.min(dayStartedAt, lastWorkdayStartedAt)
     },

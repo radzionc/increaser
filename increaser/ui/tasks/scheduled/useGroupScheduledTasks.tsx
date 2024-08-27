@@ -1,5 +1,4 @@
 import { useCallback } from 'react'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import {
   addWeeks,
   addDays,
@@ -16,6 +15,7 @@ import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
 import { getGroupId, ScheduledTaskGroupId } from './ScheduledTaskGroupId'
 import { Entry } from '@lib/utils/entities/Entry'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { endOfISOWeek } from 'date-fns'
 
 export const useGroupScheduledTasks = () => {
   const [timeGrouping] = useTaskTimeGrouping()
@@ -23,7 +23,7 @@ export const useGroupScheduledTasks = () => {
   return useCallback(
     (items: ScheduledTask[]) => {
       const now = Date.now()
-      const nextWeekEndsAt = getWeekEndedAt(addWeeks(now, 1).getTime())
+      const nextWeekEndsAt = endOfISOWeek(addWeeks(now, 1).getTime()).getTime()
       const options = [nextWeekEndsAt]
 
       const deadlines = items.map((task) => task.deadlineAt)
@@ -33,7 +33,7 @@ export const useGroupScheduledTasks = () => {
         options.push(
           match(timeGrouping, {
             day: () => endOfDay(maxDeadline).getTime(),
-            week: () => getWeekEndedAt(maxDeadline),
+            week: () => endOfISOWeek(maxDeadline).getTime(),
           }),
         )
       }
@@ -46,7 +46,7 @@ export const useGroupScheduledTasks = () => {
 
       const thisGroupEndsAt = match(timeGrouping, {
         day: () => endOfDay(now).getTime(),
-        week: () => getWeekEndedAt(now),
+        week: () => endOfISOWeek(now).getTime(),
       })
       const groupsCount =
         match(timeGrouping, {
@@ -59,7 +59,7 @@ export const useGroupScheduledTasks = () => {
       range(groupsCount).forEach((index) => {
         const groupEndsAt = match(timeGrouping, {
           day: () => endOfDay(addDays(now, index)).getTime(),
-          week: () => getWeekEndedAt(addWeeks(now, index).getTime()),
+          week: () => endOfISOWeek(addWeeks(now, index).getTime()).getTime(),
         })
 
         const key = groupEndsAt.toString()

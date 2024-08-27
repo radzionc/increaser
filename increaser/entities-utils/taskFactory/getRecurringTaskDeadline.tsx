@@ -1,7 +1,7 @@
 import { TaskCadence } from '@increaser/entities/TaskFactory'
 import { match } from '@lib/utils/match'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { endOfISOWeek } from 'date-fns'
 import { endOfDay, getDaysInMonth, endOfMonth } from 'date-fns'
 
 type Input = {
@@ -19,13 +19,14 @@ export const getRecurringTaskDeadline = ({
     workday: () => {
       const dayEndedAt = endOfDay(at).getTime()
       const lastWorkdayEndedAt =
-        getWeekEndedAt(at) - convertDuration(2, 'd', 'ms')
+        endOfISOWeek(at).getTime() - convertDuration(2, 'd', 'ms')
 
       return Math.min(dayEndedAt, lastWorkdayEndedAt)
     },
     day: () => endOfDay(at).getTime(),
     week: () =>
-      getWeekEndedAt(at) - convertDuration(6 - (deadlineIndex ?? 0), 'd', 'ms'),
+      endOfISOWeek(at).getTime() -
+      convertDuration(6 - (deadlineIndex ?? 0), 'd', 'ms'),
     month: () => {
       const daysInMonth = getDaysInMonth(at)
       return (

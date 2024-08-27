@@ -1,7 +1,7 @@
 import { match } from '@lib/utils/match'
 import { TaskTimeGrouping } from '../timeGrouping/TaskTimeGrouping'
 import { endOfDay } from 'date-fns'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { endOfISOWeek } from 'date-fns'
 
 export type ScheduledTaskGroupId = string | 'overdue'
 
@@ -18,6 +18,6 @@ export const getGroupId = ({
     ? 'overdue'
     : match(timeGroup, {
         day: () => endOfDay(deadlineAt).getTime(),
-        week: () => getWeekEndedAt(deadlineAt),
+        week: () => endOfISOWeek(deadlineAt).getTime(),
       }).toString()
 }

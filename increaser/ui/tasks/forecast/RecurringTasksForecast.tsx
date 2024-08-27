@@ -7,9 +7,9 @@ import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { subDays } from 'date-fns'
 import { match } from '@lib/utils/match'
 import { getForecastedTasks } from './getForecastedTasks'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
 import { range } from '@lib/utils/array/range'
 import { useFilterByProject } from '../../projects/filter/useFilterByProject'
+import { endOfISOWeek } from 'date-fns'
 
 type Item = {
   task: TaskFactory['task'] & {
@@ -36,7 +36,7 @@ export const RecurringTasksForecast = ({
         return getForecastedTasks({ taskFactories, value })
       },
       week: () => {
-        const weekEndsAt = getWeekEndedAt(value)
+        const weekEndsAt = endOfISOWeek(value).getTime()
 
         const values: number[] = []
         const now = Date.now()
