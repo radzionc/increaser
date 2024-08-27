@@ -1,8 +1,8 @@
 import { getUser, updateUser } from '@increaser/db/user'
 import { getRecordSize } from '@lib/utils/record/getRecordSize'
 import { recordFilter } from '@lib/utils/record/recordFilter'
-import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
+import { startOfISOWeek } from 'date-fns'
 
 export const organizeTasks = async (userId: string) => {
   const {
@@ -20,7 +20,7 @@ export const organizeTasks = async (userId: string) => {
   const now = Date.now()
   const shouldDeleteCompletedTasks =
     (completedTasksDeletedAt ?? registrationDate) <
-    inTimeZone(getWeekStartedAt(now), timeZone)
+    inTimeZone(startOfISOWeek(now).getTime(), timeZone)
 
   if (!shouldDeleteCompletedTasks) {
     return

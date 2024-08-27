@@ -5,10 +5,10 @@ import { getWeekday } from '@lib/utils/time/getWeekday'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { order } from '@lib/utils/array/order'
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { endOfISOWeek } from 'date-fns'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 
-type TaskDeadlineOption = number | null | 'custom'
+export type TaskDeadlineOption = number | null | 'custom'
 
 export const useTaskDeadlineOptions = (
   currentValue: number | null,
@@ -35,7 +35,7 @@ export const useTaskDeadlineOptions = (
       ),
     )
 
-    const thisWeekEndsAt = getWeekEndedAt(today)
+    const thisWeekEndsAt = endOfISOWeek(today).getTime()
     suggestions.push(
       addDays(thisWeekEndsAt, 5).getTime(),
       addDays(thisWeekEndsAt, 7).getTime(),

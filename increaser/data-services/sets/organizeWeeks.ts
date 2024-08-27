@@ -1,6 +1,5 @@
 import { maxWeeks, User } from '@increaser/entities/User'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
-import { getWeekStartedAt } from '@lib/utils/time/getWeekStartedAt'
 import { getSetsFinishedBefore } from '@increaser/entities-utils/set/getSetsFinishedBefore'
 import { getSetsStartedAfter } from '@increaser/entities-utils/set/getSetsStartedAfter'
 import { trackTime } from './trackTime'
@@ -12,6 +11,7 @@ import {
 } from '@lib/utils/time/Week'
 import { subWeeks } from 'date-fns'
 import { recordFilter } from '@lib/utils/record/recordFilter'
+import { startOfISOWeek } from 'date-fns'
 
 type UserFields = Pick<
   User,
@@ -24,7 +24,10 @@ export const organizeWeeks = ({
   sets,
   weeks,
 }: UserFields): Partial<UserFields> => {
-  const weekStartedAt = inTimeZone(getWeekStartedAt(Date.now()), timeZone)
+  const weekStartedAt = inTimeZone(
+    startOfISOWeek(Date.now()).getTime(),
+    timeZone,
+  )
 
   if (lastSyncedWeekEndedAt && weekStartedAt <= lastSyncedWeekEndedAt) {
     return {}

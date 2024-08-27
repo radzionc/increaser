@@ -1,4 +1,4 @@
-import { getWeekEndedAt } from '@lib/utils/time/getWeekEndedAt'
+import { endOfISOWeek } from 'date-fns'
 import { format, isToday, isTomorrow, addWeeks } from 'date-fns'
 
 type Input = {
@@ -11,7 +11,7 @@ export const formatTaskDeadline = ({ deadlineAt, now }: Input) => {
     return 'No deadline'
   }
 
-  const thisWeekEndsAt = getWeekEndedAt(now)
+  const thisWeekEndsAt = endOfISOWeek(now).getTime()
 
   if (isToday(deadlineAt)) {
     return 'Today'
