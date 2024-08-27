@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { CalendarFrame } from './CalendarFrame'
 
 const Container = styled(CalendarFrame)`
-  grid-template-rows: auto;
+  grid-template-rows: 24px;
 `
 
 export const WeekdayLabels = () => {

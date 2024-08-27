@@ -62,9 +62,10 @@ export const CalendarDayInput = ({
           isDisabled={isInInterval(monthInterval, fromDay(min))}
           icon={<ChevronLeftIcon />}
           title="Back"
+          size="l"
           onClick={() => setMonth(subtractMonths(month, 1))}
         />
-        <Text>
+        <Text color="contrast">
           {monthNames[month.month - 1]} {month.year}
         </Text>
         <IconButton
@@ -72,6 +73,7 @@ export const CalendarDayInput = ({
           isDisabled={isInInterval(monthInterval, fromDay(max))}
           onClick={() => setMonth(addMonths(month, 1))}
           title="Forward"
+          size="l"
         />
       </Header>
       <SeparatedByLine gap={8}>
@@ -87,7 +89,7 @@ export const CalendarDayInput = ({
 
             return (
               <DayOption
-                onClick={() => onChange(toDay(day))}
+                onClick={isDisabled ? undefined : () => onChange(toDay(day))}
                 isActive={isActive}
                 isDisabled={isDisabled}
                 key={day}
