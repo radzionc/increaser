@@ -16,12 +16,13 @@ import {
   dotSeparator,
 } from '@lib/ui/layout/StackSeparatedBy'
 import { getColor } from '@lib/ui/theme/getters'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusLauncherStartTime } from '../state/FocusLauncherStartTimeProvider'
+import { usePresentState } from '@lib/ui/state/usePresentState'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useFocusLauncherProject } from '../hooks/useFocusLauncherProject'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -31,13 +32,11 @@ const TimeValue = styled(HStackSeparatedBy)`
 `
 
 export const StartTimeEditor = () => {
-  const { projects } = useAssertUserState()
   const [isActive, setIsActive] = useState(false)
 
   const todaySets = useTodaySets()
 
-  const [{ startedAt, projectId }, setState] = useFocusLauncher()
-  const value = shouldBePresent(startedAt)
+  const [value, setValue] = usePresentState(useFocusLauncherStartTime())
 
   const { interval, now } = useStartTimeEditor()
 
@@ -51,7 +50,7 @@ export const StartTimeEditor = () => {
       block: 'nearest',
       inline: 'start',
     })
-  }, [startedAt])
+  }, [value])
 
   useEvent('pointermove', ({ clientY }) => {
     if (!isActive) return
@@ -66,10 +65,7 @@ export const StartTimeEditor = () => {
 
     const startedAt = enforceRange(timestamp, min, now)
 
-    setState((state) => ({
-      ...state,
-      startedAt,
-    }))
+    setValue(startedAt)
   })
 
   const cursor = isActive ? 'row-resize' : undefined
@@ -82,10 +78,12 @@ export const StartTimeEditor = () => {
 
   const minDiff = Math.round(convertDuration(now - value, 'ms', 'min'))
 
+  const project = shouldBePresent(useFocusLauncherProject())
+
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
       <CurrentIntervalRect
-        $color={theme.colors.getLabelColor(projects[projectId].color)}
+        $color={theme.colors.getLabelColor(project.color)}
         ref={intervalElement}
         style={{
           top: valueInPx,

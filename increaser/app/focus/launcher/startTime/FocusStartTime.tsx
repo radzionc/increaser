@@ -5,7 +5,7 @@ import { StartTimeEditorProvider } from './StartTimeEditorProvider'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusLauncherStartTime } from '../state/FocusLauncherStartTimeProvider'
 
 const Container = styled(VStack)`
   padding: 0;
@@ -15,12 +15,12 @@ const Container = styled(VStack)`
 `
 
 export const FocusStartTime = () => {
-  const [{ startedAt }] = useFocusLauncher()
+  const [value] = useFocusLauncherStartTime()
 
   return (
     <Container>
       <ChangeStartTimeSwitch />
-      {startedAt && (
+      {value && (
         <StartTimeEditorProvider>
           <FocusStartTimeInput />
         </StartTimeEditorProvider>

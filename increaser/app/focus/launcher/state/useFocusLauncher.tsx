@@ -7,15 +7,11 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { findBy } from '@lib/utils/array/findBy'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useFocusTasks } from '../../tasks/useFocusTasks'
-
-export const focusEntities = ['project', 'task'] as const
-export type FocusEntity = (typeof focusEntities)[number]
+import { useCallback } from 'react'
 
 export type FocusLauncherState = {
-  projectId: string
+  projectId: string | null
   taskId: string | null
-  startedAt: number | null
-  focusEntity: FocusEntity
 }
 
 export const useFocusLauncher = () => {
@@ -23,68 +19,58 @@ export const useFocusLauncher = () => {
 
   const tasks = useFocusTasks()
 
-  return useStateCorrector(
-    usePersistentState<FocusLauncherState>(PersistentStateKey.FocusLauncher, {
+  const getInitialState = useCallback((): FocusLauncherState => {
+    if (!isEmpty(tasks)) {
+      const [task] = tasks
+
+      return {
+        projectId: task.projectId,
+        taskId: task.id,
+      }
+    }
+
+    return {
       projectId: activeProjects[0].id,
       taskId: null,
-      startedAt: null,
-      focusEntity: 'project',
-    }),
+    }
+  }, [activeProjects, tasks])
+
+  return useStateCorrector(
+    usePersistentState<FocusLauncherState>(
+      PersistentStateKey.FocusLauncher,
+      getInitialState,
+    ),
     (state) => {
-      const hasWrongProject = !findBy(activeProjects, 'id', state.projectId)
+      if (state.projectId && !findBy(activeProjects, 'id', state.projectId)) {
+        return getInitialState()
+      }
 
-      if (state.focusEntity === 'project') {
-        if (hasWrongProject) {
-          return {
-            ...state,
-            projectId: activeProjects[0].id,
-            taskId: null,
-          }
-        }
-      } else {
-        if (hasWrongProject) {
-          const task = findBy(tasks, 'id', state.taskId)
-          if (task) {
-            return {
-              ...state,
-              projectId: task.projectId,
-              taskId: task.id,
-            }
-          }
+      if (state.taskId) {
+        const task = findBy(tasks, 'id', state.taskId)
+        if (!task) {
+          if (state.projectId) {
+            const projectTasks = tasks.filter(
+              (task) => task.projectId === state.projectId,
+            )
 
-          if (!isEmpty(tasks)) {
-            const [task] = tasks
-
-            return {
-              ...state,
-              projectId: task.projectId,
-              taskId: task.id,
+            if (!isEmpty(projectTasks)) {
+              return {
+                ...state,
+                taskId: projectTasks[0].id,
+              }
             }
           }
 
           return {
             ...state,
-            projectId: activeProjects[0].id,
             taskId: null,
           }
         }
 
-        const hasWrongTask = !findBy(tasks, 'id', state.taskId)
-        if (hasWrongTask) {
-          if (!isEmpty(tasks)) {
-            const [task] = tasks
-
-            return {
-              ...state,
-              projectId: task.projectId,
-              taskId: task.id,
-            }
-          }
-
+        if (state.projectId && task.projectId !== state.projectId) {
           return {
             ...state,
-            projectId: activeProjects[0].id,
-            taskId: null,
+            projectId: task.projectId,
           }
         }
       }
