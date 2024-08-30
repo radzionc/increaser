@@ -7,10 +7,15 @@ import { FocusOptionContent } from './FocusOptionContent'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { useFocusLauncher } from './state/useFocusLauncher'
+import { Project } from '@increaser/entities/Project'
 
 const Container = styled(FocusOptionContainer)``
 
-export const AddProject = () => {
+type AddProjectProps = {
+  onFinish?: (project?: Project) => void
+}
+
+export const AddProject = ({ onFinish }: AddProjectProps) => {
   const [, setState] = useFocusLauncher()
 
   return (
@@ -36,10 +41,13 @@ export const AddProject = () => {
               // wait for mutation to finish
               if (project) return
 
+              onFinish?.()
               onClose()
             }}
             onMutationFinish={(project) => {
               onClose()
+              onFinish?.(project)
+
               if (project) {
                 setState((state) => ({
                   ...state,

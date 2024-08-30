@@ -1,7 +1,6 @@
 import { Panel } from '@lib/ui/panel/Panel'
 import { VStack } from '@lib/ui/layout/Stack'
 
-import { FocusProjectInput } from './FocusProjectInput'
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { FocusTaskInput } from './FocusTaskInput'
@@ -10,6 +9,7 @@ import { StartFocus } from './StartFocus'
 import { FocusLauncherDuration } from './FocusLauncherDuration'
 import { useFocusLauncherProject } from './hooks/useFocusLauncherProject'
 import { FocusLauncherBudget } from './FocusLauncherBudget'
+import { FocusLauncherProject } from './project/FocusLauncherProject'
 
 const Container = styled(Panel)`
   position: relative;
@@ -21,7 +21,7 @@ export const FocusLauncherForm = () => {
 
   return (
     <Container withSections kind="secondary">
-      <FocusProjectInput />
+      <FocusLauncherProject />
       <FocusTaskInput />
       {project && (
         <>
