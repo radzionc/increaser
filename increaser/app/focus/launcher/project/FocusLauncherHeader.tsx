@@ -80,6 +80,7 @@ export const FocusLauncherHeader = ({
             icon={<CloseIcon />}
             onClick={() => {
               setState((state) => ({ ...state, projectId: null }))
+              onChange(false)
             }}
           />
         </RemoveButtonPosition>

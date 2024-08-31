@@ -1,42 +1,23 @@
 import { Opener } from '@lib/ui/base/Opener'
 import React from 'react'
-import { FocusOptionContainer } from './FocusOptionContainer'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import styled from 'styled-components'
 import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { endOfDay } from 'date-fns'
 import { useFocusLauncher } from './state/useFocusLauncher'
-
-const Container = styled(FocusOptionContainer)``
-
-const Content = styled(PrefixedItemFrame)`
-  ${verticalPadding(0)};
-`
+import { AddTaskPrompt } from './AddTaskPrompt'
 
 export const AddTask = () => {
   const [, setState] = useFocusLauncher()
+  const [{ projectId }] = useFocusLauncher()
 
   return (
     <Opener
-      renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : (
-          <Container
-            onClick={onOpen}
-            as="button"
-            type="button"
-            selected={false}
-          >
-            <Content prefix={<PlusIcon />}>Add a task</Content>
-          </Container>
-        )
-      }
+      renderOpener={({ onOpen }) => <AddTaskPrompt onClick={onOpen} />}
       renderContent={({ onClose }) => (
         <PanelModal width={560} onFinish={onClose}>
           <CreateTaskForm
             defaultValue={{
+              projectId: projectId || undefined,
               deadlineAt: endOfDay(Date.now()).getTime(),
             }}
             onFinish={(task) => {
