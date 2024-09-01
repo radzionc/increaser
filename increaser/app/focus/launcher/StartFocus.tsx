@@ -25,7 +25,7 @@ export const StartFocus = () => {
     }
   }, [project])
 
-  const [startTime, setStartTime] = useFocusLauncherStartTime()
+  const [startTime] = useFocusLauncherStartTime()
 
   return (
     <MemberOnlyAction
@@ -36,9 +36,6 @@ export const StartFocus = () => {
           duration: focusDuration,
           startedAt: startTime ?? Date.now(),
         })
-        if (startTime) {
-          setStartTime(null)
-        }
       }}
       render={({ action }) => (
         <Button isDisabled={isDisabled} size="l" onClick={action}>
