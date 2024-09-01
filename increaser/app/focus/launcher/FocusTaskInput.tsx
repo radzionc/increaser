@@ -7,9 +7,6 @@ import { useFilteredFocusTasks } from '../tasks/useFilteredFocusTasks'
 
 const Container = styled(VStack)`
   gap: 4px;
-
-  max-height: 320px;
-  overflow-y: auto;
 `
 
 export const FocusTaskInput = () => {
