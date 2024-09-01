@@ -12,6 +12,7 @@ import { FocusEntityInputHeader } from '../FocusEntityInputHeader'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
+import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -39,23 +40,20 @@ export const FocusTaskInput = () => {
   return (
     <Wrapper>
       <FocusEntityInputHeader
-        value={isOpen}
-        onChange={setIsOpen}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
         onRemove={() => {
           setState((state) => ({ ...state, taskId: null }))
         }}
-        label={
-          taskId ? (
-            <>
-              <EmojiTextPrefix
-                emoji={projects[tasks[taskId].projectId].emoji}
-              />
-              {tasks[taskId].name}
-            </>
-          ) : (
-            'Select a task ...'
-          )
-        }
+        label="Select a task ..."
+        value={taskId ? tasks[taskId] : null}
+        renderValue={(task) => (
+          <>
+            <EmojiTextPrefix emoji={projects[task.projectId].emoji} />
+            {task.name}
+          </>
+        )}
+        icon={productToolIconRecord.tasks}
       />
       {isOpen && (
         <Container>

@@ -13,6 +13,7 @@ import { FocusProjectOption } from './FocusProjectOption'
 import { FocusEntityInputHeader } from '../FocusEntityInputHeader'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
+import { BoxIcon } from '@lib/ui/icons/BoxIcon'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -46,21 +47,20 @@ export const FocusLauncherProject = () => {
   return (
     <Wrapper>
       <FocusEntityInputHeader
-        value={isOpen}
-        onChange={setIsOpen}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
         onRemove={() => {
           setState((state) => ({ ...state, projectId: null }))
         }}
-        label={
-          projectId ? (
-            <>
-              <EmojiTextPrefix emoji={projects[projectId].emoji} />
-              {projects[projectId].name}
-            </>
-          ) : (
-            'Select a project ...'
-          )
-        }
+        label="Select a project ..."
+        value={projectId ? projects[projectId] : null}
+        renderValue={(project) => (
+          <>
+            <EmojiTextPrefix emoji={project.emoji} />
+            {project.name}
+          </>
+        )}
+        icon={<BoxIcon />}
       />
       {isOpen && (
         <Content>

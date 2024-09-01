@@ -2,7 +2,7 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { HStack } from '@lib/ui/layout/Stack'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
-import { InputProps, RemovableComponentProps } from '@lib/ui/props'
+import { ComponentWithValueProps, RemovableComponentProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
@@ -15,6 +15,7 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { focusLauncherConfig } from './config'
 import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
 import { ReactNode } from 'react'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 
 const Container = styled(ActionInsideInteractiveElement)`
   display: flex;
@@ -25,6 +26,10 @@ const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;
   height: ${toSizeUnit(focusLauncherConfig.sectionMinHeight)};
   position: relative;
+`
+
+const Label = styled(Text)`
+  color: ${getColor('textSupporting')};
 `
 
 const Indicator = styled(FocusIconButton)``
@@ -42,19 +47,39 @@ const Content = styled(HStack)`
     background: ${getColor('mist')};
     color: ${getColor('contrast')};
   }
+
+  &:hover ${Label} {
+    color: ${getColor('textPrimary')};
+  }
 `
 
-type FocusEntityInputHeaderProps = InputProps<boolean> &
-  RemovableComponentProps & {
-    label: ReactNode
+const IconContainer = styled(IconWrapper)`
+  color: ${getColor('textPrimary')};
+  font-size: 16px;
+`
+
+type FocusEntityInputHeaderProps<T> = RemovableComponentProps &
+  ComponentWithValueProps<T> & {
+    isOpen: boolean
+    setIsOpen: (isOpen: boolean) => void
+
+    label: string
+    icon: ReactNode
+
+    renderValue: (value: NonNullable<T>) => ReactNode
   }
 
-export const FocusEntityInputHeader = ({
+export function FocusEntityInputHeader<T>({
   value,
-  onChange,
+  renderValue,
+
+  isOpen,
+  setIsOpen,
+
   onRemove,
   label,
-}: FocusEntityInputHeaderProps) => {
+  icon,
+}: FocusEntityInputHeaderProps<T>) {
   return (
     <Container
       actionPlacerStyles={{ right: 60 }}
@@ -65,19 +90,27 @@ export const FocusEntityInputHeader = ({
           icon={<CloseIcon />}
           onClick={() => {
             onRemove()
-            onChange(false)
+            setIsOpen(false)
           }}
         />
       }
       render={({ actionSize }) => (
-        <Content onClick={() => onChange(!value)}>
-          <Text cropped>{label}</Text>
+        <Content onClick={() => setIsOpen(!isOpen)}>
+          {value ? (
+            <Text cropped>{renderValue(value)}</Text>
+          ) : (
+            <HStack alignItems="center" gap={8}>
+              <IconContainer>{icon}</IconContainer>
+              <Label>{label}</Label>
+            </HStack>
+          )}
+
           <HStack>
             {actionSize && <Spacer width={actionSize.width} />}
             <Indicator
               forwardedAs="div"
               kind="secondary"
-              icon={<CollapsableStateIndicator isOpen={value} />}
+              icon={<CollapsableStateIndicator isOpen={isOpen} />}
               title={value ? 'Close' : 'Open'}
             />
           </HStack>
