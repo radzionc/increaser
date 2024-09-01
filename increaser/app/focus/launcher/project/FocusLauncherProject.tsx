@@ -3,40 +3,36 @@ import { useFocusLauncher } from '../state/useFocusLauncher'
 import styled from 'styled-components'
 import { VStack } from '@lib/ui/layout/Stack'
 import { uniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
-import { InvisibleHTMLRadio } from '@lib/ui/inputs/InvisibleHTMLRadio'
-import { AddProject } from '../AddProject'
-import { FocusOptionContainer } from '../FocusOptionContainer'
-import { FocusOptionContent } from '../FocusOptionContent'
+import { AddProject } from './AddProject'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { FocusLauncherHeader } from './FocusLauncherHeader'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { focusLauncherConfig } from '../config'
-import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
+import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
+import { FocusProjectOption } from './FocusProjectOption'
 
 const Wrapper = styled.div`
   padding: 0;
 `
 
-const paddingTop =
-  panelDefaultPadding -
-  (focusLauncherConfig.sectionMinHeight - tightListItemMinHeight) / 2
-
 const Content = styled(VStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
-  padding-top: ${toSizeUnit(paddingTop)};
+  padding-top: 4px;
 
   ${uniformColumnGrid({
-    gap: 4,
+    gap: 20,
     minChildrenWidth: 160,
     rowHeight: 40,
   })}
+
+  grid-row-gap:4px;
+  overflow: visible;
 `
 
 export const FocusLauncherProject = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [{ projectId }, setState] = useFocusLauncher()
+  const [, setState] = useFocusLauncher()
   const options = useActiveProjects()
   const { tasks } = useAssertUserState()
 
@@ -46,16 +42,11 @@ export const FocusLauncherProject = () => {
       {isOpen && (
         <Content>
           {options.map((project) => {
-            const { id, name, emoji } = project
-            const isSelected = id === projectId
+            const { id } = project
             return (
-              <FocusOptionContainer as="label" key={id} selected={isSelected}>
-                <FocusOptionContent prefix={emoji}>{name}</FocusOptionContent>
-                <InvisibleHTMLRadio
-                  isSelected={isSelected}
-                  value={id}
-                  groupName="project"
-                  onSelect={() => {
+              <CurrentProjectProvider key={id} value={project}>
+                <FocusProjectOption
+                  onClick={() => {
                     setIsOpen(false)
                     setState((state) => ({
                       ...state,
@@ -68,7 +59,7 @@ export const FocusLauncherProject = () => {
                     }))
                   }}
                 />
-              </FocusOptionContainer>
+              </CurrentProjectProvider>
             )
           })}
           <AddProject
