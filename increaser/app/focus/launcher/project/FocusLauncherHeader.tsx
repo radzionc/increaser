@@ -13,13 +13,15 @@ import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndica
 import { getColor } from '@lib/ui/theme/getters'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { interactive } from '@lib/ui/css/interactive'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { focusLauncherConfig } from '../config'
 
 const Container = styled(HStack)`
   align-items: center;
   justify-content: space-between;
 
   width: 100%;
-  height: 60px;
+  height: ${toSizeUnit(focusLauncherConfig.sectionMinHeight)};
   position: relative;
 `
 

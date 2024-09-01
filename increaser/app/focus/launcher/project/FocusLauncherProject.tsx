@@ -12,18 +12,25 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { FocusLauncherHeader } from './FocusLauncherHeader'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { focusLauncherConfig } from '../config'
+import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 
 const Wrapper = styled.div`
   padding: 0;
 `
 
+const paddingTop =
+  panelDefaultPadding -
+  (focusLauncherConfig.sectionMinHeight - tightListItemMinHeight) / 2
+
 const Content = styled(VStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-top: ${toSizeUnit(paddingTop)};
 
   ${uniformColumnGrid({
     gap: 4,
     minChildrenWidth: 160,
-    rowHeight: 52,
+    rowHeight: 40,
   })}
 `
 

@@ -26,20 +26,19 @@ export const FocusOptionContainer = styled.div<{
 
   ${transition}
   color: ${getColor('textSupporting')};
-  border: 1px solid ${getColor('background')};
+  border: 2px solid transparent;
   background: ${getColor('foreground')};
 
   ${({ selected }) =>
     selected
       ? css`
-          background: ${getColor('background')};
-          color: ${getColor('text')};
-          border-color: ${getColor('contrast')};
+          color: ${getColor('contrast')};
+          background: ${getColor('mist')};
+          border-color: ${getColor('mistExtra')};
         `
       : css`
           &:hover {
-            border-color: ${getColor('mist')};
-            color: ${getColor('text')};
+            background: ${getColor('mist')};
           }
         `}
 `
