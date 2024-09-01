@@ -1,64 +1,121 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
-import { TaskPrimaryContent } from '@increaser/ui/tasks/TaskPrimaryContent'
-import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
-import { Spacer } from '@lib/ui/layout/Spacer'
-import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { HStack } from '@lib/ui/layout/Stack'
-import {
-  FocusOptionContainer,
-  focusOptionPadding,
-} from './FocusOptionContainer'
-import { cropText } from '@lib/ui/css/cropText'
-import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { useFocusLauncher } from './state/useFocusLauncher'
+import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
+import { interactive } from '@lib/ui/css/interactive'
+import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
+import { getColor } from '@lib/ui/theme/getters'
+import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
+import { ComponentWithActiveState } from '@lib/ui/props'
+import { IconButton } from '@lib/ui/buttons/IconButton'
+import { EditIcon } from '@lib/ui/icons/EditIcon'
+import { Opener } from '@lib/ui/base/Opener'
+import { EditTaskFormOverlay } from '@increaser/ui/tasks/form/EditTaskFormOverlay'
+import { Spacer } from '@lib/ui/layout/Spacer'
+import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
+import { TaskDeadlineTag } from '@increaser/ui/tasks/deadline/TaskDeadlineTag'
+import { TaskProject } from '@increaser/ui/tasks/TaskProject'
+import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
+import { Text } from '@lib/ui/text'
 
-const CheckBoxContainer = styled.div`
-  ${sameDimensions(tightListItemConfig.lineHeight)};
+const Container = styled(OnHoverAction)`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `
 
-const Content = styled(HStack)`
-  ${cropText};
-  > * {
-    ${cropText};
-  }
+const Button = styled(IconButton)``
+
+const Outline = styled(TakeWholeSpace)<ComponentWithActiveState>`
+  ${absoluteOutline(8, 0)};
+  ${borderRadius.s};
+  pointer-events: none;
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background: ${getColor('mist')};
+      border: 2px solid ${getColor('mistExtra')};
+    `};
+`
+
+const Content = styled(TaskItemFrame)<ComponentWithActiveState>`
+  ${interactive};
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  ${({ isActive }) =>
+    !isActive
+      ? css`
+          &:hover ${Outline} {
+            background: ${getColor('mist')};
+          }
+        `
+      : css`
+          color: ${getColor('contrast')};
+        `}
 `
 
 export const FocusTaskOption = () => {
-  const { id, projectId } = useCurrentTask()
+  const { id, projectId, name } = useCurrentTask()
   const [{ taskId }, setState] = useFocusLauncher()
 
-  const isSelected = taskId === id
+  const isActive = taskId === id
 
   return (
-    <ActionInsideInteractiveElement
+    <Container
       actionPlacerStyles={{
-        left: focusOptionPadding,
-        top: focusOptionPadding,
+        right: 0,
       }}
       render={({ actionSize }) => (
-        <FocusOptionContainer
+        <Content
+          isActive={isActive}
           onClick={() => {
-            setState((state) => ({
-              ...state,
-              taskId: id,
-              projectId: shouldBePresent(projectId),
-            }))
+            if (taskId === id) {
+              setState((state) => ({
+                ...state,
+                taskId: null,
+              }))
+            } else {
+              setState((state) => ({
+                ...state,
+                taskId: id,
+                projectId: shouldBePresent(projectId),
+              }))
+            }
           }}
-          selected={isSelected}
         >
-          <Content gap={focusOptionPadding}>
-            <Spacer {...actionSize} />
-            <TaskPrimaryContent />
-          </Content>
-        </FocusOptionContainer>
+          <TaskTextContainer cropped nowrap>
+            <TaskProject value={projectId} />
+            <Text as="span" cropped>
+              {name}
+            </Text>
+            <TaskTrackedTime />
+            <TaskDeadlineTag />
+          </TaskTextContainer>
+          <Outline isActive={isActive} />
+          {actionSize && <Spacer width={actionSize.width} />}
+        </Content>
       )}
       action={
-        <CheckBoxContainer>
-          <TaskCheckBox />
-        </CheckBoxContainer>
+        <Opener
+          renderOpener={({ onOpen }) => (
+            <Button
+              size="m"
+              onClick={onOpen}
+              icon={<EditIcon />}
+              title="Edit task"
+            />
+          )}
+          renderContent={({ onClose }) => (
+            <EditTaskFormOverlay onFinish={onClose} />
+          )}
+        />
       }
     />
   )

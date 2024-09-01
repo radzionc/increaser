@@ -1,34 +1,25 @@
 import { Opener } from '@lib/ui/base/Opener'
 import React from 'react'
-import { FocusOptionContainer } from './FocusOptionContainer'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import styled from 'styled-components'
-import { FocusOptionContent } from './FocusOptionContent'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { useFocusLauncher } from './state/useFocusLauncher'
+import { useFocusLauncher } from '../state/useFocusLauncher'
+import { Project } from '@increaser/entities/Project'
+import { AddFocusEntityPrompt } from '../AddFocusEntityPrompt'
 
-const Container = styled(FocusOptionContainer)``
+type AddProjectProps = {
+  onFinish?: (project?: Project) => void
+}
 
-export const AddProject = () => {
+export const AddProject = ({ onFinish }: AddProjectProps) => {
   const [, setState] = useFocusLauncher()
 
   return (
     <Opener
-      renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : (
-          <Container
-            onClick={onOpen}
-            as="button"
-            type="button"
-            selected={false}
-          >
-            <FocusOptionContent prefix={<PlusIcon />}>
-              Add a project
-            </FocusOptionContent>
-          </Container>
-        )
-      }
+      renderOpener={({ onOpen }) => (
+        <AddFocusEntityPrompt onClick={onOpen}>
+          Add a project
+        </AddFocusEntityPrompt>
+      )}
       renderContent={({ onClose }) => (
         <PanelModal width={460} onFinish={onClose}>
           <CreateProjectForm
@@ -36,10 +27,13 @@ export const AddProject = () => {
               // wait for mutation to finish
               if (project) return
 
+              onFinish?.()
               onClose()
             }}
             onMutationFinish={(project) => {
               onClose()
+              onFinish?.(project)
+
               if (project) {
                 setState((state) => ({
                   ...state,

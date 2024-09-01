@@ -8,4 +8,12 @@ export const TaskTextContainer = styled(Text)`
   word-break: break-word;
   width: 100%;
   text-align: start;
+
+  & > *:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  > * {
+    margin-right: 8px;
+  }
 `

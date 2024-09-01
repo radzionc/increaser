@@ -2,6 +2,7 @@ import { useCurrentTask } from './CurrentTaskProvider'
 import { TaskProject } from './TaskProject'
 import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
 import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
+import { TaskDeadlineTag } from './deadline/TaskDeadlineTag'
 
 export const TaskPrimaryContent = () => {
   const { name, projectId } = useCurrentTask()
@@ -9,8 +10,9 @@ export const TaskPrimaryContent = () => {
   return (
     <TaskTextContainer>
       <TaskProject value={projectId} />
+      <span>{name}</span>
       <TaskTrackedTime />
-      {name}
+      <TaskDeadlineTag />
     </TaskTextContainer>
   )
 }

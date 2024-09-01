@@ -6,10 +6,10 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
-import { FocusLauncherForm } from '../../focus/launcher/FocusLauncherForm'
 import { FocusTitle } from './FocusTitle'
 import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 import { PageContent } from '../../ui/page/PageContent'
+import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
 
 const Container = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ export const HomePageContent = () => {
         ) : (
           <>
             <BreakTimeline />
-            <FocusLauncherForm />
+            <FocusLauncher />
           </>
         )}
       </VStack>

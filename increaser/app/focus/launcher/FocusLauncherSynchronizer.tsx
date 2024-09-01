@@ -9,11 +9,9 @@ export const FocusLauncherSynchronizer = () => {
 
   const [, setState] = useFocusLauncher()
   useEffect(() => {
-    setState((state) => ({
-      ...state,
+    setState(() => ({
       taskId,
       projectId,
-      focusEntity: taskId ? 'task' : 'project',
     }))
   }, [projectId, setState, taskId])
 

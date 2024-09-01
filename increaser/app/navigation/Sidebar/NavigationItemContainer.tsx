@@ -32,10 +32,7 @@ export const NavigationItemContainer = styled.div<ComponentWithActiveState>`
   ${({ isActive }) =>
     isActive
       ? css`
-          color: ${({ theme }) =>
-            theme.colors.primary
-              .getVariant({ l: () => 76, s: () => 100 })
-              .toCssValue()};
+          ${getColor('textPrimary')};
         `
       : css`
           svg {

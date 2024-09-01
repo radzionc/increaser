@@ -1,22 +1,11 @@
-import { useMemo, useState } from 'react'
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import { useState } from 'react'
 import { FocusTaskSelector } from './FocusTaskSelector'
 import { CreateFocusTaskPrompt } from './CreateFocusTaskPrompt'
 import { CreateFocusTaskOverlay } from './CreateFocusTaskOverlay'
-import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useFocusTaskGroups } from '../../tasks/useFocusTaskGroups'
+import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 
 export const SelectFocusTask = () => {
-  const { intervals } = useCurrentFocus()
-  const { projectId } = getLastItem(intervals)
-  const groups = useFocusTaskGroups()
-  const options = useMemo(
-    () =>
-      groups
-        .flatMap(({ tasks }) => tasks)
-        .filter((task) => task.projectId === projectId),
-    [groups, projectId],
-  )
+  const options = useFilteredFocusTasks()
 
   const [isCreatingTask, setIsCreatingTask] = useState(false)
 

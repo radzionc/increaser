@@ -2,7 +2,6 @@ import { useCurrentTask } from './CurrentTaskProvider'
 import styled from 'styled-components'
 import { TaskItemFrame } from './TaskItemFrame'
 import { EditTaskForm } from './form/EditTaskForm'
-import { TaskPrimaryContent } from './TaskPrimaryContent'
 import { TaskCheckBox } from './TaskCheckBox'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
 import { Spacer } from '@lib/ui/layout/Spacer'
@@ -13,6 +12,9 @@ import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { TaskTextContainer } from './TaskTextContainer'
+import { TaskProject } from './TaskProject'
+import { TaskTrackedTime } from './TaskTrackedTime'
 
 const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;
@@ -51,7 +53,11 @@ export const TaskItem = () => {
             }}
           >
             <Spacer {...checkboxSize} />
-            <TaskPrimaryContent />
+            <TaskTextContainer>
+              <TaskProject value={task.projectId} />
+              <span>{task.name}</span>
+              <TaskTrackedTime />
+            </TaskTextContainer>
             <Outline />
           </Content>
         </>
