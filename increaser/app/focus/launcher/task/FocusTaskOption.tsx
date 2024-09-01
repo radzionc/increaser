@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
-import { useFocusLauncher } from './state/useFocusLauncher'
 import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
 import { interactive } from '@lib/ui/css/interactive'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
@@ -20,6 +19,7 @@ import { TaskDeadlineTag } from '@increaser/ui/tasks/deadline/TaskDeadlineTag'
 import { TaskProject } from '@increaser/ui/tasks/TaskProject'
 import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
 import { Text } from '@lib/ui/text'
+import { useFocusLauncher } from '../state/useFocusLauncher'
 
 const Container = styled(OnHoverAction)`
   width: 100%;
