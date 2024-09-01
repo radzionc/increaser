@@ -1,4 +1,5 @@
 1724562351708
+Filter tasks by project in the focus launcher
 Set custom task deadlines
 Add description to a life aspiration to make it more specific and clear
 1724477563708

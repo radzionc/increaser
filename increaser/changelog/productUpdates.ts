@@ -2,6 +2,34 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1724562351708,
+    videoId: 'filter',
+    name: 'Enhanced Task Management & Vision Clarity',
+    description:
+      'Boost your focus and streamline your goals with new features that let you filter tasks by project, set custom deadlines, and refine your life aspirations.',
+    items: [
+      {
+        description:
+          'Filter tasks by project in the focus launcher for a more streamlined workflow.',
+      },
+      {
+        description:
+          'Set custom deadlines for tasks to better manage your time and priorities.',
+      },
+      {
+        description:
+          'Add detailed descriptions to your life aspirations, making your vision clearer and more actionable.',
+      },
+    ],
+
+    telegram: 'https://t.me/increaser_app/48',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-increaser-updates-task-management-vision-clarity-just-got-better--O5g-s_1lZb8vHeNVx_n',
+    linkedIn: '',
+    x: '',
+    reddit: '',
+  },
+  {
     releasedAt: 1724477563708,
     videoId: 'kanban',
     name: 'Streamlined Task Management & Enhanced Layout',
