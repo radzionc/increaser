@@ -5,7 +5,10 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { HStack } from '@lib/ui/layout/Stack'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { ClickableComponentProps } from '@lib/ui/props'
+import {
+  ClickableComponentProps,
+  ComponentWithChildrenProps,
+} from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
@@ -26,7 +29,10 @@ const Content = styled(HStack)`
   }
 `
 
-export const AddTaskPrompt = ({ onClick }: ClickableComponentProps) => {
+export const AddFocusEntityPrompt = ({
+  onClick,
+  children,
+}: ClickableComponentProps & ComponentWithChildrenProps) => {
   return (
     <Container
       horizontalOffset={tightListItemConfig.horizontalOffset}
@@ -36,7 +42,7 @@ export const AddTaskPrompt = ({ onClick }: ClickableComponentProps) => {
         <IconWrapper>
           <PlusIcon />
         </IconWrapper>
-        <span>Add a task</span>
+        {children}
       </Content>
     </Container>
   )

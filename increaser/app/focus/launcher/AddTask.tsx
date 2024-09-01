@@ -4,7 +4,7 @@ import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { endOfDay } from 'date-fns'
 import { useFocusLauncher } from './state/useFocusLauncher'
-import { AddTaskPrompt } from './AddTaskPrompt'
+import { AddFocusEntityPrompt } from './AddFocusEntityPrompt'
 
 export const AddTask = () => {
   const [, setState] = useFocusLauncher()
@@ -12,7 +12,9 @@ export const AddTask = () => {
 
   return (
     <Opener
-      renderOpener={({ onOpen }) => <AddTaskPrompt onClick={onOpen} />}
+      renderOpener={({ onOpen }) => (
+        <AddFocusEntityPrompt onClick={onOpen}>Add a task</AddFocusEntityPrompt>
+      )}
       renderContent={({ onClose }) => (
         <PanelModal width={560} onFinish={onClose}>
           <CreateTaskForm

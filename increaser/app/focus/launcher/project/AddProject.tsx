@@ -4,7 +4,7 @@ import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { useFocusLauncher } from '../state/useFocusLauncher'
 import { Project } from '@increaser/entities/Project'
-import { AddProjectPrompt } from './AddProjectPrompt'
+import { AddFocusEntityPrompt } from '../AddFocusEntityPrompt'
 
 type AddProjectProps = {
   onFinish?: (project?: Project) => void
@@ -15,7 +15,11 @@ export const AddProject = ({ onFinish }: AddProjectProps) => {
 
   return (
     <Opener
-      renderOpener={({ onOpen }) => <AddProjectPrompt onClick={onOpen} />}
+      renderOpener={({ onOpen }) => (
+        <AddFocusEntityPrompt onClick={onOpen}>
+          Add a project
+        </AddFocusEntityPrompt>
+      )}
       renderContent={({ onClose }) => (
         <PanelModal width={460} onFinish={onClose}>
           <CreateProjectForm
