@@ -2,7 +2,7 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 1724562351708,
+    releasedAt: 1725206936434,
     videoId: 'filter',
     name: 'Enhanced Task Management & Vision Clarity',
     description:
@@ -25,9 +25,11 @@ export const productUpdates: ProductUpdate[] = [
     telegram: 'https://t.me/increaser_app/48',
     indieHackers:
       'https://www.indiehackers.com/product/increaser/new-increaser-updates-task-management-vision-clarity-just-got-better--O5g-s_1lZb8vHeNVx_n',
-    linkedIn: '',
-    x: '',
-    reddit: '',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7236041110437953536',
+    x: 'https://x.com/increaser_app/status/1830276120627044686',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1f6i0t1/new_increaser_updates_boost_your_productivity/',
   },
   {
     releasedAt: 1724477563708,
