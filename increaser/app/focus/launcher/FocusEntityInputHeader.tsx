@@ -63,10 +63,12 @@ type FocusEntityInputHeaderProps<T> = RemovableComponentProps &
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
 
-    label: string
+    entityName: string
     icon: ReactNode
 
     renderValue: (value: NonNullable<T>) => ReactNode
+
+    actions?: ReactNode
   }
 
 export function FocusEntityInputHeader<T>({
@@ -77,22 +79,26 @@ export function FocusEntityInputHeader<T>({
   setIsOpen,
 
   onRemove,
-  label,
+  entityName,
   icon,
+
+  actions,
 }: FocusEntityInputHeaderProps<T>) {
   return (
     <Container
       actionPlacerStyles={{ right: 60 }}
       action={
-        <FocusIconButton
-          kind="secondary"
-          title="Clear"
-          icon={<CloseIcon />}
-          onClick={() => {
-            onRemove()
-            setIsOpen(false)
-          }}
-        />
+        value ? (
+          <FocusIconButton
+            kind="secondary"
+            title="Clear"
+            icon={<CloseIcon />}
+            onClick={() => {
+              onRemove()
+              setIsOpen(false)
+            }}
+          />
+        ) : null
       }
       render={({ actionSize }) => (
         <Content onClick={() => setIsOpen(!isOpen)}>
@@ -101,7 +107,7 @@ export function FocusEntityInputHeader<T>({
           ) : (
             <HStack alignItems="center" gap={8}>
               <IconContainer>{icon}</IconContainer>
-              <Label>{label}</Label>
+              <Label>Select {entityName}</Label>
             </HStack>
           )}
 

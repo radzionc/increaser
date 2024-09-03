@@ -70,7 +70,8 @@ export const FocusTaskOption = () => {
   return (
     <Container
       actionPlacerStyles={{
-        right: 0,
+        right: -4,
+        top: 4,
       }}
       render={({ actionSize }) => (
         <Content
@@ -90,11 +91,9 @@ export const FocusTaskOption = () => {
             }
           }}
         >
-          <TaskTextContainer cropped nowrap>
+          <TaskTextContainer>
             <TaskProject value={projectId} />
-            <Text as="span" cropped>
-              {name}
-            </Text>
+            <Text as="span">{name}</Text>
             <TaskTrackedTime />
             <TaskDeadlineTag />
           </TaskTextContainer>
@@ -106,6 +105,7 @@ export const FocusTaskOption = () => {
         <Opener
           renderOpener={({ onOpen }) => (
             <Button
+              kind="secondary"
               size="m"
               onClick={onOpen}
               icon={<EditIcon />}

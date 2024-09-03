@@ -13,6 +13,9 @@ import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
+import { FocusIconButton } from '../../components/FocusSetWidget/FocusIconButton'
+import { EditIcon } from '@lib/ui/icons/EditIcon'
+import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormContent'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -37,6 +40,8 @@ export const FocusTaskInput = () => {
     setIsOpen(false)
   }, [taskId])
 
+  const [isEditing, setIsEditing] = useState(false)
+
   return (
     <Wrapper>
       <FocusEntityInputHeader
@@ -45,7 +50,7 @@ export const FocusTaskInput = () => {
         onRemove={() => {
           setState((state) => ({ ...state, taskId: null }))
         }}
-        label="Select a task ..."
+        entityName="a task"
         value={taskId ? tasks[taskId] : null}
         renderValue={(task) => (
           <>
@@ -54,6 +59,18 @@ export const FocusTaskInput = () => {
           </>
         )}
         icon={productToolIconRecord.tasks}
+        actions={
+          taskId ? (
+            <FocusIconButton
+              kind="secondary"
+              title="Edit"
+              icon={<EditIcon />}
+              onClick={() => {
+                setIsEditing(true)
+              }}
+            />
+          ) : null
+        }
       />
       {isOpen && (
         <Container>
@@ -64,6 +81,11 @@ export const FocusTaskInput = () => {
           ))}
           <AddTask />
         </Container>
+      )}
+      {isEditing && taskId && (
+        <CurrentTaskProvider value={tasks[taskId]}>
+          <EditTaskFormContent onFinish={() => setIsEditing(false)} />
+        </CurrentTaskProvider>
       )}
     </Wrapper>
   )

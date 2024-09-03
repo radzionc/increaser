@@ -52,7 +52,7 @@ export const FocusLauncherProject = () => {
         onRemove={() => {
           setState((state) => ({ ...state, projectId: null }))
         }}
-        label="Select a project ..."
+        entityName="a project"
         value={projectId ? projects[projectId] : null}
         renderValue={(project) => (
           <>
