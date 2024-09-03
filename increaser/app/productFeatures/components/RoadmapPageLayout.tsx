@@ -13,7 +13,7 @@ import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigati
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../../focus/components/AppPageLayout'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const contentWidth = 520
 const gap = 40

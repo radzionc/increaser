@@ -1,4 +1,4 @@
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { TimeSpace } from '@lib/ui/timeline/TimeSpace'

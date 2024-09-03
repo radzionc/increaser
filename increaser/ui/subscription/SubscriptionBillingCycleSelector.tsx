@@ -1,7 +1,7 @@
 import { SubscriptionPrice } from '@lib/subscription-ui/SubscriptionPrice'
 import { useSubscriptionBillingCycle } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { SubscriptionPricesQueryDependant } from '@increaser/paddle-classic-ui/components/SubscriptionPricesQueryDependant'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { Switch } from '@lib/ui/inputs/Switch'
 import styled, { useTheme } from 'styled-components'
 import { HStack } from '@lib/ui/layout/Stack'

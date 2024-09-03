@@ -1,6 +1,6 @@
 import { ScrollIntoViewOnFirstAppearance } from '@lib/ui/base/ScrollIntoViewOnFirstAppearance'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 
 type ListItemFormProps = ComponentWithChildrenProps & {

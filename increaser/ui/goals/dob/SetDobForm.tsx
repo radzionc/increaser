@@ -10,7 +10,7 @@ import { LabelText } from '@lib/ui/inputs/LabelText'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { useDobBoundaries } from './useDobBoundaries'
 import { getDefaultDob } from './getDefaultDob'
 

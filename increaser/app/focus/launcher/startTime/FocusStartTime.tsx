@@ -4,7 +4,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { StartTimeEditorProvider } from './StartTimeEditorProvider'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { useFocusLauncherStartTime } from '../state/FocusLauncherStartTimeProvider'
 
 const Container = styled(VStack)`

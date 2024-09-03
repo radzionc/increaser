@@ -1,4 +1,4 @@
-import { panel } from '@lib/ui/panel/Panel'
+import { panel } from '@lib/ui/css/panel'
 import styled from 'styled-components'
 import { dayOverviewConfig } from './overview/config'
 

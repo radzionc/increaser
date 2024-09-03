@@ -1,4 +1,4 @@
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { HStack } from '@lib/ui/layout/Stack'
 
 import styled from 'styled-components'

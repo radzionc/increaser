@@ -1,7 +1,7 @@
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { SubscriptionCheckout } from '@increaser/app/membership/subscription/components/SubscriptionCheckout'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { SubscriptionBillingCycleSelector } from '@increaser/ui/subscription/SubscriptionBillingCycleSelector'

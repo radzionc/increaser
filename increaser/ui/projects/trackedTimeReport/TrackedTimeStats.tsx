@@ -1,6 +1,6 @@
 import { Statistic } from '@lib/ui/layout/Statistic'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { pluralize } from '@lib/utils/pluralize'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { formatDuration } from '@lib/utils/time/formatDuration'

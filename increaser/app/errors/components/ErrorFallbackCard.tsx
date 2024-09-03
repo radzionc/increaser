@@ -1,6 +1,6 @@
 import { SupportContacts } from '@increaser/app/communication/components/SupportContacts'
 import { Button } from '@lib/ui/buttons/Button'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
@@ -8,7 +8,7 @@ import { ModalTitleText } from '@lib/ui/modal/ModalTitleText'
 
 export const ErrorFallbackCard = () => {
   return (
-    <Panel width={320}>
+    <Panel style={{ width: 320 }}>
       <VStack gap={40} fullWidth alignItems="center">
         <ModalTitleText>Something went wrong</ModalTitleText>
         <VStack alignItems="center" gap={12} fullWidth>

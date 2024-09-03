@@ -1,6 +1,6 @@
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { VStack } from '@lib/ui/layout/Stack'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import styled from 'styled-components'
 import { Header } from '@lib/ui/layout/Header'
 import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'

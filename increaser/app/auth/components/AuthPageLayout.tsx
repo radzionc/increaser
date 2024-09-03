@@ -13,7 +13,7 @@ import { getAppPath } from '@increaser/ui/navigation/app'
 import { Button } from '@lib/ui/buttons/Button'
 import { OverlayNavigationItem } from '@lib/ui/website/navigation/OverlayNavigationItem'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 
 const LogoWrapper = styled(WebsiteLink)`

@@ -6,7 +6,7 @@ import {
   productName,
 } from '@increaser/config'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { Text } from '@lib/ui/text'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { CoverImage } from '@lib/ui/images/CoverImage'

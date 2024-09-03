@@ -1,6 +1,6 @@
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import styled from 'styled-components'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { SubscriptionFeatures } from '@increaser/ui/subscription/SubscriptionFeatures'
 import { productName } from '@increaser/config'

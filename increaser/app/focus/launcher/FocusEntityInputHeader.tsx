@@ -1,7 +1,7 @@
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { HStack } from '@lib/ui/layout/Stack'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { ComponentWithValueProps, RemovableComponentProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { Text } from '@lib/ui/text'

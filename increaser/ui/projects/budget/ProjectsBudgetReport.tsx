@@ -5,7 +5,7 @@ import { VStack } from '@lib/ui/layout/Stack'
 import { Header } from '@lib/ui/layout/Header'
 import { ProjectsBudgetReportViewSelector } from './report/ProjectsBudgetReportView'
 import { Match } from '@lib/ui/base/Match'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { BudgetRequired } from './BudgetRequired'
 
 export const ProjectsBudgetReport = () => {

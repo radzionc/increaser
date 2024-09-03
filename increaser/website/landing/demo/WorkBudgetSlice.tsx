@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { WorkBudgetDaysReport } from '@increaser/ui/workBudget/WorkBudgetDaysReport'
 import { WorkBudgetWeeksReport } from '@increaser/ui/workBudget/WorkBudgetWeeksReport'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 

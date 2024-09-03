@@ -1,6 +1,6 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { useMemo, useState } from 'react'
 import { ProfileFormShape } from './ProfileFormShape'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'

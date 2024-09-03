@@ -8,7 +8,6 @@ import { borderRadius } from '../css/borderRadius'
 type PanelKind = 'regular' | 'secondary'
 
 export interface PanelProps {
-  width?: React.CSSProperties['width']
   padding?: React.CSSProperties['padding']
   direction?: React.CSSProperties['flexDirection']
 
@@ -20,7 +19,6 @@ export interface PanelProps {
 export const panelDefaultPadding = 20
 
 export const panel = ({
-  width,
   padding = panelDefaultPadding,
   direction = 'column',
   kind = 'regular',
@@ -28,10 +26,6 @@ export const panel = ({
 }: PanelProps) => {
   return css`
     ${borderRadius.m};
-    ${width &&
-    css`
-      width: ${toSizeUnit(width)};
-    `}
 
     overflow: hidden;
 

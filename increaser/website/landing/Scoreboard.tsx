@@ -1,7 +1,7 @@
 import { QueryDependant } from '@lib/ui/query/components/QueryDependant'
 import { Spinner } from '@lib/ui/loaders/Spinner'
 import { Text } from '@lib/ui/text'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { HStack, VStack } from '@lib/ui/layout/Stack'
 import {
   ScoreboardPeriod,

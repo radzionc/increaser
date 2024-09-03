@@ -12,7 +12,7 @@ import { validate } from '@lib/ui/form/utils/validate'
 import { FormActions } from '@lib/ui/form/components/FormActions'
 import styled from 'styled-components'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { MusicFormShape } from './musicForm/MusicFormShape'
 import { MusicFormFields } from './musicForm/MusicFormFields'
 

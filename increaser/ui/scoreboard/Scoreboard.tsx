@@ -1,4 +1,4 @@
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { VStack } from '@lib/ui/layout/Stack'
 import {
   ScoreboardPeriod,
