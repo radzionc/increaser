@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useTheme } from 'styled-components'
 import { WorkBudgetInput } from '@increaser/ui/workBudget/WorkBudgetInput'

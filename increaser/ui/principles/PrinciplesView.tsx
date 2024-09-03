@@ -1,7 +1,7 @@
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ListIcon } from '@lib/ui/icons/ListIcon'
 import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigationItem'
 import { Text } from '@lib/ui/text'
 import { getViewSetup } from '@lib/ui/view/getViewSetup'

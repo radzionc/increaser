@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { formatDuration } from '@lib/utils/time/formatDuration'

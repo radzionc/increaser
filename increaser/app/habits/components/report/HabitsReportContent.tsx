@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { HabitsTableContainer } from '../track/HabitsTableContainer'
 import { HabitsReportColumn } from './HabitsReportColumn'
 import { getHabitTrackingDays } from '@increaser/entities-utils/habit/getHabitTrackingDays'

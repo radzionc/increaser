@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Button } from '@lib/ui/buttons/Button'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnlyAction'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'

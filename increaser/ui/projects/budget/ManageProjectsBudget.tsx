@@ -1,6 +1,6 @@
 import { Page } from '@lib/next-ui/Page'
 import { ProjectsBudgetOverview } from './ProjectsBudgetOverview'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { ManageTimePrompt } from './ManageTimePrompt'
 import { ProjectsBudgetList } from './ProjectsBudgetList'
 

@@ -1,6 +1,6 @@
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Circle } from '@lib/ui/layout/Circle'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'

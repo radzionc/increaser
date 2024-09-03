@@ -1,5 +1,5 @@
 import { MembersTelegram } from '@increaser/app/communication/MembersTelegram'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 import { FreeTrialStatus } from '../subscription/components/FreeTrialStatus'
 import { ManageSubscription } from '../subscription/components/ManageSubscription'

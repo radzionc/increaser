@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
 import styled from 'styled-components'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'

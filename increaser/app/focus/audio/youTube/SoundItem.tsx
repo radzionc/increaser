@@ -8,7 +8,7 @@ import { StarIcon } from '@lib/ui/icons/StarIcon'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
 import { Opener } from '@lib/ui/base/Opener'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 

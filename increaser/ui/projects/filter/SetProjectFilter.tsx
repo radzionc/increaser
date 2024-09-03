@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { useProjectFilter } from './ProjectFilterProvider'

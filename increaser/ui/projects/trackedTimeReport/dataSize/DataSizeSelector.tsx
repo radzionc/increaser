@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { pluralize } from '@lib/utils/pluralize'

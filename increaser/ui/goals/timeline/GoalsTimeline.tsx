@@ -1,6 +1,6 @@
 import { useAssertUserState } from '../../user/UserStateContext'
 import { GoalsTimelineProvider } from './GoalsTimelineProvider'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { TimeLabels } from './TimeLabels'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'

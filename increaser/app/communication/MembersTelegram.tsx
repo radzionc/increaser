@@ -1,7 +1,7 @@
 import { MEMBERS_TELEGRAM_GROUP } from '@increaser/app/shared/externalResources'
 import { ShyTextButton } from '@lib/ui/buttons/ShyTextButton'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { useIsPayingUser } from '@increaser/app/membership/hooks/useIsPayingUser'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 

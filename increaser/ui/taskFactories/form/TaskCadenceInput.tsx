@@ -5,7 +5,7 @@ import {
 } from '@increaser/entities/TaskFactory'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'

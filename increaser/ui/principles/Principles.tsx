@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { usePrinciples } from './hooks/usePrinciples'
 import { CurrentPrincipleProvider } from './CurrentPrincipleProvider'
 import { PrincipleItem } from './PrincipleItem'

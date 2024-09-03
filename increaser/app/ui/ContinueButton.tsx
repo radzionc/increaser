@@ -1,6 +1,6 @@
 import { ButtonProps, Button } from '@lib/ui/buttons/Button'
 import { ArrowRightIcon } from '@lib/ui/icons/ArrowRightIcon'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 
 interface Props

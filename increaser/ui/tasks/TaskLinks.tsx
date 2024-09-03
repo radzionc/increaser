@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'

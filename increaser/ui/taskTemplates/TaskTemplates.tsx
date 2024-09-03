@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { TaskTemplateItem } from './TaskTemplateItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddTaskTemplate } from './AddTaskTemplate'

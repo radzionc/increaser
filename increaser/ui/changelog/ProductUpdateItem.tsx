@@ -3,7 +3,7 @@ import {
   ProductUpdate,
   productUpdateSocials,
 } from '../../changelog/ProductUpdate'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { format } from 'date-fns'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'

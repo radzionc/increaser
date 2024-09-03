@@ -7,7 +7,7 @@ import {
   FeatureVideoSliceProps,
 } from '@lib/ui/website/FeatureVideoSlice'
 import { TasksSlice } from '../landing/demo/TasksSlice'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 const videoSlices: FeatureVideoSliceProps[] = [
   {

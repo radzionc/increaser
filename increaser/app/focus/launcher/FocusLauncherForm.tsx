@@ -1,5 +1,5 @@
 import { Panel } from '@lib/ui/css/panel'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'

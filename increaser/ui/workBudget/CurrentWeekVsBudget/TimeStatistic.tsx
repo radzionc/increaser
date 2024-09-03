@@ -1,6 +1,6 @@
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { Circle } from '@lib/ui/layout/Circle'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'

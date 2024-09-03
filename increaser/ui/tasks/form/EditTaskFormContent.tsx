@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Task } from '@increaser/entities/Task'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'

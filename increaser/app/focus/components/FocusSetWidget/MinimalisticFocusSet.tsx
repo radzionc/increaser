@@ -1,5 +1,5 @@
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { useFocus } from '@increaser/ui/focus/FocusContext'

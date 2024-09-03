@@ -1,5 +1,5 @@
 import { Spinner } from '@lib/ui/loaders/Spinner'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
 import { centerContent } from '@lib/ui/css/centerContent'

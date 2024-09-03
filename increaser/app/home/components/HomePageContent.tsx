@@ -1,7 +1,7 @@
 import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'

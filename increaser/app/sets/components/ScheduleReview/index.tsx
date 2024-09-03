@@ -1,7 +1,7 @@
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { ScheduleCheckItem } from './ScheduleCheckItem'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 
 const sleepHoursTarget = 8

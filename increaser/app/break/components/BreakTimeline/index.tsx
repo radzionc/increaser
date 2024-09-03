@@ -7,7 +7,7 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { toPercents } from '@lib/utils/toPercents'
 import styled, { css, useTheme } from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
 import { MS_IN_MIN } from '@lib/utils/time'
 

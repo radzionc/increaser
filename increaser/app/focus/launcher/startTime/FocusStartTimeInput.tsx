@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
 import { Sessions } from './Sessions'
 import styled from 'styled-components'

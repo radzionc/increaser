@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { toPercents } from '@lib/utils/toPercents'
 import { useCurrentFrameTotalTracked } from '../hooks/useCurrentFrameTotalTracked'
 import { InteractiveRow } from './InteractiveRow'

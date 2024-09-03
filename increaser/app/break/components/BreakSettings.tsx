@@ -4,7 +4,7 @@ import { Menu } from '@lib/ui/menu'
 
 import { ManageAutomation } from './ManageAutomation'
 import { ManageBreakNotifications } from './ManageBreakNotifications'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 export const BreakSettings = () => {
   return (

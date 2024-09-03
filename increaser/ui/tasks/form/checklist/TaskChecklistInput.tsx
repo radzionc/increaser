@@ -1,5 +1,5 @@
 import { TaskChecklistItem } from '@increaser/entities/Task'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { TaskChecklistItemInput } from './TaskChecklistItemInput'
 import { getId } from '@increaser/entities-utils/shared/getId'

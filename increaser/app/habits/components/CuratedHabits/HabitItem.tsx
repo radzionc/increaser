@@ -3,7 +3,7 @@ import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteCo
 import styled, { useTheme } from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { Tag } from '@lib/ui/tags/Tag'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'

@@ -7,7 +7,7 @@ import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { toPercents } from '@lib/utils/toPercents'
 import { Text } from '@lib/ui/text'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
 
 const Label = styled(VStack)`

@@ -1,6 +1,6 @@
 import { usePWA } from '@increaser/app/pwa/PWAContext'
 import styled from 'styled-components'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 import { getColor } from '@lib/ui/theme/getters'
 import {

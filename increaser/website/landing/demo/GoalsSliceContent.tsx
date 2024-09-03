@@ -1,7 +1,7 @@
 import { CurrentGoalProvider } from '@increaser/ui/goals/CurrentGoalProvider'
 import styled from 'styled-components'
 import { GoalItemContent } from '@increaser/ui/goals/GoalItemContent'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { GoalsTimeline } from '@increaser/ui/goals/timeline/GoalsTimeline'
 import { useFilteredScheduledGoals } from '@increaser/ui/goals/filter/useFilteredScheduledGoals'
 

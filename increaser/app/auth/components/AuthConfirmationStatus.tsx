@@ -1,6 +1,6 @@
 import { CopyText } from '@lib/ui/text/CopyText'
 import { Spinner } from '@lib/ui/loaders/Spinner'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { Button } from '@lib/ui/buttons/Button'
 import { InfoIcon } from '@lib/ui/icons/InfoIcon'

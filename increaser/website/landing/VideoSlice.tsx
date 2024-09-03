@@ -1,6 +1,6 @@
 import YouTubePlayer from 'react-player/lazy'
 import { demoVideoUrl, productName } from '@increaser/config'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { IntersectionAware } from '@lib/ui/base/IntersectionAware'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'

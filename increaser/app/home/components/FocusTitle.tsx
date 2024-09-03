@@ -8,7 +8,7 @@ import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { PageHeader } from '../../ui/page/header/PageHeader'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 
 export const FocusTitle = () => {
   const { intervals } = useCurrentFocus()

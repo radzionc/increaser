@@ -1,6 +1,6 @@
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import styled from 'styled-components'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'

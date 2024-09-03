@@ -1,6 +1,6 @@
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { TitledSection } from '@lib/ui/Layout/TitledSection'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
 
 import { CurrentHabitProvider } from './CurrentHabitProvider'

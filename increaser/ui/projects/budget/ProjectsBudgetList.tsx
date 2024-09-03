@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { ProjectBudgetItem } from '../../projects/budget/ProjectBudgetItem'
 import { useBudgetedProjects } from './hooks/useBudgetedProjects'
 

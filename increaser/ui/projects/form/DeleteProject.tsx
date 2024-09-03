@@ -1,7 +1,7 @@
 import { TextButton } from '@lib/ui/buttons/TextButton'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { Opener } from '@lib/ui/base/Opener'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'

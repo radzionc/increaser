@@ -1,7 +1,7 @@
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { InputProps } from '@lib/ui/props'
 import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'

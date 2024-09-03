@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'

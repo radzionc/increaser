@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useFocusLauncher } from '../state/useFocusLauncher'
 import styled from 'styled-components'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { uniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { AddProject } from './AddProject'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'

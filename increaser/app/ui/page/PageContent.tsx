@@ -1,5 +1,5 @@
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { sidebarConfig } from '../../navigation/Sidebar/config'
 

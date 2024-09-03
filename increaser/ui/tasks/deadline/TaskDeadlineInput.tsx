@@ -1,6 +1,6 @@
 import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { matchColor } from '@lib/ui/theme/getters'

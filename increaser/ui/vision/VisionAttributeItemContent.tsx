@@ -4,7 +4,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { useCurrentVisionAttribute } from './CurrentVisionAttributeProvider'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 

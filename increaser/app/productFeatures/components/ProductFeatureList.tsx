@@ -6,7 +6,7 @@ import { order } from '@lib/utils/array/order'
 import { ProductFeatureItem } from './ProductFeatureItem'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CurrentProductFeatureProvider } from './CurrentProductFeatureProvider'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { ProductFeatureStatus } from '@increaser/entities/ProductFeature'
 
 type ProductFeatureListProps = {

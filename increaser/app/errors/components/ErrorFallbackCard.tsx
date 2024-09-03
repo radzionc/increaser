@@ -1,7 +1,7 @@
 import { SupportContacts } from '@increaser/app/communication/components/SupportContacts'
 import { Button } from '@lib/ui/buttons/Button'
 import { Panel } from '@lib/ui/css/panel'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { ModalTitleText } from '@lib/ui/modal/ModalTitleText'

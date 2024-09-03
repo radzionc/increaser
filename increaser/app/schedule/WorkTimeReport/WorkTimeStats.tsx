@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { useMemo } from 'react'

@@ -1,6 +1,6 @@
 import { ProjectBudgetWidget } from './ProjectBudgetWidget'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { useBudgetedProjects } from './hooks/useBudgetedProjects'
 
 export const CurrentWeekProgress = () => {

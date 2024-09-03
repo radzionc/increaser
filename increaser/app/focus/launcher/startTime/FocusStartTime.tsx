@@ -1,6 +1,6 @@
 import { FocusStartTimeInput } from './FocusStartTimeInput'
 import { ChangeStartTimeSwitch } from './ChangeStartTimeSwitch'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { StartTimeEditorProvider } from './StartTimeEditorProvider'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'

@@ -4,7 +4,7 @@ import { SubscriptionPricesQueryDependant } from '@increaser/paddle-classic-ui/c
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { Switch } from '@lib/ui/inputs/Switch'
 import styled, { useTheme } from 'styled-components'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Tag } from '@lib/ui/tags/Tag'
 import { getAnnualSubscriptionSavings } from '@increaser/entities-utils/subscription/getAnnualSubscriptionSavings'
