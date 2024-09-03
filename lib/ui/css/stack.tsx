@@ -9,7 +9,8 @@ type FixedDirectionStackProps = {
   wrap?: React.CSSProperties['flexWrap']
   fullWidth?: boolean
   fullHeight?: boolean
-  fill?: boolean
+  fullSize?: boolean
+  flexGrow?: boolean
   children?: React.ReactNode
 }
 
@@ -36,8 +37,9 @@ export const stack = ({
   wrap,
   fullWidth,
   fullHeight,
+  fullSize,
   direction,
-  fill,
+  flexGrow,
 }: StackProps) => css`
   display: flex;
   flex-direction: ${direction};
@@ -65,7 +67,12 @@ export const stack = ({
   css`
     height: 100%;
   `}
-    ${fill &&
+  ${fullSize &&
+  css`
+    width: 100%;
+    height: 100%;
+  `}
+    ${flexGrow &&
   css`
     flex: 1;
   `}
