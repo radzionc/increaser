@@ -19,50 +19,63 @@ export interface PanelProps {
 
 export const panelDefaultPadding = 20
 
-const panelPaddingCSS = css<{ padding?: React.CSSProperties['padding'] }>`
-  padding: ${({ padding }) => toSizeUnit(padding || panelDefaultPadding)};
-`
+export const panel = ({
+  width,
+  padding = panelDefaultPadding,
+  direction = 'column',
+  kind = 'regular',
+  withSections = false,
+}: PanelProps) => {
+  return css`
+    ${borderRadius.m};
+    ${width &&
+    css`
+      width: ${toSizeUnit(width)};
+    `}
 
-export const Panel = styled.div<PanelProps>`
-  ${borderRadius.m};
-  width: ${({ width }) => (width ? toSizeUnit(width) : undefined)};
-  overflow: hidden;
+    overflow: hidden;
 
-  ${({ withSections, direction = 'column', kind = 'regular', theme }) => {
-    const contentBackground = match(kind, {
-      secondary: () => theme.colors.background.toCssValue(),
-      regular: () => theme.colors.mist.toCssValue(),
-    })
+    ${({ theme }) => {
+      const contentBackground = match(kind, {
+        secondary: () => theme.colors.background.toCssValue(),
+        regular: () => theme.colors.mist.toCssValue(),
+      })
 
-    const contentCSS = css`
-      ${panelPaddingCSS}
-      background: ${contentBackground};
-    `
+      const content = css`
+        padding: ${toSizeUnit(padding)};
+        background: ${contentBackground};
+      `
 
-    return withSections
-      ? css`
-          display: flex;
-          flex-direction: ${direction};
+      if (!withSections) {
+        return content
+      }
 
-          ${kind === 'secondary'
-            ? css`
-                background: ${getColor('mist')};
-                gap: 2px;
-              `
-            : css`
-                gap: 1px;
-              `}
+      return css`
+        display: flex;
+        flex-direction: ${direction};
 
-          > * {
-            ${contentCSS}
-          }
-        `
-      : contentCSS
-  }}
+        ${kind === 'secondary'
+          ? css`
+              background: ${getColor('mist')};
+              gap: 2px;
+            `
+          : css`
+              gap: 1px;
+            `}
 
-  ${({ kind }) =>
-    kind === 'secondary' &&
+        > * {
+          ${content}
+        }
+      `
+    }}
+
+    ${kind === 'secondary' &&
     css`
       border: 2px solid ${getColor('mist')};
     `}
+  `
+}
+
+export const Panel = styled.div<PanelProps>`
+  ${panel}
 `

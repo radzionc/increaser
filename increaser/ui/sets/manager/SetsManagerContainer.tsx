@@ -1,22 +1,12 @@
-import { Panel } from '@lib/ui/panel/Panel'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { panel } from '@lib/ui/panel/Panel'
 import styled from 'styled-components'
 import { dayOverviewConfig } from './overview/config'
 
-const Container = styled(Panel)`
+export const SetsManagerContainer = styled.div`
+  ${panel({
+    withSections: true,
+    kind: 'secondary',
+    padding: dayOverviewConfig.horizontalPadding,
+  })};
   height: 100%;
 `
-
-export const SetsManagerContainer = ({
-  children,
-}: ComponentWithChildrenProps) => {
-  return (
-    <Container
-      padding={dayOverviewConfig.horizontalPadding}
-      withSections
-      kind="secondary"
-    >
-      {children}
-    </Container>
-  )
-}
