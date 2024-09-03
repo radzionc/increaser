@@ -42,12 +42,12 @@ export const HomePageContent = () => {
           const shouldBeInOneColumn = size && size.width < 800
 
           return (
-            <VStack fill ref={setElement}>
+            <VStack flexGrow ref={setElement}>
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   <PageContent fullHeight>
                     {session && <FocusTitle />}
-                    <VStack fill gap={40}>
+                    <VStack flexGrow gap={40}>
                       {session ? (
                         <FocusSetWidget />
                       ) : (
@@ -64,7 +64,7 @@ export const HomePageContent = () => {
                 <Container>
                   <PageContent fullHeight>
                     {session && <FocusTitle />}
-                    <VStack fill gap={40}>
+                    <VStack flexGrow gap={40}>
                       {session ? (
                         <FocusSetWidget />
                       ) : (
