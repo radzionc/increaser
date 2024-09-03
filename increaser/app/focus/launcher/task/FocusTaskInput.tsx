@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { VStack } from '@lib/ui/layout/Stack'
 import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
-import { AddTask } from './AddTask'
 import { useState } from 'react'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { panelDefaultPadding } from '@lib/ui/panel/Panel'
@@ -13,9 +12,11 @@ import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
-import { FocusIconButton } from '../../components/FocusSetWidget/FocusIconButton'
-import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormContent'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskPrompt } from './AddTaskPrompt'
+import { AddFocusTaskOverlay } from './AddFocusTaskOverlay'
+import { AddFocusEntityPrompt } from '../AddFocusEntityPrompt'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -42,51 +43,53 @@ export const FocusTaskInput = () => {
 
   const [isEditing, setIsEditing] = useState(false)
 
+  const [isAddingTask, setIsAddingTask] = useState(false)
+
   return (
-    <Wrapper>
-      <FocusEntityInputHeader
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        onRemove={() => {
-          setState((state) => ({ ...state, taskId: null }))
-        }}
-        entityName="a task"
-        value={taskId ? tasks[taskId] : null}
-        renderValue={(task) => (
-          <>
-            <EmojiTextPrefix emoji={projects[task.projectId].emoji} />
-            {task.name}
-          </>
-        )}
-        icon={productToolIconRecord.tasks}
-        actions={
-          taskId ? (
-            <FocusIconButton
-              kind="secondary"
-              title="Edit"
-              icon={<EditIcon />}
-              onClick={() => {
-                setIsEditing(true)
-              }}
-            />
-          ) : null
-        }
-      />
-      {isOpen && (
-        <Container>
-          {options.map((task) => (
-            <CurrentTaskProvider value={task} key={task.id}>
-              <FocusTaskOption />
+    <>
+      {isEmpty(options) ? (
+        <AddTaskPrompt onClick={() => setIsAddingTask(true)} />
+      ) : (
+        <Wrapper>
+          <FocusEntityInputHeader
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            onRemove={() => {
+              setState((state) => ({ ...state, taskId: null }))
+            }}
+            entityName="a task"
+            value={taskId ? tasks[taskId] : null}
+            renderValue={(task) => (
+              <>
+                <EmojiTextPrefix emoji={projects[task.projectId].emoji} />
+                {task.name}
+              </>
+            )}
+            icon={productToolIconRecord.tasks}
+          />
+          {isOpen && (
+            <Container>
+              {options.map((task) => (
+                <CurrentTaskProvider value={task} key={task.id}>
+                  <FocusTaskOption />
+                </CurrentTaskProvider>
+              ))}
+              <AddFocusEntityPrompt onClick={() => setIsAddingTask(true)}>
+                Add a task
+              </AddFocusEntityPrompt>
+            </Container>
+          )}
+          {isEditing && taskId && (
+            <CurrentTaskProvider value={tasks[taskId]}>
+              <EditTaskFormContent onFinish={() => setIsEditing(false)} />
             </CurrentTaskProvider>
-          ))}
-          <AddTask />
-        </Container>
+          )}
+        </Wrapper>
       )}
-      {isEditing && taskId && (
-        <CurrentTaskProvider value={tasks[taskId]}>
-          <EditTaskFormContent onFinish={() => setIsEditing(false)} />
-        </CurrentTaskProvider>
+
+      {isAddingTask && (
+        <AddFocusTaskOverlay onFinish={() => setIsAddingTask(false)} />
       )}
-    </Wrapper>
+    </>
   )
 }

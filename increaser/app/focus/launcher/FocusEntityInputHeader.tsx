@@ -15,7 +15,7 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { focusLauncherConfig } from './config'
 import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
 import { ReactNode } from 'react'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { HeaderPromptContentFrame } from './HeaderPromptContentFrame'
 
 const Container = styled(ActionInsideInteractiveElement)`
   display: flex;
@@ -53,11 +53,6 @@ const Content = styled(HStack)`
   }
 `
 
-const IconContainer = styled(IconWrapper)`
-  color: ${getColor('textPrimary')};
-  font-size: 16px;
-`
-
 type FocusEntityInputHeaderProps<T> = RemovableComponentProps &
   ComponentWithValueProps<T> & {
     isOpen: boolean
@@ -67,8 +62,6 @@ type FocusEntityInputHeaderProps<T> = RemovableComponentProps &
     icon: ReactNode
 
     renderValue: (value: NonNullable<T>) => ReactNode
-
-    actions?: ReactNode
   }
 
 export function FocusEntityInputHeader<T>({
@@ -81,8 +74,6 @@ export function FocusEntityInputHeader<T>({
   onRemove,
   entityName,
   icon,
-
-  actions,
 }: FocusEntityInputHeaderProps<T>) {
   return (
     <Container
@@ -105,10 +96,9 @@ export function FocusEntityInputHeader<T>({
           {value ? (
             <Text cropped>{renderValue(value)}</Text>
           ) : (
-            <HStack alignItems="center" gap={8}>
-              <IconContainer>{icon}</IconContainer>
+            <HeaderPromptContentFrame icon={icon}>
               <Label>Select {entityName}</Label>
-            </HStack>
+            </HeaderPromptContentFrame>
           )}
 
           <HStack>
