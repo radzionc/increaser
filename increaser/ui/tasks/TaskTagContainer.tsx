@@ -4,6 +4,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
 export const TaskTagContainer = styled.span`
+  display: inline-block;
   ${borderRadius.s};
   padding: 4px 8px;
   font-weight: 600;
