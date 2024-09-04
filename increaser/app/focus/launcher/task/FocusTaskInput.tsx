@@ -1,6 +1,5 @@
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import styled from 'styled-components'
-import { VStack } from '@lib/ui/css/stack'
 import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'
@@ -14,13 +13,12 @@ import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormConten
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskPrompt } from './AddTaskPrompt'
 import { AddFocusTaskOverlay } from './AddFocusTaskOverlay'
-import { AddTaskOption } from './AddTaskOption'
+import { AddFocusEntityOption } from '../AddFocusEntityOption'
+import { FocusEntityOptionsContainer } from '../FocusEntityOptionsContainer'
 
 const Wrapper = styled.div`
   padding: 0;
 `
-
-const Container = styled(VStack)``
 
 export const FocusTaskInput = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -62,14 +60,17 @@ export const FocusTaskInput = () => {
             icon={productToolIconRecord.tasks}
           />
           {isOpen && (
-            <Container>
+            <FocusEntityOptionsContainer>
               {options.map((task) => (
                 <CurrentTaskProvider value={task} key={task.id}>
                   <FocusTaskOption />
                 </CurrentTaskProvider>
               ))}
-              <AddTaskOption onClick={() => setIsAddingTask(true)} />
-            </Container>
+              <AddFocusEntityOption
+                focusEntityName="a task"
+                onClick={() => setIsAddingTask(true)}
+              />
+            </FocusEntityOptionsContainer>
           )}
           {isEditing && taskId && (
             <CurrentTaskProvider value={tasks[taskId]}>

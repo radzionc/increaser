@@ -3,14 +3,14 @@ import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import { focusLauncherConfig } from '../config'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { ClickableComponentProps } from '@lib/ui/props'
-import { HeaderPromptContentFrame } from '../HeaderPromptContentFrame'
 import { hStack } from '@lib/ui/css/stack'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { focusLauncherConfig } from './config'
+import { HeaderPromptContentFrame } from './HeaderPromptContentFrame'
 
 const Container = styled(UnstyledButton)`
   ${hStack({
@@ -33,11 +33,18 @@ const Container = styled(UnstyledButton)`
   }
 `
 
-export const AddTaskOption = ({ onClick }: ClickableComponentProps) => {
+type AddFocusEntityOptionProps = ClickableComponentProps & {
+  focusEntityName: string
+}
+
+export const AddFocusEntityOption = ({
+  onClick,
+  focusEntityName,
+}: AddFocusEntityOptionProps) => {
   return (
     <Container onClick={onClick} type="button">
       <HeaderPromptContentFrame icon={<PlusIcon />}>
-        Add a task
+        Add {focusEntityName}
       </HeaderPromptContentFrame>
     </Container>
   )
