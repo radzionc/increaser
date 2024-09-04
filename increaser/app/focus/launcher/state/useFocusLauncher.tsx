@@ -48,19 +48,6 @@ export const useFocusLauncher = () => {
       if (state.taskId) {
         const task = findBy(tasks, 'id', state.taskId)
         if (!task) {
-          if (state.projectId) {
-            const projectTasks = tasks.filter(
-              (task) => task.projectId === state.projectId,
-            )
-
-            if (!isEmpty(projectTasks)) {
-              return {
-                ...state,
-                taskId: projectTasks[0].id,
-              }
-            }
-          }
-
           return {
             ...state,
             taskId: null,
