@@ -5,11 +5,17 @@ import { coloredTag } from '@lib/ui/css/coloredTag'
 import { getColor } from '@lib/ui/theme/getters'
 import { TaskTagContainer } from './TaskTagContainer'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { TimerIcon } from '@lib/ui/icons/TimerIcon'
 
 const Container = styled(TaskTagContainer)`
   ${({ theme: { colors } }) => coloredTag(colors.primary)};
 
   color: ${getColor('textPrimary')};
+`
+
+const IconContainer = styled.span`
+  vertical-align: middle;
+  margin-right: 4px;
 `
 
 export const TaskTrackedTime = () => {
@@ -19,5 +25,12 @@ export const TaskTrackedTime = () => {
     return null
   }
 
-  return <Container>{formatDuration(spentTime, 'ms')}</Container>
+  return (
+    <Container>
+      <IconContainer>
+        <TimerIcon />
+      </IconContainer>
+      {formatDuration(spentTime, 'ms')}
+    </Container>
+  )
 }
