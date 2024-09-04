@@ -16,6 +16,7 @@ import { focusLauncherConfig } from './config'
 import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
 import { ReactNode } from 'react'
 import { HeaderPromptContentFrame } from './HeaderPromptContentFrame'
+import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 
 const Container = styled(ActionInsideInteractiveElement)`
   display: flex;
@@ -34,9 +35,16 @@ const Label = styled(Text)`
 
 const Indicator = styled(FocusIconButton)``
 
+const Underline = styled.div`
+  ${absoluteOutline(0, 2)};
+  border-bottom: 2px dashed ${getColor('mistExtra')};
+`
+
 const Content = styled(HStack)`
   align-items: center;
   justify-content: space-between;
+
+  position: relative;
 
   ${interactive};
   ${takeWholeSpace};
@@ -110,6 +118,7 @@ export function FocusEntityInputHeader<T>({
               title={value ? 'Close' : 'Open'}
             />
           </HStack>
+          {isOpen && <Underline />}
         </Content>
       )}
     />
