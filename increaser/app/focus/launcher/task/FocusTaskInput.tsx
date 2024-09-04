@@ -4,8 +4,6 @@ import { VStack } from '@lib/ui/css/stack'
 import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { useFocusLauncher } from '../state/useFocusLauncher'
 import { FocusEntityInputHeader } from '../FocusEntityInputHeader'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
@@ -16,17 +14,13 @@ import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormConten
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskPrompt } from './AddTaskPrompt'
 import { AddFocusTaskOverlay } from './AddFocusTaskOverlay'
-import { AddFocusEntityPrompt } from '../AddFocusEntityPrompt'
+import { AddTaskOption } from './AddTaskOption'
 
 const Wrapper = styled.div`
   padding: 0;
 `
 
-const Container = styled(VStack)`
-  gap: 4px;
-  padding: ${toSizeUnit(panelDefaultPadding)};
-  padding-top: 4px;
-`
+const Container = styled(VStack)``
 
 export const FocusTaskInput = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -74,9 +68,7 @@ export const FocusTaskInput = () => {
                   <FocusTaskOption />
                 </CurrentTaskProvider>
               ))}
-              <AddFocusEntityPrompt onClick={() => setIsAddingTask(true)}>
-                Add a task
-              </AddFocusEntityPrompt>
+              <AddTaskOption onClick={() => setIsAddingTask(true)} />
             </Container>
           )}
           {isEditing && taskId && (
