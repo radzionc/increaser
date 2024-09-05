@@ -13,11 +13,7 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { focusSetWidgetConfig } from './config'
-import { TaskLinks } from '@increaser/ui/tasks/TaskLinks'
-import { CurrentChecklist } from './CurrentChecklist'
 import { FocusIconButton } from './FocusIconButton'
-import { EditFocusTask } from './EditFocusTask'
-import { Text } from '@lib/ui/text'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 
 const Content = styled(TaskTextContainer)`
@@ -62,13 +58,9 @@ export const CurrentFocusTask = () => {
                 <CurrentFocusTaskTrackedTime />
                 {task.name}
               </Content>
-              {task.links && task.links.length > 0 && (
-                <TaskLinks value={task.links} />
-              )}
             </VStack>
           </TaskItemFrame>
           <HStack>
-            <EditFocusTask />
             <FocusIconButton
               title="Stop task"
               kind="secondary"
@@ -77,14 +69,6 @@ export const CurrentFocusTask = () => {
             />
           </HStack>
         </Container>
-        {task.checklist && task.checklist.length > 0 && (
-          <VStack gap={4}>
-            <Text color="supporting" weight="500" size={12}>
-              Checklist
-            </Text>
-            <CurrentChecklist />
-          </VStack>
-        )}
       </Wrapper>
     </CurrentTaskProvider>
   )
