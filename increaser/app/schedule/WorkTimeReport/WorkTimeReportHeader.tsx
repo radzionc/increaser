@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { pluralize } from '@lib/utils/pluralize'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { MinimalisticToggle } from '@lib/ui/inputs/MinimalisticToggle'

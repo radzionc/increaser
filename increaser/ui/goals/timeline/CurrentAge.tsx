@@ -1,7 +1,7 @@
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { useGoalsTimeline } from './state/GoalsTimelineContext'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { goalsTimelineConfig } from './config'

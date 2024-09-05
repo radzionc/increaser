@@ -9,7 +9,7 @@ import { EnvelopIcon } from '@lib/ui/icons/EnvelopIcon'
 import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
 import { XIcon } from '@lib/ui/icons/XIcon'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 export const SupportContacts = () => (

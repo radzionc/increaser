@@ -1,7 +1,7 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { usePWA } from '@increaser/app/pwa/PWAContext'
 import { Button } from '@lib/ui/buttons/Button'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { productName } from '@increaser/config'
 

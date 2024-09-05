@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
 import { Habits } from './Habits'

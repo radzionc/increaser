@@ -3,7 +3,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import {
   ClickableComponentProps,

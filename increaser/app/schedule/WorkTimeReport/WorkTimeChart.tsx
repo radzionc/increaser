@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartItemInfo } from '@lib/ui/charts/ChartItemInfo'
 import { Text } from '@lib/ui/text'

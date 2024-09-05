@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { sidebarConfig } from '../../../navigation/Sidebar/config'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ComponentProps, ReactNode } from 'react'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { useSetPageHeaderControlsArea } from './PageHeaderControlsAreaProvider'
 
 const Container = styled(Header)`

@@ -2,7 +2,7 @@ import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { ComponentProps, ReactNode } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 
 type SummaryFrameProps = ComponentProps<typeof Text> & {
   icon?: ReactNode

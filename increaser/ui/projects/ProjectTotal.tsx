@@ -1,7 +1,7 @@
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { Circle } from '@lib/ui/layout/Circle'
 import { HSLA } from '@lib/ui/colors/HSLA'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 
 interface Props {

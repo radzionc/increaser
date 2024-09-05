@@ -1,5 +1,5 @@
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import styled, { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'

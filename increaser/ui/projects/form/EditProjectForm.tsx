@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { Project, ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'

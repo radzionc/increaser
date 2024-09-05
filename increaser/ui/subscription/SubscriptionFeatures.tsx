@@ -1,5 +1,5 @@
 import { productTools, ProductTool } from '@increaser/entities/ProductTool'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { ReactNode } from 'react'
 import { ProductToolIcon } from '@increaser/ui/tools/ProductToolIcon'

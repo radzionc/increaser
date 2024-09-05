@@ -1,7 +1,7 @@
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { ChecklistItem } from '@lib/ui/checklist/ChecklistItem'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { order } from '@lib/utils/array/order'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 

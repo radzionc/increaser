@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'

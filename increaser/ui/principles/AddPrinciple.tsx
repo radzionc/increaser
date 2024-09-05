@@ -1,7 +1,7 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { CreatePrincipleForm } from './form/CreatePrincipleForm'
 import { Button } from '@lib/ui/buttons/Button'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 

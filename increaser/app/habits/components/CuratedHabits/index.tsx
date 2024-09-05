@@ -1,6 +1,6 @@
 import { habitRecord } from '@increaser/app/habits/data/habits'
 import styled from 'styled-components'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 import { HabitItem } from './HabitItem'
 

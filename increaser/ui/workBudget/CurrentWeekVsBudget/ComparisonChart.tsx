@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { useState } from 'react'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { getLastItem } from '@lib/utils/array/getLastItem'

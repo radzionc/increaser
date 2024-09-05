@@ -5,7 +5,7 @@ import { TargetIcon } from '@lib/ui/icons/TargetIcon'
 import { AmountTextInput } from '@lib/ui/inputs/AmountTextInput'
 import { Switch } from '@lib/ui/inputs/Switch'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { InputProps } from '@lib/ui/props'
 import styled from 'styled-components'
 

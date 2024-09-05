@@ -8,7 +8,7 @@ import { PositionAbsolutelyCenterVertically } from '@lib/ui/layout/PositionAbsol
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { toPercents } from '@lib/utils/toPercents'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { CurrentGoalProvider } from '../CurrentGoalProvider'
 import { TimelineGoalItem } from './TimelineGoalItem'
 import { useFilteredScheduledGoals } from '../filter/useFilteredScheduledGoals'

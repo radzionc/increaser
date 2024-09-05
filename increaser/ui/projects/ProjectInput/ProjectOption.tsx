@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { cropText } from '@lib/ui/css/cropText'
 import { Text } from '@lib/ui/text'
 

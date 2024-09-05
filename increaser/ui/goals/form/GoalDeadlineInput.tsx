@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { addYears } from 'date-fns'

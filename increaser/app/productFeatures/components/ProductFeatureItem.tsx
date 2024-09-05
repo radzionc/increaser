@@ -1,5 +1,5 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { HStack, VStack } from '@lib/ui/css/stack'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'

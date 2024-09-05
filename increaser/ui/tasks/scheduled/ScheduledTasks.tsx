@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'

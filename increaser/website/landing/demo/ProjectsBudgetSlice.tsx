@@ -6,7 +6,7 @@ import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
 import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 

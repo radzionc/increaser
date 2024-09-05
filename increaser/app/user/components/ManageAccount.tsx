@@ -4,7 +4,7 @@ import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import styled, { css, useTheme } from 'styled-components'
@@ -24,6 +24,8 @@ import { useHasFreeTrial } from '../../membership/hooks/useHasFreeTrial'
 import { CrownIcon } from '@lib/ui/icons/CrownIcon'
 import { Tag } from '@lib/ui/tags/Tag'
 import { HeaderActionButton } from '../../navigation/HeaderActionButton'
+import { FileDownIcon } from '@lib/ui/icons/FileDownIcon'
+import { useExportUserData } from '@increaser/ui/user/hooks/useExportUserData'
 
 const Container = styled(HeaderActionButton)<ComponentWithActiveState>`
   ${({ isActive }) =>
@@ -57,6 +59,7 @@ export const ManageAccount = () => {
   const hasFreeTrial = useHasFreeTrial()
 
   const { colors } = useTheme()
+  const exportUserData = useExportUserData()
 
   const options = useMemo(
     () => [
@@ -88,6 +91,13 @@ export const ManageAccount = () => {
         },
       },
       {
+        name: 'Export data',
+        icon: <FileDownIcon />,
+        onSelect: () => {
+          exportUserData()
+        },
+      },
+      {
         name: 'Sign out',
         icon: <LogOutIcon />,
         onSelect: () => {
@@ -99,6 +109,7 @@ export const ManageAccount = () => {
       colors.alert,
       colors.idle,
       colors.success,
+      exportUserData,
       hasFreeTrial,
       isPayingUser,
       push,

@@ -6,9 +6,15 @@ import { formatTaskDeadline } from '@increaser/entities-utils/task/formatTaskDea
 import { TaskTagContainer } from '../TaskTagContainer'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { CalendarIcon } from '@lib/ui/icons/CalendarIcon'
 
 const Container = styled(TaskTagContainer)`
   color: ${getColor('idle')};
+`
+
+const IconContainer = styled.span`
+  vertical-align: middle;
+  margin-right: 4px;
 `
 
 export const TaskDeadlineTag = () => {
@@ -20,6 +26,9 @@ export const TaskDeadlineTag = () => {
 
   return (
     <Container>
+      <IconContainer>
+        <CalendarIcon />
+      </IconContainer>
       {now > deadlineAt ? 'Overdue' : formatTaskDeadline({ deadlineAt, now })}
     </Container>
   )

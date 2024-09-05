@@ -1,5 +1,5 @@
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'

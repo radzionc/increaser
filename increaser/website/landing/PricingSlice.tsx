@@ -1,5 +1,5 @@
 import { freeTrialDays } from '@increaser/config'
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'

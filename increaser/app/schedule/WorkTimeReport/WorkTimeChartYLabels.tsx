@@ -4,7 +4,7 @@ import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbs
 import { Text } from '@lib/ui/text'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { toPercents } from '@lib/utils/toPercents'
 import { DayMoment, dayMomentStep } from '@increaser/entities/DayMoments'

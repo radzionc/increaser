@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigationItem'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import {
   projectsBudgetReportViewName,

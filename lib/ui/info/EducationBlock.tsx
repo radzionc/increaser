@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { borderRadius } from '../css/borderRadius'
 import { IconWrapper } from '../icons/IconWrapper'
-import { HStack, VStack } from '../layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { ComponentWithChildrenProps, UIComponentProps } from '../props'
 import { getColor } from '../theme/getters'
 import { verticalPadding } from '../css/verticalPadding'
 import { toSizeUnit } from '../css/toSizeUnit'
-import { panelDefaultPadding } from '../panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { Button } from '../buttons/Button'
 
 const Container = styled.div`

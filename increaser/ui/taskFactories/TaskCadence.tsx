@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useCurrentTaskFactory } from './CurrentTaskFactoryProvider'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { round } from '@lib/ui/css/round'
 import { getColor } from '@lib/ui/theme/getters'
 import { centerContent } from '@lib/ui/css/centerContent'

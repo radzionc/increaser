@@ -2,7 +2,7 @@ import {
   ComponentWithActiveState,
   ComponentWithValueProps,
 } from '@lib/ui/props'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'

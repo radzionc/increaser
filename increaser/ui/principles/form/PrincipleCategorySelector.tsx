@@ -9,7 +9,7 @@ import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
 import { useEffect } from 'react'
 import { usePrincipleCategories } from '../categories/hooks/usePrincipleCategories'
 import { useAssertUserState } from '../../user/UserStateContext'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 export const PrincipleCategorySelector = ({

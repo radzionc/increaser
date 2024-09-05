@@ -2,7 +2,7 @@ import { PageContainer } from '@increaser/app/ui/page/PageContainer'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
 import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import styled from 'styled-components'
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ProductFeaturesViewProvider } from './ProductFeaturesView'
 import { FeatureForm } from './form/FeatureForm'
@@ -13,7 +13,7 @@ import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigati
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../../focus/components/AppPageLayout'
-import { panelDefaultPadding } from '@lib/ui/panel/Panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const contentWidth = 520
 const gap = 40

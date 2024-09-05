@@ -12,8 +12,4 @@ export const TaskTextContainer = styled(Text)`
   & > *:not(:last-child) {
     margin-right: 8px;
   }
-
-  > * {
-    margin-right: 8px;
-  }
 `

@@ -1,16 +1,8 @@
 import styled, { css } from 'styled-components'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
-import { useFocusLauncher } from './state/useFocusLauncher'
-import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
-import { interactive } from '@lib/ui/css/interactive'
-import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
-import { borderRadius } from '@lib/ui/css/borderRadius'
-import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { getColor } from '@lib/ui/theme/getters'
 import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
 import { ComponentWithActiveState } from '@lib/ui/props'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { Opener } from '@lib/ui/base/Opener'
 import { EditTaskFormOverlay } from '@increaser/ui/tasks/form/EditTaskFormOverlay'
@@ -20,45 +12,47 @@ import { TaskDeadlineTag } from '@increaser/ui/tasks/deadline/TaskDeadlineTag'
 import { TaskProject } from '@increaser/ui/tasks/TaskProject'
 import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
 import { Text } from '@lib/ui/text'
+import { useFocusLauncher } from '../state/useFocusLauncher'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { hStack } from '@lib/ui/css/stack'
+import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { FocusIconButton } from '../../components/FocusSetWidget/FocusIconButton'
+import { focusLauncherConfig } from '../config'
 
 const Container = styled(OnHoverAction)`
-  width: 100%;
-  display: flex;
-  align-items: center;
+  ${hStack({
+    fullWidth: true,
+    alignItems: 'center',
+  })}
 `
 
-const Button = styled(IconButton)``
+const Content = styled(UnstyledButton)<ComponentWithActiveState>`
+  ${hStack({
+    fullWidth: true,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 8,
+  })}
 
-const Outline = styled(TakeWholeSpace)<ComponentWithActiveState>`
-  ${absoluteOutline(8, 0)};
-  ${borderRadius.s};
-  pointer-events: none;
+  line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
 
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      background: ${getColor('mist')};
-      border: 2px solid ${getColor('mistExtra')};
-    `};
-`
-
-const Content = styled(TaskItemFrame)<ComponentWithActiveState>`
-  ${interactive};
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${horizontalPadding(panelDefaultPadding)};
+  height: ${toSizeUnit(focusLauncherConfig.optionMinHeight)};
 
   ${({ isActive }) =>
-    !isActive
+    isActive
       ? css`
-          &:hover ${Outline} {
-            background: ${getColor('mist')};
-          }
+          background: ${getColor('mistExtra')};
+          color: ${getColor('contrast')};
         `
       : css`
-          color: ${getColor('contrast')};
-        `}
+          &:hover {
+            background: ${getColor('mist')};
+          }
+        `};
 `
 
 export const FocusTaskOption = () => {
@@ -70,7 +64,7 @@ export const FocusTaskOption = () => {
   return (
     <Container
       actionPlacerStyles={{
-        right: 0,
+        right: panelDefaultPadding,
       }}
       render={({ actionSize }) => (
         <Content
@@ -85,27 +79,25 @@ export const FocusTaskOption = () => {
               setState((state) => ({
                 ...state,
                 taskId: id,
-                projectId: shouldBePresent(projectId),
+                projectId: projectId,
               }))
             }
           }}
         >
-          <TaskTextContainer cropped nowrap>
+          <TaskTextContainer cropped style={{ zIndex: 1 }}>
             <TaskProject value={projectId} />
-            <Text as="span" cropped>
-              {name}
-            </Text>
+            <Text as="span">{name}</Text>
             <TaskTrackedTime />
             <TaskDeadlineTag />
           </TaskTextContainer>
-          <Outline isActive={isActive} />
           {actionSize && <Spacer width={actionSize.width} />}
         </Content>
       )}
       action={
         <Opener
           renderOpener={({ onOpen }) => (
-            <Button
+            <FocusIconButton
+              kind="secondary"
               size="m"
               onClick={onOpen}
               icon={<EditIcon />}

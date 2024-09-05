@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { MinimalisticFocusSet } from './MinimalisticFocusSet'
 import styled from 'styled-components'
 import { FocusNotifications } from '../FocusNotifications'

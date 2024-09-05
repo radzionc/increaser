@@ -1,6 +1,6 @@
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { taskBoardConfig } from './config'

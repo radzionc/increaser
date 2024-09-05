@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { OAuthOption } from './OAuthOption'
 import { oAuthProviders } from '@increaser/entities/OAuthProvider'
 

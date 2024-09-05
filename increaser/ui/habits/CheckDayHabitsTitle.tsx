@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { EnhancedHabit } from './EnhancedHabit'

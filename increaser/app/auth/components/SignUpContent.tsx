@@ -1,5 +1,5 @@
 import { AuthProviders } from './AuthFlow/AuthProviders'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { SignUpAgreement } from './AuthFlow/SignUpAgreement'
 import { AuthView } from '@lib/ui/auth/AuthView'
 import { productName } from '@increaser/config'

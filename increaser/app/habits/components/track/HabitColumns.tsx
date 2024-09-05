@@ -1,4 +1,4 @@
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { useTrackHabits } from './state/TrackHabitsContext'
 import { HabitsColumn } from './HabitsColumn'
 import styled from 'styled-components'

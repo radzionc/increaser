@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { GoalsEducationItem } from './GoalsEducationItem'
 import { LinkText } from '@lib/ui/text/LinkText'
 import Link from 'next/link'

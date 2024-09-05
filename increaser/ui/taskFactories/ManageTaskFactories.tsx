@@ -1,6 +1,6 @@
 import { ProductEducationBlock } from '@increaser/ui/education/ProductEducationBlock'
 import { AddTaskFactory } from '@increaser/ui/taskFactories/AddTaskFactory'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { useTaskFactories } from './hooks/useTaskFactories'
 import { CurrentTaskFactoryProvider } from './CurrentTaskFactoryProvider'
 import { TaskFactoryItem } from './TaskFactoryItem'

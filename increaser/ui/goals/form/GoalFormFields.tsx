@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './GoalDeadlineInput'
 import { GoalFormShape } from './GoalFormShape'

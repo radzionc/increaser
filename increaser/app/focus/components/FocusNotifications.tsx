@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 
 import { FocusBrowserNotification } from './FocusSettings/FocusBrowserNotification'
 import { Menu } from '@lib/ui/menu'

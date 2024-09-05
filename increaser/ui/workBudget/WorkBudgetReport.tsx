@@ -1,4 +1,4 @@
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { WorkBudgetDaysReport } from './WorkBudgetDaysReport'
 import { WorkBudgetWeeksReport } from './WorkBudgetWeeksReport'
 import { CurrentWeekVsBudget } from './CurrentWeekVsBudget'

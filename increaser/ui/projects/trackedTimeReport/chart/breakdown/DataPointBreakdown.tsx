@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'

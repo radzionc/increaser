@@ -1,4 +1,4 @@
-import { Panel } from '@lib/ui/panel/Panel'
+import { Panel } from '@lib/ui/css/panel'
 import { ProjectsNavigation } from './projects/ProjectsNavigation'
 import { DataSizeSelector } from './dataSize/DataSizeSelector'
 import { TimeGroupingSelector } from './timeGrouping/TimeGroupingSelector'

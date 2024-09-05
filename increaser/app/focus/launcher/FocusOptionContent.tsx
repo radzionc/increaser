@@ -1,5 +1,5 @@
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'

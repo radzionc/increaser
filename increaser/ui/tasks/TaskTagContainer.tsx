@@ -1,11 +1,13 @@
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { coloredTag } from '@lib/ui/css/coloredTag'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
 export const TaskTagContainer = styled.span`
+  display: inline-block;
   ${borderRadius.s};
-  padding: 4px 8px;
+  ${horizontalPadding(4)};
   font-weight: 600;
   ${({ theme: { colors } }) => coloredTag(colors.idle)};
 
@@ -13,4 +15,6 @@ export const TaskTagContainer = styled.span`
 
   font-size: 13px;
   font-weight: 600;
+
+  white-space: nowrap;
 `

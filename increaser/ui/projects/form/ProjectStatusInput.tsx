@@ -1,6 +1,6 @@
 import { ProjectStatus, projectStatuses } from '@increaser/entities/Project'
 import { Circle } from '@lib/ui/layout/Circle'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { Text } from '@lib/ui/text'

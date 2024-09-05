@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { Button } from '@lib/ui/buttons/Button'
 import { centerContent } from '@lib/ui/css/centerContent'

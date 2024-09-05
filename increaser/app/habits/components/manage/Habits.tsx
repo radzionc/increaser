@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { CurrentHabitProvider } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'

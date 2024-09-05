@@ -1,6 +1,6 @@
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { usePrincipleCategories } from './hooks/usePrincipleCategories'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { AddPrincipleCategory } from './AddPrincipleCategory'
 import { CurrentPrincipleCategoryProvider } from './CurrentPrincipleCategoryProvider'
 import { PrincipleCategoryItem } from './PrincipleCategoryItem'

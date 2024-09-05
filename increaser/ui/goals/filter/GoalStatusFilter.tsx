@@ -4,7 +4,7 @@ import {
   useGoalStatusFilter,
 } from './useGoalStatusFilter'
 import { goalStatuses } from '@increaser/entities/Goal'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Circle } from '@lib/ui/layout/Circle'
 import { getGoalStatusColor } from '../getGoalStatusColor'
 import { useTheme } from 'styled-components'

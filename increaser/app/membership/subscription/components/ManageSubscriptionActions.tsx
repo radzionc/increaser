@@ -3,7 +3,7 @@ import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal
 import { useManageSubscriptionQuery } from '../hooks/useManageSubscriptionQuery'
 import { QueryDependant } from '@lib/ui/query/components/QueryDependant'
 import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDependantDefaultProps'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'

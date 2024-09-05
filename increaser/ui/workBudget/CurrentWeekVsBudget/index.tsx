@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'

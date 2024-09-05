@@ -1,6 +1,6 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { HabitDay, useTrackHabits } from './state/TrackHabitsContext'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { trackHabitsConfig } from './config'
 import { TrackHabitsColumn } from './TrackHabitsColumn'

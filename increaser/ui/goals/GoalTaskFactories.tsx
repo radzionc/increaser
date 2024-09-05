@@ -5,7 +5,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Text } from '@lib/ui/text'
 import { GoalSection } from './GoalSection'
 import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
 export const GoalTaskFactories = () => {
   const { taskFactories } = useCurrentGoal()

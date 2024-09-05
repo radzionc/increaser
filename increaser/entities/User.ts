@@ -126,7 +126,6 @@ export const userReadonlyFields = [
   'email',
   'registrationDate',
   'freeTrialEnd',
-  'paddle',
   'lastSyncedMonthEndedAt',
   'lastSyncedWeekEndedAt',
   'lastVisitAt',

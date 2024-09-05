@@ -1,37 +1,29 @@
 import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { VStack } from '@lib/ui/layout/Stack'
+import { VStack } from '@lib/ui/css/stack'
 
-import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
 import { FocusTitle } from './FocusTitle'
 import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 import { PageContent } from '../../ui/page/PageContent'
 import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
+import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 40px;
   height: 100%;
+  gap: 40px;
   overflow: hidden;
-
-  > * {
-    &:first-child {
-      // here's the overflow problem
-      max-height: 100%;
-      overflow: auto;
-      flex: 1;
-      ${hideScrollbars};
-    }
-  }
+  flex: 1;
 
   > * {
     &:last-child {
       width: 320px;
+      flex-shrink: 0;
     }
   }
 `
@@ -43,22 +35,6 @@ const MobileContent = styled(VStack)`
 export const HomePageContent = () => {
   const { session } = useFocus()
 
-  const content = (
-    <PageContent>
-      {session && <FocusTitle />}
-      <VStack style={{ flex: 1 }} gap={40}>
-        {session ? (
-          <FocusSetWidget />
-        ) : (
-          <>
-            <BreakTimeline />
-            <FocusLauncher />
-          </>
-        )}
-      </VStack>
-    </PageContent>
-  )
-
   return (
     <>
       <ElementSizeAware
@@ -66,21 +42,41 @@ export const HomePageContent = () => {
           const shouldBeInOneColumn = size && size.width < 800
 
           return (
-            <VStack fullWidth fullHeight ref={setElement}>
+            <VStack flexGrow ref={setElement}>
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
-                  {content}
+                  <PageContent fullHeight>
+                    {session && <FocusTitle />}
+                    <VStack flexGrow gap={40}>
+                      {session ? (
+                        <FocusSetWidget />
+                      ) : (
+                        <>
+                          <BreakTimeline />
+                          <FocusLauncher />
+                        </>
+                      )}
+                    </VStack>
+                  </PageContent>
                   <SetsManager />
                 </MobileContent>
               ) : (
                 <Container>
-                  <VStack
-                    fullHeight
-                    fullWidth
-                    style={{ position: 'relative', padding: 1 }}
-                  >
-                    {content}
-                  </VStack>
+                  <PageContent fullHeight>
+                    {session && <FocusTitle />}
+                    <VStack flexGrow gap={40}>
+                      {session ? (
+                        <FocusSetWidget />
+                      ) : (
+                        <>
+                          <BreakTimeline />
+                          <ScrollableFlexboxFiller>
+                            <FocusLauncher />
+                          </ScrollableFlexboxFiller>
+                        </>
+                      )}
+                    </VStack>
+                  </PageContent>
                   <SetsManager />
                 </Container>
               )}

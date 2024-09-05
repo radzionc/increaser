@@ -1,9 +1,9 @@
-import { Panel } from '@lib/ui/panel/Panel'
-import { VStack } from '@lib/ui/layout/Stack'
+import { Panel } from '@lib/ui/css/panel'
+import { VStack } from '@lib/ui/css/stack'
 
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
-import { FocusTaskInput } from './FocusTaskInput'
+import { FocusTaskInput } from './task/FocusTaskInput'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { StartFocus } from './StartFocus'
 import { FocusLauncherDuration } from './FocusLauncherDuration'

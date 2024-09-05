@@ -9,7 +9,7 @@ import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
 import { RedditIcon } from '@lib/ui/icons/RedditIcon'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
 import { XIcon } from '@lib/ui/icons/XIcon'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 

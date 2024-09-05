@@ -1,7 +1,7 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { Button } from '@lib/ui/buttons/Button'
 import { ResetHabitsOverlay } from './ResetHabitsOverlay'
-import { HStack } from '@lib/ui/layout/Stack'
+import { HStack } from '@lib/ui/css/stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
 

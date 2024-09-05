@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 
 import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
 import { Page } from '@lib/next-ui/Page'

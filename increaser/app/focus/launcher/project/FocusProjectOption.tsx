@@ -1,9 +1,4 @@
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
-import { borderRadius } from '@lib/ui/css/borderRadius'
-import { cropText } from '@lib/ui/css/cropText'
-import { interactive } from '@lib/ui/css/interactive'
-import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import {
   ClickableComponentProps,
   ComponentWithActiveState,
@@ -13,40 +8,36 @@ import styled, { css } from 'styled-components'
 import { useFocusLauncher } from '../state/useFocusLauncher'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { Text } from '@lib/ui/text'
-
-const Outline = styled(TakeWholeSpace)<ComponentWithActiveState>`
-  ${absoluteOutline(8, 0)};
-  ${borderRadius.s};
-  pointer-events: none;
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      background: ${getColor('mist')};
-      border: 2px solid ${getColor('mistExtra')};
-    `};
-`
+import { hStack } from '@lib/ui/css/stack'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { focusLauncherConfig } from '../config'
 
 const Container = styled(UnstyledButton)<ComponentWithActiveState>`
-  ${interactive};
-  position: relative;
-  ${cropText};
-  overflow: visible;
+  ${hStack({
+    fullWidth: true,
+    alignItems: 'center',
+    gap: 8,
+  })}
 
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
+
+  ${horizontalPadding(panelDefaultPadding)};
+  height: ${toSizeUnit(focusLauncherConfig.optionMinHeight)};
 
   ${({ isActive }) =>
-    !isActive
+    isActive
       ? css`
-          &:hover ${Outline} {
-            background: ${getColor('mist')};
-          }
+          background: ${getColor('mistExtra')};
+          color: ${getColor('contrast')};
         `
       : css`
-          color: ${getColor('contrast')};
-        `}
+          &:hover {
+            background: ${getColor('mist')};
+          }
+        `};
 `
 
 export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
@@ -57,7 +48,6 @@ export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
 
   return (
     <Container onClick={onClick} isActive={isSelected}>
-      <Outline isActive={isSelected} />
       <Text color="contrast">{emoji}</Text>
       <Text cropped>{name}</Text>
     </Container>

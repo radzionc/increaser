@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/layout/Stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { Text } from '@lib/ui/text'
 import { ProjectGoalChart } from './PreviousWeeks/ProjectGoalChart'
