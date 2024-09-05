@@ -1,24 +1,15 @@
-import { HStack, VStack } from '@lib/ui/css/stack'
+import { VStack } from '@lib/ui/css/stack'
 import { MinimalisticFocusSet } from './MinimalisticFocusSet'
-import styled from 'styled-components'
-import { FocusNotifications } from '../FocusNotifications'
-
-const Footer = styled(HStack)`
-  align-items: center;
-  width: 100%;
-  justify-content: end;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-size: 14px;
-`
+import { useFocusTask } from '../../tasks/useFocusTask'
+import { FocusTaskOverview } from './task/FocusTaskOverview'
 
 export const FocusSetWidget = () => {
+  const task = useFocusTask()
+
   return (
-    <VStack gap={4}>
+    <VStack gap={20}>
       <MinimalisticFocusSet />
-      <Footer>
-        <FocusNotifications />
-      </Footer>
+      {task && <FocusTaskOverview />}
     </VStack>
   )
 }

@@ -9,6 +9,7 @@ import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsTo
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { PageHeader } from '../../ui/page/header/PageHeader'
 import { HStack } from '@lib/ui/css/stack'
+import { FocusNotifications } from '../../focus/components/FocusNotifications'
 
 export const FocusTitle = () => {
   const { intervals } = useCurrentFocus()
@@ -32,11 +33,19 @@ export const FocusTitle = () => {
         }}
       />
       <PageHeader>
-        <PageTitle as="div">
-          <HStack wrap="wrap" gap={8}>
-            <TitleProjectSelector /> <TitleFocusDurationSelector /> session
-          </HStack>
-        </PageTitle>
+        <HStack
+          fullWidth
+          alignItems="center"
+          justifyContent="space-between"
+          gap={20}
+        >
+          <PageTitle as="div">
+            <HStack wrap="wrap" gap={8}>
+              <TitleProjectSelector /> <TitleFocusDurationSelector /> session
+            </HStack>
+          </PageTitle>
+          <FocusNotifications />
+        </HStack>
       </PageHeader>
     </>
   )

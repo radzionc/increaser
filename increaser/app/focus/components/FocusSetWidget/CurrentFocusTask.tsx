@@ -1,5 +1,3 @@
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { TaskItemFrame } from '@increaser/ui/tasks/TaskItemFrame'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
@@ -14,7 +12,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { focusSetWidgetConfig } from './config'
 import { FocusIconButton } from './FocusIconButton'
-import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useFocusTask } from '../../tasks/useFocusTask'
 
 const Content = styled(TaskTextContainer)`
   font-size: 14px;
@@ -35,13 +33,9 @@ const Container = styled(HStack)`
 `
 
 export const CurrentFocusTask = () => {
-  const { intervals } = useCurrentFocus()
-  const { tasks } = useAssertUserState()
   const { updateTask } = useFocus()
 
-  const { taskId } = getLastItem(intervals)
-
-  const task = taskId ? tasks[taskId] : undefined
+  const task = useFocusTask()
 
   if (!task) {
     return <SelectFocusTask />

@@ -45,12 +45,6 @@ const FillerContainer = styled.div`
   bottom: -2px;
   position: absolute;
 `
-
-const Filler = styled.div`
-  height: 100%;
-  background: ${getColor('primary')};
-`
-
 export const MinimalisticFocusSet = () => {
   const { cancel, stop } = useFocus()
 
