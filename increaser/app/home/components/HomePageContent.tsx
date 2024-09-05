@@ -19,13 +19,6 @@ const Container = styled.div`
   gap: 40px;
   overflow: hidden;
   flex: 1;
-
-  > * {
-    &:last-child {
-      width: 320px;
-      flex-shrink: 0;
-    }
-  }
 `
 
 const MobileContent = styled(VStack)`
@@ -77,7 +70,12 @@ export const HomePageContent = () => {
                       )}
                     </VStack>
                   </PageContent>
-                  <SetsManager />
+                  <SetsManager
+                    style={{
+                      width: 320,
+                      flexShrink: 0,
+                    }}
+                  />
                 </Container>
               )}
             </VStack>
