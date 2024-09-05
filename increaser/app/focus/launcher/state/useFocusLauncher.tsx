@@ -53,11 +53,17 @@ export const useFocusLauncher = () => {
             taskId: null,
           }
         }
-
-        if (state.projectId && task.projectId !== state.projectId) {
-          return {
-            ...state,
-            projectId: task.projectId,
+        if (task.projectId !== state.projectId) {
+          if (state.projectId) {
+            return {
+              ...state,
+              projectId: task.projectId,
+            }
+          } else {
+            return {
+              taskId: null,
+              projectId: null,
+            }
           }
         }
       }

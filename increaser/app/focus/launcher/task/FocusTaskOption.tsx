@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { getColor } from '@lib/ui/theme/getters'
 import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
@@ -80,7 +79,7 @@ export const FocusTaskOption = () => {
               setState((state) => ({
                 ...state,
                 taskId: id,
-                projectId: shouldBePresent(projectId),
+                projectId: projectId,
               }))
             }
           }}
