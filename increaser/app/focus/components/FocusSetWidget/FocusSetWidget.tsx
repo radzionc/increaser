@@ -7,7 +7,7 @@ export const FocusSetWidget = () => {
   const task = useFocusTask()
 
   return (
-    <VStack gap={20}>
+    <VStack gap={40}>
       <MinimalisticFocusSet />
       {task && <FocusTaskOverview />}
     </VStack>
