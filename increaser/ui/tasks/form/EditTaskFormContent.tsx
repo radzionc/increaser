@@ -50,14 +50,15 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
       return
     }
 
-    const newFields: Partial<Omit<Task, 'id'>> = getUpdatedValues(
-      initialValue,
-      {
+    const newFields: Partial<Omit<Task, 'id'>> = getUpdatedValues({
+      before: initialValue,
+      after: {
         ...value,
         links: fixLinks(value.links),
         checklist: fixChecklist(value.checklist),
       },
-    )
+    })
+
     if (value.deadlineAt !== task.deadlineAt) {
       const orders = Object.values(tasks).map((task) => task.order)
       newFields.order = getLastItemOrder(orders)

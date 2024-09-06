@@ -7,7 +7,6 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { omit } from '@lib/utils/record/omit'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmojiTextInputFrame } from '../../../form/EmojiTextInputFrame'
 import { useCurrentPrincipleCategory } from '../CurrentPrincipleCategoryProvider'
@@ -18,12 +17,12 @@ import { useIsPrincipleCategoryFormDisabled } from './useIsPrincipleCategoryForm
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 import { ListItemForm } from '../../../form/ListItemForm'
 import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
+import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditPricnipleCategoryForm = () => {
   const principleCategory = useCurrentPrincipleCategory()
-  const [value, setValue] = useState<PrincipleCategoryFormShape>(
-    pick(principleCategory, ['name', 'emoji']),
-  )
+  const initialValue = pick(principleCategory, ['name', 'emoji'])
+  const [value, setValue] = useState<PrincipleCategoryFormShape>(initialValue)
 
   const { mutate: updatePrincipleCategory } =
     useUpdateUserEntityMutation('principleCategory')
@@ -44,17 +43,27 @@ export const EditPricnipleCategoryForm = () => {
       return
     }
 
-    const fields: Partial<Omit<PrincipleCategory, 'id'>> = getUpdatedValues(
-      omit(principleCategory, 'id'),
-      value,
-    )
-
-    updatePrincipleCategory({
-      id: principleCategory.id,
-      fields,
+    const fields: Partial<Omit<PrincipleCategory, 'id'>> = getUpdatedValues({
+      before: initialValue,
+      after: value,
     })
+
+    if (!isRecordEmpty(fields)) {
+      updatePrincipleCategory({
+        id: principleCategory.id,
+        fields,
+      })
+    }
+
     onFinish()
-  }, [isDisabled, principleCategory, onFinish, updatePrincipleCategory, value])
+  }, [
+    initialValue,
+    isDisabled,
+    onFinish,
+    principleCategory.id,
+    updatePrincipleCategory,
+    value,
+  ])
 
   return (
     <ListItemForm

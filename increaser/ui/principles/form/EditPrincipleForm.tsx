@@ -6,7 +6,6 @@ import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
@@ -15,12 +14,12 @@ import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserE
 import { useCurrentPrinciple } from '../CurrentPrincipleProvider'
 import { PrincipleCategorySelector } from './PrincipleCategorySelector'
 import { ListItemForm } from '../../form/ListItemForm'
+import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditPrincipleForm = () => {
   const principle = useCurrentPrinciple()
-  const [value, setValue] = useState<PrincipleFormShape>(
-    pick(principle, ['name', 'categoryId', 'description']),
-  )
+  const initialValue = pick(principle, ['name', 'categoryId', 'description'])
+  const [value, setValue] = useState<PrincipleFormShape>(initialValue)
 
   const { mutate: updatePrinciple } = useUpdateUserEntityMutation('principle')
   const { mutate: deletePrinciple } = useDeleteUserEntityMutation('principle')
@@ -38,20 +37,20 @@ export const EditPrincipleForm = () => {
       return
     }
 
-    const fields: Partial<Omit<Principle, 'id'>> = getUpdatedValues(
-      omit(principle, 'id'),
-      {
-        ...value,
-        updatedAt: Date.now(),
-      },
-    )
-
-    updatePrinciple({
-      id: principle.id,
-      fields,
+    const fields: Partial<Omit<Principle, 'id'>> = getUpdatedValues({
+      before: initialValue,
+      after: value,
     })
+
+    if (!isRecordEmpty(fields)) {
+      updatePrinciple({
+        id: principle.id,
+        fields,
+      })
+    }
+
     onFinish()
-  }, [isDisabled, principle, onFinish, updatePrinciple, value])
+  }, [initialValue, isDisabled, onFinish, principle.id, updatePrinciple, value])
 
   return (
     <ListItemForm

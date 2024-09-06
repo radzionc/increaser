@@ -12,6 +12,11 @@ import { TaskDescriptionInput } from '@increaser/ui/tasks/form/TaskDescriptionIn
 import { TaskLinksInput } from '@increaser/ui/tasks/form/TaskLinksInput'
 import { TaskChecklistInput } from '@increaser/ui/tasks/form/checklist/TaskChecklistInput'
 import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
+import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
+import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
+import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
+import { fixLinks } from '@increaser/ui/tasks/form/fixLinks'
+import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
 
 type TaskFormShape = Pick<Task, 'name' | 'links' | 'checklist' | 'description'>
 
@@ -31,17 +36,27 @@ export const FocusTaskOverview = () => {
       return
     }
 
-    const newFields: Partial<Omit<Task, 'id'>> = getUpdatedValues(
-      initialValue,
-      value,
-    )
+    const newFields = getUpdatedValues({
+      before: initialValue,
+      after: {
+        ...value,
+        links: fixLinks(value.links),
+        checklist: fixChecklist(value.checklist),
+      },
+      comparators: {
+        links: (one, another) =>
+          areArraysEqual(one, another, areLinkItemsEqual),
+        checklist: (one, another) =>
+          areArraysEqual(one, another, areChecklistItemsEqual),
+      },
+    })
 
     if (isRecordEmpty(newFields)) {
       return
     }
 
     const timeout = setTimeout(() => {
-      console.log('update task fields', newFields)
+      console.log('update task', newFields)
       updateTask({
         id: task.id,
         fields: newFields,
@@ -66,10 +81,7 @@ export const FocusTaskOverview = () => {
       />
       <TaskLinksInput
         value={value.links}
-        onChange={(links) => {
-          console.log('change links')
-          setValue((prev) => ({ ...prev, links }))
-        }}
+        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <TaskChecklistInput
         value={value.checklist}
