@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Task } from '@increaser/entities/Task'
-import { FinishableComponentProps } from '@lib/ui/props'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -8,18 +7,15 @@ import { useFocusTask } from '../../../tasks/useFocusTask'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useIsTaskFormDisabled } from '@increaser/ui/tasks/form/useIsTaskFormDisabled'
-import { fixLinks } from '@increaser/ui/tasks/form/fixLinks'
-import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
 import { Panel } from '@lib/ui/css/panel'
 import { TaskDescriptionInput } from '@increaser/ui/tasks/form/TaskDescriptionInput'
 import { TaskLinksInput } from '@increaser/ui/tasks/form/TaskLinksInput'
 import { TaskChecklistInput } from '@increaser/ui/tasks/form/checklist/TaskChecklistInput'
-
-type EditTaskFormContentProps = FinishableComponentProps
+import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 type TaskFormShape = Pick<Task, 'name' | 'links' | 'checklist' | 'description'>
 
-export const FocusTaskOverview = ({ onFinish }: EditTaskFormContentProps) => {
+export const FocusTaskOverview = () => {
   const task = shouldBePresent(useFocusTask())
 
   const initialValue = pick(task, ['name', 'links', 'checklist', 'description'])
@@ -30,26 +26,30 @@ export const FocusTaskOverview = ({ onFinish }: EditTaskFormContentProps) => {
 
   const isDisabled = useIsTaskFormDisabled(value)
 
-  const onSubmit = () => {
+  useEffect(() => {
     if (isDisabled) {
       return
     }
 
     const newFields: Partial<Omit<Task, 'id'>> = getUpdatedValues(
       initialValue,
-      {
-        ...value,
-        links: fixLinks(value.links),
-        checklist: fixChecklist(value.checklist),
-      },
+      value,
     )
 
-    updateTask({
-      id: task.id,
-      fields: newFields,
-    })
-    onFinish()
-  }
+    if (isRecordEmpty(newFields)) {
+      return
+    }
+
+    const timeout = setTimeout(() => {
+      console.log('update task fields', newFields)
+      updateTask({
+        id: task.id,
+        fields: newFields,
+      })
+    }, 500)
+
+    return () => clearTimeout(timeout)
+  }, [initialValue, isDisabled, task.id, updateTask, value])
 
   return (
     <Panel withSections kind="secondary">
@@ -57,7 +57,6 @@ export const FocusTaskOverview = ({ onFinish }: EditTaskFormContentProps) => {
         placeholder="Task name"
         value={value.name}
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        onSubmit={onSubmit}
       />
       <TaskDescriptionInput
         value={value.description}
@@ -67,7 +66,10 @@ export const FocusTaskOverview = ({ onFinish }: EditTaskFormContentProps) => {
       />
       <TaskLinksInput
         value={value.links}
-        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
+        onChange={(links) => {
+          console.log('change links')
+          setValue((prev) => ({ ...prev, links }))
+        }}
       />
       <TaskChecklistInput
         value={value.checklist}
