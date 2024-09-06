@@ -26,7 +26,11 @@ export const AuthConfirmationStatus = ({
       </Text>
       {error ? (
         <>
-          <Text style={{ wordBreak: 'break-word' }} centered height="large">
+          <Text
+            style={{ wordBreak: 'break-word' }}
+            centerHorizontally
+            height="large"
+          >
             {error.message}
           </Text>
           <Link style={{ width: '100%' }} href={getAppPath('signIn')}>
@@ -34,7 +38,7 @@ export const AuthConfirmationStatus = ({
               Go back
             </Button>
           </Link>
-          <Text centered color="supporting" size={14}>
+          <Text centerHorizontally color="supporting" size={14}>
             Nothing helps? Email us at <br />
             <CopyText color="regular" as="span" content={founderEmail}>
               {founderEmail}
