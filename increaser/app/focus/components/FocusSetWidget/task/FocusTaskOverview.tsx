@@ -17,8 +17,14 @@ import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { fixLinks } from '@increaser/ui/tasks/form/fixLinks'
 import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
+import styled from 'styled-components'
+import { getColor } from '@lib/ui/theme/getters'
 
 type TaskFormShape = Pick<Task, 'name' | 'links' | 'checklist' | 'description'>
+
+const TitleInput = styled(EmbeddedTitleInput)`
+  background: ${getColor('background')};
+`
 
 export const FocusTaskOverview = () => {
   const task = shouldBePresent(useFocusTask())
@@ -68,7 +74,7 @@ export const FocusTaskOverview = () => {
 
   return (
     <Panel withSections kind="secondary">
-      <EmbeddedTitleInput
+      <TitleInput
         placeholder="Task name"
         value={value.name}
         onChange={(name) => setValue((prev) => ({ ...prev, name }))}

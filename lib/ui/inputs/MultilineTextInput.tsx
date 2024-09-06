@@ -11,6 +11,8 @@ const Container = styled.textarea`
   overflow: hidden;
   resize: none;
 
+  background: transparent;
+
   color: ${getColor('text')};
 
   &::placeholder {
