@@ -37,6 +37,7 @@ import { Minutes } from '@lib/utils/time/types'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { FocusLauncherSynchronizer } from '../launcher/FocusLauncherSynchronizer'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -240,12 +241,10 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
 
   const updateTask = useCallback(
     (taskId: string | null) => {
-      if (!session) return
-
       startNewInterval({
         projectId: taskId
           ? tasks[taskId].projectId
-          : getLastItem(session.intervals).projectId,
+          : getLastItem(shouldBePresent(session).intervals).projectId,
         taskId,
       })
     },
