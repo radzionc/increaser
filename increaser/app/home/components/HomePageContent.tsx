@@ -55,7 +55,7 @@ export const HomePageContent = () => {
               ) : (
                 <Container>
                   <PageContent flexGrow fullHeight>
-                    <ScrollableFlexboxFiller>
+                    <ScrollableFlexboxFiller hideScrollbars>
                       <VStack gap={sidebarConfig.gap}>
                         {intervals ? (
                           <FocusSetWidget />

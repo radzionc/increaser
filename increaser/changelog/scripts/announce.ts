@@ -1,13 +1,9 @@
 import clipboardy from 'clipboardy'
-import fs from 'fs'
-import path from 'path'
 import { parseChangelog } from '../utils/parseChangelog'
+import { readChangelogFile } from '../utils/readChangelogFile'
 
 const announce = () => {
-  const changelog = fs.readFileSync(
-    path.resolve(__dirname, '../changelog.md'),
-    'utf8',
-  )
+  const changelog = readChangelogFile()
 
   const changelogItems = parseChangelog(changelog)
   const { items } = changelogItems[0]
