@@ -9,6 +9,7 @@ import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 import { PageContent } from '../../ui/page/PageContent'
 import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
+import { sidebarConfig } from '../../navigation/Sidebar/config'
 
 const Container = styled.div`
   display: flex;
@@ -53,17 +54,19 @@ export const HomePageContent = () => {
                 </MobileContent>
               ) : (
                 <Container>
-                  <PageContent fullHeight>
-                    {intervals ? (
-                      <FocusSetWidget />
-                    ) : (
-                      <VStack flexGrow gap={40}>
-                        <BreakTimeline />
-                        <ScrollableFlexboxFiller>
-                          <FocusLauncher />
-                        </ScrollableFlexboxFiller>
+                  <PageContent flexGrow fullHeight>
+                    <ScrollableFlexboxFiller>
+                      <VStack gap={sidebarConfig.gap}>
+                        {intervals ? (
+                          <FocusSetWidget />
+                        ) : (
+                          <>
+                            <BreakTimeline />
+                            <FocusLauncher />
+                          </>
+                        )}
                       </VStack>
-                    )}
+                    </ScrollableFlexboxFiller>
                   </PageContent>
                   <SetsManager
                     style={{

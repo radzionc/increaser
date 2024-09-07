@@ -8,6 +8,7 @@ import { ActiveFocusHeader } from './ActiveFocusHeader'
 import { Panel } from '@lib/ui/css/panel'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { FocusTargetInputs } from '../FocusTargetInputs'
+import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 
 const NotificationsWrapper = styled.div`
   align-self: flex-end;
@@ -15,6 +16,7 @@ const NotificationsWrapper = styled.div`
 
 export const FocusSetWidget = () => {
   const task = useFocusTargetTask()
+  const isPaused = useIsFocusPaused()
 
   return (
     <>
@@ -23,7 +25,7 @@ export const FocusSetWidget = () => {
       <VStack gap={4}>
         <Panel kind="secondary" withSections>
           <FocusTargetInputs />
-          <FocusAudioWidget />
+          {!isPaused && <FocusAudioWidget />}
         </Panel>
         <NotificationsWrapper>
           <FocusNotifications />

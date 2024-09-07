@@ -1,4 +1,3 @@
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useCallback, useEffect, useRef } from 'react'
 import { useFocusSoundsPreference } from './state/useFocusSoundsPreference'
 import { useFocusAudioMode } from '../state/useFocusAudioMode'
@@ -8,12 +7,13 @@ import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
 import { Howl } from 'howler'
 import { FocusSound } from '../focusSounds'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
+import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 
 export const FocusSoundsPlayer = () => {
-  const { intervals } = useFocus()
   const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [focusAudioMode] = useFocusAudioMode()
   const [preference] = useFocusSoundsPreference()
+  const isPaused = useIsFocusPaused()
 
   const audioRecordRef = useRef<Partial<Record<FocusSound, Howl>>>({})
 
@@ -30,7 +30,7 @@ export const FocusSoundsPlayer = () => {
   useEffect(() => {
     const audioRecord = audioRecordRef.current
     const isActive =
-      intervals && focusAudioMode === 'sounds' && isFocusAudioEnabled
+      focusAudioMode === 'sounds' && isFocusAudioEnabled && !isPaused
 
     if (isActive) {
       Object.entries(preference).forEach(([sound, volume]) =>
@@ -63,7 +63,7 @@ export const FocusSoundsPlayer = () => {
     } else {
       stop()
     }
-  }, [focusAudioMode, intervals, isFocusAudioEnabled, preference, stop])
+  }, [focusAudioMode, isFocusAudioEnabled, isPaused, preference, stop])
 
   useEffect(() => {
     return stop
