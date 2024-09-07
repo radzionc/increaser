@@ -2,6 +2,39 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1725723647758,
+    videoId: 'change',
+    name: 'Focus Enhancements and Data Export',
+    description:
+      "We've made it easier to manage your focus sessions and introduced a new way to export your data.",
+    items: [
+      {
+        description: 'Quickly switch tasks during a focus session.',
+      },
+      {
+        description:
+          'Easily edit the name, description, links, and checklist of the current task directly from the focus page.',
+      },
+      {
+        description:
+          'Focus music will automatically stop when your focus session is paused.',
+      },
+      {
+        description:
+          'You can now export all your data as a JSON file for better control and backup.',
+      },
+    ],
+
+    telegram: 'https://t.me/increaser_app/49',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/boost-your-productivity-with-increasers-new-focus-data-management-features--O6CAI0bBrb9qx1WWrHR',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7238212411697074176',
+    x: 'https://x.com/increaser_app/status/1832445197130854896',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1fb9zp9/major_focus_enhancements_data_export_feature_now/',
+  },
+  {
     releasedAt: 1725206936434,
     videoId: 'filter',
     name: 'Enhanced Task Management & Vision Clarity',
