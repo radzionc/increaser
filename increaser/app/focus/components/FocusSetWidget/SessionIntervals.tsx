@@ -1,8 +1,9 @@
 import styled, { useTheme } from 'styled-components'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
+import {
+  useAssertFocusIntervals,
+  useFocus,
+} from '@increaser/ui/focus/FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { getColor } from '@lib/ui/theme/getters'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { useMemo } from 'react'
@@ -16,11 +17,6 @@ const Container = styled.div`
   position: relative;
 `
 
-const Filler = styled.div`
-  height: 100%;
-  background: ${getColor('primary')};
-`
-
 const Segment = styled.div`
   position: absolute;
   height: 100%;
@@ -28,7 +24,7 @@ const Segment = styled.div`
 
 export const SessionIntervals = () => {
   const { focusDuration } = useFocus()
-  const { intervals } = useCurrentFocus()
+  const intervals = useAssertFocusIntervals()
 
   const { start } = intervals[0]
 

@@ -1,13 +1,13 @@
-import { useCurrentFocus } from '@increaser/ui/focus/CurrentFocusProvider'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ReduceLastInterval } from './ReduceLastInterval'
+import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 
 export const CropLastInterval = () => {
   const now = useRhythmicRerender()
 
-  const { intervals } = useCurrentFocus()
+  const intervals = useAssertFocusIntervals()
 
   const { start } = getLastItem(intervals)
 

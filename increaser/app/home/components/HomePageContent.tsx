@@ -26,7 +26,7 @@ const MobileContent = styled(VStack)`
 `
 
 export const HomePageContent = () => {
-  const { session } = useFocus()
+  const { intervals } = useFocus()
 
   return (
     <>
@@ -39,9 +39,9 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   <PageContent fullHeight>
-                    {session && <FocusTitle />}
+                    {intervals && <FocusTitle />}
                     <VStack flexGrow gap={40}>
-                      {session ? (
+                      {intervals ? (
                         <FocusSetWidget />
                       ) : (
                         <>
@@ -56,9 +56,9 @@ export const HomePageContent = () => {
               ) : (
                 <Container>
                   <PageContent fullHeight>
-                    {session && <FocusTitle />}
+                    {intervals && <FocusTitle />}
                     <VStack flexGrow gap={40}>
-                      {session ? (
+                      {intervals ? (
                         <FocusSetWidget />
                       ) : (
                         <>

@@ -7,12 +7,12 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Button } from '@lib/ui/buttons/Button'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
-import { CurrentFocusTask } from './CurrentFocusTask'
 import { focusSetWidgetConfig } from './config'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { PauseFocusSession } from './PauseFocusSession'
 import { SessionIntervals } from './SessionIntervals'
 import { CropLastInterval } from './CropLastInterval'
+import { FocusTaskInput } from '../../launcher/task/FocusTaskInput'
 
 const Wrapper = styled(VStack)`
   width: 100%;
@@ -73,7 +73,7 @@ export const MinimalisticFocusSet = () => {
         </Content>
       </Container>
       <FocusAudioWidget />
-      <CurrentFocusTask />
+      <FocusTaskInput />
     </Wrapper>
   )
 }

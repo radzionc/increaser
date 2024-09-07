@@ -10,7 +10,7 @@ import { FocusSound } from '../focusSounds'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 
 export const FocusSoundsPlayer = () => {
-  const { session } = useFocus()
+  const { intervals } = useFocus()
   const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [focusAudioMode] = useFocusAudioMode()
   const [preference] = useFocusSoundsPreference()
@@ -30,7 +30,7 @@ export const FocusSoundsPlayer = () => {
   useEffect(() => {
     const audioRecord = audioRecordRef.current
     const isActive =
-      session && focusAudioMode === 'sounds' && isFocusAudioEnabled
+      intervals && focusAudioMode === 'sounds' && isFocusAudioEnabled
 
     if (isActive) {
       Object.entries(preference).forEach(([sound, volume]) =>
@@ -63,7 +63,7 @@ export const FocusSoundsPlayer = () => {
     } else {
       stop()
     }
-  }, [session, focusAudioMode, isFocusAudioEnabled, preference, stop])
+  }, [focusAudioMode, intervals, isFocusAudioEnabled, preference, stop])
 
   useEffect(() => {
     return stop

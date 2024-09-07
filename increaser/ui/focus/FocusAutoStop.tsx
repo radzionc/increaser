@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useCurrentFocus } from './CurrentFocusProvider'
 import { endOfDay } from 'date-fns'
-import { useFocus } from './FocusContext'
+import { useAssertFocusIntervals, useFocus } from './FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { shouldSetAutoStop } from './utils/shouldSetAutoStop'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
@@ -11,7 +10,7 @@ import { useIsFocusPaused } from './utils/useIsFocusPaused'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const FocusAutoStop = () => {
-  const { intervals } = useCurrentFocus()
+  const intervals = useAssertFocusIntervals()
   const { stop, focusDuration } = useFocus()
   const isPaused = useIsFocusPaused()
 

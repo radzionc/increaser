@@ -3,7 +3,6 @@ import { Task } from '@increaser/entities/Task'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { useFocusTask } from '../../../tasks/useFocusTask'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useIsTaskFormDisabled } from '@increaser/ui/tasks/form/useIsTaskFormDisabled'
@@ -19,6 +18,7 @@ import { fixLinks } from '@increaser/ui/tasks/form/fixLinks'
 import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
+import { useFocusTargetTask } from '../../../tasks/hooks/useFocusTargetTask'
 
 type TaskFormShape = Pick<Task, 'name' | 'links' | 'checklist' | 'description'>
 
@@ -27,7 +27,7 @@ const TitleInput = styled(EmbeddedTitleInput)`
 `
 
 export const FocusTaskOverview = () => {
-  const task = shouldBePresent(useFocusTask())
+  const task = shouldBePresent(useFocusTargetTask())
 
   const initialValue = pick(task, ['name', 'links', 'checklist', 'description'])
 
