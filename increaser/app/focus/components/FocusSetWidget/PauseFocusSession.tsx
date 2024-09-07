@@ -3,10 +3,12 @@ import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 import { PauseIcon } from '@lib/ui/icons/PauseIcon'
 import { PlayIcon } from '@lib/ui/icons/PlayIcon'
 import { FocusHeaderIconButton } from './FocusHeaderIconButton'
+import { useFocusTargetProject } from '../../hooks/useFocusTargetProject'
 
 export const PauseFocusSession = () => {
   const { pause, resume } = useFocus()
   const isPaused = useIsFocusPaused()
+  const project = useFocusTargetProject()
 
   return (
     <FocusHeaderIconButton
@@ -14,6 +16,9 @@ export const PauseFocusSession = () => {
       title={isPaused ? 'Resume focus session' : 'Pause focus session'}
       onClick={() => (isPaused ? resume : pause)()}
       size={'l'}
+      isDisabled={
+        project ? undefined : 'Select a project to resume focus session'
+      }
     />
   )
 }

@@ -2,20 +2,16 @@ import { MS_IN_MIN } from '@lib/utils/time'
 
 import { FillingBlock } from './FillingBlock'
 import { useFocus } from './FocusContext'
-import { useCurrentFocus } from './CurrentFocusProvider'
-import { useAssertUserState } from '../user/UserStateContext'
 import { useTheme } from 'styled-components'
 import { useFocusedDuration } from './hooks/useFocusedDuration'
-import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useFocusTargetProject } from '@increaser/app/focus/hooks/useFocusTargetProject'
 
 export const SessionProgress = () => {
   const { focusDuration } = useFocus()
 
-  const { projects } = useAssertUserState()
-  const theme = useTheme()
-  const { intervals } = useCurrentFocus()
-  const { projectId } = getLastItem(intervals)
-  const color = theme.colors.getLabelColor(projects[projectId].color)
+  const { colors } = useTheme()
+  const project = useFocusTargetProject()
+  const color = project ? colors.getLabelColor(project.color) : colors.mistExtra
 
   const msPassed = useFocusedDuration()
 

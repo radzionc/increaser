@@ -12,7 +12,7 @@ import { TaskDeadlineTag } from '@increaser/ui/tasks/deadline/TaskDeadlineTag'
 import { TaskProject } from '@increaser/ui/tasks/TaskProject'
 import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
 import { Text } from '@lib/ui/text'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusTarget } from '../../state/useFocusTarget'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { hStack } from '@lib/ui/css/stack'
@@ -57,7 +57,7 @@ const Content = styled(UnstyledButton)<ComponentWithActiveState>`
 
 export const FocusTaskOption = () => {
   const { id, projectId, name } = useCurrentTask()
-  const [{ taskId }, setState] = useFocusLauncher()
+  const [{ taskId }, setState] = useFocusTarget()
 
   const isActive = taskId === id
 

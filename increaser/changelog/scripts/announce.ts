@@ -1,13 +1,9 @@
 import clipboardy from 'clipboardy'
-import fs from 'fs'
-import path from 'path'
 import { parseChangelog } from '../utils/parseChangelog'
+import { readChangelogFile } from '../utils/readChangelogFile'
 
 const announce = () => {
-  const changelog = fs.readFileSync(
-    path.resolve(__dirname, '../changelog.md'),
-    'utf8',
-  )
+  const changelog = readChangelogFile()
 
   const changelogItems = parseChangelog(changelog)
   const { items } = changelogItems[0]
@@ -21,9 +17,9 @@ const announce = () => {
     'Make each announcement feel native to the platform.',
     'Titles should represent an essence of the updates.',
     'Announcement on X should be a tweet with 280 characters max. Do not use hashtags. Return as a markdown snippet.',
-    'Announcement on Reddit should be a Reddit post. You can use markdown for Reddit. Return title and content separately as markdown snippets.',
+    `Announcement on Reddit should be a Reddit post. You can use markdown for Reddit. Return title and content separately as markdown snippets. Include Increaser's url (https://increaser.org) in the content.`,
     `Announcement on Indie Hackers should be an Indie Hackers post. Return title and content separately as markdown snippets. Include Increaser's url (https://increaser.org) in the content.`,
-    'Announcement on LinkedIn should be a LinkedIn post. Do not use markdown syntax, e.g. no **bold**, LinkedIn posts do not support it. Return as a markdown snippet.',
+    `Announcement on LinkedIn should be a LinkedIn post. Do not use markdown syntax, e.g. no **bold**, LinkedIn posts do not support it. Return as a markdown snippet.  Include Increaser's url (https://increaser.org) in the content.`,
     'Announcement on Telegram should be a message. Return as a markdown snippet.',
     'Updates are ordered by their priority.',
     'Product updates:',

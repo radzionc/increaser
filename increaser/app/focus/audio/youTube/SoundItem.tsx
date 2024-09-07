@@ -25,7 +25,7 @@ import {
   SoundItemContainer,
   SoundNumber,
 } from './SoundItemContainer'
-import { focusSetWidgetConfig } from '../../components/FocusSetWidget/config'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const Identifier = styled.div`
   width: 100%;
@@ -61,7 +61,7 @@ export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
         isOpen ? null : (
           <OnHoverAction
             style={{ width: '100%' }}
-            actionPlacerStyles={{ right: focusSetWidgetConfig.padding }}
+            actionPlacerStyles={{ right: panelDefaultPadding }}
             action={
               <HStack alignItems="center" gap={2}>
                 <IconButton

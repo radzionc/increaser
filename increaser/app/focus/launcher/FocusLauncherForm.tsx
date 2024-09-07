@@ -3,13 +3,12 @@ import { VStack } from '@lib/ui/css/stack'
 
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
-import { FocusTaskInput } from './task/FocusTaskInput'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { StartFocus } from './StartFocus'
 import { FocusLauncherDuration } from './FocusLauncherDuration'
-import { useFocusLauncherProject } from './hooks/useFocusLauncherProject'
 import { FocusLauncherBudget } from './FocusLauncherBudget'
-import { FocusLauncherProject } from './project/FocusLauncherProject'
+import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
+import { FocusTargetInputs } from '../components/FocusTargetInputs'
 
 const Container = styled(Panel)`
   position: relative;
@@ -17,12 +16,11 @@ const Container = styled(Panel)`
 `
 
 export const FocusLauncherForm = () => {
-  const project = useFocusLauncherProject()
+  const project = useFocusTargetProject()
 
   return (
     <Container withSections kind="secondary">
-      <FocusLauncherProject />
-      <FocusTaskInput />
+      <FocusTargetInputs />
       {project && (
         <>
           <FocusLauncherBudget />

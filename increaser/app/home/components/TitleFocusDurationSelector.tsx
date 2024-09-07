@@ -1,4 +1,3 @@
-import { ClickableTitlePart } from './ClickableTitlePart'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
 import { OptionItem } from '@lib/ui/select/OptionItem'
@@ -7,6 +6,26 @@ import { OptionContent } from '@lib/ui/select/OptionContent'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { focusDurations } from '@increaser/entities/FocusDuration'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
+import { interactive } from '@lib/ui/css/interactive'
+import { ComponentWithActiveState } from '@lib/ui/props'
+import { getColor } from '@lib/ui/theme/getters'
+import styled, { css } from 'styled-components'
+import { Text } from '@lib/ui/text'
+
+const Container = styled(Text)<ComponentWithActiveState>`
+  ${interactive};
+
+  ${({ isActive }) =>
+    isActive
+      ? css`
+          color: ${getColor('textPrimary')};
+        `
+      : css`
+          &:hover {
+            color: ${getColor('contrast')};
+          }
+        `}
+`
 
 export const TitleFocusDurationSelector = () => {
   const { focusDuration, setFocusDuration } = useFocus()
@@ -28,9 +47,9 @@ export const TitleFocusDurationSelector = () => {
 
   return (
     <>
-      <ClickableTitlePart {...getReferenceProps()} isActive={isOpen} as="span">
+      <Container {...getReferenceProps()} isActive={isOpen} as="span">
         {focusDuration} min
-      </ClickableTitlePart>
+      </Container>
       {isOpen && (
         <FloatingFocusManager context={context} modal>
           <FloatingOptionsContainer {...getFloatingProps()}>

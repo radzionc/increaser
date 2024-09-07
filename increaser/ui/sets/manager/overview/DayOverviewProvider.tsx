@@ -45,7 +45,7 @@ export const DayOverviewProvider = ({
 
   const lastSetsSnapshot = useLastSetsSnapshot()
 
-  const { session } = useFocus()
+  const { intervals } = useFocus()
 
   const { sets: allSets } = useAssertUserState()
 
@@ -56,8 +56,7 @@ export const DayOverviewProvider = ({
         isEditable: set.start > lastSetsSnapshot,
       }),
     )
-    if (session && isToday(dayStartedAt)) {
-      const { intervals } = session
+    if (intervals && isToday(dayStartedAt)) {
       const sets = focusIntervalsToSets({
         intervals,
         now: currentTime,
@@ -69,7 +68,7 @@ export const DayOverviewProvider = ({
     }
 
     return result
-  }, [allSets, currentTime, dayStartedAt, lastSetsSnapshot, session])
+  }, [allSets, currentTime, dayStartedAt, intervals, lastSetsSnapshot])
 
   const { startWorkAt, finishWorkAt } = useAssertUserState()
 

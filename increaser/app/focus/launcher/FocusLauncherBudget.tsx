@@ -1,13 +1,13 @@
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useFocusLauncherProject } from './hooks/useFocusLauncherProject'
 import { useProjectDoneMinutesThisWeek } from '@increaser/ui/projects/hooks/useProjectDoneMinutesThisWeek'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { VStack } from '@lib/ui/css/stack'
 import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
 import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectBudgetSummary'
+import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
 
 export const FocusLauncherBudget = () => {
-  const project = shouldBePresent(useFocusLauncherProject())
+  const project = shouldBePresent(useFocusTargetProject())
 
   const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(project.id)
 

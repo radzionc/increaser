@@ -7,7 +7,6 @@ import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { omit } from '@lib/utils/record/omit'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
@@ -16,12 +15,12 @@ import { TurnIdeaIntoTask } from './TurnIdeaIntoTask'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditIdeaForm = () => {
   const idea = useCurrentIdea()
-  const [value, setValue] = useState<IdeaFormShape>(
-    pick(idea, ['name', 'projectId', 'description']),
-  )
+  const initialValue = pick(idea, ['name', 'projectId', 'description'])
+  const [value, setValue] = useState<IdeaFormShape>(initialValue)
 
   const { mutate: updateIdea } = useUpdateUserEntityMutation('idea')
   const { mutate: deleteIdea } = useDeleteUserEntityMutation('idea')
@@ -39,20 +38,22 @@ export const EditIdeaForm = () => {
       return
     }
 
-    const fields: Partial<Omit<Idea, 'id'>> = getUpdatedValues(
-      omit(idea, 'id'),
-      {
-        ...value,
-        updatedAt: Date.now(),
-      },
-    )
-
-    updateIdea({
-      id: idea.id,
-      fields,
+    const fields: Partial<Omit<Idea, 'id'>> = getUpdatedValues({
+      before: initialValue,
+      after: value,
     })
+
+    if (!isRecordEmpty(fields)) {
+      updateIdea({
+        id: idea.id,
+        fields: {
+          ...fields,
+          updatedAt: Date.now(),
+        },
+      })
+    }
     onFinish()
-  }, [isDisabled, idea, onFinish, updateIdea, value])
+  }, [idea.id, initialValue, isDisabled, onFinish, updateIdea, value])
 
   return (
     <ListItemForm

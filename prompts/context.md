@@ -61,13 +61,15 @@ Next, the "Home" page displays an interface for starting a work session—a focu
 
 On the side of the "Home" page, there is a timeline featuring icons with daily events such as the times to start and end work, and first/last meals. The times of these events can be changed on the "Schedule" page. The content of the timeline is user sessions colored according to the projects they belong to. Sessions are organized into blocks based on the breaks between them. At the top of the timeline, users can navigate between the days of the current week.
 
-The user can pause a session. If the session has been paused, after the user has finished the session, it will be split into multiple sessions to avoid tracking the periods when the user was not working.
+The user can pause a session. If the session has been paused, after the user has finished the session, it will be split into multiple sessions to avoid tracking the periods when the user was not working. The focus music will be paused when the session is paused.
 
 If the user gets distracted and wants to account for that time, they can deduct the time from the session. It would act the same way as if the user paused the session for a specific period and then resumed it.
 
 When the user starts a focus session, the content of the "Home" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task. If the user forgets to stop the session, it will be stopped automatically, and the user will be prompted to edit that session.
 
 Also, while in the focus session, users can choose to play focus sounds imported from YouTube or arrange their own ambient noise by mixing different individual sounds like rain, a coffee shop, or birds singing, and adjusting their volume. The YouTube player will be positioned in the corner of the screen, and the user can change the corner, turn off the music, or pause it from that widget.
+
+If the user is working on a task, the task panel will be displayed on the focus page so the user can quickly change some task details without leaving the focus page. It includes the task name, description, links, and checklist.
 
 ## Goals
 
@@ -138,6 +140,10 @@ Finally, the "Community" page features a leaderboard of the most productive user
 ## Public Profile
 
 On the "Profile" page the user can enable "public profile" and then their name and country will be shown when they request features or when they are on the leaderboard. Only paid users can enable the public profile.
+
+# Data
+
+The user can export their data as a JSON file.
 
 # Website
 

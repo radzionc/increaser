@@ -6,18 +6,18 @@ import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RocketIcon } from '@lib/ui/icons/RocketIcon'
-import { useFocusLauncher } from './state/useFocusLauncher'
-import { useFocusLauncherStartTime } from './state/FocusLauncherStartTimeProvider'
-import { useFocusLauncherProject } from './hooks/useFocusLauncherProject'
-import { useFocusLauncherDuration } from './state/FocusLauncherDurationProvider'
+import { useFocusTarget } from '../state/useFocusTarget'
+import { useFocusTargetStartTime } from './state/FocusLauncherStartTimeProvider'
+import { useFocusTargetDuration } from './state/FocusLauncherDurationProvider'
+import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
 
 export const StartFocus = () => {
   const { start } = useFocus()
-  const [{ projectId, taskId }] = useFocusLauncher()
+  const [{ projectId, taskId }] = useFocusTarget()
 
-  const [focusDuration] = useFocusLauncherDuration()
+  const [focusDuration] = useFocusTargetDuration()
 
-  const project = useFocusLauncherProject()
+  const project = useFocusTargetProject()
 
   const isDisabled = useMemo(() => {
     if (!project) {
@@ -25,7 +25,7 @@ export const StartFocus = () => {
     }
   }, [project])
 
-  const [startTime] = useFocusLauncherStartTime()
+  const [startTime] = useFocusTargetStartTime()
 
   return (
     <MemberOnlyAction

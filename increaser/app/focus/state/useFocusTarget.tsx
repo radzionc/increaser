@@ -6,20 +6,20 @@ import {
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { findBy } from '@lib/utils/array/findBy'
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { useFocusTasks } from '../../tasks/useFocusTasks'
+import { useFocusTasks } from '../tasks/useFocusTasks'
 import { useCallback } from 'react'
 
-export type FocusLauncherState = {
+export type FocusTarget = {
   projectId: string | null
   taskId: string | null
 }
 
-export const useFocusLauncher = () => {
+export const useFocusTarget = () => {
   const activeProjects = useActiveProjects()
 
   const tasks = useFocusTasks()
 
-  const getInitialState = useCallback((): FocusLauncherState => {
+  const getInitialState = useCallback((): FocusTarget => {
     if (!isEmpty(tasks)) {
       const [task] = tasks
 
@@ -36,7 +36,7 @@ export const useFocusLauncher = () => {
   }, [activeProjects, tasks])
 
   return useStateCorrector(
-    usePersistentState<FocusLauncherState>(
+    usePersistentState<FocusTarget>(
       PersistentStateKey.FocusLauncher,
       getInitialState,
     ),

@@ -6,7 +6,7 @@ import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 
 export const SignUpAgreement = () => {
   return (
-    <Text centered size={14} color="supporting">
+    <Text centerHorizontally size={14} color="supporting">
       By continuing, you agree to {productName}’s
       <br />
       <LinkText as="span">

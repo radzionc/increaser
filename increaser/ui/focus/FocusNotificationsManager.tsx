@@ -1,4 +1,4 @@
-import { createContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { MS_IN_MIN } from '@lib/utils/time'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { showNotification } from '@lib/ui/notifications/utils'
@@ -6,13 +6,11 @@ import { pluralize } from '@lib/utils/pluralize'
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { playSound } from '@lib/ui/notifications/utils/playSound'
-import { FocusSession, useFocus } from './FocusContext'
+import { useFocus } from './FocusContext'
 import { useHasTimerBrowserNotification } from './hooks/useHasTimerBrowserNotification'
 import { useFocusedDuration } from './hooks/useFocusedDuration'
 import { useIsFocusPaused } from './utils/useIsFocusPaused'
 import { useHasTimerSoundNotification } from './hooks/useHasTimerSoundNotification'
-
-const CurrentFocusContext = createContext<FocusSession | undefined>(undefined)
 
 // const remindAboutEyesEvery = 20
 const remindMinBeforeWorkDayEnds = 5

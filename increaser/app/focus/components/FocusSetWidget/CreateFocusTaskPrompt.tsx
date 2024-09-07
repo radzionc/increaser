@@ -6,10 +6,10 @@ import { interactive } from '@lib/ui/css/interactive'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { HStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { focusSetWidgetConfig } from './config'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ClickableComponentProps } from '@lib/ui/props'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const IconContainer = styled(IconWrapper)`
   font-size: 16px;
@@ -23,7 +23,7 @@ const Container = styled(HStack)`
   gap: 8px;
   ${transition};
   background: ${getColor('background')};
-  padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
+  padding: ${toSizeUnit(panelDefaultPadding)};
   font-weight: 500;
 
   &:hover {

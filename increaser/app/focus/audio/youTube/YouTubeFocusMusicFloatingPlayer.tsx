@@ -1,4 +1,3 @@
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useFocusAudioMode } from '../state/useFocusAudioMode'
 import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
 import styled from 'styled-components'
@@ -17,6 +16,7 @@ import { CSSProperties } from 'react'
 import { ManageYouTubePlayerPosition } from './ManageYouTubePlayerPosition'
 import { useYouTubePlayerPosition } from './state/useYouTubePlayerPosition'
 import { RectangleCorner } from '@lib/ui/entities/RectangleCorner'
+import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 
 const offset = 20
 
@@ -38,7 +38,6 @@ const Header = styled(HStack)`
 `
 
 export const YouTubeFocusMusicFloatingPlayer = () => {
-  const { session } = useFocus()
   const [focusAudioMode] = useFocusAudioMode()
   const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [{ url }] = useYouTubeFocusPreference()
@@ -46,8 +45,10 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
   const { isPlaying } = useYouTubeFocusMusic()
   const [position] = useYouTubePlayerPosition()
 
+  const isPaused = useIsFocusPaused()
+
   const isActive =
-    session && focusAudioMode === 'youtube' && isFocusAudioEnabled && url
+    focusAudioMode === 'youtube' && isFocusAudioEnabled && url && !isPaused
 
   if (!isActive) {
     return null

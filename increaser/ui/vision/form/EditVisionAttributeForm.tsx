@@ -11,6 +11,7 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
+import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -43,15 +44,18 @@ export const EditVisionAttributeForm = () => {
       return
     }
 
-    const fields: Partial<Omit<VisionAttribute, 'id'>> = getUpdatedValues(
-      initialValue,
-      value,
-    )
-
-    updateVisionAttribute({
-      id: visionAttribute.id,
-      fields,
+    const fields: Partial<Omit<VisionAttribute, 'id'>> = getUpdatedValues({
+      before: initialValue,
+      after: value,
     })
+
+    if (!isRecordEmpty(fields)) {
+      updateVisionAttribute({
+        id: visionAttribute.id,
+        fields,
+      })
+    }
+
     onFinish()
   }, [
     initialValue,

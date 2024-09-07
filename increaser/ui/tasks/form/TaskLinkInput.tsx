@@ -44,7 +44,6 @@ const Container = styled.div`
 const LinkPlaceholder = styled.div`
   ${sameDimensions(tightListItemMinHeight)};
   ${centerContent};
-  background: ${getColor('foreground')};
   color: ${getColor('textShy')};
 `
 
@@ -66,7 +65,6 @@ const Input = styled.input`
   outline: none;
   border: none;
 
-  /* background: ${getColor('foreground')}; */
   background: transparent;
   color: ${getColor('text')};
 

@@ -1,24 +1,38 @@
-import { HStack, VStack } from '@lib/ui/css/stack'
-import { MinimalisticFocusSet } from './MinimalisticFocusSet'
-import styled from 'styled-components'
+import { VStack } from '@lib/ui/css/stack'
+import { FocusTaskOverview } from './task/FocusTaskOverview'
+import { useFocusTargetTask } from '../../tasks/hooks/useFocusTargetTask'
 import { FocusNotifications } from '../FocusNotifications'
+import styled from 'styled-components'
+import { ActiveFocusDocumentTitle } from '../ActiveFocusDocumentTitle'
+import { ActiveFocusHeader } from './ActiveFocusHeader'
+import { Panel } from '@lib/ui/css/panel'
+import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
+import { FocusTargetInputs } from '../FocusTargetInputs'
+import { NotPausedFocusOnly } from '../NotPausedFocusOnly'
 
-const Footer = styled(HStack)`
-  align-items: center;
-  width: 100%;
-  justify-content: end;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-size: 14px;
+const NotificationsWrapper = styled.div`
+  align-self: flex-end;
 `
 
 export const FocusSetWidget = () => {
+  const task = useFocusTargetTask()
+
   return (
-    <VStack gap={4}>
-      <MinimalisticFocusSet />
-      <Footer>
-        <FocusNotifications />
-      </Footer>
-    </VStack>
+    <>
+      <ActiveFocusDocumentTitle />
+      <ActiveFocusHeader />
+      <VStack gap={4}>
+        <Panel kind="secondary" withSections>
+          <FocusTargetInputs />
+          <NotPausedFocusOnly>
+            <FocusAudioWidget />
+          </NotPausedFocusOnly>
+        </Panel>
+        <NotificationsWrapper>
+          <FocusNotifications />
+        </NotificationsWrapper>
+      </VStack>
+      {task && <FocusTaskOverview key={task.id} />}
+    </>
   )
 }

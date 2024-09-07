@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import { useFocusTasks } from './useFocusTasks'
-import { useFocusLauncher } from '../launcher/state/useFocusLauncher'
+import { useFocusTarget } from '../state/useFocusTarget'
 
 export const useFilteredFocusTasks = () => {
-  const [{ projectId }] = useFocusLauncher()
+  const [{ projectId }] = useFocusTarget()
   const tasks = useFocusTasks()
 
   return useMemo(() => {

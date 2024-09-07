@@ -1,8 +1,8 @@
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useCurrentFocus } from '../CurrentFocusProvider'
+import { useAssertFocusIntervals } from '../FocusContext'
 
 export const useIsFocusPaused = () => {
-  const { intervals } = useCurrentFocus()
+  const intervals = useAssertFocusIntervals()
 
   return getLastItem(intervals).end !== null
 }

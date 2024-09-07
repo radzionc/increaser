@@ -41,7 +41,10 @@ export const EditTaskTemplateForm = () => {
       links: fixLinks(value.links),
       checklist: fixChecklist(value.checklist),
     }
-    const fields = getUpdatedValues(initialValue, newValue)
+    const fields = getUpdatedValues({
+      before: initialValue,
+      after: newValue,
+    })
 
     updateTaskTemplate({
       id: taskTemplate.id,
