@@ -5,7 +5,7 @@ import {
 } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusTarget } from '../../state/useFocusTarget'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { Text } from '@lib/ui/text'
 import { hStack } from '@lib/ui/css/stack'
@@ -41,7 +41,7 @@ const Container = styled(UnstyledButton)<ComponentWithActiveState>`
 `
 
 export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
-  const [{ projectId }] = useFocusLauncher()
+  const [{ projectId }] = useFocusTarget()
 
   const { id, name, emoji } = useCurrentProject()
   const isSelected = id === projectId

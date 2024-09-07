@@ -2,12 +2,12 @@ import React from 'react'
 import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { endOfDay } from 'date-fns'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusTarget } from '../../state/useFocusTarget'
 import { FinishableComponentProps } from '@lib/ui/props'
 
 export const AddFocusTaskOverlay = ({ onFinish }: FinishableComponentProps) => {
-  const [, setState] = useFocusLauncher()
-  const [{ projectId }] = useFocusLauncher()
+  const [, setState] = useFocusTarget()
+  const [{ projectId }] = useFocusTarget()
 
   return (
     <PanelModal width={560} onFinish={onFinish}>

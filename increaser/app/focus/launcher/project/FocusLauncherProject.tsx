@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusTarget } from '../../state/useFocusTarget'
 import styled from 'styled-components'
 import { AddProject } from './AddProject'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
@@ -20,7 +20,7 @@ export const FocusLauncherProject = () => {
   const [isOpen, setIsOpen] = useState(false)
   const options = useActiveProjects()
 
-  const [{ projectId }, setState] = useFocusLauncher()
+  const [{ projectId }, setState] = useFocusTarget()
   const { projects, tasks } = useAssertUserState()
 
   useEffectOnDependencyChange(() => {

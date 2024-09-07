@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusTarget } from '../../state/useFocusTarget'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormContent'
@@ -23,7 +23,7 @@ export const FocusTaskInput = () => {
 
   const options = useFilteredFocusTasks()
 
-  const [{ taskId }, setState] = useFocusLauncher()
+  const [{ taskId }, setState] = useFocusTarget()
 
   const { tasks } = useAssertUserState()
 

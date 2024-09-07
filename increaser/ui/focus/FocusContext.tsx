@@ -3,6 +3,7 @@ import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { Minutes } from '@lib/utils/time/types'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export interface StartFocusParams {
   projectId: string
@@ -16,10 +17,6 @@ export type FocusInterval = {
   taskId: string | null
   start: number
   end: number | null
-}
-
-export type FocusSession = {
-  intervals: FocusInterval[]
 }
 
 export type StopFocusParams = {
@@ -37,9 +34,7 @@ interface FocusState {
   stop: (params?: StopFocusParams) => void
   cancel: () => void
 
-  session: FocusSession | null
-  updateProject: (projectId: string) => void
-  updateTask: (taskId: string | null) => void
+  intervals: FocusInterval[] | null
 
   setFocusDuration: (duration: FocusDuration) => void
   focusDuration: FocusDuration
@@ -48,3 +43,9 @@ interface FocusState {
 export const FocusContext = createContext<FocusState | undefined>(undefined)
 
 export const useFocus = createContextHook(FocusContext, 'FocusContext')
+
+export const useAssertFocusIntervals = () => {
+  const { intervals } = useFocus()
+
+  return shouldBePresent(intervals)
+}

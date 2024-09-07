@@ -22,7 +22,7 @@ const FocusLauncherDurationContext = createContext<
   FocusLauncherDurationState | undefined
 >(undefined)
 
-export const useFocusLauncherDuration = createContextHook<
+export const useFocusTargetDuration = createContextHook<
   FocusLauncherDurationState,
   [FocusDuration, Dispatch<SetStateAction<FocusDuration>>]
 >(FocusLauncherDurationContext, 'FocusLauncherDurationContext', (result) => [

@@ -19,10 +19,10 @@ import { getColor } from '@lib/ui/theme/getters'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
-import { useFocusLauncherStartTime } from '../state/FocusLauncherStartTimeProvider'
+import { useFocusTargetStartTime } from '../state/FocusLauncherStartTimeProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useFocusLauncherProject } from '../hooks/useFocusLauncherProject'
+import { useFocusTargetProject } from '../../hooks/useFocusTargetProject'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -36,7 +36,7 @@ export const StartTimeEditor = () => {
 
   const todaySets = useTodaySets()
 
-  const [value, setValue] = usePresentState(useFocusLauncherStartTime())
+  const [value, setValue] = usePresentState(useFocusTargetStartTime())
 
   const { interval, now } = useStartTimeEditor()
 
@@ -78,7 +78,7 @@ export const StartTimeEditor = () => {
 
   const minDiff = Math.round(convertDuration(now - value, 'ms', 'min'))
 
-  const project = shouldBePresent(useFocusLauncherProject())
+  const project = shouldBePresent(useFocusTargetProject())
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>

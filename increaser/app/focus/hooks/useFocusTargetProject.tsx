@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
-import { useFocusLauncher } from '../state/useFocusLauncher'
+import { useFocusTarget } from '../state/useFocusTarget'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
-export const useFocusLauncherProject = () => {
-  const [{ projectId, taskId }] = useFocusLauncher()
+export const useFocusTargetProject = () => {
+  const [{ projectId, taskId }] = useFocusTarget()
   const { projects, tasks } = useAssertUserState()
 
   return useMemo(() => {
