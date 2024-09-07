@@ -32,7 +32,7 @@ export const FocusSetWidget = () => {
           <FocusNotifications />
         </NotificationsWrapper>
       </VStack>
-      {task && <FocusTaskOverview />}
+      {task && <FocusTaskOverview key={task.id} />}
     </>
   )
 }
