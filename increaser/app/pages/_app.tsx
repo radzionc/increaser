@@ -26,6 +26,7 @@ import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
 import { ActiveFocusOnly } from '../focus/components/ActiveFocusOnly'
+import { NotPausedFocusOnly } from '../focus/components/NotPausedFocusOnly'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -62,10 +63,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                                 <ScheduleProvider>
                                   <BreakProvider>
                                     <ActiveFocusOnly>
-                                      <FocusSoundsPlayer />
-                                      <YouTubeFocusMusicFloatingPlayer />
+                                      <NotPausedFocusOnly>
+                                        <FocusSoundsPlayer />
+                                        <YouTubeFocusMusicFloatingPlayer />
+                                      </NotPausedFocusOnly>
                                     </ActiveFocusOnly>
-
                                     {component}
                                   </BreakProvider>
                                   <MembershipConfirmation />
