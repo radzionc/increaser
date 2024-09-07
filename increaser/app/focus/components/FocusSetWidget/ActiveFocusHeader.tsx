@@ -27,10 +27,10 @@ const Container = styled(HStack)`
 const FillerContainer = styled.div`
   height: 2px;
   width: 100%;
-  bottom: 0;
+  bottom: -8px;
   position: absolute;
   ${round};
-  background: ${getColor('mist')};
+  background: ${getColor('mistExtra')};
   overflow: hidden;
 `
 
@@ -42,19 +42,25 @@ export const ActiveFocusHeader = () => {
       <Container>
         <HStack alignItems="center" gap={12}>
           <PauseFocusSession />
-          <HStackSeparatedBy
-            separator={
-              <Text color="shy" as="span">
-                {slashSeparator}
+          <div style={{ position: 'relative' }}>
+            <HStackSeparatedBy
+              style={{ position: 'relative' }}
+              separator={
+                <Text color="shy" as="span">
+                  {slashSeparator}
+                </Text>
+              }
+              gap={12}
+            >
+              <Text as="div" weight="600" size={32} height="small">
+                <FocusPassedTime />
               </Text>
-            }
-            gap={12}
-          >
-            <Text as="div" weight="600" size={32} height="small">
-              <FocusPassedTime />
-            </Text>
-            <TitleFocusDurationSelector />
-          </HStackSeparatedBy>
+              <TitleFocusDurationSelector />
+            </HStackSeparatedBy>
+            <FillerContainer>
+              <SessionIntervals />
+            </FillerContainer>
+          </div>
         </HStack>
         <HStack gap={8}>
           <CropLastInterval />
@@ -66,9 +72,6 @@ export const ActiveFocusHeader = () => {
           </Button>
         </HStack>
       </Container>
-      <FillerContainer>
-        <SessionIntervals />
-      </FillerContainer>
     </PageHeader>
   )
 }

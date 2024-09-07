@@ -49,7 +49,7 @@ export const SessionIntervals = () => {
       return now
     }
 
-    const remainingDuration = targetDuration - focusDuration
+    const remainingDuration = targetDuration - focusedDuration
 
     return now + remainingDuration
   }, [focusDuration, intervals, now])
