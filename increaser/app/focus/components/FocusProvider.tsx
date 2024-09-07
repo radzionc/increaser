@@ -212,15 +212,13 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
         reduceLastInterval,
       }}
     >
-      {children}
-      {intervals ? (
+      {intervals && (
         <>
           <FocusAutoStop />
           <FocusNotificationsManager />
         </>
-      ) : (
-        <>{children}</>
       )}
+      <>{children}</>
     </FocusContext.Provider>
   )
 }

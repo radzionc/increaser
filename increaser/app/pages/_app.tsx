@@ -65,6 +65,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                                       <FocusSoundsPlayer />
                                       <YouTubeFocusMusicFloatingPlayer />
                                     </ActiveFocusOnly>
+
                                     {component}
                                   </BreakProvider>
                                   <MembershipConfirmation />
