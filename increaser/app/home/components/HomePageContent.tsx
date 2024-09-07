@@ -5,7 +5,6 @@ import { VStack } from '@lib/ui/css/stack'
 
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
-import { FocusTitle } from './FocusTitle'
 import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 import { PageContent } from '../../ui/page/PageContent'
 import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
@@ -39,7 +38,6 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   <PageContent fullHeight>
-                    {intervals && <FocusTitle />}
                     <VStack flexGrow gap={40}>
                       {intervals ? (
                         <FocusSetWidget />
@@ -56,19 +54,16 @@ export const HomePageContent = () => {
               ) : (
                 <Container>
                   <PageContent fullHeight>
-                    {intervals && <FocusTitle />}
-                    <VStack flexGrow gap={40}>
-                      {intervals ? (
-                        <FocusSetWidget />
-                      ) : (
-                        <>
-                          <BreakTimeline />
-                          <ScrollableFlexboxFiller>
-                            <FocusLauncher />
-                          </ScrollableFlexboxFiller>
-                        </>
-                      )}
-                    </VStack>
+                    {intervals ? (
+                      <FocusSetWidget />
+                    ) : (
+                      <VStack flexGrow gap={40}>
+                        <BreakTimeline />
+                        <ScrollableFlexboxFiller>
+                          <FocusLauncher />
+                        </ScrollableFlexboxFiller>
+                      </VStack>
+                    )}
                   </PageContent>
                   <SetsManager
                     style={{

@@ -1,4 +1,4 @@
-import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
+import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { useFocusAudioMode } from '../state/useFocusAudioMode'
 import { useIsFocusAudioEnabled } from '../state/useIsFocusAudioEnabled'
 import styled from 'styled-components'
@@ -38,7 +38,7 @@ const Header = styled(HStack)`
 `
 
 export const YouTubeFocusMusicFloatingPlayer = () => {
-  const intervals = useAssertFocusIntervals()
+  const { intervals } = useFocus()
   const [focusAudioMode] = useFocusAudioMode()
   const [isFocusAudioEnabled] = useIsFocusAudioEnabled()
   const [{ url }] = useYouTubeFocusPreference()

@@ -22,23 +22,23 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { focusSetWidgetConfig } from '../components/FocusSetWidget/config'
 import { TabNavigation } from '@lib/ui/navigation/TabNavigation'
 import { YouTubeViewSelector } from './youTube/YouTubeViewSelector'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const Container = styled(VStack)`
   padding: 0;
   background: ${getColor('background')};
   gap: 16px;
   > * {
-    ${horizontalPadding(focusSetWidgetConfig.padding)}
+    ${horizontalPadding(panelDefaultPadding)}
   }
 `
 
 const Content = styled(VStack)`
   padding: 0;
   > * {
-    ${horizontalPadding(focusSetWidgetConfig.padding)}
+    ${horizontalPadding(panelDefaultPadding)}
   }
   gap: 20px;
 `
@@ -46,7 +46,7 @@ const Content = styled(VStack)`
 const Header = styled(HStack)`
   padding: 0;
   > * {
-    padding: ${toSizeUnit(focusSetWidgetConfig.padding)};
+    padding: ${toSizeUnit(panelDefaultPadding)};
   }
 `
 

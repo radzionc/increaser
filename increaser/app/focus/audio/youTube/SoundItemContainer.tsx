@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { Text } from '@lib/ui/text'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { focusSetWidgetConfig } from '../../components/FocusSetWidget/config'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 export const PlayIndicator = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
@@ -18,7 +18,7 @@ export const SoundNumber = styled(Text)``
 export const SoundItemContainer = styled(UnstyledButton)`
   font-size: 14px;
   font-weight: 500;
-  padding: 4px ${toSizeUnit(focusSetWidgetConfig.padding)};
+  padding: 4px ${toSizeUnit(panelDefaultPadding)};
   width: 100%;
   display: grid;
   grid-template-columns: minmax(24px, auto) 1fr auto;

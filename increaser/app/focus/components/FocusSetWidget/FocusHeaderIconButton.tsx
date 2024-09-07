@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components'
 export const FocusHeaderIconButton = styled(IconButton)<
   Partial<ComponentWithActiveState>
 >`
-  ${sameDimensions(48)};
+  ${sameDimensions(40)};
   font-size: 20px;
   background: transparent;
   border: 1px solid ${getColor('mistExtra')};

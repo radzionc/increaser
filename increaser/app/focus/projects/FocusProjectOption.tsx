@@ -5,7 +5,6 @@ import {
 } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
-import { useFocusTarget } from '../../state/useFocusTarget'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { Text } from '@lib/ui/text'
 import { hStack } from '@lib/ui/css/stack'
@@ -13,7 +12,8 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { focusLauncherConfig } from '../config'
+import { focusLauncherConfig } from '../launcher/config'
+import { useFocusTarget } from '../state/useFocusTarget'
 
 const Container = styled(UnstyledButton)<ComponentWithActiveState>`
   ${hStack({

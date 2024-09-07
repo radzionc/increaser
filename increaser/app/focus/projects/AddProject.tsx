@@ -2,9 +2,9 @@ import { Opener } from '@lib/ui/base/Opener'
 import React from 'react'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { useFocusTarget } from '../../state/useFocusTarget'
 import { Project } from '@increaser/entities/Project'
-import { AddFocusEntityOption } from '../AddFocusEntityOption'
+import { AddFocusEntityOption } from '../launcher/AddFocusEntityOption'
+import { useFocusTarget } from '../state/useFocusTarget'
 
 type AddProjectProps = {
   onFinish?: (project?: Project) => void

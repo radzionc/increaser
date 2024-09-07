@@ -1,15 +1,35 @@
 import { VStack } from '@lib/ui/css/stack'
-import { MinimalisticFocusSet } from './MinimalisticFocusSet'
 import { FocusTaskOverview } from './task/FocusTaskOverview'
 import { useFocusTargetTask } from '../../tasks/hooks/useFocusTargetTask'
+import { FocusNotifications } from '../FocusNotifications'
+import styled from 'styled-components'
+import { ActiveFocusDocumentTitle } from '../ActiveFocusDocumentTitle'
+import { ActiveFocusHeader } from './ActiveFocusHeader'
+import { Panel } from '@lib/ui/css/panel'
+import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
+import { FocusTargetInputs } from '../FocusTargetInputs'
+
+const NotificationsWrapper = styled.div`
+  align-self: flex-end;
+`
 
 export const FocusSetWidget = () => {
   const task = useFocusTargetTask()
 
   return (
-    <VStack gap={40}>
-      <MinimalisticFocusSet />
+    <>
+      <ActiveFocusDocumentTitle />
+      <ActiveFocusHeader />
+      <VStack gap={4}>
+        <Panel kind="secondary" withSections>
+          <FocusTargetInputs />
+          <FocusAudioWidget />
+        </Panel>
+        <NotificationsWrapper>
+          <FocusNotifications />
+        </NotificationsWrapper>
+      </VStack>
       {task && <FocusTaskOverview />}
-    </VStack>
+    </>
   )
 }

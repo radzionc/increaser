@@ -1,10 +1,9 @@
 import { ReactNode, useState } from 'react'
 
 import { FocusDuration } from '@increaser/entities/FocusDuration'
-import { FocusContext, FocusSession } from '@increaser/ui/focus/FocusContext'
+import { FocusContext, FocusInterval } from '@increaser/ui/focus/FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { DemoProject } from '@increaser/demo/projects'
-import { CurrentFocusGuard } from '@increaser/ui/focus/CurrentFocusProvider'
 
 interface Props {
   children: ReactNode
@@ -13,16 +12,14 @@ interface Props {
 export const DemoFocusProvider = ({ children }: Props) => {
   const [focusDuration, setFocusDuration] = useState<FocusDuration>(90)
 
-  const [session] = useState<FocusSession>({
-    intervals: [
-      {
-        start: Date.now() - convertDuration(45, 'min', 'ms'),
-        projectId: DemoProject.Content,
-        taskId: null,
-        end: null,
-      },
-    ],
-  })
+  const [intervals] = useState<FocusInterval[]>([
+    {
+      start: Date.now() - convertDuration(45, 'min', 'ms'),
+      projectId: DemoProject.Content,
+      taskId: null,
+      end: null,
+    },
+  ])
 
   return (
     <FocusContext.Provider
@@ -30,17 +27,15 @@ export const DemoFocusProvider = ({ children }: Props) => {
         start: () => {},
         pause: () => {},
         resume: () => {},
-        updateProject: () => {},
-        updateTask: () => {},
         reduceLastInterval: () => {},
         stop,
         cancel: () => {},
-        session,
+        intervals,
         focusDuration,
         setFocusDuration,
       }}
     >
-      <CurrentFocusGuard>{children}</CurrentFocusGuard>
+      {children}
     </FocusContext.Provider>
   )
 }

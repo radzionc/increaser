@@ -70,26 +70,26 @@ export const useFocusIntervals = () => {
           }
         })
 
-        const now = Date.now()
         const lastInterval = getLastItem(result)
         if (lastInterval.end === null) {
           if (
             lastInterval.projectId !== projectId ||
             lastInterval.taskId !== taskId
           ) {
+            const now = Date.now()
             result = updateAtIndex(result, result.length - 1, (interval) => ({
               ...interval,
               end: now,
             }))
-          }
 
-          if (projectId) {
-            result.push({
-              projectId,
-              taskId,
-              start: now,
-              end: null,
-            })
+            if (projectId) {
+              result.push({
+                projectId,
+                taskId,
+                start: now,
+                end: null,
+              })
+            }
           }
         }
 

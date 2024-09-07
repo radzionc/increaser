@@ -1,22 +1,22 @@
 import { useState } from 'react'
-import { useFocusTarget } from '../../state/useFocusTarget'
 import styled from 'styled-components'
 import { AddProject } from './AddProject'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { FocusProjectOption } from './FocusProjectOption'
-import { FocusEntityInputHeader } from '../FocusEntityInputHeader'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { BoxIcon } from '@lib/ui/icons/BoxIcon'
-import { FocusEntityOptionsContainer } from '../FocusEntityOptionsContainer'
+import { FocusEntityInputHeader } from '../launcher/FocusEntityInputHeader'
+import { FocusEntityOptionsContainer } from '../launcher/FocusEntityOptionsContainer'
+import { useFocusTarget } from '../state/useFocusTarget'
 
 const Wrapper = styled.div`
   padding: 0;
 `
 
-export const FocusLauncherProject = () => {
+export const FocusProjectInput = () => {
   const [isOpen, setIsOpen] = useState(false)
   const options = useActiveProjects()
 
