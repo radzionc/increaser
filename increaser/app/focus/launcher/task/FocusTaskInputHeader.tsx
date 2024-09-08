@@ -24,10 +24,9 @@ import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { Task } from '@increaser/entities/Task'
 import { TaskCheckBox } from '@increaser/ui/tasks/TaskCheckBox'
 import { Wrap } from '@lib/ui/base/Wrap'
-import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
-import { TaskDeadlineTag } from '@increaser/ui/tasks/deadline/TaskDeadlineTag'
-import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
 import { cropText } from '@lib/ui/css/cropText'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { FocusTaskOptionContent } from './FocusTaskOptionContent'
 
 const Container = styled(ActionsInsideInteractiveElement)`
   display: flex;
@@ -54,6 +53,7 @@ const Underline = styled.div`
 const Content = styled(HStack)`
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 
   position: relative;
 
@@ -73,8 +73,18 @@ const Content = styled(HStack)`
 `
 
 const TaskContent = styled(HStack)`
+  line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
+  width: 100%;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  overflow: hidden;
+`
+
+export const TaskTextContainer = styled(HStack)`
+  line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
+  flex: 1;
+  align-items: center;
+  gap: 8px;
   ${cropText};
 `
 
@@ -138,11 +148,7 @@ export function FocusTaskInputHeader({
             {value ? (
               <TaskContent alignItems="center" gap={12}>
                 <Spacer {...actions.checkbox.size} />
-                <TaskTextContainer cropped>
-                  <Text as="span">{value.name}</Text>
-                  <TaskTrackedTime />
-                  <TaskDeadlineTag />
-                </TaskTextContainer>
+                <FocusTaskOptionContent />
               </TaskContent>
             ) : (
               <HeaderPromptContentFrame icon={productToolIconRecord.tasks}>

@@ -14,7 +14,7 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { TaskTextContainer } from './TaskTextContainer'
 import { TaskProject } from './TaskProject'
-import { TaskTrackedTime } from './TaskTrackedTime'
+import { TaskTrackedTime } from './trackedTime/TaskTrackedTime'
 
 const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;

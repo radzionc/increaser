@@ -17,4 +17,10 @@ export const TaskTagContainer = styled.span`
   font-weight: 600;
 
   white-space: nowrap;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 `

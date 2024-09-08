@@ -7,11 +7,6 @@ import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { Opener } from '@lib/ui/base/Opener'
 import { EditTaskFormOverlay } from '@increaser/ui/tasks/form/EditTaskFormOverlay'
 import { Spacer } from '@lib/ui/layout/Spacer'
-import { TaskTextContainer } from '@increaser/ui/tasks/TaskTextContainer'
-import { TaskDeadlineTag } from '@increaser/ui/tasks/deadline/TaskDeadlineTag'
-import { TaskProject } from '@increaser/ui/tasks/TaskProject'
-import { TaskTrackedTime } from '@increaser/ui/tasks/TaskTrackedTime'
-import { Text } from '@lib/ui/text'
 import { useFocusTarget } from '../../state/useFocusTarget'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
@@ -21,6 +16,7 @@ import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { FocusIconButton } from '../../components/FocusSetWidget/FocusIconButton'
 import { focusLauncherConfig } from '../config'
+import { FocusTaskOptionContent } from './FocusTaskOptionContent'
 
 const Container = styled(OnHoverAction)`
   ${hStack({
@@ -56,8 +52,9 @@ const Content = styled(UnstyledButton)<ComponentWithActiveState>`
 `
 
 export const FocusTaskOption = () => {
-  const { id, projectId, name } = useCurrentTask()
-  const [{ taskId }, setState] = useFocusTarget()
+  const { id, projectId } = useCurrentTask()
+  const [{ taskId, projectId: focusTargetProjectId }, setState] =
+    useFocusTarget()
 
   const isActive = taskId === id
 
@@ -84,12 +81,10 @@ export const FocusTaskOption = () => {
             }
           }}
         >
-          <TaskTextContainer cropped style={{ zIndex: 1 }}>
-            <TaskProject value={projectId} />
-            <Text as="span">{name}</Text>
-            <TaskTrackedTime />
-            <TaskDeadlineTag />
-          </TaskTextContainer>
+          <FocusTaskOptionContent
+            showEmoji={!focusTargetProjectId}
+            style={{ zIndex: 1 }}
+          />
           {actionSize && <Spacer width={actionSize.width} />}
         </Content>
       )}
