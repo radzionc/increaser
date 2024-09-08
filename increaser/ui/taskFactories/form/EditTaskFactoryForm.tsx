@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
@@ -11,9 +10,6 @@ import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
@@ -21,6 +17,7 @@ import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -79,29 +76,10 @@ export const EditTaskFactoryForm = () => {
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <TaskProjectSelector
-            value={value.projectId}
-            onChange={(projectId) =>
-              setValue((prev) => ({ ...prev, projectId }))
-            }
-          />
-        </div>
-
-        <EmbeddedTitleInput
-          autoFocus
-          placeholder="Task name"
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          onSubmit={onSubmit}
-        />
-      </EmojiTextInputFrame>
-      <TaskDescriptionInput
-        value={value.description}
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
+      <TaskFormHeader
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        onSubmit={isDisabled ? undefined : onSubmit}
       />
       <TaskLinksInput
         value={value.links}

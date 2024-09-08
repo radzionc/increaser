@@ -1,13 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Task } from '@increaser/entities/Task'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useIsTaskFormDisabled } from '@increaser/ui/tasks/form/useIsTaskFormDisabled'
 import { Panel } from '@lib/ui/css/panel'
-import { TaskDescriptionInput } from '@increaser/ui/tasks/form/TaskDescriptionInput'
 import { TaskLinksInput } from '@increaser/ui/tasks/form/TaskLinksInput'
 import { TaskChecklistInput } from '@increaser/ui/tasks/form/checklist/TaskChecklistInput'
 import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
@@ -16,20 +14,13 @@ import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { fixLinks } from '@increaser/ui/tasks/form/fixLinks'
 import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
-import styled from 'styled-components'
-import { getColor } from '@lib/ui/theme/getters'
 import { useFocusTargetTask } from '../../../tasks/hooks/useFocusTargetTask'
-import { EmojiTextInputFrame } from '@increaser/ui/form/EmojiTextInputFrame'
-import { TaskProjectSelector } from '@increaser/ui/tasks/TaskProjectSelector'
+import { TaskFormHeader } from '@increaser/ui/tasks/form/TaskFormHeader'
 
 type TaskFormShape = Pick<
   Task,
   'name' | 'links' | 'checklist' | 'description' | 'projectId'
 >
-
-const TitleInput = styled(EmbeddedTitleInput)`
-  background: ${getColor('background')};
-`
 
 export const FocusTaskOverview = () => {
   const task = shouldBePresent(useFocusTargetTask())
@@ -83,27 +74,9 @@ export const FocusTaskOverview = () => {
 
   return (
     <Panel withSections kind="secondary">
-      <EmojiTextInputFrame>
-        <div>
-          <TaskProjectSelector
-            value={value.projectId}
-            onChange={(projectId) =>
-              setValue((prev) => ({ ...prev, projectId }))
-            }
-          />
-        </div>
-
-        <TitleInput
-          placeholder="Task name"
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        />
-      </EmojiTextInputFrame>
-      <TaskDescriptionInput
-        value={value.description}
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
+      <TaskFormHeader
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
       />
       <TaskLinksInput
         value={value.links}

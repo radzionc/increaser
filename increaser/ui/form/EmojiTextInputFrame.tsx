@@ -11,17 +11,13 @@ export const EmojiTextInputFrame = styled(HStack)`
 
   > * {
     &:first-child {
-      padding-right: ${toSizeUnit(panelDefaultPadding / 2)};
+      padding: 8px;
+      padding-right: 0;
     }
-  }
-
-  > * {
     &:last-child {
+      padding: ${toSizeUnit(panelDefaultPadding)};
       padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
+      min-height: 100%;
     }
-  }
-
-  & > * {
-    padding: ${toSizeUnit(panelDefaultPadding)};
   }
 `

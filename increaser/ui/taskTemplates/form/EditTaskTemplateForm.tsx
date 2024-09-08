@@ -1,15 +1,11 @@
 import { useCallback, useState } from 'react'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 import { useCurrentTaskTemplate } from '../CurrentTaskTemplateProvider'
 import { omit } from '@lib/utils/record/omit'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -17,6 +13,7 @@ import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -59,29 +56,10 @@ export const EditTaskTemplateForm = () => {
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <TaskProjectSelector
-            value={value.projectId}
-            onChange={(projectId) =>
-              setValue((prev) => ({ ...prev, projectId }))
-            }
-          />
-        </div>
-
-        <EmbeddedTitleInput
-          autoFocus
-          placeholder="Task template name"
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          onSubmit={onSubmit}
-        />
-      </EmojiTextInputFrame>
-      <TaskDescriptionInput
-        value={value.description}
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
+      <TaskFormHeader
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, value }))}
+        onSubmit={isDisabled ? undefined : onSubmit}
       />
       <TaskLinksInput
         value={value.links}

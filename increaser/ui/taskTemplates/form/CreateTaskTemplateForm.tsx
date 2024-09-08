@@ -1,19 +1,16 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { otherProject } from '@increaser/entities/Project'
-import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { TaskDescriptionInput } from '../../tasks/form/TaskDescriptionInput'
 import { FinishableComponentProps } from '@lib/ui/props'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
 export const CreateTaskTemplateForm = ({
   onFinish,
@@ -38,39 +35,17 @@ export const CreateTaskTemplateForm = ({
     onFinish()
   }, [mutate, onFinish, value])
 
-  const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
-
   return (
     <ListItemForm
       onClose={onFinish}
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <TaskProjectSelector
-            autoFocus
-            value={value.projectId}
-            onChange={(projectId) => {
-              setValue((prev) => ({ ...prev, projectId }))
-              nameInputRef.current?.focus()
-            }}
-          />
-        </div>
-
-        <EmbeddedTitleInput
-          placeholder="Task template name"
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          onSubmit={onSubmit}
-          ref={nameInputRef}
-        />
-      </EmojiTextInputFrame>
-      <TaskDescriptionInput
-        value={value.description}
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
+      <TaskFormHeader
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        hasProjectAutoFocus
+        onSubmit={isDisabled ? undefined : onSubmit}
       />
       <TaskLinksInput
         value={value.links}
