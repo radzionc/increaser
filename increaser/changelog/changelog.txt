@@ -1,3 +1,4 @@
+While focusing on a task, see in real-time the total time you've spent on the current task
 1725723647758
 Quickly change current focus task.
 Easily edit current focus task name, description, links and checklist from the focus page
