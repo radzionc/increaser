@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Task } from '@increaser/entities/Task'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { pick } from '@lib/utils/record/pick'
@@ -19,8 +19,13 @@ import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { useFocusTargetTask } from '../../../tasks/hooks/useFocusTargetTask'
+import { EmojiTextInputFrame } from '@increaser/ui/form/EmojiTextInputFrame'
+import { TaskProjectSelector } from '@increaser/ui/tasks/TaskProjectSelector'
 
-type TaskFormShape = Pick<Task, 'name' | 'links' | 'checklist' | 'description'>
+type TaskFormShape = Pick<
+  Task,
+  'name' | 'links' | 'checklist' | 'description' | 'projectId'
+>
 
 const TitleInput = styled(EmbeddedTitleInput)`
   background: ${getColor('background')};
@@ -29,7 +34,11 @@ const TitleInput = styled(EmbeddedTitleInput)`
 export const FocusTaskOverview = () => {
   const task = shouldBePresent(useFocusTargetTask())
 
-  const initialValue = pick(task, ['name', 'links', 'checklist', 'description'])
+  const initialValue = useMemo(
+    () =>
+      pick(task, ['name', 'links', 'checklist', 'description', 'projectId']),
+    [task],
+  )
 
   const [value, setValue] = useState<TaskFormShape>(initialValue)
 
@@ -74,11 +83,22 @@ export const FocusTaskOverview = () => {
 
   return (
     <Panel withSections kind="secondary">
-      <TitleInput
-        placeholder="Task name"
-        value={value.name}
-        onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-      />
+      <EmojiTextInputFrame>
+        <div>
+          <TaskProjectSelector
+            value={value.projectId}
+            onChange={(projectId) =>
+              setValue((prev) => ({ ...prev, projectId }))
+            }
+          />
+        </div>
+
+        <TitleInput
+          placeholder="Task name"
+          value={value.name}
+          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
+        />
+      </EmojiTextInputFrame>
       <TaskDescriptionInput
         value={value.description}
         onChange={(description) =>
