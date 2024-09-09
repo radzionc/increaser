@@ -65,7 +65,7 @@ const LinksContainer = styled(HStack)`
   align-items: center;
   gap: 8px;
   padding: ${toSizeUnit(panelDefaultPadding)};
-  padding-top: 4px;
+  padding-top: 0;
 `
 
 export const TaskFormHeader = ({
