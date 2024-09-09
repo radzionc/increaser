@@ -3,9 +3,9 @@ import { useAssertUserState } from '../../user/UserStateContext'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
+import { ValueFinishProps } from '@lib/ui/props'
 
-type SelectGoalTaskFactoryProps = {
-  onFinish: (id: string) => void
+type SelectGoalTaskFactoryProps = ValueFinishProps<string> & {
   options: string[]
 }
 

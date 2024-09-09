@@ -11,7 +11,7 @@ import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { fixChecklist } from './checklist/fixChecklist'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
@@ -21,7 +21,7 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
 
-type EditTaskFormContentProps = FinishableComponentProps
+type EditTaskFormContentProps = NoValueFinishProps
 
 export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const { tasks } = useAssertUserState()

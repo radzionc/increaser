@@ -2,12 +2,9 @@ import { Opener } from '@lib/ui/base/Opener'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { CreateTaskFactoryForm } from '../../taskFactories/form/CreateTaskFactoryForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { ValueFinishProps } from '@lib/ui/props'
 
-type AddGoalTaskFactoryProps = {
-  onFinish: (id: string) => void
-}
-
-export const AddGoalTaskFactory = ({ onFinish }: AddGoalTaskFactoryProps) => {
+export const AddGoalTaskFactory = ({ onFinish }: ValueFinishProps<string>) => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (

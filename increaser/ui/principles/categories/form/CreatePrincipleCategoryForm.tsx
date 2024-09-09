@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
@@ -14,7 +14,7 @@ import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
 
 export const CreatePrincipleCategoryForm = ({
   onFinish,
-}: FinishableComponentProps) => {
+}: NoValueFinishProps) => {
   const [value, setValue] = useState<PrincipleCategoryFormShape>({
     name: '',
     emoji: randomlyPick(defaultEmojis),

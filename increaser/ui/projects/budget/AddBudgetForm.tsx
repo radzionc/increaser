@@ -11,7 +11,7 @@ import { ProjectGoal, ProjectWorkingDays } from '@increaser/entities/Project'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { LabelText } from '@lib/ui/inputs/LabelText'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { useFreeHours } from './hooks/useFreeHours'
 import { BudgetHoursInput } from './BudgetHoursInput'
 import { WorkdingDaysInput } from '@increaser/ui/projects/budget/WorkingDaysInput'
@@ -27,7 +27,7 @@ type WeeklyGoalShape = {
   workingDays: ProjectWorkingDays
 }
 
-export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
+export const AddBudgetForm = ({ onFinish }: NoValueFinishProps) => {
   const activeProjects = useActiveProjects()
   const { projects } = useAssertUserState()
 
@@ -125,7 +125,12 @@ export const AddBudgetForm = ({ onFinish }: FinishableComponentProps) => {
           />
         )}
         <UniformColumnGrid gap={20}>
-          <Button type="button" onClick={onFinish} kind="secondary" size="l">
+          <Button
+            type="button"
+            onClick={() => onFinish()}
+            kind="secondary"
+            size="l"
+          >
             Cancel
           </Button>
           <Button isDisabled={errorMessage} size="l">

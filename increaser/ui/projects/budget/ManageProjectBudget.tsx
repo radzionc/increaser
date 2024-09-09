@@ -12,7 +12,7 @@ import {
 } from '@increaser/entities/Project'
 import { Text } from '@lib/ui/text'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { useFreeHours } from './hooks/useFreeHours'
 import { Panel } from '@lib/ui/css/panel'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
@@ -27,7 +27,7 @@ type WeeklyGoalShape = {
   workingDays: ProjectWorkingDays
 }
 
-type ManageProjectBudgetOverlayProps = FinishableComponentProps & {
+type ManageProjectBudgetOverlayProps = NoValueFinishProps & {
   project: Project
 }
 

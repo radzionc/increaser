@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
@@ -12,7 +12,7 @@ import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInpu
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 
-type CreateIdeaFormProps = FinishableComponentProps & {
+type CreateIdeaFormProps = NoValueFinishProps & {
   initialValue?: Partial<IdeaFormShape>
 }
 

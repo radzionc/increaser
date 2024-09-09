@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
@@ -12,9 +12,7 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
 
-export const CreateVisionAttributeForm = ({
-  onFinish,
-}: FinishableComponentProps) => {
+export const CreateVisionAttributeForm = ({ onFinish }: NoValueFinishProps) => {
   const { vision } = useAssertUserState()
   const [value, setValue] = useState<VisionAttributeFormShape>({
     name: '',

@@ -4,7 +4,7 @@ import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { ComponentWithActiveState, ValueFinishProps } from '@lib/ui/props'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { getColor } from '@lib/ui/theme/getters'
@@ -14,9 +14,8 @@ import { EmbeddedPromptContainer } from '@lib/ui/buttons/EmbeddedPromptContainer
 import { BookIcon } from '@lib/ui/icons/BookIcon'
 import { EmbeddedPromptContentFrame } from '@lib/ui/buttons/EmbeddedPromptContentFrame'
 
-type Props = {
+type Props = ValueFinishProps<TaskTemplate> & {
   projectId: string
-  onFinish: (template: TaskTemplate) => void
 }
 
 const ToggleIconContainer = styled(CollapsableStateIndicator)`

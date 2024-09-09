@@ -1,7 +1,7 @@
 import { Button } from '@lib/ui/buttons/Button'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { Modal } from '@lib/ui/modal'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { useState } from 'react'
 import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
 import { ChecklistItem } from '@lib/ui/checklist/ChecklistItem'
@@ -11,7 +11,7 @@ import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
 import { MS_IN_SEC } from '@lib/utils/time'
 
-export const ResetHabitsOverlay = ({ onFinish }: FinishableComponentProps) => {
+export const ResetHabitsOverlay = ({ onFinish }: NoValueFinishProps) => {
   const habits = useOrderedHabits()
 
   const [selectedHabits, setSelectedHabits] = useState<string[]>([])
@@ -26,7 +26,12 @@ export const ResetHabitsOverlay = ({ onFinish }: FinishableComponentProps) => {
       onClose={onFinish}
       footer={
         <UniformColumnGrid gap={20}>
-          <Button type="button" size="l" onClick={onFinish} kind="secondary">
+          <Button
+            type="button"
+            size="l"
+            onClick={() => onFinish()}
+            kind="secondary"
+          >
             Cancel
           </Button>
           <Button

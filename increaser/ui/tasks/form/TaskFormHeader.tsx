@@ -95,7 +95,7 @@ export const TaskFormHeader = ({
         />
       </Header>
       <DescriptionInput
-        placeholder="Add description..."
+        placeholder="Add a description..."
         onChange={(description) => onChange({ ...value, description })}
         value={value.description}
       />

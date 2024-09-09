@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { HabitFormShape } from './HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
@@ -19,7 +19,7 @@ import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiInput } from '@increaser/ui/form/emoji-input/EmojiInput'
 
-export const CreateHabitForm = ({ onFinish }: FinishableComponentProps) => {
+export const CreateHabitForm = ({ onFinish }: NoValueFinishProps) => {
   const { habits } = useHabits()
   const usedColors = habits.map(({ color }) => color)
   const [value, setValue] = useState<HabitFormShape>({

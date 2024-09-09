@@ -1,8 +1,7 @@
-import { ReactNode } from 'react'
-import { ComponentWithChildrenProps, TitledComponentProps } from '../props'
+import { ComponentProps, ReactNode } from 'react'
+import { AsElementComponent, TitledComponentProps } from '../props'
 import { BodyPortal } from '../dom/BodyPortal'
 import { CompleteMist } from './CompleteMist'
-import { useIsScreenWidthLessThan } from '../hooks/useIsScreenWidthLessThan'
 import { useKey } from 'react-use'
 import { FocusTrap } from './FocusTrap'
 import { ModalContainer, ModalPlacement } from './ModalContainer'
@@ -10,43 +9,41 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { ModalTitleText } from './ModalTitleText'
 import { ModalContent } from './ModalContent'
 import { ModalCloseButton } from './ModalCloseButton'
-import { stopPropagation } from '../utils/stopPropagation'
 import { ModalSubTitleText } from './ModalSubTitleText'
-import { modalConfig } from './config'
+import styled from 'styled-components'
 
 export type ModalProps = TitledComponentProps &
-  ComponentWithChildrenProps & {
+  AsElementComponent &
+  ComponentProps<typeof Container> & {
     onClose?: () => void
     subTitle?: ReactNode
     placement?: ModalPlacement
     footer?: ReactNode
-    width?: number
+    targetWidth?: number
   }
+
+const Container = styled(ModalContainer)`
+  > * {
+    padding: 24px;
+  }
+`
 
 export const Modal = ({
   title,
   children,
   onClose,
-  placement = 'center',
   footer,
-  width = 400,
   subTitle,
+  as,
+  ...rest
 }: ModalProps) => {
-  const isFullScreen = useIsScreenWidthLessThan(
-    width + modalConfig.minHorizontalFreeSpaceForMist,
-  )
-
   useKey('Escape', onClose)
 
   return (
     <BodyPortal>
       <CompleteMist onClick={onClose}>
         <FocusTrap>
-          <ModalContainer
-            onClick={stopPropagation()}
-            placement={placement}
-            width={isFullScreen ? undefined : width}
-          >
+          <Container forwardedAs={as} {...rest}>
             <VStack gap={8}>
               <HStack
                 alignItems="start"
@@ -60,7 +57,7 @@ export const Modal = ({
             </VStack>
             <ModalContent>{children}</ModalContent>
             {footer && <VStack>{footer}</VStack>}
-          </ModalContainer>
+          </Container>
         </FocusTrap>
       </CompleteMist>
     </BodyPortal>

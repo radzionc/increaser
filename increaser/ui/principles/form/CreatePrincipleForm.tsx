@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
@@ -12,7 +12,7 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { PrincipleCategorySelector } from './PrincipleCategorySelector'
 import { ListItemForm } from '../../form/ListItemForm'
 
-export const CreatePrincipleForm = ({ onFinish }: FinishableComponentProps) => {
+export const CreatePrincipleForm = ({ onFinish }: NoValueFinishProps) => {
   const [value, setValue] = useState<PrincipleFormShape>({
     name: '',
     description: '',

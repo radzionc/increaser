@@ -16,10 +16,13 @@ import { fixLinks } from '@increaser/ui/tasks/form/fixLinks'
 import { fixChecklist } from '@increaser/ui/tasks/form/checklist/fixChecklist'
 import { useFocusTargetTask } from '../../../tasks/hooks/useFocusTargetTask'
 import { TaskFormHeader } from '@increaser/ui/tasks/form/TaskFormHeader'
+import { HStack } from '@lib/ui/css/stack'
+import { TaskDeadlineInput } from '@increaser/ui/tasks/deadline/TaskDeadlineInput'
+import { AddTaskLink } from '@increaser/ui/tasks/form/links/AddTaskLink'
 
 type TaskFormShape = Pick<
   Task,
-  'name' | 'links' | 'checklist' | 'description' | 'projectId'
+  'name' | 'links' | 'checklist' | 'description' | 'projectId' | 'deadlineAt'
 >
 
 export const FocusTaskOverview = () => {
@@ -27,7 +30,14 @@ export const FocusTaskOverview = () => {
 
   const initialValue = useMemo(
     () =>
-      pick(task, ['name', 'links', 'checklist', 'description', 'projectId']),
+      pick(task, [
+        'name',
+        'links',
+        'checklist',
+        'description',
+        'projectId',
+        'deadlineAt',
+      ]),
     [task],
   )
 
@@ -86,6 +96,19 @@ export const FocusTaskOverview = () => {
         value={value.checklist}
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
+      <HStack alignItems="center" gap={8}>
+        <TaskDeadlineInput
+          value={value.deadlineAt}
+          onChange={(deadlineAt) =>
+            setValue((prev) => ({ ...prev, deadlineAt }))
+          }
+        />
+        <AddTaskLink
+          onFinish={(value) =>
+            setValue((prev) => ({ ...prev, links: [...prev.links, value] }))
+          }
+        />
+      </HStack>
     </Panel>
   )
 }

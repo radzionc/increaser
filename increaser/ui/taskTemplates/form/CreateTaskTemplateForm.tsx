@@ -5,16 +5,14 @@ import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
-export const CreateTaskTemplateForm = ({
-  onFinish,
-}: FinishableComponentProps) => {
+export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
   const [value, setValue] = useState<TaskTemplateFormShape>({
     name: '',
     projectId: otherProject.id,

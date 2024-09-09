@@ -28,7 +28,7 @@ export const SetEditorProject = () => {
               <EmojiTextPrefix emoji={emoji} /> {name}
             </Text>
           </OptionContent>
-          <ExpandableSelectorToggle isOpen={props.isActive} />
+          <ExpandableSelectorToggle isOpen={!!props.isActive} />
         </ExpandableSelectorContainer>
       )}
       value={activeSet.projectId}

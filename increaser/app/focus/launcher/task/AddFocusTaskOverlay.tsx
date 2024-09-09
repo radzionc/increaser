@@ -3,9 +3,9 @@ import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { endOfDay } from 'date-fns'
 import { useFocusTarget } from '../../state/useFocusTarget'
-import { FinishableComponentProps } from '@lib/ui/props'
+import { NoValueFinishProps } from '@lib/ui/props'
 
-export const AddFocusTaskOverlay = ({ onFinish }: FinishableComponentProps) => {
+export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
   const [, setState] = useFocusTarget()
   const [{ projectId }] = useFocusTarget()
 
