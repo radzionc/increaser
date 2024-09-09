@@ -7,7 +7,6 @@ import { vStack } from '../css/stack'
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { useIsScreenWidthLessThan } from '../hooks/useIsScreenWidthLessThan'
 import { modalConfig } from './config'
-import { stopPropagation } from '../utils/stopPropagation'
 import { AsElementComponent } from '../props'
 
 export type ModalPlacement = 'top' | 'center'
@@ -61,7 +60,6 @@ export const ModalContainer = <T extends ElementType = 'div'>({
 
   return (
     <Container
-      onClick={stopPropagation()}
       width={isFullScreen ? undefined : targetWidth}
       placement={placement}
       {...props}
