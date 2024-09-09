@@ -40,6 +40,7 @@ export const AddTaskOverlay = ({
       targetWidth={480}
       onClose={() => onFinish()}
       as="form"
+      placement="top"
       {...getFormProps({
         onClose: () => onFinish(),
         isDisabled,

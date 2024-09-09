@@ -19,6 +19,7 @@ import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
+import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 
 type CreateTaskFormProps = {
   onFinish?: (id?: string) => void
@@ -119,11 +120,27 @@ export const CreateTaskFactoryForm = ({
           deadlineIndex={value.deadlineIndex}
         />
       </HStack>
-      <CreateFormFooter
-        isPending={isPending}
-        onCancel={() => onFinish?.()}
-        isDisabled={isDisabled}
-      />
+      <HStack
+        wrap="wrap"
+        fullWidth
+        alignItems="center"
+        gap={20}
+        justifyContent="space-between"
+      >
+        <HStack gap={8}>
+          <AddTaskLink
+            onFinish={(link) =>
+              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
+            }
+          />
+        </HStack>
+
+        <CreateFormFooter
+          isPending={isPending}
+          onCancel={() => onFinish?.()}
+          isDisabled={isDisabled}
+        />
+      </HStack>
     </ListItemForm>
   )
 }

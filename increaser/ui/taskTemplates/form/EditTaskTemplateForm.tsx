@@ -14,6 +14,8 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
+import { HStack } from '@lib/ui/css/stack'
+import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -69,6 +71,13 @@ export const EditTaskTemplateForm = () => {
         value={value.checklist}
         onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
+      <HStack alignItems="center" gap={8}>
+        <AddTaskLink
+          onFinish={(link) =>
+            setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
+          }
+        />
+      </HStack>
       <EditDeleteFormFooter
         onDelete={() => {
           deleteTaskTemplate(taskTemplate.id)

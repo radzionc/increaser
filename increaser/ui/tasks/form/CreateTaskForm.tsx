@@ -18,6 +18,7 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
+import { AddTaskLink } from './links/AddTaskLink'
 
 type CreateTaskFormProps = {
   defaultValue?: Partial<TaskFormShape>
@@ -131,6 +132,11 @@ export const CreateTaskForm = ({
                 ...prev,
                 deadlineAt,
               }))
+            }
+          />
+          <AddTaskLink
+            onFinish={(link) =>
+              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
         </HStack>

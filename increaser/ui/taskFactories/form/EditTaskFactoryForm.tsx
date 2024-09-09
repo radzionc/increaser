@@ -18,6 +18,7 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
+import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -103,6 +104,11 @@ export const EditTaskFactoryForm = () => {
             }
           />
         )}
+        <AddTaskLink
+          onFinish={(link) =>
+            setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
+          }
+        />
       </HStack>
       <EditDeleteFormFooter
         onDelete={() => {

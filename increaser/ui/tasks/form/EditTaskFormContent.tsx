@@ -20,6 +20,7 @@ import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFoot
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
+import { AddTaskLink } from './links/AddTaskLink'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -93,6 +94,11 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
             value={value.deadlineAt}
             onChange={(deadlineAt) =>
               setValue((prev) => ({ ...prev, deadlineAt }))
+            }
+          />
+          <AddTaskLink
+            onFinish={(link) =>
+              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
         </HStack>
