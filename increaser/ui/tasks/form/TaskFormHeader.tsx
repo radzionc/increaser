@@ -8,11 +8,15 @@ import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { useRef } from 'react'
+import { TaskLink } from '@increaser/entities/Task'
+import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
+import { TaskLinkItem } from './links/TaskLinkItem'
 
 type TaskFormHeaderValue = {
   projectId: string
   name: string
   description: string
+  links: TaskLink[]
 }
 
 type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> & {
@@ -53,6 +57,15 @@ const DescriptionInput = styled(MultilineTextInput)`
   padding: ${toSizeUnit(panelDefaultPadding)};
   padding-top: ${toSizeUnit(panelDefaultPadding / 2)};
   min-height: 60px;
+  line-height: 1.5;
+`
+
+const LinksContainer = styled(HStack)`
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-top: 4px;
 `
 
 export const TaskFormHeader = ({
@@ -98,6 +111,25 @@ export const TaskFormHeader = ({
         placeholder="Add a description..."
         onChange={(description) => onChange({ ...value, description })}
         value={value.description}
+      />
+      <NonEmptyOnly
+        value={value.links}
+        render={(links) => (
+          <LinksContainer>
+            {links.map((link, index) => (
+              <TaskLinkItem
+                key={index}
+                value={link}
+                onRemove={() =>
+                  onChange({
+                    ...value,
+                    links: value.links.filter((_, i) => i !== index),
+                  })
+                }
+              />
+            ))}
+          </LinksContainer>
+        )}
       />
     </Container>
   )

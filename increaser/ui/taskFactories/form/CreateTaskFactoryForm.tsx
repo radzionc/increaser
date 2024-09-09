@@ -6,7 +6,6 @@ import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
@@ -90,10 +89,6 @@ export const CreateTaskFactoryForm = ({
             name: prev.name || template.name,
           }))
         }}
-      />
-      <TaskLinksInput
-        value={value.links}
-        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <TaskChecklistInput
         value={value.checklist}

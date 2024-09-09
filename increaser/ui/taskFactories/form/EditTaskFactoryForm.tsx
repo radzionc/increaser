@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
@@ -81,10 +80,6 @@ export const EditTaskFactoryForm = () => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
-      />
-      <TaskLinksInput
-        value={value.links}
-        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <TaskChecklistInput
         value={value.checklist}

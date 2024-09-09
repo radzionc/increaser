@@ -7,7 +7,6 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
-import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { fixChecklist } from './checklist/fixChecklist'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
@@ -75,10 +74,6 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
-      />
-      <TaskLinksInput
-        value={value.links}
-        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <TaskChecklistInput
         value={value.checklist}

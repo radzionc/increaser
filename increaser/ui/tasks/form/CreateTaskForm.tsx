@@ -4,7 +4,6 @@ import { Task } from '@increaser/entities/Task'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
-import { TaskLinksInput } from './TaskLinksInput'
 import { fixLinks } from './fixLinks'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { fixChecklist } from './checklist/fixChecklist'
@@ -99,10 +98,6 @@ export const CreateTaskForm = ({
             name: prev.name || template.name,
           }))
         }}
-      />
-      <TaskLinksInput
-        value={value.links}
-        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <TaskChecklistInput
         value={value.checklist}

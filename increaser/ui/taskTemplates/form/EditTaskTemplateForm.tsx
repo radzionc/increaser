@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskLinksInput } from '../../tasks/form/TaskLinksInput'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
@@ -62,10 +61,6 @@ export const EditTaskTemplateForm = () => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
-      />
-      <TaskLinksInput
-        value={value.links}
-        onChange={(links) => setValue((prev) => ({ ...prev, links }))}
       />
       <TaskChecklistInput
         value={value.checklist}

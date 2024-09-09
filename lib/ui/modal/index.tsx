@@ -12,9 +12,9 @@ import { ModalCloseButton } from './ModalCloseButton'
 import { ModalSubTitleText } from './ModalSubTitleText'
 import styled from 'styled-components'
 
-export type ModalProps = TitledComponentProps &
-  AsElementComponent &
-  ComponentProps<typeof Container> & {
+export type ModalProps = AsElementComponent &
+  Omit<ComponentProps<typeof Container>, 'title'> &
+  TitledComponentProps & {
     onClose?: () => void
     subTitle?: ReactNode
     placement?: ModalPlacement
