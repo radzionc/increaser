@@ -20,6 +20,8 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
 import { AddTaskLink } from './links/AddTaskLink'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskChecklist } from './checklist/AddTaskChecklist'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -96,6 +98,16 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+          {isEmpty(value.checklist) && (
+            <AddTaskChecklist
+              onFinish={(checklist) =>
+                setValue((prev) => ({
+                  ...prev,
+                  checklist,
+                }))
+              }
+            />
+          )}
         </HStack>
       </VStack>
 

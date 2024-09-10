@@ -18,6 +18,8 @@ import { TaskFormHeader } from '@increaser/ui/tasks/form/TaskFormHeader'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskDeadlineInput } from '@increaser/ui/tasks/deadline/TaskDeadlineInput'
 import { AddTaskLink } from '@increaser/ui/tasks/form/links/AddTaskLink'
+import { AddTaskChecklist } from '@increaser/ui/tasks/form/checklist/AddTaskChecklist'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 type TaskFormShape = Pick<
   Task,
@@ -103,6 +105,16 @@ export const FocusTaskOverview = () => {
             setValue((prev) => ({ ...prev, links: [...prev.links, value] }))
           }
         />
+        {isEmpty(value.checklist) && (
+          <AddTaskChecklist
+            onFinish={(checklist) =>
+              setValue((prev) => ({
+                ...prev,
+                checklist,
+              }))
+            }
+          />
+        )}
       </HStack>
     </Panel>
   )

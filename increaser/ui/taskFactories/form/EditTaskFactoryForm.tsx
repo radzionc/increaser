@@ -18,6 +18,8 @@ import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserE
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -104,6 +106,17 @@ export const EditTaskFactoryForm = () => {
             setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
           }
         />
+
+        {isEmpty(value.checklist) && (
+          <AddTaskChecklist
+            onFinish={(checklist) =>
+              setValue((prev) => ({
+                ...prev,
+                checklist,
+              }))
+            }
+          />
+        )}
       </HStack>
       <EditDeleteFormFooter
         onDelete={() => {

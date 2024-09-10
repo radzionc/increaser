@@ -15,6 +15,8 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { HStack } from '@lib/ui/css/stack'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -72,6 +74,16 @@ export const EditTaskTemplateForm = () => {
             setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
           }
         />
+        {isEmpty(value.checklist) && (
+          <AddTaskChecklist
+            onFinish={(checklist) =>
+              setValue((prev) => ({
+                ...prev,
+                checklist,
+              }))
+            }
+          />
+        )}
       </HStack>
       <EditDeleteFormFooter
         onDelete={() => {

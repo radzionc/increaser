@@ -12,6 +12,8 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { HStack } from '@lib/ui/css/stack'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 
 export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
   const [value, setValue] = useState<TaskTemplateFormShape>({
@@ -64,6 +66,16 @@ export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+          {isEmpty(value.checklist) && (
+            <AddTaskChecklist
+              onFinish={(checklist) =>
+                setValue((prev) => ({
+                  ...prev,
+                  checklist,
+                }))
+              }
+            />
+          )}
         </HStack>
         <CreateFormFooter
           isPending={isPending}

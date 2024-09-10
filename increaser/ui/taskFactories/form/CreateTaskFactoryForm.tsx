@@ -19,6 +19,8 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 
 type CreateTaskFormProps = {
   onFinish?: (id?: string) => void
@@ -128,6 +130,17 @@ export const CreateTaskFactoryForm = ({
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+
+          {isEmpty(value.checklist) && (
+            <AddTaskChecklist
+              onFinish={(checklist) =>
+                setValue((prev) => ({
+                  ...prev,
+                  checklist,
+                }))
+              }
+            />
+          )}
         </HStack>
 
         <CreateFormFooter

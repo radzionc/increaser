@@ -2,7 +2,6 @@ import { TaskChecklistItem } from '@increaser/entities/Task'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { TaskChecklistItemInput } from './TaskChecklistItemInput'
-import { getId } from '@increaser/entities-utils/shared/getId'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled, { css } from 'styled-components'
@@ -14,6 +13,7 @@ import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { Wrap } from '@lib/ui/base/Wrap'
+import { getTaskChecklistItemInitialValue } from './getTaskChecklistItemInitialValue'
 
 type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -28,13 +28,6 @@ const DraggableItemContainer = styled(HStack)<{
       opacity: 0.4;
     `}
 `
-
-const getDefaultFields = () => ({
-  name: '',
-  completed: false,
-  order: 0,
-  id: getId(),
-})
 
 export const TaskChecklistInput = ({
   value,
@@ -107,7 +100,7 @@ export const TaskChecklistInput = ({
                       onChange([
                         ...value,
                         {
-                          ...getDefaultFields(),
+                          ...getTaskChecklistItemInitialValue(),
                           order,
                         },
                       ])
@@ -132,7 +125,7 @@ export const TaskChecklistInput = ({
           onChange([
             ...value,
             {
-              ...getDefaultFields(),
+              ...getTaskChecklistItemInitialValue(),
               order: getLastItemOrder(value.map((value) => value.order)),
             },
           ])

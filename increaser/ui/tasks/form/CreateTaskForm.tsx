@@ -18,6 +18,8 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
 import { AddTaskLink } from './links/AddTaskLink'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { AddTaskChecklist } from './checklist/AddTaskChecklist'
 
 type CreateTaskFormProps = {
   defaultValue?: Partial<TaskFormShape>
@@ -110,7 +112,7 @@ export const CreateTaskForm = ({
         gap={20}
         justifyContent="space-between"
       >
-        <HStack gap={8}>
+        <HStack wrap="wrap" fullWidth alignItems="center" gap={8}>
           <TaskStatusInput
             value={value.status}
             onChange={(status) =>
@@ -134,15 +136,25 @@ export const CreateTaskForm = ({
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+          {isEmpty(value.checklist) && (
+            <AddTaskChecklist
+              onFinish={(checklist) =>
+                setValue((prev) => ({
+                  ...prev,
+                  checklist,
+                }))
+              }
+            />
+          )}
         </HStack>
-        <CreateFormFooter
-          isPending={isPending}
-          isDisabled={isDisabled}
-          onCancel={() => {
-            onFinish?.()
-          }}
-        />
       </HStack>
+      <CreateFormFooter
+        isPending={isPending}
+        isDisabled={isDisabled}
+        onCancel={() => {
+          onFinish?.()
+        }}
+      />
     </ListItemForm>
   )
 }

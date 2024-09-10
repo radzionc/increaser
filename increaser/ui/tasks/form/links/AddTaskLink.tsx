@@ -12,7 +12,7 @@ export const AddTaskLink = ({ onFinish }: ValueFinishProps<TaskLink>) => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Container onClick={onOpen}>
+        <Container title="Add a link" onClick={onOpen}>
           <LinkIcon />
         </Container>
       )}
