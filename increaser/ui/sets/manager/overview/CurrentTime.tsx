@@ -4,16 +4,15 @@ import { useDayOverview } from './DayOverviewProvider'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { formatTime } from '@lib/utils/time/formatTime'
-import { Text } from '@lib/ui/text'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { dayOverviewConfig } from './config'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
 const Line = styled.div`
   width: 100%;
@@ -22,22 +21,18 @@ const Line = styled.div`
 `
 
 const Wrapper = styled.div`
-  width: ${toSizeUnit(dayOverviewConfig.dayTimeLabelsWidth)};
-  margin-left: ${toSizeUnit(dayOverviewConfig.horizontalPadding)};
+  margin-left: ${toSizeUnit(dayOverviewConfig.horizontalPadding - 10)};
+  width: 52px;
   position: relative;
   ${centerContent}
-  height: 20px;
-`
-
-const Time = styled(Text)`
-  position: absolute;
-`
-
-const Outline = styled.div`
-  ${absoluteOutline(10, 6)};
+  height: 28px;
   background: ${getColor('background')};
-  border-radius: 8px;
+  ${borderRadius.s};
   border: 2px solid ${getColor('primary')};
+  ${centerContent};
+  font-weight: 600;
+  font-size: 13px;
+  color: ${getColor('contrast')};
 `
 
 export const CurrentTime = () => {
@@ -70,12 +65,7 @@ export const CurrentTime = () => {
         <Line />
       </PositionAbsolutelyCenterHorizontally>
       <PositionAbsolutelyCenterHorizontally fullWidth top={top}>
-        <Wrapper>
-          <Outline />
-          <Time size={14} weight="600">
-            {formatTime(currentTime)}
-          </Time>
-        </Wrapper>
+        <Wrapper>{formatTime(currentTime)}</Wrapper>
       </PositionAbsolutelyCenterHorizontally>
     </>
   )
