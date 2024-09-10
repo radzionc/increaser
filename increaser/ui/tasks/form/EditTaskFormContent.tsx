@@ -9,7 +9,6 @@ import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
 import { fixLinks } from './fixLinks'
 import { fixChecklist } from './checklist/fixChecklist'
-import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -76,10 +75,6 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
-      />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <VStack>
         <HStack alignItems="center" gap={8}>

@@ -6,7 +6,6 @@ import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskCadenceInput } from './TaskCadenceInput'
-import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
@@ -82,10 +81,6 @@ export const EditTaskFactoryForm = () => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
-      />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
         <TaskCadenceInput

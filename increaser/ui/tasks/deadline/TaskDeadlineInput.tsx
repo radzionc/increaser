@@ -87,14 +87,14 @@ export const TaskDeadlineInput = ({
             <Icon isOverdue={isOverdue} style={{ fontSize: 14 }}>
               <CalendarIcon />
             </Icon>
-            <Text>
-              {value
-                ? formatTaskDeadline({
-                    deadlineAt: value,
-                    now,
-                  })
-                : 'Set a deadline'}
-            </Text>
+            {value && (
+              <Text>
+                {formatTaskDeadline({
+                  deadlineAt: value,
+                  now,
+                })}
+              </Text>
+            )}
           </HStack>
         </OptionContent>
       </ExpandableSelectorContainer>

@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { fixLinks } from '../../tasks/form/fixLinks'
-import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { useCurrentTaskTemplate } from '../CurrentTaskTemplateProvider'
@@ -63,10 +62,6 @@ export const EditTaskTemplateForm = () => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
-      />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
         <AddTaskLink

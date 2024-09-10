@@ -7,7 +7,6 @@ import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { TaskCadenceInput } from './TaskCadenceInput'
-import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { ExportFromTemplate } from '../../tasks/form/ExportFromTemplate'
@@ -91,10 +90,6 @@ export const CreateTaskFactoryForm = ({
             name: prev.name || template.name,
           }))
         }}
-      />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={20} wrap="wrap">
         <HStack gap={8}>

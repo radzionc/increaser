@@ -5,7 +5,6 @@ import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { fixLinks } from './fixLinks'
-import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { fixChecklist } from './checklist/fixChecklist'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
@@ -100,10 +99,6 @@ export const CreateTaskForm = ({
             name: prev.name || template.name,
           }))
         }}
-      />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack
         wrap="wrap"

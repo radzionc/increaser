@@ -8,17 +8,19 @@ import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { TaskProjectSelector } from '../TaskProjectSelector'
 import { useRef } from 'react'
-import { TaskLink } from '@increaser/entities/Task'
+import { TaskChecklistItem, TaskLink } from '@increaser/entities/Task'
 import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
 import { TaskLinkItem } from './links/TaskLinkItem'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
+import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 
 type TaskFormHeaderValue = {
   projectId: string
   name: string
   description: string
   links: TaskLink[]
+  checklist: TaskChecklistItem[]
 }
 
 type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> & {
@@ -66,6 +68,11 @@ const LinksContainer = styled(HStack)`
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-top: 0;
+`
+
+const ChecklistContainer = styled(VStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
   padding-top: 0;
 `
@@ -137,6 +144,17 @@ export const TaskFormHeader = ({
               />
             ))}
           </LinksContainer>
+        )}
+      />
+      <NonEmptyOnly
+        value={value.checklist}
+        render={(checklist) => (
+          <ChecklistContainer>
+            <TaskChecklistInput
+              value={checklist}
+              onChange={(checklist) => onChange({ ...value, checklist })}
+            />
+          </ChecklistContainer>
         )}
       />
     </Container>

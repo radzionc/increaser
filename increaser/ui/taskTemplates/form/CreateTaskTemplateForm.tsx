@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
-import { TaskChecklistInput } from '../../tasks/form/checklist/TaskChecklistInput'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
@@ -48,11 +47,6 @@ export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
         hasProjectAutoFocus
         onSubmit={isDisabled ? undefined : onSubmit}
       />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
-      />
-
       <HStack
         wrap="wrap"
         fullWidth

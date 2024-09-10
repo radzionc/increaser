@@ -6,7 +6,6 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useIsTaskFormDisabled } from '@increaser/ui/tasks/form/useIsTaskFormDisabled'
 import { Panel } from '@lib/ui/css/panel'
-import { TaskChecklistInput } from '@increaser/ui/tasks/form/checklist/TaskChecklistInput'
 import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
@@ -88,10 +87,6 @@ export const FocusTaskOverview = () => {
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
-      />
-      <TaskChecklistInput
-        value={value.checklist}
-        onChange={(checklist) => setValue((prev) => ({ ...prev, checklist }))}
       />
       <HStack alignItems="center" gap={8}>
         <TaskDeadlineInput
