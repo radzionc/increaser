@@ -11,6 +11,7 @@ import { ModalContent } from './ModalContent'
 import { ModalCloseButton } from './ModalCloseButton'
 import { ModalSubTitleText } from './ModalSubTitleText'
 import styled from 'styled-components'
+import { toSizeUnit } from '../css/toSizeUnit'
 
 export type ModalProps = AsElementComponent &
   Omit<ComponentProps<typeof Container>, 'title'> &
@@ -22,9 +23,19 @@ export type ModalProps = AsElementComponent &
     targetWidth?: number
   }
 
+const contentVerticalPadding = 8
+
 const Container = styled(ModalContainer)`
   > * {
     padding: 24px;
+  }
+
+  > *:nth-child(2) {
+    padding-top: ${toSizeUnit(contentVerticalPadding)};
+  }
+
+  > *:not(:first-child):not(:last-child) {
+    padding-bottom: ${toSizeUnit(contentVerticalPadding)};
   }
 `
 

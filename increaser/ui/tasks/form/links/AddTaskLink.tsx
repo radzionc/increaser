@@ -4,7 +4,7 @@ import { ExpandableSelectorContainer } from '@lib/ui/select/ExpandableSelectorCo
 import { ValueFinishProps } from '@lib/ui/props'
 import { TaskLink } from '@increaser/entities/Task'
 import { Opener } from '@lib/ui/base/Opener'
-import { AddTaskOverlay } from './AddTaskOverlay'
+import { AddTaskLinkOverlay } from './AddTaskLinkOverlay'
 
 const Container = styled(ExpandableSelectorContainer)``
 
@@ -17,7 +17,7 @@ export const AddTaskLink = ({ onFinish }: ValueFinishProps<TaskLink>) => {
         </Container>
       )}
       renderContent={({ onClose }) => (
-        <AddTaskOverlay
+        <AddTaskLinkOverlay
           onFinish={(value) => {
             if (value) {
               onFinish(value)

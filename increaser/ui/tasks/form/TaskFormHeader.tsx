@@ -11,6 +11,8 @@ import { useRef } from 'react'
 import { TaskLink } from '@increaser/entities/Task'
 import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
 import { TaskLinkItem } from './links/TaskLinkItem'
+import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
+import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 
 type TaskFormHeaderValue = {
   projectId: string
@@ -123,7 +125,13 @@ export const TaskFormHeader = ({
                 onRemove={() =>
                   onChange({
                     ...value,
-                    links: value.links.filter((_, i) => i !== index),
+                    links: removeAtIndex(value.links, index),
+                  })
+                }
+                onChange={(newValue) =>
+                  onChange({
+                    ...value,
+                    links: updateAtIndex(value.links, index, () => newValue),
                   })
                 }
               />
