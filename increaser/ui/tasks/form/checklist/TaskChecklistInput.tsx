@@ -53,7 +53,7 @@ export const TaskChecklistInput = ({
   const items = sortEntitiesWithOrder(value)
 
   return (
-    <Container title="Checklist">
+    <Container>
       <Content>
         <FormSectionShyTitle>Sub-tasks</FormSectionShyTitle>
       </Content>
