@@ -5,7 +5,6 @@ import { TaskChecklistItemInput } from './TaskChecklistItemInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled, { css } from 'styled-components'
-import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
 import { match } from '@lib/utils/match'
 import { DnDList } from '@lib/dnd/DnDList'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
@@ -16,6 +15,7 @@ import { getTaskChecklistItemInitialValue } from './getTaskChecklistItemInitialV
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { checklistConfig } from './config'
 import { FormSectionShyTitle } from '@lib/ui/form/components/FormSectionShyTitle'
+import { AddChecklistItem } from './AddChecklistItem'
 
 type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
 
@@ -140,21 +140,17 @@ export const TaskChecklistInput = ({
           }}
         />
       )}
-      <Content>
-        <FieldArrayAddButton
-          onClick={() => {
-            onChange([
-              ...value,
-              {
-                ...getTaskChecklistItemInitialValue(),
-                order: getLastItemOrder(value.map((value) => value.order)),
-              },
-            ])
-          }}
-        >
-          Add an item
-        </FieldArrayAddButton>
-      </Content>
+      <AddChecklistItem
+        onClick={() => {
+          onChange([
+            ...value,
+            {
+              ...getTaskChecklistItemInitialValue(),
+              order: getLastItemOrder(value.map((value) => value.order)),
+            },
+          ])
+        }}
+      />
     </Container>
   )
 }
