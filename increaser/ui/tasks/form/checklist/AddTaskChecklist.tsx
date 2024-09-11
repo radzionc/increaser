@@ -9,7 +9,7 @@ export const AddTaskChecklist = ({
 }: ValueFinishProps<TaskChecklistItem[]>) => {
   return (
     <ExpandableSelectorContainer
-      title="Add a checklist"
+      title="Add sub-tasks"
       onClick={() => {
         onFinish([getTaskChecklistItemInitialValue()])
       }}

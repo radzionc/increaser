@@ -6,7 +6,6 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
 import styled, { css } from 'styled-components'
 import { FieldArrayAddButton } from '@lib/ui/form/components/FieldArrayAddButton'
-import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { match } from '@lib/utils/match'
 import { DnDList } from '@lib/dnd/DnDList'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
@@ -14,19 +13,33 @@ import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { Wrap } from '@lib/ui/base/Wrap'
 import { getTaskChecklistItemInitialValue } from './getTaskChecklistItemInitialValue'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { checklistConfig } from './config'
+import { FormSectionShyTitle } from '@lib/ui/form/components/FormSectionShyTitle'
 
 type TaskChecklistInputProps = InputProps<TaskChecklistItem[]>
+
+const Container = styled(VStack)`
+  gap: 8px;
+  overflow-y: auto;
+`
 
 const DraggableItemContainer = styled(HStack)<{
   isDragging?: boolean
 }>`
   width: 100%;
-  gap: 8px;
+  gap: ${toSizeUnit(checklistConfig.dragHandleContentGap)};
   ${({ isDragging }) =>
     isDragging &&
     css`
       opacity: 0.4;
     `}
+`
+
+const Content = styled.div`
+  padding-left: ${toSizeUnit(
+    checklistConfig.dragHandleWidth + checklistConfig.dragHandleContentGap,
+  )};
 `
 
 export const TaskChecklistInput = ({
@@ -36,7 +49,10 @@ export const TaskChecklistInput = ({
   const items = sortEntitiesWithOrder(value)
 
   return (
-    <FieldArrayContainer title="Checklist">
+    <Container title="Checklist">
+      <Content>
+        <FormSectionShyTitle>Sub-tasks</FormSectionShyTitle>
+      </Content>
       {value.length > 0 && (
         <DnDList
           items={items}
@@ -120,19 +136,21 @@ export const TaskChecklistInput = ({
           }}
         />
       )}
-      <FieldArrayAddButton
-        onClick={() => {
-          onChange([
-            ...value,
-            {
-              ...getTaskChecklistItemInitialValue(),
-              order: getLastItemOrder(value.map((value) => value.order)),
-            },
-          ])
-        }}
-      >
-        Add an item
-      </FieldArrayAddButton>
-    </FieldArrayContainer>
+      <Content>
+        <FieldArrayAddButton
+          onClick={() => {
+            onChange([
+              ...value,
+              {
+                ...getTaskChecklistItemInitialValue(),
+                order: getLastItemOrder(value.map((value) => value.order)),
+              },
+            ])
+          }}
+        >
+          Add an item
+        </FieldArrayAddButton>
+      </Content>
+    </Container>
   )
 }

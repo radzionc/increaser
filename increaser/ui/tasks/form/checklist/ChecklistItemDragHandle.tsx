@@ -7,15 +7,14 @@ import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-
-const dragHandleWidth = 20
+import { checklistConfig } from './config'
 
 const Wrapper = styled.div`
   padding-top: ${toSizeUnit(tightListItemConfig.verticalPadding)};
 `
 
 const Container = styled.div<ComponentWithActiveState>`
-  width: ${toSizeUnit(dragHandleWidth)};
+  width: ${toSizeUnit(checklistConfig.dragHandleWidth)};
   height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   ${borderRadius.xs};
   border: 1px solid ${getColor('mist')};

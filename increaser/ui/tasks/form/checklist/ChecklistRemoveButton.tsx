@@ -7,6 +7,6 @@ export const ChecklistRemoveButton = ({ onClick }: ClickableComponentProps) => (
     kind="alert"
     onClick={onClick}
     icon={<TrashBinIcon />}
-    title="Remove item"
+    title="Remove sub-task"
   />
 )

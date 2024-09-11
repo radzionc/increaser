@@ -28,7 +28,7 @@ const ButtonWrapper = styled.div`
 const Wrapper = styled(HStack)`
   width: 100%;
 
-  &:hover ${ButtonWrapper}, &:focus-within ${ButtonWrapper} {
+  &:hover ${ButtonWrapper} {
     opacity: 1;
   }
 `
