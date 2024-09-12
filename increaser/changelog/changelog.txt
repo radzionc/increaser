@@ -1,5 +1,6 @@
-Task links take less space and are more comfortable to manage.
-While focusing on a task, see in real-time the total time you've spent on the current task
+The "sub-tasks" section appears only if you want to add sub-tasks, it's collapsible and less distracting
+Task links take up less space and are more comfortable to manage
+While focusing on a task, you can see in real-time the total time you've spent on the current task
 1725723647758
 Quickly change current focus task.
 Easily edit current focus task name, description, links and checklist from the focus page
