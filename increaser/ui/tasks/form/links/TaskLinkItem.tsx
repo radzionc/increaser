@@ -77,6 +77,11 @@ const MoreButton = styled(IconButton)<ComponentWithActiveState>`
     `}
 `
 
+const LinkIcon = styled(ExternalLinkIcon)`
+  color: ${({ theme }) =>
+    theme.colors.foreground.getVariant({ l: () => 48 }).toCssValue()};
+`
+
 export const TaskLinkItem = ({ value, onRemove, onChange }: TaskLinkProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
@@ -126,7 +131,7 @@ export const TaskLinkItem = ({ value, onRemove, onChange }: TaskLinkProps) => {
         render={({ actionSize }) => (
           <Container to={value.url}>
             <Text centerVertically style={{ gap: 8 }}>
-              <ExternalLinkIcon />
+              <LinkIcon />
               {value.name}
             </Text>
             <Spacer {...actionSize} />
