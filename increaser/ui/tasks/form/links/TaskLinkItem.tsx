@@ -1,8 +1,5 @@
 import { TaskLink } from '@increaser/entities/Task'
-import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
-import { IconButton } from '@lib/ui/buttons/IconButton'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { interactive } from '@lib/ui/css/interactive'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { HStack, hStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -11,7 +8,6 @@ import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { ExternalLinkIcon } from '@lib/ui/icons/ExternalLinkIcon'
 import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-import { Spacer } from '@lib/ui/layout/Spacer'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
 import {
   ComponentWithActiveState,
@@ -29,52 +25,58 @@ import { OptionItem } from '@lib/ui/select/OptionItem'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { EditTaskLinkOverlay } from './EditTaskLinkOverlay'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { centerContent } from '@lib/ui/css/centerContent'
 
 type TaskLinkProps = InputProps<TaskLink> & RemovableComponentProps
 
-const Wrapper = styled(ActionInsideInteractiveElement)`
-  ${interactive};
-  ${hStack({
-    alignItems: 'center',
-    gap: 4,
-  })}
-`
-
 const height = 36
 
-const closeButtonPadding = 2
-
-const Container = styled(ExternalLink)`
+const Wrapper = styled(HStack)`
+  gap: 1px;
   height: ${toSizeUnit(height)};
-  padding-left: 12px;
-  padding-right: ${toSizeUnit(closeButtonPadding)};
-  ${borderRadius.s};
-  background: ${getColor('foreground')};
-  border: 1px solid ${getColor('mist')};
+  border: 1px solid transparent;
+  ${borderRadius.m};
+  overflow: hidden;
+  background: ${getColor('mistExtra')};
+`
+
+const Content = styled(ExternalLink)`
+  height: 100%;
+  ${horizontalPadding(12)};
   ${hStack({
     alignItems: 'center',
     gap: 8,
   })}
+  background: ${getColor('foreground')};
   &:hover {
     background: ${getHoverVariant('foreground')};
     color: ${getColor('contrast')};
   }
 `
 
-const MoreButton = styled(IconButton)<ComponentWithActiveState>`
-  ${sameDimensions(height - closeButtonPadding * 2)};
+const MoreButton = styled(UnstyledButton)<ComponentWithActiveState>`
+  ${sameDimensions(height)};
   color: ${getColor('textSupporting')};
-
-  border: 1px solid transparent;
 
   outline: none;
 
+  background: ${getColor('foreground')};
+
+  ${centerContent};
+
   ${({ isActive }) =>
-    isActive &&
-    css`
-      color: ${getColor('contrast')};
-      border-color: ${getColor('text')};
-    `}
+    isActive
+      ? css`
+          color: ${getColor('contrast')};
+        `
+      : css`
+          &:hover {
+            background: ${getHoverVariant('foreground')};
+            color: ${getColor('contrast')};
+          }
+        `}
 `
 
 const LinkIcon = styled(ExternalLinkIcon)`
@@ -115,29 +117,20 @@ export const TaskLinkItem = ({ value, onRemove, onChange }: TaskLinkProps) => {
 
   return (
     <>
-      <Wrapper
-        action={
-          <MoreButton
-            isActive={isOpen}
-            {...getReferenceProps()}
-            kind="secondary"
-            title="Edit link"
-            icon={<MoreHorizontalIcon />}
-          />
-        }
-        actionPlacerStyles={{
-          right: closeButtonPadding,
-        }}
-        render={({ actionSize }) => (
-          <Container to={value.url}>
-            <Text centerVertically style={{ gap: 8 }}>
-              <LinkIcon />
-              {value.name}
-            </Text>
-            <Spacer {...actionSize} />
-          </Container>
-        )}
-      />
+      <Wrapper>
+        <Content to={value.url}>
+          <LinkIcon />
+          {value.name}
+        </Content>
+        <MoreButton
+          type="button"
+          isActive={isOpen}
+          {...getReferenceProps()}
+          title="Edit link"
+        >
+          <MoreHorizontalIcon />
+        </MoreButton>
+      </Wrapper>
 
       {isOpen && (
         <FloatingFocusManager context={context} modal returnFocus>
