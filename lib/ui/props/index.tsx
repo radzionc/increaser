@@ -112,3 +112,8 @@ export type AsElementComponent<T extends ElementType = ElementType> = {
 export type DraggingAwareComponentProps = {
   isDragging?: boolean
 }
+
+export type ProgressComponentProps = {
+  target: number
+  current: number
+}

@@ -9,12 +9,14 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { getColor } from '@lib/ui/theme/getters'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Container = styled(UnstyledButton)`
   width: 100%;
   padding-left: ${toSizeUnit(
     checklistConfig.dragHandleWidth + checklistConfig.dragHandleContentGap,
   )};
+  ${verticalPadding(tightListItemConfig.verticalPadding)};
   ${hStack({
     alignItems: 'center',
     gap: tightListItemConfig.gap,

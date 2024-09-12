@@ -37,6 +37,7 @@ export enum PersistentStateKey {
   LastPageView = 'lastPageView',
   TaskTimeGrouping = 'taskTimeGrouping',
   TasksView = 'tasksView',
+  IsChecklistOpen = 'isChecklistOpen',
 }
 
 const persistentStorage =
