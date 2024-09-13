@@ -31,6 +31,12 @@ type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> & {
 const Container = styled(VStack)`
   padding: 0;
   width: 100%;
+  flex: 1;
+  overflow-y: auto;
+
+  > * {
+    flex-shrink: 0;
+  }
 `
 
 const Header = styled(HStack)`

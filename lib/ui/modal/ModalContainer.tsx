@@ -16,6 +16,8 @@ type ContainerProps = {
   placement: ModalPlacement
 }
 
+const offset = 40
+
 const Container = styled.div<ContainerProps>`
   ${vStack()};
 
@@ -27,11 +29,11 @@ const Container = styled.div<ContainerProps>`
       ? css`
           width: ${toSizeUnit(width)};
           ${borderRadius.m};
-          max-height: 92%;
+          max-height: calc(100% - ${toSizeUnit(offset * 2)});
           ${placement === 'top' &&
           css`
             align-self: start;
-            margin-top: 4%;
+            margin-top: ${toSizeUnit(offset)};
           `}
         `
       : takeWholeSpace};
