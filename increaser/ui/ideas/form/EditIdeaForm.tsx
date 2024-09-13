@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
-import { Idea } from '@increaser/entities/Idea'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
@@ -15,7 +14,6 @@ import { TurnIdeaIntoTask } from './TurnIdeaIntoTask'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditIdeaForm = () => {
   const idea = useCurrentIdea()
@@ -38,12 +36,12 @@ export const EditIdeaForm = () => {
       return
     }
 
-    const fields: Partial<Omit<Idea, 'id'>> = getUpdatedValues({
+    const fields = getUpdatedValues({
       before: initialValue,
       after: value,
     })
 
-    if (!isRecordEmpty(fields)) {
+    if (fields) {
       updateIdea({
         id: idea.id,
         fields: {

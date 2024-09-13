@@ -1,9 +1,6 @@
 import { useState } from 'react'
-import { Task } from '@increaser/entities/Task'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { useCurrentTask } from '../CurrentTaskProvider'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
@@ -25,7 +22,6 @@ import { AddTaskChecklist } from './checklist/AddTaskChecklist'
 type EditTaskFormContentProps = NoValueFinishProps
 
 export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
-  const { tasks } = useAssertUserState()
   const task = useCurrentTask()
   const initialValue = pick(task, [
     'name',
@@ -44,7 +40,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const isDisabled = useIsTaskFormDisabled(value)
 
   const onSubmit = () => {
-    const newFields: Partial<Omit<Task, 'id'>> = getUpdatedValues({
+    const fields = getUpdatedValues({
       before: initialValue,
       after: {
         ...value,
@@ -53,15 +49,13 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
       },
     })
 
-    if (value.deadlineAt !== task.deadlineAt) {
-      const orders = Object.values(tasks).map((task) => task.order)
-      newFields.order = getLastItemOrder(orders)
+    if (fields) {
+      updateTask({
+        id: task.id,
+        fields,
+      })
     }
 
-    updateTask({
-      id: task.id,
-      fields: newFields,
-    })
     onFinish()
   }
 

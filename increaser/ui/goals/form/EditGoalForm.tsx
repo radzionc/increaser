@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useCurrentGoal } from '../CurrentGoalProvider'
-import { Goal } from '@increaser/entities/Goal'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalFormShape } from './GoalFormShape'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
@@ -11,7 +10,6 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { GoalFormFields } from './GoalFormFields'
 import { ListItemForm } from '../../form/ListItemForm'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditGoalForm = () => {
   const goal = useCurrentGoal()
@@ -43,12 +41,12 @@ export const EditGoalForm = () => {
       return
     }
 
-    const fields: Partial<Omit<Goal, 'id'>> = getUpdatedValues({
+    const fields = getUpdatedValues({
       before: initialValue,
       after: value,
     })
 
-    if (!isRecordEmpty(fields)) {
+    if (fields) {
       updateGoal({
         id: goal.id,
         fields,

@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
-import { VisionAttribute } from '@increaser/entities/Vision'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
@@ -11,7 +10,6 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -44,12 +42,12 @@ export const EditVisionAttributeForm = () => {
       return
     }
 
-    const fields: Partial<Omit<VisionAttribute, 'id'>> = getUpdatedValues({
+    const fields = getUpdatedValues({
       before: initialValue,
       after: value,
     })
 
-    if (!isRecordEmpty(fields)) {
+    if (fields) {
       updateVisionAttribute({
         id: visionAttribute.id,
         fields,

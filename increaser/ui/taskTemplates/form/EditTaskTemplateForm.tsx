@@ -45,10 +45,13 @@ export const EditTaskTemplateForm = () => {
       after: newValue,
     })
 
-    updateTaskTemplate({
-      id: taskTemplate.id,
-      fields,
-    })
+    if (fields) {
+      updateTaskTemplate({
+        id: taskTemplate.id,
+        fields,
+      })
+    }
+
     onFinish()
   }
 

@@ -1,8 +1,5 @@
 import { useCallback, useState } from 'react'
-import {
-  otherPrincipleCategoryId,
-  PrincipleCategory,
-} from '@increaser/entities/PrincipleCategory'
+import { otherPrincipleCategoryId } from '@increaser/entities/PrincipleCategory'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { pick } from '@lib/utils/record/pick'
 import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
@@ -17,7 +14,6 @@ import { useIsPrincipleCategoryFormDisabled } from './useIsPrincipleCategoryForm
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 import { ListItemForm } from '../../../form/ListItemForm'
 import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditPricnipleCategoryForm = () => {
   const principleCategory = useCurrentPrincipleCategory()
@@ -43,12 +39,12 @@ export const EditPricnipleCategoryForm = () => {
       return
     }
 
-    const fields: Partial<Omit<PrincipleCategory, 'id'>> = getUpdatedValues({
+    const fields = getUpdatedValues({
       before: initialValue,
       after: value,
     })
 
-    if (!isRecordEmpty(fields)) {
+    if (fields) {
       updatePrincipleCategory({
         id: principleCategory.id,
         fields,

@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react'
-import { Principle } from '@increaser/entities/Principle'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
@@ -14,7 +13,6 @@ import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserE
 import { useCurrentPrinciple } from '../CurrentPrincipleProvider'
 import { PrincipleCategorySelector } from './PrincipleCategorySelector'
 import { ListItemForm } from '../../form/ListItemForm'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 
 export const EditPrincipleForm = () => {
   const principle = useCurrentPrinciple()
@@ -37,12 +35,12 @@ export const EditPrincipleForm = () => {
       return
     }
 
-    const fields: Partial<Omit<Principle, 'id'>> = getUpdatedValues({
+    const fields = getUpdatedValues({
       before: initialValue,
       after: value,
     })
 
-    if (!isRecordEmpty(fields)) {
+    if (fields) {
       updatePrinciple({
         id: principle.id,
         fields,

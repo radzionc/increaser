@@ -1,12 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Task } from '@increaser/entities/Task'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
-import { useIsTaskFormDisabled } from '@increaser/ui/tasks/form/useIsTaskFormDisabled'
 import { Panel } from '@lib/ui/css/panel'
-import { isRecordEmpty } from '@lib/utils/record/isRecordEmpty'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
@@ -19,6 +17,8 @@ import { TaskDeadlineInput } from '@increaser/ui/tasks/deadline/TaskDeadlineInpu
 import { AddTaskLink } from '@increaser/ui/tasks/form/links/AddTaskLink'
 import { AddTaskChecklist } from '@increaser/ui/tasks/form/checklist/AddTaskChecklist'
 import { isEmpty } from '@lib/utils/array/isEmpty'
+import { useUnmount } from 'react-use'
+import { useValueRef } from '@lib/ui/hooks/useValueRef'
 
 type TaskFormShape = Pick<
   Task,
@@ -45,14 +45,8 @@ export const FocusTaskOverview = () => {
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
-  const isDisabled = useIsTaskFormDisabled(value)
-
-  useEffect(() => {
-    if (isDisabled) {
-      return
-    }
-
-    const newFields = getUpdatedValues({
+  const changedFields = useMemo(() => {
+    return getUpdatedValues({
       before: initialValue,
       after: {
         ...value,
@@ -66,21 +60,27 @@ export const FocusTaskOverview = () => {
           areArraysEqual(one, another, areChecklistItemsEqual),
       },
     })
+  }, [initialValue, value])
+  const changedFieldsRef = useValueRef(changedFields)
 
-    if (isRecordEmpty(newFields)) {
-      return
-    }
+  const sync = useCallback(() => {
+    const fields = changedFieldsRef.current
+    if (!fields) return
 
-    const timeout = setTimeout(() => {
-      console.log('update task', newFields)
-      updateTask({
-        id: task.id,
-        fields: newFields,
-      })
-    }, 500)
+    console.log('update task: ', fields)
+    updateTask({
+      id: task.id,
+      fields,
+    })
+  }, [changedFieldsRef, task.id, updateTask])
+
+  useEffect(() => {
+    const timeout = setTimeout(sync, 500)
 
     return () => clearTimeout(timeout)
-  }, [initialValue, isDisabled, task.id, updateTask, value])
+  }, [sync, changedFields])
+
+  useUnmount(sync)
 
   return (
     <Panel withSections kind="secondary">
