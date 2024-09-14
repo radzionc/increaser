@@ -8,8 +8,18 @@ export const productUpdateSocials = [
   'linkedIn',
   'indieHackers',
   'reddit',
+  'youtube',
 ] as const
-type ProductUpdateSocial = (typeof productUpdateSocials)[number]
+export type ProductUpdateSocial = (typeof productUpdateSocials)[number]
+
+export const productUpdateSocialName = {
+  telegram: 'Telegram',
+  x: 'X',
+  linkedIn: 'LinkedIn',
+  indieHackers: 'Indie Hackers',
+  reddit: 'Reddit',
+  youtube: 'YouTube',
+} as const
 
 export type ProductUpdateSocials = Partial<Record<ProductUpdateSocial, string>>
 
@@ -19,5 +29,4 @@ export type ProductUpdate = ProductUpdateSocials & {
   description: string
   videoId?: string
   items?: ProductUpdateItem[]
-  // todo: add YouTube support
 }

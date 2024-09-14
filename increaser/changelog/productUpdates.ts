@@ -3,14 +3,28 @@ import { ProductUpdate } from './ProductUpdate'
 export const productUpdates: ProductUpdate[] = [
   {
     releasedAt: 1726289037356,
-    name: '',
-    description: '',
-    videoId: '',
-    items: [],
-    telegram: '',
+    name: 'Streamlined Task Management & Real-Time Tracking',
+    description:
+      "We've made task management even smoother with collapsible sub-tasks and links sections, plus real-time updates for time spent on tasks.",
+    items: [
+      {
+        description:
+          'Sub-tasks section is now hidden by default. It only appears when you add sub-tasks, making task views cleaner. You can now collapse it, and drag-and-drop or remove sub-tasks with ease.',
+      },
+      {
+        description:
+          "Task links are hidden by default and only show up when you're adding links, providing a more compact interface for managing tasks.",
+      },
+      {
+        description:
+          'See your time spent on tasks update in real-time as you work, alongside task deadlines for more efficient planning.',
+      },
+    ],
+    telegram: 'https://t.me/increaser_app/50',
     x: '',
     linkedIn: '',
-    indieHackers: '',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-increaser-features-hidden-sub-tasks-real-time-updates-more--O6jVl107L2AGeQAeayB',
     reddit: '',
   },
 

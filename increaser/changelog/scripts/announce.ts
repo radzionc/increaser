@@ -1,6 +1,34 @@
 import clipboardy from 'clipboardy'
 import { parseChangelog } from '../utils/parseChangelog'
 import { readChangelogFile } from '../utils/changelogFile'
+import { ProductUpdateSocial, productUpdateSocialName } from '../ProductUpdate'
+import { toEntries } from '@lib/utils/record/toEntries'
+
+const socialPrompt: Record<ProductUpdateSocial, string[]> = {
+  telegram: [
+    'A message for Increaser telegram channel.',
+    `Include https://app.increaser.org url in the content.`,
+  ],
+  x: [
+    'A post on X, 280 characters max. Do not use hashtags.',
+    `Include https://increaser.org url in the content.`,
+  ],
+  reddit: [
+    `Include Increaser's website url in the content.`,
+    'Also provide a title for the post.',
+    `Include https://increaser.org url in the content.`,
+  ],
+  indieHackers: [
+    `Include Increaser's app url in the content.`,
+    'Also provide a title for the post.',
+    `Include https://increaser.org url in the content.`,
+  ],
+  linkedIn: [
+    `Do not use markdown syntax, e.g. no **bold**, LinkedIn posts do not support markdown.`,
+    `Include https://increaser.org url in the content.`,
+  ],
+  youtube: ['A video title and description.'],
+}
 
 const announce = () => {
   const changelog = readChangelogFile()
@@ -9,22 +37,23 @@ const announce = () => {
   const { items } = changelogItems[0]
 
   const prompt = [
-    'You will write an announcement for new product updates.',
-    'I will post it on Telegram channel, X, LinkedIn, Indie Hackers, and Reddit.',
-    'Every announcement should be a plain text as those platforms do not support markdown.',
-    'You can use emojis, or make plain text lists to make the announcement more readable.',
-    'Keep the copy short, but make sure the user will understand each update and its value.',
-    'Make each announcement feel native to the platform.',
-    'Titles should represent an essence of the updates.',
-    'Announcement on X should be a tweet with 280 characters max. Do not use hashtags. Return as a markdown snippet.',
-    `Announcement on Reddit should be a Reddit post. You can use markdown for Reddit. Return title and content separately as markdown snippets. Include Increaser's url (https://increaser.org) in the content.`,
-    `Announcement on Indie Hackers should be an Indie Hackers post. Return title and content separately as markdown snippets. Include Increaser's url (https://increaser.org) in the content.`,
-    `Announcement on LinkedIn should be a LinkedIn post. Do not use markdown syntax, e.g. no **bold**, LinkedIn posts do not support it. Return as a markdown snippet.  Include Increaser's url (https://increaser.org) in the content.`,
-    'Announcement on Telegram should be a message. Return as a markdown snippet.',
-    'Updates are ordered by their priority.',
-    'Product updates:',
-    items.map((item) => `  - ${item}`).join('\n'),
-  ].join('\n')
+    [
+      'You will write an announcement for new product updates.',
+      'Use your judgment to make the announcement engaging and informative.',
+      'Make each announcement feel native to the platform.',
+      'Return copy for each platform in a separate markdown snippet',
+      'Titles should represent an essence of the updates.',
+    ].join(' '),
+
+    ...toEntries(socialPrompt).map(({ key, value }) =>
+      [`### ${productUpdateSocialName[key]}`, value].join('\n'),
+    ),
+
+    [
+      'Updates are ordered by their priority: ',
+      ...items.map((item, index) => `${index + 1}. ${item}`),
+    ].join('\n'),
+  ].join('\n\n')
 
   console.log(prompt)
   clipboardy.writeSync(prompt)
