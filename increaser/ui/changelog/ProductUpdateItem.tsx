@@ -21,10 +21,15 @@ import { transition } from '@lib/ui/css/transition'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { ProductUpdateSocialsPrompt } from './ProductUpdateSocialsPrompt'
+import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import YouTubePlayer from 'react-player/lazy'
+import { useBoolean } from '@lib/ui/hooks/useBoolean'
 
 const Container = styled(VStack)`
   gap: 16px;
 `
+
+const youTubeVideoRatio = 9 / 16
 
 const VideoWrapper = styled.div`
   width: 100%;
@@ -32,7 +37,7 @@ const VideoWrapper = styled.div`
   ${borderRadius.m}
   overflow: hidden;
   border: 2px solid ${getColor('mistExtra')};
-  aspect-ratio: 1592 / 1080;
+
   overflow: hidden;
 `
 
@@ -52,6 +57,8 @@ export const ProductUpdateItem = ({
 }: ComponentWithValueProps<ProductUpdate>) => {
   const hasSocials = productUpdateSocials.some((social) => !!value[social])
 
+  const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
+
   return (
     <Container>
       <VStack gap={4}>
@@ -66,24 +73,64 @@ export const ProductUpdateItem = ({
         </Text>
       </VStack>
       <ClientOnly>
-        <IntersectionAware<HTMLDivElement>
-          render={({ ref, wasIntersected }) => {
-            return (
-              <VideoWrapper ref={ref}>
-                {wasIntersected && (
-                  <TakeWholeSpace>
-                    <Video as="video" autoPlay muted loop>
-                      <source
-                        src={getPublicFileUrl(`updates/${value.videoId}.mp4`)}
-                        type="video/mp4"
+        {(value.youtube || value.videoId) && (
+          <IntersectionAware<HTMLDivElement>
+            render={({ ref, wasIntersected }) => {
+              if (value.youtube) {
+                return (
+                  <VStack fullWidth ref={ref}>
+                    {wasIntersected && (
+                      <ElementSizeAware
+                        render={({ setElement, size }) => {
+                          return (
+                            <VideoWrapper ref={setElement}>
+                              {size && (
+                                <YouTubePlayer
+                                  isActive
+                                  width={size.width}
+                                  height={size.width * youTubeVideoRatio}
+                                  url={value.youtube}
+                                  playing={isPlaying}
+                                  onPause={pause}
+                                  onPlay={play}
+                                  config={{
+                                    youtube: {
+                                      playerVars: { autoplay: 0, controls: 1 },
+                                    },
+                                  }}
+                                />
+                              )}
+                            </VideoWrapper>
+                          )
+                        }}
                       />
-                    </Video>
-                  </TakeWholeSpace>
-                )}
-              </VideoWrapper>
-            )
-          }}
-        />
+                    )}
+                  </VStack>
+                )
+              } else {
+                return (
+                  <VideoWrapper
+                    style={{ aspectRatio: '1592 / 1080' }}
+                    ref={ref}
+                  >
+                    {wasIntersected && (
+                      <TakeWholeSpace>
+                        <Video as="video" autoPlay muted loop>
+                          <source
+                            src={getPublicFileUrl(
+                              `updates/${value.videoId}.mp4`,
+                            )}
+                            type="video/mp4"
+                          />
+                        </Video>
+                      </TakeWholeSpace>
+                    )}
+                  </VideoWrapper>
+                )
+              }
+            }}
+          />
+        )}
       </ClientOnly>
       {hasSocials && <ProductUpdateSocialsPrompt value={value} />}
       {value.items && (

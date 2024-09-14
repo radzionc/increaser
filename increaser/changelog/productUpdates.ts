@@ -21,11 +21,14 @@ export const productUpdates: ProductUpdate[] = [
       },
     ],
     telegram: 'https://t.me/increaser_app/50',
-    x: '',
-    linkedIn: '',
+    x: 'https://x.com/increaser_app/status/1834962949833646082',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:ugcPost:7240729193502695426/?actorCompanyId=26211797',
     indieHackers:
       'https://www.indiehackers.com/product/increaser/new-increaser-features-hidden-sub-tasks-real-time-updates-more--O6jVl107L2AGeQAeayB',
-    reddit: '',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1fgnbit/declutter_your_workspace_with_increasers_latest/',
+    youtube: 'https://youtu.be/Z7uuSvac--Q',
   },
 
   {
