@@ -1,0 +1,1 @@
+Good, now that you have more context about the changes - improve the initial changelog items while keeping them as short as possible, as they are only used internally and are being transformed into a more user-friendly text in announcements.

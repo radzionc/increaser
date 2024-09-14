@@ -6,7 +6,8 @@
     "typecheck": "tsc --noEmit",
     "prepare": "npx tsx ./scripts/prepare.ts",
     "announce": "npx tsx ./scripts/announce.ts",
-    "generate": "npx tsx ./scripts/generate.ts"
+    "generate": "npx tsx ./scripts/generate.ts",
+    "youtube": "npx tsx ./scripts/youtube.ts"
   },
   "devDependencies": {
     "clipboardy": "^4.0.0"

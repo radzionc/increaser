@@ -1,7 +1,7 @@
 1726289037356
-The "sub-tasks" section appears only if you want to add sub-tasks, it's collapsible and less distracting
-Task links take up less space and are more comfortable to manage
-While focusing on a task, you can see in real-time the total time you've spent on the current task
+Sub-tasks section is hidden by default, appears only when you choose to add sub-tasks. Collapsible and decluttered with hover-only drag-and-drop and remove button.
+Task links section is hidden by default, appears only when adding links. More compact for easier task management.
+Real-time updates for time spent on tasks are visible while working, along with task deadlines when selected.
 1725723647758
 Quickly change current focus task.
 Easily edit current focus task name, description, links and checklist from the focus page
