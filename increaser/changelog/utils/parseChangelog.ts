@@ -6,16 +6,24 @@ export function parseChangelog(changelog: string): ChangelogItem[] {
   let currentChangelogItem: ChangelogItem | null = null
 
   for (const line of lines) {
-    if (/^\d+$/.test(line)) {
+    if (/^\d+$/.test(line.trim())) {
       // Line is a timestamp
       if (currentChangelogItem) {
         changelogItems.push(currentChangelogItem)
       }
       currentChangelogItem = {
-        releasedAt: parseInt(line, 10),
+        releasedAt: parseInt(line.trim(), 10),
         items: [],
       }
-    } else if (currentChangelogItem && line.trim() !== '') {
+    } else if (line.trim() !== '') {
+      // Line is not empty
+      if (!currentChangelogItem) {
+        // Create a new changelog item with releasedAt set to null
+        currentChangelogItem = {
+          releasedAt: null,
+          items: [],
+        }
+      }
       currentChangelogItem.items.push(line)
     }
   }

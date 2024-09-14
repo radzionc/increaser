@@ -1,6 +1,6 @@
 import clipboardy from 'clipboardy'
 import { parseChangelog } from '../utils/parseChangelog'
-import { readChangelogFile } from '../utils/readChangelogFile'
+import { readChangelogFile } from '../utils/changelogFile'
 
 const announce = () => {
   const changelog = readChangelogFile()

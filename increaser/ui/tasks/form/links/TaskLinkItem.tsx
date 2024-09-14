@@ -28,12 +28,14 @@ import { EditTaskLinkOverlay } from './EditTaskLinkOverlay'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { centerContent } from '@lib/ui/css/centerContent'
+import { interactive } from '@lib/ui/css/interactive'
 
 type TaskLinkProps = InputProps<TaskLink> & RemovableComponentProps
 
 const height = 36
 
 const Wrapper = styled(HStack)`
+  ${interactive};
   gap: 1px;
   height: ${toSizeUnit(height)};
   border: 1px solid transparent;

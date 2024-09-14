@@ -1,4 +1,4 @@
 export type ChangelogItem = {
-  releasedAt: number
+  releasedAt: number | null
   items: string[]
 }
