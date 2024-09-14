@@ -1,36 +1,50 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
-import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskCadenceInput } from './TaskCadenceInput'
-import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
-import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
-import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
+import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
+import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
+import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
+import { Panel } from '@lib/ui/css/panel'
+import { Button } from '@lib/ui/buttons/Button'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
-  const [value, setValue] = useState<TaskFactoryFormShape>({
-    name: taskFactory.task.name,
-    projectId: taskFactory.task.projectId,
-    links: taskFactory.task.links ?? [],
-    cadence: taskFactory.cadence,
-    checklist: taskFactory.task.checklist ?? [],
-    description: taskFactory.task.description ?? '',
-    deadlineIndex: taskFactory.deadlineIndex ?? null,
-  })
+  const { id } = taskFactory
+  const initialValue = useMemo(
+    () => ({
+      name: taskFactory.task.name,
+      projectId: taskFactory.task.projectId,
+      links: taskFactory.task.links ?? [],
+      cadence: taskFactory.cadence,
+      checklist: taskFactory.task.checklist ?? [],
+      description: taskFactory.task.description ?? '',
+      deadlineIndex: taskFactory.deadlineIndex ?? null,
+    }),
+    [
+      taskFactory.cadence,
+      taskFactory.deadlineIndex,
+      taskFactory.task.checklist,
+      taskFactory.task.description,
+      taskFactory.task.links,
+      taskFactory.task.name,
+      taskFactory.task.projectId,
+    ],
+  )
+  const [value, setValue] = useState<TaskFactoryFormShape>(initialValue)
   const { mutate: updateTaskFactory } =
     useUpdateUserEntityMutation('taskFactory')
   const { mutate: deleteTaskFactory } =
@@ -49,78 +63,86 @@ export const EditTaskFactoryForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsTaskFactoryFormDisabled(value)
-
-  const onSubmit = () => {
-    const fields: Partial<Omit<TaskFactory, 'id'>> = {
-      task: {
-        name: value.name,
-        projectId: value.projectId,
-        links: fixLinks(value.links),
-        checklist: fixChecklist(value.checklist),
-        description: value.description,
-      },
-      cadence: value.cadence,
-      deadlineIndex: value.deadlineIndex,
-    }
-
-    updateTaskFactory({
-      id: taskFactory.id,
-      fields,
-    })
-    onFinish()
-  }
+  useLazySync<Partial<TaskFactoryFormShape>>({
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+          comparators: {
+            links: (one, another) =>
+              areArraysEqual(one, another, areLinkItemsEqual),
+            checklist: (one, another) =>
+              areArraysEqual(one, another, areChecklistItemsEqual),
+          },
+        }),
+      [initialValue, value],
+    ),
+    sync: useCallback(
+      (fields) =>
+        updateTaskFactory({
+          id,
+          fields,
+        }),
+      [id, updateTaskFactory],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
-        onSubmit={isDisabled ? undefined : onSubmit}
+        onClose={onFinish}
       />
-      <HStack alignItems="center" gap={8}>
-        <TaskCadenceInput
-          value={value.cadence}
-          onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
-        />
-        {doesCadenceSupportDeadlineIndex(value.cadence) && (
-          <TaskDeadlineIndexInput
-            value={value.deadlineIndex}
-            cadence={value.cadence}
-            onChange={(deadlineIndex) =>
-              setValue((prev) => ({ ...prev, deadlineIndex }))
+      <HStack
+        alignItems="center"
+        gap={20}
+        wrap="wrap"
+        justifyContent="space-between"
+      >
+        <HStack alignItems="center" gap={8}>
+          <TaskCadenceInput
+            value={value.cadence}
+            onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
+          />
+          {doesCadenceSupportDeadlineIndex(value.cadence) && (
+            <TaskDeadlineIndexInput
+              value={value.deadlineIndex}
+              cadence={value.cadence}
+              onChange={(deadlineIndex) =>
+                setValue((prev) => ({ ...prev, deadlineIndex }))
+              }
+            />
+          )}
+          <AddTaskLink
+            onFinish={(link) =>
+              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
-        )}
-        <AddTaskLink
-          onFinish={(link) =>
-            setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-          }
-        />
 
-        {isEmpty(value.checklist) && (
-          <AddTaskChecklist
-            onFinish={(checklist) =>
-              setValue((prev) => ({
-                ...prev,
-                checklist,
-              }))
-            }
-          />
-        )}
+          {isEmpty(value.checklist) && (
+            <AddTaskChecklist
+              onFinish={(checklist) =>
+                setValue((prev) => ({
+                  ...prev,
+                  checklist,
+                }))
+              }
+            />
+          )}
+        </HStack>
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deleteTaskFactory(id)
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
       </HStack>
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deleteTaskFactory(taskFactory.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
-    </ListItemForm>
+    </Panel>
   )
 }

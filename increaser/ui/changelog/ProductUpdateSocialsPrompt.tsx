@@ -12,6 +12,7 @@ import { XIcon } from '@lib/ui/icons/XIcon'
 import { HStack } from '@lib/ui/css/stack'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
+import { YouTubeColoredIcon } from '@lib/ui/icons/YouTubeColoredIcon'
 
 export const ProductUpdateSocialsPrompt = ({
   value,
@@ -35,6 +36,7 @@ export const ProductUpdateSocialsPrompt = ({
                 linkedIn={() => <LinkedinIcon />}
                 reddit={() => <RedditIcon />}
                 indieHackers={() => <IndieHackersIcon />}
+                youtube={() => <YouTubeColoredIcon />}
               />
             </SocialLink>
           )

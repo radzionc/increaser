@@ -4,10 +4,8 @@ import { HStack } from '@lib/ui/css/stack'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
-import { fixLinks } from '../../tasks/form/fixLinks'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { TaskCadenceInput } from './TaskCadenceInput'
-import { fixChecklist } from '../../tasks/form/checklist/fixChecklist'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { ExportFromTemplate } from '../../tasks/form/ExportFromTemplate'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
@@ -55,11 +53,7 @@ export const CreateTaskFactoryForm = ({
   const onSubmit = useCallback(() => {
     const taskFactory: TaskFactory = {
       id: getId(),
-      task: {
-        ...value,
-        links: fixLinks(value.links),
-        checklist: fixChecklist(value.checklist),
-      },
+      task: value,
       deadlineIndex: value.deadlineIndex,
       cadence: value.cadence,
     }

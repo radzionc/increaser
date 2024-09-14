@@ -1,28 +1,30 @@
-import { useState } from 'react'
-import { HStack, VStack } from '@lib/ui/css/stack'
+import { useCallback, useMemo, useState } from 'react'
+import { HStack } from '@lib/ui/css/stack'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
-import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { TaskFormShape } from './TaskFormShape'
-import { fixLinks } from './fixLinks'
-import { fixChecklist } from './checklist/fixChecklist'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
-import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
 import { AddTaskLink } from './links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from './checklist/AddTaskChecklist'
+import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
+import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
+import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
+import { Panel } from '@lib/ui/css/panel'
+import { Button } from '@lib/ui/buttons/Button'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
 export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const task = useCurrentTask()
+  const { id } = task
   const initialValue = pick(task, [
     'name',
     'projectId',
@@ -37,40 +39,44 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
   const { mutate: deleteTask } = useDeleteUserEntityMutation('task')
 
-  const isDisabled = useIsTaskFormDisabled(value)
-
-  const onSubmit = () => {
-    const fields = getUpdatedValues({
-      before: initialValue,
-      after: {
-        ...value,
-        links: fixLinks(value.links),
-        checklist: fixChecklist(value.checklist),
-      },
-    })
-
-    if (fields) {
-      updateTask({
-        id: task.id,
-        fields,
-      })
-    }
-
-    onFinish()
-  }
+  useLazySync<Partial<TaskFormShape>>({
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+          comparators: {
+            links: (one, another) =>
+              areArraysEqual(one, another, areLinkItemsEqual),
+            checklist: (one, another) =>
+              areArraysEqual(one, another, areChecklistItemsEqual),
+          },
+        }),
+      [initialValue, value],
+    ),
+    sync: useCallback(
+      (fields) =>
+        updateTask({
+          id,
+          fields,
+        }),
+      [id, updateTask],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
-        onSubmit={isDisabled ? undefined : onSubmit}
+        onClose={onFinish}
       />
-      <VStack>
+      <HStack
+        alignItems="center"
+        gap={20}
+        wrap="wrap"
+        justifyContent="space-between"
+      >
         <HStack alignItems="center" gap={8}>
           <TaskStatusInput
             value={value.status}
@@ -98,16 +104,17 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
             />
           )}
         </HStack>
-      </VStack>
-
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deleteTask(task.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
-    </ListItemForm>
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deleteTask(id)
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
+      </HStack>
+    </Panel>
   )
 }

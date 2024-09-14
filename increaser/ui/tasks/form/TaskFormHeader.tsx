@@ -3,7 +3,7 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
-import { InputProps } from '@lib/ui/props'
+import { ClosableComponentProps, InputProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { TaskProjectSelector } from '../TaskProjectSelector'
@@ -14,6 +14,8 @@ import { TaskLinkItem } from './links/TaskLinkItem'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
+import { CloseButton } from '@lib/ui/buttons/CloseButton'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
 
 type TaskFormHeaderValue = {
   projectId: string
@@ -23,10 +25,11 @@ type TaskFormHeaderValue = {
   checklist: TaskChecklistItem[]
 }
 
-type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> & {
-  onSubmit?: () => void
-  hasProjectAutoFocus?: boolean
-}
+type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> &
+  Partial<ClosableComponentProps> & {
+    onSubmit?: () => void
+    hasProjectAutoFocus?: boolean
+  }
 
 const Container = styled(VStack)`
   padding: 0;
@@ -43,23 +46,27 @@ const Header = styled(HStack)`
   padding: 0;
 
   width: 100%;
+`
 
-  > * {
-    &:first-child {
-      padding-left: 8px;
-      padding-top: 8px;
-    }
-    &:last-child {
-      padding: ${toSizeUnit(panelDefaultPadding)};
-      padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
-      min-height: 100%;
-      padding-bottom: 8px;
-    }
-  }
+const headerOffset = 8
+
+const ProjectInputContainer = styled.div`
+  padding-left: ${toSizeUnit(headerOffset)};
+  padding-top: ${toSizeUnit(headerOffset)};
+`
+
+const CloseButtonContainer = styled.div`
+  padding-right: ${toSizeUnit(headerOffset)};
+  padding-top: ${toSizeUnit(headerOffset)};
 `
 
 const TitleInput = styled(EmbeddedTitleInput)`
   background: ${getColor('background')};
+
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
+  min-height: 100%;
+  padding-bottom: ${toSizeUnit(headerOffset)};
 `
 
 const DescriptionInput = styled(MultilineTextInput)`
@@ -68,6 +75,11 @@ const DescriptionInput = styled(MultilineTextInput)`
   padding-top: ${toSizeUnit(panelDefaultPadding / 2)};
   min-height: 60px;
   line-height: 1.5;
+`
+
+const Close = styled(CloseButton)`
+  ${sameDimensions(52)};
+  font-size: 20px;
 `
 
 const LinksContainer = styled(HStack)`
@@ -88,13 +100,14 @@ export const TaskFormHeader = ({
   onChange,
   onSubmit,
   hasProjectAutoFocus = false,
+  onClose,
 }: TaskFormHeaderProps) => {
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
   return (
     <Container>
       <Header>
-        <div>
+        <ProjectInputContainer>
           <TaskProjectSelector
             autoFocus={hasProjectAutoFocus}
             value={value.projectId}
@@ -106,7 +119,7 @@ export const TaskFormHeader = ({
               nameInputRef.current?.focus()
             }}
           />
-        </div>
+        </ProjectInputContainer>
 
         <TitleInput
           placeholder="Task name"
@@ -121,6 +134,12 @@ export const TaskFormHeader = ({
           }}
           onSubmit={onSubmit}
         />
+
+        {onClose && (
+          <CloseButtonContainer>
+            <Close kind="secondary" size="l" onClick={onClose} />
+          </CloseButtonContainer>
+        )}
       </Header>
       <DescriptionInput
         placeholder="Add a description..."

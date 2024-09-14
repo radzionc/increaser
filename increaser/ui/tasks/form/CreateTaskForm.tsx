@@ -4,8 +4,6 @@ import { Task } from '@increaser/entities/Task'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
-import { fixLinks } from './fixLinks'
-import { fixChecklist } from './checklist/fixChecklist'
 import { useAssertUserState } from '../../user/UserStateContext'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
@@ -66,8 +64,6 @@ export const CreateTaskForm = ({
     const task: Task = {
       id: getId(),
       ...value,
-      links: fixLinks(value.links),
-      checklist: fixChecklist(value.checklist),
       startedAt,
       order,
     }
