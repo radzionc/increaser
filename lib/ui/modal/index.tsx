@@ -1,8 +1,6 @@
 import { ComponentProps, ReactNode } from 'react'
 import { AsElementComponent, TitledComponentProps } from '../props'
 import { BodyPortal } from '../dom/BodyPortal'
-import { CompleteMist } from './CompleteMist'
-import { useKey } from 'react-use'
 import { FocusTrap } from './FocusTrap'
 import { ModalContainer, ModalPlacement } from './ModalContainer'
 import { HStack, VStack } from '@lib/ui/css/stack'
@@ -12,6 +10,7 @@ import { ModalCloseButton } from './ModalCloseButton'
 import { ModalSubTitleText } from './ModalSubTitleText'
 import styled from 'styled-components'
 import { toSizeUnit } from '../css/toSizeUnit'
+import { Backdrop } from './Backdrop'
 
 export type ModalProps = AsElementComponent &
   Omit<ComponentProps<typeof Container>, 'title'> &
@@ -48,11 +47,9 @@ export const Modal = ({
   as,
   ...rest
 }: ModalProps) => {
-  useKey('Escape', onClose)
-
   return (
     <BodyPortal>
-      <CompleteMist onClick={onClose}>
+      <Backdrop onClose={onClose}>
         <FocusTrap>
           <Container forwardedAs={as} {...rest}>
             <VStack gap={8}>
@@ -70,7 +67,7 @@ export const Modal = ({
             {footer && <VStack>{footer}</VStack>}
           </Container>
         </FocusTrap>
-      </CompleteMist>
+      </Backdrop>
     </BodyPortal>
   )
 }

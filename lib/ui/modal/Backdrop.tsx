@@ -1,9 +1,10 @@
-import React, { useRef } from 'react'
+import React, { ComponentProps, useRef } from 'react'
 import styled from 'styled-components'
 import { takeWholeSpace } from '../css/takeWholeSpace'
 import { centerContent } from '../css/centerContent'
 import { getColor } from '../theme/getters'
-import { ClickableComponentProps, ComponentWithChildrenProps } from '../props'
+import { ClosableComponentProps } from '../props'
+import { useKey } from 'react-use'
 
 const Container = styled.div`
   z-index: 1;
@@ -16,11 +17,12 @@ const Container = styled.div`
   backdrop-filter: blur(4px);
 `
 
-export const CompleteMist = ({
-  onClick,
-  children,
-}: Partial<ClickableComponentProps> & ComponentWithChildrenProps) => {
+export const Backdrop = ({
+  onClose,
+  ...props
+}: Partial<ClosableComponentProps> & ComponentProps<typeof Container>) => {
   const isPointerDownInside = useRef(false)
+  useKey('Escape', onClose)
 
   return (
     <Container
@@ -31,15 +33,14 @@ export const CompleteMist = ({
       }}
       onPointerUp={() => {
         if (isPointerDownInside.current) {
-          onClick?.()
+          onClose?.()
         }
         isPointerDownInside.current = false
       }}
       onPointerCancel={() => {
         isPointerDownInside.current = false
       }}
-    >
-      {children}
-    </Container>
+      {...props}
+    />
   )
 }

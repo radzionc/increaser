@@ -1,7 +1,6 @@
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import styled from 'styled-components'
 
-import { CompleteMist } from '@lib/ui/modal/CompleteMist'
 import { Sidebar } from '../Sidebar'
 import { topbarConfig } from './config'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
@@ -13,6 +12,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { ProductLogo } from '../ProductLogo'
 import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
 import { HeaderActions } from '../HeaderActions'
+import { Backdrop } from '@lib/ui/modal/Backdrop'
 
 const ToggleButton = styled.div`
   ${interactive};
@@ -34,7 +34,7 @@ const Container = styled.div`
   background: ${getColor('foreground')};
 `
 
-const Cover = styled(CompleteMist)`
+const Cover = styled(Backdrop)`
   justify-content: flex-start;
 `
 
@@ -54,7 +54,7 @@ export const Topbar = () => {
   return (
     <>
       {isSidebarOpen && (
-        <Cover onClick={toggleSidebar}>
+        <Cover onClose={toggleSidebar}>
           <Sidebar />
         </Cover>
       )}
