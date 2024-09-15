@@ -1,24 +1,24 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { pick } from '@lib/utils/record/pick'
-import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
-import { ListItemForm } from '../../form/ListItemForm'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { Panel } from '@lib/ui/css/panel'
+import { HStack } from '@lib/ui/css/stack'
+import { Button } from '@lib/ui/buttons/Button'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
-  const initialValue = pick(visionAttribute, [
-    'name',
-    'emoji',
-    'imageId',
-    'description',
-  ])
+  const { id } = visionAttribute
+  const initialValue = useMemo(
+    () => pick(visionAttribute, ['name', 'emoji', 'imageId', 'description']),
+    [visionAttribute],
+  )
   const [value, setValue] = useState<VisionAttributeFormShape>({
     ...initialValue,
     description: initialValue.description ?? null,
@@ -35,54 +35,44 @@ export const EditVisionAttributeForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsVisionAttributeFormDisabled(value)
-
-  const onSubmit = useCallback(() => {
-    if (isDisabled) {
-      return
-    }
-
-    const fields = getUpdatedValues({
-      before: initialValue,
-      after: value,
-    })
-
-    if (fields) {
-      updateVisionAttribute({
-        id: visionAttribute.id,
-        fields,
-      })
-    }
-
-    onFinish()
-  }, [
-    initialValue,
-    isDisabled,
-    onFinish,
-    updateVisionAttribute,
-    value,
-    visionAttribute.id,
-  ])
+  useLazySync<Partial<VisionAttributeFormShape>>({
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+        }),
+      [initialValue, value],
+    ),
+    sync: useCallback(
+      (fields) =>
+        updateVisionAttribute({
+          id,
+          fields,
+        }),
+      [id, updateVisionAttribute],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
       <VisionAttributeFormFields
+        onClose={onFinish}
         value={value}
         onChange={setValue}
-        onSubmit={onSubmit}
       />
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deleteVisionAttribute(visionAttribute.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
-    </ListItemForm>
+      <HStack fullWidth>
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deleteVisionAttribute(id)
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
+      </HStack>
+    </Panel>
   )
 }

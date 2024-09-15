@@ -2,19 +2,20 @@ import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
-import { InputProps } from '@lib/ui/props'
+import { ClosableComponentProps, InputProps } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
-import React from 'react'
 import { VisionImageInput } from './VisionImageInput'
+import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 
 type VisionAttributeFormFieldsProps = InputProps<VisionAttributeFormShape> & {
-  onSubmit: () => void
-}
+  onSubmit?: () => void
+} & ClosableComponentProps
 
 export const VisionAttributeFormFields = ({
   value,
   onChange,
   onSubmit,
+  onClose,
 }: VisionAttributeFormFieldsProps) => {
   return (
     <>
@@ -32,6 +33,7 @@ export const VisionAttributeFormFields = ({
           value={value.name}
           onSubmit={onSubmit}
         />
+        <PanelFormCloseButton onClick={onClose} />
       </EmojiTextInputFrame>
       <EmbeddedDescriptionInput
         label="Description"

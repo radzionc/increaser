@@ -14,10 +14,10 @@ export const EmojiTextInputFrame = styled(HStack)`
       padding: 8px;
       padding-right: 0;
     }
-    &:last-child {
+    &:nth-child(2) {
+      min-height: 100%;
       padding: ${toSizeUnit(panelDefaultPadding)};
       padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
-      min-height: 100%;
     }
   }
 `

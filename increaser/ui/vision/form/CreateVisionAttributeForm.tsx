@@ -48,6 +48,7 @@ export const CreateVisionAttributeForm = ({ onFinish }: NoValueFinishProps) => {
         value={value}
         onChange={setValue}
         onSubmit={onSubmit}
+        onClose={onFinish}
       />
       <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
     </ListItemForm>
