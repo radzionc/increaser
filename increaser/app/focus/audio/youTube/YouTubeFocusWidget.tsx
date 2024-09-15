@@ -3,20 +3,15 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
-import styled from 'styled-components'
 import { SoundItem } from './SoundItem'
 import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { Opener } from '@lib/ui/base/Opener'
 import { AddSoundPrompt } from './AddSoundPrompt'
+import { VStack } from '@lib/ui/css/stack'
 
 const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
-
-const Container = styled(ScrollableFlexboxFiller)`
-  min-height: 400px;
-`
 
 export const YouTubeFocusWidget = () => {
   const { focusSounds } = useAssertUserState()
@@ -32,7 +27,7 @@ export const YouTubeFocusWidget = () => {
   })
 
   return (
-    <Container>
+    <VStack>
       <Opener
         renderOpener={({ onOpen, isOpen }) =>
           isOpen ? null : <AddSoundPrompt onClick={onOpen} />
@@ -42,6 +37,6 @@ export const YouTubeFocusWidget = () => {
       {soundsToDisplay.map((sound, index) => (
         <SoundItem key={index} index={index} {...sound} />
       ))}
-    </Container>
+    </VStack>
   )
 }

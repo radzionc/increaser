@@ -15,46 +15,59 @@ import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Switch } from '@lib/ui/inputs/Switch'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
 import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
-import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { TabNavigation } from '@lib/ui/navigation/TabNavigation'
 import { YouTubeViewSelector } from './youTube/YouTubeViewSelector'
-import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { interactive } from '@lib/ui/css/interactive'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
+import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
+import { Modal } from '@lib/ui/modal'
 
-const Container = styled(VStack)`
-  padding: 0;
-  background: ${getColor('background')};
-  gap: 16px;
+const height = 40
+
+const Wrapper = styled(HStack)`
+  ${interactive};
+  height: ${toSizeUnit(height)};
+  border: 1px solid ${getColor('mistExtra')};
+  ${borderRadius.m};
+  overflow: hidden;
+
   > * {
-    ${horizontalPadding(panelDefaultPadding)}
+    &:first-child {
+      border-right: 1px solid ${getColor('mistExtra')};
+    }
+    background: ${getColor('foreground')};
   }
 `
 
-const Content = styled(VStack)`
-  padding: 0;
-  > * {
-    ${horizontalPadding(panelDefaultPadding)}
-  }
-  gap: 20px;
-`
-
-const Header = styled(HStack)`
-  padding: 0;
-  > * {
-    padding: ${toSizeUnit(panelDefaultPadding)};
+const Content = styled(Switch)`
+  height: 100%;
+  ${horizontalPadding(12)};
+  &:hover {
+    background: ${getHoverVariant('foreground')};
+    color: ${getColor('contrast')};
   }
 `
 
-const CollapseButtonWr = styled(VStack)`
+const MoreButton = styled(UnstyledButton)`
+  ${sameDimensions(height)};
+  color: ${getColor('textSupporting')};
+
+  outline: none;
+
   ${centerContent};
-  ${verticalPadding(0)};
-`
 
+  &:hover {
+    background: ${getHoverVariant('foreground')};
+    color: ${getColor('contrast')};
+  }
+`
 export const FocusAudioWidget = () => {
   const [isEnabled, setIsEnabled] = useIsFocusAudioEnabled()
   const [isExpanded, setIsExpanded] = usePersistentState<boolean>(
@@ -64,49 +77,57 @@ export const FocusAudioWidget = () => {
   const [mode, setMode] = useFocusAudioMode()
 
   return (
-    <Container>
-      <Header>
-        <Switch
-          style={{ flex: 1 }}
+    <>
+      <Wrapper>
+        <Content
           label="Focus sounds"
           value={isEnabled}
           onChange={setIsEnabled}
+          size="s"
         />
         {isEnabled && (
-          <CollapseButtonWr>
-            <FocusIconButton
-              onClick={() => setIsExpanded(!isExpanded)}
-              kind="secondary"
-              title={isExpanded ? 'Collapse' : 'Expand'}
-              icon={<CollapsableStateIndicator isOpen={isExpanded} />}
-            />
-          </CollapseButtonWr>
-        )}
-      </Header>
-      {isExpanded && isEnabled && (
-        <Content>
-          <HStack
-            fullWidth
-            alignItems="center"
-            wrap="wrap"
-            gap={20}
-            justifyContent="space-between"
+          <MoreButton
+            onClick={() => {
+              setIsExpanded(true)
+            }}
+            type="button"
+            title="Change focus sounds"
           >
-            <TabNavigation<FocusAudioMode>
-              views={focusAudioModes}
-              getViewName={(option) => focusAduioModeName[option]}
-              activeView={mode}
-              onSelect={setMode}
+            <MoreHorizontalIcon />
+          </MoreButton>
+        )}
+      </Wrapper>
+      {isExpanded && (
+        <Modal
+          width={560}
+          title="Focus sounds"
+          onClose={() => setIsExpanded(false)}
+          placement="top"
+        >
+          <VStack gap={20}>
+            <HStack
+              fullWidth
+              alignItems="center"
+              wrap="wrap"
+              gap={20}
+              justifyContent="space-between"
+            >
+              <TabNavigation<FocusAudioMode>
+                views={focusAudioModes}
+                getViewName={(option) => focusAduioModeName[option]}
+                activeView={mode}
+                onSelect={setMode}
+              />
+              {mode === 'youtube' && <YouTubeViewSelector />}
+            </HStack>
+            <Match
+              value={mode}
+              youtube={() => <YouTubeFocusWidget />}
+              sounds={() => <SoundsFocusWidget />}
             />
-            {mode === 'youtube' && <YouTubeViewSelector />}
-          </HStack>
-          <Match
-            value={mode}
-            youtube={() => <YouTubeFocusWidget />}
-            sounds={() => <SoundsFocusWidget />}
-          />
-        </Content>
+          </VStack>
+        </Modal>
       )}
-    </Container>
+    </>
   )
 }
