@@ -1,13 +1,15 @@
 import { Opener } from '@lib/ui/base/Opener'
-import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
 import { CreateTaskForm } from '../../tasks/form/CreateTaskForm'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
-import { EmbeddedPrompt } from '@lib/ui/buttons/EmbeddedPrompt'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { Button } from '@lib/ui/buttons/Button'
+import { HStack } from '@lib/ui/css/stack'
+import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { productToolIconRecord } from '../../tools/productToolIconRecord'
 
 export const TurnIdeaIntoTask = ({
   value,
@@ -19,9 +21,12 @@ export const TurnIdeaIntoTask = ({
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <EmbeddedPrompt icon={<CheckSquareIcon />} onClick={onOpen}>
-          Turn into a task
-        </EmbeddedPrompt>
+        <Button kind="secondary" onClick={onOpen}>
+          <HStack alignItems="center" gap={8}>
+            <IconWrapper>{productToolIconRecord.tasks}</IconWrapper>
+            Turn into a task
+          </HStack>
+        </Button>
       )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>

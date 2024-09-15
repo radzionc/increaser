@@ -1,10 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
 import { pick } from '@lib/utils/record/pick'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
@@ -14,10 +13,18 @@ import { TurnIdeaIntoTask } from './TurnIdeaIntoTask'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
+import { Button } from '@lib/ui/buttons/Button'
+import { HStack } from '@lib/ui/css/stack'
 
 export const EditIdeaForm = () => {
   const idea = useCurrentIdea()
-  const initialValue = pick(idea, ['name', 'projectId', 'description'])
+  const { id } = idea
+  const initialValue = useMemo(
+    () => pick(idea, ['name', 'projectId', 'description']),
+    [idea],
+  )
   const [value, setValue] = useState<IdeaFormShape>(initialValue)
 
   const { mutate: updateIdea } = useUpdateUserEntityMutation('idea')
@@ -31,34 +38,34 @@ export const EditIdeaForm = () => {
 
   const isDisabled = useIsIdeaFormDisabled(value)
 
-  const onSubmit = useCallback(() => {
-    if (isDisabled) {
-      return
-    }
-
-    const fields = getUpdatedValues({
-      before: initialValue,
-      after: value,
-    })
-
-    if (fields) {
-      updateIdea({
-        id: idea.id,
-        fields: {
-          ...fields,
-          updatedAt: Date.now(),
-        },
+  useLazySync<Partial<IdeaFormShape>>({
+    value: useMemo(() => {
+      const result = getUpdatedValues({
+        before: initialValue,
+        after: value,
       })
-    }
-    onFinish()
-  }, [idea.id, initialValue, isDisabled, onFinish, updateIdea, value])
+
+      if (result) {
+        return {
+          ...result,
+          updatedAt: Date.now(),
+        }
+      }
+
+      return result
+    }, [initialValue, value]),
+    sync: useCallback(
+      (fields) =>
+        updateIdea({
+          id,
+          fields,
+        }),
+      [id, updateIdea],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <ListItemForm onClose={onFinish} isDisabled={isDisabled}>
       <EmojiTextInputFrame>
         <div>
           <TaskProjectSelector
@@ -73,8 +80,8 @@ export const EditIdeaForm = () => {
           placeholder="Your idea"
           value={value.name}
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          onSubmit={onSubmit}
         />
+        <PanelFormCloseButton onClick={onFinish} />
       </EmojiTextInputFrame>
 
       <EmbeddedDescriptionInput
@@ -85,15 +92,19 @@ export const EditIdeaForm = () => {
         }
         value={value.description}
       />
-      <TurnIdeaIntoTask value={value} />
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deleteIdea(idea.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
+      <HStack fullWidth alignItems="center" justifyContent="space-between">
+        <TurnIdeaIntoTask value={value} />
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deleteIdea(id)
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
+      </HStack>
     </ListItemForm>
   )
 }
