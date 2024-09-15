@@ -1,7 +1,5 @@
-import { useCallback, useState } from 'react'
-import { Habit } from '@increaser/entities/Habit'
+import { useCallback, useMemo, useState } from 'react'
 import { HabitFormShape } from './HabitFormShape'
-import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
@@ -10,20 +8,27 @@ import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
-import { ListItemForm } from '@increaser/ui/form/ListItemForm'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { EmojiInput } from '@increaser/ui/form/emoji-input/EmojiInput'
+import { pick } from '@lib/utils/record/pick'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
+import { Panel } from '@lib/ui/css/panel'
+import { PanelFormCloseButton } from '@increaser/ui/form/panel/PanelFormCloseButton'
+import { HStack } from '@lib/ui/css/stack'
+import { Button } from '@lib/ui/buttons/Button'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()
+  const { id } = habit
   const { habits } = useHabits()
   const usedColors = habits.map(({ color }) => color)
 
-  const [value, setValue] = useState<HabitFormShape>({
-    name: habit.name,
-    emoji: habit.emoji,
-    color: habit.color,
-  })
+  const initialValue = useMemo(
+    () => pick(habit, ['name', 'emoji', 'color']),
+    [habit],
+  )
+
+  const [value, setValue] = useState<HabitFormShape>(initialValue)
 
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
   const { mutate: deleteHabit } = useDeleteUserEntityMutation('habit')
@@ -34,37 +39,27 @@ export const EditHabitForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsHabitFormDisabled(value)
-
-  const onSubmit = useCallback(() => {
-    if (isDisabled) {
-      return
-    }
-
-    const fields: Partial<Omit<Habit, 'id'>> = {}
-    if (value.name !== habit.name) {
-      fields.name = value.name
-    }
-    if (value.color !== habit.color) {
-      fields.color = value.color
-    }
-    if (value.emoji !== habit.emoji) {
-      fields.emoji = value.emoji
-    }
-
-    updateHabit({
-      id: habit.id,
-      fields,
-    })
-    onFinish()
-  }, [habit, isDisabled, onFinish, updateHabit, value])
+  useLazySync<Partial<HabitFormShape>>({
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+        }),
+      [initialValue, value],
+    ),
+    sync: useCallback(
+      (fields) =>
+        updateHabit({
+          id,
+          fields,
+        }),
+      [id, updateHabit],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
       <EmojiColorTextInputFrame>
         <div>
           <EmojiInput
@@ -83,18 +78,22 @@ export const EditHabitForm = () => {
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}
-          onSubmit={onSubmit}
           placeholder="Habit name"
         />
+        <PanelFormCloseButton onClick={onFinish} />
       </EmojiColorTextInputFrame>
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deleteHabit(habit.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
-    </ListItemForm>
+      <HStack fullWidth>
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deleteHabit(id)
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
+      </HStack>
+    </Panel>
   )
 }
