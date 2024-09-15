@@ -3,19 +3,18 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
 import { pick } from '@lib/utils/record/pick'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { useCurrentPrinciple } from '../CurrentPrincipleProvider'
-import { PrincipleCategorySelector } from './PrincipleCategorySelector'
 import { ListItemForm } from '../../form/ListItemForm'
+import { Button } from '@lib/ui/buttons/Button'
+import { HStack } from '@lib/ui/css/stack'
+import { PrincipleFormFields } from './PrincipleFormFields'
 
 export const EditPrincipleForm = () => {
   const principle = useCurrentPrinciple()
+  const { id } = principle
   const initialValue = pick(principle, ['name', 'categoryId', 'description'])
   const [value, setValue] = useState<PrincipleFormShape>(initialValue)
 
@@ -56,40 +55,24 @@ export const EditPrincipleForm = () => {
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <PrincipleCategorySelector
-            value={value.categoryId}
-            onChange={(categoryId) =>
-              setValue((prev) => ({ ...prev, categoryId }))
-            }
-          />
-        </div>
-
-        <EmbeddedTitleInput
-          placeholder="Your principle"
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          onSubmit={onSubmit}
-        />
-      </EmojiTextInputFrame>
-
-      <EmbeddedDescriptionInput
-        label="Description"
-        placeholder="Describe your principle"
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
-        value={value.description}
+      <PrincipleFormFields
+        value={value}
+        onChange={setValue}
+        onSubmit={onSubmit}
+        onClose={onFinish}
       />
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deletePrinciple(principle.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
-      />
+      <HStack fullWidth>
+        <Button
+          kind="alert"
+          type="button"
+          onClick={() => {
+            deletePrinciple(id)
+            onFinish()
+          }}
+        >
+          Delete
+        </Button>
+      </HStack>
     </ListItemForm>
   )
 }

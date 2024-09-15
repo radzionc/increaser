@@ -4,12 +4,18 @@ import { VStack } from '@lib/ui/css/stack'
 import { AddPrincipleCategory } from './AddPrincipleCategory'
 import { CurrentPrincipleCategoryProvider } from './CurrentPrincipleCategoryProvider'
 import { PrincipleCategoryItem } from './PrincipleCategoryItem'
+import styled from 'styled-components'
+
+const Container = styled(VStack)`
+  max-width: 560px;
+  width: 100%;
+`
 
 export const PrincipleCategories = () => {
   const items = usePrincipleCategories()
 
   return (
-    <VStack>
+    <Container>
       <ActiveItemIdProvider initialValue={null}>
         {items.map((item) => (
           <CurrentPrincipleCategoryProvider key={item.id} value={item}>
@@ -18,6 +24,6 @@ export const PrincipleCategories = () => {
         ))}
       </ActiveItemIdProvider>
       <AddPrincipleCategory />
-    </VStack>
+    </Container>
   )
 }

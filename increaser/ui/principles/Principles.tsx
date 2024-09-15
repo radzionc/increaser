@@ -7,7 +7,10 @@ import { AddPrinciple } from './AddPrinciple'
 import styled from 'styled-components'
 import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
 
-const Container = styled(VStack)``
+const Container = styled(VStack)`
+  max-width: 560px;
+  width: 100%;
+`
 
 export const Principles = () => {
   const items = usePrinciples()
