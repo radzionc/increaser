@@ -14,8 +14,9 @@ import { TaskLinkItem } from './links/TaskLinkItem'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { removeAtIndex } from '@lib/utils/array/removeAtIndex'
 import { TaskChecklistInput } from './checklist/TaskChecklistInput'
-import { CloseButton } from '@lib/ui/buttons/CloseButton'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { panelFormConfig } from '../../form/panel/config'
+import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
 type TaskFormHeaderValue = {
   projectId: string
@@ -48,16 +49,9 @@ const Header = styled(HStack)`
   width: 100%;
 `
 
-const headerOffset = 8
-
 const ProjectInputContainer = styled.div`
-  padding-left: ${toSizeUnit(headerOffset)};
-  padding-top: ${toSizeUnit(headerOffset)};
-`
-
-const CloseButtonContainer = styled.div`
-  padding-right: ${toSizeUnit(headerOffset)};
-  padding-top: ${toSizeUnit(headerOffset)};
+  padding-left: ${toSizeUnit(tightListItemConfig.horizontalOffset)};
+  padding-top: ${toSizeUnit(tightListItemConfig.horizontalOffset)};
 `
 
 const TitleInput = styled(EmbeddedTitleInput)`
@@ -66,20 +60,15 @@ const TitleInput = styled(EmbeddedTitleInput)`
   padding: ${toSizeUnit(panelDefaultPadding)};
   padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
   min-height: 100%;
-  padding-bottom: ${toSizeUnit(headerOffset)};
+  padding-bottom: ${toSizeUnit(tightListItemConfig.horizontalOffset)};
 `
 
 const DescriptionInput = styled(MultilineTextInput)`
   background: ${getColor('background')};
   padding: ${toSizeUnit(panelDefaultPadding)};
   padding-top: ${toSizeUnit(panelDefaultPadding / 2)};
-  min-height: 60px;
+  min-height: ${toSizeUnit(panelFormConfig.sectionMinHeight)};
   line-height: 1.5;
-`
-
-const Close = styled(CloseButton)`
-  ${sameDimensions(52)};
-  font-size: 20px;
 `
 
 const LinksContainer = styled(HStack)`
@@ -135,11 +124,7 @@ export const TaskFormHeader = ({
           onSubmit={onSubmit}
         />
 
-        {onClose && (
-          <CloseButtonContainer>
-            <Close kind="secondary" size="l" onClick={onClose} />
-          </CloseButtonContainer>
-        )}
+        {onClose && <PanelFormCloseButton onClick={onClose} />}
       </Header>
       <DescriptionInput
         placeholder="Add a description..."

@@ -1,9 +1,7 @@
-import { useCallback, useState } from 'react'
-import { HStack, VStack } from '@lib/ui/css/stack'
-import { Button } from '@lib/ui/buttons/Button'
-import { Project, ProjectStatus } from '@increaser/entities/Project'
+import { useCallback, useMemo, useState } from 'react'
+import { HStack } from '@lib/ui/css/stack'
+import { ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'
-import { useIsProjectFormDisabled } from './useIsProjectFormDisabled'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
@@ -16,8 +14,12 @@ import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldPr
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
-import { ListItemForm } from '../../form/ListItemForm'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { pick } from '@lib/utils/record/pick'
+import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
+import { Panel } from '@lib/ui/css/panel'
+import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -26,14 +28,15 @@ type EditProjectFormShape = ProjectFormShape & {
 export const EditProjectForm = () => {
   const project = useCurrentProject()
   const { projects } = useAssertUserState()
+  const { id } = project
   const usedColors = Object.values(projects).map(({ color }) => color)
 
-  const [value, setValue] = useState<EditProjectFormShape>({
-    name: project.name,
-    emoji: project.emoji,
-    color: project.color,
-    status: project.status,
-  })
+  const initialValue = useMemo(
+    () => pick(project, ['name', 'emoji', 'color', 'status']),
+    [project],
+  )
+
+  const [value, setValue] = useState<EditProjectFormShape>(initialValue)
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
@@ -43,59 +46,41 @@ export const EditProjectForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsProjectFormDisabled(value)
+  useLazySync<Partial<EditProjectFormShape>>({
+    value: useMemo(() => {
+      const result = getUpdatedValues({
+        before: initialValue,
+        after: value,
+      })
 
-  const onSubmit = useCallback(() => {
-    if (isDisabled) {
-      return
-    }
+      if (value.status !== initialValue.status) {
+        return {
+          ...result,
+          order: getLastItemOrder(
+            Object.values(projects)
+              .filter(({ status }) => status === value.status)
+              .map((project) => project.order),
+          ),
+        }
+      }
 
-    const fields: Partial<Omit<Project, 'id'>> = {}
-    if (value.name !== project.name) {
-      fields.name = value.name
-    }
-    if (value.color !== project.color) {
-      fields.color = value.color
-    }
-    if (value.emoji !== project.emoji) {
-      fields.emoji = value.emoji
-    }
-    if (value.status !== project.status) {
-      fields.status = value.status
-      fields.order = getLastItemOrder(
-        Object.values(projects)
-          .filter(({ status }) => status === value.status)
-          .map((project) => project.order),
-      )
-    }
+      return result
+    }, [initialValue, projects, value]),
+    sync: useCallback(
+      (fields) =>
+        updateProject({
+          id,
+          fields,
+        }),
+      [id, updateProject],
+    ),
+  })
 
-    updateProject({
-      id: project.id,
-      fields,
-    })
-    onFinish()
-  }, [
-    isDisabled,
-    value.name,
-    value.color,
-    value.emoji,
-    value.status,
-    project.name,
-    project.color,
-    project.emoji,
-    project.status,
-    project.id,
-    updateProject,
-    onFinish,
-    projects,
-  ])
+  const isStatusEditable = couldProjectStatusBeChanged(project.id)
+  const isDeletable = couldProjectBeDeleted(project.id)
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
       <EmojiColorTextInputFrame>
         <div>
           <EmojiInput
@@ -115,32 +100,25 @@ export const EditProjectForm = () => {
           autoFocus
           onChange={(name) => setValue((prev) => ({ ...prev, name }))}
           value={value.name}
-          onSubmit={onSubmit}
         />
+        <PanelFormCloseButton onClick={onFinish} />
       </EmojiColorTextInputFrame>
-      {couldProjectStatusBeChanged(project.id) && (
-        <VStack alignItems="start">
-          <ProjectStatusInput
-            value={value.status}
-            onChange={(status) => setValue((prev) => ({ ...prev, status }))}
-          />
-        </VStack>
-      )}
-      <HStack
-        wrap="wrap"
-        justifyContent="space-between"
-        fullWidth
-        alignItems="center"
-        gap={20}
-      >
-        {couldProjectBeDeleted(project.id) ? <DeleteProject /> : <div />}
-        <HStack alignItems="center" gap={8}>
-          <Button isDisabled={isDisabled} onClick={onFinish} kind="secondary">
-            Cancel
-          </Button>
-          <Button>Save</Button>
+      {(isStatusEditable || isDeletable) && (
+        <HStack
+          alignItems="start"
+          gap={20}
+          justifyContent="space-between"
+          wrap="wrap"
+        >
+          {isStatusEditable && (
+            <ProjectStatusInput
+              value={value.status}
+              onChange={(status) => setValue((prev) => ({ ...prev, status }))}
+            />
+          )}
+          {isDeletable && <DeleteProject />}
         </HStack>
-      </HStack>
-    </ListItemForm>
+      )}
+    </Panel>
   )
 }

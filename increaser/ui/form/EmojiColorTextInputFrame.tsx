@@ -18,7 +18,7 @@ export const EmojiColorTextInputFrame = styled(HStack)`
       padding: 0;
       padding-top: 8px;
     }
-    &:last-child {
+    &:nth-child(3) {
       min-height: 100%;
       padding: ${toSizeUnit(panelDefaultPadding)};
       padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
