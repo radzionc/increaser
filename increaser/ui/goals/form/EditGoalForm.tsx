@@ -2,17 +2,20 @@ import { useCallback, useMemo, useState } from 'react'
 import { useCurrentGoal } from '../CurrentGoalProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalFormShape } from './GoalFormShape'
-import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { pick } from '@lib/utils/record/pick'
-import { EditDeleteFormFooter } from '@lib/ui/form/components/EditDeleteFormFooter'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { GoalFormFields } from './GoalFormFields'
 import { ListItemForm } from '../../form/ListItemForm'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { areEqualRecords } from '@lib/utils/record/areEqualRecords'
+import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
+import { Button } from '@lib/ui/buttons/Button'
 
 export const EditGoalForm = () => {
   const goal = useCurrentGoal()
+  const { id } = goal
   const initialValue = useMemo(
     () => ({
       ...pick(goal, ['name', 'status', 'emoji']),
@@ -34,42 +37,53 @@ export const EditGoalForm = () => {
     setActiveItemId(null)
   }, [setActiveItemId])
 
-  const isDisabled = useIsGoalFormDisabled(value)
+  useLazySync<Partial<GoalFormShape>>({
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+          comparators: {
+            target: (one, another) => {
+              if (one === another) return true
 
-  const onSubmit = useCallback(() => {
-    if (isDisabled) {
-      return
-    }
+              if (!one || !another) return false
 
-    const fields = getUpdatedValues({
-      before: initialValue,
-      after: value,
-    })
-
-    if (fields) {
-      updateGoal({
-        id: goal.id,
-        fields,
-      })
-    }
-
-    onFinish()
-  }, [goal.id, initialValue, isDisabled, onFinish, updateGoal, value])
+              return areEqualRecords(one, another)
+            },
+            taskFactories: areArraysEqual,
+          },
+        }),
+      [initialValue, value],
+    ),
+    sync: useCallback(
+      (fields) =>
+        updateGoal({
+          id,
+          fields,
+        }),
+      [id, updateGoal],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
-      <GoalFormFields value={value} onChange={setValue} onSubmit={onSubmit} />
-      <EditDeleteFormFooter
-        onDelete={() => {
-          deleteGoal(goal.id)
-          onFinish()
-        }}
-        onCancel={onFinish}
-        isDisabled={isDisabled}
+    <ListItemForm onClose={onFinish}>
+      <GoalFormFields
+        actions={
+          <Button
+            kind="alert"
+            type="button"
+            onClick={() => {
+              deleteGoal(id)
+              onFinish()
+            }}
+          >
+            Delete
+          </Button>
+        }
+        onClose={onFinish}
+        value={value}
+        onChange={setValue}
       />
     </ListItemForm>
   )

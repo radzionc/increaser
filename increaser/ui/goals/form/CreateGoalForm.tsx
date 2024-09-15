@@ -42,8 +42,15 @@ export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <GoalFormFields value={value} onChange={setValue} onSubmit={onSubmit} />
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <GoalFormFields
+        onClose={onFinish}
+        actions={
+          <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+        }
+        value={value}
+        onChange={setValue}
+        onSubmit={onSubmit}
+      />
     </ListItemForm>
   )
 }

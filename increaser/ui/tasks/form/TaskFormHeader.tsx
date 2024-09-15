@@ -45,7 +45,6 @@ const Container = styled(VStack)`
 
 const Header = styled(HStack)`
   padding: 0;
-
   width: 100%;
 `
 

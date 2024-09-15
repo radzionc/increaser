@@ -4,7 +4,7 @@ import { Panel } from '@lib/ui/css/panel'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 
 type ListItemFormProps = ComponentWithChildrenProps & {
-  onSubmit: () => void
+  onSubmit?: () => void
   isDisabled?: string | boolean
   onClose?: () => void
 }
