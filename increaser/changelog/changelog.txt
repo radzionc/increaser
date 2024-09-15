@@ -1,3 +1,4 @@
+Tasks, projects, habits, life aspirations, goals, ideas and principles changes save automatically without a need to press the "Save" button.
 1726289037356
 Sub-tasks section is hidden by default, appears only when you choose to add sub-tasks. Collapsible and decluttered with hover-only drag-and-drop and remove button.
 Task links section is hidden by default, appears only when adding links. More compact for easier task management.
