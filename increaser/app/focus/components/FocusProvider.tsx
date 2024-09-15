@@ -13,7 +13,6 @@ import {
   StartFocusParams,
   StopFocusParams,
 } from '@increaser/ui/focus/FocusContext'
-import { FocusNotificationsManager } from '@increaser/ui/focus/FocusNotificationsManager'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
@@ -223,7 +222,6 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
       {intervals && (
         <>
           <FocusAutoStop />
-          <FocusNotificationsManager />
         </>
       )}
       <>{children}</>

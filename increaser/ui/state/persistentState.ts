@@ -5,8 +5,6 @@ import { createPersistentStateManager } from '@lib/ui/state/createPersistentStat
 
 export enum PersistentStateKey {
   AuthSession = 'auth-session',
-  HasTimerSoundNotification = 'hasTimerSoundNotification',
-  HasTimerBrowserNotification = 'hasTimerBrowserNotification',
   HasBreakBrowserNotification = 'breakBrowserNotification',
   HasBreakSoundNotification = 'breakSoundNotification',
   HasBreakAutomaticBreak = 'hasBreakAutomaticBreak',
