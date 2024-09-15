@@ -3,7 +3,6 @@ import {
   HStackSeparatedBy,
   slashSeparator,
 } from '@lib/ui/layout/StackSeparatedBy'
-import { TitleFocusDurationSelector } from '../../../home/components/TitleFocusDurationSelector'
 import { SessionIntervals } from './SessionIntervals'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
@@ -12,6 +11,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { centerContent } from '@lib/ui/css/centerContent'
+import { FocusDurationSelector } from './FocusDurationSelector'
 
 const Container = styled.div`
   ${borderRadius.s};
@@ -23,7 +23,8 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  background: ${getColor('background')};
+  background: ${({ theme }) =>
+    theme.colors.background.getVariant({ a: () => 0.88 }).toCssValue()};
   height: 100%;
   border-radius: 6px;
   ${horizontalPadding(12)};
@@ -49,7 +50,7 @@ export const ActiveFocusTime = () => {
           <Text as="div" weight="600" size={24} height="small">
             <FocusPassedTime />
           </Text>
-          <TitleFocusDurationSelector />
+          <FocusDurationSelector />
         </HStackSeparatedBy>
       </Content>
     </Container>

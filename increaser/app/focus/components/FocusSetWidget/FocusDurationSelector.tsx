@@ -14,11 +14,13 @@ import { Text } from '@lib/ui/text'
 
 const Container = styled(Text)<ComponentWithActiveState>`
   ${interactive};
+  font-weight: 600;
+  font-size: 12px;
 
   ${({ isActive }) =>
     isActive
       ? css`
-          color: ${getColor('textPrimary')};
+          color: ${getColor('contrast')};
         `
       : css`
           &:hover {
@@ -27,7 +29,7 @@ const Container = styled(Text)<ComponentWithActiveState>`
         `}
 `
 
-export const TitleFocusDurationSelector = () => {
+export const FocusDurationSelector = () => {
   const { focusDuration, setFocusDuration } = useFocus()
 
   const {
