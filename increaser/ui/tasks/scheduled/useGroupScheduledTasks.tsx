@@ -14,8 +14,8 @@ import { range } from '@lib/utils/array/range'
 import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
 import { getGroupId, ScheduledTaskGroupId } from './ScheduledTaskGroupId'
 import { Entry } from '@lib/utils/entities/Entry'
-import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { endOfISOWeek } from 'date-fns'
+import { order } from '@lib/utils/array/order'
 
 export const useGroupScheduledTasks = () => {
   const [timeGrouping] = useTaskTimeGrouping()
@@ -97,7 +97,7 @@ export const useGroupScheduledTasks = () => {
 
       result = result.map(({ value, ...rest }) => ({
         ...rest,
-        value: sortEntitiesWithOrder(value),
+        value: order(value, ({ deadlineOrder }) => deadlineOrder, 'asc'),
       }))
 
       return result

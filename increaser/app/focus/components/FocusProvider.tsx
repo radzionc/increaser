@@ -31,6 +31,7 @@ import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpd
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusTarget } from '../state/useFocusTarget'
 import { useFocusIntervals } from '../hooks/useFocusIntervals'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -190,10 +191,17 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
 
     if (task.status === 'inProgress' || task.status === 'done') return
 
+    const status = 'inProgress'
+
     updateTaskMutation({
       id: taskId,
       fields: {
-        status: 'inProgress',
+        status,
+        order: getLastItemOrder(
+          Object.values(tasks)
+            .filter((task) => task.status === status)
+            .map((task) => task.order),
+        ),
       },
     })
   }, [intervals, tasks, updateTaskMutation])

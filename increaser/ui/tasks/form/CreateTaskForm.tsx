@@ -55,18 +55,28 @@ export const CreateTaskForm = ({
   const onSubmit = () => {
     if (isDisabled) return
 
-    const orders = Object.values(tasks)
-      .filter((task) => task.deadlineAt === value.deadlineAt)
-      .map((task) => task.order)
-    const order = getLastItemOrder(orders)
+    const order = getLastItemOrder(
+      Object.values(tasks)
+        .filter((task) => task.status === value.status)
+        .map((task) => task.order),
+    )
+
+    const deadlineOrder = getLastItemOrder(
+      Object.values(tasks)
+        .filter((task) => task.deadlineAt === value.deadlineAt)
+        .map((task) => task.deadlineOrder),
+    )
 
     const startedAt = Date.now()
+
     const task: Task = {
       id: getId(),
       ...value,
       startedAt,
       order,
+      deadlineOrder,
     }
+
     mutate(task, {
       onSuccess: () => {
         onMutationFinish?.(task)

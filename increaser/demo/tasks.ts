@@ -224,6 +224,7 @@ export const getDemoTasks = (): Record<string, Task> => {
         completedAt: isCompleted ? Date.now() : null,
         deadlineAt: status === 'backlog' ? null : endOfDay(startedAt).getTime(),
         order,
+        deadlineOrder: order,
         checklist: checklist || [],
         links: [],
         description: '',

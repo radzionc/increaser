@@ -6,7 +6,10 @@ import { TaskFormShape } from './TaskFormShape'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
+import {
+  UpdateUserEntityInput,
+  useUpdateUserEntityMutation,
+} from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
@@ -19,6 +22,8 @@ import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { Button } from '@lib/ui/buttons/Button'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { useAssertUserState } from '../../user/UserStateContext'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -35,13 +40,14 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
     'status',
   ])
   const [value, setValue] = useState<TaskFormShape>(initialValue)
+  const { tasks } = useAssertUserState()
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
   const { mutate: deleteTask } = useDeleteUserEntityMutation('task')
 
-  useLazySync<Partial<TaskFormShape>>({
-    value: useMemo(
-      () =>
+  useLazySync<Partial<UpdateUserEntityInput<'task'>['fields']>>({
+    value: useMemo(() => {
+      let result: Partial<UpdateUserEntityInput<'task'>['fields']> | undefined =
         getUpdatedValues({
           before: initialValue,
           after: value,
@@ -51,9 +57,34 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
             checklist: (one, another) =>
               areArraysEqual(one, another, areChecklistItemsEqual),
           },
-        }),
-      [initialValue, value],
-    ),
+        })
+
+      if (!result) return result
+
+      if (result.deadlineAt !== initialValue.deadlineAt) {
+        result = {
+          ...result,
+          deadlineOrder: getLastItemOrder(
+            Object.values(tasks)
+              .filter((task) => task.deadlineAt === value.deadlineAt)
+              .map((task) => task.deadlineOrder),
+          ),
+        }
+      }
+
+      if (result.status !== initialValue.status) {
+        result = {
+          ...result,
+          order: getLastItemOrder(
+            Object.values(tasks)
+              .filter((task) => task.status === value.status)
+              .map((task) => task.order),
+          ),
+        }
+      }
+
+      return result
+    }, [initialValue, tasks, value]),
     sync: useCallback(
       (fields) =>
         updateTask({

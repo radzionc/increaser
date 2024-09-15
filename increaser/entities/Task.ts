@@ -35,6 +35,7 @@ export type Task = EntityWithId &
     checklist: TaskChecklistItem[]
     factoryId?: string
     description: string
+    deadlineOrder: number
   }
 
 export type ScheduledTask = Omit<Task, 'deadlineAt'> & {

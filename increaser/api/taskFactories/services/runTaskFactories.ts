@@ -42,19 +42,28 @@ export const runTaskFactories = async (userId: string) => {
 
       const newTasks = [...oldTasks, ...generatedTasks]
 
-      const orders = newTasks
-        .filter((task) => task.deadlineAt === deadlineAt)
-        .map((task) => task.order)
+      const status = 'todo'
 
-      const order = getLastItemOrder(orders)
+      const order = getLastItemOrder(
+        newTasks
+          .filter((task) => task.status === status)
+          .map((task) => task.order),
+      )
+
+      const deadlineOrder = getLastItemOrder(
+        newTasks
+          .filter((task) => task.deadlineAt === deadlineAt)
+          .map((task) => task.deadlineOrder),
+      )
 
       generatedTasks.push({
         startedAt: now,
         id: getId(),
         deadlineAt,
         order,
+        deadlineOrder,
         factoryId: id,
-        status: 'todo',
+        status,
         ...task,
       })
     },

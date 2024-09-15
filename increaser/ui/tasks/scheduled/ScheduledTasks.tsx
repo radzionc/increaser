@@ -68,8 +68,8 @@ export const ScheduledTasks = () => {
             groups.find((group) => group.value.some((task) => task.id === id)),
           )
 
-          const order = getNewOrder({
-            orders: group.value.map((task) => task.order),
+          const deadlineOrder = getNewOrder({
+            orders: group.value.map((task) => task.deadlineOrder),
             sourceIndex:
               initialGroup.key === group.key
                 ? group.value.findIndex((task) => task.id === id)
@@ -82,7 +82,7 @@ export const ScheduledTasks = () => {
           updateTask({
             id,
             fields: {
-              order,
+              deadlineOrder,
               deadlineAt,
             },
           })
@@ -90,7 +90,7 @@ export const ScheduledTasks = () => {
           setGroups(
             toGroups(
               tasks.map((task) =>
-                task.id === id ? { ...task, order, deadlineAt } : task,
+                task.id === id ? { ...task, deadlineOrder, deadlineAt } : task,
               ),
             ),
           )

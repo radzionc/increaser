@@ -3,7 +3,10 @@ import { Task } from '@increaser/entities/Task'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
+import {
+  UpdateUserEntityInput,
+  useUpdateUserEntityMutation,
+} from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { Panel } from '@lib/ui/css/panel'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
@@ -16,6 +19,8 @@ import { AddTaskLink } from '@increaser/ui/tasks/form/links/AddTaskLink'
 import { AddTaskChecklist } from '@increaser/ui/tasks/form/checklist/AddTaskChecklist'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 
 type TaskFormShape = Pick<
   Task,
@@ -25,6 +30,7 @@ type TaskFormShape = Pick<
 export const FocusTaskOverview = () => {
   const task = shouldBePresent(useFocusTargetTask())
   const { id } = task
+  const { tasks } = useAssertUserState()
 
   const initialValue = useMemo(
     () =>
@@ -43,9 +49,9 @@ export const FocusTaskOverview = () => {
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
-  useLazySync<Partial<TaskFormShape>>({
-    value: useMemo(
-      () =>
+  useLazySync<Partial<UpdateUserEntityInput<'task'>['fields']>>({
+    value: useMemo(() => {
+      let result: Partial<UpdateUserEntityInput<'task'>['fields']> | undefined =
         getUpdatedValues({
           before: initialValue,
           after: value,
@@ -55,9 +61,23 @@ export const FocusTaskOverview = () => {
             checklist: (one, another) =>
               areArraysEqual(one, another, areChecklistItemsEqual),
           },
-        }),
-      [initialValue, value],
-    ),
+        })
+
+      if (!result) return result
+
+      if (result.deadlineAt !== initialValue.deadlineAt) {
+        result = {
+          ...result,
+          deadlineOrder: getLastItemOrder(
+            Object.values(tasks)
+              .filter((task) => task.deadlineAt === value.deadlineAt)
+              .map((task) => task.deadlineOrder),
+          ),
+        }
+      }
+
+      return result
+    }, [initialValue, tasks, value]),
     sync: useCallback(
       (fields) =>
         updateTask({
