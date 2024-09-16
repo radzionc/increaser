@@ -9,6 +9,7 @@ import { useFocusNotificationsHaveSound } from './state/focusNotificationsHaveSo
 import { NoVolumeIcon } from '@lib/ui/icons/NoVolumeIcon'
 import { VolumeIcon } from '@lib/ui/icons/VolumeIcon'
 import styled from 'styled-components'
+import { FocusNotificationsToggles } from './FocusNotificationsToggles'
 
 const IconContainer = styled(IconWrapper)`
   color: ${({ theme }) =>
@@ -38,7 +39,7 @@ export const ManageFocusNotifications = () => {
       </WithSecondaryAction>
       {isOpen && (
         <Modal onClose={() => setIsOpen(false)} title="Focus notifications">
-          coming soon!
+          <FocusNotificationsToggles />
         </Modal>
       )}
     </>

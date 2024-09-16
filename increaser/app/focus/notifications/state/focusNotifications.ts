@@ -6,11 +6,11 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { makeRecord } from '@lib/utils/record/makeRecord'
 import { usePermission } from 'react-use'
 
-const focusNotifications = ['sessionEnd', 'workDayEnd', 'eyeBreak']
+export const focusNotifications = ['sessionEnd', 'workDayEnd', 'eyeBreak']
 export type FocusNotification = (typeof focusNotifications)[number]
 export type FocusNotifications = Record<FocusNotification, boolean>
 
-export const useFocusNotificationsHaveSound = () => {
+export const useFocusNotifications = () => {
   const permission = usePermission({ name: 'notifications' })
   const areEnabled = permission === 'granted'
 
