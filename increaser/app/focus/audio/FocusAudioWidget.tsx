@@ -9,65 +9,29 @@ import { YouTubeFocusWidget } from './youTube/YouTubeFocusWidget'
 import { SoundsFocusWidget } from './sounds/SoundsFocusWidget'
 import { useIsFocusAudioEnabled } from './state/useIsFocusAudioEnabled'
 import { HStack, VStack } from '@lib/ui/css/stack'
-import styled from 'styled-components'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { getColor } from '@lib/ui/theme/getters'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Switch } from '@lib/ui/inputs/Switch'
-import { centerContent } from '@lib/ui/css/centerContent'
 import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
 import { TabNavigation } from '@lib/ui/navigation/TabNavigation'
 import { YouTubeViewSelector } from './youTube/YouTubeViewSelector'
-import { interactive } from '@lib/ui/css/interactive'
-import { borderRadius } from '@lib/ui/css/borderRadius'
-import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
 import { Modal } from '@lib/ui/modal'
+import { WithSecondaryAction } from '@lib/ui/buttons/WithSecondaryAction'
+import styled, { css } from 'styled-components'
+import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 
-const height = 40
-
-const Wrapper = styled(HStack)`
-  ${interactive};
-  height: ${toSizeUnit(height)};
-  border: 1px solid ${getColor('mistExtra')};
-  ${borderRadius.m};
-  overflow: hidden;
-
-  > * {
-    &:first-child {
-      border-right: 1px solid ${getColor('mistExtra')};
-    }
-    background: ${getColor('foreground')};
-  }
+const Container = styled(WithSecondaryAction)<{ isDisabled?: boolean }>`
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.5;
+    `}
 `
 
-const Content = styled(Switch)`
-  height: 100%;
-  ${horizontalPadding(12)};
-  &:hover {
-    background: ${getHoverVariant('foreground')};
-    color: ${getColor('contrast')};
-  }
-`
-
-const MoreButton = styled(UnstyledButton)`
-  ${sameDimensions(height)};
-  color: ${getColor('textSupporting')};
-
-  outline: none;
-
-  ${centerContent};
-
-  &:hover {
-    background: ${getHoverVariant('foreground')};
-    color: ${getColor('contrast')};
-  }
-`
 export const FocusAudioWidget = () => {
   const [isEnabled, setIsEnabled] = useIsFocusAudioEnabled()
   const [isExpanded, setIsExpanded] = usePersistentState<boolean>(
@@ -75,18 +39,19 @@ export const FocusAudioWidget = () => {
     false,
   )
   const [mode, setMode] = useFocusAudioMode()
+  const isPaused = useIsFocusPaused()
 
   return (
     <>
-      <Wrapper>
-        <Content
+      <Container isDisabled={isPaused}>
+        <Switch
           label="Focus sounds"
           value={isEnabled}
           onChange={setIsEnabled}
           size="s"
         />
         {isEnabled && (
-          <MoreButton
+          <UnstyledButton
             onClick={() => {
               setIsExpanded(true)
             }}
@@ -94,9 +59,9 @@ export const FocusAudioWidget = () => {
             title="Change focus sounds"
           >
             <MoreHorizontalIcon />
-          </MoreButton>
+          </UnstyledButton>
         )}
-      </Wrapper>
+      </Container>
       {isExpanded && (
         <Modal
           width={560}
