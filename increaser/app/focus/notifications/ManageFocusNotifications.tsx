@@ -38,7 +38,11 @@ export const ManageFocusNotifications = () => {
         </UnstyledButton>
       </WithSecondaryAction>
       {isOpen && (
-        <Modal onClose={() => setIsOpen(false)} title="Focus notifications">
+        <Modal
+          placement="top"
+          onClose={() => setIsOpen(false)}
+          title="Focus notifications"
+        >
           <FocusNotificationsToggles />
         </Modal>
       )}
