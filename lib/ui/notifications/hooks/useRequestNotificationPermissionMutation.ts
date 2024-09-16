@@ -7,6 +7,8 @@ export const useRequestNotificationPermissionMutation = () => {
       if (permission !== 'granted') {
         throw new Error('User denied notification permission')
       }
+
+      return permission
     },
   })
 }
