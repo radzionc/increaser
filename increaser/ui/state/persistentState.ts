@@ -36,6 +36,8 @@ export enum PersistentStateKey {
   TaskTimeGrouping = 'taskTimeGrouping',
   TasksView = 'tasksView',
   IsChecklistOpen = 'isChecklistOpen',
+  FocusNotificationsHaveSound = 'FocusNotificationsHaveSound',
+  FocusNotifications = 'FocusNotifications',
 }
 
 const persistentStorage =

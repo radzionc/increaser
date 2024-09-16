@@ -31,6 +31,7 @@ export const WithSecondaryAction = styled(HStack)`
       width: ${toSizeUnit(height)};
       ${centerContent};
       outline: none;
+      font-size: 16px;
     }
 
     &:hover {
