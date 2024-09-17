@@ -6,13 +6,13 @@ import { getColor } from '@lib/ui/theme/getters'
 import { formatTime } from '@lib/utils/time/formatTime'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { dayOverviewConfig } from './config'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { useWorkDayEndsAt } from '../../../schedule/hooks/useWorkDayEndsAt'
 
 const Line = styled.div`
   width: 100%;
@@ -36,13 +36,11 @@ const Wrapper = styled.div`
 `
 
 export const CurrentTime = () => {
-  const { finishWorkAt } = useAssertUserState()
   const [weekday] = useSelectedWeekday()
   const dayStartedAt = useStartOfWeekday(weekday)
   const { currentTime, startHour, endHour } = useDayOverview()
 
-  const workdayEndsAt =
-    dayStartedAt + convertDuration(finishWorkAt, 'min', 'ms')
+  const workdayEndsAt = useWorkDayEndsAt()
   const timelineEndsAt = dayStartedAt + convertDuration(endHour, 'h', 'ms')
   const timelineStartsAt = dayStartedAt + convertDuration(startHour, 'h', 'ms')
 

@@ -2,16 +2,14 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { Button } from '@lib/ui/buttons/Button'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { MS_IN_MIN } from '@lib/utils/time'
 import { useState } from 'react'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import styled from 'styled-components'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { UnlockIcon } from '@lib/ui/icons/UnlockIcon'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
+import { useWorkDayEndsAt } from '@increaser/ui/schedule/hooks/useWorkDayEndsAt'
 
 const Overlay = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -23,12 +21,10 @@ const Overlay = styled.div`
 export const WorkdayFinished = () => {
   const lastSetEnd = useLastSetEnd()
   const now = useRhythmicRerender()
-  const todayStartedAt = useStartOfDay()
 
   const [isLocked, setIsLocked] = useState(true)
 
-  const { finishWorkAt } = useAssertUserState()
-  const workdayEndsAt = todayStartedAt + finishWorkAt * MS_IN_MIN
+  const workdayEndsAt = useWorkDayEndsAt()
 
   if (
     now < workdayEndsAt ||

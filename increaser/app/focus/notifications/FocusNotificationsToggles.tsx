@@ -1,5 +1,4 @@
 import { Switch } from '@lib/ui/inputs/Switch'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import {
   focusNotifications,
   useFocusNotifications,
@@ -8,6 +7,18 @@ import { makeRecord } from '@lib/utils/record/makeRecord'
 import { usePermission } from 'react-use'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { useRequestNotificationPermissionMutation } from '@lib/ui/notifications/hooks/useRequestNotificationPermissionMutation'
+import { VStack } from '@lib/ui/css/stack'
+import { ManageFocusNotification } from './ManageFocusNotification'
+import { focusNotificationsConfig } from './config'
+import styled from 'styled-components'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+
+const PrimarySwitch = styled(Switch)`
+  padding: ${toSizeUnit(
+    focusNotificationsConfig.horizontalPadding +
+      focusNotificationsConfig.borderWidth,
+  )};
+`
 
 export const FocusNotificationsToggles = () => {
   const permission = usePermission({ name: 'notifications' })
@@ -16,15 +27,15 @@ export const FocusNotificationsToggles = () => {
     useRequestNotificationPermissionMutation()
 
   return (
-    <SeparatedByLine gap={8}>
+    <VStack gap={8}>
       {permission === 'denied' ? (
         <ShyWarningBlock title="Enable browser notifications">
           To receive focus notifications, please enable browser notifications.
         </ShyWarningBlock>
       ) : (
-        <Switch
+        <PrimarySwitch
           onChange={(value) => {
-            if (!value || permission === 'granted') {
+            if (!value) {
               setValue(makeRecord(focusNotifications, () => value))
             } else {
               requestPermission(undefined, {
@@ -37,6 +48,11 @@ export const FocusNotificationsToggles = () => {
           label="Enable all"
         />
       )}
-    </SeparatedByLine>
+      <VStack gap={12}>
+        {focusNotifications.map((value) => (
+          <ManageFocusNotification key={value} value={value} />
+        ))}
+      </VStack>
+    </VStack>
   )
 }

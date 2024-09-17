@@ -31,6 +31,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusTarget } from '../state/useFocusTarget'
 import { useFocusIntervals } from '../hooks/useFocusIntervals'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
+import { FocusNotifications } from '../notifications/FocusNotifications'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const [focusDuration, setFocusDuration] =
@@ -222,6 +223,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
       {intervals && (
         <>
           <FocusAutoStop />
+          <FocusNotifications />
         </>
       )}
       <>{children}</>
