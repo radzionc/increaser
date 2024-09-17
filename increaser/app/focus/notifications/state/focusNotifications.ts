@@ -2,17 +2,17 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
+import { useNotificationPermission } from '@lib/ui/notifications/hooks/useNotificationPermission'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { makeRecord } from '@lib/utils/record/makeRecord'
 import { Minutes, Seconds } from '@lib/utils/time/types'
-import { usePermission } from 'react-use'
 
 export const focusNotifications = ['sessionEnd', 'workDayEnd', 'eyeBreak']
 export type FocusNotification = (typeof focusNotifications)[number]
 export type FocusNotifications = Record<FocusNotification, boolean>
 
 export const useFocusNotifications = () => {
-  const permission = usePermission({ name: 'notifications' })
+  const permission = useNotificationPermission()
   const areEnabled = permission === 'granted'
 
   return useStateCorrector(

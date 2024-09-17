@@ -4,7 +4,6 @@ import {
   useFocusNotifications,
 } from './state/focusNotifications'
 import { makeRecord } from '@lib/utils/record/makeRecord'
-import { usePermission } from 'react-use'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { useRequestNotificationPermissionMutation } from '@lib/ui/notifications/hooks/useRequestNotificationPermissionMutation'
 import { VStack } from '@lib/ui/css/stack'
@@ -12,6 +11,7 @@ import { ManageFocusNotification } from './ManageFocusNotification'
 import { focusNotificationsConfig } from './config'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { useNotificationPermission } from '@lib/ui/notifications/hooks/useNotificationPermission'
 
 const PrimarySwitch = styled(Switch)`
   padding: ${toSizeUnit(
@@ -21,7 +21,7 @@ const PrimarySwitch = styled(Switch)`
 `
 
 export const FocusNotificationsToggles = () => {
-  const permission = usePermission({ name: 'notifications' })
+  const permission = useNotificationPermission()
   const [value, setValue] = useFocusNotifications()
   const { mutate: requestPermission } =
     useRequestNotificationPermissionMutation()
