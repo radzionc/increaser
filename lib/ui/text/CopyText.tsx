@@ -7,13 +7,14 @@ import { CheckIcon } from '../icons/CheckIcon'
 import { Text, TextProps } from '../text'
 import { Match } from '../base/Match'
 import { transition } from '../css/transition'
-import { ComponentWithChildrenProps } from '../props'
+import { ComponentWithChildrenProps, UIComponentProps } from '../props'
 
 type CopyTextProps = {
   content: string
   isIconAlwaysVisible?: boolean
 } & ComponentWithChildrenProps &
-  TextProps
+  TextProps &
+  UIComponentProps
 
 const IconWr = styled(Text)<{ isIconAlwaysVisible: boolean }>`
   margin-left: 4px;
