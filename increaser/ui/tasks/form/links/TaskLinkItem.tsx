@@ -1,6 +1,5 @@
 import { TaskLink } from '@increaser/entities/Task'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { HStack, hStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
@@ -59,7 +58,8 @@ const Content = styled(ExternalLink)`
 `
 
 const MoreButton = styled(UnstyledButton)<ComponentWithActiveState>`
-  ${sameDimensions(height)};
+  width: ${toSizeUnit(height)};
+  height: 100%;
   color: ${getColor('textSupporting')};
 
   outline: none;

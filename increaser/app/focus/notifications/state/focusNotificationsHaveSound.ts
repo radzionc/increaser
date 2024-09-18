@@ -3,9 +3,9 @@ import {
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
 
-export const useHasTimerSoundNotification = () => {
+export const useFocusNotificationsHaveSound = () => {
   return usePersistentState<boolean>(
-    PersistentStateKey.HasTimerSoundNotification,
+    PersistentStateKey.FocusNotificationsHaveSound,
     true,
   )
 }
