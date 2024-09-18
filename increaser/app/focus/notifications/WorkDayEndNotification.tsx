@@ -27,7 +27,7 @@ export const WorkDayEndNotification = () => {
     }, targetIn)
 
     return () => clearTimeout(timeout)
-  })
+  }, [notify, targetAt])
 
   return null
 }

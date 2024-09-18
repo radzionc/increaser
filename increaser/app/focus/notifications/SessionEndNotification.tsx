@@ -40,7 +40,7 @@ export const SessionEndNotification = () => {
     }, sessionEndsIn)
 
     return () => clearTimeout(timeout)
-  })
+  }, [notify, sessionEndsAt])
 
   return null
 }

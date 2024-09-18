@@ -35,7 +35,7 @@ export const EyeBreakNotification = () => {
     }, targetIn)
 
     return () => clearTimeout(timeout)
-  })
+  }, [notify, targetAt])
 
   return null
 }
