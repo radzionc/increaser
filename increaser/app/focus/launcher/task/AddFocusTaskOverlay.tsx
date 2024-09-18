@@ -1,9 +1,9 @@
 import React from 'react'
 import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { endOfDay } from 'date-fns'
 import { useFocusTarget } from '../../state/useFocusTarget'
 import { NoValueFinishProps } from '@lib/ui/props'
+import { withoutUndefinedFields } from '@lib/utils/record/withoutUndefinedFields'
 
 export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
   const [, setState] = useFocusTarget()
@@ -12,10 +12,9 @@ export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
   return (
     <PanelModal width={560} onFinish={onFinish}>
       <CreateTaskForm
-        defaultValue={{
-          projectId: projectId || undefined,
-          deadlineAt: endOfDay(Date.now()).getTime(),
-        }}
+        defaultValue={withoutUndefinedFields({
+          projectId: projectId ?? undefined,
+        })}
         onFinish={(task) => {
           // wait for mutation to finish
           if (task) return
