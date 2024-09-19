@@ -7,6 +7,7 @@ import { CropLastInterval } from './CropLastInterval'
 
 import { PageHeader } from '../../../ui/page/header/PageHeader'
 import { ActiveFocusTime } from './ActiveFocusTime'
+import { FocusDurationSelector } from './FocusDurationSelector'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -14,6 +15,7 @@ const Container = styled(HStack)`
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
+  height: 40px;
 `
 
 export const ActiveFocusHeader = () => {
@@ -22,9 +24,12 @@ export const ActiveFocusHeader = () => {
   return (
     <PageHeader>
       <Container>
-        <HStack alignItems="center" gap={12}>
+        <HStack fullHeight alignItems="center" gap={12}>
           <PauseFocusSession />
-          <ActiveFocusTime />
+          <HStack fullHeight alignItems="center">
+            <ActiveFocusTime />
+            <FocusDurationSelector />
+          </HStack>
         </HStack>
         <HStack gap={8}>
           <CropLastInterval />

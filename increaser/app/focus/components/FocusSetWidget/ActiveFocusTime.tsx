@@ -1,8 +1,4 @@
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
-import {
-  HStackSeparatedBy,
-  slashSeparator,
-} from '@lib/ui/layout/StackSeparatedBy'
 import { SessionIntervals } from './SessionIntervals'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
@@ -11,13 +7,12 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { FocusDurationSelector } from './FocusDurationSelector'
 
 const Container = styled.div`
   ${borderRadius.s};
   padding: 2px;
   background: ${getColor('mistExtra')};
-  height: 40px;
+  height: 100%;
   overflow: hidden;
   position: relative;
 `
@@ -38,20 +33,9 @@ export const ActiveFocusTime = () => {
         <SessionIntervals />
       </TakeWholeSpaceAbsolutely>
       <Content>
-        <HStackSeparatedBy
-          style={{ position: 'relative' }}
-          separator={
-            <Text color="shy" as="span">
-              {slashSeparator}
-            </Text>
-          }
-          gap={12}
-        >
-          <Text as="div" weight="600" size={24} height="small">
-            <FocusPassedTime />
-          </Text>
-          <FocusDurationSelector />
-        </HStackSeparatedBy>
+        <Text as="div" weight="600" size={24} height="small">
+          <FocusPassedTime />
+        </Text>
       </Content>
     </Container>
   )

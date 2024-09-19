@@ -6,16 +6,29 @@ import { OptionContent } from '@lib/ui/select/OptionContent'
 import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { focusDurations } from '@increaser/entities/FocusDuration'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
-import { interactive } from '@lib/ui/css/interactive'
 import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 import { Text } from '@lib/ui/text'
+import { slashSeparator } from '@lib/ui/layout/StackSeparatedBy'
+import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { hStack } from '@lib/ui/css/stack'
 
-const Container = styled(Text)<ComponentWithActiveState>`
-  ${interactive};
+const gap = 12
+
+const Container = styled(UnstyledButton)<ComponentWithActiveState>`
+  ${hStack({
+    fullHeight: true,
+    alignItems: 'center',
+    gap,
+  })}
+
   font-weight: 600;
   font-size: 12px;
+  position: relative;
+
+  ${horizontalPadding(gap)};
 
   ${({ isActive }) =>
     isActive
@@ -49,8 +62,11 @@ export const FocusDurationSelector = () => {
 
   return (
     <>
-      <Container {...getReferenceProps()} isActive={isOpen} as="span">
-        {focusDuration} min
+      <Container {...getReferenceProps()} isActive={isOpen}>
+        <Text color="shy" as="span">
+          {slashSeparator}
+        </Text>
+        <Text>{focusDuration} min</Text>
       </Container>
       {isOpen && (
         <FloatingFocusManager context={context} modal>
