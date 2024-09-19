@@ -55,7 +55,6 @@ export const FocusAudioWidget = () => {
             onClick={() => {
               setIsExpanded(true)
             }}
-            type="button"
             title="Change focus sounds"
           >
             <MoreHorizontalIcon />

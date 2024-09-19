@@ -137,7 +137,6 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         </HStack>
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deleteTask(id)
             onFinish()

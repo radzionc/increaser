@@ -36,7 +36,7 @@ export const TaskChecklistHeader = ({
   const [isOpen, setIsOpen] = useIsChecklistOpen()
 
   return (
-    <Container onClick={() => setIsOpen(!isOpen)} type="button">
+    <Container onClick={() => setIsOpen(!isOpen)}>
       <IconContainer>
         <CollapsableStateIndicator isOpen={isOpen} />
       </IconContainer>

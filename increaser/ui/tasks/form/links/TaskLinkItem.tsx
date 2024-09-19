@@ -125,7 +125,6 @@ export const TaskLinkItem = ({ value, onRemove, onChange }: TaskLinkProps) => {
           {value.name}
         </Content>
         <MoreButton
-          type="button"
           isActive={isOpen}
           {...getReferenceProps()}
           title="Edit link"

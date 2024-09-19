@@ -22,7 +22,7 @@ const Container = styled(UnstyledButton)`
 
 export const AddTaskPrompt = ({ onClick }: ClickableComponentProps) => {
   return (
-    <Container onClick={onClick} type="button">
+    <Container onClick={onClick}>
       <HeaderPromptContentFrame icon={<PlusIcon />}>
         Add a task
       </HeaderPromptContentFrame>

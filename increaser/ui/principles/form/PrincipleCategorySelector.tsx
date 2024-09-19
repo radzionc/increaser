@@ -44,11 +44,7 @@ export const PrincipleCategorySelector = ({
 
   return (
     <>
-      <ExpandableInputOpener
-        isActive={isOpen}
-        type="button"
-        {...getReferenceProps()}
-      >
+      <ExpandableInputOpener isActive={isOpen} {...getReferenceProps()}>
         <Text color="contrast" size={32}>
           {record[value].emoji}
         </Text>

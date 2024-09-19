@@ -49,7 +49,7 @@ export const SetDobForm = ({ onFinish }: NoValueFinishProps) => {
           })}
         >
           <DayInput min={min} max={max} value={value} onChange={setValue} />
-          <Button>Submit</Button>
+          <Button type="submit">Submit</Button>
         </Container>
       </Panel>
     </InputContainer>

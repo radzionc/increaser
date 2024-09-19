@@ -72,7 +72,6 @@ export const EditGoalForm = () => {
         actions={
           <Button
             kind="alert"
-            type="button"
             onClick={() => {
               deleteGoal(id)
               onFinish()

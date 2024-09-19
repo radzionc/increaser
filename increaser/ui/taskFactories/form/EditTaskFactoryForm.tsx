@@ -134,7 +134,6 @@ export const EditTaskFactoryForm = () => {
         </HStack>
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deleteTaskFactory(id)
             onFinish()

@@ -85,7 +85,6 @@ export const EditHabitForm = () => {
       <HStack fullWidth>
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deleteHabit(id)
             onFinish()

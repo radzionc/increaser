@@ -96,7 +96,6 @@ export const EditIdeaForm = () => {
         <TurnIdeaIntoTask value={value} />
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deleteIdea(id)
             onFinish()

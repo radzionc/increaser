@@ -7,6 +7,7 @@ import { borderRadius } from '../css/borderRadius'
 import { vStack } from '../css/stack'
 import { useIsScreenWidthLessThan } from '../hooks/useIsScreenWidthLessThan'
 import { modalConfig } from './config'
+import FocusLock from 'react-focus-lock'
 
 export type ModalPlacement = 'top' | 'center'
 
@@ -17,7 +18,7 @@ type ContainerProps = {
 
 const offset = 40
 
-const Container = styled.div<ContainerProps>`
+const Container = styled(FocusLock)<ContainerProps>`
   ${vStack()};
 
   max-height: 100%;
@@ -69,6 +70,7 @@ export const ModalContainer = forwardRef(
 
     return (
       <Container
+        returnFocus
         as={as}
         ref={ref}
         width={isFullScreen ? undefined : targetWidth}

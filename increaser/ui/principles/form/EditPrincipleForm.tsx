@@ -64,7 +64,6 @@ export const EditPrincipleForm = () => {
       <HStack fullWidth>
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deletePrinciple(id)
             onFinish()

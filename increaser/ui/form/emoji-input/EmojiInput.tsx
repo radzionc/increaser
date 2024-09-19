@@ -66,7 +66,6 @@ export const EmojiInput = ({ value, onChange }: InputProps<string>) => {
     <>
       <ExpandableInputOpener
         isActive={isOpen}
-        type="button"
         ref={setReference}
         {...getReferenceProps()}
       >

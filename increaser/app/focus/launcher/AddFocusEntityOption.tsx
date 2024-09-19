@@ -42,7 +42,7 @@ export const AddFocusEntityOption = ({
   focusEntityName,
 }: AddFocusEntityOptionProps) => {
   return (
-    <Container onClick={onClick} type="button">
+    <Container onClick={onClick}>
       <HeaderPromptContentFrame icon={<PlusIcon />}>
         Add {focusEntityName}
       </HeaderPromptContentFrame>

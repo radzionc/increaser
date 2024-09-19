@@ -26,12 +26,7 @@ export const ResetHabitsOverlay = ({ onFinish }: NoValueFinishProps) => {
       onClose={onFinish}
       footer={
         <UniformColumnGrid gap={20}>
-          <Button
-            type="button"
-            size="l"
-            onClick={() => onFinish()}
-            kind="secondary"
-          >
+          <Button size="l" onClick={() => onFinish()} kind="secondary">
             Cancel
           </Button>
           <Button

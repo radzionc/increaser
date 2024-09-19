@@ -109,10 +109,10 @@ export const SetEditorForm = () => {
         gap={20}
       >
         <HStack fullWidth justifyContent="end" gap={8}>
-          <Button type="button" onClick={onCancel} kind="secondary">
+          <Button onClick={onCancel} kind="secondary">
             Cancel
           </Button>
-          <Button onClick={onSubmit} isDisabled={isDisabled}>
+          <Button type="submit" onClick={onSubmit} isDisabled={isDisabled}>
             Save
           </Button>
         </HStack>

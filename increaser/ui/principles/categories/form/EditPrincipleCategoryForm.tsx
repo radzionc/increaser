@@ -78,7 +78,6 @@ export const EditPricnipleCategoryForm = () => {
         <HStack fullWidth>
           <Button
             kind="alert"
-            type="button"
             onClick={() => {
               deleteEntity(id)
               onFinish()

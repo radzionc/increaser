@@ -14,7 +14,7 @@ export const TaskProjectSelector = ({
   return (
     <ProjectSelector
       renderOpener={(props) => (
-        <ExpandableInputOpener type="button" {...props}>
+        <ExpandableInputOpener {...props}>
           <Text color="contrast" size={32}>
             {projects[value].emoji}
           </Text>

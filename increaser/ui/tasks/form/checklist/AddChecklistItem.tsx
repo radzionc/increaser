@@ -37,7 +37,7 @@ const IconContainer = styled(IconWrapper)`
 
 export const AddChecklistItem = ({ onClick }: ClickableComponentProps) => {
   return (
-    <Container onClick={onClick} type="button">
+    <Container onClick={onClick}>
       <IconContainer>
         <PlusIcon />
       </IconContainer>

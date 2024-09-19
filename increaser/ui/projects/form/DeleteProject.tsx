@@ -29,7 +29,7 @@ export const DeleteProject = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Button kind="alert" type="button" onClick={onOpen}>
+        <Button kind="alert" onClick={onOpen}>
           Delete
         </Button>
       )}

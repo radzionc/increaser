@@ -67,7 +67,7 @@ export const ExportFromTemplate = ({ projectId, onFinish }: Props) => {
 
   return (
     <>
-      <Container type="button" isActive={isOpen} {...getReferenceProps()}>
+      <Container isActive={isOpen} {...getReferenceProps()}>
         <EmbeddedPromptContentFrame>
           <BookIcon />
           Use a template

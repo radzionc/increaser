@@ -32,7 +32,6 @@ export const ManageFocusNotifications = () => {
         <UnstyledButton
           title={haveSound ? 'Disable sound' : 'Enable sound'}
           onClick={() => setHaveSound(!haveSound)}
-          type="button"
         >
           {haveSound ? <VolumeIcon /> : <NoVolumeIcon />}
         </UnstyledButton>

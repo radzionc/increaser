@@ -28,10 +28,10 @@ export const ActiveFocusHeader = () => {
         </HStack>
         <HStack gap={8}>
           <CropLastInterval />
-          <Button type="button" kind="outlined" onClick={cancel}>
+          <Button kind="outlined" onClick={cancel}>
             Cancel
           </Button>
-          <Button kind="primary" onClick={stop}>
+          <Button type="submit" kind="primary" onClick={stop}>
             Finish
           </Button>
         </HStack>

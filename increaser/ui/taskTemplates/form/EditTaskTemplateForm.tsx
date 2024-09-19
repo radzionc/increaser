@@ -90,7 +90,6 @@ export const EditTaskTemplateForm = () => {
         </HStack>
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deleteTaskTemplate(id)
             onFinish()

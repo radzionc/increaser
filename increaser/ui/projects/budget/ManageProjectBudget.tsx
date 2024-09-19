@@ -114,13 +114,12 @@ export const ManageProjectBudget = ({
           onClick={() => {
             onFinish()
           }}
-          type="button"
           kind="secondary"
           size="l"
         >
           Cancel
         </Button>
-        <Button isDisabled={errorMessage} size="l">
+        <Button type="submit" isDisabled={errorMessage} size="l">
           Submit
         </Button>
       </UniformColumnGrid>

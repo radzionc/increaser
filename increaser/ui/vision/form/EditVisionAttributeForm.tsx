@@ -64,7 +64,6 @@ export const EditVisionAttributeForm = () => {
       <HStack fullWidth>
         <Button
           kind="alert"
-          type="button"
           onClick={() => {
             deleteVisionAttribute(id)
             onFinish()

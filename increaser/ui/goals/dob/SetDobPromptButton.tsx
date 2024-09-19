@@ -8,7 +8,7 @@ export const SetDobPromptButton = () => {
     <Opener
       renderOpener={({ onOpen, isOpen }) =>
         isOpen ? null : (
-          <Button kind="secondary" type="button" onClick={onOpen}>
+          <Button kind="secondary" onClick={onOpen}>
             <EmojiTextPrefix emoji="🎂" />
             Set your birthdate
           </Button>

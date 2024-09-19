@@ -125,15 +125,10 @@ export const AddBudgetForm = ({ onFinish }: NoValueFinishProps) => {
           />
         )}
         <UniformColumnGrid gap={20}>
-          <Button
-            type="button"
-            onClick={() => onFinish()}
-            kind="secondary"
-            size="l"
-          >
+          <Button onClick={() => onFinish()} kind="secondary" size="l">
             Cancel
           </Button>
-          <Button isDisabled={errorMessage} size="l">
+          <Button type="submit" isDisabled={errorMessage} size="l">
             Submit
           </Button>
         </UniformColumnGrid>
