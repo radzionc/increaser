@@ -7,6 +7,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { centerContent } from '@lib/ui/css/centerContent'
+import { ComponentProps } from 'react'
 
 const Container = styled.div`
   ${borderRadius.s};
@@ -15,6 +16,8 @@ const Container = styled.div`
   height: 100%;
   overflow: hidden;
   position: relative;
+  font-size: 24px;
+  isolation: isolate;
 `
 
 const Content = styled.div`
@@ -26,14 +29,14 @@ const Content = styled.div`
   ${centerContent};
 `
 
-export const ActiveFocusTime = () => {
+export const ActiveFocusTime = (props: ComponentProps<typeof Container>) => {
   return (
-    <Container>
+    <Container {...props}>
       <TakeWholeSpaceAbsolutely style={{ zIndex: -1 }}>
         <SessionIntervals />
       </TakeWholeSpaceAbsolutely>
       <Content>
-        <Text as="div" weight="600" size={24} height="small">
+        <Text as="div" weight="600" height="small">
           <FocusPassedTime />
         </Text>
       </Content>
