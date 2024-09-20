@@ -6,8 +6,8 @@ import { PauseFocusSession } from './PauseFocusSession'
 import { CropLastInterval } from './CropLastInterval'
 
 import { PageHeader } from '../../../ui/page/header/PageHeader'
-import { ActiveFocusTime } from './ActiveFocusTime'
 import { FocusDurationSelector } from './FocusDurationSelector'
+import { ActiveFocusTimeWithBreakdown } from './ActiveFocusTimeWithBreakdown'
 
 const Container = styled(HStack)`
   width: 100%;
@@ -27,7 +27,7 @@ export const ActiveFocusHeader = () => {
         <HStack fullHeight alignItems="center" gap={12}>
           <PauseFocusSession />
           <HStack fullHeight alignItems="center">
-            <ActiveFocusTime />
+            <ActiveFocusTimeWithBreakdown />
             <FocusDurationSelector />
           </HStack>
         </HStack>

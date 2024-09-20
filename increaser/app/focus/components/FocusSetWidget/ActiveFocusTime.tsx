@@ -1,3 +1,4 @@
+import React, { forwardRef, ComponentProps } from 'react'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { SessionIntervals } from './SessionIntervals'
 import { Text } from '@lib/ui/text'
@@ -7,7 +8,6 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { ComponentProps } from 'react'
 
 const Container = styled.div`
   ${borderRadius.s};
@@ -29,17 +29,22 @@ const Content = styled.div`
   ${centerContent};
 `
 
-export const ActiveFocusTime = (props: ComponentProps<typeof Container>) => {
+export const ActiveFocusTime = forwardRef<
+  HTMLDivElement,
+  ComponentProps<typeof Container>
+>((props, ref) => {
   return (
-    <Container {...props}>
-      <TakeWholeSpaceAbsolutely style={{ zIndex: -1 }}>
+    <Container ref={ref} {...props}>
+      <TakeWholeSpaceAbsolutely style={{ zIndex: -1, pointerEvents: 'none' }}>
         <SessionIntervals />
       </TakeWholeSpaceAbsolutely>
-      <Content>
+      <Content style={{ pointerEvents: 'none' }}>
         <Text as="div" weight="600" height="small">
           <FocusPassedTime />
         </Text>
       </Content>
     </Container>
   )
-}
+})
+
+ActiveFocusTime.displayName = 'ActiveFocusTime'

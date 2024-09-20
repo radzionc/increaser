@@ -17,7 +17,7 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { useActiveTimeSeries } from './useActiveTimeSeries'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { VStack } from '@lib/ui/css/stack'
+import { vStack } from '@lib/ui/css/stack'
 import { Center } from '@lib/ui/layout/Center'
 import { DataPointBreakdown } from './breakdown/DataPointBreakdown'
 import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
@@ -35,15 +35,16 @@ const Reference = styled.div`
   pointer-events: none;
 `
 
-const Container = styled(VStack)`
-  border: 1px solid ${getColor('textSupporting')};
+const Container = styled.div`
+  border: 1px solid ${getColor('textShy')};
   background: ${getColor('foregroundExtra')};
-  gap: 1px;
   ${borderRadius.s};
   overflow: hidden;
 
-  font-size: 14px;
-  font-weight: 500;
+  ${vStack({
+    gap: 1,
+  })}
+
   min-width: 120px;
 
   > * {
