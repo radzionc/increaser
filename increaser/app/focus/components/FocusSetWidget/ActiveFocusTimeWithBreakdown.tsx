@@ -1,7 +1,8 @@
 import { ActiveFocusTime } from './ActiveFocusTime'
 
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
-import { FocusTimeBreakdown } from './FocusTimeBreakdown'
+import { FocusTimeBreakdown } from './breakdown/FocusTimeBreakdown'
+import { PositionFocusTimeBreakdown } from './breakdown/PositionFocusTimeBreakdown'
 
 export const ActiveFocusTimeWithBreakdown = () => {
   return (
@@ -9,7 +10,11 @@ export const ActiveFocusTimeWithBreakdown = () => {
       render={({ props, clientPosition }) => (
         <>
           <ActiveFocusTime {...props} />
-          {clientPosition && <FocusTimeBreakdown position={clientPosition} />}
+          {clientPosition && (
+            <PositionFocusTimeBreakdown position={clientPosition}>
+              <FocusTimeBreakdown />
+            </PositionFocusTimeBreakdown>
+          )}
         </>
       )}
     />
