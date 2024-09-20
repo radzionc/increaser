@@ -14,6 +14,7 @@ const youtube = () => {
     'It should not be promotional, but sound human, as it is just a founder talking about what is new in the product.',
     'The script should be plain text, free from any formatting, and be ready to put in a teleprompter.',
     'The ending should be as short as possible, and should have a call to action to try it and give feedback.',
+    'Start with "Hey everyone, Radzion here." and launch into the updates as fast as possible.',
     'Return the script as a markdown snippet.',
     'Updates are ordered by their priority:',
     items.map((item) => `  - ${item}`).join('\n'),

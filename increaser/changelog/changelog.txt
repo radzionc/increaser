@@ -1,5 +1,6 @@
-Turn on/off focus notification sound alerts from the focus page.  
 Select specific focus notifications you want to receive: session end, workday end, eye break.  
+Turn on/off focus notification sound alerts from the focus page.
+During a focus session, you can hover over the timer to see the log of your current focus session, where each item is either work on a project with a duration, or a break with a duration.
 Tasks, projects, habits, life aspirations, goals, ideas, and principles changes are saved automatically without the need to press the "Save" button.
 1726289037356
 Sub-tasks section is hidden by default, appears only when you choose to add sub-tasks. Collapsible and decluttered with hover-only drag-and-drop and remove button.
