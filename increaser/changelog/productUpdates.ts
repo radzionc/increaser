@@ -2,6 +2,40 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1726893259773,
+    name: 'Smarter Focus & Seamless Saving',
+    description:
+      "We've made it easier to control your focus notifications and track your productivity, plus automatic saving for all your important changes.",
+    items: [
+      {
+        description:
+          'Select which focus notifications you want to receive: session end, workday end, or eye break.',
+      },
+      {
+        description:
+          'Toggle sound alerts for focus notifications directly from the focus page.',
+      },
+      {
+        description:
+          'Hover over the focus timer to see a detailed log of your current session, including work durations and breaks.',
+      },
+      {
+        description:
+          "All changes to tasks, projects, habits, goals, life aspirations, ideas, and principles now save automatically—no more hitting the 'Save' button!",
+      },
+    ],
+    youtube: 'https://youtu.be/4wwxtnFxl3U',
+    telegram: 'https://t.me/increaser_app/51',
+    x: 'https://x.com/increaser_app/status/1837350887221498367',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7243118071530373120',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-increaser-updates-streamlined-focus-auto-saving-for-all--O7Hsw_czi1dFLz4aMXN',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1flv6zu/control_your_focus_save_automaticallynew_updates/',
+  },
+
+  {
     releasedAt: 1726289037356,
     name: 'Streamlined Task Management & Real-Time Tracking',
     description:

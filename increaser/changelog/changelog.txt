@@ -1,3 +1,4 @@
+1726893259773
 Select specific focus notifications you want to receive: session end, workday end, eye break.  
 Turn on/off focus notification sound alerts from the focus page.
 During a focus session, you can hover over the timer to see the log of your current focus session, where each item is either work on a project with a duration, or a break with a duration.
