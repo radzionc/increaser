@@ -53,9 +53,7 @@ export const CreateTaskFactoryForm = ({
   const onSubmit = useCallback(() => {
     const taskFactory: TaskFactory = {
       id: getId(),
-      task: value,
-      deadlineIndex: value.deadlineIndex,
-      cadence: value.cadence,
+      ...value,
     }
     onFinish?.(taskFactory.id)
     mutate(taskFactory, {
@@ -93,7 +91,7 @@ export const CreateTaskFactoryForm = ({
           />
           {doesCadenceSupportDeadlineIndex(value.cadence) && (
             <TaskDeadlineIndexInput
-              value={value.deadlineIndex}
+              value={value.deadlineIndex ?? null}
               cadence={value.cadence}
               onChange={(deadlineIndex) =>
                 setValue((prev) => ({ ...prev, deadlineIndex }))
@@ -103,7 +101,7 @@ export const CreateTaskFactoryForm = ({
         </HStack>
         <FirstTaskDeadlineForecast
           cadence={value.cadence}
-          deadlineIndex={value.deadlineIndex}
+          deadlineIndex={value.deadlineIndex ?? null}
         />
       </HStack>
       <HStack

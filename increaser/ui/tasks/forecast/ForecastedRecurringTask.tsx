@@ -1,4 +1,3 @@
-import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
@@ -8,6 +7,7 @@ import { TaskCompletionInput } from '../TaskCompletionInput'
 import { TaskTextContainer } from '../TaskTextContainer'
 import { TaskProject } from '../TaskProject'
 import { Text } from '@lib/ui/text'
+import { Task } from '@increaser/entities/Task'
 
 const Container = styled(Hoverable)`
   opacity: 0.6;
@@ -18,7 +18,9 @@ const Content = styled(TaskItemFrame)`
   pointer-events: none;
 `
 
-type Props = ComponentWithValueProps<TaskFactory['task']> & {
+type Props = ComponentWithValueProps<
+  Pick<Task, 'name' | 'description' | 'projectId' | 'links' | 'checklist'>
+> & {
   count?: number
 }
 

@@ -10,24 +10,26 @@ type Input = {
 
 export const getForecastedTasks = ({ taskFactories, value }: Input) =>
   withoutUndefined(
-    taskFactories.map(({ task, cadence, lastOutputAt, deadlineIndex, id }) => {
-      const periodStartedAt = getCadencePeriodStart({
-        cadence,
-        at: value,
-      })
-      if (lastOutputAt && lastOutputAt >= periodStartedAt) return
+    taskFactories.map(
+      ({ cadence, lastOutputAt, deadlineIndex, id, ...task }) => {
+        const periodStartedAt = getCadencePeriodStart({
+          cadence,
+          at: value,
+        })
+        if (lastOutputAt && lastOutputAt >= periodStartedAt) return
 
-      const deadlineAt = getRecurringTaskDeadline({
-        cadence,
-        deadlineIndex,
-        at: value,
-      })
+        const deadlineAt = getRecurringTaskDeadline({
+          cadence,
+          deadlineIndex,
+          at: value,
+        })
 
-      if (deadlineAt === value) {
-        return {
-          ...task,
-          factoryId: id,
+        if (deadlineAt === value) {
+          return {
+            ...task,
+            factoryId: id,
+          }
         }
-      }
-    }),
+      },
+    ),
   )

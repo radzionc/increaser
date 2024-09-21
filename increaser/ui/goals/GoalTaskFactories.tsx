@@ -17,9 +17,9 @@ export const GoalTaskFactories = () => {
         if (!taskFactoriesRecord[id]) {
           return null
         }
-        const { task, cadence } = taskFactoriesRecord[id]
+        const { name, cadence } = taskFactoriesRecord[id]
 
-        const text = `${task.name}, ${taskCadenceName[cadence].toLowerCase()}.`
+        const text = `${name}, ${taskCadenceName[cadence].toLowerCase()}.`
         return (
           <GoalSection key={id} icon={<CheckSquareIcon />}>
             <Text>{text}</Text>

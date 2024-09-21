@@ -20,29 +20,23 @@ import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { Button } from '@lib/ui/buttons/Button'
+import { pick } from '@lib/utils/record/pick'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
   const { id } = taskFactory
   const initialValue = useMemo(
-    () => ({
-      name: taskFactory.task.name,
-      projectId: taskFactory.task.projectId,
-      links: taskFactory.task.links ?? [],
-      cadence: taskFactory.cadence,
-      checklist: taskFactory.task.checklist ?? [],
-      description: taskFactory.task.description ?? '',
-      deadlineIndex: taskFactory.deadlineIndex ?? null,
-    }),
-    [
-      taskFactory.cadence,
-      taskFactory.deadlineIndex,
-      taskFactory.task.checklist,
-      taskFactory.task.description,
-      taskFactory.task.links,
-      taskFactory.task.name,
-      taskFactory.task.projectId,
-    ],
+    () =>
+      pick(taskFactory, [
+        'cadence',
+        'deadlineIndex',
+        'checklist',
+        'description',
+        'links',
+        'name',
+        'projectId',
+      ]),
+    [taskFactory],
   )
   const [value, setValue] = useState<TaskFactoryFormShape>(initialValue)
   const { mutate: updateTaskFactory } =
@@ -108,7 +102,7 @@ export const EditTaskFactoryForm = () => {
           />
           {doesCadenceSupportDeadlineIndex(value.cadence) && (
             <TaskDeadlineIndexInput
-              value={value.deadlineIndex}
+              value={value.deadlineIndex ?? null}
               cadence={value.cadence}
               onChange={(deadlineIndex) =>
                 setValue((prev) => ({ ...prev, deadlineIndex }))

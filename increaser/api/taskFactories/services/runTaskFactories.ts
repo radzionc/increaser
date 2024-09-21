@@ -19,7 +19,7 @@ export const runTaskFactories = async (userId: string) => {
   const generatedTasks: Task[] = []
 
   Object.values(taskFactories).forEach(
-    ({ task, cadence, lastOutputAt, id, deadlineIndex }) => {
+    ({ cadence, lastOutputAt, id, deadlineIndex, ...task }) => {
       const cadencePeriodStart = inTimeZone(
         getCadencePeriodStart({
           cadence,

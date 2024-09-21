@@ -1,10 +1,3 @@
-import { TaskCadence } from '@increaser/entities/TaskFactory'
-import { TaskFormShape } from '../../tasks/form/TaskFormShape'
+import { TaskFactory } from '@increaser/entities/TaskFactory'
 
-export type TaskFactoryFormShape = Omit<
-  TaskFormShape,
-  'deadlineAt' | 'status'
-> & {
-  cadence: TaskCadence
-  deadlineIndex: number | null
-}
+export type TaskFactoryFormShape = Omit<TaskFactory, 'lastOutputAt' | 'id'>

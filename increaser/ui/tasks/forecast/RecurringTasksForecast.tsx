@@ -10,15 +10,19 @@ import { getForecastedTasks } from './getForecastedTasks'
 import { range } from '@lib/utils/array/range'
 import { useFilterByProject } from '../../projects/filter/useFilterByProject'
 import { endOfISOWeek } from 'date-fns'
+import { Task } from '@increaser/entities/Task'
 
 type Item = {
-  task: TaskFactory['task'] & {
+  task: Pick<
+    Task,
+    'name' | 'description' | 'projectId' | 'links' | 'checklist'
+  > & {
     factoryId: string
   }
   count?: number
 }
 
-const getTaskFactoryProjectId = ({ task }: TaskFactory) => task.projectId
+const getTaskFactoryProjectId = ({ projectId }: TaskFactory) => projectId
 
 export const RecurringTasksForecast = ({
   value,

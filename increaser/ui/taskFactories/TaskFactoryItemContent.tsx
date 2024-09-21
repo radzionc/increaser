@@ -6,18 +6,18 @@ import { Text } from '@lib/ui/text'
 import { ProjectEmoji } from '../projects/ProjectEmoji'
 
 export const TaskFactoryItemContent = () => {
-  const { task } = useCurrentTaskFactory()
+  const { name, projectId } = useCurrentTaskFactory()
 
   return (
     <PrefixedItemFrame
       prefix={
         <Text size={16} color="contrast">
-          <ProjectEmoji id={task.projectId} />
+          <ProjectEmoji id={projectId} />
         </Text>
       }
     >
       <HStack fullWidth gap={20}>
-        <Text style={{ flex: 1 }}>{task.name}</Text>
+        <Text style={{ flex: 1 }}>{name}</Text>
         <TaskCadence />
       </HStack>
     </PrefixedItemFrame>

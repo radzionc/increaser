@@ -36,11 +36,11 @@ export const syncProjectsDependantFields = async (userId: string) => {
   )
 
   const taskFactories = recordMap(oldUser.taskFactories, (taskFactory) =>
-    projectIds.has(taskFactory.task.projectId)
+    projectIds.has(taskFactory.projectId)
       ? taskFactory
       : {
           ...taskFactory,
-          task: { ...taskFactory.task, projectId: otherProject.id },
+          task: { ...taskFactory, projectId: otherProject.id },
         },
   )
 
