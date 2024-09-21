@@ -87,6 +87,15 @@ export const TaskBoard = () => {
             groups.find((group) => group.value.some((task) => task.id === id)),
           )
 
+          console.log({
+            orders: group.value.map((task) => task.order),
+            sourceIndex:
+              initialGroup.key === group.key
+                ? group.value.findIndex((task) => task.id === id)
+                : null,
+            destinationIndex: index,
+          })
+
           const order = getNewOrder({
             orders: group.value.map((task) => task.order),
             sourceIndex:
