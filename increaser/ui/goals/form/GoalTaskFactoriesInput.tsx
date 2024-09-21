@@ -4,14 +4,13 @@ import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'
-import { EditTaskFactoryOverlay } from './EditTaskFactoryOverlay'
 import { RemoveGoalTaskFactory } from './RemoveGoalTaskFactory'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { SelectGoalTaskFactory } from './SelectGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
 import styled from 'styled-components'
+import { GoalTaskFactoryItem } from './GoalTaskFactoryItem'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -46,7 +45,7 @@ export const GoalTaskFactoriesInput = ({
                 return (
                   <CurrentTaskFactoryProvider key={item.id} value={item}>
                     <Content>
-                      <TaskFactoryItem />
+                      <GoalTaskFactoryItem />
                       <RemoveGoalTaskFactory
                         onClick={() => onChange(without(value, item.id))}
                       />
@@ -54,7 +53,6 @@ export const GoalTaskFactoriesInput = ({
                   </CurrentTaskFactoryProvider>
                 )
               })}
-            <EditTaskFactoryOverlay />
           </ActiveItemIdProvider>
         </VStack>
       )}
