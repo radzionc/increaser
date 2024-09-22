@@ -1,4 +1,3 @@
-import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useEffect, useMemo } from 'react'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -7,6 +6,7 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { sum } from '@lib/utils/array/sum'
 import { useShowFocusNotificationMutation } from './hooks/useShowFocusNotificationMutation'
 import { useFocusDuration } from '../state/focusDuration'
+import { useAssertFocusIntervals } from '../state/focusIntervals'
 
 export const SessionEndNotification = () => {
   const [focusDuration] = useFocusDuration()

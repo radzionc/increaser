@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useCurrentPage } from '@increaser/app/navigation/hooks/useCurrentPage'
 import React from 'react'
 import { ActiveFocusTime } from './FocusSetWidget/ActiveFocusTime'
-import { useFocusIntervals } from '../hooks/useFocusIntervals'
+import { useFocusIntervals } from '../state/focusIntervals'
 
 const Position = styled.div`
   position: absolute;

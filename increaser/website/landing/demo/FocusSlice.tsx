@@ -7,7 +7,6 @@ import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { SessionProgress } from '@increaser/ui/focus/SessionProgress'
-import { DemoFocusProvider } from './DemoFocusProvider'
 import { Text } from '@lib/ui/text'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
@@ -32,20 +31,18 @@ export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <ClientOnly>
-          <DemoFocusProvider>
-            <BlockWrapper>
-              <SessionProgress />
-              <Text
-                style={{ position: 'absolute' }}
-                as="div"
-                weight="600"
-                size={64}
-                height="small"
-              >
-                <FocusPassedTime />
-              </Text>
-            </BlockWrapper>
-          </DemoFocusProvider>
+          <BlockWrapper>
+            <SessionProgress />
+            <Text
+              style={{ position: 'absolute' }}
+              as="div"
+              weight="600"
+              size={64}
+              height="small"
+            >
+              <FocusPassedTime />
+            </Text>
+          </BlockWrapper>
         </ClientOnly>
       </WebsiteSliceContent>
     </WebsiteSlice>

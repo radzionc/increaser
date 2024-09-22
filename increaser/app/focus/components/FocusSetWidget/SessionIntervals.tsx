@@ -1,5 +1,4 @@
 import styled, { useTheme } from 'styled-components'
-import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
@@ -9,6 +8,7 @@ import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsTo
 import { toPercents } from '@lib/utils/toPercents'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { useFocusDuration } from '../../state/focusDuration'
+import { useAssertFocusIntervals } from '../../state/focusIntervals'
 
 const Container = styled.div`
   ${takeWholeSpace};

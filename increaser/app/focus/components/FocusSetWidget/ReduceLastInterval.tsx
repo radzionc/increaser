@@ -6,8 +6,8 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { intervalRange } from '@lib/utils/interval/intervalRange'
 import { OptionItem } from '@lib/ui/select/OptionItem'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { OptionContent } from '@lib/ui/select/OptionContent'
+import { useReduceLastFocusInterval } from '../../hooks/useReduceLastFocusInterval'
 
 type ReduceLastIntervalProps = {
   max: number
@@ -21,7 +21,7 @@ const optionToString = (option: number) =>
   })
 
 export const ReduceLastInterval = ({ max }: ReduceLastIntervalProps) => {
-  const { reduceLastInterval } = useFocus()
+  const reduceLastInterval = useReduceLastFocusInterval()
 
   const options = intervalRange({ start: 1, end: max })
 

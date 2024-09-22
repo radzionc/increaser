@@ -1,6 +1,5 @@
 import { HStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { Button } from '@lib/ui/buttons/Button'
 import { PauseFocusSession } from './PauseFocusSession'
 import { CropLastInterval } from './CropLastInterval'
@@ -10,6 +9,8 @@ import { ActiveFocusTimeWithBreakdown } from './ActiveFocusTimeWithBreakdown'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { sidebarConfig } from '../../../navigation/Sidebar/config'
 import { Header } from '@lib/ui/layout/Header'
+import { useCancelFocus } from '../../hooks/useCancelFocus'
+import { useStopFocus } from '../../hooks/useStopFocus'
 
 const Container = styled(Header)`
   min-height: ${toSizeUnit(sidebarConfig.headerHeight)};
@@ -20,7 +21,8 @@ const Container = styled(Header)`
 `
 
 export const ActiveFocusHeader = () => {
-  const { cancel, stop } = useFocus()
+  const cancel = useCancelFocus()
+  const stop = useStopFocus()
 
   return (
     <Container>

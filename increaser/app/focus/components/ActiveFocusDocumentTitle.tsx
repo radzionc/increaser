@@ -3,7 +3,7 @@ import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
-import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
+import { useAssertFocusIntervals } from '../state/focusIntervals'
 
 export const ActiveFocusDocumentTitle = () => {
   const intervals = useAssertFocusIntervals()

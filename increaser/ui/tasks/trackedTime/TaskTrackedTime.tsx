@@ -3,7 +3,7 @@ import { TaskTrackedTimeContent } from './TaskTrackedTimeContent'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getTasksTimeSpent } from '../../focus/utils/getTasksTimeSpent'
 import { RhythmicRerender } from '@lib/ui/base/RhythmicRerender'
-import { useFocusIntervals } from '@increaser/app/focus/hooks/useFocusIntervals'
+import { useFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
 
 export const TaskTrackedTime = () => {
   const { spentTime } = useCurrentTask()

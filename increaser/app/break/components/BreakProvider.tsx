@@ -25,7 +25,7 @@ import {
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { focusDurations } from '@increaser/entities/FocusDuration'
-import { useFocusIntervals } from '../../focus/hooks/useFocusIntervals'
+import { useFocusIntervals } from '../../focus/state/focusIntervals'
 
 export const remindersCount = 5
 

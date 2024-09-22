@@ -1,7 +1,7 @@
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { focusIntervalsToSets } from './focusIntervalsToSets'
-import { FocusInterval } from '../FocusContext'
+import { FocusInterval } from '@increaser/app/focus/state/focusIntervals'
 
 export const getIntervalsGapsDuration = (intervals: FocusInterval[]) => {
   const now = Date.now()

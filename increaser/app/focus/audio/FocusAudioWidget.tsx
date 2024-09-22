@@ -21,7 +21,7 @@ import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
 import { Modal } from '@lib/ui/modal'
 import { WithSecondaryAction } from '@lib/ui/buttons/WithSecondaryAction'
 import styled, { css } from 'styled-components'
-import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
+import { useAssertFocusStatus } from '../state/focusIntervals'
 
 const Container = styled(WithSecondaryAction)<{ isDisabled?: boolean }>`
   ${({ isDisabled }) =>
@@ -39,7 +39,7 @@ export const FocusAudioWidget = () => {
     false,
   )
   const [mode, setMode] = useFocusAudioMode()
-  const isPaused = useIsFocusPaused()
+  const isPaused = useAssertFocusStatus() === 'paused'
 
   return (
     <>

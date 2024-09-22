@@ -1,13 +1,15 @@
-import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 import { PauseIcon } from '@lib/ui/icons/PauseIcon'
 import { PlayIcon } from '@lib/ui/icons/PlayIcon'
 import { FocusHeaderIconButton } from './FocusHeaderIconButton'
 import { useFocusTargetProject } from '../../hooks/useFocusTargetProject'
+import { useAssertFocusStatus } from '../../state/focusIntervals'
+import { usePauseFocus } from '../../hooks/usePauseFocus'
+import { useResumeFocus } from '../../hooks/useResumeFocus'
 
 export const PauseFocusSession = () => {
-  const { pause, resume } = useFocus()
-  const isPaused = useIsFocusPaused()
+  const pause = usePauseFocus()
+  const resume = useResumeFocus()
+  const isPaused = useAssertFocusStatus() === 'paused'
   const project = useFocusTargetProject()
 
   return (

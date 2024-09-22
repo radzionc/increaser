@@ -5,7 +5,6 @@ import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
 import { getQueryClient } from '@increaser/app/query/queryClient'
 import { BreakProvider } from '@increaser/app/break/components/BreakProvider'
 import { FullSizeErrorFallback } from '@increaser/app/errors/components/FullSizeErrorFallback'
-import { FocusProvider } from '@increaser/app/focus/components/FocusProvider'
 import { HabitsProvider } from '@increaser/app/habits/components/HabitsProvider'
 import { PWAProvider } from '@increaser/app/pwa/components/PWAProvider'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -26,7 +25,10 @@ import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
 import { ActiveFocusOnly } from '../focus/components/ActiveFocusOnly'
-import { NotPausedFocusOnly } from '../focus/components/NotPausedFocusOnly'
+import { FocusNotifications } from '../focus/notifications/FocusNotifications'
+import { FocusOnly } from '../focus/components/FocusOnly'
+import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
+import { FocusTaskObserver } from '../focus/components/FocusTaskObserver'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -59,20 +61,21 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                         <>
                           <UserManagerProvider>
                             <HabitsProvider>
-                              <FocusProvider>
-                                <ScheduleProvider>
-                                  <BreakProvider>
-                                    <ActiveFocusOnly>
-                                      <NotPausedFocusOnly>
-                                        <FocusSoundsPlayer />
-                                        <YouTubeFocusMusicFloatingPlayer />
-                                      </NotPausedFocusOnly>
-                                    </ActiveFocusOnly>
-                                    {component}
-                                  </BreakProvider>
-                                  <MembershipConfirmation />
-                                </ScheduleProvider>
-                              </FocusProvider>
+                              <ScheduleProvider>
+                                <BreakProvider>
+                                  <ActiveFocusOnly>
+                                    <FocusSoundsPlayer />
+                                    <YouTubeFocusMusicFloatingPlayer />
+                                    <FocusNotifications />
+                                  </ActiveFocusOnly>
+                                  <FocusOnly>
+                                    <FocusAutoStop />
+                                    <FocusTaskObserver />
+                                  </FocusOnly>
+                                  {component}
+                                </BreakProvider>
+                                <MembershipConfirmation />
+                              </ScheduleProvider>
                             </HabitsProvider>
                           </UserManagerProvider>
                         </>

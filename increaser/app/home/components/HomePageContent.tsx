@@ -9,7 +9,7 @@ import { PageContent } from '../../ui/page/PageContent'
 import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { sidebarConfig } from '../../navigation/Sidebar/config'
-import { useFocusIntervals } from '../../focus/hooks/useFocusIntervals'
+import { useFocusIntervals } from '../../focus/state/focusIntervals'
 
 const Container = styled.div`
   display: flex;

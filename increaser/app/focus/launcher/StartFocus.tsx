@@ -2,21 +2,14 @@ import { useMemo } from 'react'
 import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
 import { MemberOnlyAction } from '@increaser/app/membership/components/MemberOnlyAction'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RocketIcon } from '@lib/ui/icons/RocketIcon'
-import { useFocusTarget } from '../state/useFocusTarget'
 import { useFocusTargetStartTime } from './state/FocusLauncherStartTimeProvider'
-import { useFocusTargetDuration } from './state/FocusLauncherDurationProvider'
 import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
+import { useStartFocus } from '../hooks/useStartFocus'
 
 export const StartFocus = () => {
-  const { start } = useFocus()
-  const [{ projectId, taskId }] = useFocusTarget()
-
-  const [focusDuration] = useFocusTargetDuration()
-
+  const start = useStartFocus()
   const project = useFocusTargetProject()
 
   const isDisabled = useMemo(() => {
@@ -31,10 +24,7 @@ export const StartFocus = () => {
     <MemberOnlyAction
       action={() => {
         start({
-          projectId: shouldBePresent(projectId),
-          taskId: taskId,
-          duration: focusDuration,
-          startedAt: startTime ?? Date.now(),
+          start: startTime ?? Date.now(),
         })
       }}
       render={({ action }) => (

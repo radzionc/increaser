@@ -7,7 +7,6 @@ import {
 import { SessionEndNotification } from './SessionEndNotification'
 import { WorkDayEndNotification } from './WorkDayEndNotification'
 import { EyeBreakNotification } from './EyeBreakNotification'
-import { NotPausedFocusOnly } from '../components/NotPausedFocusOnly'
 
 const notificationComponent: Record<FocusNotification, React.FC> = {
   sessionEnd: SessionEndNotification,
@@ -19,7 +18,7 @@ export const FocusNotifications = () => {
   const [value] = useFocusNotifications()
 
   return (
-    <NotPausedFocusOnly>
+    <>
       {focusNotifications.map((notification) => {
         if (!value[notification]) return null
 
@@ -27,6 +26,6 @@ export const FocusNotifications = () => {
 
         return <Component key={notification} />
       })}
-    </NotPausedFocusOnly>
+    </>
   )
 }

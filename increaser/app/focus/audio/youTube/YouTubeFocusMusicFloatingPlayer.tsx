@@ -16,7 +16,6 @@ import { CSSProperties } from 'react'
 import { ManageYouTubePlayerPosition } from './ManageYouTubePlayerPosition'
 import { useYouTubePlayerPosition } from './state/useYouTubePlayerPosition'
 import { RectangleCorner } from '@lib/ui/entities/RectangleCorner'
-import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 
 const offset = 20
 
@@ -45,10 +44,7 @@ export const YouTubeFocusMusicFloatingPlayer = () => {
   const { isPlaying } = useYouTubeFocusMusic()
   const [position] = useYouTubePlayerPosition()
 
-  const isPaused = useIsFocusPaused()
-
-  const isActive =
-    focusAudioMode === 'youtube' && isFocusAudioEnabled && url && !isPaused
+  const isActive = focusAudioMode === 'youtube' && isFocusAudioEnabled && url
 
   if (!isActive) {
     return null

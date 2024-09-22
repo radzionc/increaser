@@ -1,5 +1,4 @@
 import { otherProjectId } from '@increaser/entities/Project'
-import { FocusInterval } from '@increaser/ui/focus/FocusContext'
 import {
   usePersistentState,
   PersistentStateKey,
@@ -8,9 +7,17 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { useCallback } from 'react'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useFocusTarget } from '../state/useFocusTarget'
+import { useFocusTarget } from './useFocusTarget'
 import { correctRecordFields } from '@lib/utils/record/correctRecordFields'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+
+export type FocusInterval = {
+  projectId: string
+  taskId: string | null
+  start: number
+  end: number | null
+}
 
 export const useFocusIntervals = () => {
   const { tasks, projects } = useAssertUserState()
@@ -98,4 +105,28 @@ export const useFocusIntervals = () => {
       [projectId, projects, taskId, tasks],
     ),
   )
+}
+
+export const useAssertFocusIntervals = () => {
+  const [intervals] = useFocusIntervals()
+  return shouldBePresent(intervals)
+}
+
+export type FocusStatus = 'active' | 'paused'
+
+export const useFocusStatus = (): FocusStatus | null => {
+  const [intervals] = useFocusIntervals()
+
+  if (!intervals) {
+    return null
+  }
+
+  const lastInterval = getLastItem(intervals)
+
+  return lastInterval.end === null ? 'active' : 'paused'
+}
+
+export const useAssertFocusStatus = (): FocusStatus => {
+  const status = useFocusStatus()
+  return shouldBePresent(status)
 }

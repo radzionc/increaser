@@ -1,4 +1,4 @@
-import { FocusInterval } from '../FocusContext'
+import { FocusInterval } from '@increaser/app/focus/state/focusIntervals'
 
 export const getTasksTimeSpent = (intervals: FocusInterval[]) => {
   const result: Record<string, number> = {}

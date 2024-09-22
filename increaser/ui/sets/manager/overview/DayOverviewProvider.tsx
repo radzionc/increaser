@@ -12,7 +12,7 @@ import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { getDaySets } from '@increaser/entities-utils/set/getDaySets'
 import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
-import { useFocusIntervals } from '@increaser/app/focus/hooks/useFocusIntervals'
+import { useFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
 
 export type DayOverviewSet = Set & {
   isEditable: boolean

@@ -2,15 +2,17 @@ import styled, { useTheme } from 'styled-components'
 import { useMemo } from 'react'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useIsFocusPaused } from '@increaser/ui/focus/utils/useIsFocusPaused'
 import { VStack } from '@lib/ui/css/stack'
 import { FocusBreakdownItemInfo } from './FocusBreakdownItemInfo'
 import { FocusTimeBreakdownItem } from './FocusTimeBreakdownItem'
 import { FocusTimeIndicators } from './FocusTimeIndicators'
+import {
+  useAssertFocusIntervals,
+  useAssertFocusStatus,
+} from '../../../state/focusIntervals'
 
 const Container = styled.div`
   border: 1px solid ${getColor('textShy')};
@@ -30,7 +32,7 @@ export const FocusTimeBreakdown = () => {
 
   const { colors } = useTheme()
 
-  const isPaused = useIsFocusPaused()
+  const isPaused = useAssertFocusStatus() === 'paused'
 
   const intervals = useAssertFocusIntervals()
 

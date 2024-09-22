@@ -1,21 +1,24 @@
 import { useEffect, useMemo, useState } from 'react'
 import { endOfDay } from 'date-fns'
-import { useAssertFocusIntervals, useFocus } from './FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { shouldSetAutoStop } from './utils/shouldSetAutoStop'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getIntervalsGapsDuration } from './utils/getIntervalsGapsDuration'
-import { useIsFocusPaused } from './utils/useIsFocusPaused'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusDuration } from '@increaser/app/focus/state/focusDuration'
+import {
+  useAssertFocusIntervals,
+  useAssertFocusStatus,
+} from '@increaser/app/focus/state/focusIntervals'
+import { useStopFocus } from '@increaser/app/focus/hooks/useStopFocus'
 
 export const FocusAutoStop = () => {
   const intervals = useAssertFocusIntervals()
   const [focusDuration] = useFocusDuration()
 
-  const { stop } = useFocus()
-  const isPaused = useIsFocusPaused()
+  const stop = useStopFocus()
+  const isPaused = useAssertFocusStatus() === 'paused'
 
   const { start } = intervals[0]
 
