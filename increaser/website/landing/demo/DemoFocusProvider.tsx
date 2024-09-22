@@ -10,8 +10,6 @@ interface Props {
 }
 
 export const DemoFocusProvider = ({ children }: Props) => {
-  const [focusDuration, setFocusDuration] = useState<FocusDuration>(90)
-
   const [intervals] = useState<FocusInterval[]>([
     {
       start: Date.now() - convertDuration(45, 'min', 'ms'),
@@ -31,8 +29,6 @@ export const DemoFocusProvider = ({ children }: Props) => {
         stop,
         cancel: () => {},
         intervals,
-        focusDuration,
-        setFocusDuration,
       }}
     >
       {children}

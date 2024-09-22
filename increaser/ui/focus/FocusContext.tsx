@@ -1,7 +1,6 @@
 import { Set } from '@increaser/entities/User'
 import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { Minutes } from '@lib/utils/time/types'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
@@ -35,9 +34,6 @@ interface FocusState {
   cancel: () => void
 
   intervals: FocusInterval[] | null
-
-  setFocusDuration: (duration: FocusDuration) => void
-  focusDuration: FocusDuration
 }
 
 export const FocusContext = createContext<FocusState | undefined>(undefined)

@@ -8,10 +8,13 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getIntervalsGapsDuration } from './utils/getIntervalsGapsDuration'
 import { useIsFocusPaused } from './utils/useIsFocusPaused'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useFocusDuration } from '@increaser/app/focus/state/focusDuration'
 
 export const FocusAutoStop = () => {
   const intervals = useAssertFocusIntervals()
-  const { stop, focusDuration } = useFocus()
+  const [focusDuration] = useFocusDuration()
+
+  const { stop } = useFocus()
   const isPaused = useIsFocusPaused()
 
   const { start } = intervals[0]

@@ -3,7 +3,6 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { focusDurations } from '@increaser/entities/FocusDuration'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 import { ComponentWithActiveState } from '@lib/ui/props'
@@ -14,6 +13,7 @@ import { slashSeparator } from '@lib/ui/layout/StackSeparatedBy'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { hStack } from '@lib/ui/css/stack'
+import { useFocusDuration } from '../../state/focusDuration'
 
 const gap = 12
 
@@ -43,7 +43,7 @@ const Container = styled(UnstyledButton)<ComponentWithActiveState>`
 `
 
 export const FocusDurationSelector = () => {
-  const { focusDuration, setFocusDuration } = useFocus()
+  const [focusDuration, setFocusDuration] = useFocusDuration()
 
   const {
     getReferenceProps,

@@ -38,6 +38,7 @@ export enum PersistentStateKey {
   IsChecklistOpen = 'isChecklistOpen',
   FocusNotificationsHaveSound = 'FocusNotificationsHaveSound',
   FocusNotifications = 'FocusNotifications',
+  FocusDuration = 'FocusDuration',
 }
 
 const persistentStorage =

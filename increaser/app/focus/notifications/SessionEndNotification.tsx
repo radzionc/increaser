@@ -6,9 +6,12 @@ import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { sum } from '@lib/utils/array/sum'
 import { useShowFocusNotificationMutation } from './hooks/useShowFocusNotificationMutation'
+import { useFocusDuration } from '../state/focusDuration'
 
 export const SessionEndNotification = () => {
-  const { focusDuration, intervals } = useFocus()
+  const [focusDuration] = useFocusDuration()
+
+  const { intervals } = useFocus()
 
   const { mutate: notify } = useShowFocusNotificationMutation('sessionEnd')
 

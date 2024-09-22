@@ -1,13 +1,9 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { getBlocks, getNextFocusDuration } from '@increaser/app/sets/Block'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { MS_IN_MIN } from '@lib/utils/time'
 
-import {
-  FocusDuration,
-  defaultFocusDuration,
-} from '@increaser/entities/FocusDuration'
 import {
   FocusContext,
   StartFocusParams,
@@ -32,11 +28,9 @@ import { useFocusTarget } from '../state/useFocusTarget'
 import { useFocusIntervals } from '../hooks/useFocusIntervals'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { FocusNotifications } from '../notifications/FocusNotifications'
+import { useFocusDuration } from '../state/focusDuration'
 
 export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
-  const [focusDuration, setFocusDuration] =
-    useState<FocusDuration>(defaultFocusDuration)
-
   const todaySets = useTodaySets()
 
   const { tasks } = useAssertUserState()
@@ -48,10 +42,8 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const analytics = useAnalytics()
 
   const start = useCallback(
-    ({ duration, startedAt }: StartFocusParams) => {
-      analytics.trackEvent('Start focus session', {
-        duration,
-      })
+    ({ startedAt }: StartFocusParams) => {
+      analytics.trackEvent('Start focus session')
       setIntervals([
         {
           start: startedAt,
@@ -60,9 +52,6 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
           end: null,
         },
       ])
-      if (duration) {
-        setFocusDuration(duration as FocusDuration)
-      }
     },
     [analytics, projectId, setIntervals, taskId],
   )
@@ -74,6 +63,8 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const cancel = useCallback(() => {
     setIntervals(null)
   }, [setIntervals])
+
+  const [, setFocusDuration] = useFocusDuration()
 
   const stop = useCallback(
     ({ lastSetOverride }: StopFocusParams = {}) => {
@@ -124,6 +115,7 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
       addSets,
       analytics,
       intervals,
+      setFocusDuration,
       setIntervals,
       tasks,
       todaySets,
@@ -215,8 +207,6 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
         stop,
         cancel,
         intervals,
-        focusDuration,
-        setFocusDuration,
         reduceLastInterval,
       }}
     >

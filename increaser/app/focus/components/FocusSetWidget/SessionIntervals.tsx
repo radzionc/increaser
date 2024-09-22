@@ -1,8 +1,5 @@
 import styled, { useTheme } from 'styled-components'
-import {
-  useAssertFocusIntervals,
-  useFocus,
-} from '@increaser/ui/focus/FocusContext'
+import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
@@ -11,6 +8,7 @@ import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { toPercents } from '@lib/utils/toPercents'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useFocusDuration } from '../../state/focusDuration'
 
 const Container = styled.div`
   ${takeWholeSpace};
@@ -23,7 +21,8 @@ const Segment = styled.div`
 `
 
 export const SessionIntervals = () => {
-  const { focusDuration } = useFocus()
+  const [focusDuration] = useFocusDuration()
+
   const intervals = useAssertFocusIntervals()
 
   const { start } = intervals[0]
