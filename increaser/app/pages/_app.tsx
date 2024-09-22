@@ -29,6 +29,7 @@ import { FocusNotifications } from '../focus/notifications/FocusNotifications'
 import { FocusOnly } from '../focus/components/FocusOnly'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { FocusTaskObserver } from '../focus/components/FocusTaskObserver'
+import { FocusIntervalsProvider } from '../focus/state/focusIntervals'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -62,18 +63,20 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                           <UserManagerProvider>
                             <HabitsProvider>
                               <ScheduleProvider>
-                                <BreakProvider>
-                                  <ActiveFocusOnly>
-                                    <FocusSoundsPlayer />
-                                    <YouTubeFocusMusicFloatingPlayer />
-                                    <FocusNotifications />
-                                  </ActiveFocusOnly>
-                                  <FocusOnly>
-                                    <FocusAutoStop />
-                                    <FocusTaskObserver />
-                                  </FocusOnly>
-                                  {component}
-                                </BreakProvider>
+                                <FocusIntervalsProvider>
+                                  <BreakProvider>
+                                    <ActiveFocusOnly>
+                                      <FocusSoundsPlayer />
+                                      <YouTubeFocusMusicFloatingPlayer />
+                                      <FocusNotifications />
+                                    </ActiveFocusOnly>
+                                    <FocusOnly>
+                                      <FocusAutoStop />
+                                      <FocusTaskObserver />
+                                    </FocusOnly>
+                                    {component}
+                                  </BreakProvider>
+                                </FocusIntervalsProvider>
                                 <MembershipConfirmation />
                               </ScheduleProvider>
                             </HabitsProvider>
