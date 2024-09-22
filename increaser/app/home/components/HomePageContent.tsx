@@ -26,7 +26,7 @@ const MobileContent = styled(VStack)`
 `
 
 export const HomePageContent = () => {
-  const intervals = useFocusIntervals()
+  const [intervals] = useFocusIntervals()
 
   return (
     <>

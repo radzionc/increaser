@@ -17,7 +17,7 @@ const Container = styled(ActiveFocusTime)`
 export const FocusNavigationDecoration = () => {
   const page = useCurrentPage()
 
-  const intervals = useFocusIntervals()
+  const [intervals] = useFocusIntervals()
 
   const isActive = page === 'focus'
 

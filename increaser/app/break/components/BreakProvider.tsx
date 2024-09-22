@@ -62,7 +62,7 @@ export const BreakProvider = ({ children }: Props) => {
   const todayStartedAt = useStartOfDay()
   const { finishWorkAt } = useAssertUserState()
   const sets = useTodaySets()
-  const intervals = useFocusIntervals()
+  const [intervals] = useFocusIntervals()
 
   const [hasBrowserNotification, setHasBrowserNotification] =
     usePersistentState<boolean>(

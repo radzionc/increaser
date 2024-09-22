@@ -12,7 +12,7 @@ import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { getDaySets } from '@increaser/entities-utils/set/getDaySets'
 import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
-import { useAssertFocusIntervals } from '../../../focus/FocusContext'
+import { useFocusIntervals } from '@increaser/app/focus/hooks/useFocusIntervals'
 
 export type DayOverviewSet = Set & {
   isEditable: boolean
@@ -45,7 +45,7 @@ export const DayOverviewProvider = ({
 
   const lastSetsSnapshot = useLastSetsSnapshot()
 
-  const intervals = useAssertFocusIntervals()
+  const [intervals] = useFocusIntervals()
 
   const { sets: allSets } = useAssertUserState()
 
