@@ -1,6 +1,6 @@
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { GoalStatusSelector } from './GoalStatusSelector'
-import { GoalDeadlineInput } from './GoalDeadlineInput'
+import { GoalDeadlineInput } from './deadline/GoalDeadlineInput'
 import { GoalFormShape } from './GoalFormShape'
 import { GoalTargetInput } from './GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
