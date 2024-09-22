@@ -51,15 +51,12 @@ export const EmojiInput = ({ value, onChange }: InputProps<string>) => {
     middleware: [offset(4), shift(), flip()],
   })
 
-  const click = useClick(context)
-  const dismiss = useDismiss(context, {
-    escapeKey: true,
-    outsidePress: true,
-  })
-
   const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
+    useClick(context),
+    useDismiss(context, {
+      escapeKey: true,
+      outsidePress: true,
+    }),
   ])
 
   return (

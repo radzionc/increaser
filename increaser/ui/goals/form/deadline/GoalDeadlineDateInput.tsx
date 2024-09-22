@@ -19,8 +19,9 @@ import {
 import { CalendarDayInput } from '@lib/ui/time/day/calendar/CalendarDayInput'
 import { dayToString, fromDay, stringToDay, toDay } from '@lib/utils/time/Day'
 import { addYears, format } from 'date-fns'
+import { ExpandableSelectorToggle } from '@lib/ui/select/ExpandableSelectorToggle'
 
-export const GoalDateDeadlineInput = ({
+export const GoalDeadlineDateInput = ({
   value,
   onChange,
 }: InputProps<string>) => {
@@ -38,16 +39,12 @@ export const GoalDateDeadlineInput = ({
     onOpenChange: setIsOpen,
     middleware: [offset(4), shift(), flip()],
   })
-
-  const click = useClick(context)
-  const dismiss = useDismiss(context, {
-    escapeKey: true,
-    outsidePress: true,
-  })
-
   const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
+    useClick(context),
+    useDismiss(context, {
+      escapeKey: true,
+      outsidePress: true,
+    }),
   ])
 
   const [min, max] = useMemo(() => {
@@ -70,6 +67,7 @@ export const GoalDateDeadlineInput = ({
             {value && <Text>{format(valueTimestamp, 'dd MMM yyyy')}</Text>}
           </HStack>
         </OptionContent>
+        <ExpandableSelectorToggle isOpen={isOpen} />
       </ExpandableSelectorContainer>
       {isOpen && (
         <FloatingFocusManager context={context} modal returnFocus>
