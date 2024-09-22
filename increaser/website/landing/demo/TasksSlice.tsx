@@ -11,7 +11,6 @@ import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { TaskBoard } from '@increaser/ui/tasks/board/TaskBoard'
 import { ProjectFilterProvider } from '@increaser/ui/projects/filter/ProjectFilterProvider'
-import { DemoFocusProvider } from './DemoFocusProvider'
 
 const Content = styled(VStack)`
   width: 100%;
@@ -28,13 +27,11 @@ export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <ClientOnly>
-          <DemoFocusProvider>
-            <ProjectFilterProvider initialValue={null}>
-              <Content>
-                <TaskBoard />
-              </Content>
-            </ProjectFilterProvider>
-          </DemoFocusProvider>
+          <ProjectFilterProvider initialValue={null}>
+            <Content>
+              <TaskBoard />
+            </Content>
+          </ProjectFilterProvider>
         </ClientOnly>
       </WebsiteSliceContent>
     </WebsiteSlice>

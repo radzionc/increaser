@@ -1,8 +1,8 @@
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { useFocusIntervals } from '../hooks/useFocusIntervals'
 
 export const ActiveFocusOnly = ({ children }: ComponentWithChildrenProps) => {
-  const { intervals } = useFocus()
+  const intervals = useFocusIntervals()
 
   if (!intervals) {
     return null

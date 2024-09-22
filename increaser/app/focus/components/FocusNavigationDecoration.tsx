@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { useCurrentPage } from '@increaser/app/navigation/hooks/useCurrentPage'
 import React from 'react'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { ActiveFocusTime } from './FocusSetWidget/ActiveFocusTime'
+import { useFocusIntervals } from '../hooks/useFocusIntervals'
 
 const Position = styled.div`
   position: absolute;
@@ -17,7 +17,7 @@ const Container = styled(ActiveFocusTime)`
 export const FocusNavigationDecoration = () => {
   const page = useCurrentPage()
 
-  const { intervals } = useFocus()
+  const intervals = useFocusIntervals()
 
   const isActive = page === 'focus'
 

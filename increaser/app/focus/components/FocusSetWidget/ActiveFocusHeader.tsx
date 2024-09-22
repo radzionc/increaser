@@ -5,42 +5,41 @@ import { Button } from '@lib/ui/buttons/Button'
 import { PauseFocusSession } from './PauseFocusSession'
 import { CropLastInterval } from './CropLastInterval'
 
-import { PageHeader } from '../../../ui/page/header/PageHeader'
 import { FocusDurationSelector } from './FocusDurationSelector'
 import { ActiveFocusTimeWithBreakdown } from './ActiveFocusTimeWithBreakdown'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { sidebarConfig } from '../../../navigation/Sidebar/config'
+import { Header } from '@lib/ui/layout/Header'
 
-const Container = styled(HStack)`
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  height: 40px;
+const Container = styled(Header)`
+  min-height: ${toSizeUnit(sidebarConfig.headerHeight)};
+
+  > * {
+    height: 40px;
+  }
 `
 
 export const ActiveFocusHeader = () => {
   const { cancel, stop } = useFocus()
 
   return (
-    <PageHeader>
-      <Container>
-        <HStack fullHeight alignItems="center" gap={12}>
-          <PauseFocusSession />
-          <HStack fullHeight alignItems="center">
-            <ActiveFocusTimeWithBreakdown />
-            <FocusDurationSelector />
-          </HStack>
+    <Container>
+      <HStack fullHeight alignItems="center" gap={12}>
+        <PauseFocusSession />
+        <HStack fullHeight alignItems="center">
+          <ActiveFocusTimeWithBreakdown />
+          <FocusDurationSelector />
         </HStack>
-        <HStack gap={8}>
-          <CropLastInterval />
-          <Button kind="outlined" onClick={cancel}>
-            Cancel
-          </Button>
-          <Button type="submit" kind="primary" onClick={stop}>
-            Finish
-          </Button>
-        </HStack>
-      </Container>
-    </PageHeader>
+      </HStack>
+      <HStack gap={8}>
+        <CropLastInterval />
+        <Button kind="outlined" onClick={cancel}>
+          Cancel
+        </Button>
+        <Button type="submit" kind="primary" onClick={stop}>
+          Finish
+        </Button>
+      </HStack>
+    </Container>
   )
 }

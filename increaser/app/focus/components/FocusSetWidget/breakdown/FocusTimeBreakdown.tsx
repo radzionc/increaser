@@ -2,8 +2,7 @@ import styled, { useTheme } from 'styled-components'
 import { useMemo } from 'react'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
@@ -27,18 +26,17 @@ const Container = styled.div`
 `
 
 export const FocusTimeBreakdown = () => {
-  const { intervals } = useFocus()
   const { projects } = useAssertUserState()
 
   const { colors } = useTheme()
 
   const isPaused = useIsFocusPaused()
 
+  const intervals = useAssertFocusIntervals()
+
   const now = useRhythmicRerender()
   const items = useMemo(() => {
-    const sets = shouldBePresent(
-      focusIntervalsToSets({ intervals: shouldBePresent(intervals), now }),
-    )
+    const sets = focusIntervalsToSets({ intervals, now })
 
     const items: FocusBreakdownItemInfo[] = []
     sets.forEach((set, index) => {

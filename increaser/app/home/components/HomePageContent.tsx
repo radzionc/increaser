@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/css/stack'
 
-import { useFocus } from '@increaser/ui/focus/FocusContext'
 import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
 import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 import { PageContent } from '../../ui/page/PageContent'
 import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { sidebarConfig } from '../../navigation/Sidebar/config'
+import { useFocusIntervals } from '../../focus/hooks/useFocusIntervals'
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const MobileContent = styled(VStack)`
 `
 
 export const HomePageContent = () => {
-  const { intervals } = useFocus()
+  const intervals = useFocusIntervals()
 
   return (
     <>

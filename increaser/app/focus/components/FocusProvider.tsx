@@ -36,7 +36,6 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
   const { tasks } = useAssertUserState()
 
   const [{ projectId, taskId }] = useFocusTarget()
-
   const [intervals, setIntervals] = useFocusIntervals()
 
   const analytics = useAnalytics()
@@ -206,7 +205,6 @@ export const FocusProvider = ({ children }: ComponentWithChildrenProps) => {
         resume,
         stop,
         cancel,
-        intervals,
         reduceLastInterval,
       }}
     >

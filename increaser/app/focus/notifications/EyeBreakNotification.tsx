@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react'
 
 import { useShowFocusNotificationMutation } from './hooks/useShowFocusNotificationMutation'
 import { eyeBreakNotificationInterval } from './state/focusNotifications'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const EyeBreakNotification = () => {
   const { mutate: notify } = useShowFocusNotificationMutation('eyeBreak')
 
-  const { intervals } = useFocus()
+  const intervals = useAssertFocusIntervals()
 
   const [lastBreakAt, setLastBreakAt] = useState(
     () => getLastItem(shouldBePresent(intervals)).start,

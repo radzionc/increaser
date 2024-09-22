@@ -25,7 +25,7 @@ import {
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { focusDurations } from '@increaser/entities/FocusDuration'
-import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useFocusIntervals } from '../../focus/hooks/useFocusIntervals'
 
 export const remindersCount = 5
 
@@ -62,7 +62,7 @@ export const BreakProvider = ({ children }: Props) => {
   const todayStartedAt = useStartOfDay()
   const { finishWorkAt } = useAssertUserState()
   const sets = useTodaySets()
-  const { intervals } = useFocus()
+  const intervals = useFocusIntervals()
 
   const [hasBrowserNotification, setHasBrowserNotification] =
     usePersistentState<boolean>(

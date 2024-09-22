@@ -1,4 +1,4 @@
-import { useFocus } from '@increaser/ui/focus/FocusContext'
+import { useAssertFocusIntervals } from '@increaser/ui/focus/FocusContext'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useEffect, useMemo } from 'react'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -11,19 +11,19 @@ import { useFocusDuration } from '../state/focusDuration'
 export const SessionEndNotification = () => {
   const [focusDuration] = useFocusDuration()
 
-  const { intervals } = useFocus()
+  const intervals = useAssertFocusIntervals()
 
   const { mutate: notify } = useShowFocusNotificationMutation('sessionEnd')
 
   const sessionEndsAt = useMemo(() => {
-    const previousIntervals = shouldBePresent(intervals).slice(0, -1)
+    const previousIntervals = intervals.slice(0, -1)
     const workedDuration = sum(
       previousIntervals.map(({ start, end }) =>
         getIntervalDuration({ start, end: shouldBePresent(end) }),
       ),
     )
 
-    const { start } = getLastItem(shouldBePresent(intervals))
+    const { start } = getLastItem(intervals)
 
     return start + convertDuration(focusDuration, 'min', 'ms') - workedDuration
   }, [intervals, focusDuration])
