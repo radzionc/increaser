@@ -1,4 +1,7 @@
-import { otherProjectId } from '@increaser/entities/Project'
+import {
+  otherProjectId,
+  ProjectRelatedEntity,
+} from '@increaser/entities/Project'
 import {
   usePersistentState,
   PersistentStateKey,
@@ -13,8 +16,7 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { memoizeWithProvider } from '@lib/ui/state/memoizeWithProvider'
 
-export type FocusInterval = {
-  projectId: string
+export type FocusInterval = ProjectRelatedEntity & {
   taskId: string | null
   start: number
   end: number | null

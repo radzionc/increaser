@@ -5,9 +5,11 @@ import { useTaskFactories } from './hooks/useTaskFactories'
 import { CurrentTaskFactoryProvider } from './CurrentTaskFactoryProvider'
 import { TaskFactoryItem } from './TaskFactoryItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { useFilterByProject } from '../projects/filter/project/state/projectFilter'
+import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 
 export const ManageTaskFactories = () => {
-  const items = useTaskFactories()
+  const items = useFilterByProject(useTaskFactories(), getProjectId)
 
   return (
     <>

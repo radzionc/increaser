@@ -19,7 +19,6 @@ import styled, { css } from 'styled-components'
 import { DnDGroups } from '@lib/dnd/groups/DnDGroups'
 import { match } from '@lib/utils/match'
 import { getColor } from '@lib/ui/theme/getters'
-import { useFilterByProject } from '../../projects/filter/useFilterByProject'
 import { useTasks } from '../hooks/useTasks'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { makeRecord } from '@lib/utils/record/makeRecord'
@@ -30,6 +29,8 @@ import { toEntries } from '@lib/utils/record/toEntries'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { DoneTasksInfo } from './DoneTasksInfo'
+import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
+import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 
 const DraggableTaskItem = styled(TaskItem)<{ status: DnDItemStatus }>`
   ${({ status }) =>
@@ -48,10 +49,8 @@ const DraggableTaskItem = styled(TaskItem)<{ status: DnDItemStatus }>`
     })}
 `
 
-const getTaskProjectId = (task: Task) => task.projectId
-
 export const TaskBoard = () => {
-  const tasks = useFilterByProject(useTasks(), getTaskProjectId)
+  const tasks = useFilterByProject(useTasks(), getProjectId)
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 

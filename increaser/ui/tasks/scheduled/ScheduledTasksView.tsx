@@ -4,8 +4,6 @@ import { ScheduledTasks } from './ScheduledTasks'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskTimeGroupingSelector } from '../timeGrouping/TaskTimeGroupingSelector'
 import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
-import { ManageProjectFilter } from '../../projects/filter/ManageProjectFilter'
-import { ProjectFilterProvider } from '../../projects/filter/ProjectFilterProvider'
 
 const Container = styled(VStack)`
   gap: 32px;
@@ -15,16 +13,13 @@ const Container = styled(VStack)`
 
 export const ScheduledTasksView = () => {
   return (
-    <ProjectFilterProvider initialValue={null}>
-      <Container>
-        <PageHeaderControlsArea>
-          <TaskTimeGroupingSelector />
-          <ManageProjectFilter />
-        </PageHeaderControlsArea>
-        <ActiveItemIdProvider initialValue={null}>
-          <ScheduledTasks />
-        </ActiveItemIdProvider>
-      </Container>
-    </ProjectFilterProvider>
+    <Container>
+      <PageHeaderControlsArea>
+        <TaskTimeGroupingSelector />
+      </PageHeaderControlsArea>
+      <ActiveItemIdProvider initialValue={null}>
+        <ScheduledTasks />
+      </ActiveItemIdProvider>
+    </Container>
   )
 }

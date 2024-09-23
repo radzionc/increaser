@@ -24,15 +24,6 @@ export type Project = EntityWithId &
     workingDays: ProjectWorkingDays
   }
 
-const projectDefaultFields: Pick<
-  Project,
-  'status' | 'allocatedMinutesPerWeek' | 'workingDays'
-> = {
-  status: 'active',
-  allocatedMinutesPerWeek: 0,
-  workingDays: 'everyday',
-}
-
 export const goalOptionName: Record<ProjectGoal, string> = {
   doMore: 'at least',
   doLess: 'no more than',
@@ -54,4 +45,8 @@ export const otherProject: Project = {
   allocatedMinutesPerWeek: 0,
   order: 0,
   workingDays: 'everyday',
+}
+
+export type ProjectRelatedEntity = {
+  projectId: string
 }

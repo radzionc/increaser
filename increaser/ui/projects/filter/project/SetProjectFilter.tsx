@@ -1,7 +1,6 @@
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
-import { useActiveProjects } from '../hooks/useActiveProjects'
-import { useProjectFilter } from './ProjectFilterProvider'
+import { useActiveProjects } from '../../hooks/useActiveProjects'
 import styled, { css } from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'
 import { ComponentWithActiveState } from '@lib/ui/props'
@@ -13,6 +12,7 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { OptionContent } from '@lib/ui/select/OptionContent'
+import { useProjectFilter } from './state/projectFilter'
 
 const Opener = styled(Button)<ComponentWithActiveState>`
   border: 1px solid transparent;

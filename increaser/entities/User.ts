@@ -2,7 +2,7 @@ import { CountryCode } from '@lib/countries'
 import { FocusSound, defaultFocusSounds } from './FocusSound'
 import { Habit } from './Habit'
 import { LifeTimeDeal } from './LifeTimeDeal'
-import { Project, otherProject } from './Project'
+import { Project, ProjectRelatedEntity, otherProject } from './Project'
 import { Subscription } from './Subscription'
 import { WorkBudget, defaultWorkBudget } from './WorkBudget'
 import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
@@ -22,10 +22,10 @@ import {
 import { Principle } from './Principle'
 import { toRecord } from '@lib/utils/record/toRecord'
 
-export type Set = Interval & {
-  projectId: string
-  isEndEstimated?: boolean | null
-}
+export type Set = Interval &
+  ProjectRelatedEntity & {
+    isEndEstimated?: boolean | null
+  }
 
 export const maxWeeks = 24
 export const maxMonths = 24

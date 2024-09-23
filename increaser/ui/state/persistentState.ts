@@ -39,6 +39,7 @@ export enum PersistentStateKey {
   FocusNotificationsHaveSound = 'FocusNotificationsHaveSound',
   FocusNotifications = 'FocusNotifications',
   FocusDuration = 'FocusDuration',
+  ProjectFilter = 'projectFilter',
 }
 
 const persistentStorage =

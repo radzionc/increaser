@@ -6,12 +6,12 @@ import { HStack } from '@lib/ui/css/stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { TaskStatus } from '@increaser/entities/Task'
-import { useProjectFilter } from '../../../projects/filter/ProjectFilterProvider'
 import { TaskFormShape } from '../../form/TaskFormShape'
 import { CreateTaskForm } from '../../form/CreateTaskForm'
 import styled from 'styled-components'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { taskBoardConfig } from '../config'
+import { useProjectFilter } from '../../../projects/filter/project/state/projectFilter'
 
 type AddTaskProps = {
   status: TaskStatus

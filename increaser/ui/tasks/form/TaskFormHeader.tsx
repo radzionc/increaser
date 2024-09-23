@@ -17,9 +17,9 @@ import { TaskChecklistInput } from './checklist/TaskChecklistInput'
 import { panelFormConfig } from '../../form/panel/config'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { ProjectRelatedEntity } from '@increaser/entities/Project'
 
-type TaskFormHeaderValue = {
-  projectId: string
+type TaskFormHeaderValue = ProjectRelatedEntity & {
   name: string
   description: string
   links: TaskLink[]

@@ -13,10 +13,9 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { EmbeddedPromptContainer } from '@lib/ui/buttons/EmbeddedPromptContainer'
 import { BookIcon } from '@lib/ui/icons/BookIcon'
 import { EmbeddedPromptContentFrame } from '@lib/ui/buttons/EmbeddedPromptContentFrame'
+import { ProjectRelatedEntity } from '@increaser/entities/Project'
 
-type Props = ValueFinishProps<TaskTemplate> & {
-  projectId: string
-}
+type Props = ValueFinishProps<TaskTemplate> & ProjectRelatedEntity
 
 const ToggleIconContainer = styled(CollapsableStateIndicator)`
   font-size: 16px;

@@ -20,8 +20,8 @@ import { useEffect, useState } from 'react'
 import { EditTaskForm } from '../form/EditTaskForm'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import { Task } from '@increaser/entities/Task'
-import { useFilterByProject } from '../../projects/filter/useFilterByProject'
+import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
+import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {
@@ -35,13 +35,8 @@ const GroupContainer = styled(VStack)`
   gap: 4px;
 `
 
-const getTaskProjectId = (task: Task) => task.projectId
-
 export const ScheduledTasks = () => {
-  const tasks = useFilterByProject(
-    useUncompleteScheduledTasks(),
-    getTaskProjectId,
-  )
+  const tasks = useFilterByProject(useUncompleteScheduledTasks(), getProjectId)
 
   const [activeItemId] = useActiveItemId()
 

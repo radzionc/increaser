@@ -4,7 +4,7 @@ import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
+import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
 
 export const AddIdea = () => {
   const [projectId] = useProjectFilter()

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
 import { useAssertUserState } from '../user/UserStateContext'
+import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
 
 export const useTasksToDo = () => {
   const [projectId] = useProjectFilter()

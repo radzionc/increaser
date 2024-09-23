@@ -5,7 +5,7 @@ import { IdeaItem } from './IdeaItem'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
 import { useMemo } from 'react'
-import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
+import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
 
 const Container = styled(VStack)`
   max-width: 560px;

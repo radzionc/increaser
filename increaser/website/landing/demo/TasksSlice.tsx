@@ -10,7 +10,6 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { TaskBoard } from '@increaser/ui/tasks/board/TaskBoard'
-import { ProjectFilterProvider } from '@increaser/ui/projects/filter/ProjectFilterProvider'
 
 const Content = styled(VStack)`
   width: 100%;
@@ -27,11 +26,9 @@ export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <ClientOnly>
-          <ProjectFilterProvider initialValue={null}>
-            <Content>
-              <TaskBoard />
-            </Content>
-          </ProjectFilterProvider>
+          <Content>
+            <TaskBoard />
+          </Content>
         </ClientOnly>
       </WebsiteSliceContent>
     </WebsiteSlice>

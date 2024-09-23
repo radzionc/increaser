@@ -4,9 +4,11 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddTaskTemplate } from './AddTaskTemplate'
 import { CurrentTaskTemplateProvider } from './CurrentTaskTemplateProvider'
 import { useTaskTemplates } from './hooks/useTaskTemplates'
+import { useFilterByProject } from '../projects/filter/project/state/projectFilter'
+import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 
 export const TaskTemplates = () => {
-  const items = useTaskTemplates()
+  const items = useFilterByProject(useTaskTemplates(), getProjectId)
 
   return (
     <VStack style={{ maxWidth: 560 }}>

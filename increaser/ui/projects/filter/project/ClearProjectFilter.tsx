@@ -1,6 +1,5 @@
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useProject } from '../hooks/useProject'
-import { useProjectFilter } from './ProjectFilterProvider'
+import { useProject } from '../../hooks/useProject'
 import { Text } from '@lib/ui/text'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
@@ -13,6 +12,8 @@ import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { useProjectFilter } from './state/projectFilter'
+import { usePresentState } from '@lib/ui/state/usePresentState'
 
 const size = 36
 
@@ -51,10 +52,8 @@ const Container = styled(UnstyledButton)`
 `
 
 export const ClearProjectFilter = () => {
-  const [projectId, setValue] = useProjectFilter()
-  const { name, emoji } = shouldBePresent(
-    useProject(shouldBePresent(projectId)),
-  )
+  const [projectId, setValue] = usePresentState(useProjectFilter())
+  const { name, emoji } = shouldBePresent(useProject(projectId))
 
   return (
     <Container onClick={() => setValue(null)}>

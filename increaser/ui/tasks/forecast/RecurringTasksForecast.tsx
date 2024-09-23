@@ -3,14 +3,14 @@ import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { ForecastedRecurringTask } from './ForecastedRecurringTask'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
-import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { subDays } from 'date-fns'
 import { match } from '@lib/utils/match'
 import { getForecastedTasks } from './getForecastedTasks'
 import { range } from '@lib/utils/array/range'
-import { useFilterByProject } from '../../projects/filter/useFilterByProject'
 import { endOfISOWeek } from 'date-fns'
 import { Task } from '@increaser/entities/Task'
+import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
+import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 
 type Item = {
   task: Pick<
@@ -22,15 +22,10 @@ type Item = {
   count?: number
 }
 
-const getTaskFactoryProjectId = ({ projectId }: TaskFactory) => projectId
-
 export const RecurringTasksForecast = ({
   value,
 }: ComponentWithValueProps<number>) => {
-  const taskFactories = useFilterByProject(
-    useTaskFactories(),
-    getTaskFactoryProjectId,
-  )
+  const taskFactories = useFilterByProject(useTaskFactories(), getProjectId)
 
   const [timeGrouping] = useTaskTimeGrouping()
 

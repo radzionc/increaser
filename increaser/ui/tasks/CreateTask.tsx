@@ -2,7 +2,7 @@ import { AddTaskButton } from './AddTaskButton'
 import { CreateTaskForm } from './form/CreateTaskForm'
 import { useState } from 'react'
 import { TaskFormShape } from './form/TaskFormShape'
-import { useProjectFilter } from '../projects/filter/ProjectFilterProvider'
+import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
 
 type CreateTaskProps = {
   defaultValue?: Partial<TaskFormShape>
