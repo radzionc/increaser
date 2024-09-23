@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
@@ -21,6 +21,7 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { Button } from '@lib/ui/buttons/Button'
 import { pick } from '@lib/utils/record/pick'
+import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -44,7 +45,7 @@ export const EditTaskFactoryForm = () => {
   const { mutate: deleteTaskFactory } =
     useDeleteUserEntityMutation('taskFactory')
 
-  useEffect(() => {
+  useEffectOnDependencyChange(() => {
     setValue((prev) => ({
       ...prev,
       deadlineIndex: cadenceDefaultDeadlineIndex[prev.cadence],
