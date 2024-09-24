@@ -1,17 +1,18 @@
 import { productName } from '@increaser/config'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
-import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { Modal } from '@lib/ui/modal'
 import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { InlineFounderContacts } from '@increaser/app/info/components/InflineFounderContacts'
 import { useIsPayingUser } from '@increaser/app/membership/hooks/useIsPayingUser'
 import { ContinueButton } from '@increaser/app/ui/ContinueButton'
+import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 
 export const MembershipConfirmation = () => {
   const [isOpen, { set: open, unset: close }] = useBoolean(false)
   const isPayingUser = useIsPayingUser()
-  useEffectOnDependencyChange(() => {
+
+  useRunOnChange(() => {
     if (isPayingUser) {
       open()
     }

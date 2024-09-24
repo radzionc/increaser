@@ -21,7 +21,6 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { Button } from '@lib/ui/buttons/Button'
 import { pick } from '@lib/utils/record/pick'
-import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -44,13 +43,6 @@ export const EditTaskFactoryForm = () => {
     useUpdateUserEntityMutation('taskFactory')
   const { mutate: deleteTaskFactory } =
     useDeleteUserEntityMutation('taskFactory')
-
-  useEffectOnDependencyChange(() => {
-    setValue((prev) => ({
-      ...prev,
-      deadlineIndex: cadenceDefaultDeadlineIndex[prev.cadence],
-    }))
-  }, [value.cadence])
 
   const [, setActiveItemId] = useActiveItemId()
 
@@ -99,7 +91,10 @@ export const EditTaskFactoryForm = () => {
         <HStack alignItems="center" gap={8}>
           <TaskCadenceInput
             value={value.cadence}
-            onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
+            onChange={(cadence) => {
+              const deadlineIndex = cadenceDefaultDeadlineIndex[cadence]
+              return setValue((prev) => ({ ...prev, cadence, deadlineIndex }))
+            }}
           />
           {doesCadenceSupportDeadlineIndex(value.cadence) && (
             <TaskDeadlineIndexInput

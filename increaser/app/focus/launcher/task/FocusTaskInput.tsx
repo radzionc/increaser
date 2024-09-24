@@ -5,7 +5,7 @@ import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'
 import { useFocusTarget } from '../../state/useFocusTarget'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
+import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormContent'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskPrompt } from './AddTaskPrompt'
@@ -27,7 +27,7 @@ export const FocusTaskInput = () => {
 
   const { tasks } = useAssertUserState()
 
-  useEffectOnDependencyChange(() => {
+  useRunOnChange(() => {
     setIsOpen(false)
   }, [taskId])
 

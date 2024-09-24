@@ -6,11 +6,11 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { FocusProjectOption } from './FocusProjectOption'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
-import { useEffectOnDependencyChange } from '@lib/ui/hooks/useEffectOnDependencyChange'
 import { BoxIcon } from '@lib/ui/icons/BoxIcon'
 import { FocusEntityInputHeader } from '../launcher/FocusEntityInputHeader'
 import { FocusEntityOptionsContainer } from '../launcher/FocusEntityOptionsContainer'
 import { useFocusTarget } from '../state/useFocusTarget'
+import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -23,7 +23,7 @@ export const FocusProjectInput = () => {
   const [{ projectId }, setState] = useFocusTarget()
   const { projects, tasks } = useAssertUserState()
 
-  useEffectOnDependencyChange(() => {
+  useRunOnChange(() => {
     setIsOpen(false)
   }, [projectId])
 
