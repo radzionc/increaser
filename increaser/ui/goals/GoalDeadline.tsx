@@ -25,7 +25,7 @@ export const GoalDeadline = () => {
 
   return (
     <GoalSection icon={<ClockIcon />}>
-      <HStackSeparatedBy gap={8} separator={'~'}>
+      <HStackSeparatedBy gap={8} wrap="wrap" separator={'~'}>
         <Text>{formatGoalDeadline(deadlineAt)}</Text>
         {deadlineTimestamp > now && (
           <Text>{formatGoalTimeLeft(deadlineTimestamp)}</Text>

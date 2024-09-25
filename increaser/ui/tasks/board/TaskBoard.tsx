@@ -31,6 +31,8 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { DoneTasksInfo } from './DoneTasksInfo'
 import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
 import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
+import { ActiveTaskIdProvider } from '../state/activeTaskId'
+import { ActiveTask } from '../ActiveTask'
 
 const DraggableTaskItem = styled(TaskItem)<{ status: DnDItemStatus }>`
   ${({ status }) =>
@@ -73,88 +75,93 @@ export const TaskBoard = () => {
   }, [tasks, toGroups])
 
   return (
-    <TaskBoardContainer>
-      <DnDGroups
-        groups={groups}
-        getItemId={(task) => task.id}
-        onChange={(id, { index, groupId }) => {
-          const group = shouldBePresent(
-            groups.find((group) => group.key === groupId),
-          )
+    <ActiveTaskIdProvider>
+      <ActiveTask />
+      <TaskBoardContainer>
+        <DnDGroups
+          groups={groups}
+          getItemId={(task) => task.id}
+          onChange={(id, { index, groupId }) => {
+            const group = shouldBePresent(
+              groups.find((group) => group.key === groupId),
+            )
 
-          const initialGroup = shouldBePresent(
-            groups.find((group) => group.value.some((task) => task.id === id)),
-          )
-
-          console.log({
-            orders: group.value.map((task) => task.order),
-            sourceIndex:
-              initialGroup.key === group.key
-                ? group.value.findIndex((task) => task.id === id)
-                : null,
-            destinationIndex: index,
-          })
-
-          const order = getNewOrder({
-            orders: group.value.map((task) => task.order),
-            sourceIndex:
-              initialGroup.key === group.key
-                ? group.value.findIndex((task) => task.id === id)
-                : null,
-            destinationIndex: index,
-          })
-
-          updateTask({
-            id,
-            fields: {
-              order,
-              status: groupId,
-            },
-          })
-
-          setGroups(
-            toGroups(
-              tasks.map((task) =>
-                task.id === id ? { ...task, order, status: groupId } : task,
+            const initialGroup = shouldBePresent(
+              groups.find((group) =>
+                group.value.some((task) => task.id === id),
               ),
-            ),
-          )
-        }}
-        renderGroup={({
-          props: { children, ...containerProps },
-          groupId: status,
-          isDraggingOver,
-        }) => (
-          <TaskColumnContainer
-            isDraggingOver={isDraggingOver}
-            {...containerProps}
-          >
-            <ColumnHeader>
-              <ColumnContent>
-                <Text weight="600">{taskStatusName[status]}</Text>
-              </ColumnContent>
-            </ColumnHeader>
-            <TaskColumnContent>
-              {status === 'done' && <DoneTasksInfo />}
-              {children}
-            </TaskColumnContent>
-            <ColumnFooter>
-              <AddTask status={status} />
-            </ColumnFooter>
-          </TaskColumnContainer>
-        )}
-        renderItem={({ item, draggableProps, dragHandleProps, status }) => {
-          return (
-            <CurrentTaskProvider key={item.id} value={item}>
-              <DraggableTaskItem
-                status={status}
-                {...draggableProps}
-                {...dragHandleProps}
-              />
-            </CurrentTaskProvider>
-          )
-        }}
-      />
-    </TaskBoardContainer>
+            )
+
+            console.log({
+              orders: group.value.map((task) => task.order),
+              sourceIndex:
+                initialGroup.key === group.key
+                  ? group.value.findIndex((task) => task.id === id)
+                  : null,
+              destinationIndex: index,
+            })
+
+            const order = getNewOrder({
+              orders: group.value.map((task) => task.order),
+              sourceIndex:
+                initialGroup.key === group.key
+                  ? group.value.findIndex((task) => task.id === id)
+                  : null,
+              destinationIndex: index,
+            })
+
+            updateTask({
+              id,
+              fields: {
+                order,
+                status: groupId,
+              },
+            })
+
+            setGroups(
+              toGroups(
+                tasks.map((task) =>
+                  task.id === id ? { ...task, order, status: groupId } : task,
+                ),
+              ),
+            )
+          }}
+          renderGroup={({
+            props: { children, ...containerProps },
+            groupId: status,
+            isDraggingOver,
+          }) => (
+            <TaskColumnContainer
+              isDraggingOver={isDraggingOver}
+              {...containerProps}
+            >
+              <ColumnHeader>
+                <ColumnContent>
+                  <Text weight="600">{taskStatusName[status]}</Text>
+                </ColumnContent>
+              </ColumnHeader>
+              <TaskColumnContent>
+                {status === 'done' && <DoneTasksInfo />}
+                {children}
+              </TaskColumnContent>
+              <ColumnFooter>
+                <AddTask status={status} />
+              </ColumnFooter>
+            </TaskColumnContainer>
+          )}
+          renderItem={({ item, draggableProps, dragHandleProps, status }) => {
+            return (
+              <CurrentTaskProvider key={item.id} value={item}>
+                <DraggableTaskItem
+                  status={status}
+                  {...draggableProps}
+                  {...dragHandleProps}
+                />
+              </CurrentTaskProvider>
+            )
+          }}
+        />
+      </TaskBoardContainer>
+    </ActiveTaskIdProvider>
   )
 }

@@ -96,6 +96,8 @@ export const StartTimeEditor = () => {
           top: valueInPx - 20,
         }}
         separator={dotSeparator}
+        gap={8}
+        wrap="wrap"
       >
         <Text>{formatTime(value)}</Text>
         {minDiff > 0 && <Text>{formatDuration(minDiff, 'min')} earlier</Text>}

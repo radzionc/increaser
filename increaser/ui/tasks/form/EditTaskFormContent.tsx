@@ -20,10 +20,10 @@ import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
-import { Button } from '@lib/ui/buttons/Button'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useAssertUserState } from '../../user/UserStateContext'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -96,7 +96,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   })
 
   return (
-    <Panel style={{ width: '100%' }} withSections kind="secondary">
+    <Panel style={{ width: '100%', gap: 0 }} withSections kind="secondary">
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
@@ -134,16 +134,13 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
               }
             />
           )}
+          <PanelFormDeleteButton
+            onClick={() => {
+              deleteTask(id)
+              onFinish()
+            }}
+          />
         </HStack>
-        <Button
-          kind="alert"
-          onClick={() => {
-            deleteTask(id)
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
       </HStack>
     </Panel>
   )

@@ -15,6 +15,8 @@ export const BreakCountdown = () => {
   return (
     <HStackSeparatedBy
       separator={<Text color="shy">{breakDuration ? '/' : ''}</Text>}
+      gap={8}
+      wrap="wrap"
     >
       <Text as="div" weight="600" size={40} height="small">
         <AnimatedDuration getDuration={() => Date.now() - lastSetEnd} />

@@ -2,7 +2,6 @@ import { VStack } from '@lib/ui/css/stack'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { TaskItem } from '@increaser/ui/tasks/TaskItem'
 import { CreateTask } from '@increaser/ui/tasks/CreateTask'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 import { endOfDay, subDays } from 'date-fns'
 import { ScheduledTaskGroupId } from './ScheduledTaskGroupId'
@@ -17,11 +16,11 @@ import { useUncompleteScheduledTasks } from './useUncompleteScheduledTasks'
 import { useGroupScheduledTasks } from './useGroupScheduledTasks'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import { EditTaskForm } from '../form/EditTaskForm'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
 import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
+import { ActiveTask } from '../ActiveTask'
 
 const getDeadline = (groupId: ScheduledTaskGroupId) => {
   if (groupId === 'overdue') {
@@ -38,8 +37,6 @@ const GroupContainer = styled(VStack)`
 export const ScheduledTasks = () => {
   const tasks = useFilterByProject(useUncompleteScheduledTasks(), getProjectId)
 
-  const [activeItemId] = useActiveItemId()
-
   const toGroups = useGroupScheduledTasks()
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
@@ -51,6 +48,7 @@ export const ScheduledTasks = () => {
 
   return (
     <VStack gap={32}>
+      <ActiveTask />
       <DnDGroups
         groups={groups}
         getItemId={(task) => task.id}
@@ -110,37 +108,28 @@ export const ScheduledTasks = () => {
           </GroupContainer>
         )}
         renderItem={({ item, draggableProps, dragHandleProps, status }) => {
-          const isEditing = activeItemId === item.id
-
           return (
             <CurrentTaskProvider value={item} key={item.id}>
-              {isEditing ? (
-                <EditTaskForm />
-              ) : (
-                <Wrap
-                  wrap={
-                    activeItemId === null
-                      ? (children) =>
-                          status === 'overlay' ? (
-                            <TightListItemDragOverlay>
-                              {children}
-                            </TightListItemDragOverlay>
-                          ) : (
-                            <DraggableTightListItemContainer
-                              isDragging={status === 'placeholder'}
-                              {...draggableProps}
-                              {...dragHandleProps}
-                            >
-                              {children}
-                            </DraggableTightListItemContainer>
-                          )
-                      : undefined
-                  }
-                  key={item.id}
-                >
-                  <TaskItem />
-                </Wrap>
-              )}
+              <Wrap
+                wrap={(children) =>
+                  status === 'overlay' ? (
+                    <TightListItemDragOverlay>
+                      {children}
+                    </TightListItemDragOverlay>
+                  ) : (
+                    <DraggableTightListItemContainer
+                      isDragging={status === 'placeholder'}
+                      {...draggableProps}
+                      {...dragHandleProps}
+                    >
+                      {children}
+                    </DraggableTightListItemContainer>
+                  )
+                }
+                key={item.id}
+              >
+                <TaskItem />
+              </Wrap>
             </CurrentTaskProvider>
           )
         }}

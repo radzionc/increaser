@@ -6,8 +6,8 @@ import { taskBoardConfig } from '../config'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { interactive } from '@lib/ui/css/interactive'
 import { TaskPrimaryContent } from '../../TaskPrimaryContent'
-import { Opener } from '@lib/ui/base/Opener'
-import { EditTaskFormOverlay } from '../../form/EditTaskFormOverlay'
+import { useActiveTaskId } from '../../state/activeTaskId'
+import { useCurrentTask } from '../../CurrentTaskProvider'
 
 const Container = styled.div`
   background: ${getColor('foreground')};
@@ -17,6 +17,8 @@ const Container = styled.div`
   border: 2px solid transparent;
   line-height: 1.5;
 
+  outline: none;
+
   &:hover {
     border-color: ${getColor('primary')};
   }
@@ -25,16 +27,14 @@ const Container = styled.div`
 type TaskItemProps = ComponentProps<typeof Container>
 
 export const TaskItem = forwardRef<HTMLDivElement, TaskItemProps>(
-  (props, ref) => (
-    <Opener
-      renderOpener={({ onOpen }) => (
-        <Container {...props} onClick={onOpen} ref={ref}>
-          <TaskPrimaryContent />
-        </Container>
-      )}
-      renderContent={({ onClose }) => (
-        <EditTaskFormOverlay onFinish={onClose} />
-      )}
-    />
-  ),
+  (props, ref) => {
+    const { id } = useCurrentTask()
+    const [, setActiveTaskId] = useActiveTaskId()
+
+    return (
+      <Container {...props} onClick={() => setActiveTaskId(id)} ref={ref}>
+        <TaskPrimaryContent />
+      </Container>
+    )
+  },
 )

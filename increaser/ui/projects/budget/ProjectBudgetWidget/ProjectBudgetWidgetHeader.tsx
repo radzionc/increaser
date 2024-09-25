@@ -47,7 +47,7 @@ export const ProjectBudgetWidgetHeader = () => {
       </HStack>
       <Link href={getAppPath('projects', 'plan')}>
         <HStack gap={8}>
-          <HStackSeparatedBy separator="/">
+          <HStackSeparatedBy separator="/" gap={8} wrap="wrap">
             <Text weight="500" color="contrast">
               {doneMinutesThisWeek > 0
                 ? formatDuration(doneMinutesThisWeek, 'min', {

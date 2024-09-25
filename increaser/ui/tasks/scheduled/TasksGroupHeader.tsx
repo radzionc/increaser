@@ -63,7 +63,7 @@ export const TasksGroupHeader = ({
   }, [timeGrouping, value])
 
   return (
-    <Container separator={dotSeparator}>
+    <Container separator={dotSeparator} gap={8} wrap="wrap">
       {deadline.map((text, index) => (
         <Text
           color={value === 'overdue' ? 'idle' : undefined}

@@ -38,6 +38,7 @@ export const FocusTimeIndicators = ({
         alignItems="center"
         separator={<Separator />}
         gap={gap}
+        wrap="wrap"
       >
         {value.map(({ color }, index) => (
           <Circle

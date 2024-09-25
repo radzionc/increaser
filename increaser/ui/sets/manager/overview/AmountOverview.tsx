@@ -38,6 +38,8 @@ export const AmountOverview = () => {
           </Text>
           <HStackSeparatedBy
             separator={<Text color="shy">{slashSeparator}</Text>}
+            gap={8}
+            wrap="wrap"
           >
             <Text size={14} weight="500">
               {formatDuration(setsTotal, 'ms')}
