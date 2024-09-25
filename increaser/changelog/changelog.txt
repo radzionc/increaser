@@ -1,4 +1,5 @@
-The project filter on the tasks page persists even if you navigate to a different page and applies to every tab on the tasks page.
+YouTube focus music will now continue playing from where you left off, rather than restarting from the beginning each time.
+The project filter on the tasks page now remains active even when navigating to different pages, and it applies across all tabs within the tasks page.
 1726893259773
 Select specific focus notifications you want to receive: session end, workday end, eye break.  
 Turn on/off focus notification sound alerts from the focus page.
