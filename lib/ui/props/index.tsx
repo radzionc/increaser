@@ -18,6 +18,10 @@ export type ComponentWithBackActionProps = {
   onBack: () => void
 }
 
+export type ComponentWithForwardActionProps = {
+  onForward: () => void
+}
+
 export type ComponentWithClassNameProps = {
   className?: string
 }
