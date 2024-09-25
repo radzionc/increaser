@@ -1,12 +1,18 @@
 import YouTubePlayer from 'react-player/lazy'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getColor } from '@lib/ui/theme/getters'
 import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
 import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
+import {
+  PersistentStateKey,
+  usePersistentState,
+} from '@increaser/ui/state/persistentState'
+import { useRef, useCallback, useEffect } from 'react'
+import ReactPlayer from 'react-player'
+import { useThrottle } from '@lib/ui/hooks/useThrottle'
 
 const youTubeVideoRatio = 9 / 16
 
@@ -22,6 +28,36 @@ export const YouTubeFocusMusicPlayer = () => {
   const { isPlaying, setState } = useYouTubeFocusMusic()
 
   const sound = shouldBeDefined(focusSounds.find((sound) => sound.url === url))
+
+  const [timeLeftRecord, setTimeLeftRecord] = usePersistentState<
+    Record<string, number>
+  >(PersistentStateKey.YouTubeFocusMusicLeftAt, {})
+
+  const playerRef = useRef<ReactPlayer>(null)
+
+  const savePlaybackTime = useCallback(
+    (playedSeconds: number) => {
+      setTimeLeftRecord((prev) => ({ ...prev, [sound.url]: playedSeconds }))
+    },
+    [sound.url, setTimeLeftRecord],
+  )
+
+  const handleProgress = useThrottle(
+    ({ playedSeconds }: { playedSeconds: number }) => {
+      savePlaybackTime(playedSeconds)
+    },
+    5000,
+  )
+
+  useEffect(() => {
+    const player = playerRef.current
+    return () => {
+      const playedSeconds = player?.getCurrentTime()
+      if (playedSeconds !== undefined) {
+        savePlaybackTime(playedSeconds)
+      }
+    }
+  }, [savePlaybackTime])
 
   return (
     <ElementSizeAware
@@ -47,6 +83,14 @@ export const YouTubeFocusMusicPlayer = () => {
                   setState((state) => ({ ...state, isPlaying: true }))
                 }
                 volume={0.8}
+                ref={playerRef}
+                onReady={() => {
+                  const time = timeLeftRecord[sound.url] || 0
+                  if (time > 0) {
+                    playerRef.current?.seekTo(time, 'seconds')
+                  }
+                }}
+                onProgress={handleProgress}
                 config={{
                   youtube: {
                     playerVars: {
