@@ -6,7 +6,7 @@ import { DayInput } from '@lib/ui/time/day/DayInput'
 import { stringToDay, dayToString, Day } from '@lib/utils/time/Day'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { useState } from 'react'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useAssertUserState } from '../../user/UserStateContext'
@@ -36,7 +36,7 @@ export const SetDobForm = ({ onFinish }: NoValueFinishProps) => {
 
   return (
     <InputContainer as="div" style={{ gap: 8 }}>
-      <LabelText>Your date of birth</LabelText>
+      <InputLabel>Your date of birth</InputLabel>
       <Panel kind="secondary">
         <Container
           as="form"

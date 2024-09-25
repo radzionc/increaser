@@ -1,6 +1,6 @@
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { InputProps } from '@lib/ui/props'
 import { SegmentedSlider } from '@lib/ui/inputs/Slider/SegmentedSlider'
 
@@ -17,7 +17,7 @@ export const WorkBudgetInput = ({
 }: WorkBudgetInputProps) => {
   return (
     <InputContainer as="div">
-      <LabelText>{name}</LabelText>
+      <InputLabel>{name}</InputLabel>
       <SegmentedSlider
         max={10}
         value={value}

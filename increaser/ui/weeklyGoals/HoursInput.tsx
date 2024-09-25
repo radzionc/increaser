@@ -5,7 +5,7 @@ import { textInput, textInputHorizontalPadding } from '@lib/ui/css/textInput'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { FixedOptionsInputIdentifierWrapper } from '@lib/ui/inputs/dropdown/FixedOptionsInput/IdentifierWrapper'
 import { dropdownInputConfig } from '@lib/ui/inputs/dropdown/config'
 import { RelativeRow } from '@lib/ui/layout/RelativeRow'
@@ -63,7 +63,7 @@ export const HoursInput = forwardRef<HTMLInputElement, HoursInputProps>(
           gap={16}
           fullWidth
         >
-          <LabelText>{label}</LabelText>
+          <InputLabel>{label}</InputLabel>
           {max !== undefined && (
             <TextButton
               as="div"

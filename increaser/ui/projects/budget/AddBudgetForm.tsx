@@ -9,7 +9,7 @@ import { Field } from '@lib/ui/inputs/Field'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { ProjectGoal, ProjectWorkingDays } from '@increaser/entities/Project'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { useFreeHours } from './hooks/useFreeHours'
@@ -59,7 +59,7 @@ export const AddBudgetForm = ({ onFinish }: NoValueFinishProps) => {
 
   return (
     <InputContainer style={{ gap: 8 }} as="div">
-      <LabelText>Add a project budget</LabelText>
+      <InputLabel>Add a project budget</InputLabel>
       <Panel
         as="form"
         onSubmit={preventDefault(() => {

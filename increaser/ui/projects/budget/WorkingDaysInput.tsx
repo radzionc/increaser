@@ -5,7 +5,7 @@ import {
 } from '@increaser/entities/Project'
 import { RadioInput } from '@lib/ui/inputs/RadioInput'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { InputProps } from '@lib/ui/props'
 
 export const WorkdingDaysInput = ({
@@ -14,7 +14,7 @@ export const WorkdingDaysInput = ({
 }: InputProps<ProjectWorkingDays>) => {
   return (
     <InputContainer>
-      <LabelText>Working days</LabelText>
+      <InputLabel>Working days</InputLabel>
       <RadioInput
         options={projectWorkingDays}
         renderOption={(option) => workingDayOptionName[option]}

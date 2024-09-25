@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
 import { FocusDuration } from '@increaser/entities/FocusDuration'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -13,7 +13,7 @@ const Wrapper = styled(InputContainer)`
   padding: 0;
 `
 
-const Label = styled(LabelText)`
+const Label = styled(InputLabel)`
   padding: ${toSizeUnit(panelDefaultPadding)};
 
   padding-bottom: 0;

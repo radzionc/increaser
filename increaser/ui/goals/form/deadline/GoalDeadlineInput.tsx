@@ -18,7 +18,7 @@ import { formatGoalTimeLeft } from '@increaser/entities-utils/goal/formatGoalTim
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
 import { Text } from '@lib/ui/text'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { SetDobPromptButton } from '../../dob/SetDobPromptButton'
 import { without } from '@lib/utils/array/without'
@@ -92,7 +92,7 @@ export const GoalDeadlineInput = ({
 
   return (
     <InputContainer style={{ gap: 8 }} as="div">
-      <LabelText>Deadline</LabelText>
+      <InputLabel>Deadline</InputLabel>
       <HStackSeparatedBy
         separator={
           <IconContainer>
