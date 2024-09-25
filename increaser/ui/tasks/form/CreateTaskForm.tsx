@@ -5,7 +5,6 @@ import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
 import { useAssertUserState } from '../../user/UserStateContext'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
@@ -17,6 +16,7 @@ import { TaskFormHeader } from './TaskFormHeader'
 import { AddTaskLink } from './links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from './checklist/AddTaskChecklist'
+import { Button } from '@lib/ui/buttons/Button'
 
 type CreateTaskFormProps = {
   defaultValue?: Partial<TaskFormShape>
@@ -89,12 +89,14 @@ export const CreateTaskForm = ({
       onClose={() => onFinish?.()}
       onSubmit={onSubmit}
       isDisabled={isDisabled}
+      style={{ gap: 0 }}
     >
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         hasProjectAutoFocus={!defaultValue?.projectId}
         onSubmit={isDisabled ? undefined : onSubmit}
+        onClose={() => onFinish?.()}
       />
       <ExportFromTemplate
         projectId={value.projectId}
@@ -113,7 +115,7 @@ export const CreateTaskForm = ({
         gap={20}
         justifyContent="space-between"
       >
-        <HStack wrap="wrap" fullWidth alignItems="center" gap={8}>
+        <HStack wrap="wrap" alignItems="center" gap={8}>
           <TaskStatusInput
             value={value.status}
             onChange={(status) =>
@@ -148,14 +150,10 @@ export const CreateTaskForm = ({
             />
           )}
         </HStack>
+        <Button type="submit" isLoading={isPending} isDisabled={isDisabled}>
+          Submit
+        </Button>
       </HStack>
-      <CreateFormFooter
-        isPending={isPending}
-        isDisabled={isDisabled}
-        onCancel={() => {
-          onFinish?.()
-        }}
-      />
     </ListItemForm>
   )
 }

@@ -8,4 +8,5 @@ export const focusIconButtonSize = tightListItemMinHeight
 export const FocusIconButton = styled(IconButton)`
   ${sameDimensions(focusIconButtonSize)};
   font-size: 16px;
+  outline: none;
 `

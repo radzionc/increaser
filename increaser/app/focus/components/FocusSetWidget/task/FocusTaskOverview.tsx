@@ -21,6 +21,8 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
+import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
 
 type TaskFormShape = Pick<
   Task,
@@ -48,6 +50,7 @@ export const FocusTaskOverview = () => {
   const [value, setValue] = useState<TaskFormShape>(initialValue)
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
+  const { mutate: deleteTask } = useDeleteUserEntityMutation('task')
 
   useLazySync<Partial<UpdateUserEntityInput<'task'>['fields']>>({
     value: useMemo(() => {
@@ -89,7 +92,7 @@ export const FocusTaskOverview = () => {
   })
 
   return (
-    <Panel withSections kind="secondary">
+    <Panel style={{ gap: 0 }} withSections kind="secondary">
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
@@ -116,6 +119,11 @@ export const FocusTaskOverview = () => {
             }
           />
         )}
+        <PanelFormDeleteButton
+          onClick={() => {
+            deleteTask(id)
+          }}
+        />
       </HStack>
     </Panel>
   )
