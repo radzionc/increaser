@@ -5,8 +5,8 @@ import { pluralize } from '@lib/utils/pluralize'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { DataSizeSlider } from './DataSizeSlider'
 import { MaxDataSizeSelector } from './MaxDataSizeSelector'
-import { LabelText } from '@lib/ui/inputs/LabelText'
-import { inputContainer } from '@lib/ui/css/inputContainer'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
+import { inputContainer } from '@lib/ui/inputs/InputContainer'
 import { useMaxDataSize } from './useMaxDataSize'
 
 const Content = styled(HStack)`
@@ -31,9 +31,9 @@ export const DataSizeSelector = () => {
 
   return (
     <Container>
-      <LabelText color="supporting">
+      <InputLabel color="supporting">
         Interval: {pluralize(dataSize, timeGrouping)}
-      </LabelText>
+      </InputLabel>
       <Content>
         <DataSizeSlider />
         <MaxDataSizeSelector />

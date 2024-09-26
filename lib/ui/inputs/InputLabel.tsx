@@ -1,12 +1,7 @@
-import { text, Text } from '../text'
+import { Text } from '../text'
 import styled from 'styled-components'
 
-export const InputLabel = styled(Text)`
-  ${text({
-    size: 13,
-    color: 'supporting',
-  })}
-`
+export const InputLabel = styled(Text)``
 
 InputLabel.defaultProps = {
   size: 13,

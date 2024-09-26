@@ -4,7 +4,7 @@ import { TabNavigationItem } from '@lib/ui/navigation/TabNavigation/TabNavigatio
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { useTimeGrouping } from './useTimeGrouping'
 import { formatTimeGrouping, timeGroupings } from './TimeGrouping'
-import { LabelText } from '@lib/ui/inputs/LabelText'
+import { InputLabel } from '@lib/ui/inputs/InputLabel'
 
 const Option = styled(TabNavigationItem)`
   height: 36px;
@@ -17,7 +17,7 @@ export const TimeGroupingSelector = () => {
 
   return (
     <VStack gap={8}>
-      <LabelText>Group by</LabelText>
+      <InputLabel>Group by</InputLabel>
       <HStack gap={4}>
         {timeGroupings.map((option) => (
           <Option
