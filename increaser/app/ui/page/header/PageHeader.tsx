@@ -24,6 +24,10 @@ const Controls = styled(HStack)`
   justify-content: flex-end;
 `
 
+const Placeholder = styled.div`
+  display: contents;
+`
+
 type PageHeaderProps = ComponentWithChildrenProps & {
   controls?: ReactNode
 } & ComponentProps<typeof Container>
@@ -38,7 +42,10 @@ export const PageHeader = ({
   return (
     <Container {...rest}>
       {children}
-      <Controls ref={setControlsArea}>{controls}</Controls>
+      <Controls>
+        <Placeholder ref={setControlsArea} />
+        {controls}
+      </Controls>
     </Container>
   )
 }
