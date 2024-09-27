@@ -10,7 +10,6 @@ import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { trackedTimeChartConfig } from './config'
-import { useActiveTimeSeries } from './useActiveTimeSeries'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
@@ -24,6 +23,7 @@ import { TrackedTimeChartXLabels } from './TrackedTimeChartXLabels'
 import { DataPointInfo } from './DataPointInfo'
 import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { BarChartItem } from './BarChartItem'
+import { useSelectedIntervalActiveTimeSeries } from './useSelectedIntervalActiveTimeSeries'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -34,7 +34,7 @@ const Content = styled.div`
 `
 
 export const TrackedTimeChart = () => {
-  const data = useActiveTimeSeries()
+  const data = useSelectedIntervalActiveTimeSeries()
 
   const [activeIndex, setActiveIndex] = useActiveItemIndex()
 

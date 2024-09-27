@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
-import { useProjectsTimeSeries } from './useProjectsTimeSeries'
+import { useSelectedIntervalProjectsTimeSeries } from './useSelectedIntervalProjectsTimeSeries'
 import { Entry } from '@lib/utils/entities/Entry'
 import { sum } from '@lib/utils/array/sum'
 import { order } from '@lib/utils/array/order'
 
 export const useOrderedProjects = (): Entry<string, number>[] => {
-  const projectsTimeSeries = useProjectsTimeSeries()
+  const projectsTimeSeries = useSelectedIntervalProjectsTimeSeries()
 
   return useMemo(() => {
     const entries = Object.entries(projectsTimeSeries)

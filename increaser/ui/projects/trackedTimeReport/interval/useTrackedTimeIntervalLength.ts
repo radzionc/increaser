@@ -13,14 +13,13 @@ import {
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
-import { useStartOfLastTimeGroup } from '../timeGrouping/useStartOfLastTimeGroup'
 
-export const useMaxDataSize = () => {
+export const useTrackedTimeIntervalLength = () => {
   const [timeGrouping] = useTimeGrouping()
   const projects = useTrackedProjects()
   const currentPeriodStartedAt = useStartOfCurrentTimeGroup()
 
-  const lastTimeGroupStartedAt = useStartOfLastTimeGroup()
+  const currentTimeGroupStartedAt = useStartOfCurrentTimeGroup()
 
   const firstTimeGroupStartedAt = useMemo(() => {
     const items = Object.values(projects).flatMap((project) =>
@@ -38,13 +37,13 @@ export const useMaxDataSize = () => {
   return (
     match(timeGrouping, {
       day: () =>
-        differenceInDays(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        differenceInDays(currentTimeGroupStartedAt, firstTimeGroupStartedAt),
       week: () =>
-        differenceInWeeks(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        differenceInWeeks(currentTimeGroupStartedAt, firstTimeGroupStartedAt),
       month: () =>
-        differenceInMonths(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        differenceInMonths(currentTimeGroupStartedAt, firstTimeGroupStartedAt),
       year: () =>
-        differenceInYears(lastTimeGroupStartedAt, firstTimeGroupStartedAt),
+        differenceInYears(currentTimeGroupStartedAt, firstTimeGroupStartedAt),
     }) + 1
   )
 }

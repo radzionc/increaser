@@ -9,28 +9,28 @@ import { areSameMonth } from '@lib/utils/time/Month'
 import { areSameDay, toDay } from '@lib/utils/time/Day'
 import { EntityWithSeconds } from '@increaser/entities/timeTracking'
 import { recordMap } from '@lib/utils/record/recordMap'
-import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { TimeGrouping } from '../timeGrouping/TimeGrouping'
 import { subtractPeriod } from '../utils/subtractPeriod'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from './TrackedProjectsProvider'
-import { useStartOfLastTimeGroup } from '../timeGrouping/useStartOfLastTimeGroup'
+import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
+import { useTrackedTimeIntervalLength } from '../interval/useTrackedTimeIntervalLength'
 
-export const useProjectsTimeSeries = () => {
+export const useMaxIntervalProjectsTimeSeries = () => {
   const projects = useTrackedProjects()
 
-  const dataSize = useCurrentDataSize()
+  const dataSize = useTrackedTimeIntervalLength()
 
   const [timeGrouping] = useTimeGrouping()
 
-  const lastDataPointStartedAt = useStartOfLastTimeGroup()
+  const currentTimeGroupStartedAt = useStartOfCurrentTimeGroup()
 
   return useMemo(() => {
     return recordMap(projects, ({ days, weeks, months, years }) =>
       range(dataSize)
         .map((index) => {
           const startedAt = subtractPeriod({
-            value: lastDataPointStartedAt,
+            value: currentTimeGroupStartedAt,
             period: timeGrouping,
             amount: index,
           })
@@ -51,5 +51,5 @@ export const useProjectsTimeSeries = () => {
         })
         .reverse(),
     )
-  }, [dataSize, lastDataPointStartedAt, projects, timeGrouping])
+  }, [dataSize, currentTimeGroupStartedAt, projects, timeGrouping])
 }

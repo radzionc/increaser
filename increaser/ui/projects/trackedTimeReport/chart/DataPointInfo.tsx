@@ -14,7 +14,7 @@ import { formatWeek } from '@lib/utils/time/Week'
 import { Text } from '@lib/ui/text'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { useActiveTimeSeries } from './useActiveTimeSeries'
+import { useSelectedIntervalActiveTimeSeries } from './useSelectedIntervalActiveTimeSeries'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { vStack } from '@lib/ui/css/stack'
@@ -72,7 +72,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
 
   const periodStartedAt = useStartOfPeriod(index)
 
-  const data = useActiveTimeSeries()
+  const data = useSelectedIntervalActiveTimeSeries()
 
   const title = useMemo(
     () =>

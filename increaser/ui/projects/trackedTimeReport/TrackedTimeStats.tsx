@@ -5,16 +5,18 @@ import { pluralize } from '@lib/utils/pluralize'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
-import { useActiveTimeSeries } from './chart/useActiveTimeSeries'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
-import { useCurrentDataSize } from './hooks/useCurrentDataSize'
 import { useTimeGrouping } from './timeGrouping/useTimeGrouping'
+import { useTrackedTimeSelectedInterval } from './interval/useTrackedTimeSelectedInterval'
+import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
+import { useSelectedIntervalActiveTimeSeries } from './chart/useSelectedIntervalActiveTimeSeries'
 
 export const TrackedTimeStats = () => {
-  const dataSize = useCurrentDataSize()
+  const [interval] = useTrackedTimeSelectedInterval()
+  const dataSize = getIntervalDuration(interval)
   const [timeGrouping] = useTimeGrouping()
 
-  const timeSeries = useActiveTimeSeries()
+  const timeSeries = useSelectedIntervalActiveTimeSeries()
 
   const noDataAvailable = isEmpty(timeSeries) || dataSize === 0
 

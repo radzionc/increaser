@@ -1,19 +1,23 @@
 import { useMemo } from 'react'
 import { subtractPeriod } from '../utils/subtractPeriod'
-import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { useTimeGrouping } from './useTimeGrouping'
-import { useStartOfLastTimeGroup } from './useStartOfLastTimeGroup'
+import { useStartOfCurrentTimeGroup } from './useStartOfCurrentTimeGroup'
+import { useTrackedTimeSelectedInterval } from '../interval/useTrackedTimeSelectedInterval'
+import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 
 export const useStartOfPeriod = (index: number) => {
-  const lastDataPointStartedAt = useStartOfLastTimeGroup()
+  const [interval] = useTrackedTimeSelectedInterval()
+
+  const dataSize = getIntervalDuration(interval)
+
+  const currentTimeGroupStartedAt = useStartOfCurrentTimeGroup()
   const [timeGrouping] = useTimeGrouping()
-  const dataSize = useCurrentDataSize()
 
   return useMemo(() => {
     return subtractPeriod({
-      value: lastDataPointStartedAt,
+      value: currentTimeGroupStartedAt,
       period: timeGrouping,
       amount: dataSize - index - 1,
     })
-  }, [dataSize, index, lastDataPointStartedAt, timeGrouping])
+  }, [dataSize, index, currentTimeGroupStartedAt, timeGrouping])
 }

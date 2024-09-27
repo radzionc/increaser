@@ -5,22 +5,24 @@ import { subtractPeriod } from '../utils/subtractPeriod'
 import { Text } from '@lib/ui/text'
 import { getWeekIndex } from '@lib/utils/time/getWeekIndex'
 import { format } from 'date-fns'
-import { useCurrentDataSize } from '../hooks/useCurrentDataSize'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
-import { useStartOfLastTimeGroup } from '../timeGrouping/useStartOfLastTimeGroup'
+import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
+import { useTrackedTimeSelectedInterval } from '../interval/useTrackedTimeSelectedInterval'
+import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 
 type Props = {
   containerWidth: number
 }
 
 export const TrackedTimeChartXLabels = ({ containerWidth }: Props) => {
-  const dataSize = useCurrentDataSize()
+  const [interval] = useTrackedTimeSelectedInterval()
+  const dataSize = getIntervalDuration(interval)
   const [timeGrouping] = useTimeGrouping()
-  const lastDataPointStartedAt = useStartOfLastTimeGroup()
+  const currentTimeGroupStartedAt = useStartOfCurrentTimeGroup()
 
   const getDataPointStartedAt = (index: number) => {
     return subtractPeriod({
-      value: lastDataPointStartedAt,
+      value: currentTimeGroupStartedAt,
       period: timeGrouping,
       amount: dataSize - index - 1,
     })
