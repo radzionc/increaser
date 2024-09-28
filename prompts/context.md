@@ -87,21 +87,19 @@ On the side of the goals page, there is an educational section that summarizes w
 
 ## Projects
 
-On the "Projects" page, users can see all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and a status, which can be "active," "inactive," or "archived." There is one project which can’t be deleted—“Other.” When the user deletes a project, all the data associated with the deleted project will be reassigned to the “Other” project. User can reorder projects by dragging them.
+The "Projects" page has three subpages: "Projects," "Plan," and "Report."
 
-## Time tracking
+On the "Projects" subpage, users can see all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and a status, which can be "active," "inactive," or "archived." There is one project which can’t be deleted—“Other.” When the user deletes a project, all the data associated with the deleted project will be reassigned to the “Other” project. User can reorder projects by dragging them.
 
-On the "Time Tracking" page, the user can see an overview of how much time they have spent on each project. They can organize data in the report by days, weeks, months, or years, crop the data, e.g., show only the last 7 days, and they can toggle if they want to see the current period in the report, e.g., the current week. The user can highlight a specific project and also see the total time spent on all projects.
+On the "Plan" page, users can budget project time for a week, where the total budgeted time should not exceed the work budget defined on the "Work Budget" page. The user can see the progress of the project budget and the total time spent on the project this week. The user can see the allocation of time, add new budgets, and edit/delete existing project budgets. On top of that, they can set a goal to work "at least X hours" or "no more than X hours" on a project. For example, users may want to work less on some projects, such as their remote job, and more on their business project. Also, they can select if they work on the project "Monday to Friday" or "Everyday." On the side of the page, they can see their progress on the weekly goals for the current week.
+
+On the "Report" page, the user can see how much time they spend working and on which projects. They can group data by days, weeks, months, or years. They can also select a specific period of time, e.g., from June to August, using an interval input located under the time chart. The report will show a breakdown of how much time the user spent on each project in the selected period. If they want to see the dynamics of a specific project, they can click on the project name in the breakdown section, and the chart will show only that project. While viewing the report with all the projects selected, the user can hover over the chart bar to see the distribution of time between projects during that period, e.g., during that week.
 
 While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
 
 ## Work budget
 
 On the "Work Budget" page, the user can set a preferred time they want to work on a workday and on a weekend. Next to it, they can see analytics with their average workday and weekend over the last 30 days, and totals of the last 4 weeks.
-
-## Time planning
-
-On the "Time planning" page, users can budget project time for a week, where the total budgeted time should not exceed the work budget defined on the "Work Budget" page. The user can see the progress of the project budget and the total time spent on the project this week. The user can see the allocation of time, add new budgets, and edit/delete existing project budgets. On top of that, they can set a goal to work "at least X hours" or "no more than X hours" on a project. For example, users may want to work less on some projects, such as their remote job, and more on their business project. Also, they can select if they work on the project "Monday to Friday" or "Everyday." On the side of the page, they can see their progress on the weekly goals for the current week.
 
 ## Habits
 
