@@ -12,7 +12,7 @@ export const useSelectedIntervalProjectsTimeSeries = () => {
   return useMemo(
     () =>
       recordMap(timeSeries, (timeSeries) =>
-        timeSeries.slice(interval.start, interval.end),
+        timeSeries.slice(interval.start, interval.end + 1),
       ),
     [interval, timeSeries],
   )
