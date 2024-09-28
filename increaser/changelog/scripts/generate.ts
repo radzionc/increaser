@@ -5,8 +5,7 @@ import {
   productUpdatesFileName,
   readProductUpdatesFile,
 } from '../utils/productUpdatesFile'
-import fs from 'fs'
-import path from 'path'
+import { createNewYoutubeFile } from '../utils/youtubeFile'
 
 const generate = () => {
   const productUpdatesStr = readProductUpdatesFile()
@@ -21,7 +20,7 @@ const generate = () => {
     content: newProductUpdate,
   })
 
-  fs.writeFileSync(path.resolve(__dirname, '../youtube/latest.md'), '', 'utf8')
+  createNewYoutubeFile()
 }
 
 generate()
