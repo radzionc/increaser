@@ -1,26 +1,37 @@
-import { getColor } from '@lib/ui/theme/getters'
-import { match } from '@lib/utils/match'
-import styled, { css } from 'styled-components'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { VStack } from '@lib/ui/css/stack'
+import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
+import { getColor, matchColor } from '@lib/ui/theme/getters'
+import styled from 'styled-components'
 
 export type IntervalBoundaryStatus = 'idle' | 'hovered' | 'active'
 
-export const IntervalBoundaryItem = styled.div<{
+type IntervalBoundaryItemProps = {
   status: IntervalBoundaryStatus
-}>`
-  height: 100%;
+}
 
-  width: 1px;
-  background: ${getColor('primary')};
-  pointer-events: none;
-
-  ${({ status }) =>
-    match(status, {
-      idle: () => css``,
-      hovered: () => css`
-        width: 2px;
-      `,
-      active: () => css`
-        background: ${getColor('textPrimary')};
-      `,
-    })}
+const Container = styled.div<IntervalBoundaryItemProps>`
+  width: 20px;
+  height: 28px;
+  ${centerContent};
+  ${borderRadius.s};
+  border: 1px solid ${getColor('mistExtra')};
+  font-size: 16px;
+  color: ${getColor('contrast')};
+  background: ${matchColor('status', {
+    idle: 'background',
+    hovered: 'foreground',
+    active: 'primary',
+  })};
 `
+
+export const IntervalBoundaryItem = ({ status }: IntervalBoundaryItemProps) => {
+  return (
+    <VStack fullHeight justifyContent="center">
+      <Container status={status}>
+        <GripVerticalIcon />
+      </Container>
+    </VStack>
+  )
+}

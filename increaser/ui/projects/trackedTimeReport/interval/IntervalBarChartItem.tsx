@@ -7,7 +7,7 @@ export const IntervalBarChartItem = styled(
   BarChartItemContainer,
 )<ComponentWithActiveState>`
   background: ${matchColor('isActive', {
-    true: 'textShy',
+    true: 'foregroundExtra',
     false: 'mist',
   })};
 `

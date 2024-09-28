@@ -25,9 +25,21 @@ import { enforceRange } from '@lib/utils/enforceRange'
 import { match } from '@lib/utils/match'
 import { useTotalIntervalLength } from './useTotalIntervalLength'
 import { useSelectedInterval } from './useSelectedInterval'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { trackedTimeIntervalConfig } from './config'
+import { SelectedArea } from './SelectedArea'
+import { getIntIntervalLength } from '@lib/utils/interval/getIntIntervalLength'
+import { preventDefault } from '@lib/ui/utils/preventDefault'
 
 const Container = styled(TakeWholeSpaceAbsolutely)`
   cursor: ew-resize;
+`
+
+const offset = trackedTimeIntervalConfig.interactiveHorizontalOffset
+
+const PressHandler = styled(Container)`
+  width: calc(100% + ${toSizeUnit(offset * 2)});
+  left: ${toSizeUnit(-offset)};
 `
 
 export const ManageTrackedTimeInterval = () => {
@@ -95,23 +107,14 @@ export const ManageTrackedTimeInterval = () => {
   useEvent('pointercancel', activeBoundary ? stopDragging : undefined)
   useEvent('pointermove', activeBoundary ? handleMove : undefined)
 
-  const containerListeners = useMemo(() => {
-    if (activeBoundary) return {}
-
-    return {
-      onMouseEnter: handleMove,
-      onMouseLeave: clearPosition,
-      onMouseMove: handleMove,
-      onPointerDown: () => {
-        if (hoveredBoundary) {
-          setActiveBoundary(hoveredBoundary)
-        }
-      },
-    }
-  }, [activeBoundary, clearPosition, handleMove, hoveredBoundary])
-
   return (
     <>
+      <SelectedArea
+        style={{
+          left: toPercents(start / totalLength),
+          width: toPercents(getIntIntervalLength(interval) / totalLength),
+        }}
+      />
       {intervalBoundaries.map((boundary) => {
         const value = interval[boundary]
         const left = toPercents(
@@ -138,7 +141,19 @@ export const ManageTrackedTimeInterval = () => {
           </PositionAbsolutelyCenterVertically>
         )
       })}
-      <Container ref={setContainer} {...containerListeners} />
+      <Container ref={setContainer} />
+      {!activeBoundary && (
+        <PressHandler
+          onMouseMove={handleMove}
+          onMouseLeave={clearPosition}
+          onMouseEnter={handleMove}
+          onPointerDown={preventDefault(() => {
+            if (hoveredBoundary) {
+              setActiveBoundary(hoveredBoundary)
+            }
+          })}
+        />
+      )}
     </>
   )
 }

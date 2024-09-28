@@ -11,11 +11,14 @@ import { ManageTrackedTimeInterval } from './ManageTrackedTimeInterval'
 import { isInInterval } from '@lib/utils/interval/isInInterval'
 import { useSelectedInterval } from './useSelectedInterval'
 import { useTotalIntervalActiveTimeSeries } from '../chart/useTotalIntervalActiveTimeSeries'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(8px, 1fr));
+
+  ${verticalPadding(trackedTimeIntervalConfig.chartVerticalPadding)};
 
   align-items: end;
 `
@@ -31,7 +34,7 @@ export const TrackedTimeInterval = () => {
   const [interval] = useSelectedInterval()
 
   return (
-    <VStack fullWidth gap={20}>
+    <VStack style={{ userSelect: 'none' }} fullWidth gap={20}>
       <HStack>
         <Spacer width={trackedTimeChartConfig.expectedYLabelWidth} />
         <VStack
@@ -45,10 +48,12 @@ export const TrackedTimeInterval = () => {
             {normalized.data.map((value, index) => {
               const height = toPercents(value)
 
+              const isActive = isInInterval(interval, index)
+
               return (
                 <IntervalBarChartItem
                   key={index}
-                  isActive={isInInterval(interval, index)}
+                  isActive={isActive}
                   style={{
                     height,
                   }}
