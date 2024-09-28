@@ -11,6 +11,7 @@ import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { productTools } from '@increaser/entities/ProductTool'
 import { ProductToolSlice } from './demo/ProductToolSlice'
+import { FocusIntervalsProvider } from '@increaser/app/focus/state/focusIntervals'
 
 export const LandingPage = () => (
   <>
@@ -20,11 +21,13 @@ export const LandingPage = () => (
     />
     <PrimarySlice />
     <DemoUserStateProvider>
-      <MockApiProvider>
-        {productTools.map((tool) => (
-          <ProductToolSlice key={tool} value={tool} />
-        ))}
-      </MockApiProvider>
+      <FocusIntervalsProvider>
+        <MockApiProvider>
+          {productTools.map((tool) => (
+            <ProductToolSlice key={tool} value={tool} />
+          ))}
+        </MockApiProvider>
+      </FocusIntervalsProvider>
     </DemoUserStateProvider>
     <TestimonialsSlice />
     <VideoSlice />

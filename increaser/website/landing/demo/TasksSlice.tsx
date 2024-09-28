@@ -6,10 +6,10 @@ import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
 import { VStack } from '@lib/ui/css/stack'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { TaskBoard } from '@increaser/ui/tasks/board/TaskBoard'
+import { FocusIntervalsProvider } from '@increaser/app/focus/state/focusIntervals'
 
 const Content = styled(VStack)`
   width: 100%;
@@ -17,8 +17,6 @@ const Content = styled(VStack)`
 `
 
 export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
-  const { tasks } = useAssertUserState()
-
   const id = 'tasks'
 
   return (
@@ -27,7 +25,9 @@ export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <ClientOnly>
           <Content>
-            <TaskBoard />
+            <FocusIntervalsProvider>
+              <TaskBoard />
+            </FocusIntervalsProvider>
           </Content>
         </ClientOnly>
       </WebsiteSliceContent>

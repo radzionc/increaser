@@ -9,6 +9,7 @@ import {
   FeatureVideoSliceProps,
 } from '@lib/ui/website/FeatureVideoSlice'
 import { FocusSlice } from '../landing/demo/FocusSlice'
+import { FocusIntervalsProvider } from '@increaser/app/focus/state/focusIntervals'
 
 const videoSlices: FeatureVideoSliceProps[] = [
   {
@@ -38,9 +39,11 @@ export const FocusPage = () => (
     />
     <DemoUserStateProvider>
       <MockApiProvider>
-        <PrimaryWebsiteSlice>
-          <FocusSlice titleAs="h1" />
-        </PrimaryWebsiteSlice>
+        <FocusIntervalsProvider>
+          <PrimaryWebsiteSlice>
+            <FocusSlice titleAs="h1" />
+          </PrimaryWebsiteSlice>
+        </FocusIntervalsProvider>
       </MockApiProvider>
     </DemoUserStateProvider>
     {videoSlices.map((slice, index) => (
