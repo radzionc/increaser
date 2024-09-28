@@ -1,13 +1,13 @@
 import { useMemo } from 'react'
 
 import { recordMap } from '@lib/utils/record/recordMap'
-import { useTrackedTimeSelectedInterval } from '../interval/useTrackedTimeSelectedInterval'
-import { useMaxIntervalProjectsTimeSeries } from './useMaxIntervalProjectsTimeSeries'
+import { useTotalIntervalProjectsTimeSeries } from './useTotalIntervalProjectsTimeSeries'
+import { useSelectedInterval } from '../interval/useSelectedInterval'
 
 export const useSelectedIntervalProjectsTimeSeries = () => {
-  const timeSeries = useMaxIntervalProjectsTimeSeries()
+  const timeSeries = useTotalIntervalProjectsTimeSeries()
 
-  const [interval] = useTrackedTimeSelectedInterval()
+  const [interval] = useSelectedInterval()
 
   return useMemo(
     () =>

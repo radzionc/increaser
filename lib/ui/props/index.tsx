@@ -126,3 +126,7 @@ export type ProgressComponentProps = {
 export type PositionedComponentProps = {
   position: Point
 }
+
+export type ColoredComponentProps = {
+  color: HSLA
+}

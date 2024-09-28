@@ -3,4 +3,5 @@ export const trackedTimeChartConfig = {
   expectedYLabelWidth: 48,
   expectedXLabelWidth: 58,
   expectedXLabelHeight: 18,
+  spaceBetweenBars: 4,
 }

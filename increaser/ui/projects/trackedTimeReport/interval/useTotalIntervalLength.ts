@@ -14,7 +14,7 @@ import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
 
-export const useTrackedTimeIntervalLength = () => {
+export const useTotalIntervalLength = () => {
   const [timeGrouping] = useTimeGrouping()
   const projects = useTrackedProjects()
   const currentPeriodStartedAt = useStartOfCurrentTimeGroup()

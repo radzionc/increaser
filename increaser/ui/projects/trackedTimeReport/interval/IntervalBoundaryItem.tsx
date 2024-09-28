@@ -10,17 +10,17 @@ export const IntervalBoundaryItem = styled.div<{
   height: 100%;
 
   width: 1px;
-  background: ${getColor('contrast')};
+  background: ${getColor('primary')};
   pointer-events: none;
 
   ${({ status }) =>
     match(status, {
       idle: () => css``,
       hovered: () => css`
-        width: 4px;
+        width: 2px;
       `,
       active: () => css`
-        background: ${getColor('primary')};
+        background: ${getColor('textPrimary')};
       `,
     })}
 `

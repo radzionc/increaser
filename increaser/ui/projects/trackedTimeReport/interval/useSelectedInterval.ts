@@ -4,10 +4,10 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { Interval } from '@lib/utils/interval/Interval'
-import { useTrackedTimeIntervalLength } from './useTrackedTimeIntervalLength'
+import { useTotalIntervalLength } from './useTotalIntervalLength'
 
-export const useTrackedTimeSelectedInterval = () => {
-  const maxIntervalLength = useTrackedTimeIntervalLength()
+export const useSelectedInterval = () => {
+  const maxIntervalLength = useTotalIntervalLength()
 
   return useStateCorrector(
     usePersistentState<Interval>(

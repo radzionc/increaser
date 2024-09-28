@@ -1,5 +1,3 @@
-import { useTrackedTimeIntervalLength } from './useTrackedTimeIntervalLength'
-import { useTrackedTimeSelectedInterval } from './useTrackedTimeSelectedInterval'
 import {
   IntervalBoundaryItem,
   IntervalBoundaryStatus,
@@ -25,14 +23,16 @@ import { useEvent } from 'react-use'
 import { useRelativePosition } from '@lib/ui/hooks/useRelativePosition'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { match } from '@lib/utils/match'
+import { useTotalIntervalLength } from './useTotalIntervalLength'
+import { useSelectedInterval } from './useSelectedInterval'
 
 const Container = styled(TakeWholeSpaceAbsolutely)`
   cursor: ew-resize;
 `
 
 export const ManageTrackedTimeInterval = () => {
-  const totalLength = useTrackedTimeIntervalLength()
-  const [interval, setInterval] = useTrackedTimeSelectedInterval()
+  const totalLength = useTotalIntervalLength()
+  const [interval, setInterval] = useSelectedInterval()
   const { start, end } = interval
 
   const startAreaShare = (start + (end - start) / 2) / totalLength

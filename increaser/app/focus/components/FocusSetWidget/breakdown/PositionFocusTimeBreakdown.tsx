@@ -5,17 +5,12 @@ import {
   useFloating,
   autoUpdate,
 } from '@floating-ui/react'
-import styled from 'styled-components'
 import { useEffect } from 'react'
 import {
   ComponentWithChildrenProps,
   PositionedComponentProps,
 } from '@lib/ui/props'
-
-const Reference = styled.div`
-  position: fixed;
-  pointer-events: none;
-`
+import { FixedReference } from '@lib/ui/base/FixedReference'
 
 export const PositionFocusTimeBreakdown = ({
   position,
@@ -39,7 +34,7 @@ export const PositionFocusTimeBreakdown = ({
 
   return (
     <>
-      <Reference
+      <FixedReference
         ref={setReference}
         style={{
           left: position.x,

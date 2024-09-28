@@ -7,13 +7,13 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { useTimeGrouping } from './timeGrouping/useTimeGrouping'
-import { useTrackedTimeSelectedInterval } from './interval/useTrackedTimeSelectedInterval'
-import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { useSelectedIntervalActiveTimeSeries } from './chart/useSelectedIntervalActiveTimeSeries'
+import { getIntIntervalLength } from '@lib/utils/interval/getIntIntervalLength'
+import { useSelectedInterval } from './interval/useSelectedInterval'
 
 export const TrackedTimeStats = () => {
-  const [interval] = useTrackedTimeSelectedInterval()
-  const dataSize = getIntervalDuration(interval)
+  const [interval] = useSelectedInterval()
+  const dataSize = getIntIntervalLength(interval)
   const [timeGrouping] = useTimeGrouping()
 
   const timeSeries = useSelectedIntervalActiveTimeSeries()

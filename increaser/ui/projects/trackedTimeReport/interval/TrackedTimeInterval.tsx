@@ -4,13 +4,13 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { toPercents } from '@lib/utils/toPercents'
-import { useMaxIntervalActiveTimeSeries } from '../chart/useMaxIntervalActiveTimeSeries'
-import { BarChartItem } from './BarChartItem'
+import { IntervalBarChartItem } from './IntervalBarChartItem'
 import { trackedTimeChartConfig } from '../chart/config'
 import { trackedTimeIntervalConfig } from './config'
-import { useTrackedTimeSelectedInterval } from './useTrackedTimeSelectedInterval'
 import { ManageTrackedTimeInterval } from './ManageTrackedTimeInterval'
 import { isInInterval } from '@lib/utils/interval/isInInterval'
+import { useSelectedInterval } from './useSelectedInterval'
+import { useTotalIntervalActiveTimeSeries } from '../chart/useTotalIntervalActiveTimeSeries'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -21,15 +21,14 @@ const Content = styled.div`
 `
 
 export const TrackedTimeInterval = () => {
-  const data = useMaxIntervalActiveTimeSeries()
+  const data = useTotalIntervalActiveTimeSeries()
 
   const normalized = normalizeDataArrays({
     data,
     min: [0],
   })
 
-  const [interval] = useTrackedTimeSelectedInterval()
-  console.log(interval)
+  const [interval] = useSelectedInterval()
 
   return (
     <VStack fullWidth gap={20}>
@@ -47,7 +46,7 @@ export const TrackedTimeInterval = () => {
               const height = toPercents(value)
 
               return (
-                <BarChartItem
+                <IntervalBarChartItem
                   key={index}
                   isActive={isInInterval(interval, index)}
                   style={{

@@ -24,16 +24,12 @@ import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useActiveProject } from '../activeProject/useActiveProject'
-import { useStartOfPeriod } from '../timeGrouping/useStartOfPeriod'
+import { FixedReference } from '@lib/ui/base/FixedReference'
+import { useStartOfSelectedIntervalPoint } from '../timeGrouping/useStartOfSelectedIntervalPoint'
 
 type DataPointInfoProps = {
   position: Point
 }
-
-const Reference = styled.div`
-  position: fixed;
-  pointer-events: none;
-`
 
 const Container = styled.div`
   border: 1px solid ${getColor('textShy')};
@@ -70,7 +66,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
     whileElementsMounted: autoUpdate,
   })
 
-  const periodStartedAt = useStartOfPeriod(index)
+  const periodStartedAt = useStartOfSelectedIntervalPoint(index)
 
   const data = useSelectedIntervalActiveTimeSeries()
 
@@ -93,7 +89,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
 
   return (
     <>
-      <Reference
+      <FixedReference
         ref={setReference}
         style={{
           left: position.x,

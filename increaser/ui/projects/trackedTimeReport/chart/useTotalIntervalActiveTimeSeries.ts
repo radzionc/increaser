@@ -1,12 +1,12 @@
 import { mergeSameSizeDataArrays } from '@lib/utils/math/mergeSameSizeDataArrays'
 import { useMemo } from 'react'
 import { useActiveProject } from '../activeProject/useActiveProject'
-import { useMaxIntervalProjectsTimeSeries } from '../projects/useMaxIntervalProjectsTimeSeries'
+import { useTotalIntervalProjectsTimeSeries } from '../projects/useTotalIntervalProjectsTimeSeries'
 
-export const useMaxIntervalActiveTimeSeries = () => {
+export const useTotalIntervalActiveTimeSeries = () => {
   const [activeProjectId] = useActiveProject()
 
-  const projectsTimeSeries = useMaxIntervalProjectsTimeSeries()
+  const projectsTimeSeries = useTotalIntervalProjectsTimeSeries()
 
   return useMemo(() => {
     if (activeProjectId) {

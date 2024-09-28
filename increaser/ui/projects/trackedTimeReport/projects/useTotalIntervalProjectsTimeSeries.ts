@@ -14,12 +14,12 @@ import { subtractPeriod } from '../utils/subtractPeriod'
 import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from './TrackedProjectsProvider'
 import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
-import { useTrackedTimeIntervalLength } from '../interval/useTrackedTimeIntervalLength'
+import { useTotalIntervalLength } from '../interval/useTotalIntervalLength'
 
-export const useMaxIntervalProjectsTimeSeries = () => {
+export const useTotalIntervalProjectsTimeSeries = () => {
   const projects = useTrackedProjects()
 
-  const dataSize = useTrackedTimeIntervalLength()
+  const dataSize = useTotalIntervalLength()
 
   const [timeGrouping] = useTimeGrouping()
 
