@@ -24,7 +24,7 @@ const socialPrompt: Record<ProductUpdateSocial, string[]> = {
     `Include https://increaser.org url in the content.`,
   ],
   linkedIn: [
-    `Do not use markdown syntax, e.g. no **bold**, LinkedIn posts do not support markdown.`,
+    `Do not use markdown syntax, e.g. no **bold** or bullet lists, LinkedIn posts do not support markdown.`,
     `Include https://increaser.org url in the content.`,
   ],
   youtube: ['A video title and description.'],

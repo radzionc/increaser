@@ -1,7 +1,8 @@
-Select a specific interval on the project's report chart.
-YouTube focus music will now continue playing from where you left off, rather than restarting from the beginning each time.
-The project filter on the tasks page now remains active even when navigating to different pages, and it applies across all tabs within the tasks page.
-Filter principles by category.
+1727537960954
+Added the ability to set both start and end boundaries in the project's report interval selector.
+YouTube focus music now resumes from where it left off, instead of restarting at the beginning of each session.
+The project filter on the tasks page now persists across tabs and pages.
+Added filtering by category to the principles page.
 1726893259773
 Select specific focus notifications you want to receive: session end, workday end, eye break.  
 Turn on/off focus notification sound alerts from the focus page.

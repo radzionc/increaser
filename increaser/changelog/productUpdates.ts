@@ -2,16 +2,37 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 0,
-    name: '',
-    description: '',
-    items: [],
-    youtube: '',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    releasedAt: 1727537960954,
+    name: 'More Control Over Reports and Filters',
+    description:
+      'This update brings more flexibility to reports, smoother focus sessions, and better filtering options across the app.',
+    items: [
+      {
+        description:
+          'You can now set both start and end dates in project reports, making it easier to track specific periods.',
+      },
+      {
+        description:
+          'YouTube focus music now picks up where you left off, so your sessions stay seamless.',
+      },
+      {
+        description:
+          'The project filter on the tasks page now stays active, even when switching tabs.',
+      },
+      {
+        description:
+          "Principles can now be filtered by category, making it easier to find what you're looking for.",
+      },
+    ],
+    youtube: 'https://youtu.be/o4L5-GJKn3o',
+    telegram: 'https://t.me/increaser_app/52',
+    x: 'https://x.com/increaser_app/status/1840053086783517024',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7245818261722853376',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/new-in-increaser-more-control-more-flexibility--O7tGJI1HcCt-DkwiRss',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1frgy1j/increaser_update_more_control_over_your_reports/',
   },
 
   {
