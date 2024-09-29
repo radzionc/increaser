@@ -17,21 +17,13 @@ import { Page } from '@lib/next-ui/Page'
 import { MembershipConfirmation } from '@increaser/app/membership/components/MembershipConfirmation'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ScheduleProvider } from '../sets/components/ScheduleProvider'
-import { FocusSoundsPlayer } from '../focus/audio/sounds/FocusSoundsPlayer'
 import { ApiProvider } from '../api/ApiProvider'
 import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMusicProvider'
-import { YouTubeFocusMusicFloatingPlayer } from '../focus/audio/youTube/YouTubeFocusMusicFloatingPlayer'
 import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
-import { ActiveFocusOnly } from '../focus/components/ActiveFocusOnly'
-import { FocusNotifications } from '../focus/notifications/FocusNotifications'
-import { FocusOnly } from '../focus/components/FocusOnly'
-import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
-import { FocusTaskObserver } from '../focus/components/FocusTaskObserver'
 import { FocusIntervalsProvider } from '../focus/state/focusIntervals'
-import { PausedFocusOnly } from '../focus/components/PausedFocusOnly'
-import { PausedFocusAutoStop } from '@increaser/ui/focus/PausedFocusAutoStop'
+import { FocusManager } from '@increaser/ui/focus/FocusManager'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -67,18 +59,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                               <ScheduleProvider>
                                 <FocusIntervalsProvider>
                                   <BreakProvider>
-                                    <ActiveFocusOnly>
-                                      <FocusSoundsPlayer />
-                                      <YouTubeFocusMusicFloatingPlayer />
-                                      <FocusNotifications />
-                                      <FocusAutoStop />
-                                    </ActiveFocusOnly>
-                                    <FocusOnly>
-                                      <FocusTaskObserver />
-                                    </FocusOnly>
-                                    <PausedFocusOnly>
-                                      <PausedFocusAutoStop />
-                                    </PausedFocusOnly>
+                                    <FocusManager />
                                     {component}
                                   </BreakProvider>
                                 </FocusIntervalsProvider>
