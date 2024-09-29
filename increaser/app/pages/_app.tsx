@@ -30,6 +30,8 @@ import { FocusOnly } from '../focus/components/FocusOnly'
 import { FocusAutoStop } from '@increaser/ui/focus/FocusAutoStop'
 import { FocusTaskObserver } from '../focus/components/FocusTaskObserver'
 import { FocusIntervalsProvider } from '../focus/state/focusIntervals'
+import { PausedFocusOnly } from '../focus/components/PausedFocusOnly'
+import { PausedFocusAutoStop } from '@increaser/ui/focus/PausedFocusAutoStop'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -69,11 +71,14 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                                       <FocusSoundsPlayer />
                                       <YouTubeFocusMusicFloatingPlayer />
                                       <FocusNotifications />
+                                      <FocusAutoStop />
                                     </ActiveFocusOnly>
                                     <FocusOnly>
-                                      <FocusAutoStop />
                                       <FocusTaskObserver />
                                     </FocusOnly>
+                                    <PausedFocusOnly>
+                                      <PausedFocusAutoStop />
+                                    </PausedFocusOnly>
                                     {component}
                                   </BreakProvider>
                                 </FocusIntervalsProvider>

@@ -5,12 +5,8 @@ import { shouldSetAutoStop } from './utils/shouldSetAutoStop'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getIntervalsGapsDuration } from './utils/getIntervalsGapsDuration'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusDuration } from '@increaser/app/focus/state/focusDuration'
-import {
-  useAssertFocusIntervals,
-  useAssertFocusStatus,
-} from '@increaser/app/focus/state/focusIntervals'
+import { useAssertFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
 import { useStopFocus } from '@increaser/app/focus/hooks/useStopFocus'
 
 export const FocusAutoStop = () => {
@@ -18,8 +14,6 @@ export const FocusAutoStop = () => {
   const [focusDuration] = useFocusDuration()
 
   const stop = useStopFocus()
-  const isPaused = useAssertFocusStatus() === 'paused'
-
   const { start } = intervals[0]
 
   const [startedBeingVisibleAt, setStartedBeingVisibleAt] = useState<number>(
@@ -49,40 +43,32 @@ export const FocusAutoStop = () => {
 
   const now = useRhythmicRerender()
   useEffect(() => {
-    if (isPaused) {
-      const pauseDuration = now - shouldBePresent(getLastItem(intervals).end)
-      if (pauseDuration > convertDuration(1, 'h', 'ms')) {
-        stop()
-      }
-    } else {
-      if (
-        shouldSetAutoStop({
-          setDayEndsAt,
-          startedAt: getLastItem(intervals).start,
-          stoppedBeingVisibleAt,
-          startedBeingVisibleAt,
-          now,
-        })
-      ) {
-        const endOptions = [setDayEndsAt, Date.now()]
-        const gapsDuration = getIntervalsGapsDuration(intervals)
-        endOptions.push(
-          start + convertDuration(focusDuration, 'min', 'ms') + gapsDuration,
-        )
-        const end = Math.min(...endOptions)
+    if (
+      shouldSetAutoStop({
+        setDayEndsAt,
+        startedAt: getLastItem(intervals).start,
+        stoppedBeingVisibleAt,
+        startedBeingVisibleAt,
+        now,
+      })
+    ) {
+      const endOptions = [setDayEndsAt, Date.now()]
+      const gapsDuration = getIntervalsGapsDuration(intervals)
+      endOptions.push(
+        start + convertDuration(focusDuration, 'min', 'ms') + gapsDuration,
+      )
+      const end = Math.min(...endOptions)
 
-        stop({
-          lastSetOverride: {
-            end,
-            isEndEstimated: true,
-          },
-        })
-      }
+      stop({
+        lastSetOverride: {
+          end,
+          isEndEstimated: true,
+        },
+      })
     }
   }, [
     focusDuration,
     intervals,
-    isPaused,
     now,
     setDayEndsAt,
     start,
