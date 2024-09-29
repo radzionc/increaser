@@ -1,26 +1,32 @@
 import { useStopFocus } from '@increaser/app/focus/hooks/useStopFocus'
 import { useAssertFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
 import { useEffect, useMemo } from 'react'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 import { endOfDay } from 'date-fns'
 
-export const MidnightFocusAutoStop = () => {
+export const FocusAutoStop = () => {
   const intervals = useAssertFocusIntervals()
 
-  const midnightAt = useMemo(
-    () => endOfDay(intervals[0].start).getTime(),
-    [intervals],
-  )
+  const target = useMemo(() => {
+    return Math.min(
+      shouldBePresent(getLastItem(intervals).end) +
+        convertDuration(3, 'h', 'ms'),
+      endOfDay(intervals[0].start).getTime(),
+    )
+  }, [intervals])
 
   const stop = useStopFocus()
 
   useEffect(() => {
     const now = Date.now()
-    const stopIn = midnightAt - now
+    const stopIn = target - now
 
     const autoStop = () => {
       stop({
         lastSetOverride: {
-          end: midnightAt,
+          end: target,
           isEndEstimated: true,
         },
       })

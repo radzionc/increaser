@@ -5,9 +5,8 @@ import { FocusOnly } from '@increaser/app/focus/components/FocusOnly'
 import { FocusTaskObserver } from '@increaser/app/focus/components/FocusTaskObserver'
 import { PausedFocusOnly } from '@increaser/app/focus/components/PausedFocusOnly'
 import { FocusNotifications } from '@increaser/app/focus/notifications/FocusNotifications'
-import { MidnightFocusAutoStop } from './MidnightFocusAutoStop'
 import { PausedFocusAutoStop } from './PausedFocusAutoStop'
-import { LongFocusAutoStop } from './LongFocusAutoStop'
+import { FocusAutoStop } from './FocusAutoStop'
 
 export const FocusManager = () => (
   <>
@@ -15,8 +14,7 @@ export const FocusManager = () => (
       <FocusSoundsPlayer />
       <YouTubeFocusMusicFloatingPlayer />
       <FocusNotifications />
-      <LongFocusAutoStop />
-      <MidnightFocusAutoStop />
+      <FocusAutoStop />
     </ActiveFocusOnly>
     <FocusOnly>
       <FocusTaskObserver />
