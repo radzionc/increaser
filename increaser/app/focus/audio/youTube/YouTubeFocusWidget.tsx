@@ -9,6 +9,7 @@ import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { Opener } from '@lib/ui/base/Opener'
 import { AddSoundPrompt } from './AddSoundPrompt'
 import { VStack } from '@lib/ui/css/stack'
+import { YouTubeFocusAudioHeader } from './YouTubeFocusAudioHeader'
 
 const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
@@ -28,6 +29,7 @@ export const YouTubeFocusWidget = () => {
 
   return (
     <VStack>
+      <YouTubeFocusAudioHeader />
       <Opener
         renderOpener={({ onOpen, isOpen }) =>
           isOpen ? null : <AddSoundPrompt onClick={onOpen} />

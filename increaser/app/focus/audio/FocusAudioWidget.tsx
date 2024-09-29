@@ -1,27 +1,15 @@
-import {
-  focusAduioModeName,
-  FocusAudioMode,
-  focusAudioModes,
-  useFocusAudioMode,
-} from './state/useFocusAudioMode'
-import { Match } from '@lib/ui/base/Match'
-import { YouTubeFocusWidget } from './youTube/YouTubeFocusWidget'
-import { SoundsFocusWidget } from './sounds/SoundsFocusWidget'
 import { useIsFocusAudioEnabled } from './state/useIsFocusAudioEnabled'
-import { HStack, VStack } from '@lib/ui/css/stack'
 import { Switch } from '@lib/ui/inputs/Switch'
 import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
-import { TabNavigation } from '@lib/ui/navigation/TabNavigation'
-import { YouTubeViewSelector } from './youTube/YouTubeViewSelector'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
-import { Modal } from '@lib/ui/modal'
 import { WithSecondaryAction } from '@lib/ui/buttons/WithSecondaryAction'
 import styled, { css } from 'styled-components'
 import { useAssertFocusStatus } from '../state/focusIntervals'
+import { FocusAudioOverlay } from './FocusAudioOverlay'
 
 const Container = styled(WithSecondaryAction)<{ isDisabled?: boolean }>`
   ${({ isDisabled }) =>
@@ -38,7 +26,6 @@ export const FocusAudioWidget = () => {
     PersistentStateKey.AreFocusSoundsCollapsed,
     false,
   )
-  const [mode, setMode] = useFocusAudioMode()
   const isPaused = useAssertFocusStatus() === 'paused'
 
   return (
@@ -61,37 +48,7 @@ export const FocusAudioWidget = () => {
           </UnstyledButton>
         )}
       </Container>
-      {isExpanded && (
-        <Modal
-          width={560}
-          title="Focus sounds"
-          onClose={() => setIsExpanded(false)}
-          placement="top"
-        >
-          <VStack gap={20}>
-            <HStack
-              fullWidth
-              alignItems="center"
-              wrap="wrap"
-              gap={20}
-              justifyContent="space-between"
-            >
-              <TabNavigation<FocusAudioMode>
-                views={focusAudioModes}
-                getViewName={(option) => focusAduioModeName[option]}
-                activeView={mode}
-                onSelect={setMode}
-              />
-              {mode === 'youtube' && <YouTubeViewSelector />}
-            </HStack>
-            <Match
-              value={mode}
-              youtube={() => <YouTubeFocusWidget />}
-              sounds={() => <SoundsFocusWidget />}
-            />
-          </VStack>
-        </Modal>
-      )}
+      {isExpanded && <FocusAudioOverlay onClose={() => setIsExpanded(false)} />}
     </>
   )
 }
