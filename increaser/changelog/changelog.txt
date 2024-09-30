@@ -1,3 +1,4 @@
+An option to change the end time when finishing a focus session is helpful when the user forgets to stop the session and wants to adjust the end time.
 1727537960954
 Added the ability to set both start and end boundaries in the project's report interval selector.
 YouTube focus music now resumes from where it left off, instead of restarting at the beginning of each session.

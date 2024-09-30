@@ -79,6 +79,8 @@ The user can enable focus notifications that will appear as browser notification
 
 During a focus session, you can hover over the timer to see the log of your current focus session, where each item is either work on a project with a duration, or a break with a duration.
 
+When finishing a focus session, the user has the option to also 'Change session end time and finish,' which is helpful when the user forgets to stop the session and wants to adjust the end time.
+
 ## Goals
 
 On the "Goals" page, users can set specific goals that will bring them closer to their perfect vision. Goals have three potential statuses: done, in progress, and to-do. Users should set a deadline for a goal, which could be either a specific date or their age. Users can set an emoji for a goal. Users can write a plan of how they are going to achieve the goal in plain text. Users can track numeric goals; for example, if the goal is to have 1m USD net worth, they can enter their current net worth to see their progress. Since to achieve most goals, users have to do some recurring actions, there is a way to add recurring tasks or connect existing recurring tasks to the current goal. At the top of the Goals page is a timeline with age labels under the line and goals above the line. Users' current age with month and day precision is also displayed on the timeline.

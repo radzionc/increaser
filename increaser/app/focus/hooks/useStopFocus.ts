@@ -38,7 +38,6 @@ export const useStopFocus = () => {
 
   return useCallback(
     ({ isEndEstimated, end }: StopFocusParams = {}) => {
-      console.log('stop focus', { isEndEstimated, end })
       let correctedIntervals = [...intervals]
       if (end) {
         correctedIntervals = updateAtIndex(

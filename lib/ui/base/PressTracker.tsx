@@ -1,8 +1,9 @@
 import { PointerEventHandler, ReactNode, useCallback, useState } from 'react'
-import { useEvent, useIsomorphicLayoutEffect } from 'react-use'
+import { useEvent } from 'react-use'
 import { Point } from '../entities/Point'
 import { useBoundingBox } from '../hooks/useBoundingBox'
 import { useRelativePosition } from '../hooks/useRelativePosition'
+import { useIsomorphicLayoutEffect } from '../hooks/useIsomorphicLayoutEffect'
 
 interface ContainerProps {
   onPointerDown: PointerEventHandler<HTMLElement>

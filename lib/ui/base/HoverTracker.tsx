@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { Point } from '../entities/Point'
 import { useBoundingBox } from '../hooks/useBoundingBox'
-import { useIsomorphicLayoutEffect } from 'react-use'
+import { useIsomorphicLayoutEffect } from '@lib/ui/hooks/useIsomorphicLayoutEffect'
 import { useRelativePosition } from '../hooks/useRelativePosition'
 
 interface ContainerProps {
