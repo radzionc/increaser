@@ -10,7 +10,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { sidebarConfig } from '../../../navigation/Sidebar/config'
 import { Header } from '@lib/ui/layout/Header'
 import { useCancelFocus } from '../../hooks/useCancelFocus'
-import { useStopFocus } from '../../hooks/useStopFocus'
+import { FinishFocus } from './finish/FinishFocus'
 
 const Container = styled(Header)`
   min-height: ${toSizeUnit(sidebarConfig.headerHeight)};
@@ -22,7 +22,6 @@ const Container = styled(Header)`
 
 export const ActiveFocusHeader = () => {
   const cancel = useCancelFocus()
-  const stop = useStopFocus()
 
   return (
     <Container>
@@ -38,9 +37,7 @@ export const ActiveFocusHeader = () => {
         <Button kind="outlined" onClick={cancel}>
           Cancel
         </Button>
-        <Button type="submit" kind="primary" onClick={stop}>
-          Finish
-        </Button>
+        <FinishFocus />
       </HStack>
     </Container>
   )

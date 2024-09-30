@@ -16,7 +16,7 @@ type OpenerProps = {
 
 export const Opener = ({
   renderOpener,
-  renderContent,
+  renderContent: Content,
   initialIsOpen = false,
 }: OpenerProps) => {
   const [isOpen, { set: onOpen, unset: onClose }] = useBoolean(initialIsOpen)
@@ -24,7 +24,7 @@ export const Opener = ({
   return (
     <>
       {renderOpener({ onOpen, onClose, isOpen })}
-      {isOpen && renderContent({ onClose })}
+      {isOpen && <Content onClose={onClose} />}
     </>
   )
 }

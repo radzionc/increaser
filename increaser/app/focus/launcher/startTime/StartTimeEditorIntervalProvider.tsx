@@ -1,27 +1,13 @@
-import { createContextHook } from '@lib/ui/state/createContextHook'
-import { createContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 
 import { Interval } from '@lib/utils/interval/Interval'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { startOfDay, startOfHour } from 'date-fns'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { CurrentIntervalContext } from '@lib/ui/state/currentInterval'
 
-type StartTimeEditorState = {
-  interval: Interval
-  now: number
-}
-
-const StartTimeEditorContext = createContext<StartTimeEditorState | undefined>(
-  undefined,
-)
-
-export const useStartTimeEditor = createContextHook(
-  StartTimeEditorContext,
-  'StartTimeEditor',
-)
-
-export const StartTimeEditorProvider = ({
+export const StartTimeEditorIntervalProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const now = useRhythmicRerender(convertDuration(10, 's', 'ms'))
@@ -37,8 +23,8 @@ export const StartTimeEditorProvider = ({
   }, [now])
 
   return (
-    <StartTimeEditorContext.Provider value={{ interval, now }}>
+    <CurrentIntervalContext.Provider value={interval}>
       {children}
-    </StartTimeEditorContext.Provider>
+    </CurrentIntervalContext.Provider>
   )
 }

@@ -11,7 +11,7 @@ export const FocusAutoStop = () => {
 
   const target = useMemo(() => {
     return Math.min(
-      shouldBePresent(getLastItem(intervals).end) +
+      shouldBePresent(getLastItem(intervals).start) +
         convertDuration(3, 'h', 'ms'),
       endOfDay(intervals[0].start).getTime(),
     )
@@ -25,10 +25,8 @@ export const FocusAutoStop = () => {
 
     const autoStop = () => {
       stop({
-        lastSetOverride: {
-          end: target,
-          isEndEstimated: true,
-        },
+        end: target,
+        isEndEstimated: true,
       })
     }
 

@@ -1,5 +1,5 @@
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useEvent } from 'react-use'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
@@ -15,15 +15,14 @@ import {
   dotSeparator,
 } from '@lib/ui/layout/StackSeparatedBy'
 import { getColor } from '@lib/ui/theme/getters'
-import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
-import { useFocusTargetStartTime } from '../state/FocusLauncherStartTimeProvider'
-import { usePresentState } from '@lib/ui/state/usePresentState'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useFocusTargetProject } from '../../hooks/useFocusTargetProject'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { useCurrentFocusEndTime } from './state/CurrentFocusEndTime'
+import { useAssertFocusIntervals } from '../../../state/focusIntervals'
+import { useProject } from '@increaser/ui/projects/hooks/useProject'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -32,12 +31,14 @@ const TimeValue = styled(HStackSeparatedBy)`
   color: ${getColor('contrast')};
 `
 
-export const StartTimeEditor = () => {
+export const EndTimeEditor = () => {
   const [isActive, setIsActive] = useState(false)
 
-  const todaySets = useTodaySets()
+  const [value, setValue] = useCurrentFocusEndTime()
 
-  const [value, setValue] = usePresentState(useFocusTargetStartTime())
+  const intervals = useAssertFocusIntervals()
+
+  const { projectId, start: min } = getLastItem(intervals)
 
   const interval = useCurrentInterval()
 
@@ -46,12 +47,6 @@ export const StartTimeEditor = () => {
 
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
-  useEffect(() => {
-    intervalElement.current?.scrollIntoView({
-      block: 'nearest',
-      inline: 'start',
-    })
-  }, [value])
 
   const now = useRhythmicRerender(convertDuration(10, 's', 'ms'))
 
@@ -64,24 +59,23 @@ export const StartTimeEditor = () => {
     const timestamp =
       interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
-    const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
+    const endedAt = enforceRange(timestamp, min, now)
 
-    const startedAt = enforceRange(timestamp, min, now)
-
-    setValue(startedAt)
+    setValue(endedAt)
   })
 
   const cursor = isActive ? 'row-resize' : undefined
 
-  const valueDuration = getIntervalDuration({ start: value, end: now })
+  const valueDuration = getIntervalDuration({ start: min, end: value })
   const valueInPx = setEditorConfig.msToPx(value - interval.start)
+  const startInPx = setEditorConfig.msToPx(min - interval.start)
   const intervalDurationInPx = setEditorConfig.msToPx(valueDuration)
 
   const theme = useTheme()
 
   const minDiff = Math.round(convertDuration(now - value, 'ms', 'min'))
 
-  const project = shouldBePresent(useFocusTargetProject())
+  const project = shouldBePresent(useProject(projectId))
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
@@ -89,14 +83,14 @@ export const StartTimeEditor = () => {
         $color={theme.colors.getLabelColor(project.color)}
         ref={intervalElement}
         style={{
-          top: valueInPx,
+          top: startInPx,
           height: intervalDurationInPx,
         }}
       ></CurrentIntervalRect>
 
       <TimeValue
         style={{
-          top: valueInPx - 20,
+          top: valueInPx,
         }}
         separator={dotSeparator}
         gap={8}

@@ -15,11 +15,11 @@ import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 import { MS_IN_MIN } from '@lib/utils/time'
 import { getBlocks, getNextFocusDuration } from '../../sets/Block'
 import { useTodaySets } from '../../sets/hooks/useTodaySets'
-import { Set } from '@increaser/entities/User'
 import { useFocusDuration } from '../state/focusDuration'
 
 export type StopFocusParams = {
-  lastSetOverride?: Partial<Set>
+  isEndEstimated?: boolean
+  end?: number
 }
 
 export const useStopFocus = () => {
@@ -37,22 +37,32 @@ export const useStopFocus = () => {
   const { mutate: updateTasks } = useUpdateUserEntitiesMutation('task')
 
   return useCallback(
-    ({ lastSetOverride }: StopFocusParams = {}) => {
-      let sets = focusIntervalsToSets({
-        intervals,
+    ({ isEndEstimated, end }: StopFocusParams = {}) => {
+      console.log('stop focus', { isEndEstimated, end })
+      let correctedIntervals = [...intervals]
+      if (end) {
+        correctedIntervals = updateAtIndex(
+          correctedIntervals,
+          correctedIntervals.length - 1,
+          (interval) => ({
+            ...interval,
+            end,
+          }),
+        )
+      }
+
+      setIntervals(null)
+
+      const sets = focusIntervalsToSets({
+        intervals: correctedIntervals,
         now: Date.now(),
       })
 
-      if (lastSetOverride) {
-        sets = updateAtIndex(sets, sets.length - 1, (set) => ({
-          ...set,
-          ...lastSetOverride,
-        }))
+      if (isEndEstimated) {
+        sets[sets.length - 1].isEndEstimated = isEndEstimated
       }
 
-      const timeSpentRecord = getTasksTimeSpent(intervals)
-
-      setIntervals(null)
+      const timeSpentRecord = getTasksTimeSpent(correctedIntervals)
 
       const blocks = getBlocks([...todaySets, ...sets])
 

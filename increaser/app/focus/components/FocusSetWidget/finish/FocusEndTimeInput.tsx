@@ -1,16 +1,16 @@
 import { VStack } from '@lib/ui/css/stack'
 import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
-import { Sessions } from './Sessions'
 import styled from 'styled-components'
-import { StartTimeEditor } from './StartTimeEditor'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
+import { FocusEndTimeEditorSets } from './FocusEndTimeEditorSets'
+import { EndTimeEditor } from './EndTimeEditor'
 
 const Content = styled(VStack)`
   overflow: hidden;
 `
 
-export const FocusStartTimeInput = () => {
+export const FocusEndTimeInput = () => {
   const interval = useCurrentInterval()
 
   return (
@@ -19,9 +19,10 @@ export const FocusStartTimeInput = () => {
         startsAt={interval.start}
         endsAt={interval.end}
         msToPx={setEditorConfig.msToPx}
+        verticalPadding={20}
       >
-        <Sessions />
-        <StartTimeEditor />
+        <FocusEndTimeEditorSets />
+        <EndTimeEditor />
       </TimeSpace>
     </Content>
   )
