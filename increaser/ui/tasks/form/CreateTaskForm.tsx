@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { Task } from '@increaser/entities/Task'
 import { otherProject } from '@increaser/entities/Project'
@@ -40,15 +40,7 @@ export const CreateTaskForm = ({
     ...defaultValue,
   })
   const { tasks } = useAssertUserState()
-  const { mutate, isPending, variables } = useCreateUserEntityMutation('task')
-  useEffect(() => {
-    if (!variables) return
-
-    const task = tasks[variables.id]
-    if (task) {
-      onFinish?.(task)
-    }
-  }, [onFinish, tasks, variables])
+  const { mutate, isPending } = useCreateUserEntityMutation('task')
 
   const isDisabled = useIsTaskFormDisabled(value)
 
@@ -82,6 +74,8 @@ export const CreateTaskForm = ({
         onMutationFinish?.(task)
       },
     })
+
+    onFinish?.()
   }
 
   return (

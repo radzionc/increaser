@@ -38,18 +38,16 @@ export const AddTask = ({ status }: AddTaskProps) => {
 
   return (
     <Opener
-      renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : (
-          <Container kind="ghost" size="s" onClick={onOpen}>
-            <HStack alignItems="center" gap={8}>
-              <IconWrapper>
-                <PlusIcon />
-              </IconWrapper>
-              Add a task
-            </HStack>
-          </Container>
-        )
-      }
+      renderOpener={({ onOpen }) => (
+        <Container kind="ghost" size="s" onClick={onOpen}>
+          <HStack alignItems="center" gap={8}>
+            <IconWrapper>
+              <PlusIcon />
+            </IconWrapper>
+            Add a task
+          </HStack>
+        </Container>
+      )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>
           <CreateTaskForm defaultValue={defaultValue} onFinish={onClose} />
