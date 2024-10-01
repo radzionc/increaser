@@ -65,7 +65,9 @@ The user can pause a session. If the session has been paused, after the user has
 
 If the user gets distracted and wants to account for that time, they can deduct the time from the session. It would act the same way as if the user paused the session for a specific period and then resumed it.
 
-When the user starts a focus session, the content of the "Home" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task. If the user forgets to stop the session, it will be stopped automatically, and the user will be prompted to edit that session.
+When the user starts a focus session, the content of the "Home" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task.
+
+If the user forgets to stop the session and it goes for more than 3 hours, Increaser will stop it automatically, and the user will see a modal with the option to adjust the end time.
 
 Also, while in the focus session, users can choose to play focus sounds imported from YouTube or arrange their own ambient noise by mixing different individual sounds like rain, a coffee shop, or birds singing, and adjusting their volume. The YouTube player will be positioned in the corner of the screen, and the user can change the corner, turn off the music, or pause it from that widget.
 
