@@ -7,6 +7,7 @@ import { PausedFocusOnly } from '@increaser/app/focus/components/PausedFocusOnly
 import { FocusNotifications } from '@increaser/app/focus/notifications/FocusNotifications'
 import { PausedFocusAutoStop } from './PausedFocusAutoStop'
 import { FocusAutoStop } from './FocusAutoStop'
+import { LastSetObserver } from './autoStop/LastSetObserver'
 
 export const FocusManager = () => (
   <>
@@ -22,5 +23,6 @@ export const FocusManager = () => (
     <PausedFocusOnly>
       <PausedFocusAutoStop />
     </PausedFocusOnly>
+    <LastSetObserver />
   </>
 )

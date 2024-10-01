@@ -26,6 +26,7 @@ import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { focusDurations } from '@increaser/entities/FocusDuration'
 import { useFocusIntervals } from '../../focus/state/focusIntervals'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const remindersCount = 5
 
@@ -157,11 +158,10 @@ export const BreakProvider = ({ children }: Props) => {
     const lastSet = getLastItem(sets)
     if (!lastSet || !lastSetEnd) return
 
-    // TODO: implement a better solution
     if (now - lastSetEnd > 1 * MS_IN_SEC) return
 
     const blocks = getBlocks(sets)
-    const block = getLastItem(blocks)
+    const block = shouldBePresent(getLastItem(blocks))
     const blockWorkDuration = getBlockWorkDuration(block) / MS_IN_MIN
     if (blockWorkDuration + focusDurations[0] > targetBlockInMin) {
       return

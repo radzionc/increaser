@@ -4,16 +4,23 @@ import { SetItem } from '@increaser/ui/sets/manager/SetItem'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useLastSet } from '@increaser/app/sets/hooks/useLastSet'
+import { areEqualIntervals } from '@lib/utils/interval/areEqualIntervals'
 
-export const Sessions = () => {
+export const AutoStopEditorSets = () => {
   const interval = useCurrentInterval()
   const { sets: allSets } = useAssertUserState()
+  const lastSet = shouldBePresent(useLastSet())
 
   const sets = useMemo(() => {
     return allSets.filter(
-      (set) => set.end > interval.start && set.start < interval.end,
+      (set) =>
+        set.end > interval.start &&
+        set.start < interval.end &&
+        !areEqualIntervals(set, lastSet),
     )
-  }, [interval.end, interval.start, allSets])
+  }, [allSets, interval.end, interval.start, lastSet])
 
   return (
     <>
