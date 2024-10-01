@@ -22,7 +22,7 @@ const offset = 20
 const Wrapper = styled.div`
   position: fixed;
   width: 320px;
-  z-index: 1;
+  z-index: 2;
   ${borderRadius.m};
   overflow: hidden;
   border: 2px solid ${getHoverVariant('foreground')};
