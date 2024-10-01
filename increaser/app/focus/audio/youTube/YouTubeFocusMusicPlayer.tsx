@@ -10,7 +10,7 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
-import { useRef, useCallback, useEffect } from 'react'
+import { useRef, useCallback } from 'react'
 import ReactPlayer from 'react-player'
 import { useThrottle } from '@lib/ui/hooks/useThrottle'
 
@@ -46,18 +46,8 @@ export const YouTubeFocusMusicPlayer = () => {
     ({ playedSeconds }: { playedSeconds: number }) => {
       savePlaybackTime(playedSeconds)
     },
-    5000,
+    1000,
   )
-
-  useEffect(() => {
-    const player = playerRef.current
-    return () => {
-      const playedSeconds = player?.getCurrentTime()
-      if (playedSeconds !== undefined) {
-        savePlaybackTime(playedSeconds)
-      }
-    }
-  }, [savePlaybackTime])
 
   return (
     <ElementSizeAware
