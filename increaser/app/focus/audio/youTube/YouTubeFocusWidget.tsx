@@ -1,4 +1,3 @@
-import { AddSound } from './AddSound'
 import {
   PersistentStateKey,
   usePersistentState,
@@ -6,10 +5,17 @@ import {
 import { SoundItem } from './SoundItem'
 import { match } from '@lib/utils/match'
 import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
-import { Opener } from '@lib/ui/base/Opener'
-import { AddSoundPrompt } from './AddSoundPrompt'
-import { VStack } from '@lib/ui/css/stack'
 import { YouTubeFocusAudioHeader } from './YouTubeFocusAudioHeader'
+import styled from 'styled-components'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
+
+const Content = styled(ModalContent)`
+  padding: 0;
+  ${verticalPadding(12)};
+  ${hideScrollbars};
+`
 
 const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
@@ -28,17 +34,13 @@ export const YouTubeFocusWidget = () => {
   })
 
   return (
-    <VStack>
+    <>
       <YouTubeFocusAudioHeader />
-      <Opener
-        renderOpener={({ onOpen, isOpen }) =>
-          isOpen ? null : <AddSoundPrompt onClick={onOpen} />
-        }
-        renderContent={({ onClose }) => <AddSound onFinish={onClose} />}
-      />
-      {soundsToDisplay.map((sound, index) => (
-        <SoundItem key={index} index={index} {...sound} />
-      ))}
-    </VStack>
+      <Content>
+        {soundsToDisplay.map((sound, index) => (
+          <SoundItem key={index} index={index} {...sound} />
+        ))}
+      </Content>
+    </>
   )
 }
