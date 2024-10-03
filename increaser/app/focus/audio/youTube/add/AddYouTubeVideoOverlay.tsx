@@ -17,6 +17,8 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { Fields } from '@lib/ui/inputs/Fields'
+import { trimTextWithoutCuttingWords } from '@lib/utils/string/trimTextWithoutCuttingWords'
 
 type VideoFormShape = {
   url: string
@@ -82,45 +84,16 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
       })}
       footer={<CreateFormFooter onCancel={onClose} isDisabled={isDisabled} />}
     >
-      <VStack gap={20}>
-        <TextInput
-          label="YouTube video URL"
-          placeholder="https://youtu.be/..."
-          value={value.url}
-          onValueChange={(url) => setValue({ ...value, url })}
-        />
-        {value.url && (
-          <>
-            <ElementSizeAware
-              render={({ setElement, size }) => (
-                <VideoContainer ref={setElement}>
-                  {size && (
-                    <YouTubePlayer
-                      loop
-                      url={value.url}
-                      width={size.width}
-                      height={size.height}
-                      volume={0.8}
-                      onReady={(player) => {
-                        const title = player.getInternalPlayer().videoTitle
-                        if (title) {
-                          setValue((prev) => ({ ...prev, name: title }))
-                        }
-                      }}
-                      config={{
-                        youtube: {
-                          playerVars: {
-                            autoplay: 1,
-                            controls: 0,
-                            iv_load_policy: 3,
-                          },
-                        },
-                      }}
-                    />
-                  )}
-                </VideoContainer>
-              )}
-            />
+      <VStack gap={40}>
+        <Fields>
+          <TextInput
+            label="YouTube video URL"
+            placeholder="https://youtu.be/..."
+            value={value.url}
+            onValueChange={(url) => setValue({ ...value, url })}
+            autoFocus
+          />
+          {!errors.url && (
             <TextInput
               label="Name"
               autoFocus
@@ -128,7 +101,42 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
               value={value.name}
               onValueChange={(name) => setValue({ ...value, name })}
             />
-          </>
+          )}
+        </Fields>
+        {!errors.url && (
+          <ElementSizeAware
+            render={({ setElement, size }) => (
+              <VideoContainer ref={setElement}>
+                {size && (
+                  <YouTubePlayer
+                    loop
+                    url={value.url}
+                    width={size.width}
+                    height={size.height}
+                    volume={0.8}
+                    onReady={(player) => {
+                      const title = player.getInternalPlayer().videoTitle
+                      if (title && !value.name) {
+                        setValue((prev) => ({
+                          ...prev,
+                          name: trimTextWithoutCuttingWords(title, 40),
+                        }))
+                      }
+                    }}
+                    config={{
+                      youtube: {
+                        playerVars: {
+                          // autoplay: 1,
+                          controls: 0,
+                          iv_load_policy: 3,
+                        },
+                      },
+                    }}
+                  />
+                )}
+              </VideoContainer>
+            )}
+          />
         )}
       </VStack>
     </Modal>
