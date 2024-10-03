@@ -49,7 +49,7 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
     url: combineValidators(validateUrl, validateUnique),
     name: (name) => {
       if (!name) {
-        return 'Give it a name'
+        return 'Enter a name for the video'
       }
     },
   })
@@ -92,30 +92,34 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
         {value.url && (
           <>
             <ElementSizeAware
-              render={({ setElement, size }) => {
-                return (
-                  <VideoContainer ref={setElement}>
-                    {size && (
-                      <YouTubePlayer
-                        loop
-                        url={value.url}
-                        width={size.width}
-                        height={size.height}
-                        volume={0.8}
-                        config={{
-                          youtube: {
-                            playerVars: {
-                              autoplay: 1,
-                              controls: 0,
-                              iv_load_policy: 3,
-                            },
+              render={({ setElement, size }) => (
+                <VideoContainer ref={setElement}>
+                  {size && (
+                    <YouTubePlayer
+                      loop
+                      url={value.url}
+                      width={size.width}
+                      height={size.height}
+                      volume={0.8}
+                      onReady={(player) => {
+                        const title = player.getInternalPlayer().videoTitle
+                        if (title) {
+                          setValue((prev) => ({ ...prev, name: title }))
+                        }
+                      }}
+                      config={{
+                        youtube: {
+                          playerVars: {
+                            autoplay: 1,
+                            controls: 0,
+                            iv_load_policy: 3,
                           },
-                        }}
-                      />
-                    )}
-                  </VideoContainer>
-                )
-              }}
+                        },
+                      }}
+                    />
+                  )}
+                </VideoContainer>
+              )}
             />
             <TextInput
               label="Name"
