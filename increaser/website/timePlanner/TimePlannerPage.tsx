@@ -1,6 +1,5 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
-import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import {
   FeatureVideoSlice,
@@ -37,11 +36,9 @@ export const TimePlannerPage = () => (
       title={`Efficient Project Management with Increaser's Projects Budget Feature`}
       description={`Allocate time wisely, set goals, and track progress to ensure successful project completion and optimal productivity`}
     />
-    <MockApiProvider>
-      <PrimaryWebsiteSlice>
-        <ProjectsBudgetSlice titleAs="h1" />
-      </PrimaryWebsiteSlice>
-    </MockApiProvider>
+    <PrimaryWebsiteSlice>
+      <ProjectsBudgetSlice titleAs="h1" />
+    </PrimaryWebsiteSlice>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

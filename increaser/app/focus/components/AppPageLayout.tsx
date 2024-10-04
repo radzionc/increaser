@@ -1,14 +1,14 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { Navigation } from '../../navigation'
-import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
-import { ErrorFallbackCard } from '../../errors/components/ErrorFallbackCard'
+import { ErrorBoundary } from '@increaser/ui/errors/components/ErrorBoundary'
+import { ErrorFallbackCard } from '@increaser/ui/errors/components/ErrorFallbackCard'
 import { FocusManager } from '@increaser/ui/focus/FocusManager'
 import { BreakProvider } from '../../break/components/BreakProvider'
 import { HabitsProvider } from '../../habits/components/HabitsProvider'
 import { MembershipConfirmation } from '../../membership/components/MembershipConfirmation'
 import { FocusIntervalsProvider } from '../state/focusIntervals'
 import { AuthenticatedOnly } from '../../auth/components/AuthenticatedOnly'
-import { UserStateOnly } from '../../user/state/UserStateOnly'
+import { UserStateOnly } from '@increaser/ui/user/UserStateOnly'
 
 export const AppPageLayout = ({ children }: ComponentWithChildrenProps) => {
   return (

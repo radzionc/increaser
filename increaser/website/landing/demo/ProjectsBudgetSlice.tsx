@@ -9,6 +9,7 @@ import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjec
 import { VStack } from '@lib/ui/css/stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
+import { DemoGuard } from '../../demo/DemoGuard'
 
 const Content = styled(VStack)`
   max-width: 400px;
@@ -23,11 +24,11 @@ export const ProjectsBudgetSlice = (
     <WebsiteSlice>
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
-        <ClientOnly>
-          <Content>
+        <Content>
+          <DemoGuard>
             <ManageProjectsBudget />
-          </Content>
-        </ClientOnly>
+          </DemoGuard>
+        </Content>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

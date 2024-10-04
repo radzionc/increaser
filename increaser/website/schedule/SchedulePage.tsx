@@ -1,6 +1,5 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
-import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import {
   FeatureVideoSlice,
@@ -27,11 +26,9 @@ export const SchedulePage = () => (
       title={`Optimize Your Daily Routine with Increaser's Schedule Feature`}
       description={`Enhance your productivity with Increaser's Schedule feature. Plan and organize your daily activities, set work and break times, and ensure a balanced work-life routine. Start optimizing your schedule with Increaser today!`}
     />
-    <MockApiProvider>
-      <PrimaryWebsiteSlice>
-        <ScheduleSlice titleAs="h1" />
-      </PrimaryWebsiteSlice>
-    </MockApiProvider>
+    <PrimaryWebsiteSlice>
+      <ScheduleSlice titleAs="h1" />
+    </PrimaryWebsiteSlice>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

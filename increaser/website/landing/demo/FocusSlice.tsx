@@ -3,10 +3,10 @@ import {
   WebsiteSectionHeaderProps,
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { FocusLauncher } from '@increaser/app/focus/launcher/FocusLauncher'
+import { DemoGuard } from '../../demo/DemoGuard'
 
 export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   const id = 'focus'
@@ -15,9 +15,9 @@ export const FocusSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
     <WebsiteSlice id={id}>
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
-        <ClientOnly>
+        <DemoGuard>
           <FocusLauncher />
-        </ClientOnly>
+        </DemoGuard>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

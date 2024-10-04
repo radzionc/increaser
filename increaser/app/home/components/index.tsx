@@ -1,5 +1,5 @@
-import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
-import { ErrorFallbackCard } from '@increaser/app/errors/components/ErrorFallbackCard'
+import { ErrorBoundary } from '@increaser/ui/errors/components/ErrorBoundary'
+import { ErrorFallbackCard } from '@increaser/ui/errors/components/ErrorFallbackCard'
 
 import { HomePageContent } from './HomePageContent'
 import { Page } from '@lib/next-ui/Page'

@@ -1,10 +1,10 @@
 import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { VStack } from '@lib/ui/css/stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { TrackedTimeReport } from '@increaser/ui/projects/trackedTimeReport/TrackedTimeReport'
+import { DemoGuard } from '../../demo/DemoGuard'
 
 type TimeTrackingSliceProps = {
   titleAs?: React.ElementType
@@ -17,11 +17,11 @@ export const TimeTrackingSlice = ({ titleAs }: TimeTrackingSliceProps) => {
     <WebsiteSlice>
       <WebsiteSliceContent>
         <WebsiteSectionHeader titleAs={titleAs} {...getDemoSliceCopy(id)} />
-        <ClientOnly>
-          <VStack style={{ maxWidth: 920, width: '100%' }}>
+        <VStack style={{ maxWidth: 920, width: '100%' }}>
+          <DemoGuard>
             <TrackedTimeReport />
-          </VStack>
-        </ClientOnly>
+          </DemoGuard>
+        </VStack>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

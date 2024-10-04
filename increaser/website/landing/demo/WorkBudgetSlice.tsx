@@ -3,7 +3,6 @@ import {
   WebsiteSectionHeaderProps,
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import styled from 'styled-components'
@@ -13,6 +12,7 @@ import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { Panel } from '@lib/ui/css/panel'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
+import { DemoGuard } from '../../demo/DemoGuard'
 
 const Content = styled(UniformColumnGrid)`
   max-width: 860px;
@@ -25,7 +25,7 @@ export const WorkBudgetSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
     <WebsiteSlice>
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
-        <ClientOnly>
+        <DemoGuard>
           <Content minChildrenWidth={320} gap={40}>
             <ManageWorkBudget />
             <Panel kind="secondary">
@@ -35,7 +35,7 @@ export const WorkBudgetSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
               </SeparatedByLine>
             </Panel>
           </Content>
-        </ClientOnly>
+        </DemoGuard>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

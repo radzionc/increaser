@@ -3,10 +3,10 @@ import {
   WebsiteSectionHeaderProps,
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { GoalsSliceContent } from './GoalsSliceContent'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
+import { DemoGuard } from '../../demo/DemoGuard'
 
 export const GoalsSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   const id = 'goals'
@@ -14,9 +14,9 @@ export const GoalsSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
     <WebsiteSlice id={id}>
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
-        <ClientOnly>
+        <DemoGuard>
           <GoalsSliceContent />
-        </ClientOnly>
+        </DemoGuard>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )

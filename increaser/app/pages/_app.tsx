@@ -1,9 +1,9 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from '@lib/ui/css/GlobalStyle'
 import { ReactNode, useState } from 'react'
-import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
+import { ErrorBoundary } from '@increaser/ui/errors/components/ErrorBoundary'
 import { getQueryClient } from '@increaser/app/query/queryClient'
-import { FullSizeErrorFallback } from '@increaser/app/errors/components/FullSizeErrorFallback'
+import { FullSizeErrorFallback } from '@increaser/ui/errors/components/FullSizeErrorFallback'
 import { PWAProvider } from '@increaser/app/pwa/components/PWAProvider'
 import { QueryClientProvider } from '@tanstack/react-query'
 

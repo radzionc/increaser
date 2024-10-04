@@ -3,13 +3,12 @@ import {
   WebsiteSectionHeaderProps,
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
 import { VStack } from '@lib/ui/css/stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { TaskBoard } from '@increaser/ui/tasks/board/TaskBoard'
-import { FocusIntervalsProvider } from '@increaser/app/focus/state/focusIntervals'
+import { DemoGuard } from '../../demo/DemoGuard'
 
 const Content = styled(VStack)`
   width: 100%;
@@ -23,13 +22,11 @@ export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
     <WebsiteSlice id={id}>
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
-        <ClientOnly>
-          <Content>
-            <FocusIntervalsProvider>
-              <TaskBoard />
-            </FocusIntervalsProvider>
-          </Content>
-        </ClientOnly>
+        <Content>
+          <DemoGuard>
+            <TaskBoard />
+          </DemoGuard>
+        </Content>
       </WebsiteSliceContent>
     </WebsiteSlice>
   )
