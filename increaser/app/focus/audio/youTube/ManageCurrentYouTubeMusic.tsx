@@ -41,7 +41,7 @@ export const ManageCurrentYouTubeMusic = () => {
       }}
     >
       <IconWrapper>{isPlaying ? <PauseIcon /> : <PlayIcon />}</IconWrapper>
-      <Text>{name}</Text>
+      <Text cropped>{name}</Text>
     </Container>
   )
 }

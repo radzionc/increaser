@@ -19,6 +19,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Fields } from '@lib/ui/inputs/Fields'
 import { trimTextWithoutCuttingWords } from '@lib/utils/string/trimTextWithoutCuttingWords'
+import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
 
 type VideoFormShape = {
   url: string
@@ -38,6 +39,8 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
     url: '',
     name: '',
   })
+
+  const [, setPreference] = useYouTubeFocusPreference()
 
   const { focusSounds } = useAssertUserState()
   const { mutate: updateUser } = useUpdateUserMutation()
@@ -79,6 +82,7 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
               ...focusSounds,
             ],
           })
+          setPreference((prev) => ({ ...prev, url: value.url }))
           onClose()
         },
       })}
@@ -126,7 +130,6 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
                     config={{
                       youtube: {
                         playerVars: {
-                          // autoplay: 1,
                           controls: 0,
                           iv_load_policy: 3,
                         },

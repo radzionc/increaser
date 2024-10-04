@@ -34,6 +34,7 @@ const Header = styled(HStack)`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 8px;
 `
 
 export const YouTubeFocusMusicFloatingPlayer = () => {

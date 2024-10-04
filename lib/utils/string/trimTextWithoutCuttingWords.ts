@@ -16,7 +16,7 @@ export function trimTextWithoutCuttingWords(
     truncated = text.slice(0, maxLength)
   }
 
-  truncated = truncated.replace(/[\s\-.,;:!?']+$/g, '')
+  truncated = truncated.replace(/[^\p{L}\p{N}]+$/gu, '')
 
   return truncated
 }
