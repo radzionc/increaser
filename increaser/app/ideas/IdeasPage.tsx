@@ -1,7 +1,5 @@
 import { Page } from '@lib/next-ui/Page'
-import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Ideas } from '@increaser/ui/ideas/Ideas'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 
@@ -16,19 +14,15 @@ export const IdeasPage: Page = () => {
       <PageContent>
         <PageHeader
           controls={
-            <ClientOnly>
-              <UserStateOnly>
-                <ManageProjectFilter />
-                <AddIdea />
-              </UserStateOnly>
-            </ClientOnly>
+            <>
+              <ManageProjectFilter />
+              <AddIdea />
+            </>
           }
         >
           <PagePrimaryNavigation />
         </PageHeader>
-        <UserStateOnly>
-          <Ideas />
-        </UserStateOnly>
+        <Ideas />
       </PageContent>
     </PageContainer>
   )

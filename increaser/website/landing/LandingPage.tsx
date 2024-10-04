@@ -6,7 +6,6 @@ import { FaqSlice } from './FaqSlice'
 import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { ScoreboardSlice } from './ScoreboardSlice'
-import { DemoUserStateProvider } from './demo/DemoUserStateProvider'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { productTools } from '@increaser/entities/ProductTool'
@@ -20,15 +19,13 @@ export const LandingPage = () => (
       description="Increaser offers a unique solution for remote workers seeking to boost efficiency, track time, and develop positive habits for better career and health outcomes."
     />
     <PrimarySlice />
-    <DemoUserStateProvider>
-      <FocusIntervalsProvider>
-        <MockApiProvider>
-          {productTools.map((tool) => (
-            <ProductToolSlice key={tool} value={tool} />
-          ))}
-        </MockApiProvider>
-      </FocusIntervalsProvider>
-    </DemoUserStateProvider>
+    <FocusIntervalsProvider>
+      <MockApiProvider>
+        {productTools.map((tool) => (
+          <ProductToolSlice key={tool} value={tool} />
+        ))}
+      </MockApiProvider>
+    </FocusIntervalsProvider>
     <TestimonialsSlice />
     <VideoSlice />
     <ScoreboardSlice />

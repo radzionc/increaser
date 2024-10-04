@@ -1,7 +1,6 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
-import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { productName } from '@increaser/config'
 import {
@@ -37,15 +36,13 @@ export const FocusPage = () => (
       title={`Focus Timer for Enhanced Productivity | Pomodoro Technique & Ambient Sounds | ${productName}`}
       description={`Boost your productivity with Increaser's Focus Timer. Work in 90-minute blocks with customizable breaks, ambient sounds, and project tracking to maximize efficiency and maintain work-life balance. Try Increaser's focus timer today!`}
     />
-    <DemoUserStateProvider>
-      <MockApiProvider>
-        <FocusIntervalsProvider>
-          <PrimaryWebsiteSlice>
-            <FocusSlice titleAs="h1" />
-          </PrimaryWebsiteSlice>
-        </FocusIntervalsProvider>
-      </MockApiProvider>
-    </DemoUserStateProvider>
+    <MockApiProvider>
+      <FocusIntervalsProvider>
+        <PrimaryWebsiteSlice>
+          <FocusSlice titleAs="h1" />
+        </PrimaryWebsiteSlice>
+      </FocusIntervalsProvider>
+    </MockApiProvider>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

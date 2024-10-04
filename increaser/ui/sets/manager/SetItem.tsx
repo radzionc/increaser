@@ -1,7 +1,7 @@
 import { Set } from '@increaser/entities/User'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { useTheme } from 'styled-components'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ComponentProps, forwardRef } from 'react'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { borderRadius } from '@lib/ui/css/borderRadius'
@@ -22,7 +22,7 @@ const Identifier = styled.div`
 
 export const SetItem = forwardRef<HTMLDivElement, SetItemProps>(
   ({ projectId, ...rest }, ref) => {
-    const { projects } = useAssertUserState()
+    const { projects } = useUser()
 
     const theme = useTheme()
 

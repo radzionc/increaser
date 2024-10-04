@@ -14,13 +14,12 @@ import {
   dayMomentStep,
 } from '@increaser/entities/DayMoments'
 import { range } from '@lib/utils/array/range'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUser, useUser } from '@increaser/ui/user/state/user'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
 import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
 import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
-import { useSchedule } from '../../ScheduleContext'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
 interface ManageDayMomentProps {
@@ -60,10 +59,10 @@ export const ManageDayMoment = ({
   max,
   dayMoment,
 }: ManageDayMomentProps) => {
-  const user = useAssertUserState()
+  const user = useUser()
   const value = user[dayMoment]
 
-  const { updateDayMoment } = useSchedule()
+  const updateUser = useUpdateUser()
 
   const options = range(Math.round((max - min) / dayMomentStep) + 1).map(
     (step) => min + dayMomentStep * step,
@@ -106,7 +105,7 @@ export const ManageDayMoment = ({
               {...getOptionProps({
                 index,
                 onSelect: () => {
-                  updateDayMoment(dayMoment, option)
+                  updateUser({ [dayMoment]: option })
                   setIsOpen(false)
                 },
               })}

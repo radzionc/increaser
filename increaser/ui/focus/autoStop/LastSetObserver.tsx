@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useLastSetsSnapshot } from '../../sets/hooks/useLastSetsSnapshot'
 import { LastSetAutoStopOverlay } from './LastSetAutoStopOverlay'
 import { SetEndTimeProvider } from './state/setEndTime'
 
 export const LastSetObserver = () => {
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
   const lastSet = getLastItem(sets)
 
   const lastSnapshotAt = useLastSetsSnapshot()

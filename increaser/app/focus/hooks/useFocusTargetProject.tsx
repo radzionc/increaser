@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { useFocusTarget } from '../state/useFocusTarget'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const useFocusTargetProject = () => {
   const [{ projectId, taskId }] = useFocusTarget()
-  const { projects, tasks } = useAssertUserState()
+  const { projects, tasks } = useUser()
 
   return useMemo(() => {
     const id = projectId ?? (taskId ? tasks[taskId].projectId : null)

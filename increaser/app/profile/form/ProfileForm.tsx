@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 import { Panel } from '@lib/ui/css/panel'
 import { useMemo, useState } from 'react'
@@ -11,7 +11,7 @@ import { TextInput } from '@lib/ui/inputs/TextInput'
 import { CountryInput } from '@lib/ui/inputs/CountryInput'
 
 export const ProfileForm = () => {
-  const { name, country } = useAssertUserState()
+  const { name, country } = useUser()
   const initialValue: ProfileFormShape = {
     name: name ?? null,
     country: country ?? null,

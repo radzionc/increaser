@@ -13,7 +13,7 @@ import { UserIcon } from '@lib/ui/icons/UserIcon'
 import { LogOutIcon } from '@lib/ui/icons/LogOutIcon'
 import { useAuthSession } from '../../auth/hooks/useAuthSession'
 import { useMemo } from 'react'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useRouter } from 'next/router'
 import { UserPenIcon } from '@lib/ui/icons/UserPenIcon'
 import { getAppPath } from '@increaser/ui/navigation/app'
@@ -52,7 +52,7 @@ const Wrapper = styled(IconWrapper)`
 
 export const ManageAccount = () => {
   const [, setAuthSession] = useAuthSession()
-  const { email } = useAssertUserState()
+  const { email } = useUser()
   const { push } = useRouter()
 
   const isPayingUser = useIsPayingUser()

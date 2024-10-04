@@ -1,13 +1,10 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { setUserIdForErrorMonitoring } from '@increaser/app/errors/errorMonitoring'
 import { useEffect } from 'react'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from './state/user'
 
-export const UserManagerProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
-  const { id } = useAssertUserState()
+export const UserTracker = () => {
+  const { id } = useUser()
   const analytics = useAnalytics()
 
   useEffect(() => {
@@ -15,5 +12,5 @@ export const UserManagerProvider = ({
     setUserIdForErrorMonitoring(id)
   }, [id, analytics])
 
-  return <>{children}</>
+  return null
 }

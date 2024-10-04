@@ -4,7 +4,7 @@ import { Task } from '@increaser/entities/Task'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskFormShape } from './TaskFormShape'
 import { useIsTaskFormDisabled } from './useIsTaskFormDisabled'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
@@ -39,7 +39,7 @@ export const CreateTaskForm = ({
     status: 'todo',
     ...defaultValue,
   })
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
   const { mutate, isPending } = useCreateUserEntityMutation('task')
 
   const isDisabled = useIsTaskFormDisabled(value)

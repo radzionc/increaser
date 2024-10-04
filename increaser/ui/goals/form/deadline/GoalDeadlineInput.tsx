@@ -10,7 +10,7 @@ import {
 } from '@increaser/entities/Goal'
 import { useEffect, useMemo, useState } from 'react'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { Match } from '@lib/ui/base/Match'
 import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { GoalDeadlineAgeInput } from './GoalDeadlineAgeInput'
@@ -40,7 +40,7 @@ export const GoalDeadlineInput = ({
   onChange,
   isRequired,
 }: GoalDeadlineInputProps) => {
-  const { dob } = useAssertUserState()
+  const { dob } = useUser()
   const [deadlineType, setDeadlineType] = useState<GoalDeadlineType>(() => {
     if (typeof value === 'string') {
       return 'date'

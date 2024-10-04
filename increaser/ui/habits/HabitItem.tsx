@@ -3,7 +3,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { ChecklistItem } from '@lib/ui/checklist/CheckListItem'
 import { EnhancedHabit } from './EnhancedHabit'
-import { useHabits } from './HabitsContext'
+import { useTrackHabitMutation } from './api/useTrackHabitMutation'
 
 interface Props {
   habit: EnhancedHabit
@@ -22,7 +22,7 @@ const StreakWrapper = styled.div`
 `
 
 export const HabitItem = ({ habit, date, warning, showStreak }: Props) => {
-  const { trackHabit } = useHabits()
+  const { mutate: trackHabit } = useTrackHabitMutation()
 
   const isDone = habit.successes.includes(date)
 

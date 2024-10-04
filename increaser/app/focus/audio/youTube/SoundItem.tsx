@@ -14,7 +14,7 @@ import { centerContent } from '@lib/ui/css/centerContent'
 
 import { FocusSound } from '@increaser/entities/FocusSound'
 import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
@@ -45,7 +45,7 @@ const Star = styled(StarIcon)<{ $color: HSLA }>`
 
 export const SoundItem = ({ name, url, favourite, index }: SoundItemProps) => {
   const [{ url: activeSoundUrl }, setPreference] = useYouTubeFocusPreference()
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
   const { setState, isPlaying } = useYouTubeFocusMusic()
   const { mutate: updateUser } = useUpdateUserMutation()
 

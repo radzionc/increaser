@@ -2,7 +2,7 @@ import YouTubePlayer from 'react-player/lazy'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getColor } from '@lib/ui/theme/getters'
 import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
 import { useYouTubeFocusMusic } from './YouTubeFocusMusicProvider'
@@ -23,7 +23,7 @@ const Container = styled.div`
 `
 
 export const YouTubeFocusMusicPlayer = () => {
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
   const [{ url }] = useYouTubeFocusPreference()
   const { isPlaying, setState } = useYouTubeFocusMusic()
 

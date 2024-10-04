@@ -1,9 +1,9 @@
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { productName } from '@increaser/config'
 
 export const ManageLifeTimeDeal = () => {
-  const { lifeTimeDeal } = useAssertUserState()
+  const { lifeTimeDeal } = useUser()
 
   if (!lifeTimeDeal) return null
 

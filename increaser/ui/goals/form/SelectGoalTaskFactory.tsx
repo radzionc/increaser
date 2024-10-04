@@ -1,5 +1,5 @@
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
@@ -20,7 +20,7 @@ export const SelectGoalTaskFactory = ({
   onFinish,
   options,
 }: SelectGoalTaskFactoryProps) => {
-  const { taskFactories } = useAssertUserState()
+  const { taskFactories } = useUser()
   return (
     <Container
       value={null}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { AddProject } from './AddProject'
 import { useActiveProjects } from '@increaser/ui/projects/hooks/useActiveProjects'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { FocusProjectOption } from './FocusProjectOption'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
@@ -21,7 +21,7 @@ export const FocusProjectInput = () => {
   const options = useActiveProjects()
 
   const [{ projectId }, setState] = useFocusTarget()
-  const { projects, tasks } = useAssertUserState()
+  const { projects, tasks } = useUser()
 
   useRunOnChange(() => {
     setIsOpen(false)

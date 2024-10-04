@@ -4,7 +4,7 @@ import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
 import { VStack } from '@lib/ui/css/stack'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { useState } from 'react'
@@ -26,7 +26,7 @@ export const AddSound = ({ onFinish }: NoValueFinishProps) => {
     name: '',
   })
 
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
 
   const validateUnique = getUniqueValueValidator(

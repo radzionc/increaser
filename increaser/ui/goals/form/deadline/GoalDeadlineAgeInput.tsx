@@ -1,6 +1,6 @@
 import { InputProps } from '@lib/ui/props'
 import { useMemo } from 'react'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { range } from '@lib/utils/array/range'
@@ -10,7 +10,7 @@ export const GoalDeadlineAgeInput = ({
   value,
   onChange,
 }: InputProps<number>) => {
-  const { dob } = useAssertUserState()
+  const { dob } = useUser()
   const userAge = getUserAgeAt({
     dob: shouldBePresent(dob),
     at: Date.now(),

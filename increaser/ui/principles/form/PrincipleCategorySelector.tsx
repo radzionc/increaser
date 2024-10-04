@@ -8,7 +8,7 @@ import { OptionContent } from '@lib/ui/select/OptionContent'
 import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
 import { useEffect } from 'react'
 import { usePrincipleCategories } from '../categories/hooks/usePrincipleCategories'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { HStack } from '@lib/ui/css/stack'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 
@@ -18,7 +18,7 @@ export const PrincipleCategorySelector = ({
   autoFocus = false,
 }: InputProps<string> & { autoFocus?: boolean }) => {
   const principleCategories = usePrincipleCategories()
-  const { principleCategories: record } = useAssertUserState()
+  const { principleCategories: record } = useUser()
   const options = principleCategories.map(({ id }) => id)
 
   const {

@@ -20,7 +20,7 @@ import { AddTaskChecklist } from '@increaser/ui/tasks/form/checklist/AddTaskChec
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
 
@@ -32,7 +32,7 @@ type TaskFormShape = Pick<
 export const FocusTaskOverview = () => {
   const task = shouldBePresent(useFocusTargetTask())
   const { id } = task
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   const initialValue = useMemo(
     () =>

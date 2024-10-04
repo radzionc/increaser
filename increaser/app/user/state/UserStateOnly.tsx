@@ -1,21 +1,8 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-
-import { useEffect } from 'react'
-import { useAuthRedirect } from '@increaser/app/auth/hooks/useAuthRedirect'
-import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
-import { useUserState } from '@increaser/ui/user/UserStateContext'
+import { useUserQuery } from '@increaser/ui/user/queries/useUserQuery'
 
 export const UserStateOnly = ({ children }: ComponentWithChildrenProps) => {
-  const { state } = useUserState()
-  const { toAuthenticationPage } = useAuthRedirect()
+  const { data } = useUserQuery()
 
-  const [authSession] = useAuthSession()
-
-  useEffect(() => {
-    if (!authSession) {
-      toAuthenticationPage()
-    }
-  }, [authSession, toAuthenticationPage])
-
-  return state ? <>{children}</> : null
+  return data ? <>{children}</> : null
 }

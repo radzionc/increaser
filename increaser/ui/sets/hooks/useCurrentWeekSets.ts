@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const useCurrentWeekSets = () => {
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
 
   const startOfWeek = useStartOfWeek()
 

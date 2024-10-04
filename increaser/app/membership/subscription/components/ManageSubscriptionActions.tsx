@@ -6,7 +6,7 @@ import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDepen
 import { HStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { Match } from '@lib/ui/base/Match'
@@ -25,7 +25,7 @@ export const ManageSubscriptionActions = () => {
   const [stage, setStage] = useState<Stage | null>(null)
   const query = useManageSubscriptionQuery()
 
-  const user = useAssertUserState()
+  const user = useUser()
   const { subscription } = user
   const { planId } = shouldBeDefined(subscription ?? undefined)
 

@@ -2,7 +2,7 @@ import styled, { useTheme } from 'styled-components'
 import { range } from '@lib/utils/array/range'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { HStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -43,7 +43,7 @@ export const WorkTimeChartYLabels = ({
   end,
   ...rest
 }: WorkTimeChartYLabels) => {
-  const user = useAssertUserState()
+  const user = useUser()
 
   const marksCount = (end - start) / dayMomentStep + 1
   const markStep = Math.round(Math.ceil(marksCount / maxLabels) / 2) * 2

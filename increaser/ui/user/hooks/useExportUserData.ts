@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
-import { useAssertUserState } from '../UserStateContext'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUserFileKey'
 import { omit } from '@lib/utils/record/omit'
 import { userReadonlyFields } from '@increaser/entities/User'
+import { useUser } from '../state/user'
 
 export const useExportUserData = () => {
-  const user = useAssertUserState()
+  const user = useUser()
 
   return useCallback(() => {
     const { vision, ...rest } = omit(

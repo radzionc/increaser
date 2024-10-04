@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useMemo } from 'react'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { startOfDay } from 'date-fns'
@@ -7,7 +7,7 @@ import { useWorkTimeReportLastDayStartedAt } from './useWorkTimeReportLastDaySta
 import { workTimeChartConfig } from '../config'
 
 export const useWorkTimeReportStartedAt = () => {
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
   const lastDayStartedAt = useWorkTimeReportLastDayStartedAt()
 
   return useMemo(() => {

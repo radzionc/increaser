@@ -6,13 +6,13 @@ import { ScoreboardTable } from './ScoreboardTable'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { ScoreboardPeriod } from '@increaser/entities/PerformanceScoreboard'
 import { useApiQuery } from '@increaser/api-ui/hooks/useApiQuery'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { PublicProfilePrompt } from './PublicProfilePrompt'
 
 export const ScoreboardContent = () => {
   const scoreboardPeriod: ScoreboardPeriod = 'week'
   const query = useApiQuery('scoreboard', { id: scoreboardPeriod })
-  const { isAnonymous } = useAssertUserState()
+  const { isAnonymous } = useUser()
 
   return (
     <QueryDependant

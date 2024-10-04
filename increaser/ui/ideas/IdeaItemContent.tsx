@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useCurrentIdea } from './CurrentIdeaProvider'
 import { getColor } from '@lib/ui/theme/getters'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { IdeaDescription } from './IdeaDescription'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
@@ -25,7 +25,7 @@ const Container = styled(VStack)`
 
 export const IdeaItemContent = () => {
   const { description, name, projectId } = useCurrentIdea()
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   return (
     <Container>

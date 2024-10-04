@@ -2,11 +2,11 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { useCurrentTask } from './CurrentTaskProvider'
 import { TaskCompletionInput } from './TaskCompletionInput'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const TaskCheckBox = () => {
   const { status, id } = useCurrentTask()
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 

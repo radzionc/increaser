@@ -1,9 +1,9 @@
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const useWorkDayEndsAt = () => {
-  const { finishWorkAt } = useAssertUserState()
+  const { finishWorkAt } = useUser()
 
   const todayStartedAt = useStartOfDay()
 

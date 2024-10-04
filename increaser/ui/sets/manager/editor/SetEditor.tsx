@@ -11,7 +11,7 @@ import { FloatingIntervalDuration } from '@lib/ui/timeline/FloatingIntervalDurat
 import { InteractiveDragArea } from '@lib/ui/timeline/InteractiveDragArea'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import styled, { useTheme } from 'styled-components'
 import { useWeekdayPassedInterval } from '@lib/ui/time/hooks/useWeekdayPassedInterval'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
@@ -30,7 +30,7 @@ const CurrentInterval = styled(CurrentIntervalRect)`
 `
 
 export const SetEditor = () => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const [value, setActiveSet] = usePresentState(useActiveSet())
   const [weekday] = useSelectedWeekday()
   const dayInterval = useWeekdayPassedInterval(weekday)

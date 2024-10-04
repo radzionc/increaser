@@ -1,4 +1,3 @@
-import { UserStateOnly } from '../user/state/UserStateOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 
@@ -17,7 +16,7 @@ export const GoalsLayout = ({ children }: ComponentWithChildrenProps) => {
             <PageHeader>
               <PageViewNavigation />
             </PageHeader>
-            <UserStateOnly>{children}</UserStateOnly>
+            {children}
           </PageHeaderControlsAreaProvider>
         </PageContent>
       </PageContainer>

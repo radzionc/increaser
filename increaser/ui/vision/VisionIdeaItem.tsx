@@ -13,7 +13,7 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 import { SafeImage } from '@lib/ui/images/SafeImage'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
 import { VisionAttributeIdea } from '@increaser/entities/Vision'
@@ -90,7 +90,7 @@ export const VisionIdeaItem = ({
   const { mutate: deleteVisionAttribute } =
     useDeleteUserEntityMutation('visionAttribute')
 
-  const { vision } = useAssertUserState()
+  const { vision } = useUser()
 
   const isAdded = id in vision
 

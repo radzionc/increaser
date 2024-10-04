@@ -3,11 +3,11 @@ import { useMemo } from 'react'
 import { SetItem } from '@increaser/ui/sets/manager/SetItem'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const Sessions = () => {
   const interval = useCurrentInterval()
-  const { sets: allSets } = useAssertUserState()
+  const { sets: allSets } = useUser()
 
   const sets = useMemo(() => {
     return allSets.filter(

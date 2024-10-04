@@ -8,7 +8,7 @@ import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
@@ -28,7 +28,7 @@ export const CreateProjectForm = ({
   onFinish,
   onMutationFinish,
 }: CreateProjectFormProps) => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(projects).map(({ color }) => color)
   const [value, setValue] = useState<ProjectFormShape>({

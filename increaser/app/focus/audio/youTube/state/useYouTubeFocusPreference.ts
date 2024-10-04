@@ -2,7 +2,7 @@ import {
   PersistentStateKey,
   usePersistentState,
 } from '@increaser/ui/state/persistentState'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useCallback } from 'react'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
@@ -11,7 +11,7 @@ type YouTubeFocusPreference = {
 }
 
 export const useYouTubeFocusPreference = () => {
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
 
   return useStateCorrector(
     usePersistentState<YouTubeFocusPreference>(

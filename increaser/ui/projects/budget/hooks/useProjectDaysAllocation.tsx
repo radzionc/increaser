@@ -3,7 +3,7 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { range } from '@lib/utils/array/range'
 import { sum } from '@lib/utils/array/sum'
 import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWorkBudgetTotal'
 import { useActiveProjects } from '../../hooks/useActiveProjects'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -13,7 +13,7 @@ export const useProjectDaysAllocation = () => {
 
   const { workingDays } = useCurrentProject()
 
-  const { workdayHours, weekendHours } = useAssertUserState()
+  const { workdayHours, weekendHours } = useUser()
 
   return useMemo(() => {
     if (workingDays === 'workdays') {

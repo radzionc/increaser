@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { suggestFocusDuration } from '../../FocusDuration'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useTodaySets } from '../../../sets/hooks/useTodaySets'
 import { MS_IN_MIN } from '@lib/utils/time'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
@@ -34,7 +34,7 @@ export const FocusLauncherDurationProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const todayStartedAt = useStartOfDay()
-  const { finishWorkAt } = useAssertUserState()
+  const { finishWorkAt } = useUser()
   const todaySets = useTodaySets()
 
   const [value, setValue] = useState<FocusDuration>(() =>

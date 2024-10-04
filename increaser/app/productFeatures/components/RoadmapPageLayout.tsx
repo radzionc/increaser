@@ -1,6 +1,5 @@
 import { PageContainer } from '@increaser/app/ui/page/PageContainer'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
-import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import styled from 'styled-components'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -53,25 +52,21 @@ export const RoadmapPageLayout = ({ children }: ComponentWithChildrenProps) => {
                       <PagePrimaryNavigation />
                     </PageHeader>
 
-                    <UserStateOnly>
-                      <VStack gap={20}>
-                        {isSmall && <SideContent />}
-                        {children}
-                      </VStack>
-                    </UserStateOnly>
+                    <VStack gap={20}>
+                      {isSmall && <SideContent />}
+                      {children}
+                    </VStack>
                   </ProductFeaturesViewProvider>
                 </PageContent>
                 {!isSmall && (
-                  <UserStateOnly>
-                    <SideContainer style={{ gap: 0 }}>
-                      <PageHeader>
-                        <PageTitle style={{ paddingLeft: panelDefaultPadding }}>
-                          Request a Feature
-                        </PageTitle>
-                      </PageHeader>
-                      <SideContent />
-                    </SideContainer>
-                  </UserStateOnly>
+                  <SideContainer style={{ gap: 0 }}>
+                    <PageHeader>
+                      <PageTitle style={{ paddingLeft: panelDefaultPadding }}>
+                        Request a Feature
+                      </PageTitle>
+                    </PageHeader>
+                    <SideContent />
+                  </SideContainer>
                 )}
               </Content>
             </PageContainer>

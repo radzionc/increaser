@@ -1,6 +1,6 @@
 import { ContextState } from '@lib/ui/state/ContextState'
 import { createContext, useState } from 'react'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { createContextHook } from '@lib/ui/state/createContextHook'
@@ -12,7 +12,7 @@ const Context = createContext<ContextState<string | null> | undefined>(
 export const ActiveTaskIdProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   const [value, setValue] = useStateCorrector(
     useState<string | null>(null),

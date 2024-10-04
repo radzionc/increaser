@@ -1,9 +1,9 @@
 import { otherProjectId } from '@increaser/entities/Project'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 
 export const AddProjectsPrompt = () => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   return (
     <ShyInfoBlock>

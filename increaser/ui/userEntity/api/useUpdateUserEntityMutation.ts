@@ -1,8 +1,4 @@
 import { useMutation } from '@tanstack/react-query'
-import {
-  useAssertUserState,
-  useUserState,
-} from '@increaser/ui/user/UserStateContext'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import {
   UserEntity,
@@ -11,6 +7,8 @@ import {
 } from '@increaser/entities/User'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { processedByApi } from './shared'
+import { useUpdateUser, useUser } from '../../user/state/user'
+import { useUserQuery } from '../../user/queries/useUserQuery'
 
 export type UpdateUserEntityInput<T extends UserEntity> = {
   fields: Partial<Omit<UserEntityType[T], 'id'>>
@@ -22,8 +20,9 @@ export const affectOtherEntitiesOnUpdate: UserEntity[] = ['taskFactory']
 export const useUpdateUserEntityMutation = <T extends UserEntity>(
   entity: T,
 ) => {
-  const user = useAssertUserState()
-  const { updateState, pullRemoteState } = useUserState()
+  const user = useUser()
+  const updateState = useUpdateUser()
+  const { refetch } = useUserQuery()
   const api = useApi()
 
   return useMutation({
@@ -51,7 +50,7 @@ export const useUpdateUserEntityMutation = <T extends UserEntity>(
       }
 
       if (affectOtherEntitiesOnUpdate.includes(entity)) {
-        pullRemoteState()
+        refetch()
       }
     },
   })

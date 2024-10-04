@@ -4,7 +4,7 @@ import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDepen
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { ProductFeatureItem } from './ProductFeatureItem'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { CurrentProductFeatureProvider } from './CurrentProductFeatureProvider'
 import { VStack } from '@lib/ui/css/stack'
 import { ProductFeatureStatus } from '@increaser/entities/ProductFeature'
@@ -15,7 +15,7 @@ type ProductFeatureListProps = {
 
 export const ProductFeatureList = ({ status }: ProductFeatureListProps) => {
   const featuresQuery = useApiQuery('features', undefined)
-  const { id } = useAssertUserState()
+  const { id } = useUser()
 
   return (
     <VStack>

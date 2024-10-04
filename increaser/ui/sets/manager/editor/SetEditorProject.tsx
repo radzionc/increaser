@@ -1,7 +1,7 @@
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { ProjectSelector } from '@increaser/ui/projects/ProjectSelector'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveSet } from '../ActiveSetProvider'
@@ -12,7 +12,7 @@ import { OptionContent } from '@lib/ui/select/OptionContent'
 
 export const SetEditorProject = () => {
   const [activeSet, setActiveSet] = usePresentState(useActiveSet())
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   const { emoji, name } = projects[activeSet.projectId]
 

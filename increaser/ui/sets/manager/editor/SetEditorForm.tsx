@@ -2,7 +2,7 @@ import { SetEditorContent } from './SetEditorContent'
 import { SetEditorHeader } from './SetEditorHeader'
 import { useCallback, useEffect, useMemo } from 'react'
 import { usePresentState } from '@lib/ui/state/usePresentState'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { areEqualIntervals } from '@lib/utils/interval/areEqualIntervals'
 import { areIntersecting } from '@lib/utils/interval/areIntersecting'
@@ -28,7 +28,7 @@ export const SetEditorForm = () => {
   const { start, end, projectId, initialSet } = activeSet
 
   const type = useActiveSetType()
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
 
   const isDisabled = useMemo(() => {
     const hasIntersection = sets.some((set) => {

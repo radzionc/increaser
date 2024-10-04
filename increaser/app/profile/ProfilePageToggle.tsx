@@ -1,11 +1,11 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserProfileMutation } from '@increaser/app/community/hooks/useUpdateUserProfileMutation'
 import { Switch } from '@lib/ui/inputs/Switch'
 import { WithHint } from '@lib/ui/tooltips/WithHint'
 import { useIsPayingUser } from '../membership/hooks/useIsPayingUser'
 
 export const ProfilePageToggle = () => {
-  const { isAnonymous } = useAssertUserState()
+  const { isAnonymous } = useUser()
   const { mutate: updateUser } = useUpdateUserProfileMutation()
   const isPaying = useIsPayingUser()
 

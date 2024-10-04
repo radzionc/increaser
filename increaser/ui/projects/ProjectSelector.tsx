@@ -1,6 +1,6 @@
 import { ComponentWithActiveState, InputProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useActiveProjects } from '../projects/hooks/useActiveProjects'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { OptionItem } from '@lib/ui/select/OptionItem'
@@ -34,7 +34,7 @@ export const ProjectSelector = ({
   renderOpener,
 }: ProjectSelectorProps) => {
   const activeProjects = useActiveProjects()
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const options = [
     ...activeProjects.map((project) => project.id),
     addProjectKey,

@@ -4,7 +4,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { VStack } from '@lib/ui/css/stack'
 import { FocusBreakdownItemInfo } from './FocusBreakdownItemInfo'
 import { FocusTimeBreakdownItem } from './FocusTimeBreakdownItem'
@@ -28,7 +28,7 @@ const Container = styled.div`
 `
 
 export const FocusTimeBreakdown = () => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   const { colors } = useTheme()
 

@@ -2,7 +2,7 @@ import { PrincipleIdea } from '@increaser/entities-utils/principle/principleIdea
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { useCreateUserEntityMutation } from '../userEntity/api/useCreateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../userEntity/api/useDeleteUserEntityMutation'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { defaultPrincipleCategories } from '@increaser/entities/PrincipleCategory'
 import { findBy } from '@lib/utils/array/findBy'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -15,7 +15,7 @@ import { Button } from '@lib/ui/buttons/Button'
 export const AddPrincipleIdea = ({
   value: { id, description, name, categoryId },
 }: ComponentWithValueProps<PrincipleIdea>) => {
-  const { principles, principleCategories } = useAssertUserState()
+  const { principles, principleCategories } = useUser()
   const { mutate: createPrinciple } = useCreateUserEntityMutation('principle')
   const { mutate: createPrincipleCategory } =
     useCreateUserEntityMutation('principleCategory')

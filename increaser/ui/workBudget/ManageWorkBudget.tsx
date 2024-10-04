@@ -1,5 +1,5 @@
 import { VStack } from '@lib/ui/css/stack'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useTheme } from 'styled-components'
 import { WorkBudgetInput } from '@increaser/ui/workBudget/WorkBudgetInput'
 import { getWorkdayColor } from '@increaser/ui/workBudget/getWorkdayColor'
@@ -17,7 +17,7 @@ import { workdaysNumber } from '@lib/utils/time/workweek'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 
 export const ManageWorkBudget = () => {
-  const { workdayHours, weekendHours } = useAssertUserState()
+  const { workdayHours, weekendHours } = useUser()
 
   const { mutate: updateUser } = useUpdateUserMutation()
 

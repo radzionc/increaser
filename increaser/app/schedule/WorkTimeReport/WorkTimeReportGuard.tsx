@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
@@ -9,7 +9,7 @@ export const WorkTimeReportGuard = ({
   children,
 }: ComponentWithChildrenProps) => {
   const [{ includeToday }] = useWorkTimeReportPreferences()
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
   const todayStartedAt = useStartOfDay()
 
   const message = useMemo(() => {

@@ -17,7 +17,7 @@ import { BudgetHoursInput } from './BudgetHoursInput'
 import { WorkdingDaysInput } from '@increaser/ui/projects/budget/WorkingDaysInput'
 import { ProjectGoalInput } from './ProjectGoalInput'
 import { useActiveProjects } from '../hooks/useActiveProjects'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 
 type WeeklyGoalShape = {
@@ -29,7 +29,7 @@ type WeeklyGoalShape = {
 
 export const AddBudgetForm = ({ onFinish }: NoValueFinishProps) => {
   const activeProjects = useActiveProjects()
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   const options = useMemo(
     () => activeProjects.filter((p) => !p.allocatedMinutesPerWeek),

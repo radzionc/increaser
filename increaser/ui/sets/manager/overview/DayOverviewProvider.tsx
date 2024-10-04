@@ -5,7 +5,7 @@ import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { isToday } from 'date-fns'
 import { createContext, useMemo } from 'react'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
@@ -47,7 +47,7 @@ export const DayOverviewProvider = ({
 
   const [intervals] = useFocusIntervals()
 
-  const { sets: allSets } = useAssertUserState()
+  const { sets: allSets } = useUser()
 
   const sets = useMemo(() => {
     const result: DayOverviewSet[] = getDaySets(allSets, dayStartedAt).map(
@@ -70,7 +70,7 @@ export const DayOverviewProvider = ({
     return result
   }, [allSets, currentTime, dayStartedAt, intervals, lastSetsSnapshot])
 
-  const { startWorkAt, finishWorkAt } = useAssertUserState()
+  const { startWorkAt, finishWorkAt } = useUser()
 
   const startHour = useMemo(() => {
     if (sets.length) {

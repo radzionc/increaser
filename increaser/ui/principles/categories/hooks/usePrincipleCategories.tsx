@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const usePrincipleCategories = () => {
-  const { principleCategories } = useAssertUserState()
+  const { principleCategories } = useUser()
 
   return useMemo(
     () =>

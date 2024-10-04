@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
@@ -13,7 +13,7 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
 
 export const CreateVisionAttributeForm = ({ onFinish }: NoValueFinishProps) => {
-  const { vision } = useAssertUserState()
+  const { vision } = useUser()
   const [value, setValue] = useState<VisionAttributeFormShape>({
     name: '',
     imageId: null,

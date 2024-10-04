@@ -1,11 +1,11 @@
 import { User } from '@increaser/entities/User'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useMutation } from '@tanstack/react-query'
-import { useUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUser } from '../state/user'
 
 export const useUpdateUserMutation = () => {
   const api = useApi()
-  const { updateState } = useUserState()
+  const updateState = useUpdateUser()
 
   return useMutation({
     mutationFn: async (input: Partial<User>) => {

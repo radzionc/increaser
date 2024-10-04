@@ -1,5 +1,4 @@
 import { Page } from '@lib/next-ui/Page'
-import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { PageContainer } from '../../ui/page/PageContainer'
 import { PageContent } from '../../ui/page/PageContent'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
@@ -19,11 +18,9 @@ export const CommunityPage: Page = () => {
         <PageHeader>
           <PagePrimaryNavigation />
         </PageHeader>
-        <UserStateOnly>
-          <Content>
-            <ScoreboardContent />
-          </Content>
-        </UserStateOnly>
+        <Content>
+          <ScoreboardContent />
+        </Content>
       </PageContent>
     </PageContainer>
   )

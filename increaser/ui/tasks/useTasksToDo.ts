@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
 
 export const useTasksToDo = () => {
   const [projectId] = useProjectFilter()
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   return useMemo(() => {
     const items = Object.values(tasks).filter((task) => task.status === 'todo')

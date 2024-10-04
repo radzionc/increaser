@@ -1,6 +1,5 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../../focus/components/AppPageLayout'
-import { UserStateOnly } from '../../user/state/UserStateOnly'
 import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
 import { PageContainer } from '../../ui/page/PageContainer'
@@ -16,7 +15,7 @@ export const HabitsLayout = ({ children }: ComponentWithChildrenProps) => {
             <PageHeader>
               <PagePrimaryNavigation />
             </PageHeader>
-            <UserStateOnly>{children}</UserStateOnly>
+            {children}
           </PageHeaderControlsAreaProvider>
         </PageContent>
       </PageContainer>

@@ -1,6 +1,6 @@
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { freeTrialDays, productName } from '@increaser/config'
 import { useIsPayingUser } from '../../hooks/useIsPayingUser'
@@ -9,7 +9,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 
 export const FreeTrialStatus = () => {
-  const { freeTrialEnd } = useAssertUserState()
+  const { freeTrialEnd } = useUser()
 
   const isPayingUser = useIsPayingUser()
 

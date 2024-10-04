@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { getColor } from '@lib/ui/theme/getters'
@@ -55,7 +55,7 @@ const PositionTime = styled(PositionAbsolutelyCenterVertically)`
 `
 
 export const ScheduleVisualization = () => {
-  const userState = useAssertUserState()
+  const userState = useUser()
   const schedule = pick(userState, dayMoments)
 
   const eventsOrganizedByTime = useMemo(() => {

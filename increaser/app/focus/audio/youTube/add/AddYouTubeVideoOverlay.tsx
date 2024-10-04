@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { validateUrl } from '@lib/utils/validation/validateUrl'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
@@ -42,7 +42,7 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
 
   const [, setPreference] = useYouTubeFocusPreference()
 
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
 
   const validateUnique = getUniqueValueValidator(

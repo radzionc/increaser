@@ -1,4 +1,3 @@
-import { UserStateOnly } from '../user/state/UserStateOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 
@@ -15,7 +14,7 @@ export const PreferencesLayout = ({ children }: ComponentWithChildrenProps) => {
           <PageHeader>
             <PagePrimaryNavigation />
           </PageHeader>
-          <UserStateOnly>{children}</UserStateOnly>
+          {children}
         </PageContent>
       </PageContainer>
     </AppPageLayout>

@@ -17,7 +17,7 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { formatDuration } from '@lib/utils/time/formatDuration'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { OptionItem } from '@lib/ui/select/OptionItem'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
@@ -54,7 +54,7 @@ export const SetItemOverview = ({
   const [, setActiveSet] = useActiveSet()
   const { mutate: deleteSet } = useDeleteSetMutation()
 
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   const options = useMemo(() => {
     if (!value.isEditable) {

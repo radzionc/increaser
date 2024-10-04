@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { order } from '@lib/utils/array/order'
 import { taskCadence } from '@increaser/entities/TaskFactory'
 
 export const useTaskFactories = () => {
-  const { taskFactories } = useAssertUserState()
+  const { taskFactories } = useUser()
 
   return useMemo(
     () =>

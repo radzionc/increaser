@@ -1,5 +1,4 @@
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
-import { UserStateOnly } from '../user/state/UserStateOnly'
 import { Match } from '@lib/ui/base/Match'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { NavigationToInternalPage } from './Sidebar/NavigationToInternalPage'
@@ -14,11 +13,7 @@ export const SidebarNavigationItem = ({
       focus={() => (
         <NavigationToInternalPage
           value="focus"
-          decoration={
-            <UserStateOnly>
-              <FocusNavigationDecoration />
-            </UserStateOnly>
-          }
+          decoration={<FocusNavigationDecoration />}
         />
       )}
       habits={() => <NavigationToInternalPage value="habits" />}

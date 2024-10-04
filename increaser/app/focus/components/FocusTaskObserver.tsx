@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { useAssertFocusIntervals } from '../state/focusIntervals'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 export const FocusTaskObserver = () => {
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   const intervals = useAssertFocusIntervals()
 

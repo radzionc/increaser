@@ -12,7 +12,7 @@ import { getColor, matchColor } from '@lib/ui/theme/getters'
 import { format } from 'date-fns'
 import { useWorkTimeReportStartedAt } from './hooks/useWorkTimeReportStartedAt'
 import { useWorkTimeReportDays } from './hooks/useWorkTimeReportDays'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
 import { getSegmentIndex } from '@lib/utils/math/getSegmentIndex'
@@ -71,7 +71,7 @@ export const WorkTimeChart = () => {
   const reportStartedAt = useWorkTimeReportStartedAt()
   const days = useWorkTimeReportDays()
   const workDays = useMemo(() => withoutNull(days), [days])
-  const { startWorkAt, finishWorkAt } = useAssertUserState()
+  const { startWorkAt, finishWorkAt } = useUser()
 
   const boundaries = useMemo(() => {
     return [

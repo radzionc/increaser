@@ -2,7 +2,7 @@ import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { useCurrentPrinciple } from './CurrentPrincipleProvider'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { PrincipleDescription } from './PrincipleDescription'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
@@ -16,7 +16,7 @@ const Container = styled(VStack)`
 
 export const PrincipleItemContent = () => {
   const { description, name, categoryId } = useCurrentPrinciple()
-  const { principleCategories } = useAssertUserState()
+  const { principleCategories } = useUser()
 
   return (
     <Container>

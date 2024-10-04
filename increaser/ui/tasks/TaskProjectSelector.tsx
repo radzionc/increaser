@@ -1,6 +1,6 @@
 import { InputProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ExpandableInputOpener } from '@lib/ui/inputs/ExpandableInputOpener'
 import { ProjectSelector } from '@increaser/ui/projects/ProjectSelector'
 
@@ -9,7 +9,7 @@ export const TaskProjectSelector = ({
   onChange,
   autoFocus = false,
 }: InputProps<string> & { autoFocus?: boolean }) => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   return (
     <ProjectSelector

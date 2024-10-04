@@ -2,7 +2,7 @@ import { Interval } from '@lib/utils/interval/Interval'
 import { useMemo } from 'react'
 import { useWorkTimeReportStartedAt } from './useWorkTimeReportStartedAt'
 import { useWorkTimeReportDaysCount } from './useWorkTimeReportDaysCount'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { range } from '@lib/utils/array/range'
 import { startOfDay } from 'date-fns'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -12,7 +12,7 @@ export const useWorkTimeReportDays = () => {
   const startedAt = useWorkTimeReportStartedAt()
   const daysCount = useWorkTimeReportDaysCount()
   const lastDayStartedAt = useWorkTimeReportLastDayStartedAt()
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
 
   const days = useMemo(() => {
     const result: (Interval | null)[] = range(daysCount).map(() => null)

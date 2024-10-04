@@ -1,5 +1,5 @@
 import { useCurrentGoal } from './CurrentGoalProvider'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { taskCadenceName } from '@increaser/entities/TaskFactory'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Text } from '@lib/ui/text'
@@ -9,7 +9,7 @@ import { VStack } from '@lib/ui/css/stack'
 
 export const GoalTaskFactories = () => {
   const { taskFactories } = useCurrentGoal()
-  const { taskFactories: taskFactoriesRecord } = useAssertUserState()
+  const { taskFactories: taskFactoriesRecord } = useUser()
 
   return (
     <VStack>

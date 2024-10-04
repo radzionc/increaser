@@ -1,7 +1,7 @@
 import { useSubscriptionBillingCycle } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { PaddleIFrame } from '@increaser/paddle-classic-ui/components/PaddleIFrame'
 import { paddleProductCode } from '@increaser/paddle-classic-ui/paddleProductCode'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { Flow } from '@lib/ui/base/Flow'
@@ -28,7 +28,7 @@ export const SubscriptionCheckout = () => {
   })
 
   const [billingCycle] = useSubscriptionBillingCycle()
-  const user = useAssertUserState()
+  const user = useUser()
 
   const analytics = useAnalytics()
 

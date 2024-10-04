@@ -4,18 +4,18 @@ import { User } from '@sentry/nextjs'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { getApiQueryKey } from '@increaser/api-ui/hooks/useApiQuery'
 import { useMutation } from '@tanstack/react-query'
-import { useUserState } from '@increaser/ui/user/UserStateContext'
+import { useUpdateUser } from '@increaser/ui/user/state/user'
 
 export const useUpdateUserProfileMutation = () => {
   const invalidate = useInvalidateQueries()
   const api = useApi()
-  const { updateState } = useUserState()
+  const updateUser = useUpdateUser()
 
   return useMutation({
     mutationFn: (
       fields: Partial<Pick<User, 'name' | 'country' | 'isAnonymous'>>,
     ) => {
-      updateState(fields)
+      updateUser(fields)
       return api.call('updateUser', fields)
     },
     onSuccess: () => {

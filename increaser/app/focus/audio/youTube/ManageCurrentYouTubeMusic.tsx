@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useYouTubeFocusPreference } from './state/useYouTubeFocusPreference'
 import { HStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Text } from '@lib/ui/text'
 import { transition } from '@lib/ui/css/transition'
@@ -27,7 +27,7 @@ const Container = styled(HStack)`
 
 export const ManageCurrentYouTubeMusic = () => {
   const [{ url }] = useYouTubeFocusPreference()
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
   const { isPlaying, setState } = useYouTubeFocusMusic()
 
   const { name } = shouldBePresent(

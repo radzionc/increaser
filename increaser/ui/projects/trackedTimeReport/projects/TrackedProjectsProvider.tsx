@@ -1,5 +1,5 @@
 import { setupMemoProvider } from '@lib/ui/state/setupMemoProvider'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
 import { useStartOfMonth } from '@lib/ui/hooks/useStartOfMonth'
 import { useShouldHideProjectNames } from '../hideProjectNames/useShouldHideProjectNames'
@@ -47,13 +47,7 @@ export const {
 } = setupMemoProvider({
   name: 'TrackedProjects',
   useValue: () => {
-    const {
-      sets,
-      weeks,
-      months,
-      years,
-      projects: allProjects,
-    } = useAssertUserState()
+    const { sets, weeks, months, years, projects: allProjects } = useUser()
 
     const weekStartedAt = useStartOfWeek()
     const monthStartedAt = useStartOfMonth()

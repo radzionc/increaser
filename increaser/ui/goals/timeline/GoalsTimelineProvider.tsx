@@ -1,7 +1,7 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { GoalsTimelinContext } from './state/GoalsTimelineContext'
 import { useMemo } from 'react'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { fromDay, stringToDay } from '@lib/utils/time/Day'
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -19,7 +19,7 @@ export const GoalsTimelineProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const goals = useFilteredScheduledGoals()
-  const { dob: potentialDob } = useAssertUserState()
+  const { dob: potentialDob } = useUser()
   const dob = shouldBePresent(potentialDob)
 
   const [start, minEnd] = useMemo(() => {

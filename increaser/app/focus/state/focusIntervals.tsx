@@ -9,7 +9,7 @@ import {
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { useCallback } from 'react'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useFocusTarget } from './useFocusTarget'
 import { correctRecordFields } from '@lib/utils/record/correctRecordFields'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -25,7 +25,7 @@ export type FocusInterval = ProjectRelatedEntity & {
 export const { provider: FocusIntervalsProvider, useState: useFocusIntervals } =
   memoizeWithProvider<FocusInterval[] | null>({
     useState: () => {
-      const { tasks, projects } = useAssertUserState()
+      const { tasks, projects } = useUser()
 
       const [{ projectId, taskId }] = useFocusTarget()
 

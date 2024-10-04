@@ -3,11 +3,11 @@ import { useTheme } from 'styled-components'
 import { useCurrentDayTarget } from './useCurrentDayTarget'
 import { usePrevDayTarget } from './usePrevDayTarget'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const useProjectBudgetOffsetColor = (id: string) => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(id)
 
   const project = projects[id]

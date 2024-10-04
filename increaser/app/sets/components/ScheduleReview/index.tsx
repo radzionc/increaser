@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ScheduleCheckItem } from './ScheduleCheckItem'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { VStack } from '@lib/ui/css/stack'
@@ -11,7 +11,7 @@ const lastMealBedTimeHoursTarget = 3
 
 export const ScheduleReview = () => {
   const { finishWorkAt, goToBedAt, wakeUpAt, firstMealAt, lastMealAt } =
-    useAssertUserState()
+    useUser()
 
   return (
     <VStack style={{ maxWidth: 320, minWidth: 240 }} gap={16}>

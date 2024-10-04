@@ -1,11 +1,11 @@
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useMemo } from 'react'
 import { order } from '@lib/utils/array/order'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const useTodayTasks = () => {
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
   const todayStartedAt = useStartOfDay()
 
   return useMemo(

@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -25,7 +25,7 @@ export const ManageSchedule = () => {
     goToBedAt,
     firstMealAt,
     lastMealAt,
-  } = useAssertUserState()
+  } = useUser()
 
   const manageWakeUp = (
     <ManageDayMoment

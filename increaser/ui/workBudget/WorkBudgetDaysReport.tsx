@@ -1,4 +1,4 @@
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { VStack } from '@lib/ui/css/stack'
@@ -23,7 +23,7 @@ const minDays = 7
 export const WorkBudgetDaysReport = () => {
   const todayStartedAt = useStartOfDay()
 
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
 
   const lastDayStartedAt = todayStartedAt - convertDuration(1, 'd', 'ms')
 

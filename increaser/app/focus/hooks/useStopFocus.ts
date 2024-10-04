@@ -7,7 +7,7 @@ import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { getTasksTimeSpent } from '@increaser/ui/focus/utils/getTasksTimeSpent'
 import { useAddSetsMutation } from '@increaser/ui/sets/api/useAddSetsMutation'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
@@ -27,7 +27,7 @@ export const useStopFocus = () => {
   const todaySets = useTodaySets()
   const [, setFocusDuration] = useFocusDuration()
 
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   const intervals = useAssertFocusIntervals()
 

@@ -2,7 +2,6 @@ import { Page } from '@lib/next-ui/Page'
 
 import { PageContainer } from '@increaser/app/ui/page/PageContainer'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
-import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { PayingUserGuard } from './PayingUserGuard'
 import { ProfilePageToggle } from './ProfilePageToggle'
 import { VStack } from '@lib/ui/css/stack'
@@ -19,14 +18,12 @@ export const ProfilePage: Page = () => {
         <PageHeader>
           <PagePrimaryNavigation />
         </PageHeader>
-        <UserStateOnly>
-          <VStack gap={12}>
-            <ProfilePageToggle />
-            <PayingUserGuard>
-              <ProfileForm />
-            </PayingUserGuard>
-          </VStack>
-        </UserStateOnly>
+        <VStack gap={12}>
+          <ProfilePageToggle />
+          <PayingUserGuard>
+            <ProfileForm />
+          </PayingUserGuard>
+        </VStack>
       </PageContent>
     </PageContainer>
   )

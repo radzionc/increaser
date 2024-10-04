@@ -1,7 +1,7 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { getStateProviderSetup } from '@lib/ui/state/getStateProviderSetup'
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const { useState: useSetEndTime, provider: FocusEndTimeProvider } =
   getStateProviderSetup<number>('SetEndTime')
@@ -9,7 +9,7 @@ export const { useState: useSetEndTime, provider: FocusEndTimeProvider } =
 export const SetEndTimeProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
   const lastSet = getLastItem(sets)
 
   return (

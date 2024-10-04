@@ -1,4 +1,4 @@
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { GoalsTimelineProvider } from './GoalsTimelineProvider'
 import { VStack } from '@lib/ui/css/stack'
 import { TimeLabels } from './TimeLabels'
@@ -24,7 +24,7 @@ const LabelsContainer = styled.div`
 `
 
 export const GoalsTimeline = () => {
-  const { dob } = useAssertUserState()
+  const { dob } = useUser()
 
   if (dob) {
     return (

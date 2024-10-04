@@ -22,7 +22,7 @@ import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 type EditTaskFormContentProps = NoValueFinishProps
@@ -40,7 +40,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
     'status',
   ])
   const [value, setValue] = useState<TaskFormShape>(initialValue)
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
   const { mutate: deleteTask } = useDeleteUserEntityMutation('task')

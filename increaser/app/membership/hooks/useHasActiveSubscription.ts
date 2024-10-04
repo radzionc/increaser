@@ -1,10 +1,10 @@
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { isActiveSubscription } from '@increaser/entities-utils/subscription/isActiveSubscription'
 
 export const useHasActiveSubscription = () => {
-  const { subscription } = useAssertUserState()
+  const { subscription } = useUser()
 
   useRhythmicRerender(convertDuration(1, 'min', 'ms'))
 

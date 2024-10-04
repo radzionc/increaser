@@ -4,7 +4,7 @@ import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbs
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { HStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -49,7 +49,7 @@ export const DayTimeLabels = ({
   endHour,
   ...rest
 }: DayTimeLabelsProps) => {
-  const user = useAssertUserState()
+  const user = useUser()
 
   const marksCount =
     (endHour - startHour) / convertDuration(dayMomentStep, 'min', 'h') + 1

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getAppPath } from '@increaser/ui/navigation/app'
-import { useUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useMemo } from 'react'
 import { productUpdates } from '@increaser/changelog/productUpdates'
 import styled from 'styled-components'
@@ -33,7 +33,7 @@ const Wrapper = styled(IconWrapper)`
 `
 
 export const FeaturesNavigationItem = () => {
-  const { state: user } = useUserState()
+  const user = useUser()
   const newFeaturesCount = useMemo(() => {
     if (!user) {
       return 0

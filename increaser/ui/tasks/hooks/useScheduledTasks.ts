@@ -1,9 +1,9 @@
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useMemo } from 'react'
 import { ScheduledTask } from '@increaser/entities/Task'
 
 export const useScheduledTasks = (): ScheduledTask[] => {
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   return useMemo(() => {
     const result: ScheduledTask[] = []

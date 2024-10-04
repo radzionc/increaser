@@ -2,17 +2,14 @@ import { recordMap } from '@lib/utils/record/recordMap'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useMutation } from '@tanstack/react-query'
-import {
-  useAssertUserState,
-  useUserState,
-} from '@increaser/ui/user/UserStateContext'
+import { useUpdateUser, useUser } from '../../user/state/user'
 
 export type TrackHabitInput = { id: string; date: string; value: boolean }
 
 export const useTrackHabitMutation = () => {
-  const { habits } = useAssertUserState()
+  const { habits } = useUser()
   const api = useApi()
-  const { updateState } = useUserState()
+  const updateState = useUpdateUser()
 
   const analytics = useAnalytics()
 

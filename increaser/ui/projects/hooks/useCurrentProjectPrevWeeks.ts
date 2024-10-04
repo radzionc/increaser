@@ -3,11 +3,11 @@ import { useMemo } from 'react'
 import { range } from '@lib/utils/array/range'
 import { toWeek, weekToString } from '@lib/utils/time/Week'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useCurrentProject } from '../CurrentProjectProvider'
 
 export const useCurrentProjectPrevWeeks = (maxWeeks: number) => {
-  const { weeks } = useAssertUserState()
+  const { weeks } = useUser()
   const { id } = useCurrentProject()
 
   const currentWeekStartedAt = useStartOfWeek()

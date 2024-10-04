@@ -1,16 +1,13 @@
 import { useMutation } from '@tanstack/react-query'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
-import {
-  useAssertUserState,
-  useUserState,
-} from '@increaser/ui/user/UserStateContext'
 import { deleteSet } from '@increaser/entities-utils/set/deleteSet'
 import { Interval } from '@lib/utils/interval/Interval'
+import { useUpdateUser, useUser } from '../../user/state/user'
 
 export const useDeleteSetMutation = () => {
   const api = useApi()
-  const { updateState } = useUserState()
-  const { sets } = useAssertUserState()
+  const updateState = useUpdateUser()
+  const { sets } = useUser()
 
   return useMutation({
     mutationFn: (value: Interval) => {

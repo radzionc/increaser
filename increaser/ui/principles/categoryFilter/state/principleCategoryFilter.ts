@@ -1,14 +1,14 @@
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
 import { useCallback, useMemo } from 'react'
-import { useAssertUserState } from '../../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import {
   PersistentStateKey,
   usePersistentState,
 } from '../../../state/persistentState'
 
 export const usePrincipleCategoryFilter = () => {
-  const { principleCategories } = useAssertUserState()
+  const { principleCategories } = useUser()
 
   return useStateCorrector(
     usePersistentState<string | null>(

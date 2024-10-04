@@ -9,7 +9,7 @@ import { Panel } from '@lib/ui/css/panel'
 import { Match } from '@lib/ui/base/Match'
 import { useWorkTimeReportDays } from './hooks/useWorkTimeReportDays'
 import { Interval } from '@lib/utils/interval/Interval'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { pluralize } from '@lib/utils/pluralize'
 import { toPercents } from '@lib/utils/toPercents'
 import { withoutNull } from '@lib/utils/array/withoutNull'
@@ -31,7 +31,7 @@ type WorkTimeStat = (typeof workTimeStats)[number]
 
 export const WorkTimeStats = () => {
   const days = useWorkTimeReportDays()
-  const { finishWorkAt } = useAssertUserState()
+  const { finishWorkAt } = useUser()
   const workDays = useMemo(() => withoutNull(days), [days])
 
   return (

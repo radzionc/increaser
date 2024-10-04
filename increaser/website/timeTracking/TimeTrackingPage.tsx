@@ -2,7 +2,6 @@ import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
 import { TimeTrackingSlice } from '../landing/demo/TimeTrackingSlice'
-import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { freeTrialDays, productName } from '@increaser/config'
 import {
@@ -36,13 +35,11 @@ export const TimeTrackingPage = () => (
       title={`Time Tracking for Productivity | ${productName} - Boost Your Efficiency`}
       description={`Enhance your productivity with ${productName}'s time tracking feature. Manage your projects, analyze your work habits, and optimize your time. Start your ${freeTrialDays}-day free trial today!`}
     />
-    <DemoUserStateProvider>
-      <MockApiProvider>
-        <PrimaryWebsiteSlice>
-          <TimeTrackingSlice titleAs="h1" />
-        </PrimaryWebsiteSlice>
-      </MockApiProvider>
-    </DemoUserStateProvider>
+    <MockApiProvider>
+      <PrimaryWebsiteSlice>
+        <TimeTrackingSlice titleAs="h1" />
+      </PrimaryWebsiteSlice>
+    </MockApiProvider>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

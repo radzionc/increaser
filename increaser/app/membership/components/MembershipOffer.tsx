@@ -1,6 +1,6 @@
 import { SubscriptionBillingCycleProvider } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
 import { SubscriptionCheckout } from '@increaser/app/membership/subscription/components/SubscriptionCheckout'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { Panel } from '@lib/ui/css/panel'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
@@ -17,7 +17,7 @@ const Container = styled(Panel)`
 `
 
 export const MembershipOffer = () => {
-  const { lifeTimeDeal, subscription } = useAssertUserState()
+  const { lifeTimeDeal, subscription } = useUser()
 
   if (lifeTimeDeal || (subscription && !subscription.endsAt)) {
     return null

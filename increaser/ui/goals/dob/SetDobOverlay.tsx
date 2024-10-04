@@ -3,14 +3,14 @@ import { stringToDay, dayToString, Day } from '@lib/utils/time/Day'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { useState } from 'react'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useDobBoundaries } from './useDobBoundaries'
 import { getDefaultDob } from './getDefaultDob'
 import { Modal } from '@lib/ui/modal'
 import { FormActions } from '@lib/ui/form/components/FormActions'
 
 export const SetDobOverlay = ({ onFinish }: NoValueFinishProps) => {
-  const { dob } = useAssertUserState()
+  const { dob } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
   const [value, setValue] = useState<Day>(() => {
     if (dob) {

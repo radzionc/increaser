@@ -2,16 +2,14 @@ import { useMemo } from 'react'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { useTheme } from 'styled-components'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { order } from '@lib/utils/array/order'
 import { HabitsContext } from '@increaser/ui/habits/HabitsContext'
 import { enhanceHabit } from '@increaser/ui/habits/utils/enhanceHabit'
-import { useTrackHabitMutation } from '@increaser/ui/habits/api/useTrackHabitMutation'
 
 export const HabitsProvider = ({ children }: ComponentWithChildrenProps) => {
   const todayStartedAt = useStartOfDay()
-  const state = useAssertUserState()
-  const { mutate } = useTrackHabitMutation()
+  const state = useUser()
 
   const theme = useTheme()
 
@@ -31,7 +29,6 @@ export const HabitsProvider = ({ children }: ComponentWithChildrenProps) => {
     <HabitsContext.Provider
       value={{
         habits,
-        trackHabit: mutate,
       }}
     >
       {children}

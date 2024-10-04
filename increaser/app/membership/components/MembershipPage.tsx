@@ -1,4 +1,3 @@
-import { UserStateOnly } from '../../user/state/UserStateOnly'
 import { MembershipOverview } from './MembershipOverview'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { MembershipPersuasion } from './MembershipPersuasion'
@@ -14,16 +13,14 @@ export const MembershipPage = () => {
         <PageHeader>
           <PagePrimaryNavigation />
         </PageHeader>
-        <UserStateOnly>
-          <UniformColumnGrid
-            style={{ alignItems: 'start' }}
-            gap={40}
-            minChildrenWidth={320}
-          >
-            <MembershipOverview />
-            <MembershipPersuasion />
-          </UniformColumnGrid>
-        </UserStateOnly>
+        <UniformColumnGrid
+          style={{ alignItems: 'start' }}
+          gap={40}
+          minChildrenWidth={320}
+        >
+          <MembershipOverview />
+          <MembershipPersuasion />
+        </UniformColumnGrid>
       </PageContent>
     </PageContainer>
   )

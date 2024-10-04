@@ -20,7 +20,7 @@ import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { BarChart } from '@lib/ui/charts/BarChart'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 const maxWeeks = 4
 const minWeeks = 2
@@ -28,7 +28,7 @@ const minWeeks = 2
 export const WorkBudgetWeeksReport = () => {
   const weekStartedAt = useStartOfWeek()
 
-  const { weeks } = useAssertUserState()
+  const { weeks } = useUser()
 
   const lastWeekStartedAt = weekStartedAt - convertDuration(1, 'w', 'ms')
 

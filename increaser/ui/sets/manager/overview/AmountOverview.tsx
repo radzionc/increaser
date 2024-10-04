@@ -12,7 +12,7 @@ import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { useTheme } from 'styled-components'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { ProjectsAllocationLine } from '../../../projects/ProjectsAllocationLine'
 import { getProjectsTotalRecord } from '@increaser/entities-utils/project/getProjectsTotalRecord'
@@ -26,7 +26,7 @@ export const AmountOverview = () => {
   const currentDayBudget = daysBudget[weekday]
   const projectsTotal = getProjectsTotalRecord(sets)
 
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const theme = useTheme()
 
   return (

@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
 import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { toPercents } from '@lib/utils/toPercents'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useFocusDuration } from '../../state/focusDuration'
 import { useAssertFocusIntervals } from '../../state/focusIntervals'
 
@@ -27,7 +27,7 @@ export const SessionIntervals = () => {
 
   const { start } = intervals[0]
 
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const {
     colors: { getLabelColor },
   } = useTheme()

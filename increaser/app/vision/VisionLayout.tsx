@@ -1,6 +1,5 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { AppPageLayout } from '../focus/components/AppPageLayout'
-import { UserStateOnly } from '../user/state/UserStateOnly'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 import { PageHeader } from '../ui/page/header/PageHeader'
@@ -12,16 +11,10 @@ export const VisionLayout = ({ children }: ComponentWithChildrenProps) => {
     <AppPageLayout>
       <PageContainer>
         <PageContent>
-          <PageHeader
-            controls={
-              <UserStateOnly>
-                <AddVisionAttribute />
-              </UserStateOnly>
-            }
-          >
+          <PageHeader controls={<AddVisionAttribute />}>
             <PagePrimaryNavigation />
           </PageHeader>
-          <UserStateOnly>{children}</UserStateOnly>
+          {children}
         </PageContent>
       </PageContainer>
     </AppPageLayout>

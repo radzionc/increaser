@@ -1,8 +1,4 @@
 import { useMutation } from '@tanstack/react-query'
-import {
-  useAssertUserState,
-  useUserState,
-} from '@increaser/ui/user/UserStateContext'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import {
   UserEntity,
@@ -12,6 +8,8 @@ import {
 import { pick } from '@lib/utils/record/pick'
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { processedByApi } from './shared'
+import { useUpdateUser, useUser } from '../../user/state/user'
+import { useUserQuery } from '../../user/queries/useUserQuery'
 
 const affectOtherEntitiesOnCreate: UserEntity[] = ['taskFactory']
 
@@ -57,8 +55,9 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
   entity: T,
   options?: CreateUserEntityMutationOptions<T>,
 ) => {
-  const user = useAssertUserState()
-  const { updateState, pullRemoteState } = useUserState()
+  const user = useUser()
+  const updateState = useUpdateUser()
+  const { refetch } = useUserQuery()
   const api = useApi()
   const { trackEvent } = useAnalytics()
 
@@ -92,7 +91,7 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
       }
 
       if (affectOtherEntitiesOnCreate.includes(entity)) {
-        pullRemoteState()
+        refetch()
       }
 
       return result

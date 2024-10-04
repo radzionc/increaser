@@ -1,7 +1,6 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
-import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import {
   FeatureVideoSlice,
@@ -28,13 +27,11 @@ export const HabitsPage = () => (
       title={`Build and Track Productive Habits with Increaser`}
       description={`Develop and maintain healthy, productive habits with Increaser. Track your progress, set daily goals, and achieve a balanced lifestyle. Start building better habits today with Increaser!`}
     />
-    <DemoUserStateProvider>
-      <MockApiProvider>
-        <PrimaryWebsiteSlice>
-          <HabitsSlice titleAs="h1" />
-        </PrimaryWebsiteSlice>
-      </MockApiProvider>
-    </DemoUserStateProvider>
+    <MockApiProvider>
+      <PrimaryWebsiteSlice>
+        <HabitsSlice titleAs="h1" />
+      </PrimaryWebsiteSlice>
+    </MockApiProvider>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

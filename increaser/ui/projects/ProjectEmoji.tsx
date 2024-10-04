@@ -1,8 +1,8 @@
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
-import { useAssertUserState } from '../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const ProjectEmoji = ({ id }: EntityWithId) => {
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   return <>{projects[id].emoji}</>
 }

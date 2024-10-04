@@ -1,7 +1,6 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
-import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import {
   FeatureVideoSlice,
@@ -28,13 +27,11 @@ export const WorkBudgetPage = () => (
       title={`Maximize Productivity with Increaser's Work Budget Tool`}
       description={`Set and manage your ideal work hours with Increaser's Work Budget feature. Plan your workweek, allocate time for projects, and achieve a better work-life balance. Start maximizing your productivity with Increaser today!`}
     />
-    <DemoUserStateProvider>
-      <MockApiProvider>
-        <PrimaryWebsiteSlice>
-          <WorkBudgetSlice titleAs="h1" />
-        </PrimaryWebsiteSlice>
-      </MockApiProvider>
-    </DemoUserStateProvider>
+    <MockApiProvider>
+      <PrimaryWebsiteSlice>
+        <WorkBudgetSlice titleAs="h1" />
+      </PrimaryWebsiteSlice>
+    </MockApiProvider>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

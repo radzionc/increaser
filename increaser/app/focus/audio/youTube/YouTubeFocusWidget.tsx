@@ -4,7 +4,7 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { SoundItem } from './SoundItem'
 import { match } from '@lib/utils/match'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { YouTubeFocusAudioHeader } from './YouTubeFocusAudioHeader'
 import styled from 'styled-components'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
@@ -21,7 +21,7 @@ const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
 
 export const YouTubeFocusWidget = () => {
-  const { focusSounds } = useAssertUserState()
+  const { focusSounds } = useUser()
 
   const [soundsView] = usePersistentState<SoundsView>(
     PersistentStateKey.FocusSoundsView,

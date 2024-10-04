@@ -4,7 +4,7 @@ import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'
 import { useFocusTarget } from '../../state/useFocusTarget'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormContent'
 import { isEmpty } from '@lib/utils/array/isEmpty'
@@ -25,7 +25,7 @@ export const FocusTaskInput = () => {
 
   const [{ taskId }, setState] = useFocusTarget()
 
-  const { tasks } = useAssertUserState()
+  const { tasks } = useUser()
 
   useRunOnChange(() => {
     setIsOpen(false)

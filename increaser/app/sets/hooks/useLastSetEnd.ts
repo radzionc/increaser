@@ -1,8 +1,8 @@
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const useLastSetEnd = () => {
-  const { sets } = useAssertUserState()
+  const { sets } = useUser()
 
   return getLastItem(sets)?.end || null
 }

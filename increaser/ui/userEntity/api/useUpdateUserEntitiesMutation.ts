@@ -1,8 +1,4 @@
 import { useMutation } from '@tanstack/react-query'
-import {
-  useAssertUserState,
-  useUserState,
-} from '@increaser/ui/user/UserStateContext'
 import { useApi } from '@increaser/api-ui/state/ApiContext'
 import {
   UserEntity,
@@ -15,12 +11,15 @@ import {
   UpdateUserEntityInput,
 } from './useUpdateUserEntityMutation'
 import { processedByApi } from './shared'
+import { useUpdateUser, useUser } from '../../user/state/user'
+import { useUserQuery } from '../../user/queries/useUserQuery'
 
 export const useUpdateUserEntitiesMutation = <T extends UserEntity>(
   entity: T,
 ) => {
-  const user = useAssertUserState()
-  const { updateState, pullRemoteState } = useUserState()
+  const user = useUser()
+  const updateState = useUpdateUser()
+  const { refetch } = useUserQuery()
   const api = useApi()
 
   return useMutation({
@@ -52,7 +51,7 @@ export const useUpdateUserEntitiesMutation = <T extends UserEntity>(
       }
 
       if (affectOtherEntitiesOnUpdate.includes(entity)) {
-        pullRemoteState()
+        refetch()
       }
     },
   })

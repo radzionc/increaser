@@ -5,7 +5,7 @@ import { ProjectFormShape } from './ProjectFormShape'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ProjectStatusInput } from './ProjectStatusInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DeleteProject } from './DeleteProject'
@@ -27,7 +27,7 @@ type EditProjectFormShape = ProjectFormShape & {
 
 export const EditProjectForm = () => {
   const project = useCurrentProject()
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
   const { id } = project
   const usedColors = Object.values(projects).map(({ color }) => color)
 

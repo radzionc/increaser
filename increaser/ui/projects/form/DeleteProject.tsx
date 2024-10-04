@@ -7,7 +7,7 @@ import { Text } from '@lib/ui/text'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { otherProjectId } from '@increaser/entities/Project'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { Button } from '@lib/ui/buttons/Button'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
@@ -20,7 +20,7 @@ export const DeleteProject = () => {
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
-  const { projects } = useAssertUserState()
+  const { projects } = useUser()
 
   if (!couldProjectBeDeleted(id)) {
     return null

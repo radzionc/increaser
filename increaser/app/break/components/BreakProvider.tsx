@@ -13,7 +13,6 @@ import { pluralizeName } from '@lib/utils/pluralize'
 import { range } from '@lib/utils/array/range'
 import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
 import { MS_IN_MIN, MS_IN_SEC } from '@lib/utils/time'
 
 import { BreakContext, BreakDuration } from '../context/BreakContext'
@@ -27,6 +26,7 @@ import { speak } from '@lib/ui/notifications/utils/speak'
 import { focusDurations } from '@increaser/entities/FocusDuration'
 import { useFocusIntervals } from '../../focus/state/focusIntervals'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useUser } from '@increaser/ui/user/state/user'
 
 export const remindersCount = 5
 
@@ -61,7 +61,7 @@ export const BreakProvider = ({ children }: Props) => {
   const [breakDuration, setBreakDuration] = useState<BreakDuration>(undefined)
 
   const todayStartedAt = useStartOfDay()
-  const { finishWorkAt } = useAssertUserState()
+  const { finishWorkAt } = useUser()
   const sets = useTodaySets()
   const [intervals] = useFocusIntervals()
 

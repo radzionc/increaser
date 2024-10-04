@@ -1,7 +1,6 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 
 import { MockApiProvider } from '@increaser/website/api/MockApiProvider'
-import { DemoUserStateProvider } from '../landing/demo/DemoUserStateProvider'
 import {
   FeatureVideoSlice,
   FeatureVideoSliceProps,
@@ -28,13 +27,11 @@ export const TasksPage = () => (
       title={`Organize and Manage Your Tasks Efficiently | Increaser Task Management`}
       description={`Stay on top of your workload with Increaser's powerful task management feature. Organize tasks by deadlines, prioritize projects, and track progress to boost your productivity and achieve your goals. Try Increaser today!`}
     />
-    <DemoUserStateProvider>
-      <MockApiProvider>
-        <VStack>
-          <TasksSlice titleAs="h1" />
-        </VStack>
-      </MockApiProvider>
-    </DemoUserStateProvider>
+    <MockApiProvider>
+      <VStack>
+        <TasksSlice titleAs="h1" />
+      </VStack>
+    </MockApiProvider>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
     ))}

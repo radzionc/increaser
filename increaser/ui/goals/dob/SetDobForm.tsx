@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { useAssertUserState } from '../../user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { Panel } from '@lib/ui/css/panel'
 import { useDobBoundaries } from './useDobBoundaries'
 import { getDefaultDob } from './getDefaultDob'
@@ -22,7 +22,7 @@ const Container = styled(HStack)`
 `
 
 export const SetDobForm = ({ onFinish }: NoValueFinishProps) => {
-  const { dob } = useAssertUserState()
+  const { dob } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
   const [value, setValue] = useState<Day>(() => {
     if (dob) {

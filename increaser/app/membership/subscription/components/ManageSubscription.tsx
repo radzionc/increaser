@@ -1,6 +1,6 @@
 import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
-import { useAssertUserState } from '@increaser/ui/user/UserStateContext'
+import { useUser } from '@increaser/ui/user/state/user'
 import { ManageSubscriptionActions } from './ManageSubscriptionActions'
 import { mirrorRecord } from '@lib/utils/record/mirrorRecord'
 import { format } from 'date-fns'
@@ -9,7 +9,7 @@ import { paddleProductCode } from '@increaser/paddle-classic-ui/paddleProductCod
 const subscriptionDateFormat = 'dd MMMM yyyy'
 
 export const ManageSubscription = () => {
-  const { subscription } = useAssertUserState()
+  const { subscription } = useUser()
 
   if (!subscription) return null
 

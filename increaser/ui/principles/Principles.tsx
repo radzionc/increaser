@@ -6,7 +6,6 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddPrinciple } from './AddPrinciple'
 import styled from 'styled-components'
 import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
-import { UserStateOnly } from '@increaser/app/user/state/UserStateOnly'
 import { PrincipleCategoryFilter } from './categoryFilter/PrincipleCategoryFilter'
 import { useFilterByPrincipleCategory } from './categoryFilter/state/principleCategoryFilter'
 import { Principle } from '@increaser/entities/Principle'
@@ -27,9 +26,7 @@ export const Principles = () => {
   return (
     <Container>
       <PageHeaderControlsArea>
-        <UserStateOnly>
-          <PrincipleCategoryFilter />
-        </UserStateOnly>
+        <PrincipleCategoryFilter />
         <AddPrinciple />
       </PageHeaderControlsArea>
       <ActiveItemIdProvider initialValue={null}>
