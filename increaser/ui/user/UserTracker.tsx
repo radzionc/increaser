@@ -1,7 +1,7 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
-import { setUserIdForErrorMonitoring } from '@increaser/app/errors/errorMonitoring'
 import { useEffect } from 'react'
 import { useUser } from './state/user'
+import { setUserIdForErrorMonitoring } from '../errors/errorMonitoring'
 
 export const UserTracker = () => {
   const { id } = useUser()
