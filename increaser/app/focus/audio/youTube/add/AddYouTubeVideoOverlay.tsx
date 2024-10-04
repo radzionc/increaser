@@ -72,18 +72,24 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
         isDisabled,
         onClose,
         onSubmit: () => {
-          updateUser({
-            focusSounds: [
-              {
-                url: value.url,
-                name: value.name,
-                favourite: true,
+          updateUser(
+            {
+              focusSounds: [
+                {
+                  url: value.url,
+                  name: value.name,
+                  favourite: true,
+                },
+                ...focusSounds,
+              ],
+            },
+            {
+              onSettled: () => {
+                setPreference((prev) => ({ ...prev, url: value.url }))
+                onClose()
               },
-              ...focusSounds,
-            ],
-          })
-          setPreference((prev) => ({ ...prev, url: value.url }))
-          onClose()
+            },
+          )
         },
       })}
       footer={<CreateFormFooter onCancel={onClose} isDisabled={isDisabled} />}

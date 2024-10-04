@@ -9,9 +9,11 @@ export const useUpdateUserMutation = () => {
 
   return useMutation({
     mutationFn: async (input: Partial<User>) => {
-      updateState(input)
-
       return api.call('updateUser', input)
+    },
+    onMutate: async (input: Partial<User>) => {
+      updateState(input)
+      return { input }
     },
   })
 }
