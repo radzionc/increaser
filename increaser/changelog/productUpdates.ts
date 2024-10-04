@@ -3,15 +3,36 @@ import { ProductUpdate } from './ProductUpdate'
 export const productUpdates: ProductUpdate[] = [
   {
     releasedAt: 0,
-    name: '',
-    description: '',
-    items: [],
-    youtube: '',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    name: 'Smarter Session Control and Enhanced Focus Sounds',
+    description:
+      "We've added powerful new features to make your focus sessions more flexible and the sounds that accompany them more intuitive.",
+    items: [
+      {
+        description:
+          'You can now adjust the end time when finishing a focus session, ensuring your tracked time is accurate even if you forgot to stop the session.',
+      },
+      {
+        description:
+          "When a session goes too long and is auto-stopped, you'll be able to adjust the session end time with a simple editor that opens automatically.",
+      },
+      {
+        description:
+          'Focus sounds navigation is now more comfortable, so you can set up the perfect environment without distractions.',
+      },
+      {
+        description:
+          'When adding a YouTube video to focus sounds, the name is automatically filled in from the video title, and you’ll see a preview before adding.',
+      },
+    ],
+    youtube: 'https://youtu.be/UY5OX6xEWOc',
+    telegram: 'https://t.me/increaser_app/53',
+    x: 'https://x.com/increaser_app/status/1842220656965931336',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7247934636830453761',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/give-your-focus-sessions-the-flexibility-they-deserve--O8MLW0vpevQWM-KOsNZ',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1fw1fug/more_control_over_focus_sessions_enhanced_focus/',
   },
 
   {
