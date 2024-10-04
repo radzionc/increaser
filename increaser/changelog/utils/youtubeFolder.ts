@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const youTubeFolders = path.resolve(__dirname, '../../../changelog')
+const youTubeFolders = path.resolve(__dirname, '../../../../changelog')
 
 const latestDirectory = path.join(youTubeFolders, 'latest')
 
