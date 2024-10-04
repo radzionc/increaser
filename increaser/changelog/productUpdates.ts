@@ -2,7 +2,7 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 0,
+    releasedAt: 1728054756723,
     name: 'Smarter Session Control and Enhanced Focus Sounds',
     description:
       "We've added powerful new features to make your focus sessions more flexible and the sounds that accompany them more intuitive.",
