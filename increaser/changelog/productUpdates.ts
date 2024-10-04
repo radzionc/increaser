@@ -2,6 +2,19 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 0,
+    name: '',
+    description: '',
+    items: [],
+    youtube: '',
+    telegram: '',
+    x: '',
+    linkedIn: '',
+    indieHackers: '',
+    reddit: '',
+  },
+
+  {
     releasedAt: 1727537960954,
     name: 'More Control Over Reports and Filters',
     description:
