@@ -25,6 +25,7 @@ export const WeekChartXAxis = ({ value }: ComponentWithValueProps<number>) => {
         const isSelected = index === value
         return (
           <PositionAbsolutelyCenterVertically
+            key={index}
             left={toPercents(index / (D_IN_WEEK - 1))}
           >
             <Text color={isSelected ? 'contrast' : 'shy'} size={12}>

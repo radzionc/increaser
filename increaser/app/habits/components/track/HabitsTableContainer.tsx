@@ -18,8 +18,8 @@ export const HabitsTableContainer = ({
       <VStack>
         <Spacer height={trackHabitsConfig.labelHeight} />
         <TrackHabitsColumn>
-          {habits.map(({ emoji, name }) => (
-            <Text size={14} weight="500" color="contrast">
+          {habits.map(({ emoji, name, id }) => (
+            <Text key={id} size={14} weight="500" color="contrast">
               <EmojiTextPrefix size={16} emoji={emoji} />
               {name}
             </Text>

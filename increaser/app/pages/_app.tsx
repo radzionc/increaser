@@ -15,6 +15,8 @@ import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMu
 import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
+import { AuthenticatedOnly } from '../auth/components/AuthenticatedOnly'
+import { UserManager } from '@increaser/ui/user/UserManager'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -41,6 +43,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
             <ApiProvider>
               <PWAProvider>
                 <YouTubeFocusMusicProvider>
+                  <AuthenticatedOnly>
+                    <UserManager />
+                  </AuthenticatedOnly>
                   {component}
                 </YouTubeFocusMusicProvider>
               </PWAProvider>

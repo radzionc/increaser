@@ -3,7 +3,6 @@ import { Navigation } from '../../navigation'
 import { ErrorBoundary } from '@increaser/app/errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from '../../errors/components/ErrorFallbackCard'
 import { FocusManager } from '@increaser/ui/focus/FocusManager'
-import { UserManager } from '@increaser/ui/user/UserManager'
 import { BreakProvider } from '../../break/components/BreakProvider'
 import { HabitsProvider } from '../../habits/components/HabitsProvider'
 import { MembershipConfirmation } from '../../membership/components/MembershipConfirmation'
@@ -16,7 +15,6 @@ export const AppPageLayout = ({ children }: ComponentWithChildrenProps) => {
     <AuthenticatedOnly>
       <UserStateOnly>
         <ErrorBoundary fallback={<ErrorFallbackCard />}>
-          <UserManager />
           <HabitsProvider>
             <FocusIntervalsProvider>
               <BreakProvider>
