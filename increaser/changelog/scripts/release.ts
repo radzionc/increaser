@@ -8,6 +8,7 @@ import {
   readProductUpdatesFile,
 } from '../utils/productUpdatesFile'
 import { releaseNewYoutubeFile } from '../utils/youtubeFile'
+import { releaseNewYoutubeFolder } from '../utils/youtubeFolder'
 
 const generate = () => {
   const changelogStr = readChangelogFile()
@@ -40,6 +41,8 @@ const generate = () => {
   })
 
   releaseNewYoutubeFile(releasedAt)
+
+  releaseNewYoutubeFolder()
 }
 
 generate()

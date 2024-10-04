@@ -6,6 +6,7 @@ import {
   readProductUpdatesFile,
 } from '../utils/productUpdatesFile'
 import { createNewYoutubeFile } from '../utils/youtubeFile'
+import { createNewYoutubeFolder } from '../utils/youtubeFolder'
 
 const generate = () => {
   const productUpdatesStr = readProductUpdatesFile()
@@ -21,6 +22,8 @@ const generate = () => {
   })
 
   createNewYoutubeFile()
+
+  createNewYoutubeFolder()
 }
 
 generate()
