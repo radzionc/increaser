@@ -42,7 +42,7 @@ const generate = () => {
 
   releaseNewYoutubeFile(releasedAt)
 
-  releaseNewYoutubeFolder()
+  releaseNewYoutubeFolder(releasedAt)
 }
 
 generate()
