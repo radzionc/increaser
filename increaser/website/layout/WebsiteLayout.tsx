@@ -26,14 +26,23 @@ import {
   productTools,
 } from '@increaser/entities/ProductTool'
 import { getProductToolUrl } from '../navigation/productTool'
-import { ProductFeaturesNavigation } from '../navigation/ProductFeaturesNavigation'
+import { ProductFeaturesNavigation } from '../navigation/features/ProductFeaturesNavigation'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
+import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
+import { getColor } from '@lib/ui/theme/getters'
 
 const LogoWrapper = styled(Link)`
   ${interactive};
   font-size: 20px;
+  display: flex;
+`
+
+const Separator = styled.div`
+  width: 1px;
+  height: 20px;
+  background: ${getColor('mistExtra')};
 `
 
 export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
@@ -65,7 +74,11 @@ export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
       renderTopbarItems={() => (
         <>
           <div />
-          <HStack alignItems="center" gap={20}>
+          <HStackSeparatedBy
+            separator={<Separator />}
+            alignItems="center"
+            gap={8}
+          >
             <ProductFeaturesNavigation />
             <HStack alignItems="center" gap={8}>
               <AppLink to={getAppPath('signIn')}>
@@ -79,7 +92,7 @@ export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
                 </Button>
               </AppLink>
             </HStack>
-          </HStack>
+          </HStackSeparatedBy>
         </>
       )}
       renderOverlayItems={({ onClose }) => (

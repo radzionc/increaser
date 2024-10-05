@@ -1,5 +1,4 @@
 import { productName } from '@increaser/config'
-import { makeRecord } from '@lib/utils/record/makeRecord'
 
 export const productTools = [
   'vision',
@@ -38,10 +37,34 @@ export const productToolNameRecord: Record<ProductTool, string> = {
   goals: 'Goals',
 }
 
-export const productToolColorRecord: Record<ProductTool, number> = makeRecord(
-  productTools,
-  (tool, index) => index + 2,
-)
+export const productToolShortNameRecord: Record<ProductTool, string> = {
+  trackTime: 'Tracking',
+  tasks: 'Tasks',
+  workBudget: 'Budgeting',
+  timePlanner: 'Planning',
+  focus: 'Focus',
+  habits: 'Habits',
+  schedule: 'Scheduling',
+  vision: 'Vision',
+  goals: 'Goals',
+}
+
+export const productToolDescription: Record<ProductTool, string> = {
+  focus: 'Stay in the zone, get more done',
+  habits: 'Build habits that last',
+  timePlanner: 'Master your schedule with ease',
+  schedule: 'Structure your day your way',
+  tasks: 'Conquer tasks, stay on top',
+  trackTime: 'Turn time into progress',
+  vision: 'Craft the life you want',
+  workBudget: 'Balance work, live better',
+  goals: 'Reach your goals faster',
+}
+
+// export const productToolColorRecord: Record<ProductTool, number> = makeRecord(
+//   productTools,
+//   (tool, index) => index + 2,
+// )
 
 export const productToolTitle: Record<ProductTool, string> = {
   focus: 'Achieve More with Sharper Focus',
