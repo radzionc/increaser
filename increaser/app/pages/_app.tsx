@@ -22,7 +22,7 @@ import { FocusManager } from '@increaser/ui/focus/FocusManager'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '800'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 type MyAppProps = AppProps & {

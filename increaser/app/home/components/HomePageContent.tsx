@@ -10,6 +10,12 @@ import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { sidebarConfig } from '../../navigation/Sidebar/config'
 import { useFocusIntervals } from '../../focus/state/focusIntervals'
+import { useTodaySets } from '../../sets/hooks/useTodaySets'
+import { PageHeader } from '../../ui/page/header/PageHeader'
+import { PageTitle } from '@lib/ui/text/PageTitle'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { Header } from '@lib/ui/layout/Header'
+import { FocusEducationPrompt } from '@increaser/ui/focus/education/FocusEducationPrompt'
 
 const Container = styled.div`
   display: flex;
@@ -28,6 +34,25 @@ const MobileContent = styled(VStack)`
 export const HomePageContent = () => {
   const [intervals] = useFocusIntervals()
 
+  const todaySets = useTodaySets()
+
+  const content = (
+    <>
+      {isEmpty(todaySets) ? (
+        <PageHeader>
+          <Header>
+            <PageTitle>Start a focus session</PageTitle>
+            <FocusEducationPrompt />
+          </Header>
+        </PageHeader>
+      ) : (
+        <BreakTimeline />
+      )}
+
+      <FocusLauncher />
+    </>
+  )
+
   return (
     <>
       <ElementSizeAware
@@ -40,14 +65,7 @@ export const HomePageContent = () => {
                 <MobileContent gap={40}>
                   <PageContent fullHeight>
                     <VStack flexGrow gap={40}>
-                      {intervals ? (
-                        <FocusSetWidget />
-                      ) : (
-                        <>
-                          <BreakTimeline />
-                          <FocusLauncher />
-                        </>
-                      )}
+                      {intervals ? <FocusSetWidget /> : content}
                     </VStack>
                   </PageContent>
                   <SetsManager />
@@ -57,14 +75,7 @@ export const HomePageContent = () => {
                   <PageContent flexGrow fullHeight>
                     <ScrollableFlexboxFiller hideScrollbars>
                       <VStack gap={sidebarConfig.gap}>
-                        {intervals ? (
-                          <FocusSetWidget />
-                        ) : (
-                          <>
-                            <BreakTimeline />
-                            <FocusLauncher />
-                          </>
-                        )}
+                        {intervals ? <FocusSetWidget /> : content}
                       </VStack>
                     </ScrollableFlexboxFiller>
                   </PageContent>
