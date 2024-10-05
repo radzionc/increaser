@@ -38,7 +38,7 @@ const IconContainer = styled.div`
 export const ProductToolOption: React.FC<
   ComponentWithValueProps<ProductTool> & ClickableComponentProps
 > = ({ value, onClick }) => (
-  <Container>
+  <Container onClick={onClick}>
     <IconContainer>
       <ProductToolIcon value={value} />
     </IconContainer>
