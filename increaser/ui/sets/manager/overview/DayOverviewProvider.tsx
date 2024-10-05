@@ -15,7 +15,7 @@ import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
 import { useFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
 
 export type DayOverviewSet = Set & {
-  isEditable: boolean
+  isImmutable?: string
 }
 
 interface DayOverviewContextState {
@@ -53,7 +53,10 @@ export const DayOverviewProvider = ({
     const result: DayOverviewSet[] = getDaySets(allSets, dayStartedAt).map(
       (set) => ({
         ...set,
-        isEditable: set.start > lastSetsSnapshot,
+        isImmutable:
+          set.start > lastSetsSnapshot
+            ? undefined
+            : `This session cannot be edited or deleted because it is from the previous month.`,
       }),
     )
     if (intervals && isToday(dayStartedAt)) {
@@ -62,7 +65,7 @@ export const DayOverviewProvider = ({
         now: currentTime,
       }).map((set) => ({
         ...set,
-        isEditable: false,
+        isImmutable: `This session can't be edited or deleted because it's in progress.`,
       }))
       result.push(...sets)
     }

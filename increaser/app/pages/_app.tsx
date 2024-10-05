@@ -17,6 +17,8 @@ import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
 import { AuthenticatedOnly } from '../auth/components/AuthenticatedOnly'
 import { UserManager } from '@increaser/ui/user/UserManager'
+import { UserStateOnly } from '@increaser/ui/user/UserStateOnly'
+import { FocusManager } from '@increaser/ui/focus/FocusManager'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -45,6 +47,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                 <YouTubeFocusMusicProvider>
                   <AuthenticatedOnly>
                     <UserManager />
+                    <UserStateOnly>
+                      <FocusManager />
+                    </UserStateOnly>
                   </AuthenticatedOnly>
                   {component}
                 </YouTubeFocusMusicProvider>

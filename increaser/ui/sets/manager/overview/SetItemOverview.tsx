@@ -57,7 +57,7 @@ export const SetItemOverview = ({
   const { projects } = useUser()
 
   const options = useMemo(() => {
-    if (!value.isEditable) {
+    if (value.isImmutable) {
       return []
     }
     return [
@@ -132,7 +132,7 @@ export const SetItemOverview = ({
             <VStack>
               {isEmpty(options) ? (
                 <Text color="supporting" size={14}>
-                  This session can't be edited or deleted.
+                  {value.isImmutable}
                 </Text>
               ) : (
                 options.map(({ name, onSelect, icon }, index) => {
