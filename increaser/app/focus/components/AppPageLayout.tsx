@@ -5,12 +5,12 @@ import { ErrorFallbackCard } from '@increaser/ui/errors/components/ErrorFallback
 import { BreakProvider } from '../../break/components/BreakProvider'
 import { HabitsProvider } from '../../habits/components/HabitsProvider'
 import { MembershipConfirmation } from '../../membership/components/MembershipConfirmation'
-import { AuthenticatedOnly } from '../../auth/components/AuthenticatedOnly'
 import { UserStateOnly } from '@increaser/ui/user/UserStateOnly'
+import { AuthGuard } from '../../auth/components/AuthGuard'
 
 export const AppPageLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
-    <AuthenticatedOnly>
+    <AuthGuard>
       <UserStateOnly>
         <ErrorBoundary fallback={<ErrorFallbackCard />}>
           <HabitsProvider>
@@ -25,6 +25,6 @@ export const AppPageLayout = ({ children }: ComponentWithChildrenProps) => {
           </HabitsProvider>
         </ErrorBoundary>
       </UserStateOnly>
-    </AuthenticatedOnly>
+    </AuthGuard>
   )
 }
