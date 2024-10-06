@@ -101,6 +101,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onClose={onFinish}
+        onSubmit={onFinish}
       />
       <HStack
         alignItems="center"
