@@ -13,16 +13,10 @@ export const AddGoalTaskFactory = ({ onFinish }: ValueFinishProps<string>) => {
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>
           <CreateTaskFactoryForm
-            onFinish={(id) => {
-              // wait for mutation to finish
-              if (id) return
-
+            onFinish={(taskFactory) => {
               onClose()
-            }}
-            onMutationFinish={(id) => {
-              onClose()
-              if (id) {
-                onFinish(id)
+              if (taskFactory) {
+                onFinish(taskFactory.id)
               }
             }}
           />

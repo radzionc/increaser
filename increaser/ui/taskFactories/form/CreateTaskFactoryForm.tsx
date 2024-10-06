@@ -20,16 +20,12 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 
 type CreateTaskFormProps = {
-  onFinish?: (id?: string) => void
-  onMutationFinish?: (id?: string) => void
+  onFinish?: (value?: TaskFactory) => void
 }
 
 const defaultCadence = 'week'
 
-export const CreateTaskFactoryForm = ({
-  onFinish,
-  onMutationFinish,
-}: CreateTaskFormProps) => {
+export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFactoryFormShape>({
     name: '',
     projectId: otherProject.id,
@@ -39,7 +35,9 @@ export const CreateTaskFactoryForm = ({
     description: '',
     deadlineIndex: cadenceDefaultDeadlineIndex[defaultCadence],
   })
-  const { mutate, isPending } = useCreateUserEntityMutation('taskFactory')
+  const { mutate, isPending } = useCreateUserEntityMutation('taskFactory', {
+    onOptimisticUpdate: onFinish,
+  })
 
   useEffect(() => {
     setValue((prev) => ({
@@ -55,11 +53,8 @@ export const CreateTaskFactoryForm = ({
       id: getId(),
       ...value,
     }
-    onFinish?.(taskFactory.id)
-    mutate(taskFactory, {
-      onSuccess: () => onMutationFinish?.(taskFactory.id),
-    })
-  }, [mutate, onFinish, onMutationFinish, value])
+    mutate(taskFactory)
+  }, [mutate, value])
 
   return (
     <ListItemForm

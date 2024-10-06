@@ -21,13 +21,9 @@ import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 
 type CreateProjectFormProps = {
   onFinish?: (project?: Project) => void
-  onMutationFinish?: (task: Project) => void
 }
 
-export const CreateProjectForm = ({
-  onFinish,
-  onMutationFinish,
-}: CreateProjectFormProps) => {
+export const CreateProjectForm = ({ onFinish }: CreateProjectFormProps) => {
   const { projects } = useUser()
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(projects).map(({ color }) => color)
@@ -39,7 +35,9 @@ export const CreateProjectForm = ({
       used: usedColors,
     }),
   })
-  const { mutate, isPending } = useCreateUserEntityMutation('project')
+  const { mutate, isPending } = useCreateUserEntityMutation('project', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsProjectFormDisabled(value)
 
@@ -54,11 +52,8 @@ export const CreateProjectForm = ({
       workingDays: 'everyday',
       allocatedMinutesPerWeek: 0,
     }
-    onFinish?.(project)
-    mutate(project, {
-      onSuccess: () => onMutationFinish?.(project),
-    })
-  }, [activeProjects, isDisabled, mutate, onFinish, onMutationFinish, value])
+    mutate(project)
+  }, [activeProjects, isDisabled, mutate, value])
 
   return (
     <ListItemForm

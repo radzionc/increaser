@@ -16,12 +16,6 @@ export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
           projectId: projectId ?? undefined,
         })}
         onFinish={(task) => {
-          // wait for mutation to finish
-          if (task) return
-
-          onFinish()
-        }}
-        onMutationFinish={(task) => {
           if (task) {
             setState((state) => ({
               ...state,

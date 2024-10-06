@@ -72,12 +72,6 @@ export const ProjectSelector = ({
         <PanelModal width={460} onFinish={() => setIsAddingProject(false)}>
           <CreateProjectForm
             onFinish={(project) => {
-              // wait for mutation to finish
-              if (project) return
-
-              setIsAddingProject(false)
-            }}
-            onMutationFinish={(project) => {
               setIsAddingProject(false)
               if (project) {
                 onChange(project.id)

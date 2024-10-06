@@ -33,14 +33,11 @@ export const TurnIdeaIntoTask = ({
           <CreateTaskForm
             defaultValue={value}
             onFinish={(task) => {
-              if (!task) {
-                onClose()
-              }
-            }}
-            onMutationFinish={() => {
               onClose()
-              deleteIdea(id)
-              setActiveItemId(null)
+              if (task) {
+                deleteIdea(id)
+                setActiveItemId(null)
+              }
             }}
           />
         </PanelModal>

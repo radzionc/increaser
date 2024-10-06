@@ -49,7 +49,7 @@ export const PaddleIFrame = ({
       override,
       frameStyle: 'width:100%; background-color: transparent; border: none;',
     })
-  }, [className, onClose, override, paddleSdk, product, email, id])
+  }, [email, id, onClose, onSuccess, override, paddleSdk, product])
 
   return <Container className={className} />
 }

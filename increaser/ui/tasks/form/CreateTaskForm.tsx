@@ -21,12 +21,10 @@ import { Button } from '@lib/ui/buttons/Button'
 type CreateTaskFormProps = {
   defaultValue?: Partial<TaskFormShape>
   onFinish?: (task?: Task) => void
-  onMutationFinish?: (task: Task) => void
 }
 
 export const CreateTaskForm = ({
   onFinish,
-  onMutationFinish,
   defaultValue,
 }: CreateTaskFormProps) => {
   const [value, setValue] = useState<TaskFormShape>({
@@ -40,7 +38,9 @@ export const CreateTaskForm = ({
     ...defaultValue,
   })
   const { tasks } = useUser()
-  const { mutate, isPending } = useCreateUserEntityMutation('task')
+  const { mutate, isPending } = useCreateUserEntityMutation('task', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsTaskFormDisabled(value)
 
@@ -69,13 +69,7 @@ export const CreateTaskForm = ({
       deadlineOrder,
     }
 
-    mutate(task, {
-      onSuccess: () => {
-        onMutationFinish?.(task)
-      },
-    })
-
-    onFinish?.()
+    mutate(task)
   }
 
   return (

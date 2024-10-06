@@ -22,15 +22,7 @@ export const AddProject = ({ onFinish }: AddProjectProps) => {
         <PanelModal width={460} onFinish={onClose}>
           <CreateProjectForm
             onFinish={(project) => {
-              // wait for mutation to finish
-              if (project) return
-
-              onFinish?.()
               onClose()
-            }}
-            onMutationFinish={(project) => {
-              onClose()
-              onFinish?.(project)
 
               if (project) {
                 setState((state) => ({
@@ -38,6 +30,7 @@ export const AddProject = ({ onFinish }: AddProjectProps) => {
                   projectId: project.id,
                   taskId: null,
                 }))
+                onFinish?.(project)
               }
             }}
           />

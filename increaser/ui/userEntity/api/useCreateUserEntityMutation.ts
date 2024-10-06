@@ -49,6 +49,7 @@ const trackUserEntityCreation: Partial<{
 
 type CreateUserEntityMutationOptions<T extends UserEntity> = {
   onSuccess?: (value: UserEntityType[T]) => void
+  onOptimisticUpdate?: (value: UserEntityType[T]) => void
 }
 
 export const useCreateUserEntityMutation = <T extends UserEntity>(
@@ -64,12 +65,6 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
   return useMutation({
     mutationFn: async (value: UserEntityType[T]) => {
       const key = userEntityRecordName[entity]
-      updateState({
-        [key]: {
-          ...user[key],
-          [value.id]: value,
-        },
-      })
 
       const result = await api.call('createUserEntity', {
         entity,
@@ -95,6 +90,19 @@ export const useCreateUserEntityMutation = <T extends UserEntity>(
       }
 
       return result
+    },
+    onMutate: async (value: UserEntityType[T]) => {
+      const key = userEntityRecordName[entity]
+      updateState({
+        [key]: {
+          ...user[key],
+          [value.id]: value,
+        },
+      })
+
+      options?.onOptimisticUpdate?.(value)
+
+      return value
     },
     onSuccess: options?.onSuccess,
   })

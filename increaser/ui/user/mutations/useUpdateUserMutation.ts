@@ -3,7 +3,11 @@ import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { useMutation } from '@tanstack/react-query'
 import { useUpdateUser } from '../state/user'
 
-export const useUpdateUserMutation = () => {
+type UpdateUserMutationOptions = {
+  onOptimisticUpdate?: (input: Partial<User>) => void
+}
+
+export const useUpdateUserMutation = (options?: UpdateUserMutationOptions) => {
   const api = useApi()
   const updateState = useUpdateUser()
 
@@ -13,6 +17,9 @@ export const useUpdateUserMutation = () => {
     },
     onMutate: async (input: Partial<User>) => {
       updateState(input)
+
+      options?.onOptimisticUpdate?.(input)
+
       return { input }
     },
   })

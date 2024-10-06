@@ -43,7 +43,12 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
   const [, setPreference] = useYouTubeFocusPreference()
 
   const { focusSounds } = useUser()
-  const { mutate: updateUser } = useUpdateUserMutation()
+  const { mutate: updateUser } = useUpdateUserMutation({
+    onOptimisticUpdate: () => {
+      setPreference((prev) => ({ ...prev, url: value.url }))
+      onClose()
+    },
+  })
 
   const validateUnique = getUniqueValueValidator(
     new Set(focusSounds.map((sound) => sound.url)),
@@ -72,24 +77,16 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
         isDisabled,
         onClose,
         onSubmit: () => {
-          updateUser(
-            {
-              focusSounds: [
-                {
-                  url: value.url,
-                  name: value.name,
-                  favourite: true,
-                },
-                ...focusSounds,
-              ],
-            },
-            {
-              onSettled: () => {
-                setPreference((prev) => ({ ...prev, url: value.url }))
-                onClose()
+          updateUser({
+            focusSounds: [
+              {
+                url: value.url,
+                name: value.name,
+                favourite: true,
               },
-            },
-          )
+              ...focusSounds,
+            ],
+          })
         },
       })}
       footer={<CreateFormFooter onCancel={onClose} isDisabled={isDisabled} />}
