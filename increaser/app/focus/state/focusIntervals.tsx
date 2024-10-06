@@ -8,18 +8,20 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
-import { useCallback } from 'react'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useFocusTarget } from './useFocusTarget'
 import { correctRecordFields } from '@lib/utils/record/correctRecordFields'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { makeUseMemoCallback } from '@lib/ui/state/makeUseMemoCallback'
 
 export type FocusInterval = ProjectRelatedEntity & {
   taskId: string | null
   start: number
   end: number | null
 }
+
+const useCallback = makeUseMemoCallback()
 
 export const useFocusIntervals = () => {
   const { tasks, projects } = useUser()
@@ -33,6 +35,7 @@ export const useFocusIntervals = () => {
     ),
     useCallback(
       (value) => {
+        console.log('correct')
         if (!value) {
           return value
         }
