@@ -48,7 +48,10 @@ export type UserEntityType = {
 
 export type UserEntity = keyof UserEntityType
 
-type UserEntityRecord<T extends UserEntity> = Record<string, UserEntityType[T]>
+export type UserEntityRecord<T extends UserEntity> = Record<
+  string,
+  UserEntityType[T]
+>
 
 type UserEntityRecords = {
   projects: UserEntityRecord<'project'>
