@@ -5,8 +5,18 @@ import { ValueTransition } from '@lib/utils/entities/ValueTransition'
 export class LocalStorage<T extends string> implements PersistentStorage<T> {
   listeners: Record<string, OnValueChangeListener<any>[]> = {}
 
+  cache: Record<string, any> = {}
+
   constructor() {
     window.addEventListener('storage', this.handleStorageEvent)
+  }
+
+  private updateCache = (key: string, newValue: any) => {
+    if (newValue === undefined) {
+      delete this.cache[key]
+    } else {
+      this.cache[key] = newValue
+    }
   }
 
   private handleStorageEvent = (event: StorageEvent) => {
@@ -14,10 +24,11 @@ export class LocalStorage<T extends string> implements PersistentStorage<T> {
 
     if (!key) return
 
-    this.notifyListeners(
-      key,
-      recordMap({ oldValue, newValue }, this.parseValue),
-    )
+    const transition = recordMap({ oldValue, newValue }, this.parseValue)
+
+    this.updateCache(key, transition.newValue)
+
+    this.notifyListeners(key, transition)
   }
 
   private notifyListeners = <V>(
@@ -44,9 +55,15 @@ export class LocalStorage<T extends string> implements PersistentStorage<T> {
   }
 
   getItem<V>(key: T): V | undefined {
-    const item = localStorage.getItem(key)
+    if (key in this.cache) {
+      return this.cache[key]
+    }
 
-    return this.parseValue<V>(item)
+    const item = localStorage.getItem(key)
+    const value = this.parseValue<V>(item)
+    this.updateCache(key, value)
+
+    return value
   }
 
   setItem<V>(key: T, newValue: V): void {
@@ -61,6 +78,8 @@ export class LocalStorage<T extends string> implements PersistentStorage<T> {
     } else {
       localStorage.setItem(key, newValueString)
     }
+
+    this.updateCache(key, newValue)
 
     this.notifyListeners(key, {
       oldValue,
