@@ -41,6 +41,7 @@ export enum PersistentStateKey {
   ProjectFilter = 'projectFilter',
   YouTubeFocusMusicLeftAt = 'youTubeFocusMusicLeftAt',
   PrincipleCategoryFilter = 'principleCategoryFilter',
+  UserChangedFocusDurationAt = 'userChangedFocusDurationAt',
 }
 
 const persistentStorage =

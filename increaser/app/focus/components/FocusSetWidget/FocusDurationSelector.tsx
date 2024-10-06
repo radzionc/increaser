@@ -14,6 +14,7 @@ import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { hStack } from '@lib/ui/css/stack'
 import { useFocusDuration } from '../../state/focusDuration'
+import { useUserChangedFocusDurationAt } from '../../state/useUserChangedFocusDurationAt'
 
 const gap = 12
 
@@ -44,6 +45,7 @@ const Container = styled(UnstyledButton)<ComponentWithActiveState>`
 
 export const FocusDurationSelector = () => {
   const [focusDuration, setFocusDuration] = useFocusDuration()
+  const [, setTime] = useUserChangedFocusDurationAt()
 
   const {
     getReferenceProps,
@@ -78,6 +80,7 @@ export const FocusDurationSelector = () => {
                 {...getOptionProps({
                   index,
                   onSelect: () => {
+                    setTime(Date.now())
                     setFocusDuration(option)
                     setIsOpen(false)
                   },

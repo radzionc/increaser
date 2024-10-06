@@ -5,10 +5,10 @@ import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { StartFocus } from './StartFocus'
-import { FocusLauncherDuration } from './FocusLauncherDuration'
 import { FocusLauncherBudget } from './FocusLauncherBudget'
 import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
 import { FocusTargetInputs } from '../components/FocusTargetInputs'
+import { FocusDurationInput } from '../components/FocusDurationInput'
 
 const Container = styled(Panel)`
   position: relative;
@@ -25,7 +25,7 @@ export const FocusLauncherForm = () => {
         <>
           <FocusLauncherBudget />
           <FocusStartTime />
-          <FocusLauncherDuration />
+          <FocusDurationInput />
           <VStack>
             <StartFocus />
           </VStack>

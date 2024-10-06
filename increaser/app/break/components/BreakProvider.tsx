@@ -1,10 +1,5 @@
 import { breakMinutesOptions } from '@increaser/app/break/breakDuration'
 import { ReactNode, useEffect, useState } from 'react'
-import {
-  getBlockWorkDuration,
-  getBlocks,
-  targetBlockInMin,
-} from '@increaser/app/sets/Block'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { useTodaySets } from '@increaser/app/sets/hooks/useTodaySets'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
@@ -27,6 +22,11 @@ import { focusDurations } from '@increaser/entities/FocusDuration'
 import { useFocusIntervals } from '../../focus/state/focusIntervals'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUser } from '@increaser/ui/user/state/user'
+import {
+  getBlocks,
+  getBlockWorkDuration,
+} from '@increaser/entities-utils/block'
+import { blockTargetDuration } from '@increaser/entities/Block'
 
 export const remindersCount = 5
 
@@ -163,13 +163,13 @@ export const BreakProvider = ({ children }: Props) => {
     const blocks = getBlocks(sets)
     const block = shouldBePresent(getLastItem(blocks))
     const blockWorkDuration = getBlockWorkDuration(block) / MS_IN_MIN
-    if (blockWorkDuration + focusDurations[0] > targetBlockInMin) {
+    if (blockWorkDuration + focusDurations[0] > blockTargetDuration) {
       return
     }
 
-    if (blockWorkDuration >= targetBlockInMin - 10) {
+    if (blockWorkDuration >= blockTargetDuration - 10) {
       setBreakDuration('long')
-    } else if (blockWorkDuration < targetBlockInMin / 3) {
+    } else if (blockWorkDuration < blockTargetDuration / 3) {
       setBreakDuration(breakMinutesOptions[0])
     } else {
       setBreakDuration(breakMinutesOptions[1])

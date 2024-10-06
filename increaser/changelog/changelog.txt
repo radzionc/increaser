@@ -1,3 +1,4 @@
+A quick creation of tasks and projects from focus launcher without loaders.
 1728054756723
 An option to change the end time when finishing a focus session is helpful when the user forgets to stop the session and wants to adjust the end time.
 If a session went for too long and Increaser stopped it automatically, the app will open an editor where the user can easily adjust auto-stopped session end time.

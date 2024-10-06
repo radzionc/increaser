@@ -13,9 +13,6 @@ import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 import { MS_IN_MIN } from '@lib/utils/time'
-import { getBlocks, getNextFocusDuration } from '../../sets/Block'
-import { useTodaySets } from '../../sets/hooks/useTodaySets'
-import { useFocusDuration } from '../state/focusDuration'
 
 export type StopFocusParams = {
   isEndEstimated?: boolean
@@ -24,8 +21,6 @@ export type StopFocusParams = {
 
 export const useStopFocus = () => {
   const [, setIntervals] = useFocusIntervals()
-  const todaySets = useTodaySets()
-  const [, setFocusDuration] = useFocusDuration()
 
   const { tasks } = useUser()
 
@@ -63,8 +58,6 @@ export const useStopFocus = () => {
 
       const timeSpentRecord = getTasksTimeSpent(correctedIntervals)
 
-      const blocks = getBlocks([...todaySets, ...sets])
-
       addSets(sets)
 
       const taskUpdates = withoutUndefined(
@@ -84,21 +77,10 @@ export const useStopFocus = () => {
         updateTasks(taskUpdates)
       }
 
-      setFocusDuration(getNextFocusDuration(blocks))
-
       analytics.trackEvent('Finish focus session', {
         duration: Math.round(getSetsDuration(sets) / MS_IN_MIN),
       })
     },
-    [
-      addSets,
-      analytics,
-      intervals,
-      setFocusDuration,
-      setIntervals,
-      tasks,
-      todaySets,
-      updateTasks,
-    ],
+    [addSets, analytics, intervals, setIntervals, tasks, updateTasks],
   )
 }
