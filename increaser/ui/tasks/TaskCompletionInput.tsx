@@ -5,6 +5,7 @@ import { interactive } from '@lib/ui/css/interactive'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { InputProps } from '@lib/ui/props'
+import { ComponentProps } from 'react'
 
 const Container = styled(CheckStatus)`
   ${interactive};
@@ -15,9 +16,10 @@ const Container = styled(CheckStatus)`
 export const TaskCompletionInput = ({
   value,
   onChange,
-}: InputProps<boolean>) => {
+  ...rest
+}: InputProps<boolean> & ComponentProps<typeof Container>) => {
   return (
-    <Container isInteractive forwardedAs="label" value={value}>
+    <Container isInteractive forwardedAs="label" value={value} {...rest}>
       <InvisibleHTMLCheckbox value={value} onChange={onChange} />
     </Container>
   )

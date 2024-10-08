@@ -1,3 +1,4 @@
+Users can now expedite the creation of recurring tasks ahead of schedule by using the 'Create Now' button found in the 'Upcoming' tab of the 'Tasks' page.
 Focus launcher automatically adjusts the focus duration, targeting 90-minute blocks.
 No delay when adding a task or a project from a focus launcher.
 1728054756723

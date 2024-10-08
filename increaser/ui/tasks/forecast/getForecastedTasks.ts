@@ -1,6 +1,6 @@
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
 import { getRecurringTaskDeadline } from '@increaser/entities-utils/taskFactory/getRecurringTaskDeadline'
-import { TaskFactory } from '@increaser/entities/TaskFactory'
+import { ForecastedTask, TaskFactory } from '@increaser/entities/TaskFactory'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
 
 type Input = {
@@ -8,7 +8,10 @@ type Input = {
   value: number
 }
 
-export const getForecastedTasks = ({ taskFactories, value }: Input) =>
+export const getForecastedTasks = ({
+  taskFactories,
+  value,
+}: Input): ForecastedTask[] =>
   withoutUndefined(
     taskFactories.map(
       ({ cadence, lastOutputAt, deadlineIndex, id, ...task }) => {
@@ -27,6 +30,10 @@ export const getForecastedTasks = ({ taskFactories, value }: Input) =>
         if (deadlineAt === value) {
           return {
             ...task,
+            cadence,
+            deadlineIndex,
+            willBeCreatedAt: periodStartedAt,
+            lastOutputAt,
             factoryId: id,
           }
         }

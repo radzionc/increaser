@@ -8,19 +8,9 @@ import { match } from '@lib/utils/match'
 import { getForecastedTasks } from './getForecastedTasks'
 import { range } from '@lib/utils/array/range'
 import { endOfISOWeek } from 'date-fns'
-import { Task } from '@increaser/entities/Task'
 import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
 import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
-
-type Item = {
-  task: Pick<
-    Task,
-    'name' | 'description' | 'projectId' | 'links' | 'checklist'
-  > & {
-    factoryId: string
-  }
-  count?: number
-}
+import { CurrentForecastedTaskProvider } from './state/currentForecastedTask'
 
 export const RecurringTasksForecast = ({
   value,
@@ -29,7 +19,7 @@ export const RecurringTasksForecast = ({
 
   const [timeGrouping] = useTaskTimeGrouping()
 
-  const items: Item[] = useMemo(() => {
+  const items = useMemo(() => {
     const tasks = match(timeGrouping, {
       day: () => {
         return getForecastedTasks({ taskFactories, value })
@@ -46,32 +36,21 @@ export const RecurringTasksForecast = ({
           }
         })
 
-        return values.flatMap((value) =>
-          getForecastedTasks({ taskFactories, value }),
-        )
+        return values
+          .reverse()
+          .flatMap((value) => getForecastedTasks({ taskFactories, value }))
       },
     })
 
-    const result: Item[] = []
-
-    tasks.forEach((task) => {
-      const index = result.findIndex(
-        (item) => item.task.factoryId === task.factoryId,
-      )
-      if (index === -1) {
-        result.push({ task, count: 1 })
-      } else {
-        result[index].count = (result[index].count || 0) + 1
-      }
-    })
-
-    return result
+    return tasks
   }, [taskFactories, timeGrouping, value])
 
   return (
     <>
-      {items.map(({ task, count }, index) => (
-        <ForecastedRecurringTask key={index} value={task} count={count} />
+      {items.map((task, index) => (
+        <CurrentForecastedTaskProvider key={index} value={task}>
+          <ForecastedRecurringTask />
+        </CurrentForecastedTaskProvider>
       ))}
     </>
   )
