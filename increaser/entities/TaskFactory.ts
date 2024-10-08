@@ -30,7 +30,7 @@ export const taskCadenceShortName: Record<TaskCadence, string> = {
   month: 'monthly',
 }
 
-export type ForecastedTask = Omit<TaskFactory, 'lastOutputAt' | 'id'> & {
+export type ForecastedTask = Omit<TaskFactory, 'id'> & {
   willBeCreatedAt: number
   factoryId: string
 }

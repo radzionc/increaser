@@ -1,9 +1,18 @@
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { DemoProject } from './projects'
 
-type DemoTaskFactoryId = 'upload-video' | 'taxes' | 'jobs' | 'invest'
+type DemoTaskFactoryId = 'upload-video' | 'taxes' | 'jobs' | 'invest' | 'plan'
 
 export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
+  plan: {
+    id: 'plan',
+    name: 'Plan the day',
+    description: '',
+    projectId: DemoProject.Planning,
+    links: [],
+    checklist: [],
+    cadence: 'day',
+  },
   'upload-video': {
     id: 'upload-video',
     name: 'Release a YouTube video',
@@ -42,6 +51,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
       },
     ],
     cadence: 'week',
+    deadlineIndex: 2,
   },
   jobs: {
     id: 'jobs',
@@ -51,6 +61,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     links: [],
     checklist: [],
     cadence: 'week',
+    deadlineIndex: 3,
   },
   invest: {
     id: 'invest',
@@ -60,6 +71,7 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
     links: [],
     checklist: [],
     cadence: 'month',
+    deadlineIndex: 5,
   },
   taxes: {
     id: 'taxes',
@@ -94,5 +106,6 @@ export const demoTaskFactories: Record<DemoTaskFactoryId, TaskFactory> = {
       },
     ],
     cadence: 'month',
+    deadlineIndex: 8,
   },
 }

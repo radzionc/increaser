@@ -33,6 +33,7 @@ export const getForecastedTasks = ({
             cadence,
             deadlineIndex,
             willBeCreatedAt: periodStartedAt,
+            lastOutputAt,
             factoryId: id,
           }
         }

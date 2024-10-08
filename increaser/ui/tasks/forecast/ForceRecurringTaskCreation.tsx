@@ -4,9 +4,24 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { useCurrentForecastedTask } from './state/currentForecastedTask'
 import { useUser } from '../../user/state/user'
 import { generateTask } from '@increaser/entities-utils/taskFactory/generateTask'
+import { getNextCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getNextCadencePeriodStart'
+import { useMemo } from 'react'
 
 export const ForceRecurringTaskCreation = () => {
   const task = useCurrentForecastedTask()
+
+  const { cadence, lastOutputAt } = task
+
+  const nextTaskWillBeCreatedAt = useMemo(
+    () =>
+      getNextCadencePeriodStart({ cadence, at: lastOutputAt ?? Date.now() }),
+    [cadence, lastOutputAt],
+  )
+
+  const isDisabled =
+    task.willBeCreatedAt > nextTaskWillBeCreatedAt
+      ? 'To create this task, you first need to create the task that comes before it.'
+      : undefined
 
   const { mutate: updateTaskFactory } =
     useUpdateUserEntityMutation('taskFactory')
@@ -26,7 +41,7 @@ export const ForceRecurringTaskCreation = () => {
   }
 
   return (
-    <Button onClick={handleSubmit} size="xs">
+    <Button kind="ghostPrimary" isDisabled={isDisabled} onClick={handleSubmit}>
       Create now
     </Button>
   )
