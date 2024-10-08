@@ -1,12 +1,11 @@
 import { getUser, updateUser } from '@increaser/db/user'
-import { getId } from '@increaser/entities-utils/shared/getId'
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
 import { Task } from '@increaser/entities/Task'
-import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { toRecord } from '@lib/utils/record/toRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { getRecurringTaskDeadline } from '@increaser/entities-utils/taskFactory/getRecurringTaskDeadline'
+import { generateTask } from '@increaser/entities-utils/taskFactory/generateTask'
 
 export const runTaskFactories = async (userId: string) => {
   const { taskFactories, timeZone, tasks } = await getUser(userId, [
@@ -42,29 +41,20 @@ export const runTaskFactories = async (userId: string) => {
 
       const newTasks = [...oldTasks, ...generatedTasks]
 
-      const status = 'todo'
-
-      const order = getLastItemOrder(
-        newTasks
-          .filter((task) => task.status === status)
-          .map((task) => task.order),
-      )
-
-      const deadlineOrder = getLastItemOrder(
-        newTasks
-          .filter((task) => task.deadlineAt === deadlineAt)
-          .map((task) => task.deadlineOrder),
-      )
+      const newTask = generateTask({
+        task: {
+          ...task,
+          cadence,
+          deadlineIndex,
+          willBeCreatedAt: cadencePeriodStart,
+          factoryId: id,
+        },
+        tasks: newTasks,
+      })
 
       generatedTasks.push({
-        startedAt: now,
-        id: getId(),
+        ...newTask,
         deadlineAt,
-        order,
-        deadlineOrder,
-        factoryId: id,
-        status,
-        ...task,
       })
     },
   )

@@ -91,12 +91,13 @@ export const ScheduledTasks = () => {
         renderGroup={({ groupId, props: { children, ...containerProps } }) => (
           <GroupContainer {...containerProps}>
             <TasksGroupHeader value={groupId} />
-            {groupId !== 'overdue' && (
-              <RecurringTasksForecast value={Number(groupId)} />
-            )}
 
             <VStack key={groupId}>
               {children}
+
+              {groupId !== 'overdue' && (
+                <RecurringTasksForecast value={Number(groupId)} />
+              )}
               {groupId !== 'overdue' && (
                 <CreateTask
                   defaultValue={{

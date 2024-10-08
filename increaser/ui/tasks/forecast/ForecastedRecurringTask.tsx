@@ -1,16 +1,18 @@
 import { Hoverable } from '@lib/ui/base/Hoverable'
-import { ComponentWithValueProps } from '@lib/ui/props'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 import styled from 'styled-components'
 import { TaskItemFrame } from '../TaskItemFrame'
 import { TaskCompletionInput } from '../TaskCompletionInput'
 import { TaskTextContainer } from '../TaskTextContainer'
 import { TaskProject } from '../TaskProject'
-import { Text } from '@lib/ui/text'
-import { Task } from '@increaser/entities/Task'
+import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
+import { format } from 'date-fns'
+import { useMemo } from 'react'
+import { getNextCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getNextCadencePeriodStart'
+import { useCurrentForecastedTask } from './state/currentForecastedTask'
+import { ForceRecurringTaskCreation } from './ForceRecurringTaskCreation'
 
 const Container = styled(Hoverable)`
-  opacity: 0.6;
   width: 100%;
 `
 
@@ -18,36 +20,48 @@ const Content = styled(TaskItemFrame)`
   pointer-events: none;
 `
 
-type Props = ComponentWithValueProps<
-  Pick<Task, 'name' | 'description' | 'projectId' | 'links' | 'checklist'>
-> & {
-  count?: number
-}
+export const ForecastedRecurringTask = () => {
+  const value = useCurrentForecastedTask()
+  const { cadence } = value
 
-const Count = styled(Text)`
-  font-weight: 800;
-`
+  const nextTaskWillBeCreatedAt = useMemo(
+    () => getNextCadencePeriodStart({ cadence, at: Date.now() }),
+    [cadence],
+  )
 
-export const ForecastedRecurringTask = ({ value, count }: Props) => {
+  const canBeCreatedNow = value.willBeCreatedAt <= nextTaskWillBeCreatedAt
+
   return (
-    <Tooltip
-      content="This task will be created automatically"
-      renderOpener={(props) => (
-        <div {...props}>
-          <Container verticalOffset={0}>
-            <Content>
-              <TaskCompletionInput value={false} onChange={() => {}} />
-              <TaskTextContainer>
-                <TaskProject value={value.projectId} />
-                {value.name}
-                {count !== undefined && count > 1 && (
-                  <Count as="span"> × {count}</Count>
-                )}
-              </TaskTextContainer>
-            </Content>
-          </Container>
-        </div>
+    <OnHoverAction
+      actionPlacerStyles={{
+        right: 0,
+      }}
+      render={() => (
+        <Tooltip
+          content={`This task will be created on ${format(
+            value.willBeCreatedAt,
+            'd MMMM',
+          )}`}
+          renderOpener={(props) => (
+            <div style={{ width: '100%' }} {...props}>
+              <Container verticalOffset={0}>
+                <Content>
+                  <TaskCompletionInput
+                    style={{ opacity: 0.4 }}
+                    value={false}
+                    onChange={() => {}}
+                  />
+                  <TaskTextContainer>
+                    <TaskProject value={value.projectId} />
+                    {value.name}
+                  </TaskTextContainer>
+                </Content>
+              </Container>
+            </div>
+          )}
+        />
       )}
+      action={canBeCreatedNow ? <ForceRecurringTaskCreation /> : null}
     />
   )
 }
