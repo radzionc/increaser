@@ -14,13 +14,14 @@ import {
   dayMomentStep,
 } from '@increaser/entities/DayMoments'
 import { range } from '@lib/utils/array/range'
-import { useUpdateUser, useUser } from '@increaser/ui/user/state/user'
+import { useUser } from '@increaser/ui/user/state/user'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
 import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
 import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
+import { useUpdateUserMutation } from '../../../user/mutations/useUpdateUserMutation'
 
 interface ManageDayMomentProps {
   min: number
@@ -62,7 +63,7 @@ export const ManageDayMoment = ({
   const user = useUser()
   const value = user[dayMoment]
 
-  const updateUser = useUpdateUser()
+  const { mutate: updateUser } = useUpdateUserMutation()
 
   const options = range(Math.round((max - min) / dayMomentStep) + 1).map(
     (step) => min + dayMomentStep * step,

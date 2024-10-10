@@ -26,7 +26,7 @@ Increaser consists of the following primary tools:
 - Task management
 - Work budgeting
 - Time planning
-- Deep work timer
+- Focus
 - Habit tracking
 - Scheduling
 
@@ -51,21 +51,23 @@ The "Board" subpage displays all vision attributes as a gallery of images.
 
 The "Explore" subpage contains a list of suggested vision attributes to give users ideas for their vision board and help them define their perfect life. The user can add a suggested vision attribute to their vision board.
 
-## Deep work timer
+## Focus
 
-The "Home" page features a section for setting a break between work sessions ranging from 5 to 30 minutes, with an option to set an unlimited break. Break duration is automatically suggested based on the user's work session duration. The user can enable automatic blocks that will start after a work session if the current work block does not exceed 90 minutes. When the user has worked for more than 90 minutes, it's time to take an "unlimited" break.
+The "Focus" page features a section for setting a break between work sessions ranging from 5 to 30 minutes, with an option to set an unlimited break. Break duration is automatically suggested based on the user's work session duration. The user can enable automatic blocks that will start after a work session if the current work block does not exceed 90 minutes. When the user has worked for more than 90 minutes, it's time to take an "unlimited" break.
 
 Increaser advocates structuring work into 90-minute blocks to improve focus and productivity. Each block includes work sessions with breaks of no more than 15 minutes.
 
-Next, the "Home" page displays an interface for starting a work session—a focus launcher. First, the user can select a project. Then, they can select a task. If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule. Below the project selector, the user can see an overview of how much they have worked on a project this week. If they have a goal, they will also see a visual representation of how much they have worked compared to their goal and their progress relative to the current weekday. The user can change or set those goals on the "Time planning" page. In the "Tasks" view, the user will see a list of today's tasks with a project assigned to each. They can select a task, and the project for tracking will be derived from the project associated with the task. If they forget to start a focus session and have already been working for some time, they can change the session start time on the focus launcher so that Increaser will track the time they worked before launching a session. During a focus session, the user can create, update, or delete tasks for the current focus project directly from the focus session interface.
+Next, the "Focus" page displays an interface for starting a work session—a focus launcher. First, the user can select a project. Then, they can select a task (optional). If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule. Below the project selector, the user can see an overview of how much they have worked on a project this week. If they have a goal to work more or less on that project, they will also see a visual representation of how much they have worked compared to their goal and their progress relative to the current weekday. The user can change or set those goals on the "Time planning" page.
 
-On the side of the "Home" page, there is a timeline featuring icons with daily events such as the times to start and end work, and first/last meals. The times of these events can be changed on the "Schedule" page. The content of the timeline is user sessions colored according to the projects they belong to. Sessions are organized into blocks based on the breaks between them. At the top of the timeline, users can navigate between the days of the current week.
+If they forget to start a focus session and have already been working for some time, they can change the session start time on the focus launcher so that Increaser will track the time they worked before launching a session. During a focus session, the user can create, update, or delete tasks for the current focus project directly from the focus session interface.
+
+On the side of the "Focus" page, there is a timeline featuring icons with daily events such as the times to start and end work, and first/last meals. The times of these events can be changed on the "Schedule" page. The content of the timeline is user sessions colored according to the projects they belong to. Sessions are organized into blocks based on the breaks between them. At the top of the timeline, users can navigate between the days of the current week.
 
 The user can pause a session. If the session has been paused, after the user has finished the session, it will be split into multiple sessions to avoid tracking the periods when the user was not working. The focus music will be paused when the session is paused.
 
 If the user gets distracted and wants to account for that time, they can deduct the time from the session. It would act the same way as if the user paused the session for a specific period and then resumed it.
 
-When the user starts a focus session, the content of the "Home" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task.
+When the user starts a focus session, the content of the "Focus" page changes. Instead of the focus launcher, an interface for managing the current active session appears. The user can change the start time of the session, desired duration, project, and task.
 
 If the user forgets to stop the session and it goes for more than 3 hours, Increaser will stop it automatically, and the user will see a modal with the option to adjust the end time.
 
@@ -82,6 +84,8 @@ The user can enable focus notifications that will appear as browser notification
 During a focus session, you can hover over the timer to see the log of your current focus session, where each item is either work on a project with a duration, or a break with a duration.
 
 When finishing a focus session, the user has the option to also 'Change session end time and finish,' which is helpful when the user forgets to stop the session and wants to adjust the end time.
+
+The user can change focus project or task during the session. If the user changes the project, the session will be split into a new one for the new project.
 
 ## Goals
 
@@ -157,7 +161,7 @@ The user can export their data as a JSON file.
 
 # Website
 
-Increaser app is under the [app.increaser.org](http://app.increaser.org/) domain, while the Increaser website is under the [increaser.org](http://increaser.org/) domain. On the website, we are trying to persuade the user to try the app. The “Start now” button on the website leads to [app.increaser.org/sign-up](http://app.increaser.org/sign-up). The website positions Increaser as a productivity toolkit comprised of 9 tools: vision, goals, deep work timer, time tracking, task management, work budgeting, time planning, habit tracking, scheduling.
+Increaser app is under the [app.increaser.org](http://app.increaser.org/) domain, while the Increaser website is under the [increaser.org](http://increaser.org/) domain. On the website, we are trying to persuade the user to try the app. The “Start now” button on the website leads to [app.increaser.org/sign-up](http://app.increaser.org/sign-up). The website positions Increaser as a productivity toolkit comprised of primary tools mentioned above.
 
 # Tech Stack
 
