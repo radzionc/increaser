@@ -11,6 +11,7 @@ import { endOfISOWeek } from 'date-fns'
 import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
 import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 import { CurrentForecastedTaskProvider } from './state/currentForecastedTask'
+import { order } from '@lib/utils/array/order'
 
 export const RecurringTasksForecast = ({
   value,
@@ -42,7 +43,7 @@ export const RecurringTasksForecast = ({
       },
     })
 
-    return tasks
+    return order(tasks, (task) => task.willBeCreatedAt, 'asc')
   }, [taskFactories, timeGrouping, value])
 
   return (

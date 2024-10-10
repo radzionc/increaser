@@ -15,7 +15,9 @@ import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { Header } from '@lib/ui/layout/Header'
-import { FocusEducationPrompt } from '@increaser/ui/focus/education/FocusEducationPrompt'
+import { ProductToolEducationPrompt } from '@increaser/ui/education/components/ProductToolEducationPrompt'
+import { productToolEducationRecord } from '@increaser/ui/education/productToolEducationRecord'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 const Container = styled.div`
   display: flex;
@@ -42,7 +44,9 @@ export const HomePageContent = () => {
         <PageHeader>
           <Header>
             <PageTitle>Start a focus session</PageTitle>
-            <FocusEducationPrompt />
+            <ProductToolEducationPrompt
+              value={shouldBePresent(productToolEducationRecord.focus)}
+            />
           </Header>
         </PageHeader>
       ) : (

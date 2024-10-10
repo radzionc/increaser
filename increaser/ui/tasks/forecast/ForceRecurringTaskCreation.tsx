@@ -18,11 +18,6 @@ export const ForceRecurringTaskCreation = () => {
     [cadence, lastOutputAt],
   )
 
-  const isDisabled =
-    task.willBeCreatedAt > nextTaskWillBeCreatedAt
-      ? 'To create this task, you first need to create the task that comes before it.'
-      : undefined
-
   const { mutate: updateTaskFactory } =
     useUpdateUserEntityMutation('taskFactory')
   const { mutate: createTask } = useCreateUserEntityMutation('task')
@@ -40,8 +35,12 @@ export const ForceRecurringTaskCreation = () => {
     createTask(generateTask({ task, tasks: Object.values(tasks) }))
   }
 
+  if (task.willBeCreatedAt > nextTaskWillBeCreatedAt) {
+    return null
+  }
+
   return (
-    <Button kind="ghostPrimary" isDisabled={isDisabled} onClick={handleSubmit}>
+    <Button size="xs" kind="ghostPrimary" onClick={handleSubmit}>
       Create now
     </Button>
   )
