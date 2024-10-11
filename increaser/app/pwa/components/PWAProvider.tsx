@@ -3,11 +3,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { Modal } from '@lib/ui/modal'
-import { VStack } from '@lib/ui/css/stack'
 
 import { BeforeInstallPromptEvent, PWAContext } from '../PWAContext'
 import { InstallInstructions } from './InstallInstructions'
 import { productName } from '@increaser/config'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 interface Props {
   children: React.ReactNode
@@ -75,9 +75,9 @@ export const PWAProvider = ({ children }: Props) => {
           title={`Install ${productName}`}
           onClose={() => setIsInstallModalOpen(false)}
         >
-          <VStack fullHeight justifyContent="center" alignItems="center">
+          <ModalContent justifyContent="center" alignItems="center">
             <InstallInstructions />
-          </VStack>
+          </ModalContent>
         </Modal>
       )}
     </PWAContext.Provider>

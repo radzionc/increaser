@@ -10,6 +10,7 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { Match } from '@lib/ui/base/Match'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 type ManageSubscriptionAction = 'update' | 'cancel'
 
@@ -65,17 +66,19 @@ export const ManageSubscriptionActions = () => {
                 title={stageTitle[stage]}
                 onClose={() => setStage(null)}
               >
-                <Match
-                  value={stage}
-                  update={() => renderActionContent('update')}
-                  cancel={() => renderActionContent('cancel')}
-                  sync={() => (
-                    <SyncSubscription
-                      subscriptionId={subscription!.id}
-                      onFinish={() => setStage(null)}
-                    />
-                  )}
-                />
+                <ModalContent>
+                  <Match
+                    value={stage}
+                    update={() => renderActionContent('update')}
+                    cancel={() => renderActionContent('cancel')}
+                    sync={() => (
+                      <SyncSubscription
+                        subscriptionId={subscription!.id}
+                        onFinish={() => setStage(null)}
+                      />
+                    )}
+                  />
+                </ModalContent>
               </PaddleModal>
             )}
           </HStack>

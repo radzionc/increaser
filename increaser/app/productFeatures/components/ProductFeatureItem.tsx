@@ -13,6 +13,7 @@ import { ProductFeatureDetails } from './ProductFeatureDetails'
 import { VoteForFeature } from './VoteForFeature'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 const Container = styled.div`
   ${verticalPadding(panelDefaultPadding)};
@@ -66,7 +67,9 @@ export const ProductFeatureItem = () => {
           )}
           renderContent={({ onClose }) => (
             <Modal width={480} onClose={onClose} title={name}>
-              <ProductFeatureDetails />
+              <ModalContent>
+                <ProductFeatureDetails />
+              </ModalContent>
             </Modal>
           )}
         />

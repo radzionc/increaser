@@ -10,6 +10,7 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 
 import { useKeyDown } from '@lib/ui/hooks/useKeyDown'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const FinishFocusOverlay = ({ onClose }: ClosableComponentProps) => {
   const [end] = useCurrentFocusEndTime()
@@ -36,9 +37,11 @@ export const FinishFocusOverlay = ({ onClose }: ClosableComponentProps) => {
         onSubmit: handleSubmit,
       })}
     >
-      <EndTimeEditorIntervalProvider>
-        <FocusEndTimeInput />
-      </EndTimeEditorIntervalProvider>
+      <ModalContent>
+        <EndTimeEditorIntervalProvider>
+          <FocusEndTimeInput />
+        </EndTimeEditorIntervalProvider>
+      </ModalContent>
     </Modal>
   )
 }

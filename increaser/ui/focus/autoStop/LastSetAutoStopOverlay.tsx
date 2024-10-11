@@ -12,6 +12,7 @@ import { AutoStoppedSetIntervalProvider } from './AutoStoppedSetIntervalProvider
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useLastSet } from '@increaser/app/sets/hooks/useLastSet'
 import { AutoStoppedSetEndTimeInput } from './AutoStoppedSetEndTimeInput'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const LastSetAutoStopOverlay = () => {
   const lastSet = shouldBePresent(useLastSet())
@@ -52,9 +53,11 @@ export const LastSetAutoStopOverlay = () => {
         onSubmit: handleSubmit,
       })}
     >
-      <AutoStoppedSetIntervalProvider>
-        <AutoStoppedSetEndTimeInput />
-      </AutoStoppedSetIntervalProvider>
+      <ModalContent>
+        <AutoStoppedSetIntervalProvider>
+          <AutoStoppedSetEndTimeInput />
+        </AutoStoppedSetIntervalProvider>
+      </ModalContent>
     </Modal>
   )
 }

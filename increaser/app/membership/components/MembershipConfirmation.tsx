@@ -1,12 +1,12 @@
 import { productName } from '@increaser/config'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { Modal } from '@lib/ui/modal'
-import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { InlineFounderContacts } from '@increaser/app/info/components/InflineFounderContacts'
 import { useIsPayingUser } from '@increaser/app/membership/hooks/useIsPayingUser'
 import { ContinueButton } from '@increaser/app/ui/ContinueButton'
 import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const MembershipConfirmation = () => {
   const [isOpen, { set: open, unset: close }] = useBoolean(false)
@@ -27,7 +27,7 @@ export const MembershipConfirmation = () => {
       title={`Welcome to ${productName}!`}
       footer={<ContinueButton onClick={close} />}
     >
-      <VStack gap={20}>
+      <ModalContent gap={20}>
         <Text color="regular">
           Hey there! Thank you for subscribing to {productName}. I'm Radzion,
           and I'm excited for you to embark on this journey to enhanced
@@ -36,7 +36,7 @@ export const MembershipConfirmation = () => {
           help!
         </Text>
         <InlineFounderContacts />
-      </VStack>
+      </ModalContent>
     </Modal>
   )
 }

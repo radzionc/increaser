@@ -6,6 +6,20 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EducationContent } from './EducationContent'
 import { VStack } from '@lib/ui/css/stack'
 import { EducationVideo } from './EducationVideo'
+import styled from 'styled-components'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
+import { hideScrollbars } from '@lib/ui/css/hideScrollbars'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { modalConfig } from '@lib/ui/modal/config'
+
+const ContentWrapper = styled(ModalContent)`
+  ${hideScrollbars};
+  ${horizontalPadding(0)}
+`
+
+const Content = styled(EducationContent)`
+  ${horizontalPadding(modalConfig.padding)}
+`
 
 export const EducationModal: React.FC<
   ClosableComponentProps & ComponentWithValueProps<ProductToolEducation>
@@ -21,10 +35,12 @@ export const EducationModal: React.FC<
       {...getFormProps({ onSubmit: onClose, onClose })}
       footer={<CreateFormFooter submitText="Continue" />}
     >
-      <VStack gap={20}>
-        <EducationVideo value={value.youTubeVideoUrl} />
-        <EducationContent>{value.content}</EducationContent>
-      </VStack>
+      <ContentWrapper>
+        <VStack gap={modalConfig.padding}>
+          <EducationVideo value={value.youTubeVideoUrl} />
+          <Content>{value.content}</Content>
+        </VStack>
+      </ContentWrapper>
     </Modal>
   )
 }

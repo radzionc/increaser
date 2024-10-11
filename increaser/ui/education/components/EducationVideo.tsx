@@ -6,21 +6,14 @@ import {
 import YouTubePlayer from 'react-player/lazy'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
-import { getColor, matchColor } from '@lib/ui/theme/getters'
-import { borderRadius } from '@lib/ui/css/borderRadius'
+import { getColor } from '@lib/ui/theme/getters'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 
 const VideoContainer = styled.div<ComponentWithActiveState>`
   overflow: hidden;
   width: 100%;
   background: ${getColor('foreground')};
-  ${borderRadius.s};
   aspect-ratio: 16 / 9;
-  border: 2px solid
-    ${matchColor('isActive', {
-      true: 'transparent',
-      false: 'primary',
-    })};
 `
 
 export const EducationVideo = ({ value }: ComponentWithValueProps<string>) => {

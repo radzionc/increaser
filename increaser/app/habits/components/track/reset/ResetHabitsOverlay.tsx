@@ -10,6 +10,7 @@ import { VStack } from '@lib/ui/css/stack'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
 import { MS_IN_SEC } from '@lib/utils/time'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const ResetHabitsOverlay = ({ onFinish }: NoValueFinishProps) => {
   const habits = useOrderedHabits()
@@ -49,38 +50,40 @@ export const ResetHabitsOverlay = ({ onFinish }: NoValueFinishProps) => {
         </UniformColumnGrid>
       }
     >
-      <SeparatedByLine gap={8}>
-        <div>
-          <ChecklistItem
-            value={selectedHabits.length === habits.length}
-            name={'Select all'}
-            onChange={(value) => {
-              setSelectedHabits(value ? habits.map((habit) => habit.id) : [])
-            }}
-          />
-        </div>
-        <VStack>
-          {habits.map((habit) => (
+      <ModalContent>
+        <SeparatedByLine gap={8}>
+          <div>
             <ChecklistItem
-              key={habit.id}
-              value={selectedHabits.includes(habit.id)}
+              value={selectedHabits.length === habits.length}
+              name={'Select all'}
               onChange={(value) => {
-                setSelectedHabits((prev) =>
-                  value
-                    ? [...prev, habit.id]
-                    : prev.filter((id) => id !== habit.id),
-                )
+                setSelectedHabits(value ? habits.map((habit) => habit.id) : [])
               }}
-              name={
-                <>
-                  <EmojiTextPrefix emoji={habit.emoji} />
-                  {habit.name}
-                </>
-              }
             />
-          ))}
-        </VStack>
-      </SeparatedByLine>
+          </div>
+          <VStack>
+            {habits.map((habit) => (
+              <ChecklistItem
+                key={habit.id}
+                value={selectedHabits.includes(habit.id)}
+                onChange={(value) => {
+                  setSelectedHabits((prev) =>
+                    value
+                      ? [...prev, habit.id]
+                      : prev.filter((id) => id !== habit.id),
+                  )
+                }}
+                name={
+                  <>
+                    <EmojiTextPrefix emoji={habit.emoji} />
+                    {habit.name}
+                  </>
+                }
+              />
+            ))}
+          </VStack>
+        </SeparatedByLine>
+      </ModalContent>
     </Modal>
   )
 }

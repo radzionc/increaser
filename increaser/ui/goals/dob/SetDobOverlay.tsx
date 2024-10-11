@@ -8,6 +8,7 @@ import { useDobBoundaries } from './useDobBoundaries'
 import { getDefaultDob } from './getDefaultDob'
 import { Modal } from '@lib/ui/modal'
 import { FormActions } from '@lib/ui/form/components/FormActions'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const SetDobOverlay = ({ onFinish }: NoValueFinishProps) => {
   const { dob } = useUser()
@@ -36,7 +37,9 @@ export const SetDobOverlay = ({ onFinish }: NoValueFinishProps) => {
       }
       title="Your date of birth"
     >
-      <DayInput min={min} max={max} value={value} onChange={setValue} />
+      <ModalContent>
+        <DayInput min={min} max={max} value={value} onChange={setValue} />
+      </ModalContent>
     </Modal>
   )
 }

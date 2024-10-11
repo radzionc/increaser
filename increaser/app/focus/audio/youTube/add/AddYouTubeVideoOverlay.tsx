@@ -12,7 +12,6 @@ import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { TextInput } from '@lib/ui/inputs/TextInput'
 import YouTubePlayer from 'react-player/lazy'
-import { VStack } from '@lib/ui/css/stack'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
@@ -20,6 +19,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Fields } from '@lib/ui/inputs/Fields'
 import { trimTextWithoutCuttingWords } from '@lib/utils/string/trimTextWithoutCuttingWords'
 import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 type VideoFormShape = {
   url: string
@@ -91,7 +91,7 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
       })}
       footer={<CreateFormFooter onCancel={onClose} isDisabled={isDisabled} />}
     >
-      <VStack gap={40}>
+      <ModalContent gap={40}>
         <Fields>
           <TextInput
             label="YouTube video URL"
@@ -144,7 +144,7 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
             )}
           />
         )}
-      </VStack>
+      </ModalContent>
     </Modal>
   )
 }

@@ -10,6 +10,7 @@ import { NoVolumeIcon } from '@lib/ui/icons/NoVolumeIcon'
 import { VolumeIcon } from '@lib/ui/icons/VolumeIcon'
 import styled from 'styled-components'
 import { FocusNotificationsToggles } from './FocusNotificationsToggles'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 const IconContainer = styled(IconWrapper)`
   color: ${({ theme }) =>
@@ -43,7 +44,9 @@ export const ManageFocusNotifications = () => {
           onClose={() => setIsOpen(false)}
           title="Focus notifications"
         >
-          <FocusNotificationsToggles />
+          <ModalContent>
+            <FocusNotificationsToggles />
+          </ModalContent>
         </Modal>
       )}
     </>

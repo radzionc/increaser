@@ -6,6 +6,7 @@ import { OptionalValueFinishProps } from '@lib/ui/props'
 import { useState } from 'react'
 import { useIsTaskLinkFormDisabled } from './useIsTaskLinkFormDisabled'
 import { TaskLinkFormFields } from './TaskLinkFormFields'
+import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const AddTaskLinkOverlay = ({
   onFinish,
@@ -33,7 +34,9 @@ export const AddTaskLinkOverlay = ({
         <CreateFormFooter isDisabled={isDisabled} onCancel={() => onFinish()} />
       }
     >
-      <TaskLinkFormFields value={value} onChange={setValue} />
+      <ModalContent>
+        <TaskLinkFormFields value={value} onChange={setValue} />
+      </ModalContent>
     </Modal>
   )
 }
