@@ -5,7 +5,6 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ProductFeaturesViewProvider } from './ProductFeaturesView'
 import { FeatureForm } from './form/FeatureForm'
-import { FounderContacts } from '../../community/components/FounderContacts'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
@@ -32,7 +31,6 @@ const SideContainer = styled(PageContent)`
 const SideContent = () => (
   <VStack gap={24}>
     <FeatureForm />
-    <FounderContacts />
   </VStack>
 )
 

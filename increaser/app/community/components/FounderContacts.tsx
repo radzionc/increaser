@@ -22,11 +22,18 @@ import { XIcon } from '@lib/ui/icons/XIcon'
 import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
 import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
 import { SocialLink } from '@lib/ui/buttons/SocialLink'
+import Link from 'next/link'
+import { getAppPath } from '@increaser/ui/navigation/app'
 
 const Avatar = styled(CoverImage)`
   ${round};
   ${sameDimensions(40)}
   border: 1px solid ${getColor('primary')};
+`
+
+const PromptLink = styled(Link)`
+  font-weight: 600;
+  color: ${getColor('textPrimary')};
 `
 
 export const FounderContacts = () => {
@@ -49,8 +56,11 @@ export const FounderContacts = () => {
         </HStack>
         <Text height="large" color="contrast">
           👋 Hi there! Have any questions about {productName}? Feel free to ask!
-          If you have a great idea for a new feature, share it here so others
-          can vote on it!
+          If you have a great idea for a new feature,{' '}
+          <PromptLink href={getAppPath('roadmap', 'ideas')}>
+            share it here
+          </PromptLink>{' '}
+          so others can vote on it!
         </Text>
         <HStack alignItems="center" wrap="wrap" justifyContent="space-between">
           <ExternalLink to={`mailto:${founderEmail}`}>
