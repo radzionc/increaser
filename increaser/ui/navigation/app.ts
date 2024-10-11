@@ -12,7 +12,11 @@ export const primaryAppNavigationPages = [
   'preferences',
 ] as const
 
-export const secondaryAppNavigationPages = ['community', 'roadmap'] as const
+export const secondaryAppNavigationPages = [
+  'info',
+  'community',
+  'roadmap',
+] as const
 
 const appNavigationPages = [
   ...primaryAppNavigationPages,
@@ -52,6 +56,7 @@ export const appPageName: Record<AppPage, string> = {
   updates: `What's New`,
   profile: 'Public Profile',
   preferences: 'Preferences',
+  info: 'Info',
 }
 
 export const appPageEmoji: Record<AppPage, string> = {
@@ -73,6 +78,7 @@ export const appPageEmoji: Record<AppPage, string> = {
   updates: '📰',
   profile: '👤',
   preferences: '⚙️',
+  info: 'ℹ️',
 }
 
 export const appPagePath: Record<AppPage, string> = {
@@ -94,6 +100,7 @@ export const appPagePath: Record<AppPage, string> = {
   updates: 'updates',
   profile: 'profile',
   preferences: 'preferences',
+  info: 'info',
 }
 
 export const appPageViews = {
@@ -105,6 +112,7 @@ export const appPageViews = {
   projects: ['projects', 'plan', 'report'],
   goals: ['goals', 'wisdom'],
   roadmap: ['ideas', 'done'],
+  info: ['focus'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
@@ -182,5 +190,8 @@ export const appPageViewName: {
   roadmap: {
     ideas: 'Ideas',
     done: 'Done',
+  },
+  info: {
+    focus: 'Focus',
   },
 }

@@ -16,6 +16,7 @@ export const SidebarNavigationItem = ({
           decoration={<FocusNavigationDecoration />}
         />
       )}
+      info={() => <NavigationToInternalPage value="info" />}
       habits={() => <NavigationToInternalPage value="habits" />}
       tasks={() => <NavigationToInternalPage value="tasks" />}
       preferences={() => <NavigationToInternalPage value="preferences" />}

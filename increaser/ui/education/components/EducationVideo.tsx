@@ -8,21 +8,25 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
+import { ComponentProps } from 'react'
 
-const VideoContainer = styled.div<ComponentWithActiveState>`
+const Container = styled.div<ComponentWithActiveState>`
   overflow: hidden;
   width: 100%;
   background: ${getColor('foreground')};
   aspect-ratio: 16 / 9;
 `
 
-export const EducationVideo = ({ value }: ComponentWithValueProps<string>) => {
+export const EducationVideo = ({
+  value,
+  ...rest
+}: ComponentWithValueProps<string> & ComponentProps<typeof Container>) => {
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
 
   return (
     <ElementSizeAware
       render={({ setElement, size }) => (
-        <VideoContainer isActive={isPlaying} ref={setElement}>
+        <Container isActive={isPlaying} ref={setElement} {...rest}>
           {size && (
             <YouTubePlayer
               loop
@@ -43,7 +47,7 @@ export const EducationVideo = ({ value }: ComponentWithValueProps<string>) => {
               }}
             />
           )}
-        </VideoContainer>
+        </Container>
       )}
     />
   )

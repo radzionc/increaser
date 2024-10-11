@@ -6,6 +6,7 @@ import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
 import { GiftIcon } from '@lib/ui/icons/GiftIcon'
 import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
 import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
+import { InfoIcon } from '@lib/ui/icons/InfoIcon'
 
 type NavigationPathInfo = {
   name: string
@@ -57,5 +58,9 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     preferences: {
       name: 'Preferences',
       icon: <TogglesIcon />,
+    },
+    info: {
+      name: 'Info',
+      icon: <InfoIcon />,
     },
   } as const
