@@ -3,8 +3,9 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { round } from '@lib/ui/css/round'
 import { hStack } from '@lib/ui/css/stack'
 import { InfoIcon } from '@lib/ui/icons/InfoIcon'
-import { ClickableComponentProps } from '@lib/ui/props'
+import { AsElementComponent } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
+import { ComponentProps } from 'react'
 import styled from 'styled-components'
 
 const Container = styled(UnstyledButton)`
@@ -34,8 +35,10 @@ const Container = styled(UnstyledButton)`
   }
 `
 
-export const LearnMorePrompt = ({ onClick }: ClickableComponentProps) => (
-  <Container onClick={onClick}>
+export const LearnMorePrompt = (
+  props: ComponentProps<typeof Container> & AsElementComponent,
+) => (
+  <Container {...props}>
     <InfoIcon />
     Learn more
   </Container>

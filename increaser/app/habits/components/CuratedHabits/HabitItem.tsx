@@ -91,7 +91,7 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
         )}
       </HStack>
 
-      <Text height="large" size={14} color="supporting">
+      <Text height="l" size={14} color="supporting">
         {description}
       </Text>
     </Container>

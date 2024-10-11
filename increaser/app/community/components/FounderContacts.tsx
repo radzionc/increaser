@@ -54,7 +54,7 @@ export const FounderContacts = () => {
             </Text>
           </VStack>
         </HStack>
-        <Text height="large" color="contrast">
+        <Text height="l" color="contrast">
           👋 Hi there! Have any questions about {productName}? Feel free to ask!
           If you have a great idea for a new feature,{' '}
           <PromptLink href={getAppPath('roadmap', 'ideas')}>

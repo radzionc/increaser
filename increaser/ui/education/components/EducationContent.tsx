@@ -1,13 +1,24 @@
+import { text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
 export const EducationContent = styled.div`
-  line-height: 1.5;
+  ${text({
+    height: 'xl',
+    size: 16,
+  })}
 
+  > * {
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+
+  h2,
   h3 {
     font-weight: 700;
-    font-size: 16px;
-    color: ${getColor('contrast')};
+    font-size: 20px;
+    color: ${getColor('textPrimary')};
     margin-bottom: 8px;
 
     &:not(:first-child) {
@@ -24,12 +35,6 @@ export const EducationContent = styled.div`
   ol,
   ul {
     padding-left: 16px;
-  }
-
-  p {
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
   }
 
   li {

@@ -98,7 +98,7 @@ export const ManageFocusNotification = ({
           {focusNotificationEmoji[value]}
         </Text>
       </HStack>
-      <Text color="supporting" height="large">
+      <Text color="supporting" height="l">
         {focusNotificationDescription[value]}
       </Text>
     </Wrapper>

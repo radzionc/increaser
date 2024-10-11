@@ -44,7 +44,7 @@ export const DeleteProject = () => {
           }}
         >
           <VStack gap={12}>
-            <Text height="large" color="supporting">
+            <Text height="l" color="supporting">
               Are you sure you want to delete{' '}
               <Text as="span" color="contrast">
                 {name}
@@ -56,7 +56,7 @@ export const DeleteProject = () => {
               project.
             </Text>
             {status !== 'archived' && (
-              <Text height="large" color="supporting">
+              <Text height="l" color="supporting">
                 If you prefer, you can{' '}
                 <TextButton
                   as="span"

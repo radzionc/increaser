@@ -13,8 +13,6 @@ const Video = styled(EducationVideo)`
 `
 
 const SideSection = styled.div`
-  position: sticky;
-  top: 0;
   flex: 1;
   min-width: 280px;
 `
@@ -23,18 +21,17 @@ export const ProductEducationPage = ({
   value,
 }: ComponentWithValueProps<ProductToolEducation>) => {
   return (
-    <HStack fullWidth wrap="wrap" gap={40}>
+    <HStack style={{ position: 'relative' }} fullWidth wrap="wrap" gap={40}>
       <VStack style={{ maxWidth: 560 }} gap={40}>
-        <VStack gap={8}>
-          <Text color="contrast" size={20} weight="600">
+        <VStack gap={12}>
+          <Text color="contrast" size={28} weight="700">
             {value.title}
           </Text>
-          <Text color="supporting" size={14}>
-            {value.subtitle}
-          </Text>
+          <EducationContent>{value.subtitle}</EducationContent>
         </VStack>
         <Video value={value.youTubeVideoUrl} />
         <EducationContent>{value.content}</EducationContent>
+        <div />
       </VStack>
       <SideSection>
         <FounderContacts />

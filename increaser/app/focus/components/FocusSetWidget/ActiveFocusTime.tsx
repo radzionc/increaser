@@ -39,7 +39,7 @@ export const ActiveFocusTime = forwardRef<
         <SessionIntervals />
       </TakeWholeSpaceAbsolutely>
       <Content style={{ pointerEvents: 'none' }}>
-        <Text as="div" weight="600" height="small">
+        <Text as="div" weight="600" height="s">
           <FocusPassedTime />
         </Text>
       </Content>

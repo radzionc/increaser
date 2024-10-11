@@ -15,7 +15,7 @@ export const NavigationItemContentFrame = styled.div`
       align-self: center;
       justify-self: center;
       font-size: 24px;
-      stroke-width: 1.5;
+      strokewidth: 1.5;
     }
   }
 `

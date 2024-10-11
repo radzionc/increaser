@@ -37,7 +37,7 @@ export const ProductFeatureDetails = () => {
         </VStack>
         <VoteForFeature />
       </HStack>
-      {description && <Text height="large">{description}</Text>}
+      {description && <Text height="l">{description}</Text>}
     </VStack>
   )
 }

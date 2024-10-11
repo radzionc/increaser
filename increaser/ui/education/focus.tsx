@@ -1,71 +1,68 @@
 import { ProductToolEducation } from './ProductToolEducation'
 
 export const focusEducation: ProductToolEducation = {
-  title: 'Boost Your Productivity with Focus Sessions',
-  subtitle: 'Learn how focus sessions can help you work smarter, not harder.',
+  title: 'Achieve Flow State with the Focus Tool',
+  subtitle: `Increaser's Focus tool helps you structure your work into productive sessions with optimal breaks, allowing you to maintain deep concentration and avoid burnout. By organizing your tasks into manageable blocks, you can enhance focus, track your progress, and accomplish more in less time. Learn how to use Focus sessions to achieve better results and a balanced workflow.`,
   youTubeVideoUrl: 'https://youtu.be/qvIAf7kvpFk',
   content: (
     <>
+      <h2>Working with Focus Sessions</h2>
       <p>
-        Welcome to Increaser's Focus Sessions! This powerful tool is designed to
-        help you work with intention, maintain concentration, and achieve more
-        in less time.
+        The core of the Focus tool lies in the concept of focus sessions, which
+        are timed work blocks followed by short breaks. You can initiate a
+        session by selecting a project and an optional task, helping you stay
+        focused on a specific goal. Each session aims to maximize your
+        productivity by dividing work into manageable chunks—typically 90-minute
+        blocks—with well-timed breaks in between.
       </p>
 
-      <h3>What is a Focus Session?</h3>
+      <h2>Automatic Breaks and Session Management</h2>
       <p>
-        A focus session is a dedicated block of time where you commit to working
-        on a specific project or task. By setting clear boundaries for your
-        work, you can minimize distractions and dive deep into meaningful work.
+        Breaks are automatically suggested based on the duration of your focus
+        sessions, allowing you to recharge before the next work block. The tool
+        also supports automatic sessions if your work duration exceeds certain
+        thresholds, making it easy to maintain productivity without overworking.
+        If you forget to end a session, Increaser can auto-stop it, giving you
+        an option to adjust the end time to reflect your actual work accurately.
       </p>
 
-      <h3>How Focus Sessions Improve Productivity</h3>
-      <ul>
-        <li>
-          <strong>Work in Blocks:</strong> The Focus feature is built around the
-          idea of working in 90-minute blocks. After each block, you take a
-          short break to recharge and come back stronger for your next session.
-        </li>
-        <li>
-          <strong>Track Your Progress:</strong> See how much time you’ve spent
-          on each project and stay on top of your goals.
-        </li>
-        <li>
-          <strong>Session History:</strong> Keep track of your work history with
-          session logs that show what you’ve worked on, and for how long.
-        </li>
-        <li>
-          <strong>Prevent Overworking:</strong> If you forget to end a session,
-          Increaser will automatically stop it after 3 hours to help prevent
-          burnout.
-        </li>
-      </ul>
-
-      <h3>Get Started in Seconds</h3>
-      <p>Starting a Focus session is simple:</p>
-      <ol>
-        <li>Select a project or task you want to work on.</li>
-        <li>Choose a target duration.</li>
-        <li>Hit the start button, and you’re ready to focus!</li>
-      </ol>
-
-      <h3>Stay in the Zone</h3>
+      <h2>Project and Task Integration</h2>
       <p>
-        You can set up focus notifications to remind you when your session ends,
-        when it’s time for a break, or when your workday is about to end. You
-        can also mix and match ambient sounds to help maintain your
-        concentration.
+        The Focus tool integrates seamlessly with your projects and tasks. You
+        can create, edit, or delete tasks directly within an active focus
+        session, making it easy to adapt to changes. You can also view an
+        overview of your progress for each project, helping you decide where to
+        direct your efforts to stay on track with your weekly goals.
       </p>
 
-      <h3>Adjust on the Go</h3>
+      <h2>Focus Music and Notifications</h2>
       <p>
-        If you forget to start or stop a session, don’t worry. You can adjust
-        the start and end times easily so your tracked time is accurate.
+        Stay in the zone by playing focus music or creating your own ambient
+        sound mix from sources like rain, coffee shop noise, or birdsong.
+        Notifications help you keep track of session endings, workday
+        milestones, and eye breaks. These notifications keep you informed
+        without interrupting your workflow, letting you maintain a consistent
+        pace throughout the day.
       </p>
 
+      <h2>Integration with Other Tools</h2>
       <p>
-        Ready to take your productivity to the next level? Start your first
-        focus session now and experience the difference!
+        The Focus tool is deeply connected to other parts of Increaser. Time
+        tracking through focus sessions contributes to your project reports,
+        helping you analyze how your time is spent. The "Time Planning" and
+        "Work Budget" tools complement the Focus tool by letting you set goals
+        for specific projects and allocate your time effectively. Together,
+        these tools create a comprehensive system to ensure every workday is
+        productive and aligned with your vision and goals.
+      </p>
+
+      <h2>Summary</h2>
+      <p>
+        In short, the Focus tool provides a structured environment to manage
+        your work sessions, minimize distractions, and keep you motivated. By
+        combining focus sessions, automatic breaks, seamless project
+        integration, and insightful analytics, it ensures your productivity
+        aligns with your overall goals and vision.
       </p>
     </>
   ),

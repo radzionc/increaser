@@ -18,7 +18,7 @@ export const BreakCountdown = () => {
       gap={8}
       wrap="wrap"
     >
-      <Text as="div" weight="600" size={40} height="small">
+      <Text as="div" weight="600" size={40} height="s">
         <AnimatedDuration getDuration={() => Date.now() - lastSetEnd} />
       </Text>
       <Text color={breakDuration ? 'supporting' : 'shy'} weight="600">

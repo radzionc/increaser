@@ -15,10 +15,9 @@ import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { Header } from '@lib/ui/layout/Header'
-import { LearnMorePrompt } from '@increaser/ui/education/components/LearnMorePrompt'
-import { EducationModal } from '@increaser/ui/education/components/EducationModal'
-import { focusEducation } from '@increaser/ui/education/focus'
-import { Opener } from '@lib/ui/base/Opener'
+import Link from 'next/link'
+import { getAppPath } from '@increaser/ui/navigation/app'
+import { LearnMorePrompt } from '@lib/ui/info/LearnMorePrompt'
 
 const Container = styled.div`
   display: flex;
@@ -45,14 +44,9 @@ export const HomePageContent = () => {
         <PageHeader>
           <Header>
             <PageTitle>Start a focus session</PageTitle>
-            <Opener
-              renderOpener={({ onOpen }) => (
-                <LearnMorePrompt onClick={onOpen} />
-              )}
-              renderContent={({ onClose }) => (
-                <EducationModal value={focusEducation} onClose={onClose} />
-              )}
-            />
+            <Link href={getAppPath('info', 'focus')}>
+              <LearnMorePrompt as="div" />
+            </Link>
           </Header>
         </PageHeader>
       ) : (

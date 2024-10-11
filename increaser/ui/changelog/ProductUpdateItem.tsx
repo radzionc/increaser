@@ -68,7 +68,7 @@ export const ProductUpdateItem = ({
         <Text size={20} weight="500" color="contrast">
           {value.name}
         </Text>
-        <Text color="supporting" height="large">
+        <Text color="supporting" height="l">
           {value.description}
         </Text>
       </VStack>

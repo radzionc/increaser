@@ -29,7 +29,7 @@ export const AuthConfirmationStatus = ({
           <Text
             style={{ wordBreak: 'break-word' }}
             centerHorizontally
-            height="large"
+            height="l"
           >
             {error.message}
           </Text>

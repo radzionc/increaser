@@ -26,7 +26,7 @@ export const ScheduleCheckItem = ({ value, label }: ScheduleCheckItemProps) => {
   return (
     <HStack alignItems="start" gap={8}>
       <CheckContainer>{value && <CheckIcon />}</CheckContainer>
-      <Text height="large" color={value ? 'supporting' : 'shy'} as="div">
+      <Text height="l" color={value ? 'supporting' : 'shy'} as="div">
         {label}
       </Text>
     </HStack>

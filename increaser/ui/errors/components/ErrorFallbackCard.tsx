@@ -12,7 +12,7 @@ export const ErrorFallbackCard = () => {
       <VStack gap={40} fullWidth alignItems="center">
         <ModalTitleText>Something went wrong</ModalTitleText>
         <VStack alignItems="center" gap={12} fullWidth>
-          <Text height="small" size={120}>
+          <Text height="s" size={120}>
             🤷‍♂️
           </Text>
           <Button onClick={() => location.reload()}>Reload the page</Button>

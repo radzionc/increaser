@@ -155,6 +155,10 @@ Finally, the "Community" page features a leaderboard of the most productive user
 
 On the "Profile" page the user can enable "public profile" and then their name and country will be shown when they request features or when they are on the leaderboard. Only paid users can enable the public profile.
 
+## Info
+
+App has an "Info" page that serves as a knowledge base for the app. It has articles for each primary tool explaining how to use it and why it's beneficial. Each article has a following order: a title, a first paragraph, an embedded YouTube video, and the content.
+
 # Data
 
 The user can export their data as a JSON file.

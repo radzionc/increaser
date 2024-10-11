@@ -47,11 +47,7 @@ export const WorkdayFinished = () => {
                 </Text>
 
                 {!isSmall && (
-                  <Text
-                    style={{ maxWidth: 320 }}
-                    centerHorizontally
-                    height="large"
-                  >
+                  <Text style={{ maxWidth: 320 }} centerHorizontally height="l">
                     Embrace your evening, recharge, and wake up ready to conquer
                     tomorrow.
                   </Text>

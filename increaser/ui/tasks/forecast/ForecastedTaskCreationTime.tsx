@@ -19,7 +19,7 @@ const Container = styled.div`
   ${text({
     centerVertically: true,
     size: 12,
-    height: 'small',
+    height: 's',
     weight: 600,
     color: 'supporting',
   })};
