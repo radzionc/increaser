@@ -1,6 +1,7 @@
 Users can now expedite the creation of recurring tasks ahead of schedule by using the 'Create Now' button found in the 'Upcoming' tab of the 'Tasks' page.
 Users can now see on the 'Upcoming' tab of the 'Tasks' page when their recurring task will actually be created.
 Focus launcher automatically adjusts the focus duration, targeting 90-minute blocks.
+An "info" page that will serve as a knowledge base of the app where the user can find an information about Increaser tools. For now it only includes an article about focus tool.
 No delay when adding a task or a project from a focus launcher.
 1728054756723
 An option to change the end time when finishing a focus session is helpful when the user forgets to stop the session and wants to adjust the end time.
