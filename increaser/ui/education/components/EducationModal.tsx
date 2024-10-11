@@ -4,6 +4,8 @@ import { Modal } from '@lib/ui/modal'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EducationContent } from './EducationContent'
+import { VStack } from '@lib/ui/css/stack'
+import { EducationVideo } from './EducationVideo'
 
 export const EducationModal: React.FC<
   ClosableComponentProps & ComponentWithValueProps<ProductToolEducation>
@@ -13,13 +15,16 @@ export const EducationModal: React.FC<
       placement="top"
       title={value.title}
       onClose={onClose}
-      width={520}
+      width={560}
       as="form"
       subTitle={value.subtitle}
       {...getFormProps({ onSubmit: onClose, onClose })}
       footer={<CreateFormFooter submitText="Continue" />}
     >
-      <EducationContent>{value.content}</EducationContent>
+      <VStack gap={20}>
+        <EducationVideo value={value.youTubeVideoUrl} />
+        <EducationContent>{value.content}</EducationContent>
+      </VStack>
     </Modal>
   )
 }

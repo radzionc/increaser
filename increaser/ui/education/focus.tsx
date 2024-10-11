@@ -3,6 +3,7 @@ import { ProductToolEducation } from './ProductToolEducation'
 export const focusEducation: ProductToolEducation = {
   title: 'Boost Your Productivity with Focus Sessions',
   subtitle: 'Learn how focus sessions can help you work smarter, not harder.',
+  youTubeVideoUrl: 'https://youtu.be/qvIAf7kvpFk',
   content: (
     <>
       <p>
