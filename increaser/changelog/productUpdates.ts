@@ -2,16 +2,41 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 0,
-    name: '',
-    description: '',
-    items: [],
-    youtube: '',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    releasedAt: 1728708465131,
+    name: 'Create Tasks Ahead & Smarter Focus Sessions',
+    description:
+      "Introducing new ways to stay ahead of your tasks and stay focused with ease. We've added more flexibility to manage recurring tasks and made Focus Launcher smarter and faster.",
+    items: [
+      {
+        description:
+          "Expedite recurring tasks by using the new 'Create Now' button in the 'Upcoming' tab of the 'Tasks' page.",
+      },
+      {
+        description:
+          "See exactly when your recurring task will be created in the 'Upcoming' tab for better planning.",
+      },
+      {
+        description:
+          'Focus Launcher now automatically targets optimal 90-minute focus sessions for improved productivity.',
+      },
+      {
+        description:
+          "The new 'Info' page is now available, serving as a knowledge base starting with an article on the Focus tool.",
+      },
+      {
+        description:
+          "No delay when adding a task or project from the Focus Launcher—it's faster than ever.",
+      },
+    ],
+    youtube: 'https://youtu.be/Y18WO4BIpc8',
+    telegram: 'https://t.me/increaser_app/55',
+    x: 'https://x.com/increaser_app/status/1844962667829604847',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7250727196628054016',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/introducing-increasers-newest-productivity-boosters--O8z1-L5AUGwzo0Gx11T',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1g1slaz/new_increaser_updates_effortless_task_management/',
   },
 
   {
