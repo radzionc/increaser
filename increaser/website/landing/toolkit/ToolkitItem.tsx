@@ -36,7 +36,7 @@ const Container = styled(HStack)`
   text-transform: capitalize;
 
   ${text({
-    size: 24,
+    size: 20,
     weight: 700,
     color: 'contrast',
     centerVertically: true,
@@ -50,6 +50,11 @@ const Container = styled(HStack)`
 
   &:hover ${Outline} {
     opacity: 1;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 16px;
+    height: 80px;
   }
 `
 
