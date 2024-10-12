@@ -12,8 +12,20 @@ import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getProductToolUrl } from '../../navigation/productTool'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { text } from '@lib/ui/text'
+import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
+import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+
+const Outline = styled.div`
+  ${absoluteOutline(2, 2)};
+  border: 2px solid ${getColor('contrast')};
+  ${borderRadius.s};
+  opacity: 0;
+`
 
 const Container = styled(HStack)`
+  position: relative;
+  isolation: isolate;
+
   ${borderRadius.s};
   background: ${getColor('foreground')};
   color: ${getColor('contrast')};
@@ -24,20 +36,31 @@ const Container = styled(HStack)`
   text-transform: capitalize;
 
   ${text({
-    size: 20,
+    size: 24,
     weight: 700,
     color: 'contrast',
+    centerVertically: true,
   })}
 
-  height: 80px;
+  gap: 8px;
+
+  height: 120px;
 
   ${centerContent};
+
+  &:hover ${Outline} {
+    opacity: 1;
+  }
 `
 
 export const ToolkitItem = ({
   value,
 }: ComponentWithValueProps<ProductTool>) => (
   <Link href={getProductToolUrl(value)}>
-    <Container>{productToolKeyWordRecord[value]}</Container>
+    <Container>
+      {productToolIconRecord[value]}
+      {productToolKeyWordRecord[value]}
+      <Outline />
+    </Container>
   </Link>
 )
