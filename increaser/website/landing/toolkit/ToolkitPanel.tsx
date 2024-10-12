@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import { ToolkitItem } from './ToolkitItem'
 import { productTools } from '@increaser/entities/ProductTool'
 
-const Content = styled(UniformColumnGrid)`
-  max-width: 620px;
-  width: 100%;
-`
+const Content = styled(UniformColumnGrid)``
 
 export const ToolkitPanel = () => {
   return (

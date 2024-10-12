@@ -5,36 +5,39 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import {
   ProductTool,
-  productToolPurposeRecord,
+  productToolKeyWordRecord,
 } from '@increaser/entities/ProductTool'
 import Link from 'next/link'
-import { transition } from '@lib/ui/css/transition'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getProductToolUrl } from '../../navigation/productTool'
-import { ProductToolIcon } from '@increaser/ui/tools/ProductToolIcon'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { text } from '@lib/ui/text'
 
 const Container = styled(HStack)`
-  gap: 8px;
-  align-items: center;
-  padding: 12px;
   ${borderRadius.s};
   background: ${getColor('foreground')};
   color: ${getColor('contrast')};
-  font-weight: 500;
-  font-size: 14px;
-  ${transition};
   &:hover {
     background: ${getHoverVariant('foreground')};
   }
+
+  text-transform: capitalize;
+
+  ${text({
+    size: 20,
+    weight: 700,
+    color: 'contrast',
+  })}
+
+  height: 80px;
+
+  ${centerContent};
 `
 
 export const ToolkitItem = ({
   value,
 }: ComponentWithValueProps<ProductTool>) => (
   <Link href={getProductToolUrl(value)}>
-    <Container>
-      <ProductToolIcon style={{ fontSize: 18 }} value={value} />
-      {productToolPurposeRecord[value]}
-    </Container>
+    <Container>{productToolKeyWordRecord[value]}</Container>
   </Link>
 )

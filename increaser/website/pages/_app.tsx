@@ -13,7 +13,7 @@ import { darkTheme } from '@lib/ui/theme/darkTheme'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '800'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 interface MyAppProps extends AppProps {

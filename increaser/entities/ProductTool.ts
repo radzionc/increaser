@@ -3,12 +3,12 @@ import { productName } from '@increaser/config'
 export const productTools = [
   'vision',
   'goals',
+  'habits',
   'focus',
-  'trackTime',
   'tasks',
+  'trackTime',
   'workBudget',
   'timePlanner',
-  'habits',
   'schedule',
 ] as const
 export type ProductTool = (typeof productTools)[number]
@@ -35,6 +35,18 @@ export const productToolNameRecord: Record<ProductTool, string> = {
   schedule: 'Scheduling',
   vision: 'Vision board',
   goals: 'Goals',
+}
+
+export const productToolKeyWordRecord: Record<ProductTool, string> = {
+  trackTime: 'track',
+  tasks: 'tasks',
+  workBudget: 'budget',
+  timePlanner: 'plan',
+  focus: 'focus',
+  habits: 'habits',
+  schedule: 'schedule',
+  vision: 'vision',
+  goals: 'goals',
 }
 
 export const productToolShortNameRecord: Record<ProductTool, string> = {
