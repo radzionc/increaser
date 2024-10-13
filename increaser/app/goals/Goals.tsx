@@ -4,11 +4,10 @@ import { PageHeaderControlsArea } from '../ui/page/header/PageHeaderControlsArea
 import { GoalStatusFilter } from '@increaser/ui/goals/filter/GoalStatusFilter'
 import styled from 'styled-components'
 import { GoalList } from './GoalList'
+import { AddGoal } from './AddGoal'
 
 const Container = styled(VStack)`
   gap: 32px;
-  width: 100%;
-  max-width: 560px;
 `
 
 export const Goals = () => {
@@ -16,6 +15,7 @@ export const Goals = () => {
     <Container>
       <PageHeaderControlsArea>
         <GoalStatusFilter />
+        <AddGoal />
       </PageHeaderControlsArea>
       <GoalsTimeline />
       <GoalList />

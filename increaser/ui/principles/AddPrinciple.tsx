@@ -1,20 +1,13 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { CreatePrincipleForm } from './form/CreatePrincipleForm'
-import { Button } from '@lib/ui/buttons/Button'
-import { HStack } from '@lib/ui/css/stack'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { PageHeaderAddButton } from '../navigation/components/PageHeaderAddButton'
 
 export const AddPrinciple = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Button size="s" onClick={onOpen}>
-          <HStack gap={8} alignItems="center">
-            <PlusIcon />
-            Add a principle
-          </HStack>
-        </Button>
+        <PageHeaderAddButton value="a principle" onClick={onOpen} />
       )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>

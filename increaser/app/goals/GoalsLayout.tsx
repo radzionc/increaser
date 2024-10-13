@@ -20,7 +20,7 @@ export const GoalsLayout = ({ children }: ComponentWithChildrenProps) => {
     <AppPageLayout>
       <PageContainer>
         <HStack style={{ position: 'relative' }} fullWidth wrap="wrap" gap={40}>
-          <PageContent>
+          <PageContent style={{ maxWidth: 560 }}>
             <PageHeaderControlsAreaProvider>
               <PageHeader>
                 <PagePrimaryNavigation />
