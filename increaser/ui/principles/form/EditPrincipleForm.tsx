@@ -8,9 +8,9 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { useCurrentPrinciple } from '../CurrentPrincipleProvider'
 import { ListItemForm } from '../../form/ListItemForm'
-import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
 import { PrincipleFormFields } from './PrincipleFormFields'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 export const EditPrincipleForm = () => {
   const principle = useCurrentPrinciple()
@@ -62,15 +62,12 @@ export const EditPrincipleForm = () => {
         onClose={onFinish}
       />
       <HStack fullWidth>
-        <Button
-          kind="alert"
+        <PanelFormDeleteButton
           onClick={() => {
             deletePrinciple(id)
             onFinish()
           }}
-        >
-          Delete
-        </Button>
+        />
       </HStack>
     </ListItemForm>
   )

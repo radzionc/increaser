@@ -8,10 +8,10 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
 import { otherProjectId } from '@increaser/entities/Project'
 import { useUser } from '@increaser/ui/user/state/user'
-import { Button } from '@lib/ui/buttons/Button'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 export const DeleteProject = () => {
   const { name, id, status } = useCurrentProject()
@@ -28,11 +28,7 @@ export const DeleteProject = () => {
 
   return (
     <Opener
-      renderOpener={({ onOpen }) => (
-        <Button kind="alert" onClick={onOpen}>
-          Delete
-        </Button>
-      )}
+      renderOpener={({ onOpen }) => <PanelFormDeleteButton onClick={onOpen} />}
       renderContent={({ onClose }) => (
         <ConfirmationModal
           title="Confirm project deletion"

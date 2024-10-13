@@ -15,8 +15,8 @@ import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserE
 import { ListItemForm } from '../../form/ListItemForm'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
-import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 export const EditIdeaForm = () => {
   const idea = useCurrentIdea()
@@ -92,17 +92,14 @@ export const EditIdeaForm = () => {
         }
         value={value.description}
       />
-      <HStack fullWidth alignItems="center" justifyContent="space-between">
+      <HStack fullWidth alignItems="center" wrap="wrap" gap={8}>
         <TurnIdeaIntoTask value={value} />
-        <Button
-          kind="alert"
+        <PanelFormDeleteButton
           onClick={() => {
             deleteIdea(id)
             onFinish()
           }}
-        >
-          Delete
-        </Button>
+        />
       </HStack>
     </ListItemForm>
   )

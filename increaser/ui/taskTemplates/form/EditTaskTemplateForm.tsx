@@ -16,7 +16,7 @@ import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
-import { Button } from '@lib/ui/buttons/Button'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 export const EditTaskTemplateForm = () => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -87,16 +87,13 @@ export const EditTaskTemplateForm = () => {
               }
             />
           )}
+          <PanelFormDeleteButton
+            onClick={() => {
+              deleteTaskTemplate(id)
+              onFinish()
+            }}
+          />
         </HStack>
-        <Button
-          kind="alert"
-          onClick={() => {
-            deleteTaskTemplate(id)
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
       </HStack>
     </Panel>
   )

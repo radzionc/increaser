@@ -104,12 +104,7 @@ export const EditProjectForm = () => {
         <PanelFormCloseButton onClick={onFinish} />
       </EmojiColorTextInputFrame>
       {(isStatusEditable || isDeletable) && (
-        <HStack
-          alignItems="start"
-          gap={20}
-          justifyContent="space-between"
-          wrap="wrap"
-        >
+        <HStack alignItems="center" gap={8} wrap="wrap">
           {isStatusEditable && (
             <ProjectStatusInput
               value={value.status}

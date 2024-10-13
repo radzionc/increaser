@@ -10,7 +10,7 @@ import { VisionAttributeFormFields } from './VisionAttributeFormFields'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { Panel } from '@lib/ui/css/panel'
 import { HStack } from '@lib/ui/css/stack'
-import { Button } from '@lib/ui/buttons/Button'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 export const EditVisionAttributeForm = () => {
   const visionAttribute = useCurrentVisionAttribute()
@@ -62,15 +62,12 @@ export const EditVisionAttributeForm = () => {
         onChange={setValue}
       />
       <HStack fullWidth>
-        <Button
-          kind="alert"
+        <PanelFormDeleteButton
           onClick={() => {
             deleteVisionAttribute(id)
             onFinish()
           }}
-        >
-          Delete
-        </Button>
+        />
       </HStack>
     </Panel>
   )

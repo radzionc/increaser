@@ -15,7 +15,7 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { PanelFormCloseButton } from '@increaser/ui/form/panel/PanelFormCloseButton'
 import { HStack } from '@lib/ui/css/stack'
-import { Button } from '@lib/ui/buttons/Button'
+import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
 
 export const EditHabitForm = () => {
   const habit = useCurrentHabit()
@@ -83,15 +83,12 @@ export const EditHabitForm = () => {
         <PanelFormCloseButton onClick={onFinish} />
       </EmojiColorTextInputFrame>
       <HStack fullWidth>
-        <Button
-          kind="alert"
+        <PanelFormDeleteButton
           onClick={() => {
             deleteHabit(id)
             onFinish()
           }}
-        >
-          Delete
-        </Button>
+        />
       </HStack>
     </Panel>
   )

@@ -19,8 +19,8 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
-import { Button } from '@lib/ui/buttons/Button'
 import { pick } from '@lib/utils/record/pick'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
 export const EditTaskFactoryForm = () => {
   const taskFactory = useCurrentTaskFactory()
@@ -121,16 +121,13 @@ export const EditTaskFactoryForm = () => {
               }
             />
           )}
+          <PanelFormDeleteButton
+            onClick={() => {
+              deleteTaskFactory(id)
+              onFinish()
+            }}
+          />
         </HStack>
-        <Button
-          kind="alert"
-          onClick={() => {
-            deleteTaskFactory(id)
-            onFinish()
-          }}
-        >
-          Delete
-        </Button>
       </HStack>
     </Panel>
   )

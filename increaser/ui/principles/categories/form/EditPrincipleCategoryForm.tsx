@@ -12,9 +12,9 @@ import { PrincipleCategoryFormShape } from './PrincipleCategoryFormShape'
 import { ListItemForm } from '../../../form/ListItemForm'
 import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
-import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormCloseButton } from '../../../form/panel/PanelFormCloseButton'
+import { PanelFormDeleteButton } from '../../../form/panel/PanelFormDeleteButton'
 
 export const EditPricnipleCategoryForm = () => {
   const principleCategory = useCurrentPrincipleCategory()
@@ -76,15 +76,12 @@ export const EditPricnipleCategoryForm = () => {
       </EmojiTextInputFrame>
       {otherPrincipleCategoryId !== principleCategory.id && (
         <HStack fullWidth>
-          <Button
-            kind="alert"
+          <PanelFormDeleteButton
             onClick={() => {
               deleteEntity(id)
               onFinish()
             }}
-          >
-            Delete
-          </Button>
+          />
         </HStack>
       )}
     </ListItemForm>
