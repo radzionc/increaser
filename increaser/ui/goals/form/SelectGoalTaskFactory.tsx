@@ -11,7 +11,7 @@ type SelectGoalTaskFactoryProps = ValueFinishProps<string> & {
 
 const Container = styled(ExpandableSelector)`
   background: ${getColor('transparent')};
-  border-color: ${getColor('mistExtra')};
+  border-color: ${getColor('transparent')};
   color: ${getColor('contrast')};
   gap: 12px;
 ` as typeof ExpandableSelector<string>
@@ -29,6 +29,7 @@ export const SelectGoalTaskFactory = ({
       options={options}
       getOptionKey={(option) => option}
       getOptionName={(option) => taskFactories[option].name}
+      showToggle={false}
       renderOption={(option) => (
         <>
           <Text>{taskFactories[option].name}</Text>
