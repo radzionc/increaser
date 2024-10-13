@@ -6,13 +6,10 @@ import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFacto
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { RemoveGoalTaskFactory } from './RemoveGoalTaskFactory'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
-import { SelectGoalTaskFactory } from './SelectGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
 import styled from 'styled-components'
 import { GoalTaskFactoryItem } from './GoalTaskFactoryItem'
-import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
-import { getColor } from '@lib/ui/theme/getters'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -23,12 +20,6 @@ const Content = styled(HStack)`
       flex: 1;
     }
   }
-`
-
-const Separator = styled.div`
-  width: 1px;
-  height: 20px;
-  background: ${getColor('mistExtra')};
 `
 
 export const GoalTaskFactoriesInput = ({
@@ -62,17 +53,14 @@ export const GoalTaskFactoriesInput = ({
                 )
               })}
           </ActiveItemIdProvider>
-          <HStackSeparatedBy separator={<Separator />} gap={4}>
-            <AddGoalTaskFactory onFinish={(id) => onChange([...value, id])} />
-            {options.length > 0 && (
-              <SelectGoalTaskFactory
-                options={options}
-                onFinish={(id) => onChange([...value, id])}
-              />
-            )}
-          </HStackSeparatedBy>
         </VStack>
       )}
+      <VStack alignItems="start">
+        <AddGoalTaskFactory
+          options={options}
+          onFinish={(id) => onChange([...value, id])}
+        />
+      </VStack>
     </FieldArrayContainer>
   )
 }

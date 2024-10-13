@@ -1,40 +1,87 @@
-import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { useUser } from '@increaser/ui/user/state/user'
-import { Text } from '@lib/ui/text'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import {
+  ComponentWithActiveState,
+  ComponentWithOptionsProps,
+  ValueFinishProps,
+} from '@lib/ui/props'
+import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
+import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
+import { FloatingFocusManager } from '@floating-ui/react'
+import { OptionItem } from '@lib/ui/select/OptionItem'
+import { OptionContent } from '@lib/ui/select/OptionContent'
+import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
+import { BodyPortal } from '@lib/ui/dom/BodyPortal'
 import { getColor } from '@lib/ui/theme/getters'
-import { ValueFinishProps } from '@lib/ui/props'
 
-type SelectGoalTaskFactoryProps = ValueFinishProps<string> & {
-  options: string[]
-}
-
-const Container = styled(ExpandableSelector)`
-  background: ${getColor('transparent')};
-  border-color: ${getColor('transparent')};
-  color: ${getColor('contrast')};
-  gap: 12px;
-` as typeof ExpandableSelector<string>
+const Container = styled(UnstyledButton)<ComponentWithActiveState>`
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background: ${getColor('foreground')};
+    `}
+`
 
 export const SelectGoalTaskFactory = ({
   onFinish,
   options,
-}: SelectGoalTaskFactoryProps) => {
-  const { taskFactories } = useUser()
+}: ValueFinishProps<string> & ComponentWithOptionsProps<string>) => {
+  const { taskFactories, projects } = useUser()
+
+  const {
+    getReferenceProps,
+    getFloatingProps,
+    getOptionProps,
+    isOpen,
+    activeIndex,
+    setIsOpen,
+    context,
+  } = useFloatingOptions({
+    strategy: 'fixed',
+    floatingOptionsWidthSameAsOpener: false,
+    selectedIndex: null,
+    placement: 'bottom-start',
+    options: options.map((option) => taskFactories[option].name),
+  })
+
   return (
-    <Container
-      value={null}
-      openerContent="Select an existing task"
-      onChange={onFinish}
-      options={options}
-      getOptionKey={(option) => option}
-      getOptionName={(option) => taskFactories[option].name}
-      showToggle={false}
-      renderOption={(option) => (
-        <>
-          <Text>{taskFactories[option].name}</Text>
-        </>
+    <>
+      <Container isActive={isOpen} {...getReferenceProps()}>
+        <CollapsableStateIndicator isOpen={isOpen} />
+      </Container>
+      {isOpen && (
+        <BodyPortal>
+          <FloatingFocusManager context={context} modal>
+            <TitledFloatingOptionsContainer
+              title="Select an existing task"
+              {...getFloatingProps()}
+            >
+              {options.map((option, index) => (
+                <OptionItem
+                  key={option}
+                  isActive={activeIndex === index}
+                  {...getOptionProps({
+                    index,
+                    onSelect: () => {
+                      onFinish(option)
+                      setIsOpen(false)
+                    },
+                  })}
+                >
+                  <OptionContent>
+                    <EmojiTextPrefix
+                      emoji={projects[taskFactories[option].projectId].emoji}
+                    />
+                    {taskFactories[option].name}
+                  </OptionContent>
+                </OptionItem>
+              ))}
+            </TitledFloatingOptionsContainer>
+          </FloatingFocusManager>
+        </BodyPortal>
       )}
-    />
+    </>
   )
 }

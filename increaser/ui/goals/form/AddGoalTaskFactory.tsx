@@ -1,49 +1,56 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { CreateTaskFactoryForm } from '../../taskFactories/form/CreateTaskFactoryForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { ValueFinishProps } from '@lib/ui/props'
+import { ComponentWithOptionsProps, ValueFinishProps } from '@lib/ui/props'
 import styled from 'styled-components'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { selectContainerMinHeight } from '@lib/ui/select/SelectContainer'
-import { getColor } from '@lib/ui/theme/getters'
-import { Button } from '@lib/ui/buttons/Button'
-import { HStack } from '@lib/ui/css/stack'
+import { hStack } from '@lib/ui/css/stack'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { Text } from '@lib/ui/text'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
+import { withSecondaryAction } from '@lib/ui/buttons/WithSecondaryAction'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { SelectGoalTaskFactory } from './SelectGoalTaskFactory'
 
-const Container = styled(Button)`
-  height: ${toSizeUnit(selectContainerMinHeight)};
-  color: ${getColor('contrast')};
-  font-weight: 500;
-  ${horizontalPadding(12)};
-  margin-left: -${toSizeUnit(tightListItemConfig.horizontalOffset)};
+const Container = styled(UnstyledButton)`
+  ${hStack({
+    alignItems: 'center',
+    gap: 8,
+  })}
 `
 
-export const AddGoalTaskFactory = ({ onFinish }: ValueFinishProps<string>) => {
+const Wrapper = styled.div`
+  ${withSecondaryAction({ height: 40 })};
+  ${borderRadius.s};
+`
+
+export const AddGoalTaskFactory = ({
+  onFinish,
+  options,
+}: ValueFinishProps<string> & ComponentWithOptionsProps<string>) => {
   return (
-    <Opener
-      renderOpener={({ onOpen }) => (
-        <Container onClick={onOpen} kind="ghost">
-          <HStack alignItems="center" gap={8}>
+    <Wrapper>
+      <Opener
+        renderOpener={({ onOpen }) => (
+          <Container onClick={onOpen}>
             <PlusIcon />
-            <Text>Add a task</Text>
-          </HStack>
-        </Container>
+            Add a recurring task
+          </Container>
+        )}
+        renderContent={({ onClose }) => (
+          <PanelModal onFinish={onClose}>
+            <CreateTaskFactoryForm
+              onFinish={(taskFactory) => {
+                onClose()
+                if (taskFactory) {
+                  onFinish(taskFactory.id)
+                }
+              }}
+            />
+          </PanelModal>
+        )}
+      />
+      {options.length > 0 && (
+        <SelectGoalTaskFactory options={options} onFinish={onFinish} />
       )}
-      renderContent={({ onClose }) => (
-        <PanelModal onFinish={onClose}>
-          <CreateTaskFactoryForm
-            onFinish={(taskFactory) => {
-              onClose()
-              if (taskFactory) {
-                onFinish(taskFactory.id)
-              }
-            }}
-          />
-        </PanelModal>
-      )}
-    />
+    </Wrapper>
   )
 }

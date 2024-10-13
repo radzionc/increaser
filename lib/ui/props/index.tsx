@@ -81,6 +81,10 @@ export type ComponentWithValueProps<T> = {
   value: T
 }
 
+export type ComponentWithOptionsProps<T> = {
+  options: T[]
+}
+
 export type ActionGuardProps<T = () => void | Promise<void>> = {
   action: T
   render: (params: { action: T }) => ReactNode
