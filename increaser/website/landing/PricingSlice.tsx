@@ -27,7 +27,7 @@ export const PricingSlice = () => {
           <Container withSections kind="secondary">
             <SubscriptionBillingCycleSelector />
             <SubscriptionFeatures />
-            <PrimaryCallToAction size="l">Start free trial</PrimaryCallToAction>
+            <PrimaryCallToAction>Start free trial</PrimaryCallToAction>
           </Container>
         </SubscriptionBillingCycleProvider>
       </WebsiteSliceContent>

@@ -11,7 +11,7 @@ export const ClosingArgumentSlice = () => {
       <ClosingArgumentBackground imageUrl="images/closing-argument.webp">
         <WebsiteSliceContent style={{ gap: 28, paddingBottom: 200 }}>
           <WebsiteSectionHeader title="Unleash Your Potential" />
-          <PrimaryCallToAction kind="reversed" />
+          <PrimaryCallToAction />
         </WebsiteSliceContent>
       </ClosingArgumentBackground>
     </ThemeProvider>

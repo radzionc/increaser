@@ -1,18 +1,12 @@
 import { getAppPath } from '@increaser/ui/navigation/app'
 import { AppLink } from '../navigation/AppLink'
-import { Button, ButtonProps } from '@lib/ui/buttons/Button'
-
-type PrimaryCallToActionProps = Partial<ButtonProps>
+import { CtaButton } from '@lib/ui/buttons/CtaButton'
+import { ComponentWithChildrenProps } from '@lib/ui/props'
 
 export const PrimaryCallToAction = ({
   children = 'Start now',
-  size = 'xl',
-  kind = 'primary',
-  ...rest
-}: PrimaryCallToActionProps) => (
+}: Partial<ComponentWithChildrenProps>) => (
   <AppLink to={getAppPath('signUp')}>
-    <Button as="div" kind={kind} size={size} {...rest}>
-      {children}
-    </Button>
+    <CtaButton as="div">{children}</CtaButton>
   </AppLink>
 )
