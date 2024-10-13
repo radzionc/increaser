@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useCurrentGoal } from '../CurrentGoalProvider'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { GoalFormShape } from './GoalFormShape'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -11,9 +10,10 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { areEqualRecords } from '@lib/utils/record/areEqualRecords'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
-import { Button } from '@lib/ui/buttons/Button'
+import { ClosableComponentProps } from '@lib/ui/props'
+import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 
-export const EditGoalForm = () => {
+export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
   const goal = useCurrentGoal()
   const { id } = goal
   const initialValue = useMemo(
@@ -30,12 +30,6 @@ export const EditGoalForm = () => {
 
   const { mutate: updateGoal } = useUpdateUserEntityMutation('goal')
   const { mutate: deleteGoal } = useDeleteUserEntityMutation('goal')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<GoalFormShape>>({
     value: useMemo(
@@ -67,20 +61,16 @@ export const EditGoalForm = () => {
   })
 
   return (
-    <ListItemForm onClose={onFinish}>
+    <ListItemForm onClose={onClose}>
       <GoalFormFields
         actions={
-          <Button
-            kind="alert"
+          <PanelFormDeleteButton
             onClick={() => {
               deleteGoal(id)
-              onFinish()
             }}
-          >
-            Delete
-          </Button>
+          />
         }
-        onClose={onFinish}
+        onClose={onClose}
         value={value}
         onChange={setValue}
       />

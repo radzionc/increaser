@@ -105,13 +105,7 @@ export const GoalFormFields = ({
         onChange={(taskFactories) => onChange({ ...value, taskFactories })}
         value={value.taskFactories}
       />
-      <HStack
-        fullWidth
-        alignItems="center"
-        justifyContent="space-between"
-        gap={20}
-        wrap="wrap"
-      >
+      <HStack fullWidth alignItems="center" gap={8} wrap="wrap">
         <GoalStatusSelector
           value={value.status}
           onChange={(status) => onChange({ ...value, status })}
