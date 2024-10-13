@@ -20,6 +20,7 @@ type AddTaskProps = {
 const Container = styled(Button)`
   justify-content: start;
   ${horizontalPadding(taskBoardConfig.itemHorizontalPadding)};
+  outline: none;
 `
 
 export const AddTask = ({ status }: AddTaskProps) => {

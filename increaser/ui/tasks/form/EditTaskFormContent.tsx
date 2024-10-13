@@ -61,7 +61,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
 
       if (!result) return result
 
-      if (result.deadlineAt !== initialValue.deadlineAt) {
+      if ('deadlineAt' in result) {
         result = {
           ...result,
           deadlineOrder: getLastItemOrder(
@@ -72,7 +72,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         }
       }
 
-      if (result.status !== initialValue.status) {
+      if ('status' in result) {
         result = {
           ...result,
           order: getLastItemOrder(

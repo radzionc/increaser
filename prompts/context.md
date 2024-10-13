@@ -113,6 +113,8 @@ On the "Work Budget" page, the user can set a preferred time they want to work o
 
 The "Habits" page has two top-level sections: "My habits" and "Habit ideas." "My Habits" consists of three sections. The "manage" section, where the user can reorder, edit, delete, and add new habits. The "track" section, which displays a table with the habits and checkboxes for the last 30 days, where the user can check off the habits they have done. They can also "reset" habits to have a fresh start by clicking on the "Reset habit(s)" button, which opens a modal where the user can select either all habits or specific habits to be reset. This will make them start from today and will remove all the tracked data. The "report" section contains a table of habits with a streak, success rate, and when the habit has been started. The "Habit ideas" section consists of a list of suggested habits for a fulfilling life, categorized into health, relationships, and work that the user can add to their habits.
 
+To help users remember to track their habits, a prompt appears in the sidebar navigation next to the "Habits" item. This prompt will show up if the user hasn't visited the "Habits" page that day.
+
 ## Tasks
 
 The "Tasks" page has four subpages: "Tasks", "Upcoming", "Automation", and "Templates". Users can filter tasks by project.

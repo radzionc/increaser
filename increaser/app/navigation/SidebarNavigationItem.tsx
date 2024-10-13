@@ -3,6 +3,7 @@ import { Match } from '@lib/ui/base/Match'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { NavigationToInternalPage } from './Sidebar/NavigationToInternalPage'
 import { FocusNavigationDecoration } from '../focus/components/FocusNavigationDecoration'
+import { HabitsNavigationDecoration } from '@increaser/ui/habits/navigation/HabitsNavigationDecoration'
 
 export const SidebarNavigationItem = ({
   value,
@@ -17,7 +18,12 @@ export const SidebarNavigationItem = ({
         />
       )}
       info={() => <NavigationToInternalPage value="info" />}
-      habits={() => <NavigationToInternalPage value="habits" />}
+      habits={() => (
+        <NavigationToInternalPage
+          value="habits"
+          decoration={<HabitsNavigationDecoration />}
+        />
+      )}
       tasks={() => <NavigationToInternalPage value="tasks" />}
       preferences={() => <NavigationToInternalPage value="preferences" />}
       vision={() => <NavigationToInternalPage value="vision" />}

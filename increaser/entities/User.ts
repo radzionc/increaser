@@ -118,6 +118,8 @@ export type User = DayMoments &
     viewedNewFeaturesAt?: number
     completedTasksDeletedAt?: number
 
+    viewedHabitsAt?: number
+
     subscription?: Subscription
     lifeTimeDeal?: LifeTimeDeal
 

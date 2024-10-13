@@ -68,7 +68,7 @@ export const FocusTaskOverview = () => {
 
       if (!result) return result
 
-      if (result.deadlineAt !== initialValue.deadlineAt) {
+      if ('deadlineAt' in result) {
         result = {
           ...result,
           deadlineOrder: getLastItemOrder(

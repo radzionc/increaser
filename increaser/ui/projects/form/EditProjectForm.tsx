@@ -53,7 +53,7 @@ export const EditProjectForm = () => {
         after: value,
       })
 
-      if (value.status !== initialValue.status) {
+      if (result && 'status' in result) {
         return {
           ...result,
           order: getLastItemOrder(
