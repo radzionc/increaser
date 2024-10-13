@@ -58,7 +58,6 @@ const items = [
 const Container = styled(VStack)`
   gap: 20px;
   width: 100%;
-  max-width: 560px;
 `
 
 export const GoalsEducationItems = () => {
