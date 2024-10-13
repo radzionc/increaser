@@ -16,6 +16,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { panelFormConfig } from '../../form/panel/config'
+import { GoalHabitsInput } from './GoalHabitsInput'
 
 type GoalFormFieldsProps = InputProps<GoalFormShape> & {
   onSubmit?: () => void
@@ -104,6 +105,10 @@ export const GoalFormFields = ({
       <GoalTaskFactoriesInput
         onChange={(taskFactories) => onChange({ ...value, taskFactories })}
         value={value.taskFactories}
+      />
+      <GoalHabitsInput
+        onChange={(habits) => onChange({ ...value, habits })}
+        value={value.habits}
       />
       <HStack fullWidth alignItems="center" gap={8} wrap="wrap">
         <GoalStatusSelector

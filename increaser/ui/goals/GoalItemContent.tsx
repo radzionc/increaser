@@ -10,6 +10,7 @@ import { GoalPlan } from './GoalPlan'
 import { GoalTaskFactories } from './GoalTaskFactories'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { GoalStatusTag } from './GoalStatusTag'
+import { GoalHabits } from './GoalHabits'
 
 const Name = styled(Text)`
   text-align: start;
@@ -20,9 +21,11 @@ const Name = styled(Text)`
 `
 
 export const GoalItemContent = () => {
-  const { name, emoji, plan, taskFactories } = useCurrentGoal()
+  const { name, emoji, plan, taskFactories, habits } = useCurrentGoal()
 
   const hasTaskFactories = taskFactories && taskFactories.length > 0
+
+  const hasHabits = habits && habits.length > 0
 
   return (
     <VStack gap={8}>
@@ -36,6 +39,7 @@ export const GoalItemContent = () => {
       <GoalDeadline />
       {plan && <GoalPlan />}
       {hasTaskFactories && <GoalTaskFactories />}
+      {hasHabits && <GoalHabits />}
     </VStack>
   )
 }

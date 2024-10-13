@@ -1,22 +1,16 @@
-import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
-import { EditHabitForm } from './form/EditHabitForm'
-import { HabitItemContent } from './HabitItemContent'
 import { Opener } from '@lib/ui/base/Opener'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { EditHabitForm } from '@increaser/app/habits/components/manage/form/EditHabitForm'
+import { HabitItemContent } from '@increaser/app/habits/components/manage/HabitItemContent'
 
-const Container = styled(Hoverable)`
-  text-align: start;
-  width: 100%;
-`
-
-export const HabitItem = () => {
+export const GoalHabitItem = () => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (
-        <Container onClick={onOpen} verticalOffset={0}>
+        <Hoverable verticalOffset={0} onClick={onOpen}>
           <HabitItemContent />
-        </Container>
+        </Hoverable>
       )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>

@@ -24,6 +24,7 @@ export type Goal = EntityWithId &
     plan?: string | null
     target?: GoalTarget | null
     taskFactories?: string[]
+    habits?: string[]
   }
 
 export type ScheduledGoal = Omit<Goal, 'deadlineAt'> & {

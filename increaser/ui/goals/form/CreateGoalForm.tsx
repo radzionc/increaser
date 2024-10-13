@@ -21,6 +21,7 @@ export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
     target: null,
     plan: '',
     taskFactories: [],
+    habits: [],
   })
   const { mutate } = useCreateUserEntityMutation('goal')
 

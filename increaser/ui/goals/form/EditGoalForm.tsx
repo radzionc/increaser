@@ -22,6 +22,7 @@ export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
       plan: goal.plan ?? '',
       target: goal.target ?? null,
       taskFactories: goal.taskFactories ?? [],
+      habits: goal.habits ?? [],
       deadlineAt: goal.deadlineAt ?? null,
     }),
     [goal],
@@ -46,6 +47,7 @@ export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
               return areEqualRecords(one, another)
             },
             taskFactories: areArraysEqual,
+            habits: areArraysEqual,
           },
         }),
       [initialValue, value],

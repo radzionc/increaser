@@ -8,7 +8,6 @@ import { DnDList } from '@lib/dnd/DnDList'
 import { Wrap } from '@lib/ui/base/Wrap'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
-import { EditHabitForm } from './form/EditHabitForm'
 import { useEffect, useState } from 'react'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
@@ -51,35 +50,30 @@ export const Habits = () => {
       }}
       renderList={({ props }) => <VStack {...props} />}
       renderItem={({ item, draggableProps, dragHandleProps, status }) => {
-        const isEditing = activeItemId === item.id
         return (
           <CurrentHabitProvider key={item.id} value={item}>
-            {isEditing ? (
-              <EditHabitForm />
-            ) : (
-              <Wrap
-                wrap={
-                  activeItemId === null
-                    ? (children) =>
-                        status === 'overlay' ? (
-                          <TightListItemDragOverlay>
-                            {children}
-                          </TightListItemDragOverlay>
-                        ) : (
-                          <DraggableTightListItemContainer
-                            isDragging={status === 'placeholder'}
-                            {...draggableProps}
-                            {...dragHandleProps}
-                          >
-                            {children}
-                          </DraggableTightListItemContainer>
-                        )
-                    : undefined
-                }
-              >
-                <HabitItem />
-              </Wrap>
-            )}
+            <Wrap
+              wrap={
+                activeItemId === null
+                  ? (children) =>
+                      status === 'overlay' ? (
+                        <TightListItemDragOverlay>
+                          {children}
+                        </TightListItemDragOverlay>
+                      ) : (
+                        <DraggableTightListItemContainer
+                          isDragging={status === 'placeholder'}
+                          {...draggableProps}
+                          {...dragHandleProps}
+                        >
+                          {children}
+                        </DraggableTightListItemContainer>
+                      )
+                  : undefined
+              }
+            >
+              <HabitItem />
+            </Wrap>
           </CurrentHabitProvider>
         )
       }}

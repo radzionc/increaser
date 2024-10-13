@@ -9,6 +9,7 @@ import { getPublicBucketUserFileKey } from '@increaser/public/getPublicBucketUse
 import { getUser, updateUser } from '@increaser/db/user'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { otherPrincipleCategoryId } from '@increaser/entities/PrincipleCategory'
+import { syncHabitsDependantFields } from '@increaser/data-services/habits/syncHabitsDependantFields'
 
 type UserEntityRemovalHandlerParams<T extends UserEntity> = {
   userId: string
@@ -22,6 +23,7 @@ const handleUserEntityRemoval: Partial<{
 }> = {
   project: ({ userId }) => syncProjectsDependantFields(userId),
   taskFactory: ({ userId }) => syncTaskFactoriesDependantFields(userId),
+  habit: ({ userId }) => syncHabitsDependantFields(userId),
   visionAttribute: async ({ userId, value: { imageId } }) => {
     if (imageId) {
       await deletePublicBucketFile(getPublicBucketUserFileKey(userId, imageId))

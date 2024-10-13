@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OptionalValueFinishProps } from '@lib/ui/props'
 import { HabitFormShape } from './HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
@@ -18,8 +18,11 @@ import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCre
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmojiInput } from '@increaser/ui/form/emoji-input/EmojiInput'
+import { Habit } from '@increaser/entities/Habit'
 
-export const CreateHabitForm = ({ onFinish }: NoValueFinishProps) => {
+export const CreateHabitForm = ({
+  onFinish,
+}: OptionalValueFinishProps<Habit>) => {
   const { habits } = useHabits()
   const usedColors = habits.map(({ color }) => color)
   const [value, setValue] = useState<HabitFormShape>({
@@ -30,22 +33,25 @@ export const CreateHabitForm = ({ onFinish }: NoValueFinishProps) => {
       used: usedColors,
     }),
   })
-  const { mutate } = useCreateUserEntityMutation('habit')
+  const { mutate } = useCreateUserEntityMutation('habit', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsHabitFormDisabled(value)
 
   const onSubmit = useCallback(() => {
     if (isDisabled) return
 
-    mutate({
+    const habit = {
       ...value,
       order: getLastItemOrder(habits.map(({ order }) => order)),
       id: getId(),
       startedAt: Math.round(Date.now() / MS_IN_SEC),
       successes: [],
-    })
-    onFinish()
-  }, [habits, isDisabled, mutate, onFinish, value])
+    }
+
+    mutate(habit)
+  }, [habits, isDisabled, mutate, value])
 
   return (
     <ListItemForm

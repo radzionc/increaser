@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from 'react'
 import { HabitFormShape } from './HabitFormShape'
 import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
@@ -16,8 +15,9 @@ import { Panel } from '@lib/ui/css/panel'
 import { PanelFormCloseButton } from '@increaser/ui/form/panel/PanelFormCloseButton'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
+import { NoValueFinishProps } from '@lib/ui/props'
 
-export const EditHabitForm = () => {
+export const EditHabitForm = ({ onFinish }: NoValueFinishProps) => {
   const habit = useCurrentHabit()
   const { id } = habit
   const { habits } = useHabits()
@@ -32,12 +32,6 @@ export const EditHabitForm = () => {
 
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
   const { mutate: deleteHabit } = useDeleteUserEntityMutation('habit')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<HabitFormShape>>({
     value: useMemo(

@@ -8,4 +8,5 @@ export type GoalFormShape = {
   plan: string
   target: GoalTarget | null
   taskFactories: string[]
+  habits: string[]
 }
