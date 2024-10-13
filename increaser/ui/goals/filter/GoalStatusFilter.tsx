@@ -1,4 +1,3 @@
-import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import {
   getGoalStatusFilterName,
   useGoalStatusFilter,
@@ -9,19 +8,20 @@ import { Circle } from '@lib/ui/layout/Circle'
 import { getGoalStatusColor } from '../getGoalStatusColor'
 import { useTheme } from 'styled-components'
 import { Text } from '@lib/ui/text'
+import { Filter } from '@lib/ui/data/filter/Filter'
 
 export const GoalStatusFilter = () => {
   const [value, setValue] = useGoalStatusFilter()
   const theme = useTheme()
 
   return (
-    <ExpandableSelector
-      style={{ width: 142 }}
+    <Filter
       value={value}
       onChange={setValue}
-      options={[...goalStatuses, null]}
-      getOptionKey={getGoalStatusFilterName}
-      renderOption={(option) => (
+      items={goalStatuses}
+      getItemKey={getGoalStatusFilterName}
+      title="Filter by status"
+      renderItem={(option) => (
         <HStack alignItems="center" gap={8}>
           <Circle
             size={8}
