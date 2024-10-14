@@ -3430,6 +3430,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/info@workspace:increaser/info":
+  version: 0.0.0-use.local
+  resolution: "@increaser/info@workspace:increaser/info"
+  dependencies:
+    clipboardy: "npm:^4.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/paddle-classic-ui@workspace:increaser/paddle-classic-ui":
   version: 0.0.0-use.local
   resolution: "@increaser/paddle-classic-ui@workspace:increaser/paddle-classic-ui"
