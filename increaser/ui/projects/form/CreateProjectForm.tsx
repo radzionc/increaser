@@ -18,12 +18,12 @@ import { Project } from '@increaser/entities/Project'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
+import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
+import { OptionalValueFinishProps } from '@lib/ui/props'
 
-type CreateProjectFormProps = {
-  onFinish?: (project?: Project) => void
-}
-
-export const CreateProjectForm = ({ onFinish }: CreateProjectFormProps) => {
+export const CreateProjectForm = ({
+  onFinish,
+}: OptionalValueFinishProps<Project>) => {
   const { projects } = useUser()
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(projects).map(({ color }) => color)
@@ -82,6 +82,7 @@ export const CreateProjectForm = ({ onFinish }: CreateProjectFormProps) => {
           value={value.name}
           onSubmit={onSubmit}
         />
+        <PanelFormCloseButton onClick={onFinish} />
       </EmojiColorTextInputFrame>
       <CreateFormFooter
         isDisabled={isDisabled}
