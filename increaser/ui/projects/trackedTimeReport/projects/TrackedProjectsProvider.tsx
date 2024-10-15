@@ -37,6 +37,7 @@ type TrackedProject = {
   months: ProjectMonth[]
   years: ProjectYear[]
   days: ProjectDay[]
+  budget?: number
 }
 
 export type TrackedProjects = Record<string, TrackedProject>
@@ -74,6 +75,9 @@ export const {
           weeks: weeksRecord[project.id] ?? [],
           months: monthsRecord[project.id] ?? [],
           years: yearsRecord[project.id] ?? [],
+          budget: project.allocatedMinutesPerWeek
+            ? convertDuration(project.allocatedMinutesPerWeek, 'min', 's')
+            : undefined,
         }
       })
 
