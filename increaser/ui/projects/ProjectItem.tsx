@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { EditProjectForm } from './form/EditProjectForm'
 import { ProjectItemContent } from './ProjectItemContent'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { Opener } from '@lib/ui/base/Opener'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 const Container = styled(Hoverable)`
   text-align: start;
@@ -12,23 +12,22 @@ const Container = styled(Hoverable)`
 `
 
 export const ProjectItem = () => {
-  const { id } = useCurrentProject()
-
-  const [activeItemId, setActiveItemId] = useActiveItemId()
-
-  if (activeItemId === id) {
-    return <EditProjectForm />
-  }
-
   return (
-    <Container
-      onClick={() => {
-        setActiveItemId(id)
-      }}
-      verticalOffset={0}
-      horizontalOffset={tightListItemConfig.horizontalOffset}
-    >
-      <ProjectItemContent />
-    </Container>
+    <Opener
+      renderOpener={({ onOpen }) => (
+        <Container
+          onClick={onOpen}
+          verticalOffset={0}
+          horizontalOffset={tightListItemConfig.horizontalOffset}
+        >
+          <ProjectItemContent />
+        </Container>
+      )}
+      renderContent={({ onClose }) => (
+        <PanelModal onFinish={onClose}>
+          <EditProjectForm onFinish={onClose} />
+        </PanelModal>
+      )}
+    />
   )
 }

@@ -1,5 +1,4 @@
 import { VStack } from '@lib/ui/css/stack'
-import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
 
 import { ProjectList } from './ProjectList'
@@ -22,11 +21,9 @@ export const ManageProjects = () => {
         <AddProject />
       </PageHeaderControlsArea>
       <Container>
-        <ActiveItemIdProvider initialValue={null}>
-          <VStack>
-            <ProjectList />
-          </VStack>
-        </ActiveItemIdProvider>
+        <VStack>
+          <ProjectList />
+        </VStack>
       </Container>
     </ProjectStatusFilterProvider>
   )

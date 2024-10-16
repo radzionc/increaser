@@ -3,7 +3,6 @@ import { HStack } from '@lib/ui/css/stack'
 import { ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useUser } from '@increaser/ui/user/state/user'
 import { ProjectStatusInput } from './ProjectStatusInput'
@@ -20,12 +19,13 @@ import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
+import { NoValueFinishProps } from '@lib/ui/props'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
 }
 
-export const EditProjectForm = () => {
+export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
   const project = useCurrentProject()
   const { projects } = useUser()
   const { id } = project
@@ -39,12 +39,6 @@ export const EditProjectForm = () => {
   const [value, setValue] = useState<EditProjectFormShape>(initialValue)
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<EditProjectFormShape>>({
     value: useMemo(() => {
