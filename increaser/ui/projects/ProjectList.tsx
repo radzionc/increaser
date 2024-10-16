@@ -4,12 +4,16 @@ import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectPro
 import { useUpdateUserEntityMutation } from '../userEntity/api/useUpdateUserEntityMutation'
 import { DnDList } from '@lib/dnd/DnDList'
 import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { EditProjectForm } from './form/EditProjectForm'
 import { ProjectItem } from './ProjectItem'
+import { Wrap } from '@lib/ui/base/Wrap'
 import { useFilteredByStatusProjects } from './hooks/useFilteredByStatusProjects'
 import { DraggableTightListItemContainer } from '@lib/ui/list/DraggableTightListItemContainer'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { useState, useEffect } from 'react'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
 
 export const ProjectList = () => {
   const projects = useFilteredByStatusProjects()
@@ -18,6 +22,8 @@ export const ProjectList = () => {
   useEffect(() => {
     setItems(sortEntitiesWithOrder(projects))
   }, [projects])
+
+  const [activeItemId, setActiveItemId] = useActiveItemId()
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
@@ -47,20 +53,36 @@ export const ProjectList = () => {
       }}
       renderList={({ props }) => <VStack {...props} />}
       renderItem={({ item, draggableProps, dragHandleProps, status }) => {
+        const isEditing = activeItemId === item.id
         return (
           <CurrentProjectProvider key={item.id} value={item}>
-            {status === 'overlay' ? (
-              <TightListItemDragOverlay>
-                <ProjectItem />
-              </TightListItemDragOverlay>
+            {isEditing ? (
+              <PanelModal onFinish={() => setActiveItemId(null)}>
+                <EditProjectForm onFinish={() => setActiveItemId(null)} />
+              </PanelModal>
             ) : (
-              <DraggableTightListItemContainer
-                isDragging={status === 'placeholder'}
-                {...draggableProps}
-                {...dragHandleProps}
+              <Wrap
+                wrap={
+                  activeItemId === null
+                    ? (children) =>
+                        status === 'overlay' ? (
+                          <TightListItemDragOverlay>
+                            {children}
+                          </TightListItemDragOverlay>
+                        ) : (
+                          <DraggableTightListItemContainer
+                            isDragging={status === 'placeholder'}
+                            {...draggableProps}
+                            {...dragHandleProps}
+                          >
+                            {children}
+                          </DraggableTightListItemContainer>
+                        )
+                    : undefined
+                }
               >
-                <ProjectItem />
-              </DraggableTightListItemContainer>
+                <ProjectItem onClick={() => setActiveItemId(item.id)} />
+              </Wrap>
             )}
           </CurrentProjectProvider>
         )
