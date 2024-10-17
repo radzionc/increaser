@@ -7,6 +7,7 @@ import { GiftIcon } from '@lib/ui/icons/GiftIcon'
 import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
 import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
 import { InfoIcon } from '@lib/ui/icons/InfoIcon'
+import { ChartNoAxesCombinedIcon } from '@lib/ui/icons/ChartNoAxesCombinedIcon'
 
 type NavigationPathInfo = {
   name: string
@@ -62,5 +63,9 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     info: {
       name: 'Info',
       icon: <InfoIcon />,
+    },
+    timesheet: {
+      name: 'Timesheet',
+      icon: <ChartNoAxesCombinedIcon />,
     },
   } as const

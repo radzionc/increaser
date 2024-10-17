@@ -45,7 +45,7 @@ export const ProjectBudgetWidgetHeader = () => {
           {name}
         </Text>
       </HStack>
-      <Link href={getAppPath('projects', 'projects')}>
+      <Link href={getAppPath('projects')}>
         <HStack gap={8}>
           <HStackSeparatedBy separator="/" gap={8} wrap="wrap">
             <Text weight="500" color="contrast">

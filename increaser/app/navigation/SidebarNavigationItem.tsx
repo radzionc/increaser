@@ -24,6 +24,7 @@ export const SidebarNavigationItem = ({
           decoration={<HabitsNavigationDecoration />}
         />
       )}
+      timesheet={() => <NavigationToInternalPage value="timesheet" />}
       tasks={() => <NavigationToInternalPage value="tasks" />}
       preferences={() => <NavigationToInternalPage value="preferences" />}
       vision={() => <NavigationToInternalPage value="vision" />}

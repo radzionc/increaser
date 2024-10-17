@@ -4,6 +4,7 @@ export const primaryAppNavigationPages = [
   'focus',
   'tasks',
   'projects',
+  'timesheet',
   'goals',
   'habits',
   'ideas',
@@ -57,6 +58,7 @@ export const appPageName: Record<AppPage, string> = {
   profile: 'Public Profile',
   preferences: 'Preferences',
   info: 'Info',
+  timesheet: 'Timesheet',
 }
 
 export const appPageEmoji: Record<AppPage, string> = {
@@ -79,6 +81,7 @@ export const appPageEmoji: Record<AppPage, string> = {
   profile: '👤',
   preferences: '⚙️',
   info: 'ℹ️',
+  timesheet: '📊',
 }
 
 export const appPagePath: Record<AppPage, string> = {
@@ -101,6 +104,7 @@ export const appPagePath: Record<AppPage, string> = {
   profile: 'profile',
   preferences: 'preferences',
   info: 'info',
+  timesheet: 'timesheet',
 }
 
 export const appPageViews = {
@@ -109,7 +113,6 @@ export const appPageViews = {
   principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'upcoming', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
-  projects: ['projects', 'report'],
   roadmap: ['ideas', 'done'],
   info: ['focus'],
 } as const
@@ -120,7 +123,6 @@ export type AppPagePrinciplesView = (typeof appPageViews)['principles'][number]
 export type AppPageTasksView = (typeof appPageViews)['tasks'][number]
 export type AppPagePreferencesView =
   (typeof appPageViews)['preferences'][number]
-export type AppPageProjectsView = (typeof appPageViews)['projects'][number]
 
 export type AppPageViews = typeof appPageViews
 export type AppPageWithView = keyof AppPageViews
@@ -176,10 +178,6 @@ export const appPageViewName: {
   preferences: {
     schedule: 'Schedule',
     'work-budget': 'Work Budget',
-  },
-  projects: {
-    projects: 'Projects',
-    report: 'Report',
   },
   roadmap: {
     ideas: 'Ideas',

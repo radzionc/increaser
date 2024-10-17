@@ -1,8 +1,8 @@
 import { withLayout } from '@lib/next-ui/utils/withLayout'
-import { ProjectsLayout } from '@increaser/app/projects/ProjectsLayout'
 import { ManageProjects } from '@increaser/ui/projects/ManageProjects'
+import { RegularAppPageLayout } from '../focus/components/RegularAppPageLayout'
 
 export default withLayout({
   page: ManageProjects,
-  layout: ProjectsLayout,
+  layout: RegularAppPageLayout,
 })
