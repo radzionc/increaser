@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'
@@ -93,6 +93,12 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
     ),
   })
 
+  useEffect(() => {
+    if (value.status !== 'active') {
+      setValue((prev) => ({ ...prev, budget: null, goal: null }))
+    }
+  }, [value.status])
+
   const isStatusEditable = couldProjectStatusBeChanged(project.id)
   const isDeletable = couldProjectBeDeleted(project.id)
 
@@ -104,7 +110,7 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
     <ListItemForm onClose={onFinish} onSubmit={onFinish}>
       <ProjectFormFields
         value={value}
-        freeHours={freeHours}
+        freeHours={value.status === 'active' ? freeHours : 0}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onClose={onFinish}
         onSubmit={onFinish}

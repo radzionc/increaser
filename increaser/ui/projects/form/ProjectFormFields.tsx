@@ -68,18 +68,20 @@ export const ProjectFormFields = ({
         label="Workdays Only (Mon-Fri)"
       />
 
-      <BudgetHoursInput
-        max={freeHours}
-        value={value.budget}
-        onChange={(budget) =>
-          onChange({
-            ...value,
-            budget,
-          })
-        }
-      />
+      {freeHours > 0 && (
+        <BudgetHoursInput
+          max={freeHours}
+          value={value.budget}
+          onChange={(budget) =>
+            onChange({
+              ...value,
+              budget,
+            })
+          }
+        />
+      )}
 
-      {value.budget && (
+      {value.budget && value.budget > 0 && (
         <ProjectGoalInput
           value={value.goal}
           onChange={(goal) => onChange({ ...value, goal })}
