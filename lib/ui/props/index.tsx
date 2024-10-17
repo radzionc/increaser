@@ -138,3 +138,7 @@ export type ColoredComponentProps = {
 export type ComponentWithActionProps = {
   action: ReactNode
 }
+
+export type SubmittableComponentProps = {
+  onSubmit: () => void
+}

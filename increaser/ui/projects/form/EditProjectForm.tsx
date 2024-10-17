@@ -3,23 +3,19 @@ import { HStack } from '@lib/ui/css/stack'
 import { ProjectStatus } from '@increaser/entities/Project'
 import { ProjectFormShape } from './ProjectFormShape'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
-import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useUser } from '@increaser/ui/user/state/user'
 import { ProjectStatusInput } from './ProjectStatusInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { DeleteProject } from './DeleteProject'
 import { couldProjectStatusBeChanged } from '@increaser/entities-utils/project/couldProjectStatusBeChanged'
 import { couldProjectBeDeleted } from '@increaser/entities-utils/project/couldProjectBeDeleted'
-import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
-import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { Panel } from '@lib/ui/css/panel'
-import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { NoValueFinishProps } from '@lib/ui/props'
+import { ProjectFormFields } from './ProjectFormFields'
+import { ListItemForm } from '../../form/ListItemForm'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -29,7 +25,6 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
   const project = useCurrentProject()
   const { projects } = useUser()
   const { id } = project
-  const usedColors = Object.values(projects).map(({ color }) => color)
 
   const initialValue = useMemo(
     () => pick(project, ['name', 'emoji', 'color', 'status']),
@@ -74,29 +69,13 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
   const isDeletable = couldProjectBeDeleted(project.id)
 
   return (
-    <Panel style={{ width: '100%' }} withSections kind="secondary">
-      <EmojiColorTextInputFrame>
-        <div>
-          <EmojiInput
-            value={value.emoji}
-            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
-          />
-        </div>
-        <div>
-          <ColorLabelInput
-            usedValues={new Set(usedColors)}
-            value={value.color}
-            onChange={(color) => setValue((prev) => ({ ...prev, color }))}
-          />
-        </div>
-        <EmbeddedTitleInput
-          placeholder="Project name"
-          autoFocus
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          value={value.name}
-        />
-        <PanelFormCloseButton onClick={onFinish} />
-      </EmojiColorTextInputFrame>
+    <ListItemForm onClose={onFinish} onSubmit={onFinish}>
+      <ProjectFormFields
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        onClose={onFinish}
+        onSubmit={onFinish}
+      />
       {(isStatusEditable || isDeletable) && (
         <HStack alignItems="center" gap={8} wrap="wrap">
           {isStatusEditable && (
@@ -108,6 +87,6 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
           {isDeletable && <DeleteProject />}
         </HStack>
       )}
-    </Panel>
+    </ListItemForm>
   )
 }

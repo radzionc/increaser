@@ -6,20 +6,16 @@ import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { EmojiColorTextInputFrame } from '@increaser/ui/form/EmojiColorTextInputFrame'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { Project } from '@increaser/entities/Project'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
-import { EmojiInput } from '../../form/emoji-input/EmojiInput'
-import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { OptionalValueFinishProps } from '@lib/ui/props'
+import { ProjectFormFields } from './ProjectFormFields'
 
 export const CreateProjectForm = ({
   onFinish,
@@ -61,29 +57,12 @@ export const CreateProjectForm = ({
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiColorTextInputFrame>
-        <div>
-          <EmojiInput
-            value={value.emoji}
-            onChange={(emoji) => setValue((prev) => ({ ...prev, emoji }))}
-          />
-        </div>
-        <div>
-          <ColorLabelInput
-            usedValues={new Set(usedColors)}
-            value={value.color}
-            onChange={(color) => setValue((prev) => ({ ...prev, color }))}
-          />
-        </div>
-        <EmbeddedTitleInput
-          placeholder="Project name"
-          autoFocus
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          value={value.name}
-          onSubmit={onSubmit}
-        />
-        <PanelFormCloseButton onClick={onFinish} />
-      </EmojiColorTextInputFrame>
+      <ProjectFormFields
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        onClose={onFinish}
+        onSubmit={onFinish}
+      />
       <CreateFormFooter
         isDisabled={isDisabled}
         isPending={isPending}
