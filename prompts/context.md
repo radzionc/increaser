@@ -10,7 +10,7 @@ Increaser is currently available only as a web app, with no plans to develop a m
 
 # Founder
 
-Increaser was developed by Radzion, a single individual who is also the sole founder. I have been working on Increaser for over five years. While I enjoy working on it, Increaser has not yet generated revenue, so I also work full-time as a software engineer.
+Increaser was developed by Radzion, who is also the sole founder. He has been working on Increaser for over five years. While he enjoys working on it, Increaser has not yet generated revenue, so he also works full-time as a software engineer.
 
 # Monetization
 
@@ -34,7 +34,7 @@ Each tool has a dedicated page within the app and a corresponding section on the
 
 ## Vision
 
-The Vision users to define what their perfect life looks like. It consists of a list of "vision attributes," each serving as a description of a perfect life.
+The Vision tool allows users to define what their perfect life looks like. It consists of a list of "vision attributes," each serving as a description of a perfect life.
 
 The vision page in the app has three Subpages: "Vision", "Board", and "Explore".
 
@@ -53,11 +53,11 @@ The "Explore" subpage contains a list of suggested vision attributes to give use
 
 ## Focus
 
-The "Focus" page features a section for setting a break between work sessions ranging from 5 to 30 minutes, with an option to set an unlimited break. Break duration is automatically suggested based on the user's work session duration. The user can enable automatic blocks that will start after a work session if the current work block does not exceed 90 minutes. When the user has worked for more than 90 minutes, it's time to take an "unlimited" break.
+Users can set breaks between work sessions ranging from 5 to 30 minutes, or choose an unlimited break. Break durations are suggested automatically based on the length of the previous work session. Users can enable automatic work blocks that start after a break if the total work time does not exceed 90 minutes. After working for more than 90 minutes, it's recommended to take an 'unlimited' break.
 
 Increaser advocates structuring work into 90-minute blocks to improve focus and productivity. Each block includes work sessions with breaks of no more than 15 minutes.
 
-Next, the "Focus" page displays an interface for starting a work session—a focus launcher. First, the user can select a project. Then, they can select a task (optional). If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule. Below the project selector, the user can see an overview of how much they have worked on a project this week. If they have a goal to work more or less on that project, they will also see a visual representation of how much they have worked compared to their goal and their progress relative to the current weekday. The user can change or set those goals on the "Time planning" page.
+Next, the "Focus" page displays an interface for starting a work session—a focus launcher. First, the user can select a project (required). Then, they can select a task (optional). If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule. Below the project selector, the user can see an overview of how much they have worked on a project this week. If they have a goal to work more or less on that project, they will also see a visual representation of how much they have worked compared to their goal and their progress relative to the current weekday. The user can change or set those goals on the "Time planning" page.
 
 If they forget to start a focus session and have already been working for some time, they can change the session start time on the focus launcher so that Increaser will track the time they worked before launching a session. During a focus session, the user can create, update, or delete tasks for the current focus project directly from the focus session interface.
 
@@ -79,13 +79,15 @@ The user can enable focus notifications that will appear as browser notification
 
 - Session end: when the target work amount is reached, while the session doesn't end automatically, the user will get a notification.
 - Workday end: 5 minutes before the workday end, the user will get a notification.
-- Eye break: every 20 minutes of interrupted work, the user will get a notification to take a 20-second break.
+- Eye break: every 20 minutes of uninterrupted work, the user will get a notification to take a 20-second break.
 
 During a focus session, you can hover over the timer to see the log of your current focus session, where each item is either work on a project with a duration, or a break with a duration.
 
 When finishing a focus session, the user has the option to also 'Change session end time and finish,' which is helpful when the user forgets to stop the session and wants to adjust the end time.
 
 The user can change focus project or task during the session. If the user changes the project, the session will be split into a new one for the new project.
+
+While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
 
 ## Goals
 
@@ -95,19 +97,17 @@ On the side of the goals page, there is an educational section that summarizes w
 
 ## Projects
 
-The "Projects" page has three subpages: "Projects," "Plan," and "Report."
+On the "Projects" page, users can view all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and status, which can be "active," "inactive," or "archived." One project, "Other," cannot be deleted. When a user deletes a project, all data associated with that project is reassigned to the "Other" project. Users can reorder projects by dragging them. Each project item displays an emoji, name, a budget or goal (if set), and an indicator if it's a "workday project" (Monday to Friday).
 
-On the "Projects" subpage, users can view all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and status, which can be "active," "inactive," or "archived." One project, "Other," cannot be deleted. When a user deletes a project, all data associated with that project is reassigned to the "Other" project. Users can reorder projects by dragging them. Each project item displays an emoji, name, a budget or goal (if set), and an indicator if it's a "workday project" (Monday to Friday).
-
-On the "Plan" page, users can budget project time for a week, where the total budgeted time should not exceed the work budget defined on the "Work Budget" page. The user can see the progress of the project budget and the total time spent on the project this week. The user can see the allocation of time, add new budgets, and edit/delete existing project budgets. On top of that, they can set a goal to work "at least X hours" or "no more than X hours" on a project. For example, users may want to work less on some projects, such as their remote job, and more on their business project. Also, they can select if they work on the project "Monday to Friday" or "Everyday." On the side of the page, they can see their progress for the current week.
-
-On the "Report" page, users can track their work time across different projects over a selected period, with options to group the data by days, weeks, months, or years. The interval input below the chart allows users to specify a time range, such as June to August, and view a detailed breakdown of time spent on each project. The left panel shows a percentage breakdown of time across projects, and users can click on a project name to filter the chart to display only that project. The chart is color-coded to represent different projects, and hovering over the bars reveals a detailed time distribution for each period. This provides valuable insights into how time is spent, enabling users to adjust priorities and identify work patterns. When the chart is grouped by weeks and the user selects either all projects or a specific project, they will see a line showing the budgeted time for the project, or, in the case of all projects, the total budgeted time.
-
-While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
+When creating or editing a project, users can choose if the project is limited to workdays (Monday to Friday) and set a weekly budget for how much time they plan to spend on it. If a project has a budget, they can also set a goal to work 'at least X hours' or 'no more than X hours' on the project. For example, users may want to work less on some projects, such as their remote job, and more on personal business projects.
 
 ## Work budget
 
 On the "Work Budget" page, the user can set a preferred time they want to work on a workday and on a weekend. Next to it, they can see analytics with their average workday and weekend over the last 30 days, and totals of the last 4 weeks.
+
+## Timesheet
+
+On the "Timesheet" page, users can track their work time across different projects over a selected period, with options to group the data by days, weeks, months, or years. The interval input below the chart allows users to specify a time range, such as June to August, and view a detailed breakdown of time spent on each project. The left panel shows a percentage breakdown of time across projects, and users can click on a project name to filter the chart to display only that project. The chart is color-coded to represent different projects, and hovering over the bars reveals a detailed time distribution for each period. This provides valuable insights into how time is spent, enabling users to adjust priorities and identify work patterns. When the chart is grouped by weeks and the user selects either all projects or a specific project, they will see a line showing the budgeted time for the project, or, in the case of all projects, the total budgeted time.
 
 ## Habits
 
@@ -123,11 +123,13 @@ The "Tasks" subpage is a kanban board with four columns: backlog, todo, inProgre
 
 In the "Upcoming" subpage, tasks are grouped by either day or week (the user can select between day and week views). The user can drag and drop tasks between days or weeks. This view also includes "forecasted" recurring tasks that will be created automatically at the beginning of a period (e.g., that week or day). These tasks can't be edited, but the user can force the early creation of a recurring task by clicking on the "Create now" button. For example, if the user has a weekly task, a task for the next week will be created at the beginning of that week. If the user wants to edit or start working on it earlier, they can click on the "Create now" button.
 
-Completed tasks are automatically deleted at the beginning of the next week. A user can assign a task to a project. A user can add links to the task to easily access all the necessary external resources during a focus session. A user can add a checklist/subtasks to a task and then complete those sub-items during a focus session on that task. A user can write a description for a task. In the "Automation" subpage, users can set up rules for the automatic creation of recurring tasks. The cadence could be daily, every workday, every week, or every month. For weekly and monthly tasks, the user can select a "deadline index," which for a week would be a weekday and for the month the day of the month. For example, if the "deadline index" for a weekly task is 4, the task will be created every Friday. When the user adds a rule in that section, a new entity called "TaskFactory" is created. Editing or deleting a task created by a TaskFactory won't affect the TaskFactory. In the "Templates" subpage, users can create, edit, and delete task templates. A task template contains the same fields as a task, so when the user creates a task or a TaskFactory, if there are templates for a selected project, they will see an option to use a template, and if they select a template, the task form will be pre-filled with the template data. Tasks are created at the start of the period, but to make it clear for the user, we show "forecasted" recurring tasks on the "Upcoming" subpage. Those tasks are not created yet, and the user can only see them without the ability to edit or delete them.
+Completed tasks are automatically deleted at the beginning of the next week to keep user workspace organized.
 
-## Start the day with Increaser
+A user can assign a task to a project. A user can add links to the task to easily access all the necessary external resources during a focus session. A user can add a checklist/subtasks to a task and then complete those sub-items during a focus session on that task. A user can write a description for a task.
 
-The goal of the “Start the day” page is to help the user start the day well. It consists of four steps. In the first step, they can see their vision defined on the "Vision" page through vision attributes. Then they can review their goals to remember what they are working towards. In the third step, the user has to submit their yesterday's habits completion by checking the checkboxes. In the fourth step, the user has to clear the "overdue" tasks and add tasks for today. After completing the last step, the user will be redirected to the home page.
+In the 'Automation' subpage, users can set up rules for the automatic creation of recurring tasks. Each rule creates a 'TaskFactory,' an entity responsible for generating tasks based on the specified schedule. Editing or deleting a task created by a TaskFactory does not affect the TaskFactory itself. The cadence could be daily, every workday, every week, or every month. For weekly and monthly tasks, the user can select a "deadline index," which for a week would be a weekday and for the month the day of the month. For example, if the "deadline index" for a weekly task is 4, the task will be created every Friday.
+
+In the "Templates" subpage, users can create, edit, and delete task templates. A task template contains the same fields as a task, so when the user creates a task or a TaskFactory, if there are templates for a selected project, they will see an option to use a template, and if they select a template, the task form will be pre-filled with the template data. Tasks are created at the start of the period, but to make it clear for the user, we show "forecasted" recurring tasks on the "Upcoming" subpage. Those tasks are not created yet, and the user can only see them without the ability to edit or delete them.
 
 ## Schedule
 
@@ -171,4 +173,4 @@ Increaser app is under the [app.increaser.org](http://app.increaser.org/) domain
 
 # Tech Stack
 
-Increase code is within a TypeScript monorepo. The code is being deployed on AWS. To manage AWS infrastructure, I use Terraform. Both the app and the website are static NextJS apps. The API and other microservices are hosted as AWS Lambdas.
+Increaser code is within a TypeScript monorepo. The code is being deployed on AWS. To manage AWS infrastructure, I use Terraform. Both the app and the website are static NextJS apps. The API and other microservices are hosted as AWS Lambdas.

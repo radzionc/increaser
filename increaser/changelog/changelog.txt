@@ -2,6 +2,7 @@ Users can either add new daily habits to the goal or select from existing ones.
 To help users remember to track their habits, a prompt appears in the sidebar navigation next to the "Habits" item. This prompt will show up if the user hasn't visited the "Habits" page that day.
 Added a line to the weekly project report chart to display budgeted time for selected projects or total budgeted time for all projects.
 Updated the projects page to display not only the emoji and name, but also the budget, goal, and "Mon-Fri" label for workday projects.
+"Report" subpage was moved from "Projects" page to a dedicated "Timesheet" page for easier access.
 1728708465131
 Users can now expedite the creation of recurring tasks ahead of schedule by using the 'Create Now' button found in the 'Upcoming' tab of the 'Tasks' page.
 Users can now see on the 'Upcoming' tab of the 'Tasks' page when their recurring task will actually be created.
