@@ -16,6 +16,8 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { ProjectFormFields } from './ProjectFormFields'
 import { ListItemForm } from '../../form/ListItemForm'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useFreeHours } from '../budget/hooks/useFreeHours'
 
 type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
@@ -27,19 +29,45 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
   const { id } = project
 
   const initialValue = useMemo(
-    () => pick(project, ['name', 'emoji', 'color', 'status']),
+    () =>
+      pick(project, [
+        'name',
+        'emoji',
+        'color',
+        'status',
+        'allocatedMinutesPerWeek',
+        'workingDays',
+        'goal',
+      ]),
     [project],
   )
 
-  const [value, setValue] = useState<EditProjectFormShape>(initialValue)
+  const [value, setValue] = useState<EditProjectFormShape>(() => {
+    const { allocatedMinutesPerWeek, goal, ...rest } = initialValue
+
+    return {
+      ...rest,
+      goal: goal ?? null,
+      budget: allocatedMinutesPerWeek
+        ? convertDuration(allocatedMinutesPerWeek, 'min', 'h')
+        : null,
+    }
+  })
 
   const { mutate: updateProject } = useUpdateUserEntityMutation('project')
 
   useLazySync<Partial<EditProjectFormShape>>({
     value: useMemo(() => {
+      const { budget, ...rest } = value
+
+      const after = {
+        ...rest,
+        allocatedMinutesPerWeek: convertDuration(budget ?? 0, 'h', 'min'),
+      }
+
       const result = getUpdatedValues({
         before: initialValue,
-        after: value,
+        after,
       })
 
       if (result && 'status' in result) {
@@ -68,10 +96,15 @@ export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
   const isStatusEditable = couldProjectStatusBeChanged(project.id)
   const isDeletable = couldProjectBeDeleted(project.id)
 
+  const freeHours =
+    useFreeHours() +
+    convertDuration(project.allocatedMinutesPerWeek, 'min', 'h')
+
   return (
     <ListItemForm onClose={onFinish} onSubmit={onFinish}>
       <ProjectFormFields
         value={value}
+        freeHours={freeHours}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onClose={onFinish}
         onSubmit={onFinish}

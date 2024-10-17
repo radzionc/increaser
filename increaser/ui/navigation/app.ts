@@ -109,7 +109,7 @@ export const appPageViews = {
   principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'upcoming', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
-  projects: ['projects', 'plan', 'report'],
+  projects: ['projects', 'report'],
   roadmap: ['ideas', 'done'],
   info: ['focus'],
 } as const
@@ -179,7 +179,6 @@ export const appPageViewName: {
   },
   projects: {
     projects: 'Projects',
-    plan: 'Plan',
     report: 'Report',
   },
   roadmap: {

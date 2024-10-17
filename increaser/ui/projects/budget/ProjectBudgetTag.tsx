@@ -11,11 +11,13 @@ import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { Match } from '@lib/ui/base/Match'
+import { Wrap } from '@lib/ui/base/Wrap'
+import { areEmptyChildren } from '@lib/ui/utils/areEmptyChildren'
 
 const Container = styled(HStackSeparatedBy)`
   ${text({
     color: 'regular',
-    size: 14,
+    size: 13,
     nowrap: true,
   })}
 
@@ -34,18 +36,32 @@ const Separator = styled.div`
 const Content = styled(HStackSeparatedBy)``
 
 export const ProjectBudgetTag = () => {
-  const { allocatedMinutesPerWeek, goal } = useCurrentProject()
+  const { allocatedMinutesPerWeek, goal, workingDays } = useCurrentProject()
+
+  const isWorkdayOnly = workingDays === 'workdays'
+  const hasBudget = !!(allocatedMinutesPerWeek && allocatedMinutesPerWeek > 0)
 
   return (
-    <Container gap={8} separator={<Separator />}>
-      <Content gap={4} separator={slashSeparator}>
-        <span>
-          <EmphasizeNumbers
-            value={formatDuration(allocatedMinutesPerWeek, 'min')}
-          />
-        </span>
-        <span>week</span>
-      </Content>
+    <Wrap
+      wrap={(children) =>
+        areEmptyChildren(children) ? null : (
+          <Container gap={8} separator={<Separator />}>
+            {children}
+          </Container>
+        )
+      }
+    >
+      {isWorkdayOnly && <span>Mon - Fri</span>}
+      {hasBudget && (
+        <Content gap={4} separator={slashSeparator}>
+          <span>
+            <EmphasizeNumbers
+              value={formatDuration(allocatedMinutesPerWeek, 'min')}
+            />
+          </span>
+          <span>week</span>
+        </Content>
+      )}
       {goal && (
         <Match
           value={goal}
@@ -61,6 +77,6 @@ export const ProjectBudgetTag = () => {
           )}
         />
       )}
-    </Container>
+    </Wrap>
   )
 }

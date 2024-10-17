@@ -13,7 +13,7 @@ const Name = styled(Text)`
 `
 
 export const ProjectItemContent = () => {
-  const { name, emoji, allocatedMinutesPerWeek } = useCurrentProject()
+  const { name, emoji } = useCurrentProject()
 
   return (
     <HStack
@@ -25,9 +25,7 @@ export const ProjectItemContent = () => {
       <PrefixedItemFrame prefix={<Text color="contrast">{emoji}</Text>}>
         <Name>{name}</Name>
       </PrefixedItemFrame>
-      {allocatedMinutesPerWeek && allocatedMinutesPerWeek > 0 ? (
-        <ProjectBudgetTag />
-      ) : null}
+      <ProjectBudgetTag />
     </HStack>
   )
 }

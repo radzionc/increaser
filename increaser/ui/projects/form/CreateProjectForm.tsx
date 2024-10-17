@@ -16,6 +16,8 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
 import { OptionalValueFinishProps } from '@lib/ui/props'
 import { ProjectFormFields } from './ProjectFormFields'
+import { useFreeHours } from '../budget/hooks/useFreeHours'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const CreateProjectForm = ({
   onFinish,
@@ -26,6 +28,9 @@ export const CreateProjectForm = ({
   const [value, setValue] = useState<ProjectFormShape>({
     name: '',
     emoji: randomlyPick(defaultEmojis),
+    budget: null,
+    goal: null,
+    workingDays: 'everyday',
     color: randomlyPickOption({
       options: range(labelColorsCount),
       used: usedColors,
@@ -45,11 +50,12 @@ export const CreateProjectForm = ({
       id: getId(),
       status: 'active',
       order: getLastItemOrder(activeProjects.map(({ order }) => order)),
-      workingDays: 'everyday',
-      allocatedMinutesPerWeek: 0,
+      allocatedMinutesPerWeek: convertDuration(value.budget ?? 0, 'h', 'min'),
     }
     mutate(project)
   }, [activeProjects, isDisabled, mutate, value])
+
+  const freeHours = useFreeHours()
 
   return (
     <ListItemForm
@@ -59,6 +65,7 @@ export const CreateProjectForm = ({
     >
       <ProjectFormFields
         value={value}
+        freeHours={freeHours}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onClose={onFinish}
         onSubmit={onFinish}

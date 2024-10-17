@@ -3,13 +3,12 @@ import {
   WebsiteSectionHeaderProps,
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import styled from 'styled-components'
-import { ManageProjectsBudget } from '@increaser/ui/projects/budget/ManageProjectsBudget'
 import { VStack } from '@lib/ui/css/stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { DemoGuard } from '../../demo/DemoGuard'
+import { ManageProjects } from '@increaser/ui/projects/ManageProjects'
 
 const Content = styled(VStack)`
   max-width: 400px;
@@ -26,7 +25,7 @@ export const ProjectsBudgetSlice = (
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <Content>
           <DemoGuard>
-            <ManageProjectsBudget />
+            <ManageProjects />
           </DemoGuard>
         </Content>
       </WebsiteSliceContent>

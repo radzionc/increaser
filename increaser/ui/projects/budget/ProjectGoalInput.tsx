@@ -1,6 +1,5 @@
 import { VStack } from '@lib/ui/css/stack'
 import {
-  Project,
   ProjectGoal,
   goalOptionName,
   projectGoals,
@@ -13,14 +12,12 @@ import { InputProps } from '@lib/ui/props'
 import { Switch } from '@lib/ui/inputs/Switch'
 
 type ProjectGoalInputProps = InputProps<ProjectGoal | null> & {
-  project: Project
   hours: number
 }
 
 export const ProjectGoalInput = ({
   value,
   onChange,
-  project,
   hours,
 }: ProjectGoalInputProps) => {
   return (
@@ -43,7 +40,7 @@ export const ProjectGoalInput = ({
             <Text as="span" weight="600" color="contrast">
               {capitalizeFirstLetter(goalOptionName[value])}
             </Text>{' '}
-            {pluralize(hours, 'hour')} of {project.name} per week
+            {pluralize(hours, 'hour')} per week
           </Text>
         </>
       )}
