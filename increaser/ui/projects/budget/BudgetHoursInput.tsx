@@ -12,10 +12,9 @@ export const BudgetHoursInput = ({
   max,
 }: BudgetHoursInputProps) => (
   <HoursInput
-    autoFocus
     label={
       <WithHint hint="Select the number of hours you aim to spend on this project each week.">
-        Budget
+        Budget (optional)
       </WithHint>
     }
     placeholder="Enter hours"

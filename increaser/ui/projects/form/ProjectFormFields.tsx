@@ -9,8 +9,6 @@ import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { useActiveProjects } from '../hooks/useActiveProjects'
-import { Fields } from '@lib/ui/inputs/Fields'
-import { Field } from '@lib/ui/inputs/Field'
 import { BudgetHoursInput } from '../budget/BudgetHoursInput'
 import { ProjectFormShape } from './ProjectFormShape'
 import { Switch } from '@lib/ui/inputs/Switch'
@@ -60,6 +58,7 @@ export const ProjectFormFields = ({
 
       <Switch
         value={value.workingDays === 'workdays'}
+        size="s"
         onChange={(isWorkDaysOnly) =>
           onChange({
             ...value,
@@ -69,20 +68,16 @@ export const ProjectFormFields = ({
         label="Workdays Only (Mon-Fri)"
       />
 
-      <Fields>
-        <Field>
-          <BudgetHoursInput
-            max={freeHours}
-            value={value.budget}
-            onChange={(budget) =>
-              onChange({
-                ...value,
-                budget,
-              })
-            }
-          />
-        </Field>
-      </Fields>
+      <BudgetHoursInput
+        max={freeHours}
+        value={value.budget}
+        onChange={(budget) =>
+          onChange({
+            ...value,
+            budget,
+          })
+        }
+      />
 
       {value.budget && (
         <ProjectGoalInput

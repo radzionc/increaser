@@ -62,7 +62,7 @@ export const ProjectBudgetTag = () => {
           <span>week</span>
         </Content>
       )}
-      {goal && (
+      {hasBudget && goal && (
         <Match
           value={goal}
           doMore={() => (
