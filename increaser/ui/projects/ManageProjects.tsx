@@ -9,7 +9,7 @@ import { ProjectStatusFilter } from './filter/status/ProjectStatusFilter'
 import { AddProject } from './AddProject'
 
 const Container = styled(VStack)`
-  max-width: 520px;
+  max-width: 560px;
   width: 100%;
   gap: 20px;
 `
