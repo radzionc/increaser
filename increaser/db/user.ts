@@ -1,8 +1,6 @@
 import { User } from '@increaser/entities/User'
 import { tableName } from './tableName'
 import { DeleteCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb'
-import { DescribeTableCommand } from '@aws-sdk/client-dynamodb'
-import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 import {
   getAttributeNameKey,
   getAttributeParams,
@@ -61,16 +59,6 @@ export const deleteUser = (id: string) => {
   const command = new DeleteCommand(getUserItemParams(id))
 
   return dbDocClient.send(command)
-}
-
-const getNumberOfUsers = async () => {
-  const command = new DescribeTableCommand({
-    TableName: tableName.users,
-  })
-
-  const tableInfo = await dbDocClient.send(command)
-
-  return shouldBeDefined(tableInfo.Table?.ItemCount)
 }
 
 export const putUser = (user: User) => {

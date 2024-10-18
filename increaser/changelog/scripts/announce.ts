@@ -42,6 +42,7 @@ const announce = () => {
       'Use your judgment to make the announcement engaging and informative.',
       'Make each announcement feel native to the platform.',
       'Return copy for each platform in a separate markdown snippet',
+      'Do not use words "user" or "users".',
       'Titles should represent an essence of the updates.',
     ].join(' '),
 

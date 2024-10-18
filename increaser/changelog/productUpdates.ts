@@ -2,6 +2,48 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1729225980085,
+    name: 'Project Insights & Habit Tracking Boost',
+    description:
+      'New features for better habit tracking and deeper project insights, plus easier access to your time data.',
+    items: [
+      {
+        description:
+          'Connect your goals to your habits by adding new habits directly from the goal view or linking existing habits.',
+      },
+      {
+        description:
+          "Habit tracking reminder: A prompt will appear in the sidebar if you haven't visited the 'Habits' page today.",
+      },
+      {
+        description:
+          'See budgeted time on weekly project charts for selected projects or for all projects, helping you stay on track.',
+      },
+      {
+        description:
+          "Projects page update: Each project now shows the budget, goal, and 'Mon-Fri' label for workday projects.",
+      },
+      {
+        description:
+          'Set weekly budget and goals for your projects right when you create or edit them.',
+      },
+      {
+        description:
+          "The 'Report' subpage has moved to a dedicated 'Timesheet' page, making it easier to access all your time data.",
+      },
+    ],
+    youtube: 'https://youtu.be/edpgjUaKG2s',
+    telegram: 'https://t.me/increaser_app/56',
+    x: 'https://x.com/increaser_app/status/1847132146416197895',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7252899023978676224',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/introducing-new-increaser-updates-to-boost-your-productivity--O9St7rBpm61Ao7E8sj3',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1g69xij/new_updates_connect_goals_to_habits_and_more/',
+  },
+
+  {
     releasedAt: 1728708465131,
     name: 'Create Tasks Ahead & Smarter Focus Sessions',
     description:
