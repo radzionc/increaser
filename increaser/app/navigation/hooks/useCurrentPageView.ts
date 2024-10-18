@@ -19,6 +19,6 @@ export const useCurrentPageView = <P extends AppPageWithView>(
       return view as AppPathViewOf<P>
     }
 
-    throw new Error(`Invalid view=${view} for page=${page}`)
+    return appPageViews[page][0] as AppPathViewOf<P>
   }, [asPath, page])
 }

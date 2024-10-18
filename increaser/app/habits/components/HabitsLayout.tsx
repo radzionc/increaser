@@ -5,6 +5,7 @@ import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigati
 import { PageContainer } from '../../ui/page/PageContainer'
 import { PageContent } from '../../ui/page/PageContent'
 import { PageHeaderControlsAreaProvider } from '../../ui/page/header/PageHeaderControlsAreaProvider'
+import { AddHabit } from '@increaser/ui/habits/AddHabit'
 
 export const HabitsLayout = ({ children }: ComponentWithChildrenProps) => {
   return (
@@ -12,7 +13,7 @@ export const HabitsLayout = ({ children }: ComponentWithChildrenProps) => {
       <PageContainer>
         <PageContent>
           <PageHeaderControlsAreaProvider>
-            <PageHeader>
+            <PageHeader controls={<AddHabit />}>
               <PagePrimaryNavigation />
             </PageHeader>
             {children}

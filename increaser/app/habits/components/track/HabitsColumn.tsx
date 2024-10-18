@@ -57,7 +57,7 @@ export const HabitsColumn = ({
         {habits.map(({ id, color }) => {
           const isCompleted = completion[id]
           if (isCompleted === null) {
-            return <Spacer height={trackHabitsConfig.itemHeight} />
+            return <Spacer key={id} height={trackHabitsConfig.itemHeight} />
           }
 
           return (
