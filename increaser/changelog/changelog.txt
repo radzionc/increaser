@@ -1,3 +1,5 @@
+Users can now edit and reorder habits right from the "Track" and "Stats" views on the "Habits" page.
+User can reset a specific habit from the "Edit" view of a habit.
 1729225980085
 Users connect goals to their habits by either adding new habits from the goal view or picking an existing habit.
 To help users remember to track their habits, a prompt appears in the sidebar navigation next to the "Habits" item. This prompt will show up if the user hasn't visited the "Habits" page that day.

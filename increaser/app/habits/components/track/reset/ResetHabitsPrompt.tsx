@@ -6,6 +6,9 @@ import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
+import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
+import { Text } from '@lib/ui/text'
+import { Opener } from '@lib/ui/base/Opener'
 
 export const ResetHabitsPrompt = () => {
   const { habits } = useHabits()
@@ -23,27 +26,42 @@ export const ResetHabitsPrompt = () => {
   }
 
   return (
-    <Button
-      kind="secondary"
-      size="s"
-      onClick={() => {
-        updateHabits(
-          habits.map(({ id }) => ({
-            id,
-            fields: {
-              startedAt: convertDuration(Date.now(), 'ms', 's'),
-              successes: [],
-            },
-          })),
-        )
-      }}
-    >
-      <HStack alignItems="center" gap={8}>
-        <IconWrapper>
-          <RefreshIcon />
-        </IconWrapper>
-        Reset habits
-      </HStack>
-    </Button>
+    <Opener
+      renderOpener={({ onOpen }) => (
+        <Button kind="secondary" size="s" onClick={onOpen}>
+          <HStack alignItems="center" gap={8}>
+            <IconWrapper>
+              <RefreshIcon />
+            </IconWrapper>
+            Reset habits
+          </HStack>
+        </Button>
+      )}
+      renderContent={({ onClose }) => (
+        <ConfirmationModal
+          title="Confirm habits reset"
+          onClose={onClose}
+          confirmActionText="Reset"
+          width={480}
+          onConfirm={() => {
+            updateHabits(
+              habits.map(({ id }) => ({
+                id,
+                fields: {
+                  startedAt: convertDuration(Date.now(), 'ms', 's'),
+                  successes: [],
+                },
+              })),
+            )
+            onClose()
+          }}
+        >
+          <Text color="contrast" weight="l">
+            Are you sure you want to reset all habits? This will erase all
+            tracked progress and start fresh from today.
+          </Text>
+        </ConfirmationModal>
+      )}
+    />
   )
 }
