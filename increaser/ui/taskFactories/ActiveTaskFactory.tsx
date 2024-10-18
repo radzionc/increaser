@@ -1,10 +1,10 @@
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
-import { EditTaskFactoryForm } from '../../taskFactories/form/EditTaskFactoryForm'
 import { useUser } from '@increaser/ui/user/state/user'
-import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { CurrentTaskFactoryProvider } from './CurrentTaskFactoryProvider'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { EditTaskFactoryForm } from './form/EditTaskFactoryForm'
 
-export const EditTaskFactoryOverlay = () => {
+export const ActiveTaskFactory = () => {
   const [activeItemId, setActiveItemId] = useActiveItemId()
   const { taskFactories } = useUser()
 
@@ -15,7 +15,7 @@ export const EditTaskFactoryOverlay = () => {
   return (
     <CurrentTaskFactoryProvider value={taskFactories[activeItemId]}>
       <PanelModal onFinish={() => setActiveItemId(null)}>
-        <EditTaskFactoryForm />
+        <EditTaskFactoryForm onFinish={() => setActiveItemId(null)} />
       </PanelModal>
     </CurrentTaskFactoryProvider>
   )

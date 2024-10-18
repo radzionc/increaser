@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
 import { TaskCadenceInput } from './TaskCadenceInput'
@@ -21,8 +20,9 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { pick } from '@lib/utils/record/pick'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { NoValueFinishProps } from '@lib/ui/props'
 
-export const EditTaskFactoryForm = () => {
+export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
   const taskFactory = useCurrentTaskFactory()
   const { id } = taskFactory
   const initialValue = useMemo(
@@ -43,12 +43,6 @@ export const EditTaskFactoryForm = () => {
     useUpdateUserEntityMutation('taskFactory')
   const { mutate: deleteTaskFactory } =
     useDeleteUserEntityMutation('taskFactory')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<TaskFactoryFormShape>>({
     value: useMemo(

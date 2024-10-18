@@ -9,7 +9,8 @@ import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
 import styled from 'styled-components'
-import { GoalTaskFactoryItem } from './GoalTaskFactoryItem'
+import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'
+import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -38,13 +39,14 @@ export const GoalTaskFactoriesInput = ({
       {value.length > 0 && (
         <VStack>
           <ActiveItemIdProvider initialValue={null}>
+            <ActiveTaskFactory />
             {taskFactories
               .filter(({ id }) => value.includes(id))
               .map((item) => {
                 return (
                   <CurrentTaskFactoryProvider key={item.id} value={item}>
                     <Content>
-                      <GoalTaskFactoryItem />
+                      <TaskFactoryItem />
                       <RemoveGoalTaskFactory
                         onClick={() => onChange(without(value, item.id))}
                       />
