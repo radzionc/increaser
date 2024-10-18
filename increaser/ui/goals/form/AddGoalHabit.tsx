@@ -7,8 +7,8 @@ import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { withSecondaryAction } from '@lib/ui/buttons/WithSecondaryAction'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { CreateHabitForm } from '@increaser/app/habits/components/manage/form/CreateHabitForm'
 import { SelectGoalHabit } from './SelectGoalHabit'
+import { CreateHabitForm } from '../../habits/form/CreateHabitForm'
 
 const Container = styled(UnstyledButton)`
   outline: none;

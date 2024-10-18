@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { EditHabitForm } from './form/EditHabitForm'
+import { EditHabitForm } from '@increaser/ui/habits/form/EditHabitForm'
 
 export const Habits = () => {
   const { habits } = useHabits()

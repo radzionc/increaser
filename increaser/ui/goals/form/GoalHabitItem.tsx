@@ -1,8 +1,8 @@
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { Opener } from '@lib/ui/base/Opener'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { EditHabitForm } from '@increaser/app/habits/components/manage/form/EditHabitForm'
 import { HabitItemContent } from '@increaser/app/habits/components/manage/HabitItemContent'
+import { EditHabitForm } from '../../habits/form/EditHabitForm'
 
 export const GoalHabitItem = () => {
   return (
