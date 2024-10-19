@@ -1,9 +1,10 @@
+import { infoYouTubeVideos } from '../../info/infoYouTubeVideos'
 import { ProductToolEducation } from './ProductToolEducation'
 
 export const trackTimeEducation: ProductToolEducation = {
   title: 'Boost Productivity with Time Tracking',
   subtitle: `Increaser's Focus tool helps you structure your work into productive sessions with optimal breaks, allowing you to maintain deep concentration and avoid burnout. By organizing your tasks into manageable blocks, you can enhance focus, track your progress, and accomplish more in less time. Learn how to use Focus sessions to achieve better results and a balanced workflow.`,
-  youTubeVideoUrl: 'https://youtu.be/5fn7Iv5u-Qo',
+  youTubeVideoUrl: infoYouTubeVideos.trackTime,
   content: (
     <>
       <h2>Focus Sessions: Structure Your Work</h2>
