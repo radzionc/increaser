@@ -16,6 +16,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
+import { TaskTemplatesWidget } from '../widget/TaskTemplatesWidget'
 
 export const CreateTaskTemplateForm: React.FC<
   Partial<ComponentWithInitialValueProps<Partial<TaskTemplateFormShape>>> &
@@ -68,6 +69,9 @@ export const CreateTaskTemplateForm: React.FC<
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+
+          <TaskTemplatesWidget projectId={value.projectId} />
+
           {isEmpty(value.checklist) && (
             <AddTaskChecklist
               onFinish={(checklist) =>

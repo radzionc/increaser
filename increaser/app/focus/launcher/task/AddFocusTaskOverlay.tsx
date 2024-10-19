@@ -12,7 +12,7 @@ export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
   return (
     <PanelModal width={560} onFinish={onFinish}>
       <CreateTaskForm
-        defaultValue={withoutUndefinedFields({
+        initialValue={withoutUndefinedFields({
           projectId: projectId ?? undefined,
         })}
         onFinish={(task) => {

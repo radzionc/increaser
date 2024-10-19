@@ -23,6 +23,7 @@ import {
   OptionalValueFinishProps,
 } from '@lib/ui/props'
 import { TaskTemplateFormShape } from '../../taskTemplates/form/TaskTemplateFormShape'
+import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 
 export const CreateTaskForm: React.FC<
   Partial<ComponentWithInitialValueProps<Partial<TaskTemplateFormShape>>> &
@@ -123,6 +124,9 @@ export const CreateTaskForm: React.FC<
               }))
             }
           />
+
+          <TaskTemplatesWidget projectId={value.projectId} />
+
           <AddTaskLink
             onFinish={(link) =>
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))

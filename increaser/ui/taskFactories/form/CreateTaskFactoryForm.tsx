@@ -22,6 +22,7 @@ import {
   ComponentWithInitialValueProps,
   OptionalValueFinishProps,
 } from '@lib/ui/props'
+import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 
 const defaultCadence = 'week'
 
@@ -116,6 +117,8 @@ export const CreateTaskFactoryForm: React.FC<
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+
+          <TaskTemplatesWidget projectId={value.projectId} />
 
           {isEmpty(value.checklist) && (
             <AddTaskChecklist

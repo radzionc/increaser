@@ -17,6 +17,7 @@ import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
+import { TaskTemplatesWidget } from '../widget/TaskTemplatesWidget'
 
 export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -71,6 +72,9 @@ export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+
+          <TaskTemplatesWidget projectId={value.projectId} />
+
           {isEmpty(value.checklist) && (
             <AddTaskChecklist
               onFinish={(checklist) =>

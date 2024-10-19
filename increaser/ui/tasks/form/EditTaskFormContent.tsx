@@ -24,6 +24,7 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUser } from '@increaser/ui/user/state/user'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -125,6 +126,9 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+
+          <TaskTemplatesWidget projectId={value.projectId} />
+
           {isEmpty(value.checklist) && (
             <AddTaskChecklist
               onFinish={(checklist) =>

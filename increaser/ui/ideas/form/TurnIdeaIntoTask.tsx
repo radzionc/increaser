@@ -31,7 +31,7 @@ export const TurnIdeaIntoTask = ({
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>
           <CreateTaskForm
-            defaultValue={value}
+            initialValue={value}
             onFinish={(task) => {
               onClose()
               if (task) {

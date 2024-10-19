@@ -23,6 +23,7 @@ import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
+import { TaskTemplatesWidget } from '@increaser/ui/taskTemplates/widget/TaskTemplatesWidget'
 
 type TaskFormShape = Pick<
   Task,
@@ -109,6 +110,7 @@ export const FocusTaskOverview = () => {
             setValue((prev) => ({ ...prev, links: [...prev.links, value] }))
           }
         />
+        <TaskTemplatesWidget projectId={value.projectId} />
         {isEmpty(value.checklist) && (
           <AddTaskChecklist
             onFinish={(checklist) =>

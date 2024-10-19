@@ -21,6 +21,7 @@ import { Panel } from '@lib/ui/css/panel'
 import { pick } from '@lib/utils/record/pick'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
+import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 
 export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
   const taskFactory = useCurrentTaskFactory()
@@ -104,6 +105,8 @@ export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
             }
           />
+
+          <TaskTemplatesWidget projectId={value.projectId} />
 
           {isEmpty(value.checklist) && (
             <AddTaskChecklist

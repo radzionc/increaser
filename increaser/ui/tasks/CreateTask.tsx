@@ -15,7 +15,7 @@ export const CreateTask = ({ defaultValue }: CreateTaskProps) => {
 
   return isActive ? (
     <CreateTaskForm
-      defaultValue={projectId ? { projectId, ...defaultValue } : defaultValue}
+      initialValue={projectId ? { projectId, ...defaultValue } : defaultValue}
       onFinish={() => setIsActive(false)}
     />
   ) : (
