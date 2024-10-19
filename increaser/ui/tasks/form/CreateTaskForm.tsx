@@ -114,7 +114,12 @@ export const CreateTaskForm: React.FC<
             }
           />
 
-          <TaskTemplatesWidget projectId={value.projectId} />
+          <TaskTemplatesWidget
+            onChange={(template) =>
+              setValue((prev) => ({ ...prev, ...template }))
+            }
+            value={value}
+          />
 
           <AddTaskLink
             onFinish={(link) =>

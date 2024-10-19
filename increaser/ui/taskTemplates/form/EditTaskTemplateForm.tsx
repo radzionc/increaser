@@ -73,7 +73,12 @@ export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
             }
           />
 
-          <TaskTemplatesWidget projectId={value.projectId} />
+          <TaskTemplatesWidget
+            onChange={(template) =>
+              setValue((prev) => ({ ...prev, ...template }))
+            }
+            value={value}
+          />
 
           {isEmpty(value.checklist) && (
             <AddTaskChecklist

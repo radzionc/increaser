@@ -110,7 +110,12 @@ export const FocusTaskOverview = () => {
             setValue((prev) => ({ ...prev, links: [...prev.links, value] }))
           }
         />
-        <TaskTemplatesWidget projectId={value.projectId} />
+        <TaskTemplatesWidget
+          onChange={(template) =>
+            setValue((prev) => ({ ...prev, ...template }))
+          }
+          value={value}
+        />
         {isEmpty(value.checklist) && (
           <AddTaskChecklist
             onFinish={(checklist) =>
