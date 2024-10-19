@@ -4,6 +4,7 @@ import { ScheduledTasks } from './ScheduledTasks'
 import { TaskTimeGroupingSelector } from '../timeGrouping/TaskTimeGroupingSelector'
 import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
 import { ActiveTaskIdProvider } from '../state/activeTaskId'
+import { AddTask } from '../AddTask'
 
 const Container = styled(VStack)`
   gap: 32px;
@@ -16,6 +17,7 @@ export const ScheduledTasksView = () => {
     <Container>
       <PageHeaderControlsArea>
         <TaskTimeGroupingSelector />
+        <AddTask />
       </PageHeaderControlsArea>
       <ActiveTaskIdProvider>
         <ScheduledTasks />

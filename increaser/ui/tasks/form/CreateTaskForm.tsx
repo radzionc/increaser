@@ -17,16 +17,17 @@ import { AddTaskLink } from './links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from './checklist/AddTaskChecklist'
 import { Button } from '@lib/ui/buttons/Button'
+import { TaskTemplate } from '@increaser/entities/TaskTemplate'
+import {
+  ComponentWithInitialValueProps,
+  OptionalValueFinishProps,
+} from '@lib/ui/props'
+import { TaskTemplateFormShape } from '../../taskTemplates/form/TaskTemplateFormShape'
 
-type CreateTaskFormProps = {
-  defaultValue?: Partial<TaskFormShape>
-  onFinish?: (task?: Task) => void
-}
-
-export const CreateTaskForm = ({
-  onFinish,
-  defaultValue,
-}: CreateTaskFormProps) => {
+export const CreateTaskForm: React.FC<
+  Partial<ComponentWithInitialValueProps<Partial<TaskTemplateFormShape>>> &
+    Partial<OptionalValueFinishProps<TaskTemplate>>
+> = ({ onFinish, initialValue }) => {
   const [value, setValue] = useState<TaskFormShape>({
     name: '',
     projectId: otherProject.id,
@@ -35,7 +36,7 @@ export const CreateTaskForm = ({
     description: '',
     deadlineAt: null,
     status: 'todo',
-    ...defaultValue,
+    ...initialValue,
   })
   const { tasks } = useUser()
   const { mutate, isPending } = useCreateUserEntityMutation('task', {
@@ -82,7 +83,7 @@ export const CreateTaskForm = ({
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
-        hasProjectAutoFocus={!defaultValue?.projectId}
+        hasProjectAutoFocus={!initialValue?.projectId}
         onSubmit={isDisabled ? undefined : onSubmit}
         onClose={() => onFinish?.()}
       />

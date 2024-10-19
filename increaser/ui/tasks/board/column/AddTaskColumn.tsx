@@ -23,7 +23,7 @@ const Container = styled(Button)`
   outline: none;
 `
 
-export const AddTask = ({ status }: AddTaskProps) => {
+export const AddTaskColumn = ({ status }: AddTaskProps) => {
   const [projectId] = useProjectFilter()
 
   const defaultValue = useMemo(() => {
@@ -51,7 +51,7 @@ export const AddTask = ({ status }: AddTaskProps) => {
       )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>
-          <CreateTaskForm defaultValue={defaultValue} onFinish={onClose} />
+          <CreateTaskForm initialValue={defaultValue} onFinish={onClose} />
         </PanelModal>
       )}
     />
