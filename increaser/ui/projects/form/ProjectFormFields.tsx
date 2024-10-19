@@ -13,6 +13,10 @@ import { BudgetHoursInput } from '../budget/BudgetHoursInput'
 import { ProjectFormShape } from './ProjectFormShape'
 import { Switch } from '@lib/ui/inputs/Switch'
 import { ProjectGoalInput } from '../budget/ProjectGoalInput'
+import { VStack } from '@lib/ui/css/stack'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { Spacer } from '@lib/ui/layout/Spacer'
 
 type ProjectFormFieldsProps = InputProps<ProjectFormShape> &
   Partial<SubmittableComponentProps> &
@@ -29,6 +33,8 @@ export const ProjectFormFields = ({
 }: ProjectFormFieldsProps) => {
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(activeProjects).map(({ color }) => color)
+
+  const hasBudget = value.budget && value.budget > 0
 
   return (
     <>
@@ -68,25 +74,30 @@ export const ProjectFormFields = ({
         label="Workdays Only (Mon-Fri)"
       />
 
-      {freeHours > 0 && (
-        <BudgetHoursInput
-          max={freeHours}
-          value={value.budget}
-          onChange={(budget) =>
-            onChange({
-              ...value,
-              budget,
-            })
-          }
-        />
-      )}
-
-      {value.budget && value.budget > 0 && (
-        <ProjectGoalInput
-          value={value.goal}
-          onChange={(goal) => onChange({ ...value, goal })}
-          hours={value.budget}
-        />
+      {(freeHours > 0 || hasBudget) && (
+        <VStack style={{ padding: 0 }}>
+          <VStack style={{ padding: panelDefaultPadding, paddingBottom: 0 }}>
+            <BudgetHoursInput
+              max={freeHours}
+              value={value.budget}
+              onChange={(budget) =>
+                onChange({
+                  ...value,
+                  budget,
+                })
+              }
+            />
+          </VStack>
+          {hasBudget ? (
+            <ProjectGoalInput
+              value={value.goal}
+              onChange={(goal) => onChange({ ...value, goal })}
+              hours={shouldBePresent(value.budget)}
+            />
+          ) : (
+            <Spacer height={panelDefaultPadding} />
+          )}
+        </VStack>
       )}
     </>
   )
