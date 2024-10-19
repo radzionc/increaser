@@ -8,7 +8,6 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
-import { ExportFromTemplate } from './ExportFromTemplate'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
@@ -87,16 +86,6 @@ export const CreateTaskForm: React.FC<
         hasProjectAutoFocus={!initialValue?.projectId}
         onSubmit={isDisabled ? undefined : onSubmit}
         onClose={() => onFinish?.()}
-      />
-      <ExportFromTemplate
-        projectId={value.projectId}
-        onFinish={(template) => {
-          setValue((prev) => ({
-            ...prev,
-            ...template,
-            name: prev.name || template.name,
-          }))
-        }}
       />
       <HStack
         wrap="wrap"

@@ -7,7 +7,6 @@ import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
 import { TaskCadenceInput } from './TaskCadenceInput'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { ExportFromTemplate } from '../../tasks/form/ExportFromTemplate'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
 import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
@@ -72,16 +71,6 @@ export const CreateTaskFactoryForm: React.FC<
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
         hasProjectAutoFocus={!initialValue?.projectId}
-      />
-      <ExportFromTemplate
-        projectId={value.projectId}
-        onFinish={(template) => {
-          setValue((prev) => ({
-            ...prev,
-            ...template,
-            name: prev.name || template.name,
-          }))
-        }}
       />
       <HStack alignItems="center" gap={20} wrap="wrap">
         <HStack gap={8}>
