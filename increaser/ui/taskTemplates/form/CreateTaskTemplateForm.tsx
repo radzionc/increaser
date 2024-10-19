@@ -44,7 +44,6 @@ export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
-        hasProjectAutoFocus
         onSubmit={isDisabled ? undefined : onSubmit}
       />
       <HStack

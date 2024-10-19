@@ -18,14 +18,17 @@ import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
-
-type CreateTaskFormProps = {
-  onFinish?: (value?: TaskFactory) => void
-}
+import {
+  ComponentWithInitialValueProps,
+  OptionalValueFinishProps,
+} from '@lib/ui/props'
 
 const defaultCadence = 'week'
 
-export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
+export const CreateTaskFactoryForm: React.FC<
+  Partial<ComponentWithInitialValueProps<Partial<TaskFactoryFormShape>>> &
+    Partial<OptionalValueFinishProps<TaskFactory>>
+> = ({ onFinish, initialValue }) => {
   const [value, setValue] = useState<TaskFactoryFormShape>({
     name: '',
     projectId: otherProject.id,
@@ -34,6 +37,7 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
     checklist: [],
     description: '',
     deadlineIndex: cadenceDefaultDeadlineIndex[defaultCadence],
+    ...initialValue,
   })
   const { mutate, isPending } = useCreateUserEntityMutation('taskFactory', {
     onOptimisticUpdate: onFinish,
@@ -65,8 +69,8 @@ export const CreateTaskFactoryForm = ({ onFinish }: CreateTaskFormProps) => {
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
-        hasProjectAutoFocus
         onSubmit={isDisabled ? undefined : onSubmit}
+        hasProjectAutoFocus={!initialValue?.projectId}
       />
       <ExportFromTemplate
         projectId={value.projectId}

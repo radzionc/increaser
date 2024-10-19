@@ -81,6 +81,10 @@ export type ComponentWithValueProps<T> = {
   value: T
 }
 
+export type ComponentWithInitialValueProps<T> = {
+  initialValue: T
+}
+
 export type ComponentWithOptionsProps<T> = {
   options: T[]
 }
