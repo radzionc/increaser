@@ -3,7 +3,10 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { NoValueFinishProps } from '@lib/ui/props'
+import {
+  ComponentWithInitialValueProps,
+  OptionalValueFinishProps,
+} from '@lib/ui/props'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
@@ -14,15 +17,21 @@ import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 
-export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
+export const CreateTaskTemplateForm: React.FC<
+  Partial<ComponentWithInitialValueProps<Partial<TaskTemplateFormShape>>> &
+    Partial<OptionalValueFinishProps<TaskTemplate>>
+> = ({ onFinish, initialValue }) => {
   const [value, setValue] = useState<TaskTemplateFormShape>({
     name: '',
     projectId: otherProject.id,
     links: [],
     checklist: [],
     description: '',
+    ...initialValue,
   })
-  const { mutate, isPending } = useCreateUserEntityMutation('taskTemplate')
+  const { mutate, isPending } = useCreateUserEntityMutation('taskTemplate', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsTaskTemplateFormDisabled(value)
 
@@ -32,8 +41,7 @@ export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
       ...value,
     }
     mutate(taskTemplate)
-    onFinish()
-  }, [mutate, onFinish, value])
+  }, [mutate, value])
 
   return (
     <ListItemForm
@@ -45,6 +53,7 @@ export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
+        hasProjectAutoFocus={!initialValue?.projectId}
       />
       <HStack
         wrap="wrap"
@@ -74,7 +83,7 @@ export const CreateTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
           isPending={isPending}
           isDisabled={isDisabled}
           onCancel={() => {
-            onFinish()
+            onFinish?.()
           }}
         />
       </HStack>

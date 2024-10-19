@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCurrentTaskTemplate } from '../CurrentTaskTemplateProvider'
 import { omit } from '@lib/utils/record/omit'
@@ -17,8 +16,9 @@ import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { NoValueFinishProps } from '@lib/ui/props'
 
-export const EditTaskTemplateForm = () => {
+export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
   const taskTemplate = useCurrentTaskTemplate()
   const { id } = taskTemplate
   const initialValue = useMemo(() => omit(taskTemplate, 'id'), [taskTemplate])
@@ -27,12 +27,6 @@ export const EditTaskTemplateForm = () => {
     useUpdateUserEntityMutation('taskTemplate')
   const { mutate: deleteTaskTemplate } =
     useDeleteUserEntityMutation('taskTemplate')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<TaskTemplateFormShape>>({
     value: useMemo(

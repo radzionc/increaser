@@ -1,17 +1,24 @@
 import { Opener } from '@lib/ui/base/Opener'
-import { ListAddButton } from '@lib/ui/list/ListAddButton'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
+import { PageHeaderAddButton } from '../navigation/components/PageHeaderAddButton'
 import { CreateTaskTemplateForm } from './form/CreateTaskTemplateForm'
 
 export const AddTaskTemplate = () => {
+  const [projectId] = useProjectFilter()
+
   return (
     <Opener
-      renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : (
-          <ListAddButton onClick={onOpen} text="Add a task template" />
-        )
-      }
+      renderOpener={({ onOpen }) => (
+        <PageHeaderAddButton value="a template" onClick={onOpen} />
+      )}
       renderContent={({ onClose }) => (
-        <CreateTaskTemplateForm onFinish={onClose} />
+        <PanelModal onFinish={onClose}>
+          <CreateTaskTemplateForm
+            initialValue={projectId ? { projectId } : undefined}
+            onFinish={onClose}
+          />
+        </PanelModal>
       )}
     />
   )
