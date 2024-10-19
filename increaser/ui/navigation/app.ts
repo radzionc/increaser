@@ -114,7 +114,7 @@ export const appPageViews = {
   tasks: ['tasks', 'upcoming', 'automation', 'templates'],
   preferences: ['schedule', 'work-budget'],
   roadmap: ['ideas', 'done'],
-  info: ['focus'],
+  info: ['focus', 'track'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
@@ -184,5 +184,6 @@ export const appPageViewName: {
   },
   info: {
     focus: 'Focus',
+    track: 'Track Time',
   },
 }
