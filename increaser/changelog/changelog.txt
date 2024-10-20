@@ -1,7 +1,8 @@
 Users can now edit and reorder habits right from the "Track" and "Stats" views on the "Habits" page.
 User can reset a specific habit from the "Edit" view of a habit.
-It's more comfortable to set a weekly goal for a project
 Every "Tasks" sub-page now has an "Add" button
+Users can turn an existing task into a template and templates are now always available when creating or editing tasks.
+It's more comfortable to set a weekly goal for a project
 Added "Time tracking" and "Taks Management" articles to the "Info" page
 1729225980085
 Users connect goals to their habits by either adding new habits from the goal view or picking an existing habit.
