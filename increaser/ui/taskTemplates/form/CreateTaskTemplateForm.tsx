@@ -54,6 +54,7 @@ export const CreateTaskTemplateForm: React.FC<
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
+        onClose={onFinish}
         hasProjectAutoFocus={!initialValue?.projectId}
       />
       <HStack

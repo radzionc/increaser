@@ -71,6 +71,7 @@ export const CreateTaskFactoryForm: React.FC<
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onSubmit={isDisabled ? undefined : onSubmit}
         hasProjectAutoFocus={!initialValue?.projectId}
+        onClose={onFinish}
       />
       <HStack alignItems="center" gap={20} wrap="wrap">
         <HStack gap={8}>
