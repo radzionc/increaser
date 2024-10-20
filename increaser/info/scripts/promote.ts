@@ -17,7 +17,10 @@ const socialPrompt: Record<ProductUpdateSocial, string[]> = {
   linkedIn: [
     `Do not use markdown syntax, e.g. no **bold** or bullet lists, LinkedIn posts do not support markdown.`,
   ],
-  youtube: ['A video title and description.'],
+  youtube: [
+    'A video title and description.',
+    'Include Increaser website url in the description.',
+  ],
 }
 
 const announce = (id: InfoYouTubeVideo) => {

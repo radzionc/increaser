@@ -6,14 +6,14 @@ import { EditTaskTemplateForm } from './form/EditTaskTemplateForm'
 
 export const ActiveTaskTemplate = () => {
   const [activeItemId, setActiveItemId] = useActiveItemId()
-  const { taskFactories } = useUser()
+  const { taskTemplates } = useUser()
 
   if (!activeItemId) {
     return null
   }
 
   return (
-    <CurrentTaskTemplateProvider value={taskFactories[activeItemId]}>
+    <CurrentTaskTemplateProvider value={taskTemplates[activeItemId]}>
       <PanelModal onFinish={() => setActiveItemId(null)}>
         <EditTaskTemplateForm onFinish={() => setActiveItemId(null)} />
       </PanelModal>

@@ -1,4 +1,9 @@
-import { Task, TaskChecklistItem, TaskStatus } from '@increaser/entities/Task'
+import {
+  Task,
+  TaskChecklistItem,
+  TaskLink,
+  TaskStatus,
+} from '@increaser/entities/Task'
 import { toRecord } from '@lib/utils/record/toRecord'
 import { endOfDay } from 'date-fns'
 import { DemoProject } from './projects'
@@ -12,6 +17,7 @@ type TaskDescription = {
   minutes?: number
   checklist?: TaskChecklistItem[]
   status: TaskStatus
+  links?: TaskLink[]
 }
 
 const tasks: TaskDescription[] = [
@@ -21,6 +27,38 @@ const tasks: TaskDescription[] = [
     isCompleted: true,
     minutes: 80,
     status: 'inProgress',
+    links: [
+      {
+        url: 'https://docs.example.com/weekly-report-template',
+        name: 'Report Template',
+      },
+    ],
+    checklist: [
+      {
+        id: '1',
+        name: 'Gather data from the week',
+        completed: false,
+        order: 1,
+      },
+      {
+        id: '2',
+        name: 'Analyze performance metrics',
+        completed: false,
+        order: 2,
+      },
+      {
+        id: '3',
+        name: 'Summarize key achievements',
+        completed: false,
+        order: 3,
+      },
+      {
+        id: '4',
+        name: 'Identify areas for improvement',
+        completed: false,
+        order: 4,
+      },
+    ],
   },
   {
     name: 'Review code for the new feature',
@@ -212,7 +250,7 @@ export const getDemoTasks = (): Record<string, Task> => {
   return toRecord(
     tasks.map(
       (
-        { projectId, name, isCompleted, minutes, checklist, status },
+        { projectId, name, isCompleted, minutes, checklist, status, links },
         order,
       ) => ({
         id: getId(),
@@ -226,7 +264,7 @@ export const getDemoTasks = (): Record<string, Task> => {
         order,
         deadlineOrder: order,
         checklist: checklist || [],
-        links: [],
+        links: links || [],
         description: '',
       }),
     ),
