@@ -2,6 +2,45 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 0,
+    name: 'Streamlined Habits, Tasks, and Goals Management',
+    description:
+      'Manage habits, tasks, and project goals more easily with these latest improvements.',
+    items: [
+      {
+        description:
+          "Edit and reorder your habits directly from the 'Track' and 'Stats' views, making habit management faster and more intuitive.",
+      },
+      {
+        description:
+          "Reset individual habits from the 'Edit' view for a fresh start without clearing your entire habit list.",
+      },
+      {
+        description:
+          "Quickly add new tasks with the new 'Add' button available on every 'Tasks' sub-page.",
+      },
+      {
+        description:
+          'Turn any existing task into a template, and use templates seamlessly when creating or editing tasks.',
+      },
+      {
+        description:
+          'Setting a weekly goal for your projects just got easier, helping you stay on top of your progress.',
+      },
+      {
+        description:
+          "New 'Time tracking' and 'Task Management' articles added to the 'Info' page to help you maximize productivity.",
+      },
+    ],
+    youtube: 'https://youtu.be/Q9IU1cmQS3M',
+    telegram: '',
+    x: '',
+    linkedIn: '',
+    indieHackers: '',
+    reddit: '',
+  },
+
+  {
     releasedAt: 1729225980085,
     name: 'Project Insights & Habit Tracking Boost',
     description:
