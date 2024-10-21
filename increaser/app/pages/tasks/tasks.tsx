@@ -1,8 +1,8 @@
 import { withLayout } from '@lib/next-ui/utils/withLayout'
 import { TasksLayout } from '../../tasks/TasksLayout'
-import { TaskBoard } from '@increaser/ui/tasks/board/TaskBoard'
+import { TaskBoardPage } from '@increaser/ui/tasks/board/TaskBoardPage'
 
 export default withLayout({
-  page: TaskBoard,
+  page: TaskBoardPage,
   layout: TasksLayout,
 })

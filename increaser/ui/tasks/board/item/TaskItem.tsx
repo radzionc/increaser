@@ -6,8 +6,8 @@ import { taskBoardConfig } from '../config'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { interactive } from '@lib/ui/css/interactive'
 import { TaskPrimaryContent } from '../../TaskPrimaryContent'
-import { useActiveTaskId } from '../../state/activeTaskId'
 import { useCurrentTask } from '../../CurrentTaskProvider'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled.div`
   background: ${getColor('foreground')};
@@ -29,7 +29,7 @@ type TaskItemProps = ComponentProps<typeof Container>
 export const TaskItem = forwardRef<HTMLDivElement, TaskItemProps>(
   (props, ref) => {
     const { id } = useCurrentTask()
-    const [, setActiveTaskId] = useActiveTaskId()
+    const [, setActiveTaskId] = useActiveItemId()
 
     return (
       <Container {...props} onClick={() => setActiveTaskId(id)} ref={ref}>

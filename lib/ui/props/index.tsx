@@ -146,3 +146,7 @@ export type ComponentWithActionProps = {
 export type SubmittableComponentProps = {
   onSubmit: () => void
 }
+
+export type ComponentWithItemsProps<T> = {
+  items: T[]
+}

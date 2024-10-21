@@ -7,8 +7,8 @@ import styled from 'styled-components'
 import { VStack } from '@lib/ui/css/stack'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
-import { TaskBoard } from '@increaser/ui/tasks/board/TaskBoard'
 import { DemoGuard } from '../../demo/DemoGuard'
+import { TaskBoardDemo } from './TaskBoardDemo'
 
 const Content = styled(VStack)`
   width: 100%;
@@ -24,7 +24,7 @@ export const TasksSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <Content>
           <DemoGuard>
-            <TaskBoard />
+            <TaskBoardDemo />
           </DemoGuard>
         </Content>
       </WebsiteSliceContent>

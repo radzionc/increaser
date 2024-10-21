@@ -13,7 +13,7 @@ import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { TaskTextContainer } from './TaskTextContainer'
 import { TaskProject } from './TaskProject'
 import { TaskTrackedTime } from './trackedTime/TaskTrackedTime'
-import { useActiveTaskId } from './state/activeTaskId'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled(ActionInsideInteractiveElement)`
   width: 100%;
@@ -36,7 +36,7 @@ const Content = styled(TaskItemFrame)`
 export const TaskItem = () => {
   const task = useCurrentTask()
 
-  const [, setActiveItemId] = useActiveTaskId()
+  const [, setActiveItemId] = useActiveItemId()
 
   return (
     <Container

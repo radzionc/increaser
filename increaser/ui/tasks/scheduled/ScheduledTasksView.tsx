@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { ScheduledTasks } from './ScheduledTasks'
 import { TaskTimeGroupingSelector } from '../timeGrouping/TaskTimeGroupingSelector'
 import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
-import { ActiveTaskIdProvider } from '../state/activeTaskId'
 import { AddTask } from '../AddTask'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled(VStack)`
   gap: 32px;
@@ -19,9 +19,9 @@ export const ScheduledTasksView = () => {
         <TaskTimeGroupingSelector />
         <AddTask />
       </PageHeaderControlsArea>
-      <ActiveTaskIdProvider>
+      <ActiveItemIdProvider initialValue={null}>
         <ScheduledTasks />
-      </ActiveTaskIdProvider>
+      </ActiveItemIdProvider>
     </Container>
   )
 }
