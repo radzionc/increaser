@@ -5,7 +5,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { startOfDay } from 'date-fns'
 import { useCallback, useMemo, useState } from 'react'
 import { HabitDay, TrackHabitsContext } from './state/TrackHabitsContext'
-import { makeRecord } from '@lib/utils/record/makeRecord'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { findBy } from '@lib/utils/array/findBy'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
@@ -31,7 +31,7 @@ export const TrackHabitsProvider = ({
       .map((index) => {
         const startedAt = firstDayStartedAt - convertDuration(index, 'd', 'ms')
 
-        const completion = makeRecord(habitIds, (id) => {
+        const completion = recordFromKeys(habitIds, (id) => {
           const habit = shouldBePresent(findBy(habits, 'id', id))
           const habitStartedAt = startOfDay(
             convertDuration(habit.startedAt, 's', 'ms'),

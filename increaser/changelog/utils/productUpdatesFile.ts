@@ -11,6 +11,3 @@ const productUpdatesFilePath = path.resolve(
 
 export const readProductUpdatesFile = () =>
   fs.readFileSync(productUpdatesFilePath, 'utf8')
-
-export const writeProductUpdatesFile = (content: string) =>
-  fs.writeFileSync(productUpdatesFilePath, content, 'utf8')

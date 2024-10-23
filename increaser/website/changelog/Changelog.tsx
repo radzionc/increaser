@@ -15,10 +15,7 @@ export const Changelog = () => {
   return (
     <Container>
       <WebsiteSliceContent>
-        <WebsiteSectionHeader
-          title="What's New"
-          // subtitle="Discover the latest updates, new features, and improvements to enhance your productivity experience."
-        />
+        <WebsiteSectionHeader title="What's New" />
         <ProductUpdatesList />
       </WebsiteSliceContent>
     </Container>

@@ -3,7 +3,7 @@ import { Habit } from '@increaser/entities/Habit'
 import { range } from '@lib/utils/array/range'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
-import { toRecord } from '@lib/utils/record/toRecord'
+import { recordFromItems } from '@lib/utils/record/recordFromItems'
 
 enum DemoHabit {
   Sunlight = 'View sunlight after waking up',
@@ -100,7 +100,7 @@ const toHabit = (
 }
 
 export const getDemoHabits = () =>
-  toRecord(
+  recordFromItems(
     habitsDescription.map((description, index) => toHabit(description, index)),
     (habit) => habit.id,
   )

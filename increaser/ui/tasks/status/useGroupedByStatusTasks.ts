@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { Task, TaskStatus, taskStatuses } from '@increaser/entities/Task'
 import { useTasks } from '../hooks/useTasks'
-import { makeRecord } from '@lib/utils/record/makeRecord'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { useFilterByProject } from '../../projects/filter/project/state/projectFilter'
 import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 
@@ -11,7 +11,7 @@ export const useGroupedByStatusTasks = () => {
 
   return useMemo(() => {
     return {
-      ...makeRecord(taskStatuses, () => []),
+      ...recordFromKeys(taskStatuses, () => []),
       ...groupItems<Task, TaskStatus>(
         Object.values(tasks),
         (task) => task.status,

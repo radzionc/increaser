@@ -1,5 +1,5 @@
 import { Idea, Ideas } from '@increaser/entities/Idea'
-import { toRecord } from '@lib/utils/record/toRecord'
+import { recordFromItems } from '@lib/utils/record/recordFromItems'
 import { DemoProject } from './projects'
 
 const items: Omit<Idea, 'id' | 'updatedAt'>[] = [
@@ -30,7 +30,7 @@ const items: Omit<Idea, 'id' | 'updatedAt'>[] = [
 ]
 
 export const getDemoIdeas = (): Ideas => {
-  return toRecord(
+  return recordFromItems(
     items.map((item, order) => ({
       ...item,
       id: item.name,

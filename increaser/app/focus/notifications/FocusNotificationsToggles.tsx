@@ -3,7 +3,6 @@ import {
   focusNotifications,
   useFocusNotifications,
 } from './state/focusNotifications'
-import { makeRecord } from '@lib/utils/record/makeRecord'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { useRequestNotificationPermissionMutation } from '@lib/ui/notifications/hooks/useRequestNotificationPermissionMutation'
 import { VStack } from '@lib/ui/css/stack'
@@ -12,6 +11,7 @@ import { focusNotificationsConfig } from './config'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { useNotificationPermission } from '@lib/ui/notifications/hooks/useNotificationPermission'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 
 const PrimarySwitch = styled(Switch)`
   padding: ${toSizeUnit(
@@ -36,11 +36,11 @@ export const FocusNotificationsToggles = () => {
         <PrimarySwitch
           onChange={(value) => {
             if (!value) {
-              setValue(makeRecord(focusNotifications, () => value))
+              setValue(recordFromKeys(focusNotifications, () => value))
             } else {
               requestPermission(undefined, {
                 onSuccess: () =>
-                  setValue(makeRecord(focusNotifications, () => true)),
+                  setValue(recordFromKeys(focusNotifications, () => true)),
               })
             }
           }}

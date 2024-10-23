@@ -3,7 +3,7 @@ import {
   ProductUpdate,
   productUpdateSocials,
 } from '../../changelog/ProductUpdate'
-import { VStack } from '@lib/ui/css/stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { format } from 'date-fns'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
@@ -18,10 +18,21 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { transition } from '@lib/ui/css/transition'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { ProductUpdateSocialsPrompt } from './ProductUpdateSocialsPrompt'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import YouTubePlayer from 'react-player/lazy'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
+import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
+import { withoutUndefinedFields } from '@lib/utils/record/withoutUndefinedFields'
+import { toEntries } from '@lib/utils/record/toEntries'
+import { SocialLink } from '@lib/ui/buttons/SocialLink'
+import { Match } from '@lib/ui/base/Match'
+import { TelegramIcon } from '@lib/ui/icons/TelegramIcon'
+import { XIcon } from '@lib/ui/icons/XIcon'
+import { LinkedinIcon } from '@lib/ui/icons/LinkedinIcon'
+import { RedditIcon } from '@lib/ui/icons/RedditIcon'
+import { IndieHackersIcon } from '@lib/ui/icons/IndieHackersIcon'
+import { YouTubeColoredIcon } from '@lib/ui/icons/YouTubeColoredIcon'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 
 const Container = styled(VStack)`
   gap: 16px;
@@ -51,7 +62,11 @@ const Indicator = styled(IconWrapper)`
 export const ProductUpdateItem = ({
   value,
 }: ComponentWithValueProps<ProductUpdate>) => {
-  const hasSocials = productUpdateSocials.some((social) => !!value[social])
+  const socials = toEntries(
+    withoutUndefinedFields(
+      recordFromKeys(productUpdateSocials, (social) => value[social]),
+    ),
+  )
 
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
 
@@ -104,25 +119,54 @@ export const ProductUpdateItem = ({
           />
         )}
       </ClientOnly>
-      {hasSocials && <ProductUpdateSocialsPrompt value={value} />}
-      {value.items && (
-        <VStack>
-          {value.items.map(({ description }) => {
-            return (
-              <PrefixedItemFrame
-                key={description}
-                prefix={
-                  <Indicator>
-                    <PlusIcon />
-                  </Indicator>
-                }
-              >
-                <Text>{description}</Text>
-              </PrefixedItemFrame>
-            )
-          })}
-        </VStack>
-      )}
+      <NonEmptyOnly
+        value={socials}
+        render={(items) => (
+          <HStack alignItems="center" gap={8}>
+            <Text color="shy" weight="600">
+              Discuss on
+            </Text>
+            <HStack alignItems="center">
+              {items.map(({ key, value }) => {
+                return (
+                  <SocialLink key={key} to={value}>
+                    <Match
+                      value={key}
+                      telegram={() => <TelegramIcon />}
+                      x={() => <XIcon />}
+                      linkedIn={() => <LinkedinIcon />}
+                      reddit={() => <RedditIcon />}
+                      indieHackers={() => <IndieHackersIcon />}
+                      youtube={() => <YouTubeColoredIcon />}
+                    />
+                  </SocialLink>
+                )
+              })}
+            </HStack>
+          </HStack>
+        )}
+      />
+      <NonEmptyOnly
+        value={value.items}
+        render={(items) => (
+          <VStack>
+            {items.map(({ description }) => {
+              return (
+                <PrefixedItemFrame
+                  key={description}
+                  prefix={
+                    <Indicator>
+                      <PlusIcon />
+                    </Indicator>
+                  }
+                >
+                  <Text>{description}</Text>
+                </PrefixedItemFrame>
+              )
+            })}
+          </VStack>
+        )}
+      />
     </Container>
   )
 }

@@ -73,7 +73,7 @@ export const productToolDescription: Record<ProductTool, string> = {
   goals: 'Reach your goals faster',
 }
 
-// export const productToolColorRecord: Record<ProductTool, number> = makeRecord(
+// export const productToolColorRecord: Record<ProductTool, number> = recordFromKeys(
 //   productTools,
 //   (tool, index) => index + 2,
 // )

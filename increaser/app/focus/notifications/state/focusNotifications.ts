@@ -4,7 +4,7 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { useNotificationPermission } from '@lib/ui/notifications/hooks/useNotificationPermission'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
-import { makeRecord } from '@lib/utils/record/makeRecord'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { Minutes, Seconds } from '@lib/utils/time/types'
 
 export const focusNotifications = ['sessionEnd', 'workDayEnd', 'eyeBreak']
@@ -18,11 +18,11 @@ export const useFocusNotifications = () => {
   return useStateCorrector(
     usePersistentState<FocusNotifications>(
       PersistentStateKey.FocusNotifications,
-      () => makeRecord(focusNotifications, () => areEnabled),
+      () => recordFromKeys(focusNotifications, () => areEnabled),
     ),
     (value) => {
       if (!areEnabled && Object.values(value).some((v) => v)) {
-        return makeRecord(focusNotifications, () => false)
+        return recordFromKeys(focusNotifications, () => false)
       }
 
       return value

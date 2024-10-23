@@ -20,7 +20,7 @@ import {
   PrincipleCategory,
 } from './PrincipleCategory'
 import { Principle } from './Principle'
-import { toRecord } from '@lib/utils/record/toRecord'
+import { recordFromItems } from '@lib/utils/record/recordFromItems'
 
 export type Set = Interval &
   ProjectRelatedEntity & {
@@ -187,7 +187,7 @@ export const userDefaultFields: Pick<
   completedEducation: [],
   taskFactories: {},
   taskTemplates: {},
-  principleCategories: toRecord(defaultPrincipleCategories, (p) => p.id),
+  principleCategories: recordFromItems(defaultPrincipleCategories, (p) => p.id),
   principles: {},
   ...defaultWorkBudget,
   ...dayMomentsDefaultValues,

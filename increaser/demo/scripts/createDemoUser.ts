@@ -2,7 +2,7 @@ import { getUser, putUser } from '@increaser/db/user'
 import { demoConfig } from '../config'
 import { getDemoUser } from '../getDemoUser'
 import { deleteUser } from '@increaser/data-services/users/deleteUser'
-import { toRecord } from '@lib/utils/record/toRecord'
+import { recordFromItems } from '@lib/utils/record/recordFromItems'
 import { copyToUserFolder } from '@increaser/public/copyToUserFolder'
 import { asyncAttempt } from '@lib/utils/promise/asyncAttempt'
 
@@ -28,7 +28,7 @@ export const createDemoUser = async () => {
     }),
   )
 
-  user.vision = toRecord(visionAttributes, (va) => va.id)
+  user.vision = recordFromItems(visionAttributes, (va) => va.id)
 
   await putUser(user)
 }

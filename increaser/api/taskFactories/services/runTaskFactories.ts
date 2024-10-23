@@ -1,11 +1,11 @@
 import { getUser, updateUser } from '@increaser/db/user'
 import { getCadencePeriodStart } from '@increaser/entities-utils/taskFactory/getCadencePeriodStart'
 import { Task } from '@increaser/entities/Task'
-import { toRecord } from '@lib/utils/record/toRecord'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { inTimeZone } from '@lib/utils/time/inTimeZone'
 import { getRecurringTaskDeadline } from '@increaser/entities-utils/taskFactory/getRecurringTaskDeadline'
 import { generateTask } from '@increaser/entities-utils/taskFactory/generateTask'
+import { recordFromItems } from '@lib/utils/record/recordFromItems'
 
 export const runTaskFactories = async (userId: string) => {
   const { taskFactories, timeZone, tasks } = await getUser(userId, [
@@ -60,7 +60,7 @@ export const runTaskFactories = async (userId: string) => {
   )
 
   if (generatedTasks.length > 0) {
-    const newTasks = toRecord(
+    const newTasks = recordFromItems(
       [...oldTasks, ...generatedTasks],
       (task) => task.id,
     )

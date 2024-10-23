@@ -9,7 +9,7 @@ import { useMemo } from 'react'
 import { pick } from '@lib/utils/record/pick'
 import { DayMoment, dayMoments } from '@increaser/entities/DayMoments'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
-import { makeRecord } from '@lib/utils/record/makeRecord'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { toPercents } from '@lib/utils/toPercents'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -61,7 +61,7 @@ export const ScheduleVisualization = () => {
   const eventsOrganizedByTime = useMemo(() => {
     const result: Record<number, DayMoment[]> = {}
 
-    return makeRecord(withoutDuplicates(Object.values(schedule)), (time) =>
+    return recordFromKeys(withoutDuplicates(Object.values(schedule)), (time) =>
       Object.entries(schedule)
         .filter(([, dayMoment]) => dayMoment === time)
         .map(([dayMoment]) => dayMoment as DayMoment),
