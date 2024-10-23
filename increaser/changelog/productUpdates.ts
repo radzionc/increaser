@@ -254,7 +254,6 @@ export const productUpdates: ProductUpdate[] = [
 
   {
     releasedAt: 1725723647758,
-    videoId: 'change',
     name: 'Focus Enhancements and Data Export',
     description:
       "We've made it easier to manage your focus sessions and introduced a new way to export your data.",
@@ -287,7 +286,6 @@ export const productUpdates: ProductUpdate[] = [
   },
   {
     releasedAt: 1725206936434,
-    videoId: 'filter',
     name: 'Enhanced Task Management & Vision Clarity',
     description:
       'Boost your focus and streamline your goals with new features that let you filter tasks by project, set custom deadlines, and refine your life aspirations.',
@@ -317,7 +315,6 @@ export const productUpdates: ProductUpdate[] = [
   },
   {
     releasedAt: 1724477563708,
-    videoId: 'kanban',
     name: 'Streamlined Task Management & Enhanced Layout',
     description:
       'We’ve added a powerful Kanban board, introduced new task statuses, and made it easier to organize your scheduled tasks by weeks. Plus, enjoy more space with our updated page headers.',
@@ -351,7 +348,6 @@ export const productUpdates: ProductUpdate[] = [
   },
   {
     releasedAt: 1723362485159,
-    videoId: 'projects',
     name: 'Enhanced Time Tracking & Navigation',
     description:
       'Boost your productivity with our latest updates, making time tracking and navigation smoother and more insightful.',
@@ -385,7 +381,6 @@ export const productUpdates: ProductUpdate[] = [
   },
   {
     releasedAt: 1722919666475,
-    videoId: 'sets',
     name: 'Enhanced Focus and Project Management',
     description:
       'Boost your productivity with new features for better focus session control and improved project management.',
@@ -439,14 +434,12 @@ export const productUpdates: ProductUpdate[] = [
     x: 'https://x.com/increaser_app/status/1818250633301856744',
     reddit:
       'https://www.reddit.com/r/increaser/comments/1efr77m/exciting_new_increaser_updates_pause_sessions/',
-    videoId: 'pause',
   },
   {
     releasedAt: 1721993826695,
     name: 'Introducing Principles 🌟',
     description:
       "We're excited to announce the new 'Principles' feature! Now, you can define and manage your core values and beliefs right within Increaser. Add, edit, and categorize your principles to guide your daily decisions and actions. Explore suggested principles to inspire a fulfilling life. Start building a strong foundation for your goals today!",
-    videoId: 'principles',
     indieHackers:
       'https://www.indiehackers.com/product/increaser/new-feature-in-increaser-principles--O2iqwGLfsbQIYZncOXl',
     telegram: 'https://t.me/increaser_app/43',
@@ -479,7 +472,6 @@ export const productUpdates: ProductUpdate[] = [
           "Preview future recurring tasks in the 'To-Do' tab to always know what's ahead.",
       },
     ],
-    videoId: 'deadline-index',
     indieHackers:
       'https://www.indiehackers.com/product/increaser/boost-your-productivity-with-increasers-latest-updates--O2U5JBce2cxp-dBecRY',
     telegram: 'https://t.me/increaser_chat/55',
@@ -494,13 +486,11 @@ export const productUpdates: ProductUpdate[] = [
     name: 'Product Updates',
     description:
       'Stay updated with the latest features and improvements directly within the app.',
-    videoId: 'changelog',
   },
   {
     releasedAt: 1721550970258,
     name: 'Task templates',
     description:
       'Streamline task creation with reusable templates. Easily create, edit, and apply templates for frequently used tasks to save time and ensure consistency.',
-    videoId: 'task-templates',
   },
 ]

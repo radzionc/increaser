@@ -27,6 +27,5 @@ export type ProductUpdate = ProductUpdateSocials & {
   releasedAt: number
   name: string
   description: string
-  videoId?: string
   items?: ProductUpdateItem[]
 }

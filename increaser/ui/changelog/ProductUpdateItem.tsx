@@ -10,8 +10,6 @@ import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { ClientOnly } from '@lib/ui/base/ClientOnly'
-import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { getPublicFileUrl } from '../storage/getPublicFileUrl'
 import { IntersectionAware } from '@lib/ui/base/IntersectionAware'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { centerContent } from '@lib/ui/css/centerContent'
@@ -50,8 +48,6 @@ const Indicator = styled(IconWrapper)`
   ${transition};
 `
 
-const Video = styled(TakeWholeSpace)``
-
 export const ProductUpdateItem = ({
   value,
 }: ComponentWithValueProps<ProductUpdate>) => {
@@ -73,62 +69,38 @@ export const ProductUpdateItem = ({
         </Text>
       </VStack>
       <ClientOnly>
-        {(value.youtube || value.videoId) && (
+        {value.youtube && (
           <IntersectionAware<HTMLDivElement>
-            render={({ ref, wasIntersected }) => {
-              if (value.youtube) {
-                return (
-                  <VStack fullWidth ref={ref}>
-                    {wasIntersected && (
-                      <ElementSizeAware
-                        render={({ setElement, size }) => {
-                          return (
-                            <VideoWrapper ref={setElement}>
-                              {size && (
-                                <YouTubePlayer
-                                  isActive
-                                  width={size.width}
-                                  height={size.width * youTubeVideoRatio}
-                                  url={value.youtube}
-                                  playing={isPlaying}
-                                  onPause={pause}
-                                  onPlay={play}
-                                  config={{
-                                    youtube: {
-                                      playerVars: { autoplay: 0, controls: 1 },
-                                    },
-                                  }}
-                                />
-                              )}
-                            </VideoWrapper>
-                          )
-                        }}
-                      />
-                    )}
-                  </VStack>
-                )
-              } else {
-                return (
-                  <VideoWrapper
-                    style={{ aspectRatio: '1592 / 1080' }}
-                    ref={ref}
-                  >
-                    {wasIntersected && (
-                      <TakeWholeSpace>
-                        <Video as="video" autoPlay muted loop>
-                          <source
-                            src={getPublicFileUrl(
-                              `updates/${value.videoId}.mp4`,
-                            )}
-                            type="video/mp4"
-                          />
-                        </Video>
-                      </TakeWholeSpace>
-                    )}
-                  </VideoWrapper>
-                )
-              }
-            }}
+            render={({ ref, wasIntersected }) => (
+              <VStack fullWidth ref={ref}>
+                {wasIntersected && (
+                  <ElementSizeAware
+                    render={({ setElement, size }) => {
+                      return (
+                        <VideoWrapper ref={setElement}>
+                          {size && (
+                            <YouTubePlayer
+                              isActive
+                              width={size.width}
+                              height={size.width * youTubeVideoRatio}
+                              url={value.youtube}
+                              playing={isPlaying}
+                              onPause={pause}
+                              onPlay={play}
+                              config={{
+                                youtube: {
+                                  playerVars: { autoplay: 0, controls: 1 },
+                                },
+                              }}
+                            />
+                          )}
+                        </VideoWrapper>
+                      )
+                    }}
+                  />
+                )}
+              </VStack>
+            )}
           />
         )}
       </ClientOnly>
