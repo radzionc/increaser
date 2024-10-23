@@ -151,6 +151,10 @@ The "Principles" page consists of two sub-pages: "My principles" and "Principle 
 
 When there is a new feature or a set of features, there is an announcement on the "What's new" page, which consists of a short clip without audio, a title, a description, and a list of items if it's more than a single update. You can get to the "What's new" page by clicking a bell icon in the top right corner of the sidebar. The bell icon will have a dot with the number of new announcements. When the user clicks on the bell icon, the dot will disappear.
 
+Each announcement consists of a title, description, a YouTube video and a list of items if it's more than a single update. Each item is just a sentence describing an individual change. Also, it includes links to that announcement made on social media, which includes: Telegram, X, LinkedIn, Indie Hackers, Reddit and YouTube.
+
+Website also has a "What's new" page that lists all the updates that have been made to the app. It displays the same content as the app.
+
 ## Request Features
 
 On the "Request features" page, there is a list of features proposed by users that consist of a title, description, and an upvote button together with the number of total upvotes. The user can switch between the "ideas" and "done" tabs. To propose a feature, there is a small form on the side of the page so that the user can quickly submit a feature request. The new feature requests will be reviewed by the founder; before that, the feature won't be visible to other users.
