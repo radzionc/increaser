@@ -1,4 +1,4 @@
-type ProductUpdateItem = {
+export type ProductUpdateItem = {
   description: string
 }
 
