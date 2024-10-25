@@ -13,21 +13,28 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { pluralize } from '@lib/utils/pluralize'
 import { toPercents } from '@lib/utils/toPercents'
 import { withoutNull } from '@lib/utils/array/withoutNull'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 const getFormattedAvgWorkdayStart = (days: Interval[]) => {
+  if (isEmpty(days)) {
+    return '-'
+  }
+
   const average = getAverage(days.map(({ start }) => start))
 
   return formatDailyEventTime(average)
 }
 
 const getFormattedAvgWorkdayEnd = (days: Interval[]) => {
+  if (isEmpty(days)) {
+    return '-'
+  }
   const average = getAverage(days.map(({ end }) => end))
 
   return formatDailyEventTime(average)
 }
 
 const workTimeStats = ['startedWorkAt', 'finishedWorkAt', 'workedLate'] as const
-type WorkTimeStat = (typeof workTimeStats)[number]
 
 export const WorkTimeStats = () => {
   const days = useWorkTimeReportDays()

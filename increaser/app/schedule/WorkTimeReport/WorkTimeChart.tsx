@@ -25,6 +25,7 @@ import { ComponentWithActiveState } from '@lib/ui/props'
 import { WorkTimeChartYLabels } from './WorkTimeChartYLabels'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { withoutNull } from '@lib/utils/array/withoutNull'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 const chartConfig = {
   chartHeight: 360,
@@ -73,36 +74,45 @@ export const WorkTimeChart = () => {
   const workDays = useMemo(() => withoutNull(days), [days])
   const { startWorkAt, finishWorkAt } = useUser()
 
-  const boundaries = useMemo(() => {
-    return [
-      Math.min(
-        ...[Math.min(...workDays.map(({ start }) => start)), startWorkAt].map(
-          (value) =>
-            convertDuration(
-              Math.floor(value / convertDuration(1, 'h', 'min')),
-              'h',
-              'min',
-            ),
+  const interval = useMemo(() => {
+    const startOptions = [startWorkAt]
+    if (!isEmpty(workDays)) {
+      startOptions.push(Math.min(...workDays.map(({ start }) => start)))
+    }
+
+    const start = Math.min(
+      ...startOptions.map((value) =>
+        convertDuration(
+          Math.floor(value / convertDuration(1, 'h', 'min')),
+          'h',
+          'min',
         ),
       ),
-      Math.max(
-        ...[Math.min(...workDays.map(({ end }) => end)), finishWorkAt].map(
-          (value) =>
-            convertDuration(
-              Math.ceil(value / convertDuration(1, 'h', 'min')),
-              'h',
-              'min',
-            ),
+    )
+
+    const endOptions = [finishWorkAt]
+    if (!isEmpty(workDays)) {
+      endOptions.push(Math.max(...workDays.map(({ end }) => end)))
+    }
+
+    const end = Math.max(
+      ...endOptions.map((value) =>
+        convertDuration(
+          Math.ceil(value / convertDuration(1, 'h', 'min')),
+          'h',
+          'min',
         ),
       ),
-    ]
+    )
+
+    return { start, end }
   }, [workDays, startWorkAt, finishWorkAt])
 
   const dayMoments = [startWorkAt, finishWorkAt]
 
   const normalized = normalizeDataArrays({
     days: workDays.flatMap(({ start, end }) => [start, end]),
-    boundaries,
+    boundaries: Object.values(interval),
     dayMoments,
   })
 
@@ -163,10 +173,7 @@ export const WorkTimeChart = () => {
                 </Row>
                 <Row>
                   <VStack style={{ flex: 1 }}>
-                    <WorkTimeChartYLabels
-                      start={boundaries[0]}
-                      end={boundaries[1]}
-                    />
+                    <WorkTimeChartYLabels {...interval} />
                   </VStack>
                   <VStack
                     style={{
