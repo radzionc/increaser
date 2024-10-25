@@ -3361,7 +3361,6 @@ __metadata:
     next-sitemap: "npm:^4.2.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-    react-hook-form: "npm:^7.49.2"
     react-player: "npm:^2.12.0"
     react-use: "npm:^17.4.2"
     styled-components: "npm:^6.1.6"
@@ -3685,7 +3684,6 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-dropzone: "npm:^14.2.3"
     react-focus-lock: "npm:^2.13.2"
-    react-hook-form: "npm:^7.49.2"
     react-spring: "npm:^9.7.3"
     react-use: "npm:^17.4.2"
     styled-components: "npm:^6.1.6"
@@ -13123,15 +13121,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: a169e060e2a2457062489fb5e48811f334823b3878a4599162878c93c683f47807407044009c3886da07f2adaa9d7325cbb4fafc104a7f8cd4d1dad7325304f8
-  languageName: node
-  linkType: hard
-
-"react-hook-form@npm:^7.49.2":
-  version: 7.49.2
-  resolution: "react-hook-form@npm:7.49.2"
-  peerDependencies:
-    react: ^16.8.0 || ^17 || ^18
-  checksum: 7895d65b8458c42d46eb338803bb0fd1aab42fc69ecf80b47846eace9493a10cac5b05c9b744a5f9f1f7969a3e2703fc2118cdab97e49a7798a72d09f106383f
   languageName: node
   linkType: hard
 

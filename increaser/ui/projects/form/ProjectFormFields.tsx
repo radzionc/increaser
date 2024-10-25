@@ -17,6 +17,7 @@ import { VStack } from '@lib/ui/css/stack'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Spacer } from '@lib/ui/layout/Spacer'
+import { Text } from '@lib/ui/text'
 
 type ProjectFormFieldsProps = InputProps<ProjectFormShape> &
   Partial<SubmittableComponentProps> &
@@ -74,7 +75,7 @@ export const ProjectFormFields = ({
         label="Workdays Only (Mon-Fri)"
       />
 
-      {(freeHours > 0 || hasBudget) && (
+      {freeHours > 0 || hasBudget ? (
         <VStack style={{ padding: 0 }}>
           <VStack style={{ padding: panelDefaultPadding, paddingBottom: 0 }}>
             <BudgetHoursInput
@@ -98,6 +99,11 @@ export const ProjectFormFields = ({
             <Spacer height={panelDefaultPadding} />
           )}
         </VStack>
+      ) : (
+        <Text>
+          All available work time has already been allocated; adjust existing
+          project budgets to free up time.
+        </Text>
       )}
     </>
   )
