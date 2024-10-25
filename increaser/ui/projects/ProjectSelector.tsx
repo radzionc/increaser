@@ -20,7 +20,6 @@ type OpenerParams = Record<string, unknown> & ComponentWithActiveState
 type ProjectSelectorProps = InputProps<string> & {
   autoFocus?: boolean
   renderOpener: (params: OpenerParams) => ReactNode
-  floatingOptionsWidthSameAsOpener?: boolean
 }
 
 const addProjectKey = 'add-project' as const
@@ -30,7 +29,6 @@ export const ProjectSelector = ({
   value,
   onChange,
   autoFocus = false,
-  floatingOptionsWidthSameAsOpener = false,
   renderOpener,
 }: ProjectSelectorProps) => {
   const activeProjects = useActiveProjects()
@@ -51,7 +49,6 @@ export const ProjectSelector = ({
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener,
     selectedIndex: options.indexOf(value),
     placement: 'bottom-start',
     strategy: 'fixed',

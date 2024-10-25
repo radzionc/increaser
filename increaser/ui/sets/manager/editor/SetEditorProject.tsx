@@ -20,7 +20,6 @@ export const SetEditorProject = () => {
 
   return (
     <ProjectSelector
-      floatingOptionsWidthSameAsOpener={true}
       renderOpener={(props) => (
         <ExpandableSelectorContainer style={{ maxWidth: 160 }} {...props}>
           <OptionContent>

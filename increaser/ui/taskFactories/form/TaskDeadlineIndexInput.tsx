@@ -17,7 +17,7 @@ export const TaskDeadlineIndexInput = ({ value, onChange, cadence }: Props) => {
       workday={() => null}
       week={() => (
         <ExpandableSelector
-          style={{ width: 124 }}
+          showToggle={false}
           value={value}
           onChange={onChange}
           options={range(7)}
@@ -26,7 +26,7 @@ export const TaskDeadlineIndexInput = ({ value, onChange, cadence }: Props) => {
       )}
       month={() => (
         <ExpandableSelector
-          style={{ width: 124 }}
+          showToggle={false}
           value={value}
           onChange={onChange}
           options={range(31)}

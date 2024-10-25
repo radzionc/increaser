@@ -16,7 +16,7 @@ export const TaskCadenceInput = ({
 }: InputProps<TaskCadence>) => {
   return (
     <ExpandableSelector
-      style={{ width: 168 }}
+      showToggle={false}
       openerContent={
         <HStack alignItems="center" gap={8}>
           <IconWrapper style={{ fontSize: 14 }}>

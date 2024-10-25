@@ -111,7 +111,6 @@ export const TaskLinkItem = ({ value, onRemove, onChange }: TaskLinkProps) => {
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     placement: 'bottom-start',
     options: options.map(({ name }) => name),

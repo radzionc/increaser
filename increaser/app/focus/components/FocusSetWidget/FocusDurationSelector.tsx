@@ -56,7 +56,6 @@ export const FocusDurationSelector = () => {
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: focusDurations.indexOf(focusDuration),
     strategy: 'fixed',
     options: focusDurations.map((option) => option.toString()),

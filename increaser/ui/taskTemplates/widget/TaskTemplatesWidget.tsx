@@ -58,7 +58,6 @@ export const TaskTemplatesWidget = ({
     context,
   } = useFloatingOptions({
     strategy: 'fixed',
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     placement: 'bottom-start',
     options: options.map(getOptionName),

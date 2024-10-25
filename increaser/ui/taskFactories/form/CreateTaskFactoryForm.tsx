@@ -5,11 +5,8 @@ import { otherProject } from '@increaser/entities/Project'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { TaskCadenceInput } from './TaskCadenceInput'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
-import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
-import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
@@ -22,6 +19,7 @@ import {
   OptionalValueFinishProps,
 } from '@lib/ui/props'
 import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
+import { TaskFactoryScheduleInput } from './TaskFactoryScheduleInput'
 
 const defaultCadence = 'week'
 
@@ -74,21 +72,10 @@ export const CreateTaskFactoryForm: React.FC<
         onClose={onFinish}
       />
       <HStack alignItems="center" gap={20} wrap="wrap">
-        <HStack gap={8}>
-          <TaskCadenceInput
-            value={value.cadence}
-            onChange={(cadence) => setValue((prev) => ({ ...prev, cadence }))}
-          />
-          {doesCadenceSupportDeadlineIndex(value.cadence) && (
-            <TaskDeadlineIndexInput
-              value={value.deadlineIndex ?? null}
-              cadence={value.cadence}
-              onChange={(deadlineIndex) =>
-                setValue((prev) => ({ ...prev, deadlineIndex }))
-              }
-            />
-          )}
-        </HStack>
+        <TaskFactoryScheduleInput
+          value={value}
+          onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        />
         <FirstTaskDeadlineForecast
           cadence={value.cadence}
           deadlineIndex={value.deadlineIndex ?? null}

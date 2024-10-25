@@ -126,7 +126,6 @@ export const ManageAccount = () => {
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     placement: 'bottom-start',
     options: options.map(({ name }) => name),

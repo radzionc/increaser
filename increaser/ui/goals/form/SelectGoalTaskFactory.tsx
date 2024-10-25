@@ -40,7 +40,6 @@ export const SelectGoalTaskFactory = ({
     context,
   } = useFloatingOptions({
     strategy: 'fixed',
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     placement: 'bottom-start',
     options: options.map((option) => taskFactories[option].name),

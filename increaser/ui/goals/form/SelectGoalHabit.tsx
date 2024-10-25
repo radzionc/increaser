@@ -40,7 +40,6 @@ export const SelectGoalHabit = ({
     context,
   } = useFloatingOptions({
     strategy: 'fixed',
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     placement: 'bottom-start',
     options: options.map((option) => habits[option].name),

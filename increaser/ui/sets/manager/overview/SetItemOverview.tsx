@@ -90,7 +90,6 @@ export const SetItemOverview = ({
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     placement: 'bottom-start',
     options: options.map(({ name }) => name),

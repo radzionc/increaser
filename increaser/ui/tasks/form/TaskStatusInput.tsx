@@ -20,7 +20,6 @@ export const TaskStatusInput = ({ value, onChange }: TaskStatusInputProps) => {
       onChange={onChange}
       options={taskStatuses}
       getOptionKey={capitalizeFirstLetter}
-      floatingOptionsWidthSameAsOpener={false}
       showToggle={false}
       renderOption={(option) => (
         <HStack alignItems="center" gap={8}>

@@ -70,7 +70,6 @@ export const ManageYouTubePlayerPosition = () => {
     context,
   } = useFloatingOptions({
     selectedIndex: null,
-    floatingOptionsWidthSameAsOpener: false,
     strategy: 'fixed',
   })
 

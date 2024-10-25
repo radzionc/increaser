@@ -34,7 +34,6 @@ export const ReduceLastInterval = ({ max }: ReduceLastIntervalProps) => {
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: null,
     strategy: 'fixed',
     options: options.map(optionToString),
@@ -56,6 +55,7 @@ export const ReduceLastInterval = ({ max }: ReduceLastIntervalProps) => {
           >
             {options.map((option, index) => (
               <OptionItem
+                key={option}
                 isActive={activeIndex === index}
                 {...getOptionProps({
                   index,

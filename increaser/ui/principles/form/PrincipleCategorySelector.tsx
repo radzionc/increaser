@@ -30,7 +30,6 @@ export const PrincipleCategorySelector = ({
     activeIndex,
     context,
   } = useFloatingOptions({
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: options.indexOf(value),
     placement: 'bottom-start',
     options: principleCategories.map(({ name }) => name),

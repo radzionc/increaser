@@ -2,10 +2,6 @@ import { useCallback, useMemo, useState } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
-import { TaskCadenceInput } from './TaskCadenceInput'
-import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
-import { doesCadenceSupportDeadlineIndex } from '@increaser/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
-import { TaskDeadlineIndexInput } from './TaskDeadlineIndexInput'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
@@ -22,6 +18,7 @@ import { pick } from '@lib/utils/record/pick'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
+import { TaskFactoryScheduleInput } from './TaskFactoryScheduleInput'
 
 export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
   const taskFactory = useCurrentTaskFactory()
@@ -77,29 +74,13 @@ export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         onClose={onFinish}
       />
-      <HStack
-        alignItems="center"
-        gap={20}
-        wrap="wrap"
-        justifyContent="space-between"
-      >
+
+      <HStack alignItems="center" gap={20} wrap="wrap">
+        <TaskFactoryScheduleInput
+          value={value}
+          onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        />
         <HStack alignItems="center" gap={8}>
-          <TaskCadenceInput
-            value={value.cadence}
-            onChange={(cadence) => {
-              const deadlineIndex = cadenceDefaultDeadlineIndex[cadence]
-              return setValue((prev) => ({ ...prev, cadence, deadlineIndex }))
-            }}
-          />
-          {doesCadenceSupportDeadlineIndex(value.cadence) && (
-            <TaskDeadlineIndexInput
-              value={value.deadlineIndex ?? null}
-              cadence={value.cadence}
-              onChange={(deadlineIndex) =>
-                setValue((prev) => ({ ...prev, deadlineIndex }))
-              }
-            />
-          )}
           <AddTaskLink
             onFinish={(link) =>
               setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
@@ -123,13 +104,13 @@ export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
               }
             />
           )}
-          <PanelFormDeleteButton
-            onClick={() => {
-              deleteTaskFactory(id)
-              onFinish()
-            }}
-          />
         </HStack>
+        <PanelFormDeleteButton
+          onClick={() => {
+            deleteTaskFactory(id)
+            onFinish()
+          }}
+        />
       </HStack>
     </Panel>
   )

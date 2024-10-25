@@ -60,7 +60,6 @@ export const TaskDeadlineInput = ({
     context,
   } = useFloatingOptions({
     strategy: 'fixed',
-    floatingOptionsWidthSameAsOpener: false,
     selectedIndex: match(view, {
       options: () => (value === null ? null : options.indexOf(value)),
       custom: () => null,
