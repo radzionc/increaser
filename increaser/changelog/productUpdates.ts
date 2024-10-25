@@ -2,7 +2,7 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 0,
+    releasedAt: 1729829282066,
     name: 'Streamlined Habits, Tasks, and Goals Management',
     description:
       'Manage habits, tasks, and project goals more easily with these latest improvements.',
@@ -33,11 +33,14 @@ export const productUpdates: ProductUpdate[] = [
       },
     ],
     youtube: 'https://youtu.be/Q9IU1cmQS3M',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    telegram: 'https://t.me/increaser_app/59',
+    x: 'https://x.com/increaser_app/status/1849663864268357642',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7255428883120848896',
+    indieHackers:
+      'https://www.indiehackers.com/product/increaser/fresh-increaser-updates-habits-tasks-and-more--OA0q8Bux6don0fSci6Y',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1gblpeh/big_habit_and_task_management_updates_on_increaser/',
   },
 
   {
