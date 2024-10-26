@@ -1,11 +1,11 @@
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
-import { Habit } from '@increaser/entities/Habit'
+import { ActiveHabit } from '@increaser/entities/Habit'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 type GetHabitStreakInput = {
   at: number
-  habit: Habit
+  habit: ActiveHabit
 }
 
 export const getHabitStreak = ({

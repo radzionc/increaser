@@ -10,6 +10,10 @@ export type Habit = EntityWithId &
   EntityWithEmoji &
   EntityWithColor &
   EntityWithOrder &
-  EntityWithStartDate & {
+  Partial<EntityWithStartDate> & {
     successes: string[]
   }
+
+export type ActiveHabit = Omit<Habit, 'startedAt'> & EntityWithStartDate
+
+export type InactiveHabit = Omit<Habit, 'startedAt'>

@@ -10,7 +10,7 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { useMemo } from 'react'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { subDays } from 'date-fns'
-import { useHabits } from '../hooks/useHabits'
+import { useActiveHabits } from '../hooks/useActiveHabits'
 
 const Position = styled.div`
   position: absolute;
@@ -41,7 +41,7 @@ const Container = styled.div`
 
 export const HabitsNavigationPrompt = () => {
   const todayStartedAt = useStartOfDay()
-  const habits = useHabits()
+  const habits = useActiveHabits()
 
   const hasUncheckedYesterdayHabits = useMemo(() => {
     const yesterdayStartedAt = subDays(todayStartedAt, 1).getTime()

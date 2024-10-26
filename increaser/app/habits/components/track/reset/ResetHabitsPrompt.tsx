@@ -8,10 +8,10 @@ import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useU
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { Text } from '@lib/ui/text'
 import { Opener } from '@lib/ui/base/Opener'
-import { useHabits } from '@increaser/ui/habits/hooks/useHabits'
+import { useActiveHabits } from '@increaser/ui/habits/hooks/useActiveHabits'
 
 export const ResetHabitsPrompt = () => {
-  const habits = useHabits()
+  const habits = useActiveHabits()
 
   const todayStartedAt = useStartOfDay()
 

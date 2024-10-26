@@ -10,7 +10,7 @@ import { findBy } from '@lib/utils/array/findBy'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { useHabitTrackingDaysCount } from '@increaser/ui/habits/hooks/useHabitTrackingDaysCount'
-import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
+import { useOrderedActiveHabits } from '@increaser/ui/habits/hooks/useOrderedActiveHabits'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
 const daysToDisplay = 30
@@ -22,7 +22,7 @@ export const TrackHabitsProvider = ({
 
   const daysCount = useHabitTrackingDaysCount()
 
-  const habits = useOrderedHabits()
+  const habits = useOrderedActiveHabits()
 
   const days: HabitDay[] = useMemo(() => {
     const habitIds = habits.map(({ id }) => id)

@@ -15,6 +15,8 @@ export const ResetHabit = () => {
 
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
 
+  if (!startedAt) return null
+
   if (startedAt >= todayStartedAt) {
     return null
   }

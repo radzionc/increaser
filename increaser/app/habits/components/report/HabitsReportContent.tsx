@@ -6,12 +6,12 @@ import { Text } from '@lib/ui/text'
 import { pluralize } from '@lib/utils/pluralize'
 import { getHabitPassedDays } from '@increaser/entities-utils/habit/getHabitPassedDays'
 import { toPercents } from '@lib/utils/toPercents'
-import { useHabits } from '@increaser/ui/habits/hooks/useHabits'
 import { getHabitStreak } from '@increaser/entities-utils/habit/getHabitStreak'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
+import { useActiveHabits } from '@increaser/ui/habits/hooks/useActiveHabits'
 
 export const HabitsReportContent = () => {
-  const habits = useHabits()
+  const habits = useActiveHabits()
   const todayStartedAt = useStartOfDay()
 
   return (
