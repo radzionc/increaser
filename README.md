@@ -19,7 +19,7 @@ increaser is not a library, but a collection of amazing tools like components, h
 ### 2. Install dependencies
 
 ```sh
-yarn add @floating-ui/dom @floating-ui/react react-spring @react-spring/web date-fns react-focus-on react react-dom react-dropzone react-to-print react-use styled-components react-query copy-to-clipboard
+yarn add @floating-ui/dom @floating-ui/react react-spring @react-spring/web date-fns react-focus-on react react-dom react-dropzone react-to-print styled-components react-query
 yarn add --dev @types/react @types/react-dom @types/styled-components eslint typescript
 ```
 
