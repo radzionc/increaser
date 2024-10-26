@@ -1,6 +1,5 @@
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { useEffect, useRef, useState } from 'react'
-import { useEvent } from 'react-use'
+import { useCallback, useEffect, useRef } from 'react'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
@@ -24,6 +23,8 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusTargetProject } from '../../hooks/useFocusTargetProject'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { useEvent } from '@lib/ui/hooks/useEvent'
+import { useBoolean } from '@lib/ui/hooks/useBoolean'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -33,7 +34,7 @@ const TimeValue = styled(HStackSeparatedBy)`
 `
 
 export const StartTimeEditor = () => {
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, { set: activate, unset: deactivate }] = useBoolean(false)
 
   const todaySets = useTodaySets()
 
@@ -41,8 +42,8 @@ export const StartTimeEditor = () => {
 
   const interval = useCurrentInterval()
 
-  useEvent('pointerup', () => setIsActive(false))
-  useEvent('pointercancel', () => setIsActive(false))
+  useEvent(window, 'pointerup', deactivate)
+  useEvent(window, 'pointercancel', deactivate)
 
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
@@ -55,21 +56,28 @@ export const StartTimeEditor = () => {
 
   const now = useRhythmicRerender(convertDuration(10, 's', 'ms'))
 
-  useEvent('pointermove', ({ clientY }) => {
-    if (!isActive) return
+  useEvent(
+    window,
+    'pointermove',
+    useCallback(
+      ({ clientY }) => {
+        if (!isActive) return
 
-    const containerRect = containerElement?.current?.getBoundingClientRect()
-    if (!containerRect) return
+        const containerRect = containerElement?.current?.getBoundingClientRect()
+        if (!containerRect) return
 
-    const timestamp =
-      interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
+        const timestamp =
+          interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
-    const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
+        const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
 
-    const startedAt = enforceRange(timestamp, min, now)
+        const startedAt = enforceRange(timestamp, min, now)
 
-    setValue(startedAt)
-  })
+        setValue(startedAt)
+      },
+      [interval.start, isActive, now, setValue, todaySets],
+    ),
+  )
 
   const cursor = isActive ? 'row-resize' : undefined
 
@@ -107,10 +115,7 @@ export const StartTimeEditor = () => {
       </TimeValue>
 
       {!isActive && (
-        <BoundaryInteractiveArea
-          top={valueInPx}
-          onPointerDown={() => setIsActive(true)}
-        />
+        <BoundaryInteractiveArea top={valueInPx} onPointerDown={activate} />
       )}
     </TakeWholeSpace>
   )

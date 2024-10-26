@@ -1,13 +1,15 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { PersistentStateKey } from '@increaser/ui/state/persistentState'
 import { usePersistentState } from '@increaser/ui/state/persistentState'
 import { Modal } from '@lib/ui/modal'
 
-import { BeforeInstallPromptEvent, PWAContext } from '../PWAContext'
+import { PWAContext } from '../PWAContext'
 import { InstallInstructions } from './InstallInstructions'
 import { productName } from '@increaser/config'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
+import { useEvent } from '@lib/ui/hooks/useEvent'
+import { BeforeInstallPromptEvent } from '@lib/ui/pwa/BeforeInstallPromptEvent'
 
 interface Props {
   children: React.ReactNode
@@ -24,37 +26,26 @@ export const PWAProvider = ({ children }: Props) => {
     null,
   )
 
-  useEffect(() => {
-    const handleBeforeInstallEvent = (event: Event) => {
+  useEvent(
+    window,
+    'beforeinstallprompt',
+    useCallback((event: BeforeInstallPromptEvent) => {
       event.preventDefault()
       setInstallPromptEvent(event as BeforeInstallPromptEvent)
-    }
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallEvent)
-
-    return () => {
-      window.removeEventListener(
-        'beforeinstallprompt',
-        handleBeforeInstallEvent,
-      )
-    }
-  }, [])
+    }, []),
+  )
 
   const analytics = useAnalytics()
 
-  useEffect(() => {
-    const handleAppInstalledEvent = () => {
+  useEvent(
+    window,
+    'appinstalled',
+    useCallback(() => {
       analytics.trackEvent('Finish Install')
       setInstallPromptEvent(null)
       setIsInstallModalOpen(false)
-    }
-
-    window.addEventListener('appinstalled', handleAppInstalledEvent)
-
-    return () => {
-      window.removeEventListener('appinstalled', handleAppInstalledEvent)
-    }
-  })
+    }, [analytics]),
+  )
 
   const setIsSidebarInstallPromptRejected = useCallback(() => {
     setRejectedAt(Date.now())

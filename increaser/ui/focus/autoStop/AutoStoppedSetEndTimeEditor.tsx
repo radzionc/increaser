@@ -1,6 +1,5 @@
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { useRef, useState } from 'react'
-import { useEvent } from 'react-use'
+import { useCallback, useRef } from 'react'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { CurrentIntervalRect } from '@lib/ui/timeline/CurrentIntervalRect'
@@ -23,6 +22,8 @@ import { useProject } from '@increaser/ui/projects/hooks/useProject'
 import { useLastSet } from '@increaser/app/sets/hooks/useLastSet'
 import { useSetEndTime } from './state/setEndTime'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
+import { useEvent } from '@lib/ui/hooks/useEvent'
+import { useBoolean } from '@lib/ui/hooks/useBoolean'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -32,7 +33,7 @@ const TimeValue = styled(HStackSeparatedBy)`
 `
 
 export const AutoStoppedSetEndTimeEditor = () => {
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, { set: activate, unset: deactivate }] = useBoolean(false)
 
   const [value, setValue] = useSetEndTime()
 
@@ -40,8 +41,8 @@ export const AutoStoppedSetEndTimeEditor = () => {
 
   const interval = useCurrentInterval()
 
-  useEvent('pointerup', () => setIsActive(false))
-  useEvent('pointercancel', () => setIsActive(false))
+  useEvent(window, 'pointerup', deactivate)
+  useEvent(window, 'pointercancel', deactivate)
 
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
@@ -50,19 +51,26 @@ export const AutoStoppedSetEndTimeEditor = () => {
 
   const prevValue = shouldBePresent(useLastSetEnd())
 
-  useEvent('pointermove', ({ clientY }) => {
-    if (!isActive) return
+  useEvent(
+    window,
+    'pointermove',
+    useCallback(
+      ({ clientY }) => {
+        if (!isActive) return
 
-    const containerRect = containerElement?.current?.getBoundingClientRect()
-    if (!containerRect) return
+        const containerRect = containerElement?.current?.getBoundingClientRect()
+        if (!containerRect) return
 
-    const timestamp =
-      interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
+        const timestamp =
+          interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
-    const endedAt = enforceRange(timestamp, min, now)
+        const endedAt = enforceRange(timestamp, min, now)
 
-    setValue(endedAt)
-  })
+        setValue(endedAt)
+      },
+      [interval.start, isActive, min, now, setValue],
+    ),
+  )
 
   const cursor = isActive ? 'row-resize' : undefined
 
@@ -105,10 +113,7 @@ export const AutoStoppedSetEndTimeEditor = () => {
       </TimeValue>
 
       {!isActive && (
-        <BoundaryInteractiveArea
-          top={valueInPx}
-          onPointerDown={() => setIsActive(true)}
-        />
+        <BoundaryInteractiveArea top={valueInPx} onPointerDown={activate} />
       )}
     </TakeWholeSpace>
   )

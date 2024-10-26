@@ -1,9 +1,6 @@
 import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
-
-export interface BeforeInstallPromptEvent extends Event {
-  prompt(): Promise<void>
-}
+import { BeforeInstallPromptEvent } from '@lib/ui/pwa/BeforeInstallPromptEvent'
 
 interface PWAState {
   installPromptEvent: null | BeforeInstallPromptEvent

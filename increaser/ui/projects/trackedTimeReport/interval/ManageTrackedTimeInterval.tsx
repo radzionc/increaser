@@ -8,18 +8,11 @@ import {
 } from '@lib/utils/interval/Interval'
 import { toPercents } from '@lib/utils/toPercents'
 import { PositionAbsolutelyCenterVertically } from '@lib/ui/layout/PositionAbsolutelyCenterVertically'
-import {
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { PointerEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { useBoundingBox } from '@lib/ui/hooks/useBoundingBox'
 import { Point } from '@lib/ui/entities/Point'
-import { useEvent } from 'react-use'
 import { useRelativePosition } from '@lib/ui/hooks/useRelativePosition'
 import { enforceRange } from '@lib/utils/enforceRange'
 import { match } from '@lib/utils/match'
@@ -30,6 +23,7 @@ import { trackedTimeIntervalConfig } from './config'
 import { SelectedArea } from './SelectedArea'
 import { getIntIntervalLength } from '@lib/utils/interval/getIntIntervalLength'
 import { preventDefault } from '@lib/ui/utils/preventDefault'
+import { WindowPointerMoveListener } from '@lib/ui/base/WindowPointerMoveListener'
 
 const Container = styled(TakeWholeSpaceAbsolutely)`
   cursor: ew-resize;
@@ -72,9 +66,15 @@ export const ManageTrackedTimeInterval = () => {
     setClientPosition(null)
   }, [])
 
-  const handleMove: MouseEventHandler<HTMLElement> = useCallback((event) => {
-    setClientPosition({ x: event.clientX, y: event.clientY })
-  }, [])
+  const handleMove = useCallback(
+    ({
+      clientX,
+      clientY,
+    }: Pick<PointerEvent<Element>, 'clientX' | 'clientY'>) => {
+      setClientPosition({ x: clientX, y: clientY })
+    },
+    [],
+  )
 
   useEffect(() => {
     if (!activeBoundary || !position) return
@@ -102,10 +102,6 @@ export const ManageTrackedTimeInterval = () => {
   const stopDragging = useCallback(() => {
     setActiveBoundary(null)
   }, [])
-
-  useEvent('pointerup', activeBoundary ? stopDragging : undefined)
-  useEvent('pointercancel', activeBoundary ? stopDragging : undefined)
-  useEvent('pointermove', activeBoundary ? handleMove : undefined)
 
   return (
     <>
@@ -142,11 +138,13 @@ export const ManageTrackedTimeInterval = () => {
         )
       })}
       <Container ref={setContainer} />
-      {!activeBoundary && (
+      {activeBoundary ? (
+        <WindowPointerMoveListener onMove={handleMove} onStop={stopDragging} />
+      ) : (
         <PressHandler
-          onMouseMove={handleMove}
-          onMouseLeave={clearPosition}
-          onMouseEnter={handleMove}
+          onPointerMove={handleMove}
+          onPointerLeave={clearPosition}
+          onPointerOver={handleMove}
           onPointerDown={preventDefault(() => {
             if (hoveredBoundary) {
               setActiveBoundary(hoveredBoundary)

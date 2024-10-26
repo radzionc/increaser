@@ -1,6 +1,5 @@
 import { TakeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { useEffect, useMemo, useRef } from 'react'
-import { useEvent } from 'react-use'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { enforceRange } from '@lib/utils/enforceRange'
@@ -21,6 +20,7 @@ import { setEditorConfig } from './config'
 import { editorSetFrame } from './editorSetFrame'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { useActiveControl } from './ActiveControlProvider'
+import { WindowPointerMoveListener } from '@lib/ui/base/WindowPointerMoveListener'
 
 const borderWidth = 2
 
@@ -36,8 +36,10 @@ export const SetEditor = () => {
   const dayInterval = useWeekdayPassedInterval(weekday)
   const [activeControl, setActiveControl] = useActiveControl()
 
-  useEvent('pointerup', () => setActiveControl(null))
-  useEvent('pointercancel', () => setActiveControl(null))
+  const deactivate = useCallback(
+    () => setActiveControl(null),
+    [setActiveControl],
+  )
 
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
@@ -55,53 +57,66 @@ export const SetEditor = () => {
     })
   }, [])
 
-  useEvent('pointermove', ({ clientY }) => {
-    if (!activeControl) return
+  const valueDuration = getIntervalDuration(value)
 
-    const containerRect = containerElement?.current?.getBoundingClientRect()
-    if (!containerRect) return
+  const handleMove = useCallback(
+    ({ clientY }: PointerEvent) => {
+      if (!activeControl) return
 
-    const timestamp =
-      dayInterval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
+      const containerRect = containerElement?.current?.getBoundingClientRect()
+      if (!containerRect) return
 
-    const getNewInterval = () => {
-      if (activeControl === 'position') {
-        const halfDuration = valueDuration / 2
-        const oldCenter = value.start + halfDuration
+      const timestamp =
+        dayInterval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
-        const newCenter = enforceRange(
-          timestamp,
-          dayInterval.start + halfDuration,
-          dayInterval.end - halfDuration,
-        )
+      const getNewInterval = () => {
+        if (activeControl === 'position') {
+          const halfDuration = valueDuration / 2
+          const oldCenter = value.start + halfDuration
 
-        const offset = newCenter - oldCenter
+          const newCenter = enforceRange(
+            timestamp,
+            dayInterval.start + halfDuration,
+            dayInterval.end - halfDuration,
+          )
 
-        return {
-          start: value.start + offset,
-          end: value.end + offset,
-        }
-      } else {
-        return {
-          start:
-            activeControl === 'start'
-              ? enforceRange(timestamp, dayInterval.start, value.end)
-              : value.start,
-          end:
-            activeControl === 'end'
-              ? enforceRange(timestamp, value.start, dayInterval.end)
-              : value.end,
+          const offset = newCenter - oldCenter
+
+          return {
+            start: value.start + offset,
+            end: value.end + offset,
+          }
+        } else {
+          return {
+            start:
+              activeControl === 'start'
+                ? enforceRange(timestamp, dayInterval.start, value.end)
+                : value.start,
+            end:
+              activeControl === 'end'
+                ? enforceRange(timestamp, value.start, dayInterval.end)
+                : value.end,
+          }
         }
       }
-    }
 
-    const interval = getNewInterval()
+      const interval = getNewInterval()
 
-    setActiveSet((state) => ({
-      ...shouldBePresent(state),
-      ...interval,
-    }))
-  })
+      setActiveSet((state) => ({
+        ...shouldBePresent(state),
+        ...interval,
+      }))
+    },
+    [
+      activeControl,
+      dayInterval.end,
+      dayInterval.start,
+      setActiveSet,
+      value.end,
+      value.start,
+      valueDuration,
+    ],
+  )
 
   const cursor = useMemo(() => {
     if (!activeControl) return undefined
@@ -111,7 +126,6 @@ export const SetEditor = () => {
     return 'row-resize'
   }, [activeControl])
 
-  const valueDuration = getIntervalDuration(value)
   const intervalStartInPx = setEditorConfig.msToPx(
     value.start - dayInterval.start,
   )
@@ -122,6 +136,7 @@ export const SetEditor = () => {
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
+      <WindowPointerMoveListener onMove={handleMove} onStop={deactivate} />
       <CurrentInterval
         $color={colors.getLabelColor(projects[value.projectId].color)}
         ref={intervalElement}

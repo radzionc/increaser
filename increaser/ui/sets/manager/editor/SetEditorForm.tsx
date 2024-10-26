@@ -1,6 +1,6 @@
 import { SetEditorContent } from './SetEditorContent'
 import { SetEditorHeader } from './SetEditorHeader'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useUser } from '@increaser/ui/user/state/user'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -16,6 +16,7 @@ import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { setEditorConfig } from './config'
+import { useKeyDown } from '@lib/ui/hooks/useKeyDown'
 
 const Footer = styled(HStack)`
   ${verticalPadding(setEditorConfig.rightPadding)};
@@ -81,21 +82,9 @@ export const SetEditorForm = () => {
     updateSet,
   ])
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        onSubmit()
-      } else if (event.key === 'Escape') {
-        onCancel()
-      }
-    }
+  useKeyDown('Enter', onSubmit)
 
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [onCancel, onSubmit])
+  useKeyDown('Escape', onCancel)
 
   return (
     <>
