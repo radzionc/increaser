@@ -22,8 +22,8 @@ import { useProject } from '@increaser/ui/projects/hooks/useProject'
 import { useLastSet } from '@increaser/app/sets/hooks/useLastSet'
 import { useSetEndTime } from './state/setEndTime'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
-import { useEvent } from '@lib/ui/hooks/useEvent'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
+import { WindowPointerMoveListener } from '@lib/ui/base/WindowPointerMoveListener'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -41,9 +41,6 @@ export const AutoStoppedSetEndTimeEditor = () => {
 
   const interval = useCurrentInterval()
 
-  useEvent(window, 'pointerup', deactivate)
-  useEvent(window, 'pointercancel', deactivate)
-
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
 
@@ -51,25 +48,21 @@ export const AutoStoppedSetEndTimeEditor = () => {
 
   const prevValue = shouldBePresent(useLastSetEnd())
 
-  useEvent(
-    window,
-    'pointermove',
-    useCallback(
-      ({ clientY }) => {
-        if (!isActive) return
+  const onMove = useCallback(
+    ({ clientY }: PointerEvent) => {
+      if (!isActive) return
 
-        const containerRect = containerElement?.current?.getBoundingClientRect()
-        if (!containerRect) return
+      const containerRect = containerElement?.current?.getBoundingClientRect()
+      if (!containerRect) return
 
-        const timestamp =
-          interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
+      const timestamp =
+        interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
-        const endedAt = enforceRange(timestamp, min, now)
+      const endedAt = enforceRange(timestamp, min, now)
 
-        setValue(endedAt)
-      },
-      [interval.start, isActive, min, now, setValue],
-    ),
+      setValue(endedAt)
+    },
+    [interval.start, isActive, min, now, setValue],
   )
 
   const cursor = isActive ? 'row-resize' : undefined
@@ -87,6 +80,7 @@ export const AutoStoppedSetEndTimeEditor = () => {
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
+      <WindowPointerMoveListener onMove={onMove} onStop={deactivate} />
       <CurrentIntervalRect
         $color={theme.colors.getLabelColor(project.color)}
         ref={intervalElement}

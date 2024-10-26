@@ -14,7 +14,7 @@ export const CuratedHabits = () => {
   return (
     <Container>
       {Object.entries(habitRecord).map(([id, habit]) => (
-        <HabitItem value={habit} key={id} />
+        <HabitItem value={{ ...habit, id }} key={id} />
       ))}
     </Container>
   )

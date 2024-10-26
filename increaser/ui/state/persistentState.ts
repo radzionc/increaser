@@ -2,6 +2,7 @@ import { TemporaryStorage } from '@lib/ui/state/TemporaryStorage'
 import { LocalStorage } from '@lib/ui/state/LocalStorage'
 import { createPersistentStateHook } from '@lib/ui/state/createPersistentStateHook'
 import { createPersistentStateManager } from '@lib/ui/state/createPersistentStateManager'
+import { hasWindow } from '@lib/ui/utils/window'
 
 export enum PersistentStateKey {
   AuthSession = 'auth-session',
@@ -44,10 +45,9 @@ export enum PersistentStateKey {
   UserChangedFocusDurationAt = 'userChangedFocusDurationAt',
 }
 
-const persistentStorage =
-  typeof window !== 'undefined'
-    ? new LocalStorage<PersistentStateKey>()
-    : new TemporaryStorage<PersistentStateKey>()
+const persistentStorage = hasWindow
+  ? new LocalStorage<PersistentStateKey>()
+  : new TemporaryStorage<PersistentStateKey>()
 
 export const usePersistentState =
   createPersistentStateHook<PersistentStateKey>(persistentStorage)

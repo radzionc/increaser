@@ -9,12 +9,13 @@ import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { MS_IN_SEC } from '@lib/utils/time'
-import { getId } from '@increaser/entities-utils/shared/getId'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
+import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { useUser } from '@increaser/ui/user/state/user'
+import { useHabits } from '@increaser/ui/habits/hooks/useHabits'
 
 const Added = styled.div`
   background: transparent;
@@ -29,11 +30,14 @@ const Container = styled(VStack)`
   width: 100%;
 `
 
-export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
-  const { emoji, tags, name, description } = value
-  const { habits } = useHabits()
-  const habitsNames = new Set(habits.map((habit) => habit.name))
-  const isHabitAdded = habitsNames.has(name)
+export const HabitItem = ({
+  value,
+}: ComponentWithValueProps<HabitInfo & EntityWithId>) => {
+  const { emoji, tags, name, description, id } = value
+  const { habits: habitRecord } = useUser()
+  const isHabitAdded = id in habitRecord
+
+  const habits = useHabits()
 
   const {
     colors: { getLabelColor },
@@ -78,7 +82,7 @@ export const HabitItem = ({ value }: ComponentWithValueProps<HabitInfo>) => {
                 emoji,
                 color: defaultColorOption,
                 order: getLastItemOrder(habits.map(({ order }) => order)),
-                id: getId(),
+                id,
                 startedAt: Math.round(Date.now() / MS_IN_SEC),
                 successes: [],
               })

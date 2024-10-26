@@ -10,7 +10,7 @@ export const HabitsTableContainer = ({
   children,
 }: ComponentWithChildrenProps) => {
   return (
-    <HStack gap={40}>
+    <HStack fullWidth gap={40}>
       <VStack>
         <Spacer height={trackHabitsConfig.labelHeight} />
         <VStack>
@@ -20,7 +20,9 @@ export const HabitsTableContainer = ({
         </VStack>
         <Spacer height={20} />
       </VStack>
-      <ScrollableFlexboxFiller>{children}</ScrollableFlexboxFiller>
+      <ScrollableFlexboxFiller hideScrollbars>
+        {children}
+      </ScrollableFlexboxFiller>
     </HStack>
   )
 }

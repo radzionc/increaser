@@ -1,7 +1,6 @@
 import { VStack } from '@lib/ui/css/stack'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { CurrentHabitProvider } from '@increaser/ui/habits/CurrentHabitProvider'
-import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { HabitItem } from './HabitItem'
 import { useUpdateUserEntityMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntityMutation'
 import { DnDList } from '@lib/dnd/DnDList'
@@ -13,9 +12,10 @@ import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { EditHabitForm } from '@increaser/ui/habits/form/EditHabitForm'
+import { useHabits } from '@increaser/ui/habits/hooks/useHabits'
 
 export const Habits = () => {
-  const { habits } = useHabits()
+  const habits = useHabits()
 
   const [items, setItems] = useState(() => sortEntitiesWithOrder(habits))
   useEffect(() => {

@@ -8,7 +8,7 @@ import { PWAContext } from '../PWAContext'
 import { InstallInstructions } from './InstallInstructions'
 import { productName } from '@increaser/config'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
-import { useEvent } from '@lib/ui/hooks/useEvent'
+import { useEvent, useWindowEvent } from '@lib/ui/hooks/useEvent'
 import { BeforeInstallPromptEvent } from '@lib/ui/pwa/BeforeInstallPromptEvent'
 
 interface Props {
@@ -26,8 +26,7 @@ export const PWAProvider = ({ children }: Props) => {
     null,
   )
 
-  useEvent(
-    window,
+  useWindowEvent(
     'beforeinstallprompt',
     useCallback((event: BeforeInstallPromptEvent) => {
       event.preventDefault()
@@ -37,8 +36,7 @@ export const PWAProvider = ({ children }: Props) => {
 
   const analytics = useAnalytics()
 
-  useEvent(
-    window,
+  useWindowEvent(
     'appinstalled',
     useCallback(() => {
       analytics.trackEvent('Finish Install')

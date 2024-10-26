@@ -6,7 +6,6 @@ import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
 import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
 import { range } from '@lib/utils/array/range'
 import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
-import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { getId } from '@increaser/entities-utils/shared/getId'
@@ -16,11 +15,12 @@ import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { Habit } from '@increaser/entities/Habit'
 import { HabitFormFields } from './HabitFormFields'
+import { useHabits } from '../hooks/useHabits'
 
 export const CreateHabitForm = ({
   onFinish,
 }: OptionalValueFinishProps<Habit>) => {
-  const { habits } = useHabits()
+  const habits = useHabits()
   const usedColors = habits.map(({ color }) => color)
   const [value, setValue] = useState<HabitFormShape>({
     name: '',

@@ -5,11 +5,11 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
 import styled from 'styled-components'
-import { useHabits } from '../../habits/HabitsContext'
 import { CurrentHabitProvider } from '../../habits/CurrentHabitProvider'
 import { AddGoalHabit } from './AddGoalHabit'
 import { RemoveGoalHabit } from './RemoveGoalHabit'
 import { GoalHabitItem } from './GoalHabitItem'
+import { useHabits } from '../../habits/hooks/useHabits'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -23,7 +23,7 @@ const Content = styled(HStack)`
 `
 
 export const GoalHabitsInput = ({ value, onChange }: InputProps<string[]>) => {
-  const { habits } = useHabits()
+  const habits = useHabits()
   const options = useMemo(() => {
     return habits.filter(({ id }) => !value.includes(id)).map(({ id }) => id)
   }, [habits, value])

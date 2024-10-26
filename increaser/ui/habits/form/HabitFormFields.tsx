@@ -9,7 +9,7 @@ import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
 import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { HabitFormShape } from './HabitFormShape'
-import { useHabits } from '../HabitsContext'
+import { useHabits } from '../hooks/useHabits'
 
 type HabitFormFieldsProps = InputProps<HabitFormShape> &
   Partial<SubmittableComponentProps> &
@@ -21,7 +21,7 @@ export const HabitFormFields = ({
   onSubmit,
   onClose,
 }: HabitFormFieldsProps) => {
-  const { habits } = useHabits()
+  const habits = useHabits()
   const usedColors = habits.map(({ color }) => color)
 
   return (

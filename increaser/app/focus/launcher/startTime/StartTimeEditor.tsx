@@ -23,8 +23,8 @@ import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useFocusTargetProject } from '../../hooks/useFocusTargetProject'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { useEvent } from '@lib/ui/hooks/useEvent'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
+import { WindowPointerMoveListener } from '@lib/ui/base/WindowPointerMoveListener'
 
 const TimeValue = styled(HStackSeparatedBy)`
   position: absolute;
@@ -42,9 +42,6 @@ export const StartTimeEditor = () => {
 
   const interval = useCurrentInterval()
 
-  useEvent(window, 'pointerup', deactivate)
-  useEvent(window, 'pointercancel', deactivate)
-
   const containerElement = useRef<HTMLDivElement | null>(null)
   const intervalElement = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
@@ -56,27 +53,23 @@ export const StartTimeEditor = () => {
 
   const now = useRhythmicRerender(convertDuration(10, 's', 'ms'))
 
-  useEvent(
-    window,
-    'pointermove',
-    useCallback(
-      ({ clientY }) => {
-        if (!isActive) return
+  const onMove = useCallback(
+    ({ clientY }: PointerEvent) => {
+      if (!isActive) return
 
-        const containerRect = containerElement?.current?.getBoundingClientRect()
-        if (!containerRect) return
+      const containerRect = containerElement?.current?.getBoundingClientRect()
+      if (!containerRect) return
 
-        const timestamp =
-          interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
+      const timestamp =
+        interval.start + setEditorConfig.pxToMs(clientY - containerRect.top)
 
-        const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
+      const min = Math.max(getLastItem(todaySets)?.end ?? 0, interval.start)
 
-        const startedAt = enforceRange(timestamp, min, now)
+      const startedAt = enforceRange(timestamp, min, now)
 
-        setValue(startedAt)
-      },
-      [interval.start, isActive, now, setValue, todaySets],
-    ),
+      setValue(startedAt)
+    },
+    [interval.start, isActive, now, setValue, todaySets],
   )
 
   const cursor = isActive ? 'row-resize' : undefined
@@ -93,6 +86,7 @@ export const StartTimeEditor = () => {
 
   return (
     <TakeWholeSpace style={{ cursor }} ref={containerElement}>
+      <WindowPointerMoveListener onMove={onMove} onStop={deactivate} />
       <CurrentIntervalRect
         $color={theme.colors.getLabelColor(project.color)}
         ref={intervalElement}

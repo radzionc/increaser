@@ -2,16 +2,16 @@ import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
-import { useHabits } from '@increaser/ui/habits/HabitsContext'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { Text } from '@lib/ui/text'
 import { Opener } from '@lib/ui/base/Opener'
+import { useHabits } from '@increaser/ui/habits/hooks/useHabits'
 
 export const ResetHabitsPrompt = () => {
-  const { habits } = useHabits()
+  const habits = useHabits()
 
   const todayStartedAt = useStartOfDay()
 

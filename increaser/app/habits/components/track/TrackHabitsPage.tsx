@@ -1,12 +1,10 @@
-import { TrackHabitsProvider } from './TrackHabitsProvider'
-import { HabitColumns } from './HabitColumns'
-import { HabitsTableContainer } from './HabitsTableContainer'
 import { PageHeaderControlsArea } from '../../../ui/page/header/PageHeaderControlsAreaProvider'
 import { ResetHabitsPrompt } from './reset/ResetHabitsPrompt'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { useEffect } from 'react'
+import { TrackHabits } from '@increaser/ui/habits/TrackHabits'
 
-export const TrackHabits = () => {
+export const TrackHabitsPage = () => {
   const { mutate } = useUpdateUserMutation()
   useEffect(() => {
     mutate({
@@ -15,13 +13,11 @@ export const TrackHabits = () => {
   }, [mutate])
 
   return (
-    <HabitsTableContainer>
+    <>
       <PageHeaderControlsArea>
         <ResetHabitsPrompt />
       </PageHeaderControlsArea>
-      <TrackHabitsProvider>
-        <HabitColumns />
-      </TrackHabitsProvider>
-    </HabitsTableContainer>
+      <TrackHabits />
+    </>
   )
 }
