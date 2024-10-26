@@ -113,6 +113,8 @@ On the "Timesheet" page, users can track their work time across different projec
 
 The "Habits" page has three tabs: "Track", "Stats", and "Explore". Both the "Track" and "Stats" have a similar layout with a list of habits listed on the left, but on "Track" sub-page there is a grid of days by clicking on a day the user can mark the habit as done or not done. The "Stats" sub-page shows a table with the habits and their streak, consistency, and when the habit has been started. The user can edit or delete habits from the "Track" and "Stats" sub-pages. The user can also reset a specific habit.
 
+The user can "stop" a habit, which will make habit "inactive" and it will clear all the tracked the data. The user can "start" a habit again, which will make the habit "active" and the user can start tracking it again.
+
 In the header of the "Track" sub-page there is also a "Reset habits" button that will reset all habits to have a fresh start, meaning that all the tracked data will be removed and the habits will start from today.
 
 The "Explore" sub-page consists of a list of suggested habits for a fulfilling life, categorized into health, relationships, and work that the user can add to their habits.

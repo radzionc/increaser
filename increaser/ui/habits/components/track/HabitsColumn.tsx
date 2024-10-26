@@ -4,7 +4,6 @@ import { VStack } from '@lib/ui/css/stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { trackHabitsConfig } from './config'
 import { TrackHabitsColumn } from './TrackHabitsColumn'
-import { useOrderedHabits } from '@increaser/ui/habits/hooks/useOrderedHabits'
 import { CheckHabit } from './CheckHabit'
 import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
@@ -13,6 +12,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { format } from 'date-fns'
 import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
+import { useOrderedActiveHabits } from '@increaser/ui/habits/hooks/useOrderedActiveHabits'
 
 const Container = styled(VStack)`
   align-items: center;
@@ -28,7 +28,7 @@ const Label = styled.div`
 export const HabitsColumn = ({
   value: { startedAt, completion },
 }: ComponentWithValueProps<HabitDay>) => {
-  const habits = useOrderedHabits()
+  const habits = useOrderedActiveHabits()
   const { activeDayStartedAt, setActiveDayStartedAt, days } = useTrackHabits()
   const isActive = activeDayStartedAt === startedAt
   const defaultACtiveDayStartedAt = days[0].startedAt

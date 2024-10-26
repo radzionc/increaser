@@ -9,8 +9,8 @@ export type Habit = EntityWithId &
   EntityWithName &
   EntityWithEmoji &
   EntityWithColor &
-  EntityWithOrder &
-  Partial<EntityWithStartDate> & {
+  EntityWithOrder & {
+    startedAt?: number | null
     successes: string[]
   }
 

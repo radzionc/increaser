@@ -1,5 +1,5 @@
-import { PageHeaderControlsArea } from '../../../ui/page/header/PageHeaderControlsAreaProvider'
-import { ResetHabitsPrompt } from './reset/ResetHabitsPrompt'
+import { PageHeaderControlsArea } from '../ui/page/header/PageHeaderControlsAreaProvider'
+import { ResetHabitsPrompt } from '@increaser/ui/habits/components/track/reset/ResetHabitsPrompt'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { useEffect } from 'react'
 import { TrackHabits } from '@increaser/ui/habits/TrackHabits'

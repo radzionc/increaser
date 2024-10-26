@@ -1,8 +1,8 @@
 import { useHabitTrackingDaysCount } from '@increaser/ui/habits/hooks/useHabitTrackingDaysCount'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { HabitsReportContent } from './HabitsReportContent'
+import { HabitsReportContent } from '@increaser/ui/habits/components/report/HabitsReportContent'
 
-export const HabitsReport = () => {
+export const HabitsReportPage = () => {
   const daysNumber = useHabitTrackingDaysCount()
 
   if (daysNumber < 2) {

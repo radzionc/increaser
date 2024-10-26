@@ -12,6 +12,7 @@ import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteB
 import { NoValueFinishProps } from '@lib/ui/props'
 import { HabitFormFields } from './HabitFormFields'
 import { ResetHabit } from './ResetHabit'
+import { ManageHabitStatus } from './ManageHabitStatus'
 
 export const EditHabitForm = ({ onFinish }: NoValueFinishProps) => {
   const habit = useCurrentHabit()
@@ -62,6 +63,7 @@ export const EditHabitForm = ({ onFinish }: NoValueFinishProps) => {
           }}
         />
         <ResetHabit />
+        <ManageHabitStatus />
       </HStack>
     </Panel>
   )

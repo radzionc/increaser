@@ -1,4 +1,4 @@
-import { HabitInfo, habitTagColors } from '@increaser/app/habits/data/habits'
+import { HabitInfo, habitTagColors } from '@increaser/ui/habits/data/habits'
 import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import styled, { useTheme } from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'

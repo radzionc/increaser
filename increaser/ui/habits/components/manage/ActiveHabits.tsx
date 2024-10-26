@@ -10,19 +10,17 @@ import { TightListItemDragOverlay } from '@lib/ui/list/TightListItemDragOverlay'
 import { useEffect, useState } from 'react'
 import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { getNewOrder } from '@lib/utils/order/getNewOrder'
-import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { EditHabitForm } from '@increaser/ui/habits/form/EditHabitForm'
-import { useHabits } from '@increaser/ui/habits/hooks/useHabits'
+import { useActiveHabits } from '@increaser/ui/habits/hooks/useActiveHabits'
 
-export const Habits = () => {
-  const habits = useHabits()
+export const ActiveHabits = () => {
+  const habits = useActiveHabits()
 
   const [items, setItems] = useState(() => sortEntitiesWithOrder(habits))
   useEffect(() => {
     setItems(sortEntitiesWithOrder(habits))
   }, [habits])
 
-  const [activeItemId, setActiveItemId] = useActiveItemId()
+  const [, setActiveItemId] = useActiveItemId()
 
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
 
@@ -52,38 +50,27 @@ export const Habits = () => {
       }}
       renderList={({ props }) => <VStack {...props} />}
       renderItem={({ item, draggableProps, dragHandleProps, status }) => {
-        const isEditing = activeItemId === item.id
-
         return (
           <CurrentHabitProvider key={item.id} value={item}>
-            {isEditing ? (
-              <PanelModal onFinish={() => setActiveItemId(null)}>
-                <EditHabitForm onFinish={() => setActiveItemId(null)} />
-              </PanelModal>
-            ) : (
-              <Wrap
-                wrap={
-                  activeItemId === null
-                    ? (children) =>
-                        status === 'overlay' ? (
-                          <TightListItemDragOverlay>
-                            {children}
-                          </TightListItemDragOverlay>
-                        ) : (
-                          <DraggableTightListItemContainer
-                            isDragging={status === 'placeholder'}
-                            {...draggableProps}
-                            {...dragHandleProps}
-                          >
-                            {children}
-                          </DraggableTightListItemContainer>
-                        )
-                    : undefined
-                }
-              >
-                <HabitItem onClick={() => setActiveItemId(item.id)} />
-              </Wrap>
-            )}
+            <Wrap
+              wrap={(children) =>
+                status === 'overlay' ? (
+                  <TightListItemDragOverlay>
+                    {children}
+                  </TightListItemDragOverlay>
+                ) : (
+                  <DraggableTightListItemContainer
+                    isDragging={status === 'placeholder'}
+                    {...draggableProps}
+                    {...dragHandleProps}
+                  >
+                    {children}
+                  </DraggableTightListItemContainer>
+                )
+              }
+            >
+              <HabitItem onClick={() => setActiveItemId(item.id)} />
+            </Wrap>
           </CurrentHabitProvider>
         )
       }}
