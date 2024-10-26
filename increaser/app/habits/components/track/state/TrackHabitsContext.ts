@@ -1,8 +1,8 @@
 import { createContext } from 'react'
 import { createContextHook } from '@lib/ui/state/createContextHook'
+import { EntityWithStartDate } from '@lib/utils/entities/EntityWithStartDate'
 
-export type HabitDay = {
-  startedAt: number
+export type HabitDay = EntityWithStartDate & {
   completion: Record<string, null | boolean>
 }
 

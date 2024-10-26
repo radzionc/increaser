@@ -6,11 +6,11 @@ import { SquareIcon } from '@lib/ui/icons/SquareIcon'
 import { text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
-import { useUser } from '../../user/state/user'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { useMemo } from 'react'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { subDays } from 'date-fns'
+import { useHabits } from '../hooks/useHabits'
 
 const Position = styled.div`
   position: absolute;
@@ -41,14 +41,14 @@ const Container = styled.div`
 
 export const HabitsNavigationPrompt = () => {
   const todayStartedAt = useStartOfDay()
-  const { habits } = useUser()
+  const habits = useHabits()
 
   const hasUncheckedYesterdayHabits = useMemo(() => {
     const yesterdayStartedAt = subDays(todayStartedAt, 1).getTime()
 
-    const yesterdayHabitDate = toHabitDate(new Date(yesterdayStartedAt))
+    const yesterdayHabitDate = toHabitDate(yesterdayStartedAt)
 
-    const matchingHabits = Object.values(habits).filter(
+    const matchingHabits = habits.filter(
       ({ startedAt }) => startedAt <= yesterdayStartedAt,
     )
 

@@ -33,14 +33,12 @@ export const TrackHabitsProvider = ({
 
         const completion = recordFromKeys(habitIds, (id) => {
           const habit = shouldBePresent(findBy(habits, 'id', id))
-          const habitStartedAt = startOfDay(
-            convertDuration(habit.startedAt, 's', 'ms'),
-          ).getTime()
+          const habitStartedAt = startOfDay(habit.startedAt).getTime()
           if (startedAt < habitStartedAt) {
             return null
           }
 
-          const habitDate = toHabitDate(new Date(startedAt))
+          const habitDate = toHabitDate(startedAt)
           return habit.successes.includes(habitDate)
         })
 

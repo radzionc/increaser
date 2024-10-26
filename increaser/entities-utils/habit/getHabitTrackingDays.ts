@@ -7,8 +7,7 @@ export const getHabitTrackingDays = ({
 }: Pick<Habit, 'startedAt'>) => {
   return Math.round(
     convertDuration(
-      startOfDay(Date.now()).getTime() -
-        startOfDay(convertDuration(startedAt, 's', 'ms')).getTime(),
+      startOfDay(Date.now()).getTime() - startOfDay(startedAt).getTime(),
       'ms',
       'd',
     ) + 1,

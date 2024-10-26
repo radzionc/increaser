@@ -7,7 +7,7 @@ export const getHabitPassedDays = ({
   successes,
 }: Pick<Habit, 'startedAt' | 'successes'>) => {
   const trackingDays = getHabitTrackingDays({ startedAt })
-  const todayHabitDate = toHabitDate(new Date())
+  const todayHabitDate = toHabitDate(Date.now())
   if (successes.includes(todayHabitDate)) {
     return trackingDays
   }

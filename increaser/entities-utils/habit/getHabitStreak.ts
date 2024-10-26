@@ -14,33 +14,25 @@ export const getHabitStreak = ({
 }: GetHabitStreakInput) => {
   const successesSet = new Set(successes)
 
-  const hasSuccessToday = successesSet.has(toHabitDate(new Date(at)))
+  const hasSuccessToday = successesSet.has(toHabitDate(at))
 
   const passedDayEndedAt = hasSuccessToday
     ? at + convertDuration(1, 'd', 'ms')
     : at
 
   const daysCount = Math.max(
-    Math.ceil(
-      convertDuration(
-        passedDayEndedAt - convertDuration(startedAt, 's', 'ms'),
-        'ms',
-        'd',
-      ),
-    ),
+    Math.ceil(convertDuration(passedDayEndedAt - startedAt, 'ms', 'd')),
     0,
   )
 
   const passedDays = range(daysCount)
     .map((index) => passedDayEndedAt - convertDuration(index + 1, 'ms', 'd'))
     .filter(
-      (timestamp) =>
-        timestamp >
-        convertDuration(startedAt, 's', 'ms') - convertDuration(1, 'd', 'ms'),
+      (timestamp) => timestamp > startedAt - convertDuration(1, 'd', 'ms'),
     )
 
   const index = passedDays.findIndex(
-    (day) => !successesSet.has(toHabitDate(new Date(day))),
+    (day) => !successesSet.has(toHabitDate(day)),
   )
 
   if (index === -1) {

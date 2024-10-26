@@ -4,7 +4,6 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
 import { useCurrentHabit } from '../CurrentHabitProvider'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Opener } from '@lib/ui/base/Opener'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { Text } from '@lib/ui/text'
@@ -16,7 +15,7 @@ export const ResetHabit = () => {
 
   const { mutate: updateHabit } = useUpdateUserEntityMutation('habit')
 
-  if (convertDuration(startedAt, 's', 'ms') >= todayStartedAt) {
+  if (startedAt >= todayStartedAt) {
     return null
   }
 
@@ -40,7 +39,7 @@ export const ResetHabit = () => {
             updateHabit({
               id,
               fields: {
-                startedAt: Math.round(convertDuration(Date.now(), 'ms', 's')),
+                startedAt: Date.now(),
                 successes: [],
               },
             })

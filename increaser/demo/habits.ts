@@ -2,7 +2,7 @@ import { startOfDay } from 'date-fns'
 import { Habit } from '@increaser/entities/Habit'
 import { range } from '@lib/utils/array/range'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
-import { MS_IN_DAY, MS_IN_SEC } from '@lib/utils/time'
+import { MS_IN_DAY } from '@lib/utils/time'
 import { recordFromItems } from '@lib/utils/record/recordFromItems'
 
 enum DemoHabit {
@@ -70,7 +70,7 @@ const generateSuccesses = (rate: number) => {
   const today = Date.now()
   return range(goalDays).reduce((acc, index) => {
     if (index < 3 || Math.random() > 1 - rate) {
-      acc.push(toHabitDate(new Date(today - index * MS_IN_DAY)))
+      acc.push(toHabitDate(today - index * MS_IN_DAY))
     }
 
     return acc
@@ -82,7 +82,7 @@ const toHabit = (
   order: number,
 ): Habit => {
   const dayStartedAt = startOfDay(new Date()).getTime()
-  const startedAt = (dayStartedAt - MS_IN_DAY * goalDays) / MS_IN_SEC
+  const startedAt = dayStartedAt - MS_IN_DAY * goalDays
   let successes = generateSuccesses(target)
   if (!checkedToday) {
     successes = successes.slice(1)

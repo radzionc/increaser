@@ -16,7 +16,7 @@ export const ResetHabitsPrompt = () => {
   const todayStartedAt = useStartOfDay()
 
   const areAllHabitsStartedToday = habits.every(
-    ({ startedAt }) => convertDuration(startedAt, 's', 'ms') >= todayStartedAt,
+    ({ startedAt }) => startedAt >= todayStartedAt,
   )
 
   const { mutate: updateHabits } = useUpdateUserEntitiesMutation('habit')

@@ -11,7 +11,6 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { MS_IN_SEC } from '@lib/utils/time'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
 import { useUser } from '@increaser/ui/user/state/user'
@@ -83,7 +82,7 @@ export const HabitItem = ({
                 color: defaultColorOption,
                 order: getLastItemOrder(habits.map(({ order }) => order)),
                 id,
-                startedAt: Math.round(Date.now() / MS_IN_SEC),
+                startedAt: Date.now(),
                 successes: [],
               })
             }}

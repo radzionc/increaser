@@ -2,6 +2,7 @@ import { EntityWithId } from '@lib/utils/entities/EntityWithId'
 import { EntityWithName } from '@lib/utils/entities/EntityWithName'
 import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
 import { ProjectRelatedEntity } from './Project'
+import { EntityWithStartDate } from '@lib/utils/entities/EntityWithStartDate'
 
 export type TaskLink = {
   url: string
@@ -27,8 +28,8 @@ export const taskStatusName: Record<TaskStatus, string> = {
 export type Task = EntityWithId &
   EntityWithName &
   EntityWithOrder &
-  ProjectRelatedEntity & {
-    startedAt: number
+  ProjectRelatedEntity &
+  EntityWithStartDate & {
     status: TaskStatus
     deadlineAt: number | null
     spentTime?: number

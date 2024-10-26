@@ -9,7 +9,6 @@ import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { MS_IN_SEC } from '@lib/utils/time'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
@@ -43,7 +42,7 @@ export const CreateHabitForm = ({
       ...value,
       order: getLastItemOrder(habits.map(({ order }) => order)),
       id: getId(),
-      startedAt: Math.round(Date.now() / MS_IN_SEC),
+      startedAt: Date.now(),
       successes: [],
     }
 

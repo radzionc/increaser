@@ -51,7 +51,7 @@ export const CheckHabit = ({
         mutate({
           id,
           value: !isCompleted,
-          date: toHabitDate(new Date(dayStartedAt)),
+          date: toHabitDate(dayStartedAt),
         })
       }}
       isActive={isCompleted}

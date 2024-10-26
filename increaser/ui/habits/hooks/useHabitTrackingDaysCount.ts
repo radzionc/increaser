@@ -12,9 +12,7 @@ export const useHabitTrackingDaysCount = () => {
     const firstHabitStartedAt = Math.min(
       ...habits.map((habit) => habit.startedAt),
     )
-    const lastDayStartedAt = startOfDay(
-      convertDuration(firstHabitStartedAt, 's', 'ms'),
-    ).getTime()
+    const lastDayStartedAt = startOfDay(firstHabitStartedAt).getTime()
     return (
       Math.round(
         convertDuration(firstDayStartedAt - lastDayStartedAt, 'ms', 'd'),
