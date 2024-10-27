@@ -1,9 +1,8 @@
-import { getHabitPassedDays } from '@increaser/entities-utils/habit/getHabitPassedDays'
-
 import { VStack } from '@lib/ui/css/stack'
 import { HabitConsistency } from './HabitConsistency'
 import { HabitColumnLabel } from './HabitColumnLabel'
 import { useOrderedActiveHabits } from '../../hooks/useOrderedActiveHabits'
+import { CurrentHabitProvider } from '../../CurrentHabitProvider'
 
 export const HabitsConsistency = () => {
   const habits = useOrderedActiveHabits()
@@ -11,11 +10,12 @@ export const HabitsConsistency = () => {
   return (
     <VStack alignItems="center">
       <HabitColumnLabel>%</HabitColumnLabel>
-      {habits.map(({ id, successes, startedAt }) => {
-        const passedDays = getHabitPassedDays({ successes, startedAt })
-        const value = passedDays === 0 ? 0 : successes.length / passedDays
-
-        return <HabitConsistency key={id} value={value} />
+      {habits.map((value) => {
+        return (
+          <CurrentHabitProvider key={value.id} value={value}>
+            <HabitConsistency />
+          </CurrentHabitProvider>
+        )
       })}
     </VStack>
   )

@@ -3,11 +3,13 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 import { ProgressRing } from '@lib/ui/progress/ProgressRing'
-import { ComponentWithValueProps } from '@lib/ui/props'
 import { text } from '@lib/ui/text'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 import { useMemo } from 'react'
 import styled, { useTheme } from 'styled-components'
+import { useCurrentHabit } from '../../CurrentHabitProvider'
+import { getHabitPassedDays } from '@increaser/entities-utils/habit/getHabitPassedDays'
+import { ActiveHabit } from '@increaser/entities/Habit'
 
 const Container = styled.div`
   ${sameDimensions(tightListItemMinHeight)};
@@ -30,9 +32,14 @@ const Progress = styled(ProgressRing)`
   left: ${toSizeUnit(offset / 2)};
 `
 
-export const HabitConsistency = ({
-  value,
-}: ComponentWithValueProps<number>) => {
+export const HabitConsistency = () => {
+  const { successes, startedAt } = useCurrentHabit() as ActiveHabit
+  const daysCount = useMemo(
+    () => getHabitPassedDays({ successes, startedAt }),
+    [successes, startedAt],
+  )
+  const value = daysCount === 0 ? 0 : successes.length / daysCount
+
   const { colors } = useTheme()
 
   const color = useMemo(() => {

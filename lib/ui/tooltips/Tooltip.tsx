@@ -54,7 +54,7 @@ export const Tooltip = ({ content, renderOpener, placement }: TooltipProps) => {
     strategy: 'fixed',
     placement,
     middleware: [
-      offset(8),
+      offset(4),
       flip(),
       shift(),
       arrow({
