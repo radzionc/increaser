@@ -11,4 +11,5 @@ export const TrackHabitsColumn = styled.div`
   row-gap: ${toSizeUnit(trackHabitsConfig.itemGap)};
   align-items: center;
   grid-auto-rows: ${toSizeUnit(trackHabitsConfig.itemHeight)};
+  justify-items: center;
 `

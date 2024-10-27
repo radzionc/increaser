@@ -2,6 +2,7 @@ import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { ActiveHabit } from '@increaser/entities/Habit'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { endOfDay, subDays } from 'date-fns'
 
 type GetHabitStreakInput = {
   at: number
@@ -14,11 +15,11 @@ export const getHabitStreak = ({
 }: GetHabitStreakInput) => {
   const successesSet = new Set(successes)
 
-  const hasSuccessToday = successesSet.has(toHabitDate(at))
+  const hasSuccessAtDate = successesSet.has(toHabitDate(at))
 
-  const passedDayEndedAt = hasSuccessToday
-    ? at + convertDuration(1, 'd', 'ms')
-    : at
+  const passedDayEndedAt = hasSuccessAtDate
+    ? endOfDay(at).getTime()
+    : endOfDay(subDays(at, 1)).getTime()
 
   const daysCount = Math.max(
     Math.ceil(convertDuration(passedDayEndedAt - startedAt, 'ms', 'd')),

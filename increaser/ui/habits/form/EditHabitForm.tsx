@@ -7,12 +7,16 @@ import { pick } from '@lib/utils/record/pick'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
-import { HStack } from '@lib/ui/css/stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { HabitFormFields } from './HabitFormFields'
 import { ResetHabit } from './ResetHabit'
 import { ManageHabitStatus } from './ManageHabitStatus'
+import { Text } from '@lib/ui/text'
+import { ClockIcon } from '@lib/ui/icons/ClockIcon'
+import { LabeledValue } from '@lib/ui/text/LabeledValue'
+import { relativeDayFormat } from '@lib/utils/time/relativeDayFormat'
 
 export const EditHabitForm = ({ onFinish }: NoValueFinishProps) => {
   const habit = useCurrentHabit()
@@ -52,16 +56,29 @@ export const EditHabitForm = ({ onFinish }: NoValueFinishProps) => {
         onClose={onFinish}
         onSubmit={onFinish}
       />
-      <HStack gap={8} fullWidth>
-        <PanelFormDeleteButton
-          onClick={() => {
-            deleteHabit(id)
-            onFinish()
-          }}
-        />
-        <ResetHabit />
-        <ManageHabitStatus />
-      </HStack>
+      <VStack gap={16}>
+        {habit.startedAt && (
+          <LabeledValue
+            name={
+              <Text centerVertically style={{ gap: 6 }}>
+                <ClockIcon /> Started tracking
+              </Text>
+            }
+          >
+            {relativeDayFormat(habit.startedAt, 'd MMMM yyyy')}
+          </LabeledValue>
+        )}
+        <HStack gap={8} fullWidth>
+          <ManageHabitStatus />
+          <ResetHabit />
+          <PanelFormDeleteButton
+            onClick={() => {
+              deleteHabit(id)
+              onFinish()
+            }}
+          />
+        </HStack>
+      </VStack>
     </Panel>
   )
 }

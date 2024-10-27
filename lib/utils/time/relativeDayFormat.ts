@@ -2,7 +2,7 @@ import { isYesterday, isToday, isTomorrow, format } from 'date-fns'
 
 export const relativeDayFormat = (
   timestamp: number,
-  formatStr: string,
+  formatStr: string = 'd MMM',
 ): string => {
   if (isToday(timestamp)) {
     return 'Today'

@@ -6,13 +6,13 @@ import { trackHabitsConfig } from './config'
 import { TrackHabitsColumn } from './TrackHabitsColumn'
 import { CheckHabit } from './CheckHabit'
 import styled from 'styled-components'
-import { Text } from '@lib/ui/text'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { format } from 'date-fns'
 import { CenterAbsolutely } from '@lib/ui/layout/CenterAbsolutely'
 import { useOrderedActiveHabits } from '@increaser/ui/habits/hooks/useOrderedActiveHabits'
+import { HabitColumnLabel } from '../report/HabitColumnLabel'
+import { relativeDayFormat } from '@lib/utils/time/relativeDayFormat'
 
 const Container = styled(VStack)`
   align-items: center;
@@ -45,11 +45,7 @@ export const HabitsColumn = ({
       <Label>
         {isActive && (
           <CenterAbsolutely>
-            <Text nowrap size={12} weight="500" color="contrast">
-              {defaultACtiveDayStartedAt === startedAt
-                ? 'Today'
-                : format(startedAt, 'MMM d')}
-            </Text>
+            <HabitColumnLabel>{relativeDayFormat(startedAt)}</HabitColumnLabel>
           </CenterAbsolutely>
         )}
       </Label>
