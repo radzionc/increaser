@@ -38,7 +38,7 @@ export const FocusAutoStop = () => {
     const timeout = setTimeout(autoStop, stopIn)
 
     return () => clearTimeout(timeout)
-  })
+  }, [stop, target])
 
   return null
 }
