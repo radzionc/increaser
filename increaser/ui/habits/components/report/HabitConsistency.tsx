@@ -5,6 +5,7 @@ import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 import { ProgressRing } from '@lib/ui/progress/ProgressRing'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { text } from '@lib/ui/text'
+import { useMemo } from 'react'
 import styled, { useTheme } from 'styled-components'
 
 const Container = styled.div`
@@ -32,15 +33,23 @@ export const HabitConsistency = ({
   value,
 }: ComponentWithValueProps<number>) => {
   const { colors } = useTheme()
+
+  const color = useMemo(() => {
+    if (value < 0.5) {
+      return colors.alert
+    }
+
+    if (value < 0.75) {
+      return colors.idle
+    }
+
+    return colors.success
+  }, [colors, value])
+
   return (
     <Container>
       {Math.round(value * 100)}
-      <Progress
-        color={colors.success}
-        size={ringSize}
-        value={value}
-        thickness={2}
-      />
+      <Progress color={color} size={ringSize} value={value} thickness={2} />
     </Container>
   )
 }
