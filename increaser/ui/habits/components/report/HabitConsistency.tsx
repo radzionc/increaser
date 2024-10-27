@@ -10,6 +10,7 @@ import styled, { useTheme } from 'styled-components'
 import { useCurrentHabit } from '../../CurrentHabitProvider'
 import { getHabitPassedDays } from '@increaser/entities-utils/habit/getHabitPassedDays'
 import { ActiveHabit } from '@increaser/entities/Habit'
+import { pluralize } from '@lib/utils/pluralize'
 
 const Container = styled.div`
   ${sameDimensions(tightListItemMinHeight)};
@@ -34,11 +35,38 @@ const Progress = styled(ProgressRing)`
 
 export const HabitConsistency = () => {
   const { successes, startedAt } = useCurrentHabit() as ActiveHabit
+
   const daysCount = useMemo(
     () => getHabitPassedDays({ successes, startedAt }),
     [successes, startedAt],
   )
-  const value = daysCount === 0 ? 0 : successes.length / daysCount
+
+  const successesCount = successes.length
+
+  const numberOfSkips = daysCount - successesCount
+
+  const value = daysCount === 0 ? 0 : successesCount / daysCount
+
+  const message = useMemo(() => {
+    if (value === 0) {
+      return undefined
+    }
+
+    if (numberOfSkips === 0) {
+      return 'You never skip'
+    }
+
+    const averageDaysPerSkip = daysCount / numberOfSkips
+
+    if (Math.round(averageDaysPerSkip) === 2) {
+      return 'You skip every other day'
+    } else {
+      return `You skip once every ${pluralize(
+        Math.round(averageDaysPerSkip),
+        'day',
+      )}`
+    }
+  }, [daysCount, numberOfSkips, value])
 
   const { colors } = useTheme()
 
@@ -62,7 +90,7 @@ export const HabitConsistency = () => {
           <Progress color={color} size={ringSize} value={value} thickness={2} />
         </Container>
       )}
-      content="Consistency"
+      content={message}
     />
   )
 }

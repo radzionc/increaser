@@ -111,17 +111,17 @@ On the "Timesheet" page, users can track their work time across different projec
 
 ## Habits
 
-The "Habits" page has two sub-pages: "Track" and "Explore".
+The "Habits" page includes two sub-pages: "Track" and "Explore."
 
-The "Track" subpage organized into colums. First go habits, where each items has an emoji and a name. Clicking on a habit will open a modal where the user can manage the habit. Next goes a column with habit consistency represented as a ring progress with a percentage at the center. After that goes a column with habits streaks, where the user can see their current streak. The last column takes the remaining space and represent a grid where the user can see and track their habits. Each cell in the grid represents a day, and the user can click on it to mark the habit as done for that day.
+The "Track" sub-page is organized into columns. The first column lists habits, where each item has an emoji and a name. Clicking on a habit opens a modal where users can manage it. The next column shows habit consistency, represented as a progress ring with a percentage in the center. Hovering over the consistency displays how often the user skips that habit, e.g., "You skip it once every 5 days." After that, there’s a column for habit streaks, where users can view their current streak. The last column occupies the remaining space, featuring a grid where users can view and track their habits. Each cell in the grid represents a day, and users can click on a cell to mark the habit as completed for that day.
 
-The user can "stop" a habit, which will make habit "inactive" and it will clear all the tracked the data. The user can "start" a habit again, which will make the habit "active" and the user can start tracking it again.
+Users can "stop" a habit, which will make it "inactive" and clear all tracked data. They can "start" a habit again, making it "active" so tracking can resume.
 
-In the header of the "Track" sub-page there is also a "Reset habits" button that will reset all habits to have a fresh start, meaning that all the tracked data will be removed and the habits will start from today.
+At the top of the "Track" sub-page, there’s also a "Reset habits" button that resets all habits, providing a fresh start by removing all tracked data and beginning from today.
 
-The "Explore" sub-page consists of a list of suggested habits for a fulfilling life, categorized into health, relationships, and work that the user can add to their habits.
+The "Explore" sub-page presents a list of suggested habits for a fulfilling life, categorized into health, relationships, and work, which users can add to their habits.
 
-To help users remember to track their habits, a prompt appears in the sidebar navigation next to the "Habits" item. This prompt will show up if the user hasn't visited the "Habits" page that day.
+To help users remember to track their habits, a prompt appears in the sidebar navigation next to the "Habits" item if they haven't visited the "Habits" page that day.
 
 ## Tasks
 
