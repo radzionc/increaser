@@ -108,9 +108,11 @@ export const StartTimeEditor = () => {
         {minDiff > 0 && <Text>{formatDuration(minDiff, 'min')} earlier</Text>}
       </TimeValue>
 
-      {!isActive && (
-        <BoundaryInteractiveArea top={valueInPx} onPointerDown={activate} />
-      )}
+      <BoundaryInteractiveArea
+        isActive={isActive}
+        top={valueInPx}
+        onPointerDown={activate}
+      />
     </TakeWholeSpace>
   )
 }

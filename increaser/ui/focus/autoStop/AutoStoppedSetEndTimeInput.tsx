@@ -3,8 +3,11 @@ import { TimeSpace } from '@lib/ui/timeline/TimeSpace'
 import styled from 'styled-components'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
-import { AutoStoppedSetEndTimeEditor } from './AutoStoppedSetEndTimeEditor'
 import { AutoStopEditorSets } from './AutoStopEditorSets'
+import { useSetEndTime } from './state/setEndTime'
+import { FocusEndTimeEditor } from '../end/FocusEndTimeEditor'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useLastSet } from '@increaser/app/sets/hooks/useLastSet'
 
 const Content = styled(VStack)`
   overflow: hidden;
@@ -12,6 +15,10 @@ const Content = styled(VStack)`
 
 export const AutoStoppedSetEndTimeInput = () => {
   const interval = useCurrentInterval()
+
+  const [value, setValue] = useSetEndTime()
+
+  const { projectId, start } = shouldBePresent(useLastSet())
 
   return (
     <Content>
@@ -22,7 +29,12 @@ export const AutoStoppedSetEndTimeInput = () => {
         verticalPadding={20}
       >
         <AutoStopEditorSets />
-        <AutoStoppedSetEndTimeEditor />
+        <FocusEndTimeEditor
+          projectId={projectId}
+          start={start}
+          value={value}
+          onChange={setValue}
+        />
       </TimeSpace>
     </Content>
   )

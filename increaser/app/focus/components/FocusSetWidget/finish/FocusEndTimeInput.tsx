@@ -4,7 +4,10 @@ import styled from 'styled-components'
 import { setEditorConfig } from '@increaser/ui/sets/manager/editor/config'
 import { useCurrentInterval } from '@lib/ui/state/currentInterval'
 import { FocusEndTimeEditorSets } from './FocusEndTimeEditorSets'
-import { EndTimeEditor } from './EndTimeEditor'
+import { FocusEndTimeEditor } from '@increaser/ui/focus/end/FocusEndTimeEditor'
+import { useCurrentFocusEndTime } from './state/CurrentFocusEndTime'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+import { useAssertFocusIntervals } from '../../../state/focusIntervals'
 
 const Content = styled(VStack)`
   overflow: hidden;
@@ -12,6 +15,12 @@ const Content = styled(VStack)`
 
 export const FocusEndTimeInput = () => {
   const interval = useCurrentInterval()
+
+  const [value, onChange] = useCurrentFocusEndTime()
+
+  const intervals = useAssertFocusIntervals()
+
+  const { projectId, start } = getLastItem(intervals)
 
   return (
     <Content>
@@ -22,7 +31,12 @@ export const FocusEndTimeInput = () => {
         verticalPadding={20}
       >
         <FocusEndTimeEditorSets />
-        <EndTimeEditor />
+        <FocusEndTimeEditor
+          projectId={projectId}
+          start={start}
+          value={value}
+          onChange={onChange}
+        />
       </TimeSpace>
     </Content>
   )
