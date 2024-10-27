@@ -14,7 +14,7 @@ enum DemoHabit {
   PrepareForTomorrow = 'Prepare for tomorrow',
 }
 
-interface HabitDescription extends Pick<Habit, 'id' | 'emoji' | 'color'> {
+interface HabitDescription extends Pick<Habit, 'id' | 'emoji'> {
   target: number
   checkedToday?: boolean
 }
@@ -26,42 +26,36 @@ const habitsDescription: HabitDescription[] = [
     id: DemoHabit.Sunlight,
     emoji: '🌞',
     target: 1,
-    color: 3,
     checkedToday: true,
   },
   {
     id: DemoHabit.Exercise,
     emoji: '🏋️‍♂️',
     target: 0.8,
-    color: 5,
     checkedToday: true,
   },
   {
     id: DemoHabit.Fasting,
     emoji: '🍽',
     target: 0.9,
-    color: 10,
     checkedToday: true,
   },
   {
     id: DemoHabit.Balance,
     emoji: '🧘‍♂️',
     target: 0.9,
-    color: 12,
     checkedToday: true,
   },
   {
     id: DemoHabit.WalkAfterDinner,
     emoji: '🚶‍♂️',
     target: 0.9,
-    color: 8,
     checkedToday: false,
   },
   {
     id: DemoHabit.PrepareForTomorrow,
     emoji: '📝',
     target: 0.9,
-    color: 6,
     checkedToday: false,
   },
 ]
@@ -78,7 +72,7 @@ const generateSuccesses = (rate: number) => {
 }
 
 const toHabit = (
-  { id, emoji, color, target, checkedToday }: HabitDescription,
+  { id, emoji, target, checkedToday }: HabitDescription,
   order: number,
 ): Habit => {
   const dayStartedAt = startOfDay(new Date()).getTime()
@@ -94,7 +88,6 @@ const toHabit = (
     emoji,
     order,
     startedAt,
-    color,
     successes,
   }
 }

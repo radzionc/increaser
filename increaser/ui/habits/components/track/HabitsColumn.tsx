@@ -54,7 +54,8 @@ export const HabitsColumn = ({
         )}
       </Label>
       <TrackHabitsColumn>
-        {habits.map(({ id, color }) => {
+        {habits.map((habit) => {
+          const { id } = habit
           const isCompleted = completion[id]
           if (isCompleted === null) {
             return <Spacer key={id} height={trackHabitsConfig.itemHeight} />
@@ -63,7 +64,7 @@ export const HabitsColumn = ({
           return (
             <CheckHabit
               key={id}
-              habit={{ id, color }}
+              habit={habit}
               isCompleted={isCompleted}
               dayStartedAt={startedAt}
             />

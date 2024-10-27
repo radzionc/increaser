@@ -6,10 +6,8 @@ import {
 } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
-import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
-import { ColorLabelInput } from '@lib/ui/inputs/ColorLabelInput'
 import { HabitFormShape } from './HabitFormShape'
-import { useHabits } from '../hooks/useHabits'
+import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 
 type HabitFormFieldsProps = InputProps<HabitFormShape> &
   Partial<SubmittableComponentProps> &
@@ -21,22 +19,12 @@ export const HabitFormFields = ({
   onSubmit,
   onClose,
 }: HabitFormFieldsProps) => {
-  const habits = useHabits()
-  const usedColors = habits.map(({ color }) => color)
-
   return (
-    <EmojiColorTextInputFrame>
+    <EmojiTextInputFrame>
       <div>
         <EmojiInput
           value={value.emoji}
           onChange={(emoji) => onChange({ ...value, emoji })}
-        />
-      </div>
-      <div>
-        <ColorLabelInput
-          usedValues={new Set(usedColors)}
-          value={value.color}
-          onChange={(color) => onChange({ ...value, color })}
         />
       </div>
       <EmbeddedTitleInput
@@ -47,6 +35,6 @@ export const HabitFormFields = ({
         onSubmit={onSubmit}
       />
       <PanelFormCloseButton onClick={onClose} />
-    </EmojiColorTextInputFrame>
+    </EmojiTextInputFrame>
   )
 }

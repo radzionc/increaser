@@ -3,9 +3,6 @@ import { OptionalValueFinishProps } from '@lib/ui/props'
 import { HabitFormShape } from '@increaser/ui/habits/form/HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
-import { randomlyPickOption } from '@lib/utils/array/randomlyPickOption'
-import { range } from '@lib/utils/array/range'
-import { labelColorsCount } from '@lib/ui/colors/generateLabelColorGetter'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { getId } from '@increaser/entities-utils/shared/getId'
@@ -20,14 +17,9 @@ export const CreateHabitForm = ({
   onFinish,
 }: OptionalValueFinishProps<Habit>) => {
   const habits = useHabits()
-  const usedColors = habits.map(({ color }) => color)
   const [value, setValue] = useState<HabitFormShape>({
     name: '',
     emoji: randomlyPick(defaultEmojis),
-    color: randomlyPickOption({
-      options: range(labelColorsCount),
-      used: usedColors,
-    }),
   })
   const { mutate } = useCreateUserEntityMutation('habit', {
     onOptimisticUpdate: onFinish,

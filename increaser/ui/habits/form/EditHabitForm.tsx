@@ -18,10 +18,7 @@ export const EditHabitForm = ({ onFinish }: NoValueFinishProps) => {
   const habit = useCurrentHabit()
   const { id } = habit
 
-  const initialValue = useMemo(
-    () => pick(habit, ['name', 'emoji', 'color']),
-    [habit],
-  )
+  const initialValue = useMemo(() => pick(habit, ['name', 'emoji']), [habit])
 
   const [value, setValue] = useState<HabitFormShape>(initialValue)
 

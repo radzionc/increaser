@@ -1,5 +1,4 @@
 import { HabitInfo, habitTagColors } from '@increaser/ui/habits/data/habits'
-import { usePaletteColorOptions } from '@increaser/app/shared/hooks/usePaletteColorOptions'
 import styled, { useTheme } from 'styled-components'
 import { Button } from '@lib/ui/buttons/Button'
 import { CheckIcon } from '@lib/ui/icons/CheckIcon'
@@ -43,7 +42,6 @@ export const HabitItem = ({
   } = useTheme()
 
   const { mutate: createHabit } = useCreateUserEntityMutation('habit')
-  const { defaultColorOption } = usePaletteColorOptions(habits)
 
   return (
     <Container gap={8}>
@@ -79,7 +77,6 @@ export const HabitItem = ({
               createHabit({
                 name,
                 emoji,
-                color: defaultColorOption,
                 order: getLastItemOrder(habits.map(({ order }) => order)),
                 id,
                 startedAt: Date.now(),
