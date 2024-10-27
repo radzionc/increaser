@@ -6,6 +6,7 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { ActiveHabits } from '../manage/ActiveHabits'
 import { ActiveHabit } from '@increaser/ui/habits/ActiveHabit'
+import { InactiveHabits } from '../manage/InactiveHabits'
 
 export const HabitsTableContainer = ({
   children,
@@ -20,6 +21,7 @@ export const HabitsTableContainer = ({
             <ActiveHabits />
           </VStack>
           <Spacer height={20} />
+          <InactiveHabits />
         </VStack>
         <ScrollableFlexboxFiller hideScrollbars>
           {children}
