@@ -111,7 +111,9 @@ On the "Timesheet" page, users can track their work time across different projec
 
 ## Habits
 
-The "Habits" page has three tabs: "Track", "Stats", and "Explore". Both the "Track" and "Stats" have a similar layout with a list of habits listed on the left, but on "Track" sub-page there is a grid of days by clicking on a day the user can mark the habit as done or not done. The "Stats" sub-page shows a table with the habits and their streak, consistency, and when the habit has been started. The user can edit or delete habits from the "Track" and "Stats" sub-pages. The user can also reset a specific habit.
+The "Habits" page has two sub-pages: "Track" and "Explore".
+
+The "Track" subpage organized into colums. First go habits, where each items has an emoji and a name. Clicking on a habit will open a modal where the user can manage the habit. Next goes a column with habit consistency represented as a ring progress with a percentage at the center. After that goes a column with habits streaks, where the user can see their current streak. The last column takes the remaining space and represent a grid where the user can see and track their habits. Each cell in the grid represents a day, and the user can click on it to mark the habit as done for that day.
 
 The user can "stop" a habit, which will make habit "inactive" and it will clear all the tracked the data. The user can "start" a habit again, which will make the habit "active" and the user can start tracking it again.
 

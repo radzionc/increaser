@@ -1,5 +1,6 @@
 Users can stop tracking habits without deleting them by making them inactive.
 User can see session duration while editing session end time.
+Merge "Track" and "Stats" habit views into a single page.
 1729829282066
 Users can now edit and reorder habits right from the "Track" and "Stats" views on the "Habits" page.
 User can reset a specific habit from the "Edit" view of a habit.

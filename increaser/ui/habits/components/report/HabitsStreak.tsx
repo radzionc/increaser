@@ -2,13 +2,13 @@ import { Text } from '@lib/ui/text'
 import { pluralize } from '@lib/utils/pluralize'
 import { getHabitStreak } from '@increaser/entities-utils/habit/getHabitStreak'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { useActiveHabits } from '@increaser/ui/habits/hooks/useActiveHabits'
 import { VStack } from '@lib/ui/css/stack'
 import { HabitColumnLabel } from './HabitColumnLabel'
 import { TrackHabitsColumn } from '../track/TrackHabitsColumn'
+import { useOrderedActiveHabits } from '../../hooks/useOrderedActiveHabits'
 
 export const HabitsStreak = () => {
-  const habits = useActiveHabits()
+  const habits = useOrderedActiveHabits()
   const todayStartedAt = useStartOfDay()
 
   return (

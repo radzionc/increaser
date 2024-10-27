@@ -1,12 +1,12 @@
 import { getHabitPassedDays } from '@increaser/entities-utils/habit/getHabitPassedDays'
 
-import { useActiveHabits } from '@increaser/ui/habits/hooks/useActiveHabits'
 import { VStack } from '@lib/ui/css/stack'
 import { HabitConsistency } from './HabitConsistency'
 import { HabitColumnLabel } from './HabitColumnLabel'
+import { useOrderedActiveHabits } from '../../hooks/useOrderedActiveHabits'
 
 export const HabitsConsistency = () => {
-  const habits = useActiveHabits()
+  const habits = useOrderedActiveHabits()
 
   return (
     <VStack alignItems="center">
