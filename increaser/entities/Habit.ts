@@ -10,6 +10,7 @@ export type Habit = EntityWithId &
   EntityWithOrder & {
     startedAt?: number | null
     successes: string[]
+    plan?: string
   }
 
 export type ActiveHabit = Omit<Habit, 'startedAt'> & EntityWithStartDate

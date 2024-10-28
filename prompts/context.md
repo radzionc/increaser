@@ -117,6 +117,8 @@ The "Track" sub-page is organized into columns. The first column lists habits, w
 
 Users can "stop" a habit, which will make it "inactive" and clear all tracked data. They can "start" a habit again, making it "active" so tracking can resume.
 
+Users can write a simple plan for each habit, displayed in the habit modal. It should be a short sentence or two explaining how they plan to achieve and maintain the habit, specifying when exactly they will do it during the day.
+
 At the top of the "Track" sub-page, there’s also a "Reset habits" button that resets all habits, providing a fresh start by removing all tracked data and beginning from today.
 
 The "Explore" sub-page presents a list of suggested habits for a fulfilling life, categorized into health, relationships, and work, which users can add to their habits.

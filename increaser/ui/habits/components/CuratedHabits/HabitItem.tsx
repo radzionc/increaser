@@ -31,7 +31,7 @@ const Container = styled(VStack)`
 export const HabitItem = ({
   value,
 }: ComponentWithValueProps<HabitInfo & EntityWithId>) => {
-  const { emoji, tags, name, description, id } = value
+  const { emoji, tags, name, description, id, plan } = value
   const { habits: habitRecord } = useUser()
   const isHabitAdded = id in habitRecord
 
@@ -81,6 +81,7 @@ export const HabitItem = ({
                 id,
                 startedAt: Date.now(),
                 successes: [],
+                plan,
               })
             }}
             isRounded
