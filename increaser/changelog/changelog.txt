@@ -3,6 +3,7 @@ Merge "Track" and "Stats" habit views into a single page.
 User can now write a plan for when exactly they will do the habit so they are more likely to stick with it.
 Hovering over the consistency displays how often the user skips that habit.
 User can see session duration while editing session end time.
+Added "Buid habits" article to the "Info" page.
 1729829282066
 Users can now edit and reorder habits right from the "Track" and "Stats" views on the "Habits" page.
 User can reset a specific habit from the "Edit" view of a habit.

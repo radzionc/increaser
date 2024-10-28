@@ -3,7 +3,6 @@ import { HStack } from '@lib/ui/css/stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { RefreshIcon } from '@lib/ui/icons/RefreshIcon'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useUpdateUserEntitiesMutation } from '@increaser/ui/userEntity/api/useUpdateUserEntitiesMutation'
 import { ConfirmationModal } from '@lib/ui/modal/ConfirmationModal'
 import { Text } from '@lib/ui/text'
@@ -48,7 +47,7 @@ export const ResetHabitsPrompt = () => {
               habits.map(({ id }) => ({
                 id,
                 fields: {
-                  startedAt: convertDuration(Date.now(), 'ms', 's'),
+                  startedAt: Date.now(),
                   successes: [],
                 },
               })),
