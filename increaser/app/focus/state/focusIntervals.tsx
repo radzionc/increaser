@@ -13,13 +13,15 @@ import { useFocusTarget } from './useFocusTarget'
 import { correctRecordFields } from '@lib/utils/record/correctRecordFields'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useCallback } from 'react'
+import { makeUseMemoCallback } from '@lib/ui/state/makeUseMemoCallback'
 
 export type FocusInterval = ProjectRelatedEntity & {
   taskId: string | null
   start: number
   end: number | null
 }
+
+const useCallback = makeUseMemoCallback()
 
 export const useFocusIntervals = () => {
   const { tasks, projects } = useUser()
