@@ -40,35 +40,38 @@ export const useFocusTarget = () => {
       PersistentStateKey.FocusLauncher,
       getInitialState,
     ),
-    (state) => {
-      if (state.projectId && !findBy(activeProjects, 'id', state.projectId)) {
-        return getInitialState()
-      }
-
-      if (state.taskId) {
-        const task = findBy(tasks, 'id', state.taskId)
-        if (!task) {
-          return {
-            ...state,
-            taskId: null,
-          }
+    useCallback(
+      (state) => {
+        if (state.projectId && !findBy(activeProjects, 'id', state.projectId)) {
+          return getInitialState()
         }
-        if (task.projectId !== state.projectId) {
-          if (state.projectId) {
+
+        if (state.taskId) {
+          const task = findBy(tasks, 'id', state.taskId)
+          if (!task) {
             return {
               ...state,
-              projectId: task.projectId,
-            }
-          } else {
-            return {
               taskId: null,
-              projectId: null,
+            }
+          }
+          if (task.projectId !== state.projectId) {
+            if (state.projectId) {
+              return {
+                ...state,
+                projectId: task.projectId,
+              }
+            } else {
+              return {
+                taskId: null,
+                projectId: null,
+              }
             }
           }
         }
-      }
 
-      return state
-    },
+        return state
+      },
+      [activeProjects, getInitialState, tasks],
+    ),
   )
 }
