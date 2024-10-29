@@ -7,6 +7,7 @@ import { Panel } from '@lib/ui/css/panel'
 import { FocusAudioWidget } from '../../audio/FocusAudioWidget'
 import { FocusTargetInputs } from '../FocusTargetInputs'
 import { ManageFocusNotifications } from '../../notifications/ManageFocusNotifications'
+import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 
 export const FocusSetWidget = () => {
   const task = useFocusTargetTask()
@@ -29,7 +30,11 @@ export const FocusSetWidget = () => {
         <FocusAudioWidget />
         <ManageFocusNotifications />
       </HStack>
-      {task && <FocusTaskOverview key={task.id} />}
+      {task && (
+        <CurrentTaskProvider value={task}>
+          <FocusTaskOverview />
+        </CurrentTaskProvider>
+      )}
     </>
   )
 }

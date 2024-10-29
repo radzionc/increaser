@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from 'react'
 import { Task } from '@increaser/entities/Task'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import {
   UpdateUserEntityInput,
   useUpdateUserEntityMutation,
@@ -11,7 +10,6 @@ import { Panel } from '@lib/ui/css/panel'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
-import { useFocusTargetTask } from '../../../tasks/hooks/useFocusTargetTask'
 import { TaskFormHeader } from '@increaser/ui/tasks/form/TaskFormHeader'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskDeadlineInput } from '@increaser/ui/tasks/deadline/TaskDeadlineInput'
@@ -24,6 +22,7 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
 import { TaskTemplatesWidget } from '@increaser/ui/taskTemplates/widget/TaskTemplatesWidget'
+import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 
 type TaskFormShape = Pick<
   Task,
@@ -31,7 +30,8 @@ type TaskFormShape = Pick<
 >
 
 export const FocusTaskOverview = () => {
-  const task = shouldBePresent(useFocusTargetTask())
+  const task = useCurrentTask()
+
   const { id } = task
   const { tasks } = useUser()
 
