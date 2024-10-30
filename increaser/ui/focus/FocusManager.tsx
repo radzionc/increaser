@@ -8,6 +8,7 @@ import { LastSetObserver } from './autoStop/LastSetObserver'
 import { FocusDurationManager } from './FocusDurationManager'
 import { useFocusStatus } from '@increaser/app/focus/state/focusIntervals'
 import { Match } from '@lib/ui/base/Match'
+import { MatchPresense } from '@lib/ui/base/MatchPresense'
 
 export const FocusManager = () => {
   const status = useFocusStatus()
@@ -15,25 +16,27 @@ export const FocusManager = () => {
   return (
     <>
       <LastSetObserver />
-      {status === null ? (
-        <FocusDurationManager />
-      ) : (
-        <>
-          <FocusTaskObserver />
-          <Match
-            value={status}
-            active={() => (
-              <>
-                <FocusSoundsPlayer />
-                <YouTubeFocusMusicFloatingPlayer />
-                <FocusNotifications />
-                <FocusAutoStop />
-              </>
-            )}
-            paused={() => <PausedFocusAutoStop />}
-          />
-        </>
-      )}
+      <MatchPresense
+        value={status}
+        absent={() => <FocusDurationManager />}
+        present={(value) => (
+          <>
+            <FocusTaskObserver />
+            <Match
+              value={value}
+              active={() => (
+                <>
+                  <FocusSoundsPlayer />
+                  <YouTubeFocusMusicFloatingPlayer />
+                  <FocusNotifications />
+                  <FocusAutoStop />
+                </>
+              )}
+              paused={() => <PausedFocusAutoStop />}
+            />
+          </>
+        )}
+      />
     </>
   )
 }

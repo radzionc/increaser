@@ -154,3 +154,7 @@ export type ComponentWithItemsProps<T> = {
 export type SizedComponentProps<T = number> = {
   size: T
 }
+
+export type ComponentWithStatusProps<T> = {
+  status: T
+}
