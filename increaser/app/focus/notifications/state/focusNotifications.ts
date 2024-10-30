@@ -7,7 +7,11 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { Minutes, Seconds } from '@lib/utils/time/types'
 
-export const focusNotifications = ['sessionEnd', 'workDayEnd', 'eyeBreak']
+export const focusNotifications = [
+  'sessionEnd',
+  'workDayEnd',
+  'eyeBreak',
+] as const
 export type FocusNotification = (typeof focusNotifications)[number]
 export type FocusNotifications = Record<FocusNotification, boolean>
 

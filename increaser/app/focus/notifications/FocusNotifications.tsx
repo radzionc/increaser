@@ -1,31 +1,34 @@
-import {
-  FocusNotification,
-  focusNotifications,
-  useFocusNotifications,
-} from './state/focusNotifications'
+import { useFocusNotifications } from './state/focusNotifications'
 
 import { SessionEndNotification } from './SessionEndNotification'
 import { WorkDayEndNotification } from './WorkDayEndNotification'
 import { EyeBreakNotification } from './EyeBreakNotification'
-
-const notificationComponent: Record<FocusNotification, React.FC> = {
-  sessionEnd: SessionEndNotification,
-  workDayEnd: WorkDayEndNotification,
-  eyeBreak: EyeBreakNotification,
-}
+import { Match } from '@lib/ui/base/Match'
+import { toEntries } from '@lib/utils/record/toEntries'
+import { useMemo } from 'react'
 
 export const FocusNotifications = () => {
   const [value] = useFocusNotifications()
 
+  const notifications = useMemo(
+    () =>
+      toEntries(value)
+        .filter(({ value }) => value)
+        .map(({ key }) => key),
+    [value],
+  )
+
   return (
     <>
-      {focusNotifications.map((notification) => {
-        if (!value[notification]) return null
-
-        const Component = notificationComponent[notification]
-
-        return <Component key={notification} />
-      })}
+      {notifications.map((notification) => (
+        <Match
+          key={notification}
+          value={notification}
+          sessionEnd={() => <SessionEndNotification />}
+          workDayEnd={() => <WorkDayEndNotification />}
+          eyeBreak={() => <EyeBreakNotification />}
+        />
+      ))}
     </>
   )
 }
