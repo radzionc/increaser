@@ -7,17 +7,26 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { findBy } from '@lib/utils/array/findBy'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useFocusTasks } from '../tasks/useFocusTasks'
-import { useCallback } from 'react'
+import { useFocusProjectDefaultTask } from './focusProjectDefaultTask'
+import { makeUseMemoCallback } from '@lib/ui/state/makeUseMemoCallback'
+import { useMemo } from 'react'
 
 export type FocusTarget = {
   projectId: string | null
   taskId: string | null
 }
 
+const useCallback = makeUseMemoCallback()
+
 export const useFocusTarget = () => {
   const activeProjects = useActiveProjects()
 
   const tasks = useFocusTasks()
+
+  const projectIds = useMemo(
+    () => new Set(activeProjects.map((project) => project.id)),
+    [activeProjects],
+  )
 
   const getInitialState = useCallback((): FocusTarget => {
     if (!isEmpty(tasks)) {
@@ -35,6 +44,8 @@ export const useFocusTarget = () => {
     }
   }, [activeProjects, tasks])
 
+  const [projectDefaultTask] = useFocusProjectDefaultTask()
+
   return useStateCorrector(
     usePersistentState<FocusTarget>(
       PersistentStateKey.FocusLauncher,
@@ -42,18 +53,25 @@ export const useFocusTarget = () => {
     ),
     useCallback(
       (state) => {
-        if (state.projectId && !findBy(activeProjects, 'id', state.projectId)) {
+        if (state.projectId && !projectIds.has(state.projectId)) {
           return getInitialState()
         }
 
         if (state.taskId) {
           const task = findBy(tasks, 'id', state.taskId)
+
           if (!task) {
+            let taskId = null
+            if (state.projectId) {
+              taskId = projectDefaultTask[state.projectId] ?? null
+            }
+
             return {
               ...state,
-              taskId: null,
+              taskId,
             }
           }
+
           if (task.projectId !== state.projectId) {
             if (state.projectId) {
               return {
@@ -71,7 +89,7 @@ export const useFocusTarget = () => {
 
         return state
       },
-      [activeProjects, getInitialState, tasks],
+      [getInitialState, projectDefaultTask, projectIds, tasks],
     ),
   )
 }
