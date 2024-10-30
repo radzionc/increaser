@@ -9,12 +9,13 @@ import { FocusDurationManager } from './FocusDurationManager'
 import { useFocusStatus } from '@increaser/app/focus/state/focusIntervals'
 import { Match } from '@lib/ui/base/Match'
 import { MatchPresense } from '@lib/ui/base/MatchPresense'
+import { ErrorBoundary } from '../errors/components/ErrorBoundary'
 
 export const FocusManager = () => {
   const status = useFocusStatus()
 
   return (
-    <>
+    <ErrorBoundary>
       <LastSetObserver />
       <MatchPresense
         value={status}
@@ -37,6 +38,6 @@ export const FocusManager = () => {
           </>
         )}
       />
-    </>
+    </ErrorBoundary>
   )
 }
