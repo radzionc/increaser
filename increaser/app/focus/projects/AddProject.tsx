@@ -4,14 +4,14 @@ import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { Project } from '@increaser/entities/Project'
 import { AddFocusEntityOption } from '../launcher/AddFocusEntityOption'
-import { useFocusTarget } from '../state/useFocusTarget'
+import { useFocusProject } from '../state/focusProject'
 
 type AddProjectProps = {
   onFinish?: (project?: Project) => void
 }
 
 export const AddProject = ({ onFinish }: AddProjectProps) => {
-  const [, setState] = useFocusTarget()
+  const [, setState] = useFocusProject()
 
   return (
     <Opener
@@ -25,11 +25,7 @@ export const AddProject = ({ onFinish }: AddProjectProps) => {
               onClose()
 
               if (project) {
-                setState((state) => ({
-                  ...state,
-                  projectId: project.id,
-                  taskId: null,
-                }))
+                setState(project.id)
                 onFinish?.(project)
               }
             }}

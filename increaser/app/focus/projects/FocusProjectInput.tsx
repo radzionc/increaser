@@ -9,8 +9,8 @@ import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { BoxIcon } from '@lib/ui/icons/BoxIcon'
 import { FocusEntityInputHeader } from '../launcher/FocusEntityInputHeader'
 import { FocusEntityOptionsContainer } from '../launcher/FocusEntityOptionsContainer'
-import { useFocusTarget } from '../state/useFocusTarget'
 import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
+import { useFocusProject } from '../state/focusProject'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -20,8 +20,9 @@ export const FocusProjectInput = () => {
   const [isOpen, setIsOpen] = useState(false)
   const options = useActiveProjects()
 
-  const [{ projectId }, setState] = useFocusTarget()
-  const { projects, tasks } = useUser()
+  const { projects } = useUser()
+
+  const [projectId, setProjectId] = useFocusProject()
 
   useRunOnChange(() => {
     setIsOpen(false)
@@ -33,7 +34,7 @@ export const FocusProjectInput = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRemove={() => {
-          setState((state) => ({ ...state, projectId: null }))
+          setProjectId(null)
         }}
         entityName="a project"
         value={projectId ? projects[projectId] : null}
@@ -53,15 +54,7 @@ export const FocusProjectInput = () => {
               <CurrentProjectProvider key={id} value={project}>
                 <FocusProjectOption
                   onClick={() => {
-                    setState((state) => ({
-                      ...state,
-                      projectId: id,
-                      taskId: state.taskId
-                        ? tasks[state.taskId].projectId === id
-                          ? state.taskId
-                          : null
-                        : null,
-                    }))
+                    setProjectId(id)
                   }}
                 />
               </CurrentProjectProvider>

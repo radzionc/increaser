@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useFilteredFocusTasks } from '../../tasks/useFilteredFocusTasks'
 import { FocusTaskOption } from './FocusTaskOption'
 import { useState } from 'react'
-import { useFocusTarget } from '../../state/useFocusTarget'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormContent'
@@ -13,6 +12,9 @@ import { AddFocusTaskOverlay } from './AddFocusTaskOverlay'
 import { AddFocusEntityOption } from '../AddFocusEntityOption'
 import { FocusEntityOptionsContainer } from '../FocusEntityOptionsContainer'
 import { FocusTaskInputHeader } from './FocusTaskInputHeader'
+import { useFocusTarget } from '../../state/focusTarget'
+import { useFocusProjectTask } from '../../state/focusProjectTask'
+import { omit } from '@lib/utils/record/omit'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -23,7 +25,9 @@ export const FocusTaskInput = () => {
 
   const options = useFilteredFocusTasks()
 
-  const [{ taskId }, setState] = useFocusTarget()
+  const { taskId, projectId } = useFocusTarget()
+
+  const [, setProjectTask] = useFocusProjectTask()
 
   const { tasks } = useUser()
 
@@ -45,7 +49,9 @@ export const FocusTaskInput = () => {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             onRemove={() => {
-              setState((state) => ({ ...state, taskId: null }))
+              if (projectId) {
+                setProjectTask((prev) => omit(prev, projectId))
+              }
             }}
             value={taskId ? tasks[taskId] : null}
           />

@@ -43,7 +43,8 @@ export enum PersistentStateKey {
   YouTubeFocusMusicLeftAt = 'youTubeFocusMusicLeftAt',
   PrincipleCategoryFilter = 'principleCategoryFilter',
   UserChangedFocusDurationAt = 'userChangedFocusDurationAt',
-  FocusProjectDefaultTask = 'focusProjectDefaultTask',
+  FocusProject = 'focusProject',
+  FocusProjectTask = 'focusProjectDefaultTask',
 }
 
 const persistentStorage = hasWindow

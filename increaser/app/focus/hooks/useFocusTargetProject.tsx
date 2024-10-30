@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
-import { useFocusTarget } from '../state/useFocusTarget'
 import { useUser } from '@increaser/ui/user/state/user'
+import { useFocusTarget } from '../state/focusTarget'
 
 export const useFocusTargetProject = () => {
-  const [{ projectId, taskId }] = useFocusTarget()
+  const { projectId, taskId } = useFocusTarget()
   const { projects, tasks } = useUser()
 
   return useMemo(() => {

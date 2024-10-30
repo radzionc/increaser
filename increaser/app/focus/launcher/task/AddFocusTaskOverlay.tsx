@@ -1,13 +1,16 @@
 import React from 'react'
 import { CreateTaskForm } from '@increaser/ui/tasks/form/CreateTaskForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { useFocusTarget } from '../../state/useFocusTarget'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { withoutUndefinedFields } from '@lib/utils/record/withoutUndefinedFields'
+import { useFocusTarget } from '../../state/focusTarget'
+import { useFocusProject } from '../../state/focusProject'
+import { useFocusProjectTask } from '../../state/focusProjectTask'
 
 export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
-  const [, setState] = useFocusTarget()
-  const [{ projectId }] = useFocusTarget()
+  const { projectId } = useFocusTarget()
+  const [, setProject] = useFocusProject()
+  const [, setProjectTask] = useFocusProjectTask()
 
   return (
     <PanelModal width={560} onFinish={onFinish}>
@@ -17,10 +20,10 @@ export const AddFocusTaskOverlay = ({ onFinish }: NoValueFinishProps) => {
         })}
         onFinish={(task) => {
           if (task) {
-            setState((state) => ({
-              ...state,
-              projectId: task.projectId,
-              taskId: task.id,
+            setProject(task.projectId)
+            setProjectTask((prev) => ({
+              ...prev,
+              [task.projectId]: task.id,
             }))
           }
           onFinish()

@@ -13,7 +13,7 @@ import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { focusLauncherConfig } from '../launcher/config'
-import { useFocusTarget } from '../state/useFocusTarget'
+import { useFocusTarget } from '../state/focusTarget'
 
 const Container = styled(UnstyledButton)<ComponentWithActiveState>`
   ${hStack({
@@ -41,7 +41,7 @@ const Container = styled(UnstyledButton)<ComponentWithActiveState>`
 `
 
 export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
-  const [{ projectId }] = useFocusTarget()
+  const { projectId } = useFocusTarget()
 
   const { id, name, emoji } = useCurrentProject()
   const isSelected = id === projectId

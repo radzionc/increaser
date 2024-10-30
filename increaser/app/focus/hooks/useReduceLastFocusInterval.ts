@@ -4,10 +4,10 @@ import { updateAtIndex } from '@lib/utils/array/updateAtIndex'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Minutes } from '@lib/utils/time/types'
-import { useFocusTarget } from '../state/useFocusTarget'
+import { useFocusTarget } from '../state/focusTarget'
 
 export const useReduceLastFocusInterval = () => {
-  const [{ projectId, taskId }] = useFocusTarget()
+  const { projectId, taskId } = useFocusTarget()
   const [, setIntervals] = useFocusIntervals()
 
   return useCallback(

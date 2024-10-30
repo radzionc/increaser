@@ -7,7 +7,6 @@ import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { Opener } from '@lib/ui/base/Opener'
 import { EditTaskFormOverlay } from '@increaser/ui/tasks/form/EditTaskFormOverlay'
 import { Spacer } from '@lib/ui/layout/Spacer'
-import { useFocusTarget } from '../../state/useFocusTarget'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { hStack } from '@lib/ui/css/stack'
@@ -17,6 +16,9 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { FocusIconButton } from '../../components/FocusSetWidget/FocusIconButton'
 import { focusLauncherConfig } from '../config'
 import { FocusTaskOptionContent } from './FocusTaskOptionContent'
+import { useFocusTarget } from '../../state/focusTarget'
+import { useFocusProjectTask } from '../../state/focusProjectTask'
+import { omit } from '@lib/utils/record/omit'
 
 const Container = styled(OnHoverAction)`
   ${hStack({
@@ -53,8 +55,8 @@ const Content = styled(UnstyledButton)<ComponentWithActiveState>`
 
 export const FocusTaskOption = () => {
   const { id, projectId } = useCurrentTask()
-  const [{ taskId, projectId: focusTargetProjectId }, setState] =
-    useFocusTarget()
+  const { taskId, projectId: focusTargetProjectId } = useFocusTarget()
+  const [, setState] = useFocusProjectTask()
 
   const isActive = taskId === id
 
@@ -68,15 +70,13 @@ export const FocusTaskOption = () => {
           isActive={isActive}
           onClick={() => {
             if (taskId === id) {
-              setState((state) => ({
-                ...state,
-                taskId: null,
-              }))
+              if (focusTargetProjectId) {
+                setState((prev) => omit(prev, focusTargetProjectId))
+              }
             } else {
-              setState((state) => ({
-                ...state,
-                taskId: id,
-                projectId: projectId,
+              setState((prev) => ({
+                ...prev,
+                [projectId]: id,
               }))
             }
           }}

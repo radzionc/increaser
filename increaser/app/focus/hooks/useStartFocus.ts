@@ -2,14 +2,14 @@ import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useCallback } from 'react'
 import { useFocusIntervals } from '../state/focusIntervals'
-import { useFocusTarget } from '../state/useFocusTarget'
+import { useFocusTarget } from '../state/focusTarget'
 
 type StartFocusParams = {
   start: number
 }
 
 export const useStartFocus = () => {
-  const [{ projectId, taskId }] = useFocusTarget()
+  const { projectId, taskId } = useFocusTarget()
   const [, setIntervals] = useFocusIntervals()
 
   const analytics = useAnalytics()

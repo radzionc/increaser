@@ -1,8 +1,8 @@
 import { useUser } from '@increaser/ui/user/state/user'
-import { useFocusTarget } from '../../state/useFocusTarget'
+import { useFocusTarget } from '../../state/focusTarget'
 
 export const useFocusTargetTask = () => {
-  const [{ taskId }] = useFocusTarget()
+  const { taskId } = useFocusTarget()
   const { tasks } = useUser()
 
   return taskId ? tasks[taskId] : null
