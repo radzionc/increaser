@@ -6,10 +6,6 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
-import { HStack } from '@lib/ui/css/stack'
-import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
@@ -17,7 +13,6 @@ import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
-import { TaskTemplatesWidget } from '../widget/TaskTemplatesWidget'
 
 export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
   const taskTemplate = useCurrentTaskTemplate()
@@ -62,44 +57,14 @@ export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
         onClose={onFinish}
         onSubmit={onFinish}
       />
-      <HStack
-        alignItems="center"
-        gap={20}
-        wrap="wrap"
-        justifyContent="space-between"
-      >
-        <HStack alignItems="center" gap={8}>
-          <AddTaskLink
-            onFinish={(link) =>
-              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-            }
-          />
-
-          <TaskTemplatesWidget
-            onChange={(template) =>
-              setValue((prev) => ({ ...prev, ...template }))
-            }
-            value={value}
-          />
-
-          {isEmpty(value.checklist) && (
-            <AddTaskChecklist
-              onFinish={(checklist) =>
-                setValue((prev) => ({
-                  ...prev,
-                  checklist,
-                }))
-              }
-            />
-          )}
-          <PanelFormDeleteButton
-            onClick={() => {
-              deleteTaskTemplate(id)
-              onFinish()
-            }}
-          />
-        </HStack>
-      </HStack>
+      <div>
+        <PanelFormDeleteButton
+          onClick={() => {
+            deleteTaskTemplate(id)
+            onFinish()
+          }}
+        />
+      </div>
     </Panel>
   )
 }

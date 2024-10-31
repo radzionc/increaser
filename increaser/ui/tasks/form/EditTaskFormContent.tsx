@@ -13,9 +13,6 @@ import {
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
-import { AddTaskLink } from './links/AddTaskLink'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { AddTaskChecklist } from './checklist/AddTaskChecklist'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
@@ -24,7 +21,6 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUser } from '@increaser/ui/user/state/user'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
-import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -97,7 +93,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   })
 
   return (
-    <Panel style={{ width: '100%', gap: 0 }} withSections kind="secondary">
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
@@ -116,29 +112,6 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
             setValue((prev) => ({ ...prev, deadlineAt }))
           }
         />
-        <AddTaskLink
-          onFinish={(link) =>
-            setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-          }
-        />
-
-        <TaskTemplatesWidget
-          onChange={(template) =>
-            setValue((prev) => ({ ...prev, ...template }))
-          }
-          value={value}
-        />
-
-        {isEmpty(value.checklist) && (
-          <AddTaskChecklist
-            onFinish={(checklist) =>
-              setValue((prev) => ({
-                ...prev,
-                checklist,
-              }))
-            }
-          />
-        )}
         <PanelFormDeleteButton
           onClick={() => {
             deleteTask(id)

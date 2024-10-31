@@ -13,15 +13,11 @@ import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { TaskFormHeader } from '@increaser/ui/tasks/form/TaskFormHeader'
 import { HStack } from '@lib/ui/css/stack'
 import { TaskDeadlineInput } from '@increaser/ui/tasks/deadline/TaskDeadlineInput'
-import { AddTaskLink } from '@increaser/ui/tasks/form/links/AddTaskLink'
-import { AddTaskChecklist } from '@increaser/ui/tasks/form/checklist/AddTaskChecklist'
-import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
-import { TaskTemplatesWidget } from '@increaser/ui/taskTemplates/widget/TaskTemplatesWidget'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 
 type TaskFormShape = Pick<
@@ -93,7 +89,7 @@ export const FocusTaskOverview = () => {
   })
 
   return (
-    <Panel style={{ gap: 0 }} withSections kind="secondary">
+    <Panel withSections kind="secondary">
       <TaskFormHeader
         value={value}
         onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
@@ -105,27 +101,6 @@ export const FocusTaskOverview = () => {
             setValue((prev) => ({ ...prev, deadlineAt }))
           }
         />
-        <AddTaskLink
-          onFinish={(value) =>
-            setValue((prev) => ({ ...prev, links: [...prev.links, value] }))
-          }
-        />
-        <TaskTemplatesWidget
-          onChange={(template) =>
-            setValue((prev) => ({ ...prev, ...template }))
-          }
-          value={value}
-        />
-        {isEmpty(value.checklist) && (
-          <AddTaskChecklist
-            onFinish={(checklist) =>
-              setValue((prev) => ({
-                ...prev,
-                checklist,
-              }))
-            }
-          />
-        )}
         <PanelFormDeleteButton
           onClick={() => {
             deleteTask(id)

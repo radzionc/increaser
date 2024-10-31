@@ -12,9 +12,6 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
-import { AddTaskLink } from './links/AddTaskLink'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { AddTaskChecklist } from './checklist/AddTaskChecklist'
 import { Button } from '@lib/ui/buttons/Button'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import {
@@ -22,7 +19,6 @@ import {
   OptionalValueFinishProps,
 } from '@lib/ui/props'
 import { TaskTemplateFormShape } from '../../taskTemplates/form/TaskTemplateFormShape'
-import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 
 export const CreateTaskForm: React.FC<
   Partial<ComponentWithInitialValueProps<Partial<TaskTemplateFormShape>>> &
@@ -78,7 +74,6 @@ export const CreateTaskForm: React.FC<
       onClose={() => onFinish?.()}
       onSubmit={onSubmit}
       isDisabled={isDisabled}
-      style={{ gap: 0 }}
     >
       <TaskFormHeader
         value={value}
@@ -113,29 +108,6 @@ export const CreateTaskForm: React.FC<
               }))
             }
           />
-
-          <TaskTemplatesWidget
-            onChange={(template) =>
-              setValue((prev) => ({ ...prev, ...template }))
-            }
-            value={value}
-          />
-
-          <AddTaskLink
-            onFinish={(link) =>
-              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-            }
-          />
-          {isEmpty(value.checklist) && (
-            <AddTaskChecklist
-              onFinish={(checklist) =>
-                setValue((prev) => ({
-                  ...prev,
-                  checklist,
-                }))
-              }
-            />
-          )}
         </HStack>
         <Button type="submit" isLoading={isPending} isDisabled={isDisabled}>
           Submit

@@ -18,6 +18,10 @@ import { panelFormConfig } from '../../form/panel/config'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { ProjectRelatedEntity } from '@increaser/entities/Project'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
+import { AddTaskChecklist } from './checklist/AddTaskChecklist'
+import { AddTaskLink } from './links/AddTaskLink'
 
 type TaskFormHeaderValue = ProjectRelatedEntity & {
   name: string
@@ -79,6 +83,11 @@ const LinksContainer = styled(HStack)`
 `
 
 const ChecklistContainer = styled(VStack)`
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-top: 0;
+`
+
+const Actions = styled(HStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
   padding-top: 0;
 `
@@ -166,6 +175,24 @@ export const TaskFormHeader = ({
           </ChecklistContainer>
         )}
       />
+      <Actions gap={8}>
+        <TaskTemplatesWidget
+          onChange={(template) => onChange({ ...value, ...template })}
+          value={value}
+        />
+
+        <AddTaskLink
+          onFinish={(link) =>
+            onChange({ ...value, links: [...value.links, link] })
+          }
+        />
+
+        {isEmpty(value.checklist) && (
+          <AddTaskChecklist
+            onFinish={(checklist) => onChange({ ...value, checklist })}
+          />
+        )}
+      </Actions>
     </Container>
   )
 }

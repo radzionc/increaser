@@ -12,11 +12,6 @@ import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
-import { HStack } from '@lib/ui/css/stack'
-import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
-import { TaskTemplatesWidget } from '../widget/TaskTemplatesWidget'
 
 export const CreateTaskTemplateForm: React.FC<
   Partial<ComponentWithInitialValueProps<Partial<TaskTemplateFormShape>>> &
@@ -57,46 +52,13 @@ export const CreateTaskTemplateForm: React.FC<
         onClose={onFinish}
         hasProjectAutoFocus={!initialValue?.projectId}
       />
-      <HStack
-        wrap="wrap"
-        fullWidth
-        alignItems="center"
-        gap={20}
-        justifyContent="space-between"
-      >
-        <HStack gap={8}>
-          <AddTaskLink
-            onFinish={(link) =>
-              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-            }
-          />
-
-          <TaskTemplatesWidget
-            onChange={(template) =>
-              setValue((prev) => ({ ...prev, ...template }))
-            }
-            value={value}
-          />
-
-          {isEmpty(value.checklist) && (
-            <AddTaskChecklist
-              onFinish={(checklist) =>
-                setValue((prev) => ({
-                  ...prev,
-                  checklist,
-                }))
-              }
-            />
-          )}
-        </HStack>
-        <CreateFormFooter
-          isPending={isPending}
-          isDisabled={isDisabled}
-          onCancel={() => {
-            onFinish?.()
-          }}
-        />
-      </HStack>
+      <CreateFormFooter
+        isPending={isPending}
+        isDisabled={isDisabled}
+        onCancel={() => {
+          onFinish?.()
+        }}
+      />
     </ListItemForm>
   )
 }

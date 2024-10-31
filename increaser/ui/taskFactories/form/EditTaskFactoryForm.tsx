@@ -5,9 +5,6 @@ import { useCurrentTaskFactory } from '../CurrentTaskFactoryProvider'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
-import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
@@ -17,7 +14,6 @@ import { Panel } from '@lib/ui/css/panel'
 import { pick } from '@lib/utils/record/pick'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
-import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 import { TaskFactoryScheduleInput } from './TaskFactoryScheduleInput'
 
 export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
@@ -80,31 +76,6 @@ export const EditTaskFactoryForm = ({ onFinish }: NoValueFinishProps) => {
           value={value}
           onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
         />
-        <HStack alignItems="center" gap={8}>
-          <AddTaskLink
-            onFinish={(link) =>
-              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-            }
-          />
-
-          <TaskTemplatesWidget
-            onChange={(template) =>
-              setValue((prev) => ({ ...prev, ...template }))
-            }
-            value={value}
-          />
-
-          {isEmpty(value.checklist) && (
-            <AddTaskChecklist
-              onFinish={(checklist) =>
-                setValue((prev) => ({
-                  ...prev,
-                  checklist,
-                }))
-              }
-            />
-          )}
-        </HStack>
         <PanelFormDeleteButton
           onClick={() => {
             deleteTaskFactory(id)

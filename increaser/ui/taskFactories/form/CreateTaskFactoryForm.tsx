@@ -11,14 +11,10 @@ import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
-import { AddTaskLink } from '../../tasks/form/links/AddTaskLink'
-import { isEmpty } from '@lib/utils/array/isEmpty'
-import { AddTaskChecklist } from '../../tasks/form/checklist/AddTaskChecklist'
 import {
   ComponentWithInitialValueProps,
   OptionalValueFinishProps,
 } from '@lib/ui/props'
-import { TaskTemplatesWidget } from '../../taskTemplates/widget/TaskTemplatesWidget'
 import { TaskFactoryScheduleInput } from './TaskFactoryScheduleInput'
 
 const defaultCadence = 'week'
@@ -81,45 +77,11 @@ export const CreateTaskFactoryForm: React.FC<
           deadlineIndex={value.deadlineIndex ?? null}
         />
       </HStack>
-      <HStack
-        wrap="wrap"
-        fullWidth
-        alignItems="center"
-        gap={20}
-        justifyContent="space-between"
-      >
-        <HStack gap={8}>
-          <AddTaskLink
-            onFinish={(link) =>
-              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-            }
-          />
-
-          <TaskTemplatesWidget
-            onChange={(template) =>
-              setValue((prev) => ({ ...prev, ...template }))
-            }
-            value={value}
-          />
-
-          {isEmpty(value.checklist) && (
-            <AddTaskChecklist
-              onFinish={(checklist) =>
-                setValue((prev) => ({
-                  ...prev,
-                  checklist,
-                }))
-              }
-            />
-          )}
-        </HStack>
-
-        <CreateFormFooter
-          isPending={isPending}
-          onCancel={() => onFinish?.()}
-          isDisabled={isDisabled}
-        />
-      </HStack>
+      <CreateFormFooter
+        isPending={isPending}
+        onCancel={() => onFinish?.()}
+        isDisabled={isDisabled}
+      />
     </ListItemForm>
   )
 }
