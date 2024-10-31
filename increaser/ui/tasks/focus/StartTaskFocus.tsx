@@ -11,6 +11,7 @@ import { useCurrentTask } from '../CurrentTaskProvider'
 import { useStartFocus } from '@increaser/app/focus/hooks/useStartFocus'
 import { useRouter } from 'next/router'
 import { getAppPath } from '../../navigation/app'
+import { NoValueFinishProps } from '@lib/ui/props'
 
 const Container = styled(ExpandableSelectorContainer)`
   padding-right: 16px;
@@ -21,7 +22,7 @@ const Container = styled(ExpandableSelectorContainer)`
   }
 `
 
-export const StartTaskFocus = () => {
+export const StartTaskFocus = ({ onFinish }: NoValueFinishProps) => {
   const [, setFocusProject] = useFocusProject()
   const [, setFocusProjectTask] = useFocusProjectTask()
 
@@ -37,6 +38,8 @@ export const StartTaskFocus = () => {
         <Container
           {...props}
           onClick={() => {
+            onFinish()
+
             setFocusProjectTask((prev) => ({ ...prev, [projectId]: id }))
             setFocusProject(projectId)
             start()

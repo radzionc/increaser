@@ -113,7 +113,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
             setValue((prev) => ({ ...prev, deadlineAt }))
           }
         />
-        <StartTaskFocus />
+        <StartTaskFocus onFinish={onFinish} />
         <PanelFormDeleteButton
           onClick={() => {
             deleteTask(id)
