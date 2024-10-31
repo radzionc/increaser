@@ -21,6 +21,7 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useUser } from '@increaser/ui/user/state/user'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { StartTaskFocus } from '../focus/StartTaskFocus'
 
 type EditTaskFormContentProps = NoValueFinishProps
 
@@ -112,6 +113,7 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
             setValue((prev) => ({ ...prev, deadlineAt }))
           }
         />
+        <StartTaskFocus />
         <PanelFormDeleteButton
           onClick={() => {
             deleteTask(id)

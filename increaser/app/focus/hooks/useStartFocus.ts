@@ -5,7 +5,7 @@ import { useFocusIntervals } from '../state/focusIntervals'
 import { useFocusTarget } from '../state/focusTarget'
 
 type StartFocusParams = {
-  start: number
+  start?: number
 }
 
 export const useStartFocus = () => {
@@ -15,12 +15,12 @@ export const useStartFocus = () => {
   const analytics = useAnalytics()
 
   return useCallback(
-    ({ start }: StartFocusParams) => {
+    ({ start }: StartFocusParams = {}) => {
       analytics.trackEvent('Start focus session')
 
       setIntervals([
         {
-          start,
+          start: start ?? Date.now(),
           taskId,
           projectId: shouldBePresent(projectId),
           end: null,
