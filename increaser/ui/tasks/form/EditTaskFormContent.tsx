@@ -104,53 +104,47 @@ export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
         onClose={onFinish}
         onSubmit={onFinish}
       />
-      <HStack
-        alignItems="center"
-        gap={20}
-        wrap="wrap"
-        justifyContent="space-between"
-      >
-        <HStack alignItems="center" gap={8}>
-          <TaskStatusInput
-            value={value.status}
-            onChange={(status) => setValue((prev) => ({ ...prev, status }))}
-          />
-          <TaskDeadlineInput
-            value={value.deadlineAt}
-            onChange={(deadlineAt) =>
-              setValue((prev) => ({ ...prev, deadlineAt }))
-            }
-          />
-          <AddTaskLink
-            onFinish={(link) =>
-              setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
-            }
-          />
 
-          <TaskTemplatesWidget
-            onChange={(template) =>
-              setValue((prev) => ({ ...prev, ...template }))
-            }
-            value={value}
-          />
+      <HStack alignItems="center" gap={8}>
+        <TaskStatusInput
+          value={value.status}
+          onChange={(status) => setValue((prev) => ({ ...prev, status }))}
+        />
+        <TaskDeadlineInput
+          value={value.deadlineAt}
+          onChange={(deadlineAt) =>
+            setValue((prev) => ({ ...prev, deadlineAt }))
+          }
+        />
+        <AddTaskLink
+          onFinish={(link) =>
+            setValue((prev) => ({ ...prev, links: [...prev.links, link] }))
+          }
+        />
 
-          {isEmpty(value.checklist) && (
-            <AddTaskChecklist
-              onFinish={(checklist) =>
-                setValue((prev) => ({
-                  ...prev,
-                  checklist,
-                }))
-              }
-            />
-          )}
-          <PanelFormDeleteButton
-            onClick={() => {
-              deleteTask(id)
-              onFinish()
-            }}
+        <TaskTemplatesWidget
+          onChange={(template) =>
+            setValue((prev) => ({ ...prev, ...template }))
+          }
+          value={value}
+        />
+
+        {isEmpty(value.checklist) && (
+          <AddTaskChecklist
+            onFinish={(checklist) =>
+              setValue((prev) => ({
+                ...prev,
+                checklist,
+              }))
+            }
           />
-        </HStack>
+        )}
+        <PanelFormDeleteButton
+          onClick={() => {
+            deleteTask(id)
+            onFinish()
+          }}
+        />
       </HStack>
     </Panel>
   )
