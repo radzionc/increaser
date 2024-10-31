@@ -86,7 +86,7 @@ export type ComponentWithInitialValueProps<T> = {
 }
 
 export type ComponentWithOptionsProps<T> = {
-  options: T[]
+  options: readonly T[]
 }
 
 export type ActionGuardProps<T = () => void | Promise<void>> = {

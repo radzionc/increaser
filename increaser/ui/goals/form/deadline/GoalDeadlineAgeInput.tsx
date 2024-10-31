@@ -25,7 +25,7 @@ export const GoalDeadlineAgeInput = ({
 
   return (
     <ExpandableSelector
-      style={{ minWidth: 80 }}
+      showToggle={false}
       options={options}
       value={value}
       onChange={onChange}

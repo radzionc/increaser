@@ -1,6 +1,5 @@
 import { HStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
-import styled from 'styled-components'
 import { addYears } from 'date-fns'
 import { dayToString, toDay } from '@lib/utils/time/Day'
 import {
@@ -9,7 +8,6 @@ import {
   goalDeadlineTypes,
 } from '@increaser/entities/Goal'
 import { useEffect, useMemo, useState } from 'react'
-import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { useUser } from '@increaser/ui/user/state/user'
 import { Match } from '@lib/ui/base/Match'
 import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
@@ -17,24 +15,17 @@ import { GoalDeadlineAgeInput } from './GoalDeadlineAgeInput'
 import { formatGoalTimeLeft } from '@increaser/entities-utils/goal/formatGoalTimeLeft'
 import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoalDeadlineTimestamp'
 import { Text } from '@lib/ui/text'
-import { InputContainer } from '@lib/ui/inputs/InputContainer'
-import { InputLabel } from '@lib/ui/inputs/InputLabel'
-import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { SetDobPromptButton } from '../../dob/SetDobPromptButton'
 import { without } from '@lib/utils/array/without'
 import { GoalDeadlineDateInput } from './GoalDeadlineDateInput'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
-import { ArrowRightIcon } from '@lib/ui/icons/ArrowRightIcon'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
+import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
+import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 
 type GoalDeadlineInputProps = InputProps<string | number | null> & {
   isRequired?: boolean
 }
 
-const IconContainer = styled(IconWrapper)`
-  color: ${({ theme }) =>
-    theme.colors.foreground.getVariant({ l: () => 48 }).toCssValue()};
-`
 export const GoalDeadlineInput = ({
   value,
   onChange,
@@ -91,22 +82,20 @@ export const GoalDeadlineInput = ({
   }, [guardedValue, onChange, value])
 
   return (
-    <InputContainer style={{ gap: 8 }} as="div">
-      <InputLabel>Deadline</InputLabel>
-      <HStackSeparatedBy
-        separator={
-          <IconContainer>
-            <ArrowRightIcon />
-          </IconContainer>
-        }
-        fullWidth
-        alignItems="center"
-        wrap="wrap"
-        gap={12}
-      >
-        <HStack alignItems="center" gap={8}>
+    <HStackSeparatedBy
+      alignItems="center"
+      gap={8}
+      separator={<Text color="shy">~</Text>}
+    >
+      <HStack alignItems="center" gap={8}>
+        <Text color="supporting">Deadline:</Text>
+        <HStackSeparatedBy
+          alignItems="center"
+          gap={8}
+          separator={<Text color="shy">of</Text>}
+        >
           <ExpandableSelector
-            style={{ minWidth: 80 }}
+            showToggle={false}
             options={
               isRequired
                 ? without(goalDeadlineTypes, 'none')
@@ -137,15 +126,16 @@ export const GoalDeadlineInput = ({
             }
             none={() => null}
           />
-        </HStack>
-        {guardedValue && (
-          <Text size={14} as="div">
-            {formatGoalTimeLeft(
-              getGoalDeadlineTimestamp({ deadlineAt: guardedValue, dob }),
-            )}
-          </Text>
-        )}
-      </HStackSeparatedBy>
-    </InputContainer>
+        </HStackSeparatedBy>
+      </HStack>
+
+      {guardedValue && (
+        <Text color="supporting" size={14}>
+          {formatGoalTimeLeft(
+            getGoalDeadlineTimestamp({ deadlineAt: guardedValue, dob }),
+          )}
+        </Text>
+      )}
+    </HStackSeparatedBy>
   )
 }
