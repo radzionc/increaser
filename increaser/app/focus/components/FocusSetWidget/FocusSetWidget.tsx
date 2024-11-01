@@ -31,7 +31,7 @@ export const FocusSetWidget = () => {
         <ManageFocusNotifications />
       </HStack>
       {task && (
-        <CurrentTaskProvider value={task}>
+        <CurrentTaskProvider key={task.id} value={task}>
           <FocusTaskOverview />
         </CurrentTaskProvider>
       )}
