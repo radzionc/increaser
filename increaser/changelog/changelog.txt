@@ -1,3 +1,5 @@
+Added a 'Start' button to tasks on the 'Tasks' page, enabling quick launch of a focus session for the selected task.
+Increaser now auto-selects the last task worked on for a project whenever switching to that project.
 1730435467902
 Users can stop tracking habits without deleting them by making them inactive.
 Merge "Track" and "Stats" habit views into a single page.

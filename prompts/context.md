@@ -87,6 +87,8 @@ When finishing a focus session, the user has the option to also 'Change session 
 
 The user can change focus project or task during the session. If the user changes the project, the session will be split into a new one for the new project.
 
+When changing projects Increaser will automatically set a task the user worked on last time for that project. If the user didn't work on any task for that project, there will be no task selected.
+
 While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
 
 ## Goals
@@ -140,6 +142,8 @@ A user can assign a task to a project. A user can add links to the task to easil
 In the 'Automation' subpage, users can set up rules for the automatic creation of recurring tasks. Each rule creates a 'TaskFactory,' an entity responsible for generating tasks based on the specified schedule. Editing or deleting a task created by a TaskFactory does not affect the TaskFactory itself. The cadence could be daily, every workday, every week, or every month. For weekly and monthly tasks, the user can select a "deadline index," which for a week would be a weekday and for the month the day of the month. For example, if the "deadline index" for a weekly task is 4, the task will be created every Friday. Tasks are created at the start of the period, but to make it clear for the user, we show "forecasted" recurring tasks on the "Upcoming" subpage.
 
 In the "Templates" subpage, users can create, edit, and delete task templates. A task template contains the same fields as a task, so when the user creates a task or a TaskFactory, if there are templates for a selected project, they will see an option to use a template, and if they select a template, the task form will be pre-filled with the template data. User can also turn an existing task into a template.
+
+A task have a "Start" button that will start a focus session for that task.
 
 ## Schedule
 
