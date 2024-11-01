@@ -2,6 +2,48 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 1730435467902,
+    name: 'Enhanced Habit Tracking & Time Management Updates',
+    description:
+      "We've made it easier to manage your habits and track your time effectively. From simplified habit views to new planning features, these updates will help you stay on track with ease.",
+    items: [
+      {
+        description:
+          'Pause habits without deleting them—just mark as inactive to stop tracking temporarily.',
+      },
+      {
+        description:
+          "Combined 'Track' and 'Stats' habit views for easier tracking and insights in one place.",
+      },
+      {
+        description:
+          'Plan when to complete habits with a new field, boosting your commitment to routine.',
+      },
+      {
+        description:
+          'Hover over consistency to see your habit skip frequency for deeper habit insights.',
+      },
+      {
+        description:
+          'View session duration while adjusting the end time, giving you more accurate control.',
+      },
+      {
+        description:
+          "Added 'Build habits' article to the 'Info' page to guide you in creating lasting habits.",
+      },
+    ],
+    youtube: 'https://youtu.be/J00nl-zDgVc',
+    telegram: 'https://t.me/increaser_app/61',
+    x: 'https://x.com/increaser_app/status/1852206097458749885',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7257972145664774144',
+    indieHackers:
+      'https://www.indiehackers.com/post/new-increaser-updates-smarter-habit-tracking-and-planning-bKZH03QNSoMj3oSl3hsw',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1ggxk9g/build_better_habits_with_increasers_latest_update/',
+  },
+
+  {
     releasedAt: 1729829282066,
     name: 'Streamlined Habits, Tasks, and Goals Management',
     description:
