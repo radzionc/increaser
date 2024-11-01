@@ -12,8 +12,8 @@ export const goalStatusNameRecord: Record<GoalStatus, string> = {
 }
 
 export type GoalTarget = {
-  current: number
-  value: number
+  current?: number | null
+  value?: number | null
 }
 
 export type Goal = EntityWithId &

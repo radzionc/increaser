@@ -64,6 +64,7 @@ const DescriptionInput = styled(MultilineTextInput)`
 const HeaderSection = styled(HStack)`
   padding: ${toSizeUnit(panelDefaultPadding)};
   padding-top: 0;
+  padding-bottom: ${toSizeUnit(panelDefaultPadding / 2)};
 `
 
 export const GoalFormFields = ({
@@ -104,11 +105,11 @@ export const GoalFormFields = ({
             onChange={(deadlineAt) => onChange({ ...value, deadlineAt })}
           />
         </HeaderSection>
+        <GoalTargetInput
+          value={value.target}
+          onChange={(target) => onChange({ ...value, target })}
+        />
       </HeaderWrapper>
-      <GoalTargetInput
-        value={value.target}
-        onChange={(target) => onChange({ ...value, target })}
-      />
       <GoalTaskFactoriesInput
         onChange={(taskFactories) => onChange({ ...value, taskFactories })}
         value={value.taskFactories}
