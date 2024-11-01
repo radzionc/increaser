@@ -2,7 +2,7 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 0,
+    releasedAt: 1730435467902,
     name: 'Enhanced Habit Tracking & Time Management Updates',
     description:
       "We've made it easier to manage your habits and track your time effectively. From simplified habit views to new planning features, these updates will help you stay on track with ease.",
@@ -32,12 +32,15 @@ export const productUpdates: ProductUpdate[] = [
           "Added 'Build habits' article to the 'Info' page to guide you in creating lasting habits.",
       },
     ],
-    youtube: '',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    youtube: 'https://youtu.be/J00nl-zDgVc',
+    telegram: 'https://t.me/increaser_app/61',
+    x: 'https://x.com/increaser_app/status/1852206097458749885',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7257972145664774144',
+    indieHackers:
+      'https://www.indiehackers.com/post/new-increaser-updates-smarter-habit-tracking-and-planning-bKZH03QNSoMj3oSl3hsw',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1ggxk9g/build_better_habits_with_increasers_latest_update/',
   },
 
   {
