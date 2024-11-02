@@ -60,7 +60,7 @@ export interface ApiInterface {
   sendAuthLinkByEmail: ApiMethod<{ email: string }, undefined>
 
   addSet: ApiMethod<Set, undefined>
-  addSets: ApiMethod<Set[], undefined>
+  addSets: ApiMethod<Set[], Set[]>
   updateSet: ApiMethod<{ old: Interval; new: Set }, undefined>
   deleteSet: ApiMethod<Interval, undefined>
 

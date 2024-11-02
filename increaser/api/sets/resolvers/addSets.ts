@@ -5,9 +5,13 @@ import { addSets as add } from '@increaser/entities-utils/set/addSets'
 
 export const addSets: ApiResolver<'addSets'> = async ({ input, context }) => {
   const userId = assertUserId(context)
-  const { sets } = await getUser(userId, ['sets'])
+  const { sets: prev } = await getUser(userId, ['sets'])
+
+  const sets = add({ prev, value: input })
 
   await updateUser(userId, {
-    sets: add({ prev: sets, value: input }),
+    sets,
   })
+
+  return sets
 }

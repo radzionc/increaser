@@ -15,5 +15,8 @@ export const useAddSetsMutation = () => {
 
       return api.call('addSets', value)
     },
+    onSuccess: (sets) => {
+      updateState({ sets })
+    },
   })
 }
