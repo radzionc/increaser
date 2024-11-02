@@ -106,26 +106,27 @@ export const GoalDeadlineInput = ({
             renderOption={capitalizeFirstLetter}
             getOptionKey={(option) => goalDeadlineName[option]}
           />
-          <Match
-            value={deadlineType}
-            date={() => (
-              <GoalDeadlineDateInput
-                value={guardedValue as string}
-                onChange={onChange}
-              />
-            )}
-            age={() =>
-              dob ? (
-                <GoalDeadlineAgeInput
-                  value={guardedValue as number}
+          {deadlineType !== 'none' && (
+            <Match
+              value={deadlineType}
+              date={() => (
+                <GoalDeadlineDateInput
+                  value={guardedValue as string}
                   onChange={onChange}
                 />
-              ) : (
-                <SetDobPromptButton />
-              )
-            }
-            none={() => null}
-          />
+              )}
+              age={() =>
+                dob ? (
+                  <GoalDeadlineAgeInput
+                    value={guardedValue as number}
+                    onChange={onChange}
+                  />
+                ) : (
+                  <SetDobPromptButton />
+                )
+              }
+            />
+          )}
         </HStackSeparatedBy>
       </HStack>
 
