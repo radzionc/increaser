@@ -28,7 +28,7 @@ const Line = styled.div`
 const LabelsContainer = styled.div`
   width: 100%;
   position: relative;
-  height: ${toSizeUnit(goalsTimelineConfig.labelsHeight)};
+  height: ${toSizeUnit(goalsTimelineConfig.timeLabelHeight)};
 `
 
 export const GoalsTimeline = () => {
