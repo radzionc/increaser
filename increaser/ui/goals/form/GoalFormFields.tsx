@@ -17,6 +17,7 @@ import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { panelFormConfig } from '../../form/panel/config'
 import { GoalHabitsInput } from './GoalHabitsInput'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
 type GoalFormFieldsProps = InputProps<GoalFormShape> & {
   onSubmit?: () => void
@@ -92,23 +93,27 @@ export const GoalFormFields = ({
           onChange={(plan) => onChange({ ...value, plan })}
           value={value.plan}
         />
-        <GoalDeadlineInput
-          isRequired={value.status !== 'toDo'}
-          value={value.deadlineAt}
-          onChange={(deadlineAt) => onChange({ ...value, deadlineAt })}
-        />
-        <GoalTargetInput
-          value={value.target}
-          onChange={(target) => onChange({ ...value, target })}
-        />
-        <GoalTaskFactoriesInput
-          onChange={(taskFactories) => onChange({ ...value, taskFactories })}
-          value={value.taskFactories}
-        />
-        <GoalHabitsInput
-          onChange={(habits) => onChange({ ...value, habits })}
-          value={value.habits}
-        />
+        <SeparatedByLine gap={20}>
+          <VStack>
+            <GoalDeadlineInput
+              isRequired={value.status !== 'toDo'}
+              value={value.deadlineAt}
+              onChange={(deadlineAt) => onChange({ ...value, deadlineAt })}
+            />
+            <GoalTargetInput
+              value={value.target}
+              onChange={(target) => onChange({ ...value, target })}
+            />
+          </VStack>
+          <GoalTaskFactoriesInput
+            onChange={(taskFactories) => onChange({ ...value, taskFactories })}
+            value={value.taskFactories}
+          />
+          <GoalHabitsInput
+            onChange={(habits) => onChange({ ...value, habits })}
+            value={value.habits}
+          />
+        </SeparatedByLine>
       </HeaderWrapper>
       <HStack fullWidth alignItems="center" gap={8} wrap="wrap">
         <GoalStatusSelector

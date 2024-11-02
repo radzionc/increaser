@@ -27,6 +27,7 @@ const Content = styled(HStack)`
 
 const Container = styled(FieldArrayContainer)`
   padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-top: 0;
 `
 
 export const GoalTaskFactoriesInput = ({
