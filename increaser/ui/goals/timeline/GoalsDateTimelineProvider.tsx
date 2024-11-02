@@ -8,6 +8,7 @@ import { getGoalDeadlineTimestamp } from '@increaser/entities-utils/goal/getGoal
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { startOfYear, addYears, differenceInYears } from 'date-fns'
 import { useUser } from '../../user/state/user'
+import { range } from '@lib/utils/array/range'
 
 const maxLabelsCount = 10
 
@@ -60,10 +61,8 @@ export const GoalsDateTimelineProvider = ({
   )
 
   const timeLabels = useMemo(() => {
-    return Array.from({ length: count + 1 }).map((_, i) =>
-      addYears(start, i * step).getTime(),
-    )
-  }, [start, step, count])
+    return range(count + 1).map((i) => addYears(start, i * step).getTime())
+  }, [count, start, step])
 
   return (
     <GoalsTimelinContext.Provider

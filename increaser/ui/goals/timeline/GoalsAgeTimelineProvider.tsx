@@ -43,27 +43,28 @@ export const GoalsAgeTimelineProvider = ({
         (v) => v,
         'asc',
       )
-      start = Math.min(
-        start,
-        addYears(
+
+      const earliestDeadline = orderedDeadlines[0]
+      if (earliestDeadline < start) {
+        start = addYears(
           dobDate,
           getUserAgeAt({
             dob,
             at: orderedDeadlines[0],
           }) - 1,
-        ).getTime(),
-      )
+        ).getTime()
+      }
 
-      end = Math.max(
-        end,
-        addYears(
+      const latestDeadline = getLastItem(orderedDeadlines)
+      if (latestDeadline > end) {
+        end = addYears(
           dobDate,
           getUserAgeAt({
             dob,
-            at: getLastItem(orderedDeadlines),
-          }) + 1,
-        ).getTime(),
-      )
+            at: latestDeadline,
+          }),
+        ).getTime()
+      }
     }
 
     return [start, end]
@@ -89,7 +90,7 @@ export const GoalsAgeTimelineProvider = ({
   )
 
   const timeLabels = useMemo(() => {
-    return range(count).map((i) => addYears(start, i * step).getTime())
+    return range(count + 1).map((i) => addYears(start, i * step).getTime())
   }, [count, start, step])
 
   return (
