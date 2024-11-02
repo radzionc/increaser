@@ -11,6 +11,8 @@ import { without } from '@lib/utils/array/without'
 import styled from 'styled-components'
 import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'
 import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -21,6 +23,10 @@ const Content = styled(HStack)`
       flex: 1;
     }
   }
+`
+
+const Container = styled(FieldArrayContainer)`
+  padding: ${toSizeUnit(panelDefaultPadding)};
 `
 
 export const GoalTaskFactoriesInput = ({
@@ -35,7 +41,7 @@ export const GoalTaskFactoriesInput = ({
   }, [taskFactories, value])
 
   return (
-    <FieldArrayContainer title="Recurring tasks">
+    <Container title="Recurring tasks">
       {value.length > 0 && (
         <VStack>
           <ActiveItemIdProvider initialValue={null}>
@@ -63,6 +69,6 @@ export const GoalTaskFactoriesInput = ({
           onFinish={(id) => onChange([...value, id])}
         />
       </VStack>
-    </FieldArrayContainer>
+    </Container>
   )
 }

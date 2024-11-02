@@ -10,6 +10,8 @@ import { AddGoalHabit } from './AddGoalHabit'
 import { RemoveGoalHabit } from './RemoveGoalHabit'
 import { GoalHabitItem } from './GoalHabitItem'
 import { useHabits } from '../../habits/hooks/useHabits'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -22,6 +24,10 @@ const Content = styled(HStack)`
   }
 `
 
+const Container = styled(FieldArrayContainer)`
+  padding: ${toSizeUnit(panelDefaultPadding)};
+`
+
 export const GoalHabitsInput = ({ value, onChange }: InputProps<string[]>) => {
   const habits = useHabits()
   const options = useMemo(() => {
@@ -29,7 +35,7 @@ export const GoalHabitsInput = ({ value, onChange }: InputProps<string[]>) => {
   }, [habits, value])
 
   return (
-    <FieldArrayContainer title="Daily habits">
+    <Container title="Daily habits">
       {value.length > 0 && (
         <VStack>
           <ActiveItemIdProvider initialValue={null}>
@@ -56,6 +62,6 @@ export const GoalHabitsInput = ({ value, onChange }: InputProps<string[]>) => {
           onFinish={(id) => onChange([...value, id])}
         />
       </VStack>
-    </FieldArrayContainer>
+    </Container>
   )
 }
