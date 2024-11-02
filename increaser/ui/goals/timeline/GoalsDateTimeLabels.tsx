@@ -1,15 +1,12 @@
 import { useGoalsTimeline } from './state/GoalsTimelineContext'
 import { useMemo } from 'react'
-import { getUserAgeAt } from '@increaser/entities-utils/user/getUserAgeAt'
+import { format } from 'date-fns'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { toPercents } from '@lib/utils/toPercents'
-import { useUser } from '../../user/state/user'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { TimelineLabel } from './TimelineLabel'
 
-export const GoalsAgeTimeLabels = () => {
+export const GoalsDateTimeLabels = () => {
   const { interval, timeLabels } = useGoalsTimeline()
-  const { dob } = useUser()
 
   const intervalDuration = useMemo(
     () => getIntervalDuration(interval),
@@ -22,7 +19,7 @@ export const GoalsAgeTimeLabels = () => {
         <TimelineLabel
           left={toPercents((timestamp - interval.start) / intervalDuration)}
           key={timestamp}
-          title={getUserAgeAt({ dob: shouldBePresent(dob), at: timestamp })}
+          title={format(new Date(timestamp), 'yyyy')}
         />
       ))}
     </>

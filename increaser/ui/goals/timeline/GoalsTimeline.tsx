@@ -15,6 +15,8 @@ import { SetDobPromptButton } from '../dob/SetDobPromptButton'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { format } from 'date-fns'
 import { GoalsAgeTimeLabels } from './GoalsAgeTimeLabels'
+import { GoalsDateTimelineProvider } from './GoalsDateTimelineProvider'
+import { GoalsDateTimeLabels } from './GoalsDateTimeLabels'
 
 const Line = styled.div`
   height: 1px;
@@ -55,7 +57,18 @@ export const GoalsTimeline = () => {
       </HStack>
       <Match
         value={type}
-        date={() => null}
+        date={() => (
+          <GoalsDateTimelineProvider>
+            <VStack>
+              <GroupedGoals />
+              <Spacer height={8} />
+              <Line />
+              <LabelsContainer>
+                <GoalsDateTimeLabels />
+              </LabelsContainer>
+            </VStack>
+          </GoalsDateTimelineProvider>
+        )}
         age={() =>
           dob ? (
             <GoalsAgeTimelineProvider>
