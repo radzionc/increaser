@@ -93,9 +93,13 @@ While the user will primarily track their work through focus sessions, they can 
 
 ## Goals
 
-On the "Goals" page, users can set specific goals that will bring them closer to their perfect vision. Goals have three potential statuses: done, in progress, and to-do. Users should set a deadline for a goal, which could be either a specific date or their age. Users can set an emoji for a goal. Users can write a plan in plain text detailing how they are going to achieve the goal. Users can track numeric goals; for example, if the goal is to have a 1 million USD net worth, they can enter their current net worth to see their progress. Since achieving most goals requires users to perform recurring actions, there is a way to add recurring tasks or connect existing recurring tasks to the current goal. The same applies to daily habits; they can either add new daily habits to the goal or select from existing ones. At the top of the Goals page is a timeline with age labels under the line and goals above the line. Users' current age with month and day precision is also displayed on the timeline.
+On the "Goals" page, users can set goals to move closer to their ideal vision. Goals can be marked as done, active, or idea. Each goal includes a deadline, which can be a specific date or the user's age, an emoji, and a plain-text plan on how to achieve it. For numeric goals, users can track progress by entering a value, such as their current net worth toward a 1 million USD goal.
 
-On the side of the goals page, there is an educational section that summarizes wisdom on how to set and achieve goals. The user can collapse this section if they don't want to see it.
+To support recurring actions needed for many goals, users can link recurring tasks or habits to a goal or create new ones specifically for it.
+
+At the top of the "Goals" page, a timeline shows goals positioned according to their deadlines, with two view options: age-based and date-based. In age-based view, the user’s age is displayed at the top with day precision, and the timeline has age labels. In date-based view, today’s date is shown at the top, and the timeline displays year labels.
+
+An educational section on the right side of the page provides advice on setting and achieving goals. Users can collapse this section if they prefer.
 
 ## Projects
 
