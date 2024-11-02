@@ -11,17 +11,25 @@ import { hStack } from '@lib/ui/css/stack'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { Text } from '@lib/ui/text'
 import { toPercents } from '@lib/utils/toPercents'
+import { panelFormConfig } from '../../form/panel/config'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 
 const Container = styled.div`
   padding: 0;
 
+  min-height: ${toSizeUnit(panelFormConfig.sectionMinHeight)};
+
   > * {
     &:first-child {
-      padding: ${toSizeUnit(panelDefaultPadding)};
+      ${horizontalPadding(panelDefaultPadding)};
+    }
+
+    &:only-child {
+      flex: 1;
     }
   }
 
-  ${hStack({ alignItems: 'center' })}
+  ${hStack({ alignItems: 'stretch' })}
 `
 
 const Input = styled(AmountTextInput)`
