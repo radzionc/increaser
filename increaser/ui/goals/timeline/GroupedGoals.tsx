@@ -12,6 +12,7 @@ import { VStack } from '@lib/ui/css/stack'
 import { CurrentGoalProvider } from '../CurrentGoalProvider'
 import { TimelineGoalItem } from './TimelineGoalItem'
 import { useFilteredScheduledGoals } from '../filter/useFilteredScheduledGoals'
+import { useUser } from '../../user/state/user'
 
 const Container = styled(VStack)`
   position: relative;
@@ -20,7 +21,8 @@ const Container = styled(VStack)`
 
 export const GroupedGoals = () => {
   const items = useFilteredScheduledGoals()
-  const { dob, interval } = useGoalsTimeline()
+  const { interval } = useGoalsTimeline()
+  const { dob } = useUser()
 
   const intervalDuration = getIntervalDuration(interval)
 

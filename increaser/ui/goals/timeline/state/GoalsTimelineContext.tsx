@@ -4,7 +4,6 @@ import { createContext } from 'react'
 
 type GoalsTimelineState = {
   interval: Interval
-  dob: string
   timeLabels: number[]
 }
 

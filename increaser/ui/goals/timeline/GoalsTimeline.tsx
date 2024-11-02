@@ -1,7 +1,6 @@
 import { useUser } from '@increaser/ui/user/state/user'
-import { GoalsTimelineProvider } from './GoalsTimelineProvider'
+import { GoalsAgeTimelineProvider } from './GoalsAgeTimelineProvider'
 import { HStack, VStack } from '@lib/ui/css/stack'
-import { TimeLabels } from './TimeLabels'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { goalsTimelineConfig } from './config'
@@ -15,6 +14,7 @@ import { useGoalsTimelineType } from './state/goalsTimelineType'
 import { SetDobPromptButton } from '../dob/SetDobPromptButton'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { format } from 'date-fns'
+import { GoalsAgeTimeLabels } from './GoalsAgeTimeLabels'
 
 const Line = styled.div`
   height: 1px;
@@ -58,16 +58,16 @@ export const GoalsTimeline = () => {
         date={() => null}
         age={() =>
           dob ? (
-            <GoalsTimelineProvider>
+            <GoalsAgeTimelineProvider>
               <VStack>
                 <GroupedGoals />
                 <Spacer height={8} />
                 <Line />
                 <LabelsContainer>
-                  <TimeLabels />
+                  <GoalsAgeTimeLabels />
                 </LabelsContainer>
               </VStack>
-            </GoalsTimelineProvider>
+            </GoalsAgeTimelineProvider>
           ) : null
         }
       />

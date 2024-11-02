@@ -15,7 +15,7 @@ import { useFilteredScheduledGoals } from '../filter/useFilteredScheduledGoals'
 
 const maxLabelsCount = 10
 
-export const GoalsTimelineProvider = ({
+export const GoalsAgeTimelineProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
   const goals = useFilteredScheduledGoals()
@@ -95,7 +95,6 @@ export const GoalsTimelineProvider = ({
   return (
     <GoalsTimelinContext.Provider
       value={{
-        dob,
         interval,
         timeLabels,
       }}

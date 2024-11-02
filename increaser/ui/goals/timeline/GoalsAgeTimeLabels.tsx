@@ -9,6 +9,8 @@ import { toPercents } from '@lib/utils/toPercents'
 import { Text } from '@lib/ui/text'
 import { VStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
+import { useUser } from '../../user/state/user'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 const Label = styled(VStack)`
   font-size: 12px;
@@ -21,8 +23,9 @@ const Label = styled(VStack)`
   top: 0;
 `
 
-export const TimeLabels = () => {
-  const { interval, dob, timeLabels } = useGoalsTimeline()
+export const GoalsAgeTimeLabels = () => {
+  const { interval, timeLabels } = useGoalsTimeline()
+  const { dob } = useUser()
 
   const intervalDuration = useMemo(
     () => getIntervalDuration(interval),
@@ -40,7 +43,7 @@ export const TimeLabels = () => {
             key={timestamp}
           >
             <Text size={12} nowrap>
-              {getUserAgeAt({ dob, at: timestamp })}
+              {getUserAgeAt({ dob: shouldBePresent(dob), at: timestamp })}
             </Text>
           </Label>
         )
