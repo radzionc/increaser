@@ -17,6 +17,7 @@ import { format } from 'date-fns'
 import { GoalsAgeTimeLabels } from './GoalsAgeTimeLabels'
 import { GoalsDateTimelineProvider } from './GoalsDateTimelineProvider'
 import { GoalsDateTimeLabels } from './GoalsDateTimeLabels'
+import { Wrap } from '@lib/ui/base/Wrap'
 
 const Line = styled.div`
   height: 1px;
@@ -55,35 +56,38 @@ export const GoalsTimeline = () => {
         />
         <ManageGoalsTimelineType />
       </HStack>
-      <Match
-        value={type}
-        date={() => (
-          <GoalsDateTimelineProvider>
-            <VStack>
-              <GroupedGoals />
-              <Spacer height={8} />
-              <Line />
-              <LabelsContainer>
-                <GoalsDateTimeLabels />
-              </LabelsContainer>
-            </VStack>
-          </GoalsDateTimelineProvider>
-        )}
-        age={() =>
-          dob ? (
-            <GoalsAgeTimelineProvider>
-              <VStack>
-                <GroupedGoals />
-                <Spacer height={8} />
-                <Line />
-                <LabelsContainer>
-                  <GoalsAgeTimeLabels />
-                </LabelsContainer>
-              </VStack>
-            </GoalsAgeTimelineProvider>
-          ) : null
-        }
-      />
+      {type === 'age' && !dob ? null : (
+        <VStack>
+          <Wrap
+            wrap={(children) => (
+              <Match
+                value={type}
+                age={() => (
+                  <GoalsAgeTimelineProvider>
+                    {children}
+                  </GoalsAgeTimelineProvider>
+                )}
+                date={() => (
+                  <GoalsDateTimelineProvider>
+                    {children}
+                  </GoalsDateTimelineProvider>
+                )}
+              />
+            )}
+          >
+            <GroupedGoals />
+            <Spacer height={8} />
+            <Line />
+            <LabelsContainer>
+              <Match
+                value={type}
+                date={() => <GoalsDateTimeLabels />}
+                age={() => <GoalsAgeTimeLabels />}
+              />
+            </LabelsContainer>
+          </Wrap>
+        </VStack>
+      )}
     </VStack>
   )
 }
