@@ -19,12 +19,12 @@ export const GoalStatusSelector = ({
 
   return (
     <ExpandableSelector
+      showToggle={false}
       value={value}
       onChange={onChange}
       options={goalStatuses}
       getOptionKey={(option) => option}
       getOptionName={(option) => goalStatusNameRecord[option]}
-      style={{ minWidth: 140 }}
       returnFocus
       renderOption={(option) => (
         <HStack alignItems="center" gap={8}>
