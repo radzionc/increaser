@@ -10,7 +10,7 @@ export const SetDobPromptButton = () => {
         isOpen ? null : (
           <Button kind="secondary" onClick={onOpen}>
             <EmojiTextPrefix emoji="🎂" />
-            Set your birthdate
+            Add your birth date
           </Button>
         )
       }

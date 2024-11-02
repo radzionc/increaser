@@ -1,15 +1,20 @@
 import { useUser } from '@increaser/ui/user/state/user'
 import { GoalsTimelineProvider } from './GoalsTimelineProvider'
-import { VStack } from '@lib/ui/css/stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import { TimeLabels } from './TimeLabels'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
-import { SetDobPrompt } from '../dob/SetDobPrompt'
 import { goalsTimelineConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { CurrentAge } from './CurrentAge'
 import { GroupedGoals } from './GroupedGoals'
 import { Spacer } from '@lib/ui/layout/Spacer'
+import { ManageGoalsTimelineType } from './ManageGoalsTimelineType'
+import { Match } from '@lib/ui/base/Match'
+import { useGoalsTimelineType } from './state/goalsTimelineType'
+import { SetDobPromptButton } from '../dob/SetDobPromptButton'
+import { LabeledValue } from '@lib/ui/text/LabeledValue'
+import { format } from 'date-fns'
 
 const Line = styled.div`
   height: 1px;
@@ -26,21 +31,46 @@ const LabelsContainer = styled.div`
 export const GoalsTimeline = () => {
   const { dob } = useUser()
 
-  if (dob) {
-    return (
-      <GoalsTimelineProvider>
-        <VStack>
-          <GroupedGoals />
-          <Spacer height={8} />
-          <Line />
-          <LabelsContainer>
-            <TimeLabels />
-            <CurrentAge />
-          </LabelsContainer>
-        </VStack>
-      </GoalsTimelineProvider>
-    )
-  }
+  const [type] = useGoalsTimelineType()
 
-  return <SetDobPrompt />
+  return (
+    <VStack gap={20}>
+      <HStack
+        fullWidth
+        alignItems="center"
+        justifyContent="space-between"
+        wrap="wrap"
+        gap={20}
+      >
+        <Match
+          value={type}
+          date={() => (
+            <LabeledValue name="Today">
+              {format(Date.now(), 'd MMMM yyyy')}
+            </LabeledValue>
+          )}
+          age={() => (dob ? <CurrentAge /> : <SetDobPromptButton />)}
+        />
+        <ManageGoalsTimelineType />
+      </HStack>
+      <Match
+        value={type}
+        date={() => null}
+        age={() =>
+          dob ? (
+            <GoalsTimelineProvider>
+              <VStack>
+                <GroupedGoals />
+                <Spacer height={8} />
+                <Line />
+                <LabelsContainer>
+                  <TimeLabels />
+                </LabelsContainer>
+              </VStack>
+            </GoalsTimelineProvider>
+          ) : null
+        }
+      />
+    </VStack>
+  )
 }
