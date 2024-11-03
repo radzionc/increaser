@@ -3,28 +3,32 @@ import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { VStack } from '@lib/ui/css/stack'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
 import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
 import { ManageGoalTaskFactory } from './ManageGoalTaskFactory'
 import { LinkedEntitiesContainer } from './linkedEntity/LinkedEntitiesContainer'
+import { AddLinkedEntity } from './linkedEntity/AddLinkedEntity'
+import { CreateTaskFactoryForm } from '../../taskFactories/form/CreateTaskFactoryForm'
+import { LinkEntity } from './linkedEntity/LinkEntity'
+import { useUser } from '../../user/state/user'
+import { LinkedEntityActionsContainer } from './linkedEntity/LinkedEntityActionsContainer'
 
 export const GoalTaskFactoriesInput = ({
   value,
   onChange,
 }: InputProps<string[]>) => {
+  const { projects } = useUser()
   const taskFactories = useTaskFactories()
-  const options = useMemo(() => {
-    return taskFactories
-      .filter(({ id }) => !value.includes(id))
-      .map(({ id }) => id)
-  }, [taskFactories, value])
+  const options = useMemo(
+    () => taskFactories.filter(({ id }) => !value.includes(id)),
+    [taskFactories, value],
+  )
 
   return (
     <LinkedEntitiesContainer title="Recurring tasks">
-      {value.length > 0 && (
-        <VStack>
+      <VStack>
+        {value.length > 0 && (
           <ActiveItemIdProvider initialValue={null}>
             <ActiveTaskFactory />
             {taskFactories
@@ -37,13 +41,30 @@ export const GoalTaskFactoriesInput = ({
                 </CurrentTaskFactoryProvider>
               ))}
           </ActiveItemIdProvider>
-        </VStack>
-      )}
-      <VStack alignItems="start">
-        <AddGoalTaskFactory
-          options={options}
-          onFinish={(id) => onChange([...value, id])}
-        />
+        )}
+        <LinkedEntityActionsContainer>
+          <AddLinkedEntity
+            renderCreateForm={({ onClose }) => (
+              <CreateTaskFactoryForm
+                onFinish={(taskFactory) => {
+                  onClose()
+                  if (taskFactory) {
+                    onChange([...value, taskFactory.id])
+                  }
+                }}
+              />
+            )}
+          />
+          <LinkEntity
+            options={options}
+            getOptionName={(option) => option.name}
+            getOptionKey={(option) => option.id}
+            getOptionEmoji={(option) => projects[option.projectId].emoji}
+            onFinish={(taskFactory) => {
+              onChange([...value, taskFactory.id])
+            }}
+          />
+        </LinkedEntityActionsContainer>
       </VStack>
     </LinkedEntitiesContainer>
   )
