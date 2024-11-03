@@ -1,4 +1,4 @@
-import { hStack, vStack } from '@lib/ui/css/stack'
+import { vStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { addYears } from 'date-fns'
 import { dayToString, toDay } from '@lib/utils/time/Day'
@@ -21,34 +21,11 @@ import { GoalDeadlineDateInput } from './GoalDeadlineDateInput'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import styled from 'styled-components'
-import { panelFormConfig } from '../../../form/panel/config'
 import { Switch } from '@lib/ui/inputs/Switch'
-
-type GoalDeadlineInputProps = InputProps<string | number | null> & {
-  isRequired?: boolean
-}
-
-const Container = styled.div`
-  padding: 0;
-
-  min-height: ${toSizeUnit(panelFormConfig.sectionMinHeight)};
-
-  > * {
-    &:first-child {
-      ${horizontalPadding(panelDefaultPadding)};
-    }
-
-    &:only-child {
-      flex: 1;
-    }
-  }
-
-  ${hStack({ alignItems: 'stretch' })}
-`
+import { PanelFormSwitchPrefixedSection } from '../../../form/panel/PanelFormSwitchPrefixedSection'
 
 const TimeLeft = styled.div`
   ${vStack({
@@ -61,7 +38,7 @@ const TimeLeft = styled.div`
 export const GoalDeadlineInput = ({
   value,
   onChange,
-}: GoalDeadlineInputProps) => {
+}: InputProps<string | number | null>) => {
   const { dob } = useUser()
   const [deadlineType, setDeadlineType] = useState<GoalDeadlineType>(() => {
     if (typeof value === 'string') {
@@ -109,7 +86,7 @@ export const GoalDeadlineInput = ({
   const hasDeadline = deadlineType !== 'none'
 
   return (
-    <Container>
+    <PanelFormSwitchPrefixedSection>
       <Switch
         size="s"
         label="Deadline"
@@ -161,6 +138,6 @@ export const GoalDeadlineInput = ({
           </Text>
         </TimeLeft>
       )}
-    </Container>
+    </PanelFormSwitchPrefixedSection>
   )
 }

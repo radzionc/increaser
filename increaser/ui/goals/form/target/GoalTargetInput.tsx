@@ -5,39 +5,22 @@ import { Switch } from '@lib/ui/inputs/Switch'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { InputProps } from '@lib/ui/props'
 import styled, { useTheme } from 'styled-components'
-import { hStack, vStack } from '@lib/ui/css/stack'
+import { vStack } from '@lib/ui/css/stack'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { text, Text } from '@lib/ui/text'
-import { panelFormConfig } from '../../form/panel/config'
-import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 import { ProgressRing } from '@lib/ui/progress/ProgressRing'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-
-const Container = styled.div`
-  padding: 0;
-
-  min-height: ${toSizeUnit(panelFormConfig.sectionMinHeight)};
-
-  > * {
-    &:first-child {
-      ${horizontalPadding(panelDefaultPadding)};
-    }
-
-    &:only-child {
-      flex: 1;
-    }
-  }
-
-  ${hStack({ alignItems: 'stretch', fullWidth: true })}
-`
+import { textInputAutoWidth } from '@lib/ui/css/textInput'
+import { PanelFormSwitchPrefixedSection } from '../../../form/panel/PanelFormSwitchPrefixedSection'
 
 const Input = styled(AmountTextInput)`
   height: 40px;
-  width: 100px;
+  ${({ value, placeholder }) => textInputAutoWidth({ value, placeholder })};
 `
+
 const ProgressWrapper = styled.div`
   ${vStack({
     justifyContent: 'center',
@@ -67,7 +50,7 @@ export const GoalTargetInput = ({
   const { colors } = useTheme()
 
   return (
-    <Container>
+    <PanelFormSwitchPrefixedSection>
       <Switch
         size="s"
         label="Measure"
@@ -126,6 +109,6 @@ export const GoalTargetInput = ({
           </ProgressContainer>
         </ProgressWrapper>
       ) : null}
-    </Container>
+    </PanelFormSwitchPrefixedSection>
   )
 }

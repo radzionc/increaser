@@ -2,7 +2,7 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { GoalStatusSelector } from './GoalStatusSelector'
 import { GoalDeadlineInput } from './deadline/GoalDeadlineInput'
 import { GoalFormShape } from './GoalFormShape'
-import { GoalTargetInput } from './GoalTargetInput'
+import { GoalTargetInput } from './target/GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { ClosableComponentProps, InputProps } from '@lib/ui/props'
@@ -93,7 +93,6 @@ export const GoalFormFields = ({
           value={value.plan}
         />
         <GoalDeadlineInput
-          isRequired={value.status !== 'toDo'}
           value={value.deadlineAt}
           onChange={(deadlineAt) => onChange({ ...value, deadlineAt })}
         />
