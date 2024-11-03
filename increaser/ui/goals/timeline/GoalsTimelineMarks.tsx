@@ -1,33 +1,48 @@
 import { useGoalsTimeline } from './state/GoalsTimelineContext'
 import styled from 'styled-components'
 import { goalsTimelineConfig } from './config'
-import { getColor } from '@lib/ui/theme/getters'
+import { matchColor } from '@lib/ui/theme/getters'
 import { HStack } from '@lib/ui/css/stack'
 import { MONTHS_IN_YEAR } from '@lib/utils/time'
 import { range } from '@lib/utils/array/range'
+import { ComponentWithActiveState } from '@lib/ui/props'
+import { addMonths } from 'date-fns'
 
-const Mark = styled.div`
+const Mark = styled.div<ComponentWithActiveState>`
   width: 1px;
-  background: ${getColor('foregroundExtra')};
+  background: ${matchColor('isActive', {
+    true: 'textPrimary',
+    false: 'foregroundExtra',
+  })};
 `
 
 export const GoalsTimelineMarks = () => {
-  const { timeLabels } = useGoalsTimeline()
+  const { timeLabels, interval } = useGoalsTimeline()
 
   const labelsCount = (timeLabels.length - 1) * MONTHS_IN_YEAR + 1
 
+  const now = Date.now()
+
   return (
     <HStack fullWidth alignItems="center" justifyContent="space-between">
-      {range(labelsCount).map((index) => (
-        <Mark
-          key={index}
-          style={{
-            height:
-              goalsTimelineConfig.marksHeight *
-              (index % MONTHS_IN_YEAR === 0 ? 1 : 0.4),
-          }}
-        />
-      ))}
+      {range(labelsCount).map((index) => {
+        const height =
+          goalsTimelineConfig.marksHeight *
+          (index % MONTHS_IN_YEAR === 0 ? 1 : 0.4)
+
+        const time = addMonths(interval.start, index).getTime()
+        const isActive = time <= now
+
+        return (
+          <Mark
+            key={index}
+            isActive={isActive}
+            style={{
+              height,
+            }}
+          />
+        )
+      })}
     </HStack>
   )
 }
