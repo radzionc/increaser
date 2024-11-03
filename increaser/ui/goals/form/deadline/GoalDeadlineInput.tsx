@@ -1,4 +1,4 @@
-import { hStack, HStack } from '@lib/ui/css/stack'
+import { hStack, vStack } from '@lib/ui/css/stack'
 import { InputProps } from '@lib/ui/props'
 import { addYears } from 'date-fns'
 import { dayToString, toDay } from '@lib/utils/time/Day'
@@ -48,6 +48,14 @@ const Container = styled.div`
   }
 
   ${hStack({ alignItems: 'stretch' })}
+`
+
+const TimeLeft = styled.div`
+  ${vStack({
+    justifyContent: 'center',
+  })}
+  justify-self: flex-end;
+  padding-left: ${toSizeUnit(panelDefaultPadding)};
 `
 
 export const GoalDeadlineInput = ({
@@ -112,52 +120,46 @@ export const GoalDeadlineInput = ({
         <HStackSeparatedBy
           alignItems="center"
           gap={8}
-          separator={<Text color="shy">~</Text>}
+          separator={<Text color="shy">of</Text>}
         >
-          <HStack alignItems="center" gap={8}>
-            <HStackSeparatedBy
-              alignItems="center"
-              gap={8}
-              separator={<Text color="shy">of</Text>}
-            >
-              <ExpandableSelector
-                showToggle={false}
-                options={without(goalDeadlineTypes, 'none')}
-                value={deadlineType}
-                onChange={setDeadlineType}
-                renderOption={capitalizeFirstLetter}
-                getOptionKey={(option) => goalDeadlineName[option]}
+          <ExpandableSelector
+            showToggle={false}
+            options={without(goalDeadlineTypes, 'none')}
+            value={deadlineType}
+            onChange={setDeadlineType}
+            renderOption={capitalizeFirstLetter}
+            getOptionKey={(option) => goalDeadlineName[option]}
+          />
+          <Match
+            value={deadlineType}
+            date={() => (
+              <GoalDeadlineDateInput
+                value={guardedValue as string}
+                onChange={onChange}
               />
-              <Match
-                value={deadlineType}
-                date={() => (
-                  <GoalDeadlineDateInput
-                    value={guardedValue as string}
-                    onChange={onChange}
-                  />
-                )}
-                age={() =>
-                  dob ? (
-                    <GoalDeadlineAgeInput
-                      value={guardedValue as number}
-                      onChange={onChange}
-                    />
-                  ) : (
-                    <SetDobPromptButton />
-                  )
-                }
-              />
-            </HStackSeparatedBy>
-          </HStack>
-
-          {guardedValue && (
-            <Text color="supporting" size={14}>
-              {formatGoalTimeLeft(
-                getGoalDeadlineTimestamp({ deadlineAt: guardedValue, dob }),
-              )}
-            </Text>
-          )}
+            )}
+            age={() =>
+              dob ? (
+                <GoalDeadlineAgeInput
+                  value={guardedValue as number}
+                  onChange={onChange}
+                />
+              ) : (
+                <SetDobPromptButton />
+              )
+            }
+          />
         </HStackSeparatedBy>
+      )}
+
+      {guardedValue && (
+        <TimeLeft>
+          <Text color="primary" size={14}>
+            {formatGoalTimeLeft(
+              getGoalDeadlineTimestamp({ deadlineAt: guardedValue, dob }),
+            )}
+          </Text>
+        </TimeLeft>
       )}
     </Container>
   )

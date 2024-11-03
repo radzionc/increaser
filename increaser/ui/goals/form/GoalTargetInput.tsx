@@ -4,14 +4,17 @@ import { AmountTextInput } from '@lib/ui/inputs/AmountTextInput'
 import { Switch } from '@lib/ui/inputs/Switch'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { InputProps } from '@lib/ui/props'
-import styled from 'styled-components'
-import { hStack } from '@lib/ui/css/stack'
+import styled, { useTheme } from 'styled-components'
+import { hStack, vStack } from '@lib/ui/css/stack'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
-import { Text } from '@lib/ui/text'
-import { toPercents } from '@lib/utils/toPercents'
+import { text, Text } from '@lib/ui/text'
 import { panelFormConfig } from '../../form/panel/config'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
+import { centerContent } from '@lib/ui/css/centerContent'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
+import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
+import { ProgressRing } from '@lib/ui/progress/ProgressRing'
+import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 
 const Container = styled.div`
   padding: 0;
@@ -28,18 +31,41 @@ const Container = styled.div`
     }
   }
 
-  ${hStack({ alignItems: 'stretch' })}
+  ${hStack({ alignItems: 'stretch', fullWidth: true })}
 `
 
 const Input = styled(AmountTextInput)`
   height: 40px;
   width: 100px;
 `
+const ProgressWrapper = styled.div`
+  ${vStack({
+    justifyContent: 'center',
+  })}
+  padding-left: ${toSizeUnit(panelDefaultPadding)};
+`
+
+const ProgressContainer = styled.div`
+  ${sameDimensions(tightListItemMinHeight)};
+  ${centerContent};
+  position: relative;
+  ${text({
+    size: 12,
+    color: 'contrast',
+    weight: 600,
+  })}
+`
+
+const Progress = styled(ProgressRing)`
+  ${takeWholeSpaceAbsolutely};
+`
 
 export const GoalTargetInput = ({
   value,
   onChange,
 }: InputProps<GoalTarget | null>) => {
+  const { colors } = useTheme()
+
   return (
     <Container>
       <Switch
@@ -58,41 +84,48 @@ export const GoalTargetInput = ({
         }}
       />
       {value && (
-        <HStackSeparatedBy gap={8} separator={<Text color="shy">~</Text>}>
-          <HStackSeparatedBy gap={8} separator={<Text color="shy">/</Text>}>
-            <Input
-              value={value.current ?? null}
-              placeholder="Current"
-              onValueChange={(current) => {
-                onChange({
-                  ...value,
-                  current,
-                })
-              }}
-            />
-            <Input
-              placeholder="Target"
-              value={value.value ?? null}
-              onValueChange={(target) => {
-                onChange({
-                  ...value,
-                  value: target,
-                })
-              }}
-            />
-          </HStackSeparatedBy>
-          {value.value &&
-          value.value > 0 &&
-          value.current &&
-          value.current > 0 ? (
-            <Text color="supporting">
-              <EmphasizeNumbers
-                value={toPercents(value.current / value.value, 'round')}
-              />
-            </Text>
-          ) : null}
+        <HStackSeparatedBy gap={8} separator={<Text color="shy">/</Text>}>
+          <Input
+            value={value.current ?? null}
+            placeholder="Current"
+            onValueChange={(current) => {
+              onChange({
+                ...value,
+                current,
+              })
+            }}
+          />
+          <Input
+            placeholder="Target"
+            value={value.value ?? null}
+            onValueChange={(target) => {
+              onChange({
+                ...value,
+                value: target,
+              })
+            }}
+          />
         </HStackSeparatedBy>
       )}
+      {value &&
+      value.value &&
+      value.value > 0 &&
+      value.current &&
+      value.current > 0 ? (
+        <ProgressWrapper>
+          <ProgressContainer>
+            <Text size={12}>
+              {Math.round((value.current * 100) / value.value)}
+            </Text>
+            <Progress
+              size={tightListItemMinHeight}
+              value={value.current / value.value}
+              thickness={2}
+              color={colors.textPrimary}
+            ></Progress>
+          </ProgressContainer>
+        </ProgressWrapper>
+      ) : null}
     </Container>
   )
 }
