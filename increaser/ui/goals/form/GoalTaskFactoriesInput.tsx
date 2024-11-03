@@ -4,15 +4,15 @@ import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
-import { RemoveGoalTaskFactory } from './RemoveGoalTaskFactory'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
 import styled from 'styled-components'
-import { TaskFactoryItem } from '../../taskFactories/TaskFactoryItem'
 import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { ManageGoalTaskFactory } from './ManageGoalTaskFactory'
+import { TaskFactoryItemContent } from '../../taskFactories/TaskFactoryItemContent'
 
 const Content = styled(HStack)`
   width: 100%;
@@ -52,9 +52,9 @@ export const GoalTaskFactoriesInput = ({
                 return (
                   <CurrentTaskFactoryProvider key={item.id} value={item}>
                     <Content>
-                      <TaskFactoryItem />
-                      <RemoveGoalTaskFactory
-                        onClick={() => onChange(without(value, item.id))}
+                      <TaskFactoryItemContent />
+                      <ManageGoalTaskFactory
+                        onRemove={() => onChange(without(value, item.id))}
                       />
                     </Content>
                   </CurrentTaskFactoryProvider>
