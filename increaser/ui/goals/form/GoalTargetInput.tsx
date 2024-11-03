@@ -1,7 +1,5 @@
 import { GoalTarget } from '@increaser/entities/Goal'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { CircleIcon } from '@lib/ui/icons/CircleIcon'
-import { TargetIcon } from '@lib/ui/icons/TargetIcon'
 import { AmountTextInput } from '@lib/ui/inputs/AmountTextInput'
 import { Switch } from '@lib/ui/inputs/Switch'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
@@ -13,6 +11,7 @@ import { Text } from '@lib/ui/text'
 import { toPercents } from '@lib/utils/toPercents'
 import { panelFormConfig } from '../../form/panel/config'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 
 const Container = styled.div`
   padding: 0;
@@ -34,7 +33,7 @@ const Container = styled.div`
 
 const Input = styled(AmountTextInput)`
   height: 40px;
-  width: 120px;
+  width: 100px;
 `
 
 export const GoalTargetInput = ({
@@ -45,7 +44,7 @@ export const GoalTargetInput = ({
     <Container>
       <Switch
         size="s"
-        label="Track a number"
+        label="Measure"
         value={!!value}
         onChange={(value) => {
           onChange(
@@ -62,7 +61,6 @@ export const GoalTargetInput = ({
         <HStackSeparatedBy gap={8} separator={<Text color="shy">~</Text>}>
           <HStackSeparatedBy gap={8} separator={<Text color="shy">/</Text>}>
             <Input
-              unit={<CircleIcon />}
               value={value.current ?? null}
               placeholder="Current"
               onValueChange={(current) => {
@@ -73,7 +71,6 @@ export const GoalTargetInput = ({
               }}
             />
             <Input
-              unit={<TargetIcon />}
               placeholder="Target"
               value={value.value ?? null}
               onValueChange={(target) => {
@@ -88,8 +85,10 @@ export const GoalTargetInput = ({
           value.value > 0 &&
           value.current &&
           value.current > 0 ? (
-            <Text color="shy">
-              {toPercents(value.current / value.value, 'round')}
+            <Text color="supporting">
+              <EmphasizeNumbers
+                value={toPercents(value.current / value.value, 'round')}
+              />
             </Text>
           ) : null}
         </HStackSeparatedBy>
