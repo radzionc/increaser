@@ -48,18 +48,16 @@ export const GoalTaskFactoriesInput = ({
             <ActiveTaskFactory />
             {taskFactories
               .filter(({ id }) => value.includes(id))
-              .map((item) => {
-                return (
-                  <CurrentTaskFactoryProvider key={item.id} value={item}>
-                    <Content>
-                      <TaskFactoryItemContent />
-                      <ManageGoalTaskFactory
-                        onRemove={() => onChange(without(value, item.id))}
-                      />
-                    </Content>
-                  </CurrentTaskFactoryProvider>
-                )
-              })}
+              .map((item) => (
+                <CurrentTaskFactoryProvider key={item.id} value={item}>
+                  <Content>
+                    <TaskFactoryItemContent />
+                    <ManageGoalTaskFactory
+                      onRemove={() => onChange(without(value, item.id))}
+                    />
+                  </Content>
+                </CurrentTaskFactoryProvider>
+              ))}
           </ActiveItemIdProvider>
         </VStack>
       )}
