@@ -20,5 +20,5 @@ export const PanelFormSwitchPrefixedSection = styled.div`
     }
   }
 
-  ${hStack({ alignItems: 'stretch', fullWidth: true })}
+  ${hStack({ alignItems: 'stretch', fullWidth: true, wrap: 'wrap' })}
 `

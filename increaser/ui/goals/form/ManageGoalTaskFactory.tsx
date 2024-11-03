@@ -25,6 +25,21 @@ import { Text } from '@lib/ui/text'
 import { UnlinkIcon } from '@lib/ui/icons/UnlinkIcon'
 import { TaskFactoryItemContent } from '../../taskFactories/TaskFactoryItemContent'
 
+const Container = styled(IconButton)<ComponentWithActiveState>`
+  ${sameDimensions(tightListItemMinHeight)}
+  border: 1px transparent solid;
+  display: none;
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      display: block;
+      color: ${getColor('contrast')};
+      background: ${getColor('background')};
+      border-color: ${getColor('text')};
+    `}
+`
+
 const Wrapper = styled.div`
   width: 100%;
 
@@ -38,19 +53,16 @@ const Wrapper = styled.div`
       flex: 1;
     }
   }
-`
 
-const Container = styled(IconButton)<ComponentWithActiveState>`
-  ${sameDimensions(tightListItemMinHeight)}
-  border: 1px transparent solid;
+  &:hover ${Container} {
+    display: block;
+  }
 
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      color: ${getColor('contrast')};
-      background: ${getColor('background')};
-      border-color: ${getColor('text')};
-    `}
+  @media (hover: none) {
+    ${Container} {
+      display: block;
+    }
+  }
 `
 
 export const ManageGoalTaskFactory = ({
