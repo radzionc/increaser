@@ -2,12 +2,10 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { GoalsAgeTimelineProvider } from './GoalsAgeTimelineProvider'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
-import { getColor } from '@lib/ui/theme/getters'
 import { goalsTimelineConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { CurrentAge } from './CurrentAge'
 import { GroupedGoals } from './GroupedGoals'
-import { Spacer } from '@lib/ui/layout/Spacer'
 import { ManageGoalsTimelineType } from './ManageGoalsTimelineType'
 import { Match } from '@lib/ui/base/Match'
 import { useGoalsTimelineType } from './state/goalsTimelineType'
@@ -18,12 +16,7 @@ import { GoalsAgeTimeLabels } from './GoalsAgeTimeLabels'
 import { GoalsDateTimelineProvider } from './GoalsDateTimelineProvider'
 import { GoalsDateTimeLabels } from './GoalsDateTimeLabels'
 import { Wrap } from '@lib/ui/base/Wrap'
-
-const Line = styled.div`
-  height: 1px;
-  width: 100%;
-  background: ${getColor('mistExtra')};
-`
+import { GoalsTimelineMarks } from './GoalsTimelineMarks'
 
 const LabelsContainer = styled.div`
   width: 100%;
@@ -57,7 +50,7 @@ export const GoalsTimeline = () => {
         <ManageGoalsTimelineType />
       </HStack>
       {type === 'age' && !dob ? null : (
-        <VStack>
+        <VStack gap={4}>
           <Wrap
             wrap={(children) => (
               <Match
@@ -76,8 +69,7 @@ export const GoalsTimeline = () => {
             )}
           >
             <GroupedGoals />
-            <Spacer height={8} />
-            <Line />
+            <GoalsTimelineMarks />
             <LabelsContainer>
               <Match
                 value={type}
