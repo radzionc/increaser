@@ -1,4 +1,3 @@
-import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { InputProps } from '@lib/ui/props'
 import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { VStack } from '@lib/ui/css/stack'
@@ -7,15 +6,9 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
-import styled from 'styled-components'
 import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { ManageGoalTaskFactory } from './ManageGoalTaskFactory'
-
-const Container = styled(FieldArrayContainer)`
-  padding: ${toSizeUnit(panelDefaultPadding)};
-`
+import { LinkedEntitiesContainer } from './linkedEntity/LinkedEntitiesContainer'
 
 export const GoalTaskFactoriesInput = ({
   value,
@@ -29,7 +22,7 @@ export const GoalTaskFactoriesInput = ({
   }, [taskFactories, value])
 
   return (
-    <Container title="Recurring tasks">
+    <LinkedEntitiesContainer title="Recurring tasks">
       {value.length > 0 && (
         <VStack>
           <ActiveItemIdProvider initialValue={null}>
@@ -52,6 +45,6 @@ export const GoalTaskFactoriesInput = ({
           onFinish={(id) => onChange([...value, id])}
         />
       </VStack>
-    </Container>
+    </LinkedEntitiesContainer>
   )
 }

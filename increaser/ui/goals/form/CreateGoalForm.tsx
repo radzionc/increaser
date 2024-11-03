@@ -10,6 +10,7 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { GoalFormFields } from './GoalFormFields'
 import { useGoalStatusFilter } from '../filter/useGoalStatusFilter'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
+import { HStack } from '@lib/ui/css/stack'
 
 export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
   const [statusFilter] = useGoalStatusFilter()
@@ -46,7 +47,9 @@ export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
       <GoalFormFields
         onClose={onFinish}
         actions={
-          <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+          <HStack flexGrow justifyContent="end">
+            <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+          </HStack>
         }
         value={value}
         onChange={setValue}

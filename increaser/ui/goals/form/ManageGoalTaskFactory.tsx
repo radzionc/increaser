@@ -3,7 +3,7 @@ import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentTaskFactory } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { TaskFactoryItemContent } from '../../taskFactories/TaskFactoryItemContent'
-import { GoalLinkedEntity } from './GoalLinkedEntity'
+import { GoalLinkedEntity } from './linkedEntity/GoalLinkedEntity'
 
 export const ManageGoalTaskFactory = ({
   onRemove,
