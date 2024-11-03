@@ -15,7 +15,7 @@ import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { getColor } from '@lib/ui/theme/getters'
-import { VStack, HStack } from '@lib/ui/css/stack'
+import { VStack, HStack, hStack } from '@lib/ui/css/stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { OptionItem } from '@lib/ui/select/OptionItem'
@@ -23,6 +23,22 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { FloatingFocusManager } from '@floating-ui/react'
 import { Text } from '@lib/ui/text'
 import { UnlinkIcon } from '@lib/ui/icons/UnlinkIcon'
+import { TaskFactoryItemContent } from '../../taskFactories/TaskFactoryItemContent'
+
+const Wrapper = styled.div`
+  width: 100%;
+
+  ${hStack({
+    gap: 8,
+    alignItems: 'center',
+  })}
+
+  > * {
+    &:first-child {
+      flex: 1;
+    }
+  }
+`
 
 const Container = styled(IconButton)<ComponentWithActiveState>`
   ${sameDimensions(tightListItemMinHeight)}
@@ -86,7 +102,8 @@ export const ManageGoalTaskFactory = ({
   })
 
   return (
-    <>
+    <Wrapper>
+      <TaskFactoryItemContent />
       <Container
         {...getReferenceProps()}
         isActive={isOpen}
@@ -124,6 +141,6 @@ export const ManageGoalTaskFactory = ({
           </FloatingOptionsContainer>
         </FloatingFocusManager>
       )}
-    </>
+    </Wrapper>
   )
 }

@@ -1,7 +1,7 @@
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { InputProps } from '@lib/ui/props'
 import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
-import { HStack, VStack } from '@lib/ui/css/stack'
+import { VStack } from '@lib/ui/css/stack'
 import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { AddGoalTaskFactory } from './AddGoalTaskFactory'
@@ -12,18 +12,6 @@ import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { ManageGoalTaskFactory } from './ManageGoalTaskFactory'
-import { TaskFactoryItemContent } from '../../taskFactories/TaskFactoryItemContent'
-
-const Content = styled(HStack)`
-  width: 100%;
-  align-items: center;
-  gap: 8px;
-  > * {
-    &:first-child {
-      flex: 1;
-    }
-  }
-`
 
 const Container = styled(FieldArrayContainer)`
   padding: ${toSizeUnit(panelDefaultPadding)};
@@ -50,12 +38,9 @@ export const GoalTaskFactoriesInput = ({
               .filter(({ id }) => value.includes(id))
               .map((item) => (
                 <CurrentTaskFactoryProvider key={item.id} value={item}>
-                  <Content>
-                    <TaskFactoryItemContent />
-                    <ManageGoalTaskFactory
-                      onRemove={() => onChange(without(value, item.id))}
-                    />
-                  </Content>
+                  <ManageGoalTaskFactory
+                    onRemove={() => onChange(without(value, item.id))}
+                  />
                 </CurrentTaskFactoryProvider>
               ))}
           </ActiveItemIdProvider>
