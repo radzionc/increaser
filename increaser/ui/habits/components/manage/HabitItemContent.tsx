@@ -3,9 +3,8 @@ import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { getColor } from '@lib/ui/theme/getters'
 import { useCurrentHabit } from '@increaser/ui/habits/CurrentHabitProvider'
-import { ChecklistItemFrame } from '@lib/ui/checklist/ChecklistItemFrame'
-import { Center } from '@lib/ui/layout/Center'
 import { habitContentMinHeight } from './config'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 
 const Name = styled(Text)`
   text-align: start;
@@ -17,11 +16,8 @@ export const HabitItemContent = () => {
   const { name, emoji } = useCurrentHabit()
 
   return (
-    <ChecklistItemFrame>
-      <Center>
-        <Text color="contrast">{emoji}</Text>
-      </Center>
+    <PrefixedItemFrame prefix={<Text color="contrast">{emoji}</Text>}>
       <Name>{name}</Name>
-    </ChecklistItemFrame>
+    </PrefixedItemFrame>
   )
 }

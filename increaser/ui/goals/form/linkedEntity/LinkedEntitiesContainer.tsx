@@ -6,5 +6,6 @@ import styled from 'styled-components'
 
 export const LinkedEntitiesContainer = styled(FieldArrayContainer)`
   ${horizontalPadding(panelDefaultPadding)};
-  ${verticalPadding(panelDefaultPadding / 2)}
+  ${verticalPadding(panelDefaultPadding / 2)};
+  gap: 4px;
 `

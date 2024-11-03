@@ -7,8 +7,8 @@ import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { BodyPortal } from '@lib/ui/dom/BodyPortal'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
 import { LinkIcon } from '@lib/ui/icons/LinkIcon'
-import { Text } from '@lib/ui/text'
 import { LinkActionContainer } from './LinkActionContainer'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 
 type LinkEntityProps<T> = ComponentWithOptionsProps<T> &
   ValueFinishProps<T> & {
@@ -42,8 +42,7 @@ export function LinkEntity<T>({
   return (
     <>
       <LinkActionContainer {...getReferenceProps()} isActive={isOpen}>
-        <LinkIcon />
-        <Text>Link</Text>
+        <PrefixedItemFrame prefix={<LinkIcon />}>Link</PrefixedItemFrame>
       </LinkActionContainer>
       {isOpen && (
         <BodyPortal>

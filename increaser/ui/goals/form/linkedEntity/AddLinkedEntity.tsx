@@ -4,7 +4,7 @@ import { ClosableComponentProps } from '@lib/ui/props'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { ReactNode } from 'react'
 import { LinkActionContainer } from './LinkActionContainer'
-import { Text } from '@lib/ui/text'
+import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 
 type AddLinkedEntityProps = {
   renderCreateForm: (props: ClosableComponentProps) => ReactNode
@@ -15,8 +15,7 @@ export const AddLinkedEntity = ({ renderCreateForm }: AddLinkedEntityProps) => {
     <Opener
       renderOpener={({ onOpen }) => (
         <LinkActionContainer onClick={onOpen}>
-          <PlusIcon />
-          <Text>Add</Text>
+          <PrefixedItemFrame prefix={<PlusIcon />}>Add</PrefixedItemFrame>
         </LinkActionContainer>
       )}
       renderContent={({ onClose }) => (
