@@ -5,7 +5,7 @@ import { Opener } from '@lib/ui/base/Opener'
 import { SetDobOverlay } from '../dob/SetDobOverlay'
 import { useUser } from '../../user/state/user'
 import { Hoverable } from '@lib/ui/base/Hoverable'
-import { LabeledValue } from '@lib/ui/text/LabeledValue'
+import { Text } from '@lib/ui/text'
 
 export const CurrentAge = () => {
   const { dob } = useUser()
@@ -20,11 +20,12 @@ export const CurrentAge = () => {
     <Opener
       renderOpener={({ onOpen }) => (
         <Hoverable onClick={onOpen}>
-          <LabeledValue name="Your age">
+          <Text color="primary">
             {formatDuration(duration, {
               format: ['years', 'months', 'days'],
-            })}
-          </LabeledValue>
+            })}{' '}
+            old
+          </Text>
         </Hoverable>
       )}
       renderContent={({ onClose }) => <SetDobOverlay onFinish={onClose} />}

@@ -6,17 +6,16 @@ import { goalsTimelineConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { CurrentAge } from './CurrentAge'
 import { GroupedGoals } from './GroupedGoals'
-import { ManageGoalsTimelineType } from './ManageGoalsTimelineType'
 import { Match } from '@lib/ui/base/Match'
 import { useGoalsTimelineType } from './state/goalsTimelineType'
-import { SetDobPromptButton } from '../dob/SetDobPromptButton'
-import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { format } from 'date-fns'
 import { GoalsAgeTimeLabels } from './GoalsAgeTimeLabels'
 import { GoalsDateTimelineProvider } from './GoalsDateTimelineProvider'
 import { GoalsDateTimeLabels } from './GoalsDateTimeLabels'
 import { Wrap } from '@lib/ui/base/Wrap'
 import { GoalsTimelineMarks } from './GoalsTimelineMarks'
+import { SetDobPrompt } from '../dob/SetDobPrompt'
+import { Text } from '@lib/ui/text'
 
 const LabelsContainer = styled.div`
   width: 100%;
@@ -30,7 +29,7 @@ export const GoalsTimeline = () => {
   const [type] = useGoalsTimelineType()
 
   return (
-    <VStack gap={20}>
+    <VStack gap={8}>
       <HStack
         fullWidth
         alignItems="center"
@@ -41,15 +40,14 @@ export const GoalsTimeline = () => {
         <Match
           value={type}
           date={() => (
-            <LabeledValue name="Today">
-              {format(Date.now(), 'd MMMM yyyy')}
-            </LabeledValue>
+            <Text color="primary">{format(Date.now(), 'd MMMM yyyy')}</Text>
           )}
-          age={() => (dob ? <CurrentAge /> : <SetDobPromptButton />)}
+          age={() => (dob ? <CurrentAge /> : null)}
         />
-        <ManageGoalsTimelineType />
       </HStack>
-      {type === 'age' && !dob ? null : (
+      {type === 'age' && !dob ? (
+        <SetDobPrompt />
+      ) : (
         <VStack gap={4}>
           <Wrap
             wrap={(children) => (
