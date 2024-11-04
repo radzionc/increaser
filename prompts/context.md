@@ -99,8 +99,6 @@ To support recurring actions needed for many goals, users can link recurring tas
 
 At the top of the "Goals" page, a timeline shows goals positioned according to their deadlines, with two view options: age-based and date-based. In age-based view, the user’s age is displayed at the top with day precision, and the timeline has age labels. In date-based view, today’s date is shown at the top, and the timeline displays year labels.
 
-An educational section on the right side of the page provides advice on setting and achieving goals. Users can collapse this section if they prefer.
-
 ## Projects
 
 On the "Projects" page, users can view all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and status, which can be "active," "inactive," or "archived." One project, "Other," cannot be deleted. When a user deletes a project, all data associated with that project is reassigned to the "Other" project. Users can reorder projects by dragging them. Each project item displays an emoji, name, a budget or goal (if set), and an indicator if it's a "workday project" (Monday to Friday).

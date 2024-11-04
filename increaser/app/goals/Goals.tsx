@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import { GoalList } from './GoalList'
 import { AddGoal } from './AddGoal'
 import { ManageGoalsTimelineType } from '@increaser/ui/goals/timeline/ManageGoalsTimelineType'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { ActiveGoal } from '@increaser/ui/goals/ActiveGoal'
 
 const Container = styled(VStack)`
   gap: 32px;
@@ -19,8 +21,11 @@ export const Goals = () => {
         <ManageGoalsTimelineType />
         <AddGoal />
       </PageHeaderControlsArea>
-      <GoalsTimeline />
-      <GoalList />
+      <ActiveItemIdProvider initialValue={null}>
+        <ActiveGoal />
+        <GoalsTimeline />
+        <GoalList />
+      </ActiveItemIdProvider>
     </Container>
   )
 }

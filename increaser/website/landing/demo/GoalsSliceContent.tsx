@@ -4,6 +4,8 @@ import { GoalItemContent } from '@increaser/ui/goals/GoalItemContent'
 import { VStack } from '@lib/ui/css/stack'
 import { GoalsTimeline } from '@increaser/ui/goals/timeline/GoalsTimeline'
 import { useFilteredScheduledGoals } from '@increaser/ui/goals/filter/useFilteredScheduledGoals'
+import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
+import { ActiveGoal } from '@increaser/ui/goals/ActiveGoal'
 
 const Container = styled(VStack)`
   gap: 40px;
@@ -15,13 +17,16 @@ export const GoalsSliceContent = () => {
   const items = useFilteredScheduledGoals()
 
   return (
-    <Container>
-      <GoalsTimeline />
-      {items.map((item) => (
-        <CurrentGoalProvider key={item.id} value={item}>
-          <GoalItemContent />
-        </CurrentGoalProvider>
-      ))}
-    </Container>
+    <ActiveItemIdProvider initialValue={null}>
+      <ActiveGoal />
+      <Container>
+        <GoalsTimeline />
+        {items.map((item) => (
+          <CurrentGoalProvider key={item.id} value={item}>
+            <GoalItemContent />
+          </CurrentGoalProvider>
+        ))}
+      </Container>
+    </ActiveItemIdProvider>
   )
 }

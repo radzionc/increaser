@@ -7,8 +7,11 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { getGoalStatusColor } from '../getGoalStatusColor'
 import { useCurrentGoal } from '../CurrentGoalProvider'
+import { interactive } from '@lib/ui/css/interactive'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled.div`
+  ${interactive};
   border: 2px solid ${getColor('mistExtra')};
   ${round}
   color: ${getColor('contrast')};
@@ -29,12 +32,14 @@ const Indicator = styled.div`
 `
 
 export const TimelineGoalItem = () => {
-  const { emoji, status } = useCurrentGoal()
+  const { emoji, status, id } = useCurrentGoal()
 
   const theme = useTheme()
 
+  const [, setActiveItemId] = useActiveItemId()
+
   return (
-    <Container>
+    <Container onClick={() => setActiveItemId(id)}>
       {emoji}
       <Indicator
         style={{
