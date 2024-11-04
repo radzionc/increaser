@@ -1,18 +1,20 @@
 import { CurrentGoalProvider } from '@increaser/ui/goals/CurrentGoalProvider'
 import { useFilteredGoals } from '@increaser/ui/goals/filter/useFilteredGoals'
 import { GoalItem } from '@increaser/ui/goals/GoalItem'
-import { VStack } from '@lib/ui/css/stack'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
 export const GoalList = () => {
   const items = useFilteredGoals()
 
   return (
-    <VStack>
+    <SeparatedByLine gap={12}>
       {items.map((item) => (
-        <CurrentGoalProvider key={item.id} value={item}>
-          <GoalItem />
-        </CurrentGoalProvider>
+        <div key={item.id}>
+          <CurrentGoalProvider value={item}>
+            <GoalItem />
+          </CurrentGoalProvider>
+        </div>
       ))}
-    </VStack>
+    </SeparatedByLine>
   )
 }

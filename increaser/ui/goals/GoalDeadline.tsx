@@ -8,7 +8,6 @@ import { formatGoalDeadline } from '@increaser/entities-utils/goal/formatGoalDea
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { formatGoalTimeLeft } from '@increaser/entities-utils/goal/formatGoalTimeLeft'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
-import { GoalSection } from './GoalSection'
 
 export const GoalDeadline = () => {
   const { dob } = useUser()
@@ -24,13 +23,16 @@ export const GoalDeadline = () => {
   })
 
   return (
-    <GoalSection icon={<ClockIcon />}>
-      <HStackSeparatedBy gap={8} wrap="wrap" separator={'~'}>
-        <Text>{formatGoalDeadline(deadlineAt)}</Text>
-        {deadlineTimestamp > now && (
-          <Text>{formatGoalTimeLeft(deadlineTimestamp)} left</Text>
-        )}
-      </HStackSeparatedBy>
-    </GoalSection>
+    <HStackSeparatedBy gap={8} wrap="wrap" separator={'~'}>
+      <Text centerVertically style={{ gap: 8 }}>
+        <ClockIcon />
+        <span>{formatGoalDeadline(deadlineAt)}</span>
+      </Text>
+      {deadlineTimestamp > now && (
+        <Text color="primary">
+          {formatGoalTimeLeft(deadlineTimestamp)} left
+        </Text>
+      )}
+    </HStackSeparatedBy>
   )
 }

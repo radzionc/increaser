@@ -1,4 +1,3 @@
-import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import styled, { useTheme } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { coloredTag } from '@lib/ui/css/coloredTag'
@@ -10,14 +9,13 @@ import { goalStatusNameRecord } from '@increaser/entities/Goal'
 import { useCurrentGoal } from './CurrentGoalProvider'
 import { useMemo } from 'react'
 import { toPercents } from '@lib/utils/toPercents'
-import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 
-const Container = styled.div<{ $color: HSLA }>`
-  height: ${toSizeUnit(tightListItemConfig.lineHeight)};
+const Container = styled.span<{ $color: HSLA }>`
+  height: 28px;
   ${borderRadius.s};
   font-size: 14px;
   flex-shrink: 0;
-  font-weight: 500;
+  font-weight: 600;
   ${centerContent};
   ${horizontalPadding(8)}
   ${({ $color }) => coloredTag($color)}

@@ -1,14 +1,17 @@
 import { useCurrentGoal } from './CurrentGoalProvider'
-import { Text } from '@lib/ui/text'
-import { MapIcon } from '@lib/ui/icons/MapIcon'
-import { GoalSection } from './GoalSection'
+import { text } from '@lib/ui/text'
+import styled from 'styled-components'
+
+const Container = styled.p`
+  ${text({
+    color: 'supporting',
+    height: 'l',
+  })}
+  white-space: pre-line;
+`
 
 export const GoalPlan = () => {
   const { plan } = useCurrentGoal()
 
-  return (
-    <GoalSection icon={<MapIcon />}>
-      <Text>{plan}</Text>
-    </GoalSection>
-  )
+  return <Container>{plan}</Container>
 }
