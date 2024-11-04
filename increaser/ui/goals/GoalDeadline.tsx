@@ -28,7 +28,7 @@ export const GoalDeadline = () => {
       <HStackSeparatedBy gap={8} wrap="wrap" separator={'~'}>
         <Text>{formatGoalDeadline(deadlineAt)}</Text>
         {deadlineTimestamp > now && (
-          <Text>{formatGoalTimeLeft(deadlineTimestamp)}</Text>
+          <Text>{formatGoalTimeLeft(deadlineTimestamp)} left</Text>
         )}
       </HStackSeparatedBy>
     </GoalSection>

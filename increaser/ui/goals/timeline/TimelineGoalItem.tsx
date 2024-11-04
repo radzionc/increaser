@@ -9,6 +9,11 @@ import { getGoalStatusColor } from '../getGoalStatusColor'
 import { useCurrentGoal } from '../CurrentGoalProvider'
 import { interactive } from '@lib/ui/css/interactive'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { Tooltip } from '@lib/ui/tooltips/Tooltip'
+import { VStack } from '@lib/ui/css/stack'
+import { Text } from '@lib/ui/text'
+import { ScheduledGoal } from '@increaser/entities/Goal'
+import { GoalDeadline } from '../GoalDeadline'
 
 const Container = styled.div`
   ${interactive};
@@ -32,20 +37,30 @@ const Indicator = styled.div`
 `
 
 export const TimelineGoalItem = () => {
-  const { emoji, status, id } = useCurrentGoal()
+  const { emoji, status, id, name } = useCurrentGoal() as ScheduledGoal
 
   const theme = useTheme()
 
   const [, setActiveItemId] = useActiveItemId()
 
   return (
-    <Container onClick={() => setActiveItemId(id)}>
-      {emoji}
-      <Indicator
-        style={{
-          background: getGoalStatusColor(status, theme).toCssValue(),
-        }}
-      />
-    </Container>
+    <Tooltip
+      renderOpener={(props) => (
+        <Container {...props} onClick={() => setActiveItemId(id)}>
+          {emoji}
+          <Indicator
+            style={{
+              background: getGoalStatusColor(status, theme).toCssValue(),
+            }}
+          />
+        </Container>
+      )}
+      content={
+        <VStack gap={4}>
+          <Text color="contrast">{name}</Text>
+          <GoalDeadline />
+        </VStack>
+      }
+    />
   )
 }

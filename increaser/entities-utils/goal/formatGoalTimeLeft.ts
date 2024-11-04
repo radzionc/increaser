@@ -17,5 +17,6 @@ export const formatGoalTimeLeft = (deadlineAt: number) => {
   const durationStr = formatDuration(duration, {
     format: ['years', 'months', 'days', ...extraPrecision],
   })
+
   return durationStr
 }
