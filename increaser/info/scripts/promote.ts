@@ -31,13 +31,18 @@ const announce = (id: InfoYouTubeVideo) => {
 
   const youTubeVideoUrl = infoYouTubeVideos[id]
 
+  if (!youTubeVideoUrl) {
+    console.error('YouTube video URL not found')
+    return
+  }
+
   const prompt = [
     [
       'You will will write to promote a new YouTube video posted on Increaser YouTube channel.',
       'Use your judgment to make the text engaging and informative.',
       'Make each text feel native to the platform.',
       `Include YouTube video URL ${youTubeVideoUrl} in the content.`,
-      // 'Return copy for each platform in a separate markdown snippet',
+      'Return copy for each platform in a separate markdown snippet',
     ].join(' '),
 
     ...toEntries(socialPrompt).map(({ key, value }) =>
