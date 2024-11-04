@@ -69,6 +69,7 @@ export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
           <PanelFormDeleteButton
             onClick={() => {
               deleteGoal(id)
+              onClose()
             }}
           />
         }
