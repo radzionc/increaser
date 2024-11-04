@@ -16,6 +16,7 @@ import { Wrap } from '@lib/ui/base/Wrap'
 import { GoalsTimelineMarks } from './GoalsTimelineMarks'
 import { SetDobPrompt } from '../dob/SetDobPrompt'
 import { Text } from '@lib/ui/text'
+import { UIComponentProps } from '@lib/ui/props'
 
 const LabelsContainer = styled.div`
   width: 100%;
@@ -23,13 +24,17 @@ const LabelsContainer = styled.div`
   height: ${toSizeUnit(goalsTimelineConfig.timeLabelHeight)};
 `
 
-export const GoalsTimeline = () => {
+type GoalsTimelineProps = UIComponentProps & {
+  controls?: React.ReactNode
+}
+
+export const GoalsTimeline = ({ controls, ...rest }: GoalsTimelineProps) => {
   const { dob } = useUser()
 
   const [type] = useGoalsTimelineType()
 
   return (
-    <VStack gap={8}>
+    <VStack gap={8} {...rest}>
       <HStack
         fullWidth
         alignItems="center"
@@ -44,6 +49,7 @@ export const GoalsTimeline = () => {
           )}
           age={() => (dob ? <CurrentAge /> : null)}
         />
+        {controls}
       </HStack>
       {type === 'age' && !dob ? (
         <SetDobPrompt />
