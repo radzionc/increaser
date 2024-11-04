@@ -1,5 +1,6 @@
 import { Goal, Goals } from '@increaser/entities/Goal'
 import { recordFromItems } from '@lib/utils/record/recordFromItems'
+import { DemoHabit } from './habits'
 
 type GoalDescription = Pick<
   Goal,
@@ -10,6 +11,7 @@ type GoalDescription = Pick<
   | 'plan'
   | 'target'
   | 'taskFactories'
+  | 'habits'
 >
 
 const items: GoalDescription[] = [
@@ -30,31 +32,31 @@ const items: GoalDescription[] = [
   },
   {
     emoji: '💪',
-    name: 'Perform 20 pull-ups in a single set',
+    name: 'Achieve an Athletic Build',
     status: 'inProgress',
-    deadlineAt: 28,
-    plan: 'I will do a 25-minute bodyweight workout every other day.',
+    deadlineAt: 27,
+    plan: 'Engage in daily workouts combining strength training and cardio exercises to build muscle and reduce body fat. Maintain a balanced diet rich in protein and essential nutrients to support muscle growth. Ensure adequate rest and sleep for recovery and overall health.',
+    habits: [DemoHabit.Exercise, DemoHabit.Fasting, DemoHabit.WalkAfterDinner],
   },
   {
     emoji: '💰',
-    name: 'Accumulate $500k in ETF investments',
+    name: 'Accumulate $500k in ETF Investments',
     status: 'inProgress',
     target: {
       value: 500,
       current: 220,
     },
-    deadlineAt: 29,
+    deadlineAt: 28,
     plan: 'I will be working as a remote software developer, making at least $150k per year, saving $100k each year. I will work on side projects to be a better builder and have more income streams and career opportunities. I will invest in ETFs.',
     taskFactories: ['upload-video', 'jobs', 'invest'],
   },
   {
     emoji: '🏝️',
-    name: 'Own a mortgage-free house near the beach',
+    name: 'Own a Mortgage-Free Beach House',
     status: 'inProgress',
-    deadlineAt: 30,
-    plan: `1. Accumulate $300k worth of liquid assets.
-    2. Move to a low-cost beach town.
-    3. Buy a house.`,
+    deadlineAt: 29,
+    plan: `1. Accumulate $300k worth of liquid assets.\n2. Move to a low-cost beach town.\n3. Buy a house.`,
+    taskFactories: ['invest'],
   },
 ]
 

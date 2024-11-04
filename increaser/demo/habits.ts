@@ -5,9 +5,9 @@ import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { MS_IN_DAY } from '@lib/utils/time'
 import { recordFromItems } from '@lib/utils/record/recordFromItems'
 
-enum DemoHabit {
+export enum DemoHabit {
   Sunlight = 'View sunlight after waking up',
-  Exercise = 'Exercise or stretching',
+  Exercise = 'Physical exercise',
   Fasting = 'No food after 7PM',
   Balance = 'No work after dinner',
   WalkAfterDinner = 'Walk after dinner',

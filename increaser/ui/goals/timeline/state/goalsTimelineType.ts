@@ -1,3 +1,4 @@
+import { defaultGoalDeadlineType } from '@increaser/entities/Goal'
 import {
   PersistentStateKey,
   usePersistentState,
@@ -5,6 +6,7 @@ import {
 
 export const goalTimelineTypes = ['age', 'date'] as const
 export type GoalTimelineType = (typeof goalTimelineTypes)[number]
+
 export const goalTimelineName: Record<GoalTimelineType, string> = {
   age: 'Age',
   date: 'Date',
@@ -13,6 +15,6 @@ export const goalTimelineName: Record<GoalTimelineType, string> = {
 export const useGoalsTimelineType = () => {
   return usePersistentState(
     PersistentStateKey.GoalsTimelineType,
-    'date' as GoalTimelineType,
+    defaultGoalDeadlineType,
   )
 }

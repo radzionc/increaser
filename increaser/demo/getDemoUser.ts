@@ -14,11 +14,12 @@ import { dayToString, toDay } from '@lib/utils/time/Day'
 import { demoTaskFactories } from './taskFactories'
 import { getDemoIdeas } from './ideas'
 import { demoTaskTemplates } from './taskTemplates'
+import { subYears, subMonths } from 'date-fns'
 
 export const getDemoUser = (): User => {
   const now = Date.now()
 
-  const dobTimestamp = now - convertDuration(52 * 26 + 8, 'w', 'ms')
+  const dobTimestamp = subMonths(subYears(now, 26), 8).getTime()
   const dob = dayToString(toDay(dobTimestamp))
 
   const user = {

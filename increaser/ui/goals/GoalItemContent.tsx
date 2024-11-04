@@ -42,8 +42,8 @@ export const GoalItemContent = () => {
           <GoalStatusTag />
         </Header>
         {plan && <GoalPlan />}
+        <GoalDeadline />
       </VStack>
-      <GoalDeadline />
       <NonEmptyOnly
         value={taskFactories}
         render={(items) => (

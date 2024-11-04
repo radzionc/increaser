@@ -183,6 +183,10 @@ On the "Profile" page the user can enable "public profile" and then their name a
 
 App has an "Info" page that serves as a knowledge base for the app. It has articles for each primary tool explaining how to use it and why it's beneficial. Each article has a following order: a title, a first paragraph, an embedded YouTube video, and the content.
 
+## Demo User
+
+In the explanation videos and landing page we display a data for a demo user that should resonate with the user. We have a profile of a remote software engineer making good money, developing his own projects, and having a fulfilling life.
+
 # Data
 
 The user can export their data as a JSON file.

@@ -35,6 +35,9 @@ export type Goals = Record<string, Goal>
 
 export const goalDeadlineTypes = ['age', 'date', 'none'] as const
 export type GoalDeadlineType = (typeof goalDeadlineTypes)[number]
+
+export const defaultGoalDeadlineType: GoalDeadlineType = 'age'
+
 export const goalDeadlineName: Record<GoalDeadlineType, string> = {
   age: 'Age',
   date: 'Date',
