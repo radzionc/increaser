@@ -1,38 +1,40 @@
-import { WebsiteSectionHeader } from '@lib/ui/website/WebsiteSectionHeader'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { PrimaryCallToAction } from './PrimaryCallToAction'
-import { ToolkitPanel } from './toolkit/ToolkitPanel'
 import { VStack } from '@lib/ui/css/stack'
-import { uniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
+import { Text } from '@lib/ui/text'
+import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
+import { SparkleIcon } from '@lib/ui/icons/SparkleIcon'
 import styled from 'styled-components'
+import { getColor } from '@lib/ui/theme/getters'
 
-const Container = styled.div`
-  ${uniformColumnGrid({
-    gap: 40,
-    minChildrenWidth: 340,
-  })}
+const primaryTools = [
+  'Deep Work',
+  'Time Tracking',
+  'Daily Habits',
+  'Tasks Management',
+]
 
-  align-items: center;
+const Separator = styled(SparkleIcon)`
+  color: ${getColor('contrast')};
+  font-size: 14px;
 `
 
 export const PrimarySlice = () => (
   <PrimaryWebsiteSlice>
-    <Container>
-      <VStack alignItems="center" gap={40}>
-        <WebsiteSectionHeader
-          titleAs="h1"
-          title={
-            <>
-              From Chaos to Clarity
-              <br /> Transform Your Workday
-              <br /> into Productive Bliss
-            </>
-          }
-          subtitle="Crafted with Remote Workers' Needs at the Forefront"
-        />
-        <PrimaryCallToAction />
+    <VStack flexGrow justifyContent="center" alignItems="center" gap={32}>
+      <VStack alignItems="center" gap={12}>
+        <Text color="contrast" size={40} as="h1" weight={800}>
+          Achieve Your Goals
+        </Text>
+        <HStackSeparatedBy gap={8} separator={<Separator />}>
+          {primaryTools.map((tool) => (
+            <Text as="h2" color="primary" size={14} weight={600} key={tool}>
+              {tool}
+            </Text>
+          ))}
+        </HStackSeparatedBy>
       </VStack>
-      <ToolkitPanel />
-    </Container>
+      <PrimaryCallToAction />
+    </VStack>
   </PrimaryWebsiteSlice>
 )
