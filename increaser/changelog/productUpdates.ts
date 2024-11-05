@@ -6,7 +6,7 @@ export const productUpdates: ProductUpdate[] = [
     name: '',
     description: '',
     items: [],
-    youtube: '',
+    youtube: 'https://youtu.be/HX4MD53w1oY',
     telegram: '',
     x: '',
     linkedIn: '',
