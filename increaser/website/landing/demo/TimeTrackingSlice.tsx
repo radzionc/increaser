@@ -5,6 +5,7 @@ import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { TrackedTimeReport } from '@increaser/ui/projects/trackedTimeReport/TrackedTimeReport'
 import { DemoGuard } from '../../demo/DemoGuard'
+import { TimeGroupingProvider } from '@increaser/ui/projects/trackedTimeReport/timeGrouping/state'
 
 type TimeTrackingSliceProps = {
   titleAs?: React.ElementType
@@ -19,7 +20,9 @@ export const TimeTrackingSlice = ({ titleAs }: TimeTrackingSliceProps) => {
         <WebsiteSectionHeader titleAs={titleAs} {...getDemoSliceCopy(id)} />
         <VStack style={{ maxWidth: 920, width: '100%' }}>
           <DemoGuard>
-            <TrackedTimeReport />
+            <TimeGroupingProvider value="week">
+              <TrackedTimeReport />
+            </TimeGroupingProvider>
           </DemoGuard>
         </VStack>
       </WebsiteSliceContent>

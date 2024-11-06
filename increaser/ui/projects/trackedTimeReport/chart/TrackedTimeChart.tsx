@@ -25,7 +25,6 @@ import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { BarChartItem } from './BarChartItem'
 import { useSelectedIntervalActiveTimeSeries } from './useSelectedIntervalActiveTimeSeries'
 import { useActiveBudget } from '../hooks/useActiveBudget'
-import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
 import { order } from '@lib/utils/array/order'
 import { borderRadius } from '@lib/ui/css/borderRadius'
@@ -33,6 +32,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
 import { BodyPortal } from '@lib/ui/dom/BodyPortal'
+import { useTimeGrouping } from '../timeGrouping/state'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -71,9 +71,9 @@ export const TrackedTimeChart = () => {
 
   const budget = useActiveBudget()
 
-  const [timeGroup] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
 
-  const showBudget = timeGroup === 'week' && budget !== undefined
+  const showBudget = timeGrouping === 'week' && budget !== undefined
 
   const yLabels = useMemo(() => {
     const result = generateYLabels({

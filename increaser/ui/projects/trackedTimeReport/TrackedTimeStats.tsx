@@ -6,15 +6,15 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
-import { useTimeGrouping } from './timeGrouping/useTimeGrouping'
 import { useSelectedIntervalActiveTimeSeries } from './chart/useSelectedIntervalActiveTimeSeries'
 import { getIntIntervalLength } from '@lib/utils/interval/getIntIntervalLength'
 import { useSelectedInterval } from './interval/useSelectedInterval'
+import { useTimeGrouping } from './timeGrouping/state'
 
 export const TrackedTimeStats = () => {
   const [interval] = useSelectedInterval()
   const dataSize = getIntIntervalLength(interval)
-  const [timeGrouping] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
 
   const timeSeries = useSelectedIntervalActiveTimeSeries()
 

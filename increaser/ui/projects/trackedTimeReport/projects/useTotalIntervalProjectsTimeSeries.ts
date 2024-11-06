@@ -11,17 +11,17 @@ import { EntityWithSeconds } from '@increaser/entities/timeTracking'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { TimeGrouping } from '../timeGrouping/TimeGrouping'
 import { subtractPeriod } from '../utils/subtractPeriod'
-import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from './TrackedProjectsProvider'
 import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
 import { useTotalIntervalLength } from '../interval/useTotalIntervalLength'
+import { useTimeGrouping } from '../timeGrouping/state'
 
 export const useTotalIntervalProjectsTimeSeries = () => {
   const projects = useTrackedProjects()
 
   const dataSize = useTotalIntervalLength()
 
-  const [timeGrouping] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
 
   const currentTimeGroupStartedAt = useStartOfCurrentTimeGroup()
 

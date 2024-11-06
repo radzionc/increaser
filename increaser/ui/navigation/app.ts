@@ -115,6 +115,7 @@ export const appPageViews = {
   preferences: ['schedule', 'work-budget'],
   roadmap: ['ideas', 'done'],
   info: ['focus', 'track', 'tasks', 'habits', 'goals'],
+  timesheet: ['day', 'week', 'month', 'year'],
 } as const
 
 export type AppPageVisionView = (typeof appPageViews)['vision'][number]
@@ -187,5 +188,11 @@ export const appPageViewName: {
     tasks: 'Manage Tasks',
     habits: 'Build Habits',
     goals: 'Achieve Goals',
+  },
+  timesheet: {
+    day: 'Days',
+    week: 'Weeks',
+    month: 'Months',
+    year: 'Years',
   },
 }

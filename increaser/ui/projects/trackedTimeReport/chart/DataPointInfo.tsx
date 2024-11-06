@@ -22,10 +22,10 @@ import { Center } from '@lib/ui/layout/Center'
 import { DataPointBreakdown } from './breakdown/DataPointBreakdown'
 import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
-import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useActiveProject } from '../activeProject/useActiveProject'
 import { FixedReference } from '@lib/ui/base/FixedReference'
 import { useStartOfSelectedIntervalPoint } from '../timeGrouping/useStartOfSelectedIntervalPoint'
+import { useTimeGrouping } from '../timeGrouping/state'
 
 type DataPointInfoProps = {
   position: Point
@@ -51,7 +51,7 @@ const Container = styled.div`
 
 export const DataPointInfo = ({ position }: DataPointInfoProps) => {
   const [index] = usePresentState(useActiveItemIndex())
-  const [timeGrouping] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
   const [activeProjectId] = useActiveProject()
 
   const {

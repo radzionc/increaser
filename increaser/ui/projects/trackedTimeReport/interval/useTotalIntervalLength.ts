@@ -10,12 +10,12 @@ import {
   differenceInWeeks,
   differenceInYears,
 } from 'date-fns'
-import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 import { useStartOfCurrentTimeGroup } from '../timeGrouping/useStartOfCurrentTimeGroup'
+import { useTimeGrouping } from '../timeGrouping/state'
 
 export const useTotalIntervalLength = () => {
-  const [timeGrouping] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
   const projects = useTrackedProjects()
   const currentPeriodStartedAt = useStartOfCurrentTimeGroup()
 

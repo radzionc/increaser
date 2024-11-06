@@ -5,8 +5,8 @@ import {
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { Interval } from '@lib/utils/interval/Interval'
 import { useTotalIntervalLength } from './useTotalIntervalLength'
-import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
 import { TimeGrouping } from '../timeGrouping/TimeGrouping'
+import { useTimeGrouping } from '../timeGrouping/state'
 
 const stateKey: Record<TimeGrouping, PersistentStateKey> = {
   day: PersistentStateKey.TrackedTimeIntervalDays,
@@ -18,10 +18,10 @@ const stateKey: Record<TimeGrouping, PersistentStateKey> = {
 export const useSelectedInterval = () => {
   const maxIntervalLength = useTotalIntervalLength()
 
-  const [group] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
 
   return useStateCorrector(
-    usePersistentState<Interval>(stateKey[group], () => ({
+    usePersistentState<Interval>(stateKey[timeGrouping], () => ({
       start: 0,
       end: maxIntervalLength - 1,
     })),

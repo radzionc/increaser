@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { startOfDay, startOfMonth, startOfYear } from 'date-fns'
 import { match } from '@lib/utils/match'
-import { useTimeGrouping } from './useTimeGrouping'
 import { startOfISOWeek } from 'date-fns'
+import { useTimeGrouping } from './state'
 
 export const useStartOfCurrentTimeGroup = () => {
-  const [group] = useTimeGrouping()
+  const group = useTimeGrouping()
 
   return useMemo(() => {
     const now = new Date()

@@ -4,11 +4,11 @@ import { Text } from '@lib/ui/text'
 import { getWeekIndex } from '@lib/utils/time/getWeekIndex'
 import { format } from 'date-fns'
 import { useStartOfSelectedIntervalPoint } from '../timeGrouping/useStartOfSelectedIntervalPoint'
-import { useTimeGrouping } from '../timeGrouping/useTimeGrouping'
+import { useTimeGrouping } from '../timeGrouping/state'
 
 export const TrackedTimeChartXLabel = ({ index }: ComponentWithIndexProps) => {
   const value = useStartOfSelectedIntervalPoint(index)
-  const [timeGrouping] = useTimeGrouping()
+  const timeGrouping = useTimeGrouping()
 
   return (
     <Text nowrap color="supporting" size={12} key={index}>
