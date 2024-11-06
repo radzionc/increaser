@@ -1,23 +1,22 @@
-import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { PrimaryCallToAction } from './PrimaryCallToAction'
 import { vStack, VStack } from '@lib/ui/css/stack'
-import { Text } from '@lib/ui/text'
+import { text, Text } from '@lib/ui/text'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { SparkleIcon } from '@lib/ui/icons/SparkleIcon'
 import styled from 'styled-components'
-import { getColor } from '@lib/ui/theme/getters'
-import { ClosingArgumentBackground } from '@lib/ui/website/ClosingArgumentBackground'
-import { borderRadius } from '@lib/ui/css/borderRadius'
+import { FadeOutImageSlice } from '@lib/ui/website/FadeOutImageSlice'
 
 const primaryTools = ['Deep Work', 'Time Tracking', 'Tasks', 'Daily Habits']
 
 const Separator = styled(SparkleIcon)`
-  color: ${getColor('contrast')};
-  font-size: 14px;
+  ${text({
+    size: 14,
+    color: 'contrast',
+  })}
 `
 
-const Container = styled(ClosingArgumentBackground)`
-  padding-top: 100px;
+const Container = styled(FadeOutImageSlice)`
+  padding-top: 60px;
   align-items: start;
 `
 
@@ -27,16 +26,29 @@ const Content = styled.div`
     alignItems: 'center',
     gap: 32,
   })}
-  padding: 20px;
-  border-radius: 20px;
-
-  position: relative;
-
-  background: hsl(220deg 25.71% 13.73%);
 `
 
+const Explanation = styled.div`
+  ${vStack({
+    alignItems: 'center',
+    gap: 8,
+  })}
+`
+
+const Item = styled(Text)`
+  color: #ffd700;
+  ${text({
+    blurBackground: true,
+    nowrap: true,
+    size: 16,
+    weight: 700,
+  })}
+`
+
+const backgroundUrl = 'images/primary-slice-bg.webp'
+
 export const PrimarySlice = () => (
-  <Container imageUrl="images/mountain.jpg">
+  <Container imageUrl={backgroundUrl}>
     <Content>
       <VStack alignItems="center" gap={12}>
         <Text
@@ -54,10 +66,11 @@ export const PrimarySlice = () => (
           size={14}
           weight={600}
           style={{ fontStyle: 'italic' }}
+          blurBackground
         >
           with
         </Text>
-        <VStack alignItems="center" gap={8}>
+        <Explanation>
           <HStackSeparatedBy
             alignItems="center"
             justifyContent="center"
@@ -66,22 +79,15 @@ export const PrimarySlice = () => (
             separator={<Separator />}
           >
             {primaryTools.map((tool) => (
-              <Text
-                nowrap
-                as="h2"
-                size={16}
-                weight={700}
-                key={tool}
-                color="primary"
-              >
+              <Item as="h2" key={tool}>
                 {tool}
-              </Text>
+              </Item>
             ))}
           </HStackSeparatedBy>
-          <Text color="primary" nowrap as="h2" size={14} weight={600}>
+          <Item size={14} weight={600}>
             and other cool tools...
-          </Text>
-        </VStack>
+          </Item>
+        </Explanation>
       </VStack>
       <PrimaryCallToAction />
     </Content>
