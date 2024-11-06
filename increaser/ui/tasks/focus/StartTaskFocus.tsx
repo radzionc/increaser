@@ -12,6 +12,7 @@ import { useStartFocus } from '@increaser/app/focus/hooks/useStartFocus'
 import { useRouter } from 'next/router'
 import { getAppPath } from '../../navigation/app'
 import { NoValueFinishProps } from '@lib/ui/props'
+import { useFocusStatus } from '@increaser/app/focus/state/focusIntervals'
 
 const Container = styled(ExpandableSelectorContainer)`
   padding-right: 16px;
@@ -30,6 +31,8 @@ export const StartTaskFocus = ({ onFinish }: NoValueFinishProps) => {
 
   const start = useStartFocus()
 
+  const focusStatus = useFocusStatus()
+
   const { push } = useRouter()
 
   return (
@@ -42,7 +45,11 @@ export const StartTaskFocus = ({ onFinish }: NoValueFinishProps) => {
 
             setFocusProjectTask((prev) => ({ ...prev, [projectId]: id }))
             setFocusProject(projectId)
-            start()
+
+            if (!focusStatus) {
+              start()
+            }
+
             push(getAppPath('focus'))
           }}
         >
