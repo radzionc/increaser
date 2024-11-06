@@ -32,6 +32,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
+import { BodyPortal } from '@lib/ui/dom/BodyPortal'
 
 const Content = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -184,9 +185,11 @@ export const TrackedTimeChart = () => {
                       render={({ props, clientPosition }) => (
                         <>
                           <TakeWholeSpaceAbsolutely {...props}>
-                            {clientPosition && activeIndex !== null && (
-                              <DataPointInfo position={clientPosition} />
-                            )}
+                            <BodyPortal>
+                              {clientPosition && activeIndex !== null && (
+                                <DataPointInfo position={clientPosition} />
+                              )}
+                            </BodyPortal>
                           </TakeWholeSpaceAbsolutely>
                         </>
                       )}

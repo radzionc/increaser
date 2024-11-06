@@ -96,7 +96,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
           top: position.y,
         }}
       />
-      <Container ref={setFloating} style={{ ...floatingStyles, zIndex: 1 }}>
+      <Container ref={setFloating} style={{ ...floatingStyles }}>
         <Center>
           <Text>{title}</Text>
         </Center>
