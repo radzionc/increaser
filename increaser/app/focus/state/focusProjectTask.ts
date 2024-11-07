@@ -9,14 +9,14 @@ import { makeUseMemoCallback } from '@lib/ui/state/makeUseMemoCallback'
 import { toEntries } from '@lib/utils/record/toEntries'
 import { omit } from '@lib/utils/record/omit'
 import { groupItems } from '@lib/utils/array/groupItems'
-import { useTasks } from '@increaser/ui/tasks/hooks/useTasks'
+import { useUncompleteTasks } from '@increaser/ui/tasks/useUncompleteTasks'
 
 const useCallback = makeUseMemoCallback()
 
 export const useFocusProjectTask = () => {
   const activeProjects = useActiveProjects()
 
-  const tasks = useTasks()
+  const tasks = useUncompleteTasks()
 
   const projectIds = useMemo(
     () => new Set(activeProjects.map((project) => project.id)),

@@ -27,13 +27,15 @@ export const StartTaskFocus = ({ onFinish }: NoValueFinishProps) => {
   const [, setFocusProject] = useFocusProject()
   const [, setFocusProjectTask] = useFocusProjectTask()
 
-  const { projectId, id } = useCurrentTask()
+  const { projectId, id, status } = useCurrentTask()
 
   const start = useStartFocus()
 
   const focusStatus = useFocusStatus()
 
   const { push } = useRouter()
+
+  if (status === 'done') return null
 
   return (
     <Tooltip
