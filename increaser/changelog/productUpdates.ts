@@ -2,16 +2,41 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: 0,
-    name: '',
-    description: '',
-    items: [],
+    releasedAt: 1730944392505,
+    name: 'Enhanced Goal Tracking & Task Management',
+    description:
+      'New features make managing goals and tasks simpler and more intuitive, with faster access to focus sessions and improved timeline flexibility.',
+    items: [
+      {
+        description:
+          'Easily switch between age-based and date-based views in the Goals timeline for a customized perspective on your progress.',
+      },
+      {
+        description:
+          'Experience a streamlined form for creating and editing goals, designed for ease and efficiency.',
+      },
+      {
+        description:
+          "Quickly start a focus session with the new 'Start' button on tasks in the 'Tasks' page.",
+      },
+      {
+        description:
+          'Increaser now auto-selects your last task for each project, saving you setup time when switching between projects.',
+      },
+      {
+        description:
+          "Learn effective goal-setting strategies with the new 'Achieve goals' article on the Info page.",
+      },
+    ],
     youtube: 'https://youtu.be/HX4MD53w1oY',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    telegram: 'https://t.me/increaser_app/63',
+    x: 'https://x.com/increaser_app/status/1854340689762337136',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7260105573809983488',
+    indieHackers:
+      'https://www.indiehackers.com/post/increaser-updates-enhanced-goals-timeline-quick-task-start-and-more-oRIoQKBp4TZCLUldIT2F',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1glfcgp/increaser_updates_new_goals_timeline_views_and/',
   },
 
   {
