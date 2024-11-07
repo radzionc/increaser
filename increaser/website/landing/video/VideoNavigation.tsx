@@ -2,19 +2,11 @@ import {
   InfoYouTubeVideo,
   infoYouTubeVideos,
 } from '@increaser/info/infoYouTubeVideos'
-import { vStack } from '@lib/ui/css/stack'
 import { ComponentWithActiveState, InputProps } from '@lib/ui/props'
 import { ProductToolOption } from '../../navigation/features/ProductToolOption'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import styled, { css } from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
-
-const Container = styled.div`
-  ${vStack({
-    gap: 4,
-  })}
-  min-width: 248px;
-`
 
 const Option = styled(ProductToolOption)<ComponentWithActiveState>`
   border: 2px solid transparent;
@@ -31,7 +23,7 @@ export const VideoNavigation = ({
   onChange,
 }: InputProps<InfoYouTubeVideo>) => {
   return (
-    <Container>
+    <>
       {getRecordKeys(infoYouTubeVideos).map((option) => (
         <Option
           isActive={option === value}
@@ -42,6 +34,6 @@ export const VideoNavigation = ({
           value={option}
         />
       ))}
-    </Container>
+    </>
   )
 }

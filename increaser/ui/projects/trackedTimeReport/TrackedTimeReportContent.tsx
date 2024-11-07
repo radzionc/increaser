@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
 import { TrackedTimeNavigation } from './TrackedTimeNavigation'
-import { TrackedTimeStats } from './TrackedTimeStats'
 import { ActiveItemIndexProvider } from '@lib/ui/list/ActiveItemIndexProvider'
 import { TrackedTimeInterval } from './interval/TrackedTimeInterval'
+import { SelectedIntervalInfo } from './interval/SelectedIntervalInfo'
+import { NonEmptyIntervalOnly } from './interval/NonEmptyIntervalOnly'
 
 const contentWidth = 520
 const gap = 40
@@ -31,6 +32,18 @@ export const TrackedTimeReportContent = () => {
           size && size.width - contentWidth - gap < navigationWidth
         return (
           <Container ref={setElement}>
+            <PageContent>
+              {isSmall && <TrackedTimeNavigation />}
+              <VStack gap={16}>
+                <NonEmptyIntervalOnly>
+                  <SelectedIntervalInfo />
+                </NonEmptyIntervalOnly>
+                <ActiveItemIndexProvider initialValue={null}>
+                  <TrackedTimeChart />
+                </ActiveItemIndexProvider>
+                <TrackedTimeInterval />
+              </VStack>
+            </PageContent>
             {!isSmall && (
               <NavigationContainer
                 style={{ maxWidth: navigationWidth, minWidth: navigationWidth }}
@@ -38,16 +51,6 @@ export const TrackedTimeReportContent = () => {
                 <TrackedTimeNavigation />
               </NavigationContainer>
             )}
-            <PageContent>
-              {isSmall && <TrackedTimeNavigation />}
-              <VStack gap={40}>
-                <TrackedTimeStats />
-                <ActiveItemIndexProvider initialValue={null}>
-                  <TrackedTimeChart />
-                </ActiveItemIndexProvider>
-                <TrackedTimeInterval />
-              </VStack>
-            </PageContent>
           </Container>
         )
       }}

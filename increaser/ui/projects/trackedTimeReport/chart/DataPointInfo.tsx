@@ -7,10 +7,7 @@ import {
   autoUpdate,
 } from '@floating-ui/react'
 import styled from 'styled-components'
-import { useEffect, useMemo } from 'react'
-import { format } from 'date-fns'
-import { match } from '@lib/utils/match'
-import { formatWeek } from '@lib/utils/time/Week'
+import { useEffect } from 'react'
 import { Text } from '@lib/ui/text'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -25,7 +22,7 @@ import { usePresentState } from '@lib/ui/state/usePresentState'
 import { useActiveProject } from '../activeProject/useActiveProject'
 import { FixedReference } from '@lib/ui/base/FixedReference'
 import { useStartOfSelectedIntervalPoint } from '../timeGrouping/useStartOfSelectedIntervalPoint'
-import { useTimeGrouping } from '../timeGrouping/state'
+import { useFormatPeriodDate } from '../timeGrouping/useFormatPeriodDate'
 
 type DataPointInfoProps = {
   position: Point
@@ -51,7 +48,6 @@ const Container = styled.div`
 
 export const DataPointInfo = ({ position }: DataPointInfoProps) => {
   const [index] = usePresentState(useActiveItemIndex())
-  const timeGrouping = useTimeGrouping()
   const [activeProjectId] = useActiveProject()
 
   const {
@@ -70,16 +66,9 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
 
   const data = useSelectedIntervalActiveTimeSeries()
 
-  const title = useMemo(
-    () =>
-      match(timeGrouping, {
-        day: () => format(periodStartedAt, 'EEE d, MMM yyyy'),
-        week: () => formatWeek(periodStartedAt),
-        month: () => format(periodStartedAt, 'MMMM yyyy'),
-        year: () => new Date(periodStartedAt).getFullYear().toString(),
-      }),
-    [periodStartedAt, timeGrouping],
-  )
+  const formatDate = useFormatPeriodDate()
+
+  const title = formatDate(periodStartedAt)
 
   useEffect(() => {
     update()
