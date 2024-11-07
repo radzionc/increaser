@@ -1,7 +1,7 @@
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
 import { PricingSlice } from './PricingSlice'
 import { PrimarySlice } from './PrimarySlice'
-import { VideoSlice } from './VideoSlice'
+import { VideoSlice } from './video/VideoSlice'
 import { FaqSlice } from './FaqSlice'
 import { ClosingArgumentSlice } from './ClosingArgumentSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
