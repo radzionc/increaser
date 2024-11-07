@@ -1,7 +1,6 @@
 import { Statistic } from '@lib/ui/layout/Statistic'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { Panel } from '@lib/ui/css/panel'
-import { pluralize } from '@lib/utils/pluralize'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { sum } from '@lib/utils/array/sum'
@@ -22,14 +21,6 @@ export const TrackedTimeStats = () => {
 
   return (
     <UniformColumnGrid gap={16} minChildrenWidth={120}>
-      <Panel>
-        <Statistic
-          title="Interval"
-          value={
-            noDataAvailable ? undefined : pluralize(dataSize, timeGrouping)
-          }
-        />
-      </Panel>
       <Panel>
         <Statistic
           title={`Average ${timeGrouping}`}

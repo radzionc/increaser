@@ -9,6 +9,7 @@ import { ActiveItemIndexProvider } from '@lib/ui/list/ActiveItemIndexProvider'
 import { TrackedTimeInterval } from './interval/TrackedTimeInterval'
 import { SelectedIntervalInfo } from './interval/SelectedIntervalInfo'
 import { NonEmptyIntervalOnly } from './interval/NonEmptyIntervalOnly'
+import { TrackedTimeStats } from './TrackedTimeStats'
 
 const contentWidth = 520
 const gap = 40
@@ -25,6 +26,12 @@ const NavigationContainer = styled(VStack)`
 `
 
 export const TrackedTimeReportContent = () => {
+  const sideContent = (
+    <VStack gap={20}>
+      <TrackedTimeStats />
+      <TrackedTimeNavigation />
+    </VStack>
+  )
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
@@ -33,7 +40,7 @@ export const TrackedTimeReportContent = () => {
         return (
           <Container ref={setElement}>
             <PageContent>
-              {isSmall && <TrackedTimeNavigation />}
+              {isSmall && sideContent}
               <VStack gap={16}>
                 <NonEmptyIntervalOnly>
                   <SelectedIntervalInfo />
@@ -48,7 +55,7 @@ export const TrackedTimeReportContent = () => {
               <NavigationContainer
                 style={{ maxWidth: navigationWidth, minWidth: navigationWidth }}
               >
-                <TrackedTimeNavigation />
+                {sideContent}
               </NavigationContainer>
             )}
           </Container>
