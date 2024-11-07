@@ -17,7 +17,8 @@ const Header = styled.p`
   ${text({
     centerVertically: true,
     color: 'contrast',
-    size: 18,
+    size: 16,
+    weight: 600,
   })}
 
   gap: 12px;
@@ -50,6 +51,9 @@ export const GoalItemContent = () => {
           <LinkedEntitiesContainer title="Recurring tasks">
             <VStack>
               {items.map((id) => {
+                const value = taskFactoryRecord[id]
+                if (!value) return null
+
                 return (
                   <CurrentTaskFactoryProvider
                     key={id}
@@ -69,6 +73,9 @@ export const GoalItemContent = () => {
           <LinkedEntitiesContainer title="Daily habitrs">
             <VStack>
               {items.map((id) => {
+                const value = habitRecord[id]
+                if (!value) return null
+
                 return (
                   <CurrentHabitProvider key={id} value={habitRecord[id]}>
                     <HabitItemContent />

@@ -11,19 +11,25 @@ import { GoalFormFields } from './GoalFormFields'
 import { useGoalStatusFilter } from '../filter/useGoalStatusFilter'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { HStack } from '@lib/ui/css/stack'
+import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
+import { useGoalFormCorrector } from './useGoalFormCorrector'
 
 export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
   const [statusFilter] = useGoalStatusFilter()
-  const [value, setValue] = useState<GoalFormShape>({
-    name: '',
-    status: statusFilter || 'inProgress',
-    deadlineAt: null,
-    emoji: randomlyPick(defaultEmojis),
-    target: null,
-    plan: '',
-    taskFactories: [],
-    habits: [],
-  })
+
+  const [value, setValue] = useStateCorrector(
+    useState<GoalFormShape>({
+      name: '',
+      status: statusFilter || 'inProgress',
+      deadlineAt: null,
+      emoji: randomlyPick(defaultEmojis),
+      target: null,
+      plan: '',
+      taskFactories: [],
+      habits: [],
+    }),
+    useGoalFormCorrector(),
+  )
   const { mutate } = useCreateUserEntityMutation('goal')
 
   const isDisabled = useIsGoalFormDisabled(value)

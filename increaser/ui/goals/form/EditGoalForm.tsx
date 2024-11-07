@@ -12,6 +12,8 @@ import { areEqualRecords } from '@lib/utils/record/areEqualRecords'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { ClosableComponentProps } from '@lib/ui/props'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
+import { useGoalFormCorrector } from './useGoalFormCorrector'
 
 export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
   const goal = useCurrentGoal()
@@ -27,7 +29,10 @@ export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
     }),
     [goal],
   )
-  const [value, setValue] = useState<GoalFormShape>(initialValue)
+  const [value, setValue] = useStateCorrector(
+    useState<GoalFormShape>(initialValue),
+    useGoalFormCorrector(),
+  )
 
   const { mutate: updateGoal } = useUpdateUserEntityMutation('goal')
   const { mutate: deleteGoal } = useDeleteUserEntityMutation('goal')
