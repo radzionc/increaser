@@ -1,3 +1,5 @@
+Improved tracked time report to be more space-efficient and comfortable to navigate.
+The tracked time report now remembers the selected interval for each time grouping. For example, if you change the interval on the "grouped by weeks" view, it won’t affect the interval setting on the "grouped by days" view.
 1730944392505
 Added a new option to switch the Goals timeline view between age-based and date-based formats.
 A more comfortable and compact form for creating and editing goals.
