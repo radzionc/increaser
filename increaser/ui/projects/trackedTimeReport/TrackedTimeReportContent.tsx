@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@lib/ui/css/stack'
+import { hStack, VStack } from '@lib/ui/css/stack'
 import { TrackedTimeChart } from './chart/TrackedTimeChart'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
@@ -9,13 +9,13 @@ import { ActiveItemIndexProvider } from '@lib/ui/list/ActiveItemIndexProvider'
 import { TrackedTimeInterval } from './interval/TrackedTimeInterval'
 import { SelectedIntervalInfo } from './interval/SelectedIntervalInfo'
 import { NonEmptyIntervalOnly } from './interval/NonEmptyIntervalOnly'
-import { TrackedTimeStats } from './TrackedTimeStats'
 
 const contentWidth = 520
 const gap = 40
 const navigationWidth = 320
 
-const Container = styled(HStack)`
+const Container = styled.div`
+  ${hStack()};
   width: 100%;
   gap: ${toSizeUnit(gap)};
   align-items: start;
@@ -26,12 +26,7 @@ const NavigationContainer = styled(VStack)`
 `
 
 export const TrackedTimeReportContent = () => {
-  const sideContent = (
-    <VStack gap={20}>
-      <TrackedTimeStats />
-      <TrackedTimeNavigation />
-    </VStack>
-  )
+  const sideContent = <TrackedTimeNavigation />
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {

@@ -5,7 +5,7 @@ import { useSelectedInterval } from './useSelectedInterval'
 import { text, Text } from '@lib/ui/text'
 import { pluralize } from '@lib/utils/pluralize'
 import styled from 'styled-components'
-import { HStack, hStack } from '@lib/ui/css/stack'
+import { HStack, hStack, VStack, vStack } from '@lib/ui/css/stack'
 import { useCallback } from 'react'
 import { match } from '@lib/utils/match'
 import { format } from 'date-fns'
@@ -14,10 +14,18 @@ import { trackedTimeChartConfig } from '../chart/config'
 import { TrackedTimeChartTitle } from '../TrackedTimeChartTitle'
 
 import { SelectedIntervalTotal } from './SelectedIntervalTotal'
+import { SelectedPeriodAverage } from '../SelectedPeriodAverage'
 
-const Container = styled.div`
+const Row = styled.div`
   ${hStack({
     justifyContent: 'space-between',
+    gap: 8,
+    wrap: 'wrap',
+  })}
+`
+
+const Container = styled.div`
+  ${vStack({
     gap: 8,
   })}
   ${text({
@@ -50,22 +58,27 @@ export const SelectedIntervalInfo = () => {
 
   return (
     <Container>
-      <HStack alignItems="center" gap={8}>
-        <TrackedTimeChartTitle />
-        <Text as="span" color="supporting">
-          (<SelectedIntervalTotal />)
-        </Text>
-      </HStack>
-      {dataSize > 1 ? (
+      <Row>
         <HStack alignItems="center" gap={8}>
-          {pluralize(dataSize, timeGrouping)}{' '}
+          <TrackedTimeChartTitle />
           <Text as="span" color="supporting">
-            ({intervalStr})
+            (<SelectedIntervalTotal />)
           </Text>
         </HStack>
-      ) : (
-        <span>{formatDate(startedAt)}</span>
-      )}
+        {dataSize > 1 ? (
+          <HStack alignItems="center" gap={8}>
+            {pluralize(dataSize, timeGrouping)}{' '}
+            <Text as="span" color="supporting">
+              ({intervalStr})
+            </Text>
+          </HStack>
+        ) : (
+          <span>{formatDate(startedAt)}</span>
+        )}
+      </Row>
+      <VStack style={{ alignSelf: 'end' }}>
+        <SelectedPeriodAverage />
+      </VStack>
     </Container>
   )
 }
