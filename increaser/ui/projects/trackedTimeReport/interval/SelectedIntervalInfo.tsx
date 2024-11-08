@@ -5,14 +5,17 @@ import { useSelectedInterval } from './useSelectedInterval'
 import { text, Text } from '@lib/ui/text'
 import { pluralize } from '@lib/utils/pluralize'
 import styled from 'styled-components'
-import { hStack } from '@lib/ui/css/stack'
+import { HStack, hStack } from '@lib/ui/css/stack'
 import { useCallback } from 'react'
 import { match } from '@lib/utils/match'
 import { format } from 'date-fns'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { trackedTimeChartConfig } from '../chart/config'
+import { TrackedTimeChartTitle } from '../TrackedTimeChartTitle'
 
 const Container = styled.div`
   ${hStack({
-    justifyContent: 'end',
+    justifyContent: 'space-between',
     gap: 8,
   })}
   ${text({
@@ -20,6 +23,7 @@ const Container = styled.div`
     size: 14,
     weight: 600,
   })}
+  padding-left: ${toSizeUnit(trackedTimeChartConfig.expectedYLabelWidth)};
 `
 
 export const SelectedIntervalInfo = () => {
@@ -48,10 +52,13 @@ export const SelectedIntervalInfo = () => {
 
   return (
     <Container>
-      {pluralize(dataSize, timeGrouping)}{' '}
-      <Text as="span" color="supporting">
-        ({intervalStr})
-      </Text>
+      <TrackedTimeChartTitle />
+      <HStack alignItems="center" gap={8}>
+        {pluralize(dataSize, timeGrouping)}{' '}
+        <Text as="span" color="supporting">
+          ({intervalStr})
+        </Text>
+      </HStack>
     </Container>
   )
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { Text } from '@lib/ui/text'
 import { VStack } from '@lib/ui/css/stack'
 import { toPercents } from '@lib/utils/toPercents'
 import { useCurrentFrameTotalTracked } from '../hooks/useCurrentFrameTotalTracked'
@@ -8,10 +7,10 @@ import { InteractiveRow } from './InteractiveRow'
 import { BreakdownRowContent } from './BreakdownRowContent'
 import { BreakdownValue } from './BreakdownValue'
 import { AllocationLine } from '@increaser/app/ui/AllocationLine'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { useActiveProject } from '../activeProject/useActiveProject'
 import { useTrackedProjects } from '../projects/TrackedProjectsProvider'
 import { useOrderedProjects } from '../projects/useOrderedProjects'
+import { TrackedEntityIndicator } from '../TrackedEntityIndicator'
 
 export const ProjectsDistributionBreakdown = () => {
   const projects = useTrackedProjects()
@@ -28,7 +27,8 @@ export const ProjectsDistributionBreakdown = () => {
       {items.map(({ key, value }) => {
         const isPrimary = activeProject === key
 
-        const { emoji, name, color } = projects[key]
+        const { color } = projects[key]
+
         return (
           <InteractiveRow
             onClick={() => setActiveProject(key)}
@@ -37,8 +37,7 @@ export const ProjectsDistributionBreakdown = () => {
           >
             <VStack gap={4}>
               <BreakdownRowContent>
-                <IconWrapper>{emoji}</IconWrapper>
-                <Text cropped>{name}</Text>
+                <TrackedEntityIndicator value={key} />
                 <AllocationLine
                   height={4}
                   segments={[
