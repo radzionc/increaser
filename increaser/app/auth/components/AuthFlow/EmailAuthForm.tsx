@@ -62,7 +62,12 @@ export const EmailAuthForm = () => {
         value={email}
         onValueChange={setEmail}
       />
-      <Button isDisabled={isDisabled} size="l" isLoading={isPending}>
+      <Button
+        type="submit"
+        isDisabled={isDisabled}
+        size="l"
+        isLoading={isPending}
+      >
         Continue
       </Button>
     </VStack>
