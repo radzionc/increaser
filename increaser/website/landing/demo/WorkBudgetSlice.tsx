@@ -6,13 +6,11 @@ import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { ManageWorkBudget } from '@increaser/ui/workBudget/ManageWorkBudget'
 import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import styled from 'styled-components'
-import { WorkBudgetDaysReport } from '@increaser/ui/workBudget/WorkBudgetDaysReport'
-import { WorkBudgetWeeksReport } from '@increaser/ui/workBudget/WorkBudgetWeeksReport'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { Panel } from '@lib/ui/css/panel'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { DemoGuard } from '../../demo/DemoGuard'
+import { CurrentWeekVsBudget } from '@increaser/ui/workBudget/CurrentWeekVsBudget'
 
 const Content = styled(UniformColumnGrid)`
   max-width: 860px;
@@ -29,10 +27,7 @@ export const WorkBudgetSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
           <Content minChildrenWidth={320} gap={40}>
             <ManageWorkBudget />
             <Panel kind="secondary">
-              <SeparatedByLine gap={24}>
-                <WorkBudgetDaysReport />
-                <WorkBudgetWeeksReport />
-              </SeparatedByLine>
+              <CurrentWeekVsBudget />
             </Panel>
           </Content>
         </DemoGuard>

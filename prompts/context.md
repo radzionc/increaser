@@ -111,7 +111,13 @@ On the "Work Budget" page, the user can set a preferred time they want to work o
 
 ## Timesheet
 
-On the "Timesheet" page, users can track their work time across different projects over a selected period, with options to group the data by days, weeks, months, or years. The interval input below the chart allows users to specify a time range, such as June to August, and view a detailed breakdown of time spent on each project. The left panel shows a percentage breakdown of time across projects, and users can click on a project name to filter the chart to display only that project. The chart is color-coded to represent different projects, and hovering over the bars reveals a detailed time distribution for each period. This provides valuable insights into how time is spent, enabling users to adjust priorities and identify work patterns. When the chart is grouped by weeks and the user selects either all projects or a specific project, they will see a line showing the budgeted time for the project, or, in the case of all projects, the total budgeted time.
+On the "Timesheet" page, users can track their work time across different projects over a selected period, with options to group the data by days, weeks, months, or years. The interval input below the chart allows users to specify a time range, such as June to August, and view a detailed breakdown of time spent on each project. The right panel shows a percentage breakdown of time across projects, and users can click on a project name to filter the chart to display only that project. The chart is color-coded to represent different projects, and hovering over the bars reveals a detailed time distribution for each period. This provides valuable insights into how time is spent, enabling users to adjust priorities and identify work patterns.
+
+At the top of the chart displayed indicator if a project selected, a selected period, and an average amount of time worked per selected period, e.g. average week or average month.
+
+When the report is grouped by weeks and the user selects either all projects or a specific project, they will see a line showing the budgeted time for the project, or, in the case of all projects, the total budgeted time.
+
+When the report is grouped by days, next to the average day there is also an average workday and weekend time.
 
 ## Habits
 

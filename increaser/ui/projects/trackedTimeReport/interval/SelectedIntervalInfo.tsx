@@ -14,7 +14,7 @@ import { trackedTimeChartConfig } from '../chart/config'
 import { TrackedTimeChartTitle } from '../TrackedTimeChartTitle'
 
 import { SelectedIntervalTotal } from './SelectedIntervalTotal'
-import { SelectedPeriodAverage } from '../SelectedPeriodAverage'
+import { SelectedPeriodAverage } from '../average/SelectedPeriodAverage'
 
 const Row = styled.div`
   ${hStack({
