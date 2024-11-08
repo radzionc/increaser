@@ -1,5 +1,4 @@
 import { Statistic } from '@lib/ui/layout/Statistic'
-import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { Panel } from '@lib/ui/css/panel'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -20,45 +19,24 @@ export const TrackedTimeStats = () => {
   const noDataAvailable = isEmpty(timeSeries) || dataSize === 0
 
   return (
-    <UniformColumnGrid gap={16} minChildrenWidth={120}>
-      <Panel>
-        <Statistic
-          title={`Average ${timeGrouping}`}
-          value={
-            noDataAvailable ? undefined : (
-              <EmphasizeNumbers
-                value={formatDuration(
-                  sum(Object.values(timeSeries).flat()) / dataSize,
-                  's',
-                  {
-                    minUnit: 'min',
-                    maxUnit: 'h',
-                  },
-                )}
-              />
-            )
-          }
-        />
-      </Panel>
-      <Panel>
-        <Statistic
-          title="Total"
-          value={
-            noDataAvailable ? undefined : (
-              <EmphasizeNumbers
-                value={formatDuration(
-                  sum(Object.values(timeSeries).flat()),
-                  's',
-                  {
-                    minUnit: 'min',
-                    maxUnit: 'h',
-                  },
-                )}
-              />
-            )
-          }
-        />
-      </Panel>
-    </UniformColumnGrid>
+    <Panel>
+      <Statistic
+        title={`Average ${timeGrouping}`}
+        value={
+          noDataAvailable ? undefined : (
+            <EmphasizeNumbers
+              value={formatDuration(
+                sum(Object.values(timeSeries).flat()) / dataSize,
+                's',
+                {
+                  minUnit: 'min',
+                  maxUnit: 'h',
+                },
+              )}
+            />
+          )
+        }
+      />
+    </Panel>
   )
 }

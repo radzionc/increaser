@@ -13,6 +13,8 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { trackedTimeChartConfig } from '../chart/config'
 import { TrackedTimeChartTitle } from '../TrackedTimeChartTitle'
 
+import { SelectedIntervalTotal } from './SelectedIntervalTotal'
+
 const Container = styled.div`
   ${hStack({
     justifyContent: 'space-between',
@@ -48,7 +50,12 @@ export const SelectedIntervalInfo = () => {
 
   return (
     <Container>
-      <TrackedTimeChartTitle />
+      <HStack alignItems="center" gap={8}>
+        <TrackedTimeChartTitle />
+        <Text as="span" color="supporting">
+          (<SelectedIntervalTotal />)
+        </Text>
+      </HStack>
       {dataSize > 1 ? (
         <HStack alignItems="center" gap={8}>
           {pluralize(dataSize, timeGrouping)}{' '}

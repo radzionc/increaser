@@ -27,7 +27,7 @@ export const TrackedEntityIndicator = ({
     return (
       <Container>
         <SigmaIcon />
-        Total
+        All projects
       </Container>
     )
   }
