@@ -46,19 +46,19 @@ export const SelectedIntervalInfo = () => {
   )
   const intervalStr = [startedAt, endedAt].map(formatDate).join(' - ')
 
-  if (dataSize === 1) {
-    return <Container>{formatDate(startedAt)}</Container>
-  }
-
   return (
     <Container>
       <TrackedTimeChartTitle />
-      <HStack alignItems="center" gap={8}>
-        {pluralize(dataSize, timeGrouping)}{' '}
-        <Text as="span" color="supporting">
-          ({intervalStr})
-        </Text>
-      </HStack>
+      {dataSize > 1 ? (
+        <HStack alignItems="center" gap={8}>
+          {pluralize(dataSize, timeGrouping)}{' '}
+          <Text as="span" color="supporting">
+            ({intervalStr})
+          </Text>
+        </HStack>
+      ) : (
+        <span>{formatDate(startedAt)}</span>
+      )}
     </Container>
   )
 }
