@@ -119,6 +119,8 @@ When the report is grouped by weeks and the user selects either all projects or 
 
 When the report is grouped by days, next to the average day there is also an average workday and weekend time.
 
+When the report is grouped by days, the user has the option to see the "Sessions" view, where instead of a bar chart, they see sessions grouped by days. Sessions are colored according to the projects they belong to. When the user selects a specific project, sessions for other projects will be grayed out.
+
 ## Habits
 
 The "Habits" page includes two sub-pages: "Track" and "Explore."
