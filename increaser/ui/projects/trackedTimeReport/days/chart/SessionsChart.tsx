@@ -77,7 +77,7 @@ export const SessionsChart = () => {
                       trackedTimeChartConfig.expectedYLabelWidth
                     }
                     renderLabel={(index) => {
-                      const minutes = yLabels[index] + min
+                      const minutes = max - yLabels[index]
 
                       return (
                         <YLabel key={index}>
