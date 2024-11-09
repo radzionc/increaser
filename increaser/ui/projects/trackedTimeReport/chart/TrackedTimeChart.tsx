@@ -1,4 +1,4 @@
-import { hStack, HStack, VStack } from '@lib/ui/css/stack'
+import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { useMemo } from 'react'
@@ -7,21 +7,11 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
-import { Spacer } from '@lib/ui/layout/Spacer'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { trackedTimeChartConfig } from './config'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
-import { HoverTracker } from '@lib/ui/base/HoverTracker'
-import { getSegmentIndex } from '@lib/utils/math/getSegmentIndex'
-import {
-  takeWholeSpaceAbsolutely,
-  TakeWholeSpaceAbsolutely,
-} from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { toPercents } from '@lib/utils/toPercents'
-import { TrackedTimeChartXLabels } from './TrackedTimeChartXLabels'
-import { DataPointInfo } from './DataPointInfo'
-import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { BarChartItem } from './BarChartItem'
 import { useSelectedIntervalActiveTimeSeries } from './useSelectedIntervalActiveTimeSeries'
 import { useActiveBudget } from '../hooks/useActiveBudget'
@@ -31,16 +21,11 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
-import { BodyPortal } from '@lib/ui/dom/BodyPortal'
 import { useTimeGrouping } from '../timeGrouping/state'
-
-const Content = styled.div`
-  ${takeWholeSpaceAbsolutely};
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8px, 1fr));
-
-  align-items: end;
-`
+import { ChartContent } from './ChartContent'
+import { DataPointSelector } from './DataPointSelector'
+import { ChartXLabels } from './ChartXLabels'
+import { ChartContainer } from './ChartContainer'
 
 const BudgetOutline = styled.div`
   ${absoluteOutline(12, 4)};
@@ -58,16 +43,8 @@ const BudgetLine = styled.div`
   pointer-events: none;
 `
 
-const Container = styled.div`
-  ${hStack()};
-  position: relative;
-  isolation: isolate;
-`
-
 export const TrackedTimeChart = () => {
   const data = useSelectedIntervalActiveTimeSeries()
-
-  const [activeIndex, setActiveIndex] = useActiveItemIndex()
 
   const budget = useActiveBudget()
 
@@ -100,7 +77,7 @@ export const TrackedTimeChart = () => {
           <VStack fullWidth gap={20} ref={setElement}>
             {size && (
               <>
-                <Container>
+                <ChartContainer>
                   {showBudget && (
                     <PositionAbsolutelyCenterHorizontally
                       top={toPercents(
@@ -157,7 +134,7 @@ export const TrackedTimeChart = () => {
                     fullWidth
                   >
                     <ChartHorizontalGridLines data={normalized.yLabels} />
-                    <Content>
+                    <ChartContent>
                       {normalized.data.map((value, index) => {
                         const height = toPercents(value)
 
@@ -171,40 +148,12 @@ export const TrackedTimeChart = () => {
                           />
                         )
                       })}
-                    </Content>
-                    <HoverTracker
-                      onChange={({ position }) => {
-                        if (position) {
-                          setActiveIndex(
-                            getSegmentIndex(data.length, position.x),
-                          )
-                        } else {
-                          setActiveIndex(null)
-                        }
-                      }}
-                      render={({ props, clientPosition }) => (
-                        <>
-                          <TakeWholeSpaceAbsolutely {...props}>
-                            <BodyPortal>
-                              {clientPosition && activeIndex !== null && (
-                                <DataPointInfo position={clientPosition} />
-                              )}
-                            </BodyPortal>
-                          </TakeWholeSpaceAbsolutely>
-                        </>
-                      )}
-                    />
+                    </ChartContent>
+                    <DataPointSelector />
                   </VStack>
-                </Container>
+                </ChartContainer>
 
-                <HStack>
-                  <Spacer width={trackedTimeChartConfig.expectedYLabelWidth} />
-                  <TrackedTimeChartXLabels
-                    containerWidth={
-                      size.width - trackedTimeChartConfig.expectedYLabelWidth
-                    }
-                  />
-                </HStack>
+                <ChartXLabels width={size.width} />
               </>
             )}
           </VStack>

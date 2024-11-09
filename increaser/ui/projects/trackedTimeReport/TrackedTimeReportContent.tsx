@@ -9,6 +9,9 @@ import { ActiveItemIndexProvider } from '@lib/ui/list/ActiveItemIndexProvider'
 import { TrackedTimeInterval } from './interval/TrackedTimeInterval'
 import { SelectedIntervalInfo } from './interval/SelectedIntervalInfo'
 import { NonEmptyIntervalOnly } from './interval/NonEmptyIntervalOnly'
+import { useTimeGrouping } from './timeGrouping/state'
+import { useDaysView } from './days/state/daysView'
+import { SessionsChart } from './days/chart/SessionsChart'
 
 const contentWidth = 520
 const gap = 40
@@ -27,6 +30,9 @@ const NavigationContainer = styled(VStack)`
 
 export const TrackedTimeReportContent = () => {
   const sideContent = <TrackedTimeNavigation />
+  const timeGrouping = useTimeGrouping()
+  const [view] = useDaysView()
+
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
@@ -41,7 +47,11 @@ export const TrackedTimeReportContent = () => {
                   <SelectedIntervalInfo />
                 </NonEmptyIntervalOnly>
                 <ActiveItemIndexProvider initialValue={null}>
-                  <TrackedTimeChart />
+                  {view === 'sessions' && timeGrouping === 'day' ? (
+                    <SessionsChart />
+                  ) : (
+                    <TrackedTimeChart />
+                  )}
                 </ActiveItemIndexProvider>
                 <TrackedTimeInterval />
               </VStack>
