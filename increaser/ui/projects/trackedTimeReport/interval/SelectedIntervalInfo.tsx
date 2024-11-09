@@ -46,8 +46,8 @@ export const SelectedIntervalInfo = () => {
   const formatDate = useCallback(
     (value: number) =>
       match(timeGrouping, {
-        day: () => format(value, 'EEE d'),
-        week: () => format(value, 'EEE d'),
+        day: () => format(value, 'MMM d'),
+        week: () => format(value, 'MMM d'),
         month: () => format(value, 'MMM yyyy'),
         year: () => new Date(value).getFullYear().toString(),
       }),

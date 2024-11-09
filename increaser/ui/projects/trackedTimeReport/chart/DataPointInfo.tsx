@@ -22,6 +22,8 @@ import { useActiveProject } from '../activeProject/useActiveProject'
 import { FixedReference } from '@lib/ui/base/FixedReference'
 import { useStartOfSelectedIntervalPoint } from '../timeGrouping/useStartOfSelectedIntervalPoint'
 import { useFormatPeriodDate } from '../timeGrouping/useFormatPeriodDate'
+import { useTimeGrouping } from '../timeGrouping/state'
+import { ActiveDayInterval } from '../days/ActiveDayInterval'
 
 type DataPointInfoProps = {
   position: Point
@@ -75,6 +77,8 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
 
   const total = data[index]
 
+  const timeGrouping = useTimeGrouping()
+
   return (
     <>
       <FixedReference
@@ -101,6 +105,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
             )}
           </Text>
         </HStack>
+        {!activeProjectId && timeGrouping === 'day' && <ActiveDayInterval />}
         {!activeProjectId && <DataPointBreakdown />}
       </Container>
     </>
