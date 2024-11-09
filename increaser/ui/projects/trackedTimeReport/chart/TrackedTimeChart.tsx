@@ -26,6 +26,7 @@ import { ChartContent } from './ChartContent'
 import { DataPointSelector } from './DataPointSelector'
 import { ChartXLabels } from './ChartXLabels'
 import { ChartContainer } from './ChartContainer'
+import { YLabel } from './YLabel'
 
 const BudgetOutline = styled.div`
   ${absoluteOutline(12, 4)};
@@ -119,9 +120,9 @@ export const TrackedTimeChart = () => {
                       }
 
                       return (
-                        <Text key={index} size={12} color="supporting">
+                        <YLabel key={index}>
                           <EmphasizeNumbers value={str} />
-                        </Text>
+                        </YLabel>
                       )
                     }}
                     data={normalized.yLabels}

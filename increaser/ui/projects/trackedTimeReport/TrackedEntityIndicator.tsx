@@ -14,6 +14,7 @@ const Container = styled.p`
   > * {
     &:first-child {
       font-size: 18px;
+      line-height: 1;
     }
   }
 `

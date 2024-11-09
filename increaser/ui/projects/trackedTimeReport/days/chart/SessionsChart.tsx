@@ -5,28 +5,62 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
-import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 import { trackedTimeChartConfig } from '../../chart/config'
-import { useSelectedIntervalActiveTimeSeries } from '../../chart/useSelectedIntervalActiveTimeSeries'
 import { ChartContent } from '../../chart/ChartContent'
 import { DataPointSelector } from '../../chart/DataPointSelector'
 import { ChartXLabels } from '../../chart/ChartXLabels'
 import { ChartContainer } from '../../chart/ChartContainer'
+import { useSetsGroupedByDays } from '../state/setsGroupedByDays'
+import { useUser } from '../../../../user/state/user'
+import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
+import { fillRangeWithPoints } from '@lib/ui/charts/utils/fillRangeWithPoints'
+import { YLabel } from '../../chart/YLabel'
+import { DaySessions } from './DaySessions'
 
 export const SessionsChart = () => {
-  const data = useSelectedIntervalActiveTimeSeries()
+  const days = useSetsGroupedByDays()
 
-  const yLabels = useMemo(() => {
-    const result = generateYLabels({
-      maxValue: convertDuration(Math.max(...data), 's', 'h'),
-      stepSizes: [0.25, 0.5, 1, 2, 4, 10, 20, 50, 100, 200, 500, 1000],
-    }).map((value) => convertDuration(value, 'h', 's'))
+  const { startWorkAt, finishWorkAt } = useUser()
 
-    return result
-  }, [data])
+  const min = useMemo(() => {
+    const earliestStart = Math.min(
+      ...days.flat().flatMap(({ start }) => start),
+      startWorkAt,
+    )
+
+    return convertDuration(
+      Math.floor(earliestStart / convertDuration(1, 'h', 'min')),
+      'h',
+      'min',
+    )
+  }, [days, startWorkAt])
+
+  const max = useMemo(() => {
+    const latestEnd = Math.max(
+      ...days.flat().flatMap(({ end }) => end),
+      finishWorkAt,
+    )
+
+    return convertDuration(
+      Math.ceil(latestEnd / convertDuration(1, 'h', 'min')),
+      'h',
+      'min',
+    )
+  }, [days, finishWorkAt])
+
+  const duration = max - min
+
+  const yLabels = useMemo(
+    () =>
+      fillRangeWithPoints({
+        length: duration,
+        steps: [30, 60, 120, 180, 240, 320],
+        maxPoints: 12,
+      }),
+    [duration],
+  )
 
   const normalized = normalizeDataArrays({
-    data,
     yLabels,
   })
 
@@ -42,8 +76,14 @@ export const SessionsChart = () => {
                     expectedLabelWidth={
                       trackedTimeChartConfig.expectedYLabelWidth
                     }
-                    renderLabel={() => {
-                      return null
+                    renderLabel={(index) => {
+                      const minutes = yLabels[index] + min
+
+                      return (
+                        <YLabel key={index}>
+                          {formatDailyEventTime(minutes)}
+                        </YLabel>
+                      )
                     }}
                     data={normalized.yLabels}
                   />
@@ -55,7 +95,16 @@ export const SessionsChart = () => {
                     fullWidth
                   >
                     <ChartHorizontalGridLines data={normalized.yLabels} />
-                    <ChartContent>coming soon!</ChartContent>
+                    <ChartContent>
+                      {days.map((sets, index) => (
+                        <DaySessions
+                          key={index}
+                          sets={sets}
+                          index={index}
+                          interval={{ start: min, end: max }}
+                        />
+                      ))}
+                    </ChartContent>
                     <DataPointSelector />
                   </VStack>
                 </ChartContainer>
