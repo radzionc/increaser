@@ -5,7 +5,7 @@ import { useSelectedInterval } from './useSelectedInterval'
 import { text, Text } from '@lib/ui/text'
 import { pluralize } from '@lib/utils/pluralize'
 import styled from 'styled-components'
-import { HStack, hStack, VStack, vStack } from '@lib/ui/css/stack'
+import { HStack, hStack, vStack } from '@lib/ui/css/stack'
 import { useCallback } from 'react'
 import { match } from '@lib/utils/match'
 import { format } from 'date-fns'
@@ -14,7 +14,6 @@ import { trackedTimeChartConfig } from '../chart/config'
 import { TrackedTimeChartTitle } from '../TrackedTimeChartTitle'
 
 import { SelectedIntervalTotal } from './SelectedIntervalTotal'
-import { SelectedPeriodAverage } from '../average/SelectedPeriodAverage'
 
 const Row = styled.div`
   ${hStack({
@@ -76,9 +75,6 @@ export const SelectedIntervalInfo = () => {
           <span>{formatDate(startedAt)}</span>
         )}
       </Row>
-      <VStack style={{ alignSelf: 'end' }}>
-        <SelectedPeriodAverage />
-      </VStack>
     </Container>
   )
 }

@@ -4,7 +4,7 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { PageContent } from '@increaser/app/ui/page/PageContent'
-import { TrackedTimeNavigation } from './TrackedTimeNavigation'
+import { TrackedTimeSummary } from './TrackedTimeSummary'
 import { ActiveItemIndexProvider } from '@lib/ui/list/ActiveItemIndexProvider'
 import { TrackedTimeInterval } from './interval/TrackedTimeInterval'
 import { SelectedIntervalInfo } from './interval/SelectedIntervalInfo'
@@ -29,7 +29,6 @@ const NavigationContainer = styled(VStack)`
 `
 
 export const TrackedTimeReportContent = () => {
-  const sideContent = <TrackedTimeNavigation />
   const timeGrouping = useTimeGrouping()
   const [view] = useDaysView()
 
@@ -41,7 +40,7 @@ export const TrackedTimeReportContent = () => {
         return (
           <Container ref={setElement}>
             <PageContent>
-              {isSmall && sideContent}
+              {isSmall && <TrackedTimeSummary />}
               <VStack gap={16}>
                 <NonEmptyIntervalOnly>
                   <SelectedIntervalInfo />
@@ -60,7 +59,7 @@ export const TrackedTimeReportContent = () => {
               <NavigationContainer
                 style={{ maxWidth: navigationWidth, minWidth: navigationWidth }}
               >
-                {sideContent}
+                <TrackedTimeSummary />
               </NavigationContainer>
             )}
           </Container>

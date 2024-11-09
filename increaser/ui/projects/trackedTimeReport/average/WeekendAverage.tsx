@@ -3,20 +3,16 @@ import { useSelectedIntervalActiveTimeSeries } from '../chart/useSelectedInterva
 import { useGetStartOfIntervalPoint } from '../timeGrouping/useGetStartOfIntervalPoint'
 import { AverageValue } from './AverageValue'
 import { isWorkday } from '@lib/utils/time/workweek'
-import { sum } from '@lib/utils/array/sum'
 
 export const WeekendAverage = () => {
   const timeSeries = useSelectedIntervalActiveTimeSeries()
 
   const getStart = useGetStartOfIntervalPoint()
 
-  const value = useMemo(() => {
-    const workdays = timeSeries.filter(
-      (_, index) => !isWorkday(getStart(index)),
-    )
+  const value = useMemo(
+    () => timeSeries.filter((_, index) => !isWorkday(getStart(index))),
+    [getStart, timeSeries],
+  )
 
-    return sum(workdays) / workdays.length
-  }, [getStart, timeSeries])
-
-  return <AverageValue name="weekend" value={value} />
+  return <AverageValue kind="secondary" name="Weekend" value={value} />
 }

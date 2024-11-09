@@ -162,3 +162,7 @@ export type ComponentWithStatusProps<T> = {
 export type NamedComponentProps = {
   name: string
 }
+
+export type ComponentWithKindProps<T> = {
+  kind: T
+}
