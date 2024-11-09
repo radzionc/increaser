@@ -14,8 +14,7 @@ import { formatDuration } from '@lib/utils/time/formatDuration'
 import { useSelectedIntervalActiveTimeSeries } from './useSelectedIntervalActiveTimeSeries'
 import { getColor } from '@lib/ui/theme/getters'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { vStack } from '@lib/ui/css/stack'
-import { Center } from '@lib/ui/layout/Center'
+import { HStack, vStack } from '@lib/ui/css/stack'
 import { DataPointBreakdown } from './breakdown/DataPointBreakdown'
 import { useActiveItemIndex } from '@lib/ui/list/ActiveItemIndexProvider'
 import { usePresentState } from '@lib/ui/state/usePresentState'
@@ -86,11 +85,11 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
         }}
       />
       <Container ref={setFloating} style={{ ...floatingStyles }}>
-        <Center>
-          <Text>{title}</Text>
-        </Center>
-        <Center>
-          <Text size={20} color="contrast">
+        <HStack alignItems="center" justifyContent="space-between" gap={20}>
+          <Text weight="600" color="supporting">
+            {title}
+          </Text>
+          <Text weight="600" color="contrast">
             {total ? (
               <EmphasizeNumbers
                 value={formatDuration(total, 's', {
@@ -101,7 +100,7 @@ export const DataPointInfo = ({ position }: DataPointInfoProps) => {
               '-'
             )}
           </Text>
-        </Center>
+        </HStack>
         {!activeProjectId && <DataPointBreakdown />}
       </Container>
     </>
