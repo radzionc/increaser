@@ -28,6 +28,7 @@ export enum PersistentStateKey {
   TrackedTimeIntervalWeeks = 'TrackedTimeIntervalWeeks',
   TrackedTimeIntervalMonths = 'TrackedTimeIntervalMonths',
   TrackedTimeIntervalYears = 'TrackedTimeIntervalYears',
+  TrackedTimeDaysView = 'TrackedTimeDaysView',
   TimeGrouping = 'timeGrouping',
   ActiveProject = 'activeProject',
   ShouldHideProjectNames = 'shouldHideProjectNames',

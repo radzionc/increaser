@@ -1,8 +1,8 @@
 import { withLayout } from '@lib/next-ui/utils/withLayout'
 import { RegularAppPageLayout } from '../../focus/components/RegularAppPageLayout'
-import { TimesheetPageContent } from '../../timesheet/TimesheetPageContent'
+import { DaysTimesheetPageContent } from '../../timesheet/DaysTimesheetPageContent'
 
 export default withLayout({
-  page: TimesheetPageContent,
+  page: DaysTimesheetPageContent,
   layout: RegularAppPageLayout,
 })

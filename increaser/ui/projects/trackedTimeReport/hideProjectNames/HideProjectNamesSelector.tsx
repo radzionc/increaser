@@ -15,6 +15,7 @@ export const HideProjectNamesSelector = () => {
       renderOpener={(props) => (
         <div {...props}>
           <IconButton
+            size="l"
             kind="secondary"
             title={title}
             onClick={() => setValue(!value)}
