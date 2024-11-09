@@ -1,5 +1,5 @@
 export const trackedTimeChartConfig = {
-  chartHeight: 280,
+  chartHeight: 320,
   expectedYLabelWidth: 48,
   expectedXLabelWidth: 58,
   expectedXLabelHeight: 18,
