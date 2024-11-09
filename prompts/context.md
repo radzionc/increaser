@@ -121,6 +121,8 @@ When the report is grouped by days, next to the average day there is also an ave
 
 When the report is grouped by days, the user has the option to see the "Sessions" view, where instead of a bar chart, they see sessions grouped by days. Sessions are colored according to the projects they belong to. When the user selects a specific project, sessions for other projects will be grayed out.
 
+When the report is grouped by days and no project selected the user can see when the workday started and ended for a specific day.
+
 ## Habits
 
 The "Habits" page includes two sub-pages: "Track" and "Explore."
