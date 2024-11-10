@@ -26,12 +26,6 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
       <b>Task Management</b> system.
     </>
   ),
-  workBudget: (
-    <>
-      Set and manage your work hours effectively with our <b>Work Budgeting</b>{' '}
-      feature to maintain a balanced schedule.
-    </>
-  ),
   timePlanner: (
     <>
       Plan your week effectively and allocate time to your projects with our
@@ -42,12 +36,6 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
     <>
       Build and maintain positive habits effortlessly using our insightful{' '}
       <b>Habit Tracking</b> feature.
-    </>
-  ),
-  schedule: (
-    <>
-      Optimize your daily routine and ensure a smooth workflow with our
-      user-friendly <b>Scheduling</b> tool.
     </>
   ),
   vision: (
