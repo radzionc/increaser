@@ -73,7 +73,7 @@ export const DayOverviewProvider = ({
     return result
   }, [allSets, currentTime, dayStartedAt, intervals, lastSetsSnapshot])
 
-  const { startWorkAt, finishWorkAt } = useUser()
+  const { finishWorkAt } = useUser()
 
   const startHour = useMemo(() => {
     if (sets.length) {
@@ -82,11 +82,8 @@ export const DayOverviewProvider = ({
       )
     }
 
-    return Math.min(
-      Math.floor(convertDuration(startWorkAt, 'min', 'h')),
-      convertDuration(currentTime - dayStartedAt, 'ms', 'h'),
-    )
-  }, [currentTime, dayStartedAt, startWorkAt, sets])
+    return Math.min(convertDuration(currentTime - dayStartedAt, 'ms', 'h'))
+  }, [currentTime, dayStartedAt, sets])
 
   const endHour = useMemo(() => {
     const workdayEndsAtHour = Math.ceil(

@@ -40,20 +40,17 @@ const BudgetOutline = styled.div`
 export const SessionsChart = () => {
   const days = useSetsGroupedByDays()
 
-  const { startWorkAt, finishWorkAt } = useUser()
+  const { finishWorkAt } = useUser()
 
   const min = useMemo(() => {
-    const earliestStart = Math.min(
-      ...days.flat().flatMap(({ start }) => start),
-      startWorkAt,
-    )
+    const earliestStart = Math.min(...days.flat().flatMap(({ start }) => start))
 
     return convertDuration(
       Math.floor(earliestStart / convertDuration(1, 'h', 'min')),
       'h',
       'min',
     )
-  }, [days, startWorkAt])
+  }, [days])
 
   const max = useMemo(() => {
     const latestEnd = Math.max(

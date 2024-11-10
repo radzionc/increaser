@@ -8,26 +8,16 @@ import { css } from 'styled-components'
 import { interactive } from '@lib/ui/css/interactive'
 import { TimeOption } from './TimeOption'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import {
-  DayMoment,
-  dayMomentShortName,
-  dayMomentStep,
-} from '@increaser/entities/DayMoments'
+
 import { range } from '@lib/utils/array/range'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
-import { dayMomentIcon } from '@increaser/ui/schedule/dayMomentIcon'
-import { getDayMomentColor } from '@increaser/ui/schedule/utils/getDayMomentColor'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
 import { useUpdateUserMutation } from '../../../user/mutations/useUpdateUserMutation'
-
-interface ManageDayMomentProps {
-  min: number
-  max: number
-  dayMoment: DayMoment
-}
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { FlagIcon } from '@lib/ui/icons/FlagIcon'
 
 const Container = styled.div<{ isActive: boolean }>`
   ${borderRadius.m};
@@ -55,15 +45,14 @@ const Container = styled.div<{ isActive: boolean }>`
   }
 `
 
-export const ManageDayMoment = ({
-  min,
-  max,
-  dayMoment,
-}: ManageDayMomentProps) => {
-  const user = useUser()
-  const value = user[dayMoment]
+const dayMomentStep = 30
 
+export const ManageFinishWorkAt = () => {
+  const { finishWorkAt } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
+
+  const min = convertDuration(12, 'h', 'min')
+  const max = convertDuration(24, 'h', 'min')
 
   const options = range(Math.round((max - min) / dayMomentStep) + 1).map(
     (step) => min + dayMomentStep * step,
@@ -77,25 +66,25 @@ export const ManageDayMoment = ({
     setIsOpen,
     activeIndex,
   } = useFloatingOptions({
-    selectedIndex: options.indexOf(value),
+    selectedIndex: options.indexOf(finishWorkAt),
     options: options.map((option) => option.toString()),
   })
 
   const theme = useTheme()
-  const color = getDayMomentColor(dayMoment, theme)
+  const color = theme.colors.alert
 
   return (
     <>
       <Container isActive={isOpen} {...getReferenceProps()}>
         <HStack style={{ minWidth: 132 }} alignItems="center" gap={8}>
           <IconWrapper style={{ color: color.toCssValue() }}>
-            {dayMomentIcon[dayMoment]}
+            <FlagIcon />
           </IconWrapper>
           <Text weight="500" as="div">
-            {dayMomentShortName[dayMoment]}
+            Finish work at
           </Text>
         </HStack>
-        <Text weight="600">{formatDailyEventTime(value)}</Text>
+        <Text weight="600">{formatDailyEventTime(finishWorkAt)}</Text>
       </Container>
       {isOpen && (
         <FloatingOptionsContainer {...getFloatingProps()}>
@@ -106,12 +95,12 @@ export const ManageDayMoment = ({
               {...getOptionProps({
                 index,
                 onSelect: () => {
-                  updateUser({ [dayMoment]: option })
+                  updateUser({ finishWorkAt: option })
                   setIsOpen(false)
                 },
               })}
             >
-              <WithSelectionMark isSelected={option === value}>
+              <WithSelectionMark isSelected={option === finishWorkAt}>
                 {formatDailyEventTime(option)}
               </WithSelectionMark>
             </TimeOption>

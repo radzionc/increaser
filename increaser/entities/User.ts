@@ -5,7 +5,6 @@ import { LifeTimeDeal } from './LifeTimeDeal'
 import { Project, ProjectRelatedEntity, otherProject } from './Project'
 import { Subscription } from './Subscription'
 import { WorkBudget, defaultWorkBudget } from './WorkBudget'
-import { DayMoments, dayMomentsDefaultValues } from './DayMoments'
 import { Task } from './Task'
 import { Interval } from '@lib/utils/interval/Interval'
 import { TimeRecord } from './TrackedTime'
@@ -21,6 +20,8 @@ import {
 } from './PrincipleCategory'
 import { Principle } from './Principle'
 import { recordFromItems } from '@lib/utils/record/recordFromItems'
+import { Minutes } from '@lib/utils/time/types'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export type Set = Interval &
   ProjectRelatedEntity & {
@@ -87,8 +88,7 @@ export const userEntityRecordName: {
   principle: 'principles',
 } as const
 
-export type User = DayMoments &
-  WorkBudget &
+export type User = WorkBudget &
   UserEntityRecords & {
     id: string
     email: string
@@ -97,6 +97,8 @@ export type User = DayMoments &
     sets: Set[]
     registrationDate: number
     freeTrialEnd: number
+
+    finishWorkAt: Minutes
 
     dob?: string | null
 
@@ -150,12 +152,7 @@ export const userDefaultFields: Pick<
   | 'projects'
   | 'habits'
   | 'isAnonymous'
-  | 'wakeUpAt'
-  | 'firstMealAt'
-  | 'startWorkAt'
-  | 'lastMealAt'
   | 'finishWorkAt'
-  | 'goToBedAt'
   | 'workdayHours'
   | 'weekendHours'
   | 'weeks'
@@ -187,8 +184,8 @@ export const userDefaultFields: Pick<
   completedEducation: [],
   taskFactories: {},
   taskTemplates: {},
+  finishWorkAt: convertDuration(18, 'h', 'min'),
   principleCategories: recordFromItems(defaultPrincipleCategories, (p) => p.id),
   principles: {},
   ...defaultWorkBudget,
-  ...dayMomentsDefaultValues,
 }
