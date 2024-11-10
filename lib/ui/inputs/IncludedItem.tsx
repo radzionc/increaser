@@ -7,27 +7,31 @@ import { UnstyledButton } from '../buttons/UnstyledButton'
 import { transition } from '../css/transition'
 import { CloseIcon } from '../icons/CloseIcon'
 import { centerContent } from '../css/centerContent'
+import { sameDimensions } from '../css/sameDimensions'
+import { toSizeUnit } from '../css/toSizeUnit'
 
 type IncludedItemProps = ComponentWithChildrenProps &
   UIComponentProps & {
     onRemove?: () => void
   }
 
+const closeButtonSize = 36
+const offset = 2
+
 const Container = styled(HStack)`
   background: ${getColor('foreground')};
   ${borderRadius.s}
   align-items: center;
   justify-content: space-between;
-  padding: 4px;
+  padding: ${toSizeUnit(offset)};
   padding-left: 12px;
-  min-height: 48px;
+  height: ${toSizeUnit(closeButtonSize + offset * 2)};
   gap: 8px;
 `
 
 const Button = styled(UnstyledButton)`
   height: 100%;
-  min-width: 32px;
-  aspect-ratio: 1/1;
+  ${sameDimensions(closeButtonSize)};
   ${borderRadius.s}
   ${transition};
   ${centerContent};
