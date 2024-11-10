@@ -49,7 +49,7 @@ export const ProjectsBudgetOverview = () => {
             </LabeledValue>
           )}
         </HStack>
-        <Link href={getAppPath('preferences', 'work-budget')}>
+        <Link href={getAppPath('preferences')}>
           <LabeledValue labelColor="supporting" name="Work budget">
             <Text color="contrast">
               {formatDuration(workBudetTotal, 'h', {

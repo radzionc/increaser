@@ -112,7 +112,6 @@ export const appPageViews = {
   habits: ['track', 'ideas'],
   principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'upcoming', 'automation', 'templates'],
-  preferences: ['schedule', 'work-budget'],
   roadmap: ['ideas', 'done'],
   info: ['focus', 'track', 'tasks', 'habits', 'goals'],
   timesheet: ['day', 'week', 'month', 'year'],
@@ -122,8 +121,6 @@ export type AppPageVisionView = (typeof appPageViews)['vision'][number]
 export type AppPageHabitsView = (typeof appPageViews)['habits'][number]
 export type AppPagePrinciplesView = (typeof appPageViews)['principles'][number]
 export type AppPageTasksView = (typeof appPageViews)['tasks'][number]
-export type AppPagePreferencesView =
-  (typeof appPageViews)['preferences'][number]
 
 export type AppPageViews = typeof appPageViews
 export type AppPageWithView = keyof AppPageViews
@@ -173,10 +170,6 @@ export const appPageViewName: {
     upcoming: 'Upcoming',
     automation: 'Automation',
     templates: 'Templates',
-  },
-  preferences: {
-    schedule: 'Schedule',
-    'work-budget': 'Work Budget',
   },
   roadmap: {
     ideas: 'Ideas',
