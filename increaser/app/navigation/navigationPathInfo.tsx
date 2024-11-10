@@ -5,7 +5,6 @@ import { GlobeIcon } from '@lib/ui/icons/GlobeIcon'
 import { LightBulbIcon } from '@lib/ui/icons/LightBulbIcon'
 import { GiftIcon } from '@lib/ui/icons/GiftIcon'
 import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
-import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
 import { InfoIcon } from '@lib/ui/icons/InfoIcon'
 import { ChartNoAxesCombinedIcon } from '@lib/ui/icons/ChartNoAxesCombinedIcon'
 
@@ -55,10 +54,6 @@ export const navigationPathInfo: Record<AppNavigationPage, NavigationPathInfo> =
     principles: {
       name: 'Principles',
       icon: <ScrollIcon />,
-    },
-    preferences: {
-      name: 'Preferences',
-      icon: <TogglesIcon />,
     },
     info: {
       name: 'Info',

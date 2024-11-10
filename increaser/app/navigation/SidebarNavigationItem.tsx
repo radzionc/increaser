@@ -26,7 +26,6 @@ export const SidebarNavigationItem = ({
       )}
       timesheet={() => <NavigationToInternalPage value="timesheet" />}
       tasks={() => <NavigationToInternalPage value="tasks" />}
-      preferences={() => <NavigationToInternalPage value="preferences" />}
       vision={() => <NavigationToInternalPage value="vision" />}
       goals={() => <NavigationToInternalPage value="goals" />}
       projects={() => <NavigationToInternalPage value="projects" />}
