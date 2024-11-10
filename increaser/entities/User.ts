@@ -126,7 +126,11 @@ export type User = WorkBudget &
     lifeTimeDeal?: LifeTimeDeal
 
     accountDeletionEmailSentAt?: number
+
+    weekends: number[]
   }
+
+export const defaultWeekends = [5, 6]
 
 export const userReadonlyFields = [
   'id',
@@ -166,6 +170,7 @@ export const userDefaultFields: Pick<
   | 'taskTemplates'
   | 'principleCategories'
   | 'principles'
+  | 'weekends'
 > = {
   focusSounds: defaultFocusSounds,
   sets: [],
@@ -187,5 +192,6 @@ export const userDefaultFields: Pick<
   finishWorkAt: convertDuration(18, 'h', 'min'),
   principleCategories: recordFromItems(defaultPrincipleCategories, (p) => p.id),
   principles: {},
+  weekends: defaultWeekends,
   ...defaultWorkBudget,
 }
