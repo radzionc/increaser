@@ -10,7 +10,6 @@ export const primaryAppNavigationPages = [
   'ideas',
   'principles',
   'vision',
-  'preferences',
 ] as const
 
 export const secondaryAppNavigationPages = [
@@ -34,6 +33,7 @@ export const appPages = [
   'updates',
   'profile',
   'membership',
+  'preferences',
 ] as const
 
 export type AppPage = (typeof appPages)[number]

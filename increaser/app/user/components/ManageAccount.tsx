@@ -26,6 +26,7 @@ import { Tag } from '@lib/ui/tags/Tag'
 import { HeaderActionButton } from '../../navigation/HeaderActionButton'
 import { FileDownIcon } from '@lib/ui/icons/FileDownIcon'
 import { useExportUserData } from '@increaser/ui/user/hooks/useExportUserData'
+import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
 
 const Container = styled(HeaderActionButton)<ComponentWithActiveState>`
   ${({ isActive }) =>
@@ -88,6 +89,13 @@ export const ManageAccount = () => {
         icon: <UserPenIcon />,
         onSelect: () => {
           push(getAppPath('profile'))
+        },
+      },
+      {
+        name: 'Preferences',
+        icon: <TogglesIcon />,
+        onSelect: () => {
+          push(getAppPath('preferences'))
         },
       },
       {
