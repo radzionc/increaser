@@ -5,10 +5,11 @@ import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
 import { ScheduleReview } from '../sets/components/ScheduleReview'
 import { ScheduleVisualization } from '@increaser/ui/schedule/ScheduleVisualization'
 import { ManageSchedule } from '@increaser/ui/schedule/ManageSchedule'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
 export const PreferencesPage = () => {
   return (
-    <VStack gap={40}>
+    <SeparatedByLine gap={40}>
       <HStack gap={40} fullWidth wrap="wrap">
         <VStack style={{ flex: 1 }} gap={40}>
           <ScheduleVisualization />
@@ -25,6 +26,6 @@ export const PreferencesPage = () => {
         <ManageWorkBudget />
         <WorkBudgetReport />
       </UniformColumnGrid>
-    </VStack>
+    </SeparatedByLine>
   )
 }
