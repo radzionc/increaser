@@ -1,5 +1,4 @@
 import { VStack } from '@lib/ui/css/stack'
-import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { useMemo } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -27,6 +26,7 @@ import { DataPointSelector } from './DataPointSelector'
 import { ChartXLabels } from './ChartXLabels'
 import { ChartContainer } from './ChartContainer'
 import { YLabel } from './YLabel'
+import { YLabelHighlight } from './YLabelHighlight'
 
 const BudgetOutline = styled.div`
   ${absoluteOutline(12, 4)};
@@ -102,20 +102,10 @@ export const TrackedTimeChart = () => {
 
                       if (showBudget && yLabels[index] === budget) {
                         return (
-                          <Text
-                            as="div"
-                            style={{
-                              position: 'relative',
-                              isolation: 'isolate',
-                            }}
-                            key={index}
-                            size={12}
-                            weight="600"
-                            color="contrast"
-                          >
+                          <YLabelHighlight>
                             <EmphasizeNumbers value={str} />
                             <BudgetOutline />
-                          </Text>
+                          </YLabelHighlight>
                         )
                       }
 

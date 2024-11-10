@@ -16,6 +16,26 @@ import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { fillRangeWithPoints } from '@lib/ui/charts/utils/fillRangeWithPoints'
 import { YLabel } from '../../chart/YLabel'
 import { DaySessions } from './DaySessions'
+import { PositionAbsolutelyCenterHorizontally } from '@lib/ui/layout/PositionAbsolutelyCenterHorizontally'
+import { toPercents } from '@lib/utils/toPercents'
+import { getColor } from '@lib/ui/theme/getters'
+import styled from 'styled-components'
+import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+import { borderRadius } from '@lib/ui/css/borderRadius'
+import { YLabelHighlight } from '../../chart/YLabelHighlight'
+import { ChartHighlightLine } from '../../chart/ChartHighlightLine'
+
+const Line = styled(ChartHighlightLine)`
+  color: ${getColor('alert')};
+`
+
+const BudgetOutline = styled.div`
+  ${absoluteOutline(8, 4)};
+  ${borderRadius.s};
+  background: ${getColor('background')};
+  border: 2px solid ${getColor('alert')};
+  z-index: -1;
+`
 
 export const SessionsChart = () => {
   const days = useSetsGroupedByDays()
@@ -62,6 +82,7 @@ export const SessionsChart = () => {
 
   const normalized = normalizeDataArrays({
     yLabels,
+    workdayEnd: [finishWorkAt - min],
   })
 
   return (
@@ -72,6 +93,18 @@ export const SessionsChart = () => {
             {size && (
               <>
                 <ChartContainer>
+                  {normalized.workdayEnd.map((boundary, index) => {
+                    console.log({ index, boundary })
+                    return (
+                      <PositionAbsolutelyCenterHorizontally
+                        key={index}
+                        top={toPercents(boundary)}
+                        fullWidth
+                      >
+                        <Line />
+                      </PositionAbsolutelyCenterHorizontally>
+                    )
+                  })}
                   <ChartYAxis
                     expectedLabelWidth={
                       trackedTimeChartConfig.expectedYLabelWidth
@@ -87,6 +120,20 @@ export const SessionsChart = () => {
                     }}
                     data={normalized.yLabels}
                   />
+                  {normalized.workdayEnd.map((boundary, index) => {
+                    console.log({ index, boundary })
+                    return (
+                      <PositionAbsolutelyCenterHorizontally
+                        key={index}
+                        top={toPercents(boundary)}
+                      >
+                        <YLabelHighlight>
+                          {formatDailyEventTime(finishWorkAt)}
+                          <BudgetOutline />
+                        </YLabelHighlight>
+                      </PositionAbsolutelyCenterHorizontally>
+                    )
+                  })}
                   <VStack
                     style={{
                       position: 'relative',
