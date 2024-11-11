@@ -1,6 +1,16 @@
 import { WorkBudget } from '@increaser/entities/WorkBudget'
-import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
 
-export const getWorkBudgetTotal = (workBudget: WorkBudget): number =>
-  workBudget.workdayHours * workdaysNumber +
-  workBudget.weekendHours * weekendsNumber
+type GetWorkBudgetTotalInput = WorkBudget & {
+  weekends: number[]
+}
+
+export const getWorkBudgetTotal = ({
+  workdayHours,
+  weekendHours,
+  weekends,
+}: GetWorkBudgetTotalInput): number => {
+  const weekendCount = weekends.length
+  const workdayCount = 7 - weekendCount
+
+  return workdayHours * workdayCount + weekendHours * weekendCount
+}

@@ -13,11 +13,10 @@ import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { Panel } from '@lib/ui/css/panel'
 import { InputDebounce } from '@lib/ui/inputs/InputDebounce'
 import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWorkBudgetTotal'
-import { workdaysNumber } from '@lib/utils/time/workweek'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 
 export const ManageWorkBudget = () => {
-  const { workdayHours, weekendHours } = useUser()
+  const { workdayHours, weekendHours, weekends } = useUser()
 
   const { mutate: updateUser } = useUpdateUserMutation()
 
@@ -26,6 +25,7 @@ export const ManageWorkBudget = () => {
   const workBudgetTotal = getWorkBudgetTotal({
     workdayHours,
     weekendHours,
+    weekends,
   })
 
   const formattedWorkdBudgetTotal = formatDuration(workBudgetTotal, 'h', {
@@ -71,10 +71,10 @@ export const ManageWorkBudget = () => {
           <BarChart
             height={160}
             items={daysBudget.map((value, index) => {
-              const color =
-                index < workdaysNumber
-                  ? getWorkdayColor(theme)
-                  : getWeekendColor(theme)
+              const color = weekends.includes(index)
+                ? getWeekendColor(theme)
+                : getWorkdayColor(theme)
+
               return {
                 value,
                 label: <Text>{getShortWeekday(index)}</Text>,

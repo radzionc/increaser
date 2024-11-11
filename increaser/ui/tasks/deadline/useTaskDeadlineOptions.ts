@@ -20,7 +20,7 @@ export const useTaskDeadlineOptions = (
 
     const today = endOfDay(todayStartedAt).getTime()
     const tomorrow = addDays(today, 1).getTime()
-    const currentWeekdayIndex = getWeekday(new Date(today))
+    const currentWeekdayIndex = getWeekday(today)
 
     const lastDayIndex = convertDuration(1, 'w', 'd') - 1
 

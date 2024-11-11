@@ -1,11 +1,16 @@
 import { WorkBudget } from '@increaser/entities/WorkBudget'
 import { range } from '@lib/utils/array/range'
-import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
+import { D_IN_WEEK } from '@lib/utils/time'
+
+type Input = WorkBudget & {
+  weekends: number[]
+}
 
 export const toDaysBudget = ({
   workdayHours,
   weekendHours,
-}: WorkBudget): number[] => [
-  ...range(workdaysNumber).map(() => workdayHours),
-  ...range(weekendsNumber).map(() => weekendHours),
-]
+  weekends,
+}: Input): number[] =>
+  range(D_IN_WEEK).map((day) =>
+    weekends.includes(day) ? weekendHours : workdayHours,
+  )

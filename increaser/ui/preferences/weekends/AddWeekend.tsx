@@ -5,7 +5,6 @@ import { range } from '@lib/utils/array/range'
 import { D_IN_WEEK, WEEKDAYS } from '@lib/utils/time'
 import { without } from '@lib/utils/array/without'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
-import { isEmpty } from '@lib/utils/array/isEmpty'
 
 export const AddWeekend = () => {
   const { weekends } = useUser()
@@ -17,7 +16,7 @@ export const AddWeekend = () => {
     [weekends],
   )
 
-  if (isEmpty(options)) return null
+  if (options.length < 2) return null
 
   return (
     <ExpandableSelector<number>

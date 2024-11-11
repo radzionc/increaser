@@ -51,7 +51,7 @@ export const ProjectBudgetTag = () => {
         )
       }
     >
-      {isWorkdayOnly && <span>Mon - Fri</span>}
+      {isWorkdayOnly && <span>Workdays</span>}
       {hasBudget && (
         <Content gap={4} separator={slashSeparator}>
           <span>

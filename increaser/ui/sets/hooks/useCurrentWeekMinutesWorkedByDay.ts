@@ -13,7 +13,7 @@ export const useCurrentWeekMinutesWorkedByDay = () => {
   return useMemo(() => {
     const result = range(weekday + 1).map(() => 0)
     sets.forEach((set) => {
-      const index = getWeekday(new Date(set.start))
+      const index = getWeekday(set.start)
       result[index] += getSetDuration(set)
     })
 

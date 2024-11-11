@@ -4,8 +4,7 @@ import { MS_IN_HOUR, MS_IN_MIN } from '@lib/utils/time'
 import { startOfMonth, subMonths, startOfDay } from 'date-fns'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { isWorkday } from '@lib/utils/time/workweek'
-import { Set } from '@increaser/entities/User'
+import { defaultWeekends, Set } from '@increaser/entities/User'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 
 type SetBoundaryDescriptor = [number, number]
@@ -333,7 +332,9 @@ const daySetsDescription: DaySetsDescription[] = [
 ]
 
 const getRandomSets = (timestamp: number) => {
-  const options = isWorkday(timestamp)
+  const weekday = getWeekday(timestamp)
+  const isWeekend = defaultWeekends.includes(weekday)
+  const options = !isWeekend
     ? daySetsDescription.slice(0, 5)
     : daySetsDescription.slice(-2)
 
@@ -341,7 +342,6 @@ const getRandomSets = (timestamp: number) => {
 }
 
 export const getDemoSets = () => {
-  const today = new Date()
   const now = Date.now()
 
   const firstDayStartedAt = startOfMonth(subMonths(now, 6)).getTime()
@@ -349,7 +349,7 @@ export const getDemoSets = () => {
   const daysNumber =
     Math.round(convertDuration(todayStartedAt - firstDayStartedAt, 'ms', 'd')) +
     1
-  const currentWeekday = getWeekday(today)
+  const currentWeekday = getWeekday(now)
   const currentWeekStartedAt =
     todayStartedAt - convertDuration(currentWeekday, 'd', 'ms')
 

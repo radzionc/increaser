@@ -26,12 +26,6 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
       <b>Task Management</b> system.
     </>
   ),
-  timePlanner: (
-    <>
-      Plan your week effectively and allocate time to your projects with our
-      powerful <b>Time Planning</b> tool.
-    </>
-  ),
   habits: (
     <>
       Build and maintain positive habits effortlessly using our insightful{' '}

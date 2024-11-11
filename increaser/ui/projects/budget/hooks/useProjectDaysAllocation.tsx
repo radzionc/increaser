@@ -2,20 +2,22 @@ import { useMemo } from 'react'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { range } from '@lib/utils/array/range'
 import { sum } from '@lib/utils/array/sum'
-import { weekendsNumber, workdaysNumber } from '@lib/utils/time/workweek'
 import { useUser } from '@increaser/ui/user/state/user'
 import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWorkBudgetTotal'
 import { useActiveProjects } from '../../hooks/useActiveProjects'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { D_IN_WEEK } from '@lib/utils/time'
 
 export const useProjectDaysAllocation = () => {
   const activeProjects = useActiveProjects()
 
   const { workingDays } = useCurrentProject()
 
-  const { workdayHours, weekendHours } = useUser()
+  const { workdayHours, weekendHours, weekends } = useUser()
 
   return useMemo(() => {
+    const weekendsNumber = weekends.length
+    const workdaysNumber = D_IN_WEEK - weekendsNumber
     if (workingDays === 'workdays') {
       return range(workdaysNumber).map(() => 1 / workdaysNumber)
     }
@@ -23,6 +25,7 @@ export const useProjectDaysAllocation = () => {
     const workBudgetTotal = getWorkBudgetTotal({
       workdayHours,
       weekendHours,
+      weekends,
     })
 
     const plannedWorkdaysShare =
@@ -54,5 +57,5 @@ export const useProjectDaysAllocation = () => {
       ...range(workdaysNumber).map(() => realWorkdaysShare / workdaysNumber),
       ...range(weekendsNumber).map(() => realWeekendsShare / weekendsNumber),
     ]
-  }, [activeProjects, weekendHours, workdayHours, workingDays])
+  }, [activeProjects, weekendHours, weekends, workdayHours, workingDays])
 }
