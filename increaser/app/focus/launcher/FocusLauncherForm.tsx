@@ -5,7 +5,6 @@ import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
 import { FocusStartTime } from './startTime/FocusStartTime'
 import { StartFocus } from './StartFocus'
-import { FocusLauncherBudget } from './FocusLauncherBudget'
 import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
 import { FocusTargetInputs } from '../components/FocusTargetInputs'
 import { FocusDurationInput } from '../components/FocusDurationInput'
@@ -23,7 +22,6 @@ export const FocusLauncherForm = () => {
       <FocusTargetInputs />
       {project && (
         <>
-          <FocusLauncherBudget />
           <FocusStartTime />
           <FocusDurationInput />
           <VStack>

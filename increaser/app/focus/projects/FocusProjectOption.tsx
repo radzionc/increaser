@@ -7,19 +7,21 @@ import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { Text } from '@lib/ui/text'
-import { hStack } from '@lib/ui/css/stack'
+import { HStack, hStack } from '@lib/ui/css/stack'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { focusLauncherConfig } from '../launcher/config'
 import { useFocusTarget } from '../state/focusTarget'
+import { ProjectBudgetTag } from '@increaser/ui/projects/budget/ProjectBudgetTag'
 
 const Container = styled(UnstyledButton)<ComponentWithActiveState>`
   ${hStack({
     fullWidth: true,
     alignItems: 'center',
     gap: 8,
+    justifyContent: 'space-between',
   })}
 
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
@@ -48,8 +50,11 @@ export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
 
   return (
     <Container onClick={onClick} isActive={isSelected}>
-      <Text color="contrast">{emoji}</Text>
-      <Text cropped>{name}</Text>
+      <HStack alignItems="center" gap={8}>
+        <Text color="contrast">{emoji}</Text>
+        <Text cropped>{name}</Text>
+      </HStack>
+      <ProjectBudgetTag />
     </Container>
   )
 }

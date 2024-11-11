@@ -21,6 +21,7 @@ const Day = styled(VStack)<ComponentWithActiveState>`
   align-items: center;
   justify-content: center;
   padding-right: 4px;
+  pointer-events: none;
 
   ${({ isActive }) =>
     isActive &&
@@ -31,10 +32,16 @@ const Day = styled(VStack)<ComponentWithActiveState>`
   &:last-child {
     border-right: 0;
   }
+
+  opacity: 0;
 `
 
 const Container = styled(HStack)`
   ${takeWholeSpaceAbsolutely};
+
+  &:hover ${Day} {
+    opacity: 1;
+  }
 `
 
 export const ProjectBudgetWidgetDays = () => {

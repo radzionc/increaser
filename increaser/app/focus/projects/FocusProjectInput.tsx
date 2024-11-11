@@ -11,9 +11,14 @@ import { FocusEntityInputHeader } from '../launcher/FocusEntityInputHeader'
 import { FocusEntityOptionsContainer } from '../launcher/FocusEntityOptionsContainer'
 import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 import { useFocusProject } from '../state/focusProject'
+import { HStack, vStack } from '@lib/ui/css/stack'
+import { ProjectBudgetTag } from '@increaser/ui/projects/budget/ProjectBudgetTag'
+import { FocusLauncherBudget } from '../launcher/FocusLauncherBudget'
 
 const Wrapper = styled.div`
   padding: 0;
+
+  ${vStack()};
 `
 
 export const FocusProjectInput = () => {
@@ -39,14 +44,23 @@ export const FocusProjectInput = () => {
         entityName="a project"
         value={projectId ? projects[projectId] : null}
         renderValue={(project) => (
-          <>
-            <EmojiTextPrefix emoji={project.emoji} />
-            {project.name}
-          </>
+          <CurrentProjectProvider key={project.id} value={project}>
+            <HStack
+              fullWidth
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <HStack alignItems="center" gap={8}>
+                <EmojiTextPrefix emoji={project.emoji} />
+                {project.name}
+              </HStack>
+              <ProjectBudgetTag />
+            </HStack>
+          </CurrentProjectProvider>
         )}
         icon={<BoxIcon />}
       />
-      {isOpen && (
+      {isOpen ? (
         <FocusEntityOptionsContainer>
           {options.map((project) => {
             const { id } = project
@@ -66,6 +80,8 @@ export const FocusProjectInput = () => {
             }}
           />
         </FocusEntityOptionsContainer>
+      ) : (
+        <FocusLauncherBudget />
       )}
     </Wrapper>
   )

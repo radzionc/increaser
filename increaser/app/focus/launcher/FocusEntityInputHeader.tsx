@@ -1,6 +1,6 @@
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
-import { HStack } from '@lib/ui/css/stack'
+import { hStack, HStack } from '@lib/ui/css/stack'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { ComponentWithValueProps, RemovableComponentProps } from '@lib/ui/props'
 import styled from 'styled-components'
@@ -17,6 +17,7 @@ import { FocusIconButton } from '../components/FocusSetWidget/FocusIconButton'
 import { ReactNode } from 'react'
 import { HeaderPromptContentFrame } from './HeaderPromptContentFrame'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+import { cropText } from '@lib/ui/css/cropText'
 
 const Container = styled(ActionInsideInteractiveElement)`
   display: flex;
@@ -40,9 +41,14 @@ const Underline = styled.div`
   border-bottom: 2px dashed ${getColor('mistExtra')};
 `
 
-const Content = styled(HStack)`
-  align-items: center;
-  justify-content: space-between;
+const Content = styled.div`
+  ${hStack({
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 4,
+  })}
+
+  ${cropText};
 
   position: relative;
 
@@ -102,7 +108,7 @@ export function FocusEntityInputHeader<T>({
       render={({ actionSize }) => (
         <Content onClick={() => setIsOpen(!isOpen)}>
           {value ? (
-            <Text cropped>{renderValue(value)}</Text>
+            renderValue(value)
           ) : (
             <HeaderPromptContentFrame icon={icon}>
               <Label>Select {entityName}</Label>

@@ -68,10 +68,10 @@ export const ProjectBudgetOverview = () => {
       >
         <LinesFiller />
       </Fill>
-      <ProjectBudgetWidgetDays />
       {goal && !(hasReachedFinalDay || hasReachedGoal) && (
         <ProjectBudgetOffset />
       )}
+      <ProjectBudgetWidgetDays />
     </Container>
   )
 }
