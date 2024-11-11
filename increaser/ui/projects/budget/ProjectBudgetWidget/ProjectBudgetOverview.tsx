@@ -14,7 +14,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  ${borderRadius.m};
+  ${borderRadius.s};
   height: 100%;
   background: ${getColor('background')};
   border: 1px solid ${getColor('mistExtra')};
@@ -68,10 +68,10 @@ export const ProjectBudgetOverview = () => {
       >
         <LinesFiller />
       </Fill>
+      <ProjectBudgetWidgetDays />
       {goal && !(hasReachedFinalDay || hasReachedGoal) && (
         <ProjectBudgetOffset />
       )}
-      <ProjectBudgetWidgetDays />
     </Container>
   )
 }

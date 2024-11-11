@@ -7,6 +7,12 @@ import { getWorkBudgetTotal } from '@increaser/entities-utils/workBudget/getWork
 import { useActiveProjects } from '../../hooks/useActiveProjects'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { D_IN_WEEK } from '@lib/utils/time'
+import { without } from '@lib/utils/array/without'
+
+type DayAllocation = {
+  value: number
+  weekday: number
+}
 
 export const useProjectDaysAllocation = () => {
   const activeProjects = useActiveProjects()
@@ -15,11 +21,18 @@ export const useProjectDaysAllocation = () => {
 
   const { workdayHours, weekendHours, weekends } = useUser()
 
-  return useMemo(() => {
+  return useMemo((): DayAllocation[] => {
     const weekendsNumber = weekends.length
     const workdaysNumber = D_IN_WEEK - weekendsNumber
+
     if (workingDays === 'workdays') {
-      return range(workdaysNumber).map(() => 1 / workdaysNumber)
+      const value = 1 / workdaysNumber
+      const workdays = without(range(D_IN_WEEK), ...weekends)
+
+      return workdays.map((weekday) => ({
+        value,
+        weekday,
+      }))
     }
 
     const workBudgetTotal = getWorkBudgetTotal({
@@ -53,9 +66,12 @@ export const useProjectDaysAllocation = () => {
       plannedWeekendsShare,
     ].map((share) => share / (adjustedWorkdayShare + plannedWeekendsShare))
 
-    return [
-      ...range(workdaysNumber).map(() => realWorkdaysShare / workdaysNumber),
-      ...range(weekendsNumber).map(() => realWeekendsShare / weekendsNumber),
-    ]
+    const workdayValue = realWorkdaysShare / workdaysNumber
+    const weekendValue = realWeekendsShare / weekendsNumber
+
+    return range(D_IN_WEEK).map((weekday) => ({
+      value: weekends.includes(weekday) ? weekendValue : workdayValue,
+      weekday,
+    }))
   }, [activeProjects, weekendHours, weekends, workdayHours, workingDays])
 }

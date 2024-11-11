@@ -1,5 +1,4 @@
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { useProjectDoneMinutesThisWeek } from '@increaser/ui/projects/hooks/useProjectDoneMinutesThisWeek'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { VStack } from '@lib/ui/css/stack'
 import { ProjectBudgetWidget } from '@increaser/ui/projects/budget/ProjectBudgetWidget'
@@ -9,9 +8,7 @@ import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
 export const FocusLauncherBudget = () => {
   const project = shouldBePresent(useFocusTargetProject())
 
-  const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(project.id)
-
-  if (project.allocatedMinutesPerWeek > 0 && doneMinutesThisWeek > 0) {
+  if (project.allocatedMinutesPerWeek > 0) {
     return (
       <CurrentProjectProvider value={project}>
         <VStack gap={4}>
