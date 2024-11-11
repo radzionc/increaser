@@ -14,7 +14,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  ${borderRadius.s};
+  ${borderRadius.xs};
   height: 100%;
   background: ${getColor('background')};
   border: 1px solid ${getColor('mistExtra')};
