@@ -1,7 +1,7 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { getStateProviderSetup } from '@lib/ui/state/getStateProviderSetup'
-import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useUser } from '@increaser/ui/user/state/user'
+import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const { useState: useSetEndTime, provider: FocusEndTimeProvider } =
   getStateProviderSetup<number>('SetEndTime')
@@ -9,11 +9,10 @@ export const { useState: useSetEndTime, provider: FocusEndTimeProvider } =
 export const SetEndTimeProvider = ({
   children,
 }: ComponentWithChildrenProps) => {
-  const { sets } = useUser()
-  const lastSet = getLastItem(sets)
+  const lastSetEnd = shouldBePresent(useLastSetEnd())
 
   return (
-    <FocusEndTimeProvider initialValue={lastSet.end}>
+    <FocusEndTimeProvider initialValue={lastSetEnd}>
       {children}
     </FocusEndTimeProvider>
   )

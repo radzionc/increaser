@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import { useStartOfWeek } from '@lib/ui/hooks/useStartOfWeek'
-import { useUser } from '@increaser/ui/user/state/user'
+import { useSets } from './useSets'
 
 export const useCurrentWeekSets = () => {
-  const { sets } = useUser()
+  const sets = useSets()
 
   const startOfWeek = useStartOfWeek()
 

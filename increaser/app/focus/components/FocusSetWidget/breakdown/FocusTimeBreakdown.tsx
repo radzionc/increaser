@@ -24,7 +24,7 @@ const Container = styled.div`
   grid-template-columns: auto minmax(200px, auto);
   gap: 20px;
 
-  padding: 20px;
+  padding: 4px 8px;
 `
 
 export const FocusTimeBreakdown = () => {

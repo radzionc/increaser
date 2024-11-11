@@ -25,6 +25,7 @@ import {
   ProjectDay,
 } from '@increaser/entities/timeTracking'
 import { HSLA } from '@lib/ui/colors/HSLA'
+import { useSets } from '../../../sets/hooks/useSets'
 
 const daysMax = 30
 
@@ -48,7 +49,8 @@ export const {
 } = setupMemoProvider({
   name: 'TrackedProjects',
   useValue: () => {
-    const { sets, weeks, months, years, projects: allProjects } = useUser()
+    const sets = useSets()
+    const { weeks, months, years, projects: allProjects } = useUser()
 
     const weekStartedAt = useStartOfWeek()
     const monthStartedAt = useStartOfMonth()

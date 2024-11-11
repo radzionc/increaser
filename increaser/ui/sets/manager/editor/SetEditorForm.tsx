@@ -2,7 +2,6 @@ import { SetEditorContent } from './SetEditorContent'
 import { SetEditorHeader } from './SetEditorHeader'
 import { useCallback, useMemo } from 'react'
 import { usePresentState } from '@lib/ui/state/usePresentState'
-import { useUser } from '@increaser/ui/user/state/user'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { areEqualIntervals } from '@lib/utils/interval/areEqualIntervals'
 import { areIntersecting } from '@lib/utils/interval/areIntersecting'
@@ -17,6 +16,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { setEditorConfig } from './config'
 import { useKeyDown } from '@lib/ui/hooks/useKeyDown'
+import { useSets } from '../../hooks/useSets'
 
 const Footer = styled(HStack)`
   ${verticalPadding(setEditorConfig.rightPadding)};
@@ -29,7 +29,7 @@ export const SetEditorForm = () => {
   const { start, end, projectId, initialSet } = activeSet
 
   const type = useActiveSetType()
-  const { sets } = useUser()
+  const sets = useSets()
 
   const isDisabled = useMemo(() => {
     const hasIntersection = sets.some((set) => {

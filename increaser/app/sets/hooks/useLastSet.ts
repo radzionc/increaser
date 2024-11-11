@@ -1,8 +1,8 @@
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useUser } from '@increaser/ui/user/state/user'
+import { useSets } from '@increaser/ui/sets/hooks/useSets'
 
 export const useLastSet = () => {
-  const { sets } = useUser()
+  const sets = useSets()
 
   return getLastItem(sets)
 }

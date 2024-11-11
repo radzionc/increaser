@@ -3,16 +3,14 @@ import { ComponentWithChildrenProps } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { isToday } from 'date-fns'
 import { createContext, useMemo } from 'react'
 import { useUser } from '@increaser/ui/user/state/user'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { focusIntervalsToSets } from '@increaser/ui/focus/utils/focusIntervalsToSets'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { getDaySets } from '@increaser/entities-utils/set/getDaySets'
 import { useLastSetsSnapshot } from '../../hooks/useLastSetsSnapshot'
-import { useFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
+import { useSets } from '../../hooks/useSets'
 
 export type DayOverviewSet = Set & {
   isImmutable?: string
@@ -45,33 +43,25 @@ export const DayOverviewProvider = ({
 
   const lastSetsSnapshot = useLastSetsSnapshot()
 
-  const [intervals] = useFocusIntervals()
+  const allSets = useSets()
 
-  const { sets: allSets } = useUser()
+  const sets = useMemo(
+    () =>
+      getDaySets(allSets, dayStartedAt).map((set) => {
+        const result: DayOverviewSet = { ...set }
 
-  const sets = useMemo(() => {
-    const result: DayOverviewSet[] = getDaySets(allSets, dayStartedAt).map(
-      (set) => ({
-        ...set,
-        isImmutable:
-          set.start > lastSetsSnapshot
-            ? undefined
-            : `This session cannot be edited or deleted because it is from the previous month.`,
+        if (set.start > lastSetsSnapshot) {
+          result.isImmutable = `This session cannot be edited or deleted because it is from the previous month.`
+        }
+
+        if (set.isActive) {
+          result.isImmutable = `This session can't be edited or deleted because it's in progress.`
+        }
+
+        return result
       }),
-    )
-    if (intervals && isToday(dayStartedAt)) {
-      const sets = focusIntervalsToSets({
-        intervals,
-        now: currentTime,
-      }).map((set) => ({
-        ...set,
-        isImmutable: `This session can't be edited or deleted because it's in progress.`,
-      }))
-      result.push(...sets)
-    }
-
-    return result
-  }, [allSets, currentTime, dayStartedAt, intervals, lastSetsSnapshot])
+    [allSets, dayStartedAt, lastSetsSnapshot],
+  )
 
   const { finishWorkAt } = useUser()
 

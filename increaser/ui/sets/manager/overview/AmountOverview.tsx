@@ -5,7 +5,6 @@ import {
 } from '@lib/ui/layout/StackSeparatedBy'
 import { WEEKDAYS } from '@lib/utils/time'
 import { ProjectTotal } from '@increaser/ui/projects/ProjectTotal'
-import { useDayOverview } from './DayOverviewProvider'
 import { Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
@@ -16,10 +15,11 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { ProjectsAllocationLine } from '../../../projects/ProjectsAllocationLine'
 import { getProjectsTotalRecord } from '@increaser/entities-utils/project/getProjectsTotalRecord'
+import { useSets } from '../../hooks/useSets'
 
 export const AmountOverview = () => {
   const [weekday] = useSelectedWeekday()
-  const { sets } = useDayOverview()
+  const sets = useSets()
   const setsTotal = getSetsDuration(sets)
 
   const daysBudget = useDaysBudget()

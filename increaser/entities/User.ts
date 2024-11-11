@@ -26,6 +26,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 export type Set = Interval &
   ProjectRelatedEntity & {
     isEndEstimated?: boolean | null
+    isActive?: boolean | null
   }
 
 export const maxWeeks = 24

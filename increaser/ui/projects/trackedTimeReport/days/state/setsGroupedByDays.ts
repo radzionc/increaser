@@ -1,5 +1,4 @@
 import { getIntIntervalLength } from '@lib/utils/interval/getIntIntervalLength'
-import { useUser } from '../../../../user/state/user'
 import { useSelectedInterval } from '../../interval/useSelectedInterval'
 import { useMemo } from 'react'
 import { range } from '@lib/utils/array/range'
@@ -7,6 +6,7 @@ import { useStartOfSelectedIntervalPoint } from '../../timeGrouping/useStartOfSe
 import { addDays, startOfDay } from 'date-fns'
 import { Set } from '@increaser/entities/User'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useSets } from '../../../../sets/hooks/useSets'
 
 export const useSetsGroupedByDays = () => {
   const [interval] = useSelectedInterval()
@@ -14,7 +14,7 @@ export const useSetsGroupedByDays = () => {
 
   const intervalStartedAt = useStartOfSelectedIntervalPoint(0)
 
-  const { sets } = useUser()
+  const sets = useSets()
 
   return useMemo(() => {
     const days = range(dataSize).map((index) =>
