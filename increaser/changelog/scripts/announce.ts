@@ -41,9 +41,9 @@ const announce = () => {
       'You will write an announcement for new product updates.',
       'Use your judgment to make the announcement engaging and informative.',
       'Make each announcement feel native to the platform.',
-      'Return copy for each platform in a separate markdown snippet',
       'Do not use words "user" or "users".',
       'Titles should represent an essence of the updates.',
+      'Return the result as a markdown snippet with each platform starting with "# {platform_name}".',
     ].join(' '),
 
     ...toEntries(socialPrompt).map(({ key, value }) =>

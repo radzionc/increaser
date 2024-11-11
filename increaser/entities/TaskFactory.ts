@@ -24,7 +24,7 @@ export const taskCadenceName: Record<TaskCadence, string> = {
 }
 
 export const taskCadenceShortName: Record<TaskCadence, string> = {
-  workday: 'mon-fri',
+  workday: 'workdays',
   day: 'daily',
   week: 'weekly',
   month: 'monthly',

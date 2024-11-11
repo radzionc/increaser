@@ -72,7 +72,7 @@ export const ProjectFormFields = ({
             workingDays: isWorkDaysOnly ? 'workdays' : 'everyday',
           })
         }
-        label="Workdays Only (Mon-Fri)"
+        label="Workdays only"
       />
 
       {freeHours > 0 || hasBudget ? (

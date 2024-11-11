@@ -2,6 +2,45 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 0,
+    name: 'Enhanced Time Tracking Insights',
+    description:
+      "We've added new views and improvements to help you better understand your work patterns, making it easier to track time across projects and plan effectively.",
+    items: [
+      {
+        description:
+          "New 'Sessions' view for daily reports, showing sessions grouped by day and color-coded by project.",
+      },
+      {
+        description:
+          'Improved tracked time report layout for a more space-efficient and comfortable navigation experience.',
+      },
+      {
+        description:
+          'Added average workday and weekend time display next to the average day when viewing reports grouped by days.',
+      },
+      {
+        description:
+          'See start and end times for each workday in daily reports when no project is selected.',
+      },
+      {
+        description:
+          'Added a line indicator for preferred end of work time in daily reports on the Timesheet.',
+      },
+      {
+        description:
+          'The tracked time report now remembers the selected interval for each time grouping, making it easier to navigate between views.',
+      },
+    ],
+    youtube: '',
+    telegram: '',
+    x: '',
+    linkedIn: '',
+    indieHackers: '',
+    reddit: '',
+  },
+
+  {
     releasedAt: 1730944392505,
     name: 'Enhanced Goal Tracking & Task Management',
     description:
