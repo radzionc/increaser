@@ -1,39 +1,29 @@
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { HStack, VStack } from '@lib/ui/css/stack'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Text } from '@lib/ui/text'
-import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { toPercents } from '@lib/utils/toPercents'
 import { getShortWeekday } from '@lib/utils/time'
 import { useProjectDaysAllocation } from '../hooks/useProjectDaysAllocation'
 import { getColor } from '@lib/ui/theme/getters'
-import { ComponentWithActiveState } from '@lib/ui/props'
 
 const DayName = styled(Text)`
   font-size: 12px;
   font-weight: 500;
 `
 
-const Day = styled(VStack)<ComponentWithActiveState>`
+const Day = styled(VStack)`
   height: 100%;
-  border-right: 1px dashed ${getColor('textShy')};
+  border-right: 1px solid ${getColor('mistExtra')};
   color: ${getColor('textShy')};
   align-items: center;
   justify-content: center;
   padding-right: 4px;
   pointer-events: none;
 
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      color: ${getColor('contrast')};
-    `}
-
   &:last-child {
     border-right: 0;
   }
-
-  opacity: 0;
 `
 
 const Container = styled(HStack)`
@@ -45,8 +35,6 @@ const Container = styled(HStack)`
 `
 
 export const ProjectBudgetWidgetDays = () => {
-  const currentWeekday = useWeekday()
-
   const segments = useProjectDaysAllocation()
 
   return (
@@ -54,12 +42,9 @@ export const ProjectBudgetWidgetDays = () => {
       {segments.map(({ value, weekday }) => {
         if (value === 0) return null
 
-        const isActive = currentWeekday === weekday
-
         return (
           <Day
             key={weekday}
-            isActive={isActive}
             style={{
               width: toPercents(value),
             }}

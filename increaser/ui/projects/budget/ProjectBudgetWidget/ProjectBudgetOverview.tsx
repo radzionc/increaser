@@ -19,6 +19,7 @@ const Container = styled.div`
   background: ${getColor('background')};
   border: 1px solid ${getColor('mistExtra')};
   overflow: hidden;
+  height: 28px;
 `
 
 const Fill = styled.div`

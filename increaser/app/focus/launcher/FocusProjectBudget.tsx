@@ -1,5 +1,5 @@
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
-import { VStack, vStack } from '@lib/ui/css/stack'
+import { vStack } from '@lib/ui/css/stack'
 import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectBudgetSummary'
 import { useFocusTargetProject } from '../hooks/useFocusTargetProject'
 import styled from 'styled-components'
@@ -20,9 +20,7 @@ export const FocusProjectBudget = () => {
     return (
       <CurrentProjectProvider value={project}>
         <Container>
-          <VStack style={{ height: 28 }}>
-            <ProjectBudgetOverview />
-          </VStack>
+          <ProjectBudgetOverview />
           <ProjectBudgetSummary />
         </Container>
       </CurrentProjectProvider>
