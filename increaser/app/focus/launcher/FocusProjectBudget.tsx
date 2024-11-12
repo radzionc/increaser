@@ -13,7 +13,7 @@ const Container = styled.div`
   padding-top: 12px;
 `
 
-export const FocusLauncherBudget = () => {
+export const FocusProjectBudget = () => {
   const project = useFocusTargetProject()
 
   if (project && project.allocatedMinutesPerWeek > 0) {

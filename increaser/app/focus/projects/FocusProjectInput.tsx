@@ -13,7 +13,7 @@ import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 import { useFocusProject } from '../state/focusProject'
 import { HStack, vStack } from '@lib/ui/css/stack'
 import { ProjectBudgetTag } from '@increaser/ui/projects/budget/ProjectBudgetTag'
-import { FocusLauncherBudget } from '../launcher/FocusLauncherBudget'
+import { FocusProjectBudget } from '../launcher/FocusProjectBudget'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -81,7 +81,7 @@ export const FocusProjectInput = () => {
           />
         </FocusEntityOptionsContainer>
       ) : (
-        <FocusLauncherBudget />
+        <FocusProjectBudget />
       )}
     </Wrapper>
   )
