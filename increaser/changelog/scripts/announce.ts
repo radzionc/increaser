@@ -24,10 +24,13 @@ const socialPrompt: Record<ProductUpdateSocial, string[]> = {
     `Include https://increaser.org url in the content.`,
   ],
   linkedIn: [
-    `Do not use markdown syntax, e.g. no **bold** or bullet lists, LinkedIn posts do not support markdown.`,
+    `Do not use markdown syntax, LinkedIn posts do not support markdown.`,
     `Include https://increaser.org url in the content.`,
   ],
-  youtube: ['A video title and description.'],
+  youtube: [
+    'A video title and description.',
+    `Do not use markdown syntax, YouTube title and description do not support markdown.`,
+  ],
 }
 
 const announce = () => {
@@ -43,7 +46,7 @@ const announce = () => {
       'Make each announcement feel native to the platform.',
       'Do not use words "user" or "users".',
       'Titles should represent an essence of the updates.',
-      'Return the result as a markdown snippet with each platform starting with "# {platform_name}".',
+      'Return the result as a markdown snippet with each platform starting with "# {platform_name}", but do not use markdown features in copies that don`t support markdown, .e.g. YouTube description should be plain text.',
     ].join(' '),
 
     ...toEntries(socialPrompt).map(({ key, value }) =>

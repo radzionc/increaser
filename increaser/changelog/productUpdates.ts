@@ -32,12 +32,15 @@ export const productUpdates: ProductUpdate[] = [
           'The tracked time report now remembers the selected interval for each time grouping, making it easier to navigate between views.',
       },
     ],
-    youtube: '',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    youtube: 'https://youtu.be/p7P6GpFHM-c',
+    telegram: 'https://t.me/increaser_app/64',
+    x: 'https://x.com/increaser_app/status/1856174967198568795',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7261939651408498688',
+    indieHackers:
+      'https://www.indiehackers.com/post/just-launched-sessions-view-and-improved-time-reports-on-increaser-bN3HX3ue7fR8IYB0fm9A',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1gpbamz/increaser_update_new_sessions_view_and_enhanced/',
   },
 
   {
