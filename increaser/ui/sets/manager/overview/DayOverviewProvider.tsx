@@ -50,7 +50,7 @@ export const DayOverviewProvider = ({
       getDaySets(allSets, dayStartedAt).map((set) => {
         const result: DayOverviewSet = { ...set }
 
-        if (set.start > lastSetsSnapshot) {
+        if (set.start < lastSetsSnapshot) {
           result.isImmutable = `This session cannot be edited or deleted because it is from the previous month.`
         }
 
