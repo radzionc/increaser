@@ -16,19 +16,7 @@ Increaser was developed by Radzion, who is also the sole founder. He has been wo
 
 Increaser offers a 14-day free trial, with a monthly subscription of $5.99 and an annual subscription for $47.88.
 
-# Increaser Tools
-
-Increaser consists of the following primary tools:
-
-- Vision
-- Goals
-- Time tracking
-- Task management
-- Time planning
-- Focus
-- Habit tracking
-
-Each tool has a dedicated page within the app and a corresponding section on the website.
+# App
 
 ## Vision
 
@@ -55,7 +43,9 @@ Users can set breaks between work sessions ranging from 5 to 30 minutes, or choo
 
 Increaser advocates structuring work into 90-minute blocks to improve focus and productivity. Each block includes work sessions with breaks of no more than 15 minutes.
 
-Next, the "Focus" page displays an interface for starting a work session—a focus launcher. First, the user can select a project (required). Then, they can select a task (optional). If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule. Below the project selector, the user can see an overview of how much they have worked on a project this week. If they have a goal to work more or less on that project, they will also see a visual representation of how much they have worked compared to their goal and their progress relative to the current weekday. The user can change or set those goals on the "Time planning" page.
+Next, the "Focus" page displays an interface for starting a work session—a focus launcher. First, the user can select a project (required). Then, they can select a task (optional). If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule.
+
+For project with a budgeted time the user will see a widget on the focus launcher with a visual representation of how much they have worked compared to their budget and their progress relative to the current weekday. Increaser will calculate the expected work time the user should have completed by the current day of the week and show the user how much they are behind or ahead of schedule, with a colored highlight for projects with a goal to work at least or no more than a certain amount of time. This widget will also be visible during a focus session on the focus page and will be updated in real-time.
 
 If they forget to start a focus session and have already been working for some time, they can change the session start time on the focus launcher so that Increaser will track the time they worked before launching a session. During a focus session, the user can create, update, or delete tasks for the current focus project directly from the focus session interface.
 
@@ -103,9 +93,15 @@ On the "Projects" page, users can view all their projects and change their statu
 
 When creating or editing a project, users can choose if the project is limited to workdays (Monday to Friday) and set a weekly budget for how much time they plan to spend on it. If a project has a budget, they can also set a goal to work 'at least X hours' or 'no more than X hours' on the project. For example, users may want to work less on some projects, such as their remote job, and more on personal business projects.
 
-## Work budget
+## Preferences
 
-On the "Work Budget" page, the user can set a preferred time they want to work on a workday and on a weekend. Next to it, they can see analytics with their average workday and weekend over the last 30 days, and totals of the last 4 weeks.
+The preferences page could be accessed from the user menu in the top right corner on the sidebar.
+
+On the "Preferences" page, user can set a preference by which time they want to finish their workday.
+
+The user can also select which days are the weekend days. If the user doesn't have a concept of a weekend and work the same amount of time every day, they can remove the weekend days.
+
+The user can set a preference for how much time they want to work on a workday and on a weekend, the total hours will serve as a "work budget" when the user is setting a project budget.
 
 ## Timesheet
 
@@ -156,10 +152,6 @@ In the 'Automation' subpage, users can set up rules for the automatic creation o
 In the "Templates" subpage, users can create, edit, and delete task templates. A task template contains the same fields as a task, so when the user creates a task or a TaskFactory, if there are templates for a selected project, they will see an option to use a template, and if they select a template, the task form will be pre-filled with the template data. User can also turn an existing task into a template.
 
 A task have a "Start" button that will start a focus session for that task.
-
-## Schedule
-
-On the "Schedule" page, the user can set the time when they want to start and finish work; wake up and go to bed; have their first and last meals. The app prompts the user to set the time so that they have 16 hours of intermittent fasting, no food 60 minutes after waking up, no food 3 hours before sleep, 2 hours of relaxation before bed, and an optimal 8 hours of sleep. Since Increaser can only know when the user started and finished work based on user time tracking, we show a report for the last 30 days showing the user's start and end work time, average time when they start work, average time when they finish work, and the number of times they worked late, e.g., after the user's set work end time.
 
 ## Ideas
 
