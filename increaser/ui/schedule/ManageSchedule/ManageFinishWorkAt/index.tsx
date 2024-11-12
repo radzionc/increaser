@@ -1,11 +1,11 @@
 import { HStack } from '@lib/ui/css/stack'
-import { Text } from '@lib/ui/text'
 import { range } from '@lib/utils/array/range'
 import { useUser } from '@increaser/ui/user/state/user'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
 import { useUpdateUserMutation } from '../../../user/mutations/useUpdateUserMutation'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { ExpandableSelector } from '@lib/ui/select/ExpandableSelector'
+import { TextConnector } from '../../../preferences/TextConnector'
 
 const dayMomentStep = 30
 
@@ -23,9 +23,7 @@ export const ManageFinishWorkAt = () => {
   return (
     <>
       <HStack wrap="wrap" alignItems="center" gap={8}>
-        <Text weight="600" color="supporting">
-          I want to finish work before
-        </Text>
+        <TextConnector>I want to finish work before</TextConnector>
         <ExpandableSelector<number>
           value={finishWorkAt}
           onChange={(option) => {
