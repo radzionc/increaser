@@ -26,6 +26,7 @@ export const AddWeekend = () => {
       getOptionKey={(option) => option.toString()}
       getOptionName={(option) => WEEKDAYS[option]}
       openerContent="Add a weekend"
+      showToggle={false}
     />
   )
 }
