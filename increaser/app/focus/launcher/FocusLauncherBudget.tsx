@@ -1,4 +1,3 @@
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { VStack, vStack } from '@lib/ui/css/stack'
 import { ProjectBudgetSummary } from '@increaser/ui/projects/budget/ProjectBudgetWidget/ProjectBudgetSummary'
@@ -15,9 +14,9 @@ const Container = styled.div`
 `
 
 export const FocusLauncherBudget = () => {
-  const project = shouldBePresent(useFocusTargetProject())
+  const project = useFocusTargetProject()
 
-  if (project.allocatedMinutesPerWeek > 0) {
+  if (project && project.allocatedMinutesPerWeek > 0) {
     return (
       <CurrentProjectProvider value={project}>
         <Container>
