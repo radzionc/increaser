@@ -9,7 +9,6 @@ import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLine
 import { D_IN_WEEK } from '@lib/utils/time'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { HoverTracker } from '@lib/ui/base/HoverTracker'
-import { getClosestItemIndex } from '@lib/utils/math/getClosestItemIndex'
 import { useCurrentWeekVsBudgetColors } from './useCurrentWeekVsBudgetColors'
 import { chartConfig } from './config'
 import { useWorkBudgetData } from './useWorkBudgetData'
@@ -18,9 +17,9 @@ import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { SelectedDayInfo } from './SelectedDayInfo'
 import { WeekChartXAxis } from './WeekChartXAxis'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-import { CurrentDayLine } from './CurrentDayLine'
 import { ComparisonChartLines } from './ComparisonChartLines'
 import { ComponentWithWidthProps } from '@lib/ui/props'
+import { CurrentDayHighlight } from './CurrentDayHighlight'
 
 export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
   const weekday = useWeekday()
@@ -47,8 +46,8 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
       <HStack>
         <Spacer width={chartConfig.expectedYAxisLabelWidth} />
         <SelectedDayInfo
-          expectedValue={workBudgetData[selectedDataPoint]}
-          doneValue={workDoneData[selectedDataPoint]}
+          expectedValue={workBudgetData[selectedDataPoint + 1]}
+          doneValue={workDoneData[selectedDataPoint + 1]}
           width={contentWidth}
           index={selectedDataPoint}
         />
@@ -74,6 +73,7 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
           }}
           fullWidth
         >
+          <CurrentDayHighlight value={selectedDataPoint} />
           <ChartHorizontalGridLines data={yData} />
           <ComparisonChartLines
             value={[
@@ -85,12 +85,11 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
           <HoverTracker
             onChange={({ position }) => {
               setSelectedDataPoint(
-                position ? getClosestItemIndex(D_IN_WEEK, position.x) : weekday,
+                position ? Math.floor(position.x * D_IN_WEEK) : weekday,
               )
             }}
             render={({ props }) => <TakeWholeSpaceAbsolutely {...props} />}
           />
-          <CurrentDayLine value={selectedDataPoint} />
         </VStack>
       </HStack>
 

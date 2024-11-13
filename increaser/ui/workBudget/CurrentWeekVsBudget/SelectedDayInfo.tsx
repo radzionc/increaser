@@ -29,10 +29,10 @@ export const SelectedDayInfo = ({
   return (
     <>
       <ChartItemInfo
-        itemIndex={index}
+        itemIndex={index * 2 + 1}
         isVisible={true}
         containerWidth={width}
-        dataPointsNumber={D_IN_WEEK}
+        dataPointsNumber={D_IN_WEEK * 2 + 1}
       >
         <Container>
           <TimeStatistic name="Done" value={doneValue} color={colors.done} />
