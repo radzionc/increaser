@@ -89,9 +89,11 @@ At the top of the "Goals" page, a timeline shows goals positioned according to t
 
 ## Projects
 
-On the "Projects" page, users can view all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and status, which can be "active," "inactive," or "archived." One project, "Other," cannot be deleted. When a user deletes a project, all data associated with that project is reassigned to the "Other" project. Users can reorder projects by dragging them. Each project item displays an emoji, name, a budget or goal (if set), and an indicator if it's a "workday project" (Monday to Friday).
+On the "Projects" page, users can view all their projects and change their status, edit, or delete them. Each project has a name, emoji, color, and status, which can be "active," "inactive," or "archived." One project, "Other," cannot be deleted. When a user deletes a project, all data associated with that project is reassigned to the "Other" project. Users can reorder projects by dragging them. Each project item displays an emoji, name, a budget or goal (if set), and an indicator if it's a "workday project".
 
 When creating or editing a project, users can choose if the project is limited to workdays (Monday to Friday) and set a weekly budget for how much time they plan to spend on it. If a project has a budget, they can also set a goal to work 'at least X hours' or 'no more than X hours' on the project. For example, users may want to work less on some projects, such as their remote job, and more on personal business projects.
+
+The cumulative chart on the side of the projects page displays two overlaying lines: one for "expected work time," derived from the "work budget" set in preferences, and another for the "total time worked." The X-axis represents the days of the current week, while the Y-axis shows cumulative hours. Above the chart, "Done" indicates the total hours worked so far, "Expected" shows the cumulative hours that should have been completed by this point in the week, and "Difference" highlights any gap between expected and actual time worked. This helps users track their progress against their weekly time goals.
 
 ## Preferences
 
