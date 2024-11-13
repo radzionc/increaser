@@ -1,5 +1,4 @@
 import { HStack, VStack } from '@lib/ui/css/stack'
-import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { Spacer } from '@lib/ui/layout/Spacer'
@@ -10,7 +9,6 @@ import { ComparisonChart } from './ComparisonChart'
 export const CurrentWeekVsBudget = () => {
   return (
     <VStack gap={20}>
-      <SectionTitle>Current week vs budget</SectionTitle>
       <HStack>
         <ElementSizeAware
           render={({ setElement, size }) => (

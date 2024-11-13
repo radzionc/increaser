@@ -3,7 +3,6 @@ import { HStack, vStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { BudgetOverview } from '@increaser/ui/projects/budget/BudgetOverview'
 import { CurrentWeekVsBudget } from '@increaser/ui/workBudget/CurrentWeekVsBudget'
-import { Panel } from '@lib/ui/css/panel'
 
 const SideSection = styled.div`
   flex: 1;
@@ -19,9 +18,7 @@ export const ProjectPageContent = () => {
       <ManageProjects />
       <SideSection>
         <BudgetOverview />
-        <Panel>
-          <CurrentWeekVsBudget />
-        </Panel>
+        <CurrentWeekVsBudget />
       </SideSection>
     </HStack>
   )

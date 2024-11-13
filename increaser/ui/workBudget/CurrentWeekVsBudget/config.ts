@@ -1,5 +1,5 @@
 export const chartConfig = {
-  chartHeight: 120,
+  chartHeight: 160,
   expectedYAxisLabelWidth: 40,
   expectedXLabelWidth: 24,
   expectedXLabelHeight: 18,
