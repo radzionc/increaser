@@ -7,11 +7,17 @@ import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 
 type TimeStatisticProps = ComponentWithValueProps<number | undefined> & {
-  color: HSLA
+  color?: HSLA
   name: string
+  isSigned?: boolean
 }
 
-export const TimeStatistic = ({ value, name, color }: TimeStatisticProps) => {
+export const TimeStatistic = ({
+  value,
+  name,
+  color,
+  isSigned,
+}: TimeStatisticProps) => {
   return (
     <>
       <HStack alignItems="center" gap={6}>
@@ -21,9 +27,13 @@ export const TimeStatistic = ({ value, name, color }: TimeStatisticProps) => {
       <Text weight="500" color="contrast">
         {value ? (
           <EmphasizeNumbers
-            value={formatDuration(value, 'min', {
-              maxUnit: 'h',
-            })}
+            value={`${isSigned && value > 0 ? '+' : ''}${formatDuration(
+              Math.abs(value),
+              'min',
+              {
+                maxUnit: 'h',
+              },
+            )}`}
           />
         ) : (
           '-'

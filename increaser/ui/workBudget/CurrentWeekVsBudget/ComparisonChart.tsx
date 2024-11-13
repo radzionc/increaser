@@ -1,5 +1,5 @@
 import { HStack, VStack } from '@lib/ui/css/stack'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useWeekday } from '@lib/ui/hooks/useWeekday'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
@@ -20,6 +20,8 @@ import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { ComparisonChartLines } from './ComparisonChartLines'
 import { ComponentWithWidthProps } from '@lib/ui/props'
 import { CurrentDayHighlight } from './CurrentDayHighlight'
+import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
   const weekday = useWeekday()
@@ -32,9 +34,20 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
 
   const [selectedDataPoint, setSelectedDataPoint] = useState<number>(weekday)
 
-  const yData = [workBudgetData[0], getLastItem(workBudgetData)]
+  const yLabels = useMemo(() => {
+    const maxValue = Math.max(
+      getLastItem(workBudgetData),
+      getLastItem(workDoneData),
+    )
+
+    return generateYLabels({
+      maxValue,
+      stepSizes: [1, 5, 10].map((value) => convertDuration(value, 'h', 'min')),
+    })
+  }, [workBudgetData, workDoneData])
+
   const normalized = normalizeDataArrays({
-    y: yData,
+    yLabels,
     workBudget: workBudgetData,
     workDone: workDoneData,
   })
@@ -47,7 +60,9 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
         <Spacer width={chartConfig.expectedYAxisLabelWidth} />
         <SelectedDayInfo
           expectedValue={workBudgetData[selectedDataPoint + 1]}
-          doneValue={workDoneData[selectedDataPoint + 1]}
+          doneValue={
+            workDoneData[selectedDataPoint + 1] ?? getLastItem(workDoneData)
+          }
           width={contentWidth}
           index={selectedDataPoint}
         />
@@ -58,13 +73,13 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
           expectedLabelWidth={chartConfig.expectedYAxisLabelWidth}
           renderLabel={(index) => (
             <Text key={index} size={12} color="supporting">
-              {formatDuration(yData[index], 'min', {
+              {formatDuration(yLabels[index], 'min', {
                 maxUnit: 'h',
                 minUnit: 'h',
               })}
             </Text>
           )}
-          data={normalized.y}
+          data={normalized.yLabels}
         />
         <VStack
           style={{
@@ -74,7 +89,7 @@ export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
           fullWidth
         >
           <CurrentDayHighlight value={selectedDataPoint} />
-          <ChartHorizontalGridLines data={yData} />
+          <ChartHorizontalGridLines data={normalized.yLabels} />
           <ComparisonChartLines
             value={[
               { data: normalized.workBudget, color: colors.budget },

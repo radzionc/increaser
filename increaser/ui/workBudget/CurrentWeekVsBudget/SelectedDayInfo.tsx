@@ -41,6 +41,11 @@ export const SelectedDayInfo = ({
             value={expectedValue}
             color={colors.budget}
           />
+          <TimeStatistic
+            name="Difference"
+            isSigned
+            value={(doneValue || 0) - expectedValue}
+          />
         </Container>
       </ChartItemInfo>
     </>
