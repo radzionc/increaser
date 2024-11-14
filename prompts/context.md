@@ -49,7 +49,7 @@ For project with a budgeted time the user will see a widget on the focus launche
 
 If they forget to start a focus session and have already been working for some time, they can change the session start time on the focus launcher so that Increaser will track the time they worked before launching a session. During a focus session, the user can create, update, or delete tasks for the current focus project directly from the focus session interface.
 
-On the side of the "Focus" page, there is a timeline featuring icons with daily events such as the times to start and end work, and first/last meals. The times of these events can be changed on the "Schedule" page. The content of the timeline is user sessions colored according to the projects they belong to. Sessions are organized into blocks based on the breaks between them. At the top of the timeline, users can navigate between the days of the current week.
+On the side of the "Focus" page there is a timeline with the user sessions colored according to the projects they belong to. Sessions are organized into blocks based on the breaks between them. At the top of the timeline, users can navigate between the days of the current week. At the bottom of the timeline displayed the duration left until the end of the workday.
 
 The user can pause a session. If the session has been paused, after the user has finished the session, it will be split into multiple sessions to avoid tracking the periods when the user was not working. The focus music will be paused when the session is paused.
 
@@ -78,6 +78,8 @@ The user can change focus project or task during the session. If the user change
 When changing projects Increaser will automatically set a task the user worked on last time for that project. If the user didn't work on any task for that project, there will be no task selected.
 
 While the user will primarily track their work through focus sessions, they can also track time by manually adding a focus session from the side timeline on the focus page. There, they can also edit and delete existing sessions.
+
+When it the time after user's workday end, the focus launcher will be disabled and the user will see a message that they should stop working, but they can unlock the focus launcher if they want to continue working.
 
 ## Goals
 
@@ -119,7 +121,7 @@ When the report is grouped by days, the user has the option to see the "Sessions
 
 When the report is grouped by days and no project selected the user can see when the workday started and ended for a specific day.
 
-When the report is grouped by days, the user can see a line with their preffered end of work time.
+When the report is grouped by days, the user can see a line with their preffered end of work day time.
 
 ## Habits
 
