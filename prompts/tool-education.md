@@ -1,4 +1,4 @@
-Give 10 titles for the article about "Focus" on "Info" page of the app. Should be less than 80 characters.
+Give 10 titles for the article about "Focus" on "Info" page of the app. Should be less than 80 characters. No need to mention product name since the article will be within the app.
 
 Write a short paragraph that will be used as a subtitle. You can also think of it as a first paragraph of the article. It will be located between the title and the video.
 

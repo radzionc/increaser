@@ -4,5 +4,5 @@ export type ProductToolEducation = {
   title: string
   subtitle: string
   content: ReactNode
-  youTubeVideoUrl: string
+  youTubeVideoUrl?: string
 }
