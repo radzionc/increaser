@@ -7,17 +7,9 @@ export const productTools = [
   'focus',
   'tasks',
   'trackTime',
+  'workPreferences',
 ] as const
 export type ProductTool = (typeof productTools)[number]
-
-export const productToolPurposeRecord: Record<ProductTool, string> = {
-  trackTime: 'Track time',
-  tasks: 'Manage tasks',
-  focus: 'Rich deep focus',
-  habits: 'Track daily habits',
-  vision: 'Have a vision',
-  goals: 'Set and achieve goals',
-}
 
 export const productToolNameRecord: Record<ProductTool, string> = {
   trackTime: 'Time tracking',
@@ -26,6 +18,7 @@ export const productToolNameRecord: Record<ProductTool, string> = {
   habits: 'Habit tracking',
   vision: 'Vision board',
   goals: 'Goals',
+  workPreferences: 'Work preferences',
 }
 
 export const productToolKeyWordRecord: Record<ProductTool, string> = {
@@ -35,6 +28,7 @@ export const productToolKeyWordRecord: Record<ProductTool, string> = {
   habits: 'habits',
   vision: 'vision',
   goals: 'goals',
+  workPreferences: 'preferences',
 }
 
 export const productToolShortNameRecord: Record<ProductTool, string> = {
@@ -44,6 +38,7 @@ export const productToolShortNameRecord: Record<ProductTool, string> = {
   habits: 'Habits',
   vision: 'Vision',
   goals: 'Goals',
+  workPreferences: 'Preferences',
 }
 
 export const productToolDescription: Record<ProductTool, string> = {
@@ -53,6 +48,7 @@ export const productToolDescription: Record<ProductTool, string> = {
   trackTime: 'Turn time into progress',
   vision: 'Craft the life you want',
   goals: 'Reach your goals faster',
+  workPreferences: 'Tailor your work style',
 }
 
 export const productToolTitle: Record<ProductTool, string> = {
@@ -62,6 +58,7 @@ export const productToolTitle: Record<ProductTool, string> = {
   trackTime: 'Transform Time into Achievements',
   vision: 'Create Your Ideal Future',
   goals: 'Realize Your Ambitions with Clear Goals',
+  workPreferences: 'Set Up Your Perfect Work Environment',
 }
 
 export const productToolSubtitle: Record<ProductTool, string> = {
@@ -71,4 +68,5 @@ export const productToolSubtitle: Record<ProductTool, string> = {
   trackTime: `Utilize ${productName} to turn every minute into meaningful progress`,
   vision: `Visualize and pursue your perfect life with ${productName}'s Vision Board`,
   goals: `Set, track, and accomplish your goals with ${productName} to achieve your dreams`,
+  workPreferences: `Configure your workspace and hours to match your productivity style with ${productName}`,
 }

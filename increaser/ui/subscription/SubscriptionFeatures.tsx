@@ -44,6 +44,12 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
       our <b>Goals</b> tool.
     </>
   ),
+  workPreferences: (
+    <>
+      Customize your work environment and schedule for maximum productivity with
+      our <b>Work Preferences</b> tool.
+    </>
+  ),
 }
 
 const lineHeight = 20

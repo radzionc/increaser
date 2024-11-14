@@ -4,7 +4,7 @@ import { ManageWeekends } from '@increaser/ui/preferences/weekends/ManageWeekend
 
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 
-export const PreferencesPage = () => {
+export const ManageWorkPreferences = () => {
   return (
     <SeparatedByLine gap={20} style={{ maxWidth: 520 }}>
       <ManageFinishWorkAt />
