@@ -2,7 +2,6 @@ import { Opener } from '@lib/ui/base/Opener'
 import { CreateTaskForm } from '../../tasks/form/CreateTaskForm'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { IdeaFormShape } from './IdeaFormShape'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
@@ -15,7 +14,6 @@ export const TurnIdeaIntoTask = ({
   value,
 }: ComponentWithValueProps<IdeaFormShape>) => {
   const { mutate: deleteIdea } = useDeleteUserEntityMutation('idea')
-  const [, setActiveItemId] = useActiveItemId()
   const { id } = useCurrentIdea()
 
   return (
@@ -36,7 +34,6 @@ export const TurnIdeaIntoTask = ({
               onClose()
               if (task) {
                 deleteIdea(id)
-                setActiveItemId(null)
               }
             }}
           />

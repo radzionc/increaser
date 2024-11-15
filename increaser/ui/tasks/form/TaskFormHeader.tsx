@@ -34,6 +34,7 @@ type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> &
   Partial<ClosableComponentProps> & {
     onSubmit?: () => void
     hasProjectAutoFocus?: boolean
+    titlePlaceholder?: string
   }
 
 const Container = styled(VStack)`
@@ -98,6 +99,7 @@ export const TaskFormHeader = ({
   onSubmit,
   hasProjectAutoFocus = false,
   onClose,
+  titlePlaceholder = 'Task name',
 }: TaskFormHeaderProps) => {
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -119,7 +121,7 @@ export const TaskFormHeader = ({
         </ProjectInputContainer>
 
         <TitleInput
-          placeholder="Task name"
+          placeholder={titlePlaceholder}
           autoFocus={!hasProjectAutoFocus && !value.name}
           value={value.name}
           ref={nameInputRef}

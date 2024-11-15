@@ -1,16 +1,15 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { otherProjectId } from '@increaser/entities/Project'
-import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
+import { otherProject } from '@increaser/entities/Project'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
+import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
+import { useIdeas } from '../hooks/useIdeas'
+import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
 type CreateIdeaFormProps = NoValueFinishProps & {
   initialValue?: Partial<IdeaFormShape>
@@ -20,30 +19,33 @@ export const CreateIdeaForm = ({
   onFinish,
   initialValue,
 }: CreateIdeaFormProps) => {
+  const ideas = useIdeas()
+
   const [value, setValue] = useState<IdeaFormShape>({
     name: '',
+    projectId: otherProject.id,
+    links: [],
+    checklist: [],
     description: '',
-    projectId: otherProjectId,
     ...initialValue,
   })
-  const { mutate } = useCreateUserEntityMutation('idea')
+  const { mutate, isPending } = useCreateUserEntityMutation('idea', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsIdeaFormDisabled(value)
 
   const onSubmit = useCallback(() => {
-    if (isDisabled) return
+    const order = getLastItemOrder(
+      Object.values(ideas).map((task) => task.order),
+    )
 
     mutate({
       id: getId(),
+      order,
       ...value,
-      updatedAt: Date.now(),
     })
-    onFinish()
-  }, [isDisabled, mutate, onFinish, value])
-
-  const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
-
-  const shouldFocusProjectInput = !initialValue?.projectId
+  }, [ideas, mutate, value])
 
   return (
     <ListItemForm
@@ -51,36 +53,19 @@ export const CreateIdeaForm = ({
       onSubmit={onSubmit}
       isDisabled={isDisabled}
     >
-      <EmojiTextInputFrame>
-        <div>
-          <TaskProjectSelector
-            autoFocus={shouldFocusProjectInput}
-            value={value.projectId}
-            onChange={(projectId) => {
-              setValue((prev) => ({ ...prev, projectId }))
-              nameInputRef.current?.focus()
-            }}
-          />
-        </div>
-        <EmbeddedTitleInput
-          placeholder="Your idea"
-          autoFocus={!shouldFocusProjectInput}
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-          onSubmit={onSubmit}
-          ref={nameInputRef}
-        />
-      </EmojiTextInputFrame>
-
-      <EmbeddedDescriptionInput
-        label="Description"
-        placeholder="Describe your idea"
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
-        value={value.description}
+      <TaskFormHeader
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        onSubmit={isDisabled ? undefined : onSubmit}
+        hasProjectAutoFocus={!initialValue?.projectId}
+        onClose={onFinish}
+        titlePlaceholder="Idea name"
       />
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <CreateFormFooter
+        isPending={isPending}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
     </ListItemForm>
   )
 }

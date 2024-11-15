@@ -6,6 +6,7 @@ import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import styled from 'styled-components'
 import { useMemo } from 'react'
 import { useProjectFilter } from '../projects/filter/project/state/projectFilter'
+import { ActiveIdea } from './ActiveIdea'
 
 const Container = styled(VStack)`
   max-width: 560px;
@@ -25,6 +26,7 @@ export const Ideas = () => {
   return (
     <Container>
       <ActiveItemIdProvider initialValue={null}>
+        <ActiveIdea />
         {filteredItems.map((item) => (
           <CurrentIdeaProvider key={item.id} value={item}>
             <IdeaItem />

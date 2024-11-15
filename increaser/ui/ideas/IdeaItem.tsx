@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentIdea } from './CurrentIdeaProvider'
-import { EditIdeaForm } from './form/EditIdeaForm'
 import { IdeaItemContent } from './IdeaItemContent'
 
 const Container = styled(Hoverable)`
@@ -13,11 +12,7 @@ const Container = styled(Hoverable)`
 export const IdeaItem = () => {
   const { id } = useCurrentIdea()
 
-  const [activeItemId, setActiveItemId] = useActiveItemId()
-
-  if (activeItemId === id) {
-    return <EditIdeaForm />
-  }
+  const [, setActiveItemId] = useActiveItemId()
 
   return (
     <Container

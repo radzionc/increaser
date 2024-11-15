@@ -2,7 +2,10 @@ import { Idea, Ideas } from '@increaser/entities/Idea'
 import { recordFromItems } from '@lib/utils/record/recordFromItems'
 import { DemoProject } from './projects'
 
-const items: Omit<Idea, 'id' | 'updatedAt'>[] = [
+const items: Omit<
+  Idea,
+  'id' | 'updatedAt' | 'links' | 'checklist' | 'order'
+>[] = [
   {
     name: 'Improve Website SEO',
     description:
@@ -36,6 +39,8 @@ export const getDemoIdeas = (): Ideas => {
       id: item.name,
       order,
       updatedAt: Date.now(),
+      links: [],
+      checklist: [],
     })),
     (item) => item.id,
   )

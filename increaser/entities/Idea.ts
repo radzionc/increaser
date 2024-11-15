@@ -1,12 +1,6 @@
-import { EntityWithId } from '@lib/utils/entities/EntityWithId'
-import { EntityWithName } from '@lib/utils/entities/EntityWithName'
-import { ProjectRelatedEntity } from './Project'
+import { EntityWithOrder } from '@lib/utils/entities/EntityWithOrder'
+import { TaskTemplate } from './TaskTemplate'
 
-export type Idea = EntityWithId &
-  ProjectRelatedEntity &
-  EntityWithName & {
-    updatedAt: number
-    description: string
-  }
+export type Idea = TaskTemplate & EntityWithOrder
 
 export type Ideas = Record<string, Idea>

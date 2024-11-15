@@ -1,6 +1,3 @@
-import { ProjectRelatedEntity } from '@increaser/entities/Project'
+import { Idea } from '@increaser/entities/Idea'
 
-export type IdeaFormShape = ProjectRelatedEntity & {
-  name: string
-  description: string
-}
+export type IdeaFormShape = Omit<Idea, 'id' | 'order'>

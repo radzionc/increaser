@@ -1,12 +1,9 @@
 import { useMemo } from 'react'
 import { useUser } from '@increaser/ui/user/state/user'
-import { order } from '@lib/utils/array/order'
+import { sortEntitiesWithOrder } from '@lib/utils/entities/EntityWithOrder'
 
 export const useIdeas = () => {
   const { ideas } = useUser()
 
-  return useMemo(
-    () => order(Object.values(ideas), (idea) => idea.updatedAt, 'desc'),
-    [ideas],
-  )
+  return useMemo(() => sortEntitiesWithOrder(Object.values(ideas)), [ideas])
 }

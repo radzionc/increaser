@@ -1,28 +1,27 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { IdeaFormShape } from './IdeaFormShape'
-import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
-import { TaskProjectSelector } from '../../tasks/TaskProjectSelector'
-import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { TurnIdeaIntoTask } from './TurnIdeaIntoTask'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
-import { ListItemForm } from '../../form/ListItemForm'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
-import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { NoValueFinishProps } from '@lib/ui/props'
+import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
+import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
+import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
+import { Panel } from '@lib/ui/css/panel'
+import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
-export const EditIdeaForm = () => {
+export const EditIdeaForm = ({ onFinish }: NoValueFinishProps) => {
   const idea = useCurrentIdea()
   const { id } = idea
   const initialValue = useMemo(
-    () => pick(idea, ['name', 'projectId', 'description']),
+    () =>
+      pick(idea, ['checklist', 'description', 'links', 'name', 'projectId']),
     [idea],
   )
   const [value, setValue] = useState<IdeaFormShape>(initialValue)
@@ -30,30 +29,21 @@ export const EditIdeaForm = () => {
   const { mutate: updateIdea } = useUpdateUserEntityMutation('idea')
   const { mutate: deleteIdea } = useDeleteUserEntityMutation('idea')
 
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
-
-  const isDisabled = useIsIdeaFormDisabled(value)
-
   useLazySync<Partial<IdeaFormShape>>({
-    value: useMemo(() => {
-      const result = getUpdatedValues({
-        before: initialValue,
-        after: value,
-      })
-
-      if (result) {
-        return {
-          ...result,
-          updatedAt: Date.now(),
-        }
-      }
-
-      return result
-    }, [initialValue, value]),
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+          comparators: {
+            links: (one, another) =>
+              areArraysEqual(one, another, areLinkItemsEqual),
+            checklist: (one, another) =>
+              areArraysEqual(one, another, areChecklistItemsEqual),
+          },
+        }),
+      [initialValue, value],
+    ),
     sync: useCallback(
       (fields) =>
         updateIdea({
@@ -65,35 +55,16 @@ export const EditIdeaForm = () => {
   })
 
   return (
-    <ListItemForm onClose={onFinish} isDisabled={isDisabled}>
-      <EmojiTextInputFrame>
-        <div>
-          <TaskProjectSelector
-            value={value.projectId}
-            onChange={(projectId) =>
-              setValue((prev) => ({ ...prev, projectId }))
-            }
-          />
-        </div>
-
-        <EmbeddedTitleInput
-          placeholder="Your idea"
-          value={value.name}
-          onChange={(name) => setValue((prev) => ({ ...prev, name }))}
-        />
-        <PanelFormCloseButton onClick={onFinish} />
-      </EmojiTextInputFrame>
-
-      <EmbeddedDescriptionInput
-        label="Description"
-        placeholder="Describe your idea"
-        onChange={(description) =>
-          setValue((prev) => ({ ...prev, description }))
-        }
-        value={value.description}
+    <Panel style={{ width: '100%' }} withSections kind="secondary">
+      <TaskFormHeader
+        titlePlaceholder="Idea name"
+        value={value}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        onClose={onFinish}
       />
-      <HStack fullWidth alignItems="center" wrap="wrap" gap={8}>
-        <TurnIdeaIntoTask value={value} />
+
+      <HStack alignItems="center" gap={20} wrap="wrap">
+        <TurnIdeaIntoTask value={idea} />
         <PanelFormDeleteButton
           onClick={() => {
             deleteIdea(id)
@@ -101,6 +72,6 @@ export const EditIdeaForm = () => {
           }}
         />
       </HStack>
-    </ListItemForm>
+    </Panel>
   )
 }

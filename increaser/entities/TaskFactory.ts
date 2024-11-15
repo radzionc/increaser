@@ -1,12 +1,9 @@
-import { Task } from './Task'
+import { TaskTemplate } from './TaskTemplate'
 
 export const taskCadence = ['workday', 'day', 'week', 'month'] as const
 export type TaskCadence = (typeof taskCadence)[number]
 
-export type TaskFactory = Pick<
-  Task,
-  'id' | 'name' | 'description' | 'projectId' | 'links' | 'checklist'
-> & {
+export type TaskFactory = TaskTemplate & {
   cadence: TaskCadence
   // day cadence: none
   // workday cadence: none
