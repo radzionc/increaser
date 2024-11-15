@@ -157,7 +157,7 @@ In the "Templates" subpage, users can create, edit, and delete task templates. A
 
 A task have a "Start" button that will start a focus session for that task.
 
-On the "Ideas" sub-page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, project, checklist and links fields. The user can turn an idea into a task by clicking on the "Turn into a task" button.
+On the "Ideas" sub-page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, project, checklist and links fields. The user can turn an idea into a task by clicking on the "Turn into a task" button. The user can reorder ideas by dragging them.
 
 ## Principles
 
