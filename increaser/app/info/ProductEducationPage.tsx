@@ -29,7 +29,7 @@ export const ProductEducationPage = ({
           </Text>
           <EducationContent>{value.subtitle}</EducationContent>
         </VStack>
-        <Video value={value.youTubeVideoUrl} />
+        {value.youTubeVideoUrl && <Video value={value.youTubeVideoUrl} />}
         <EducationContent>{value.content}</EducationContent>
         <div />
       </VStack>

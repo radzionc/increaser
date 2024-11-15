@@ -42,7 +42,7 @@ const announce = (id: InfoYouTubeVideo) => {
       'Use your judgment to make the text engaging and informative.',
       'Make each text feel native to the platform.',
       `Include YouTube video URL ${youTubeVideoUrl} in the content.`,
-      'Return copy for each platform in a separate markdown snippet',
+      'Return the result as a markdown code snippet with each platform starting with "# {platform_name}", but do not use markdown features in copies that don`t support markdown, .e.g. YouTube description should be plain text.',
     ].join(' '),
 
     ...toEntries(socialPrompt).map(({ key, value }) =>

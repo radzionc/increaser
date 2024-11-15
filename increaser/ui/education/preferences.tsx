@@ -1,8 +1,10 @@
+import { infoYouTubeVideos } from '@increaser/info/infoYouTubeVideos'
 import { ProductToolEducation } from './ProductToolEducation'
 
 export const preferencesEducation: ProductToolEducation = {
   title: 'Customize Your Work Preferences for Peak Productivity',
   subtitle: `Setting up your work preferences is a powerful way to customize your schedule, enhance productivity, and maintain a healthy work-life balance. By tailoring settings like your preferred workday end time, weekend days, and daily work hours, you align the app with your personal goals and routines.`,
+  youTubeVideoUrl: infoYouTubeVideos.workPreferences,
   content: (
     <>
       <h2>Setting Your Preferred Workday End Time</h2>
