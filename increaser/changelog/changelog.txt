@@ -3,6 +3,7 @@ Added a real-time updated project progress widget to the focus session page for 
 Updated the project budget widget on the focus launcher to be more compact and display today's expected work time.
 The weekly comparison chart for work budget vs. actual work is now better organized and clearly displays the difference between expected and completed hours.
 Added "Preferences" article to the "Info" page.
+Ideas moved to the "Ideas" tab on the "Tasks" page, and users can now add links and checklist to ideas same way as with tasks.
 1731381780369
 Added a "Sessions" view for daily reports, displaying sessions grouped by day and color-coded by project.
 Improved tracked time report to be more space-efficient and comfortable to navigate.
