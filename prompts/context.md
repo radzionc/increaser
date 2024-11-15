@@ -141,7 +141,7 @@ To help users remember to track their habits, a prompt appears in the sidebar na
 
 ## Tasks
 
-The "Tasks" page has four subpages: "Tasks", "Upcoming", "Automation", and "Templates". Users can filter tasks by project.
+The "Tasks" page has vide subpages: "Tasks", "Ideas", "Upcoming", "Automation", and "Templates". Users can filter tasks by project.
 
 The "Tasks" subpage is a kanban board with four columns: backlog, todo, inProgress, and done. Users can drag and drop tasks between columns.
 
@@ -157,9 +157,7 @@ In the "Templates" subpage, users can create, edit, and delete task templates. A
 
 A task have a "Start" button that will start a focus session for that task.
 
-## Ideas
-
-On the "Ideas" page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, and project field. The user can turn an idea into a task by clicking on the "Turn into a task" button. The user can filter ideas by project.
+On the "Ideas" sub-page, the user can note down ideas for their projects to avoid forgetting them. An idea has a name, description, project, checklist and links fields. The user can turn an idea into a task by clicking on the "Turn into a task" button.
 
 ## Principles
 
