@@ -85,7 +85,7 @@ When it the time after user's workday end, the focus launcher will be disabled a
 
 On the "Goals" page, users can set goals to move closer to their ideal vision. Goals can be marked as done, active, or idea. Each goal includes a deadline, which can be a specific date or the user's age, an emoji, and a plain-text plan on how to achieve it. For numeric goals, users can track progress by entering a value, such as their current net worth toward a 1 million USD goal.
 
-Goals integrate with other tools in Increaser, to support recurring actions needed for many goals, users can link recurring tasks(TaskFactories) or daily habits to a goal or create new ones specifically for it.
+Goals integrate with other tools in Increaser, to support recurring actions needed for many goals, users can link recurring tasks(TaskFactories) or daily habits to a goal or create new ones specifically for it. Users also can add or link existing principles to a goal.
 
 At the top of the "Goals" page, a timeline shows goals positioned according to their deadlines, with two view options: age-based and date-based. In age-based view, the user’s age is displayed at the top with day precision, and the timeline has age labels. In date-based view, today’s date is shown at the top, and the timeline displays year labels.
 
