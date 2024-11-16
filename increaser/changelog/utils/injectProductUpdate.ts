@@ -2,13 +2,13 @@ import { ProductUpdate } from '../ProductUpdate'
 
 export const injectProductUpdate = (
   fileContent: string,
-  value: Partial<ProductUpdate>,
+  value: Partial<ProductUpdate> = {},
 ) => {
   const declaration = 'export const productUpdates: ProductUpdate[] = ['
   const [before, after] = fileContent.split(declaration)
 
   const productUpdate: ProductUpdate = {
-    releasedAt: 0,
+    releasedAt: undefined,
     name: '',
     description: '',
     items: [],

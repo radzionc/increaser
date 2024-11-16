@@ -1,15 +1,18 @@
 import { Opener } from '@lib/ui/base/Opener'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { PageHeaderAddButton } from '../../navigation/components/PageHeaderAddButton'
 import { CreatePrincipleCategoryForm } from './form/CreatePrincipleCategoryForm'
-import { ListAddButton } from '@lib/ui/list/ListAddButton'
 
 export const AddPrincipleCategory = () => {
   return (
     <Opener
-      renderOpener={({ onOpen, isOpen }) =>
-        isOpen ? null : <ListAddButton onClick={onOpen} text="Add a category" />
-      }
+      renderOpener={({ onOpen }) => (
+        <PageHeaderAddButton value="a category" onClick={onOpen} />
+      )}
       renderContent={({ onClose }) => (
-        <CreatePrincipleCategoryForm onFinish={onClose} />
+        <PanelModal onFinish={onClose}>
+          <CreatePrincipleCategoryForm onFinish={onClose} />
+        </PanelModal>
       )}
     />
   )

@@ -5,6 +5,8 @@ import { AddPrincipleCategory } from './AddPrincipleCategory'
 import { CurrentPrincipleCategoryProvider } from './CurrentPrincipleCategoryProvider'
 import { PrincipleCategoryItem } from './PrincipleCategoryItem'
 import styled from 'styled-components'
+import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeaderControlsAreaProvider'
+import { ActivePrincipleCategory } from './ActivePrincipleCategory'
 
 const Container = styled(VStack)`
   max-width: 560px;
@@ -15,15 +17,20 @@ export const PrincipleCategories = () => {
   const items = usePrincipleCategories()
 
   return (
-    <Container>
+    <>
+      <PageHeaderControlsArea>
+        <AddPrincipleCategory />
+      </PageHeaderControlsArea>
       <ActiveItemIdProvider initialValue={null}>
-        {items.map((item) => (
-          <CurrentPrincipleCategoryProvider key={item.id} value={item}>
-            <PrincipleCategoryItem />
-          </CurrentPrincipleCategoryProvider>
-        ))}
+        <ActivePrincipleCategory />
+        <Container>
+          {items.map((item) => (
+            <CurrentPrincipleCategoryProvider key={item.id} value={item}>
+              <PrincipleCategoryItem />
+            </CurrentPrincipleCategoryProvider>
+          ))}
+        </Container>
       </ActiveItemIdProvider>
-      <AddPrincipleCategory />
-    </Container>
+    </>
   )
 }

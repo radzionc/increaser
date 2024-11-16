@@ -24,7 +24,7 @@ export const productUpdateSocialName = {
 export type ProductUpdateSocials = Partial<Record<ProductUpdateSocial, string>>
 
 export type ProductUpdate = ProductUpdateSocials & {
-  releasedAt: number
+  releasedAt?: number
   name: string
   description: string
   items?: ProductUpdateItem[]

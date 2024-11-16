@@ -20,6 +20,7 @@ import { YouTubeColoredIcon } from '@lib/ui/icons/YouTubeColoredIcon'
 import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { ProductUpdateYouTubeVideo } from './ProductUpdateYouTubeVideo'
 import { ProductUpdateSubItem } from './ProductUpdateSubItem'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const ProductUpdateItem = ({
   value,
@@ -34,7 +35,7 @@ export const ProductUpdateItem = ({
     <VStack gap={16}>
       <VStack gap={4}>
         <Text size={14} color="supporting">
-          {format(value.releasedAt, 'MMMM d, yyyy')}
+          {format(shouldBePresent(value.releasedAt), 'MMMM d, yyyy')}
         </Text>
         <Text size={20} weight="500" color="contrast">
           {value.name}

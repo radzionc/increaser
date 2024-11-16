@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { otherPrincipleCategoryId } from '@increaser/entities/PrincipleCategory'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
@@ -15,8 +14,9 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormCloseButton } from '../../../form/panel/PanelFormCloseButton'
 import { PanelFormDeleteButton } from '../../../form/panel/PanelFormDeleteButton'
+import { NoValueFinishProps } from '@lib/ui/props'
 
-export const EditPricnipleCategoryForm = () => {
+export const EditPricnipleCategoryForm = ({ onFinish }: NoValueFinishProps) => {
   const principleCategory = useCurrentPrincipleCategory()
   const { id } = principleCategory
   const initialValue = useMemo(
@@ -30,12 +30,6 @@ export const EditPricnipleCategoryForm = () => {
 
   const { mutate: deleteEntity } =
     useDeleteUserEntityMutation('principleCategory')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<PrincipleCategoryFormShape>>({
     value: useMemo(

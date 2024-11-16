@@ -43,7 +43,7 @@ export const FeaturesNavigationItem = () => {
       user.viewedNewFeaturesAt || user.registrationDate
 
     return productUpdates.filter(
-      (update) => update.releasedAt > viewedNewFeaturesAt,
+      (update) => update.releasedAt && update.releasedAt > viewedNewFeaturesAt,
     ).length
   }, [user])
 

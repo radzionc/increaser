@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentPrincipleCategory } from './CurrentPrincipleCategoryProvider'
-import { EditPricnipleCategoryForm } from './form/EditPrincipleCategoryForm'
 import { PrincipleCategoryItemContent } from './PrincipleCategoryItemContent'
 
 const Container = styled(Hoverable)`
@@ -13,11 +12,7 @@ const Container = styled(Hoverable)`
 export const PrincipleCategoryItem = () => {
   const { id } = useCurrentPrincipleCategory()
 
-  const [activeItemId, setActiveItemId] = useActiveItemId()
-
-  if (activeItemId === id) {
-    return <EditPricnipleCategoryForm />
-  }
+  const [, setActiveItemId] = useActiveItemId()
 
   return (
     <Container
