@@ -9,6 +9,7 @@ import { PageHeaderControlsArea } from '@increaser/app/ui/page/header/PageHeader
 import { PrincipleCategoryFilter } from './categoryFilter/PrincipleCategoryFilter'
 import { useFilterByPrincipleCategory } from './categoryFilter/state/principleCategoryFilter'
 import { Principle } from '@increaser/entities/Principle'
+import { ActivePrinciple } from './ActivePrinciple'
 
 const Container = styled(VStack)`
   max-width: 560px;
@@ -24,18 +25,21 @@ export const Principles = () => {
   )
 
   return (
-    <Container>
+    <>
       <PageHeaderControlsArea>
         <PrincipleCategoryFilter />
         <AddPrinciple />
       </PageHeaderControlsArea>
       <ActiveItemIdProvider initialValue={null}>
-        {items.map((item) => (
-          <CurrentPrincipleProvider key={item.id} value={item}>
-            <PrincipleItem />
-          </CurrentPrincipleProvider>
-        ))}
+        <ActivePrinciple />
+        <Container>
+          {items.map((item) => (
+            <CurrentPrincipleProvider key={item.id} value={item}>
+              <PrincipleItem />
+            </CurrentPrincipleProvider>
+          ))}
+        </Container>
       </ActiveItemIdProvider>
-    </Container>
+    </>
   )
 }
