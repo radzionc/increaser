@@ -23,8 +23,10 @@ export const useGroupScheduledTasks = () => {
   return useCallback(
     (items: ScheduledTask[]) => {
       const now = Date.now()
-      const nextWeekEndsAt = endOfISOWeek(addWeeks(now, 1).getTime()).getTime()
-      const options = [nextWeekEndsAt]
+      const nextNextWeekEndsAt = endOfISOWeek(
+        addWeeks(now, 2).getTime(),
+      ).getTime()
+      const options = [nextNextWeekEndsAt]
 
       const deadlines = items.map((task) => task.deadlineAt)
       if (!isEmpty(deadlines)) {

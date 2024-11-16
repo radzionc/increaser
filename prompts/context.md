@@ -161,7 +161,13 @@ On the "Ideas" sub-page, the user can note down ideas for their projects to avoi
 
 ## Principles
 
-The "Principles" page consists of two sub-pages: "My principles" and "Principle ideas." The "My principles" page has two tabs: "Principles" and "Categories." On the principles page, the user can add, edit, and delete principles, which consist of a name, description, and category. On the categories page, the user can add, edit, and delete categories. A category consists of a name and an emoji. The "Principle ideas" page consists of a list of suggested principles for a fulfilling life, categorized into health, marriage, work, mindset, and finances that the user can add to their principles.
+The "Principles" page consists of three sub-pages: "Principles", "Categories" and "Explore."
+
+The "Principles" sub-page the user can add, edit, and delete principles, which consist of a name, description, and category. User can create a category while creating a principle.
+
+On the "Categories" sub-page, the user can add, edit, and delete categories. A category consists of a name and an emoji.
+
+The "Explore" sub-page consists of a list of suggested principles for a fulfilling life, categorized into health, marriage, work, mindset, and finances that the user can add to their principles.
 
 ## What's New
 
