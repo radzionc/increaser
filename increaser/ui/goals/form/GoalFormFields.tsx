@@ -17,6 +17,7 @@ import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { panelFormConfig } from '../../form/panel/config'
 import { GoalHabitsInput } from './GoalHabitsInput'
+import { GoalPrinciplesInput } from './GoalPrinciplesInput'
 
 type GoalFormFieldsProps = InputProps<GoalFormShape> & {
   onSubmit?: () => void
@@ -107,6 +108,10 @@ export const GoalFormFields = ({
         <GoalHabitsInput
           onChange={(habits) => onChange({ ...value, habits })}
           value={value.habits}
+        />
+        <GoalPrinciplesInput
+          value={value.principles}
+          onChange={(principles) => onChange({ ...value, principles })}
         />
       </HeaderWrapper>
       <HStack fullWidth alignItems="center" gap={8} wrap="wrap">

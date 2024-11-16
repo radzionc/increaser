@@ -16,8 +16,12 @@ export const LinkActionContainer = styled(
 
   ${borderRadius.m};
 
+  color: ${getColor('textSupporting')};
+  font-weight: 600;
+
   &:hover {
     background: ${getColor('mist')};
+    color: ${getColor('contrast')};
   }
 
   ${({ isActive }) =>

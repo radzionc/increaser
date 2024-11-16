@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OptionalValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
@@ -8,14 +8,19 @@ import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { PrincipleFormFields } from './PrincipleFormFields'
+import { Principle } from '@increaser/entities/Principle'
 
-export const CreatePrincipleForm = ({ onFinish }: NoValueFinishProps) => {
+export const CreatePrincipleForm = ({
+  onFinish,
+}: OptionalValueFinishProps<Principle>) => {
   const [value, setValue] = useState<PrincipleFormShape>({
     name: '',
     description: '',
     categoryId: otherProjectId,
   })
-  const { mutate } = useCreateUserEntityMutation('principle')
+  const { mutate } = useCreateUserEntityMutation('principle', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsPrincipleFormDisabled(value)
 
@@ -27,8 +32,7 @@ export const CreatePrincipleForm = ({ onFinish }: NoValueFinishProps) => {
       ...value,
       updatedAt: Date.now(),
     })
-    onFinish()
-  }, [isDisabled, mutate, onFinish, value])
+  }, [isDisabled, mutate, value])
 
   return (
     <ListItemForm

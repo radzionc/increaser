@@ -12,6 +12,8 @@ import { GoalTaskFactoryItem } from './GoalTaskFactoryItem'
 import { FieldArrayContainer } from '@lib/ui/form/components/FieldArrayContainer'
 import { CurrentHabitProvider } from '../habits/CurrentHabitProvider'
 import { HabitItemContent } from '../habits/components/manage/HabitItemContent'
+import { CurrentPrincipleProvider } from '../principles/CurrentPrincipleProvider'
+import { GoalPrincipleItem } from './form/GoalPrincipleItem'
 
 const Header = styled.p`
   ${text({
@@ -30,9 +32,14 @@ export const LinkedEntitiesContainer = styled(FieldArrayContainer)`
 `
 
 export const GoalItemContent = () => {
-  const { name, emoji, plan, taskFactories, habits } = useCurrentGoal()
+  const { name, emoji, plan, taskFactories, habits, principles } =
+    useCurrentGoal()
 
-  const { taskFactories: taskFactoryRecord, habits: habitRecord } = useUser()
+  const {
+    taskFactories: taskFactoryRecord,
+    habits: habitRecord,
+    principles: principlesRecord,
+  } = useUser()
 
   return (
     <VStack style={{ maxWidth: 600 }} gap={12}>
@@ -55,10 +62,7 @@ export const GoalItemContent = () => {
                 if (!value) return null
 
                 return (
-                  <CurrentTaskFactoryProvider
-                    key={id}
-                    value={taskFactoryRecord[id]}
-                  >
+                  <CurrentTaskFactoryProvider key={id} value={value}>
                     <GoalTaskFactoryItem />
                   </CurrentTaskFactoryProvider>
                 )
@@ -77,9 +81,28 @@ export const GoalItemContent = () => {
                 if (!value) return null
 
                 return (
-                  <CurrentHabitProvider key={id} value={habitRecord[id]}>
+                  <CurrentHabitProvider key={id} value={value}>
                     <HabitItemContent />
                   </CurrentHabitProvider>
+                )
+              })}
+            </VStack>
+          </LinkedEntitiesContainer>
+        )}
+      />
+      <NonEmptyOnly
+        value={principles}
+        render={(items) => (
+          <LinkedEntitiesContainer title="Principles">
+            <VStack>
+              {items.map((id) => {
+                const value = principlesRecord[id]
+                if (!value) return null
+
+                return (
+                  <CurrentPrincipleProvider key={id} value={value}>
+                    <GoalPrincipleItem />
+                  </CurrentPrincipleProvider>
                 )
               })}
             </VStack>

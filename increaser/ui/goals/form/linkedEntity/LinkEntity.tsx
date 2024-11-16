@@ -9,6 +9,7 @@ import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContai
 import { LinkIcon } from '@lib/ui/icons/LinkIcon'
 import { LinkActionContainer } from './LinkActionContainer'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
+import { isEmpty } from '@lib/utils/array/isEmpty'
 
 type LinkEntityProps<T> = ComponentWithOptionsProps<T> &
   ValueFinishProps<T> & {
@@ -38,6 +39,10 @@ export function LinkEntity<T>({
     placement: 'bottom-start',
     options: options.map(getOptionName),
   })
+
+  if (isEmpty(options)) {
+    return null
+  }
 
   return (
     <>

@@ -27,6 +27,7 @@ export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
       plan: '',
       taskFactories: [],
       habits: [],
+      principles: [],
     }),
     useGoalFormCorrector(),
   )
