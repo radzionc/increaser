@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from 'react'
-import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
@@ -11,27 +10,28 @@ import { PrincipleCategoryFormShape } from './PrincipleCategoryFormShape'
 import { EmojiTextInputFrame } from '../../../form/EmojiTextInputFrame'
 import { ListItemForm } from '../../../form/ListItemForm'
 import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
+import { PrincipleCategory } from '@increaser/entities/PrincipleCategory'
+import { OptionalValueFinishProps } from '@lib/ui/props'
 
 export const CreatePrincipleCategoryForm = ({
   onFinish,
-}: NoValueFinishProps) => {
+}: OptionalValueFinishProps<PrincipleCategory>) => {
   const [value, setValue] = useState<PrincipleCategoryFormShape>({
     name: '',
     emoji: randomlyPick(defaultEmojis),
   })
-  const { mutate } = useCreateUserEntityMutation('principleCategory')
+  const { mutate } = useCreateUserEntityMutation('principleCategory', {
+    onOptimisticUpdate: onFinish,
+  })
 
   const isDisabled = useIsPrincipleCategoryFormDisabled(value)
 
   const onSubmit = useCallback(() => {
-    if (isDisabled) return
-
     mutate({
       id: getId(),
       ...value,
     })
-    onFinish()
-  }, [isDisabled, mutate, onFinish, value])
+  }, [mutate, value])
 
   const nameInputRef = useRef<HTMLTextAreaElement | null>(null)
 
