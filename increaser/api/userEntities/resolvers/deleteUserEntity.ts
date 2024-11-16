@@ -10,6 +10,7 @@ import { getUser, updateUser } from '@increaser/db/user'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { otherPrincipleCategoryId } from '@increaser/entities/PrincipleCategory'
 import { syncHabitsDependantFields } from '@increaser/data-services/habits/syncHabitsDependantFields'
+import { syncPrinciplesDependantFields } from '@increaser/data-services/principles/syncPrinciplesDependantFields'
 
 type UserEntityRemovalHandlerParams<T extends UserEntity> = {
   userId: string
@@ -40,6 +41,7 @@ const handleUserEntityRemoval: Partial<{
       ),
     })
   },
+  principle: async ({ userId }) => syncPrinciplesDependantFields(userId),
 }
 
 export const deleteUserEntity: ApiResolver<'deleteUserEntity'> = async ({

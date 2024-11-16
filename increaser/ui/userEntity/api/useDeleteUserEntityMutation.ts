@@ -9,6 +9,8 @@ const affectOtherEntitiesOnDelete: UserEntity[] = [
   'taskFactory',
   'project',
   'principleCategory',
+  'principle',
+  'habit',
 ]
 
 export const useDeleteUserEntityMutation = <T extends UserEntity>(
