@@ -46,7 +46,7 @@ const announce = () => {
       'Make each announcement feel native to the platform.',
       'Do not use words "user" or "users".',
       'Titles should represent an essence of the updates.',
-      'Return the result as a markdown snippet with each platform starting with "# {platform_name}", but do not use markdown features in copies that don`t support markdown, .e.g. YouTube description should be plain text.',
+      'Return the result as a markdown code snippet with each platform starting with "# {platform_name}", but do not use markdown features in copies that don`t support markdown, .e.g. YouTube description should be plain text.',
     ].join(' '),
 
     ...toEntries(socialPrompt).map(({ key, value }) =>

@@ -2,6 +2,49 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    releasedAt: 0,
+    name: 'Customize Your Schedule and Enhanced Project Tracking',
+    description:
+      "We've introduced new features that let you tailor your work schedule and improve project tracking for a more streamlined experience.",
+    items: [
+      {
+        description:
+          'You can now customize your weekend days or remove them entirely if you work the same amount daily.',
+      },
+      {
+        description:
+          'Added a real-time updated project budget widget to the focus session page for continuous tracking during work sessions.',
+      },
+      {
+        description:
+          "Updated the project budget widget on the focus launcher to be more compact and display today's expected work time.",
+      },
+      {
+        description:
+          'The weekly comparison chart for work budget versus actual work is now better organized and clearly displays the difference between expected and completed hours.',
+      },
+      {
+        description:
+          "Added a 'Preferences' article to the 'Info' page to help you make the most of these new features.",
+      },
+      {
+        description:
+          "Moved 'Ideas' to the 'Ideas' tab on the 'Tasks' page, and you can now add links and checklists to ideas just like with tasks.",
+      },
+      {
+        description:
+          'You can reorder ideas by dragging them, making it easier to organize your thoughts.',
+      },
+    ],
+    youtube: 'https://youtu.be/8D9Y6ydxr-w',
+    telegram: '',
+    x: '',
+    linkedIn: '',
+    indieHackers: '',
+    reddit: '',
+  },
+
+  {
     releasedAt: 1731381780369,
     name: 'Enhanced Time Tracking Insights',
     description:

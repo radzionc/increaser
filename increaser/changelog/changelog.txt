@@ -1,5 +1,5 @@
 Users can now customize their weekend days or remove them if they work the same amount daily.
-Added a real-time updated project progress widget to the focus session page for continuous tracking during work sessions.
+Added a real-time updated project budget widget to the focus session page for continuous tracking during work sessions.
 Updated the project budget widget on the focus launcher to be more compact and display today's expected work time.
 The weekly comparison chart for work budget vs. actual work is now better organized and clearly displays the difference between expected and completed hours.
 Added "Preferences" article to the "Info" page.
