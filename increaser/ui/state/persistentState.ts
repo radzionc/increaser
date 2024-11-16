@@ -41,6 +41,7 @@ export enum PersistentStateKey {
   ProjectFilter = 'projectFilter',
   YouTubeFocusMusicLeftAt = 'youTubeFocusMusicLeftAt',
   PrincipleCategoryFilter = 'principleCategoryFilter',
+  ExplorePrincipleCategoryFilter = 'explorePrincipleCategoryFilter',
   UserChangedFocusDurationAt = 'userChangedFocusDurationAt',
   FocusProject = 'focusProject',
   FocusProjectTask = 'focusProjectDefaultTask',
