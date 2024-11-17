@@ -109,7 +109,15 @@ export const appPageViews = {
   principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'ideas', 'upcoming', 'automation', 'templates'],
   roadmap: ['ideas', 'done'],
-  info: ['focus', 'track', 'tasks', 'habits', 'goals', 'preferences'],
+  info: [
+    'focus',
+    'track',
+    'tasks',
+    'habits',
+    'goals',
+    'preferences',
+    'principles',
+  ],
   timesheet: ['day', 'week', 'month', 'year'],
 } as const
 
@@ -179,6 +187,7 @@ export const appPageViewName: {
     habits: 'Build Habits',
     goals: 'Achieve Goals',
     preferences: 'Preferences',
+    principles: 'Principles',
   },
   timesheet: {
     day: 'Days',
