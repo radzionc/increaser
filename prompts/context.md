@@ -167,7 +167,9 @@ The "Principles" sub-page the user can add, edit, and delete principles, which c
 
 On the "Categories" sub-page, the user can add, edit, and delete categories. A category consists of a name and an emoji.
 
-The "Explore" sub-page consists of a list of suggested principles for a fulfilling life, categorized into health, marriage, work, mindset, and finances that the user can add to their principles. Users can filter principles by category
+The "Explore" sub-page consists of a list of suggested principles for a fulfilling life, categorized into health, marriage, work, mindset, and finances that the user can add to their principles. Users can filter principles by category.
+
+One of the most important use case for principles is make lessons from mistakes and other experiences and turn them into principles.
 
 ## What's New
 
