@@ -8,6 +8,7 @@ export const productTools = [
   'tasks',
   'trackTime',
   'workPreferences',
+  'principles',
 ] as const
 export type ProductTool = (typeof productTools)[number]
 
@@ -19,6 +20,7 @@ export const productToolNameRecord: Record<ProductTool, string> = {
   vision: 'Vision board',
   goals: 'Goals',
   workPreferences: 'Work preferences',
+  principles: 'Principles',
 }
 
 export const productToolKeyWordRecord: Record<ProductTool, string> = {
@@ -29,6 +31,7 @@ export const productToolKeyWordRecord: Record<ProductTool, string> = {
   vision: 'vision',
   goals: 'goals',
   workPreferences: 'preferences',
+  principles: 'principles',
 }
 
 export const productToolShortNameRecord: Record<ProductTool, string> = {
@@ -39,6 +42,7 @@ export const productToolShortNameRecord: Record<ProductTool, string> = {
   vision: 'Vision',
   goals: 'Goals',
   workPreferences: 'Preferences',
+  principles: 'Principles',
 }
 
 export const productToolDescription: Record<ProductTool, string> = {
@@ -49,6 +53,7 @@ export const productToolDescription: Record<ProductTool, string> = {
   vision: 'Craft the life you want',
   goals: 'Reach your goals faster',
   workPreferences: 'Tailor your work style',
+  principles: 'Define your guiding principles',
 }
 
 export const productToolTitle: Record<ProductTool, string> = {
@@ -59,6 +64,7 @@ export const productToolTitle: Record<ProductTool, string> = {
   vision: 'Create Your Ideal Future',
   goals: 'Realize Your Ambitions with Clear Goals',
   workPreferences: 'Set Up Your Perfect Work Environment',
+  principles: 'Guide Your Life with Core Principles',
 }
 
 export const productToolSubtitle: Record<ProductTool, string> = {
@@ -69,4 +75,5 @@ export const productToolSubtitle: Record<ProductTool, string> = {
   vision: `Visualize and pursue your perfect life with ${productName}'s Vision Board`,
   goals: `Set, track, and accomplish your goals with ${productName} to achieve your dreams`,
   workPreferences: `Configure your workspace and hours to match your productivity style with ${productName}`,
+  principles: `Capture and live by your guiding principles with ${productName}`,
 }

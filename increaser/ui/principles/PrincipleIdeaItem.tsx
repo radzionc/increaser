@@ -1,21 +1,15 @@
 import { PrincipleIdea } from '@increaser/entities-utils/principle/principleIdeas'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import styled from 'styled-components'
-import { defaultPrincipleCategories } from '@increaser/entities/PrincipleCategory'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { Text } from '@lib/ui/text'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { Opener } from '@lib/ui/base/Opener'
 import { CreatePrincipleForm } from './form/CreatePrincipleForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { PrincipleItemContainer } from './PrincipleItemContainer'
-import { PrincipleHeader } from './PrincipleHeader'
-import { PrincipleName } from './PrincipleName'
-import { PrincipleDescription } from './PrincipleDescription'
 import { useUser } from '../user/state/user'
 import { useMemo } from 'react'
 import { PrincipleFormShape } from './form/PrincipleFormShape'
 import { usePrinciples } from './hooks/usePrinciples'
+import { PrincipleIdeaItemContent } from './PrincipleIdeaItemContent'
 
 const Container = styled(Hoverable)`
   text-align: start;
@@ -25,7 +19,7 @@ const Container = styled(Hoverable)`
 export const PrincipleIdeaItem = ({
   value,
 }: ComponentWithValueProps<PrincipleIdea>) => {
-  const { description, name, source, categoryId } = value
+  const { description, name, categoryId } = value
 
   const { principleCategories } = useUser()
 
@@ -49,41 +43,7 @@ export const PrincipleIdeaItem = ({
     return result
   }, [categoryId, description, name, principleCategories])
 
-  const content = (
-    <PrincipleItemContainer>
-      <PrincipleHeader
-        prefix={
-          <Text color="contrast">
-            {
-              shouldBePresent(
-                defaultPrincipleCategories.find(
-                  (principle) => principle.id === value.categoryId,
-                ),
-              ).emoji
-            }
-          </Text>
-        }
-      >
-        <PrincipleName>
-          {name}
-          {isAdded && (
-            <Text
-              weight="600"
-              style={{ marginLeft: 8 }}
-              as="span"
-              color="success"
-            >
-              (added)
-            </Text>
-          )}
-        </PrincipleName>
-      </PrincipleHeader>
-      <PrincipleDescription>{description}</PrincipleDescription>
-      <Text color="shy">
-        From "{source.name}" by {source.author}
-      </Text>
-    </PrincipleItemContainer>
-  )
+  const content = <PrincipleIdeaItemContent value={value} />
 
   if (isAdded) {
     return <>{content}</>
@@ -97,9 +57,7 @@ export const PrincipleIdeaItem = ({
             onOpen()
           }}
           verticalOffset={0}
-        >
-          {content}
-        </Container>
+        ></Container>
       )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>

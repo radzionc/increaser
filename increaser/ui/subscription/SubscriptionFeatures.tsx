@@ -50,6 +50,12 @@ const productToolDescriptionRecord: Record<ProductTool, ReactNode> = {
       our <b>Work Preferences</b> tool.
     </>
   ),
+  principles: (
+    <>
+      Define and live by your core values using our <b>Principles</b> feature to
+      guide your decisions.
+    </>
+  ),
 }
 
 const lineHeight = 20

@@ -7,6 +7,7 @@ import { SquareCheckIcon } from '@lib/ui/icons/SquareCheckIcon'
 import { TimerIcon } from '@lib/ui/icons/TimerIcon'
 import { SproutIcon } from '@lib/ui/icons/SproutIcon'
 import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
+import { ScrollIcon } from '@lib/ui/icons/ScrollIcon'
 
 export const productToolIconRecord: Record<ProductTool, ReactNode> = {
   trackTime: <TableIcon />,
@@ -16,4 +17,5 @@ export const productToolIconRecord: Record<ProductTool, ReactNode> = {
   vision: <SparklesIcon />,
   goals: <GoalIcon />,
   workPreferences: <TogglesIcon />,
+  principles: <ScrollIcon />,
 }

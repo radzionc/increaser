@@ -8,6 +8,7 @@ import { HabitsSlice } from './HabitsSlice'
 import { VisionSlice } from './VisionSlice'
 import { GoalsSlice } from './GoalsSlice'
 import { WorkPreferencesSlice } from './WorkPreferencesSlice'
+import { PrinciplesSlice } from './PrinciplesSlice'
 
 export const ProductToolSlice = ({
   value,
@@ -21,5 +22,6 @@ export const ProductToolSlice = ({
     vision={() => <VisionSlice />}
     goals={() => <GoalsSlice />}
     workPreferences={() => <WorkPreferencesSlice />}
+    principles={() => <PrinciplesSlice />}
   />
 )

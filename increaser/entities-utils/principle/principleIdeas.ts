@@ -19,7 +19,7 @@ export type PrincipleIdea = Omit<Principle, 'updatedAt'> & {
   source: PrincipleSource
 }
 
-const workIdeas: PrincipleIdea[] = [
+export const workIdeas: PrincipleIdea[] = [
   {
     id: 'highImpactTasks',
     name: 'Focus on high-impact tasks',
