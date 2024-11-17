@@ -50,12 +50,9 @@ export const ProjectBudgetOverview = () => {
   return (
     <Container
       style={
-        goal && (hasReachedFinalDay || hasReachedGoal)
+        goal && hasReachedGoal
           ? {
-              borderColor: (hasReachedGoal
-                ? colors.success
-                : colors.alert
-              ).toCssValue(),
+              borderColor: colors.success.toCssValue(),
             }
           : {}
       }
@@ -69,9 +66,7 @@ export const ProjectBudgetOverview = () => {
       >
         <LinesFiller />
       </Fill>
-      {goal && !(hasReachedFinalDay || hasReachedGoal) && (
-        <ProjectBudgetOffset />
-      )}
+      {goal && !hasReachedGoal && <ProjectBudgetOffset />}
       <ProjectBudgetWidgetDays />
     </Container>
   )
