@@ -15,6 +15,7 @@ import { PrincipleDescription } from './PrincipleDescription'
 import { useUser } from '../user/state/user'
 import { useMemo } from 'react'
 import { PrincipleFormShape } from './form/PrincipleFormShape'
+import { usePrinciples } from './hooks/usePrinciples'
 
 const Container = styled(Hoverable)`
   text-align: start;
@@ -26,12 +27,14 @@ export const PrincipleIdeaItem = ({
 }: ComponentWithValueProps<PrincipleIdea>) => {
   const { description, name, source, categoryId } = value
 
-  const fullDescription = [
-    description,
-    `From "${source.name}" by ${source.author}`,
-  ].join('\n\n')
-
   const { principleCategories } = useUser()
+
+  const principles = usePrinciples()
+
+  const isAdded = useMemo(
+    () => principles.some((p) => p.name === name),
+    [name, principles],
+  )
 
   const initialValue = useMemo(() => {
     const result: Partial<PrincipleFormShape> = {
@@ -46,6 +49,46 @@ export const PrincipleIdeaItem = ({
     return result
   }, [categoryId, description, name, principleCategories])
 
+  const content = (
+    <PrincipleItemContainer>
+      <PrincipleHeader
+        prefix={
+          <Text color="contrast">
+            {
+              shouldBePresent(
+                defaultPrincipleCategories.find(
+                  (principle) => principle.id === value.categoryId,
+                ),
+              ).emoji
+            }
+          </Text>
+        }
+      >
+        <PrincipleName>
+          {name}
+          {isAdded && (
+            <Text
+              weight="600"
+              style={{ marginLeft: 8 }}
+              as="span"
+              color="success"
+            >
+              (added)
+            </Text>
+          )}
+        </PrincipleName>
+      </PrincipleHeader>
+      <PrincipleDescription>{description}</PrincipleDescription>
+      <Text color="shy">
+        From "{source.name}" by {source.author}
+      </Text>
+    </PrincipleItemContainer>
+  )
+
+  if (isAdded) {
+    return <>{content}</>
+  }
+
   return (
     <Opener
       renderOpener={({ onOpen }) => (
@@ -55,24 +98,7 @@ export const PrincipleIdeaItem = ({
           }}
           verticalOffset={0}
         >
-          <PrincipleItemContainer>
-            <PrincipleHeader
-              prefix={
-                <Text color="contrast">
-                  {
-                    shouldBePresent(
-                      defaultPrincipleCategories.find(
-                        (principle) => principle.id === value.categoryId,
-                      ),
-                    ).emoji
-                  }
-                </Text>
-              }
-            >
-              <PrincipleName>{name}</PrincipleName>
-            </PrincipleHeader>
-            <PrincipleDescription>{fullDescription}</PrincipleDescription>
-          </PrincipleItemContainer>
+          {content}
         </Container>
       )}
       renderContent={({ onClose }) => (

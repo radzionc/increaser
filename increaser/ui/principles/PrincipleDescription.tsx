@@ -6,4 +6,5 @@ export const PrincipleDescription = styled(Text)`
   font-size: 14px;
   color: ${getColor('textSupporting')};
   white-space: pre-line;
+  line-height: 1.5;
 `
