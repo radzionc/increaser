@@ -38,7 +38,7 @@ const workIdeas: PrincipleIdea[] = [
       'Define clear, achievable goals to provide direction and motivation. Break down larger goals into smaller, manageable tasks.',
     source: {
       type: 'book',
-      name: 'The 4 Disciplines of Execution: Achieving Your Wildly Important Goals',
+      name: 'The 4 Disciplines of Execution',
       author: 'Chris McChesney, Sean Covey, Jim Huling',
     },
   },
@@ -49,7 +49,7 @@ const workIdeas: PrincipleIdea[] = [
       'Always seek to improve your skills and processes. Small, incremental improvements can lead to significant gains over time.',
     source: {
       type: 'book',
-      name: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones',
+      name: 'Atomic Habits',
       author: 'James Clear',
     },
   },
@@ -162,7 +162,7 @@ const marriageIdeas: PrincipleIdea[] = [
       'Clear and open communication is crucial for resolving conflicts and building trust in marriage. Practice honesty and clarity in your interactions.',
     source: {
       type: 'book',
-      name: 'Crucial Conversations: Tools for Talking When Stakes Are High',
+      name: 'Crucial Conversations',
       author: 'Kerry Patterson, Joseph Grenny, Ron McMillan, and Al Switzler',
     },
     categoryId: 'marriage',
@@ -174,7 +174,7 @@ const marriageIdeas: PrincipleIdea[] = [
       'Prioritize spending quality time with your spouse to strengthen your connection and create lasting memories.',
     source: {
       type: 'book',
-      name: 'The 5 Love Languages: The Secret to Love that Lasts',
+      name: 'The 5 Love Languages',
       author: 'Gary Chapman',
     },
   },
@@ -185,7 +185,7 @@ const marriageIdeas: PrincipleIdea[] = [
       'Empathy involves understanding and sharing the feelings of your spouse. Practicing empathy can enhance your marriage by making your partner feel valued and understood.',
     source: {
       type: 'book',
-      name: 'Empathy: Why It Matters, and How to Get It',
+      name: 'Empathy',
       author: 'Roman Krznaric',
     },
   },
@@ -196,7 +196,7 @@ const marriageIdeas: PrincipleIdea[] = [
       'Trust is the foundation of any strong marriage. Build trust through consistency, honesty, and reliability in your actions and words.',
     source: {
       type: 'book',
-      name: 'The Speed of Trust: The One Thing that Changes Everything',
+      name: 'The Speed of Trust',
       author: 'Stephen M.R. Covey',
     },
   },
@@ -207,7 +207,7 @@ const marriageIdeas: PrincipleIdea[] = [
       'Approach conflicts with a calm and open mindset, seeking to understand your spouse’s perspective and finding mutually beneficial solutions.',
     source: {
       type: 'book',
-      name: 'Nonviolent Communication: A Language of Life',
+      name: 'Nonviolent Communication',
       author: 'Marshall B. Rosenberg',
     },
   },
@@ -229,7 +229,7 @@ const marriageIdeas: PrincipleIdea[] = [
       'Healthy marriages require clear boundaries. Communicate your limits and respect the boundaries set by your spouse to maintain mutual respect.',
     source: {
       type: 'book',
-      name: 'Boundaries: When to Say Yes, How to Say No to Take Control of Your Life',
+      name: 'Boundaries',
       author: 'Henry Cloud and John Townsend',
     },
   },
@@ -254,7 +254,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Incorporate regular physical activity into your routine to maintain physical health, boost mood, and improve overall well-being.',
     source: {
       type: 'book',
-      name: 'Spark: The Revolutionary New Science of Exercise and the Brain',
+      name: 'Spark',
       author: 'John J. Ratey',
     },
   },
@@ -265,7 +265,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins to fuel your body and support overall health.',
     source: {
       type: 'book',
-      name: "In Defense of Food: An Eater's Manifesto",
+      name: 'In Defense of Food',
       author: 'Michael Pollan',
     },
   },
@@ -276,7 +276,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Ensure you get 7-9 hours of quality sleep each night to support cognitive function, emotional well-being, and physical health.',
     source: {
       type: 'book',
-      name: 'Why We Sleep: Unlocking the Power of Sleep and Dreams',
+      name: 'Why We Sleep',
       author: 'Matthew Walker',
     },
   },
@@ -309,7 +309,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Visit your healthcare provider for regular check-ups and screenings to monitor your health and catch potential issues early.',
     source: {
       type: 'book',
-      name: 'The Checklist Manifesto: How to Get Things Right',
+      name: 'The Checklist Manifesto',
       author: 'Atul Gawande',
     },
   },
@@ -320,7 +320,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Take care of your mental health by seeking therapy if needed, practicing self-care, and maintaining a positive outlook.',
     source: {
       type: 'book',
-      name: 'The Happiness Advantage: How a Positive Brain Fuels Success in Work and Life',
+      name: 'The Happiness Advantage',
       author: 'Shawn Achor',
     },
   },
@@ -331,7 +331,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Cultivate habits that promote health, such as not smoking, limiting alcohol intake, and avoiding excessive consumption of processed foods.',
     source: {
       type: 'book',
-      name: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones',
+      name: 'Atomic Habits',
       author: 'James Clear',
     },
   },
@@ -342,7 +342,7 @@ const healthIdeas: PrincipleIdea[] = [
       'Nurture your social relationships to improve mental health, reduce stress, and increase longevity.',
     source: {
       type: 'book',
-      name: 'Social: Why Our Brains Are Wired to Connect',
+      name: 'Social',
       author: 'Matthew D. Lieberman',
     },
   },
@@ -480,7 +480,7 @@ const mindsetIdeas: PrincipleIdea[] = [
       'Embrace challenges and view failures as opportunities to learn and grow.',
     source: {
       type: 'book',
-      name: 'Mindset: The New Psychology of Success',
+      name: 'Mindset',
       author: 'Carol S. Dweck',
     },
   },
@@ -535,7 +535,7 @@ const mindsetIdeas: PrincipleIdea[] = [
       'Treat yourself with kindness and understanding, especially during difficult times, to maintain a healthy mindset.',
     source: {
       type: 'book',
-      name: 'Self-Compassion: The Proven Power of Being Kind to Yourself',
+      name: 'Self-Compassion',
       author: 'Kristin Neff',
     },
   },
@@ -568,7 +568,7 @@ const mindsetIdeas: PrincipleIdea[] = [
       'Define specific, measurable goals to provide direction and maintain focus on your personal and professional growth.',
     source: {
       type: 'book',
-      name: 'Goals!: How to Get Everything You Want -- Faster Than You Ever Thought Possible',
+      name: 'Goals!',
       author: 'Brian Tracy',
     },
   },
@@ -579,7 +579,7 @@ const mindsetIdeas: PrincipleIdea[] = [
       'View failures as valuable learning experiences that provide insights and opportunities for growth.',
     source: {
       type: 'book',
-      name: 'Failing Forward: Turning Mistakes into Stepping Stones for Success',
+      name: 'Failing Forward',
       author: 'John C. Maxwell',
     },
   },
