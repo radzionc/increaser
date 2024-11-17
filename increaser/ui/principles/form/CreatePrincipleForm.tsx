@@ -1,5 +1,8 @@
 import { useCallback, useState } from 'react'
-import { OptionalValueFinishProps } from '@lib/ui/props'
+import {
+  ComponentWithInitialValueProps,
+  OptionalValueFinishProps,
+} from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
@@ -10,13 +13,21 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { PrincipleFormFields } from './PrincipleFormFields'
 import { Principle } from '@increaser/entities/Principle'
 
+type CreatePrincipleFormProps = OptionalValueFinishProps<Principle> &
+  Partial<ComponentWithInitialValueProps<Partial<PrincipleFormShape>>> & {
+    submitText?: string
+  }
+
 export const CreatePrincipleForm = ({
   onFinish,
-}: OptionalValueFinishProps<Principle>) => {
+  initialValue,
+  submitText,
+}: CreatePrincipleFormProps) => {
   const [value, setValue] = useState<PrincipleFormShape>({
     name: '',
     description: '',
     categoryId: otherProjectId,
+    ...initialValue,
   })
   const { mutate } = useCreateUserEntityMutation('principle', {
     onOptimisticUpdate: onFinish,
@@ -45,9 +56,13 @@ export const CreatePrincipleForm = ({
         onChange={setValue}
         onSubmit={onSubmit}
         onClose={onFinish}
-        categorySelectorAutoFocus
+        categorySelectorAutoFocus={!initialValue?.categoryId}
       />
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <CreateFormFooter
+        submitText={submitText}
+        onCancel={onFinish}
+        isDisabled={isDisabled}
+      />
     </ListItemForm>
   )
 }

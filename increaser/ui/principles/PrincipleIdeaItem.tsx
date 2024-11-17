@@ -2,80 +2,88 @@ import { PrincipleIdea } from '@increaser/entities-utils/principle/principleIdea
 import { ComponentWithValueProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { defaultPrincipleCategories } from '@increaser/entities/PrincipleCategory'
-import { findBy } from '@lib/utils/array/findBy'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { HStack, VStack } from '@lib/ui/css/stack'
-import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { Text } from '@lib/ui/text'
-import { getColor } from '@lib/ui/theme/getters'
-import { borderRadius } from '@lib/ui/css/borderRadius'
-import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
-import { AddPrincipleIdea } from './AddPrincipleIdea'
-import { GoalSection } from '../goals/GoalSection'
-import { BookIcon } from '@lib/ui/icons/BookIcon'
+import { Hoverable } from '@lib/ui/base/Hoverable'
+import { Opener } from '@lib/ui/base/Opener'
+import { CreatePrincipleForm } from './form/CreatePrincipleForm'
+import { PanelModal } from '@lib/ui/modal/PanelModal'
+import { PrincipleItemContainer } from './PrincipleItemContainer'
+import { PrincipleHeader } from './PrincipleHeader'
+import { PrincipleName } from './PrincipleName'
+import { PrincipleDescription } from './PrincipleDescription'
+import { useUser } from '../user/state/user'
+import { useMemo } from 'react'
+import { PrincipleFormShape } from './form/PrincipleFormShape'
 
-const Content = styled(VStack)`
-  ${verticalPadding(tightListItemConfig.verticalPadding)};
-  gap: 8px;
-`
-
-const Header = styled(HStack)`
-  gap: 8px;
+const Container = styled(Hoverable)`
+  text-align: start;
   width: 100%;
-  justify-content: space-between;
-`
-
-const Tag = styled(HStack)`
-  align-items: center;
-  padding: 4px 8px;
-  border: 1px solid ${getColor('mistExtra')};
-  ${borderRadius.s};
-  font-size: 14px;
-  align-self: start;
-  color: ${getColor('contrast')};
 `
 
 export const PrincipleIdeaItem = ({
   value,
 }: ComponentWithValueProps<PrincipleIdea>) => {
-  const { description, name, categoryId, source } = value
+  const { description, name, source, categoryId } = value
 
-  const category = shouldBePresent(
-    findBy(defaultPrincipleCategories, 'id', categoryId),
-  )
+  const fullDescription = [
+    description,
+    `From "${source.name}" by ${source.author}`,
+  ].join('\n\n')
+
+  const { principleCategories } = useUser()
+
+  const initialValue = useMemo(() => {
+    const result: Partial<PrincipleFormShape> = {
+      name,
+      description,
+    }
+
+    if (categoryId in principleCategories) {
+      result.categoryId = categoryId
+    }
+
+    return result
+  }, [categoryId, description, name, principleCategories])
 
   return (
-    <Content>
-      <Header>
-        <HStack
-          alignItems="center"
-          fullWidth
-          justifyContent="space-between"
-          gap={8}
+    <Opener
+      renderOpener={({ onOpen }) => (
+        <Container
+          onClick={() => {
+            onOpen()
+          }}
+          verticalOffset={0}
         >
-          <HStack wrap="wrap" alignItems="center" gap={8}>
-            <Text color="contrast" weight="500">
-              {name}
-            </Text>
-            <Tag>
-              <EmojiTextPrefix emoji={category.emoji} />
-              {category.name.toLowerCase()}
-            </Tag>
-          </HStack>
-          <AddPrincipleIdea value={value} />
-        </HStack>
-      </Header>
-      <GoalSection icon={<BookIcon />}>
-        <Text size={14} color="supporting">
-          "{source.name}" by {source.author}
-        </Text>
-      </GoalSection>
-      {description && (
-        <Text size={14} color="regular" weight="500">
-          {description}
-        </Text>
+          <PrincipleItemContainer>
+            <PrincipleHeader
+              prefix={
+                <Text color="contrast">
+                  {
+                    shouldBePresent(
+                      defaultPrincipleCategories.find(
+                        (principle) => principle.id === value.categoryId,
+                      ),
+                    ).emoji
+                  }
+                </Text>
+              }
+            >
+              <PrincipleName>{name}</PrincipleName>
+            </PrincipleHeader>
+            <PrincipleDescription>{fullDescription}</PrincipleDescription>
+          </PrincipleItemContainer>
+        </Container>
       )}
-    </Content>
+      renderContent={({ onClose }) => (
+        <PanelModal onFinish={onClose}>
+          <CreatePrincipleForm
+            submitText="Add to my principles"
+            initialValue={initialValue}
+            onFinish={onClose}
+          />
+        </PanelModal>
+      )}
+    />
   )
 }
