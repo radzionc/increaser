@@ -5,6 +5,7 @@ export const infoYouTubeVideos = {
   habits: 'https://youtu.be/JFCP1CWhlzA',
   goals: 'https://youtu.be/zCrUr0SgzwQ',
   workPreferences: 'https://youtu.be/jU49KQG9XPQ',
+  principles: 'https://youtu.be/ukTAEMrVJxA',
 } as const
 
 export type InfoYouTubeVideo = keyof typeof infoYouTubeVideos

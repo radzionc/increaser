@@ -19,6 +19,7 @@ const socialPrompt: Record<ProductUpdateSocial, string[]> = {
   ],
   youtube: [
     'A video title and description.',
+    'The title should work for people who don`t know about the product.',
     'Include Increaser website url in the description.',
   ],
 }

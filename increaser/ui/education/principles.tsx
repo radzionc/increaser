@@ -1,7 +1,9 @@
+import { infoYouTubeVideos } from '@increaser/info/infoYouTubeVideos'
 import { ProductToolEducation } from './ProductToolEducation'
 
 export const principlesEducation: ProductToolEducation = {
   title: 'Building Your Guiding Principles for a Fulfilling Life',
+  youTubeVideoUrl: infoYouTubeVideos.principles,
   subtitle: `Turn your life experiences into guiding wisdom with the 'Principles' feature. This tool enables you to document lessons learned from mistakes and successes, organize them into categories, and explore suggested principles to enhance personal growth and decision-making. Start building a foundation of core beliefs that will help navigate your journey toward a fulfilling life.`,
   content: (
     <>
