@@ -4,11 +4,11 @@ import {
 } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { getDemoSliceCopy } from './getDemoSliceCopy'
-import { MyVisionBoard } from '@increaser/ui/vision/MyVisionBoard'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import styled from 'styled-components'
 import { DemoGuard } from '../../demo/DemoGuard'
+import { VisionDemo } from './VisionDemo'
 
 const Slice = styled(WebsiteSlice)`
   ${centeredContentColumn({
@@ -23,7 +23,7 @@ export const VisionSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
       <WebsiteSliceContent>
         <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
         <DemoGuard>
-          <MyVisionBoard />
+          <VisionDemo />
         </DemoGuard>
       </WebsiteSliceContent>
     </Slice>
