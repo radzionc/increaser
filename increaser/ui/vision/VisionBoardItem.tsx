@@ -9,15 +9,28 @@ import { VisionBoardItemHeader } from './VisionBoardItemHeader'
 import { interactive } from '@lib/ui/css/interactive'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { TextOnlyVisionItemContainer } from './TextOnlyVisionItemContainer'
+import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
+
+const Image = styled.img`
+  object-fit: cover;
+`
 
 const Container = styled(VStack)`
   overflow: hidden;
   ${borderRadius.m};
   ${interactive};
-`
 
-const Image = styled.img`
-  object-fit: cover;
+  position: relative;
+
+  &:hover {
+    ${VisionBoardItemHeader} {
+      opacity: 1;
+    }
+
+    ${Image} {
+      opacity: 0.8;
+    }
+  }
 `
 
 export const VisionBoardItem = () => {
@@ -39,8 +52,11 @@ export const VisionBoardItem = () => {
       src={getPublicFileUrl(shouldBePresent(imageId))}
       render={(props) => (
         <Container onClick={() => setActiveItemId(id)}>
-          <VisionBoardItemHeader>{name}</VisionBoardItemHeader>
           <Image {...props} />
+          <VisionBoardItemHeader>
+            <EmojiTextPrefix emoji={emoji} />
+            {name}
+          </VisionBoardItemHeader>
         </Container>
       )}
     />

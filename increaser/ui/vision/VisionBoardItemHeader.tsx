@@ -1,4 +1,5 @@
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
@@ -12,6 +13,13 @@ export const VisionBoardItemHeader = styled.div`
   border: 1px solid ${getColor('mist')};
   background: ${getColor('foreground')};
 
-  font-size: 14px;
-  font-weight: 500;
+  ${text({
+    color: 'contrast',
+  })}
+
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
 `
