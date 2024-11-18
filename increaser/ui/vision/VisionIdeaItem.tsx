@@ -2,36 +2,35 @@ import {
   ComponentWithActiveState,
   ComponentWithValueProps,
 } from '@lib/ui/props'
-import { VStack } from '@lib/ui/css/stack'
+import { HStack, VStack } from '@lib/ui/css/stack'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
-import { round } from '@lib/ui/css/round'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { IconWrapper } from '@lib/ui/icons/IconWrapper'
-import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { getPublicFileUrl } from '@increaser/ui/storage/getPublicFileUrl'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { useUser } from '@increaser/ui/user/state/user'
-import { CheckIcon } from '@lib/ui/icons/CheckIcon'
 import { interactive } from '@lib/ui/css/interactive'
 import { VisionAttributeIdea } from '@increaser/entities/Vision'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
-import { transition } from '@lib/ui/css/transition'
 import { VisionBoardItemHeader } from '@increaser/ui/vision/VisionBoardItemHeader'
-import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDeleteUserEntityMutation'
+import { text, Text } from '@lib/ui/text'
+import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 
-const Indicator = styled.div`
-  ${round};
-  ${sameDimensions(24)};
+const Indicator = styled.div<ComponentWithActiveState>`
   ${centerContent};
-  color: ${getColor('textSupporting')};
   background: ${getColor('mist')};
-  ${transition};
+  ${borderRadius.m};
+  ${horizontalPadding(8)};
+  ${({ isActive }) =>
+    text({
+      nowrap: true,
+      color: isActive ? 'alert' : 'success',
+    })}
+  min-height: 32px;
+  ${centerContent};
 `
 
 const Container = styled(VStack)<ComponentWithActiveState>`
@@ -46,14 +45,9 @@ const Container = styled(VStack)<ComponentWithActiveState>`
           color: ${getColor('contrast')};
 
           border-color: ${getColor('contrast')};
-
-          ${Indicator} {
-            color: ${getColor('success')};
-          }
         `
       : css`
           img {
-            ${transition};
             filter: grayscale(100%);
           }
           background: ${getColor('foreground')};
@@ -68,15 +62,13 @@ const Container = styled(VStack)<ComponentWithActiveState>`
             border-color: ${getColor('mistExtra')};
             color: ${getColor('contrast')};
           }
-
-          &:hover ${Indicator} {
-            color: ${getColor('success')};
-          }
         `}
-`
 
-const Content = styled(PrefixedItemFrame)`
-  ${verticalPadding(0)};
+  &:hover {
+    ${VisionBoardItemHeader} {
+      opacity: 1;
+    }
+  }
 `
 
 const Image = styled.img`
@@ -119,17 +111,10 @@ export const VisionIdeaItem = ({
       }}
     >
       <VisionBoardItemHeader>
-        <Content
-          prefix={
-            <Indicator>
-              <IconWrapper>
-                {isAdded ? <CheckIcon /> : <PlusIcon />}
-              </IconWrapper>
-            </Indicator>
-          }
-        >
-          {name}
-        </Content>
+        <HStack fullWidth alignItems="center" justifyContent="space-between">
+          <Text color="contrast">{name}</Text>
+          <Indicator isActive={isAdded}>{isAdded ? 'Remove' : 'Add'}</Indicator>
+        </HStack>
       </VisionBoardItemHeader>
       <SafeImage
         src={getPublicFileUrl(imageId)}
