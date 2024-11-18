@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { VisionBoardItemHeader } from './VisionBoardItemHeader'
 import { interactive } from '@lib/ui/css/interactive'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
+import { TextOnlyVisionItemContainer } from './TextOnlyVisionItemContainer'
 
 const Container = styled(VStack)`
   overflow: hidden;
@@ -20,9 +21,17 @@ const Image = styled.img`
 `
 
 export const VisionBoardItem = () => {
-  const { imageId, name, id } = useCurrentVisionAttribute()
+  const { imageId, name, id, emoji } = useCurrentVisionAttribute()
 
   const [, setActiveItemId] = useActiveItemId()
+
+  if (!imageId) {
+    return (
+      <TextOnlyVisionItemContainer onClick={() => setActiveItemId(id)}>
+        {emoji} {name}
+      </TextOnlyVisionItemContainer>
+    )
+  }
 
   return (
     <SafeImage

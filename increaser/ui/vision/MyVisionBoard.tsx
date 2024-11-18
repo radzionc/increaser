@@ -8,11 +8,7 @@ import { ActiveVisionItem } from './ActiveVisionItem'
 
 export const MyVisionBoard = () => {
   const { vision } = useUser()
-  const items = order(
-    Object.values(vision).filter((item) => item.imageId),
-    (item) => item.order,
-    'asc',
-  )
+  const items = order(Object.values(vision), (item) => item.order, 'asc')
 
   return (
     <ActiveItemIdProvider initialValue={null}>
