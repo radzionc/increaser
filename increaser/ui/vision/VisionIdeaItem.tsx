@@ -38,6 +38,7 @@ const Container = styled(VStack)<ComponentWithActiveState>`
   overflow: hidden;
   ${borderRadius.m};
   ${interactive};
+  position: relative;
 
   ${({ isActive }) =>
     isActive
