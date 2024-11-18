@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useCurrentVisionAttribute } from '../CurrentVisionAttributeProvider'
-import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
@@ -11,8 +10,9 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { Panel } from '@lib/ui/css/panel'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
+import { NoValueFinishProps } from '@lib/ui/props'
 
-export const EditVisionAttributeForm = () => {
+export const EditVisionAttributeForm = ({ onFinish }: NoValueFinishProps) => {
   const visionAttribute = useCurrentVisionAttribute()
   const { id } = visionAttribute
   const initialValue = useMemo(
@@ -28,12 +28,6 @@ export const EditVisionAttributeForm = () => {
     useUpdateUserEntityMutation('visionAttribute')
   const { mutate: deleteVisionAttribute } =
     useDeleteUserEntityMutation('visionAttribute')
-
-  const [, setActiveItemId] = useActiveItemId()
-
-  const onFinish = useCallback(() => {
-    setActiveItemId(null)
-  }, [setActiveItemId])
 
   useLazySync<Partial<VisionAttributeFormShape>>({
     value: useMemo(

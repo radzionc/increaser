@@ -6,10 +6,13 @@ import { VStack } from '@lib/ui/css/stack'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import styled from 'styled-components'
 import { VisionBoardItemHeader } from './VisionBoardItemHeader'
+import { interactive } from '@lib/ui/css/interactive'
+import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 
 const Container = styled(VStack)`
   overflow: hidden;
   ${borderRadius.m};
+  ${interactive};
 `
 
 const Image = styled.img`
@@ -17,14 +20,16 @@ const Image = styled.img`
 `
 
 export const VisionBoardItem = () => {
-  const { imageId, name } = useCurrentVisionAttribute()
+  const { imageId, name, id } = useCurrentVisionAttribute()
+
+  const [, setActiveItemId] = useActiveItemId()
 
   return (
     <SafeImage
       key={imageId}
       src={getPublicFileUrl(shouldBePresent(imageId))}
       render={(props) => (
-        <Container>
+        <Container onClick={() => setActiveItemId(id)}>
           <VisionBoardItemHeader>{name}</VisionBoardItemHeader>
           <Image {...props} />
         </Container>

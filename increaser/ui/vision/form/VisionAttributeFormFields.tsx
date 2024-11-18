@@ -1,15 +1,59 @@
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
-import { EmojiTextInputFrame } from '../../form/EmojiTextInputFrame'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import { ClosableComponentProps, InputProps } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { VisionImageInput } from './VisionImageInput'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
+import { VStack, HStack } from '@lib/ui/css/stack'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
+import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
+import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
+import { getColor } from '@lib/ui/theme/getters'
+import styled from 'styled-components'
+import { panelFormConfig } from '../../form/panel/config'
 
 type VisionAttributeFormFieldsProps = InputProps<VisionAttributeFormShape> & {
   onSubmit?: () => void
 } & ClosableComponentProps
+
+const HeaderWrapper = styled(VStack)`
+  padding: 0;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+
+  > * {
+    flex-shrink: 0;
+  }
+`
+
+const Header = styled(HStack)`
+  padding: 0;
+  width: 100%;
+`
+
+const EmojiInputContainer = styled.div`
+  padding-left: ${toSizeUnit(tightListItemConfig.horizontalOffset)};
+  padding-top: ${toSizeUnit(tightListItemConfig.horizontalOffset)};
+`
+
+const TitleInput = styled(EmbeddedTitleInput)`
+  background: ${getColor('background')};
+
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-left: ${toSizeUnit(panelDefaultPadding / 2)};
+  min-height: 100%;
+  padding-bottom: ${toSizeUnit(tightListItemConfig.horizontalOffset)};
+`
+
+const DescriptionInput = styled(MultilineTextInput)`
+  background: ${getColor('background')};
+  padding: ${toSizeUnit(panelDefaultPadding)};
+  padding-top: ${toSizeUnit(panelDefaultPadding / 2)};
+  min-height: ${toSizeUnit(panelFormConfig.sectionMinHeight)};
+  line-height: 1.5;
+`
 
 export const VisionAttributeFormFields = ({
   value,
@@ -19,30 +63,29 @@ export const VisionAttributeFormFields = ({
 }: VisionAttributeFormFieldsProps) => {
   return (
     <>
-      <EmojiTextInputFrame>
-        <div>
-          <EmojiInput
-            value={value.emoji}
-            onChange={(emoji) => onChange({ ...value, emoji })}
+      <HeaderWrapper>
+        <Header>
+          <EmojiInputContainer>
+            <EmojiInput
+              value={value.emoji}
+              onChange={(emoji) => onChange({ ...value, emoji })}
+            />
+          </EmojiInputContainer>
+          <TitleInput
+            placeholder="What is your aspiration?"
+            autoFocus
+            onChange={(name) => onChange({ ...value, name })}
+            value={value.name}
+            onSubmit={onSubmit}
           />
-        </div>
-        <EmbeddedTitleInput
-          autoFocus
-          placeholder="What is your aspiration?"
-          onChange={(name) => onChange({ ...value, name })}
-          value={value.name}
-          onSubmit={onSubmit}
+          <PanelFormCloseButton onClick={onClose} />
+        </Header>
+        <DescriptionInput
+          placeholder="Add a description..."
+          onChange={(description) => onChange({ ...value, description })}
+          value={value.description ?? ''}
         />
-        <PanelFormCloseButton onClick={onClose} />
-      </EmojiTextInputFrame>
-      <EmbeddedDescriptionInput
-        label="Description"
-        placeholder="Make your aspiration more specific"
-        onChange={(description) =>
-          onChange({ ...value, description: description || null })
-        }
-        value={value.description ?? ''}
-      />
+      </HeaderWrapper>
       <VisionImageInput
         onChange={(imageId) => onChange({ ...value, imageId })}
         value={value.imageId ?? null}
