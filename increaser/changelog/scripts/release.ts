@@ -30,7 +30,7 @@ const generate = () => {
   const productUpdatesStr = readProductUpdatesFile()
 
   const newProductUpdatesStr = productUpdatesStr.replace(
-    /releasedAt:\s*\d+/,
+    /releasedAt:\s*(\d+|undefined)/,
     `releasedAt: ${releasedAt}`,
   )
 

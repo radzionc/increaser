@@ -2,7 +2,7 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
-    releasedAt: undefined,
+    releasedAt: 1731993006066,
     name: 'Customize Your Schedule and Enhanced Project Tracking',
     description:
       "We've introduced new features that let you tailor your work schedule and improve project tracking for a more streamlined experience.",
