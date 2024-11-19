@@ -57,7 +57,9 @@ export const PrincipleIdeaItem = ({
             onOpen()
           }}
           verticalOffset={0}
-        ></Container>
+        >
+          {content}
+        </Container>
       )}
       renderContent={({ onClose }) => (
         <PanelModal onFinish={onClose}>

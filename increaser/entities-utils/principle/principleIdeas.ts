@@ -76,17 +76,6 @@ export const workIdeas: PrincipleIdea[] = [
     },
   },
   {
-    id: 'growthMindset',
-    name: 'Cultivate a growth mindset',
-    description:
-      'Adopt a growth mindset by viewing challenges as opportunities for growth. Embrace failures as learning experiences.',
-    source: {
-      type: 'book',
-      name: 'Mindset: The New Psychology of Success',
-      author: 'Carol S. Dweck',
-    },
-  },
-  {
     id: 'delegateCollaborate',
     name: 'Delegate and collaborate',
     description:
