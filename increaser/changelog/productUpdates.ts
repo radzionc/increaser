@@ -37,11 +37,14 @@ export const productUpdates: ProductUpdate[] = [
       },
     ],
     youtube: 'https://youtu.be/8D9Y6ydxr-w',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    telegram: 'https://t.me/increaser_app/67',
+    x: 'https://x.com/increaser_app/status/1858738742162239818',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7264503800286064640',
+    indieHackers:
+      'https://www.indiehackers.com/post/new-increaser-features-custom-weekends-real-time-project-tracking-p15416rglkREjnXC5UM6',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1gupmtm/increaser_updates_customize_weekends_realtime/',
   },
 
   {
