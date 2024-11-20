@@ -1,6 +1,7 @@
 Users can add a new category while creating a new principle.
 Users can add or link existing principles to their goals.
 Users can now filter principle ideas by category.
+Users can add or link existing vision to their goals.
 1731992874818
 Users can now customize their weekend days or remove them if they work the same amount daily.
 Added a real-time updated project budget widget to the focus session page for continuous tracking during work sessions.
