@@ -1,4 +1,6 @@
-export const infoYouTubeVideos = {
+import { ProductTool } from '@increaser/entities/ProductTool'
+
+export const infoYouTubeVideos: Record<ProductTool, string> = {
   focus: 'https://youtu.be/qvIAf7kvpFk',
   trackTime: 'https://youtu.be/5fn7Iv5u-Qo',
   tasks: 'https://youtu.be/OjZrCqyfM48',

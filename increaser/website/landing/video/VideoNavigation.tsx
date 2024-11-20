@@ -7,6 +7,7 @@ import { ProductToolOption } from '../../navigation/features/ProductToolOption'
 import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import styled, { css } from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
+import { productTools } from '@increaser/entities/ProductTool'
 
 const Option = styled(ProductToolOption)<ComponentWithActiveState>`
   border: 2px solid transparent;
@@ -24,7 +25,7 @@ export const VideoNavigation = ({
 }: InputProps<InfoYouTubeVideo>) => {
   return (
     <>
-      {getRecordKeys(infoYouTubeVideos).map((option) => (
+      {productTools.map((option) => (
         <Option
           isActive={option === value}
           onClick={() => {

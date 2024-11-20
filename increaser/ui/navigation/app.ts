@@ -1,4 +1,5 @@
 import { scoreboardPeriodInDays } from '@increaser/entities/PerformanceScoreboard'
+import { productTools } from '@increaser/entities/ProductTool'
 
 export const primaryAppNavigationPages = [
   'focus',
@@ -109,15 +110,7 @@ export const appPageViews = {
   principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'ideas', 'upcoming', 'automation', 'templates'],
   roadmap: ['ideas', 'done'],
-  info: [
-    'focus',
-    'track',
-    'tasks',
-    'habits',
-    'goals',
-    'preferences',
-    'principles',
-  ],
+  info: productTools,
   timesheet: ['day', 'week', 'month', 'year'],
 } as const
 
@@ -181,12 +174,13 @@ export const appPageViewName: {
   },
   info: {
     focus: 'Focus',
-    track: 'Track Time',
-    tasks: 'Manage Tasks',
-    habits: 'Build Habits',
-    goals: 'Achieve Goals',
-    preferences: 'Preferences',
+    trackTime: 'Time Tracking',
+    tasks: 'Tasks',
+    habits: 'Habits',
+    goals: 'Goals',
+    workPreferences: 'Preferences',
     principles: 'Principles',
+    vision: 'Vision',
   },
   timesheet: {
     day: 'Days',
