@@ -16,7 +16,7 @@ import { CurrentPrincipleProvider } from '../principles/CurrentPrincipleProvider
 import { GoalPrincipleItem } from './form/GoalPrincipleItem'
 import { goalLinkedEntityTitle } from './form/linkedEntity/GoalLinkedEntity'
 import { CurrentVisionAttributeProvider } from '../vision/CurrentVisionAttributeProvider'
-import { GoalVisionItem } from './form/GoalVisionItem'
+import { VisionBoardItem } from '../vision/VisionBoardItem'
 
 const Header = styled.p`
   ${text({
@@ -32,6 +32,18 @@ const Header = styled.p`
 
 export const LinkedEntitiesContainer = styled(FieldArrayContainer)`
   gap: 4px;
+`
+
+export const VisionContainer = styled.div`
+  column-gap: 8px;
+  column-width: 240px;
+  width: 100%;
+
+  margin-top: 4px;
+
+  > * {
+    margin-bottom: 8px;
+  }
 `
 
 export const GoalItemContent = () => {
@@ -60,18 +72,18 @@ export const GoalItemContent = () => {
         value={vision}
         render={(items) => (
           <LinkedEntitiesContainer title={goalLinkedEntityTitle.vision}>
-            <VStack>
+            <VisionContainer>
               {items.map((id) => {
                 const value = visionRecord[id]
                 if (!value) return null
 
                 return (
                   <CurrentVisionAttributeProvider key={id} value={value}>
-                    <GoalVisionItem />
+                    <VisionBoardItem />
                   </CurrentVisionAttributeProvider>
                 )
               })}
-            </VStack>
+            </VisionContainer>
           </LinkedEntitiesContainer>
         )}
       />
