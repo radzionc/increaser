@@ -6,6 +6,7 @@ export const infoYouTubeVideos = {
   goals: 'https://youtu.be/zCrUr0SgzwQ',
   workPreferences: 'https://youtu.be/jU49KQG9XPQ',
   principles: 'https://youtu.be/ukTAEMrVJxA',
+  vision: 'https://youtu.be/6eWq5k2Ob0Y',
 } as const
 
 export type InfoYouTubeVideo = keyof typeof infoYouTubeVideos
