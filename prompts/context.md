@@ -22,9 +22,9 @@ Increaser offers a 14-day free trial, with a monthly subscription of $5.99 and a
 
 The Vision tool allows users to define what their perfect life looks like. It consists of a list of "vision attributes," each serving as a description of a perfect life.
 
-The vision page in the app has three Subpages: "Vision", "Board", and "Explore".
+The vision page in the app has two Subpages: "Board", and "Explore".
 
-On the "Vision" subpage, users can see all vision attributes in a list, create new attributes, and edit or delete existing ones.
+On the "Board" subpage, users can see all vision attributes displayed as a gallery of images. By hovering over an image, users can see the attribute's name and emoji. Users can click on an image to view the full description of the vision attribute, edit it, or delete it.
 
 A vision attribute has:
 
@@ -32,8 +32,6 @@ A vision attribute has:
 - An image: uploaded by the user
 - An emoji: to represent the attribute
 - A description: e.g., "I have a loving partner who supports me in everything I do."
-
-The "Board" subpage displays all vision attributes as a gallery of images.
 
 The "Explore" subpage contains a list of suggested vision attributes to give users ideas for their vision board and help them define their perfect life. The user can add a suggested vision attribute to their vision board.
 
