@@ -12,6 +12,7 @@ import { AddLinkedEntity } from './linkedEntity/AddLinkedEntity'
 import { LinkEntity } from './linkedEntity/LinkEntity'
 import { LinkedEntityActionsContainer } from './linkedEntity/LinkedEntityActionsContainer'
 import { CreateHabitForm } from '../../habits/form/CreateHabitForm'
+import { goalLinkedEntityTitle } from './linkedEntity/GoalLinkedEntity'
 
 export const GoalHabitsInput = ({ value, onChange }: InputProps<string[]>) => {
   const habits = useHabits()
@@ -21,7 +22,7 @@ export const GoalHabitsInput = ({ value, onChange }: InputProps<string[]>) => {
   )
 
   return (
-    <LinkedEntitiesContainer title="Daily habits">
+    <LinkedEntitiesContainer title={goalLinkedEntityTitle.habit}>
       <VStack>
         {value.length > 0 && (
           <ActiveItemIdProvider initialValue={null}>

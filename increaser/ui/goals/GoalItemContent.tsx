@@ -14,6 +14,9 @@ import { CurrentHabitProvider } from '../habits/CurrentHabitProvider'
 import { HabitItemContent } from '../habits/components/manage/HabitItemContent'
 import { CurrentPrincipleProvider } from '../principles/CurrentPrincipleProvider'
 import { GoalPrincipleItem } from './form/GoalPrincipleItem'
+import { goalLinkedEntityTitle } from './form/linkedEntity/GoalLinkedEntity'
+import { CurrentVisionAttributeProvider } from '../vision/CurrentVisionAttributeProvider'
+import { GoalVisionItem } from './form/GoalVisionItem'
 
 const Header = styled.p`
   ${text({
@@ -32,13 +35,14 @@ export const LinkedEntitiesContainer = styled(FieldArrayContainer)`
 `
 
 export const GoalItemContent = () => {
-  const { name, emoji, plan, taskFactories, habits, principles } =
+  const { name, emoji, plan, taskFactories, habits, principles, vision } =
     useCurrentGoal()
 
   const {
     taskFactories: taskFactoryRecord,
     habits: habitRecord,
     principles: principlesRecord,
+    vision: visionRecord,
   } = useUser()
 
   return (
@@ -53,9 +57,28 @@ export const GoalItemContent = () => {
         <GoalDeadline />
       </VStack>
       <NonEmptyOnly
+        value={vision}
+        render={(items) => (
+          <LinkedEntitiesContainer title={goalLinkedEntityTitle.vision}>
+            <VStack>
+              {items.map((id) => {
+                const value = visionRecord[id]
+                if (!value) return null
+
+                return (
+                  <CurrentVisionAttributeProvider key={id} value={value}>
+                    <GoalVisionItem />
+                  </CurrentVisionAttributeProvider>
+                )
+              })}
+            </VStack>
+          </LinkedEntitiesContainer>
+        )}
+      />
+      <NonEmptyOnly
         value={taskFactories}
         render={(items) => (
-          <LinkedEntitiesContainer title="Recurring tasks">
+          <LinkedEntitiesContainer title={goalLinkedEntityTitle.taskFactory}>
             <VStack>
               {items.map((id) => {
                 const value = taskFactoryRecord[id]
@@ -74,7 +97,7 @@ export const GoalItemContent = () => {
       <NonEmptyOnly
         value={habits}
         render={(items) => (
-          <LinkedEntitiesContainer title="Daily habitrs">
+          <LinkedEntitiesContainer title={goalLinkedEntityTitle.habit}>
             <VStack>
               {items.map((id) => {
                 const value = habitRecord[id]
@@ -93,7 +116,7 @@ export const GoalItemContent = () => {
       <NonEmptyOnly
         value={principles}
         render={(items) => (
-          <LinkedEntitiesContainer title="Principles">
+          <LinkedEntitiesContainer title={goalLinkedEntityTitle.principle}>
             <VStack>
               {items.map((id) => {
                 const value = principlesRecord[id]

@@ -2,26 +2,26 @@ import { RemovableComponentProps } from '@lib/ui/props'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ManageGoalLinkedEntity } from './linkedEntity/ManageGoalLinkedEntity'
-import { useCurrentPrinciple } from '../../principles/CurrentPrincipleProvider'
-import { GoalPrincipleItem } from './GoalPrincipleItem'
+import { GoalVisionItem } from './GoalVisionItem'
+import { useCurrentVisionAttribute } from '../../vision/CurrentVisionAttributeProvider'
 
-export const ManageGoalPrinciple = ({ onRemove }: RemovableComponentProps) => {
+export const ManageGoalVision = ({ onRemove }: RemovableComponentProps) => {
   const [, setActiveItemId] = useActiveItemId()
-  const { id } = useCurrentPrinciple()
+  const { id } = useCurrentVisionAttribute()
 
-  const { mutate: deletePrinciple } = useDeleteUserEntityMutation('principle')
+  const { mutate: deleteVision } = useDeleteUserEntityMutation('principle')
 
   return (
     <ManageGoalLinkedEntity
       onDelete={() => {
-        deletePrinciple(id)
+        deleteVision(id)
       }}
       onEdit={() => {
         setActiveItemId(id)
       }}
       onUnlink={onRemove}
     >
-      <GoalPrincipleItem />
+      <GoalVisionItem />
     </ManageGoalLinkedEntity>
   )
 }

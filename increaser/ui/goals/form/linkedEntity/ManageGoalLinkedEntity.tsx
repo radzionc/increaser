@@ -77,7 +77,7 @@ type GoalLinkedEntityProps = ComponentWithChildrenProps & {
   onUnlink: () => void
 }
 
-export const GoalLinkedEntity = ({
+export const ManageGoalLinkedEntity = ({
   children,
   onEdit,
   onDelete,

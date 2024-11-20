@@ -27,6 +27,7 @@ export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
       habits: goal.habits ?? [],
       deadlineAt: goal.deadlineAt ?? null,
       principles: goal.principles ?? [],
+      vision: goal.vision ?? [],
     }),
     [goal],
   )

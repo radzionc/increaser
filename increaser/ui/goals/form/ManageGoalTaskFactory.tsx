@@ -2,7 +2,7 @@ import { RemovableComponentProps } from '@lib/ui/props'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useCurrentTaskFactory } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
-import { GoalLinkedEntity } from './linkedEntity/GoalLinkedEntity'
+import { ManageGoalLinkedEntity } from './linkedEntity/ManageGoalLinkedEntity'
 
 import { GoalTaskFactoryItem } from '../GoalTaskFactoryItem'
 
@@ -16,7 +16,7 @@ export const ManageGoalTaskFactory = ({
     useDeleteUserEntityMutation('taskFactory')
 
   return (
-    <GoalLinkedEntity
+    <ManageGoalLinkedEntity
       onDelete={() => {
         deleteTaskFactory(id)
       }}
@@ -26,6 +26,6 @@ export const ManageGoalTaskFactory = ({
       onUnlink={onRemove}
     >
       <GoalTaskFactoryItem />
-    </GoalLinkedEntity>
+    </ManageGoalLinkedEntity>
   )
 }

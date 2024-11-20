@@ -18,6 +18,7 @@ import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
 import { panelFormConfig } from '../../form/panel/config'
 import { GoalHabitsInput } from './GoalHabitsInput'
 import { GoalPrinciplesInput } from './GoalPrinciplesInput'
+import { GoalVisionInput } from './GoalVisionInput'
 
 type GoalFormFieldsProps = InputProps<GoalFormShape> & {
   onSubmit?: () => void
@@ -100,6 +101,10 @@ export const GoalFormFields = ({
         <GoalTargetInput
           value={value.target}
           onChange={(target) => onChange({ ...value, target })}
+        />
+        <GoalVisionInput
+          value={value.vision}
+          onChange={(vision) => onChange({ ...value, vision })}
         />
         <GoalTaskFactoriesInput
           onChange={(taskFactories) => onChange({ ...value, taskFactories })}

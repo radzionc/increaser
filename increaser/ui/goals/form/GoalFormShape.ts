@@ -10,4 +10,5 @@ export type GoalFormShape = {
   taskFactories: string[]
   habits: string[]
   principles: string[]
+  vision: string[]
 }

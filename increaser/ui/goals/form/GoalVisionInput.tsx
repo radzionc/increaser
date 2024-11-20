@@ -1,56 +1,53 @@
 import { InputProps } from '@lib/ui/props'
-import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { VStack } from '@lib/ui/css/stack'
-import { CurrentTaskFactoryProvider } from '../../taskFactories/CurrentTaskFactoryProvider'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { useMemo } from 'react'
 import { without } from '@lib/utils/array/without'
-import { ActiveTaskFactory } from '../../taskFactories/ActiveTaskFactory'
-import { ManageGoalTaskFactory } from './ManageGoalTaskFactory'
 import { LinkedEntitiesContainer } from './linkedEntity/LinkedEntitiesContainer'
 import { AddLinkedEntity } from './linkedEntity/AddLinkedEntity'
-import { CreateTaskFactoryForm } from '../../taskFactories/form/CreateTaskFactoryForm'
 import { LinkEntity } from './linkedEntity/LinkEntity'
-import { useUser } from '../../user/state/user'
 import { LinkedEntityActionsContainer } from './linkedEntity/LinkedEntityActionsContainer'
+import { useVisionAttributes } from '../../vision/hooks/useVisionAttributes'
+import { ActiveVisionItem } from '../../vision/ActiveVisionItem'
+import { CurrentVisionAttributeProvider } from '../../vision/CurrentVisionAttributeProvider'
+import { CreateVisionAttributeForm } from '../../vision/form/CreateVisionAttributeForm'
+import { ManageGoalVision } from './ManageGoalVision'
 import { goalLinkedEntityTitle } from './linkedEntity/GoalLinkedEntity'
 
-export const GoalTaskFactoriesInput = ({
-  value,
-  onChange,
-}: InputProps<string[]>) => {
-  const { projects } = useUser()
-  const taskFactories = useTaskFactories()
+export const GoalVisionInput = ({ value, onChange }: InputProps<string[]>) => {
+  const attributes = useVisionAttributes()
+
   const options = useMemo(
-    () => taskFactories.filter(({ id }) => !value.includes(id)),
-    [taskFactories, value],
+    () => attributes.filter(({ id }) => !value.includes(id)),
+    [attributes, value],
   )
 
   return (
-    <LinkedEntitiesContainer title={goalLinkedEntityTitle.taskFactory}>
+    <LinkedEntitiesContainer title={goalLinkedEntityTitle.vision}>
       <VStack>
         {value.length > 0 && (
           <ActiveItemIdProvider initialValue={null}>
-            <ActiveTaskFactory />
-            {taskFactories
+            <ActiveVisionItem />
+
+            {attributes
               .filter(({ id }) => value.includes(id))
               .map((item) => (
-                <CurrentTaskFactoryProvider key={item.id} value={item}>
-                  <ManageGoalTaskFactory
+                <CurrentVisionAttributeProvider key={item.id} value={item}>
+                  <ManageGoalVision
                     onRemove={() => onChange(without(value, item.id))}
                   />
-                </CurrentTaskFactoryProvider>
+                </CurrentVisionAttributeProvider>
               ))}
           </ActiveItemIdProvider>
         )}
         <LinkedEntityActionsContainer>
           <AddLinkedEntity
             renderCreateForm={({ onClose }) => (
-              <CreateTaskFactoryForm
-                onFinish={(taskFactory) => {
+              <CreateVisionAttributeForm
+                onFinish={(item) => {
                   onClose()
-                  if (taskFactory) {
-                    onChange([...value, taskFactory.id])
+                  if (item) {
+                    onChange([...value, item.id])
                   }
                 }}
               />
@@ -60,9 +57,9 @@ export const GoalTaskFactoriesInput = ({
             options={options}
             getOptionName={(option) => option.name}
             getOptionKey={(option) => option.id}
-            getOptionEmoji={(option) => projects[option.projectId].emoji}
-            onFinish={(taskFactory) => {
-              onChange([...value, taskFactory.id])
+            getOptionEmoji={(option) => option.emoji}
+            onFinish={(item) => {
+              onChange([...value, item.id])
             }}
           />
         </LinkedEntityActionsContainer>

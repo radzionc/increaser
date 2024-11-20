@@ -1,7 +1,7 @@
 import { RemovableComponentProps } from '@lib/ui/props'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
-import { GoalLinkedEntity } from './linkedEntity/GoalLinkedEntity'
+import { ManageGoalLinkedEntity } from './linkedEntity/ManageGoalLinkedEntity'
 import { useCurrentHabit } from '../../habits/CurrentHabitProvider'
 import { HabitItemContent } from '../../habits/components/manage/HabitItemContent'
 
@@ -12,7 +12,7 @@ export const ManageGoalHabit = ({ onRemove }: RemovableComponentProps) => {
   const { mutate: deleteHabit } = useDeleteUserEntityMutation('habit')
 
   return (
-    <GoalLinkedEntity
+    <ManageGoalLinkedEntity
       onDelete={() => {
         deleteHabit(id)
       }}
@@ -22,6 +22,6 @@ export const ManageGoalHabit = ({ onRemove }: RemovableComponentProps) => {
       onUnlink={onRemove}
     >
       <HabitItemContent />
-    </GoalLinkedEntity>
+    </ManageGoalLinkedEntity>
   )
 }

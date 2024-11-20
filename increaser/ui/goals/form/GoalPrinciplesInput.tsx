@@ -13,6 +13,7 @@ import { LinkedEntityActionsContainer } from './linkedEntity/LinkedEntityActions
 import { CreatePrincipleForm } from '../../principles/form/CreatePrincipleForm'
 import { useUser } from '../../user/state/user'
 import { ManageGoalPrinciple } from './ManageGoalPrinciple'
+import { goalLinkedEntityTitle } from './linkedEntity/GoalLinkedEntity'
 
 export const GoalPrinciplesInput = ({
   value,
@@ -27,7 +28,7 @@ export const GoalPrinciplesInput = ({
   )
 
   return (
-    <LinkedEntitiesContainer title="Principles">
+    <LinkedEntitiesContainer title={goalLinkedEntityTitle.principle}>
       <VStack>
         {value.length > 0 && (
           <ActiveItemIdProvider initialValue={null}>

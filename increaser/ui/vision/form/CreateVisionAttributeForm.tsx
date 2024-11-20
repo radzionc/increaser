@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react'
-import { NoValueFinishProps } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useUser } from '@increaser/ui/user/state/user'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
@@ -11,8 +10,12 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { ListItemForm } from '../../form/ListItemForm'
 import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
+import { VisionAttribute } from '@increaser/entities/Vision'
+import { OptionalValueFinishProps } from '@lib/ui/props'
 
-export const CreateVisionAttributeForm = ({ onFinish }: NoValueFinishProps) => {
+export const CreateVisionAttributeForm = ({
+  onFinish,
+}: OptionalValueFinishProps<VisionAttribute>) => {
   const { vision } = useUser()
   const [value, setValue] = useState<VisionAttributeFormShape>({
     name: '',
