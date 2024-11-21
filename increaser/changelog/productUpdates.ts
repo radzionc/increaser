@@ -2,6 +2,40 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    name: 'Streamlined Goal Connections and Principle Management',
+    description:
+      'Enhancements to principles, goals, and vision make connecting and managing your productivity tools more intuitive and efficient.',
+    items: [
+      {
+        description:
+          'Add a new category while creating a principle for seamless organization.',
+      },
+      {
+        description:
+          'Link principles directly to your goals for deeper alignment and purpose.',
+      },
+      {
+        description:
+          'Filter principle ideas by category to find inspiration faster.',
+      },
+      {
+        description:
+          'Add or link existing life aspirations to your goals for a clearer path to your ideal life.',
+      },
+      {
+        description:
+          "New 'Principles' and 'Vision' articles added to the Info page to guide and inspire.",
+      },
+    ],
+    youtube: 'https://youtu.be/_RPaaNdAF74',
+    telegram: '',
+    x: '',
+    linkedIn: '',
+    indieHackers: '',
+    reddit: '',
+  },
+
+  {
     releasedAt: 1731993006066,
     name: 'Customize Your Schedule and Enhanced Project Tracking',
     description:

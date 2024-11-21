@@ -20,20 +20,20 @@ Increaser offers a 14-day free trial, with a monthly subscription of $5.99 and a
 
 ## Vision
 
-The Vision tool allows users to define what their perfect life looks like. It consists of a list of "vision attributes," each serving as a description of a perfect life.
+The Vision tool allows users to define what their perfect life looks like. It consists of a list of "life aspirations," each serving as a description of a perfect life.
 
 The vision page in the app has two Subpages: "Board", and "Explore".
 
-On the "Board" subpage, users can see all vision attributes displayed as a gallery of images. By hovering over an image, users can see the attribute's name and emoji. Users can click on an image to view the full description of the vision attribute, edit it, or delete it.
+On the "Board" subpage, users can see all life aspirations displayed as a gallery of images. By hovering over an image, users can see the aspiration's name and emoji. Users can click on an image to view the full description of the life aspiration, edit it, or delete it.
 
-A vision attribute has:
+A life aspiration has:
 
 - A name: e.g., "Happy marriage"
 - An image: uploaded by the user
-- An emoji: to represent the attribute
+- An emoji: to represent the aspiration
 - A description: e.g., "I have a loving partner who supports me in everything I do."
 
-The "Explore" subpage contains a list of suggested vision attributes to give users ideas for their vision board and help them define their perfect life. The user can add a suggested vision attribute to their vision board.
+The "Explore" subpage contains a list of suggested aspirations to give users ideas for their vision board and help them define their perfect life. The user can add a suggested life aspiration to their vision board.
 
 ## Focus
 
@@ -83,7 +83,7 @@ When it the time after user's workday end, the focus launcher will be disabled a
 
 On the "Goals" page, users can set goals to move closer to their ideal vision. Goals can be marked as done, active, or idea. Each goal includes a deadline, which can be a specific date or the user's age, an emoji, and a plain-text plan on how to achieve it. For numeric goals, users can track progress by entering a value, such as their current net worth toward a 1 million USD goal.
 
-Goals integrate with other tools in Increaser, to support recurring actions needed for many goals, users can link recurring tasks(TaskFactories) or daily habits to a goal or create new ones specifically for it. Users can add or link existing principles to a goal. Users can add or link their vision attributes to a goal, to have a clear connection between their goals and their vision.
+Goals integrate with other tools in Increaser, to support recurring actions needed for many goals, users can link recurring tasks(TaskFactories) or daily habits to a goal or create new ones specifically for it. Users can add or link existing principles to a goal. Users can add or link their life aspirations to a goal, to have a clear connection between their goals and their vision.
 
 At the top of the "Goals" page, a timeline shows goals positioned according to their deadlines, with two view options: age-based and date-based. In age-based view, the user’s age is displayed at the top with day precision, and the timeline has age labels. In date-based view, today’s date is shown at the top, and the timeline displays year labels.
 
