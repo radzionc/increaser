@@ -1,11 +1,9 @@
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { toPercents } from '@lib/utils/toPercents'
-import { useMemo } from 'react'
 import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
-import { useHasReachedFinalWorkday } from '../hooks/useHasReachedFinalWorkday'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
 import { LinesFiller } from '@lib/ui/visual/LinesFiller'
 import { ProjectBudgetOffset } from './ProjectBudgetOffset'
@@ -34,29 +32,8 @@ export const ProjectBudgetOverview = () => {
 
   const doneMinutesThisWeek = useProjectDoneMinutesThisWeek(id)
 
-  const { colors } = useTheme()
-
-  const hasReachedFinalDay = useHasReachedFinalWorkday()
-  const hasReachedGoal = useMemo(() => {
-    if (!goal) return false
-
-    if (goal === 'doMore') {
-      return doneMinutesThisWeek >= allocatedMinutesPerWeek
-    }
-
-    return hasReachedFinalDay && doneMinutesThisWeek <= allocatedMinutesPerWeek
-  }, [allocatedMinutesPerWeek, doneMinutesThisWeek, goal, hasReachedFinalDay])
-
   return (
-    <Container
-      style={
-        goal && hasReachedGoal
-          ? {
-              borderColor: colors.success.toCssValue(),
-            }
-          : {}
-      }
-    >
+    <Container>
       <Fill
         style={{
           width: toPercents(
@@ -66,7 +43,7 @@ export const ProjectBudgetOverview = () => {
       >
         <LinesFiller />
       </Fill>
-      {goal && !hasReachedGoal && <ProjectBudgetOffset />}
+      {goal && <ProjectBudgetOffset />}
       <ProjectBudgetWidgetDays />
     </Container>
   )

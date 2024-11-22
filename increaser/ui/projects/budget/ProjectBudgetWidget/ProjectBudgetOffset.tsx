@@ -6,6 +6,7 @@ import { useCurrentDayTarget } from '../hooks/useCurrentDayTarget'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
 import { useProjectBudgetOffsetColor } from '../hooks/useProjectBudgetOffsetColor'
 import { borderRadius } from '@lib/ui/css/borderRadius'
+import { useMemo } from 'react'
 
 const Offset = styled.div`
   position: absolute;
@@ -26,25 +27,31 @@ export const ProjectBudgetOffset = () => {
 
   const color = useProjectBudgetOffsetColor(id)
 
-  const value = isUnderTarget
-    ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
-    : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek
+  const total = Math.max(doneMinutesThisWeek, allocatedMinutesPerWeek)
 
-  if (!value) return null
+  const left = useMemo(() => {
+    if (isUnderTarget) {
+      return doneMinutesThisWeek / total
+    }
+
+    return target / total
+  }, [doneMinutesThisWeek, isUnderTarget, target, total])
+
+  const width = useMemo(() => {
+    if (isUnderTarget) {
+      return (target - doneMinutesThisWeek) / total
+    }
+
+    return (doneMinutesThisWeek - target) / total
+  }, [doneMinutesThisWeek, isUnderTarget, target, total])
+
+  console.log({ left, width })
 
   return (
     <Offset
       style={{
-        left: toPercents(
-          isUnderTarget
-            ? doneMinutesThisWeek / allocatedMinutesPerWeek
-            : target / allocatedMinutesPerWeek,
-        ),
-        width: toPercents(
-          isUnderTarget
-            ? (target - doneMinutesThisWeek) / allocatedMinutesPerWeek
-            : (doneMinutesThisWeek - target) / allocatedMinutesPerWeek,
-        ),
+        left: toPercents(left),
+        width: toPercents(width),
         color: color.toCssValue(),
       }}
     />
