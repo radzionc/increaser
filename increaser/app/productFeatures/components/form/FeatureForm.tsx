@@ -5,7 +5,7 @@ import { Validators } from '@lib/ui/form/utils/Validators'
 import { validate } from '@lib/ui/form/utils/validate'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { EmbeddedDescriptionInput } from '@lib/ui/inputs/EmbeddedDescriptionInput'
 import styled from 'styled-components'
@@ -74,7 +74,7 @@ export const FeatureForm = () => {
         rows={3}
         value={value.description}
       />
-      <CreateFormFooter isDisabled={isDisabled} />
+      <CancelSubmitFormFooter isDisabled={isDisabled} />
     </ListItemForm>
   )
 }

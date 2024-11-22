@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import {
   ComponentWithInitialValueProps,
   OptionalValueFinishProps,
@@ -52,7 +52,7 @@ export const CreateTaskTemplateForm: React.FC<
         onClose={onFinish}
         hasProjectAutoFocus={!initialValue?.projectId}
       />
-      <CreateFormFooter
+      <CancelSubmitFormFooter
         isPending={isPending}
         isDisabled={isDisabled}
         onCancel={() => {

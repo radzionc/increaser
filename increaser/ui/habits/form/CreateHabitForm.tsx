@@ -8,7 +8,7 @@ import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { Habit } from '@increaser/entities/Habit'
 import { HabitFormFields } from './HabitFormFields'
 import { useHabits } from '../hooks/useHabits'
@@ -53,7 +53,7 @@ export const CreateHabitForm = ({
         onClose={onFinish}
         onSubmit={onFinish}
       />
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <CancelSubmitFormFooter onCancel={onFinish} isDisabled={isDisabled} />
     </ListItemForm>
   )
 }

@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { getId } from '@increaser/entities-utils/shared/getId'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
@@ -56,7 +56,7 @@ export const CreatePrincipleCategoryForm = ({
           ref={nameInputRef}
         />
       </EmojiTextInputFrame>
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <CancelSubmitFormFooter onCancel={onFinish} isDisabled={isDisabled} />
     </ListItemForm>
   )
 }

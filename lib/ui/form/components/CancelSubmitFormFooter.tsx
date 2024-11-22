@@ -9,7 +9,7 @@ type CancelSubmitFormFooterProps = {
   cancelText?: string
 }
 
-export const CancelSubmitFooter = ({
+export const CancelSubmitFormFooter = ({
   onCancel,
   isDisabled,
   isPending,

@@ -1,5 +1,5 @@
 import { TaskLink } from '@increaser/entities/Task'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { Modal } from '@lib/ui/modal'
 import { OptionalValueFinishProps } from '@lib/ui/props'
@@ -31,7 +31,10 @@ export const AddTaskLinkOverlay = ({
         onSubmit: () => onFinish(value),
       })}
       footer={
-        <CreateFormFooter isDisabled={isDisabled} onCancel={() => onFinish()} />
+        <CancelSubmitFormFooter
+          isDisabled={isDisabled}
+          onCancel={() => onFinish()}
+        />
       }
     >
       <ModalContent>

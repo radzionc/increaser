@@ -85,7 +85,7 @@ export const PrimarySlice = () => (
             ))}
           </HStackSeparatedBy>
           <Item size={14} weight={600}>
-            and other cool tools...
+            and other powerful tools...
           </Item>
         </Explanation>
       </VStack>

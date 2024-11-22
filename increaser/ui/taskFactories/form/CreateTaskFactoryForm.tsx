@@ -5,7 +5,7 @@ import { otherProject } from '@increaser/entities/Project'
 import { TaskFactoryFormShape } from './TaskFactoryFormShape'
 import { useIsTaskFactoryFormDisabled } from './useIsTaskFactoryFormDisabled'
 import { TaskFactory } from '@increaser/entities/TaskFactory'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { cadenceDefaultDeadlineIndex } from '@increaser/entities-utils/taskFactory/cadenceDefaultDeadlineIndex'
 import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
@@ -77,7 +77,7 @@ export const CreateTaskFactoryForm: React.FC<
           deadlineIndex={value.deadlineIndex ?? null}
         />
       </HStack>
-      <CreateFormFooter
+      <CancelSubmitFormFooter
         isPending={isPending}
         onCancel={() => onFinish?.()}
         isDisabled={isDisabled}

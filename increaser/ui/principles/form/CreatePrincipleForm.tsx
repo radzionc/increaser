@@ -7,7 +7,7 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
 import { otherProjectId } from '@increaser/entities/Project'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { PrincipleFormFields } from './PrincipleFormFields'
@@ -58,7 +58,7 @@ export const CreatePrincipleForm = ({
         onClose={onFinish}
         categorySelectorAutoFocus={!initialValue?.categoryId}
       />
-      <CreateFormFooter
+      <CancelSubmitFormFooter
         submitText={submitText}
         onCancel={onFinish}
         isDisabled={isDisabled}

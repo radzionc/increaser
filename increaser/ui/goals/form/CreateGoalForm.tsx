@@ -6,7 +6,7 @@ import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsGoalFormDisabled } from './useIsGoalFormDisabled'
 import { defaultEmojis } from '@lib/utils/entities/EntityWithEmoji'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { GoalFormFields } from './GoalFormFields'
 import { useGoalStatusFilter } from '../filter/useGoalStatusFilter'
 import { ListItemForm } from '@increaser/ui/form/ListItemForm'
@@ -56,7 +56,10 @@ export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
         onClose={onFinish}
         actions={
           <HStack flexGrow justifyContent="end">
-            <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+            <CancelSubmitFormFooter
+              onCancel={onFinish}
+              isDisabled={isDisabled}
+            />
           </HStack>
         }
         value={value}

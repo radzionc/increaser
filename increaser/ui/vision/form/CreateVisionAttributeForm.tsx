@@ -8,7 +8,7 @@ import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { useIsVisionAttributeFormDisabled } from './useIsVisionAttributeFormDisabled'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
 import { VisionAttribute } from '@increaser/entities/Vision'
 import { OptionalValueFinishProps } from '@lib/ui/props'
@@ -53,7 +53,7 @@ export const CreateVisionAttributeForm = ({
         onSubmit={onSubmit}
         onClose={onFinish}
       />
-      <CreateFormFooter onCancel={onFinish} isDisabled={isDisabled} />
+      <CancelSubmitFormFooter onCancel={onFinish} isDisabled={isDisabled} />
     </ListItemForm>
   )
 }

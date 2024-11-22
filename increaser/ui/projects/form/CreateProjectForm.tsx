@@ -12,7 +12,7 @@ import { useActiveProjects } from '../hooks/useActiveProjects'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { Project } from '@increaser/entities/Project'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
 import { OptionalValueFinishProps } from '@lib/ui/props'
 import { ProjectFormFields } from './ProjectFormFields'
@@ -70,7 +70,7 @@ export const CreateProjectForm = ({
         onClose={onFinish}
         onSubmit={onFinish}
       />
-      <CreateFormFooter
+      <CancelSubmitFormFooter
         isDisabled={isDisabled}
         isPending={isPending}
         onCancel={() => onFinish?.()}

@@ -4,7 +4,7 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
 import { otherProject } from '@increaser/entities/Project'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
@@ -61,7 +61,7 @@ export const CreateIdeaForm = ({
         onClose={onFinish}
         titlePlaceholder="Idea name"
       />
-      <CreateFormFooter
+      <CancelSubmitFormFooter
         isPending={isPending}
         onCancel={onFinish}
         isDisabled={isDisabled}

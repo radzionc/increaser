@@ -9,7 +9,6 @@ import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserMutation } from '@increaser/ui/user/mutations/useUpdateUserMutation'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
-import { CreateFormFooter } from '@lib/ui/form/components/CreateFormFooter'
 import { TextInput } from '@lib/ui/inputs/TextInput'
 import YouTubePlayer from 'react-player/lazy'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -20,6 +19,7 @@ import { Fields } from '@lib/ui/inputs/Fields'
 import { trimTextWithoutCuttingWords } from '@lib/utils/string/trimTextWithoutCuttingWords'
 import { useYouTubeFocusPreference } from '../state/useYouTubeFocusPreference'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
+import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 
 type VideoFormShape = {
   url: string
@@ -89,7 +89,9 @@ export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
           })
         },
       })}
-      footer={<CreateFormFooter onCancel={onClose} isDisabled={isDisabled} />}
+      footer={
+        <CancelSubmitFormFooter onCancel={onClose} isDisabled={isDisabled} />
+      }
     >
       <ModalContent gap={40}>
         <Fields>
