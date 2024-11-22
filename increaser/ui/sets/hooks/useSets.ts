@@ -4,7 +4,7 @@ import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
 import { isEmpty } from '@lib/utils/array/isEmpty'
-import { Set } from '@increaser/entities/User'
+import { focusIntervalsToSets } from '../../focus/utils/focusIntervalsToSets'
 
 export const useSets = () => {
   const { sets } = useUser()
@@ -18,16 +18,11 @@ export const useSets = () => {
       return sets
     }
 
-    return [
-      ...sets,
-      ...activeFocusIntervals.map(
-        ({ start, end, projectId }): Set => ({
-          start,
-          end: end || now,
-          projectId,
-          isActive: true,
-        }),
-      ),
-    ]
+    const activeSets = focusIntervalsToSets({
+      intervals: activeFocusIntervals,
+      now,
+    }).map((set) => ({ ...set, isActive: true }))
+
+    return [...sets, ...activeSets]
   }, [activeFocusIntervals, now, sets])
 }
