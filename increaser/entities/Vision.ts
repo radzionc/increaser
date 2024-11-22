@@ -104,4 +104,11 @@ export const visionAttributeIdeas: VisionAttributeIdea[] = [
     emoji: '🐶',
     description: 'Caring for a loyal and loving canine companion.',
   },
+  {
+    id: 'surf',
+    name: 'Endless summer',
+    emoji: '🏄‍♂️',
+    description:
+      'Settling into a warm, vibrant, and tranquil beachside lifestyle.',
+  },
 ]
