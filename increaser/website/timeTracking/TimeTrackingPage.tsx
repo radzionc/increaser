@@ -35,7 +35,7 @@ export const TimeTrackingPage = () => (
       description={`Enhance your productivity with ${productName}'s time tracking feature. Manage your projects, analyze your work habits, and optimize your time. Start your ${freeTrialDays}-day free trial today!`}
     />
     <PrimaryWebsiteSlice>
-      <TimeTrackingSlice titleAs="h1" />
+      <TimeTrackingSlice />
     </PrimaryWebsiteSlice>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />

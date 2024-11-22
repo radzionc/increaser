@@ -1,12 +1,9 @@
-import {
-  WebsiteSectionHeader,
-  WebsiteSectionHeaderProps,
-} from '@lib/ui/website/WebsiteSectionHeader'
+import { WebsiteSectionHeaderProps } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
-import { getDemoSliceCopy } from './getDemoSliceCopy'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { DemoGuard } from '../../demo/DemoGuard'
 import { PrinciplesDemo } from './PrinciplesDemo'
+import { WebsiteSectionTitle } from '@lib/ui/website/WebsiteSectionTitle'
 
 export const PrinciplesSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   const id = 'principles'
@@ -14,7 +11,9 @@ export const PrinciplesSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
   return (
     <WebsiteSlice id={id}>
       <WebsiteSliceContent>
-        <WebsiteSectionHeader {...getDemoSliceCopy(id)} {...props} />
+        <WebsiteSectionTitle>
+          Build a Life Guided by Strong <strong>Principles</strong>
+        </WebsiteSectionTitle>
         <DemoGuard>
           <PrinciplesDemo />
         </DemoGuard>

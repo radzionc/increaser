@@ -27,7 +27,7 @@ export const HabitsPage = () => (
       description={`Develop and maintain healthy, productive habits with Increaser. Track your progress, set daily goals, and achieve a balanced lifestyle. Start building better habits today with Increaser!`}
     />
     <PrimaryWebsiteSlice>
-      <HabitsSlice titleAs="h1" />
+      <HabitsSlice />
     </PrimaryWebsiteSlice>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />

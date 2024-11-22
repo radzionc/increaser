@@ -35,7 +35,7 @@ export const FocusPage = () => (
       description={`Boost your productivity with Increaser's Focus Timer. Work in 90-minute blocks with customizable breaks, ambient sounds, and project tracking to maximize efficiency and maintain work-life balance. Try Increaser's focus timer today!`}
     />
     <PrimaryWebsiteSlice>
-      <FocusSlice titleAs="h1" />
+      <FocusSlice />
     </PrimaryWebsiteSlice>
     {videoSlices.map((slice, index) => (
       <FeatureVideoSlice key={index} {...slice} />
