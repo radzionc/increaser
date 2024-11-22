@@ -9,6 +9,16 @@ import { ScoreboardSlice } from './ScoreboardSlice'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 import { productTools } from '@increaser/entities/ProductTool'
 import { ProductToolSlice } from './demo/ProductToolSlice'
+import { VStack } from '@lib/ui/css/stack'
+import styled from 'styled-components'
+
+const ProductToolsContainer = styled(VStack)`
+  > * {
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+`
 
 export const LandingPage = () => (
   <>
@@ -17,9 +27,11 @@ export const LandingPage = () => (
       description="Increaser offers a unique solution for remote workers seeking to boost efficiency, track time, and develop positive habits for better career and health outcomes."
     />
     <PrimarySlice />
-    {productTools.map((tool) => (
-      <ProductToolSlice key={tool} value={tool} />
-    ))}
+    <ProductToolsContainer>
+      {productTools.map((tool) => (
+        <ProductToolSlice key={tool} value={tool} />
+      ))}
+    </ProductToolsContainer>
     <TestimonialsSlice />
     <VideoSlice />
     <ScoreboardSlice />
