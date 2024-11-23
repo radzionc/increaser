@@ -1,4 +1,4 @@
-import { VStack } from '@lib/ui/css/stack'
+import { vStack, VStack } from '@lib/ui/css/stack'
 import { text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { useCurrentGoal } from './CurrentGoalProvider'
@@ -17,6 +17,7 @@ import { GoalPrincipleItem } from './form/GoalPrincipleItem'
 import { goalLinkedEntityTitle } from './form/linkedEntity/GoalLinkedEntity'
 import { CurrentVisionAttributeProvider } from '../vision/CurrentVisionAttributeProvider'
 import { VisionBoardItem } from '../vision/VisionBoardItem'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
 const Header = styled.p`
   ${text({
@@ -43,6 +44,15 @@ export const VisionContainer = styled.div`
 
   > * {
     margin-bottom: 8px;
+  }
+`
+
+const LinkedEntitiesContent = styled.div`
+  ${vStack({
+    gap: 8,
+  })};
+  > * {
+    ${verticalPadding(0)}
   }
 `
 
@@ -91,7 +101,7 @@ export const GoalItemContent = () => {
         value={taskFactories}
         render={(items) => (
           <LinkedEntitiesContainer title={goalLinkedEntityTitle.taskFactory}>
-            <VStack>
+            <LinkedEntitiesContent>
               {items.map((id) => {
                 const value = taskFactoryRecord[id]
                 if (!value) return null
@@ -102,7 +112,7 @@ export const GoalItemContent = () => {
                   </CurrentTaskFactoryProvider>
                 )
               })}
-            </VStack>
+            </LinkedEntitiesContent>
           </LinkedEntitiesContainer>
         )}
       />
@@ -110,7 +120,7 @@ export const GoalItemContent = () => {
         value={habits}
         render={(items) => (
           <LinkedEntitiesContainer title={goalLinkedEntityTitle.habit}>
-            <VStack>
+            <LinkedEntitiesContent>
               {items.map((id) => {
                 const value = habitRecord[id]
                 if (!value) return null
@@ -121,7 +131,7 @@ export const GoalItemContent = () => {
                   </CurrentHabitProvider>
                 )
               })}
-            </VStack>
+            </LinkedEntitiesContent>
           </LinkedEntitiesContainer>
         )}
       />
@@ -129,7 +139,7 @@ export const GoalItemContent = () => {
         value={principles}
         render={(items) => (
           <LinkedEntitiesContainer title={goalLinkedEntityTitle.principle}>
-            <VStack>
+            <LinkedEntitiesContent>
               {items.map((id) => {
                 const value = principlesRecord[id]
                 if (!value) return null
@@ -140,7 +150,7 @@ export const GoalItemContent = () => {
                   </CurrentPrincipleProvider>
                 )
               })}
-            </VStack>
+            </LinkedEntitiesContent>
           </LinkedEntitiesContainer>
         )}
       />

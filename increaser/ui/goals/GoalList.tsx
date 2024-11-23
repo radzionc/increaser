@@ -7,7 +7,7 @@ export const GoalList = () => {
   const items = useFilteredGoals()
 
   return (
-    <SeparatedByLine gap={12}>
+    <SeparatedByLine gap={4}>
       {items.map((item) => (
         <div key={item.id}>
           <CurrentGoalProvider value={item}>
