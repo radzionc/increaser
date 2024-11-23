@@ -1,11 +1,10 @@
-import { WebsiteSectionHeaderProps } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
-import { FocusLauncher } from '@increaser/app/focus/launcher/FocusLauncher'
 import { DemoGuard } from '../../demo/DemoGuard'
 import styled from 'styled-components'
 import { VStack } from '@lib/ui/css/stack'
 import { WebsiteSectionTitle } from '@lib/ui/website/WebsiteSectionTitle'
+import { FocusLauncher } from '@increaser/ui/focus/launcher/FocusLauncher'
 
 const Container = styled(VStack)`
   max-width: 480px;

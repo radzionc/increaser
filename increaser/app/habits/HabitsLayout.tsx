@@ -1,5 +1,5 @@
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { AppPageLayout } from '../focus/components/AppPageLayout'
+import { AppPageLayout } from '../ui/page/AppPageLayout'
 import { PageHeader } from '../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'
 import { PageContainer } from '../ui/page/PageContainer'

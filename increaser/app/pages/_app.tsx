@@ -11,7 +11,6 @@ import { Open_Sans } from 'next/font/google'
 import { Page } from '@lib/next-ui/Page'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'
 import { ApiProvider } from '../api/ApiProvider'
-import { YouTubeFocusMusicProvider } from '../focus/audio/youTube/YouTubeFocusMusicProvider'
 import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
@@ -19,6 +18,7 @@ import { AuthenticatedOnly } from '../auth/components/AuthenticatedOnly'
 import { UserManager } from '@increaser/ui/user/UserManager'
 import { UserStateOnly } from '@increaser/ui/user/UserStateOnly'
 import { FocusManager } from '@increaser/ui/focus/FocusManager'
+import { YouTubeFocusMusicProvider } from '@increaser/ui/focus/audio/youTube/YouTubeFocusMusicProvider'
 
 const openSans = Open_Sans({
   subsets: ['latin'],

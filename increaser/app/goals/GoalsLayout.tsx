@@ -2,7 +2,7 @@ import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { AppPageLayout } from '../focus/components/AppPageLayout'
+import { AppPageLayout } from '../ui/page/AppPageLayout'
 import { PageHeader } from '../ui/page/header/PageHeader'
 import { PageHeaderControlsAreaProvider } from '../ui/page/header/PageHeaderControlsAreaProvider'
 import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'

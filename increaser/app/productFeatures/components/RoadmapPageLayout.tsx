@@ -10,7 +10,7 @@ import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
 import { PageTitle } from '@lib/ui/text/PageTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { AppPageLayout } from '../../focus/components/AppPageLayout'
+import { AppPageLayout } from '../../ui/page/AppPageLayout'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 
 const contentWidth = 520

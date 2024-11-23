@@ -1,5 +1,3 @@
-import { useFocusProject } from '@increaser/app/focus/state/focusProject'
-import { useFocusProjectTask } from '@increaser/app/focus/state/focusProjectTask'
 import { HStack } from '@lib/ui/css/stack'
 import { PlayIcon } from '@lib/ui/icons/PlayIcon'
 import { ExpandableSelectorContainer } from '@lib/ui/select/ExpandableSelectorContainer'
@@ -8,11 +6,13 @@ import { getColor } from '@lib/ui/theme/getters'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 import styled from 'styled-components'
 import { useCurrentTask } from '../CurrentTaskProvider'
-import { useStartFocus } from '@increaser/app/focus/hooks/useStartFocus'
 import { useRouter } from 'next/router'
 import { getAppPath } from '../../navigation/app'
 import { NoValueFinishProps } from '@lib/ui/props'
-import { useFocusStatus } from '@increaser/app/focus/state/focusIntervals'
+import { useFocusStatus } from '@increaser/ui/focus/state/focusIntervals'
+import { useStartFocus } from '../../focus/hooks/useStartFocus'
+import { useFocusProject } from '../../focus/state/focusProject'
+import { useFocusProjectTask } from '../../focus/state/focusProjectTask'
 
 const Container = styled(ExpandableSelectorContainer)`
   padding-right: 16px;

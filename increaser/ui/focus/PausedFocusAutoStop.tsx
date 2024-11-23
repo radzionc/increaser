@@ -1,5 +1,5 @@
-import { useStopFocus } from '@increaser/app/focus/hooks/useStopFocus'
-import { useAssertFocusIntervals } from '@increaser/app/focus/state/focusIntervals'
+import { useStopFocus } from '@increaser/ui/focus/hooks/useStopFocus'
+import { useAssertFocusIntervals } from '@increaser/ui/focus/state/focusIntervals'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { convertDuration } from '@lib/utils/time/convertDuration'

@@ -1,5 +1,5 @@
 import { withLayout } from '@lib/next-ui/utils/withLayout'
-import { RegularAppPageLayout } from '../focus/components/RegularAppPageLayout'
+import { RegularAppPageLayout } from '../ui/page/RegularAppPageLayout'
 import { ManageWorkPreferences } from '@increaser/ui/preferences/ManageWorkPreferences'
 
 export default withLayout({

@@ -3,13 +3,11 @@ import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/css/stack'
 
-import { FocusSetWidget } from '../../focus/components/FocusSetWidget/FocusSetWidget'
 import { SetsManager } from '@increaser/ui/sets/manager/SetsManager'
 import { PageContent } from '../../ui/page/PageContent'
-import { FocusLauncher } from '../../focus/launcher/FocusLauncher'
+import { FocusLauncher } from '@increaser/ui/focus/launcher/FocusLauncher'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { sidebarConfig } from '../../navigation/Sidebar/config'
-import { useFocusIntervals } from '../../focus/state/focusIntervals'
 import { useTodaySets } from '../../sets/hooks/useTodaySets'
 import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PageTitle } from '@lib/ui/text/PageTitle'
@@ -18,6 +16,8 @@ import { Header } from '@lib/ui/layout/Header'
 import Link from 'next/link'
 import { getAppPath } from '@increaser/ui/navigation/app'
 import { LearnMorePrompt } from '@lib/ui/info/LearnMorePrompt'
+import { useFocusIntervals } from '@increaser/ui/focus/state/focusIntervals'
+import { FocusSetWidget } from '@increaser/ui/focus/FocusSetWidget/FocusSetWidget'
 
 const Container = styled.div`
   display: flex;

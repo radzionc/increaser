@@ -1,4 +1,4 @@
-import { useUserChangedFocusDurationAt } from '@increaser/app/focus/state/useUserChangedFocusDurationAt'
+import { useUserChangedFocusDurationAt } from '@increaser/ui/focus/state/useUserChangedFocusDurationAt'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { useMemo } from 'react'
 import { FocusDurationCustomizer } from './FocusDurationCustomizer'

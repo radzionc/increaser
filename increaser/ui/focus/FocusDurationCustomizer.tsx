@@ -5,7 +5,7 @@ import {
   getBlocks,
   getBlockWorkDuration,
 } from '@increaser/entities-utils/block'
-import { useFocusDuration } from '@increaser/app/focus/state/focusDuration'
+import { useFocusDuration } from '@increaser/ui/focus/state/focusDuration'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import {

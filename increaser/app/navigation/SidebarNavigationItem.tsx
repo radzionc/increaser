@@ -2,8 +2,8 @@ import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { Match } from '@lib/ui/base/Match'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { NavigationToInternalPage } from './Sidebar/NavigationToInternalPage'
-import { FocusNavigationDecoration } from '../focus/components/FocusNavigationDecoration'
 import { HabitsNavigationDecoration } from '@increaser/ui/habits/navigation/HabitsNavigationDecoration'
+import { FocusNavigationDecoration } from '../focus/navigation/FocusNavigationDecoration'
 
 export const SidebarNavigationItem = ({
   value,

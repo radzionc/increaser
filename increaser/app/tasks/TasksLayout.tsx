@@ -3,7 +3,7 @@ import { PageContent } from '../ui/page/PageContent'
 
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
 import { ComponentWithChildrenProps } from '@lib/ui/props'
-import { AppPageLayout } from '../focus/components/AppPageLayout'
+import { AppPageLayout } from '../ui/page/AppPageLayout'
 import { PageHeaderControlsAreaProvider } from '../ui/page/header/PageHeaderControlsAreaProvider'
 import { PageViewNavigation } from '../navigation/page/PageViewNavigation'
 import { PageHeader } from '../ui/page/header/PageHeader'

@@ -1,4 +1,4 @@
-import { FocusInterval } from '@increaser/app/focus/state/focusIntervals'
+import { FocusInterval } from '@increaser/ui/focus/state/focusIntervals'
 import { Set } from '@increaser/entities/User'
 
 type Input = {

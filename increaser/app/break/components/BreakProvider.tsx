@@ -19,7 +19,6 @@ import {
 import { attempt } from '@lib/utils/attempt'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { focusDurations } from '@increaser/entities/FocusDuration'
-import { useFocusIntervals } from '../../focus/state/focusIntervals'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useUser } from '@increaser/ui/user/state/user'
 import {
@@ -27,6 +26,7 @@ import {
   getBlockWorkDuration,
 } from '@increaser/entities-utils/block'
 import { blockTargetDuration } from '@increaser/entities/Block'
+import { useFocusIntervals } from '@increaser/ui/focus/state/focusIntervals'
 
 export const remindersCount = 5
 
