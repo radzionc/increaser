@@ -8,12 +8,7 @@ import styled from 'styled-components'
 import { trackHabitsConfig } from './config'
 import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { useTrackHabitMutation } from '@increaser/ui/habits/api/useTrackHabitMutation'
-
-type CheckHabitProps = {
-  habit: Pick<Habit, 'id' | 'emoji'>
-  isCompleted: boolean
-  dayStartedAt: number
-}
+import { ComponentProps } from 'react'
 
 const Container = styled.div<ComponentWithActiveState>`
   ${sameDimensions(trackHabitsConfig.itemHeight)};
@@ -25,20 +20,31 @@ const Container = styled.div<ComponentWithActiveState>`
 
   ${centerContent};
 
-  font-size: 20px;
+  font-size: 24px;
 
-  border: 1px solid ${getColor('mistExtra')};
+  border: 1px solid
+    ${matchColor('isActive', {
+      true: 'mist',
+      false: 'mistExtra',
+    })};
 
   background: ${matchColor('isActive', {
-    true: 'success',
-    false: 'foreground',
+    true: 'background',
+    false: 'foregroundExtra',
   })};
 `
 
+type CheckHabitProps = {
+  habit: Pick<Habit, 'id' | 'emoji'>
+  isCompleted: boolean
+  dayStartedAt: number
+} & ComponentProps<typeof Container>
+
 export const CheckHabit = ({
-  habit: { id },
+  habit: { id, emoji },
   isCompleted,
   dayStartedAt,
+  ...rest
 }: CheckHabitProps) => {
   const { mutate } = useTrackHabitMutation()
 
@@ -52,6 +58,9 @@ export const CheckHabit = ({
         })
       }}
       isActive={isCompleted}
-    />
+      {...rest}
+    >
+      {isCompleted && emoji}
+    </Container>
   )
 }

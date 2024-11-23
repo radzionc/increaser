@@ -24,19 +24,19 @@ const goalDays = 60
 const habitsDescription: HabitDescription[] = [
   {
     id: DemoHabit.Sunlight,
-    emoji: '🌞',
+    emoji: '🏝️',
     target: 1,
     checkedToday: true,
   },
   {
     id: DemoHabit.Exercise,
-    emoji: '🏋️‍♂️',
+    emoji: '💪',
     target: 0.8,
     checkedToday: true,
   },
   {
     id: DemoHabit.Fasting,
-    emoji: '🍽',
+    emoji: '🌮',
     target: 0.9,
     checkedToday: true,
   },
@@ -48,13 +48,13 @@ const habitsDescription: HabitDescription[] = [
   },
   {
     id: DemoHabit.WalkAfterDinner,
-    emoji: '🚶‍♂️',
+    emoji: '👟',
     target: 0.9,
     checkedToday: false,
   },
   {
     id: DemoHabit.PrepareForTomorrow,
-    emoji: '📝',
+    emoji: '📚',
     target: 0.9,
     checkedToday: false,
   },
