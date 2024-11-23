@@ -35,7 +35,6 @@ export const useFocusIntervals = () => {
     ),
     useCallback(
       (value) => {
-        console.log('correct')
         if (!value) {
           return value
         }

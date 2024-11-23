@@ -10,6 +10,8 @@ import { toEntries } from '@lib/utils/record/toEntries'
 import { omit } from '@lib/utils/record/omit'
 import { groupItems } from '@lib/utils/array/groupItems'
 import { useUncompleteTasks } from '@increaser/ui/tasks/useUncompleteTasks'
+import { withoutUndefinedFields } from '@lib/utils/record/withoutUndefinedFields'
+import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 
 const useCallback = makeUseMemoCallback()
 
@@ -31,7 +33,14 @@ export const useFocusProjectTask = () => {
   return useStateCorrector(
     usePersistentState<Record<string, string>>(
       PersistentStateKey.FocusProjectTask,
-      {},
+      () => {
+        return withoutUndefinedFields(
+          recordFromKeys(
+            Array.from(projectIds),
+            (id) => tasksByProjectId[id]?.[0]?.id,
+          ),
+        )
+      },
     ),
     useCallback(
       (state) => {

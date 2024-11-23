@@ -8,7 +8,6 @@ import { VisionBoardItem } from '@increaser/ui/vision/VisionBoardItem'
 export const VisionDemo = () => {
   const { vision } = useUser()
   const items = order(Object.values(vision), (item) => item.order, 'asc')
-  console.log(items)
 
   return (
     <ActiveItemIdProvider initialValue={null}>

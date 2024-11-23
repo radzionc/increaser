@@ -58,7 +58,10 @@ const projectsDescription: ProjectDescription[] = [
 
 export const getDemoProjects = () => {
   const projects = projectsDescription.map(
-    ({ id, color, emoji, allocatedMinutesPerWeek, goal }, index) => {
+    (
+      { id, color, emoji, allocatedMinutesPerWeek, goal, workingDays },
+      index,
+    ) => {
       const project: Project = {
         id,
         name: id,
@@ -66,12 +69,12 @@ export const getDemoProjects = () => {
         emoji,
         allocatedMinutesPerWeek,
         status: 'active',
-        workingDays: 'everyday',
+        workingDays,
         goal,
-        order: projectsDescription.length - index,
+        order: index,
       }
       return project
     },
   )
-  return recordFromItems([otherProject, ...projects], (project) => project.id)
+  return recordFromItems([...projects, otherProject], (project) => project.id)
 }

@@ -22,7 +22,7 @@ type TaskDescription = {
 
 const tasks: TaskDescription[] = [
   {
-    name: 'Prepare for the sprint planning',
+    name: 'Build a new feature',
     projectId: DemoProject.Job,
     isCompleted: true,
     minutes: 80,

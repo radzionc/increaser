@@ -7,7 +7,7 @@ import { WebsiteSectionTitle } from '@lib/ui/website/WebsiteSectionTitle'
 import { FocusLauncher } from '@increaser/ui/focus/launcher/FocusLauncher'
 
 const Container = styled(VStack)`
-  max-width: 480px;
+  max-width: 520px;
   width: 100%;
 `
 

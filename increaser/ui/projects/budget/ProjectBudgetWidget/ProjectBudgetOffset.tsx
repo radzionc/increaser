@@ -45,8 +45,6 @@ export const ProjectBudgetOffset = () => {
     return (doneMinutesThisWeek - target) / total
   }, [doneMinutesThisWeek, isUnderTarget, target, total])
 
-  console.log({ left, width })
-
   return (
     <Offset
       style={{
