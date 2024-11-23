@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Container = styled.p`
   ${text({
-    color: 'supporting',
+    color: 'shy',
     height: 'l',
   })}
   white-space: pre-line;

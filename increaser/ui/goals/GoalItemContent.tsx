@@ -18,6 +18,7 @@ import { goalLinkedEntityTitle } from './form/linkedEntity/GoalLinkedEntity'
 import { CurrentVisionAttributeProvider } from '../vision/CurrentVisionAttributeProvider'
 import { VisionBoardItem } from '../vision/VisionBoardItem'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { GoalLinkedEntities } from './GoalLinkedEntities'
 
 const Header = styled.p`
   ${text({
@@ -69,19 +70,19 @@ export const GoalItemContent = () => {
 
   return (
     <VStack style={{ maxWidth: 600 }} gap={12}>
-      <VStack gap={8}>
+      <VStack gap={4}>
         <Header>
           <span>{emoji}</span>
           {name}
           <GoalStatusTag />
         </Header>
-        {plan && <GoalPlan />}
         <GoalDeadline />
       </VStack>
+      {plan && <GoalPlan />}
       <NonEmptyOnly
         value={vision}
         render={(items) => (
-          <LinkedEntitiesContainer title={goalLinkedEntityTitle.vision}>
+          <GoalLinkedEntities title={goalLinkedEntityTitle.vision}>
             <VisionContainer>
               {items.map((id) => {
                 const value = visionRecord[id]
@@ -94,13 +95,13 @@ export const GoalItemContent = () => {
                 )
               })}
             </VisionContainer>
-          </LinkedEntitiesContainer>
+          </GoalLinkedEntities>
         )}
       />
       <NonEmptyOnly
         value={taskFactories}
         render={(items) => (
-          <LinkedEntitiesContainer title={goalLinkedEntityTitle.taskFactory}>
+          <GoalLinkedEntities title={goalLinkedEntityTitle.taskFactory}>
             <LinkedEntitiesContent>
               {items.map((id) => {
                 const value = taskFactoryRecord[id]
@@ -113,13 +114,13 @@ export const GoalItemContent = () => {
                 )
               })}
             </LinkedEntitiesContent>
-          </LinkedEntitiesContainer>
+          </GoalLinkedEntities>
         )}
       />
       <NonEmptyOnly
         value={habits}
         render={(items) => (
-          <LinkedEntitiesContainer title={goalLinkedEntityTitle.habit}>
+          <GoalLinkedEntities title={goalLinkedEntityTitle.habit}>
             <LinkedEntitiesContent>
               {items.map((id) => {
                 const value = habitRecord[id]
@@ -132,13 +133,13 @@ export const GoalItemContent = () => {
                 )
               })}
             </LinkedEntitiesContent>
-          </LinkedEntitiesContainer>
+          </GoalLinkedEntities>
         )}
       />
       <NonEmptyOnly
         value={principles}
         render={(items) => (
-          <LinkedEntitiesContainer title={goalLinkedEntityTitle.principle}>
+          <GoalLinkedEntities title={goalLinkedEntityTitle.principle}>
             <LinkedEntitiesContent>
               {items.map((id) => {
                 const value = principlesRecord[id]
@@ -151,7 +152,7 @@ export const GoalItemContent = () => {
                 )
               })}
             </LinkedEntitiesContent>
-          </LinkedEntitiesContainer>
+          </GoalLinkedEntities>
         )}
       />
     </VStack>
