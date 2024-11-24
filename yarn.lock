@@ -3620,6 +3620,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@increaser/new-year@workspace:increaser/new-year":
+  version: 0.0.0-use.local
+  resolution: "@increaser/new-year@workspace:increaser/new-year"
+  dependencies:
+    clipboardy: "npm:^4.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@increaser/paddle-classic-ui@workspace:increaser/paddle-classic-ui":
   version: 0.0.0-use.local
   resolution: "@increaser/paddle-classic-ui@workspace:increaser/paddle-classic-ui"
