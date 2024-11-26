@@ -28,15 +28,18 @@ export const productUpdates: ProductUpdate[] = [
       },
     ],
     youtube: 'https://youtu.be/_RPaaNdAF74',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    telegram: 'https://t.me/increaser_app/70',
+    x: 'https://x.com/increaser_app/status/1861244647411974559',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7267009599327621121',
+    indieHackers:
+      'https://www.indiehackers.com/post/streamline-goal-setting-with-increaser-s-new-features-WMX2zCYlBM14hjZV0SjS',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1h01ut9/align_your_goals_like_never_before_with/',
   },
 
   {
-    releasedAt: 1731993006066,
+    releasedAt: 1732590495129,
     name: 'Customize Your Schedule and Enhanced Project Tracking',
     description:
       "We've introduced new features that let you tailor your work schedule and improve project tracking for a more streamlined experience.",
