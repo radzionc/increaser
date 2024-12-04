@@ -1,6 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { PrincipleFormShape } from './PrincipleFormShape'
-import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserEntityMutation'
@@ -11,48 +10,46 @@ import { HStack } from '@lib/ui/css/stack'
 import { PrincipleFormFields } from './PrincipleFormFields'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { NoValueFinishProps } from '@lib/ui/props'
+import { useLazySync } from '@lib/ui/hooks/useLazySync'
 
 export const EditPrincipleForm = ({ onFinish }: NoValueFinishProps) => {
   const principle = useCurrentPrinciple()
   const { id } = principle
-  const initialValue = pick(principle, ['name', 'categoryId', 'description'])
+
+  const initialValue = useMemo(
+    () => pick(principle, ['name', 'categoryId', 'description']),
+    [principle],
+  )
   const [value, setValue] = useState<PrincipleFormShape>(initialValue)
 
   const { mutate: updatePrinciple } = useUpdateUserEntityMutation('principle')
   const { mutate: deletePrinciple } = useDeleteUserEntityMutation('principle')
 
-  const isDisabled = useIsPrincipleFormDisabled(value)
-
-  const onSubmit = useCallback(() => {
-    if (isDisabled) {
-      return
-    }
-
-    const fields = getUpdatedValues({
-      before: initialValue,
-      after: value,
-    })
-
-    if (fields) {
-      updatePrinciple({
-        id: principle.id,
-        fields,
-      })
-    }
-
-    onFinish()
-  }, [initialValue, isDisabled, onFinish, principle.id, updatePrinciple, value])
+  useLazySync<Partial<PrincipleFormShape>>({
+    value: useMemo(
+      () =>
+        getUpdatedValues({
+          before: initialValue,
+          after: value,
+        }),
+      [initialValue, value],
+    ),
+    sync: useCallback(
+      (fields) =>
+        updatePrinciple({
+          id,
+          fields,
+        }),
+      [id, updatePrinciple],
+    ),
+  })
 
   return (
-    <ListItemForm
-      onClose={onFinish}
-      onSubmit={onSubmit}
-      isDisabled={isDisabled}
-    >
+    <ListItemForm onClose={onFinish}>
       <PrincipleFormFields
         value={value}
-        onChange={setValue}
-        onSubmit={onSubmit}
+        onChange={(value) => setValue((prev) => ({ ...prev, ...value }))}
+        onSubmit={onFinish}
         onClose={onFinish}
       />
       <HStack fullWidth>
