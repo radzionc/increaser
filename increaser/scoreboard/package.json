@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@sentry/serverless": "^7.109.0"
+    "@sentry/serverless": "7.114.0"
   },
   "scripts": {
     "transpile": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
@@ -13,6 +13,6 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "esbuild": "^0.18.20"
+    "esbuild": "^0.24.0"
   }
 }

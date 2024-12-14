@@ -13,7 +13,7 @@ export const MembersTelegram = () => {
     <ExternalLink to={MEMBERS_TELEGRAM_GROUP}>
       <HStack alignItems="center" gap={8}>
         <TelegramIcon />
-        <ShyTextButton as="span" text="Members Telegram Group" />
+        <ShyTextButton as="span">Members Telegram Group</ShyTextButton>
       </HStack>
     </ExternalLink>
   )

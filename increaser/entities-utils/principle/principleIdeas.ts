@@ -7,7 +7,7 @@ import {
   mindsetPrincipleCategory,
 } from '@increaser/entities/PrincipleCategory'
 
-const principleSourceTypes = ['book']
+export const principleSourceTypes = ['book']
 type PrincipleSourceType = (typeof principleSourceTypes)[number]
 type PrincipleSource = {
   type: PrincipleSourceType

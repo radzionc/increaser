@@ -1,4 +1,4 @@
-const habitTags = [
+export const habitTags = [
   'health',
   'sleep',
   'productivity',

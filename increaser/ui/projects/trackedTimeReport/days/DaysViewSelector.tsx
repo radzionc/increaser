@@ -1,5 +1,5 @@
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadionInput'
+import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadioInput'
 import { daysViews, useDaysView } from './state/daysView'
 
 export const DaysViewSelector = () => {

@@ -8,7 +8,7 @@ import { PWAContext } from '../PWAContext'
 import { InstallInstructions } from './InstallInstructions'
 import { productName } from '@increaser/config'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
-import { useEvent, useWindowEvent } from '@lib/ui/hooks/useEvent'
+import { useWindowEvent } from '@lib/ui/hooks/useEvent'
 import { BeforeInstallPromptEvent } from '@lib/ui/pwa/BeforeInstallPromptEvent'
 
 interface Props {

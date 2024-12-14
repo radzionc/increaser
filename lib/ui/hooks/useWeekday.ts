@@ -3,7 +3,7 @@ import { MS_IN_MIN } from '@lib/utils/time'
 import { useRhythmicRerender } from './useRhythmicRerender'
 
 export const useWeekday = () => {
-  const now = useRhythmicRerender(MS_IN_MIN)
+  useRhythmicRerender(MS_IN_MIN)
 
-  return getWeekday(now)
+  return getWeekday(Date.now())
 }

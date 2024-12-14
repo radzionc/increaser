@@ -1,4 +1,4 @@
-import { QueryDependant } from '@lib/ui/query/components/QueryDependant'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Spinner } from '@lib/ui/loaders/Spinner'
 import { Text } from '@lib/ui/text'
 import { LastScoreboardUpdate } from './LastScoreboardUpdate'
@@ -15,8 +15,8 @@ export const ScoreboardContent = () => {
   const { isAnonymous } = useUser()
 
   return (
-    <QueryDependant
-      query={query}
+    <MatchQuery
+      value={query}
       success={(value) => {
         const shouldShowPrompt = value.myPosition !== undefined && isAnonymous
         return (

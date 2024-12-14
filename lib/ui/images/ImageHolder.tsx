@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { getColor } from '../theme/getters'
 import { Center } from '../layout/Center'
@@ -28,16 +28,18 @@ const ImageIconWr = styled(Center)`
   background: ${getColor('mist')};
 `
 
-export const ImageHolder = forwardRef(function ImageHolderInner(
-  { width, height, children }: Props,
-  ref: React.Ref<HTMLDivElement> | null,
-) {
+export const ImageHolder = ({
+  width,
+  height,
+  children,
+  ...rest
+}: Props & React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <Container style={{ width, height }} ref={ref}>
+    <Container style={{ width, height }} {...rest}>
       <ImageIconWr>
         <ImageIcon />
       </ImageIconWr>
       {children}
     </Container>
   )
-})
+}

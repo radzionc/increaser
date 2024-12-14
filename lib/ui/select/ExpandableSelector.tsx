@@ -45,7 +45,7 @@ export function ExpandableSelector<T>({
   } = useFloatingOptions({
     strategy: 'fixed',
     selectedIndex: value === null ? null : options.indexOf(value),
-    placement: 'bottom',
+    placement: 'bottom-start',
     options: options.map(getOptionKey ?? getOptionName),
   })
 

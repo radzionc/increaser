@@ -75,9 +75,6 @@ export const useFloatingOptions = ({
         selectedIndex,
         onNavigate: setActiveIndex,
         loop: true,
-        scrollItemIntoView: {
-          block: 'center',
-        },
       }),
       useTypeahead(context, {
         listRef: optionStringsRef,

@@ -62,7 +62,7 @@ const LoginLinkEmail = ({
           This button will expire in 20 minutes.
         </Text>
         <Section style={buttonContainer}>
-          <Button pY={20} pX={20} style={button} href={loginUrl}>
+          <Button style={button} href={loginUrl}>
             Log in to {productName}
           </Button>
         </Section>
@@ -106,6 +106,7 @@ const button = {
   textDecoration: 'none',
   textAlign: 'center' as const,
   display: 'block',
+  padding: 20,
 }
 
 const buttonContainer = {

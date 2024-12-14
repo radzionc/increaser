@@ -1,9 +1,8 @@
-import { forwardRef } from 'react'
+import { ComponentProps, ReactNode, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { ClosableComponentProps, ComponentWithChildrenProps } from '../../props'
+import { ClosableComponentProps } from '../../props'
 import { takeWholeSpace } from '../../css/takeWholeSpace'
 import { HStack, VStack } from '@lib/ui/css/stack'
-import { ReactNode, useEffect, useState } from 'react'
 import { useIsScreenWidthLessThan } from '../../hooks/useIsScreenWidthLessThan'
 import { centeredContentColumn } from '../../css/centeredContentColumn'
 import { websiteConfig } from '../config'
@@ -14,16 +13,16 @@ import { MenuIcon } from '../../icons/MenuIcon'
 import { toSizeUnit } from '../../css/toSizeUnit'
 import { verticalPadding } from '../../css/verticalPadding'
 
-type WebsiteNavigationProps = ComponentWithChildrenProps & {
+const Wrapper = styled(VStack)`
+  ${takeWholeSpace};
+`
+
+type WebsiteNavigationProps = ComponentProps<typeof Wrapper> & {
   logo: ReactNode
   renderTopbarItems: () => ReactNode
   renderOverlayItems: (props: ClosableComponentProps) => ReactNode
   footer?: ReactNode
 }
-
-const Wrapper = styled(VStack)`
-  ${takeWholeSpace};
-`
 
 const Container = styled(VStack)`
   max-height: 100%;
@@ -59,10 +58,14 @@ const Content = styled.div`
   flex: 1;
 `
 
-export const WebsiteNavigation = forwardRef<
-  HTMLDivElement,
-  WebsiteNavigationProps
->(({ children, logo, renderOverlayItems, renderTopbarItems, footer }, ref) => {
+export function WebsiteNavigation({
+  children,
+  logo,
+  renderOverlayItems,
+  renderTopbarItems,
+  footer,
+  ...rest
+}: WebsiteNavigationProps) {
   const isSmallScreen = useIsScreenWidthLessThan(800)
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
 
@@ -74,7 +77,7 @@ export const WebsiteNavigation = forwardRef<
 
   return (
     <>
-      <Wrapper>
+      <Wrapper {...rest}>
         <Header>
           <HStack fullWidth alignItems="center" gap={40}>
             {logo}
@@ -97,7 +100,7 @@ export const WebsiteNavigation = forwardRef<
             </TobbarContent>
           </HStack>
         </Header>
-        <Container ref={ref}>
+        <Container>
           <Content>{children}</Content>
           {footer}
         </Container>
@@ -111,4 +114,4 @@ export const WebsiteNavigation = forwardRef<
       )}
     </>
   )
-})
+}

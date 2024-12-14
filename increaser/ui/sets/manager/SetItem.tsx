@@ -2,7 +2,7 @@ import { Set } from '@increaser/entities/User'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { useTheme } from 'styled-components'
 import { useUser } from '@increaser/ui/user/state/user'
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentProps } from 'react'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 
@@ -20,18 +20,16 @@ const Identifier = styled.div`
   height: 100%;
 `
 
-export const SetItem = forwardRef<HTMLDivElement, SetItemProps>(
-  ({ projectId, ...rest }, ref) => {
-    const { projects } = useUser()
+export const SetItem = ({ projectId, ...rest }: SetItemProps) => {
+  const { projects } = useUser()
 
-    const theme = useTheme()
+  const theme = useTheme()
 
-    const color = theme.colors.getLabelColor(projects[projectId].color)
+  const color = theme.colors.getLabelColor(projects[projectId].color)
 
-    return (
-      <Container ref={ref} {...rest}>
-        <Identifier style={{ background: color.toCssValue() }} />
-      </Container>
-    )
-  },
-)
+  return (
+    <Container {...rest}>
+      <Identifier style={{ background: color.toCssValue() }} />
+    </Container>
+  )
+}

@@ -1,11 +1,10 @@
-import { WebsiteSectionHeaderProps } from '@lib/ui/website/WebsiteSectionHeader'
 import { WebsiteSliceContent } from '@lib/ui/website/WebsiteSliceContent'
 import { WebsiteSlice } from '@lib/ui/website/WebsiteSlice'
 import { DemoGuard } from '../../demo/DemoGuard'
 import { PrinciplesDemo } from './PrinciplesDemo'
 import { WebsiteSectionTitle } from '@lib/ui/website/WebsiteSectionTitle'
 
-export const PrinciplesSlice = (props: Partial<WebsiteSectionHeaderProps>) => {
+export const PrinciplesSlice = () => {
   const id = 'principles'
 
   return (

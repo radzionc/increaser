@@ -5,7 +5,6 @@ import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider
 import { toPercents } from '@lib/utils/toPercents'
 import { ProjectBudgetWidgetDays } from './ProjectBudgetWidgetDays'
 import { useProjectDoneMinutesThisWeek } from '../../hooks/useProjectDoneMinutesThisWeek'
-import { LinesFiller } from '@lib/ui/visual/LinesFiller'
 import { ProjectBudgetOffset } from './ProjectBudgetOffset'
 
 const Container = styled.div`
@@ -22,9 +21,15 @@ const Container = styled.div`
 
 const Fill = styled.div`
   height: 100%;
-  background: ${getColor('foregroundExtra')};
   position: relative;
-  color: ${getColor('background')};
+
+  background: repeating-linear-gradient(
+    135deg,
+    ${getColor('foregroundExtra')},
+    ${getColor('foregroundExtra')} 1.5px,
+    ${getColor('background')} 1.5px,
+    ${getColor('background')} 3px
+  );
 `
 
 export const ProjectBudgetOverview = () => {
@@ -40,9 +45,7 @@ export const ProjectBudgetOverview = () => {
             Math.min(doneMinutesThisWeek / allocatedMinutesPerWeek, 1),
           ),
         }}
-      >
-        <LinesFiller />
-      </Fill>
+      />
       {goal && <ProjectBudgetOffset />}
       <ProjectBudgetWidgetDays />
     </Container>

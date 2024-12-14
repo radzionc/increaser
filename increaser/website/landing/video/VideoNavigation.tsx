@@ -1,10 +1,6 @@
-import {
-  InfoYouTubeVideo,
-  infoYouTubeVideos,
-} from '@increaser/info/infoYouTubeVideos'
+import { InfoYouTubeVideo } from '@increaser/info/infoYouTubeVideos'
 import { ComponentWithActiveState, InputProps } from '@lib/ui/props'
 import { ProductToolOption } from '../../navigation/features/ProductToolOption'
-import { getRecordKeys } from '@lib/utils/record/getRecordKeys'
 import styled, { css } from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { productTools } from '@increaser/entities/ProductTool'

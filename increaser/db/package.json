@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.478.0",
-    "@aws-sdk/lib-dynamodb": "^3.478.0"
+    "@aws-sdk/client-dynamodb": "^3.712.0",
+    "@aws-sdk/lib-dynamodb": "^3.712.0"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

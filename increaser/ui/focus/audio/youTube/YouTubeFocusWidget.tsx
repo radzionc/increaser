@@ -17,7 +17,7 @@ const Content = styled(ModalContent)`
   ${hideScrollbars};
 `
 
-const soundsViews = ['all', 'favourites'] as const
+export const soundsViews = ['all', 'favourites'] as const
 type SoundsView = (typeof soundsViews)[number]
 
 export const YouTubeFocusWidget = () => {

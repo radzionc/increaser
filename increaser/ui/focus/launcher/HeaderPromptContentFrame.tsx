@@ -20,9 +20,9 @@ export const HeaderPromptContentFrame = ({
   icon,
 }: ComponentWithIconProps & ComponentProps<typeof Container>) => {
   return (
-    <HStack alignItems="center" gap={8}>
+    <Container>
       <IconContainer>{icon}</IconContainer>
       {children}
-    </HStack>
+    </Container>
   )
 }

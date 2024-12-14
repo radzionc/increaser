@@ -9,6 +9,6 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.124"
+    "@types/aws-lambda": "^8.10.146"
   }
 }

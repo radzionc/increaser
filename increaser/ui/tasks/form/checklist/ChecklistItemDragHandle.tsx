@@ -5,7 +5,7 @@ import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { ComponentWithActiveState } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentProps } from 'react'
 import styled, { css } from 'styled-components'
 import { checklistConfig } from './config'
 
@@ -41,15 +41,14 @@ const Container = styled.div<ComponentWithActiveState>`
         `}
 `
 
-export const ChecklistItemDragHandle = forwardRef<
-  HTMLDivElement,
-  ComponentProps<typeof Container>
->((props, ref) => {
+export const ChecklistItemDragHandle = (
+  props: ComponentProps<typeof Container>,
+) => {
   return (
     <Wrapper>
-      <Container {...props} ref={ref}>
+      <Container {...props}>
         <GripVerticalIcon />
       </Container>
     </Wrapper>
   )
-})
+}

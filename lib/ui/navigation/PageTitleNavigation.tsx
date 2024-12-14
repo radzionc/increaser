@@ -86,7 +86,9 @@ export function PageTitleNavigation<T extends string>({
             onClick={() => onChange(v)}
             isActive={v === value}
             key={v}
-            ref={(el) => optionRefs.current.set(v, el)}
+            ref={(el) => {
+              optionRefs.current.set(v, el)
+            }}
           >
             {getOptionName(v)}
             <ItemUnderline />

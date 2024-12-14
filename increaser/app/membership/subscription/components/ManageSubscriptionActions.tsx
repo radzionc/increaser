@@ -1,8 +1,7 @@
 import { PaddleIFrame } from '@increaser/paddle-classic-ui/components/PaddleIFrame'
 import { PaddleModal } from '@increaser/paddle-classic-ui/components/PaddleModal'
 import { useManageSubscriptionQuery } from '../hooks/useManageSubscriptionQuery'
-import { QueryDependant } from '@lib/ui/query/components/QueryDependant'
-import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDependantDefaultProps'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { HStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
 import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
@@ -11,6 +10,7 @@ import { useState } from 'react'
 import { SyncSubscription } from './SyncSubscription'
 import { Match } from '@lib/ui/base/Match'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
+import { Spinner } from '@lib/ui/loaders/Spinner'
 
 type ManageSubscriptionAction = 'update' | 'cancel'
 
@@ -31,9 +31,9 @@ export const ManageSubscriptionActions = () => {
   const { planId } = shouldBeDefined(subscription ?? undefined)
 
   return (
-    <QueryDependant
-      query={query}
-      {...getQueryDependantDefaultProps('subscription management URLs')}
+    <MatchQuery
+      value={query}
+      pending={() => <Spinner />}
       success={({ updateUrl, cancelUrl }) => {
         const actionUrl: Record<ManageSubscriptionAction, string> = {
           update: updateUrl,

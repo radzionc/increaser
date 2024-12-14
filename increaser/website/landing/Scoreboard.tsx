@@ -1,4 +1,4 @@
-import { QueryDependant } from '@lib/ui/query/components/QueryDependant'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Spinner } from '@lib/ui/loaders/Spinner'
 import { Text } from '@lib/ui/text'
 import { Panel } from '@lib/ui/css/panel'
@@ -22,8 +22,8 @@ export const Scoreboard = () => {
         <SectionTitle>
           Last {scoreboardPeriodInDays[scoreboardPeriod]} days top performers
         </SectionTitle>
-        <QueryDependant
-          query={query}
+        <MatchQuery
+          value={query}
           success={(value) => (
             <VStack gap={24}>
               <ScoreboardTable

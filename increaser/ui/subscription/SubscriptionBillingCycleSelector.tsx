@@ -1,6 +1,5 @@
 import { SubscriptionPrice } from '@lib/subscription-ui/SubscriptionPrice'
 import { useSubscriptionBillingCycle } from '@lib/subscription-ui/SubscriptionBillingCycleProvider'
-import { SubscriptionPricesQueryDependant } from '@increaser/paddle-classic-ui/components/SubscriptionPricesQueryDependant'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { Switch } from '@lib/ui/inputs/Switch'
 import styled, { useTheme } from 'styled-components'
@@ -9,6 +8,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Tag } from '@lib/ui/tags/Tag'
 import { getAnnualSubscriptionSavings } from '@increaser/entities-utils/subscription/getAnnualSubscriptionSavings'
 import { toPercents } from '@lib/utils/toPercents'
+import { MatchSubscriptionPricesQuery } from '@increaser/paddle-classic-ui/components/MatchSubscriptionPricesQuery'
 
 const Header = styled(HStack)`
   padding: 0;
@@ -35,7 +35,7 @@ export const SubscriptionBillingCycleSelector = () => {
   const { colors } = useTheme()
 
   return (
-    <SubscriptionPricesQueryDependant
+    <MatchSubscriptionPricesQuery
       success={(prices) => {
         const saving = getAnnualSubscriptionSavings(
           prices.year.amount,

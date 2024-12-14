@@ -1,6 +1,5 @@
 import { useApiQuery } from '@increaser/api-ui/hooks/useApiQuery'
-import { QueryDependant } from '@lib/ui/query/components/QueryDependant'
-import { getQueryDependantDefaultProps } from '@lib/ui/query/utils/getQueryDependantDefaultProps'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { splitBy } from '@lib/utils/array/splitBy'
 import { order } from '@lib/utils/array/order'
 import { ProductFeatureItem } from './ProductFeatureItem'
@@ -8,6 +7,7 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { CurrentProductFeatureProvider } from './CurrentProductFeatureProvider'
 import { VStack } from '@lib/ui/css/stack'
 import { ProductFeatureStatus } from '@increaser/entities/ProductFeature'
+import { Spinner } from '@lib/ui/loaders/Spinner'
 
 type ProductFeatureListProps = {
   status: ProductFeatureStatus
@@ -19,9 +19,9 @@ export const ProductFeatureList = ({ status }: ProductFeatureListProps) => {
 
   return (
     <VStack>
-      <QueryDependant
-        query={featuresQuery}
-        {...getQueryDependantDefaultProps('features')}
+      <MatchQuery
+        value={featuresQuery}
+        pending={() => <Spinner />}
         success={(features) => {
           const [myUnapprovedFeatures, otherFeatures] = splitBy(
             features.filter((feature) => status === feature.status),

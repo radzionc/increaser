@@ -10,7 +10,7 @@ export const queryOAuthProvider = async <T>(
     let message = response.statusText
     try {
       message = await response.text()
-    } catch (err) {}
+    } catch {}
 
     throw new ApiError('invalidInput', `${action} failed: ${message}`)
   }

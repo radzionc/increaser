@@ -5,7 +5,7 @@ import {
 } from '@increaser/entities/ProductTool'
 import { ProductToolIcon } from '@increaser/ui/tools/ProductToolIcon'
 import { hStack, VStack } from '@lib/ui/css/stack'
-import { ClickableComponentProps, ComponentWithValueProps } from '@lib/ui/props'
+import { ComponentWithValueProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'

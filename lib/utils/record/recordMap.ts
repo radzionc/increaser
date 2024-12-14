@@ -1,11 +1,8 @@
 export const recordMap = <K extends string | number, T, V>(
   record: Record<K, T>,
-  fn: (value: T, index: number) => V,
+  fn: (value: T) => V,
 ): Record<K, V> => {
   return Object.fromEntries(
-    Object.entries(record).map(([key, value], index) => [
-      key,
-      fn(value as T, index),
-    ]),
+    Object.entries(record).map(([key, value]) => [key, fn(value as T)]),
   ) as Record<K, V>
 }

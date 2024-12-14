@@ -1,4 +1,4 @@
-import React, { forwardRef, ComponentProps } from 'react'
+import { ComponentProps } from 'react'
 import { FocusPassedTime } from '@increaser/ui/focus/FocusPassedTime'
 import { SessionIntervals } from './SessionIntervals'
 import { Text } from '@lib/ui/text'
@@ -29,12 +29,9 @@ const Content = styled.div`
   ${centerContent};
 `
 
-export const ActiveFocusTime = forwardRef<
-  HTMLDivElement,
-  ComponentProps<typeof Container>
->((props, ref) => {
+export const ActiveFocusTime = (props: ComponentProps<typeof Container>) => {
   return (
-    <Container ref={ref} {...props}>
+    <Container {...props}>
       <TakeWholeSpaceAbsolutely style={{ zIndex: -1, pointerEvents: 'none' }}>
         <SessionIntervals />
       </TakeWholeSpaceAbsolutely>
@@ -45,6 +42,4 @@ export const ActiveFocusTime = forwardRef<
       </Content>
     </Container>
   )
-})
-
-ActiveFocusTime.displayName = 'ActiveFocusTime'
+}

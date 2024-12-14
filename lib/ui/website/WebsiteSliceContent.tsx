@@ -5,5 +5,5 @@ export const WebsiteSliceContent = styled(VStack)`
   width: 100%;
   justify-content: center;
   align-items: center;
-  gap: 48px;
+  gap: 60px;
 `

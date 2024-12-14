@@ -26,7 +26,7 @@ export const ProjectsBudgetVisualization = () => {
     }
 
     return result
-  }, [colors.mist, projects, workBudgetTotal])
+  }, [colors, projects, workBudgetTotal])
 
   return <CountableItemsVisualization value={items} />
 }

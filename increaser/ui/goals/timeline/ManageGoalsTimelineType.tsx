@@ -1,4 +1,4 @@
-import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadionInput'
+import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadioInput'
 import {
   useGoalsTimelineType,
   goalTimelineTypes,

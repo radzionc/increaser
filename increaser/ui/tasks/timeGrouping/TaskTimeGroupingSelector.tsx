@@ -1,7 +1,7 @@
 import { useTaskTimeGrouping } from './useTaskTimeGrouping'
 import { taskTimeGroupings } from './TaskTimeGrouping'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadionInput'
+import { GroupedRadioInput } from '@lib/ui/inputs/GroupedRadioInput'
 
 export const TaskTimeGroupingSelector = () => {
   const [value, setValue] = useTaskTimeGrouping()

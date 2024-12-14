@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import { ComponentProps } from 'react'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -26,15 +26,13 @@ const Container = styled.div`
 
 type TaskItemProps = ComponentProps<typeof Container>
 
-export const TaskItem = forwardRef<HTMLDivElement, TaskItemProps>(
-  (props, ref) => {
-    const { id } = useCurrentTask()
-    const [, setActiveTaskId] = useActiveItemId()
+export const TaskItem = (props: TaskItemProps) => {
+  const { id } = useCurrentTask()
+  const [, setActiveTaskId] = useActiveItemId()
 
-    return (
-      <Container {...props} onClick={() => setActiveTaskId(id)} ref={ref}>
-        <TaskPrimaryContent />
-      </Container>
-    )
-  },
-)
+  return (
+    <Container {...props} onClick={() => setActiveTaskId(id)}>
+      <TaskPrimaryContent />
+    </Container>
+  )
+}

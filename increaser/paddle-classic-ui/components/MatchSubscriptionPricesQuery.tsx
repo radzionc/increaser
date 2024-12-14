@@ -1,8 +1,8 @@
 import { Text } from '@lib/ui/text'
 import {
-  QueryDependant,
-  QueryDependantProps,
-} from '@lib/ui/query/components/QueryDependant'
+  MatchQuery,
+  MatchQueryProps,
+} from '@lib/ui/query/components/MatchQuery'
 import { Center } from '@lib/ui/layout/Center'
 import { Spinner } from '@lib/ui/loaders/Spinner'
 import {
@@ -10,17 +10,17 @@ import {
   useSubscriptionPricesQuery,
 } from '../hooks/useSubscriptionPricesQuery'
 
-interface SubscriptionPricesQueryDependantProps
-  extends Pick<QueryDependantProps<SubscriptionPrices>, 'success'> {}
+interface MatchSubscriptionPricesQueryProps
+  extends Pick<MatchQueryProps<SubscriptionPrices>, 'success'> {}
 
-export const SubscriptionPricesQueryDependant = ({
+export const MatchSubscriptionPricesQuery = ({
   success,
-}: SubscriptionPricesQueryDependantProps) => {
+}: MatchSubscriptionPricesQueryProps) => {
   const query = useSubscriptionPricesQuery()
 
   return (
-    <QueryDependant
-      query={query}
+    <MatchQuery
+      value={query}
       error={() => <Text>Failed to load subscription price</Text>}
       pending={() => (
         <Center>
