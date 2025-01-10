@@ -10,7 +10,7 @@
     "generateIconMetaTags": "npx tsx icon/scripts/generateIconMetaTags"
   },
   "dependencies": {
-    "next": "^15.1.0",
+    "next": "^15.1.4",
     "next-sitemap": "^4.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

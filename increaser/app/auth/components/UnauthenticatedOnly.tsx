@@ -16,9 +16,5 @@ export const UnauthenticatedOnly = ({
     }
   }, [authSession, toAuthenticatedPage])
 
-  if (authSession) {
-    return null
-  }
-
   return <>{children}</>
 }
