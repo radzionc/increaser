@@ -26,7 +26,7 @@ export const EducationVideo = ({
   return (
     <ElementSizeAware
       render={({ setElement, size }) => (
-        <Container isActive={isPlaying} ref={setElement} {...rest}>
+        <Container isActive={isPlaying} {...rest} ref={setElement}>
           {size && (
             <YouTubePlayer
               loop
