@@ -53,8 +53,8 @@ export const organizeMonths = ({
   const newMonths = trackTime({
     sets: unsyncedSets,
     trackedTime: months,
-    getPeriodKey: (timestamp) => monthToString(toMonth(timestamp)),
-    targetTimeZoneOffset: timeZone,
+    getPeriodKey: (timestamp) =>
+      monthToString(toMonth(inTimeZone(timestamp, timeZone))),
   })
 
   const omitMonthsAfter = inTimeZone(

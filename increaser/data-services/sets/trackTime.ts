@@ -2,26 +2,21 @@ import { getSetDuration } from '@increaser/entities-utils/set/getSetDuration'
 import { TrackedTime } from '@increaser/entities/TrackedTime'
 import { Set } from '@increaser/entities/User'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { inTimeZone } from '@lib/utils/time/inTimeZone'
 
 type TrackTimeInput = {
   sets: Set[]
   trackedTime: TrackedTime
   getPeriodKey: (timestamp: number) => string
-  targetTimeZoneOffset: number
 }
 
 export const trackTime = ({
   sets,
   trackedTime,
   getPeriodKey,
-  targetTimeZoneOffset,
 }: TrackTimeInput) => {
   const result = { ...trackedTime }
   sets.forEach((set) => {
-    const timestamp = inTimeZone(set.end, targetTimeZoneOffset)
-
-    const periodKey = getPeriodKey(timestamp)
+    const periodKey = getPeriodKey(set.end)
     if (!result[periodKey]) {
       result[periodKey] = {}
     }

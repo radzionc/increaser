@@ -46,8 +46,8 @@ export const organizeWeeks = ({
   const newWeeks = trackTime({
     sets: unsyncedSets,
     trackedTime: weeks,
-    getPeriodKey: (timestamp) => weekToString(toWeek(timestamp)),
-    targetTimeZoneOffset: timeZone,
+    getPeriodKey: (timestamp) =>
+      weekToString(toWeek(inTimeZone(timestamp, timeZone))),
   })
 
   const omitWeeksAfter = inTimeZone(
