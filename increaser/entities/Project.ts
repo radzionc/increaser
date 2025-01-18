@@ -38,9 +38,9 @@ export const otherProjectId = 'other'
 
 export const otherProject: Project = {
   id: otherProjectId,
-  name: 'Other',
+  name: 'General',
   color: 0,
-  emoji: '❔',
+  emoji: '📦',
   status: 'active',
   allocatedMinutesPerWeek: 0,
   order: 0,

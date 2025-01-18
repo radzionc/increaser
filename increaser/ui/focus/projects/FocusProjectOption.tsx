@@ -6,8 +6,7 @@ import {
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
-import { Text } from '@lib/ui/text'
-import { HStack, hStack } from '@lib/ui/css/stack'
+import { hStack } from '@lib/ui/css/stack'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
@@ -15,6 +14,7 @@ import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { focusLauncherConfig } from '@increaser/ui/focus/launcher/config'
 import { useFocusTarget } from '../state/focusTarget'
 import { ProjectBudgetTag } from '@increaser/ui/projects/budget/ProjectBudgetTag'
+import { FocusProjectOptionContent } from './FocusProjectOptionContent'
 
 const Container = styled(UnstyledButton)<ComponentWithActiveState>`
   ${hStack({
@@ -50,10 +50,7 @@ export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
 
   return (
     <Container onClick={onClick} isActive={isSelected}>
-      <HStack alignItems="center" gap={8}>
-        <Text color="contrast">{emoji}</Text>
-        <Text cropped>{name}</Text>
-      </HStack>
+      <FocusProjectOptionContent emoji={emoji} name={name} />
       <ProjectBudgetTag />
     </Container>
   )

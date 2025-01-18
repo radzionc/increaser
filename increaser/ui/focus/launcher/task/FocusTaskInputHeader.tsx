@@ -10,11 +10,9 @@ import { getColor } from '@lib/ui/theme/getters'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { interactive } from '@lib/ui/css/interactive'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { ActionsInsideInteractiveElement } from '@lib/ui/base/ActionsInsideInteractiveElement'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
 
-import { focusLauncherConfig } from '../config'
 import { HeaderPromptContentFrame } from '../HeaderPromptContentFrame'
 import { productToolIconRecord } from '@increaser/ui/tools/productToolIconRecord'
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
@@ -28,17 +26,7 @@ import {
   FocusIconButton,
   focusIconButtonSize,
 } from '../../FocusSetWidget/FocusIconButton'
-
-const Container = styled(ActionsInsideInteractiveElement)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-
-  width: 100%;
-  height: ${toSizeUnit(focusLauncherConfig.sectionMinHeight)};
-  position: relative;
-`
+import { FocusEntityInputContainer } from '../FocusEntityInputContainer'
 
 const Label = styled(Text)`
   color: ${getColor('textSupporting')};
@@ -115,7 +103,7 @@ export function FocusTaskInputHeader({
           : undefined
       }
     >
-      <Container
+      <FocusEntityInputContainer
         actions={
           value
             ? {
