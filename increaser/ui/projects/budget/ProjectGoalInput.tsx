@@ -17,18 +17,17 @@ type ProjectGoalInputProps = InputProps<ProjectGoal | null> & {
   hours: number
 }
 
-const GoalSwitch = styled(Switch)`
-  padding-left: ${toSizeUnit(panelDefaultPadding)};
-`
-
 const Container = styled.div`
-  padding: 0;
+  padding-left: ${toSizeUnit(panelDefaultPadding)};
 
   ${hStack({
     fullWidth: true,
+    wrap: 'wrap',
   })}
 
-  height: 60px;
+  > * {
+    height: 60px;
+  }
 
   > *:only-child {
     flex: 1;
@@ -42,7 +41,7 @@ export const ProjectGoalInput = ({
 }: ProjectGoalInputProps) => {
   return (
     <Container>
-      <GoalSwitch
+      <Switch
         size="s"
         onChange={() => onChange(value ? null : 'doMore')}
         value={value !== null}
@@ -56,7 +55,7 @@ export const ProjectGoalInput = ({
             options={projectGoals}
             renderOption={(option) => goalOptionName[option]}
           />
-          <Text style={{ height: '100%' }} centerVertically color="contrast">
+          <Text centerVertically color="contrast">
             {pluralize(hours, 'hour')} per week
           </Text>
         </>

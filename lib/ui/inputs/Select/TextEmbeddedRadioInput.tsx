@@ -89,7 +89,7 @@ export function TextEmbeddedRadioInput<T extends string>({
               onSelect={() => onChange(option)}
             />
             <OptionContent>
-              <Text>{renderOption(option)}</Text>
+              <Text nowrap>{renderOption(option)}</Text>
               <OptionUnderline />
             </OptionContent>
           </Option>

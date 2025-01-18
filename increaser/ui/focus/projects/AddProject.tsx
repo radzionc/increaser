@@ -1,5 +1,4 @@
 import { Opener } from '@lib/ui/base/Opener'
-import React from 'react'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { Project } from '@increaser/entities/Project'
@@ -19,7 +18,7 @@ export const AddProject = ({ onFinish }: AddProjectProps) => {
         <AddFocusEntityOption onClick={onOpen} focusEntityName="a project" />
       )}
       renderContent={({ onClose }) => (
-        <PanelModal width={460} onFinish={onClose}>
+        <PanelModal onFinish={onClose}>
           <CreateProjectForm
             onFinish={(project) => {
               onClose()

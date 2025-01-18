@@ -66,7 +66,7 @@ export const ProjectSelector = ({
   return (
     <>
       {isAddingProject && (
-        <PanelModal width={460} onFinish={() => setIsAddingProject(false)}>
+        <PanelModal onFinish={() => setIsAddingProject(false)}>
           <CreateProjectForm
             onFinish={(project) => {
               setIsAddingProject(false)
