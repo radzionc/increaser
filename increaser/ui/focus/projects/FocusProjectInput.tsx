@@ -15,7 +15,8 @@ import { FocusProjectBudget } from '@increaser/ui/focus/launcher/FocusProjectBud
 import { FocusProjectOptionContent } from './FocusProjectOptionContent'
 import { cropText } from '@lib/ui/css/cropText'
 import { FocusEntityInputHeader } from '../launcher/focusEntity/FocusEntityInputHeader'
-import { FocusEntityInputWrapper } from '../launcher/focusEntity/FocusEntityInputWrapper'
+import { FocusLauncherField } from '../launcher/FocusLauncherField'
+import { Panel } from '@lib/ui/css/panel'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -45,53 +46,55 @@ export const FocusProjectInput = () => {
   }, [projectId])
 
   return (
-    <FocusEntityInputWrapper label="Focus project">
-      <Wrapper>
-        <FocusEntityInputHeader
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          onRemove={() => {
-            setProjectId(null)
-          }}
-          entityName="a project"
-          value={projectId ? projects[projectId] : null}
-          renderValue={(project) => (
-            <CurrentProjectProvider key={project.id} value={project}>
-              <Content>
-                <FocusProjectOptionContent
-                  emoji={project.emoji}
-                  name={project.name}
-                />
-                <ProjectBudgetTag />
-              </Content>
-            </CurrentProjectProvider>
-          )}
-          icon={<BoxIcon />}
-        />
-        {isOpen ? (
-          <FocusEntityOptionsContainer>
-            {options.map((project) => {
-              const { id } = project
-              return (
-                <CurrentProjectProvider key={id} value={project}>
-                  <FocusProjectOption
-                    onClick={() => {
-                      setProjectId(id)
-                    }}
+    <FocusLauncherField label="Focus project">
+      <Panel kind="secondary" withSections>
+        <Wrapper>
+          <FocusEntityInputHeader
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            onRemove={() => {
+              setProjectId(null)
+            }}
+            entityName="a project"
+            value={projectId ? projects[projectId] : null}
+            renderValue={(project) => (
+              <CurrentProjectProvider key={project.id} value={project}>
+                <Content>
+                  <FocusProjectOptionContent
+                    emoji={project.emoji}
+                    name={project.name}
                   />
-                </CurrentProjectProvider>
-              )
-            })}
-            <AddProject
-              onFinish={() => {
-                setIsOpen(false)
-              }}
-            />
-          </FocusEntityOptionsContainer>
-        ) : (
-          <FocusProjectBudget />
-        )}
-      </Wrapper>
-    </FocusEntityInputWrapper>
+                  <ProjectBudgetTag />
+                </Content>
+              </CurrentProjectProvider>
+            )}
+            icon={<BoxIcon />}
+          />
+          {isOpen ? (
+            <FocusEntityOptionsContainer>
+              {options.map((project) => {
+                const { id } = project
+                return (
+                  <CurrentProjectProvider key={id} value={project}>
+                    <FocusProjectOption
+                      onClick={() => {
+                        setProjectId(id)
+                      }}
+                    />
+                  </CurrentProjectProvider>
+                )
+              })}
+              <AddProject
+                onFinish={() => {
+                  setIsOpen(false)
+                }}
+              />
+            </FocusEntityOptionsContainer>
+          ) : (
+            <FocusProjectBudget />
+          )}
+        </Wrapper>
+      </Panel>
+    </FocusLauncherField>
   )
 }

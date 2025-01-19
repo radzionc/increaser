@@ -15,7 +15,8 @@ import { FocusTaskInputHeader } from './FocusTaskInputHeader'
 import { useFocusTarget } from '@increaser/ui/focus/state/focusTarget'
 import { useFocusProjectTask } from '@increaser/ui/focus/state/focusProjectTask'
 import { omit } from '@lib/utils/record/omit'
-import { FocusEntityInputWrapper } from '../focusEntity/FocusEntityInputWrapper'
+import { FocusLauncherField } from '../FocusLauncherField'
+import { Panel } from '@lib/ui/css/panel'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -41,45 +42,47 @@ export const FocusTaskInput = () => {
   const [isAddingTask, setIsAddingTask] = useState(false)
 
   return (
-    <FocusEntityInputWrapper label="Focus task (optional)">
-      {isEmpty(options) ? (
-        <AddTaskPrompt onClick={() => setIsAddingTask(true)} />
-      ) : (
-        <Wrapper>
-          <FocusTaskInputHeader
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            onRemove={() => {
-              if (projectId) {
-                setProjectTask((prev) => omit(prev, projectId))
-              }
-            }}
-            value={taskId ? tasks[taskId] : null}
-          />
-          {isOpen && (
-            <FocusEntityOptionsContainer>
-              {options.map((task) => (
-                <CurrentTaskProvider value={task} key={task.id}>
-                  <FocusTaskOption />
-                </CurrentTaskProvider>
-              ))}
-              <AddFocusEntityOption
-                focusEntityName="a task"
-                onClick={() => setIsAddingTask(true)}
-              />
-            </FocusEntityOptionsContainer>
-          )}
-          {isEditing && taskId && (
-            <CurrentTaskProvider value={tasks[taskId]}>
-              <EditTaskFormContent onFinish={() => setIsEditing(false)} />
-            </CurrentTaskProvider>
-          )}
-        </Wrapper>
-      )}
+    <FocusLauncherField label="Focus task (optional)">
+      <Panel kind="secondary" withSections>
+        {isEmpty(options) ? (
+          <AddTaskPrompt onClick={() => setIsAddingTask(true)} />
+        ) : (
+          <Wrapper>
+            <FocusTaskInputHeader
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              onRemove={() => {
+                if (projectId) {
+                  setProjectTask((prev) => omit(prev, projectId))
+                }
+              }}
+              value={taskId ? tasks[taskId] : null}
+            />
+            {isOpen && (
+              <FocusEntityOptionsContainer>
+                {options.map((task) => (
+                  <CurrentTaskProvider value={task} key={task.id}>
+                    <FocusTaskOption />
+                  </CurrentTaskProvider>
+                ))}
+                <AddFocusEntityOption
+                  focusEntityName="a task"
+                  onClick={() => setIsAddingTask(true)}
+                />
+              </FocusEntityOptionsContainer>
+            )}
+            {isEditing && taskId && (
+              <CurrentTaskProvider value={tasks[taskId]}>
+                <EditTaskFormContent onFinish={() => setIsEditing(false)} />
+              </CurrentTaskProvider>
+            )}
+          </Wrapper>
+        )}
 
-      {isAddingTask && (
-        <AddFocusTaskOverlay onFinish={() => setIsAddingTask(false)} />
-      )}
-    </FocusEntityInputWrapper>
+        {isAddingTask && (
+          <AddFocusTaskOverlay onFinish={() => setIsAddingTask(false)} />
+        )}
+      </Panel>
+    </FocusLauncherField>
   )
 }

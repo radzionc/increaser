@@ -1,4 +1,4 @@
-import { Panel, panelDefaultPadding } from '@lib/ui/css/panel'
+import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import {
@@ -17,16 +17,14 @@ const Label = styled.p`
   padding-left: ${toSizeUnit(panelDefaultPadding)};
 `
 
-export const FocusEntityInputWrapper = ({
+export const FocusLauncherField = ({
   label,
   children,
 }: LabeledComponentProps & ComponentWithChildrenProps) => {
   return (
     <VStack gap={8}>
       <Label>{label}</Label>
-      <Panel kind="secondary" withSections>
-        {children}
-      </Panel>
+      {children}
     </VStack>
   )
 }

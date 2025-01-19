@@ -5,7 +5,7 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { FocusDurationInputContent } from './FocusDurationInputContent'
 import { useFocusDuration } from '../state/focusDuration'
 import { useUserChangedFocusDurationAt } from '../state/useUserChangedFocusDurationAt'
-import { FocusEntityInputWrapper } from '../launcher/focusEntity/FocusEntityInputWrapper'
+import { FocusLauncherField } from '../launcher/FocusLauncherField'
 
 const Wrapper = styled(InputContainer)`
   padding: 0;
@@ -16,7 +16,7 @@ export const FocusDurationInput = () => {
   const [, setTime] = useUserChangedFocusDurationAt()
 
   return (
-    <FocusEntityInputWrapper
+    <FocusLauncherField
       label={
         <>
           Focus duration:{' '}
@@ -42,6 +42,6 @@ export const FocusDurationInput = () => {
           </Wrapper>
         )}
       />
-    </FocusEntityInputWrapper>
+    </FocusLauncherField>
   )
 }
