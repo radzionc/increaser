@@ -1,7 +1,6 @@
-import { HStack, VStack } from '@lib/ui/css/stack'
+import { HStack } from '@lib/ui/css/stack'
 import { FocusTaskOverview } from './task/FocusTaskOverview'
 import { ActiveFocusHeader } from './ActiveFocusHeader'
-import { Panel } from '@lib/ui/css/panel'
 
 import { CurrentTaskProvider } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { FocusAudioWidget } from '../audio/FocusAudioWidget'
@@ -17,11 +16,7 @@ export const FocusSetWidget = () => {
     <>
       <ActiveFocusDocumentTitle />
       <ActiveFocusHeader />
-      <VStack gap={4}>
-        <Panel kind="secondary" withSections>
-          <FocusTargetInputs />
-        </Panel>
-      </VStack>
+      <FocusTargetInputs />
       <HStack
         fullWidth
         alignItems="center"

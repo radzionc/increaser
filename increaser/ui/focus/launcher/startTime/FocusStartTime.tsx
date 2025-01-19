@@ -6,6 +6,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { useFocusTargetStartTime } from '../state/FocusLauncherStartTimeProvider'
 import { StartTimeEditorIntervalProvider } from './StartTimeEditorIntervalProvider'
+import { FocusEntityInputWrapper } from '../focusEntity/FocusEntityInputWrapper'
 
 const Container = styled(VStack)`
   padding: 0;
@@ -18,13 +19,15 @@ export const FocusStartTime = () => {
   const [value] = useFocusTargetStartTime()
 
   return (
-    <Container>
-      <ChangeStartTimeSwitch />
-      {value && (
-        <StartTimeEditorIntervalProvider>
-          <FocusStartTimeInput />
-        </StartTimeEditorIntervalProvider>
-      )}
-    </Container>
+    <FocusEntityInputWrapper label="Focus start time">
+      <Container>
+        <ChangeStartTimeSwitch />
+        {value && (
+          <StartTimeEditorIntervalProvider>
+            <FocusStartTimeInput />
+          </StartTimeEditorIntervalProvider>
+        )}
+      </Container>
+    </FocusEntityInputWrapper>
   )
 }
