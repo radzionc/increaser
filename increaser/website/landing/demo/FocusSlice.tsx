@@ -9,6 +9,7 @@ import { FocusLauncher } from '@increaser/ui/focus/launcher/FocusLauncher'
 const Container = styled(VStack)`
   max-width: 520px;
   width: 100%;
+  gap: 24px;
 `
 
 export const FocusSlice = () => {
