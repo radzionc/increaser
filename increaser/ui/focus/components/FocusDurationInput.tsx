@@ -20,7 +20,7 @@ export const FocusDurationInput = () => {
       label={
         <>
           Focus duration:{' '}
-          <Text as="span" color="contrast" weight="500">
+          <Text as="span" color="contrast">
             {value} min
           </Text>
         </>
