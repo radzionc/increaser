@@ -20,11 +20,12 @@ import {
   FocusIconButton,
   focusIconButtonSize,
 } from '../../FocusSetWidget/FocusIconButton'
-import { FocusEntityInputContainer } from '../FocusEntityInputContainer'
-import { FocusEntityInputLabel } from '../FocusEntityInputContent'
-import { FocusEntityInputIndicator } from '../FocusEntityInputContent'
-import { FocusEntityInputUnderline } from '../FocusEntityInputContent'
-import { FocusEntityInputContent } from '../FocusEntityInputContent'
+import { FocusEntityInputLabel } from '../focusEntity/FocusEntityInputContent'
+import { FocusEntityInputIndicator } from '../focusEntity/FocusEntityInputContent'
+import { FocusEntityInputUnderline } from '../focusEntity/FocusEntityInputContent'
+import { FocusEntityInputContent } from '../focusEntity/FocusEntityInputContent'
+import { FocusEntityInputContainer } from '../focusEntity/FocusEntityInputContainer'
+import { focusEntityConfig } from '../focusEntity/config'
 
 const TaskContent = styled(HStack)`
   line-height: ${toSizeUnit(tightListItemConfig.lineHeight)};
@@ -91,7 +92,7 @@ export function FocusTaskInputHeader({
                     />
                   ),
                   placerStyles: {
-                    right: panelDefaultPadding + focusIconButtonSize,
+                    right: focusEntityConfig.rightPadding + focusIconButtonSize,
                   },
                 },
               }

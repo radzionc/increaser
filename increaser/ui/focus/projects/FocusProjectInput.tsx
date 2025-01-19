@@ -6,8 +6,7 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { CurrentProjectProvider } from '@increaser/ui/projects/CurrentProjectProvider'
 import { FocusProjectOption } from './FocusProjectOption'
 import { BoxIcon } from '@lib/ui/icons/BoxIcon'
-import { FocusEntityInputHeader } from '@increaser/ui/focus/launcher/FocusEntityInputHeader'
-import { FocusEntityOptionsContainer } from '@increaser/ui/focus/launcher/FocusEntityOptionsContainer'
+import { FocusEntityOptionsContainer } from '../launcher/focusEntity/FocusEntityOptionsContainer'
 import { useRunOnChange } from '@lib/ui/hooks/useRunOnChange'
 import { useFocusProject } from '../state/focusProject'
 import { hStack, vStack } from '@lib/ui/css/stack'
@@ -15,6 +14,8 @@ import { ProjectBudgetTag } from '@increaser/ui/projects/budget/ProjectBudgetTag
 import { FocusProjectBudget } from '@increaser/ui/focus/launcher/FocusProjectBudget'
 import { FocusProjectOptionContent } from './FocusProjectOptionContent'
 import { cropText } from '@lib/ui/css/cropText'
+import { FocusEntityInputHeader } from '../launcher/focusEntity/FocusEntityInputHeader'
+import { FocusEntityInputWrapper } from '../launcher/focusEntity/FocusEntityInputWrapper'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -44,51 +45,53 @@ export const FocusProjectInput = () => {
   }, [projectId])
 
   return (
-    <Wrapper>
-      <FocusEntityInputHeader
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        onRemove={() => {
-          setProjectId(null)
-        }}
-        entityName="a project"
-        value={projectId ? projects[projectId] : null}
-        renderValue={(project) => (
-          <CurrentProjectProvider key={project.id} value={project}>
-            <Content>
-              <FocusProjectOptionContent
-                emoji={project.emoji}
-                name={project.name}
-              />
-              <ProjectBudgetTag />
-            </Content>
-          </CurrentProjectProvider>
-        )}
-        icon={<BoxIcon />}
-      />
-      {isOpen ? (
-        <FocusEntityOptionsContainer>
-          {options.map((project) => {
-            const { id } = project
-            return (
-              <CurrentProjectProvider key={id} value={project}>
-                <FocusProjectOption
-                  onClick={() => {
-                    setProjectId(id)
-                  }}
+    <FocusEntityInputWrapper label="Focus project">
+      <Wrapper>
+        <FocusEntityInputHeader
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          onRemove={() => {
+            setProjectId(null)
+          }}
+          entityName="a project"
+          value={projectId ? projects[projectId] : null}
+          renderValue={(project) => (
+            <CurrentProjectProvider key={project.id} value={project}>
+              <Content>
+                <FocusProjectOptionContent
+                  emoji={project.emoji}
+                  name={project.name}
                 />
-              </CurrentProjectProvider>
-            )
-          })}
-          <AddProject
-            onFinish={() => {
-              setIsOpen(false)
-            }}
-          />
-        </FocusEntityOptionsContainer>
-      ) : (
-        <FocusProjectBudget />
-      )}
-    </Wrapper>
+                <ProjectBudgetTag />
+              </Content>
+            </CurrentProjectProvider>
+          )}
+          icon={<BoxIcon />}
+        />
+        {isOpen ? (
+          <FocusEntityOptionsContainer>
+            {options.map((project) => {
+              const { id } = project
+              return (
+                <CurrentProjectProvider key={id} value={project}>
+                  <FocusProjectOption
+                    onClick={() => {
+                      setProjectId(id)
+                    }}
+                  />
+                </CurrentProjectProvider>
+              )
+            })}
+            <AddProject
+              onFinish={() => {
+                setIsOpen(false)
+              }}
+            />
+          </FocusEntityOptionsContainer>
+        ) : (
+          <FocusProjectBudget />
+        )}
+      </Wrapper>
+    </FocusEntityInputWrapper>
   )
 }

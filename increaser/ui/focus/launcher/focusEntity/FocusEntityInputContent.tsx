@@ -6,8 +6,10 @@ import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
-import { FocusIconButton } from '../FocusSetWidget/FocusIconButton'
+import { FocusIconButton } from '../../FocusSetWidget/FocusIconButton'
 import { absoluteOutline } from '@lib/ui/css/absoluteOutline'
+import { focusEntityConfig } from './config'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 export const FocusEntityInputIndicator = styled(FocusIconButton)``
 
@@ -30,6 +32,7 @@ export const FocusEntityInputContent = styled.div`
   ${takeWholeSpace};
 
   ${horizontalPadding(panelDefaultPadding)};
+  padding-right: ${toSizeUnit(focusEntityConfig.rightPadding)};
 
   &:hover ${FocusEntityInputIndicator} {
     background: ${getColor('mist')};

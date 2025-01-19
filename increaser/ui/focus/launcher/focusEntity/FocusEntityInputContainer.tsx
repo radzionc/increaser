@@ -1,8 +1,8 @@
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import styled from 'styled-components'
-import { focusLauncherConfig } from './config'
 import { ActionsInsideInteractiveElement } from '@lib/ui/base/ActionsInsideInteractiveElement'
 
+import { focusEntityConfig } from './config'
 export const FocusEntityInputContainer = styled(
   ActionsInsideInteractiveElement,
 )`
@@ -12,6 +12,6 @@ export const FocusEntityInputContainer = styled(
   gap: 20px;
 
   width: 100%;
-  height: ${toSizeUnit(focusLauncherConfig.sectionMinHeight)};
+  height: ${toSizeUnit(focusEntityConfig.height)};
   position: relative;
 `

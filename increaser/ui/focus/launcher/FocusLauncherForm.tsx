@@ -1,5 +1,4 @@
-import { Panel } from '@lib/ui/css/panel'
-import { VStack } from '@lib/ui/css/stack'
+import { vStack, VStack } from '@lib/ui/css/stack'
 
 import { WorkdayFinished } from './WorkdayFinished'
 import styled from 'styled-components'
@@ -9,16 +8,17 @@ import { useFocusTargetProject } from '@increaser/ui/focus/hooks/useFocusTargetP
 import { FocusTargetInputs } from '@increaser/ui/focus/components/FocusTargetInputs'
 import { FocusDurationInput } from '@increaser/ui/focus/components/FocusDurationInput'
 
-const Container = styled(Panel)`
-  position: relative;
-  isolation: isolate;
+const Container = styled(VStack)`
+  ${vStack({
+    gap: 20,
+  })}
 `
 
 export const FocusLauncherForm = () => {
   const project = useFocusTargetProject()
 
   return (
-    <Container withSections kind="secondary">
+    <Container>
       <FocusTargetInputs />
       {project && (
         <>

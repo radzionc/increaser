@@ -1,15 +1,14 @@
 import { HStack } from '@lib/ui/css/stack'
-import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { ComponentWithValueProps, RemovableComponentProps } from '@lib/ui/props'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { ReactNode } from 'react'
-import { HeaderPromptContentFrame } from './HeaderPromptContentFrame'
+import { HeaderPromptContentFrame } from '../HeaderPromptContentFrame'
 import {
   FocusIconButton,
   focusIconButtonSize,
-} from '../FocusSetWidget/FocusIconButton'
+} from '../../FocusSetWidget/FocusIconButton'
 import { FocusEntityInputContainer } from './FocusEntityInputContainer'
 import {
   FocusEntityInputIndicator,
@@ -17,6 +16,7 @@ import {
   FocusEntityInputUnderline,
 } from './FocusEntityInputContent'
 import { FocusEntityInputContent } from './FocusEntityInputContent'
+import { focusEntityConfig } from './config'
 
 type FocusEntityInputHeaderProps<T> = RemovableComponentProps &
   ComponentWithValueProps<T> & {
@@ -58,7 +58,7 @@ export function FocusEntityInputHeader<T>({
                   />
                 ),
                 placerStyles: {
-                  right: panelDefaultPadding + focusIconButtonSize,
+                  right: focusEntityConfig.rightPadding + focusIconButtonSize,
                 },
               },
             }

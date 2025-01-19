@@ -9,8 +9,8 @@ import { hStack } from '@lib/ui/css/stack'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
-import { focusLauncherConfig } from './config'
-import { HeaderPromptContentFrame } from './HeaderPromptContentFrame'
+import { focusLauncherConfig } from '../config'
+import { HeaderPromptContentFrame } from '../HeaderPromptContentFrame'
 
 const Container = styled(UnstyledButton)`
   ${hStack({

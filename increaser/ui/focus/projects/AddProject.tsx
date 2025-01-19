@@ -2,7 +2,7 @@ import { Opener } from '@lib/ui/base/Opener'
 import { CreateProjectForm } from '@increaser/ui/projects/form/CreateProjectForm'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
 import { Project } from '@increaser/entities/Project'
-import { AddFocusEntityOption } from '@increaser/ui/focus/launcher/AddFocusEntityOption'
+import { AddFocusEntityOption } from '../launcher/focusEntity/AddFocusEntityOption'
 import { useFocusProject } from '../state/focusProject'
 
 type AddProjectProps = {

@@ -9,12 +9,13 @@ import { EditTaskFormContent } from '@increaser/ui/tasks/form/EditTaskFormConten
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { AddTaskPrompt } from './AddTaskPrompt'
 import { AddFocusTaskOverlay } from './AddFocusTaskOverlay'
-import { AddFocusEntityOption } from '../AddFocusEntityOption'
-import { FocusEntityOptionsContainer } from '../FocusEntityOptionsContainer'
+import { AddFocusEntityOption } from '../focusEntity/AddFocusEntityOption'
+import { FocusEntityOptionsContainer } from '../focusEntity/FocusEntityOptionsContainer'
 import { FocusTaskInputHeader } from './FocusTaskInputHeader'
 import { useFocusTarget } from '@increaser/ui/focus/state/focusTarget'
 import { useFocusProjectTask } from '@increaser/ui/focus/state/focusProjectTask'
 import { omit } from '@lib/utils/record/omit'
+import { FocusEntityInputWrapper } from '../focusEntity/FocusEntityInputWrapper'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -40,7 +41,7 @@ export const FocusTaskInput = () => {
   const [isAddingTask, setIsAddingTask] = useState(false)
 
   return (
-    <>
+    <FocusEntityInputWrapper label="Focus task (optional)">
       {isEmpty(options) ? (
         <AddTaskPrompt onClick={() => setIsAddingTask(true)} />
       ) : (
@@ -79,6 +80,6 @@ export const FocusTaskInput = () => {
       {isAddingTask && (
         <AddFocusTaskOverlay onFinish={() => setIsAddingTask(false)} />
       )}
-    </>
+    </FocusEntityInputWrapper>
   )
 }
