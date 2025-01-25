@@ -28,7 +28,9 @@ export const useStopFocus = () => {
 
   const analytics = useAnalytics()
 
-  const { mutate: addSets } = useAddSetsMutation()
+  const { mutate: addSets } = useAddSetsMutation({
+    onOptimisticUpdate: () => setIntervals(null),
+  })
   const { mutate: updateTasks } = useUpdateUserEntitiesMutation('task')
 
   return useCallback(
@@ -44,8 +46,6 @@ export const useStopFocus = () => {
           }),
         )
       }
-
-      setIntervals(null)
 
       const sets = focusIntervalsToSets({
         intervals: correctedIntervals,
@@ -81,6 +81,6 @@ export const useStopFocus = () => {
         duration: Math.round(getSetsDuration(sets) / MS_IN_MIN),
       })
     },
-    [addSets, analytics, intervals, setIntervals, tasks, updateTasks],
+    [addSets, analytics, intervals, tasks, updateTasks],
   )
 }

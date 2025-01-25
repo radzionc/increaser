@@ -4,7 +4,11 @@ import { useApi } from '@increaser/api-ui/state/ApiContext'
 import { addSets } from '@increaser/entities-utils/set/addSets'
 import { useUpdateUser, useUser } from '../../user/state/user'
 
-export const useAddSetsMutation = () => {
+type UseAddSetsMutationConfig = {
+  onOptimisticUpdate?: () => void
+}
+
+export const useAddSetsMutation = (config?: UseAddSetsMutationConfig) => {
   const api = useApi()
   const updateState = useUpdateUser()
   const { sets } = useUser()
@@ -12,6 +16,7 @@ export const useAddSetsMutation = () => {
   return useMutation({
     mutationFn: (value: Set[]) => {
       updateState({ sets: addSets({ prev: sets, value }) })
+      config?.onOptimisticUpdate?.()
 
       return api.call('addSets', value)
     },
