@@ -14,6 +14,10 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ManageBreakDuration } from '../duration/ManageBreakDuration'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { BreakCountdown } from '../BreakCountdown'
+import { RhythmicRerender } from '@lib/ui/base/RhythmicRerender'
+import { Text } from '@lib/ui/text'
+import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 
 const Container = styled.div`
   overflow: hidden;
@@ -33,14 +37,28 @@ const Content = styled.div`
 export const FloatingBreakWidget = () => {
   const [breakDuration, setBreakDuration] = useBreakDuration()
 
-  if (!breakDuration) {
+  const lastSetEnd = useLastSetEnd()
+
+  if (!breakDuration || !lastSetEnd) {
     return null
   }
 
   return (
     <FloatingWidgetContainer>
       <FloatingWidgetHeader>
-        {breakDuration}-minute break
+        <RhythmicRerender
+          render={(now) => {
+            const duration = now - lastSetEnd
+            const hasExpired =
+              duration > convertDuration(breakDuration, 'min', 'ms')
+
+            return (
+              <Text color={hasExpired ? 'idle' : undefined}>
+                {breakDuration}-minute break
+              </Text>
+            )
+          }}
+        />
         <HStack>
           <ManageFloatingWidgetPosition />
           <IconButton

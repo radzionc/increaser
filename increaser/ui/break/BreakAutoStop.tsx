@@ -23,7 +23,7 @@ export const BreakAutoStop = () => {
 
     const duration = now - lastSetEnd
 
-    const maxDuration = Math.max(...breakDurations) + 5
+    const maxDuration = Math.max(...breakDurations) + 10
 
     if (duration > convertDuration(maxDuration, 'min', 'ms')) {
       setBreakDuration(null)
