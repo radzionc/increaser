@@ -1,1 +1,2 @@
-export type BreakDuration = 5 | 10 | 15
+export const breakDurations = [5, 10, 15]
+export type BreakDuration = (typeof breakDurations)[number]

@@ -37,7 +37,7 @@ The "Explore" subpage contains a list of suggested aspirations to give users ide
 
 ## Focus
 
-Users can set breaks between work sessions ranging from 5 to 30 minutes, or choose an unlimited break. Break durations are suggested automatically based on the length of the previous work session. Users can enable automatic work blocks that start after a break if the total work time does not exceed 90 minutes. After working for more than 90 minutes, it's recommended to take an 'unlimited' break.
+Users can set breaks between work sessions ranging from 5 to 15 minutes. Users can enable automatic work blocks that start after a break if the total work time does not exceed 90 minutes. User can select a duration for an automatic break. After working for more than 90 minutes in a block, the automatic break won't start.
 
 Increaser advocates structuring work into 90-minute blocks to improve focus and productivity. Each block includes work sessions with breaks of no more than 15 minutes.
 
