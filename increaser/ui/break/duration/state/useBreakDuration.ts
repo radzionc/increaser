@@ -5,9 +5,11 @@ import { BreakDuration } from '../BreakDuration'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { useCallback } from 'react'
 import { useFocusIntervals } from '../../../focus/state/focusIntervals'
+import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 
 export const useBreakDuration = () => {
   const [intervals] = useFocusIntervals()
+  const lastSetEnd = useLastSetEnd()
 
   return useStateCorrector(
     usePersistentState<BreakDuration | null>(
@@ -16,13 +18,17 @@ export const useBreakDuration = () => {
     ),
     useCallback(
       (duration) => {
-        if (intervals && duration) {
+        if (intervals) {
+          return null
+        }
+
+        if (!lastSetEnd) {
           return null
         }
 
         return duration
       },
-      [intervals],
+      [intervals, lastSetEnd],
     ),
   )
 }

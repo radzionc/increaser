@@ -1,9 +1,12 @@
 import { HStack } from '@lib/ui/css/stack'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
+import { floatingWidgetConfig } from './config'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 export const FloatingWidgetHeader = styled(HStack)`
-  padding: 8px 8px 8px 12px;
+  padding: ${toSizeUnit(floatingWidgetConfig.padding)};
+  padding-bottom: 12px;
   background: ${getColor('foreground')};
   align-items: center;
   justify-content: space-between;

@@ -7,8 +7,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { mergeRefs } from '@lib/ui/utils/mergeRefs'
-
-const youTubeVideoRatio = 9 / 16
+import { widescreenRatio } from '@lib/ui/video/config'
 
 const VideoWrapper = styled.div`
   width: 100%;
@@ -34,7 +33,7 @@ export const VideoPlayer = ({ value }: ComponentWithValueProps<string>) => {
                   <YouTubePlayer
                     isActive
                     width={size.width}
-                    height={size.width * youTubeVideoRatio}
+                    height={size.width / widescreenRatio}
                     url={value}
                     playing={isPlaying}
                     onPause={pause}

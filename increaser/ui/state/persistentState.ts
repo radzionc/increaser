@@ -51,6 +51,7 @@ export enum PersistentStateKey {
   AutoBreakStartedAt = 'autoBreakStartedAt',
   UnlockedLateWorkAt = 'unlockedLateWorkAt',
   DefaultBreakDuration = 'defaultBreakDuration',
+  BreakNotificationsHaveSound = 'breakNotificationsHaveSound',
 }
 
 const persistentStorage = hasWindow
