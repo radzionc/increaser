@@ -3,7 +3,7 @@ import { ManageFinishWorkAt } from '@increaser/ui/schedule/ManageSchedule/Manage
 import { ManageWeekends } from '@increaser/ui/preferences/weekends/ManageWeekends'
 
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
-import { ManageBreakPreference } from '@increaser/app/break/preference/ManageBreakPreference'
+import { BreakPreferences } from '../break/preferences/BreakPreferences'
 
 export const ManageWorkPreferences = () => {
   return (
@@ -11,7 +11,7 @@ export const ManageWorkPreferences = () => {
       <ManageFinishWorkAt />
       <ManageWeekends />
       <ManageWorkBudget />
-      <ManageBreakPreference />
+      <BreakPreferences />
     </SeparatedByLine>
   )
 }

@@ -2,7 +2,6 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { Button } from '@lib/ui/buttons/Button'
 import { centerContent } from '@lib/ui/css/centerContent'
-import { useState } from 'react'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import styled from 'styled-components'
@@ -10,6 +9,8 @@ import { UnlockIcon } from '@lib/ui/icons/UnlockIcon'
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { useWorkDayEndsAt } from '@increaser/ui/schedule/hooks/useWorkDayEndsAt'
+import { useUnlockedLateWorkAt } from '../state/unlockedLateWorkAt'
+import { useIsTodayLateWorkUnlocked } from '../state/useIsTodayLateWorkUnlocked'
 
 const Overlay = styled.div`
   ${takeWholeSpaceAbsolutely};
@@ -22,14 +23,16 @@ export const WorkdayFinished = () => {
   const lastSetEnd = useLastSetEnd()
   const now = useRhythmicRerender()
 
-  const [isLocked, setIsLocked] = useState(true)
+  const [, setUnlockedLateWorkAt] = useUnlockedLateWorkAt()
+
+  const isTodayLateWorkUnlocked = useIsTodayLateWorkUnlocked()
 
   const workdayEndsAt = useWorkDayEndsAt()
 
   if (
     now < workdayEndsAt ||
     (lastSetEnd && lastSetEnd > workdayEndsAt) ||
-    !isLocked
+    isTodayLateWorkUnlocked
   ) {
     return null
   }
@@ -59,7 +62,7 @@ export const WorkdayFinished = () => {
                 )}
               </VStack>
 
-              <Button onClick={() => setIsLocked(false)} kind="alert">
+              <Button onClick={() => setUnlockedLateWorkAt(now)} kind="alert">
                 <HStack alignItems="center" gap={8}>
                   <UnlockIcon />
                   <Text>Continue working</Text>
