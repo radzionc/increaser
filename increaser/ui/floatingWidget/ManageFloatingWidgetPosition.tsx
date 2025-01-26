@@ -1,5 +1,4 @@
 import { IconButton } from '@lib/ui/buttons/IconButton'
-import { useYouTubePlayerPosition } from './state/useYouTubePlayerPosition'
 import { RectangleCornerIcon } from '@lib/ui/icons/RectangleCornerIcon'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import styled, { css } from 'styled-components'
@@ -11,6 +10,7 @@ import { RectangleCorner } from '@lib/ui/entities/RectangleCorner'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { interactive } from '@lib/ui/css/interactive'
+import { useFloatingWidgetPosition } from './state/floatingWidgetPosition'
 
 const Container = styled(IconButton)<ComponentWithActiveState>`
   ${({ isActive }) =>
@@ -58,8 +58,8 @@ const OptionItem = styled.div<OptionItemProps>`
     `}
 `
 
-export const ManageYouTubePlayerPosition = () => {
-  const [position, setPosition] = useYouTubePlayerPosition()
+export const ManageFloatingWidgetPosition = () => {
+  const [position, setPosition] = useFloatingWidgetPosition()
   const {
     getReferenceProps,
     getFloatingProps,
@@ -86,7 +86,7 @@ export const ManageYouTubePlayerPosition = () => {
         isActive={isOpen}
         {...getReferenceProps()}
         kind="secondary"
-        title="Reposition the player"
+        title="Reposition the widget"
         icon={<RectangleCornerIcon value={position} />}
       />
       {isOpen && (

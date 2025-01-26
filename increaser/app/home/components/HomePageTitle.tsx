@@ -19,7 +19,7 @@ export const HomePageTitle = () => {
           render={(time) => {
             const duration = time - getLastItem(todaySets).end
             const value = formatDuration(duration, 'ms', {
-              kind: 'long',
+              kind: 'm',
             })
 
             if (duration < convertDuration(1, 'min', 'ms')) {

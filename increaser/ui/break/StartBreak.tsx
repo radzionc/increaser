@@ -3,15 +3,19 @@ import { useBreakDuration } from './duration/state/useBreakDuration'
 import { useDefaultBreakDuration } from './duration/state/useDefaultBreakDuration'
 
 export const StartBreak = () => {
-  const [, setBreakDuration] = useBreakDuration()
+  const [breakDuration, setBreakDuration] = useBreakDuration()
   const [defaultBreakDuration] = useDefaultBreakDuration()
+
+  if (breakDuration) {
+    return null
+  }
 
   return (
     <Button
       onClick={() => setBreakDuration(defaultBreakDuration)}
       kind="secondary"
     >
-      Start Break
+      Take a break
     </Button>
   )
 }

@@ -121,7 +121,7 @@ export const SetItemOverview = ({
                 <Text nowrap>
                   {formatDuration(getIntervalDuration(value), 'ms', {
                     minUnit: 'min',
-                    kind: 'long',
+                    kind: 'l',
                   })}
                 </Text>
               </HStackSeparatedBy>

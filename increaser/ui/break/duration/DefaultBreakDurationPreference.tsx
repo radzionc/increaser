@@ -18,7 +18,7 @@ export const DefaultBreakDurationPreference = () => {
         options={breakDurations}
         getOptionKey={(duration) => duration.toString()}
         getOptionName={(duration) =>
-          formatDuration(duration, 'min', { kind: 'long' })
+          formatDuration(duration, 'min', { kind: 'l' })
         }
       />
     </HStack>

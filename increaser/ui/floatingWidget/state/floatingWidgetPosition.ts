@@ -4,9 +4,9 @@ import {
 } from '@increaser/ui/state/persistentState'
 import { RectangleCorner } from '@lib/ui/entities/RectangleCorner'
 
-export const useYouTubePlayerPosition = () => {
+export const useFloatingWidgetPosition = () => {
   return usePersistentState<RectangleCorner>(
-    PersistentStateKey.YouTubePlayerPosition,
+    PersistentStateKey.FloatingWidgetPosition,
     'bottom-right',
   )
 }

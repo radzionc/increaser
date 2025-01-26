@@ -39,7 +39,7 @@ export const FreeTrialStatus = () => {
               <Text color="contrast" as="span" weight="500">
                 {formatDuration(freeTrialEnd - now, 'ms', {
                   minUnit: 'h',
-                  kind: 'long',
+                  kind: 'l',
                 })}
               </Text>
             </Text>

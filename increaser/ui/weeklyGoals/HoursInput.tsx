@@ -70,7 +70,7 @@ export const HoursInput = ({
             {formatDuration(max, 'h', {
               maxUnit: 'h',
               minUnit: 'h',
-              kind: 'long',
+              kind: 'l',
             })}
           </TextButton>
         )}
