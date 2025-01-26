@@ -46,6 +46,7 @@ export enum PersistentStateKey {
   FocusProject = 'focusProject',
   FocusProjectTask = 'focusProjectDefaultTask',
   GoalsTimelineType = 'goalsTimelineType',
+  AutoBreakDuration = 'autoBreakDuration',
 }
 
 const persistentStorage = hasWindow
