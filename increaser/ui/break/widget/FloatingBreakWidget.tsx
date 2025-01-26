@@ -8,7 +8,6 @@ import { FloatingWidgetHeader } from '../../floatingWidget/FloatingWidgetHeader'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { widescreenRatio } from '@lib/ui/video/config'
-import { ManageBreakNotifications } from '../notifications/ManageBreakNotifications'
 import { floatingWidgetConfig } from '../../floatingWidget/config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { ManageBreakDuration } from '../duration/ManageBreakDuration'
@@ -18,6 +17,7 @@ import { RhythmicRerender } from '@lib/ui/base/RhythmicRerender'
 import { Text } from '@lib/ui/text'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { ManageBreakNotifications } from '../notifications/ManageBreakNotifications'
 
 const Container = styled.div`
   overflow: hidden;

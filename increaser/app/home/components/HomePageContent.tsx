@@ -55,7 +55,7 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   <PageContent fullHeight>
-                    <VStack flexGrow gap={40}>
+                    <VStack style={{ position: 'relative' }} flexGrow gap={40}>
                       {intervals ? <FocusSetWidget /> : content}
                     </VStack>
                   </PageContent>

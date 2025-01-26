@@ -3,6 +3,7 @@ import { useBreakNotificationsHaveSound } from './state/breakNotificationsHaveSo
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
+import { BreakNotificationsToggles } from './BreakNotificationsToggles'
 
 const Container = styled(ManageNotifications)`
   > * {
@@ -23,7 +24,7 @@ export const ManageBreakNotifications = () => {
       setIsSoundEnabled={setHaveSound}
       title="Break notifications"
     >
-      coming soon
+      <BreakNotificationsToggles />
     </Container>
   )
 }

@@ -11,12 +11,14 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { useWorkDayEndsAt } from '@increaser/ui/schedule/hooks/useWorkDayEndsAt'
 import { useUnlockedLateWorkAt } from '../state/unlockedLateWorkAt'
 import { useIsTodayLateWorkUnlocked } from '../state/useIsTodayLateWorkUnlocked'
+import { borderRadius } from '@lib/ui/css/borderRadius'
 
 const Overlay = styled.div`
   ${takeWholeSpaceAbsolutely};
   ${centerContent};
   background: ${(props) =>
     props.theme.colors.foreground.getVariant({ a: () => 0.9 }).toCssValue()};
+  ${borderRadius.s}
 `
 
 export const WorkdayFinished = () => {

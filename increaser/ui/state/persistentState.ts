@@ -54,6 +54,7 @@ export enum PersistentStateKey {
   BreakNotificationsHaveSound = 'breakNotificationsHaveSound',
   HasBreakEndNotification = 'hasBreakEndNotification',
   HasBreakEndRecurringNotification = 'hasBreakEndRecurringNotification',
+  BreakNotifications = 'BreakNotifications',
 }
 
 const persistentStorage = hasWindow
