@@ -74,7 +74,7 @@ export const formatDuration = (
 
     const value = match(kind, {
       s: () => `${wholeValue}${unit.slice(0, 1)}`,
-      m: () => `${wholeValue} ${shortDurationUnitName[unit]}`,
+      m: () => `${wholeValue}${shortDurationUnitName[unit]}`,
       l: () => pluralize(wholeValue, durationUnitName[unit]),
       digitalClock: () => padWithZero(wholeValue),
     })

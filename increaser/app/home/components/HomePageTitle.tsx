@@ -6,6 +6,7 @@ import { Text } from '@lib/ui/text'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { convertDuration } from '@lib/utils/time/convertDuration'
+import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
 
 export const HomePageTitle = () => {
   const todaySets = useTodaySets()
@@ -30,7 +31,7 @@ export const HomePageTitle = () => {
               <Text centerVertically={{ gap: 8 }}>
                 <span>Time since last session:</span>
                 <Text as="span" color="primary">
-                  {value}
+                  <EmphasizeNumbers value={value} />
                 </Text>
               </Text>
             )
