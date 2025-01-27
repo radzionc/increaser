@@ -3,14 +3,13 @@ import {
   breakNotifications,
   useBreakNotifications,
 } from './state/breakNotifications'
-import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { useRequestNotificationPermissionMutation } from '@lib/ui/notifications/hooks/useRequestNotificationPermissionMutation'
 import { VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { useNotificationPermission } from '@lib/ui/notifications/hooks/useNotificationPermission'
 import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 import { ManageBreakNotification } from './ManageBreakNotification'
+import { NonDeniedOnly } from '@lib/ui/notifications/manage/NonDeniedOnly'
 
 const breakNotificationsConfig = {
   horizontalPadding: 8,
@@ -25,18 +24,13 @@ const PrimarySwitch = styled(Switch)`
 `
 
 export const BreakNotificationsToggles = () => {
-  const permission = useNotificationPermission()
   const [value, setValue] = useBreakNotifications()
   const { mutate: requestPermission } =
     useRequestNotificationPermissionMutation()
 
   return (
-    <VStack gap={8}>
-      {permission === 'denied' ? (
-        <ShyWarningBlock title="Enable browser notifications">
-          To receive break notifications, please enable browser notifications.
-        </ShyWarningBlock>
-      ) : (
+    <NonDeniedOnly name="break">
+      <VStack gap={8}>
         <PrimarySwitch
           onChange={(value) => {
             if (!value) {
@@ -51,12 +45,12 @@ export const BreakNotificationsToggles = () => {
           value={Object.values(value).every((v) => v)}
           label="Enable all"
         />
-      )}
-      <VStack gap={12}>
-        {breakNotifications.map((value) => (
-          <ManageBreakNotification key={value} value={value} />
-        ))}
+        <VStack gap={12}>
+          {breakNotifications.map((value) => (
+            <ManageBreakNotification key={value} value={value} />
+          ))}
+        </VStack>
       </VStack>
-    </VStack>
+    </NonDeniedOnly>
   )
 }
