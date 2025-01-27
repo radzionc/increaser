@@ -9,8 +9,7 @@ import { IntersectionAware } from '@lib/ui/base/IntersectionAware'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import YouTubePlayer from 'react-player/lazy'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
-
-const youTubeVideoRatio = 9 / 16
+import { widescreenRatio } from '@lib/ui/video/config'
 
 const VideoWrapper = styled.div`
   width: 100%;
@@ -40,7 +39,7 @@ export const ProductUpdateYouTubeVideo = ({
                       <YouTubePlayer
                         isActive
                         width={size.width}
-                        height={size.width * youTubeVideoRatio}
+                        height={size.width / widescreenRatio}
                         url={value}
                         playing={isPlaying}
                         onPause={pause}

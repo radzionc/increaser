@@ -3,15 +3,14 @@ import {
   focusNotifications,
   useFocusNotifications,
 } from './state/focusNotifications'
-import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { useRequestNotificationPermissionMutation } from '@lib/ui/notifications/hooks/useRequestNotificationPermissionMutation'
 import { VStack } from '@lib/ui/css/stack'
 import { ManageFocusNotification } from './ManageFocusNotification'
 import { focusNotificationsConfig } from './config'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { useNotificationPermission } from '@lib/ui/notifications/hooks/useNotificationPermission'
 import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
+import { NonDeniedOnly } from '@lib/ui/notifications/manage/NonDeniedOnly'
 
 const PrimarySwitch = styled(Switch)`
   padding: ${toSizeUnit(
@@ -21,18 +20,13 @@ const PrimarySwitch = styled(Switch)`
 `
 
 export const FocusNotificationsToggles = () => {
-  const permission = useNotificationPermission()
   const [value, setValue] = useFocusNotifications()
   const { mutate: requestPermission } =
     useRequestNotificationPermissionMutation()
 
   return (
-    <VStack gap={8}>
-      {permission === 'denied' ? (
-        <ShyWarningBlock title="Enable browser notifications">
-          To receive focus notifications, please enable browser notifications.
-        </ShyWarningBlock>
-      ) : (
+    <NonDeniedOnly name="focus">
+      <VStack gap={8}>
         <PrimarySwitch
           onChange={(value) => {
             if (!value) {
@@ -47,12 +41,12 @@ export const FocusNotificationsToggles = () => {
           value={Object.values(value).every((v) => v)}
           label="Enable all"
         />
-      )}
-      <VStack gap={12}>
-        {focusNotifications.map((value) => (
-          <ManageFocusNotification key={value} value={value} />
-        ))}
+        <VStack gap={12}>
+          {focusNotifications.map((value) => (
+            <ManageFocusNotification key={value} value={value} />
+          ))}
+        </VStack>
       </VStack>
-    </VStack>
+    </NonDeniedOnly>
   )
 }

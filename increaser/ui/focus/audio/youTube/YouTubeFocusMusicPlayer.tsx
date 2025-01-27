@@ -13,8 +13,7 @@ import {
 import { useRef, useCallback } from 'react'
 import ReactPlayer from 'react-player'
 import { useThrottle } from '@lib/ui/hooks/useThrottle'
-
-const youTubeVideoRatio = 9 / 16
+import { widescreenRatio } from '@lib/ui/video/config'
 
 const Container = styled.div`
   overflow: hidden;
@@ -52,7 +51,7 @@ export const YouTubeFocusMusicPlayer = () => {
   return (
     <ElementSizeAware
       render={({ setElement, size }) => {
-        const height = (size?.width || 0) * youTubeVideoRatio
+        const height = (size?.width || 0) / widescreenRatio
 
         return (
           <Container

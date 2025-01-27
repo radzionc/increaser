@@ -29,7 +29,7 @@ export const ManageWorkBudget = () => {
 
   const formattedWorkdBudgetTotal = formatDuration(workBudgetTotal, 'h', {
     maxUnit: 'h',
-    kind: 'long',
+    kind: 'l',
   })
 
   const daysBudget = useDaysBudget()

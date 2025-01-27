@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   ${vStack()};
 `
 
-const Content = styled.p`
+const Content = styled.div`
   ${hStack({
     fullWidth: true,
     alignItems: 'center',

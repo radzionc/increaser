@@ -27,7 +27,7 @@ export const SummaryFrameDuration = ({
   <Text as="span" weight="600" color="contrast">
     {formatDuration(value, 'min', {
       maxUnit: 'h',
-      kind: 'long',
+      kind: 'l',
     })}
   </Text>
 )

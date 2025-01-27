@@ -1,4 +1,3 @@
-import { BreakTimeline } from '@increaser/app/break/components/BreakTimeline'
 import styled from 'styled-components'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/css/stack'
@@ -8,16 +7,12 @@ import { PageContent } from '../../ui/page/PageContent'
 import { FocusLauncher } from '@increaser/ui/focus/launcher/FocusLauncher'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { sidebarConfig } from '../../navigation/Sidebar/config'
-import { useTodaySets } from '../../sets/hooks/useTodaySets'
 import { PageHeader } from '../../ui/page/header/PageHeader'
-import { PageTitle } from '@lib/ui/text/PageTitle'
-import { isEmpty } from '@lib/utils/array/isEmpty'
 import { Header } from '@lib/ui/layout/Header'
-import Link from 'next/link'
-import { getAppPath } from '@increaser/ui/navigation/app'
-import { LearnMorePrompt } from '@lib/ui/info/LearnMorePrompt'
 import { useFocusIntervals } from '@increaser/ui/focus/state/focusIntervals'
 import { FocusSetWidget } from '@increaser/ui/focus/FocusSetWidget/FocusSetWidget'
+import { HomePageTitle } from './HomePageTitle'
+import { HomePageTitleAction } from './HomePageTitleAction'
 
 const Container = styled.div`
   display: flex;
@@ -36,22 +31,14 @@ const MobileContent = styled(VStack)`
 export const HomePageContent = () => {
   const [intervals] = useFocusIntervals()
 
-  const todaySets = useTodaySets()
-
   const content = (
     <>
-      {isEmpty(todaySets) ? (
-        <PageHeader>
-          <Header>
-            <PageTitle>Start a focus session</PageTitle>
-            <Link href={getAppPath('info', 'focus')}>
-              <LearnMorePrompt as="div" />
-            </Link>
-          </Header>
-        </PageHeader>
-      ) : (
-        <BreakTimeline />
-      )}
+      <PageHeader>
+        <Header>
+          <HomePageTitle />
+          <HomePageTitleAction />
+        </Header>
+      </PageHeader>
 
       <FocusLauncher />
     </>
@@ -68,7 +55,7 @@ export const HomePageContent = () => {
               {shouldBeInOneColumn ? (
                 <MobileContent gap={40}>
                   <PageContent fullHeight>
-                    <VStack flexGrow gap={40}>
+                    <VStack style={{ position: 'relative' }} flexGrow gap={40}>
                       {intervals ? <FocusSetWidget /> : content}
                     </VStack>
                   </PageContent>

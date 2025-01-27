@@ -20,7 +20,7 @@ export enum PersistentStateKey {
   YouTubeFocusPreference = 'youTubeFocusPreference',
   FocusIntervals = 'focusIntervals',
   AreFocusSoundsCollapsed = 'areFocusSoundsCollapsed',
-  YouTubePlayerPosition = 'youTubePlayerPosition',
+  FloatingWidgetPosition = 'youTubePlayerPosition',
   WorkTimeReportPreferences = 'workTimeReportPreferences',
   GoalsStatusFilter = 'goalsStatusFilter',
   IsGoalsEducationOpen = 'isGoalsEducationOpen',
@@ -46,6 +46,15 @@ export enum PersistentStateKey {
   FocusProject = 'focusProject',
   FocusProjectTask = 'focusProjectDefaultTask',
   GoalsTimelineType = 'goalsTimelineType',
+  HasAutoBreak = 'hasAutoBreak',
+  BreakDuration = 'breakDuration',
+  AutoBreakStartedAt = 'autoBreakStartedAt',
+  UnlockedLateWorkAt = 'unlockedLateWorkAt',
+  DefaultBreakDuration = 'defaultBreakDuration',
+  BreakNotificationsHaveSound = 'breakNotificationsHaveSound',
+  HasBreakEndNotification = 'hasBreakEndNotification',
+  HasBreakEndRecurringNotification = 'hasBreakEndRecurringNotification',
+  BreakNotifications = 'BreakNotifications',
 }
 
 const persistentStorage = hasWindow

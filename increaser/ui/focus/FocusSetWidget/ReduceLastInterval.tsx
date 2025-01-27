@@ -17,7 +17,7 @@ const optionToString = (option: number) =>
   formatDuration(option, 'min', {
     minUnit: 'min',
     maxUnit: 'h',
-    kind: 'long',
+    kind: 'l',
   })
 
 export const ReduceLastInterval = ({ max }: ReduceLastIntervalProps) => {

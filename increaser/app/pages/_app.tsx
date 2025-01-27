@@ -19,6 +19,7 @@ import { UserManager } from '@increaser/ui/user/UserManager'
 import { UserStateOnly } from '@increaser/ui/user/UserStateOnly'
 import { FocusManager } from '@increaser/ui/focus/FocusManager'
 import { YouTubeFocusMusicProvider } from '@increaser/ui/focus/audio/youTube/YouTubeFocusMusicProvider'
+import { BreakManager } from '@increaser/ui/break/BreakManager'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -49,6 +50,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
                     <UserManager />
                     <UserStateOnly>
                       <FocusManager />
+                      <BreakManager />
                     </UserStateOnly>
                   </AuthenticatedOnly>
                   {component}
