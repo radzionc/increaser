@@ -7,18 +7,19 @@ import { speak } from '@lib/ui/notifications/utils/speak'
 import { attempt } from '@lib/utils/attempt'
 import { useBreakNotificationsHaveSound } from './state/breakNotificationsHaveSound'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { usePresentState } from '@lib/ui/state/usePresentState'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
 export const BreakEndNotification = () => {
-  const [breakDuration] = useBreakDuration()
-  const lastSetEnd = useLastSetEnd()
+  const [breakDuration] = usePresentState(useBreakDuration())
+  const lastSetEnd = shouldBePresent(useLastSetEnd())
   const [hasSound] = useBreakNotificationsHaveSound()
 
   const now = useRhythmicRerender()
 
   useEffect(() => {
-    if (!breakDuration || !lastSetEnd) return
-
     const breakEnd = lastSetEnd + convertDuration(breakDuration, 'min', 'ms')
+
     if (breakEnd <= now) return
 
     const timeout = setTimeout(() => {
