@@ -6,16 +6,18 @@ import { showNotification } from '@lib/ui/notifications/utils'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { attempt } from '@lib/utils/attempt'
 import { useBreakNotificationsHaveSound } from './state/breakNotificationsHaveSound'
+import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 
 export const BreakEndNotification = () => {
   const [breakDuration] = useBreakDuration()
   const lastSetEnd = useLastSetEnd()
   const [hasSound] = useBreakNotificationsHaveSound()
 
+  const now = useRhythmicRerender()
+
   useEffect(() => {
     if (!breakDuration || !lastSetEnd) return
 
-    const now = Date.now()
     const breakEnd = lastSetEnd + convertDuration(breakDuration, 'min', 'ms')
     if (breakEnd <= now) return
 
@@ -32,7 +34,7 @@ export const BreakEndNotification = () => {
     }, breakEnd - now)
 
     return () => clearTimeout(timeout)
-  }, [breakDuration, lastSetEnd, hasSound])
+  }, [breakDuration, lastSetEnd, hasSound, now])
 
   return null
 }

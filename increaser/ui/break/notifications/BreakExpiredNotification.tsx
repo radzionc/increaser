@@ -9,19 +9,24 @@ import { pluralize } from '@lib/utils/pluralize'
 import { remindersCount } from './state/breakNotifications'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { isInInterval } from '@lib/utils/interval/isInInterval'
+import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
+import { useBreakDuration } from '../duration/state/useBreakDuration'
+import { usePresentState } from '@lib/ui/state/usePresentState'
 
 export const BreakExpiredNotification = () => {
   const lastSetEnd = useLastSetEnd()
   const [hasSound] = useBreakNotificationsHaveSound()
+  const [breakDuration] = usePresentState(useBreakDuration())
+
+  const now = useRhythmicRerender()
 
   useEffect(() => {
     if (!lastSetEnd) return
 
-    const now = Date.now()
     const timeouts = range(remindersCount)
       .map(
-        (reminderNumber) =>
-          lastSetEnd + convertDuration(reminderNumber + 1, 'min', 'ms'),
+        (index) =>
+          lastSetEnd + convertDuration(breakDuration + index + 1, 'min', 'ms'),
       )
       .filter((time) => time > now)
       .map((time) =>
@@ -47,7 +52,7 @@ export const BreakExpiredNotification = () => {
     return () => {
       timeouts.forEach(clearTimeout)
     }
-  }, [lastSetEnd, hasSound])
+  }, [breakDuration, hasSound, lastSetEnd, now])
 
   return null
 }
