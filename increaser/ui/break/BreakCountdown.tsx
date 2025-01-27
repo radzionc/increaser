@@ -1,13 +1,11 @@
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
-import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { AnimatedDuration } from '@lib/ui/time/AnimatedDuration'
 import { Text } from '@lib/ui/text'
 
 export const BreakCountdown = () => {
   const lastSetEnd = useLastSetEnd()
-  const todayStartedAt = useStartOfDay()
 
-  if (!lastSetEnd || todayStartedAt > lastSetEnd) return null
+  if (!lastSetEnd) return null
 
   return (
     <Text as="div" weight="600" size={60} height="s">
