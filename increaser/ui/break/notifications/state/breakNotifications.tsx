@@ -39,10 +39,11 @@ export const breakNotificationName: Record<BreakNotification, string> = {
   breakExpired: 'Break expired',
 }
 
+export const remindersCount = 5
+
 export const breakNotificationDescription: Record<BreakNotification, string> = {
   breakEnd: 'Get notified when your break time is up.',
-  breakExpired:
-    'Receive reminders every minute for 5 minutes if you exceed your break time.',
+  breakExpired: `Receive reminders every minute for ${remindersCount} minutes if you exceed your break time.`,
 }
 
 export const breakNotificationText: Record<BreakNotification, string> = {

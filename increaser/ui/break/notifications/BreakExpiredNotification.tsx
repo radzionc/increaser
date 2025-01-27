@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { useLastSetEnd } from '@increaser/app/sets/hooks/useLastSetEnd'
 import { range } from '@lib/utils/array/range'
-import { MS_IN_MIN, MS_IN_SEC } from '@lib/utils/time'
 import { showNotification } from '@lib/ui/notifications/utils'
 import { speak } from '@lib/ui/notifications/utils/speak'
 import { attempt } from '@lib/utils/attempt'
 import { useBreakNotificationsHaveSound } from './state/breakNotificationsHaveSound'
 import { pluralize } from '@lib/utils/pluralize'
-
-const REMINDERS_COUNT = 5
+import { remindersCount } from './state/breakNotifications'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { isInInterval } from '@lib/utils/interval/isInInterval'
 
 export const BreakExpiredNotification = () => {
   const lastSetEnd = useLastSetEnd()
@@ -18,16 +18,25 @@ export const BreakExpiredNotification = () => {
     if (!lastSetEnd) return
 
     const now = Date.now()
-    const timeouts = range(REMINDERS_COUNT)
-      .map((reminderNumber) => lastSetEnd + (reminderNumber + 1) * MS_IN_MIN)
+    const timeouts = range(remindersCount)
+      .map(
+        (reminderNumber) =>
+          lastSetEnd + convertDuration(reminderNumber + 1, 'min', 'ms'),
+      )
       .filter((time) => time > now)
       .map((time) =>
         setTimeout(() => {
           const now = Date.now()
-          if (now < time - 5 * MS_IN_SEC || now > time + 5 * MS_IN_SEC) return
+          const offset = convertDuration(5, 's', 'ms')
+          const interval = { start: time - offset, end: time + offset }
+          if (!isInInterval(interval, now)) return
 
-          const minutes = Math.round((now - lastSetEnd) / MS_IN_MIN)
+          const minutes = Math.round(
+            convertDuration(now - lastSetEnd, 'ms', 'min'),
+          )
+
           const text = `The break started ${pluralize(minutes, 'minute')} ago`
+
           showNotification(text)
           if (hasSound) {
             attempt(() => speak(text), undefined)
