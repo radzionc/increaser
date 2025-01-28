@@ -17,6 +17,7 @@ import { useFocusProjectTask } from '@increaser/ui/focus/state/focusProjectTask'
 import { omit } from '@lib/utils/record/omit'
 import { FocusLauncherField } from '../FocusLauncherField'
 import { Panel } from '@lib/ui/css/panel'
+import { FocusTaskActions } from './FocusTaskActions'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -42,7 +43,10 @@ export const FocusTaskInput = () => {
   const [isAddingTask, setIsAddingTask] = useState(false)
 
   return (
-    <FocusLauncherField label="Focus task (optional)">
+    <FocusLauncherField
+      label="Focus task (optional)"
+      action={<FocusTaskActions />}
+    >
       <Panel kind="secondary" withSections>
         {isEmpty(options) ? (
           <AddTaskPrompt onClick={() => setIsAddingTask(true)} />

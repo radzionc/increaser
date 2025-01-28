@@ -1,11 +1,16 @@
 import { panelDefaultPadding } from '@lib/ui/css/panel'
-import { VStack } from '@lib/ui/css/stack'
+import { hStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { ChildrenProp, LabelProp } from '@lib/ui/props'
+import { ActionProp, ChildrenProp, LabelProp } from '@lib/ui/props'
 import { text } from '@lib/ui/text'
 import styled from 'styled-components'
 
 const Label = styled.div`
+  ${hStack({
+    fullWidth: true,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  })}
   ${text({
     color: 'supporting',
     weight: 600,
@@ -17,10 +22,14 @@ const Label = styled.div`
 export const FocusLauncherField = ({
   label,
   children,
-}: LabelProp & ChildrenProp) => {
+  action,
+}: LabelProp & ChildrenProp & Partial<ActionProp>) => {
   return (
     <VStack gap={8}>
-      <Label>{label}</Label>
+      <Label>
+        {label}
+        {action}
+      </Label>
       {children}
     </VStack>
   )
