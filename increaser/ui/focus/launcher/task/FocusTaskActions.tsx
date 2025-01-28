@@ -8,6 +8,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { isEmpty } from '@lib/utils/array/isEmpty'
+import { useFocusProject } from '../../state/focusProject'
 
 export const FocusTaskActions = () => {
   const options = useFilteredFocusTasks()
@@ -15,6 +16,8 @@ export const FocusTaskActions = () => {
   const [, setState] = useFocusProjectTask()
 
   const todayStartedAt = useStartOfDay()
+
+  const [, setFocusProject] = useFocusProject()
 
   const actions = useMemo(() => {
     const result: FocusTaskActionProps[] = []
@@ -30,6 +33,7 @@ export const FocusTaskActions = () => {
         name: 'Today',
         value: tasksForToday.length,
         onClick: () => {
+          setFocusProject(task.projectId)
           setState((prev) => ({
             ...prev,
             [task.projectId]: task.id,
@@ -50,6 +54,7 @@ export const FocusTaskActions = () => {
         value: overdueTasks.length,
         kind: 'idle',
         onClick: () => {
+          setFocusProject(task.projectId)
           setState((prev) => ({
             ...prev,
             [task.projectId]: task.id,
@@ -59,7 +64,7 @@ export const FocusTaskActions = () => {
     }
 
     return result
-  }, [options, setState, todayStartedAt])
+  }, [options, setFocusProject, setState, todayStartedAt])
 
   return (
     <NonEmptyOnly

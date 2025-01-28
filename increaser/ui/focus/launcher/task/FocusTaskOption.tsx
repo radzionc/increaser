@@ -19,6 +19,7 @@ import { useFocusTarget } from '@increaser/ui/focus/state/focusTarget'
 import { useFocusProjectTask } from '@increaser/ui/focus/state/focusProjectTask'
 import { omit } from '@lib/utils/record/omit'
 import { FocusIconButton } from '../../FocusSetWidget/FocusIconButton'
+import { useFocusProject } from '../../state/focusProject'
 
 const Container = styled(OnHoverAction)`
   ${hStack({
@@ -57,6 +58,7 @@ export const FocusTaskOption = () => {
   const { id, projectId } = useCurrentTask()
   const { taskId, projectId: focusTargetProjectId } = useFocusTarget()
   const [, setState] = useFocusProjectTask()
+  const [, setFocusProject] = useFocusProject()
 
   const isActive = taskId === id
 
@@ -69,6 +71,7 @@ export const FocusTaskOption = () => {
         <Content
           isActive={isActive}
           onClick={() => {
+            setFocusProject(projectId)
             if (taskId === id) {
               if (focusTargetProjectId) {
                 setState((prev) => omit(prev, focusTargetProjectId))
