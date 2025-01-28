@@ -33,12 +33,12 @@ export const FocusStartTime = () => {
   return (
     <FocusLauncherField
       label={
-        <>
+        <span>
           Focus start time:{' '}
           <Text as="span" color="contrast">
             {value ? formatTime(value) : 'now'}
           </Text>
-        </>
+        </span>
       }
     >
       <Panel kind="secondary" withSections>

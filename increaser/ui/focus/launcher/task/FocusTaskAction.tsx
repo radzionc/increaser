@@ -8,10 +8,13 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { text } from '@lib/ui/text'
 import { match } from '@lib/utils/match'
+import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 
 type Kind = 'regular' | 'idle'
 
 const Button = styled(UnstyledButton)<KindProp<Kind>>`
+  height: 100%;
+  ${horizontalPadding(4)}
   ${hStack({
     gap: 4,
     alignItems: 'center',
@@ -19,10 +22,18 @@ const Button = styled(UnstyledButton)<KindProp<Kind>>`
   ${({ kind }) =>
     text({
       color: match(kind, {
-        regular: () => undefined,
+        regular: () => 'regular',
         idle: () => 'idle',
       }),
     })}
+
+  &:hover {
+    color: ${({ kind }) =>
+      match(kind, {
+        regular: () => getHoverVariant('text'),
+        idle: () => getHoverVariant('idle'),
+      })};
+  }
 `
 
 const Circle = styled.div`

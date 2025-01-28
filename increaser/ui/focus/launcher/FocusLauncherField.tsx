@@ -17,6 +17,7 @@ const Label = styled.div`
     size: 12,
   })}
   padding-left: ${toSizeUnit(panelDefaultPadding)};
+  min-height: 32px;
 `
 
 export const FocusLauncherField = ({
@@ -25,7 +26,7 @@ export const FocusLauncherField = ({
   action,
 }: LabelProp & ChildrenProp & Partial<ActionProp>) => {
   return (
-    <VStack gap={8}>
+    <VStack>
       <Label>
         {label}
         {action}

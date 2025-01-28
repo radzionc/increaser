@@ -70,7 +70,7 @@ export const FocusTaskActions = () => {
     <NonEmptyOnly
       value={actions}
       render={(props) => (
-        <HStack alignItems="center" gap={8}>
+        <HStack alignItems="center" fullHeight gap={2}>
           {props.map((action) => (
             <FocusTaskAction key={action.name} {...action} />
           ))}
