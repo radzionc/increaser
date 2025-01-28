@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 import { useBoolean } from '../hooks/useBoolean'
-import { BackActionProp, ForwardActionProp } from '../props'
+import { OnBackProp, OnForwardProp } from '../props'
 
 type StepTransitionProps = {
-  from: (props: ForwardActionProp) => ReactNode
-  to: (props: BackActionProp) => ReactNode
+  from: (props: OnForwardProp) => ReactNode
+  to: (props: OnBackProp) => ReactNode
 }
 
 export const StepTransition = ({ from, to }: StepTransitionProps) => {

@@ -14,11 +14,11 @@ export type ChildrenProp = {
   children: ReactNode
 }
 
-export type BackActionProp = {
+export type OnBackProp = {
   onBack: () => void
 }
 
-export type ForwardActionProp = {
+export type OnForwardProp = {
   onForward: () => void
 }
 
