@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 
 import { Interval } from '@lib/utils/interval/Interval'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -7,9 +7,7 @@ import { startOfDay, startOfHour } from 'date-fns'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { CurrentIntervalContext } from '@lib/ui/state/currentInterval'
 
-export const StartTimeEditorIntervalProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const StartTimeEditorIntervalProvider = ({ children }: ChildrenProp) => {
   const now = useRhythmicRerender(convertDuration(10, 's', 'ms'))
 
   const interval: Interval = useMemo(() => {

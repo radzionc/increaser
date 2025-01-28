@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { useTrackedProjects } from './projects/TrackedProjectsProvider'
 import { SigmaIcon } from '@lib/ui/icons/SigmaIcon'
 import styled from 'styled-components'
@@ -19,9 +19,7 @@ const Container = styled.p`
   }
 `
 
-export const TrackedEntityIndicator = ({
-  value,
-}: ComponentWithValueProps<string | null>) => {
+export const TrackedEntityIndicator = ({ value }: ValueProp<string | null>) => {
   const projects = useTrackedProjects()
 
   if (!value) {

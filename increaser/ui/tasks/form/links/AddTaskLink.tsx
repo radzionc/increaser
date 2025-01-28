@@ -1,11 +1,11 @@
 import { LinkIcon } from '@lib/ui/icons/LinkIcon'
 import { ExpandableSelectorContainer } from '@lib/ui/select/ExpandableSelectorContainer'
-import { ValueFinishProps } from '@lib/ui/props'
+import { OnFinishValueProp } from '@lib/ui/props'
 import { TaskLink } from '@increaser/entities/Task'
 import { Opener } from '@lib/ui/base/Opener'
 import { AddTaskLinkOverlay } from './AddTaskLinkOverlay'
 
-export const AddTaskLink = ({ onFinish }: ValueFinishProps<TaskLink>) => {
+export const AddTaskLink = ({ onFinish }: OnFinishValueProp<TaskLink>) => {
   return (
     <Opener
       renderOpener={({ onOpen }) => (

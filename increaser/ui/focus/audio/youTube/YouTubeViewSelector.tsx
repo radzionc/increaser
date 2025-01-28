@@ -6,7 +6,7 @@ import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { HStack } from '@lib/ui/css/stack'
 import { modalConfig } from '@lib/ui/modal/config'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import styled, { css } from 'styled-components'
 import { youTubeWidgetConfig } from './config'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
@@ -28,7 +28,7 @@ const ItemUnderline = styled.div`
     transparent;
 `
 
-const Option = styled(UnstyledButton)<ComponentWithActiveState>`
+const Option = styled(UnstyledButton)<IsActiveProp>`
   height: 100%;
   ${centerContent};
   ${horizontalPadding(

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { OptionalValueFinishProps } from '@lib/ui/props'
+import { OnFinishOptionalValueProp } from '@lib/ui/props'
 import { HabitFormShape } from '@increaser/ui/habits/form/HabitFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
 import { useIsHabitFormDisabled } from './useIsHabitFormDisabled'
@@ -15,7 +15,7 @@ import { useHabits } from '../hooks/useHabits'
 
 export const CreateHabitForm = ({
   onFinish,
-}: OptionalValueFinishProps<Habit>) => {
+}: OnFinishOptionalValueProp<Habit>) => {
   const habits = useHabits()
   const [value, setValue] = useState<HabitFormShape>({
     name: '',

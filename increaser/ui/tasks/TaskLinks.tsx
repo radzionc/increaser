@@ -5,7 +5,7 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { ExternalLinkIcon } from '@lib/ui/icons/ExternalLinkIcon'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { TaskLink } from '@increaser/entities/Task'
 
 const Container = styled(ExternalLink)`
@@ -28,7 +28,7 @@ const Container = styled(ExternalLink)`
   }
 `
 
-export const TaskLinks = ({ value }: ComponentWithValueProps<TaskLink[]>) => {
+export const TaskLinks = ({ value }: ValueProp<TaskLink[]>) => {
   return (
     <HStack wrap="wrap" gap={8}>
       {value.map(({ url, name }, index) => (

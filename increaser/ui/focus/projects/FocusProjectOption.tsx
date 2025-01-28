@@ -1,8 +1,5 @@
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import {
-  ClickableComponentProps,
-  ComponentWithActiveState,
-} from '@lib/ui/props'
+import { OnClickProp, IsActiveProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
@@ -16,7 +13,7 @@ import { useFocusTarget } from '../state/focusTarget'
 import { ProjectBudgetTag } from '@increaser/ui/projects/budget/ProjectBudgetTag'
 import { FocusProjectOptionContent } from './FocusProjectOptionContent'
 
-const Container = styled(UnstyledButton)<ComponentWithActiveState>`
+const Container = styled(UnstyledButton)<IsActiveProp>`
   ${hStack({
     fullWidth: true,
     alignItems: 'center',
@@ -42,7 +39,7 @@ const Container = styled(UnstyledButton)<ComponentWithActiveState>`
         `};
 `
 
-export const FocusProjectOption = ({ onClick }: ClickableComponentProps) => {
+export const FocusProjectOption = ({ onClick }: OnClickProp) => {
   const { projectId } = useFocusTarget()
 
   const { id, name, emoji } = useCurrentProject()

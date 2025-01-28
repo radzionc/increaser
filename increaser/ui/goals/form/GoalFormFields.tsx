@@ -5,7 +5,7 @@ import { GoalFormShape } from './GoalFormShape'
 import { GoalTargetInput } from './target/GoalTargetInput'
 import { GoalTaskFactoriesInput } from './GoalTaskFactoriesInput'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { ClosableComponentProps, InputProps } from '@lib/ui/props'
+import { OnCloseProp, InputProps } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
@@ -23,7 +23,7 @@ import { GoalVisionInput } from './GoalVisionInput'
 type GoalFormFieldsProps = InputProps<GoalFormShape> & {
   onSubmit?: () => void
   actions?: ReactNode
-} & ClosableComponentProps
+} & OnCloseProp
 
 const HeaderWrapper = styled(VStack)`
   padding: 0;

@@ -1,6 +1,6 @@
 import { VisionAttributeFormShape } from './VisionAttributeFormShape'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { ClosableComponentProps, InputProps } from '@lib/ui/props'
+import { OnCloseProp, InputProps } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { VisionImageInput } from './VisionImageInput'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
@@ -15,7 +15,7 @@ import { panelFormConfig } from '../../form/panel/config'
 
 type VisionAttributeFormFieldsProps = InputProps<VisionAttributeFormShape> & {
   onSubmit?: () => void
-} & ClosableComponentProps
+} & OnCloseProp
 
 const HeaderWrapper = styled(VStack)`
   padding: 0;

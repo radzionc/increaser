@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
 import { ComponentProps } from 'react'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 
 const Wrapper = styled.div`
   display: block;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
 `
 
-const Container = styled(VStack)<ComponentWithActiveState>`
+const Container = styled(VStack)<IsActiveProp>`
   position: relative;
   max-height: 100%;
   ${borderRadius.m};

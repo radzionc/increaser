@@ -1,6 +1,6 @@
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { HStack } from '@lib/ui/css/stack'
-import { ComponentWithIconProps } from '@lib/ui/props'
+import { IconProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { ComponentProps } from 'react'
 import styled from 'styled-components'
@@ -18,7 +18,7 @@ const IconContainer = styled(IconWrapper)`
 export const HeaderPromptContentFrame = ({
   children,
   icon,
-}: ComponentWithIconProps & ComponentProps<typeof Container>) => {
+}: IconProp & ComponentProps<typeof Container>) => {
   return (
     <Container>
       <IconContainer>{icon}</IconContainer>

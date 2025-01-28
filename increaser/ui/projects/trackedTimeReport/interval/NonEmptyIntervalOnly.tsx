@@ -1,9 +1,7 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useSelectedIntervalLength } from './useSelectedIntervalLength'
 
-export const NonEmptyIntervalOnly = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const NonEmptyIntervalOnly = ({ children }: ChildrenProp) => {
   const dataSize = useSelectedIntervalLength()
 
   if (dataSize < 1) return null

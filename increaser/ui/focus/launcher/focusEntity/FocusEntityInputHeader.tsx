@@ -1,5 +1,5 @@
 import { HStack } from '@lib/ui/css/stack'
-import { ComponentWithValueProps, RemovableComponentProps } from '@lib/ui/props'
+import { ValueProp, OnRemoveProp } from '@lib/ui/props'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
 import { Spacer } from '@lib/ui/layout/Spacer'
@@ -18,8 +18,8 @@ import {
 import { FocusEntityInputContent } from './FocusEntityInputContent'
 import { focusEntityConfig } from './config'
 
-type FocusEntityInputHeaderProps<T> = RemovableComponentProps &
-  ComponentWithValueProps<T> & {
+type FocusEntityInputHeaderProps<T> = OnRemoveProp &
+  ValueProp<T> & {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
 

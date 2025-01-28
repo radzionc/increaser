@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 
 import { Interval } from '@lib/utils/interval/Interval'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -8,9 +8,7 @@ import { CurrentIntervalContext } from '@lib/ui/state/currentInterval'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { useLastSet } from '@increaser/app/sets/hooks/useLastSet'
 
-export const AutoStoppedSetIntervalProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const AutoStoppedSetIntervalProvider = ({ children }: ChildrenProp) => {
   const lastSet = shouldBePresent(useLastSet())
 
   const interval: Interval = useMemo(() => {

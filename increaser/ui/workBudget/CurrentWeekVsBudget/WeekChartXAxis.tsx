@@ -1,5 +1,5 @@
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { chartConfig } from './config'
 import { range } from '@lib/utils/array/range'
@@ -15,7 +15,7 @@ const Container = styled.div`
   justify-items: center;
 `
 
-export const WeekChartXAxis = ({ value }: ComponentWithValueProps<number>) => {
+export const WeekChartXAxis = ({ value }: ValueProp<number>) => {
   return (
     <Container>
       {range(D_IN_WEEK).map((index) => {

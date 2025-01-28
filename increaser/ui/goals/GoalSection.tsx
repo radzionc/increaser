@@ -1,7 +1,7 @@
 import { HStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { ReactNode } from 'react'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
@@ -21,7 +21,7 @@ const IconContainer = styled(IconWrapper)`
   height: ${toSizeUnit(lineHeight)};
 `
 
-type GoalSectionProps = ComponentWithChildrenProps & {
+type GoalSectionProps = ChildrenProp & {
   icon: ReactNode
 }
 

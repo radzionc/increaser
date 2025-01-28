@@ -1,4 +1,4 @@
-import { ComponentWithActiveState, InputProps } from '@lib/ui/props'
+import { IsActiveProp, InputProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useActiveProjects } from '../projects/hooks/useActiveProjects'
@@ -15,7 +15,7 @@ import { CreateProjectForm } from './form/CreateProjectForm'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 
-type OpenerParams = Record<string, unknown> & ComponentWithActiveState
+type OpenerParams = Record<string, unknown> & IsActiveProp
 
 type ProjectSelectorProps = InputProps<string> & {
   autoFocus?: boolean

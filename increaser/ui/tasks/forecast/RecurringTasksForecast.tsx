@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useTaskFactories } from '../../taskFactories/hooks/useTaskFactories'
 import { ForecastedRecurringTask } from './ForecastedRecurringTask'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { useTaskTimeGrouping } from '../timeGrouping/useTaskTimeGrouping'
 import { subDays } from 'date-fns'
 import { match } from '@lib/utils/match'
@@ -13,9 +13,7 @@ import { getProjectId } from '@increaser/entities-utils/project/getProjectId'
 import { CurrentForecastedTaskProvider } from './state/currentForecastedTask'
 import { order } from '@lib/utils/array/order'
 
-export const RecurringTasksForecast = ({
-  value,
-}: ComponentWithValueProps<number>) => {
+export const RecurringTasksForecast = ({ value }: ValueProp<number>) => {
   const taskFactories = useFilterByProject(useTaskFactories(), getProjectId)
 
   const [timeGrouping] = useTaskTimeGrouping()

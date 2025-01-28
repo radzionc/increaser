@@ -1,6 +1,6 @@
 import { HStack } from '@lib/ui/css/stack'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
-import { ComponentWithValueProps, RemovableComponentProps } from '@lib/ui/props'
+import { ValueProp, OnRemoveProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
 import { CloseIcon } from '@lib/ui/icons/CloseIcon'
@@ -43,8 +43,8 @@ export const TaskTextContainer = styled(HStack)`
   ${cropText};
 `
 
-type FocusTaskInputHeaderProps = RemovableComponentProps &
-  ComponentWithValueProps<Task | null> & {
+type FocusTaskInputHeaderProps = OnRemoveProp &
+  ValueProp<Task | null> & {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
   }

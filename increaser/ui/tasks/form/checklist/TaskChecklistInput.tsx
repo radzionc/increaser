@@ -1,6 +1,6 @@
 import { TaskChecklistItem } from '@increaser/entities/Task'
 import { HStack, VStack } from '@lib/ui/css/stack'
-import { DraggingAwareComponentProps, InputProps } from '@lib/ui/props'
+import { IsDraggingProp, InputProps } from '@lib/ui/props'
 import { TaskChecklistItemInput } from './TaskChecklistItemInput'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { ChecklistItemDragHandle } from './ChecklistItemDragHandle'
@@ -26,7 +26,7 @@ const Container = styled(VStack)`
 
 const DragHandle = styled(ChecklistItemDragHandle)``
 
-const DraggableItemContainer = styled(HStack)<DraggingAwareComponentProps>`
+const DraggableItemContainer = styled(HStack)<IsDraggingProp>`
   width: 100%;
   gap: ${toSizeUnit(checklistConfig.dragHandleContentGap)};
   ${({ isDragging }) =>

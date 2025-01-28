@@ -2,7 +2,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { Header } from '@lib/ui/layout/Header'
 import styled from 'styled-components'
 import { sidebarConfig } from '../../../navigation/Sidebar/config'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { ComponentProps, ReactNode } from 'react'
 import { HStack } from '@lib/ui/css/stack'
 import { useSetPageHeaderControlsArea } from './PageHeaderControlsAreaProvider'
@@ -28,7 +28,7 @@ const Placeholder = styled.div`
   display: contents;
 `
 
-type PageHeaderProps = ComponentWithChildrenProps & {
+type PageHeaderProps = ChildrenProp & {
   controls?: ReactNode
 } & ComponentProps<typeof Container>
 

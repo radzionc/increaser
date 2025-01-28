@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { GoalsTimelinContext } from './state/GoalsTimelineContext'
 import { useMemo } from 'react'
 import { useFilteredScheduledGoals } from '../filter/useFilteredScheduledGoals'
@@ -12,9 +12,7 @@ import { range } from '@lib/utils/array/range'
 
 const maxLabelsCount = 10
 
-export const GoalsDateTimelineProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const GoalsDateTimelineProvider = ({ children }: ChildrenProp) => {
   const goals = useFilteredScheduledGoals()
   const { dob } = useUser()
 

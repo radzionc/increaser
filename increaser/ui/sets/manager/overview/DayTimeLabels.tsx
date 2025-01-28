@@ -7,7 +7,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { toPercents } from '@lib/utils/toPercents'
 import { formatDailyEventTime } from '@lib/utils/time/formatDailyEventTime'
-import { UIComponentProps } from '@lib/ui/props'
+import { UiProps } from '@lib/ui/props'
 
 const dayTimeLabelsWidthInPx = 48
 const dayTimeLabelTimeWidthInPx = 32
@@ -27,7 +27,7 @@ const MarkContainer = styled(HStack)`
   gap: 4px;
 `
 
-interface DayTimeLabelsProps extends UIComponentProps {
+interface DayTimeLabelsProps extends UiProps {
   startHour: number
   endHour: number
 }

@@ -1,9 +1,9 @@
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useBudgetedProjects } from './hooks/useBudgetedProjects'
 
-export const BudgetRequired = ({ children }: ComponentWithChildrenProps) => {
+export const BudgetRequired = ({ children }: ChildrenProp) => {
   const budgetedProjects = useBudgetedProjects()
 
   return (

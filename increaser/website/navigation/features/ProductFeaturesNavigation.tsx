@@ -12,7 +12,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { text } from '@lib/ui/text'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
@@ -23,7 +23,7 @@ import { useRouter } from 'next/router'
 import { getProductToolUrl } from '../productTool'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 
-const Opener = styled(UnstyledButton)<ComponentWithActiveState>`
+const Opener = styled(UnstyledButton)<IsActiveProp>`
   ${borderRadius.s};
   outline: none;
   ${horizontalPadding(20)};

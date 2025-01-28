@@ -2,7 +2,7 @@ import { Habit } from '@increaser/entities/Habit'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { interactive } from '@lib/ui/css/interactive'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { getColor, matchColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { trackHabitsConfig } from './config'
@@ -10,7 +10,7 @@ import { toHabitDate } from '@increaser/entities-utils/habit/toHabitDate'
 import { useTrackHabitMutation } from '@increaser/ui/habits/api/useTrackHabitMutation'
 import { ComponentProps } from 'react'
 
-const Container = styled.div<ComponentWithActiveState>`
+const Container = styled.div<IsActiveProp>`
   ${sameDimensions(trackHabitsConfig.itemHeight)};
 
   ${centerContent};

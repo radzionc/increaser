@@ -5,7 +5,7 @@ import {
 } from '@increaser/entities/ProductTool'
 import { ProductToolIcon } from '@increaser/ui/tools/ProductToolIcon'
 import { hStack, VStack } from '@lib/ui/css/stack'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
@@ -37,8 +37,7 @@ const IconContainer = styled.div`
 `
 
 export const ProductToolOption: React.FC<
-  ComponentWithValueProps<ProductTool> &
-    Omit<ComponentProps<typeof Container>, 'value'>
+  ValueProp<ProductTool> & Omit<ComponentProps<typeof Container>, 'value'>
 > = ({ value, ...rest }) => (
   <Container {...rest}>
     <IconContainer>

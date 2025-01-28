@@ -1,11 +1,11 @@
 import { InfoYouTubeVideo } from '@increaser/info/infoYouTubeVideos'
-import { ComponentWithActiveState, InputProps } from '@lib/ui/props'
+import { IsActiveProp, InputProps } from '@lib/ui/props'
 import { ProductToolOption } from '../../navigation/features/ProductToolOption'
 import styled, { css } from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
 import { productTools } from '@increaser/entities/ProductTool'
 
-const Option = styled(ProductToolOption)<ComponentWithActiveState>`
+const Option = styled(ProductToolOption)<IsActiveProp>`
   border: 2px solid transparent;
 
   ${({ isActive }) =>

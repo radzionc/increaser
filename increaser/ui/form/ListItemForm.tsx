@@ -1,13 +1,13 @@
 import { ScrollIntoViewOnFirstAppearance } from '@lib/ui/base/ScrollIntoViewOnFirstAppearance'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { Panel } from '@lib/ui/css/panel'
-import { ComponentWithChildrenProps, UIComponentProps } from '@lib/ui/props'
+import { ChildrenProp, UiProps } from '@lib/ui/props'
 
-type ListItemFormProps = ComponentWithChildrenProps & {
+type ListItemFormProps = ChildrenProp & {
   onSubmit?: () => void
   isDisabled?: string | boolean
   onClose?: () => void
-} & UIComponentProps
+} & UiProps
 
 export const ListItemForm = ({
   onSubmit,

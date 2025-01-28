@@ -4,7 +4,7 @@ import { Backdrop } from '@lib/ui/modal/Backdrop'
 import { ModalCloseButton } from '@lib/ui/modal/ModalCloseButton'
 import { ModalContainer } from '@lib/ui/modal/ModalContainer'
 import { ModalTitleText } from '@lib/ui/modal/ModalTitleText'
-import { ClosableComponentProps } from '@lib/ui/props'
+import { OnCloseProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { FocusAudioModeSelector } from './FocusAudioModeSelector'
 import { Match } from '@lib/ui/base/Match'
@@ -24,7 +24,7 @@ const Header = styled.div`
   padding: ${toSizeUnit(modalConfig.padding)};
 `
 
-export const FocusAudioOverlay = ({ onClose }: ClosableComponentProps) => {
+export const FocusAudioOverlay = ({ onClose }: OnCloseProp) => {
   const [mode] = useFocusAudioMode()
 
   return (

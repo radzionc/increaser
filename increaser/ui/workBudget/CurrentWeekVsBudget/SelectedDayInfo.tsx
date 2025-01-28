@@ -3,7 +3,7 @@ import { TimeStatistic } from './TimeStatistic'
 import { useCurrentWeekVsBudgetColors } from './useCurrentWeekVsBudgetColors'
 import styled from 'styled-components'
 import { D_IN_WEEK } from '@lib/utils/time'
-import { ComponentWithWidthProps } from '@lib/ui/props'
+import { WidthProp } from '@lib/ui/props'
 
 const Container = styled.div`
   font-size: 14px;
@@ -12,7 +12,7 @@ const Container = styled.div`
   gap: 4px;
 `
 
-type SelectedDayInfoProps = ComponentWithWidthProps & {
+type SelectedDayInfoProps = WidthProp & {
   expectedValue: number
   doneValue?: number
   index: number

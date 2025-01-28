@@ -11,17 +11,14 @@ import { FirstTaskDeadlineForecast } from './FirstTaskDeadlineForecast'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
 import { ListItemForm } from '../../form/ListItemForm'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
-import {
-  ComponentWithInitialValueProps,
-  OptionalValueFinishProps,
-} from '@lib/ui/props'
+import { InitialValueProp, OnFinishOptionalValueProp } from '@lib/ui/props'
 import { TaskFactoryScheduleInput } from './TaskFactoryScheduleInput'
 
 const defaultCadence = 'week'
 
 export const CreateTaskFactoryForm: React.FC<
-  Partial<ComponentWithInitialValueProps<Partial<TaskFactoryFormShape>>> &
-    Partial<OptionalValueFinishProps<TaskFactory>>
+  Partial<InitialValueProp<Partial<TaskFactoryFormShape>>> &
+    Partial<OnFinishOptionalValueProp<TaskFactory>>
 > = ({ onFinish, initialValue }) => {
   const [value, setValue] = useState<TaskFactoryFormShape>({
     name: '',

@@ -6,16 +6,13 @@ import {
   autoUpdate,
 } from '@floating-ui/react'
 import { useEffect } from 'react'
-import {
-  ComponentWithChildrenProps,
-  PositionedComponentProps,
-} from '@lib/ui/props'
+import { ChildrenProp, PositionProp } from '@lib/ui/props'
 import { FixedReference } from '@lib/ui/base/FixedReference'
 
 export const PositionFocusTimeBreakdown = ({
   position,
   children,
-}: ComponentWithChildrenProps & PositionedComponentProps) => {
+}: ChildrenProp & PositionProp) => {
   const {
     refs: { setReference, setFloating },
     floatingStyles,

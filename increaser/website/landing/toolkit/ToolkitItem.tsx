@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { HStack } from '@lib/ui/css/stack'
 import { borderRadius } from '@lib/ui/css/borderRadius'
@@ -58,9 +58,7 @@ const Container = styled(HStack)`
   }
 `
 
-export const ToolkitItem = ({
-  value,
-}: ComponentWithValueProps<ProductTool>) => (
+export const ToolkitItem = ({ value }: ValueProp<ProductTool>) => (
   <Link href={getProductToolUrl(value)}>
     <Container>
       {productToolIconRecord[value]}

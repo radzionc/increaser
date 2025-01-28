@@ -5,7 +5,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
@@ -20,7 +20,7 @@ const Indicator = styled(IconWrapper)`
 
 export const ProductUpdateSubItem = ({
   value: { description },
-}: ComponentWithValueProps<ProductUpdateItem>) => (
+}: ValueProp<ProductUpdateItem>) => (
   <PrefixedItemFrame
     key={description}
     prefix={

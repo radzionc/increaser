@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { InputContainer } from '@lib/ui/inputs/InputContainer'
 import { DayInput } from '@lib/ui/time/day/DayInput'
 import { stringToDay, dayToString, Day } from '@lib/utils/time/Day'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { useState } from 'react'
 import { InputLabel } from '@lib/ui/inputs/InputLabel'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
@@ -21,7 +21,7 @@ const Container = styled(HStack)`
   gap: 20px;
 `
 
-export const SetDobForm = ({ onFinish }: NoValueFinishProps) => {
+export const SetDobForm = ({ onFinish }: OnFinishNoValueProp) => {
   const { dob } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
   const [value, setValue] = useState<Day>(() => {

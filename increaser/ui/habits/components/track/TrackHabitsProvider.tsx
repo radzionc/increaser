@@ -1,5 +1,5 @@
 import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { range } from '@lib/utils/array/range'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { startOfDay } from 'date-fns'
@@ -15,9 +15,7 @@ import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 
 const daysToDisplay = 30
 
-export const TrackHabitsProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const TrackHabitsProvider = ({ children }: ChildrenProp) => {
   const firstDayStartedAt = useStartOfDay()
 
   const daysCount = useHabitTrackingDaysCount()

@@ -2,7 +2,7 @@ import { TaskLink } from '@increaser/entities/Task'
 import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { Modal } from '@lib/ui/modal'
-import { OptionalValueFinishProps } from '@lib/ui/props'
+import { OnFinishOptionalValueProp } from '@lib/ui/props'
 import { useState } from 'react'
 import { useIsTaskLinkFormDisabled } from './useIsTaskLinkFormDisabled'
 import { TaskLinkFormFields } from './TaskLinkFormFields'
@@ -10,7 +10,7 @@ import { ModalContent } from '@lib/ui/modal/ModalContent'
 
 export const AddTaskLinkOverlay = ({
   onFinish,
-}: OptionalValueFinishProps<TaskLink>) => {
+}: OnFinishOptionalValueProp<TaskLink>) => {
   const [value, setValue] = useState<TaskLink>({
     url: '',
     name: '',

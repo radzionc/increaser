@@ -1,12 +1,12 @@
 import { Button } from '@lib/ui/buttons/Button'
 import { HStack } from '@lib/ui/css/stack'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { ClickableComponentProps, ComponentWithValueProps } from '@lib/ui/props'
+import { OnClickProp, ValueProp } from '@lib/ui/props'
 
 export const PageHeaderAddButton = ({
   onClick,
   value,
-}: ClickableComponentProps & ComponentWithValueProps<string>) => {
+}: OnClickProp & ValueProp<string>) => {
   return (
     <Button onClick={onClick} size="s">
       <HStack gap={8} alignItems="center">

@@ -1,10 +1,10 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 
 import { useEffect } from 'react'
 import { useAuthRedirect } from '@increaser/app/auth/hooks/useAuthRedirect'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 
-export const AuthGuard = ({ children }: ComponentWithChildrenProps) => {
+export const AuthGuard = ({ children }: ChildrenProp) => {
   const { toAuthenticationPage } = useAuthRedirect()
   const [authSession] = useAuthSession()
 

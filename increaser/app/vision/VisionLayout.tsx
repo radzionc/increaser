@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { AppPageLayout } from '../ui/page/AppPageLayout'
 import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
@@ -11,7 +11,7 @@ const Container = styled(PageContainer)`
   max-width: initial;
 `
 
-export const VisionLayout = ({ children }: ComponentWithChildrenProps) => {
+export const VisionLayout = ({ children }: ChildrenProp) => {
   return (
     <AppPageLayout>
       <Container>

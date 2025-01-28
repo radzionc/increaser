@@ -1,11 +1,11 @@
-import { RemovableComponentProps } from '@lib/ui/props'
+import { OnRemoveProp } from '@lib/ui/props'
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
 import { ManageGoalLinkedEntity } from './linkedEntity/ManageGoalLinkedEntity'
 import { GoalVisionItem } from './GoalVisionItem'
 import { useCurrentVisionAttribute } from '../../vision/CurrentVisionAttributeProvider'
 
-export const ManageGoalVision = ({ onRemove }: RemovableComponentProps) => {
+export const ManageGoalVision = ({ onRemove }: OnRemoveProp) => {
   const [, setActiveItemId] = useActiveItemId()
   const { id } = useCurrentVisionAttribute()
 

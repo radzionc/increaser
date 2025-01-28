@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { Dispatch, SetStateAction, createContext, useState } from 'react'
 
@@ -14,9 +14,7 @@ const YouTubeFocusMusicContext = createContext<
   YouTubeFocusMusicState | undefined
 >(undefined)
 
-export const YouTubeFocusMusicProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const YouTubeFocusMusicProvider = ({ children }: ChildrenProp) => {
   const [state, setState] = useState<YouTubeFocusMusicMutableState>({
     isPlaying: true,
   })

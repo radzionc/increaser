@@ -18,12 +18,12 @@ import { SelectedDayInfo } from './SelectedDayInfo'
 import { WeekChartXAxis } from './WeekChartXAxis'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { ComparisonChartLines } from './ComparisonChartLines'
-import { ComponentWithWidthProps } from '@lib/ui/props'
+import { WidthProp } from '@lib/ui/props'
 import { CurrentDayHighlight } from './CurrentDayHighlight'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
-export const ComparisonChart = ({ width }: ComponentWithWidthProps) => {
+export const ComparisonChart = ({ width }: WidthProp) => {
   const weekday = useWeekday()
 
   const colors = useCurrentWeekVsBudgetColors()

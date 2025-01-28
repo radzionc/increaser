@@ -10,9 +10,9 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { Panel } from '@lib/ui/css/panel'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 
-export const EditVisionAttributeForm = ({ onFinish }: NoValueFinishProps) => {
+export const EditVisionAttributeForm = ({ onFinish }: OnFinishNoValueProp) => {
   const visionAttribute = useCurrentVisionAttribute()
   const { id } = visionAttribute
   const initialValue = useMemo(

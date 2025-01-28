@@ -1,4 +1,4 @@
-import { ComponentWithIndexProps } from '@lib/ui/props'
+import { IndexProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { takeWholeSpace } from '@lib/ui/css/takeWholeSpace'
 import { useDataPointBreakdown } from '../hooks/useDataPointBreakdown'
@@ -11,9 +11,7 @@ const Container = styled.div`
   display: grid;
 `
 
-export const BarChartItemBreakdownFill = ({
-  index,
-}: ComponentWithIndexProps) => {
+export const BarChartItemBreakdownFill = ({ index }: IndexProp) => {
   const items = useDataPointBreakdown(index)
   const projects = useTrackedProjects()
   const getColor = useBarChartFillColor(index)

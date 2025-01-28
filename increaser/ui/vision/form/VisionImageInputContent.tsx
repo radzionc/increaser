@@ -1,6 +1,6 @@
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { VStack } from '@lib/ui/css/stack'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { ReactNode } from 'react'
 
@@ -8,7 +8,7 @@ type VisionImageInputContentProps = {
   title: ReactNode
   subTitle: ReactNode
   icon: ReactNode
-} & Partial<ComponentWithChildrenProps>
+} & Partial<ChildrenProp>
 
 export const VisionImageInputContent = ({
   title,

@@ -1,7 +1,7 @@
 import { takeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { HStack } from '@lib/ui/css/stack'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { taskBoardConfig } from './config'
 
@@ -18,9 +18,7 @@ export const Container = styled(HStack)`
   gap: ${toSizeUnit(taskBoardConfig.columnGap)};
 `
 
-export const TaskBoardContainer = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const TaskBoardContainer = ({ children }: ChildrenProp) => {
   return (
     <Wrapper>
       <Container>{children}</Container>

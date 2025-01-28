@@ -11,7 +11,7 @@ import { interactive } from '@lib/ui/css/interactive'
 import { transition } from '@lib/ui/css/transition'
 import { VisionImageInputContent } from './VisionImageInputContent'
 import { borderRadius } from '@lib/ui/css/borderRadius'
-import { ValueFinishProps } from '@lib/ui/props'
+import { OnFinishValueProp } from '@lib/ui/props'
 
 const ImageInput = styled(TakeWholeSpace)`
   ${centerContent};
@@ -32,7 +32,7 @@ const PendingContainer = styled(TakeWholeSpace)`
   border: 2px dashed ${getColor('mistExtra')};
 `
 
-export const UploadVisionImage = ({ onFinish }: ValueFinishProps<string>) => {
+export const UploadVisionImage = ({ onFinish }: OnFinishValueProp<string>) => {
   const { mutate: uploadFile, status } = useUploadFileMutation()
 
   const { getRootProps, getInputProps } = useDropzone({

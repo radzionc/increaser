@@ -4,7 +4,7 @@ import { coloredTag } from '@lib/ui/css/coloredTag'
 import { getColor } from '@lib/ui/theme/getters'
 import { TaskTagContainer } from '../TaskTagContainer'
 import { TimerIcon } from '@lib/ui/icons/TimerIcon'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 const Container = styled(TaskTagContainer)`
@@ -13,9 +13,7 @@ const Container = styled(TaskTagContainer)`
   color: ${getColor('textPrimary')};
 `
 
-export const TaskTrackedTimeContent = ({
-  value,
-}: ComponentWithValueProps<number>) => {
+export const TaskTrackedTimeContent = ({ value }: ValueProp<number>) => {
   if (Math.round(convertDuration(value, 'ms', 'min')) < 1) {
     return null
   }

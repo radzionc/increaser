@@ -16,10 +16,10 @@ import { DoneTasksInfo } from './DoneTasksInfo'
 import { ActiveTask } from '../ActiveTask'
 import { groupTasks } from './utils/groupTasks'
 import { DraggableTaskItem } from './item/DraggableTaskItem'
-import { ComponentWithItemsProps } from '@lib/ui/props'
+import { ItemsProp } from '@lib/ui/props'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 
-export const TaskBoard = ({ items }: ComponentWithItemsProps<Task>) => {
+export const TaskBoard = ({ items }: ItemsProp<Task>) => {
   const { mutate: updateTask } = useUpdateUserEntityMutation('task')
 
   const [groups, setGroups] = useState(() => groupTasks(items))

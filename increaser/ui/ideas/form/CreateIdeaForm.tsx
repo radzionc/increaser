@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useIsIdeaFormDisabled } from './useIsIdeaFormDisabled'
@@ -11,7 +11,7 @@ import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 import { useIdeas } from '../hooks/useIdeas'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 
-type CreateIdeaFormProps = NoValueFinishProps & {
+type CreateIdeaFormProps = OnFinishNoValueProp & {
   initialValue?: Partial<IdeaFormShape>
 }
 

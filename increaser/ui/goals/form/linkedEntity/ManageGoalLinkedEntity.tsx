@@ -1,8 +1,5 @@
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import {
-  ComponentWithActiveState,
-  ComponentWithChildrenProps,
-} from '@lib/ui/props'
+import { IsActiveProp, ChildrenProp } from '@lib/ui/props'
 import styled, { css } from 'styled-components'
 import { tightListItemMinHeight } from '@lib/ui/list/tightListItemConfig'
 import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
@@ -23,7 +20,7 @@ import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 
-const Container = styled(UnstyledButton)<ComponentWithActiveState>`
+const Container = styled(UnstyledButton)<IsActiveProp>`
   ${sameDimensions(tightListItemMinHeight)}
   border: 1px ${getColor('mist')} solid;
   opacity: 0;
@@ -71,7 +68,7 @@ const Wrapper = styled.div`
   }
 `
 
-type GoalLinkedEntityProps = ComponentWithChildrenProps & {
+type GoalLinkedEntityProps = ChildrenProp & {
   onDelete: () => void
   onEdit: () => void
   onUnlink: () => void

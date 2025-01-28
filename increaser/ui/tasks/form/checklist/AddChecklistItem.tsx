@@ -3,7 +3,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import styled from 'styled-components'
 import { checklistConfig } from './config'
 import { hStack } from '@lib/ui/css/stack'
-import { ClickableComponentProps } from '@lib/ui/props'
+import { OnClickProp } from '@lib/ui/props'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
@@ -35,7 +35,7 @@ const IconContainer = styled(IconWrapper)`
   font-size: 16px;
 `
 
-export const AddChecklistItem = ({ onClick }: ClickableComponentProps) => {
+export const AddChecklistItem = ({ onClick }: OnClickProp) => {
   return (
     <Container onClick={onClick}>
       <IconContainer>

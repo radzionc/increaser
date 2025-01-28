@@ -1,6 +1,6 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { CreateTaskForm } from '../../tasks/form/CreateTaskForm'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { IdeaFormShape } from './IdeaFormShape'
 import { useCurrentIdea } from '../CurrentIdeaProvider'
 import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserEntityMutation'
@@ -10,9 +10,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { productToolIconRecord } from '../../tools/productToolIconRecord'
 
-export const TurnIdeaIntoTask = ({
-  value,
-}: ComponentWithValueProps<IdeaFormShape>) => {
+export const TurnIdeaIntoTask = ({ value }: ValueProp<IdeaFormShape>) => {
   const { mutate: deleteIdea } = useDeleteUserEntityMutation('idea')
   const { id } = useCurrentIdea()
 

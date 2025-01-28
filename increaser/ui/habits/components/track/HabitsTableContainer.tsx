@@ -2,15 +2,13 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { trackHabitsConfig } from './config'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { ActiveItemIdProvider } from '@lib/ui/list/ActiveItemIdProvider'
 import { ActiveHabits } from '../manage/ActiveHabits'
 import { ActiveHabit } from '@increaser/ui/habits/ActiveHabit'
 import { InactiveHabits } from '../manage/InactiveHabits'
 
-export const HabitsTableContainer = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const HabitsTableContainer = ({ children }: ChildrenProp) => {
   return (
     <ActiveItemIdProvider initialValue={null}>
       <ActiveHabit />

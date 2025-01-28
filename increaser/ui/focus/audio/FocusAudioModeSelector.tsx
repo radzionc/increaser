@@ -6,11 +6,11 @@ import {
 } from './state/useFocusAudioMode'
 
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { HStack } from '@lib/ui/css/stack'
 
-const Option = styled(UnstyledButton)<ComponentWithActiveState>`
+const Option = styled(UnstyledButton)<IsActiveProp>`
   ${({ isActive }) =>
     isActive
       ? css``

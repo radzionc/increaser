@@ -8,7 +8,7 @@ import { Text } from '@lib/ui/text'
 import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { getLastItemOrder } from '@lib/utils/order/getLastItemOrder'
 import { useCreateUserEntityMutation } from '@increaser/ui/userEntity/api/useCreateUserEntityMutation'
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
@@ -28,9 +28,7 @@ const Container = styled(VStack)`
   width: 100%;
 `
 
-export const HabitItem = ({
-  value,
-}: ComponentWithValueProps<HabitInfo & EntityWithId>) => {
+export const HabitItem = ({ value }: ValueProp<HabitInfo & EntityWithId>) => {
   const { emoji, tags, name, description, id, plan } = value
   const { habits: habitRecord } = useUser()
   const isHabitAdded = id in habitRecord

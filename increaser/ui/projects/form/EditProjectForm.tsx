@@ -13,7 +13,7 @@ import { useUpdateUserEntityMutation } from '../../userEntity/api/useUpdateUserE
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { ProjectFormFields } from './ProjectFormFields'
 import { ListItemForm } from '../../form/ListItemForm'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -23,7 +23,7 @@ type EditProjectFormShape = ProjectFormShape & {
   status: ProjectStatus
 }
 
-export const EditProjectForm = ({ onFinish }: NoValueFinishProps) => {
+export const EditProjectForm = ({ onFinish }: OnFinishNoValueProp) => {
   const project = useCurrentProject()
   const { projects } = useUser()
   const { id } = project

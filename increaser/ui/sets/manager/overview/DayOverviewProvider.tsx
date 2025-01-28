@@ -1,5 +1,5 @@
 import { Set } from '@increaser/entities/User'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { createContextHook } from '@lib/ui/state/createContextHook'
 import { useRhythmicRerender } from '@lib/ui/hooks/useRhythmicRerender'
 import { getLastItem } from '@lib/utils/array/getLastItem'
@@ -33,9 +33,7 @@ export const useDayOverview = createContextHook(
   'DayOverview',
 )
 
-export const DayOverviewProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const DayOverviewProvider = ({ children }: ChildrenProp) => {
   const currentTime = useRhythmicRerender()
   const [weekday] = useSelectedWeekday()
 

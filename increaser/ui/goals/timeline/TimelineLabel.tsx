@@ -1,12 +1,12 @@
 import { PositionAbsolutelyCenterVertically } from '@lib/ui/layout/PositionAbsolutelyCenterVertically'
-import { TitledComponentProps } from '@lib/ui/props'
+import { TitleProp } from '@lib/ui/props'
 import { text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { goalsTimelineConfig } from './config'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { centerContent } from '@lib/ui/css/centerContent'
 
-type TimeLabelProps = TitledComponentProps & {
+type TimeLabelProps = TitleProp & {
   left: string
 }
 

@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { ApiContext, CallApi } from '@increaser/api-ui/state/ApiContext'
 import { getDemoUser } from '@increaser/demo/getDemoUser'
 
@@ -10,7 +10,7 @@ const mockCallApi: CallApi = async (method) => {
   return undefined
 }
 
-export const MockApiProvider = ({ children }: ComponentWithChildrenProps) => {
+export const MockApiProvider = ({ children }: ChildrenProp) => {
   return (
     <ApiContext.Provider value={{ call: mockCallApi }}>
       {children}

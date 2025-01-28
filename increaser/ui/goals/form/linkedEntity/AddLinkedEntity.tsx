@@ -1,13 +1,13 @@
 import { Opener } from '@lib/ui/base/Opener'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { ClosableComponentProps } from '@lib/ui/props'
+import { OnCloseProp } from '@lib/ui/props'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { ReactNode } from 'react'
 import { LinkActionContainer } from './LinkActionContainer'
 import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 
 type AddLinkedEntityProps = {
-  renderCreateForm: (props: ClosableComponentProps) => ReactNode
+  renderCreateForm: (props: OnCloseProp) => ReactNode
 }
 
 export const AddLinkedEntity = ({ renderCreateForm }: AddLinkedEntityProps) => {

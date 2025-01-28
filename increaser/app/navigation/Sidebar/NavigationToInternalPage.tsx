@@ -1,5 +1,5 @@
 import { NavigationItem, NavigationItemProps } from './NavigationItem'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import {
   AppNavigationPage,
   appPageViews,
@@ -13,9 +13,8 @@ import { useLastPageView } from '../hooks/useLastPageView'
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 
-type NavigationToInternalPageProps =
-  ComponentWithValueProps<AppNavigationPage> &
-    Pick<NavigationItemProps, 'decoration'>
+type NavigationToInternalPageProps = ValueProp<AppNavigationPage> &
+  Pick<NavigationItemProps, 'decoration'>
 
 export const NavigationToInternalPage = ({
   value,

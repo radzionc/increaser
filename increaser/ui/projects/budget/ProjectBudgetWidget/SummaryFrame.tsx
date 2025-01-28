@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { ComponentProps, ReactNode } from 'react'
 import { formatDuration } from '@lib/utils/time/formatDuration'
@@ -21,9 +21,7 @@ export const SummaryFrame = ({
   </HStack>
 )
 
-export const SummaryFrameDuration = ({
-  value,
-}: ComponentWithValueProps<number>) => (
+export const SummaryFrameDuration = ({ value }: ValueProp<number>) => (
   <Text as="span" weight="600" color="contrast">
     {formatDuration(value, 'min', {
       maxUnit: 'h',

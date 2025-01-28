@@ -1,11 +1,11 @@
 import { VStack } from '@lib/ui/css/stack'
 import { Text } from '../text'
-import { ComponentWithChildrenProps, TitledComponentProps } from '../props'
+import { ChildrenProp, TitleProp } from '../props'
 
 export const TitledSection = ({
   title,
   children,
-}: TitledComponentProps & ComponentWithChildrenProps) => (
+}: TitleProp & ChildrenProp) => (
   <VStack fullWidth gap={16}>
     <Text as="div" size={16} weight="600" color="contrast">
       {title}

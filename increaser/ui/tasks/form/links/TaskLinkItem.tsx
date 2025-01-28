@@ -8,11 +8,7 @@ import { ExternalLinkIcon } from '@lib/ui/icons/ExternalLinkIcon'
 import { MoreHorizontalIcon } from '@lib/ui/icons/MoreHorizontalIcon'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { ExternalLink } from '@lib/ui/navigation/Link/ExternalLink'
-import {
-  ComponentWithActiveState,
-  InputProps,
-  RemovableComponentProps,
-} from '@lib/ui/props'
+import { IsActiveProp, InputProps, OnRemoveProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { getColor } from '@lib/ui/theme/getters'
@@ -29,7 +25,7 @@ import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { interactive } from '@lib/ui/css/interactive'
 
-type TaskLinkProps = InputProps<TaskLink> & RemovableComponentProps
+type TaskLinkProps = InputProps<TaskLink> & OnRemoveProp
 
 const height = 36
 
@@ -57,7 +53,7 @@ const Content = styled(ExternalLink)`
   }
 `
 
-const MoreButton = styled(UnstyledButton)<ComponentWithActiveState>`
+const MoreButton = styled(UnstyledButton)<IsActiveProp>`
   width: ${toSizeUnit(height)};
   height: 100%;
   color: ${getColor('textSupporting')};

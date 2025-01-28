@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { useRouter } from 'next/router'
 import { getAppPath } from '../../navigation/app'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { useFocusStatus } from '@increaser/ui/focus/state/focusIntervals'
 import { useStartFocus } from '../../focus/hooks/useStartFocus'
 import { useFocusProject } from '../../focus/state/focusProject'
@@ -23,7 +23,7 @@ const Container = styled(ExpandableSelectorContainer)`
   }
 `
 
-export const StartTaskFocus = ({ onFinish }: NoValueFinishProps) => {
+export const StartTaskFocus = ({ onFinish }: OnFinishNoValueProp) => {
   const [, setFocusProject] = useFocusProject()
   const [, setFocusProjectTask] = useFocusProjectTask()
 

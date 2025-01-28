@@ -1,11 +1,11 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useIsPayingUser } from '../membership/hooks/useIsPayingUser'
 import { ActionPrompt } from '@lib/ui/info/ActionPrompt'
 import Link from 'next/link'
 import { Button } from '@lib/ui/buttons/Button'
 import { getAppPath } from '@increaser/ui/navigation/app'
 
-export const PayingUserGuard = ({ children }: ComponentWithChildrenProps) => {
+export const PayingUserGuard = ({ children }: ChildrenProp) => {
   const isPaying = useIsPayingUser()
 
   if (isPaying) {

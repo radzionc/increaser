@@ -1,12 +1,10 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 
 import { useEffect } from 'react'
 import { useAuthRedirect } from '@increaser/app/auth/hooks/useAuthRedirect'
 import { useAuthSession } from '@increaser/app/auth/hooks/useAuthSession'
 
-export const UnauthenticatedOnly = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const UnauthenticatedOnly = ({ children }: ChildrenProp) => {
   const { toAuthenticatedPage } = useAuthRedirect()
   const [authSession] = useAuthSession()
 

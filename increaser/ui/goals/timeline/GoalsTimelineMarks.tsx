@@ -5,10 +5,10 @@ import { matchColor } from '@lib/ui/theme/getters'
 import { HStack } from '@lib/ui/css/stack'
 import { MONTHS_IN_YEAR } from '@lib/utils/time'
 import { range } from '@lib/utils/array/range'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { addMonths } from 'date-fns'
 
-const Mark = styled.div<ComponentWithActiveState>`
+const Mark = styled.div<IsActiveProp>`
   width: 1px;
   background: ${matchColor('isActive', {
     true: 'textPrimary',

@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { Navigation } from '../../navigation'
 import { ErrorBoundary } from '@increaser/ui/errors/components/ErrorBoundary'
 import { ErrorFallbackCard } from '@increaser/ui/errors/components/ErrorFallbackCard'
@@ -6,7 +6,7 @@ import { MembershipConfirmation } from '../../membership/components/MembershipCo
 import { UserStateOnly } from '@increaser/ui/user/UserStateOnly'
 import { AuthGuard } from '../../auth/components/AuthGuard'
 
-export const AppPageLayout = ({ children }: ComponentWithChildrenProps) => {
+export const AppPageLayout = ({ children }: ChildrenProp) => {
   return (
     <AuthGuard>
       <UserStateOnly>

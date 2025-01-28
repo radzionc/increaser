@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { HabitDay, useTrackHabits } from './state/TrackHabitsContext'
 import { VStack } from '@lib/ui/css/stack'
 import { Spacer } from '@lib/ui/layout/Spacer'
@@ -27,7 +27,7 @@ const Label = styled.div`
 
 export const HabitsColumn = ({
   value: { startedAt, completion },
-}: ComponentWithValueProps<HabitDay>) => {
+}: ValueProp<HabitDay>) => {
   const habits = useOrderedActiveHabits()
   const { activeDayStartedAt, setActiveDayStartedAt, days } = useTrackHabits()
   const isActive = activeDayStartedAt === startedAt

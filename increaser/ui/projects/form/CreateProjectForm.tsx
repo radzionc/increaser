@@ -14,14 +14,14 @@ import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserE
 import { Project } from '@increaser/entities/Project'
 import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { ListItemForm } from '../../form/ListItemForm'
-import { OptionalValueFinishProps } from '@lib/ui/props'
+import { OnFinishOptionalValueProp } from '@lib/ui/props'
 import { ProjectFormFields } from './ProjectFormFields'
 import { useFreeHours } from '../budget/hooks/useFreeHours'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 
 export const CreateProjectForm = ({
   onFinish,
-}: OptionalValueFinishProps<Project>) => {
+}: OnFinishOptionalValueProp<Project>) => {
   const { projects } = useUser()
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(projects).map(({ color }) => color)

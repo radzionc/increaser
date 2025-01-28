@@ -3,7 +3,7 @@ import { useFocusSoundsPreference } from './state/useFocusSoundsPreference'
 import { transition } from '@lib/ui/css/transition'
 
 import { Slider } from '@lib/ui/inputs/Slider'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { omit } from '@lib/utils/record/omit'
 import { ActionInsideInteractiveElement } from '@lib/ui/base/ActionInsideInteractiveElement'
 import { VStack } from '@lib/ui/css/stack'
@@ -45,9 +45,7 @@ const BottomSpacer = styled(Spacer)`
   ${centerContent};
 `
 
-export const FocusSoundOption = ({
-  value,
-}: ComponentWithValueProps<FocusSound>) => {
+export const FocusSoundOption = ({ value }: ValueProp<FocusSound>) => {
   const [proference, setPreference] = useFocusSoundsPreference()
 
   const isActive = value in proference

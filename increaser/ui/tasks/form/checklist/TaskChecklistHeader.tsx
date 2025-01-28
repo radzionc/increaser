@@ -10,7 +10,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { CollapsableStateIndicator } from '@lib/ui/layout/CollapsableStateIndicator'
 import { getColor } from '@lib/ui/theme/getters'
 import { Text } from '@lib/ui/text'
-import { ProgressComponentProps } from '@lib/ui/props'
+import { ProgressProps } from '@lib/ui/props'
 
 const IconContainer = styled(IconWrapper)`
   ${sameDimensions(checklistConfig.dragHandleWidth)};
@@ -29,10 +29,7 @@ const Container = styled(UnstyledButton)`
   }
 `
 
-export const TaskChecklistHeader = ({
-  target,
-  current,
-}: ProgressComponentProps) => {
+export const TaskChecklistHeader = ({ target, current }: ProgressProps) => {
   const [isOpen, setIsOpen] = useIsChecklistOpen()
 
   return (

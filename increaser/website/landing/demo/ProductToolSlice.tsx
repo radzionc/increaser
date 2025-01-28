@@ -1,6 +1,6 @@
 import { ProductTool } from '@increaser/entities/ProductTool'
 import { Match } from '@lib/ui/base/Match'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { TasksSlice } from './TasksSlice'
 import { TimeTrackingSlice } from './TimeTrackingSlice'
 import { FocusSlice } from './FocusSlice'
@@ -10,9 +10,7 @@ import { GoalsSlice } from './GoalsSlice'
 import { WorkPreferencesSlice } from './WorkPreferencesSlice'
 import { PrinciplesSlice } from './PrinciplesSlice'
 
-export const ProductToolSlice = ({
-  value,
-}: ComponentWithValueProps<ProductTool>) => (
+export const ProductToolSlice = ({ value }: ValueProp<ProductTool>) => (
   <Match
     value={value}
     tasks={() => <TasksSlice />}

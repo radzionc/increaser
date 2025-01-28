@@ -1,10 +1,8 @@
-import { ComponentWithValueProps } from '../../props'
+import { ValueProp } from '../../props'
 import { Query } from '../Query'
 import { ReactNode } from 'react'
 
-export type MatchQueryProps<T, E = unknown> = ComponentWithValueProps<
-  Query<T, E>
-> & {
+export type MatchQueryProps<T, E = unknown> = ValueProp<Query<T, E>> & {
   error?: (error: E) => ReactNode
   pending?: () => ReactNode
   success: (data: T) => ReactNode

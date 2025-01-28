@@ -2,7 +2,7 @@ import { Education } from '@increaser/entities/Education'
 import { ReactNode } from 'react'
 import { useUser } from '@increaser/ui/user/state/user'
 import { useUpdateUserMutation } from '../user/mutations/useUpdateUserMutation'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { EducationBlock } from '@lib/ui/info/EducationBlock'
 
 const content: Record<Education, ReactNode> = {
@@ -44,9 +44,7 @@ const content: Record<Education, ReactNode> = {
   ),
 }
 
-export const ProductEducationBlock = ({
-  value,
-}: ComponentWithValueProps<Education>) => {
+export const ProductEducationBlock = ({ value }: ValueProp<Education>) => {
   const { completedEducation } = useUser()
 
   const { mutate } = useUpdateUserMutation()

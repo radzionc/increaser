@@ -1,7 +1,7 @@
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import { ClosableComponentProps, InputProps } from '@lib/ui/props'
+import { OnCloseProp, InputProps } from '@lib/ui/props'
 import styled from 'styled-components'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
@@ -16,7 +16,7 @@ import { useRef } from 'react'
 type PrincipleFormFieldsProps = InputProps<PrincipleFormShape> & {
   onSubmit?: () => void
   categorySelectorAutoFocus?: boolean
-} & ClosableComponentProps
+} & OnCloseProp
 
 const HeaderWrapper = styled(VStack)`
   padding: 0;

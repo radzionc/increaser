@@ -3,7 +3,7 @@ import { HStack, VStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
 import { MultilineTextInput } from '@lib/ui/inputs/MultilineTextInput'
-import { ClosableComponentProps, InputProps } from '@lib/ui/props'
+import { OnCloseProp, InputProps } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 import { TaskProjectSelector } from '../TaskProjectSelector'
@@ -31,7 +31,7 @@ type TaskFormHeaderValue = ProjectRelatedEntity & {
 }
 
 type TaskFormHeaderProps = InputProps<TaskFormHeaderValue> &
-  Partial<ClosableComponentProps> & {
+  Partial<OnCloseProp> & {
     onSubmit?: () => void
     hasProjectAutoFocus?: boolean
     titlePlaceholder?: string

@@ -1,11 +1,11 @@
 import { Match } from '@lib/ui/base/Match'
-import { ComponentWithIndexProps } from '@lib/ui/props'
+import { IndexProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { format, getISOWeek } from 'date-fns'
 import { useStartOfSelectedIntervalPoint } from '../timeGrouping/useStartOfSelectedIntervalPoint'
 import { useTimeGrouping } from '../timeGrouping/state'
 
-export const TrackedTimeChartXLabel = ({ index }: ComponentWithIndexProps) => {
+export const TrackedTimeChartXLabel = ({ index }: IndexProp) => {
   const value = useStartOfSelectedIntervalPoint(index)
   const timeGrouping = useTimeGrouping()
 

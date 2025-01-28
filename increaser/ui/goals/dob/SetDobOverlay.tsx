@@ -1,6 +1,6 @@
 import { DayInput } from '@lib/ui/time/day/DayInput'
 import { stringToDay, dayToString, Day } from '@lib/utils/time/Day'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { useState } from 'react'
 import { useUpdateUserMutation } from '../../user/mutations/useUpdateUserMutation'
 import { useUser } from '@increaser/ui/user/state/user'
@@ -10,7 +10,7 @@ import { Modal } from '@lib/ui/modal'
 import { FormActions } from '@lib/ui/form/components/FormActions'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
 
-export const SetDobOverlay = ({ onFinish }: NoValueFinishProps) => {
+export const SetDobOverlay = ({ onFinish }: OnFinishNoValueProp) => {
   const { dob } = useUser()
   const { mutate: updateUser } = useUpdateUserMutation()
   const [value, setValue] = useState<Day>(() => {

@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { D_IN_WEEK } from '@lib/utils/time'
 import { toPercents } from '@lib/utils/toPercents'
@@ -11,9 +11,7 @@ const Container = styled.div`
   pointer-events: none;
 `
 
-export const CurrentDayHighlight = ({
-  value,
-}: ComponentWithValueProps<number>) => (
+export const CurrentDayHighlight = ({ value }: ValueProp<number>) => (
   <Container
     style={{
       width: toPercents(1 / D_IN_WEEK),

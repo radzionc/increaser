@@ -6,10 +6,10 @@ import { useGoalsTimelineType } from './state/goalsTimelineType'
 import { format } from 'date-fns'
 import { SetDobPrompt } from '../dob/SetDobPrompt'
 import { Text } from '@lib/ui/text'
-import { UIComponentProps } from '@lib/ui/props'
+import { UiProps } from '@lib/ui/props'
 import { GoalsTimelineContent } from './GoalsTimelineContent'
 
-type GoalsTimelineProps = UIComponentProps & {
+type GoalsTimelineProps = UiProps & {
   controls?: React.ReactNode
 }
 

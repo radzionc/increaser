@@ -1,7 +1,7 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useFocusStatus } from '../state/focusIntervals'
 
-export const ActiveFocusOnly = ({ children }: ComponentWithChildrenProps) => {
+export const ActiveFocusOnly = ({ children }: ChildrenProp) => {
   const status = useFocusStatus()
 
   if (status !== 'active') {

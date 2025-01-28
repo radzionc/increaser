@@ -1,9 +1,5 @@
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import {
-  ClosableComponentProps,
-  InputProps,
-  SubmittableComponentProps,
-} from '@lib/ui/props'
+import { OnCloseProp, InputProps, OnSubmitProp } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { EmojiColorTextInputFrame } from '../../form/EmojiColorTextInputFrame'
@@ -20,8 +16,8 @@ import { Spacer } from '@lib/ui/layout/Spacer'
 import { Text } from '@lib/ui/text'
 
 type ProjectFormFieldsProps = InputProps<ProjectFormShape> &
-  Partial<SubmittableComponentProps> &
-  ClosableComponentProps & {
+  Partial<OnSubmitProp> &
+  OnCloseProp & {
     freeHours: number
   }
 

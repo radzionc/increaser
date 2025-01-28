@@ -1,5 +1,5 @@
 import { ProjectWeek } from '@increaser/entities/timeTracking'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { useState } from 'react'
 import { useCurrentProject } from '@increaser/ui/projects/CurrentProjectProvider'
 import { convertDuration } from '@lib/utils/time/convertDuration'
@@ -34,9 +34,7 @@ const Line = styled.div`
   pointer-events: none;
 `
 
-export const ProjectGoalChart = ({
-  value,
-}: ComponentWithValueProps<ProjectWeek[]>) => {
+export const ProjectGoalChart = ({ value }: ValueProp<ProjectWeek[]>) => {
   const { allocatedMinutesPerWeek, color } = useCurrentProject()
   const targets = [convertDuration(allocatedMinutesPerWeek, 'min', 's')]
   const normalized = normalizeDataArrays({

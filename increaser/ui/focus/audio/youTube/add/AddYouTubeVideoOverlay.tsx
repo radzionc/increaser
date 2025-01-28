@@ -1,5 +1,5 @@
 import { Modal } from '@lib/ui/modal'
-import { ClosableComponentProps } from '@lib/ui/props'
+import { OnCloseProp } from '@lib/ui/props'
 import { focusAudioConfig } from '../../config'
 import { validate } from '@lib/ui/form/utils/validate'
 import { useState } from 'react'
@@ -34,7 +34,7 @@ const VideoContainer = styled.div`
   aspect-ratio: 16 / 9;
 `
 
-export const AddYouTubeVideoOverlay = ({ onClose }: ClosableComponentProps) => {
+export const AddYouTubeVideoOverlay = ({ onClose }: OnCloseProp) => {
   const [value, setValue] = useState<VideoFormShape>({
     url: '',
     name: '',

@@ -1,5 +1,5 @@
 import { PrincipleIdea } from '@increaser/entities-utils/principle/principleIdeas'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { useCreateUserEntityMutation } from '../userEntity/api/useCreateUserEntityMutation'
 import { useDeleteUserEntityMutation } from '../userEntity/api/useDeleteUserEntityMutation'
 import { useUser } from '@increaser/ui/user/state/user'
@@ -14,7 +14,7 @@ import { Button } from '@lib/ui/buttons/Button'
 
 export const AddPrincipleIdea = ({
   value: { id, description, name, categoryId },
-}: ComponentWithValueProps<PrincipleIdea>) => {
+}: ValueProp<PrincipleIdea>) => {
   const { principles, principleCategories } = useUser()
   const { mutate: createPrinciple } = useCreateUserEntityMutation('principle')
   const { mutate: createPrincipleCategory } =

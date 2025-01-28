@@ -1,9 +1,9 @@
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
-import { SelectableComponentProps } from '@lib/ui/props'
+import { OnSelectProp } from '@lib/ui/props'
 import { useTheme } from 'styled-components'
 
-const EmojiPicker = ({ onSelect }: SelectableComponentProps<string>) => {
+const EmojiPicker = ({ onSelect }: OnSelectProp<string>) => {
   const { name } = useTheme()
 
   return (

@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { ProjectGoal } from '@increaser/entities/Project'
 import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
@@ -18,7 +18,7 @@ const Container = styled(IconWrapper)`
 
 export const ProjectGoalShyIndicator = ({
   value,
-}: ComponentWithValueProps<ProjectGoal | null>) => {
+}: ValueProp<ProjectGoal | null>) => {
   const { colors } = useTheme()
 
   return (

@@ -1,9 +1,5 @@
 import { EmbeddedTitleInput } from '@lib/ui/inputs/EmbeddedTitleInput'
-import {
-  ClosableComponentProps,
-  InputProps,
-  SubmittableComponentProps,
-} from '@lib/ui/props'
+import { OnCloseProp, InputProps, OnSubmitProp } from '@lib/ui/props'
 import { EmojiInput } from '../../form/emoji-input/EmojiInput'
 import { PanelFormCloseButton } from '../../form/panel/PanelFormCloseButton'
 import { HabitFormShape } from './HabitFormShape'
@@ -17,8 +13,8 @@ import styled from 'styled-components'
 import { panelFormConfig } from '../../form/panel/config'
 
 type HabitFormFieldsProps = InputProps<HabitFormShape> &
-  Partial<SubmittableComponentProps> &
-  ClosableComponentProps
+  Partial<OnSubmitProp> &
+  OnCloseProp
 
 const HeaderWrapper = styled(VStack)`
   padding: 0;

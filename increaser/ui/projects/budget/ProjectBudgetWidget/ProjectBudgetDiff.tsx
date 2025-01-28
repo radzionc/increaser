@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { useCurrentProject } from '../../CurrentProjectProvider'
@@ -6,9 +6,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { ProjectBudgetDiffIndicator } from './ProjectBudgetDiffIndicator'
 import { Minutes } from '@lib/utils/time/types'
 
-export const ProjectBudgetDiff = ({
-  value,
-}: ComponentWithValueProps<Minutes>) => {
+export const ProjectBudgetDiff = ({ value }: ValueProp<Minutes>) => {
   const { goal } = useCurrentProject()
 
   if (!value) return null

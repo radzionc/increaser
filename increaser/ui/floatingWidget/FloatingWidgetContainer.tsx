@@ -4,7 +4,7 @@ import { getHoverVariant } from '@lib/ui/theme/getHoverVariant'
 import { match } from '@lib/utils/match'
 import { CSSProperties } from 'react'
 import { RectangleCorner } from '@lib/ui/entities/RectangleCorner'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useFloatingWidgetPosition } from './state/floatingWidgetPosition'
 
 const offset = 20
@@ -18,9 +18,7 @@ const Wrapper = styled.div`
   border: 2px solid ${getHoverVariant('foreground')};
 `
 
-export const FloatingWidgetContainer = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const FloatingWidgetContainer = ({ children }: ChildrenProp) => {
   const [position] = useFloatingWidgetPosition()
 
   return (

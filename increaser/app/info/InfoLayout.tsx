@@ -2,7 +2,7 @@ import { PageContainer } from '../ui/page/PageContainer'
 import { PageContent } from '../ui/page/PageContent'
 
 import { PageDocumentTitle } from '../ui/page/PageDocumentTitle'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { AppPageLayout } from '../ui/page/AppPageLayout'
 import { PageHeaderControlsAreaProvider } from '../ui/page/header/PageHeaderControlsAreaProvider'
 import { PageViewNavigation } from '../navigation/page/PageViewNavigation'
@@ -11,7 +11,7 @@ import { appPageEmoji } from '@increaser/ui/navigation/app'
 
 const title = 'Knowledge Base'
 
-export const InfoLayout = ({ children }: ComponentWithChildrenProps) => {
+export const InfoLayout = ({ children }: ChildrenProp) => {
   return (
     <AppPageLayout>
       <PageContainer>

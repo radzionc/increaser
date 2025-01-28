@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 
 import { getColor } from '@lib/ui/theme/getters'
@@ -9,9 +9,7 @@ import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 
-export const LinkActionContainer = styled(
-  UnstyledButton,
-)<ComponentWithActiveState>`
+export const LinkActionContainer = styled(UnstyledButton)<IsActiveProp>`
   border: 1px solid transparent;
 
   ${borderRadius.m};

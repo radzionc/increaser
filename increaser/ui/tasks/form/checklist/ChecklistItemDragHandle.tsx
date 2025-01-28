@@ -3,7 +3,7 @@ import { centerContent } from '@lib/ui/css/centerContent'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { GripVerticalIcon } from '@lib/ui/icons/GripVerticalIcon'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { ComponentProps } from 'react'
 import styled, { css } from 'styled-components'
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   padding-top: ${toSizeUnit(tightListItemConfig.verticalPadding)};
 `
 
-const Container = styled.div<ComponentWithActiveState>`
+const Container = styled.div<IsActiveProp>`
   width: ${toSizeUnit(checklistConfig.dragHandleWidth)};
   height: ${toSizeUnit(tightListItemConfig.lineHeight)};
   ${borderRadius.xs};

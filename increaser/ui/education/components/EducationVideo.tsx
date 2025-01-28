@@ -1,7 +1,4 @@
-import {
-  ComponentWithActiveState,
-  ComponentWithValueProps,
-} from '@lib/ui/props'
+import { IsActiveProp, ValueProp } from '@lib/ui/props'
 
 import YouTubePlayer from 'react-player/lazy'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
@@ -10,7 +7,7 @@ import { getColor } from '@lib/ui/theme/getters'
 import { useBoolean } from '@lib/ui/hooks/useBoolean'
 import { ComponentProps } from 'react'
 
-const Container = styled.div<ComponentWithActiveState>`
+const Container = styled.div<IsActiveProp>`
   overflow: hidden;
   width: 100%;
   background: ${getColor('foreground')};
@@ -20,7 +17,7 @@ const Container = styled.div<ComponentWithActiveState>`
 export const EducationVideo = ({
   value,
   ...rest
-}: ComponentWithValueProps<string> & ComponentProps<typeof Container>) => {
+}: ValueProp<string> & ComponentProps<typeof Container>) => {
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
 
   return (

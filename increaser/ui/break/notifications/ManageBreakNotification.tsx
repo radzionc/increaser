@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import {
   BreakNotification,
   breakNotificationDescription,
@@ -10,7 +10,7 @@ import { DetailedNotificationToggle } from '@lib/ui/notifications/manage/Detaile
 
 export const ManageBreakNotification = ({
   value,
-}: ComponentWithValueProps<BreakNotification>) => {
+}: ValueProp<BreakNotification>) => {
   const [notifications, setNotifications] = useBreakNotifications()
 
   return (

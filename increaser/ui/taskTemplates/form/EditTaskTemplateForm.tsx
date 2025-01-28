@@ -12,9 +12,9 @@ import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 
-export const EditTaskTemplateForm = ({ onFinish }: NoValueFinishProps) => {
+export const EditTaskTemplateForm = ({ onFinish }: OnFinishNoValueProp) => {
   const taskTemplate = useCurrentTaskTemplate()
   const { id } = taskTemplate
   const initialValue = useMemo(() => omit(taskTemplate, 'id'), [taskTemplate])

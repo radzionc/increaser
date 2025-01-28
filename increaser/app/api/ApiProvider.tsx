@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useAuthSession } from '../auth/hooks/useAuthSession'
 
 import { callApi } from '@increaser/api-ui/utils/callApi'
@@ -9,7 +9,7 @@ import { shouldBeDefined } from '@lib/utils/assert/shouldBeDefined'
 
 const baseUrl = shouldBeDefined(process.env.NEXT_PUBLIC_API_URL)
 
-export const ApiProvider = ({ children }: ComponentWithChildrenProps) => {
+export const ApiProvider = ({ children }: ChildrenProp) => {
   const [authSession, setAuthSession] = useAuthSession()
   const authToken = authSession?.token
 

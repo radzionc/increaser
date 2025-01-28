@@ -1,13 +1,13 @@
 import { AppNavigationPage } from '@increaser/ui/navigation/app'
 import { Match } from '@lib/ui/base/Match'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { NavigationToInternalPage } from './Sidebar/NavigationToInternalPage'
 import { HabitsNavigationDecoration } from '@increaser/ui/habits/navigation/HabitsNavigationDecoration'
 import { FocusNavigationDecoration } from '../focus/navigation/FocusNavigationDecoration'
 
 export const SidebarNavigationItem = ({
   value,
-}: ComponentWithValueProps<AppNavigationPage>) => {
+}: ValueProp<AppNavigationPage>) => {
   return (
     <Match
       value={value}

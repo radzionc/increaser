@@ -10,12 +10,12 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { areEqualRecords } from '@lib/utils/record/areEqualRecords'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
-import { ClosableComponentProps } from '@lib/ui/props'
+import { OnCloseProp } from '@lib/ui/props'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { useGoalFormCorrector } from './useGoalFormCorrector'
 
-export const EditGoalForm = ({ onClose }: ClosableComponentProps) => {
+export const EditGoalForm = ({ onClose }: OnCloseProp) => {
   const goal = useCurrentGoal()
   const { id } = goal
   const initialValue = useMemo(

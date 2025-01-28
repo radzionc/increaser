@@ -1,5 +1,5 @@
 import { useAnalytics } from '@lib/analytics-ui/AnalyticsContext'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
@@ -20,7 +20,7 @@ const Container = styled(VStack)`
   ${horizontalPadding(panelDefaultPadding)};
 `
 
-export const AddSound = ({ onFinish }: NoValueFinishProps) => {
+export const AddSound = ({ onFinish }: OnFinishNoValueProp) => {
   const [value, setValue] = useState<MusicFormShape>({
     url: '',
     name: '',

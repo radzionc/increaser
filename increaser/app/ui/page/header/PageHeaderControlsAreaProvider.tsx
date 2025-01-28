@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import {
   Dispatch,
   SetStateAction,
@@ -18,9 +18,7 @@ const Context = createContext<ContextState>({
   setValue: () => {},
 })
 
-export const PageHeaderControlsAreaProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const PageHeaderControlsAreaProvider = ({ children }: ChildrenProp) => {
   const [value, setValue] = useState<HTMLDivElement | null>(null)
 
   return (
@@ -34,9 +32,7 @@ export const useSetPageHeaderControlsArea = () => {
   return setValue
 }
 
-export const PageHeaderControlsArea = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const PageHeaderControlsArea = ({ children }: ChildrenProp) => {
   const { value } = useContext(Context)
 
   if (!value) return null

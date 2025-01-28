@@ -6,14 +6,14 @@ import { trackedTimeChartConfig } from '../../chart/config'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { useTrackedProjects } from '../../projects/TrackedProjectsProvider'
 import { toPercents } from '@lib/utils/toPercents'
-import { ComponentWithIndexProps } from '@lib/ui/props'
+import { IndexProp } from '@lib/ui/props'
 import { useBarChartFillColor } from '../../chart/hooks/useBarChartFillColor'
 import { useActiveProject } from '../../activeProject/useActiveProject'
 
 type DaySessionsProps = {
   interval: Interval
   sets: Set[]
-} & ComponentWithIndexProps
+} & IndexProp
 
 const Container = styled.div`
   width: calc(100% - ${toSizeUnit(trackedTimeChartConfig.spaceBetweenBars)});

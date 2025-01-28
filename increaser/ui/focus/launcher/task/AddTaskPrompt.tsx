@@ -5,7 +5,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { focusLauncherConfig } from '../config'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { ClickableComponentProps } from '@lib/ui/props'
+import { OnClickProp } from '@lib/ui/props'
 import { HeaderPromptContentFrame } from '../HeaderPromptContentFrame'
 
 const Container = styled(UnstyledButton)`
@@ -20,7 +20,7 @@ const Container = styled(UnstyledButton)`
   }
 `
 
-export const AddTaskPrompt = ({ onClick }: ClickableComponentProps) => {
+export const AddTaskPrompt = ({ onClick }: OnClickProp) => {
   return (
     <Container onClick={onClick}>
       <HeaderPromptContentFrame icon={<PlusIcon />}>

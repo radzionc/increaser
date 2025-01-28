@@ -4,7 +4,7 @@ import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import { ClickableComponentProps } from '@lib/ui/props'
+import { OnClickProp } from '@lib/ui/props'
 import { hStack } from '@lib/ui/css/stack'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
@@ -33,7 +33,7 @@ const Container = styled(UnstyledButton)`
   }
 `
 
-type AddFocusEntityOptionProps = ClickableComponentProps & {
+type AddFocusEntityOptionProps = OnClickProp & {
   focusEntityName: string
 }
 

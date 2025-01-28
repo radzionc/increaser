@@ -2,7 +2,7 @@ import {
   HStackSeparatedBy,
   dotSeparator,
 } from '@lib/ui/layout/StackSeparatedBy'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
@@ -23,7 +23,7 @@ const Container = styled(HStackSeparatedBy)`
 
 export const TasksGroupHeader = ({
   value,
-}: ComponentWithValueProps<ScheduledTaskGroupId>) => {
+}: ValueProp<ScheduledTaskGroupId>) => {
   const [timeGrouping] = useTaskTimeGrouping()
 
   const deadline = useMemo(() => {

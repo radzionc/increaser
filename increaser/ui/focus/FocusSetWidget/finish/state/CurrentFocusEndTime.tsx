@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { getStateProviderSetup } from '@lib/ui/state/getStateProviderSetup'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useMemo } from 'react'
@@ -9,9 +9,7 @@ export const {
   provider: FocusEndTimeProvider,
 } = getStateProviderSetup<number>('CurrentFocusEndTime')
 
-export const CurrentFocusEndTimeProvider = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const CurrentFocusEndTimeProvider = ({ children }: ChildrenProp) => {
   const intervals = useAssertFocusIntervals()
 
   const initialValue = useMemo(

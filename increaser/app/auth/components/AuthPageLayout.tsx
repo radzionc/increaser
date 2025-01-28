@@ -1,4 +1,4 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 
 import { UnauthenticatedOnly } from './UnauthenticatedOnly'
 import { WebsiteNavigation } from '@lib/ui/website/navigation/WebsiteNavigation'
@@ -43,7 +43,7 @@ const Content = styled(Panel)`
   }
 `
 
-export const AuthPageLayout = ({ children }: ComponentWithChildrenProps) => {
+export const AuthPageLayout = ({ children }: ChildrenProp) => {
   return (
     <UnauthenticatedOnly>
       <WebsiteNavigation

@@ -2,10 +2,7 @@ import styled, { css } from 'styled-components'
 import { DayOverviewSet } from './DayOverviewProvider'
 import { getColor } from '@lib/ui/theme/getters'
 import { interactive } from '@lib/ui/css/interactive'
-import {
-  ComponentWithActiveState,
-  ComponentWithValueProps,
-} from '@lib/ui/props'
+import { IsActiveProp, ValueProp } from '@lib/ui/props'
 import { SetItem } from '../SetItem'
 import { useMemo } from 'react'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
@@ -30,7 +27,7 @@ import {
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 
-const Container = styled(SetItem)<ComponentWithActiveState>`
+const Container = styled(SetItem)<IsActiveProp>`
   ${interactive};
 
   &:hover {
@@ -48,9 +45,7 @@ const Container = styled(SetItem)<ComponentWithActiveState>`
     `}
 `
 
-export const SetItemOverview = ({
-  value,
-}: ComponentWithValueProps<DayOverviewSet>) => {
+export const SetItemOverview = ({ value }: ValueProp<DayOverviewSet>) => {
   const [, setActiveSet] = useActiveSet()
   const { mutate: deleteSet } = useDeleteSetMutation()
 

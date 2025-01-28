@@ -1,5 +1,5 @@
 import { TaskChecklistItem } from '@increaser/entities/Task'
-import { ValueFinishProps } from '@lib/ui/props'
+import { OnFinishValueProp } from '@lib/ui/props'
 import { ExpandableSelectorContainer } from '@lib/ui/select/ExpandableSelectorContainer'
 import { getTaskChecklistItemInitialValue } from './getTaskChecklistItemInitialValue'
 import { useIsChecklistOpen } from './state/isChecklistOpen'
@@ -7,7 +7,7 @@ import { CheckSquareIcon } from '@lib/ui/icons/CheckSquareIcon'
 
 export const AddTaskChecklist = ({
   onFinish,
-}: ValueFinishProps<TaskChecklistItem[]>) => {
+}: OnFinishValueProp<TaskChecklistItem[]>) => {
   const [, setIsOpen] = useIsChecklistOpen()
 
   return (

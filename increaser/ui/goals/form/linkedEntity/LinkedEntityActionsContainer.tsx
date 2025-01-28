@@ -1,6 +1,6 @@
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
@@ -10,9 +10,9 @@ const Separator = styled.div`
   background: ${getColor('mistExtra')};
 `
 
-export const LinkedEntityActionsContainer: React.FC<
-  ComponentWithChildrenProps
-> = ({ children }) => (
+export const LinkedEntityActionsContainer: React.FC<ChildrenProp> = ({
+  children,
+}) => (
   <HStackSeparatedBy
     style={{ marginLeft: -tightListItemConfig.horizontalOffset }}
     alignItems="center"

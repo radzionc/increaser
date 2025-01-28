@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { HabitItemContent } from './HabitItemContent'
-import { ClickableComponentProps } from '@lib/ui/props'
+import { OnClickProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 
 const Container = styled(Hoverable)`
@@ -10,7 +10,7 @@ const Container = styled(Hoverable)`
   color: ${getColor('contrast')};
 `
 
-export const HabitItem = ({ onClick }: ClickableComponentProps) => {
+export const HabitItem = ({ onClick }: OnClickProp) => {
   return (
     <Container onClick={onClick} verticalOffset={0}>
       <HabitItemContent />

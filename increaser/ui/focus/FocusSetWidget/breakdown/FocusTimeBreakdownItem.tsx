@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { FocusBreakdownItemInfo } from './FocusBreakdownItemInfo'
 import { HStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
@@ -25,7 +25,7 @@ const formatIntervalDuration = (interval: Interval) =>
 
 export const FocusTimeBreakdownItem = ({
   value: { kind, name, interval },
-}: ComponentWithValueProps<FocusBreakdownItemInfo>) => {
+}: ValueProp<FocusBreakdownItemInfo>) => {
   return (
     <Container>
       <Text color={kind === 'primary' ? 'contrast' : 'shy'}>{name}</Text>

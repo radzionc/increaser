@@ -3,11 +3,11 @@ import { useStartOfDay } from '@lib/ui/hooks/useStartOfDay'
 import { fromDay, toDay } from '@lib/utils/time/Day'
 import { endOfDay, addYears } from 'date-fns'
 import { CalendarDayInput } from '@lib/ui/time/day/calendar/CalendarDayInput'
-import { OptionalValueFinishProps } from '@lib/ui/props'
+import { OnFinishOptionalValueProp } from '@lib/ui/props'
 
 export const CustomTaskDeadlineInput = ({
   onFinish,
-}: OptionalValueFinishProps<number>) => {
+}: OnFinishOptionalValueProp<number>) => {
   const todayStartedAt = useStartOfDay()
   const endOfToday = endOfDay(todayStartedAt).getTime()
   const min = toDay(endOfToday)

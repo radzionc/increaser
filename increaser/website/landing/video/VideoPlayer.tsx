@@ -5,7 +5,7 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import styled from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
 import { getColor } from '@lib/ui/theme/getters'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { mergeRefs } from '@lib/ui/utils/mergeRefs'
 import { widescreenRatio } from '@lib/ui/video/config'
 
@@ -19,7 +19,7 @@ const VideoWrapper = styled.div`
   overflow: hidden;
 `
 
-export const VideoPlayer = ({ value }: ComponentWithValueProps<string>) => {
+export const VideoPlayer = ({ value }: ValueProp<string>) => {
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
 
   return (

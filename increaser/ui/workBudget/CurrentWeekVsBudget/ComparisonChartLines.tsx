@@ -1,7 +1,7 @@
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { HSLA } from '@lib/ui/colors/HSLA'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
-import { ComponentWithValueProps, ComponentWithWidthProps } from '@lib/ui/props'
+import { ValueProp, WidthProp } from '@lib/ui/props'
 import { chartConfig } from './config'
 
 type ChartDescription = {
@@ -9,8 +9,7 @@ type ChartDescription = {
   color: HSLA
 }
 
-type ComparisonChartLinesProps = ComponentWithValueProps<ChartDescription[]> &
-  ComponentWithWidthProps
+type ComparisonChartLinesProps = ValueProp<ChartDescription[]> & WidthProp
 export const ComparisonChartLines = ({
   value,
   width,

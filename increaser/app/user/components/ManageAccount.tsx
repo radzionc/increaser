@@ -1,4 +1,4 @@
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { OptionItem } from '@lib/ui/select/OptionItem'
@@ -28,7 +28,7 @@ import { FileDownIcon } from '@lib/ui/icons/FileDownIcon'
 import { useExportUserData } from '@increaser/ui/user/hooks/useExportUserData'
 import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
 
-const Container = styled(HeaderActionButton)<ComponentWithActiveState>`
+const Container = styled(HeaderActionButton)<IsActiveProp>`
   ${({ isActive }) =>
     isActive &&
     css`

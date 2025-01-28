@@ -5,7 +5,7 @@ import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { focusDurations } from '@increaser/entities/FocusDuration'
 import { WithSelectionMark } from '@lib/ui/select/WithSelectionMark'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled, { css } from 'styled-components'
 import { Text } from '@lib/ui/text'
@@ -18,7 +18,7 @@ import { useUserChangedFocusDurationAt } from '../state/useUserChangedFocusDurat
 
 const gap = 12
 
-const Container = styled(UnstyledButton)<ComponentWithActiveState>`
+const Container = styled(UnstyledButton)<IsActiveProp>`
   ${hStack({
     fullHeight: true,
     alignItems: 'center',

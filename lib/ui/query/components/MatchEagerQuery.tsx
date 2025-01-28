@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 import { EagerQuery } from '../Query'
-import { ComponentWithValueProps } from '../../props'
+import { ValueProp } from '../../props'
 
-export type MatchEagerQueryProps<T, E = unknown> = ComponentWithValueProps<
+export type MatchEagerQueryProps<T, E = unknown> = ValueProp<
   EagerQuery<T, E>
 > & {
   pending?: () => ReactNode

@@ -5,10 +5,7 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import { HStack } from '@lib/ui/css/stack'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import {
-  ClickableComponentProps,
-  ComponentWithChildrenProps,
-} from '@lib/ui/props'
+import { OnClickProp, ChildrenProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import styled from 'styled-components'
 
@@ -32,7 +29,7 @@ const Content = styled(HStack)`
 export const AddFocusEntityPrompt = ({
   onClick,
   children,
-}: ClickableComponentProps & ComponentWithChildrenProps) => {
+}: OnClickProp & ChildrenProp) => {
   return (
     <Container
       horizontalOffset={tightListItemConfig.horizontalOffset}

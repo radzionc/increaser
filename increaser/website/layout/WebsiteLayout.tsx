@@ -27,7 +27,7 @@ import {
 } from '@increaser/entities/ProductTool'
 import { getProductToolUrl } from '../navigation/productTool'
 import { ProductFeaturesNavigation } from '../navigation/features/ProductFeaturesNavigation'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
@@ -45,7 +45,7 @@ const Separator = styled.div`
   background: ${getColor('mistExtra')};
 `
 
-export const WebsiteLayout = ({ children }: ComponentWithChildrenProps) => {
+export const WebsiteLayout = ({ children }: ChildrenProp) => {
   const { events } = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
 

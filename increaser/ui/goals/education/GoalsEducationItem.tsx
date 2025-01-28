@@ -1,10 +1,10 @@
 import { VStack } from '@lib/ui/css/stack'
-import { ComponentWithChildrenProps, TitledComponentProps } from '@lib/ui/props'
+import { ChildrenProp, TitleProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 
-type GoalsEducationItemProps = TitledComponentProps &
-  ComponentWithChildrenProps & {
+type GoalsEducationItemProps = TitleProp &
+  ChildrenProp & {
     index: number
   }
 

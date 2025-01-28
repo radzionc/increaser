@@ -1,4 +1,4 @@
-import { ComponentWithValueProps, NoValueFinishProps } from '@lib/ui/props'
+import { ValueProp, OnFinishNoValueProp } from '@lib/ui/props'
 import { validateUrl } from '@lib/utils/validation/validateUrl'
 import { getUniqueValueValidator } from '@lib/utils/validation/getUniqueValueValidator'
 import { combineValidators } from '@lib/utils/validation/combineValidators'
@@ -26,7 +26,7 @@ const Container = styled(VStack)`
 export const EditSoundForm = ({
   onFinish,
   value: initialValue,
-}: NoValueFinishProps & ComponentWithValueProps<MusicFormShape>) => {
+}: OnFinishNoValueProp & ValueProp<MusicFormShape>) => {
   const [value, setValue] = useState<MusicFormShape>(initialValue)
 
   const { focusSounds } = useUser()

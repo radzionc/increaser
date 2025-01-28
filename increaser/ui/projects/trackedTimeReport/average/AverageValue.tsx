@@ -1,10 +1,6 @@
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { EmphasizeNumbers } from '@lib/ui/text/EmphasizeNumbers'
-import {
-  ComponentWithKindProps,
-  ComponentWithValueProps,
-  NamedComponentProps,
-} from '@lib/ui/props'
+import { KindProp, ValueProp, NameProp } from '@lib/ui/props'
 import { text, Text } from '@lib/ui/text'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 import { sum } from '@lib/utils/array/sum'
@@ -30,9 +26,7 @@ export const AverageValue = ({
   value,
   name,
   kind = 'regular',
-}: NamedComponentProps &
-  ComponentWithValueProps<number[]> &
-  Partial<ComponentWithKindProps<AverageValueKind>>) => {
+}: NameProp & ValueProp<number[]> & Partial<KindProp<AverageValueKind>>) => {
   const result = useMemo(() => {
     if (isEmpty(value)) {
       return undefined

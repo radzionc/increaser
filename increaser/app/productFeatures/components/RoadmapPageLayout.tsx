@@ -9,7 +9,7 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { PageHeader } from '../../ui/page/header/PageHeader'
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
 import { PageTitle } from '@lib/ui/text/PageTitle'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { AppPageLayout } from '../../ui/page/AppPageLayout'
 import { panelDefaultPadding } from '@lib/ui/css/panel'
 
@@ -34,7 +34,7 @@ const SideContent = () => (
   </VStack>
 )
 
-export const RoadmapPageLayout = ({ children }: ComponentWithChildrenProps) => {
+export const RoadmapPageLayout = ({ children }: ChildrenProp) => {
   return (
     <AppPageLayout>
       <ElementSizeAware

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { useCurrentTask } from '@increaser/ui/tasks/CurrentTaskProvider'
 import { getColor } from '@lib/ui/theme/getters'
 import { OnHoverAction } from '@lib/ui/base/OnHoverAction'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { EditIcon } from '@lib/ui/icons/EditIcon'
 import { Opener } from '@lib/ui/base/Opener'
 import { EditTaskFormOverlay } from '@increaser/ui/tasks/form/EditTaskFormOverlay'
@@ -27,7 +27,7 @@ const Container = styled(OnHoverAction)`
   })}
 `
 
-const Content = styled(UnstyledButton)<ComponentWithActiveState>`
+const Content = styled(UnstyledButton)<IsActiveProp>`
   ${hStack({
     fullWidth: true,
     alignItems: 'center',

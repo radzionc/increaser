@@ -1,5 +1,5 @@
 import { PrincipleIdea } from '@increaser/entities-utils/principle/principleIdeas'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { defaultPrincipleCategories } from '@increaser/entities/PrincipleCategory'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Text } from '@lib/ui/text'
@@ -12,7 +12,7 @@ import { usePrinciples } from './hooks/usePrinciples'
 
 export const PrincipleIdeaItemContent = ({
   value,
-}: ComponentWithValueProps<PrincipleIdea>) => {
+}: ValueProp<PrincipleIdea>) => {
   const { description, name, source } = value
 
   const principles = usePrinciples()

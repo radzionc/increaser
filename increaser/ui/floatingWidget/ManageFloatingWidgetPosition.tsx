@@ -2,7 +2,7 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { RectangleCornerIcon } from '@lib/ui/icons/RectangleCornerIcon'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import styled, { css } from 'styled-components'
-import { ComponentWithActiveState } from '@lib/ui/props'
+import { IsActiveProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { FloatingOptionsContainer } from '@lib/ui/floating/FloatingOptionsContainer'
@@ -12,7 +12,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { interactive } from '@lib/ui/css/interactive'
 import { useFloatingWidgetPosition } from './state/floatingWidgetPosition'
 
-const Container = styled(IconButton)<ComponentWithActiveState>`
+const Container = styled(IconButton)<IsActiveProp>`
   ${({ isActive }) =>
     isActive &&
     css`
@@ -32,7 +32,7 @@ const OptionsContainer = styled(FloatingOptionsContainer)`
   outline: 1px solid ${getColor('mist')};
 `
 
-type OptionItemProps = ComponentWithActiveState & {
+type OptionItemProps = IsActiveProp & {
   isSelected: boolean
 }
 

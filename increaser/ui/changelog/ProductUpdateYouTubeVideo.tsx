@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 
 import { VStack } from '@lib/ui/css/stack'
 
@@ -21,9 +21,7 @@ const VideoWrapper = styled.div`
   overflow: hidden;
 `
 
-export const ProductUpdateYouTubeVideo = ({
-  value,
-}: ComponentWithValueProps<string>) => {
+export const ProductUpdateYouTubeVideo = ({ value }: ValueProp<string>) => {
   const [isPlaying, { set: play, unset: pause }] = useBoolean(false)
 
   return (

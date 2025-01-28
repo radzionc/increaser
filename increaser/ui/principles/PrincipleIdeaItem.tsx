@@ -1,5 +1,5 @@
 import { PrincipleIdea } from '@increaser/entities-utils/principle/principleIdeas'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import styled from 'styled-components'
 import { Hoverable } from '@lib/ui/base/Hoverable'
 import { Opener } from '@lib/ui/base/Opener'
@@ -16,9 +16,7 @@ const Container = styled(Hoverable)`
   width: 100%;
 `
 
-export const PrincipleIdeaItem = ({
-  value,
-}: ComponentWithValueProps<PrincipleIdea>) => {
+export const PrincipleIdeaItem = ({ value }: ValueProp<PrincipleIdea>) => {
   const { description, name, categoryId } = value
 
   const { principleCategories } = useUser()

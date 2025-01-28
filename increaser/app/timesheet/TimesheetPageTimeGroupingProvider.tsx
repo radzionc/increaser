@@ -1,10 +1,10 @@
 import { useCurrentPageView } from '@increaser/app/navigation/hooks/useCurrentPageView'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { TimeGroupingProvider } from '@increaser/ui/projects/trackedTimeReport/timeGrouping/state'
 
 export const TimesheetPageTimeGroupingProvider = ({
   children,
-}: ComponentWithChildrenProps) => {
+}: ChildrenProp) => {
   const value = useCurrentPageView('timesheet')
 
   return <TimeGroupingProvider value={value}>{children}</TimeGroupingProvider>

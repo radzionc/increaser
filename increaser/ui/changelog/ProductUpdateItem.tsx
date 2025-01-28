@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import {
   ProductUpdate,
   productUpdateSocials,
@@ -22,9 +22,7 @@ import { ProductUpdateYouTubeVideo } from './ProductUpdateYouTubeVideo'
 import { ProductUpdateSubItem } from './ProductUpdateSubItem'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
-export const ProductUpdateItem = ({
-  value,
-}: ComponentWithValueProps<ProductUpdate>) => {
+export const ProductUpdateItem = ({ value }: ValueProp<ProductUpdate>) => {
   const socials = toEntries(
     withoutUndefinedFields(
       recordFromKeys(productUpdateSocials, (social) => value[social]),

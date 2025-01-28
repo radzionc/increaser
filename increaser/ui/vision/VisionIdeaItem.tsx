@@ -1,7 +1,4 @@
-import {
-  ComponentWithActiveState,
-  ComponentWithValueProps,
-} from '@lib/ui/props'
+import { IsActiveProp, ValueProp } from '@lib/ui/props'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import styled, { css } from 'styled-components'
 import { borderRadius } from '@lib/ui/css/borderRadius'
@@ -19,7 +16,7 @@ import { useDeleteUserEntityMutation } from '@increaser/ui/userEntity/api/useDel
 import { text, Text } from '@lib/ui/text'
 import { horizontalPadding } from '@lib/ui/css/horizontalPadding'
 
-const Indicator = styled.div<ComponentWithActiveState>`
+const Indicator = styled.div<IsActiveProp>`
   ${centerContent};
   background: ${getColor('mist')};
   ${borderRadius.m};
@@ -33,7 +30,7 @@ const Indicator = styled.div<ComponentWithActiveState>`
   ${centerContent};
 `
 
-const Container = styled(VStack)<ComponentWithActiveState>`
+const Container = styled(VStack)<IsActiveProp>`
   overflow: hidden;
   ${borderRadius.m};
   ${interactive};
@@ -77,7 +74,7 @@ const Image = styled.img`
 
 export const VisionIdeaItem = ({
   value: { id, name, emoji, description },
-}: ComponentWithValueProps<VisionAttributeIdea>) => {
+}: ValueProp<VisionAttributeIdea>) => {
   const { mutate: createVisionAttribute } =
     useCreateUserEntityMutation('visionAttribute')
   const { mutate: deleteVisionAttribute } =

@@ -5,11 +5,11 @@ import { borderRadius } from '@lib/ui/css/borderRadius'
 import { centerContent } from '@lib/ui/css/centerContent'
 import { match } from '@lib/utils/match'
 import { coloredTag } from '@lib/ui/css/coloredTag'
-import { StyledComponentWithColorProps } from '@lib/ui/props'
+import { StyledColorProp } from '@lib/ui/props'
 import { useCurrentTaskFactory } from '../taskFactories/CurrentTaskFactoryProvider'
 import { TaskFactoryTitle } from '../taskFactories/TaskFactoryTitle'
 
-const Prefix = styled.div<StyledComponentWithColorProps>`
+const Prefix = styled.div<StyledColorProp>`
   ${takeWholeSpace};
   ${borderRadius.xs};
   ${({ $color }) => coloredTag($color)}

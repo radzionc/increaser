@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { FocusBreakdownItemInfo } from './FocusBreakdownItemInfo'
 import { VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
@@ -30,7 +30,7 @@ const Separator = styled.div`
 
 export const FocusTimeIndicators = ({
   value,
-}: ComponentWithValueProps<FocusBreakdownItemInfo[]>) => {
+}: ValueProp<FocusBreakdownItemInfo[]>) => {
   return (
     <Container>
       <StackSeparatedBy

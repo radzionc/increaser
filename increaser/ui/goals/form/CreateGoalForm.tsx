@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { NoValueFinishProps } from '@lib/ui/props'
+import { OnFinishNoValueProp } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { GoalFormShape } from './GoalFormShape'
 import { randomlyPick } from '@lib/utils/array/randomlyPick'
@@ -14,7 +14,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { useStateCorrector } from '@lib/ui/state/useStateCorrector'
 import { useGoalFormCorrector } from './useGoalFormCorrector'
 
-export const CreateGoalForm = ({ onFinish }: NoValueFinishProps) => {
+export const CreateGoalForm = ({ onFinish }: OnFinishNoValueProp) => {
   const [statusFilter] = useGoalStatusFilter()
 
   const [value, setValue] = useStateCorrector(
