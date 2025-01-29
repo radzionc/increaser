@@ -37,11 +37,28 @@ The "Explore" subpage contains a list of suggested aspirations to give users ide
 
 ## Focus
 
-Users can set breaks between work sessions ranging from 5 to 15 minutes. Users can enable automatic work blocks that start after a break if the total work time does not exceed 90 minutes. User can select a duration for an automatic break. After working for more than 90 minutes in a block, the automatic break won't start.
+If the user have done at least one focus session, the title of the focus page will display how much time passed since the last focus session.
+
+### Break
+
+There are three options for a break: 5, 10 or 15 minutes. If the duration since the last focus session is less that the largest break duration option, the user will see a button to start a break next the focus page title.
+
+When the break is active it will be displayed in the same widget as the YouTube focus music player across all pages. On that widget the user can see the time since the last session end, and if it exceeds the break duration, the user will see a color indicator.
+
+The user can change the current break duration from the widget.
+
+The user can manage break notifications from the widget. There two types of notifications:
+
+- Break end: when the break duration is reached, the user will see a notification.
+- Break expired: every minute for 5 minutes after the break duration is reached, the user will see a notification.
+
+To see those notifications the user has to enable browser notifications. Also there is an option to toggle sound, the sound will be a robot voice saying that the break is over, or in the case of the break expired notification, a robot voice saying how much time passed since the last session end.
 
 Increaser advocates structuring work into 90-minute blocks to improve focus and productivity. Each block includes work sessions with breaks of no more than 15 minutes.
 
 Next, the "Focus" page displays an interface for starting a work session—a focus launcher. First, the user can select a project (required). Then, they can select a task (optional). If a project is selected, tasks will be filtered based on the assigned project. If no project is selected, all tasks will be displayed. To start a session, the user has to select either a task or a project. The user can also create a project or a task directly from the focus launcher. Project options are sorted based on the user's weekly goal completion, prompting the user to work on projects that are behind schedule.
+
+Next to the focus task input label there is an indicator showing how many tasks are scheduled for today or overdue. The user can click on the indicator to select a task for today or an overdue one.
 
 For project with a budgeted time the user will see a widget on the focus launcher with a visual representation of how much they have worked compared to their budget and their progress relative to the current weekday. Increaser will calculate the expected work time the user should have completed by the current day of the week and show the user how much they are behind or ahead of schedule, with a colored highlight for projects with a goal to work at least or no more than a certain amount of time. This widget will also be visible during a focus session on the focus page and will be updated in real-time.
 
@@ -97,6 +114,10 @@ The cumulative chart on the side of the projects page displays two overlaying li
 
 ## Preferences
 
+The preferences page consists of two sections: "Work preferences" and "Break preferences".
+
+### Work preferences
+
 The preferences page could be accessed from the user menu in the top right corner on the sidebar.
 
 On the "Preferences" page, user can set a preference by which time they want to finish their workday.
@@ -104,6 +125,12 @@ On the "Preferences" page, user can set a preference by which time they want to 
 The user can also select which days are the weekend days. If the user doesn't have a concept of a weekend and work the same amount of time every day, they can remove the weekend days.
 
 The user can set a preference for how much time they want to work on a workday and on a weekend, the total hours will serve as a "work budget" when the user is setting a project budget.
+
+### Break preferences
+
+The user can set a default break duration in break preferences.
+
+The user can enable automatic breaks after a work session. Automatic break will start if the duration from the last focus session is less than the default break duration, and that the current work block duration does not exceed 90 minutes. Also the automatic break won't start if it will be the end of the workday after the break.
 
 ## Timesheet
 
