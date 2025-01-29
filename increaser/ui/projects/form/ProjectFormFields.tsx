@@ -14,6 +14,9 @@ import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Spacer } from '@lib/ui/layout/Spacer'
 import { Text } from '@lib/ui/text'
+import { WithHint } from '@lib/ui/tooltips/WithHint'
+import { useUser } from '../../user/state/user'
+import { WEEKDAYS } from '@lib/utils/time'
 
 type ProjectFormFieldsProps = InputProps<ProjectFormShape> &
   Partial<OnSubmitProp> &
@@ -30,6 +33,8 @@ export const ProjectFormFields = ({
 }: ProjectFormFieldsProps) => {
   const activeProjects = useActiveProjects()
   const usedColors = Object.values(activeProjects).map(({ color }) => color)
+  const user = useUser()
+  const weekendDays = user.weekends.map((day) => WEEKDAYS[day]).join(' and ')
 
   const hasBudget = value.budget && value.budget > 0
 
@@ -68,7 +73,13 @@ export const ProjectFormFields = ({
             workingDays: isWorkDaysOnly ? 'workdays' : 'everyday',
           })
         }
-        label="Workdays only"
+        label={
+          <WithHint
+            hint={`When enabled, time will only be tracked on workdays (excluding ${weekendDays}). Use this for work projects you don't plan to work on during non-working days.`}
+          >
+            Workdays only
+          </WithHint>
+        }
       />
 
       {freeHours > 0 || hasBudget ? (

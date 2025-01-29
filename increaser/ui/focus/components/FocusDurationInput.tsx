@@ -18,12 +18,12 @@ export const FocusDurationInput = () => {
   return (
     <FocusLauncherField
       label={
-        <>
+        <span>
           Focus duration:{' '}
           <Text as="span" color="contrast">
             {value} min
           </Text>
-        </>
+        </span>
       }
     >
       <ElementSizeAware
