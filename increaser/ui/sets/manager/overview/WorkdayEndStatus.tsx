@@ -7,8 +7,10 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { useStartOfWeekday } from '@lib/ui/time/hooks/useStartOfWeekday'
 import { useWorkDayEndsAt } from '../../../schedule/hooks/useWorkDayEndsAt'
+import Link from 'next/link'
+import { getAppPath } from '../../../navigation/app'
 
-const Container = styled.div`
+const Container = styled(Link)`
   position: absolute;
   bottom: -20px;
   width: 100%;
@@ -36,7 +38,7 @@ export const WorkdayEndStatus = () => {
   }
 
   return (
-    <Container>
+    <Container href={getAppPath('preferences')}>
       {currentTime < workdayEndsAt && (
         <Text color="contrast" weight="500" size={14}>
           <Text as="span" color="supporting">

@@ -34,6 +34,9 @@ export const ManageFinishWorkAt = () => {
           getOptionName={formatDailyEventTime}
           showToggle={false}
         />
+        <TextConnector>
+          to maintain a healthy work-life balance and unwind before sleep
+        </TextConnector>
       </HStack>
     </>
   )
