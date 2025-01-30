@@ -20,7 +20,7 @@ const Container = styled(HStack)`
   justify-content: space-between;
   padding: 4px;
   padding-left: 12px;
-  min-height: 48px;
+  min-height: 40px;
   gap: 8px;
 `
 
