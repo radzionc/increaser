@@ -5,10 +5,10 @@ import {
 } from '@lib/ui/layout/StackSeparatedBy'
 import { WEEKDAYS } from '@lib/utils/time'
 import { ProjectTotal } from '@increaser/ui/projects/ProjectTotal'
-import { Text } from '@lib/ui/text'
+import { text, Text } from '@lib/ui/text'
 import { formatDuration } from '@lib/utils/time/formatDuration'
 import { getSetsDuration } from '@increaser/entities-utils/set/getSetsDuration'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { useDaysBudget } from '@increaser/ui/workBudget/hooks/useDaysBudget'
 import { useUser } from '@increaser/ui/user/state/user'
@@ -16,6 +16,20 @@ import { useSelectedWeekday } from '@lib/ui/time/SelectedWeekdayProvider'
 import { ProjectsAllocationLine } from '../../../projects/ProjectsAllocationLine'
 import { getProjectsTotalRecord } from '@increaser/entities-utils/project/getProjectsTotalRecord'
 import { useDayOverview } from './DayOverviewProvider'
+import Link from 'next/link'
+import { getAppPath } from '../../../navigation/app'
+
+const Budget = styled(Link)`
+  ${text({
+    color: 'supporting',
+  })}
+
+  &:hover {
+    ${text({
+      color: 'contrast',
+    })}
+  }
+`
 
 export const AmountOverview = () => {
   const [weekday] = useSelectedWeekday()
@@ -41,12 +55,10 @@ export const AmountOverview = () => {
             gap={8}
             wrap="wrap"
           >
-            <Text size={14} weight="500">
-              {formatDuration(setsTotal, 'ms')}
-            </Text>
-            <Text size={14} weight="500" color="shy">
+            <Text>{formatDuration(setsTotal, 'ms')}</Text>
+            <Budget href={getAppPath('preferences')}>
               {formatDuration(currentDayBudget, 'h')}
-            </Text>
+            </Budget>
           </HStackSeparatedBy>
         </HStack>
         <ProjectsAllocationLine
