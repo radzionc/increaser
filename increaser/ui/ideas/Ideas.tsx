@@ -13,6 +13,8 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { useProject } from '../projects/hooks/useProject'
 import { AddIdea } from './AddIdea'
 import { NoFilterMatches } from '@lib/ui/data/filter/NoFilterMatches'
+import { EmptyState } from '@lib/ui/data/empty/EmptyState'
+import { LearnMoreShyAction } from '@lib/ui/info/LearnMoreShyAction'
 
 const Container = styled(VStack)`
   max-width: 560px;
@@ -24,12 +26,26 @@ export const Ideas = () => {
 
   const ideas = useFilterByProject(useIdeas(), getProjectId)
 
-  if (isEmpty(ideas) && project) {
+  if (isEmpty(ideas)) {
+    if (project) {
+      return (
+        <NoFilterMatches
+          title={`"${project.name}" has no ideas yet`}
+          onRemove={() => setProjectFilter(null)}
+          action={<AddIdea />}
+        />
+      )
+    }
+
     return (
-      <NoFilterMatches
-        title={`"${project.name}" has no ideas yet`}
-        onRemove={() => setProjectFilter(null)}
-        action={<AddIdea />}
+      <EmptyState
+        title="Start with your first idea"
+        action={
+          <>
+            <LearnMoreShyAction value="tasks" />
+            <AddIdea />
+          </>
+        }
       />
     )
   }
