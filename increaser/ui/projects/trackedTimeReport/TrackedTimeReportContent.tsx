@@ -12,6 +12,14 @@ import { NonEmptyIntervalOnly } from './interval/NonEmptyIntervalOnly'
 import { useTimeGrouping } from './timeGrouping/state'
 import { useDaysView } from './days/state/daysView'
 import { SessionsChart } from './days/chart/SessionsChart'
+import { useTotalIntervalProjectsTimeSeries } from './projects/useTotalIntervalProjectsTimeSeries'
+import { sum } from '@lib/utils/array/sum'
+import { useMemo } from 'react'
+import { EmptyState } from '@lib/ui/data/empty/EmptyState'
+import { LearnMoreShyAction } from '@lib/ui/info/LearnMoreShyAction'
+import { getAppPath } from '../../navigation/app'
+import Link from 'next/link'
+import { Button } from '@lib/ui/buttons/Button'
 
 const contentWidth = 520
 const gap = 40
@@ -31,6 +39,30 @@ const NavigationContainer = styled(VStack)`
 export const TrackedTimeReportContent = () => {
   const timeGrouping = useTimeGrouping()
   const [view] = useDaysView()
+
+  const timeSeries = useTotalIntervalProjectsTimeSeries()
+
+  const hasData = useMemo(() => {
+    return sum(Object.values(timeSeries).flat()) > 0
+  }, [timeSeries])
+
+  if (!hasData) {
+    return (
+      <EmptyState
+        title="Start tracking your work time"
+        action={
+          <>
+            <LearnMoreShyAction value="trackTime" />
+            <Link href={getAppPath('focus')}>
+              <Button as="div" size="s">
+                Start a focus session
+              </Button>
+            </Link>
+          </>
+        }
+      />
+    )
+  }
 
   return (
     <ElementSizeAware

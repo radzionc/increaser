@@ -9,6 +9,7 @@ type EmptyStateProps = TitleProp & ActionProp
 export const EmptyState = ({ action, title }: EmptyStateProps) => {
   return (
     <Center gap={40}>
+      <div />
       <Text size={20} weight="700" color="contrast">
         {title}
       </Text>
@@ -16,6 +17,7 @@ export const EmptyState = ({ action, title }: EmptyStateProps) => {
       <HStack gap={8} alignItems="center">
         {action}
       </HStack>
+      <div />
     </Center>
   )
 }
