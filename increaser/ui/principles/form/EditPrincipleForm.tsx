@@ -9,10 +9,10 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { HStack } from '@lib/ui/css/stack'
 import { PrincipleFormFields } from './PrincipleFormFields'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
-import { OnFinishNoValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 
-export const EditPrincipleForm = ({ onFinish }: OnFinishNoValueProp) => {
+export const EditPrincipleForm = ({ onFinish }: OnFinishProp) => {
   const principle = useCurrentPrinciple()
   const { id } = principle
 

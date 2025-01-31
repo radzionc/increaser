@@ -1,10 +1,10 @@
 import { useActiveItemId } from '@lib/ui/list/ActiveItemIdProvider'
 import { PanelModal } from '@lib/ui/modal/PanelModal'
-import { ValueProp, OnFinishNoValueProp } from '@lib/ui/props'
+import { ValueProp, OnFinishProp } from '@lib/ui/props'
 import { ReactNode, useCallback, useEffect } from 'react'
 
 type ActiveUserEntityProps<T> = {
-  render: (props: OnFinishNoValueProp & ValueProp<T>) => ReactNode
+  render: (props: OnFinishProp & ValueProp<T>) => ReactNode
   items: Record<string, T>
 }
 

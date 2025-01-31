@@ -13,10 +13,10 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { pick } from '@lib/utils/record/pick'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
-import { OnFinishNoValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { TaskFactoryScheduleInput } from './TaskFactoryScheduleInput'
 
-export const EditTaskFactoryForm = ({ onFinish }: OnFinishNoValueProp) => {
+export const EditTaskFactoryForm = ({ onFinish }: OnFinishProp) => {
   const taskFactory = useCurrentTaskFactory()
   const { id } = taskFactory
   const initialValue = useMemo(

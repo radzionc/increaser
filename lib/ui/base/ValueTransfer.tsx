@@ -1,9 +1,9 @@
 import { ReactNode, useState } from 'react'
 
-import { ValueProp, OnFinishValueProp } from '../props'
+import { ValueProp, OnFinishProp } from '../props'
 
 type ValueTransferProps<T> = {
-  from: (props: OnFinishValueProp<T>) => ReactNode
+  from: (props: OnFinishProp<T>) => ReactNode
   to: (props: ValueProp<T>) => ReactNode
 }
 

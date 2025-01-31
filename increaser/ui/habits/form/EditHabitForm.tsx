@@ -9,7 +9,7 @@ import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import { Panel } from '@lib/ui/css/panel'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '@increaser/ui/form/panel/PanelFormDeleteButton'
-import { OnFinishNoValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { HabitFormFields } from './HabitFormFields'
 import { ResetHabit } from './ResetHabit'
 import { ManageHabitStatus } from './ManageHabitStatus'
@@ -18,7 +18,7 @@ import { ClockIcon } from '@lib/ui/icons/ClockIcon'
 import { LabeledValue } from '@lib/ui/text/LabeledValue'
 import { relativeDayFormat } from '@lib/utils/time/relativeDayFormat'
 
-export const EditHabitForm = ({ onFinish }: OnFinishNoValueProp) => {
+export const EditHabitForm = ({ onFinish }: OnFinishProp) => {
   const habit = useCurrentHabit()
   const { id } = habit
 

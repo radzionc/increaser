@@ -3,7 +3,7 @@ import { HStack } from '@lib/ui/css/stack'
 import { useCurrentTask } from '../CurrentTaskProvider'
 import { TaskDeadlineInput } from '../deadline/TaskDeadlineInput'
 import { TaskFormShape } from './TaskFormShape'
-import { OnFinishNoValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { pick } from '@lib/utils/record/pick'
 import { getUpdatedValues } from '@lib/utils/record/getUpdatedValues'
 import {
@@ -23,7 +23,7 @@ import { useUser } from '@increaser/ui/user/state/user'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
 import { StartTaskFocus } from '../focus/StartTaskFocus'
 
-type EditTaskFormContentProps = OnFinishNoValueProp
+type EditTaskFormContentProps = OnFinishProp
 
 export const EditTaskFormContent = ({ onFinish }: EditTaskFormContentProps) => {
   const task = useCurrentTask()

@@ -1,4 +1,4 @@
-import { OptionsProp, OnFinishValueProp } from '@lib/ui/props'
+import { OptionsProp, OnFinishProp } from '@lib/ui/props'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
 import { FloatingFocusManager } from '@floating-ui/react'
 import { OptionItem } from '@lib/ui/select/OptionItem'
@@ -12,7 +12,7 @@ import { PrefixedItemFrame } from '@lib/ui/list/PrefixedItemFrame'
 import { isEmpty } from '@lib/utils/array/isEmpty'
 
 type LinkEntityProps<T> = OptionsProp<T> &
-  OnFinishValueProp<T> & {
+  OnFinishProp<T> & {
     getOptionName: (option: T) => string
     getOptionKey: (option: T) => string
     getOptionEmoji: (option: T) => string

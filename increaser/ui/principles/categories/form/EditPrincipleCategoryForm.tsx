@@ -14,11 +14,9 @@ import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormCloseButton } from '../../../form/panel/PanelFormCloseButton'
 import { PanelFormDeleteButton } from '../../../form/panel/PanelFormDeleteButton'
-import { OnFinishNoValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 
-export const EditPricnipleCategoryForm = ({
-  onFinish,
-}: OnFinishNoValueProp) => {
+export const EditPricnipleCategoryForm = ({ onFinish }: OnFinishProp) => {
   const principleCategory = useCurrentPrincipleCategory()
   const { id } = principleCategory
   const initialValue = useMemo(

@@ -9,14 +9,14 @@ import { useDeleteUserEntityMutation } from '../../userEntity/api/useDeleteUserE
 import { useLazySync } from '@lib/ui/hooks/useLazySync'
 import { HStack } from '@lib/ui/css/stack'
 import { PanelFormDeleteButton } from '../../form/panel/PanelFormDeleteButton'
-import { OnFinishNoValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { areChecklistItemsEqual } from '@increaser/entities-utils/task/checklist'
 import { areLinkItemsEqual } from '@increaser/entities-utils/task/links'
 import { areArraysEqual } from '@lib/utils/array/areArraysEqual'
 import { Panel } from '@lib/ui/css/panel'
 import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
-export const EditIdeaForm = ({ onFinish }: OnFinishNoValueProp) => {
+export const EditIdeaForm = ({ onFinish }: OnFinishProp) => {
   const idea = useCurrentIdea()
   const { id } = idea
   const initialValue = useMemo(
