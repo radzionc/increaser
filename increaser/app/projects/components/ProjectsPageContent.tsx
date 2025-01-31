@@ -3,6 +3,7 @@ import { HStack, vStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 import { BudgetOverview } from '@increaser/ui/projects/budget/BudgetOverview'
 import { CurrentWeekVsBudget } from '@increaser/ui/workBudget/CurrentWeekVsBudget'
+import { ProjectStatusFilterProvider } from '@increaser/ui/projects/filter/status/ProjectStatusFilterProvider'
 
 const SideSection = styled.div`
   flex: 1;
@@ -15,7 +16,9 @@ const SideSection = styled.div`
 export const ProjectPageContent = () => {
   return (
     <HStack style={{ position: 'relative' }} fullWidth wrap="wrap" gap={40}>
-      <ManageProjects />
+      <ProjectStatusFilterProvider initialValue="active">
+        <ManageProjects />
+      </ProjectStatusFilterProvider>
       <SideSection>
         <BudgetOverview />
         <CurrentWeekVsBudget />
