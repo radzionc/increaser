@@ -14,12 +14,12 @@ import { TaskStatusInput } from './TaskStatusInput'
 import { TaskFormHeader } from './TaskFormHeader'
 import { Button } from '@lib/ui/buttons/Button'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
-import { InitialValueProp, OnFinishOptionalValueProp } from '@lib/ui/props'
+import { InitialValueProp, OnFinishProp } from '@lib/ui/props'
 import { TaskTemplateFormShape } from '../../taskTemplates/form/TaskTemplateFormShape'
 
 export const CreateTaskForm: React.FC<
   Partial<InitialValueProp<Partial<TaskTemplateFormShape>>> &
-    Partial<OnFinishOptionalValueProp<TaskTemplate>>
+    Partial<OnFinishProp<TaskTemplate, 'optional'>>
 > = ({ onFinish, initialValue }) => {
   const [value, setValue] = useState<TaskFormShape>({
     name: '',

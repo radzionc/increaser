@@ -11,11 +11,11 @@ import { EmojiTextInputFrame } from '../../../form/EmojiTextInputFrame'
 import { ListItemForm } from '../../../form/ListItemForm'
 import { EmojiInput } from '../../../form/emoji-input/EmojiInput'
 import { PrincipleCategory } from '@increaser/entities/PrincipleCategory'
-import { OnFinishOptionalValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 
 export const CreatePrincipleCategoryForm = ({
   onFinish,
-}: OnFinishOptionalValueProp<PrincipleCategory>) => {
+}: OnFinishProp<PrincipleCategory, 'optional'>) => {
   const [value, setValue] = useState<PrincipleCategoryFormShape>({
     name: '',
     emoji: randomlyPick(defaultEmojis),

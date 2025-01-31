@@ -11,11 +11,11 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
 import { VisionAttributeFormFields } from './VisionAttributeFormFields'
 import { VisionAttribute } from '@increaser/entities/Vision'
-import { OnFinishOptionalValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 
 export const CreateVisionAttributeForm = ({
   onFinish,
-}: OnFinishOptionalValueProp<VisionAttribute>) => {
+}: OnFinishProp<VisionAttribute, 'optional'>) => {
   const { vision } = useUser()
   const [value, setValue] = useState<VisionAttributeFormShape>({
     name: '',

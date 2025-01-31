@@ -3,7 +3,7 @@ import { getId } from '@increaser/entities-utils/shared/getId'
 import { otherProject } from '@increaser/entities/Project'
 import { TaskTemplate } from '@increaser/entities/TaskTemplate'
 import { CancelSubmitFormFooter } from '@lib/ui/form/components/CancelSubmitFormFooter'
-import { InitialValueProp, OnFinishOptionalValueProp } from '@lib/ui/props'
+import { InitialValueProp, OnFinishProp } from '@lib/ui/props'
 import { useIsTaskTemplateFormDisabled } from './useIsTaskTemplateFormDisabled'
 import { TaskTemplateFormShape } from './TaskTemplateFormShape'
 import { useCreateUserEntityMutation } from '../../userEntity/api/useCreateUserEntityMutation'
@@ -12,7 +12,7 @@ import { TaskFormHeader } from '../../tasks/form/TaskFormHeader'
 
 export const CreateTaskTemplateForm: React.FC<
   Partial<InitialValueProp<Partial<TaskTemplateFormShape>>> &
-    Partial<OnFinishOptionalValueProp<TaskTemplate>>
+    Partial<OnFinishProp<TaskTemplate, 'optional'>>
 > = ({ onFinish, initialValue }) => {
   const [value, setValue] = useState<TaskTemplateFormShape>({
     name: '',

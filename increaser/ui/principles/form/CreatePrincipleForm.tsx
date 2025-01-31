@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { InitialValueProp, OnFinishOptionalValueProp } from '@lib/ui/props'
+import { InitialValueProp, OnFinishProp } from '@lib/ui/props'
 import { getId } from '@increaser/entities-utils/shared/getId'
 import { PrincipleFormShape } from './PrincipleFormShape'
 import { useIsPrincipleFormDisabled } from './useIsPrincipleFormDisabled'
@@ -10,7 +10,7 @@ import { ListItemForm } from '../../form/ListItemForm'
 import { PrincipleFormFields } from './PrincipleFormFields'
 import { Principle } from '@increaser/entities/Principle'
 
-type CreatePrincipleFormProps = OnFinishOptionalValueProp<Principle> &
+type CreatePrincipleFormProps = OnFinishProp<Principle, 'optional'> &
   Partial<InitialValueProp<Partial<PrincipleFormShape>>> & {
     submitText?: string
   }

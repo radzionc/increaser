@@ -1,14 +1,14 @@
 import { TaskLink } from '@increaser/entities/Task'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { Modal } from '@lib/ui/modal'
-import { OnFinishOptionalValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { useState } from 'react'
 import { useIsTaskLinkFormDisabled } from './useIsTaskLinkFormDisabled'
 import { EditFormFooter } from '@lib/ui/form/components/EditFormFooter'
 import { TaskLinkFormFields } from './TaskLinkFormFields'
 import { ModalContent } from '@lib/ui/modal/ModalContent'
 
-type EditTaskOverlayProps = OnFinishOptionalValueProp<TaskLink> & {
+type EditTaskOverlayProps = OnFinishProp<TaskLink, 'optional'> & {
   initialValue: TaskLink
 }
 
