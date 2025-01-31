@@ -1,33 +1,22 @@
 import { ReactNode } from 'react'
 import { HStack, VStack } from '../../css/stack'
 import { NoDataIllustration } from '../../illustrations/NoDataIllustration'
-import { Center } from '../../layout/Center'
 import { ActionProp, TitleProp } from '../../props'
 import { Text } from '../../text'
-import styled from 'styled-components'
-import { verticalPadding } from '../../css/verticalPadding'
+import { EmptyStateContainer } from './EmptyStateContainer'
+import { EmptyStateContent } from './EmptyStateContent'
 
 type EmptyStateProps = TitleProp &
   ActionProp & {
     description?: ReactNode
   }
 
-const Container = styled(Center)`
-  ${verticalPadding(40)}
-`
-
-const Content = styled(VStack)`
-  max-width: 400px;
-  align-items: center;
-  gap: 40px;
-`
-
 export const EmptyState = ({ action, title, description }: EmptyStateProps) => {
   return (
-    <Container>
-      <Content>
+    <EmptyStateContainer>
+      <EmptyStateContent>
         <VStack alignItems="center" gap={8}>
-          <Text size={20} weight="700" color="contrast">
+          <Text centerHorizontally size={20} weight="700" color="contrast">
             {title}
           </Text>
           {description && (
@@ -40,7 +29,7 @@ export const EmptyState = ({ action, title, description }: EmptyStateProps) => {
         <HStack gap={8} alignItems="center">
           {action}
         </HStack>
-      </Content>
-    </Container>
+      </EmptyStateContent>
+    </EmptyStateContainer>
   )
 }
