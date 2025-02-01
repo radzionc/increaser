@@ -26,6 +26,12 @@ yarn announce
 
 6. Include all the social links in the changelog item.
 
-7. Deploy the website and check the changelog item.
+7. Add a timestamp to the changelog item.
 
-8. Deploy the app and check the changelog item.
+```
+yarn release
+```
+
+8. Deploy the website and check the changelog item.
+
+9. Deploy the app and check the changelog item.

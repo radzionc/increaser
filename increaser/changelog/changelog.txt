@@ -1,3 +1,4 @@
+1738412990125
 View the active break in the same widget as the YouTube focus music player across all pages.
 Improved break notifications management to easily change preferences or toggle break notification sounds.
 Select a default break duration in preferences.

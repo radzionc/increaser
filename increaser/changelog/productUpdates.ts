@@ -28,12 +28,15 @@ export const productUpdates: ProductUpdate[] = [
       },
     ],
 
-    youtube: '',
-    telegram: '',
-    x: '',
-    linkedIn: '',
-    indieHackers: '',
-    reddit: '',
+    youtube: 'https://youtu.be/3XzLbsUqu8U',
+    telegram: 'https://t.me/increaser_app/71',
+    x: 'https://x.com/increaser_app/status/1885666206251651501',
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7291432340185051136',
+    indieHackers:
+      'https://www.indiehackers.com/post/increaser-enhancements-integrated-breaks-smarter-prompts-bJPTpIjDVfbuOtjNJ9dk',
+    reddit:
+      'https://www.reddit.com/r/increaser/comments/1if59ao/increaser_update_integrated_breaks_smarter_prompts/',
   },
 
   {
@@ -74,7 +77,7 @@ export const productUpdates: ProductUpdate[] = [
   },
 
   {
-    releasedAt: 1732590495129,
+    releasedAt: 1738412990125,
     name: 'Customize Your Schedule and Enhanced Project Tracking',
     description:
       "We've introduced new features that let you tailor your work schedule and improve project tracking for a more streamlined experience.",
