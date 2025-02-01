@@ -2,6 +2,7 @@ View the active break in the same widget as the YouTube focus music player acros
 Improved break notifications management to easily change preferences or toggle break notification sounds.
 Select a default break duration in preferences.
 Focus task input label includes a suggestion to select a task for today or an overdue one.
+On all pages with an "items list", if no items match the current filter, the app will prompt you to either add an item or reset the filter. Additionally, when there is no filter and no data, it will prompt you to create a new item instead of displaying an empty screen.
 1732590495129
 Users can add a new category while creating a new principle.
 Users can add or link existing principles to their goals.

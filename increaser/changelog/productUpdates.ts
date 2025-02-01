@@ -2,6 +2,41 @@ import { ProductUpdate } from './ProductUpdate'
 
 export const productUpdates: ProductUpdate[] = [
   {
+    name: 'Seamless Breaks & Smart Prompts',
+    description:
+      "We've fine-tuned your workflow with smoother break transitions, improved notification controls, and intuitive prompts across item lists.",
+    items: [
+      {
+        description:
+          'After a focus session, the break widget now appears in the same spot as the YouTube focus music player, ensuring a smooth transition across all pages.',
+      },
+      {
+        description:
+          'Manage break notifications effortlessly with quick options to adjust preferences and toggle sounds.',
+      },
+      {
+        description:
+          'Set a default break duration in your preferences for consistent break timing.',
+      },
+      {
+        description:
+          'The focus task input now suggests selecting a task for today or an overdue one to keep you on track.',
+      },
+      {
+        description:
+          "When no items match a filter or your list is empty, you'll be prompted to add an item, reset the filter, or create a new one for a better experience.",
+      },
+    ],
+
+    youtube: '',
+    telegram: '',
+    x: '',
+    linkedIn: '',
+    indieHackers: '',
+    reddit: '',
+  },
+
+  {
     name: 'Streamlined Goal Connections and Principle Management',
     description:
       'Enhancements to principles, goals, and vision make connecting and managing your productivity tools more intuitive and efficient.',
