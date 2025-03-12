@@ -1,0 +1,16 @@
+{
+  "name": "@product/changelog",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "prepare": "npx tsx ./scripts/prepare.ts",
+    "announce": "npx tsx ./scripts/announce.ts",
+    "generate": "npx tsx ./scripts/generate.ts",
+    "youtube": "npx tsx ./scripts/youtube.ts",
+    "release": "npx tsx ./scripts/release.ts"
+  },
+  "devDependencies": {
+    "clipboardy": "^4.0.0"
+  }
+}

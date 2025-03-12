@@ -1,0 +1,1 @@
+Make an illustration of an early sunrise(it's still dark) and mountain with a dimension of 1920x1080 in 4k hight quality in a warm colors, a bit cozy, and inspiring to achieve goals

@@ -1,0 +1,1 @@
+A user proposed a new feature, improve it's title and description to ensure it's clear and concise so that other users can easily understand it. No need to capitalize every word in the title. Do not use the word "users" since it won't look right on the feature request page.

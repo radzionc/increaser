@@ -1,0 +1,12 @@
+{
+  "ignore": [
+    "lib/**",
+    "increaser/infra/**",
+    "**/scripts/**",
+    "**/*.config.js",
+    "increaser/db/migrations/**",
+    "increaser/app/productFeatures/components/ProductFeaturesView.tsx",
+    "increaser/ui/principles/PrinciplesView.tsx",
+    "increaser/ui/projects/filter/ProjectFilterProvider.tsx"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@product/entities-utils",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "uuid": "^11.1.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

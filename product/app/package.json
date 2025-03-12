@@ -1,0 +1,37 @@
+{
+  "name": "@product/app",
+  "version": "3.0.8",
+  "private": true,
+  "scripts": {
+    "dev": "NEXT_PUBLIC_VERSION=$npm_package_version next dev",
+    "build": "NEXT_PUBLIC_VERSION=$npm_package_version next build && next-sitemap",
+    "postbuild": "next-sitemap",
+    "start": "next start",
+    "lint": "next lint",
+    "generateIconMetaTags": "npx tsx icon/scripts/generateIconMetaTags",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "^9.5.0",
+    "@tanstack/query-sync-storage-persister": "^5.67.2",
+    "@tanstack/react-query": "^5.67.2",
+    "@tanstack/react-query-persist-client": "^5.67.2",
+    "date-fns": "^4.1.0",
+    "howler": "^2.2.4",
+    "next": "^15.2.2",
+    "next-pwa": "^5.6.0",
+    "next-sitemap": "^4.2.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-player": "^2.16.0",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.2.2",
+    "@types/howler": "^2.2.12",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "^5.8.2"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@product/email",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "email dev",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.758.0",
+    "@react-email/components": "^0.0.33",
+    "@react-email/render": "^1.0.5",
+    "react-email": "^3.0.7"
+  }
+}

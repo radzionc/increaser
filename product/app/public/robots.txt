@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://app.increaser.org
+
+# Sitemaps
+Sitemap: https://app.increaser.org/sitemap.xml

@@ -1,0 +1,29 @@
+{
+  "name": "@product/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node dist/lambda.js",
+    "build": "rm -rf ./dist && node build.mjs",
+    "typecheck": "tsc --noEmit",
+    "dev": "npx tsx ./server.ts"
+  },
+  "main": "lambda.ts",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.758.0",
+    "@aws-sdk/s3-request-presigner": "^3.758.0",
+    "@sentry/serverless": "^7.120.3",
+    "@vendia/serverless-express": "^4.12.6",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.10",
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "esbuild": "^0.25.1"
+  }
+}

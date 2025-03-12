@@ -1,0 +1,113 @@
+1738412990125
+View the active break in the same widget as the YouTube focus music player across all pages.
+Improved break notifications management to easily change preferences or toggle break notification sounds.
+Select a default break duration in preferences.
+Focus task input label includes a suggestion to select a task for today or an overdue one.
+On all pages with an "items list", if no items match the current filter, the app will prompt you to either add an item or reset the filter. Additionally, when there is no filter and no data, it will prompt you to create a new item instead of displaying an empty screen.
+1732590495129
+Users can add a new category while creating a new principle.
+Users can add or link existing principles to their goals.
+Users can now filter principle ideas by category.
+Users can add or link existing vision to their goals.
+Added "Principles" and "Vision" articles to the "Info" page.
+1731992874818
+Users can now customize their weekend days or remove them if they work the same amount daily.
+Added a real-time updated project budget widget to the focus session page for continuous tracking during work sessions.
+Updated the project budget widget on the focus launcher to be more compact and display today's expected work time.
+The weekly comparison chart for work budget vs. actual work is now better organized and clearly displays the difference between expected and completed hours.
+Added "Preferences" article to the "Info" page.
+Ideas moved to the "Ideas" tab on the "Tasks" page, and users can now add links and checklist to ideas same way as with tasks.
+Users can reorder ideas by dragging them
+1731381780369
+Added a "Sessions" view for daily reports, displaying sessions grouped by day and color-coded by project.
+Improved tracked time report to be more space-efficient and comfortable to navigate.
+Added average workday and weekend time display next to the average day when the tracked time report is grouped by days.
+Added start and end times for each workday when viewing daily reports with no project selected.
+Added a line indicator for preferred end of work time when viewing daily reports in the Timesheet.
+The tracked time report now remembers the selected interval for each time grouping. For example, if you change the interval on the "grouped by weeks" view, it won’t affect the interval setting on the "grouped by days" view.
+1730944392505
+Added a new option to switch the Goals timeline view between age-based and date-based formats.
+A more comfortable and compact form for creating and editing goals.
+Added a 'Start' button to tasks on the 'Tasks' page, enabling quick launch of a focus session for the selected task.
+Increaser now auto-selects the last task worked on for a project whenever switching to that project.
+Added "Achieve goals" article to the "Info" page.
+1730435467902
+Users can stop tracking habits without deleting them by making them inactive.
+Merge "Track" and "Stats" habit views into a single page.
+User can now write a plan for when exactly they will do the habit so they are more likely to stick with it.
+Hovering over the consistency displays how often the user skips that habit.
+User can see session duration while editing session end time.
+Added "Build habits" article to the "Info" page.
+1729829282066
+Users can now edit and reorder habits right from the "Track" and "Stats" views on the "Habits" page.
+User can reset a specific habit from the "Edit" view of a habit.
+Every "Tasks" sub-page now has an "Add" button
+Users can turn an existing task into a template and templates are now always available when creating or editing tasks.
+It's more comfortable to set a weekly goal for a project
+Added "Time tracking" and "Taks Management" articles to the "Info" page
+1729225980085
+Users connect goals to their habits by either adding new habits from the goal view or picking an existing habit.
+To help users remember to track their habits, a prompt appears in the sidebar navigation next to the "Habits" item. This prompt will show up if the user hasn't visited the "Habits" page that day.
+Added a line to the weekly project report chart to display budgeted time for selected projects or total budgeted time for all projects.
+Updated the projects page to display not only the emoji and name, but also the budget, goal, and "Mon-Fri" label for workday projects.
+User can set project weekly budget and goal while creating or editing a project.
+"Report" subpage was moved from "Projects" page to a dedicated "Timesheet" page for easier access.
+1728708465131
+Users can now expedite the creation of recurring tasks ahead of schedule by using the 'Create Now' button found in the 'Upcoming' tab of the 'Tasks' page.
+Users can now see on the 'Upcoming' tab of the 'Tasks' page when their recurring task will actually be created.
+Focus launcher automatically adjusts the focus duration, targeting 90-minute blocks.
+An "info" page that will serve as a knowledge base of the app where the user can find an information about Increaser tools. For now it only includes an article about focus tool.
+No delay when adding a task or a project from a focus launcher.
+1728054756723
+An option to change the end time when finishing a focus session is helpful when the user forgets to stop the session and wants to adjust the end time.
+If a session went for too long and Increaser stopped it automatically, the app will open an editor where the user can easily adjust auto-stopped session end time.
+A more comfortable focus sounds navigation.
+When adding a YouTube video to focus sounds, you can see a preview of the video, and the name will be filled in automatically based on the YouTube video's title.
+1727537960954
+Added the ability to set both start and end boundaries in the project's report interval selector.
+YouTube focus music now resumes from where it left off, instead of restarting at the beginning of each session.
+The project filter on the tasks page now persists across tabs and pages.
+Added filtering by category to the principles page.
+1726893259773
+Select specific focus notifications you want to receive: session end, workday end, eye break.  
+Turn on/off focus notification sound alerts from the focus page.
+During a focus session, you can hover over the timer to see the log of your current focus session, where each item is either work on a project with a duration, or a break with a duration.
+Tasks, projects, habits, life aspirations, goals, ideas, and principles changes are saved automatically without the need to press the "Save" button.
+1726289037356
+Sub-tasks section is hidden by default, appears only when you choose to add sub-tasks. Collapsible and decluttered with hover-only drag-and-drop and remove button.
+Task links section is hidden by default, appears only when adding links. More compact for easier task management.
+Real-time updates for time spent on tasks are visible while working, along with task deadlines when selected.
+1725723647758
+Quickly change current focus task.
+Easily edit current focus task name, description, links and checklist from the focus page
+Focus music stops when the focus session is paused
+Export all your data as a JSON file
+1725206936434
+Filter tasks by project in the focus launcher
+Set custom task deadlines
+Add description to a life aspiration to make it more specific and clear
+1724477563708
+Kanban board for tasks to easily access all your tasks in one place and drag and drop them between columns.
+An option to group scheduled tasks by weeks.
+Task statuses: backlog, todo, in progress, done. When you start working on a task, it's status automatically changes to "in progress".
+New page headers take less space, giving more room for the content
+1723362485159
+View the breakdown of how much time you spent on each project on the hovered day, week, or month of the year on the tracked time report.
+Instead of fixed options for the tracked time report you can now select the custom duration.
+Improved sidebar navigation with memory of the last visited view within a page.
+Improved this week's hours goals widget for better understanding of the progress.
+1722919666475
+Add, edit and delete sessions right from the focus page timeline
+Deduct minutes from the current focus session if got distracted
+Filter tasks and ideas by project
+1722338935549
+Pause focus session (the most requested feature yet)
+Create a project or a task from the focus launcher
+A more comfortable focus duration selector with a keyboard support for moving between duration options
+1721993826695
+Add Principles feature
+1721711243227
+Set specific workday on which weekly recurring tasks should be created
+Set specific day on which monthly recurring tasks should be created
+Tasks with a deadline are grouped by days on the tasks page "to-do" tab
+Recurring tasks are created at the start of the period, but to make it clear what tasks you will have in the future, you can see a preview of future recurring tasks on the tasks page "To-Do" tab

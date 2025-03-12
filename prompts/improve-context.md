@@ -1,0 +1,1 @@
+This file serves as a context about my project - Increaser, it's only purpose is to be used when prompting AI to do tasks related to the project. Read it carefully, and find all the mistakes, things that you find unclear or confusing. List them all and propose a solution.
