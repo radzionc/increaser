@@ -9,7 +9,12 @@
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.758.0",
     "@react-email/components": "^0.0.33",
-    "@react-email/render": "^1.0.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19",
     "react-email": "^3.0.7"
   }
 }

@@ -3942,9 +3942,12 @@ __metadata:
   resolution: "@product/email@workspace:product/email"
   dependencies:
     "@aws-sdk/client-sesv2": "npm:^3.758.0"
-    "@react-email/components": "npm:^0.0.33"
-    "@react-email/render": "npm:^1.0.5"
-    react-email: "npm:^3.0.7"
+    "@react-email/components": "npm:0.0.33"
+    "@types/react": "npm:^19.0.10"
+    "@types/react-dom": "npm:^19"
+    react: "npm:19.0.0"
+    react-dom: "npm:19.0.0"
+    react-email: "npm:3.0.7"
   languageName: unknown
   linkType: soft
 
@@ -4115,7 +4118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/components@npm:^0.0.33":
+"@react-email/components@npm:0.0.33":
   version: 0.0.33
   resolution: "@react-email/components@npm:0.0.33"
   dependencies:
@@ -4237,7 +4240,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/render@npm:1.0.5, @react-email/render@npm:^1.0.5":
+"@react-email/render@npm:1.0.5":
   version: 1.0.5
   resolution: "@react-email/render@npm:1.0.5"
   dependencies:
@@ -5974,7 +5977,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19.0.4":
+"@types/react-dom@npm:^19, @types/react-dom@npm:^19.0.4":
   version: 19.0.4
   resolution: "@types/react-dom@npm:19.0.4"
   peerDependencies:
@@ -12761,7 +12764,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.0.0":
+"react-dom@npm:19.0.0, react-dom@npm:^19.0.0":
   version: 19.0.0
   resolution: "react-dom@npm:19.0.0"
   dependencies:
@@ -12785,7 +12788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-email@npm:^3.0.7":
+"react-email@npm:3.0.7":
   version: 3.0.7
   resolution: "react-email@npm:3.0.7"
   dependencies:
@@ -12867,7 +12870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^19.0.0":
+"react@npm:19.0.0, react@npm:^19.0.0":
   version: 19.0.0
   resolution: "react@npm:19.0.0"
   checksum: 10/2490969c503f644703c88990d20e4011fa6119ddeca451e9de48f6d7ab058d670d2852a5fcd3aa3cd90a923ab2815d532637bd4a814add402ae5c0d4f129ee71
