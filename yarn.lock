@@ -2688,7 +2688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.22.0, @eslint/js@npm:^9.21.0":
+"@eslint/js@npm:9.22.0, @eslint/js@npm:^9.22.0":
   version: 9.22.0
   resolution: "@eslint/js@npm:9.22.0"
   checksum: 10/2d7725f29ee4a7c85f5b5c499945d60f7701877b41b580d3f7badef43901ac98e4f8f76e4cfaef9ba116966c5f7b67132161e31e02f2eeccb0d09b548f6ea1b2
@@ -3136,7 +3136,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lib/next-analytics-ui@workspace:lib/next-analytics-ui"
   dependencies:
-    next: "npm:^15.2.0"
+    next: "npm:^15.2.2"
     react: "npm:^19.0.0"
   languageName: unknown
   linkType: soft
@@ -3176,8 +3176,8 @@ __metadata:
     "@floating-ui/react": "npm:^0.27.5"
     "@svgr/core": "npm:^8.1.0"
     "@svgr/plugin-jsx": "npm:^8.1.0"
-    "@tanstack/react-query": "npm:^5.66.11"
-    "@types/node": "npm:^22.13.8"
+    "@tanstack/react-query": "npm:^5.67.3"
+    "@types/node": "npm:^22.13.10"
     "@types/react": "npm:^19.0.10"
     "@types/react-dom": "npm:^19.0.4"
     date-fns: "npm:^4.1.0"
@@ -3225,15 +3225,6 @@ __metadata:
   dependencies:
     fast-glob: "npm:3.3.1"
   checksum: 10/4d6bffbfab275cdf291b5eaa2b4b42591fc1568f35874aed409eb887b1291b75ebbc0fd7069e1035244e1a70ac75ebbe570ac6cdb46e8ce29c7ec7d55c616177
-  languageName: node
-  linkType: hard
-
-"@next/eslint-plugin-next@npm:^14.2.3":
-  version: 14.2.24
-  resolution: "@next/eslint-plugin-next@npm:14.2.24"
-  dependencies:
-    glob: "npm:10.3.10"
-  checksum: 10/cbf32c1a695c79bd79e8255dcd8d0002e61f26832dcba9398afcafee480ef260f09d61f9d7af845c5f3abf09799bb84f06a5d5ffd21a40f10431fb3580d17ee3
   languageName: node
   linkType: hard
 
@@ -3850,7 +3841,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@product/api-ui@workspace:product/api-ui"
   dependencies:
-    "@tanstack/react-query": "npm:^5.67.2"
+    "@tanstack/react-query": "npm:^5.67.3"
     "@types/react": "npm:^19.0.10"
     react: "npm:^19.0.0"
   languageName: unknown
@@ -3882,9 +3873,9 @@ __metadata:
   dependencies:
     "@next/eslint-plugin-next": "npm:^15.2.2"
     "@sentry/nextjs": "npm:^9.5.0"
-    "@tanstack/query-sync-storage-persister": "npm:^5.67.2"
-    "@tanstack/react-query": "npm:^5.67.2"
-    "@tanstack/react-query-persist-client": "npm:^5.67.2"
+    "@tanstack/query-sync-storage-persister": "npm:^5.67.3"
+    "@tanstack/react-query": "npm:^5.67.3"
+    "@tanstack/react-query-persist-client": "npm:^5.67.3"
     "@types/howler": "npm:^2.2.12"
     "@types/node": "npm:^22.13.10"
     "@types/react": "npm:^19.0.10"
@@ -3942,12 +3933,12 @@ __metadata:
   resolution: "@product/email@workspace:product/email"
   dependencies:
     "@aws-sdk/client-sesv2": "npm:^3.758.0"
-    "@react-email/components": "npm:0.0.33"
+    "@react-email/components": "npm:^0.0.33"
     "@types/react": "npm:^19.0.10"
-    "@types/react-dom": "npm:^19"
-    react: "npm:19.0.0"
-    react-dom: "npm:19.0.0"
-    react-email: "npm:3.0.7"
+    "@types/react-dom": "npm:^19.0.4"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    react-email: "npm:^3.0.7"
   languageName: unknown
   linkType: soft
 
@@ -4118,7 +4109,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/components@npm:0.0.33":
+"@react-email/components@npm:^0.0.33":
   version: 0.0.33
   resolution: "@react-email/components@npm:0.0.33"
   dependencies:
@@ -5674,13 +5665,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.67.2":
-  version: 5.67.2
-  resolution: "@tanstack/query-core@npm:5.67.2"
-  checksum: 10/65d0d0a2fa40510f187a4b6b165c3e2bc1800c3df943e5dad1a7896147e4b0d180462a38cae5e86e01d59d5d6a63af881e15e400fa72b4fe6bcb39643830a40e
-  languageName: node
-  linkType: hard
-
 "@tanstack/query-core@npm:5.67.3":
   version: 5.67.3
   resolution: "@tanstack/query-core@npm:5.67.3"
@@ -5688,38 +5672,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-persist-client-core@npm:5.67.2":
-  version: 5.67.2
-  resolution: "@tanstack/query-persist-client-core@npm:5.67.2"
+"@tanstack/query-persist-client-core@npm:5.67.3":
+  version: 5.67.3
+  resolution: "@tanstack/query-persist-client-core@npm:5.67.3"
   dependencies:
-    "@tanstack/query-core": "npm:5.67.2"
-  checksum: 10/e7ea1cb02f918645d560f683379f09e69652962f1ad285747506e91f58891933bbe7bad02de923d7ec145a6dd8a8d3c902487e54e5b0db54a5d58ba82171c284
+    "@tanstack/query-core": "npm:5.67.3"
+  checksum: 10/d4cb429348bf684d123990ea6b843d15dba8ad84ed9375afca762a3c02be8385464a8c64d88b897fe4b944be177d19ffa467b1ecdfaa83b12c3bb8dd4f22b5c2
   languageName: node
   linkType: hard
 
-"@tanstack/query-sync-storage-persister@npm:^5.67.2":
-  version: 5.67.2
-  resolution: "@tanstack/query-sync-storage-persister@npm:5.67.2"
+"@tanstack/query-sync-storage-persister@npm:^5.67.3":
+  version: 5.67.3
+  resolution: "@tanstack/query-sync-storage-persister@npm:5.67.3"
   dependencies:
-    "@tanstack/query-core": "npm:5.67.2"
-    "@tanstack/query-persist-client-core": "npm:5.67.2"
-  checksum: 10/42e9a6611ec08c60e1e16e19047f49f38fb8d68e8f36f77465e07742446546c2bbee1ae9c30272b1591476ae6549a117d0ee728a66bd3d41176e76f01df53374
+    "@tanstack/query-core": "npm:5.67.3"
+    "@tanstack/query-persist-client-core": "npm:5.67.3"
+  checksum: 10/f533a3e87efddf893a7ae06afc39303125d9823baa4713f2b96c1b1369ad43015e78a57554956d6a25f8a6700fb09c857ad6d270ce7c687d4c4c3b877fccadd0
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-persist-client@npm:^5.67.2":
-  version: 5.67.2
-  resolution: "@tanstack/react-query-persist-client@npm:5.67.2"
+"@tanstack/react-query-persist-client@npm:^5.67.3":
+  version: 5.67.3
+  resolution: "@tanstack/react-query-persist-client@npm:5.67.3"
   dependencies:
-    "@tanstack/query-persist-client-core": "npm:5.67.2"
+    "@tanstack/query-persist-client-core": "npm:5.67.3"
   peerDependencies:
-    "@tanstack/react-query": ^5.67.2
+    "@tanstack/react-query": ^5.67.3
     react: ^18 || ^19
-  checksum: 10/c68ef8bb9f31ee65fceec20c6a70c48202a505acc81893c0fce0eb0fbaa09b0c4001285af647b976d7eb332d90788752b8397a2d1e0ecc3e0a8656544c2657e0
+  checksum: 10/2047ff07d4fc1c23babaada0697d5202330b7ccb1141cbae3e2c1c134389113fe38844026ccc20595887ea2e88c2c909f5ffd4f85dc469998d0e23c1f68f122d
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.66.11":
+"@tanstack/react-query@npm:^5.67.3":
   version: 5.67.3
   resolution: "@tanstack/react-query@npm:5.67.3"
   dependencies:
@@ -5727,17 +5711,6 @@ __metadata:
   peerDependencies:
     react: ^18 || ^19
   checksum: 10/b3d95e32dc0d458222057c02e620f7886f4a12c236b4af6b710ae8f145e88b6f2f30ddea53f02f91d4a780945674728cbf40b8d813737d36e98178c9df76fa26
-  languageName: node
-  linkType: hard
-
-"@tanstack/react-query@npm:^5.67.2":
-  version: 5.67.2
-  resolution: "@tanstack/react-query@npm:5.67.2"
-  dependencies:
-    "@tanstack/query-core": "npm:5.67.2"
-  peerDependencies:
-    react: ^18 || ^19
-  checksum: 10/96edcdaced1a3e02522a766a09d495547c4c446fb10c0127e08e6c240eae27bdb53c9751a62371a2f0144541688025dcca4a1f78c2000c27d68e6abd59240318
   languageName: node
   linkType: hard
 
@@ -5916,7 +5889,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^22.13.10, @types/node@npm:^22.13.8":
+"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^22.13.10":
   version: 22.13.10
   resolution: "@types/node@npm:22.13.10"
   dependencies:
@@ -5977,7 +5950,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19, @types/react-dom@npm:^19.0.4":
+"@types/react-dom@npm:^19.0.4":
   version: 19.0.4
   resolution: "@types/react-dom@npm:19.0.4"
   peerDependencies:
@@ -6097,7 +6070,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/eslint-plugin@npm:^8.25.0":
+"@typescript-eslint/eslint-plugin@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/eslint-plugin@npm:^8.26.1":
   version: 8.26.1
   resolution: "@typescript-eslint/eslint-plugin@npm:8.26.1"
   dependencies:
@@ -6118,7 +6091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/parser@npm:^8.25.0":
+"@typescript-eslint/parser@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0, @typescript-eslint/parser@npm:^8.26.1":
   version: 8.26.1
   resolution: "@typescript-eslint/parser@npm:8.26.1"
   dependencies:
@@ -8602,7 +8575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.21.0, eslint@npm:^9.22.0":
+"eslint@npm:^9.22.0":
   version: 9.22.0
   resolution: "eslint@npm:9.22.0"
   dependencies:
@@ -9345,21 +9318,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:10.3.10":
-  version: 10.3.10
-  resolution: "glob@npm:10.3.10"
-  dependencies:
-    foreground-child: "npm:^3.1.0"
-    jackspeak: "npm:^2.3.5"
-    minimatch: "npm:^9.0.1"
-    minipass: "npm:^5.0.0 || ^6.0.2 || ^7.0.0"
-    path-scurry: "npm:^1.10.1"
-  bin:
-    glob: dist/esm/bin.mjs
-  checksum: 10/38bdb2c9ce75eb5ed168f309d4ed05b0798f640b637034800a6bf306f39d35409bf278b0eaaffaec07591085d3acb7184a201eae791468f0f617771c2486a6a8
-  languageName: node
-  linkType: hard
-
 "glob@npm:10.3.4":
   version: 10.3.4
   resolution: "glob@npm:10.3.4"
@@ -9805,21 +9763,21 @@ __metadata:
   dependencies:
     "@eslint/compat": "npm:^1.2.7"
     "@eslint/eslintrc": "npm:^3.3.0"
-    "@eslint/js": "npm:^9.21.0"
-    "@next/eslint-plugin-next": "npm:^14.2.3"
+    "@eslint/js": "npm:^9.22.0"
+    "@next/eslint-plugin-next": "npm:^15.2.2"
     "@types/react": "npm:^19.0.10"
     "@types/react-dom": "npm:^19.0.4"
-    "@typescript-eslint/eslint-plugin": "npm:^8.25.0"
-    "@typescript-eslint/parser": "npm:^8.25.0"
-    eslint: "npm:^9.21.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.26.1"
+    "@typescript-eslint/parser": "npm:^8.26.1"
+    eslint: "npm:^9.22.0"
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     globals: "npm:^16.0.0"
     husky: "npm:^9.1.7"
-    lint-staged: "npm:^15.4.3"
-    prettier: "npm:^3.5.2"
-    syncpack: "npm:^13.0.2"
+    lint-staged: "npm:^15.5.0"
+    prettier: "npm:^3.5.3"
+    syncpack: "npm:^13.0.3"
     typescript: "npm:^5.8.2"
   languageName: unknown
   linkType: soft
@@ -10407,7 +10365,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jackspeak@npm:^2.0.3, jackspeak@npm:^2.3.5":
+"jackspeak@npm:^2.0.3":
   version: 2.3.6
   resolution: "jackspeak@npm:2.3.6"
   dependencies:
@@ -10807,9 +10765,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.4.3":
-  version: 15.4.3
-  resolution: "lint-staged@npm:15.4.3"
+"lint-staged@npm:^15.5.0":
+  version: 15.5.0
+  resolution: "lint-staged@npm:15.5.0"
   dependencies:
     chalk: "npm:^5.4.1"
     commander: "npm:^13.1.0"
@@ -10823,7 +10781,7 @@ __metadata:
     yaml: "npm:^2.7.0"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/14a6a9cb9b5e8027b1347cb24e114839d618d343d5c724c26def7d45ca9b9a9b813b585531c68f5a3d13332407c2dba198987a73f0350df483d99a876ba69c60
+  checksum: 10/5873584649c5f840b990036c20abd4b58d6b1313dad5505627b4d0cc077f0ec8ac0d6cf4cf4d959e66e0ab085db384bb12dce9490ff29217bf4ed96d0442ed51
   languageName: node
   linkType: hard
 
@@ -11614,7 +11572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^15.2.0, next@npm:^15.2.2":
+"next@npm:^15.2.2":
   version: 15.2.2
   resolution: "next@npm:15.2.2"
   dependencies:
@@ -12491,7 +12449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.5.2, prettier@npm:^3.5.3":
+"prettier@npm:^3.5.3":
   version: 3.5.3
   resolution: "prettier@npm:3.5.3"
   bin:
@@ -12764,7 +12722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.0.0, react-dom@npm:^19.0.0":
+"react-dom@npm:^19.0.0":
   version: 19.0.0
   resolution: "react-dom@npm:19.0.0"
   dependencies:
@@ -12788,7 +12746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-email@npm:3.0.7":
+"react-email@npm:^3.0.7":
   version: 3.0.7
   resolution: "react-email@npm:3.0.7"
   dependencies:
@@ -12870,7 +12828,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.0.0, react@npm:^19.0.0":
+"react@npm:^19.0.0":
   version: 19.0.0
   resolution: "react@npm:19.0.0"
   checksum: 10/2490969c503f644703c88990d20e4011fa6119ddeca451e9de48f6d7ab058d670d2852a5fcd3aa3cd90a923ab2815d532637bd4a814add402ae5c0d4f129ee71
@@ -14331,7 +14289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"syncpack@npm:^13.0.2":
+"syncpack@npm:^13.0.3":
   version: 13.0.3
   resolution: "syncpack@npm:13.0.3"
   dependencies:

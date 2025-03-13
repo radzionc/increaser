@@ -2,7 +2,7 @@ import { PutCommand } from '@aws-sdk/lib-dynamodb'
 import { dbDocClient } from '@lib/dynamodb/client'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
 import { updateItem } from '@lib/dynamodb/updateItem'
-import { asyncAttempt } from '@lib/utils/promise/asyncAttempt'
+import { attempt, withFallback } from '@lib/utils/attempt'
 import { PerformanceScoreboard } from '@product/entities/PerformanceScoreboard'
 
 import { tableName } from './tableName'
@@ -13,7 +13,10 @@ export const getScoreboard = makeGetItem<string, PerformanceScoreboard>({
 })
 
 export const doesScoreboardExist = async (id: string) =>
-  asyncAttempt(async () => Boolean(await getScoreboard(id, ['id'])), false)
+  withFallback(
+    attempt(async () => Boolean(await getScoreboard(id, ['id']))),
+    false,
+  )
 
 export const updateScoreboard = async (
   id: string,

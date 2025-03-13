@@ -1,5 +1,5 @@
+import { PageVisitTracker } from '@lib/next-analytics-ui/PageVisitTracker'
 import { Page } from '@lib/next-ui/Page'
-import { PageVisitTracker } from '@lib/next-ui/PageVisitTracker'
 import { GlobalStyle } from '@lib/ui/css/GlobalStyle'
 import { darkTheme } from '@lib/ui/theme/darkTheme'
 import { ThemeProvider } from '@lib/ui/theme/ThemeProvider'

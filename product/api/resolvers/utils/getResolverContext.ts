@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from 'http'
 
 import { CountryCode } from '@lib/countries'
-import { safeResolve } from '@lib/utils/promise/safeResolve'
+import { attempt, withFallback } from '@lib/utils/attempt'
 import { getUser } from '@product/db/user'
 
 import { userIdFromToken } from '../../auth/userIdFromToken'
@@ -13,11 +13,13 @@ interface GetResolverContextParams {
 }
 
 const getUserId = async (token: string) => {
-  const userId = await safeResolve(userIdFromToken(token), undefined)
+  const userId = token
+    ? await withFallback(attempt(userIdFromToken(token)), undefined)
+    : undefined
 
   if (userId) {
-    const verifiedUser = await safeResolve(getUser(userId, ['id']), undefined)
-    if (verifiedUser) {
+    const { data } = await attempt(() => getUser(userId, ['id']))
+    if (data) {
       return userId
     }
   }

@@ -1,5 +1,5 @@
 import { CountryCode } from '@lib/countries'
-import { asyncAttempt } from '@lib/utils/promise/asyncAttempt'
+import { attempt } from '@lib/utils/attempt'
 import { putEmail } from '@product/db/email'
 import { getUserByEmail, putUser } from '@product/db/user'
 import { AuthSession } from '@product/entities/AuthSession'
@@ -35,7 +35,7 @@ export const authorize = async ({
   })
 
   await putUser(newUser)
-  await asyncAttempt(() => putEmail({ id: email }), undefined)
+  await attempt(putEmail({ id: email }))
 
   const session = await getAuthSession(newUser.id)
 

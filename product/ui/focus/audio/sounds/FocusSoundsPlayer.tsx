@@ -23,7 +23,7 @@ export const FocusSoundsPlayer = () => {
         if (howl.playing()) {
           howl.pause()
         }
-      }, undefined),
+      }),
     )
   }, [])
 
@@ -48,7 +48,7 @@ export const FocusSoundsPlayer = () => {
             howl.play()
           }
           howl.volume(volume)
-        }, undefined),
+        }),
       )
 
       Object.entries(audioRecord).forEach(([sound, howl]) =>
@@ -57,7 +57,7 @@ export const FocusSoundsPlayer = () => {
           if (!preference[id] && howl.playing()) {
             howl.pause()
           }
-        }, undefined),
+        }),
       )
     } else {
       stop()

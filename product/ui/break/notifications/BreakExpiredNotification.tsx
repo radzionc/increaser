@@ -46,7 +46,7 @@ export const BreakExpiredNotification = () => {
 
           showNotification(text)
           if (hasSound) {
-            attempt(() => speak(text), undefined)
+            attempt(() => speak(text))
           }
         }, time - now),
       )

@@ -32,7 +32,7 @@ export const BreakEndNotification = () => {
       const text = `The ${breakDuration}-minute break is over!`
       showNotification(text)
       if (hasSound) {
-        attempt(() => speak(text), undefined)
+        attempt(() => speak(text))
       }
     }, breakEnd - now)
 
