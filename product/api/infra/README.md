@@ -24,6 +24,8 @@ export TF_VAR_telegram_bot_token=
 export TF_VAR_telegram_chat_id=
 export TF_VAR_public_bucket_name=
 export TF_VAR_public_bucket_region=
+export TF_VAR_secrets_name=
+export TF_VAR_secrets_arn=
 
 export TF_VAR_remote_state_bucket=
 export TF_VAR_remote_state_key=
