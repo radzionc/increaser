@@ -1,4 +1,4 @@
-type VariableName = 'PADDLE_API_KEY' | 'PADDLE_VENDOR_ID'
+type VariableName = 'PADDLE_VENDOR_ID'
 
 export const getEnvVar = (name: VariableName): string => {
   const value = process.env[name]

@@ -1,4 +1,4 @@
-import { getEnvVar } from './getEnvVar'
+import { getSecret } from '@product/secrets'
 
 const paddleBaseUrl = 'https://vendors.paddle.com/api/2.0'
 
@@ -9,11 +9,12 @@ export const queryPaddle = async <T>(
   const formData = new URLSearchParams(payload)
 
   const url = [paddleBaseUrl, endpoint].join('/')
+  const apiKey = await getSecret('paddleApiKey')
   const result = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Bearer ${getEnvVar('PADDLE_API_KEY')}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: formData.toString(),
   })

@@ -18,7 +18,6 @@ export TF_VAR_secret=
 export TF_VAR_email_secret=
 export TF_VAR_app_url=
 export TF_VAR_email_domain=
-export TF_VAR_paddle_api_key=
 export TF_VAR_paddle_vendor_id=
 export TF_VAR_telegram_bot_token=
 export TF_VAR_telegram_chat_id=
