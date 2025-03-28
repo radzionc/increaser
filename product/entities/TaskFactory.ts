@@ -3,6 +3,8 @@ import { TaskTemplate } from './TaskTemplate'
 export const taskCadence = ['workday', 'day', 'week', 'month'] as const
 export type TaskCadence = (typeof taskCadence)[number]
 
+export const taskCadenceWithDeadlineIndex = ['week', 'month']
+
 export type TaskFactory = TaskTemplate & {
   cadence: TaskCadence
   // day cadence: none

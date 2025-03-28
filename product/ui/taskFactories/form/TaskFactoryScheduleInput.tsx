@@ -1,7 +1,10 @@
 import { HStackSeparatedBy } from '@lib/ui/layout/StackSeparatedBy'
 import { InputProps } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
-import { TaskFactory } from '@product/entities/TaskFactory'
+import {
+  taskCadenceWithDeadlineIndex,
+  TaskFactory,
+} from '@product/entities/TaskFactory'
 import { doesCadenceSupportDeadlineIndex } from '@product/entities-utils/taskFactory/doesCadenceSupportDeadlineIndex'
 
 import { TaskCadenceInput } from './TaskCadenceInput'
@@ -18,7 +21,15 @@ export const TaskFactoryScheduleInput: React.FC<
     >
       <TaskCadenceInput
         value={value.cadence}
-        onChange={(cadence) => onChange({ ...value, cadence })}
+        onChange={(cadence) => {
+          onChange({
+            ...value,
+            cadence,
+            deadlineIndex: taskCadenceWithDeadlineIndex.includes(cadence)
+              ? 0
+              : null,
+          })
+        }}
       />
       {doesCadenceSupportDeadlineIndex(value.cadence) && (
         <TaskDeadlineIndexInput
