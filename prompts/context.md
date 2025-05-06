@@ -204,18 +204,6 @@ Each announcement consists of a title, description, a YouTube video and a list o
 
 Website also has a "What's new" page that lists all the updates that have been made to the app. It displays the same content as the app.
 
-## Request Features
-
-On the "Request features" page, there is a list of features proposed by users that consist of a title, description, and an upvote button together with the number of total upvotes. The user can switch between the "ideas" and "done" tabs. To propose a feature, there is a small form on the side of the page so that the user can quickly submit a feature request. The new feature requests will be reviewed by the founder; before that, the feature won't be visible to other users.
-
-## Community
-
-Finally, the "Community" page features a leaderboard of the most productive users over the past seven days, based on total daily work hours. Users are anonymous by default.
-
-## Public Profile
-
-On the "Profile" page the user can enable "public profile" and then their name and country will be shown when they request features or when they are on the leaderboard. Only paid users can enable the public profile.
-
 ## Info
 
 App has an "Info" page that serves as a knowledge base for the app. It has articles for each primary tool explaining how to use it and why it's beneficial. Each article has a following order: a title, a first paragraph, an embedded YouTube video, and the content.

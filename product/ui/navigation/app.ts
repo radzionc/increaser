@@ -1,4 +1,3 @@
-import { scoreboardPeriodInDays } from '@product/entities/PerformanceScoreboard'
 import { productTools } from '@product/entities/ProductTool'
 
 export const primaryAppNavigationPages = [
@@ -12,11 +11,7 @@ export const primaryAppNavigationPages = [
   'vision',
 ] as const
 
-export const secondaryAppNavigationPages = [
-  'info',
-  'community',
-  'roadmap',
-] as const
+export const secondaryAppNavigationPages = ['info'] as const
 
 const appNavigationPages = [
   ...primaryAppNavigationPages,
@@ -31,7 +26,6 @@ export const appPages = [
   'signUp',
   'emailConfirm',
   'updates',
-  'profile',
   'membership',
   'preferences',
 ] as const
@@ -45,16 +39,13 @@ export const appPageName: Record<AppPage, string> = {
   vision: 'Vision',
   goals: 'Goals',
   projects: 'Projects',
-  community: `Last ${scoreboardPeriodInDays.week} days top performers`,
   membership: 'Membership',
   oauth: 'OAuth',
   signIn: 'Sign In',
   signUp: 'Sign Up',
   emailConfirm: 'Email Confirm',
-  roadmap: 'Roadmap',
   principles: 'Principles',
   updates: `What's New`,
-  profile: 'Public Profile',
   preferences: 'Preferences',
   info: 'Info',
   timesheet: 'Timesheet',
@@ -67,16 +58,13 @@ export const appPageEmoji: Record<AppPage, string> = {
   vision: '🔮',
   goals: '🎯',
   projects: '🚀',
-  community: '👥',
   membership: '🎓',
   oauth: '🔒',
   signIn: '🔑',
   signUp: '🔑',
   emailConfirm: '📧',
-  roadmap: '🗺️',
   principles: '📜',
   updates: '📰',
-  profile: '👤',
   preferences: '⚙️',
   info: 'ℹ️',
   timesheet: '📊',
@@ -89,16 +77,13 @@ export const appPagePath: Record<AppPage, string> = {
   vision: 'vision',
   goals: 'goals',
   projects: 'projects',
-  community: 'community',
   membership: 'membership',
   oauth: 'oauth',
   signIn: 'sign-in',
   signUp: 'sign-up',
   emailConfirm: 'email-confirm',
-  roadmap: 'roadmap',
   principles: 'principles',
   updates: 'updates',
-  profile: 'profile',
   preferences: 'preferences',
   info: 'info',
   timesheet: 'timesheet',
@@ -109,7 +94,6 @@ export const appPageViews = {
   habits: ['track', 'ideas'],
   principles: ['my', 'categories', 'ideas'],
   tasks: ['tasks', 'ideas', 'upcoming', 'automation', 'templates'],
-  roadmap: ['ideas', 'done'],
   info: productTools,
   timesheet: ['day', 'week', 'month', 'year'],
 } as const
@@ -167,10 +151,6 @@ export const appPageViewName: {
     upcoming: 'Upcoming',
     automation: 'Automation',
     templates: 'Templates',
-  },
-  roadmap: {
-    ideas: 'Ideas',
-    done: 'Done',
   },
   info: {
     focus: 'Focus',

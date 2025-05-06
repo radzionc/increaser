@@ -7,15 +7,8 @@ import { EducationVideo } from '@product/ui/education/components/EducationVideo'
 import { ProductToolEducation } from '@product/ui/education/ProductToolEducation'
 import styled from 'styled-components'
 
-import { FounderContacts } from '../community/components/FounderContacts'
-
 const Video = styled(EducationVideo)`
   ${borderRadius.m};
-`
-
-const SideSection = styled.div`
-  flex: 1;
-  min-width: 280px;
 `
 
 export const ProductEducationPage = ({
@@ -34,9 +27,6 @@ export const ProductEducationPage = ({
         <EducationContent>{value.content}</EducationContent>
         <div />
       </VStack>
-      <SideSection>
-        <FounderContacts />
-      </SideSection>
     </HStack>
   )
 }

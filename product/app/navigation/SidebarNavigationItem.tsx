@@ -31,9 +31,7 @@ export const SidebarNavigationItem = ({
       vision={() => <NavigationToInternalPage value="vision" />}
       goals={() => <NavigationToInternalPage value="goals" />}
       projects={() => <NavigationToInternalPage value="projects" />}
-      community={() => <NavigationToInternalPage value="community" />}
       principles={() => <NavigationToInternalPage value="principles" />}
-      roadmap={() => <NavigationToInternalPage value="roadmap" />}
     />
   )
 }

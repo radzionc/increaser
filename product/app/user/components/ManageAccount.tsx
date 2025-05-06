@@ -10,7 +10,6 @@ import { IconWrapper } from '@lib/ui/icons/IconWrapper'
 import { LogOutIcon } from '@lib/ui/icons/LogOutIcon'
 import { TogglesIcon } from '@lib/ui/icons/TogglesIcon'
 import { UserIcon } from '@lib/ui/icons/UserIcon'
-import { UserPenIcon } from '@lib/ui/icons/UserPenIcon'
 import { IsActiveProp } from '@lib/ui/props'
 import { OptionContent } from '@lib/ui/select/OptionContent'
 import { OptionItem } from '@lib/ui/select/OptionItem'
@@ -84,13 +83,6 @@ export const ManageAccount = () => {
             {isPayingUser ? 'active' : hasFreeTrial ? 'free trial' : 'inactive'}
           </Tag>
         ),
-      },
-      {
-        name: 'Public profile',
-        icon: <UserPenIcon />,
-        onSelect: () => {
-          push(getAppPath('profile'))
-        },
       },
       {
         name: 'Preferences',
