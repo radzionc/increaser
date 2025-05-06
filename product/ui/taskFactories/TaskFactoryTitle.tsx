@@ -18,7 +18,7 @@ export const TaskFactoryTitle = () => {
           day={() => 'daily'}
           workday={() => 'every workday'}
           week={() => `weekly on ${WEEKDAYS[shouldBePresent(deadlineIndex)]}`}
-          month={() => `monthly on the ${deadlineIndex}th`}
+          month={() => `monthly on the ${(deadlineIndex || 0) + 1}th`}
         />
         )
       </Text>
