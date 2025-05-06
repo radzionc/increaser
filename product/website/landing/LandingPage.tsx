@@ -9,7 +9,6 @@ import { FaqSlice } from './FaqSlice'
 import { FoundersNoteSlice } from './FoundersNoteSlice'
 import { PricingSlice } from './PricingSlice'
 import { PrimarySlice } from './PrimarySlice'
-import { ScoreboardSlice } from './ScoreboardSlice'
 import { TestimonialsSlice } from './testimonials/TestimonialsSlice'
 import { VideoSlice } from './video/VideoSlice'
 
@@ -35,7 +34,6 @@ export const LandingPage = () => (
     </ProductToolsContainer>
     <TestimonialsSlice />
     <VideoSlice />
-    <ScoreboardSlice />
     <PricingSlice />
     <FoundersNoteSlice />
     <FaqSlice />
