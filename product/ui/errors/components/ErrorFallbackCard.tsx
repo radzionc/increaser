@@ -3,8 +3,6 @@ import { Panel } from '@lib/ui/css/panel'
 import { VStack } from '@lib/ui/css/stack'
 import { ModalTitleText } from '@lib/ui/modal/ModalTitleText'
 import { Text } from '@lib/ui/text'
-import { EmojiTextPrefix } from '@lib/ui/text/EmojiTextPrefix'
-import { SupportContacts } from '@product/app/communication/components/SupportContacts'
 
 export const ErrorFallbackCard = () => {
   return (
@@ -16,12 +14,6 @@ export const ErrorFallbackCard = () => {
             🤷‍♂️
           </Text>
           <Button onClick={() => location.reload()}>Reload the page</Button>
-        </VStack>
-        <VStack alignItems="center" gap={12} fullWidth>
-          <Text color="supporting">
-            <EmojiTextPrefix emoji="🚨" /> Message us if reload didn't help
-          </Text>
-          <SupportContacts />
         </VStack>
       </VStack>
     </Panel>
