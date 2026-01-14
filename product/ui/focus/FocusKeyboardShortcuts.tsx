@@ -36,7 +36,7 @@ const StopFocusShortcut = ({ intervals }: { intervals: FocusInterval[] }) => {
   const cancelFocus = useCancelFocus()
 
   useKeyDown(
-    ' ',
+    'Enter',
     () => {
       if (isActiveElementEditable()) return
 
