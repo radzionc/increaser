@@ -2,6 +2,7 @@ import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
 import { VStack } from '@lib/ui/css/stack'
 import { Header } from '@lib/ui/layout/Header'
 import { ScrollableFlexboxFiller } from '@lib/ui/layout/ScrollableFlexboxFiller'
+import { FocusKeyboardShortcuts } from '@product/ui/focus/FocusKeyboardShortcuts'
 import { FocusSetWidget } from '@product/ui/focus/FocusSetWidget/FocusSetWidget'
 import { FocusLauncher } from '@product/ui/focus/launcher/FocusLauncher'
 import { useFocusIntervals } from '@product/ui/focus/state/focusIntervals'
@@ -47,6 +48,7 @@ export const HomePageContent = () => {
 
   return (
     <>
+      <FocusKeyboardShortcuts />
       <ElementSizeAware
         render={({ size, setElement }) => {
           const shouldBeInOneColumn = size && size.width < 800

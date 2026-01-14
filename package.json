@@ -32,6 +32,7 @@
     "typecheck": "tsc --noEmit",
     "sync-packages": "syncpack fix-mismatches",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "check": "yarn typecheck && yarn lint:fix"
   }
 }
