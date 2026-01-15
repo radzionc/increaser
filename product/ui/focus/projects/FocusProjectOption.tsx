@@ -4,7 +4,7 @@ import { panelDefaultPadding } from '@lib/ui/css/panel'
 import { hStack } from '@lib/ui/css/stack'
 import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 import { tightListItemConfig } from '@lib/ui/list/tightListItemConfig'
-import { OnClickProp, IsActiveProp } from '@lib/ui/props'
+import { IsActiveProp, OnClickProp } from '@lib/ui/props'
 import { getColor } from '@lib/ui/theme/getters'
 import { focusLauncherConfig } from '@product/ui/focus/launcher/config'
 import { ProjectBudgetTag } from '@product/ui/projects/budget/ProjectBudgetTag'
@@ -41,7 +41,14 @@ const Container = styled(UnstyledButton)<IsActiveProp>`
         `};
 `
 
-export const FocusProjectOption = ({ onClick }: OnClickProp) => {
+type FocusProjectOptionProps = OnClickProp & {
+  shortcut?: string
+}
+
+export const FocusProjectOption = ({
+  onClick,
+  shortcut,
+}: FocusProjectOptionProps) => {
   const { projectId } = useFocusTarget()
 
   const { id, name, emoji } = useCurrentProject()
@@ -49,7 +56,11 @@ export const FocusProjectOption = ({ onClick }: OnClickProp) => {
 
   return (
     <Container onClick={onClick} isActive={isSelected}>
-      <FocusProjectOptionContent emoji={emoji} name={name} />
+      <FocusProjectOptionContent
+        emoji={emoji}
+        name={name}
+        shortcut={shortcut}
+      />
       <ProjectBudgetTag />
     </Container>
   )

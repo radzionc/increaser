@@ -2,12 +2,40 @@ import { useKeyDown } from '@lib/ui/hooks/useKeyDown'
 import { isActiveElementEditable } from '@lib/ui/utils/isEditableElement'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { useIsLikeMember } from '@product/app/membership/hooks/useIsLikeMember'
+import { useActiveProjects } from '@product/ui/projects/hooks/useActiveProjects'
 
 import { useCancelFocus } from './hooks/useCancelFocus'
 import { useFocusTargetProject } from './hooks/useFocusTargetProject'
 import { useStartFocus } from './hooks/useStartFocus'
 import { useStopFocus } from './hooks/useStopFocus'
+import { getProjectShortcuts } from './projects/getProjectShortcuts'
 import { FocusInterval, useFocusIntervals } from './state/focusIntervals'
+import { useFocusProject } from './state/focusProject'
+
+const ProjectSwitchShortcuts = () => {
+  const activeProjects = useActiveProjects()
+  const [, setProjectId] = useFocusProject()
+
+  const shortcuts = getProjectShortcuts(activeProjects)
+  const shortcutKeys = Array.from(shortcuts.keys())
+
+  useKeyDown(
+    shortcutKeys,
+    (event) => {
+      if (isActiveElementEditable()) return
+
+      const projectId = shortcuts.get(event.key.toLowerCase())
+      if (projectId) {
+        setProjectId(projectId)
+      }
+    },
+    {
+      shouldPreventDefault: false,
+    },
+  )
+
+  return null
+}
 
 const StartFocusShortcut = () => {
   const project = useFocusTargetProject()
@@ -68,9 +96,14 @@ const StopFocusShortcut = ({ intervals }: { intervals: FocusInterval[] }) => {
 export const FocusKeyboardShortcuts = () => {
   const [intervals] = useFocusIntervals()
 
-  if (intervals) {
-    return <StopFocusShortcut intervals={intervals} />
-  }
-
-  return <StartFocusShortcut />
+  return (
+    <>
+      <ProjectSwitchShortcuts />
+      {intervals ? (
+        <StopFocusShortcut intervals={intervals} />
+      ) : (
+        <StartFocusShortcut />
+      )}
+    </>
+  )
 }

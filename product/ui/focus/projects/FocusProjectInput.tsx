@@ -19,6 +19,7 @@ import { useFocusProject } from '../state/focusProject'
 import { AddProject } from './AddProject'
 import { FocusProjectOption } from './FocusProjectOption'
 import { FocusProjectOptionContent } from './FocusProjectOptionContent'
+import { getProjectShortcuts } from './getProjectShortcuts'
 
 const Wrapper = styled.div`
   padding: 0;
@@ -74,18 +75,25 @@ export const FocusProjectInput = () => {
           />
           {isOpen ? (
             <FocusEntityOptionsContainer>
-              {options.map((project) => {
-                const { id } = project
-                return (
-                  <CurrentProjectProvider key={id} value={project}>
-                    <FocusProjectOption
-                      onClick={() => {
-                        setProjectId(id)
-                      }}
-                    />
-                  </CurrentProjectProvider>
-                )
-              })}
+              {(() => {
+                const shortcuts = getProjectShortcuts(options)
+                return options.map((project) => {
+                  const { id, name } = project
+                  const letter = name[0]?.toLowerCase()
+                  const shortcut =
+                    shortcuts.get(letter) === id ? letter : undefined
+                  return (
+                    <CurrentProjectProvider key={id} value={project}>
+                      <FocusProjectOption
+                        onClick={() => {
+                          setProjectId(id)
+                        }}
+                        shortcut={shortcut}
+                      />
+                    </CurrentProjectProvider>
+                  )
+                })
+              })()}
               <AddProject
                 onFinish={() => {
                   setIsOpen(false)
