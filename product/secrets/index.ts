@@ -9,7 +9,6 @@ import { getEnvVar } from './getEnvVar'
 
 export const secretNames = [
   'googleClientSecret',
-  'facebookClientSecret',
   'paddleApiKey',
   'telegramBotToken',
   'emailSecret',

@@ -1,5 +1,4 @@
 import { match } from '@lib/utils/match'
-import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { OAuthProvider } from '@product/entities/OAuthProvider'
 
 import { queryOAuthProvider } from './queryOAuthProvider'
@@ -15,7 +14,6 @@ interface UserInfoResponse {
 }
 
 const GOOGLE_USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
-const FACEBOOK_USER_INFO_URL = 'https://graph.facebook.com/me'
 
 export const getOAuthUserInfo = async ({
   accessToken,
@@ -31,13 +29,5 @@ export const getOAuthUserInfo = async ({
           Authorization: `Bearer ${accessToken}`,
         },
       }),
-    facebook: async () =>
-      queryOAuthProvider<UserInfoResponse>(
-        actionName,
-        addQueryParams(FACEBOOK_USER_INFO_URL, {
-          fields: ['email', 'name'].join(','),
-          access_token: accessToken,
-        }),
-      ),
   })
 }

@@ -30,7 +30,7 @@ export const OAuthOption = ({ provider }: OAuthOptionProps) => {
       <IconCentricButton
         as="div"
         text={`Continue with ${providerName}`}
-        icon={<AuthProviderIcon provider={provider} />}
+        icon={<AuthProviderIcon />}
       />
     </ExternalLink>
   )

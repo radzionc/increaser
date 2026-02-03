@@ -34,7 +34,6 @@ resource "aws_lambda_function" "api" {
     variables = {
       SENTRY_KEY : var.sentry_key,
       GOOGLE_CLIENT_ID : var.google_client_id,
-      FACEBOOK_CLIENT_ID : var.facebook_client_id,
       APP_URL : var.app_url,
       EMAIL_DOMAIN : var.email_domain,
       SES_AWS_REGION : var.ses_aws_region,

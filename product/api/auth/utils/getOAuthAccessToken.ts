@@ -1,5 +1,4 @@
 import { match } from '@lib/utils/match'
-import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { OAuthProvider } from '@product/entities/OAuthProvider'
 import { getSecret } from '@product/secrets'
 
@@ -18,7 +17,6 @@ interface TokenResponse {
 }
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token'
-const FACEBOOK_TOKEN_URL = 'https://graph.facebook.com/v4.0/oauth/access_token'
 
 export const getOAuthAccessToken = async ({
   provider,
@@ -38,16 +36,6 @@ export const getOAuthAccessToken = async ({
           code,
         }),
       }),
-    facebook: async () =>
-      queryOAuthProvider<TokenResponse>(
-        actionName,
-        addQueryParams(FACEBOOK_TOKEN_URL, {
-          client_id: getEnvVar('FACEBOOK_CLIENT_ID'),
-          client_secret: await getSecret('facebookClientSecret'),
-          redirect_uri: redirectUri,
-          code,
-        }),
-      ),
   })
 
   return response.access_token

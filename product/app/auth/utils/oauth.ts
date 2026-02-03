@@ -6,18 +6,15 @@ import { getAppPath } from '@product/ui/navigation/app'
 
 const oauthBaseUrlRecord: Record<OAuthProvider, string> = {
   google: 'https://accounts.google.com/o/oauth2/v2/auth',
-  facebook: 'https://www.facebook.com/v4.0/dialog/oauth',
 }
 
 const oauthScopeRecord: Record<OAuthProvider, string> = {
   google:
     'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
-  facebook: 'public_profile,email',
 }
 
 const oauthClientIdRecord: Record<OAuthProvider, string> = {
   google: shouldBeDefined(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID),
-  facebook: shouldBeDefined(process.env.NEXT_PUBLIC_FACEBOOK_APP_ID),
 }
 
 export const getOAuthRedirectUri = (provider: OAuthProvider) =>
@@ -37,10 +34,6 @@ export const getOAuthUrl = (provider: OAuthProvider) => {
     google: () => ({
       access_type: 'offline',
       prompt: 'consent',
-    }),
-    facebook: () => ({
-      auth_type: 'rerequest',
-      display: 'popup',
     }),
   })
 

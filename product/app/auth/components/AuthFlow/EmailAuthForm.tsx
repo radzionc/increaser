@@ -3,6 +3,8 @@ import { Button } from '@lib/ui/buttons/Button'
 import { VStack } from '@lib/ui/css/stack'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { TextInput } from '@lib/ui/inputs/TextInput'
+import { Text } from '@lib/ui/text'
+import { getErrorMessage } from '@lib/utils/getErrorMessage'
 import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { validateEmail } from '@lib/utils/validation/validateEmail'
 import { useApiMutation } from '@product/api-ui/hooks/useApiMutation'
@@ -17,9 +19,13 @@ export const EmailAuthForm = () => {
 
   const analytics = useAnalytics()
 
-  const { mutate: sendAuthLinkByEmail, isPending } = useApiMutation(
-    'sendAuthLinkByEmail',
-  )
+  const {
+    mutate: sendAuthLinkByEmail,
+    isPending,
+    error,
+  } = useApiMutation('sendAuthLinkByEmail')
+
+  const errorMessage = error ? getErrorMessage(error) : undefined
 
   const isDisabled = useMemo(() => {
     if (!email) {
@@ -61,6 +67,11 @@ export const EmailAuthForm = () => {
         value={email}
         onValueChange={setEmail}
       />
+      {errorMessage && (
+        <Text color="alert" centerHorizontally>
+          {errorMessage}
+        </Text>
+      )}
       <Button
         type="submit"
         isDisabled={isDisabled}

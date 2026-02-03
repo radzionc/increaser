@@ -1,4 +1,8 @@
-type ApiErrorId = 'invalidAuthToken' | 'invalidInput' | 'unknown'
+type ApiErrorId =
+  | 'invalidAuthToken'
+  | 'invalidInput'
+  | 'registrationClosed'
+  | 'unknown'
 
 export class ApiError extends Error {
   constructor(

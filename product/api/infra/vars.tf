@@ -18,9 +18,6 @@ variable "email_domain" {}
 
 variable "google_client_id" {}
 
-variable "facebook_client_id" {}
-
-
 variable "ses_aws_region" {
   default = "us-east-1"
 }
