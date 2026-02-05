@@ -22,14 +22,14 @@ variable "ses_aws_region" {
   default = "us-east-1"
 }
 
-variable "paddle_vendor_id" {}
-
 variable "telegram_chat_id" {}
 
 variable "public_bucket_name" {}
 
 variable "public_bucket_region" {}
 
-variable "secrets_name" {}
+variable "google_client_secret" {}
 
-variable "secrets_arn" {}
+variable "telegram_bot_token" {}
+
+variable "jwt_secret" {}

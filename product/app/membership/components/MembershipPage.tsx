@@ -1,4 +1,4 @@
-import { UniformColumnGrid } from '@lib/ui/css/uniformColumnGrid'
+import { VStack } from '@lib/ui/css/stack'
 
 import { PagePrimaryNavigation } from '../../navigation/page/PagePrimaryNavigation'
 import { PageHeader } from '../../ui/page/header/PageHeader'
@@ -15,14 +15,10 @@ export const MembershipPage = () => {
         <PageHeader>
           <PagePrimaryNavigation />
         </PageHeader>
-        <UniformColumnGrid
-          style={{ alignItems: 'start' }}
-          gap={40}
-          minChildrenWidth={320}
-        >
+        <VStack style={{ alignItems: 'start' }} gap={40}>
           <MembershipOverview />
           <MembershipPersuasion />
-        </UniformColumnGrid>
+        </VStack>
       </PageContent>
     </PageContainer>
   )

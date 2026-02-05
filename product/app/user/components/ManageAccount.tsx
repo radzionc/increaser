@@ -1,6 +1,4 @@
 import { FloatingFocusManager } from '@floating-ui/react'
-import { round } from '@lib/ui/css/round'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { TitledFloatingOptionsContainer } from '@lib/ui/floating/TitledFloatingOptionsContainer'
 import { useFloatingOptions } from '@lib/ui/floating/useFloatingOptions'
@@ -24,8 +22,6 @@ import { useMemo } from 'react'
 import styled, { css, useTheme } from 'styled-components'
 
 import { useAuthSession } from '../../auth/hooks/useAuthSession'
-import { useHasFreeTrial } from '../../membership/hooks/useHasFreeTrial'
-import { useIsPayingUser } from '../../membership/hooks/useIsPayingUser'
 import { HeaderActionButton } from '../../navigation/HeaderActionButton'
 
 const Container = styled(HeaderActionButton)<IsActiveProp>`
@@ -38,14 +34,6 @@ const Container = styled(HeaderActionButton)<IsActiveProp>`
     `}
 `
 
-const Indicator = styled.div`
-  position: absolute;
-  right: -2px;
-  top: -4px;
-  ${sameDimensions(8)};
-  ${round};
-`
-
 const Wrapper = styled(IconWrapper)`
   position: relative;
   overflow: visible;
@@ -55,9 +43,6 @@ export const ManageAccount = () => {
   const [, setAuthSession] = useAuthSession()
   const { email } = useUser()
   const { push } = useRouter()
-
-  const isPayingUser = useIsPayingUser()
-  const hasFreeTrial = useHasFreeTrial()
 
   const { colors } = useTheme()
   const exportUserData = useExportUserData()
@@ -70,19 +55,7 @@ export const ManageAccount = () => {
         onSelect: () => {
           push(getAppPath('membership'))
         },
-        indicator: (
-          <Tag
-            $color={
-              isPayingUser
-                ? colors.success
-                : hasFreeTrial
-                  ? colors.idle
-                  : colors.alert
-            }
-          >
-            {isPayingUser ? 'active' : hasFreeTrial ? 'free trial' : 'inactive'}
-          </Tag>
-        ),
+        indicator: <Tag $color={colors.success}>free</Tag>,
       },
       {
         name: 'Preferences',
@@ -106,16 +79,7 @@ export const ManageAccount = () => {
         },
       },
     ],
-    [
-      colors.alert,
-      colors.idle,
-      colors.success,
-      exportUserData,
-      hasFreeTrial,
-      isPayingUser,
-      push,
-      setAuthSession,
-    ],
+    [colors.success, exportUserData, push, setAuthSession],
   )
 
   const {
@@ -136,16 +100,6 @@ export const ManageAccount = () => {
     <>
       <Container isActive={isOpen} {...getReferenceProps()}>
         <Wrapper>
-          {!isPayingUser && (
-            <Indicator
-              style={{
-                background: (hasFreeTrial
-                  ? colors.idle
-                  : colors.alert
-                ).toCssValue(),
-              }}
-            />
-          )}
           <UserIcon />
         </Wrapper>
       </Container>

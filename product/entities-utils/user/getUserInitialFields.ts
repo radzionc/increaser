@@ -1,5 +1,3 @@
-import { convertDuration } from '@lib/utils/time/convertDuration'
-import { freeTrialDurationInDays } from '@product/entities/Membership'
 import { User, userDefaultFields } from '@product/entities/User'
 import { getId } from '@product/entities-utils/shared/getId'
 
@@ -10,8 +8,6 @@ export const getUserInitialFields = ({
   timeZone,
 }: Pick<User, 'email' | 'name' | 'country' | 'timeZone'>): User => {
   const registeredAt = Date.now()
-  const freeTrialEndsAt =
-    registeredAt + convertDuration(freeTrialDurationInDays, 'd', 'ms')
 
   return {
     ...userDefaultFields,
@@ -20,7 +16,7 @@ export const getUserInitialFields = ({
     name,
     country,
     registrationDate: registeredAt,
-    freeTrialEnd: freeTrialEndsAt,
+    freeTrialEnd: 0,
     lastVisitAt: registeredAt,
     timeZone,
   }

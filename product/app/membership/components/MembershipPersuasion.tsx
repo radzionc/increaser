@@ -2,7 +2,6 @@ import { Panel } from '@lib/ui/css/panel'
 import { SafeImage } from '@lib/ui/images/SafeImage'
 import { SectionTitle } from '@lib/ui/text/SectionTitle'
 import { productName } from '@product/config'
-import { SubscriptionFeatures } from '@product/ui/subscription/SubscriptionFeatures'
 import styled from 'styled-components'
 
 const Image = styled.img`
@@ -16,14 +15,13 @@ export const MembershipPersuasion = () => {
     <Panel withSections>
       <div>
         <SectionTitle>
-          Unlock your full potential with {productName}
+          All features are now free with {productName}
         </SectionTitle>
       </div>
       <SafeImage
         src="/images/morning.webp"
         render={(props) => <Image {...props} />}
       />
-      <SubscriptionFeatures />
     </Panel>
   )
 }

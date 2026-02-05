@@ -4,8 +4,6 @@ import { sendAuthLinkByEmail } from '../auth/resolvers/sendAuthLinkByEmail'
 import { features } from '../features/resolvers/features'
 import { proposeFeature } from '../features/resolvers/proposeFeature'
 import { voteForFeature } from '../features/resolvers/voteForFeature'
-import { manageSubscription } from '../membership/subscription/resolvers/manageSubscription'
-import { subscription } from '../membership/subscription/resolvers/subscription'
 import { scoreboard } from '../scoreboard/resolvers/scoreboard'
 import { addSet } from '../sets/resolvers/addSet'
 import { addSets } from '../sets/resolvers/addSets'
@@ -28,8 +26,6 @@ export const implementation: ApiImplementation = {
   sendAuthLinkByEmail,
   user,
   updateUser,
-  manageSubscription,
-  subscription,
   scoreboard,
   addSet,
   proposeFeature,

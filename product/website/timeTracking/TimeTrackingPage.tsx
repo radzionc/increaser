@@ -4,7 +4,7 @@ import {
   FeatureVideoSliceProps,
 } from '@lib/ui/website/FeatureVideoSlice'
 import { PrimaryWebsiteSlice } from '@lib/ui/website/WebsiteSlice'
-import { freeTrialDays, productName } from '@product/config'
+import { productName } from '@product/config'
 
 import { TimeTrackingSlice } from '../landing/demo/TimeTrackingSlice'
 
@@ -32,7 +32,7 @@ export const TimeTrackingPage = () => (
   <>
     <PageMetaTags
       title={`Time Tracking for Productivity | ${productName} - Boost Your Efficiency`}
-      description={`Enhance your productivity with ${productName}'s time tracking feature. Manage your projects, analyze your work habits, and optimize your time. Start your ${freeTrialDays}-day free trial today!`}
+      description={`Enhance your productivity with ${productName}'s time tracking feature. Manage your projects, analyze your work habits, and optimize your time. Start using for free today!`}
     />
     <PrimaryWebsiteSlice>
       <TimeTrackingSlice />

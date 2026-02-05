@@ -6,7 +6,6 @@ import {
   UserProfile,
 } from '@product/entities/PerformanceScoreboard'
 import { ProductFeature } from '@product/entities/ProductFeature'
-import { Subscription } from '@product/entities/Subscription'
 import {
   Set,
   User,
@@ -38,15 +37,6 @@ export interface ApiInterface {
 
   user: ApiMethod<{ timeZone: number }, User>
   updateUser: ApiMethod<Partial<Pick<User, UserEditableFields>>, undefined>
-  manageSubscription: ApiMethod<
-    undefined,
-    {
-      updateUrl: string
-      cancelUrl: string
-    }
-  >
-
-  subscription: ApiMethod<{ id: string }, Subscription | undefined>
 
   scoreboard: ApiMethod<
     { id: string },

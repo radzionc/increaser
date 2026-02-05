@@ -9,14 +9,12 @@ import { FocusSound, defaultFocusSounds } from './FocusSound'
 import { Goal } from './Goal'
 import { Habit } from './Habit'
 import { Idea } from './Idea'
-import { LifeTimeDeal } from './LifeTimeDeal'
 import { Principle } from './Principle'
 import {
   defaultPrincipleCategories,
   PrincipleCategory,
 } from './PrincipleCategory'
 import { Project, ProjectRelatedEntity, otherProject } from './Project'
-import { Subscription } from './Subscription'
 import { Task } from './Task'
 import { TaskFactory } from './TaskFactory'
 import { TaskTemplate } from './TaskTemplate'
@@ -124,9 +122,6 @@ export type User = WorkBudget &
 
     viewedHabitsAt?: number
 
-    subscription?: Subscription
-    lifeTimeDeal?: LifeTimeDeal
-
     accountDeletionEmailSentAt?: number
 
     weekends: number[]
@@ -142,8 +137,6 @@ export const userReadonlyFields = [
   'lastSyncedMonthEndedAt',
   'lastSyncedWeekEndedAt',
   'lastVisitAt',
-  'subscription',
-  'lifeTimeDeal',
 ] as const
 
 type UserReadonlyFields = (typeof userReadonlyFields)[number]

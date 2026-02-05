@@ -1,15 +1,5 @@
-import {
-  SecretsManagerClient,
-  GetSecretValueCommand,
-} from '@aws-sdk/client-secrets-manager'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
-import { assertField } from '@lib/utils/record/assertField'
-
-import { getEnvVar } from './getEnvVar'
-
 export const secretNames = [
   'googleClientSecret',
-  'paddleApiKey',
   'telegramBotToken',
   'emailSecret',
   'jwtSecret',
@@ -17,16 +7,18 @@ export const secretNames = [
 
 type SecretName = (typeof secretNames)[number]
 
-const getSecrets = async () => {
-  const client = new SecretsManagerClient({})
-  const command = new GetSecretValueCommand({ SecretId: getEnvVar('SECRETS') })
-  const { SecretString } = await client.send(command)
-
-  return shouldBePresent(SecretString)
+const envVarMap: Record<SecretName, string> = {
+  googleClientSecret: 'GOOGLE_CLIENT_SECRET',
+  telegramBotToken: 'TELEGRAM_BOT_TOKEN',
+  emailSecret: 'EMAIL_SECRET',
+  jwtSecret: 'JWT_SECRET',
 }
 
 export const getSecret = async <T = string>(name: SecretName): Promise<T> => {
-  const secrets = await getSecrets()
-
-  return assertField(JSON.parse(secrets), name)
+  const envVar = envVarMap[name]
+  const value = process.env[envVar]
+  if (!value) {
+    throw new Error(`Missing environment variable: ${envVar}`)
+  }
+  return value as T
 }

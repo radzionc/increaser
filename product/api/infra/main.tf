@@ -37,11 +37,13 @@ resource "aws_lambda_function" "api" {
       APP_URL : var.app_url,
       EMAIL_DOMAIN : var.email_domain,
       SES_AWS_REGION : var.ses_aws_region,
-      PADDLE_VENDOR_ID : var.paddle_vendor_id,
       TELEGRAM_CHAT_ID : var.telegram_chat_id
       PUBLIC_BUCKET_NAME: var.public_bucket_name
       PUBLIC_BUCKET_REGION: var.public_bucket_region
-      SECRETS: var.secrets_name
+      GOOGLE_CLIENT_SECRET: var.google_client_secret
+      TELEGRAM_BOT_TOKEN: var.telegram_bot_token
+      EMAIL_SECRET: var.email_secret
+      JWT_SECRET: var.jwt_secret
     }
   }
 }

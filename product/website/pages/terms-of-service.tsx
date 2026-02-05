@@ -42,27 +42,9 @@ const TermsOfServicePage = () => (
         subject to the Agreement.
       </LegalPageSection>
       <LegalPageSection title="Billing/Payment Terms">
-        Additional groupings of features may be added to the service and made
-        available to you as a paid upgrade (&quot;Membership&quot;). If you
-        choose to subscribe to a Membership, you shall pay fees to {productName}
-        . Upon selection of a Membership, you will provide {productName} with
-        the necessary billing information (&quot;Billing Data&quot;). Credit
-        cards are the only payment mechanism {productName} will accept for
-        payment of a monthly subscription fee for a Membership. All currency
-        references are in U.S. dollars. If you select a Membership, you must
-        provide current, complete, and accurate Billing Data. You must promptly
-        update all Billing Data to keep your Account current, complete, and
-        accurate (such as a change in billing address, credit card number, or
-        credit card expiration date), and you must promptly notify {productName}{' '}
-        if your Payment Method is changed. You agree that {productName} may
-        continue charging you for any use of the Membership under your Billing
-        Data unless you have terminated your membership as set forth herein. As
-        long as your Account remains active and in good standing, You will be
-        charged the Subscription Fee even if you never use the service. you may,
-        however, cancel your Membership at any time. Our order process is
-        conducted by our online reseller Paddle.com. Paddle.com is the Merchant
-        of Record for all our orders. Paddle provides all customer service
-        inquiries and handles returns.
+        {productName} is currently free to use. There are no subscription fees
+        or payment processing involved. Any future changes to this policy will
+        be communicated to users.
       </LegalPageSection>
       <LegalPageSection title="User content and ownership">
         You agree that you are fully responsible for the content you submit or

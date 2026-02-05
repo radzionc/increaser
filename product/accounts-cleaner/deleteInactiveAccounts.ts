@@ -6,7 +6,6 @@ import {
 } from '@product/config'
 import { deleteUser } from '@product/data-services/users/deleteUser'
 import { getAllUsers, updateUser } from '@product/db/user'
-import { isActiveSubscription } from '@product/entities-utils/subscription/isActiveSubscription'
 
 import { notifyAboutAccountDeletion } from './notifyAboutAccountDeletion'
 
@@ -16,29 +15,12 @@ export const deleteInactiveAccounts = async () => {
     'email',
     'accountDeletionEmailSentAt',
     'lastVisitAt',
-    'lifeTimeDeal',
-    'subscription',
-    'freeTrialEnd',
   ])
   const now = Date.now()
   await Promise.all(
     users.map(
-      async ({
-        id,
-        email,
-        accountDeletionEmailSentAt,
-        lastVisitAt,
-        subscription,
-        lifeTimeDeal,
-        freeTrialEnd,
-      }) => {
+      async ({ id, email, accountDeletionEmailSentAt, lastVisitAt }) => {
         try {
-          if (freeTrialEnd > now) return
-
-          if (lifeTimeDeal) return
-
-          if (subscription && isActiveSubscription(subscription)) return
-
           if (
             accountDeletionEmailSentAt &&
             lastVisitAt < accountDeletionEmailSentAt

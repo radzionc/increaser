@@ -1,7 +1,6 @@
 import { useKeyDown } from '@lib/ui/hooks/useKeyDown'
 import { isActiveElementEditable } from '@lib/ui/utils/isEditableElement'
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { useIsLikeMember } from '@product/app/membership/hooks/useIsLikeMember'
 import { useActiveProjects } from '@product/ui/projects/hooks/useActiveProjects'
 
 import { useCancelFocus } from './hooks/useCancelFocus'
@@ -39,7 +38,6 @@ const ProjectSwitchShortcuts = () => {
 
 const StartFocusShortcut = () => {
   const project = useFocusTargetProject()
-  const isLikeMember = useIsLikeMember()
   const startFocus = useStartFocus()
 
   useKeyDown(
@@ -47,7 +45,6 @@ const StartFocusShortcut = () => {
     () => {
       if (isActiveElementEditable()) return
       if (!project) return
-      if (!isLikeMember) return
 
       startFocus({ start: Date.now() })
     },
