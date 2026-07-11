@@ -125,6 +125,11 @@ export type User = WorkBudget &
     accountDeletionEmailSentAt?: number
 
     weekends: number[]
+
+    githubToken?: string
+    githubProjectOwner?: string
+    githubProjectNumber?: number
+    lastGithubSyncAt?: number
   }
 
 export const defaultWeekends = [5, 6]

@@ -39,6 +39,11 @@ export type Task = EntityWithId &
     factoryId?: string
     description: string
     deadlineOrder: number
+    githubIssueId?: string
+    githubIssueNumber?: number
+    githubItemId?: string
+    githubRepo?: string
+    githubLastSyncedStatus?: TaskStatus
   }
 
 export type ScheduledTask = Omit<Task, 'deadlineAt'> & {

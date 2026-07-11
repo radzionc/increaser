@@ -28,6 +28,7 @@ export const appPages = [
   'updates',
   'membership',
   'preferences',
+  'profile',
 ] as const
 
 export type AppPage = (typeof appPages)[number]
@@ -47,6 +48,7 @@ export const appPageName: Record<AppPage, string> = {
   principles: 'Principles',
   updates: `What's New`,
   preferences: 'Preferences',
+  profile: 'Profile',
   info: 'Info',
   timesheet: 'Timesheet',
 }
@@ -66,6 +68,7 @@ export const appPageEmoji: Record<AppPage, string> = {
   principles: '📜',
   updates: '📰',
   preferences: '⚙️',
+  profile: '👤',
   info: 'ℹ️',
   timesheet: '📊',
 }
@@ -85,6 +88,7 @@ export const appPagePath: Record<AppPage, string> = {
   principles: 'principles',
   updates: 'updates',
   preferences: 'preferences',
+  profile: 'profile',
   info: 'info',
   timesheet: 'timesheet',
 }

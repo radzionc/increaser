@@ -4,6 +4,8 @@ import { sendAuthLinkByEmail } from '../auth/resolvers/sendAuthLinkByEmail'
 import { features } from '../features/resolvers/features'
 import { proposeFeature } from '../features/resolvers/proposeFeature'
 import { voteForFeature } from '../features/resolvers/voteForFeature'
+import { listGithubProjects } from '../github/resolvers/listGithubProjects'
+import { syncGithubProject } from '../github/resolvers/syncGithubProject'
 import { scoreboard } from '../scoreboard/resolvers/scoreboard'
 import { addSet } from '../sets/resolvers/addSet'
 import { addSets } from '../sets/resolvers/addSets'
@@ -40,4 +42,6 @@ export const implementation: ApiImplementation = {
   updateUserEntities,
   deleteUserEntity,
   getFileUploadUrl,
+  listGithubProjects,
+  syncGithubProject,
 }

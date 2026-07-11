@@ -104,6 +104,15 @@ export interface ApiInterface {
       key: string
     }
   >
+
+  listGithubProjects: ApiMethod<
+    undefined,
+    { id: string; number: number; title: string; owner: string }[]
+  >
+  syncGithubProject: ApiMethod<
+    undefined,
+    { imported: number; updated: number; pushed: number }
+  >
 }
 
 export type ApiMethodName = keyof ApiInterface

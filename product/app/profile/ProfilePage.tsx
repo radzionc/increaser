@@ -7,6 +7,7 @@ import { PagePrimaryNavigation } from '../navigation/page/PagePrimaryNavigation'
 import { PageHeader } from '../ui/page/header/PageHeader'
 
 import { ProfileForm } from './form/ProfileForm'
+import { GithubIntegrationPanel } from './GithubIntegrationPanel'
 import { PayingUserGuard } from './PayingUserGuard'
 import { ProfilePageToggle } from './ProfilePageToggle'
 
@@ -24,6 +25,7 @@ export const ProfilePage: Page = () => {
           <PayingUserGuard>
             <ProfileForm />
           </PayingUserGuard>
+          <GithubIntegrationPanel />
         </VStack>
       </PageContent>
     </PageContainer>

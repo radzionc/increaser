@@ -9,8 +9,10 @@ interface GetOAuthUserInfoParams {
 }
 
 interface UserInfoResponse {
+  id: string | number
   email?: string
   name?: string
+  picture?: string
 }
 
 const GOOGLE_USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'

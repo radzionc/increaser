@@ -15,6 +15,7 @@
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
+    "dynalite": "^3.2.2",
     "eslint": "^9.22.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -33,6 +34,7 @@
     "sync-packages": "syncpack fix-mismatches",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "check": "yarn typecheck && yarn lint:fix"
+    "check": "yarn typecheck && yarn lint:fix",
+    "db:local": "node scripts/local-db.js"
   }
 }
